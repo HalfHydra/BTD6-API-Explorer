@@ -1,0 +1,643 @@
+{
+    "HeroBGColors": {
+        "Quincy": [0.000, 0.522, 0.624],
+        "Gwendolin": [0.671, 0.153, 0.133], 
+        "StrikerJones": [0.306, 0.475, 0.129],
+        "ObynGreenfoot": [0.004, 0.576, 0.286],
+        "Benjamin": [0.165, 0.341, 0.082],
+        "PatFusty": [0.035, 0.529, 0.412],
+        "CaptainChurchill": [0.263, 0.494, 0.149],
+        "Ezili": [0.357, 0.208, 0.494],
+        "Adora": [0.510, 0.224, 0.569],
+        "AdmiralBrickell": [0.133, 0.510, 0.851],
+        "Etienne": [0.596, 0.322, 0.161],
+        "Psi": [0.306, 0.341, 0.698],
+        "Geraldo": [0.314, 0.251, 0.435],
+        "Sauda": [0.541, 0.169, 0.325],
+        "Corvus": [0.122, 0.318, 0.518],
+        "Voidora": [0.102, 0.145, 0.341],
+        "JiangshiSauda": [0.359, 0.453, 0.547]
+    },
+    "Rank": {
+        "1": {
+            "totalXpNeeded": "0",
+            "levelUnlockString": "MM:1"
+        },
+        "2": {
+            "totalXpNeeded": "480",
+            "levelUnlockString": "Tower:Primary"
+        },
+        "3": {
+            "totalXpNeeded": "1580",
+            "levelUnlockString": "Tower:Primary"
+        },
+        "4": {
+            "totalXpNeeded": "2200",
+            "levelUnlockString": "Tower:Primary"
+        },
+        "5": {
+            "totalXpNeeded": "3350",
+            "levelUnlockString": "Tower:Primary"
+        },
+        "6": {
+            "totalXpNeeded": "5850",
+            "levelUnlockString": "Tower:Primary"
+        },
+        "7": {
+            "totalXpNeeded": "8850",
+            "levelUnlockString": "Tower:Military"
+        },
+        "8": {
+            "totalXpNeeded": "12350",
+            "levelUnlockString": "Tower:Military"
+        },
+        "9": {
+            "totalXpNeeded": "15850",
+            "levelUnlockString": "Tower:Military"
+        },
+        "10": {
+            "totalXpNeeded": "19850",
+            "levelUnlockString": "Tower:Military"
+        },
+        "11": {
+            "totalXpNeeded": "24100",
+            "levelUnlockString": "Tower:Military"
+        },
+        "12": {
+            "totalXpNeeded": "28600",
+            "levelUnlockString": "Tower:Military"
+        },
+        "13": {
+            "totalXpNeeded": "33100",
+            "levelUnlockString": "MM:50"
+        },
+        "14": {
+            "totalXpNeeded": "38000",
+            "levelUnlockString": "Hero:Gwendolin"
+        },
+        "15": {
+            "totalXpNeeded": "45000",
+            "levelUnlockString": "Tower:Magic"
+        },
+        "16": {
+            "totalXpNeeded": "53000",
+            "levelUnlockString": "Tower:Magic"
+        },
+        "17": {
+            "totalXpNeeded": "62000",
+            "levelUnlockString": "Tower:Magic"
+        },
+        "18": {
+            "totalXpNeeded": "72000",
+            "levelUnlockString": "MM:50"
+        },
+        "19": {
+            "totalXpNeeded": "84000",
+            "levelUnlockString": "Tower:Magic"
+        },
+        "20": {
+            "totalXpNeeded": "96000",
+            "levelUnlockString": "Tower:Magic"
+        },
+        "21": {
+            "totalXpNeeded": "109000",
+            "levelUnlockString": "Hero:StrikerJones"
+        },
+        "22": {
+            "totalXpNeeded": "123000",
+            "levelUnlockString": "Tower:Support"
+        },
+        "23": {
+            "totalXpNeeded": "138000",
+            "levelUnlockString": "Tower:Support"
+        },
+        "24": {
+            "totalXpNeeded": "154000",
+            "levelUnlockString": "Tower:Support"
+        },
+        "25": {
+            "totalXpNeeded": "171000",
+            "levelUnlockString": "MM:50"
+        },
+        "26": {
+            "totalXpNeeded": "189000",
+            "levelUnlockString": "Tower:Support"
+        },
+        "27": {
+            "totalXpNeeded": "208000",
+            "levelUnlockString": "MM:50"
+        },
+        "28": {
+            "totalXpNeeded": "228000",
+            "levelUnlockString": "Hero:ObynGreenfoot"
+        },
+        "29": {
+            "totalXpNeeded": "249000",
+            "levelUnlockString": "MM:50"
+        },
+        "30": {
+            "totalXpNeeded": "274000",
+            "levelUnlockString": "Knowledge"
+        },
+        "31": {
+            "totalXpNeeded": "304000",
+            "levelUnlockString": "Knowledge"
+        },
+        "32": {
+            "totalXpNeeded": "339000",
+            "levelUnlockString": "Knowledge"
+        },
+        "33": {
+            "totalXpNeeded": "379000",
+            "levelUnlockString": "MM:200"
+        },
+        "34": {
+            "totalXpNeeded": "424000",
+            "levelUnlockString": "Knowledge"
+        },
+        "35": {
+            "totalXpNeeded": "474000",
+            "levelUnlockString": "Knowledge"
+        },
+        "36": {
+            "totalXpNeeded": "529000",
+            "levelUnlockString": "MM:200"
+        },
+        "37": {
+            "totalXpNeeded": "589000",
+            "levelUnlockString": "Knowledge"
+        },
+        "38": {
+            "totalXpNeeded": "654000",
+            "levelUnlockString": "Knowledge"
+        },
+        "39": {
+            "totalXpNeeded": "724000",
+            "levelUnlockString": "Knowledge"
+        },
+        "40": {
+            "totalXpNeeded": "799000",
+            "levelUnlockString": "Knowledge"
+        },
+        "41": {
+            "totalXpNeeded": "879000",
+            "levelUnlockString": "Knowledge"
+        },
+        "42": {
+            "totalXpNeeded": "964000",
+            "levelUnlockString": "Knowledge"
+        },
+        "43": {
+            "totalXpNeeded": "1054000",
+            "levelUnlockString": "Knowledge"
+        },
+        "44": {
+            "totalXpNeeded": "1149000",
+            "levelUnlockString": "Knowledge"
+        },
+        "45": {
+            "totalXpNeeded": "1249000",
+            "levelUnlockString": "Knowledge"
+        },
+        "46": {
+            "totalXpNeeded": "1354000",
+            "levelUnlockString": "Knowledge"
+        },
+        "47": {
+            "totalXpNeeded": "1464000",
+            "levelUnlockString": "Knowledge"
+        },
+        "48": {
+            "totalXpNeeded": "1579000",
+            "levelUnlockString": "Knowledge"
+        },
+        "49": {
+            "totalXpNeeded": "1699000",
+            "levelUnlockString": "Knowledge"
+        },
+        "50": {
+            "totalXpNeeded": "1829000",
+            "levelUnlockString": "Knowledge"
+        },
+        "51": {
+            "totalXpNeeded": "1969000",
+            "levelUnlockString": "Knowledge"
+        },
+        "52": {
+            "totalXpNeeded": "2119000",
+            "levelUnlockString": "Knowledge"
+        },
+        "53": {
+            "totalXpNeeded": "2279000",
+            "levelUnlockString": "Knowledge"
+        },
+        "54": {
+            "totalXpNeeded": "2449000",
+            "levelUnlockString": "Knowledge"
+        },
+        "55": {
+            "totalXpNeeded": "2629000",
+            "levelUnlockString": "Knowledge"
+        },
+        "56": {
+            "totalXpNeeded": "2819000",
+            "levelUnlockString": "Knowledge"
+        },
+        "57": {
+            "totalXpNeeded": "3019000",
+            "levelUnlockString": "Knowledge"
+        },
+        "58": {
+            "totalXpNeeded": "3229000",
+            "levelUnlockString": "Knowledge"
+        },
+        "59": {
+            "totalXpNeeded": "3449000",
+            "levelUnlockString": "Knowledge"
+        },
+        "60": {
+            "totalXpNeeded": "3679000",
+            "levelUnlockString": "Knowledge"
+        },
+        "61": {
+            "totalXpNeeded": "3919000",
+            "levelUnlockString": "Knowledge"
+        },
+        "62": {
+            "totalXpNeeded": "4169000",
+            "levelUnlockString": "Knowledge"
+        },
+        "63": {
+            "totalXpNeeded": "4429000",
+            "levelUnlockString": "Knowledge"
+        },
+        "64": {
+            "totalXpNeeded": "4699000",
+            "levelUnlockString": "Knowledge"
+        },
+        "65": {
+            "totalXpNeeded": "4979000",
+            "levelUnlockString": "Knowledge"
+        },
+        "66": {
+            "totalXpNeeded": "5269000",
+            "levelUnlockString": "Knowledge"
+        },
+        "67": {
+            "totalXpNeeded": "5569000",
+            "levelUnlockString": "Knowledge"
+        },
+        "68": {
+            "totalXpNeeded": "5879000",
+            "levelUnlockString": "Knowledge"
+        },
+        "69": {
+            "totalXpNeeded": "6199000",
+            "levelUnlockString": "Knowledge"
+        },
+        "70": {
+            "totalXpNeeded": "6529000",
+            "levelUnlockString": "Knowledge"
+        },
+        "71": {
+            "totalXpNeeded": "6869000",
+            "levelUnlockString": "Knowledge"
+        },
+        "72": {
+            "totalXpNeeded": "7219000",
+            "levelUnlockString": "Knowledge"
+        },
+        "73": {
+            "totalXpNeeded": "7579000",
+            "levelUnlockString": "Knowledge"
+        },
+        "74": {
+            "totalXpNeeded": "7949000",
+            "levelUnlockString": "Knowledge"
+        },
+        "75": {
+            "totalXpNeeded": "8329000",
+            "levelUnlockString": "Knowledge"
+        },
+        "76": {
+            "totalXpNeeded": "8719000",
+            "levelUnlockString": "Knowledge"
+        },
+        "77": {
+            "totalXpNeeded": "9119000",
+            "levelUnlockString": "Knowledge"
+        },
+        "78": {
+            "totalXpNeeded": "9529000",
+            "levelUnlockString": "Knowledge"
+        },
+        "79": {
+            "totalXpNeeded": "9949000",
+            "levelUnlockString": "Knowledge"
+        },
+        "80": {
+            "totalXpNeeded": "10379000",
+            "levelUnlockString": "Knowledge"
+        },
+        "81": {
+            "totalXpNeeded": "10819000",
+            "levelUnlockString": "Knowledge"
+        },
+        "82": {
+            "totalXpNeeded": "11269000",
+            "levelUnlockString": "Knowledge"
+        },
+        "83": {
+            "totalXpNeeded": "11729000",
+            "levelUnlockString": "Knowledge"
+        },
+        "84": {
+            "totalXpNeeded": "12199000",
+            "levelUnlockString": "Knowledge"
+        },
+        "85": {
+            "totalXpNeeded": "12679000",
+            "levelUnlockString": "Knowledge"
+        },
+        "86": {
+            "totalXpNeeded": "13169000",
+            "levelUnlockString": "Knowledge"
+        },
+        "87": {
+            "totalXpNeeded": "13669000",
+            "levelUnlockString": "Knowledge"
+        },
+        "88": {
+            "totalXpNeeded": "14179000",
+            "levelUnlockString": "Knowledge"
+        },
+        "89": {
+            "totalXpNeeded": "14699000",
+            "levelUnlockString": "Knowledge"
+        },
+        "90": {
+            "totalXpNeeded": "15229000",
+            "levelUnlockString": "Knowledge"
+        },
+        "91": {
+            "totalXpNeeded": "15769000",
+            "levelUnlockString": "Knowledge"
+        },
+        "92": {
+            "totalXpNeeded": "16319000",
+            "levelUnlockString": "Knowledge"
+        },
+        "93": {
+            "totalXpNeeded": "16879000",
+            "levelUnlockString": "Knowledge"
+        },
+        "94": {
+            "totalXpNeeded": "17449000",
+            "levelUnlockString": "Knowledge"
+        },
+        "95": {
+            "totalXpNeeded": "18029000",
+            "levelUnlockString": "Knowledge"
+        },
+        "96": {
+            "totalXpNeeded": "18619000",
+            "levelUnlockString": "Knowledge"
+        },
+        "97": {
+            "totalXpNeeded": "19219000",
+            "levelUnlockString": "Knowledge"
+        },
+        "98": {
+            "totalXpNeeded": "19829000",
+            "levelUnlockString": "Knowledge"
+        },
+        "99": {
+            "totalXpNeeded": "20449000",
+            "levelUnlockString": "Knowledge"
+        },
+        "100": {
+            "totalXpNeeded": "21079000",
+            "levelUnlockString": "Knowledge"
+        },
+        "101": {
+            "totalXpNeeded": "21729000",
+            "levelUnlockString": "Knowledge"
+        },
+        "102": {
+            "totalXpNeeded": "22429000",
+            "levelUnlockString": "Knowledge"
+        },
+        "103": {
+            "totalXpNeeded": "23179000",
+            "levelUnlockString": "Knowledge"
+        },
+        "104": {
+            "totalXpNeeded": "23979000",
+            "levelUnlockString": "Knowledge"
+        },
+        "105": {
+            "totalXpNeeded": "24829000",
+            "levelUnlockString": "Knowledge"
+        },
+        "106": {
+            "totalXpNeeded": "25729000",
+            "levelUnlockString": "Knowledge"
+        },
+        "107": {
+            "totalXpNeeded": "26679000",
+            "levelUnlockString": "Knowledge"
+        },
+        "108": {
+            "totalXpNeeded": "27679000",
+            "levelUnlockString": "Knowledge"
+        },
+        "109": {
+            "totalXpNeeded": "28729000",
+            "levelUnlockString": "Knowledge"
+        },
+        "110": {
+            "totalXpNeeded": "29829000",
+            "levelUnlockString": "Knowledge"
+        },
+        "111": {
+            "totalXpNeeded": "30979000",
+            "levelUnlockString": "Knowledge"
+        },
+        "112": {
+            "totalXpNeeded": "32179000",
+            "levelUnlockString": "Knowledge"
+        },
+        "113": {
+            "totalXpNeeded": "33429000",
+            "levelUnlockString": "Knowledge"
+        },
+        "114": {
+            "totalXpNeeded": "34729000",
+            "levelUnlockString": "Knowledge"
+        },
+        "115": {
+            "totalXpNeeded": "36079000",
+            "levelUnlockString": "Knowledge"
+        },
+        "116": {
+            "totalXpNeeded": "37479000",
+            "levelUnlockString": "Knowledge"
+        },
+        "117": {
+            "totalXpNeeded": "38929000",
+            "levelUnlockString": "Knowledge"
+        },
+        "118": {
+            "totalXpNeeded": "40429000",
+            "levelUnlockString": "Knowledge"
+        },
+        "119": {
+            "totalXpNeeded": "41979000",
+            "levelUnlockString": "Knowledge"
+        },
+        "120": {
+            "totalXpNeeded": "43579000",
+            "levelUnlockString": "Knowledge"
+        },
+        "121": {
+            "totalXpNeeded": "45229000",
+            "levelUnlockString": "Knowledge"
+        },
+        "122": {
+            "totalXpNeeded": "46929000",
+            "levelUnlockString": "Knowledge"
+        },
+        "123": {
+            "totalXpNeeded": "48679000",
+            "levelUnlockString": "Knowledge"
+        },
+        "124": {
+            "totalXpNeeded": "50479000",
+            "levelUnlockString": "Knowledge"
+        },
+        "125": {
+            "totalXpNeeded": "52329000",
+            "levelUnlockString": "Knowledge"
+        },
+        "126": {
+            "totalXpNeeded": "54229000",
+            "levelUnlockString": "Knowledge"
+        },
+        "127": {
+            "totalXpNeeded": "56179000",
+            "levelUnlockString": "Knowledge"
+        },
+        "128": {
+            "totalXpNeeded": "58179000",
+            "levelUnlockString": "Knowledge"
+        },
+        "129": {
+            "totalXpNeeded": "60229000",
+            "levelUnlockString": "Knowledge"
+        },
+        "130": {
+            "totalXpNeeded": "62329000",
+            "levelUnlockString": "Knowledge"
+        },
+        "131": {
+            "totalXpNeeded": "64479000",
+            "levelUnlockString": "Knowledge"
+        },
+        "132": {
+            "totalXpNeeded": "66679000",
+            "levelUnlockString": "Knowledge"
+        },
+        "133": {
+            "totalXpNeeded": "68929000",
+            "levelUnlockString": "Knowledge"
+        },
+        "134": {
+            "totalXpNeeded": "71229000",
+            "levelUnlockString": "Knowledge"
+        },
+        "135": {
+            "totalXpNeeded": "73579000",
+            "levelUnlockString": "Knowledge"
+        },
+        "136": {
+            "totalXpNeeded": "75979000",
+            "levelUnlockString": "Knowledge"
+        },
+        "137": {
+            "totalXpNeeded": "78429000",
+            "levelUnlockString": "Knowledge"
+        },
+        "138": {
+            "totalXpNeeded": "80929000",
+            "levelUnlockString": "Knowledge"
+        },
+        "139": {
+            "totalXpNeeded": "83479000",
+            "levelUnlockString": "Knowledge"
+        },
+        "140": {
+            "totalXpNeeded": "86079000",
+            "levelUnlockString": "Knowledge"
+        },
+        "141": {
+            "totalXpNeeded": "88729000",
+            "levelUnlockString": "Knowledge"
+        },
+        "142": {
+            "totalXpNeeded": "91429000",
+            "levelUnlockString": "Knowledge"
+        },
+        "143": {
+            "totalXpNeeded": "94179000",
+            "levelUnlockString": "Knowledge"
+        },
+        "144": {
+            "totalXpNeeded": "96979000",
+            "levelUnlockString": "Knowledge"
+        },
+        "145": {
+            "totalXpNeeded": "99829000",
+            "levelUnlockString": "Knowledge"
+        },
+        "146": {
+            "totalXpNeeded": "102729000",
+            "levelUnlockString": "Knowledge"
+        },
+        "147": {
+            "totalXpNeeded": "105679000",
+            "levelUnlockString": "Knowledge"
+        },
+        "148": {
+            "totalXpNeeded": "108679000",
+            "levelUnlockString": "Knowledge"
+        },
+        "149": {
+            "totalXpNeeded": "111729000",
+            "levelUnlockString": "Knowledge"
+        },
+        "150": {
+            "totalXpNeeded": "120000000",
+            "levelUnlockString": "Knowledge"
+        },
+        "151": {
+            "totalXpNeeded": "130000000",
+            "levelUnlockString": "Knowledge"
+        },
+        "152": {
+            "totalXpNeeded": "141000000",
+            "levelUnlockString": "Knowledge"
+        },
+        "153": {
+            "totalXpNeeded": "153000000",
+            "levelUnlockString": "Knowledge"
+        },
+        "154": {
+            "totalXpNeeded": "166000000",
+            "levelUnlockString": "Knowledge"
+        },
+        "155": {
+            "totalXpNeeded": "180000000",
+            "levelUnlockString": "Knowledge"
+        }
+    }
+}
