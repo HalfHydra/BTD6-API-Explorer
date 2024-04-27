@@ -1,3 +1,9 @@
+:root {
+    --profile-primary: #699BD9;
+    --profile-secondary: #436FA7;
+    --profile-tertiary: #2B496F;
+}
+
 @font-face {
     font-family: 'Luckiest Guy';
     font-style: normal;
@@ -164,10 +170,45 @@
 }
 .rank {
     width: 300px;
+    height: 80px;
 }
 
-.content-div {
+.profile-header {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-name {
+    font-size: 28px;
+    font-family: 'Luckiest Guy';
+    color: white;
+    margin-left: 14px;
+    padding: 10px;
+}
+
+.profile-banner {
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.profile-bottom {
+    display: flex;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.content-div {
+    justify-content: center;
+    background-color: var(--profile-primary);
+    border-radius: 10px;
 }
 
 .black-outline {

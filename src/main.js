@@ -165,9 +165,46 @@ changeTab('overview');
 let tempXP = 0;
 
 function generateOverview(){
-    document.getElementById('overview-content').appendChild(generateAvatar(100));
-    document.getElementById('overview-content').appendChild(generateRank());
-    document.getElementById('overview-content').appendChild(generateRank(true));
+
+    let profileHeader = document.createElement('div');
+    profileHeader.id = 'profile-header';
+    profileHeader.classList.add('profile-header');
+    profileHeader.classList.add('profile-banner');
+    profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${btd6publicprofile["bannerURL"]}')`;
+    document.getElementById('overview-content').appendChild(profileHeader);
+    profileHeader.appendChild(generateAvatar(100));
+
+    let profileTopBottom = document.createElement('div');
+    profileTopBottom.id = 'profile-top-bottom';
+    profileTopBottom.classList.add('profile-top-bottom');
+    profileHeader.appendChild(profileTopBottom);
+
+    let profileTop = document.createElement('div');
+    profileTop.id = 'profile-top';
+    profileTop.classList.add('profile-top');
+    profileTopBottom.appendChild(profileTop);
+
+    let profileName = document.createElement('p');
+    profileName.id = 'profile-name';
+    profileName.classList.add('profile-name');
+    profileName.classList.add('black-outline');
+    profileName.innerHTML = btd6publicprofile["displayName"];
+    profileTop.appendChild(profileName);
+
+    let profileBottom = document.createElement('div');
+    profileBottom.id = 'profile-bottom';
+    profileBottom.classList.add('profile-bottom');
+    profileTopBottom.appendChild(profileBottom);
+
+    profileBottom.appendChild(generateRank());
+    profileBottom.appendChild(generateRank(true));
+
+    let profileStats = document.createElement('div');
+    profileStats.id = 'profile-stats';
+    profileStats.classList.add('profile-stats');
+    document.getElementById('overview-content').appendChild(profileStats);
+
+    let statsInOrder = [""]
 }
 
 function generateAvatar(width){
