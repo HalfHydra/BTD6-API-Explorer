@@ -10,6 +10,13 @@ let rankInfo = {
     "xpGoal": null
 };
 
+let xpNeededPerVeteranRank = 20000000;
+let rankInfoVeteran = {
+    "rank": 1,
+    "xp": null,
+    "xpGoal": 20000000
+};
+
 fetch('./data/English.json')
     .then(response => response.json())
     .then(data => {
@@ -41,13 +48,17 @@ fetch('./data/Constants.json')
 function generateIfReady(){
     if (readyFlags.every(flag => flag === 1)){
         generateRankInfo()
+        generateVeteranRankInfo()
         generateOverview()
     }
 }
 
 function generateRankInfo(){
+    // btd6usersave["xp"] = 125235498
     if (btd6usersave["xp"] === 180000000){
         rankInfo["rank"] = 155;
+        rankInfo["xp"] = null;
+        rankInfo["xpGoal"] = null;
         return;
     }
     let subtractableXP = parseInt(btd6usersave["xp"]);
@@ -63,6 +74,16 @@ function generateRankInfo(){
             return;
         }
     }
+}
+
+function generateVeteranRankInfo(){
+    let subtractableXPVeteran = parseInt(btd6usersave["veteranXp"]);
+    while (subtractableXPVeteran >= xpNeededPerVeteranRank){
+        subtractableXPVeteran -= xpNeededPerVeteranRank;
+        rankInfoVeteran["rank"] += 1;
+    }
+    rankInfoVeteran["xp"] = subtractableXPVeteran;
+    console.log(rankInfoVeteran)
 }
 
 const container = document.createElement('div');
@@ -99,7 +120,7 @@ headerContainer.id = 'header';
 headerContainer.classList.add('header-container');
 header.appendChild(headerContainer);
 
-let headers = ['Overview', 'Inventory', 'Achievements', 'Maps', 'Settings'];
+let headers = ['Overview', 'Progress', 'Explore', 'Maps', 'Settings'];
 
 headers.forEach((headerName) => {
     headerName = headerName.toLowerCase();
@@ -126,7 +147,7 @@ function changeTab(tab) {
         tab.style.display = 'none';
         document.getElementById(tab.id.replace('-content', '')).classList.remove('selected');
     }
-    document.getElementById(tab + '-content').style.display = 'block';
+    document.getElementById(tab + '-content').style.display = 'flex';
     document.getElementById(tab).classList.add('selected');
 }
 
@@ -141,9 +162,12 @@ headers.forEach((headerName) => {
 
 changeTab('overview');
 
+let tempXP = 0;
+
 function generateOverview(){
     document.getElementById('overview-content').appendChild(generateAvatar(100));
     document.getElementById('overview-content').appendChild(generateRank());
+    document.getElementById('overview-content').appendChild(generateRank(true));
 }
 
 function generateAvatar(width){
@@ -169,7 +193,7 @@ function generateAvatar(width){
     return avatar;
 }
 
-function generateRank(){
+function generateRank(veteran){
     let rank = document.createElement('div');
     rank.id = 'rank';
     rank.classList.add('rank');
@@ -182,15 +206,49 @@ function generateRank(){
     let rankImg = document.createElement('img');
     rankImg.id = 'rank-img';
     rankImg.classList.add('rank-img');
-    rankImg.src = '../Assets/UI/LvlHolder.png';
+    rankImg.src = veteran ? '../Assets/UI/LvlHolderVeteran.png' : '../Assets/UI/LvlHolder.png';
     rankStar.appendChild(rankImg);
 
     let rankText = document.createElement('p');
     rankText.id = 'rank-text';
     rankText.classList.add('rank-text');
     rankText.classList.add('black-outline');
-    rankText.innerHTML = rankInfo["rank"];
+    rankText.innerHTML = veteran ? rankInfoVeteran["rank"] : rankInfo["rank"];
     rankStar.appendChild(rankText);
+
+    let rankBar = document.createElement('div');
+    rankBar.id = 'rank-bar';
+    rankBar.classList.add('rank-bar');
+    rank.appendChild(rankBar);
+
+    let rankBarFill = document.createElement('div');
+    rankBarFill.id = 'rank-bar-fill';
+    rankBarFill.classList.add('rank-bar-fill');
+    if (veteran) { 
+        rankBar.classList.add('rank-bar-veteran');
+        rankBarFill.classList.add('rank-bar-fill-veteran');
+        rankBarFill.style.width = rankInfoVeteran["xp"] === null ? "100%" : `${(rankInfoVeteran["xp"]/rankInfoVeteran["xpGoal"]) * 100}%`;
+    } else {
+        rankBarFill.style.width = rankInfo["xp"] === null ? "100%" : `${(rankInfo["xp"]/rankInfo["xpGoal"]) * 100}%`;
+    }
+    rankBar.appendChild(rankBarFill);
+
+    // let rankBarFrameImg = document.createElement('img');
+    // rankBarFrameImg.id = 'rank-bar-frame-img';
+    // rankBarFrameImg.classList.add('rank-bar-frame-img');
+    // rankBarFrameImg.src = '../Assets/UI/XPBarFrame.png';
+    // rankBar.appendChild(rankBarFrameImg);
+
+    let rankBarText = document.createElement('p');
+    rankBarText.id = 'rank-bar-text';
+    rankBarText.classList.add('rank-bar-text');
+    if (veteran) {
+        rankBarText.innerHTML = rankInfoVeteran["xp"] === null ? "Max Level" : `${rankInfoVeteran["xp"].toLocaleString()}/${rankInfoVeteran["xpGoal"].toLocaleString()}`;
+    } else {
+        rankBarText.innerHTML = rankInfo["xp"] === null ? "Max Level" : `${rankInfo["xp"].toLocaleString()}/${rankInfo["xpGoal"].toLocaleString()}`;
+    }
+    if (rankInfo["xp"] == null && !veteran) { rankBarText.classList.add("rank-bar-text-max") }
+    rankBar.appendChild(rankBarText);
 
     return rank;
 }

@@ -4,7 +4,19 @@
     font-weight: 400;
     src: url("../font/luckiestguy.woff2") format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-  }
+}
+
+@font-face {
+    font-family: 'Gardenia';
+    font-style: normal;
+    src: url("../font/Gardenia-Regular.woff2") format('woff2');
+}
+
+@font-face {
+    font-family: 'GardeniaBold';
+    font-style: normal;
+    src: url("../font/Gardenia-Bold.woff2") format('woff2');
+}
 
 .title {
     font-size: 56px;
@@ -67,6 +79,7 @@
     width: 75px;
     height: 75px;
     position: absolute;
+    z-index: 10;
 }
 
 .rank-text {
@@ -77,13 +90,84 @@
     width: 75px;
     height: 75px;
     position: absolute;
-    z-index: 999;
+    z-index: 20;
     text-align: center;
     display: flex;
     /* vertical-align: middle; */
     /* margin: auto 0; */
     justify-content: center;
     align-items: center;
+}
+.rank-bar {
+    width: 240px;
+    height: 55px;
+    background-image: url(../Assets/UI/XPBar.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 10px 40px;
+    position: absolute;
+}
+.rank-bar-text {
+    /* height: 52px;
+    display: flex;
+    font-family: "GardeniaBold";
+    justify-content: center;
+    flex-direction: column;
+    letter-spacing: 0.5px;
+    align-items: center;
+    font-size: 20px;
+    color: white;
+    position: relative; */
+    height: 52px;
+    display: flex;
+    font-family: "GardeniaBold";
+    justify-content: center;
+    flex-direction: column;
+    /* letter-spacing: 0.5px; */
+    align-items: center;
+    font-size: 18px;
+    color: white;
+    position: relative;
+    padding-left: 15px;
+    /* text-align: center; */
+}
+.rank-bar-text-max {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+}
+.rank-bar-fill {
+    background-image: url(../Assets/UI/BarfillBlue.png);
+    height: 100%;
+    background-size: contain;
+    position: absolute;
+    -webkit-mask-image: url(../Assets/UI/XPBarFrame.png);
+    -webkit-mask-size: 100% 95%;
+    /* -webkit-mask-repeat: no-repeat; */
+    mask-image: url(../Assets/UI/XPBarFrame.png);
+    mask-size: 100% 95%;
+}
+.rank-bar-fill-max {
+    background-image: url(../Assets/UI/BarfillBlue.png);
+    height: 100%;
+    background-size: contain;
+    position: absolute;
+    -webkit-mask-image: url(../Assets/UI/XPBarFrame.png);
+    -webkit-mask-size: contain;
+    mask-image: url(../Assets/UI/XPBarFrame.png);
+    mask-size: contain;
+}
+.rank-bar-fill-veteran {
+    background-image: url(../Assets/UI/BarfillPurple.png);
+}
+.rank-bar-veteran {
+    background-image: url(../Assets/UI/XPBarVeteran.png);
+}
+.rank {
+    width: 300px;
+}
+
+.content-div {
+    display: flex;
 }
 
 .black-outline {
