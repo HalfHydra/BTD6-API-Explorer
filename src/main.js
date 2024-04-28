@@ -2,6 +2,7 @@ let readyFlags = [0,0,0,0,0]
 
 let locJSON = {}
 let achievementsJSON = {}
+let achievementsHelper = {}
 let constants = {}
 
 let rankInfo = {
@@ -16,6 +17,8 @@ let rankInfoVeteran = {
     "xp": null,
     "xpGoal": 20000000
 };
+
+let profileStats = {}
 
 fetch('./data/English.json')
     .then(response => response.json())
@@ -49,6 +52,8 @@ function generateIfReady(){
     if (readyFlags.every(flag => flag === 1)){
         generateRankInfo()
         generateVeteranRankInfo()
+        generateAchievementsHelper()
+        generateStats()
         generateOverview()
     }
 }
@@ -84,6 +89,74 @@ function generateVeteranRankInfo(){
     }
     rankInfoVeteran["xp"] = subtractableXPVeteran;
     console.log(rankInfoVeteran)
+}
+
+function generateAchievementsHelper(){
+    for (let [key, model] of Object.entries(achievementsJSON)) {
+        achievementsHelper[model.name] = model;
+    }
+}
+
+function generateStats(){
+    profileStats["Games Played"] = btd6publicprofile.gameplay["gameCount"];
+    profileStats["Games Won"] = btd6publicprofile.gameplay["gamesWon"];
+    profileStats["Highest Round (All Time)"] = btd6publicprofile.gameplay["highestRound"];
+    profileStats["Highest Round (CHIMPS)"] = btd6publicprofile.gameplay["highestRoundCHIMPS"];
+    profileStats["Highest Round (Deflation)"] = btd6publicprofile.gameplay["highestRoundDeflation"];
+    profileStats["Total Pop Count"] = btd6publicprofile.bloonsPopped["bloonsPopped"];
+    profileStats["Total Co-Op Pop Count"] = btd6publicprofile.bloonsPopped["coopBloonsPopped"];
+    profileStats["Camo Bloons Popped"] = btd6publicprofile.bloonsPopped["camosPopped"];
+    profileStats["Lead Bloons Popped"] = btd6publicprofile.bloonsPopped["leadsPopped"];
+    profileStats["Purple Bloons Popped"] = btd6publicprofile.bloonsPopped["purplesPopped"];
+    profileStats["Regrow Bloons Popped"] = btd6publicprofile.bloonsPopped["regrowsPopped"];
+    profileStats["Ceramic Bloons Popped"] = btd6publicprofile.bloonsPopped["ceramicsPopped"];
+    profileStats["MOABs Popped"] = btd6publicprofile.bloonsPopped["moabsPopped"];
+    profileStats["BFBs Popped"] = btd6publicprofile.bloonsPopped["bfbsPopped"];
+    profileStats["ZOMGs Popped"] = btd6publicprofile.bloonsPopped["zomgsPopped"];
+    profileStats["BADs Popped"] = btd6publicprofile.bloonsPopped["badsPopped"];
+    profileStats["Bloons Leaked"] = btd6publicprofile.bloonsPopped["bloonsLeaked"];
+    profileStats["Cash Generated"] = btd6publicprofile.gameplay["cashEarned"];
+    profileStats["Cash Gifted"] = btd6publicprofile.gameplay["coopCashGiven"];
+    profileStats["Powers Used"] = btd6publicprofile.gameplay["powersUsed"];
+    profileStats["Daily Reward Chests Opened"] = btd6publicprofile.gameplay["dailyRewards"];
+    profileStats["Challenges Completed"] = btd6publicprofile.gameplay["challengesCompleted"];
+    profileStats["Achievements"] = btd6publicprofile.gameplay["achievements"];
+    profileStats["Hidden Achievements"] = 0;
+    profileStats["Odysseys Completed"] = btd6publicprofile.gameplay["totalOdysseysCompleted"];
+    profileStats["Lifetime Trophies"] = btd6publicprofile.gameplay["totalTrophiesEarned"];
+    profileStats["Necro Bloons Reanimated"] = btd6publicprofile.bloonsPopped["necroBloonsReanimated"];
+    profileStats["Transforming Tonics Used"] = btd6publicprofile.bloonsPopped["transformingTonicsUsed"];
+    profileStats["Most Experienced Monkey"] = btd6publicprofile["mostExperiencedMonkey"];
+    profileStats["Most Experienced Monkey XP"] = btd6usersave.towerXP[btd6publicprofile["mostExperiencedMonkey"]];
+    profileStats["Most Experienced Monkey"] = locJSON[profileStats["Most Experienced Monkey"]];
+    profileStats["Insta Monkey Collection"] = btd6publicprofile.gameplay["instaMonkeyCollection"];
+    profileStats["Collection Chests Opened"] = btd6publicprofile.gameplay["collectionChestsOpened"];
+    profileStats["Golden Bloons Popped"] = btd6publicprofile.bloonsPopped["goldenBloonsPopped"];
+    profileStats["Monkey Teams Wins"] = btd6publicprofile.gameplay["monkeyTeamsWins"];
+    profileStats["Damage Done To Bosses"] = btd6publicprofile.gameplay["damageDoneToBosses"];
+
+    //stats from usersave
+    profileStats["Daily Challenges Completed"] = btd6usersave["totalDailyChallengesCompleted"];
+    profileStats["Consecutive DCs Completed"] = btd6usersave["consecutiveDailyChallengesCompleted"];
+    profileStats["Races Entered"] = btd6usersave["totalRacesEntered"];
+    profileStats["Challenges Played"] = btd6usersave["challengesPlayed"];
+    profileStats["Challenges Shared"] = btd6usersave["challengesShared"];
+    profileStats["Continues Used"] = btd6usersave["continuesUsed"];
+
+    //Calculate the hidden and normal achievements
+    let hiddenAchievements = 0;
+    let normalAchievements = 0;
+    //for (let [name, model] of Object.entries(achievementsHelper)){
+    btd6usersave.achievementsClaimed.forEach((achievement) => {
+        let model = achievementsHelper[fixAchievementName(achievement)];
+        if (model.model.hidden){
+            hiddenAchievements += 1;
+        } else {
+            normalAchievements += 1;
+        }
+    })
+    profileStats["Hidden Achievements"] = hiddenAchievements;
+    profileStats["Achievements"] = normalAchievements;
 }
 
 const container = document.createElement('div');
@@ -199,12 +272,39 @@ function generateOverview(){
     profileBottom.appendChild(generateRank());
     profileBottom.appendChild(generateRank(true));
 
-    let profileStats = document.createElement('div');
-    profileStats.id = 'profile-stats';
-    profileStats.classList.add('profile-stats');
-    document.getElementById('overview-content').appendChild(profileStats);
+    let belowProfileHeader = document.createElement('div');
+    belowProfileHeader.id = 'below-profile-header';
+    belowProfileHeader.classList.add('below-profile-header');
+    document.getElementById('overview-content').appendChild(belowProfileHeader);
 
-    let statsInOrder = [""]
+    let currencyAndMedalsDiv = document.createElement('div');
+    currencyAndMedalsDiv.id = 'selectors-div';
+    currencyAndMedalsDiv.classList.add('selectors-div');
+    belowProfileHeader.appendChild(currencyAndMedalsDiv);
+
+    let profileStatsDiv = document.createElement('div');
+    profileStatsDiv.id = 'profile-stats';
+    profileStatsDiv.classList.add('profile-stats');
+    belowProfileHeader.appendChild(profileStatsDiv);
+
+    for (let [key, value] of Object.entries(profileStats)){
+        let stat = document.createElement('div');
+        stat.id = 'stat';
+        stat.classList.add('stat');
+        profileStatsDiv.appendChild(stat);
+
+        let statName = document.createElement('p');
+        statName.id = 'stat-name';
+        statName.classList.add('stat-name');
+        statName.innerHTML = key;
+        stat.appendChild(statName);
+
+        let statValue = document.createElement('p');
+        statValue.id = 'stat-value';
+        statValue.classList.add('stat-value');
+        statValue.innerHTML = value.toLocaleString();
+        stat.appendChild(statValue);
+    }
 }
 
 function generateAvatar(width){
