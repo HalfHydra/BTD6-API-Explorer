@@ -89,6 +89,24 @@ const upgradeNameFixMap = {
     "MonkeySubParagon": "NauticSiegeCore"
 }
 
+let medalMap = {
+    "Easy": "Bronze",
+    "PrimaryOnly": "Bronze01",
+    "Deflation": "Bronze02",
+    "Medium": "Silver",
+    "MilitaryOnly": "Silver01",
+    "Apopalypse": "Silver03",
+    "Reverse": "Silver02",
+    "Hard": "Gold",
+    "MagicOnly": "Gold01",
+    "DoubleMoabHealth": "Gold03",
+    "HalfCash": "Gold04",
+    "AlternateBloonsRounds": "Gold02",
+    "Impoppable": "Impoppable",
+    "Clicks": "ImpoppableRuby",
+    "CHIMPS-BLACK": "ImpoppableHematite"
+}
+
 function getTowerAssetPath(towerType, upgrade) {
     return towerType == "WizardMonkey" ? `Assets/TowerIcon/${upgrade}-Wizard.png` : `Assets/TowerIcon/${upgrade}-${towerType}.png`;
 }
@@ -128,4 +146,8 @@ function getAchievementIcon(achievement, hidden){
 
 function fixAchievementName(name){
     return achievementNameFixMap[name] || name;
+}
+
+function getMedalIcon(medal){
+    return `Assets/MedalIcon/${medal}.png`;
 }

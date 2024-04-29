@@ -10,7 +10,7 @@ getSaveData(oak_token)
 getPublicProfileData(oak_token)
 
 async function getSaveData(oak_token) {
-    // let res = await fetch(`https://data.ninjakiwi.com/btd6/save/${oak_token}`);
+    //let res = await fetch(`https://data.ninjakiwi.com/btd6/save/${oak_token}`);
     let res = await fetch(`./data/PreventAPISpam.txt`);
     try {
         let json = await res.json();
@@ -26,7 +26,7 @@ async function getSaveData(oak_token) {
 }
 
 async function getPublicProfileData(oak_token) {
-    // let res = await fetch(`https://data.ninjakiwi.com/btd6/users/${oak_token}`);
+    //let res = await fetch(`https://data.ninjakiwi.com/btd6/users/${oak_token}`);
     let res = await fetch(`./data/PreventAPISpam_UserID.json`);
     try {
         let json = await res.json();

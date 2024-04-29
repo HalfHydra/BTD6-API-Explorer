@@ -20,6 +20,8 @@ let rankInfoVeteran = {
 
 let profileStats = {}
 
+let medalsInOrder = {}
+
 fetch('./data/English.json')
     .then(response => response.json())
     .then(data => {
@@ -54,6 +56,7 @@ function generateIfReady(){
         generateVeteranRankInfo()
         generateAchievementsHelper()
         generateStats()
+        generateMedals()
         generateOverview()
     }
 }
@@ -157,6 +160,55 @@ function generateStats(){
     })
     profileStats["Hidden Achievements"] = hiddenAchievements;
     profileStats["Achievements"] = normalAchievements;
+}
+
+function generateMedals(){
+    let tempCoop = {};
+    for (let [key, value] of Object.entries(medalMap)){
+        medalsInOrder["Medal" + value] = btd6publicprofile["_medalsSinglePlayer"][key] || 0;
+        tempCoop["MedalCoop" + value] = btd6publicprofile["_medalsMultiplayer"][key] || 0;
+    }
+    medalsInOrder = {...medalsInOrder, ...tempCoop};
+    //boss badges when they are added
+    medalsInOrder["MedalEventBronzeMedal"] = btd6publicprofile["_medalsRace"]["Bronze"] || 0;
+    medalsInOrder["MedalEventSilverMedal"] = btd6publicprofile["_medalsRace"]["Silver"] || 0;
+    medalsInOrder["MedalEventGoldSilverMedal"] = btd6publicprofile["_medalsRace"]["GoldSilver"] || 0;
+    medalsInOrder["MedalEventDoubleGoldMedal"] = btd6publicprofile["_medalsRace"]["DoubleGold"] || 0;
+    medalsInOrder["MedalEventGoldDiamondMedal"] = btd6publicprofile["_medalsRace"]["GoldDiamond"] || 0;
+    medalsInOrder["MedalEventRedDiamondMedal"] = btd6publicprofile["_medalsRace"]["RedDiamond"] || 0;
+    medalsInOrder["MedalEventBlackDiamondMedal"] = btd6publicprofile["_medalsRace"]["BlackDiamond"] || 0;
+    medalsInOrder["OdysseyStarIcon"] = btd6publicprofile.gameplay["totalOdysseyStars"] || 0;
+    medalsInOrder["BossMedalEventBronzeMedal"] = btd6publicprofile["_medalsBoss"]["Bronze"] || 0;
+    medalsInOrder["BossMedalEventSilverMedal"] = btd6publicprofile["_medalsBoss"]["Silver"] || 0;
+    medalsInOrder["BossMedalEventDoubleSilverMedal"] = btd6publicprofile["_medalsBoss"]["DoubleSilver"] || 0;
+    medalsInOrder["BossMedalEventGoldSilverMedal"] = btd6publicprofile["_medalsBoss"]["GoldSilver"] || 0;
+    medalsInOrder["BossMedalEventDoubleGoldMedal"] = btd6publicprofile["_medalsBoss"]["DoubleGold"] || 0;
+    medalsInOrder["BossMedalEventGoldDiamondMedal"] = btd6publicprofile["_medalsBoss"]["GoldDiamond"] || 0;
+    medalsInOrder["BossMedalEventDiamondMedal"] = btd6publicprofile["_medalsBoss"]["Diamond"] || 0;
+    medalsInOrder["BossMedalEventRedDiamondMedal"] = btd6publicprofile["_medalsBoss"]["RedDiamond"] || 0;
+    medalsInOrder["BossMedalEventBlackDiamondMedal"] = btd6publicprofile["_medalsBoss"]["BlackDiamond"] || 0;
+    medalsInOrder["EliteBossMedalEventBronzeMedal"] = btd6publicprofile["_medalsBossElite"]["Bronze"] || 0;
+    medalsInOrder["EliteBossMedalEventSilverMedal"] = btd6publicprofile["_medalsBossElite"]["Silver"] || 0;
+    medalsInOrder["EliteBossMedalEventDoubleSilverMedal"] = btd6publicprofile["_medalsBossElite"]["DoubleSilver"] || 0;
+    medalsInOrder["EliteBossMedalEventGoldSilverMedal"] = btd6publicprofile["_medalsBossElite"]["GoldSilver"] || 0;
+    medalsInOrder["EliteBossMedalEventDoubleGoldMedal"] = btd6publicprofile["_medalsBossElite"]["DoubleGold"] || 0;
+    medalsInOrder["EliteBossMedalEventGoldDiamondMedal"] = btd6publicprofile["_medalsBossElite"]["GoldDiamond"] || 0;
+    medalsInOrder["EliteBossMedalEventDiamondMedal"] = btd6publicprofile["_medalsBossElite"]["Diamond"] || 0;
+    medalsInOrder["EliteBossMedalEventRedDiamondMedal"] = btd6publicprofile["_medalsBossElite"]["RedDiamond"] || 0;
+    medalsInOrder["EliteBossMedalEventBlackDiamondMedal"] = btd6publicprofile["_medalsBossElite"]["BlackDiamond"] || 0;
+    medalsInOrder["CtLocalPlayerBronzeMedal"] = btd6publicprofile["_medalsCTLocal"]["Bronze"] || 0;
+    medalsInOrder["CtLocalPlayerSilverMedal"] = btd6publicprofile["_medalsCTLocal"]["Silver"] || 0;
+    medalsInOrder["CtLocalPlayerDoubleGoldMedal"] = btd6publicprofile["_medalsCTLocal"]["DoubleGold"] || 0;
+    medalsInOrder["CtLocalPlayerDiamondMedal"] = btd6publicprofile["_medalsCTLocal"]["Diamond"] || 0;
+    medalsInOrder["CtLocalPlayerRedDiamondMedal"] = btd6publicprofile["_medalsCTLocal"]["RedDiamond"] || 0;
+    medalsInOrder["CtLocalPlayerBlackDiamondMedal"] = btd6publicprofile["_medalsCTLocal"]["BlackDiamond"] || 0;
+    medalsInOrder["CtGlobalPlayerBronzeMedal"] = btd6publicprofile["_medalsCTGlobal"]["Bronze"] || 0;
+    medalsInOrder["CtGlobalPlayerSilverMedal"] = btd6publicprofile["_medalsCTGlobal"]["Silver"] || 0;
+    medalsInOrder["CtGlobalPlayerDoubleSilverMedal"] = btd6publicprofile["_medalsCTGlobal"]["DoubleSilver"] || 0;
+    medalsInOrder["CtGlobalPlayerGoldSilverMedal"] = btd6publicprofile["_medalsCTGlobal"]["GoldSilver"] || 0;
+    medalsInOrder["CtGlobalPlayerDoubleGoldMedal"] = btd6publicprofile["_medalsCTGlobal"]["DoubleGold"] || 0;
+    medalsInOrder["CtGlobalPlayerGoldDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["GoldDiamond"] || 0;
+    medalsInOrder["CtGlobalPlayerDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["Diamond"] || 0;
 }
 
 const container = document.createElement('div');
@@ -270,22 +322,151 @@ function generateOverview(){
     profileTopBottom.appendChild(profileBottom);
 
     profileBottom.appendChild(generateRank());
-    profileBottom.appendChild(generateRank(true));
+    if(btd6usersave["veteranXp"] > 0){
+        profileBottom.appendChild(generateRank(true));
+    }
 
     let belowProfileHeader = document.createElement('div');
     belowProfileHeader.id = 'below-profile-header';
     belowProfileHeader.classList.add('below-profile-header');
     document.getElementById('overview-content').appendChild(belowProfileHeader);
 
+    let leftColumnDiv = document.createElement('div');
+    leftColumnDiv.id = 'left-column-div';
+    leftColumnDiv.classList.add('left-column-div');
+    belowProfileHeader.appendChild(leftColumnDiv);
+
+    let leftColumnHeader = document.createElement('div');
+    leftColumnHeader.id = 'left-column-header';
+    leftColumnHeader.classList.add('left-column-header');
+    leftColumnDiv.appendChild(leftColumnHeader);
+
+    let leftColumnHeaderText = document.createElement('p');
+    leftColumnHeaderText.id = 'left-column-header-text';
+    leftColumnHeaderText.classList.add('column-header-text');
+    leftColumnHeaderText.classList.add('black-outline');
+    leftColumnHeaderText.innerHTML = 'Currency and Medals';
+    leftColumnHeader.appendChild(leftColumnHeaderText);
+
     let currencyAndMedalsDiv = document.createElement('div');
     currencyAndMedalsDiv.id = 'selectors-div';
     currencyAndMedalsDiv.classList.add('selectors-div');
-    belowProfileHeader.appendChild(currencyAndMedalsDiv);
+    leftColumnDiv.appendChild(currencyAndMedalsDiv);
+
+    let currencyDiv = document.createElement('div');
+    currencyDiv.id = 'currency-div';
+    currencyDiv.classList.add('currency-div');
+    currencyAndMedalsDiv.appendChild(currencyDiv);
+
+    let currencyMMDiv = document.createElement('div');
+    currencyMMDiv.id = 'currency-mm-div';
+    currencyMMDiv.classList.add('currency-mm-div');
+    currencyDiv.appendChild(currencyMMDiv);
+
+    let currencyMMImg = document.createElement('img');
+    currencyMMImg.id = 'currency-mm-img';
+    currencyMMImg.classList.add('currency-mm-img');
+    currencyMMImg.src = '../Assets/UI/BloonjaminsIcon.png';
+    currencyMMDiv.appendChild(currencyMMImg);
+
+    let currencyMMText = document.createElement('p');
+    currencyMMText.id = 'currency-mm-text';
+    currencyMMText.classList.add('currency-mm-text');
+    currencyMMText.classList.add('mm-outline');
+    currencyMMText.innerHTML = "$" + btd6usersave["monkeyMoney"].toLocaleString();
+    currencyMMDiv.appendChild(currencyMMText);
+
+    let currencyKnowledgeDiv = document.createElement('div');
+    currencyKnowledgeDiv.id = 'currency-knowledge-div';
+    currencyKnowledgeDiv.classList.add('currency-knowledge-div');
+    currencyDiv.appendChild(currencyKnowledgeDiv);
+
+    let currencyKnowledgeImg = document.createElement('img');
+    currencyKnowledgeImg.id = 'currency-knowledge-img';
+    currencyKnowledgeImg.classList.add('currency-knowledge-img');
+    currencyKnowledgeImg.src = '../Assets/UI/KnowledgeIcon.png';
+    currencyKnowledgeDiv.appendChild(currencyKnowledgeImg);
+
+    let currencyKnowledgeText = document.createElement('p');
+    currencyKnowledgeText.id = 'currency-knowledge-text';
+    currencyKnowledgeText.classList.add('currency-knowledge-text');
+    currencyKnowledgeText.classList.add('knowledge-outline');
+    currencyKnowledgeText.innerHTML = btd6usersave["knowledgePoints"].toLocaleString();
+    currencyKnowledgeDiv.appendChild(currencyKnowledgeText);
+
+    let currencyTrophiesDiv = document.createElement('div');
+    currencyTrophiesDiv.id = 'currency-trophies-div';
+    currencyTrophiesDiv.classList.add('currency-trophies-div');
+    currencyDiv.appendChild(currencyTrophiesDiv);
+
+    let currencyTrophiesImg = document.createElement('img');
+    currencyTrophiesImg.id = 'currency-trophies-img';
+    currencyTrophiesImg.classList.add('currency-trophies-img');
+    currencyTrophiesImg.src = '../Assets/UI/TrophyIcon.png';
+    currencyTrophiesDiv.appendChild(currencyTrophiesImg);
+
+    let currencyTrophiesText = document.createElement('p');
+    currencyTrophiesText.id = 'currency-trophies-text';
+    currencyTrophiesText.classList.add('currency-trophies-text');
+    currencyTrophiesText.classList.add('black-outline');
+    currencyTrophiesText.innerHTML = btd6publicprofile.gameplay["totalTrophiesEarned"].toLocaleString();
+    currencyTrophiesDiv.appendChild(currencyTrophiesText);
+
+    let medalsDiv = document.createElement('div');
+    medalsDiv.id = 'medals-div';
+    medalsDiv.classList.add('medals-div');
+    currencyAndMedalsDiv.appendChild(medalsDiv);
+
+    for (let [medal, num] of Object.entries(medalsInOrder)){
+        let medalDiv = document.createElement('div');
+        medalDiv.id = 'medal-div';
+        medalDiv.classList.add('medal-div');
+        medalsDiv.appendChild(medalDiv);
+
+        let medalImg = document.createElement('img');
+        medalImg.id = 'medal-img';
+        medalImg.classList.add('medal-img');
+        medalImg.src = getMedalIcon(medal);
+        medalImg.style.display = "none";
+        medalImg.addEventListener('load', () => {
+            if(medalImg.width < medalImg.height){
+                medalImg.style.width = `${ratioCalc(3,70,256,0,medalImg.width)}px`
+            } else {
+                medalImg.style.height = `${ratioCalc(3,70,256,0,medalImg.height)}px`
+            }
+            medalImg.style.removeProperty('display');
+        })
+        medalDiv.appendChild(medalImg);
+
+        let medalText = document.createElement('p');
+        medalText.id = 'medal-text';
+        medalText.classList.add('medal-text');
+        medalText.classList.add('black-outline');
+        medalText.innerHTML = num.toLocaleString();
+        medalDiv.appendChild(medalText);
+    }
+
+    let rightColumnDiv = document.createElement('div');
+    rightColumnDiv.id = 'right-column-div';
+    rightColumnDiv.classList.add('right-column-div');
+    belowProfileHeader.appendChild(rightColumnDiv);
+
+    let rightColumnHeader = document.createElement('div');
+    rightColumnHeader.id = 'right-column-header';
+    rightColumnHeader.classList.add('right-column-header');
+    rightColumnDiv.appendChild(rightColumnHeader);
+
+    let rightColumnHeaderText = document.createElement('p');
+    rightColumnHeaderText.id = 'right-column-header-text';
+    rightColumnHeaderText.classList.add('column-header-text');
+    rightColumnHeaderText.classList.add('black-outline');
+    rightColumnHeaderText.innerHTML = 'Overall Stats';
+    rightColumnHeader.appendChild(rightColumnHeaderText);
 
     let profileStatsDiv = document.createElement('div');
     profileStatsDiv.id = 'profile-stats';
     profileStatsDiv.classList.add('profile-stats');
-    belowProfileHeader.appendChild(profileStatsDiv);
+    rightColumnDiv.appendChild(profileStatsDiv);
 
     for (let [key, value] of Object.entries(profileStats)){
         let stat = document.createElement('div');
@@ -389,3 +570,21 @@ function generateRank(veteran){
 
     return rank;
 }
+
+function ratioCalc(unknown, x1, x2, y1, y2){
+    switch(unknown){
+        case 1:
+            // x1/x2 == y1/y2
+            return x2 * (y1/y2)
+        case 2:
+            // x1/x2 == y1/y2
+            return x1 * (y2/y1)
+        case 3:
+            // x1/x2 == y1/y2
+            return y2 * (x1/x2)
+        case 4:
+            // x1/x2 == y1/y2
+            return y1 * (x2/x1)
+    }
+}
+

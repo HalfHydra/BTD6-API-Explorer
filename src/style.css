@@ -223,6 +223,129 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-color: var(--profile-secondary);
+}
+
+.currency-div {
+
+}
+.currency-mm-div {
+    border: 20px solid transparent;
+    /* padding: 15px; */
+    border-image-source: url(../Assets/UI/BarfillContainer.png);
+    border-image-slice: 50;
+    background-color: #9F7842;
+    border-radius: 20px;
+    /*margin-left:10px;*/
+    display: inline-block;
+    /* margin-right: 50px; */
+}
+.currency-mm-img {
+    position: absolute;
+    width: 100px;
+    transform: rotate(345deg);
+    margin-left: -60px;
+    margin-top: -10px;
+}
+.currency-mm-text {
+    font-family: 'Luckiest Guy';
+    font-size: 32px;
+    color: #9AE42C;
+    padding-left: 40px;
+    /* padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;*/
+}
+
+.currency-knowledge-div {
+    border: 20px solid transparent;
+    /* padding: 15px; */
+    border-image-source: url(../Assets/UI/BarfillContainer.png);
+    border-image-slice: 50;
+    background-color: #9F7842;
+    border-radius: 20px;
+    /*margin-left:10px;*/
+    display: inline-block;
+}
+.currency-knowledge-img {
+    position: absolute;
+    width: 70px;
+    transform: rotate(345deg);
+    margin-left: -40px;
+    margin-top: -20px;
+}
+.currency-knowledge-text {
+    font-family: 'Luckiest Guy';
+    font-size: 32px;
+    color: white;
+    padding-left: 40px;
+    /* padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;*/
+}
+
+.currency-div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+}
+
+.currency-trophies-div {
+    border: 20px solid transparent;
+    /* padding: 15px; */
+    border-image-source: url(../Assets/UI/BarfillTrophyContainer.png);
+    border-image-slice: 50;
+    background-color: #314683;
+    border-radius: 20px;
+    /* margin-left: 10px; */
+    display: inline-block;
+    background: linear-gradient(180deg, rgba(94,10,196,1) 0%, rgba(131,47,235,1) 100%);
+}
+.currency-trophies-img {
+    position: absolute;
+    width: 70px;
+    margin-left: -40px;
+    margin-top: -18px;
+}
+.currency-trophies-text {
+    font-family: 'Luckiest Guy';
+    font-size: 32px;
+    color: white;
+    padding-left: 40px;
+    /* padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;*/
+}
+.medals-div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.medal-div {
+    display: flex;
+    position: relative;
+    width: 70px;
+    height: 70px;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 5px 0px;
+}
+.medal-img {
+    /*width: 50px;*/
+    /*width: inherit;*/
+    /*object-fit: contain;
+    width: 100%;
+    height: 100%;*/
+}
+.medal-text {
+    font-family: 'Luckiest Guy';
+    color: white;
+    font-size: 24px;
+    position: absolute;
+    margin-left: 50%;
+    margin-top: 50%;
+    z-index: 5;
 }
 
 .stat {
@@ -243,6 +366,13 @@
     letter-spacing: 0.5px;
 }
 
+.column-header-text {
+    font-family: 'Luckiest Guy';
+    font-size: 32px;
+    color: white;
+    padding: 10px;
+}
+
 .profile-stats {
     width: 500px;
     padding: 10px;
@@ -260,6 +390,14 @@
 .black-outline {
     -webkit-text-stroke: 0.7px black;
     text-shadow: 1px 0px 0px #000, -1px 0px 0 #000, 0px 1px 0 #000, 1px 0px 0px #000, 1px 2px 0px #000, -1px -1px 0 #000, -1px 2px 0 #000, 1px -1px 0px #000;
+}
+.mm-outline {
+    -webkit-text-stroke: 0.7px #004500;
+    text-shadow: 1px 0px 0px #004500, -1px 0px 0 #004500, 0px 1px 0 #004500, 1px 0px 0px #004500, 1px 2px 0px #004500, -1px -1px 0 #004500, -1px 2px 0 #004500, 1px -1px 0px #004500;
+}
+.knowledge-outline {
+    -webkit-text-stroke: 0.7px #5600CC;
+    text-shadow: 1px 0px 0px #5600CC, -1px 0px 0 #5600CC, 0px 1px 0 #5600CC, 1px 0px 0px #5600CC, 1px 2px 0px #5600CC, -1px -1px 0 #5600CC, -1px 2px 0 #5600CC, 1px -1px 0px #5600CC;
 }
 
 .noSelect {
