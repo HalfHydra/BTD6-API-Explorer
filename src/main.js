@@ -1,5 +1,6 @@
 let readyFlags = [0,0,0,0,0]
-
+let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
+let isGenerated = []
 let locJSON = {}
 let achievementsJSON = {}
 let achievementsHelper = {}
@@ -19,8 +20,10 @@ let rankInfoVeteran = {
 };
 
 let profileStats = {}
-
 let medalsInOrder = {}
+let extrasUnlocked = {}
+
+let progressSubText = {}
 
 fetch('./data/English.json')
     .then(response => response.json())
@@ -57,7 +60,11 @@ function generateIfReady(){
         generateAchievementsHelper()
         generateStats()
         generateMedals()
+        generateExtras()
+        generateProgressSubText()
         generateOverview()
+        isGenerated.push('overview');
+        changeTab('overview');
     }
 }
 
@@ -132,7 +139,7 @@ function generateStats(){
     profileStats["Most Experienced Monkey"] = btd6publicprofile["mostExperiencedMonkey"];
     profileStats["Most Experienced Monkey XP"] = btd6usersave.towerXP[btd6publicprofile["mostExperiencedMonkey"]];
     profileStats["Most Experienced Monkey"] = locJSON[profileStats["Most Experienced Monkey"]];
-    profileStats["Insta Monkey Collection"] = btd6publicprofile.gameplay["instaMonkeyCollection"];
+    profileStats["Insta Monkey Collection"] = `${btd6publicprofile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}`;
     profileStats["Collection Chests Opened"] = btd6publicprofile.gameplay["collectionChestsOpened"];
     profileStats["Golden Bloons Popped"] = btd6publicprofile.bloonsPopped["goldenBloonsPopped"];
     profileStats["Monkey Teams Wins"] = btd6publicprofile.gameplay["monkeyTeamsWins"];
@@ -158,8 +165,8 @@ function generateStats(){
             normalAchievements += 1;
         }
     })
-    profileStats["Hidden Achievements"] = hiddenAchievements;
-    profileStats["Achievements"] = normalAchievements;
+    profileStats["Hidden Achievements"] = `${hiddenAchievements}/${constants.hiddenAchievements}`;
+    profileStats["Achievements"] = `${normalAchievements}/${constants.achievements}`;
 }
 
 function generateMedals(){
@@ -209,6 +216,25 @@ function generateMedals(){
     medalsInOrder["CtGlobalPlayerDoubleGoldMedal"] = btd6publicprofile["_medalsCTGlobal"]["DoubleGold"] || 0;
     medalsInOrder["CtGlobalPlayerGoldDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["GoldDiamond"] || 0;
     medalsInOrder["CtGlobalPlayerDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["Diamond"] || 0;
+}
+
+function generateExtras(){
+    extrasUnlocked["Big Bloons"] = btd6usersave["unlockedBigBloons"];
+    extrasUnlocked["Small Bloons"] = btd6usersave["unlockedSmallBloons"];
+    extrasUnlocked["Big Monkey Towers"] = btd6usersave["seenBigTowers"];
+    extrasUnlocked["Small Monkey Towers"] = btd6usersave["unlockedSmallTowers"];
+    //extrasUnlocked["Small Bosses"] = btd6usersave["unlockedSmallBosses"]; hopefully this gets implemented
+}
+
+function generateProgressSubText(){
+    progressSubText["Towers"] = `${Object.keys(btd6usersave.unlockedTowers).filter(k => btd6usersave.unlockedTowers[k]).length}/${Object.keys(btd6usersave.unlockedTowers).length} Towers Unlocked`;
+    progressSubText["Heroes"] = `${Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length}/${Object.keys(btd6usersave.unlockedHeros).length} Heroes Unlocked`;
+    progressSubText["Knowledge"] = `${Object.keys(btd6usersave.acquiredKnowledge).filter(k => btd6usersave.acquiredKnowledge[k]).length}/${Object.keys(btd6usersave.acquiredKnowledge).length} Knowledge Unlocked`;
+    progressSubText["Map Progress"] = `${Object.keys(btd6usersave.mapProgress).filter(k => btd6usersave.mapProgress[k]).length}/${Object.keys(btd6usersave.mapProgress).length} Maps Unlocked`;
+    progressSubText["Powers"] = `${Object.values(btd6usersave.powers).map(power => power.quantity).reduce((acc, amount) => acc + amount)} Powers`
+    progressSubText["Insta Monkeys"] = `${btd6publicprofile.gameplay.instaMonkeyCollection}/${constants.totalInstaMonkeys} Insta Monkeys`;
+    progressSubText["Achievements"] = `${btd6publicprofile.achievements}/${constants.achievements + constants.hiddenAchievements} Achievements`;
+    progressSubText["Extras"] = `${Object.keys(extrasUnlocked).filter(k => extrasUnlocked[k]).length} Extras`;
 }
 
 const container = document.createElement('div');
@@ -274,18 +300,41 @@ function changeTab(tab) {
     }
     document.getElementById(tab + '-content').style.display = 'flex';
     document.getElementById(tab).classList.add('selected');
+    if(!isGenerated.includes(tab)){
+        switch(tab){
+            case 'overview':
+                generateOverview();
+                isGenerated.push(tab);
+                break;
+            case 'progress':
+                generateProgress();
+                isGenerated.push(tab);
+                break;
+            case 'explore':
+                //generateExplore();
+                //isGenerated.push(tab);
+                break;
+            case 'maps':
+                //generateMaps();
+                //isGenerated.push(tab);
+                break;
+            case 'settings':
+                //generateSettings();
+                //isGenerated.push(tab);
+                break;
+        }
+    }
 }
 
 headers.forEach((headerName) => {
     headerName = headerName.toLowerCase();
     let contentElement = document.createElement('div');
     contentElement.id = headerName + '-content';
-    contentElement.classList.add('content-div');
+    contentElement.classList.add(`content-div`);
+    contentElement.classList.add(headerName)
     contentElement.style.display = 'none';
     content.appendChild(contentElement);
 })
-
-changeTab('overview');
 
 let tempXP = 0;
 
@@ -409,7 +458,7 @@ function generateOverview(){
     currencyTrophiesText.id = 'currency-trophies-text';
     currencyTrophiesText.classList.add('currency-trophies-text');
     currencyTrophiesText.classList.add('black-outline');
-    currencyTrophiesText.innerHTML = btd6publicprofile.gameplay["totalTrophiesEarned"].toLocaleString();
+    currencyTrophiesText.innerHTML = btd6usersave["trophies"].toLocaleString();
     currencyTrophiesDiv.appendChild(currencyTrophiesText);
 
     let medalsDiv = document.createElement('div');
@@ -418,6 +467,7 @@ function generateOverview(){
     currencyAndMedalsDiv.appendChild(medalsDiv);
 
     for (let [medal, num] of Object.entries(medalsInOrder)){
+        if(num === 0) { continue; }
         let medalDiv = document.createElement('div');
         medalDiv.id = 'medal-div';
         medalDiv.classList.add('medal-div');
@@ -445,6 +495,23 @@ function generateOverview(){
         medalText.innerHTML = num.toLocaleString();
         medalDiv.appendChild(medalText);
     }
+
+    /*let topColumnDiv = document.createElement('div');
+    topColumnDiv.id = 'top-column-div';
+    topColumnDiv.classList.add('right-column-div');
+    leftColumnDiv.appendChild(topColumnDiv);
+
+    let topHeroesDiv = document.createElement('div');
+    topHeroesDiv.id = 'top-heroes-div';
+    topHeroesDiv.classList.add('top-heroes-div');
+    topColumnDiv.appendChild(topHeroesDiv);*/
+
+    /*let topHeroesHeaderText = document.createElement('p');
+    topColumnHeaderText.id = 'top-column-header-text';
+    topColumnHeaderText.classList.add('top-header-text');
+    topColumnHeaderText.classList.add('black-outline');
+    topColumnHeaderText.innerHTML = 'Top Heroes';
+    leftColumnHeader.appendChild(topColumnHeaderText);*/
 
     let rightColumnDiv = document.createElement('div');
     rightColumnDiv.id = 'right-column-div';
@@ -569,6 +636,44 @@ function generateRank(veteran){
     rankBar.appendChild(rankBarText);
 
     return rank;
+}
+
+function generateProgress(){
+    let progressContent = document.getElementById('progress-content');
+    // progressContent.innerHTML = "";
+    /*let progressClipboardTop = document.createElement('div');
+    progressClipboardTop.id = 'progress-clipboard-top';
+    progressClipboardTop.classList.add('progress-clipboard-top');
+    progressContent.appendChild(progressClipboardTop);*/
+
+    let progressClipboard = document.createElement('img');
+    progressClipboard.id = 'progress-clipboard';
+    progressClipboard.classList.add('progress-clipboard');
+    progressClipboard.src = '../Assets/UI/ClipboardTop.png';
+    progressContent.appendChild(progressClipboard);
+
+    let progressPage = document.createElement('div');
+    progressPage.id = 'progress-page';
+    progressPage.classList.add('progress-page');
+    progressContent.appendChild(progressPage);
+
+    let selectorsDiv = document.createElement('div');
+    selectorsDiv.id = 'selectors-div';
+    selectorsDiv.classList.add('selectors-div');
+    progressPage.appendChild(selectorsDiv);
+
+    let selectors = ['Towers', 'Heroes', 'Knowledge', 'Map Progress', 'Powers', 'Insta Monkeys', 'Achievements', 'Extras'];
+
+    selectors.forEach((selector) => {
+        let selectorDiv = document.createElement('div');
+        selectorDiv.id = selector.toLowerCase() + '-div';
+        selectorDiv.classList.add('selector-div');
+        selectorDiv.innerHTML = progressSubText[selector];
+        selectorDiv.addEventListener('click', () => {
+            changeProgressTab(selector.toLowerCase());
+        })
+        selectorsDiv.appendChild(selectorDiv);
+    })
 }
 
 function ratioCalc(unknown, x1, x2, y1, y2){

@@ -213,10 +213,22 @@
     margin: 0 auto;
 }
 .content-div {
-    justify-content: center;
-    background-color: var(--profile-primary);
     border-radius: 10px;
     flex-direction: column;
+    justify-content: center;
+}
+.overview {
+    background-color: var(--profile-primary);
+}
+.progress {
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
+.progress-page{
+    background-color: var(--profile-primary);
+    border-radius: 20px;
+    width: 750px;
 }
 
 .below-profile-header {
@@ -225,6 +237,9 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     background-color: var(--profile-secondary);
+    margin: 10px;
+    border-radius: 10px;
+    padding-bottom: 20px;
 }
 
 .currency-div {
@@ -378,6 +393,30 @@
     padding: 10px;
     background-color: var(--profile-tertiary);
     border-radius: 15px;
+}
+
+.top-heroes-div{
+    border: 20px solid transparent;
+    /* padding: 15px; */
+    border-image-source: url(../Assets/UI/StatsRibbon.png);
+    border-image-slice: 50;
+    background-color: #9F7842;
+    border-radius: 20px;
+    /* margin-left: 10px; */
+    display: inline-block;
+    /* margin-right: 50px; */
+}
+
+.progress-clipboard {
+    width: 500px;
+    height: 128px;
+}
+
+.progress-content-div {
+    justify-content: center;
+    background-color: var(--profile-primary);
+    border-radius: 10px;
+    flex-direction: column;
 }
 
 .selectors-div {
