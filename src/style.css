@@ -36,13 +36,12 @@
     font-family: 'Luckiest Guy';
     text-align: center;
     color: white;
-    padding: 20px;
-    padding-bottom: 40px;
-    background-image: url(../Assets/UI/TitleContainer.png);
-    background-position-y: bottom;
-    background-size: cover;
     width: 650px;
     margin: 0 auto;
+    border: 30px solid transparent;
+    border-image-source: url('../Assets/UI/TitleContainer (2).png');
+    border-image-slice: 90;
+    background: linear-gradient(#804A24 100%, transparent) no-repeat;
 }
 
 .hex-bg {
@@ -229,6 +228,9 @@
     background-color: var(--profile-primary);
     border-radius: 20px;
     width: 750px;
+    display: flex;
+    justify-content: center;
+    padding: 25px 0px;
 }
 
 .below-profile-header {
@@ -242,6 +244,12 @@
     padding-bottom: 20px;
 }
 
+.currency-medals-div {
+    width: 500px;
+    padding: 10px;
+    background-color: var(--profile-tertiary);
+    border-radius: 15px;
+}
 .currency-div {
 
 }
@@ -420,10 +428,34 @@
 }
 
 .selectors-div {
-    width: 500px;
+    width: 600px;
     padding: 10px;
-    background-color: var(--profile-tertiary);
+    background-color: var(--profile-secondary);
     border-radius: 15px;
+}
+
+.selector-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 110px;
+    border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/InstaTowersContainerGold.png);
+    border-image-slice: 115;
+    background: linear-gradient(180deg, #005280 0%, #0075A0 100%);
+    border-radius: 20px;
+    margin: 10px 0px;
+}
+.selector-img {
+    width:100px;
+}
+.selector-go-img {
+    width: 75px;
+}
+.selector-text {
+    font-family: 'Luckiest Guy';
+    font-size: 24px;
+    color: white;
 }
 
 .black-outline {

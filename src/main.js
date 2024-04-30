@@ -230,11 +230,11 @@ function generateProgressSubText(){
     progressSubText["Towers"] = `${Object.keys(btd6usersave.unlockedTowers).filter(k => btd6usersave.unlockedTowers[k]).length}/${Object.keys(btd6usersave.unlockedTowers).length} Towers Unlocked`;
     progressSubText["Heroes"] = `${Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length}/${Object.keys(btd6usersave.unlockedHeros).length} Heroes Unlocked`;
     progressSubText["Knowledge"] = `${Object.keys(btd6usersave.acquiredKnowledge).filter(k => btd6usersave.acquiredKnowledge[k]).length}/${Object.keys(btd6usersave.acquiredKnowledge).length} Knowledge Unlocked`;
-    progressSubText["Map Progress"] = `${Object.keys(btd6usersave.mapProgress).filter(k => btd6usersave.mapProgress[k]).length}/${Object.keys(btd6usersave.mapProgress).length} Maps Unlocked`;
-    progressSubText["Powers"] = `${Object.values(btd6usersave.powers).map(power => power.quantity).reduce((acc, amount) => acc + amount)} Powers`
-    progressSubText["Insta Monkeys"] = `${btd6publicprofile.gameplay.instaMonkeyCollection}/${constants.totalInstaMonkeys} Insta Monkeys`;
+    progressSubText["Map Progress"] = `${Object.keys(btd6usersave.mapProgress).filter(k => btd6usersave.mapProgress[k]).length}/${constants.totalMaps} Maps Played`;
+    progressSubText["Powers"] = `${Object.values(btd6usersave.powers).map(power => power.quantity).reduce((acc, amount) => acc + amount)} Powers Accumulated`
+    progressSubText["Insta Monkeys"] = `${btd6publicprofile.gameplay.instaMonkeyCollection}/${constants.totalInstaMonkeys} Instas Collected`;
     progressSubText["Achievements"] = `${btd6publicprofile.achievements}/${constants.achievements + constants.hiddenAchievements} Achievements`;
-    progressSubText["Extras"] = `${Object.keys(extrasUnlocked).filter(k => extrasUnlocked[k]).length} Extras`;
+    progressSubText["Extras"] = `${Object.keys(extrasUnlocked).filter(k => extrasUnlocked[k]).length} Extras Unlocked`;
 }
 
 const container = document.createElement('div');
@@ -271,7 +271,7 @@ headerContainer.id = 'header';
 headerContainer.classList.add('header-container');
 header.appendChild(headerContainer);
 
-let headers = ['Overview', 'Progress', 'Explore', 'Maps', 'Settings'];
+let headers = ['Overview', 'Progress', 'Explore', 'FAQ', 'Settings'];
 
 headers.forEach((headerName) => {
     headerName = headerName.toLowerCase();
@@ -398,8 +398,8 @@ function generateOverview(){
     leftColumnHeader.appendChild(leftColumnHeaderText);
 
     let currencyAndMedalsDiv = document.createElement('div');
-    currencyAndMedalsDiv.id = 'selectors-div';
-    currencyAndMedalsDiv.classList.add('selectors-div');
+    currencyAndMedalsDiv.id = 'currency-medals-div';
+    currencyAndMedalsDiv.classList.add('currency-medals-div');
     leftColumnDiv.appendChild(currencyAndMedalsDiv);
 
     let currencyDiv = document.createElement('div');
@@ -665,14 +665,34 @@ function generateProgress(){
     let selectors = ['Towers', 'Heroes', 'Knowledge', 'Map Progress', 'Powers', 'Insta Monkeys', 'Achievements', 'Extras'];
 
     selectors.forEach((selector) => {
+        if(progressSubText[selector].includes("0 Extras")) { return; }
         let selectorDiv = document.createElement('div');
         selectorDiv.id = selector.toLowerCase() + '-div';
         selectorDiv.classList.add('selector-div');
-        selectorDiv.innerHTML = progressSubText[selector];
+        /*selectorDiv.innerHTML = progressSubText[selector];*/
         selectorDiv.addEventListener('click', () => {
             changeProgressTab(selector.toLowerCase());
         })
         selectorsDiv.appendChild(selectorDiv);
+
+        let selectorImg = document.createElement('img');
+        selectorImg.id = selector.toLowerCase() + '-img';
+        selectorImg.classList.add('selector-img');
+        selectorImg.src = selector == "Heroes" ? `../Assets/HeroIconCircle/HeroIcon${btd6usersave.primaryHero}.png` : '../Assets/UI/' + selector.replace(" ","") + 'Btn.png';
+        selectorDiv.appendChild(selectorImg);
+
+        let selectorText = document.createElement('p');
+        selectorText.id = selector.toLowerCase() + '-text';
+        selectorText.classList.add('selector-text');
+        selectorText.classList.add('black-outline');
+        selectorText.innerHTML = progressSubText[selector];
+        selectorDiv.appendChild(selectorText);
+
+        let selectorGoImg = document.createElement('img');
+        selectorGoImg.id = selector.toLowerCase() + '-go-img';
+        selectorGoImg.classList.add('selector-go-img');
+        selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
+        selectorDiv.appendChild(selectorGoImg);
     })
 }
 
