@@ -55,6 +55,7 @@ fetch('./data/Constants.json')
 
 function generateIfReady(){
     if (readyFlags.every(flag => flag === 1)){
+        document.body.classList.add('transition-bg')
         generateRankInfo()
         generateVeteranRankInfo()
         generateAchievementsHelper()
@@ -308,7 +309,6 @@ function changeTab(tab) {
                 break;
             case 'progress':
                 generateProgress();
-                isGenerated.push(tab);
                 break;
             case 'explore':
                 //generateExplore();
@@ -640,7 +640,7 @@ function generateRank(veteran){
 
 function generateProgress(){
     let progressContent = document.getElementById('progress-content');
-    // progressContent.innerHTML = "";
+    progressContent.innerHTML = "";
     /*let progressClipboardTop = document.createElement('div');
     progressClipboardTop.id = 'progress-clipboard-top';
     progressClipboardTop.classList.add('progress-clipboard-top');
@@ -694,6 +694,326 @@ function generateProgress(){
         selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
         selectorDiv.appendChild(selectorGoImg);
     })
+}
+
+function changeProgressTab(selector){
+    switch(selector){
+        case 'towers':
+            generateTowerProgress();
+            break;
+    }
+}
+
+function generateTowerProgress(){
+    let progressContent = document.getElementById('progress-content');
+    progressContent.innerHTML = "";
+
+    let towerProgressContainer = document.createElement('div');
+    towerProgressContainer.id = 'tower-progress-container';
+    towerProgressContainer.classList.add('tower-progress-container');
+    progressContent.appendChild(towerProgressContainer);
+
+    let towerProgressDiv = document.createElement('div');
+    towerProgressDiv.id = 'tower-progress-div';
+    towerProgressDiv.classList.add('tower-progress-div');
+    towerProgressContainer.appendChild(towerProgressDiv);
+
+    let towerSelectorHeaderTop = document.createElement('div');
+    towerSelectorHeaderTop.id = 'tower-selector-header-top';
+    towerSelectorHeaderTop.classList.add('tower-selector-header-top');
+    towerProgressDiv.appendChild(towerSelectorHeaderTop);
+
+    let towerSelectorHeaderText = document.createElement('p');
+    towerSelectorHeaderText.id = 'tower-selector-header-text';
+    towerSelectorHeaderText.classList.add('tower-selector-header-text');
+    towerSelectorHeaderText.classList.add('black-outline');
+    towerSelectorHeaderText.innerHTML = 'Towers';
+    towerSelectorHeaderTop.appendChild(towerSelectorHeaderText);
+
+    let towerSelectorHeader = document.createElement('div');
+    towerSelectorHeader.id = 'tower-selector-header';
+    towerSelectorHeader.classList.add('tower-selector-header');
+    towerProgressDiv.appendChild(towerSelectorHeader);
+
+    for (let [tower, category] of Object.entries(constants.towersInOrder)) {
+        let towerSelector = document.createElement('div');
+        towerSelector.id = tower + '-selector';
+        towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
+        towerSelector.addEventListener('click', () => {
+            console.log("oh no")
+            generateTowerProgressTower(tower);
+        })
+        towerSelectorHeader.appendChild(towerSelector);
+
+        let towerSelectorImg = document.createElement('img');
+        towerSelectorImg.id = tower + '-selector-img';
+        towerSelectorImg.classList.add('tower-selector-img');
+        towerSelectorImg.src = getInstaContainerIcon(tower,"000");
+        towerSelector.appendChild(towerSelectorImg);
+
+        let towerSelectorHighlight = document.createElement('div');
+        towerSelectorHighlight.id = tower + '-selector-highlight';
+        towerSelectorHighlight.classList.add('tower-selector-highlight');
+        towerSelector.appendChild(towerSelectorHighlight);
+    }
+
+    let towerProgressContent = document.createElement('div');
+    towerProgressContent.id = 'tower-progress-content';
+    towerProgressContent.classList.add('tower-progress-content');
+    towerProgressContainer.appendChild(towerProgressContent);
+
+    towerProgressContainer.append(generateTowerProgressTower("DartMonkey"));
+}
+
+function generateTowerProgressTower(tower){
+    let towerProgressContent = document.getElementById('tower-progress-content');
+    towerProgressContent.innerHTML = "";
+
+    let paragonUnlocked = constants.paragonsAvailable.includes(tower) ? btd6usersave.acquiredUpgrades[`${tower} Paragon`] : false;
+    paragonUnlocked ? changeHexBGColor(constants.ParagonBGColor) : changeHexBGColor()
+
+    let towerProgressTop = document.createElement('div');
+    towerProgressTop.id = 'tower-progress-top';
+    towerProgressTop.classList.add('tower-progress-top');
+    if (paragonUnlocked) { towerProgressTop.classList.add('tower-progress-top-paragon') }
+    towerProgressContent.appendChild(towerProgressTop);
+
+    let towerProgressContentTop = document.createElement('div');
+    towerProgressContentTop.id = 'tower-progress-content-top';
+    towerProgressContentTop.classList.add('tower-progress-content-top');
+    towerProgressTop.appendChild(towerProgressContentTop);
+
+    let towerProgressInfoContainer = document.createElement('div');
+    towerProgressInfoContainer.id = 'tower-progress-info-container';
+    towerProgressInfoContainer.classList.add('tower-progress-info-container');
+    towerProgressContentTop.appendChild(towerProgressInfoContainer);
+
+    let towerProgressContentText = document.createElement('p');
+    towerProgressContentText.id = 'tower-progress-content-text';
+    towerProgressContentText.classList.add('tower-progress-content-text');
+    towerProgressContentText.classList.add(paragonUnlocked ? 'knowledge-outline' : 'black-outline');
+    towerProgressContentText.innerHTML = locJSON[tower == "Wizard" ? "WizardMonkey" : tower];
+    towerProgressInfoContainer.appendChild(towerProgressContentText);
+
+    let towerProgressContentXP = document.createElement('p');
+    towerProgressContentXP.id = 'tower-progress-content-xp';
+    towerProgressContentXP.classList.add('tower-progress-content-xp');
+    towerProgressContentXP.classList.add('mm-outline');
+    towerProgressContentXP.innerHTML = `XP: ${btd6usersave.towerXP[tower == "Wizard" ? "WizardMonkey" : tower].toLocaleString()}`;
+    towerProgressInfoContainer.appendChild(towerProgressContentXP);
+
+    let towerProgressContentDesc = document.createElement('p');
+    towerProgressContentDesc.id = 'tower-progress-content-desc';
+    towerProgressContentDesc.classList.add('tower-progress-content-desc'+ (paragonUnlocked ? '-paragon' : ''));
+    towerProgressContentDesc.innerHTML = locJSON[`${tower == "Wizard" ? "WizardMonkey" : tower} Description`];;
+    towerProgressContentTop.appendChild(towerProgressContentDesc);
+
+    let towerNameAndPortrait = document.createElement('div');
+    towerNameAndPortrait.id = 'tower-name-and-portrait';
+    towerNameAndPortrait.classList.add('tower-name-and-portrait');
+    towerProgressContent.appendChild(towerNameAndPortrait);
+
+    let towerPortraitName = document.createElement('p');
+    towerPortraitName.id = 'tower-portrait-name';
+    towerPortraitName.classList.add('tower-portrait-name');
+    towerPortraitName.classList.add('black-outline');
+    towerPortraitName.innerHTML = locJSON[tower == "Wizard" ? "WizardMonkey" : tower];
+    towerNameAndPortrait.appendChild(towerPortraitName);
+
+    let towerProgressPortraitDiv = document.createElement('div');
+    towerProgressPortraitDiv.id = 'tower-progress-portrait';
+    towerProgressPortraitDiv.classList.add('tower-progress-portrait');
+    towerProgressPortraitDiv.classList.add(`tower-progress-portrait-${constants.towersInOrder[tower].toLowerCase()}`)
+    towerNameAndPortrait.appendChild(towerProgressPortraitDiv);
+
+    let towerProgressPortrait = document.createElement('img');
+    towerProgressPortrait.id = 'tower-progress-portrait-img';
+    towerProgressPortrait.classList.add('tower-progress-portrait-img');
+    towerProgressPortrait.src = getTowerAssetPath(tower,"000");
+    towerProgressPortraitDiv.appendChild(towerProgressPortrait);
+
+    let towerProgressMainDiv = document.createElement('div');
+    towerProgressMainDiv.id = 'tower-progress-main-div';
+    towerProgressMainDiv.classList.add('tower-progress-main-div');
+    towerProgressContent.appendChild(towerProgressMainDiv);
+
+    towerProgressMainDiv.appendChild(makeUpgradeButtons(tower, paragonUnlocked));
+
+    let towerProgressBottom = document.createElement('div');
+    towerProgressBottom.id = 'tower-progress-bottom';
+    towerProgressBottom.classList.add('tower-progress-bottom');
+    towerProgressContent.appendChild(towerProgressBottom);
+
+    for (let selector of document.getElementsByClassName('tower-selector-highlight')){
+        selector.style.display = "none";
+    }
+    document.getElementById(`${tower}-selector-highlight`).style.display = "block";
+
+    return towerProgressContent;
+}
+
+function makeUpgradeButtons(tower, paragonUnlocked){
+    let upgradeContainer = document.createElement('div');
+    upgradeContainer.id = 'upgrade-container';
+    upgradeContainer.classList.add('upgrade-container');
+
+    let upgradeRows = document.createElement('div');
+    upgradeRows.id = 'upgrade-rows';
+    upgradeRows.classList.add('upgrade-rows');
+    upgradeContainer.appendChild(upgradeRows);
+
+    let row1 = document.createElement('div');
+    row1.id = 'upgrade-row-1';
+    row1.classList.add('upgrade-row');
+    upgradeRows.appendChild(row1);
+
+    let row2 = document.createElement('div');
+    row2.id = 'upgrade-row-2';
+    row2.classList.add('upgrade-row');
+    upgradeRows.appendChild(row2);
+
+    let row3 = document.createElement('div');
+    row3.id = 'upgrade-row-3';
+    row3.classList.add('upgrade-row');
+    upgradeRows.appendChild(row3);
+
+    let index = 0;
+    for (let [upgrade, model] of Object.entries(constants.towerPaths[tower].path1)) {
+        row1.appendChild(generateUpgradeIcon(tower, upgrade, btd6usersave.acquiredUpgrades[upgrade] ? "unlocked" : "locked", 1, index, paragonUnlocked));
+        index++;
+    }
+
+    index = 0;
+    for (let [upgrade, model] of Object.entries(constants.towerPaths[tower].path2)) {
+        row2.appendChild(generateUpgradeIcon(tower, upgrade, btd6usersave.acquiredUpgrades[upgrade] ? "unlocked" : "locked", 2, index, paragonUnlocked));
+        index++;
+    }
+
+    index = 0;
+    for (let [upgrade, model] of Object.entries(constants.towerPaths[tower].path3)) {
+        row3.appendChild(generateUpgradeIcon(tower, upgrade, btd6usersave.acquiredUpgrades[upgrade] ? "unlocked" : "locked", 3, index, paragonUnlocked));
+        index++;
+    }
+
+    let upgradeContainerParagon = document.createElement('div');
+    upgradeContainerParagon.id = 'upgrade-container-paragon';
+    upgradeContainerParagon.classList.add('upgrade-container-paragon');
+    upgradeContainer.appendChild(upgradeContainerParagon);
+
+    if (paragonUnlocked){
+        upgradeContainerParagon.appendChild(generateParagonIcon(tower, `${tower} Paragon`, btd6usersave.acquiredUpgrades[`${tower} Paragon`] ? "unlocked" : "locked"));
+    }
+
+    // constants.towerPaths[tower].path1.forEach((upgrade) => {
+
+    //     generateUpgradeIcon(tower, upgrade, upgradeStatus);
+    // })
+    return upgradeContainer;
+}
+
+function generateUpgradeIcon(tower, upgrade, status, row, tier, paragon){
+    let upgradeDiv = document.createElement('div');
+    upgradeDiv.id = `${tower}-${upgrade}-div`;
+    upgradeDiv.classList.add('upgrade-div');
+    tier == 4 ? upgradeDiv.classList.add(`upgrade-t5`) : upgradeDiv.classList.add(`upgrade-${paragon ? "paragon" : status}`);
+    let towerUpgrade = ``;
+    switch (row){
+        case 1:
+            towerUpgrade = `${tier + 1}00`;
+            break;
+        case 2:
+            towerUpgrade = `0${tier + 1}0`;
+            break;
+        case 3:
+            towerUpgrade = `00${tier + 1}`;
+            break;
+    }
+
+    let upgradeImg = document.createElement('img');
+    upgradeImg.id = `${tower}-${upgrade}-img`;
+    upgradeImg.classList.add('upgrade-img');
+    upgradeImg.src = getUpgradeAssetPath(upgrade);
+    upgradeDiv.appendChild(upgradeImg);
+
+    let upgradeGlow = document.createElement('div');
+    upgradeGlow.id = `${tower}-${upgrade}-glow`;
+    // upgradeGlow.classList.add('upgrade-glow');
+    upgradeDiv.appendChild(upgradeGlow);
+
+    let upgradeText = document.createElement('p');
+    upgradeText.id = `${tower}-${upgrade}-text`;
+    upgradeText.classList.add('upgrade-text');
+    upgradeText.innerHTML = getLocValue(upgrade);
+    upgradeDiv.appendChild(upgradeText);
+
+    let upgradeTooltip = document.createElement('div');
+    upgradeTooltip.id = `${tower}-${upgrade}-tooltip`;
+    upgradeTooltip.classList.add('upgrade-tooltip');
+    upgradeTooltip.innerHTML = getLocValue(`${upgrade} Description`);
+    upgradeDiv.appendChild(upgradeTooltip);
+
+    upgradeDiv.addEventListener('click', () => {
+        onSelectTowerUpgrade(tower, upgrade, towerUpgrade);
+        Array.from(document.getElementsByClassName('upgrade-glow')).forEach((glow) => {
+            glow.classList.remove('upgrade-glow');
+        });
+        upgradeGlow.classList.add('upgrade-glow');
+    })
+
+    return upgradeDiv;
+}
+
+function generateParagonIcon(tower, upgrade, status){
+    let paragonDiv = document.createElement('div');
+    paragonDiv.id = `${tower}-paragon-div`;
+    paragonDiv.classList.add('upgrade-div');
+    paragonDiv.classList.add(`upgrade-paragon-special${btd6usersave.acquiredUpgrades[upgrade] ? "" : "-locked"}`);
+
+    let paragonImg = document.createElement('img');
+    paragonImg.id = `${tower}-paragon-img`;
+    paragonImg.classList.add('upgrade-img');
+    paragonImg.src = getUpgradeAssetPath(`${tower} Paragon`);
+    paragonDiv.appendChild(paragonImg);
+
+    let paragonGlow = document.createElement('div');
+    paragonGlow.id = `${tower}-${upgrade}-glow`;
+    // upgradeGlow.classList.add('upgrade-glow');
+    paragonDiv.appendChild(paragonGlow);
+
+    let paragonText = document.createElement('p');
+    paragonText.id = `${tower}-${upgrade}-text`;
+    paragonText.classList.add('upgrade-text');
+    paragonText.innerHTML = getLocValue(upgrade);
+    paragonDiv.appendChild(paragonText);
+
+    let paragonTooltip = document.createElement('div');
+    paragonTooltip.id = `${tower}-${upgrade}-tooltip`;
+    paragonTooltip.classList.add('upgrade-tooltip');
+    paragonTooltip.innerHTML = getLocValue(`${upgrade} Description`);
+    paragonDiv.appendChild(paragonTooltip);
+
+    return paragonDiv;
+}
+
+function onSelectTowerUpgrade(tower, upgrade, tiers){
+    let portrait_div = document.getElementById('tower-progress-portrait');
+    let portrait_name = document.getElementById('tower-portrait-name');
+    let portrait_img = document.getElementById('tower-progress-portrait-img');
+
+    for (let upgrade of document.getElementsByClassName('upgrade-div')){
+        upgrade.classList.remove('selected');
+    }
+
+    portrait_name.innerHTML = getLocValue(upgrade);
+    portrait_img.src = getTowerAssetPath(tower,tiers);
+}
+
+function changeHexBGColor(color){
+    if (color == null) { 
+        document.body.style.removeProperty("background-color")
+        return; 
+    }
+    document.body.style.backgroundColor = `rgba(${color[0] * 255},${color[1] * 255},${color[2] * 255})`;
 }
 
 function ratioCalc(unknown, x1, x2, y1, y2){

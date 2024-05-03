@@ -3,6 +3,35 @@
     "achievements": 134,
     "hiddenAchievements": 12,
     "totalMaps": 73,
+    "towersInOrder": {
+        "DartMonkey": "Primary",
+        "BoomerangMonkey": "Primary",
+        "BombShooter": "Primary",
+        "TackShooter": "Primary",
+        "IceMonkey": "Primary",
+        "GlueGunner": "Primary",
+        "SniperMonkey": "Military",
+        "MonkeySub": "Military",
+        "MonkeyBuccaneer": "Military",
+        "MonkeyAce": "Military",
+        "HeliPilot": "Military",
+        "MortarMonkey": "Military",
+        "DartlingGunner": "Military",
+        "Wizard": "Magic",
+        "SuperMonkey": "Magic",
+        "NinjaMonkey": "Magic",
+        "Alchemist": "Magic",
+        "Druid": "Magic",
+        "BananaFarm": "Support",
+        "SpikeFactory": "Support",
+        "MonkeyVillage": "Support",
+        "EngineerMonkey": "Support",
+        "BeastHandler": "Support"
+    },
+    "paragonsAvailable": ["DartMonkey", "BoomerangMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "Wizard", "NinjaMonkey", "EngineerMonkey"],
+    "collectionOrder": ["520", "502", "510", "501", "500", "250", "052", "150", "051", "050", "205", "025", "105", "015", "005", "420", "402", "410", "401", "400", "240", "042", "140", "041", "040", "204", "024", "104", "014", "004", "320", "302", "310", "301", "300", "230", "032", "130", "031", "030", "203", "023", "103", "013", "003", "220", "202", "210", "201", "200", "022", "120", "021", "020", "102", "012", "002", "110", "101", "100", "011", "010", "001", "000"],
+    "BGColor": [0.000, 0.498, 1.000],
+    "ParagonBGColor": [0.522, 0.000, 1.000],
     "HeroBGColors": {
         "Quincy": [0.000, 0.522, 0.624],
         "Gwendolin": [0.671, 0.153, 0.133], 
@@ -685,6 +714,514 @@
         "155": {
             "totalXpNeeded": "180000000",
             "levelUnlockString": "Knowledge"
+        }
+    },
+    "towerPaths": {
+        "DartMonkey": {
+            "path1": {
+                "Sharp Shots": 100,
+                "Razor Sharp Shots": 500,
+                "Spike-o-pult": 2100,
+                "Juggernaut": 7500,
+                "Ultra-Juggernaut": 22000
+            },
+            "path2": {
+                "Quick Shots": 80,
+                "Very Quick Shots": 400,
+                "Triple Shot": 2000,
+                "Super Monkey Fan Club": 9500,
+                "Plasma Monkey Fan Club": 30000
+            },
+            "path3": {
+                "Long Range Darts": 50,
+                "Enhanced Eyesight": 450,
+                "Crossbow": 1900,
+                "Sharp Shooter": 12000,
+                "Crossbow Master": 35000
+            }
+        },
+        "BoomerangMonkey": {
+            "path1": {
+                "Improved Rangs": 100,
+                "Glaives": 520,
+                "Glaive Ricochet": 2500,
+                "M.O.A.R Glaives": 8500,
+                "Glaive Lord": 37500
+            },
+            "path2": {
+                "Faster Throwing": 120,
+                "Faster Rangs": 550,
+                "Bionc Boomerang": 2500,
+                "Turbo Charge": 9000,
+                "Perma Charge": 32000
+            },
+            "path3": {
+                "Long Range Rangs": 110,
+                "Red Hot Rangs": 490,
+                "Kylie Boomerang": 3000,
+                "MOAB Press": 9500,
+                "MOAB Domination": 28000
+            }
+        },
+        "BombShooter": {
+            "path1": {
+                "Bigger Bombs": 200,
+                "Heavy Bombs": 1000,
+                "Really Big Bombs": 3000,
+                "Bloon Impact": 10000,
+                "Bloon Crush": 37500
+            },
+            "path2": {
+                "Faster Reload": 180,
+                "Missile Launcher": 650,
+                "MOAB Mauler": 2700,
+                "MOAB Assassin": 10000,
+                "MOAB Eliminator": 35000
+            },
+            "path3": {
+                "Extra Range": 150,
+                "Frag Bombs": 600,
+                "Cluster Bombs": 2500,
+                "Recursive Cluster": 10000,
+                "Bomb Blitz": 25000
+            }
+        },
+        "TackShooter": {
+            "path1": {
+                "Faster Shooting": 150,
+                "Even Faster Shooting": 550,
+                "Hot Shots": 2400,
+                "Ring of Fire": 9500,
+                "Inferno Ring": 32500
+            },
+            "path2": {
+                "Long Range Tacks": 140,
+                "Super Range Tacks": 500,
+                "Blade Shooter": 2300,
+                "Blade Maelstrom": 9000,
+                "Super Maelstrom": 28000
+            },
+            "path3": {
+                "More Tacks": 150,
+                "Even More Tacks": 490,
+                "Tack Sprayer": 2450,
+                "Overdrive": 8750,
+                "The Tack Zone": 26500
+            }
+        },
+        "IceMonkey": {
+            "path1": {
+                "Permafrost": 160,
+                "Metal Freeze": 500,
+                "Ice Shards": 2500,
+                "Embrittlement": 8250,
+                "Super Brittle": 25000
+            },
+            "path2": {
+                "Enhanced Freeze": 160,
+                "Deep Freeze": 500,
+                "Arctic Wind": 2500,
+                "Snowstorm": 8500,
+                "Absolute Zero": 27500
+            },
+            "path3": {
+                "Larger Radius": 160,
+                "Re-Freeze": 500,
+                "Cryo Cannon": 2500,
+                "Icicles": 9000,
+                "Icicle Impale": 30000
+            }
+        },
+        "GlueGunner": {
+            "path1": {
+                "Glue Soak": 150,
+                "Corrosive Glue": 550,
+                "Bloon Dissolver": 2500,
+                "Bloon Liquefier": 9000,
+                "The Bloon Solver": 37500
+            },
+            "path2": {
+                "Bigger Globs": 120,
+                "Glue Splatter": 900,
+                "Glue Hose": 2500,
+                "Glue Strike": 8500,
+                "Glue Storm": 25000
+            },
+            "path3": {
+                "Stickier Glue": 130,
+                "Stronger Glue": 600,
+                "MOAB Glue": 2500,
+                "Relentless Glue": 8000,
+                "Super Glue": 30000
+            }
+        },
+        "SniperMonkey": {
+            "path1": {
+                "Full Metal Jacket": 120,
+                "Large Calibre": 800,
+                "Deadly Precision": 3500,
+                "Maim MOAB": 10500,
+                "Cripple MOAB": 37500
+            },
+            "path2": {
+                "Night Vision Goggles": 200,
+                "Shrapnel Shot": 600,
+                "Bouncing Bullet": 2500,
+                "Supply Drop": 11000,
+                "Elite Sniper": 35000
+            },
+            "path3": {
+                "Fast Firing": 130,
+                "Even Faster Firing": 600,
+                "Semi-Automatic": 2750,
+                "Full Auto Rifle": 10000,
+                "Elite Defender": 30000
+            }
+        },
+        "MonkeySub": {
+            "path1": {
+                "Longer Range": 125,
+                "Advanced Intel": 750,
+                "Submerge and Support": 2250,
+                "Bloontonium Reactor": 11000,
+                "Energizer": 33000
+            },
+            "path2": {
+                "Barbed Darts": 130,
+                "Heat-tipped Darts": 600,
+                "Ballistic Missile": 3000,
+                "First Strike Capability": 20000,
+                "Pre-emptive Strike": 45000
+            },
+            "path3": {
+                "Twin Guns": 150,
+                "Airburst Darts": 1000,
+                "Triple Guns": 2750,
+                "Armor Piercing Darts": 10000,
+                "Sub Commander": 25000
+            }
+        },
+        "MonkeyBuccaneer": {
+            "path1": {
+                "Buccaneer-Faster Shooting": 150,
+                "Buccaneer-Double Shot": 700,
+                "Buccaneer-Destroyer": 3000,
+                "Buccaneer-Aircraft Carrier": 12500,
+                "Buccaneer-Carrier Flagship": 37000
+            },
+            "path2": {
+                "Buccaneer-Grape Shot": 200,
+                "Buccaneer-Hot Shot": 650,
+                "Buccaneer-Cannon Ship": 2700,
+                "Buccaneer-Monkey Pirates": 13000,
+                "Buccaneer-Pirate Lord": 35000
+            },
+            "path3": {
+                "Buccaneer-Long Range": 150,
+                "Buccaneer-Crow's Nest": 600,
+                "Buccaneer-Merchantman": 3100,
+                "Buccaneer-Favored Trades": 10000,
+                "Buccaneer-Trade Empire": 40000
+            }
+        },
+        "MonkeyAce": {
+            "path1": {
+                "Rapid Fire": 160,
+                "Lots More Darts": 750,
+                "Fighter Plane": 2700,
+                "Operation: Dart Storm": 8000,
+                "Sky Shredder": 35000
+            },
+            "path2": {
+                "Exploding Pineapple": 120,
+                "Spy Plane": 600,
+                "Bomber Ace": 2500,
+                "Ground Zero": 15000,
+                "Tsar Bomba": 30000
+            },
+            "path3": {
+                "Sharper Darts": 160,
+                "Centered Path": 600,
+                "Neva-Miss Targeting": 3000,
+                "Spectre": 19000,
+                "Flying Fortress": 45000
+            }
+        },
+        "HeliPilot": {
+            "path1": {
+                "Quad Darts": 200,
+                "Pursuit": 650,
+                "Razor Rotors": 2700,
+                "Apache Dartship": 20000,
+                "Apache Prime": 55000
+            },
+            "path2": {
+                "Bigger Jets": 150,
+                "IFR": 650,
+                "Downdraft": 3300,
+                "Support Chinook": 15000,
+                "Special Poperations": 40000
+            },
+            "path3": {
+                "Faster Darts": 140,
+                "Faster Firing": 550,
+                "MOAB Shove": 2500,
+                "Comanche Defense": 12500,
+                "Comanche Commander": 50000
+            }
+        },
+        "MortarMonkey": {
+            "path1": {
+                "Bigger Blast": 180,
+                "Bloon Buster": 600,
+                "Shockwave": 2500,
+                "The Big One": 15000,
+                "The Biggest One": 29000
+            },
+            "path2": {
+                "Mortar Faster Reload": 150,
+                "Mortar Rapid Reload": 600,
+                "Heavy Shells": 2300,
+                "Artillery Battery": 12500,
+                "Pop and Awe": 32000
+            },
+            "path3": {
+                "Increased Accuracy": 140,
+                "Burny Stuff": 650,
+                "Signal Flare": 2200,
+                "Shattering Shells": 12000,
+                "Blooncineration": 35000
+            }
+        },
+        "DartlingGunner": {
+            "path1": {
+                "Focused Firing": 150,
+                "Laser Shock": 600,
+                "Laser Cannon": 2600,
+                "Plasma Accelerator": 12500,
+                "Ray of Doom": 75000
+            },
+            "path2": {
+                "Advanced Targeting": 130,
+                "Faster Barrel Spin": 700,
+                "Hydra Rocket Pods": 2700,
+                "Rocket Storm": 14000,
+                "M.A.D": 60000
+            },
+            "path3": {
+                "Faster Swivel": 110,
+                "Powerful Darts": 650,
+                "Buckshot": 3000,
+                "Bloon Area Denial System": 15000,
+                "Bloon Exclusion Zone": 55000
+            }
+        },
+        "Wizard": {
+            "path1": {
+                "Guided Magic": 110,
+                "Arcane Blast": 600,
+                "Arcane Mastery": 2300,
+                "Arcane Spike": 11000,
+                "Archmage": 35000
+            },
+            "path2": {
+                "Fireball": 130,
+                "Wall of Fire": 700,
+                "Dragon's Breath": 2600,
+                "Summon Phoenix": 13000,
+                "Wizard Lord Phoenix": 35000
+            },
+            "path3": {
+                "Intense Magic": 140,
+                "Monkey Sense": 500,
+                "Shimmer": 2200,
+                "Necromancer: Unpopped Army": 10000,
+                "Soulbind": 30000
+            }
+        },
+        "SuperMonkey": {
+            "path1": {
+                "Laser Blasts": 500,
+                "Plasma Blasts": 2200,
+                "Sun Avatar": 7000,
+                "Sun Temple": 50000,
+                "True Sun God": 150000
+            },
+            "path2": {
+                "Super Range": 300,
+                "Epic Range": 1300,
+                "Robo Monkey": 6000,
+                "Tech Terror": 35000,
+                "The Anti-Bloon": 85000
+            },
+            "path3": {
+                "Knockback": 550,
+                "Ultravision": 2000,
+                "Dark Knight": 6500,
+                "Dark Champion": 47500,
+                "Legend of the Night": 100000
+            }
+        },
+        "NinjaMonkey": {
+            "path1": {
+                "Ninja Discipline": 150,
+                "Sharp Shurikens": 550,
+                "Double Shot": 2000,
+                "Bloonjitsu": 16000,
+                "Grandmaster Ninja": 50000
+            },
+            "path2": {
+                "Distraction": 200,
+                "Counter-Espionage": 600,
+                "Shinobi Tactics": 2000,
+                "Bloon Sabotage": 14000,
+                "Grand Saboteur": 35000
+            },
+            "path3": {
+                "Seeking Shuriken": 140,
+                "Caltrops": 500,
+                "Flash Bomb": 2500,
+                "Sticky Bomb": 15500,
+                "Master Bomber": 37500
+            }
+        },
+        "Alchemist": {
+            "path1": {
+                "Larger Potions": 140,
+                "Acidic Mixture Dip": 550,
+                "Berserker Brew": 2250,
+                "Stronger Stimulant": 10000,
+                "Permanent Brew": 30000
+            },
+            "path2": {
+                "Stronger Acid": 140,
+                "Perishing Potions": 500,
+                "Unstable Concoction": 2500,
+                "Transforming Tonic": 10000,
+                "Total Transformation": 28000
+            },
+            "path3": {
+                "Alchemist Faster Throwing": 145,
+                "Acid Pool": 700,
+                "Lead to Gold": 2000,
+                "Rubber to Gold": 8500,
+                "Bloon Master Alchemist": 24000
+            }
+        },
+        "Druid": {
+            "path1": {
+                "Hard Thorns": 150,
+                "Heart of Thunder": 750,
+                "Druid of the Storm": 2500,
+                "Ball Lightning": 12000,
+                "Superstorm": 35000
+            },
+            "path2": {
+                "Thorn Swarm": 140,
+                "Heart of Oak": 600,
+                "Druid of the Jungle": 2000,
+                "Jungle's Bounty": 11000,
+                "Spirit of the Forest": 40000
+            },
+            "path3": {
+                "Druidic Reach": 120,
+                "Heart of Vengeance": 550,
+                "Druid of Wrath": 1700,
+                "Poplust": 14000,
+                "Avatar of Wrath": 33000
+            }
+        },
+        "BananaFarm": {
+            "path1": {
+                "Increased Production": 200,
+                "Greater Production": 750,
+                "Banana Plantation": 3000,
+                "Banana Research Facility": 20000,
+                "Banana Central": 50000
+            },
+            "path2": {
+                "Long Life Bananas": 200,
+                "Valuable Bananas": 1000,
+                "Monkey Bank": 3500,
+                "IMF loan": 20000,
+                "Monkey-Nomics": 50000
+            },
+            "path3": {
+                "EZ Collect": 200,
+                "Banana Salvage": 950,
+                "Marketplace": 3200,
+                "Central Market": 20000,
+                "Monkey Wall Street": 50000
+            }
+        },
+        "SpikeFactory": {
+            "path1": {
+                "Bigger Stacks": 170,
+                "White Hot Spikes": 600,
+                "Spiked Balls": 2400,
+                "Spiked Mines": 15000,
+                "Super Mines": 32500
+            },
+            "path2": {
+                "Faster Production": 180,
+                "Even Faster Production": 650,
+                "MOAB SHREDR": 2500,
+                "Spike Storm": 11000,
+                "Carpet of Spikes": 35000
+            },
+            "path3": {
+                "Long Reach": 120,
+                "Directed Spikes": 550,
+                "Long Life Spikes": 2100,
+                "Deadly Spikes": 9000,
+                "Perma-Spike": 29500
+            }
+        },
+        "MonkeyVillage": {
+            "path1": {
+                "Bigger Radius": 160,
+                "Jungle Drums": 1000,
+                "Primary Training": 2000,
+                "Primary Mentoring": 12000,
+                "Primary Expertise": 32000
+            },
+            "path2": {
+                "Grow Blocker": 150,
+                "Radar Scanner": 2500,
+                "Monkey Intelligence Bureau": 3500,
+                "Call to Arms": 20000,
+                "Homeland Defense": 30000
+            },
+            "path3": {
+                "Monkey Business": 250,
+                "Monkey Commerce": 750,
+                "Monkey Town": 3000,
+                "Monkey City": 15500,
+                "Monkeyopolis": 28000
+            }
+        },
+        "EngineerMonkey": {
+            "path1": {
+                "Sentry Gun": 160,
+                "Faster Engineering": 550,
+                "Sprockets": 1850,
+                "Sentry Expert": 9500,
+                "Sentry Paragon": 30000
+            },
+            "path2": {
+                "Larger Service Area": 170,
+                "Deconstruction": 500,
+                "Cleansing Foam": 2000,
+                "Overclock": 14000,
+                "Ultraboost": 35000
+            },
+            "path3": {
+                "Oversize Nails": 150,
+                "Pin": 500,
+                "Double Gun": 1800,
+                "Bloon Trap": 11000,
+                "XXXL Trap": 40000
+            }
         }
     }
 }

@@ -86,7 +86,8 @@ const upgradeNameFixMap = {
     "WizardMonkeyParagon": "MagusPerfectus",
     "MonkeyAceParagon": "GoliathDoomship",
     "MonkeyBuccaneerParagon": "NavarchOfTheSeas",
-    "MonkeySubParagon": "NauticSiegeCore"
+    "MonkeySubParagon": "NauticSiegeCore",
+    "SmartSpikes": "DirectedSpikes"
 }
 
 let medalMap = {
@@ -111,11 +112,16 @@ function getTowerAssetPath(towerType, upgrade) {
     return towerType == "WizardMonkey" ? `Assets/TowerIcon/${upgrade}-Wizard.png` : `Assets/TowerIcon/${upgrade}-${towerType}.png`;
 }
 
+function getInstaContainerIcon(towerType, upgrade) {
+    return `Assets/UI/InstaContainer/${upgrade}-${towerType}.png`;
+}
+
 function getInstaMonkeyIcon(towerType, upgrade) {
     return `Assets/InstaMonkeyIcon/${upgrade}-${towerType}Insta.png`;
 }
 
 function getUpgradeAssetPath(upgrade) {
+    upgrade = upgrade.replace(/[^a-zA-Z0-9]/g, "");
     return upgradeNameFixMap[upgrade] ? `Assets/UpgradeIcon/${upgradeNameFixMap[upgrade]}UpgradeIcon.png` : `Assets/UpgradeIcon/${upgrade}UpgradeIcon.png`;
 }
 
@@ -150,4 +156,10 @@ function fixAchievementName(name){
 
 function getMedalIcon(medal){
     return `Assets/MedalIcon/${medal}.png`;
+}
+
+function getLocValue(key){
+    if(key == "Directed Spikes") return "Smart Spikes";
+    if(key == "Directed Spikes Description") return "Smart Spikes Description";
+    return locJSON[key];
 }

@@ -32,22 +32,26 @@
 
 
 .title {
-    font-size: 56px;
+    font-size: 48px;
     font-family: 'Luckiest Guy';
     text-align: center;
     color: white;
     width: 650px;
     margin: 0 auto;
-    border: 30px solid transparent;
-    border-image-source: url('../Assets/UI/TitleContainer (2).png');
+    border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/TitleContainer.png);
     border-image-slice: 90;
     background: linear-gradient(#804A24 100%, transparent) no-repeat;
 }
 
 .hex-bg {
-    background-image: radial-gradient(circle, transparent 0%, rgba(0,0,0,1) 100%), url('../Assets/UI/PowersPatternBg4.png');
+    background-image: radial-gradient(circle, transparent 0%, rgba(0,0,0,1) 100%), url(../Assets/UI/PowersPatternGreyBg2.png);
     background-attachment: fixed;
-    background-blend-mode: luminosity;
+    background-blend-mode: multiply;
+    background-color: rgb(0, 127, 255);
+}
+.transition-bg {
+    transition: background-color 0.25s;
 }
 
 .header-container {
@@ -458,6 +462,305 @@
     color: white;
 }
 
+
+
+.tower-progress-container {
+    display: flex;
+}
+.tower-selector-header {
+    display: flex;
+    max-width: 210px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+.tower-selector-header::-webkit-scrollbar {
+    display: none;
+}
+.tower-selector-header-text {
+    text-align: center;
+    font-size: 18px;
+    border: 10px solid transparent;
+    border-image-source: url(../Assets/UI/BarfillContainer.png);
+    border-image-slice: 45;
+    background-color: #9F7842;
+    border-radius: 20px;
+}
+.tower-progress-div {
+    height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    background-color: #9F7843;
+    border-radius: 10px;
+    position: fixed;
+    margin-left: -9vw;
+}
+.tower-selector-primary {
+    width: 100px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../Assets/UI/TowerContainerPrimary.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 2px;
+    position: relative;
+}
+.tower-selector-military {
+    width: 100px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../Assets/UI/TowerContainerMilitary.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 2px;
+    position: relative;
+}
+.tower-selector-magic {
+    width: 100px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../Assets/UI/TowerContainerMagic.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 2px;
+    position: relative;
+}
+.tower-selector-support {
+    width: 100px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../Assets/UI/TowerContainerSupport.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 2px;
+    position: relative;
+}
+
+.tower-selector-img {
+    width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+}
+
+.tower-selector-highlight {
+    border: 40px solid transparent;
+    border-image-source: url(../Assets/UI/SmallSquareGlowOutline.png);
+    border-image-slice: 110;
+    position: absolute;
+    width: 32px;
+    height: 54px;
+    display: none;
+}
+
+.tower-progress-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tower-progress-top {
+    /*border: 30px solid transparent;
+    border-image-source: url(../Assets/UI/TitleContainer.png);
+    border-image-slice: 90;
+    background: linear-gradient(#804A24 100%, transparent) no-repeat;*/
+    width: 700px;
+    height: 100px;
+    margin: 0 110px;
+    border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/InfoContainer.png);
+    border-image-slice: 110;
+    background: linear-gradient(#b4834c 0%, #bd925a 100%) no-repeat;
+}
+.tower-progress-content-text {
+    font-size: 32px;
+    padding: 10px;
+}
+
+.tower-progress-content-xp {
+    font-family: 'Luckiest Guy';
+    font-size: 32px;
+    color: #9AE42C;
+    padding: 10px;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+
+.tower-progress-content-top {
+    display:flex;
+    flex-direction: column;
+}
+
+.tower-progress-info-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tower-progress-content-desc {
+    font-family: 'GardeniaBold';
+    font-size: 18px;
+    line-height: 24px;
+    color: #271002;
+    padding: 10px;
+}
+.tower-name-and-portrait {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.tower-progress-main-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 50px;
+}
+.tower-progress-portrait {
+    width: 210px;
+    height: 250px;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tower-progress-portrait-primary {
+    background-image: url(../Assets/UI/TowerContainerPrimaryLarge.png);
+}
+.tower-progress-portrait-military {
+    background-image: url(../Assets/UI/TowerContainerMilitaryLarge.png);
+}
+.tower-progress-portrait-magic {
+    background-image: url(../Assets/UI/TowerContainerMagicLarge.png);
+}
+.tower-progress-portrait-support {
+    background-image: url(../Assets/UI/TowerContainerSupportLarge.png);
+}
+
+.tower-progress-portrait-img {
+    /* width: 210px;
+    height: 250px;
+    object-fit: contain;
+    position: absolute; */
+    /* width: 350px;
+    height: 220px;
+    object-fit: contain;
+    position: absolute;
+    margin-left: -70px; */
+    /* object-position: left; */
+    max-width: 220px;
+    height: 200px;
+    object-fit: contain;
+    position: absolute;
+}
+
+.upgrade-row {
+    display: flex;
+    flex-direction: row;
+}
+.upgrade-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    margin: 10px;
+    width: 110px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.upgrade-img {
+    width: 80px;
+    height: 110px;
+    object-fit: contain;
+}
+.upgrade-text {
+    font-family: 'GardeniaBold';
+    font-size: 15px;
+    color: white;
+    width: 130px;
+    text-align: center;
+    padding-top: 10px;
+    height: 30px;
+}
+.upgrade-unlocked {
+    background-image: url(../Assets/UI/UpgradeContainerBlue.png);
+}
+.upgrade-locked {
+    background-image: url(../Assets/UI/UpgradeContainerGrey.png);
+}
+.upgrade-paragon {
+    background-image: url(../Assets/UI/UpgradeContainerSkillParagon.png);
+}
+.upgrade-t5 {
+    background-image: url(../Assets/UI/UpgradeContainerTier5.png);
+}
+.upgrade-t5-locked {
+    background-image: url(../Assets/UI/UpgradeContainerTier5Locked.png);
+}
+.upgrade-paragon-special {
+    background-image: url(../Assets/UI/UpgradeContainerParagon.png);
+}
+
+.tower-portrait-name {
+    position: absolute;
+    margin-top: -12px;
+    font-size: 26px;
+    line-height: 20px;
+    width: 215px;
+    text-align: center;
+    z-index: 5;
+}
+
+.upgrade-glow {
+    border-radius: 50%;
+    box-shadow: 0px 0px 8px 8px #ffdf98;
+    animation: glow 0.5s linear infinite alternate;
+    width: 110px;
+    height: 110px;
+    margin-top: -110px;
+    z-index: -1;
+}
+
+.tower-progress-top-paragon {
+    border-image-source: url(../Assets/UI/InfoContainerParagon.png);
+    background: linear-gradient(#2E398C 0%, #2337A8 100%) no-repeat;
+}
+.tower-progress-content-desc-paragon {
+    font-family: 'GardeniaBold';
+    font-size: 18px;
+    line-height: 24px;
+    color: white;
+    padding: 10px;
+}
+
+.tower-progress-bottom {
+    height: 100px;
+}
+
+.upgrade-container {
+    display: flex;
+}
+
+.upgrade-container-paragon {
+    background-image: url(../Assets/UI/ParagonBGVertical.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 135px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+}
+
+
 .black-outline {
     -webkit-text-stroke: 0.7px black;
     text-shadow: 1px 0px 0px #000, -1px 0px 0 #000, 0px 1px 0 #000, 1px 0px 0px #000, 1px 2px 0px #000, -1px -1px 0 #000, -1px 2px 0 #000, 1px -1px 0px #000;
@@ -469,6 +772,45 @@
 .knowledge-outline {
     -webkit-text-stroke: 0.7px #5600CC;
     text-shadow: 1px 0px 0px #5600CC, -1px 0px 0 #5600CC, 0px 1px 0 #5600CC, 1px 0px 0px #5600CC, 1px 2px 0px #5600CC, -1px -1px 0 #5600CC, -1px 2px 0 #5600CC, 1px -1px 0px #5600CC;
+}
+
+.upgrade-tooltip {
+    visibility: hidden;
+    width: 415px;
+    height: 90px;
+    background-color: #F4F3E2;
+    color: black;
+    font-family: "GardeniaBold";
+    line-height: 22px;
+    text-align: left;
+    border-radius: 26px;
+    position: absolute;
+    z-index: 1;
+    bottom: 110%;
+    left: 50%;
+    margin-left: -222px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border: 20px solid transparent;
+    border-image-slice: 50;
+    border-image-source: url(../Assets/UI/SpeechBubbleSquare.png);
+}
+.upgrade-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 117%;
+    left: 50%;
+    margin-left: -20px;
+    border-width: 15px;
+    border-style: solid;
+    border-image-source: url(../Assets/UI/SpeechBubblePoint2.png);
+    border-image-slice: 35;
+}
+.upgrade-div:hover .upgrade-tooltip {
+    visibility: visible;
 }
 
 .noSelect {
@@ -483,4 +825,23 @@
 div {
     font-family: Arial, Helvetica, sans-serif;
     user-select: none;
+}
+
+p {
+    font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
+    color: white;
+    user-select: none;
+}
+
+@keyframes glow{
+    to {
+      box-shadow: 0px 0px 5px 5px #ffdf98;
+    }
+  }
+
+@media (max-width: 1199px) {
+    .tower-progress-div {
+        width: 105px;
+        margin-left: 0px;
+    }
 }
