@@ -1222,6 +1222,29 @@
                 "Bloon Trap": 11000,
                 "XXXL Trap": 40000
             }
+        },
+        "BeastHandler": {
+            "path1": {
+                "Piranha": 250,
+                "Barracuda": 500,
+                "Great White": 1000,
+                "Orca": 4250,
+                "Megalodon": 100000
+            },
+            "path2": {
+                "Microraptor": 250,
+                "Adasaurus": 500,
+                "Velociraptor": 1000,
+                "Tyrannosaurus Rex": 5000,
+                "Giganotosaurus": 90000
+            },
+            "path3": {
+                "Gyrfalcon": 250,
+                "Horned Owl": 500,
+                "Golden Eagle": 1000,
+                "Giant Condor": 5500,
+                "Pouakai": 110000
+            }
         }
     }
 }
