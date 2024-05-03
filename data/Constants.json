@@ -17,7 +17,7 @@
         "HeliPilot": "Military",
         "MortarMonkey": "Military",
         "DartlingGunner": "Military",
-        "Wizard": "Magic",
+        "WizardMonkey": "Magic",
         "SuperMonkey": "Magic",
         "NinjaMonkey": "Magic",
         "Alchemist": "Magic",
@@ -28,7 +28,7 @@
         "EngineerMonkey": "Support",
         "BeastHandler": "Support"
     },
-    "paragonsAvailable": ["DartMonkey", "BoomerangMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "Wizard", "NinjaMonkey", "EngineerMonkey"],
+    "paragonsAvailable": ["DartMonkey", "BoomerangMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "WizardMonkey", "NinjaMonkey", "EngineerMonkey"],
     "collectionOrder": ["520", "502", "510", "501", "500", "250", "052", "150", "051", "050", "205", "025", "105", "015", "005", "420", "402", "410", "401", "400", "240", "042", "140", "041", "040", "204", "024", "104", "014", "004", "320", "302", "310", "301", "300", "230", "032", "130", "031", "030", "203", "023", "103", "013", "003", "220", "202", "210", "201", "200", "022", "120", "021", "020", "102", "012", "002", "110", "101", "100", "011", "010", "001", "000"],
     "BGColor": [0.000, 0.498, 1.000],
     "ParagonBGColor": [0.522, 0.000, 1.000],
@@ -1016,7 +1016,7 @@
                 "Bloon Exclusion Zone": 55000
             }
         },
-        "Wizard": {
+        "WizardMonkey": {
             "path1": {
                 "Guided Magic": 110,
                 "Arcane Blast": 600,

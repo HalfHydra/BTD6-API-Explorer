@@ -113,7 +113,7 @@ function getTowerAssetPath(towerType, upgrade) {
 }
 
 function getInstaContainerIcon(towerType, upgrade) {
-    return `Assets/UI/InstaContainer/${upgrade}-${towerType}.png`;
+    return  towerType == "WizardMonkey" ? `Assets/UI/InstaContainer/${upgrade}-Wizard.png` : `Assets/UI/InstaContainer/${upgrade}-${towerType}.png`;
 }
 
 function getInstaMonkeyIcon(towerType, upgrade) {

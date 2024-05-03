@@ -643,6 +643,15 @@
 .tower-progress-portrait-support {
     background-image: url(../Assets/UI/TowerContainerSupportLarge.png);
 }
+.tower-progress-portrait-paragon {
+    background-image: url(../Assets/UI/TowerContainerParagonLarge.png);
+}
+.tower-progress-portrait-t5-locked {
+    background-image: url(../Assets/UI/TowerContainerT5LockedLarge.png);
+}
+.tower-progress-portrait-paragon-locked {
+    background-image: url(../Assets/UI/TowerContainerParagonLockedLarge.png);
+}
 
 .tower-progress-portrait-img {
     /* width: 210px;
@@ -672,14 +681,16 @@
     border-radius: 20px;
     margin: 10px;
     width: 110px;
-    background-size: contain;
-    background-repeat: no-repeat;
     position: relative;
+    /* background-size: contain;
+    background-repeat: no-repeat;
+    position: relative; */
 }
 .upgrade-img {
     width: 80px;
     height: 110px;
     object-fit: contain;
+    z-index: 1;
 }
 .upgrade-text {
     font-family: 'GardeniaBold';
@@ -708,6 +719,15 @@
 .upgrade-paragon-special {
     background-image: url(../Assets/UI/UpgradeContainerParagon.png);
 }
+.upgrade-paragon-special-locked {
+    background-image: url(../Assets/UI/UpgradeContainerParagonLocked.png);
+}
+.upgrade-green {
+    background-image: url(../Assets/UI/UpgradeContainerGreen.png);
+}
+.upgrade-red {
+    background-image: url(../Assets/UI/UpgradeContainerRed.png);
+}
 
 .tower-portrait-name {
     position: absolute;
@@ -720,13 +740,22 @@
 }
 
 .upgrade-glow {
-    border-radius: 50%;
+    /* border-radius: 50%;
     box-shadow: 0px 0px 8px 8px #ffdf98;
     animation: glow 0.5s linear infinite alternate;
     width: 110px;
     height: 110px;
     margin-top: -110px;
+    z-index: -1; */
+    background-image: url(../Assets/UI/GlowSkillCircle.png);
+    background-size: contain;
+    position: absolute;
+    width: 110px;
+    height: 110px;
     z-index: -1;
+    transform: scale(1.40);
+    margin-left: 3.75px;
+    animation: upgradeglow 0.35s cubic-bezier(0.4, 0, 1, 1) infinite alternate;
 }
 
 .tower-progress-top-paragon {
@@ -758,8 +787,34 @@
     align-items: center;
     justify-content: center;
     margin-left: 15px;
+    /* z-index: 3; */
 }
 
+.upgrade-glow-paragon {
+    animation: paragonglow 1.5s cubic-bezier(0.21, 0.32, 0.56, 0.8) infinite;
+    animation-direction: unset;
+    width: 110px;
+    height: 110px;
+    background-image: url(../Assets/UI/GlowSkillStarParagonText.png);
+    background-size: contain;
+    z-index: 0;
+    margin-top: 3px;
+    margin-left: 7px;
+    position: absolute;
+}
+
+.upgrade-bg-img {
+    width: 110px;
+    height: 110px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 1;
+}
+
+.upgrade-after-locked {
+    filter: saturate(0.25) brightness(0.75);
+}
 
 .black-outline {
     -webkit-text-stroke: 0.7px black;
@@ -785,7 +840,7 @@
     text-align: left;
     border-radius: 26px;
     position: absolute;
-    z-index: 1;
+    z-index: 5;
     bottom: 110%;
     left: 50%;
     margin-left: -222px;
@@ -839,7 +894,57 @@ p {
     }
   }
 
-@media (max-width: 1199px) {
+  @keyframes paragonglow {
+    0% {
+      -webkit-transform: rotate(-45deg) scale(0.75);
+              transform: rotate(-45deg) scale(0.75);
+              opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    98% {
+      -webkit-transform: rotate(50deg) scale(1.75);
+              transform: rotate(50deg) scale(1.75);
+              opacity: 0;
+    }
+    99% {
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: rotate(-45deg) scale(0.75);
+                transform: rotate(-45deg) scale(0.75);
+                opacity: 1;
+    }
+  }
+
+  @keyframes upgradeglow {
+    0% {
+      -webkit-transform: scale(1.4);
+              transform: scale(1.4);
+    }
+    100% {
+      -webkit-transform: scale(1.45);
+              transform: scale(1.45);
+    }
+  }
+
+  @keyframes upgradeclicked {
+    0% {
+      -webkit-transform: scale(1.0);
+              transform: scale(1.0);
+    }
+    50% {
+      -webkit-transform: scale(1.45);
+              transform: scale(1.45);
+    }
+    100% {
+      -webkit-transform: scale(1.0);
+              transform: scale(1.0);
+    }
+  }
+
+@media (max-width: 1299px) {
     .tower-progress-div {
         width: 105px;
         margin-left: 0px;
