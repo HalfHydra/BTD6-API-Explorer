@@ -24,13 +24,6 @@
     src: url("../font/Gardenia-Bold.woff2") format('woff2');
 }
 
-@font-face {
-    font-family: 'FuseV.2';
-    font-style: normal;
-    src: url("../font/FuseV.2Display-Regular.woff2") format('woff2');
-}
-
-
 .title {
     font-size: 48px;
     font-family: 'Luckiest Guy';
