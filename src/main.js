@@ -66,6 +66,7 @@ function generateIfReady(){
         generateOverview()
         isGenerated.push('overview');
         changeTab('overview');
+        // document.getElementById("loading").style.transform = "scale(0)";
     }
 }
 
@@ -86,7 +87,6 @@ function generateRankInfo(){
             rankInfo["rank"] = rank - 1;
             rankInfo["xp"] = subtractableXP;
             rankInfo["xpGoal"] = xpGoal;
-            console.log(rankInfo)
             return;
         }
     }
@@ -99,7 +99,6 @@ function generateVeteranRankInfo(){
         rankInfoVeteran["rank"] += 1;
     }
     rankInfoVeteran["xp"] = subtractableXPVeteran;
-    console.log(rankInfoVeteran)
 }
 
 function generateAchievementsHelper(){
@@ -293,7 +292,7 @@ content.classList.add('content');
 container.appendChild(content);
 
 function changeTab(tab) {
-    console.log(tab)
+    changeHexBGColor(constants.BGColor)
     let tabs = document.getElementsByClassName('content-div');
     for (let tab of tabs){
         tab.style.display = 'none';
@@ -701,6 +700,9 @@ function changeProgressTab(selector){
         case 'towers':
             generateTowerProgress();
             break;
+        case 'heroes':
+            generateHeroesProgress();
+            break;
     }
 }
 
@@ -988,7 +990,6 @@ function generateUpgradeIcon(tower, upgrade, status, row, tier, paragon, grayOut
         }
         upgradeGlow.classList.add('upgrade-glow');
     })
-    console.log(grayOut)
     if (grayOut) {
         upgradeBGImg.classList.add('upgrade-after-locked');
         upgradeImg.classList.add('upgrade-after-locked');
@@ -1105,6 +1106,158 @@ function onSelectTowerUpgradeParagon(tower, upgrade, tiers){
 
     portrait_img.src = getTowerAssetPath(tower,tiers);
 }
+
+function generateHeroesProgress(){
+    let progressContent = document.getElementById('progress-content');
+    progressContent.innerHTML = "";
+
+    let heroProgressContainer = document.createElement('div');
+    heroProgressContainer.id = 'tower-progress-container';
+    heroProgressContainer.classList.add('tower-progress-container');
+    progressContent.appendChild(heroProgressContainer);
+
+    let heroProgressDiv = document.createElement('div');
+    heroProgressDiv.id = 'hero-progress-div';
+    heroProgressDiv.classList.add('hero-progress-div');
+    heroProgressContainer.appendChild(heroProgressDiv);
+
+    let heroSelectorHeaderTop = document.createElement('div');
+    heroSelectorHeaderTop.id = 'tower-selector-header-top';
+    heroSelectorHeaderTop.classList.add('tower-selector-header-top');
+    heroProgressDiv.appendChild(heroSelectorHeaderTop);
+
+    let heroSelectorHeaderText = document.createElement('p');
+    heroSelectorHeaderText.id = 'hero-selector-header-text';
+    heroSelectorHeaderText.classList.add('hero-selector-header-text');
+    heroSelectorHeaderText.classList.add('black-outline');
+    heroSelectorHeaderText.innerHTML = 'Heroes';
+    heroSelectorHeaderTop.appendChild(heroSelectorHeaderText);
+
+    let heroSelectorHeader = document.createElement('div');
+    heroSelectorHeader.id = 'hero-selector-header';
+    heroSelectorHeader.classList.add('hero-selector-header');
+    heroProgressDiv.appendChild(heroSelectorHeader);
+
+    for (let [hero, nameColor] of Object.entries(constants.heroesInOrder)) {
+        let heroSelector = document.createElement('div');
+        heroSelector.id = hero + '-selector';
+        heroSelector.classList.add(`hero-selector-div`);
+        heroSelector.addEventListener('click', () => {
+            generateHeroProgressHero(hero, nameColor);
+        })
+        heroSelectorHeader.appendChild(heroSelector);
+
+        let heroSelectorImg = document.createElement('img');
+        heroSelectorImg.id = hero + '-selector-img';
+        heroSelectorImg.classList.add('hero-selector-img');
+        heroSelectorImg.src = getHeroSquareIcon(hero);
+        heroSelector.appendChild(heroSelectorImg);
+
+        let heroSelectorHighlight = document.createElement('div');
+        heroSelectorHighlight.id = hero + '-selector-highlight';
+        heroSelectorHighlight.classList.add('hero-selector-highlight');
+        heroSelector.appendChild(heroSelectorHighlight);
+    }
+
+    let heroProgressContent = document.createElement('div');
+    heroProgressContent.id = 'hero-progress-content';
+    heroProgressContent.classList.add('hero-progress-content');
+    heroProgressContainer.appendChild(heroProgressContent);
+
+    // heroProgressContainer.append(generateHeroProgressHero("DartMonkey"));
+}
+
+function generateHeroProgressHero(hero, nameColor){
+    changeHexBGColor(constants.HeroBGColors[hero]);
+
+    let heroProgressContent = document.getElementById('hero-progress-content');
+    heroProgressContent.innerHTML = "";
+
+    //a div for containing the top, middle, and bottom divs
+    let heroProgressContainer = document.createElement('div');
+    heroProgressContainer.id = 'hero-progress-container';
+    heroProgressContainer.classList.add('hero-progress-container');
+    heroProgressContent.appendChild(heroProgressContainer);
+
+    //top div
+    let heroProgressTop = document.createElement('div');
+    heroProgressTop.id = 'hero-progress-top';
+    heroProgressTop.classList.add('hero-progress-top');
+    heroProgressContainer.appendChild(heroProgressTop);
+
+    //header text div
+    let heroProgressHeader = document.createElement('div');
+    heroProgressHeader.id = 'hero-progress-header';
+    heroProgressHeader.classList.add('hero-progress-header');
+    heroProgressTop.appendChild(heroProgressHeader);
+
+    let heroProgressTrailFX = document.createElement('img');
+    heroProgressTrailFX.id = 'hero-progress-trail-fx';
+    heroProgressTrailFX.classList.add('hero-progress-trail-fx');
+    heroProgressTrailFX.src = './Assets/UI/TrailFX.png'; 
+    heroProgressHeader.appendChild(heroProgressTrailFX);
+
+    //header hero name text
+    let heroProgressHeaderText = document.createElement('p');
+    heroProgressHeaderText.id = 'hero-progress-header-text';
+    heroProgressHeaderText.classList.add('hero-progress-header-text');
+    heroProgressHeaderText.style.backgroundImage = `url('../Assets/UI/${nameColor}TxtTextureMain.png')`;
+    // heroProgressHeaderText.classList.add('black-outline');
+    heroProgressHeaderText.innerHTML = locJSON[hero];
+    heroProgressHeader.appendChild(heroProgressHeaderText);
+
+    //header hero name subtitle
+    let heroProgressHeaderSubtitle = document.createElement('p');
+    heroProgressHeaderSubtitle.id = 'hero-progress-header-subtitle';
+    heroProgressHeaderSubtitle.classList.add('hero-progress-header-subtitle');
+    heroProgressHeaderSubtitle.classList.add('subtitle-outline');
+    heroProgressHeaderSubtitle.innerHTML = getLocValue(`${hero} Short Description`);
+    heroProgressHeader.appendChild(heroProgressHeaderSubtitle);
+
+    //middle div
+    let heroProgressMiddle = document.createElement('div');
+    heroProgressMiddle.id = 'hero-progress-middle';
+    heroProgressMiddle.classList.add('hero-progress-middle');
+    heroProgressContainer.appendChild(heroProgressMiddle);
+
+    //hero portrait div
+    let heroPortraitDiv = document.createElement('div');
+    heroPortraitDiv.id = 'hero-portrait-div';
+    heroPortraitDiv.classList.add('hero-portrait-div');
+    heroProgressMiddle.appendChild(heroPortraitDiv);
+
+    //hero portrait img
+    let heroPortraitImg = document.createElement('img');
+    heroPortraitImg.id = 'hero-portrait-img';
+    heroPortraitImg.classList.add('hero-portrait-img');
+    heroPortraitImg.src = getHeroPortrait(hero, 1);
+    heroPortraitDiv.appendChild(heroPortraitImg);
+
+    //hero portrait glow
+    let heroPortraitGlow = document.createElement('img');
+    heroPortraitGlow.id = 'hero-portrait-glow';
+    heroPortraitGlow.classList.add('hero-portrait-glow');
+    heroPortraitGlow.src = './Assets/UI/HeroPortraitGlow.png';
+    heroPortraitDiv.appendChild(heroPortraitGlow);
+
+    //hero portrait bar
+    let heroPortraitBar = document.createElement('img');
+    heroPortraitBar.id = 'hero-portrait-bar';
+    heroPortraitBar.classList.add('hero-portrait-bar');
+    heroPortraitBar.src = './Assets/UI/HeroPortraitBar.png';
+    heroPortraitDiv.appendChild(heroPortraitBar);
+
+    //hero skins div
+
+    //bottom div
+
+    //hero desc text
+
+    //hero levels div
+
+    return heroProgressContent;
+}
+
 function changeHexBGColor(color){
     if (color == null) { 
         document.body.style.removeProperty("background-color")

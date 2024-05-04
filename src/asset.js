@@ -133,6 +133,10 @@ function getHeroPortrait(hero, level) {
     return level == 1 ?  `Assets/Portrait/${hero}Portrait.png` : `Assets/Portrait/${hero}PortraitLvl${level}.png`;
 }
 
+function getHeroSquareIcon(hero) {
+    return `Assets/HeroIconSquare/HeroIcon${hero}.png`;
+}
+
 function getSkinAssetPath(skin, level) {
     skin = skinNameFixMap[skin] || skin;
     return level == 1 ? `Assets/Portrait/${skin}Portrait.png` : `Assets/Portrait/${skin}PortraitLvl${level}.png`;

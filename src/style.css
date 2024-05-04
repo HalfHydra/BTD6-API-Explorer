@@ -769,6 +769,7 @@
 
 .upgrade-container {
     display: flex;
+    align-items: center;
 }
 
 .upgrade-container-paragon {
@@ -781,6 +782,10 @@
     justify-content: center;
     margin-left: 15px;
     /* z-index: 3; */
+    box-shadow: 0px 0px 8px 5px rgba(0,255,255,0.9);
+    border-radius: 15px;
+    align-items: center;
+    height: 490px;
 }
 
 .upgrade-glow-paragon {
@@ -809,6 +814,92 @@
     filter: saturate(0.25) brightness(0.75);
 }
 
+.hero-selector-header {
+    display: flex;
+    max-width: 330px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+.hero-selector-header::-webkit-scrollbar {
+    display: none;
+}
+.hero-selector-img {
+    width: 100px;
+    object-fit: contain;
+}
+.hero-selector-header-text {
+    text-align: center;
+    font-size: 18px;
+    border: 10px solid transparent;
+    border-image-source: url(../Assets/UI/BarfillVeteranContainer.png);
+    border-image-slice: 46;
+    background-color: #9F7842;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #2E4A83 0%, #344181 100%);
+}
+.hero-progress-div {
+    height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    /* position: fixed;
+    margin-left: -9vw; */
+}
+
+.hero-selector-div {
+    margin: 5px;
+}
+
+.hero-progress-content {
+    width: 800px;
+    /* margin-left: 21vh; */
+}
+
+.hero-progress-top {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-progress-header {
+    width: 520px;
+}
+
+.hero-progress-trail-fx {
+    width: 500px;
+    height: 65px;
+    position: absolute;
+}
+.hero-progress-header-text {
+    position: relative;
+    height: 50px;
+    padding-top: 4px;
+    padding-left: 38px;
+    padding-bottom: 12px;
+    font-size: 53px;
+    background: url('../Assets/UI/YellowTxtTextureMain.png');  
+    background-size: contain;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(1px 0px 0px #000) drop-shadow(-1px 0px 0 #000) drop-shadow(0px 1px 0 #000) drop-shadow(1px 0px 0px #000) drop-shadow(1px 2px 0px #000) drop-shadow(-1px -1px 0 #000) drop-shadow(-1px 2px 0 #000) drop-shadow(1px -1px 0px #000);
+}
+.hero-progress-header-subtitle {
+    font-size: 26px;
+    padding-left: 60px;
+}
+
+.hero-portrait-img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    /* position: absolute;
+    margin-left: -100px;
+    margin-top: -100px; */
+
+}
+
 .black-outline {
     -webkit-text-stroke: 0.7px black;
     text-shadow: 1px 0px 0px #000, -1px 0px 0 #000, 0px 1px 0 #000, 1px 0px 0px #000, 1px 2px 0px #000, -1px -1px 0 #000, -1px 2px 0 #000, 1px -1px 0px #000;
@@ -820,6 +911,11 @@
 .knowledge-outline {
     -webkit-text-stroke: 0.7px #5600CC;
     text-shadow: 1px 0px 0px #5600CC, -1px 0px 0 #5600CC, 0px 1px 0 #5600CC, 1px 0px 0px #5600CC, 1px 2px 0px #5600CC, -1px -1px 0 #5600CC, -1px 2px 0 #5600CC, 1px -1px 0px #5600CC;
+}
+.subtitle-outline {
+    -webkit-text-stroke: 0.7px #E63C00;
+    text-shadow: 1px 0px 0px #E63C00, -1px 0px 0 #E63C00, 0px 1px 0 #E63C00, 1px 0px 0px #E63C00, 1px 2px 0px #E63C00, -1px -1px 0 #E63C00, -1px 2px 0 #E63C00, 1px -1px 0px #E63C00;
+
 }
 
 .upgrade-tooltip {
@@ -941,5 +1037,9 @@ p {
     .tower-progress-div {
         width: 105px;
         margin-left: 0px;
+    }
+    .hero-progress-div {
+        width: 220px;
+        /* margin-left: -1vh; */
     }
 }
