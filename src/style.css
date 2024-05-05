@@ -1061,6 +1061,9 @@
 .selected-level-btn {
     filter: hue-rotate(270deg)
 }
+.hero-selector-div-disabled {
+    filter: grayscale(100%);
+}
 
 .black-outline {
     -webkit-text-stroke: 0.7px black;

@@ -139,6 +139,23 @@ let medalMap = {
     "CHIMPS-BLACK": "ImpoppableHematite"
 }
 
+let saveSkintoSkinMap = {
+    "Scientist Gwendolin": "ScientistGwendolin",
+    "Biker Bones": "BikerBones",
+    "Sentai Captain Churchill": "SentaiCaptainChurchill",
+    "Cyber Quincy": "Cyber Quincy",
+    "Octo Jones": "OctoJones",
+    "Sleigh Captain Churchill": "SleighCaptainChurchill",
+    "Wolfpack Quincy": "WolfpackQuincy",
+    "ScientistGwendolin": "Scientist Gwendolin",
+    "BikerBones": "Biker Bones",
+    "SentaiCaptainChurchill": "Sentai Captain Churchill",
+    "CyberQuincy": "Cyber Quincy",
+    "OctoJones": "Octo Jones",
+    "SleighCaptainChurchill": "Sleigh Captain Churchill",
+    "WolfpackQuincy": "Wolfpack Quincy"
+}
+
 function getTowerAssetPath(towerType, upgrade) {
     return towerType == "WizardMonkey" ? `Assets/TowerIcon/${upgrade}-Wizard.png` : `Assets/TowerIcon/${upgrade}-${towerType}.png`;
 }

@@ -743,8 +743,13 @@ function generateTowerProgress(){
         let towerSelector = document.createElement('div');
         towerSelector.id = tower + '-selector';
         towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
+        if(!btd6usersave.unlockedTowers[tower]){
+            towerSelector.classList.add('hero-selector-div-disabled');
+        }
         towerSelector.addEventListener('click', () => {
-            generateTowerProgressTower(tower);
+            if(btd6usersave.unlockedTowers[tower]){
+                generateTowerProgressTower(tower);
+            }
         })
         towerSelectorHeader.appendChild(towerSelector);
 
@@ -1144,8 +1149,13 @@ function generateHeroesProgress(){
         let heroSelector = document.createElement('div');
         heroSelector.id = hero + '-selector';
         heroSelector.classList.add(`hero-selector-div`);
+        if(!btd6usersave.unlockedHeros[hero]){ 
+            heroSelector.classList.add(`hero-selector-div-disabled`);
+        }
         heroSelector.addEventListener('click', () => {
-            generateHeroProgressHero(hero, nameColor);
+            if(btd6usersave.unlockedHeros[hero]){ 
+                generateHeroProgressHero(hero, nameColor);
+            }
         })
         heroSelectorHeader.appendChild(heroSelector);
 
@@ -1264,6 +1274,11 @@ function generateHeroProgressHero(hero, nameColor){
     heroProgressMiddle.appendChild(heroSkinsDiv);
 
     constants.heroSkins[hero].forEach((skin) => {
+        console.log(`${skin}, ${btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin]}`)
+        if ((btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == false || btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == null) && skin != hero) { return; }
+
+        // || skin == hero
+
         let heroSkin = document.createElement('img');
         heroSkin.id = `${hero}-${skin}-skin`;
         heroSkin.classList.add('hero-skin');
