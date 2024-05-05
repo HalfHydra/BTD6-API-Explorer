@@ -25,6 +25,8 @@ let extrasUnlocked = {}
 
 let progressSubText = {}
 
+let currentlySelectedHero = "";
+
 fetch('./data/English.json')
     .then(response => response.json())
     .then(data => {
@@ -1164,10 +1166,11 @@ function generateHeroesProgress(){
     heroProgressContent.classList.add('hero-progress-content');
     heroProgressContainer.appendChild(heroProgressContent);
 
-    // heroProgressContainer.append(generateHeroProgressHero("DartMonkey"));
+    generateHeroProgressHero(btd6usersave.primaryHero, constants.heroesInOrder[btd6usersave.primaryHero])
 }
 
 function generateHeroProgressHero(hero, nameColor){
+    currentlySelectedHero = hero;
     changeHexBGColor(constants.HeroBGColors[hero]);
 
     let heroProgressContent = document.getElementById('hero-progress-content');
@@ -1212,6 +1215,7 @@ function generateHeroProgressHero(hero, nameColor){
     heroProgressHeaderSubtitle.classList.add('hero-progress-header-subtitle');
     heroProgressHeaderSubtitle.classList.add('subtitle-outline');
     heroProgressHeaderSubtitle.innerHTML = getLocValue(`${hero} Short Description`);
+    console.log(`getLocValue('\${hero} Short Description') : ${getLocValue(hero + " Short Description")}`)
     heroProgressHeader.appendChild(heroProgressHeaderSubtitle);
 
     //middle div
@@ -1219,6 +1223,13 @@ function generateHeroProgressHero(hero, nameColor){
     heroProgressMiddle.id = 'hero-progress-middle';
     heroProgressMiddle.classList.add('hero-progress-middle');
     heroProgressContainer.appendChild(heroProgressMiddle);
+
+    let heroPortraitLevelSelectBtns = document.createElement('div');
+    heroPortraitLevelSelectBtns.id = 'hero-portrait-level-select-btns';
+    heroPortraitLevelSelectBtns.classList.add('hero-portrait-level-select-btns');
+    heroProgressMiddle.appendChild(heroPortraitLevelSelectBtns);
+
+    updatePortraitLevelButtons(hero)
 
     //hero portrait div
     let heroPortraitDiv = document.createElement('div');
@@ -1233,29 +1244,165 @@ function generateHeroProgressHero(hero, nameColor){
     heroPortraitImg.src = getHeroPortrait(hero, 1);
     heroPortraitDiv.appendChild(heroPortraitImg);
 
-    //hero portrait glow
-    let heroPortraitGlow = document.createElement('img');
-    heroPortraitGlow.id = 'hero-portrait-glow';
-    heroPortraitGlow.classList.add('hero-portrait-glow');
-    heroPortraitGlow.src = './Assets/UI/HeroPortraitGlow.png';
-    heroPortraitDiv.appendChild(heroPortraitGlow);
-
     //hero portrait bar
-    let heroPortraitBar = document.createElement('img');
+    let heroPortraitBar = document.createElement('div');
     heroPortraitBar.id = 'hero-portrait-bar';
     heroPortraitBar.classList.add('hero-portrait-bar');
-    heroPortraitBar.src = './Assets/UI/HeroPortraitBar.png';
     heroPortraitDiv.appendChild(heroPortraitBar);
 
+    //hero portrait glow
+    let heroPortraitGlow = document.createElement('div');
+    heroPortraitGlow.id = 'hero-portrait-glow';
+    heroPortraitGlow.classList.add('hero-portrait-glow');
+    heroPortraitGlow.style.background = `radial-gradient(circle, rgb(${constants.HeroBGColors[hero][0] * 255},${constants.HeroBGColors[hero][1] * 255},${constants.HeroBGColors[hero][2] * 255}) 0%, transparent 70%)`
+    // heroPortraitGlow.src = './Assets/UI/GlowUi.png';
+    heroPortraitDiv.appendChild(heroPortraitGlow);
+
     //hero skins div
+    let heroSkinsDiv = document.createElement('div');
+    heroSkinsDiv.id = 'hero-skins-div';
+    heroSkinsDiv.classList.add('hero-skins-div');
+    heroProgressMiddle.appendChild(heroSkinsDiv);
+
+    constants.heroSkins[hero].forEach((skin) => {
+        let heroSkin = document.createElement('img');
+        heroSkin.id = `${hero}-${skin}-skin`;
+        heroSkin.classList.add('hero-skin');
+        heroSkin.src = getHeroIconCircle(skin);
+        heroSkin.addEventListener('click', () => {
+            let colorToUse = constants.HeroBGColors[skin] ? constants.HeroBGColors[skin] : constants.HeroBGColors[hero];
+            document.getElementById("hero-portrait-glow").style.background = `radial-gradient(circle, rgb(${colorToUse[0] * 255},${colorToUse[1] * 255},${colorToUse[2] * 255}) 0%, transparent 70%)`
+            changeHexBGColor(colorToUse);
+            changeHeroSkin(skin, hero == skin);
+        })
+        heroSkinsDiv.appendChild(heroSkin);
+    })
 
     //bottom div
+    let heroProgressBottom = document.createElement('div');
+    heroProgressBottom.id = 'hero-progress-bottom';
+    heroProgressBottom.classList.add('hero-progress-bottom');
+    heroProgressContainer.appendChild(heroProgressBottom);
 
     //hero desc text
+    let heroProgressDesc = document.createElement('p');
+    heroProgressDesc.id = 'hero-progress-desc';
+    heroProgressDesc.classList.add('hero-progress-desc');
+    heroProgressDesc.innerHTML = getLocValue(`${hero} Description`);
+    heroProgressBottom.appendChild(heroProgressDesc);
 
-    //hero levels div
+    //hero level descs div
+    let heroLevelDescs = document.createElement('div');
+    heroLevelDescs.id = 'hero-level-descs';
+    heroLevelDescs.classList.add('hero-level-descs');
+    heroProgressBottom.appendChild(heroLevelDescs);
+
+    for (let i = 1; i<21; i++){
+        let heroLevelDescDiv = document.createElement('div');
+        heroLevelDescDiv.id = `hero-level-desc-div-${i}`;
+        heroLevelDescDiv.classList.add('hero-level-desc-div');
+        heroLevelDescs.appendChild(heroLevelDescDiv);
+
+        let heroLevelDescIconDiv = document.createElement('div');
+        heroLevelDescIconDiv.id = `hero-level-desc-icon-div-${i}`;
+        heroLevelDescIconDiv.classList.add('hero-level-desc-icon-div');
+        i == 20 ? heroLevelDescIconDiv.classList.add('hero-level-desc-image-purple') : constants.heroLevelIcons[hero].includes(i) ? heroLevelDescIconDiv.classList.add("hero-level-desc-image-gold")  : heroLevelDescIconDiv.classList.add('hero-level-desc-image');
+        heroLevelDescDiv.appendChild(heroLevelDescIconDiv);
+
+        let heroLevelDescText = document.createElement('p');
+        heroLevelDescText.id = `hero-level-desc-text-${i}`;
+        heroLevelDescText.classList.add('hero-level-desc-text');
+        heroLevelDescText.classList.add('black-outline');
+        heroLevelDescText.innerHTML = i;
+        heroLevelDescIconDiv.appendChild(heroLevelDescText);
+
+        // let heroLevelDescImage = document.createElement('img');
+        // heroLevelDescImage.id = `hero-level-desc-image-${i}`;
+        // switch (i){
+        //     case 20:
+        //         heroLevelDescImage.classList.add('hero-level-desc-image-purple');
+        //         heroLevelDescImage.src = "./Assets/UI/HeroLevelBadge07.png"
+        //         break;
+        //     case constants.heroLevelIcons[hero].includes(i):
+        //         heroLevelDescImage.classList.add('hero-level-desc-image-gold');
+        //         heroLevelDescImage.src = "./Assets/UI/HeroLevelBadge06.png"
+        //         break;
+        //     default:
+        //         heroLevelDescImage.classList.add('hero-level-desc-image');
+        //         heroLevelDescImage.src = "./Assets/UI/HeroLevelBadge04.png"
+        //         break;
+        // }
+        // heroLevelDescIconDiv.appendChild(heroLevelDescImage);
+
+        let heroLevelDesc = document.createElement('p');
+        heroLevelDesc.id = `hero-level-desc-${i}`;
+        heroLevelDesc.classList.add('hero-level-desc');
+        heroLevelDesc.innerHTML = getLocValue(`${hero} Level ${i} Description`);
+        heroLevelDescDiv.appendChild(heroLevelDesc);
+    }
+
+    for (let selector of document.getElementsByClassName('hero-selector-highlight')){
+        selector.style.display = "none";
+    }
+    document.getElementById(`${hero}-selector-highlight`).style.display = "block";
 
     return heroProgressContent;
+}
+
+function changeHeroSkin(skin, isOriginal){
+    currentlySelectedHero = skin;
+    let heroProgressHeaderSubtitle = document.getElementById('hero-progress-header-subtitle');
+    heroProgressHeaderSubtitle.innerHTML = isOriginal ? getLocValue(`${skin} Short Description`) : getLocValue(`${skin}SkinName`);
+    let heroProgressDesc = document.getElementById('hero-progress-desc');
+    heroProgressDesc.innerHTML = isOriginal ? getLocValue(`${skin} Description`) : getLocValue(`${skin}SkinDescription`);
+    console.log(skin)
+    changeHeroLevelPortrait(1);
+}
+
+function changeHeroLevelPortrait(level){
+    let heroPortraitImg = document.getElementById('hero-portrait-img');
+    heroPortraitImg.src = getSkinAssetPath(currentlySelectedHero, level);
+    updatePortraitLevelButtons(currentlySelectedHero);
+    for (let btn of document.getElementsByClassName('hero-level-select-btn')){
+        btn.classList.remove('selected-level-btn');
+    }
+    document.getElementById(`${level}-level-select-btn`).classList.add('selected-level-btn');
+}
+
+function updatePortraitLevelButtons(hero){
+    let heroPortraitLevelSelectBtns = document.getElementById('hero-portrait-level-select-btns');
+    heroPortraitLevelSelectBtns.innerHTML = "";
+
+    constants.HeroPortraitLevels[hero].forEach((level) => {
+        let heroLevelSelectBtnDiv = document.createElement('div');
+        heroLevelSelectBtnDiv.id = `${level}-level-select-div`;
+        heroLevelSelectBtnDiv.classList.add('hero-level-select-div');
+        heroPortraitLevelSelectBtns.appendChild(heroLevelSelectBtnDiv);
+
+        let heroLevelSelectBtn = document.createElement('div');
+        heroLevelSelectBtn.id = `${level}-level-select-btn`;
+        heroLevelSelectBtn.classList.add('hero-level-select-btn');
+        heroLevelSelectBtnDiv.appendChild(heroLevelSelectBtn);
+
+        if(level == "20SunGod" || level == "20SunGodVengeful" || level == "20SunGodVengful") { 
+            let heroLevelSelectImg = document.createElement('img');
+            heroLevelSelectImg.id = `${level}-level-select-img`;
+            heroLevelSelectImg.classList.add('hero-level-select-img');
+            heroLevelSelectImg.src = level == "20SunGod" ? "./Assets/UI/BuffIconTrueSunGod5xx.png" : "./Assets/UI/BuffIconTrueSunGod555.png";
+            heroLevelSelectBtnDiv.appendChild(heroLevelSelectImg);
+        } else {
+            let heroLevelSelectBtnText = document.createElement('p');
+            heroLevelSelectBtnText.id = `${level}-level-select-text`;
+            heroLevelSelectBtnText.classList.add('hero-level-select-text');
+            heroLevelSelectBtnText.classList.add('black-outline');
+            heroLevelSelectBtnText.innerHTML = level;
+            heroLevelSelectBtnDiv.appendChild(heroLevelSelectBtnText);
+        }
+        heroLevelSelectBtnDiv.addEventListener('click', () => {
+            changeHeroLevelPortrait(level);
+        })
+    })
+    document.getElementById(`1-level-select-btn`).classList.add('selected-level-btn');
 }
 
 function changeHexBGColor(color){
@@ -1263,7 +1410,7 @@ function changeHexBGColor(color){
         document.body.style.removeProperty("background-color")
         return; 
     }
-    document.body.style.backgroundColor = `rgba(${color[0] * 255},${color[1] * 255},${color[2] * 255})`;
+    document.body.style.backgroundColor = `rgb(${color[0] * 255},${color[1] * 255},${color[2] * 255})`;
 }
 
 function ratioCalc(unknown, x1, x2, y1, y2){

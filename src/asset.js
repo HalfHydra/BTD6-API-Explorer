@@ -90,6 +90,37 @@ const upgradeNameFixMap = {
     "SmartSpikes": "DirectedSpikes"
 }
 
+let locJSONOverrides = {
+    "Directed Spikes": "Smart Spikes",
+    "Directed Spikes Description": "Smart Spikes Description",
+    "CircusGwendolinSkinName": "HarlegwenGwendolinSkinName",
+    "CircusGwendolinSkinDescription": "HarlegwenGwendolinSkinDescription",
+    "OctoJonesSkinName": "OctoJonesStrikerJonesSkinName",
+    "OctoJonesSkinDescription": "OctoJonesStrikerJonesSkinDescription",
+    "MoltenObynSkinName": "ObynMountainGuardianSkinName",
+    "MoltenObynSkinDescription": "ObynMountainGuardianSkinDescription",
+    "SushiBentoSkinName": "SushiBentoBenjaminSkinName",
+    "SushiBentoSkinDescription": "SushiBentoBenjaminSkinDescription",
+    "KaijuPatSkinName": "KaijuPatFustySkinName",
+    "KaijuPatSkinDescription": "KaijuPatFustySkinDescription",
+    "GalaxiliSkinName": "GalaxiliEziliSkinName",
+    "GalaxiliSkinDescription": "GalaxiliEziliSkinDescription",
+    "VoidoraSkinName": "VoidoraAdoraSkinName",
+    "VoidoraSkinDescription": "VoidoraAdoraSkinDescription",
+    "VikingSaudaSkinName": "VikingSaudaSaudaSkinName",
+    "VikingSaudaSkinDescription": "VikingSaudaSaudaSkinDescription",
+    "JiangshiSaudaSkinName": "JiangshiSaudaSaudaSkinName",
+    "JiangshiSaudaSkinDescription": "JiangshiSaudaSaudaSkinDescription",
+    "DreadPirateBrickellSkinName": "DreadPirateBrickellAdmiralBrickellSkinName",
+    "DreadPirateBrickellSkinDescription": "DreadPirateBrickellAdmiralBrickellSkinDescription",
+    "LifeguardBrickellSkinName": "LifeguardBrickellAdmiralBrickellSkinName",
+    "LifeguardBrickellSkinDescription": "LifeguardBrickellAdmiralBrickellSkinDescription",
+    "PsimbalsSkinName": "PsimbalsPsiSkinName",
+    "PsimbalsSkinDescription": "PsimbalsPsiSkinDescription",
+    "GadgeteerGeraldoSkinName": "GentlemonkeyGadgeteerGeraldoSkinName",
+    "GadgeteerGeraldoSkinDescription": "GentlemonkeyGadgeteerGeraldoSkinDescription"
+}
+
 let medalMap = {
     "Easy": "Bronze",
     "PrimaryOnly": "Bronze01",
@@ -134,7 +165,13 @@ function getHeroPortrait(hero, level) {
 }
 
 function getHeroSquareIcon(hero) {
+    hero = skinNameFixMap[hero] || hero
     return `Assets/HeroIconSquare/HeroIcon${hero}.png`;
+}
+
+function getHeroIconCircle(hero) {
+    hero = skinNameFixMap[hero] || hero
+    return `Assets/HeroIconCircle/HeroIcon${hero}.png`;
 }
 
 function getSkinAssetPath(skin, level) {
@@ -163,7 +200,6 @@ function getMedalIcon(medal){
 }
 
 function getLocValue(key){
-    if(key == "Directed Spikes") return "Smart Spikes";
-    if(key == "Directed Spikes Description") return "Smart Spikes Description";
+    if(locJSONOverrides[key]) return locJSON[locJSONOverrides[key]];
     return locJSON[key];
 }

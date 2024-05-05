@@ -821,6 +821,7 @@
     flex-wrap: wrap;
     overflow-y: scroll;
     scrollbar-width: none;
+    position: relative;
 }
 .hero-selector-header::-webkit-scrollbar {
     display: none;
@@ -828,6 +829,17 @@
 .hero-selector-img {
     width: 100px;
     object-fit: contain;
+}
+.hero-selector-highlight {
+    border: 40px solid transparent;
+    border-image-source: url(../Assets/UI/SmallSquareGlowOutline.png);
+    border-image-slice: 110;
+    position: absolute;
+    width: 32px;
+    height: 54px;
+    display: none;
+    margin-top: -133px;
+    margin-left: -6px;
 }
 .hero-selector-header-text {
     text-align: center;
@@ -890,14 +902,164 @@
     padding-left: 60px;
 }
 
-.hero-portrait-img {
-    width: 200px;
-    height: 200px;
+.hero-progress-middle {
+    display: flex;
+    justify-content: space-between;
+}
+.hero-portrait-level-select-btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 130px;
+}
+.hero-level-select-btn {
+    background-image: url(../Assets/UI/BlankButton.png);
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+}
+.hero-level-select-text {
+    width: 70px;
+    position: absolute;
+    font-size: 34px;
+    font-family: 'Luckiest Guy';
+    color: white;
+    text-align: center;
+}
+.hero-level-select-div {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+.hero-level-select-img {
+    width: 70px;
+    height: 50px;
     object-fit: contain;
+    position: absolute;
+}
+
+.hero-portrait-img {
+    width: 350px;
+    height: 350px;
+    object-fit: contain;
+    padding: 50px;
     /* position: absolute;
     margin-left: -100px;
     margin-top: -100px; */
+}
 
+.hero-portrait-div {
+    display: flex;
+    justify-content: center;
+}
+.hero-portrait-glow {
+    position: absolute;
+    z-index: -1;
+    width: 512px;
+    height: 512px;
+}
+.hero-portrait-bar {
+    height: 100vh;
+    width: 600px;
+    background-color: rgba(0,0,0,0.1);
+    transform: rotate(25deg) scale(1.0, 5.0);
+    position: fixed;
+    top: 0;
+    z-index: -2;
+    margin-left: -10vh;
+}
+.hero-skins-div {
+    width: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.hero-skin {
+    width: 130px;
+    padding: 5px;
+}
+
+.hero-progress-bottom {
+    min-height: 100px;
+    height: calc(100vh - 730px);
+    overflow-y: scroll;
+}
+.hero-progress-bottom::-webkit-scrollbar {
+    width: 5px;
+}  
+.hero-progress-bottom::-webkit-scrollbar-thumb {
+    background-color: #1A679B;
+}
+
+.hero-progress-desc {
+    font-family: 'GardeniaBold';
+    font-size: 18px;
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    padding: 20px;
+    margin-left: 20px;
+    border-radius: 10px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-level-desc-div {
+    background-color: rgba(0,0,0,0.5);
+    padding: 20px;
+    margin: 5px 0 5px 20px;
+    border-radius: 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.hero-level-desc-icon-div {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-level-desc-image {
+    background-image: url(../Assets/UI/HeroLevelBadge04.png);
+    background-size: 65px 65px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.hero-level-desc-image-gold {
+    background-image: url(../Assets/UI/HeroLevelBadge06.png);
+    background-size: 75px 75px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.hero-level-desc-image-purple {
+    background-image: url(../Assets/UI/HeroLevelBadge07.png);
+    background-size: 75px 75px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.hero-level-desc {
+    font-family: 'GardeniaBold';
+    font-size: 18px;
+    color: white;
+    padding-left: 12px;
+}
+
+.hero-level-desc-text {
+    width: 80px;
+    font-size: 28px;
+    text-align: center;
+}
+
+.selected-level-btn {
+    filter: hue-rotate(270deg)
 }
 
 .black-outline {

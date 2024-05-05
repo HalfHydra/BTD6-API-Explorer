@@ -52,7 +52,7 @@
         "Voidora": [0.102, 0.145, 0.341],
         "JiangshiSauda": [0.359, 0.453, 0.547]
     },
-    "HeroLevels": {
+    "HeroPortraitLevels": {
         "AdmiralBrickell": [1,3,7,10,20],
         "LifeguardBrickell": [1,3,7,10,20],
         "DreadPirateBrickell": [1,3,7,10,20],
@@ -94,6 +94,40 @@
         "Geraldo": [1,3,7,10,20],
         "GadgeteerGeraldo": [1,3,7,10,20],
         "Corvus": [1,3,7,10,15,20]
+    },
+    "heroSkins": {
+        "Quincy": ["Quincy", "CyberQuincy", "WolfpackQuincy"],
+        "Gwendolin": ["Gwendolin", "CircusGwendolin", "ScientistGwendolin"], 
+        "StrikerJones": ["StrikerJones", "BikerBones", "OctoJones"],
+        "ObynGreenfoot": ["ObynGreenfoot", "MoltenObyn", "ObynOceanGuardian"],
+        "Benjamin": ["Benjamin", "SushiBento", "BenJammin"],
+        "PatFusty": ["PatFusty", "FustyTheSnowman", "KaijuPat"],
+        "CaptainChurchill": ["CaptainChurchill", "SentaiCaptainChurchill", "SleighCaptainChurchill"],
+        "Ezili": ["Ezili", "Galaxili", "SmudgeCatt"],
+        "Adora": ["Adora", "JoanOfArcAdora", "Voidora"],
+        "AdmiralBrickell": ["AdmiralBrickell", "DreadPirateBrickell", "LifeguardBrickell"],
+        "Etienne": ["Etienne", "ETnEtienne", "BookWyrmEtienne"],
+        "Psi": ["Psi", "Psimbals"],
+        "Geraldo": ["Geraldo", "GadgeteerGeraldo"],
+        "Sauda": ["Sauda", "JiangshiSauda", "VikingSauda"],
+        "Corvus": ["Corvus"]
+    },
+    "heroLevelIcons": {
+        "Quincy": [3,10],
+        "Gwendolin": [3,10], 
+        "StrikerJones": [3,7,10],
+        "ObynGreenfoot": [3,10],
+        "Benjamin": [3,10],
+        "PatFusty": [3,10],
+        "CaptainChurchill": [3,10],
+        "Ezili": [3,7,10],
+        "Adora": [3,7,10],
+        "AdmiralBrickell": [3,7,10],
+        "Etienne": [3,10],
+        "Psi": [3,10],
+        "Geraldo": [],
+        "Sauda": [3,10],
+        "Corvus": [3,7,10]
     },
     "Rank": {
         "1": {
