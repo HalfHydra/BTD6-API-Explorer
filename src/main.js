@@ -1215,7 +1215,6 @@ function generateHeroProgressHero(hero, nameColor){
     heroProgressHeaderSubtitle.classList.add('hero-progress-header-subtitle');
     heroProgressHeaderSubtitle.classList.add('subtitle-outline');
     heroProgressHeaderSubtitle.innerHTML = getLocValue(`${hero} Short Description`);
-    console.log(`getLocValue('\${hero} Short Description') : ${getLocValue(hero + " Short Description")}`)
     heroProgressHeader.appendChild(heroProgressHeaderSubtitle);
 
     //middle div
@@ -1355,7 +1354,6 @@ function changeHeroSkin(skin, isOriginal){
     heroProgressHeaderSubtitle.innerHTML = isOriginal ? getLocValue(`${skin} Short Description`) : getLocValue(`${skin}SkinName`);
     let heroProgressDesc = document.getElementById('hero-progress-desc');
     heroProgressDesc.innerHTML = isOriginal ? getLocValue(`${skin} Description`) : getLocValue(`${skin}SkinDescription`);
-    console.log(skin)
     changeHeroLevelPortrait(1);
 }
 
@@ -1374,6 +1372,8 @@ function updatePortraitLevelButtons(hero){
     heroPortraitLevelSelectBtns.innerHTML = "";
 
     constants.HeroPortraitLevels[hero].forEach((level) => {
+        if (level == "20SunGod" && !btd6usersave.acquiredUpgrades["True Sun God"]) { return; }
+        if ((level == "20SunGodVengeful" || level == "20SunGodVengful") && !btd6usersave.achievementsClaimed.includes("Strangely Adorable")) { return; }
         let heroLevelSelectBtnDiv = document.createElement('div');
         heroLevelSelectBtnDiv.id = `${level}-level-select-div`;
         heroLevelSelectBtnDiv.classList.add('hero-level-select-div');
