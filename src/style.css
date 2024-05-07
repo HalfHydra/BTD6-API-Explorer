@@ -1065,6 +1065,77 @@
     filter: grayscale(100%);
 }
 
+.knowledge-progress-container {
+    display: flex;
+    /* background-image: url(../Assets/UI/Background/EventTotemPatternBg.png);
+    border-radius: 20px;
+    background-size: 10vh; */
+    flex-direction: column;
+    /* border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/Background/MainBgPanelParagon.png);
+    border-image-slice: 46;
+    background-color: #B700FF; */
+    padding-bottom: 200px;
+}
+.knowledge-icon {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin: 10px;
+}
+.knowledge-progress-container-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.knowledge-progress-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.knowledge-icon-div {
+    position: relative;
+}
+.knowledge-name-text {
+    font-size: 32px;
+    padding: 4px;
+}
+.knowledge-desc-text {
+    color: black;
+    font-family: "GardeniaBold";
+    font-size: 24px;
+    line-height: 32px;
+}
+.knowledge-glow {
+    background-image: url(../Assets/UI/GlowSkillCircle.png);
+    background-size: contain;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    z-index: -1;
+    margin-left: 11px;
+    margin-top: 10px;
+    animation: upgradeglow 0.35s cubic-bezier(0.4, 0, 1, 1) infinite alternate;
+}
+.knowledge-progress-floating-tooltip {
+    border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/BarfillContainer.png);
+    border-image-slice: 50;
+    background-color: #9F7842;
+    border-radius: 20px;
+    position: fixed;
+    bottom: 20px;
+    width: 75vw;
+    max-width: 1000px;
+    padding: 10px;
+    text-align: center;
+    display:none;
+}
+.tooltip-container-help-me {
+    display: flex;
+    justify-content: center;
+}
+
 .black-outline {
     -webkit-text-stroke: 0.7px black;
     text-shadow: 1px 0px 0px #000, -1px 0px 0 #000, 0px 1px 0 #000, 1px 0px 0px #000, 1px 2px 0px #000, -1px -1px 0 #000, -1px 2px 0 #000, 1px -1px 0px #000;

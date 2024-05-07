@@ -751,6 +751,26 @@
             "levelUnlockString": "Knowledge"
         }
     },
+    "RecommendedKnowledge": [
+        "EliteMilitaryTraining",
+        "MonkeyEducation",
+        "MoMonkeyMoney",
+        "MoreCash",
+        "BonusMonkey",
+        "BigBloonSabotage",
+        "ManaShield",
+        "AdvancedLogistics",
+        "MilitaryConscription",
+        "FarmSubsidy",
+        "VeteranMonkeyTraining",
+        "EmpoweredHeroes",
+        "PreGamePrep",
+        "AviationGradeGlue",
+        "SelfTaughtHeroes",
+        "QuadBurst",
+        "Wingmonkey",
+        "BetterSellDeals"
+    ],
     "towerPaths": {
         "DartMonkey": {
             "path1": {

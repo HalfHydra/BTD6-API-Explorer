@@ -705,6 +705,10 @@ function changeProgressTab(selector){
         case 'heroes':
             generateHeroesProgress();
             break;
+        case "knowledge":
+            changeHexBGColor(constants.ParagonBGColor)
+            generateKnowledgeProgress();
+            break;
     }
 }
 
@@ -1418,6 +1422,125 @@ function updatePortraitLevelButtons(hero){
         })
     })
     document.getElementById(`1-level-select-btn`).classList.add('selected-level-btn');
+}
+
+function generateKnowledgeProgress(){
+    let progressContent = document.getElementById('progress-content');
+    progressContent.innerHTML = "";
+
+    let knowledgeProgressContainer = document.createElement('div');
+    knowledgeProgressContainer.id = 'knowledge-progress-container';
+    knowledgeProgressContainer.classList.add('knowledge-progress-container');
+    progressContent.appendChild(knowledgeProgressContainer);
+
+    let recommendedKnowledgeContainerDiv = document.createElement('div');
+    recommendedKnowledgeContainerDiv.id = 'recommended-knowledge-container-div';
+    recommendedKnowledgeContainerDiv.classList.add('knowledge-progress-container-div');
+    knowledgeProgressContainer.appendChild(recommendedKnowledgeContainerDiv);
+
+    let recommendedKnowledgeHeader = document.createElement('p');
+    recommendedKnowledgeHeader.id = 'left-column-header-text';
+    recommendedKnowledgeHeader.classList.add('column-header-text');
+    recommendedKnowledgeHeader.classList.add('black-outline');
+    recommendedKnowledgeHeader.innerHTML = 'Recommended Knowledge Points';
+    recommendedKnowledgeContainerDiv.appendChild(recommendedKnowledgeHeader);
+
+    let recommendedKnowledgeDiv = document.createElement('div');
+    recommendedKnowledgeDiv.id = 'recommended-knowledge-div';
+    recommendedKnowledgeDiv.classList.add('knowledge-progress-div');
+    recommendedKnowledgeContainerDiv.appendChild(recommendedKnowledgeDiv);
+
+    let knowledgeProgressUnlockedContainerDiv = document.createElement('div');
+    knowledgeProgressUnlockedContainerDiv.classList.add('knowledge-progress-container-div');
+    knowledgeProgressContainer.appendChild(knowledgeProgressUnlockedContainerDiv);
+
+    let knowledgeProgressUnlockedHeader = document.createElement('p');
+    knowledgeProgressUnlockedHeader.id = 'right-column-header-text';
+    knowledgeProgressUnlockedHeader.classList.add('column-header-text');
+    knowledgeProgressUnlockedHeader.classList.add('black-outline');
+    knowledgeProgressUnlockedHeader.innerHTML = 'Unlocked Knowledge Points';
+    knowledgeProgressUnlockedContainerDiv.appendChild(knowledgeProgressUnlockedHeader);
+
+    let knowledgeProgressUnlockedDiv = document.createElement('div');
+    knowledgeProgressUnlockedDiv.id = 'knowledge-progress-unlocked-div';
+    knowledgeProgressUnlockedDiv.classList.add('knowledge-progress-div');
+    knowledgeProgressUnlockedContainerDiv.appendChild(knowledgeProgressUnlockedDiv);
+
+    let knowledgeProgressLockedContainerDiv = document.createElement('div');
+    knowledgeProgressLockedContainerDiv.classList.add('knowledge-progress-container-div');
+    knowledgeProgressContainer.appendChild(knowledgeProgressLockedContainerDiv);
+
+    let knowledgeProgressLockedHeader = document.createElement('p');
+    knowledgeProgressLockedHeader.id = 'right-column-header-text';
+    knowledgeProgressLockedHeader.classList.add('column-header-text');
+    knowledgeProgressLockedHeader.classList.add('black-outline');
+    knowledgeProgressLockedHeader.innerHTML = 'Locked Knowledge Points';
+    knowledgeProgressLockedContainerDiv.appendChild(knowledgeProgressLockedHeader);
+
+    let knowledgeProgressLockedDiv = document.createElement('div');
+    knowledgeProgressLockedDiv.id = 'knowledge-progress-locked-div';
+    knowledgeProgressLockedDiv.classList.add('knowledge-progress-div');
+    knowledgeProgressLockedContainerDiv.appendChild(knowledgeProgressLockedDiv);
+
+    for (let [knowledge, obtained] of Object.entries(btd6usersave.acquiredKnowledge)) {
+        let knowledgeIconDiv = document.createElement('div');
+        knowledgeIconDiv.id = `${knowledge}-icon-div`;
+        knowledgeIconDiv.classList.add('knowledge-icon-div');
+        obtained ? knowledgeProgressUnlockedDiv.appendChild(knowledgeIconDiv) : constants.RecommendedKnowledge.includes(knowledge) ? recommendedKnowledgeDiv.appendChild(knowledgeIconDiv) : knowledgeProgressLockedDiv.appendChild(knowledgeIconDiv);
+
+        let knowledgeGlow = document.createElement('div');
+        knowledgeGlow.id = `${knowledge}-glow`;
+        // upgradeGlow.classList.add('upgrade-glow');
+        knowledgeIconDiv.appendChild(knowledgeGlow);
+
+        let knowledgeIcon = document.createElement('img');
+        knowledgeIcon.id = `${knowledge}-icon`;
+        knowledgeIcon.classList.add('knowledge-icon');
+        knowledgeIcon.src = getKnowledgeAssetPath(knowledge);
+        knowledgeIconDiv.appendChild(knowledgeIcon);
+
+        knowledgeIconDiv.addEventListener('click', () => {
+            onSelectKnowledgePoint(knowledge);
+            Array.from(document.getElementsByClassName('knowledge-glow')).forEach((glow) => {
+                glow.classList.remove('knowledge-glow');
+            });
+            knowledgeGlow.classList.add('knowledge-glow');
+        })
+    }
+
+    let tooltipContainerHelpMe = document.createElement('div');
+    tooltipContainerHelpMe.id = 'tooltip-container-help-me';
+    tooltipContainerHelpMe.classList.add('tooltip-container-help-me');
+    knowledgeProgressContainer.appendChild(tooltipContainerHelpMe);
+
+    let knowledgeProgressFloatingTooltip = document.createElement('div');
+    knowledgeProgressFloatingTooltip.id = 'knowledge-progress-floating-tooltip';
+    knowledgeProgressFloatingTooltip.classList.add('knowledge-progress-floating-tooltip');
+    tooltipContainerHelpMe.appendChild(knowledgeProgressFloatingTooltip);
+
+    let knowledgeNameText = document.createElement('p');
+    knowledgeNameText.id = `knowledge-name-text`;
+    knowledgeNameText.classList.add('knowledge-name-text');
+    knowledgeNameText.classList.add('black-outline');
+    // knowledgeNameText.innerHTML = getLocValue(knowledge);
+    knowledgeProgressFloatingTooltip.appendChild(knowledgeNameText);
+
+    let knowledgeDescText = document.createElement('p');
+    knowledgeDescText.id = `knowledge-desc-text`;
+    knowledgeDescText.classList.add('knowledge-desc-text');
+    // knowledgeDescText.innerHTML = getLocValue(`${knowledge}Description`);
+    knowledgeProgressFloatingTooltip.appendChild(knowledgeDescText);
+}
+
+function onSelectKnowledgePoint(knowledge){
+    let knowledgeProgressFloatingTooltip = document.getElementById('knowledge-progress-floating-tooltip');
+    knowledgeProgressFloatingTooltip.style.display = "block";
+
+    let knowledgeNameText = document.getElementById('knowledge-name-text');
+    knowledgeNameText.innerHTML = getLocValue(knowledge);
+
+    let knowledgeDescText = document.getElementById('knowledge-desc-text');
+    knowledgeDescText.innerHTML = getLocValue(`${knowledge}Description`);
 }
 
 function changeHexBGColor(color){
