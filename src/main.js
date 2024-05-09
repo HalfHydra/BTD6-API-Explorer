@@ -826,7 +826,7 @@ function changeProgressTab(selector){
             generateMapsProgress();
             break;
         case "Powers":
-            //generatePowersProgress();
+            generatePowersProgress();
             break;
         case "InstaMonkeys":
             //generateInstaMonkeysProgress();
@@ -2515,6 +2515,48 @@ function generateMapsGameView() {
             mapPage = i;
             generateMapsGameView();
         })
+    }
+}
+
+function generatePowersProgress() {
+    let progressContent = document.getElementById('progress-content');
+    progressContent.innerHTML = "";
+
+    let powersProgressContainer = document.createElement('div');
+    powersProgressContainer.id = 'powers-progress-container';
+    powersProgressContainer.classList.add('powers-progress-container');
+    progressContent.appendChild(powersProgressContainer);
+
+    for (let [power, value] of Object.entries(btd6usersave.powers)) {
+        let powerDiv = document.createElement('div');
+        powerDiv.id = `${power}-div`;
+        powerDiv.classList.add('power-div');
+        powersProgressContainer.appendChild(powerDiv);
+
+        let powerImg = document.createElement('img');
+        powerImg.id = `${power}-img`;
+        powerImg.classList.add('power-img');
+        powerImg.src = getPowerIcon(power);
+        powerDiv.appendChild(powerImg);
+
+        let powerName = document.createElement('p');
+        powerName.id = `${power}-name`;
+        powerName.classList.add('power-name');
+        powerName.classList.add('black-outline');
+        powerName.innerHTML = getLocValue(power);
+        powerDiv.appendChild(powerName);
+
+        let powerProgress = document.createElement('div');
+        powerProgress.id = `${power}-progress`;
+        powerProgress.classList.add('power-progress');
+        powerDiv.appendChild(powerProgress);
+
+        let powerProgressText = document.createElement('p');
+        powerProgressText.id = `${power}-progress-text`;
+        powerProgressText.classList.add('power-progress-text');
+        powerProgressText.classList.add('black-outline');
+        powerProgressText.innerHTML = `${value.quantity}`;
+        powerProgress.appendChild(powerProgressText);
     }
 }
 

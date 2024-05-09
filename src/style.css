@@ -1567,6 +1567,52 @@
     font-size: 20px;
 }
 
+.powers-progress-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.power-div {
+    background-image: url(../Assets/UI/PowerContainer.png);
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 20px 10px;
+}
+.power-img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+.power-name {
+    position: absolute;
+    /* bottom: 0; */
+    top: 90%;
+    font-size: 22px;
+    width: 190px;
+    text-align: center;
+}
+.power-progress {
+    position: absolute;
+    background-image: url(../Assets/UI/NotificationYellow.png);
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 10%;
+    right: 0%;
+}
+.power-progress-text {
+    font-size: 28px;
+}
 .black-outline {
     -webkit-text-stroke: 0.7px black;
     text-shadow: 1px 0px 0px #000, -1px 0px 0 #000, 0px 1px 0 #000, 1px 0px 0px #000, 1px 2px 0px #000, -1px -1px 0 #000, -1px 2px 0 #000, 1px -1px 0px #000;
