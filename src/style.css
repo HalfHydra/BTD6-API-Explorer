@@ -1075,7 +1075,7 @@
     border-image-source: url(../Assets/UI/Background/MainBgPanelParagon.png);
     border-image-slice: 46;
     background-color: #B700FF; */
-    padding-bottom: 200px;
+    padding-bottom: 180px
 }
 .knowledge-icon {
     width: 100px;
@@ -1097,7 +1097,7 @@
     position: relative;
 }
 .knowledge-name-text {
-    font-size: 32px;
+    font-size: 36px;
     padding: 4px;
 }
 .knowledge-desc-text {
@@ -1134,6 +1134,286 @@
 .tooltip-container-help-me {
     display: flex;
     justify-content: center;
+}
+
+.maps-progress-views {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    padding: 10px;
+    justify-content: space-around;
+}
+.maps-progress-view {
+    border: 5px solid transparent;
+    border-image-source: url(../Assets/UI/StatsTabBlue.png);
+    border-image-slice: 25;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #2E4A83 0%, #344181 100%);
+    font-family: 'Luckiest Guy';
+    color: white;
+    font-size: 22px;
+    padding: 2px 8px;
+    background: linear-gradient(180deg, #17BBEE 0%, #14B8EB 100%);
+    margin: 0 5px;
+}
+.maps-progress-coop-toggle {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+.maps-progress-coop-toggle-text {
+    font-size: 24px;
+    padding: 5px;
+}
+.map-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    border-radius: 20px;
+    position: relative;
+}
+.none-border {
+    border: 10px solid transparent;
+    border-image-source: url(../Assets/UI/MainBgPanel.png);
+    border-image-slice: 60;
+    background-color: #9F7842;
+    border-radius: 20px;
+}
+.coop-border {
+    border: 10px solid transparent;
+    border-image-source: url(../Assets/UI/MainBgPanelBlue.png);
+    border-image-slice: 60;
+    background-color: #9F7842;
+    border-radius: 20px;
+}
+.bronze-border {
+    border: 10px solid transparent;
+    border-image-source: url(../Assets/UI/MainBGPanelBronze.png);
+    border-image-slice: 60;
+    background-color: #9F7842;
+    border-radius: 20px;
+}
+.silver-border {
+    border: 10px solid transparent;
+    border-image-source: url(../Assets/UI/MainBGPanelGrey.png);
+    border-image-slice: 60;
+    background-color: #9F7842;
+    border-radius: 20px;
+}
+.gold-border {
+    border: 10px solid transparent;
+    border-image-source: url(../Assets/UI/MainBGPanelGold.png);
+    border-image-slice: 60;
+    background-color: #9F7842;
+    border-radius: 20px;
+}
+.black-border {
+    border: 10px solid transparent;
+    border-image-source: url(../Assets/UI/MainBgPanelHematite.png);
+    border-image-slice: 60;
+    background-color: #9F7842;
+    border-radius: 20px;
+}
+.map-name {
+    position: absolute;
+    font-size: 20px;
+}
+.map-img {
+    width: 200px;
+    height: 127.5px;
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+}
+.maps-progress-header-bar {
+    background-color: var(--profile-primary);
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.maps-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: var(--profile-tertiary);
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 20px;
+}
+.map-container {
+    display: flex;
+}
+.map-sections {
+    display: flex;
+}
+.maps-progress-filter {
+    display: flex;
+}
+.map-section-medal-img {
+    height: 69px;
+}
+.map-label-medals {
+    height: 56px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+}
+.map-label-rounds {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+}
+.map-label-completed {
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+}
+.map-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.map-section-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.map-section-text {
+    font-size: 32px;
+}
+.map-progress-filter-difficulty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.map-progress-filter-difficulty-select {
+    height: 30px;
+    min-width: 100px;
+    margin-right: 10px;
+}
+
+.map-difficulty-icon {
+    width:100px;
+    padding: 0 10px;
+}
+.map-name-large {
+    font-size: 28px;
+    padding: 10px;
+
+}
+.map-name-top {
+    display: flex;
+    align-items: center;
+}
+.map-progress-div {
+    width: 550px;
+    background-color: var(--profile-secondary);
+    border-radius: 10px;
+}
+.map-name-and-medals {
+    width: 100%;
+}
+.map-icon {
+    width: 502px;
+    height: 320px;
+    border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/BarfillContainer.png);
+    border-image-slice: 40;
+    background-color: #9F7842;
+    border-radius: 20px;
+    margin: 0 5px;
+}
+.map-progress-subtext {
+    font-size: 24px;
+    padding: 10px;
+    color: white;
+    font-family: 'GardeniaBold';
+}
+.map-left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.map-progress-medals {
+    display: flex;
+    width: 350px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: var(--profile-secondary);
+    margin: 10px 0;
+    border-radius: 20px;
+    /* padding: 10px; */
+    padding: 10px 80px;
+    border-width: 20px;
+}
+.map-below-header-bar {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.right-column-header {
+    display: flex;
+    justify-content: space-between;
+}
+.no-data-found {
+    text-align: center;
+    font-size: 32px;
+    background-color: rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.map-progress-container {
+    background-color: var(--profile-primary);
+    border-radius: 10px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    flex-direction: column;
+    align-content: space-around;
+}
+.single-map-progress-header-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.map-next-and-prev {
+    display: flex;
+}
+.map-right-column {
+    width: 550px;
+    background-color: var(--profile-secondary);
+    border-radius: 10px;
+}
+.map-stats-div {
+    display: flex;
+    background-color: var(--profile-tertiary);
+    border-radius: 10px;
+    margin: 10px;
+}
+.map-stats-icon {
+    width: 80px;
+    object-fit: contain;
+    padding: 10px 10px;
+}
+.map-stats-text-mode {
+    font-size: 28px;
+}
+.map-stats-text {
+    font-size: 24px;
+    color: white;
+    font-family: 'GardeniaBold';
+}
+.map-stats-text-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .black-outline {
@@ -1201,7 +1481,7 @@
     -webkit-user-select: none;
     -ms-user-select: none;
 }
-
+  
 div {
     font-family: Arial, Helvetica, sans-serif;
     user-select: none;
@@ -1211,6 +1491,22 @@ p {
     font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
     color: white;
     user-select: none;
+}
+
+input[type='checkbox'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    background: #34547F;
+    border-radius: 5px;
+    border: 2px solid #2B466A;
+}
+
+input[type='checkbox']:checked {
+    background: url('../Assets/UI/Checked.png');
+    background-size: 25px 25px;
 }
 
 @keyframes glow{

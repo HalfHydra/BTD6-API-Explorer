@@ -24,6 +24,17 @@ let medalsInOrder = {}
 let extrasUnlocked = {}
 
 let progressSubText = {}
+let processedMapData = {
+    "Maps": {},
+    "Medals": {
+        "single": {},
+        "coop": {}
+    },
+    "Borders": {
+        "single": {},
+        "coop": {}
+    }
+}
 
 let currentlySelectedHero = "";
 
@@ -65,6 +76,7 @@ function generateIfReady(){
         generateMedals()
         generateExtras()
         generateProgressSubText()
+        generateMapData()
         generateOverview()
         isGenerated.push('overview');
         changeTab('overview');
@@ -232,11 +244,103 @@ function generateProgressSubText(){
     progressSubText["Towers"] = `${Object.keys(btd6usersave.unlockedTowers).filter(k => btd6usersave.unlockedTowers[k]).length}/${Object.keys(btd6usersave.unlockedTowers).length} Towers Unlocked`;
     progressSubText["Heroes"] = `${Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length}/${Object.keys(btd6usersave.unlockedHeros).length} Heroes Unlocked`;
     progressSubText["Knowledge"] = `${Object.keys(btd6usersave.acquiredKnowledge).filter(k => btd6usersave.acquiredKnowledge[k]).length}/${Object.keys(btd6usersave.acquiredKnowledge).length} Knowledge Unlocked`;
-    progressSubText["Map Progress"] = `${Object.keys(btd6usersave.mapProgress).filter(k => btd6usersave.mapProgress[k]).length}/${constants.totalMaps} Maps Played`;
+    progressSubText["MapProgress"] = `${Object.keys(btd6usersave.mapProgress).filter(k => btd6usersave.mapProgress[k]).length}/${constants.totalMaps} Maps Played`;
     progressSubText["Powers"] = `${Object.values(btd6usersave.powers).map(power => power.quantity).reduce((acc, amount) => acc + amount)} Powers Accumulated`
-    progressSubText["Insta Monkeys"] = `${btd6publicprofile.gameplay.instaMonkeyCollection}/${constants.totalInstaMonkeys} Instas Collected`;
+    progressSubText["InstaMonkeys"] = `${btd6publicprofile.gameplay.instaMonkeyCollection}/${constants.totalInstaMonkeys} Instas Collected`;
     progressSubText["Achievements"] = `${btd6publicprofile.achievements}/${constants.achievements + constants.hiddenAchievements} Achievements`;
     progressSubText["Extras"] = `${Object.keys(extrasUnlocked).filter(k => extrasUnlocked[k]).length} Extras Unlocked`;
+}
+
+function generateMapData() {
+    for (let [map, data] of Object.entries(btd6usersave.mapProgress)) {
+        let mapData = {"single": {}, "coop": {}}
+        mapData["single"]["Easy"] = data.difficulty?.Easy?.single?.["Standard"];
+        mapData["single"]["PrimaryOnly"] = data.difficulty?.Easy?.single?.["PrimaryOnly"];
+        mapData["single"]["Deflation"] = data.difficulty?.Easy?.single?.["Deflation"];
+        mapData["single"]["Medium"] = data.difficulty?.Medium?.single?.["Standard"];
+        mapData["single"]["MilitaryOnly"] = data.difficulty?.Medium?.single?.["MilitaryOnly"];
+        mapData["single"]["Apopalypse"] = data.difficulty?.Medium?.single?.["Apopalypse"];
+        mapData["single"]["Reverse"] = data.difficulty?.Medium?.single?.["Reverse"];
+        mapData["single"]["Hard"] = data.difficulty?.Hard?.single?.["Standard"];
+        mapData["single"]["MagicOnly"] = data.difficulty?.Hard?.single?.["MagicOnly"];
+        mapData["single"]["DoubleMoabHealth"] = data.difficulty?.Hard?.single?.["DoubleMoabHealth"];
+        mapData["single"]["HalfCash"] = data.difficulty?.Hard?.single?.["HalfCash"];
+        mapData["single"]["AlternateBloonsRounds"] = data.difficulty?.Hard?.single?.["AlternateBloonsRounds"];
+        mapData["single"]["Impoppable"] = data.difficulty?.Hard?.single?.["Impoppable"];
+        mapData["single"]["Clicks"] = data.difficulty?.Hard?.single?.["Clicks"];
+        mapData["coop"]["Easy"] = data.difficulty?.Easy?.coop?.["Standard"];
+        mapData["coop"]["PrimaryOnly"] = data.difficulty?.Easy?.coop?.["PrimaryOnly"];
+        mapData["coop"]["Deflation"] = data.difficulty?.Easy?.coop?.["Deflation"];
+        mapData["coop"]["Medium"] = data.difficulty?.Medium?.coop?.["Standard"];
+        mapData["coop"]["MilitaryOnly"] = data.difficulty?.Medium?.coop?.["MilitaryOnly"];
+        mapData["coop"]["Apopalypse"] = data.difficulty?.Medium?.coop?.["Apopalypse"];
+        mapData["coop"]["Reverse"] = data.difficulty?.Medium?.coop?.["Reverse"];
+        mapData["coop"]["Hard"] = data.difficulty?.Hard?.coop?.["Standard"];
+        mapData["coop"]["MagicOnly"] = data.difficulty?.Hard?.coop?.["MagicOnly"];
+        mapData["coop"]["DoubleMoabHealth"] = data.difficulty?.Hard?.coop?.["DoubleMoabHealth"];
+        mapData["coop"]["HalfCash"] = data.difficulty?.Hard?.coop?.["HalfCash"];
+        mapData["coop"]["AlternateBloonsRounds"] = data.difficulty?.Hard?.coop?.["AlternateBloonsRounds"];
+        mapData["coop"]["Impoppable"] = data.difficulty?.Hard?.coop?.["Impoppable"];
+        mapData["coop"]["Clicks"] = data.difficulty?.Hard?.coop?.["Clicks"];
+
+        //this is necessary because sometimes maps will randomly show up as incomplete despite having parameters such as a completed best round number or "completedWithoutLoadSave" is true.
+        //this is a workaround to ensure that the map is marked as completed if it meets the requirements for a bronze/silver/gold/black border
+        for (let [difficulty, diffData] of Object.entries(mapData["single"])) {
+            if (diffData && diffData["completed"] === false && (diffData["bestRound"] >= constants.modeBestRoundFix[difficulty] || diffData.completedWithoutLoadingSave) ) {
+                diffData["completed"] = true;
+            }
+        }
+
+        for (let [difficulty, diffData] of Object.entries(mapData["coop"])) {
+            if (diffData && diffData["completed"] === false && (diffData["bestRound"] >= constants.modeBestRoundFix[difficulty] || diffData.completedWithoutLoadingSave) ) {
+                diffData["completed"] = true;
+            }
+        }
+
+        processedMapData.Medals.single[map] = {};
+        processedMapData.Medals.coop[map] = {};
+
+        for (let [difficulty, diffData] of Object.entries(mapData["single"])) {
+            (diffData && diffData["completed"]) ? processedMapData.Medals.single[map][difficulty] = true : processedMapData.Medals.single[map][difficulty] = false;
+        }
+
+        for (let [difficulty, diffData] of Object.entries(mapData["coop"])) {
+            (diffData && diffData["completed"]) ? processedMapData.Medals.coop[map][difficulty] = true : processedMapData.Medals.coop[map][difficulty] = false;
+        }
+
+        processedMapData.Medals.single[map]["CHIMPS-BLACK"] = mapData["single"]["Clicks"] ? mapData["single"]["Clicks"].completedWithoutLoadingSave : false;
+        processedMapData.Medals.coop[map]["CHIMPS-BLACK"] = mapData["coop"]["Clicks"] ? mapData["coop"]["Clicks"].completedWithoutLoadingSave : false;
+
+        let bronzeBorder = ["Easy", "PrimaryOnly", "Deflation"].every(key => 
+            mapData["single"][key] && mapData["single"][key]["completed"] === true
+        );
+        let silverBorder = bronzeBorder && ["Medium", "MilitaryOnly", "Apopalypse", "Reverse"].every(key =>
+            mapData["single"][key] && mapData["single"][key]["completed"] === true
+        );
+        let goldBorder = silverBorder && ["Hard", "MagicOnly", "DoubleMoabHealth", "HalfCash", "AlternateBloonsRounds", "Impoppable", "Clicks"].every(key =>
+            mapData["single"][key] && mapData["single"][key]["completed"] === true
+        );
+        let blackBorder = goldBorder && mapData["single"]["Clicks"].completedWithoutLoadingSave;
+        
+        processedMapData["Borders"]["single"][map] = blackBorder ? "Black" : goldBorder ? "Gold" : silverBorder ? "Silver" : bronzeBorder ? "Bronze" : "None";
+        
+        bronzeBorder = ["Easy", "PrimaryOnly", "Deflation"].every(key =>
+            mapData["coop"][key] && mapData["coop"][key]["completed"] === true
+        );
+        silverBorder = bronzeBorder && ["Medium", "MilitaryOnly", "Apopalypse", "Reverse"].every(key =>
+            mapData["coop"][key] && mapData["coop"][key]["completed"] === true
+        );
+        goldBorder = silverBorder && ["Hard", "MagicOnly", "DoubleMoabHealth", "HalfCash", "AlternateBloonsRounds", "Impoppable", "Clicks"].every(key =>
+            mapData["coop"][key] && mapData["coop"][key]["completed"] === true
+        );
+        blackBorder = goldBorder && mapData["coop"]["Clicks"].completedWithoutLoadingSave;
+
+        processedMapData["Borders"]["coop"][map] = blackBorder ? "Black" : goldBorder ? "Gold" : silverBorder ? "Silver" : bronzeBorder ? "Bronze" : "None";
+        
+        processedMapData["Maps"][map] = mapData;
+
+
+    }
 }
 
 const container = document.createElement('div');
@@ -663,7 +767,7 @@ function generateProgress(){
     selectorsDiv.classList.add('selectors-div');
     progressPage.appendChild(selectorsDiv);
 
-    let selectors = ['Towers', 'Heroes', 'Knowledge', 'Map Progress', 'Powers', 'Insta Monkeys', 'Achievements', 'Extras'];
+    let selectors = ['Towers', 'Heroes', 'Knowledge', 'MapProgress', 'Powers', 'InstaMonkeys', 'Achievements', 'Extras'];
 
     selectors.forEach((selector) => {
         if(progressSubText[selector].includes("0 Extras")) { return; }
@@ -672,7 +776,7 @@ function generateProgress(){
         selectorDiv.classList.add('selector-div');
         /*selectorDiv.innerHTML = progressSubText[selector];*/
         selectorDiv.addEventListener('click', () => {
-            changeProgressTab(selector.toLowerCase());
+            changeProgressTab(selector);
         })
         selectorsDiv.appendChild(selectorDiv);
 
@@ -699,15 +803,30 @@ function generateProgress(){
 
 function changeProgressTab(selector){
     switch(selector){
-        case 'towers':
+        case 'Towers':
             generateTowerProgress();
             break;
-        case 'heroes':
+        case 'Heroes':
             generateHeroesProgress();
             break;
-        case "knowledge":
+        case "Knowledge":
             changeHexBGColor(constants.ParagonBGColor)
             generateKnowledgeProgress();
+            break;
+        case "MapProgress":
+            generateMapsProgress();
+            break;
+        case "Powers":
+            //generatePowersProgress();
+            break;
+        case "InstaMonkeys":
+            //generateInstaMonkeysProgress();
+            break;
+        case "Achievements":
+            //generateAchievementsProgress();
+            break;
+        case "Extras":
+            //generateExtrasProgress();
             break;
     }
 }
@@ -1508,6 +1627,17 @@ function generateKnowledgeProgress(){
         })
     }
 
+    if (recommendedKnowledgeDiv.innerHTML == "") {
+        recommendedKnowledgeHeader.style.display = "none";
+    }
+    if (knowledgeProgressLockedDiv.innerHTML == "") {
+        knowledgeProgressLockedHeader.style.display = "none";
+    }
+    if (knowledgeProgressUnlockedDiv.innerHTML == "") {
+        knowledgeProgressUnlockedHeader.style.display = "none";
+    }
+
+
     let tooltipContainerHelpMe = document.createElement('div');
     tooltipContainerHelpMe.id = 'tooltip-container-help-me';
     tooltipContainerHelpMe.classList.add('tooltip-container-help-me');
@@ -1541,6 +1671,698 @@ function onSelectKnowledgePoint(knowledge){
 
     let knowledgeDescText = document.getElementById('knowledge-desc-text');
     knowledgeDescText.innerHTML = getLocValue(`${knowledge}Description`);
+}
+
+function generateMapsProgress(){
+    let progressContent = document.getElementById('progress-content');
+    progressContent.innerHTML = "";
+
+    let mapsProgressHeaderBar = document.createElement('div');
+    mapsProgressHeaderBar.id = 'maps-progress-header-bar';
+    mapsProgressHeaderBar.classList.add('maps-progress-header-bar');
+    progressContent.appendChild(mapsProgressHeaderBar);
+
+    let mapsProgressViews = document.createElement('div');
+    mapsProgressViews.id = 'maps-progress-views';
+    mapsProgressViews.classList.add('maps-progress-views');
+    mapsProgressHeaderBar.appendChild(mapsProgressViews);
+
+    let mapsProgressViewsText = document.createElement('p');
+    mapsProgressViewsText.id = 'maps-progress-views-text';
+    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressViewsText.classList.add('black-outline');
+    mapsProgressViewsText.innerHTML = "Display Type:";
+    mapsProgressViews.appendChild(mapsProgressViewsText);
+
+    let mapsProgressGrid = document.createElement('div');
+    mapsProgressGrid.id = 'maps-progress-grid';
+    mapsProgressGrid.classList.add('maps-progress-view');
+    mapsProgressGrid.classList.add('black-outline')
+    mapsProgressGrid.classList.add('maps-progress-view-selected');
+    mapsProgressGrid.innerHTML = "Grid";
+    mapsProgressGrid.addEventListener('click', () => {
+        onChangeMapView("grid");
+    })
+    mapsProgressViews.appendChild(mapsProgressGrid);
+
+    let mapsProgressList = document.createElement('div');
+    mapsProgressList.id = 'maps-progress-list';
+    mapsProgressList.classList.add('maps-progress-view');
+    mapsProgressList.classList.add('black-outline')
+    mapsProgressList.innerHTML = "List";
+    mapsProgressList.addEventListener('click', () => {
+        onChangeMapView("list");
+    })
+    mapsProgressViews.appendChild(mapsProgressList);
+
+    let mapsProgressGame = document.createElement('div');
+    mapsProgressGame.id = 'maps-progress-game';
+    mapsProgressGame.classList.add('maps-progress-view');
+    mapsProgressGame.classList.add('black-outline')
+    mapsProgressGame.innerHTML = "Game";
+    mapsProgressGame.addEventListener('click', () => {
+        onChangeMapView("game");
+    })
+    mapsProgressViews.appendChild(mapsProgressGame);
+
+
+    let mapsProgressFilter = document.createElement('div');
+    mapsProgressFilter.id = 'maps-progress-filter';
+    mapsProgressFilter.classList.add('maps-progress-filter');
+    mapsProgressHeaderBar.appendChild(mapsProgressFilter);
+
+    let mapProgressFilterDifficulty = document.createElement('div');
+    mapProgressFilterDifficulty.id = 'map-progress-filter-difficulty';
+    mapProgressFilterDifficulty.classList.add('map-progress-filter-difficulty');
+    mapsProgressFilter.appendChild(mapProgressFilterDifficulty);
+
+    let mapsProgressFilterDifficultyText = document.createElement('p');
+    mapsProgressFilterDifficultyText.id = 'maps-progress-filter-difficulty-text';
+    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressFilterDifficultyText.classList.add('black-outline');
+    mapsProgressFilterDifficultyText.innerHTML = "Filter Difficulty:";
+    mapProgressFilterDifficulty.appendChild(mapsProgressFilterDifficultyText);
+
+    let mapProgressFilterDifficultySelect = document.createElement('select');
+    mapProgressFilterDifficultySelect.id = 'map-progress-filter-difficulty-select';
+    mapProgressFilterDifficultySelect.classList.add('map-progress-filter-difficulty-select');
+    mapProgressFilterDifficultySelect.addEventListener('change', () => {
+        console.log(mapProgressFilterDifficultySelect.value);
+        onChangeDifficultyFilter(mapProgressFilterDifficultySelect.value);
+    })
+    let options = ["All","Beginner","Intermediate","Advanced","Expert"]
+    options.forEach((option) => {
+        let difficultyOption = document.createElement('option');
+        difficultyOption.value = option;
+        difficultyOption.innerHTML = option;
+        mapProgressFilterDifficultySelect.appendChild(difficultyOption);
+    })
+    mapProgressFilterDifficulty.appendChild(mapProgressFilterDifficultySelect);
+
+    let mapsProgressCoopToggle = document.createElement('div');
+    mapsProgressCoopToggle.id = 'maps-progress-coop-toggle';
+    mapsProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
+    mapsProgressFilter.appendChild(mapsProgressCoopToggle);
+
+    let mapsProgressCoopToggleText = document.createElement('p');
+    mapsProgressCoopToggleText.id = 'maps-progress-coop-toggle-text';
+    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressCoopToggleText.classList.add('black-outline');
+    mapsProgressCoopToggleText.innerHTML = "Co-op: ";
+    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
+
+    let mapsProgressCoopToggleInput = document.createElement('input');
+    mapsProgressCoopToggleInput.id = 'maps-progress-coop-toggle-input';
+    mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
+    mapsProgressCoopToggleInput.type = 'checkbox';
+    mapsProgressCoopToggleInput.addEventListener('change', () => {
+        onChangeCoopToggle(mapsProgressCoopToggleInput.checked);
+    })
+    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
+
+
+    let mapsProgressContainer = document.createElement('div');
+    mapsProgressContainer.id = 'maps-progress-container';
+    mapsProgressContainer.classList.add('maps-progress-container');
+    progressContent.appendChild(mapsProgressContainer);
+
+    let mapProgressContainer = document.createElement('div');
+    mapProgressContainer.id = 'map-progress-container';
+    mapProgressContainer.classList.add('map-progress-container');
+    progressContent.appendChild(mapProgressContainer);
+
+    onChangeMapView("grid");
+}
+let currentMapView = "grid";
+let coopEnabled = false;
+let currentDifficultyFilter = "All";
+function onChangeMapView(view){
+    switch(view){
+        case "grid":
+            currentMapView = "grid";
+            generateMapsGridView(coopEnabled);
+            break;
+        case "list":
+            currentMapView = "list";
+            generateMapsListView(coopEnabled);
+            break;
+        case "game":
+            currentMapView = "game";
+            //generateMapsGameView(coopEnabled);
+            break;
+    }
+}
+
+function onChangeCoopToggle(coop){
+    coopEnabled = coop;
+    document.getElementById('maps-progress-coop-toggle-input').checked = coop;
+    switch(currentMapView) {
+        case "grid":
+            generateMapsGridView();
+            break;
+        case "list":
+            //generateMapsListView(coopEnabled);
+            break;
+        case "game":
+            //generateMapsGameView(coopEnabled);
+            break;
+    }
+}
+
+function onChangeDifficultyFilter(difficulty){
+    currentDifficultyFilter = difficulty;
+    switch(currentMapView) {
+        case "grid":
+            generateMapsGridView();
+            break;
+        case "list":
+            //generateMapsListView(difficulty);
+            break;
+        case "game":
+            //generateMapsGameView(difficulty);
+            break;
+    }
+}
+
+function onSelectMap(map){
+    document.getElementById('maps-progress-container').style.display = "none";
+    document.getElementById('maps-progress-header-bar').style.display = "none";
+    document.getElementById('map-progress-container').style.display = "flex";
+    generateMapDetails(map);
+}
+
+function onExitMap(){
+    document.getElementById('map-progress-container').style.display = "none";
+    document.getElementById('maps-progress-header-bar').style.display = "flex";
+    document.getElementById('maps-progress-container').style.display = "block";
+}
+
+function generateMapDetails(map){
+    let mapProgressContainer = document.getElementById('map-progress-container');
+    mapProgressContainer.innerHTML = "";
+
+    let mapProgressHeaderBar = document.createElement('div');
+    mapProgressHeaderBar.id = 'map-progress-header-bar';
+    mapProgressHeaderBar.classList.add('single-map-progress-header-bar');
+    mapProgressContainer.appendChild(mapProgressHeaderBar);
+
+    let mapNextAndPrev = document.createElement('div');
+    mapNextAndPrev.id = 'map-next-and-prev';
+    mapNextAndPrev.classList.add('map-next-and-prev');
+    mapProgressHeaderBar.appendChild(mapNextAndPrev);
+
+    let mapProgressPrevBtn = document.createElement('div');
+    mapProgressPrevBtn.id = 'map-progress-prev-btn';
+    mapProgressPrevBtn.classList.add('maps-progress-view');
+    mapProgressPrevBtn.classList.add('black-outline');
+    mapProgressPrevBtn.innerHTML = "Previous";
+    mapProgressPrevBtn.addEventListener('click', () => {
+        let maps = Object.keys(constants.mapsInOrder).filter(value => Object.keys(btd6usersave.mapProgress).includes(value));; //Object.keys(constants.mapsInOrder);
+        if (maps.indexOf(map) == 0) {
+            onSelectMap(maps[maps.length - 1]);
+        } else {
+            onSelectMap(maps[maps.indexOf(map) - 1])
+        }
+    })
+    mapNextAndPrev.appendChild(mapProgressPrevBtn);
+
+    let mapProgressNextBtn = document.createElement('div');
+    mapProgressNextBtn.id = 'map-progress-next-btn';
+    mapProgressNextBtn.classList.add('maps-progress-view');
+    mapProgressNextBtn.classList.add('black-outline');
+    mapProgressNextBtn.innerHTML = "Next";
+    mapProgressNextBtn.addEventListener('click', () => {
+        let maps = Object.keys(constants.mapsInOrder).filter(value => Object.keys(btd6usersave.mapProgress).includes(value));; //Object.keys(constants.mapsInOrder);
+        if (maps.indexOf(map) == maps.length - 1) {
+            onSelectMap(maps[0]);
+        } else {
+            onSelectMap(maps[maps.indexOf(map) + 1])
+        }
+    })
+    mapNextAndPrev.appendChild(mapProgressNextBtn);
+
+    let mapProgressExitBtn = document.createElement('div');
+    mapProgressExitBtn.id = 'map-progress-exit-btn';
+    mapProgressExitBtn.classList.add('maps-progress-view');
+    mapProgressExitBtn.classList.add('black-outline');
+    mapProgressExitBtn.innerHTML = "Exit";
+    mapProgressExitBtn.addEventListener('click', () => {
+        onExitMap();
+    })
+    mapProgressHeaderBar.appendChild(mapProgressExitBtn);
+
+    let mapBelowHeaderBar = document.createElement('div');
+    mapBelowHeaderBar.id = 'map-below-header-bar';
+    mapBelowHeaderBar.classList.add('map-below-header-bar');
+    mapProgressContainer.appendChild(mapBelowHeaderBar);
+
+    let mapLeftColumn = document.createElement('div');
+    mapLeftColumn.id = 'map-left-column';
+    mapLeftColumn.classList.add('map-left-column');
+    mapBelowHeaderBar.appendChild(mapLeftColumn);
+
+    let mapNameAndIcon = document.createElement('div');
+    mapNameAndIcon.id = 'map-progress-div';
+    mapNameAndIcon.classList.add('map-progress-div');
+    mapLeftColumn.appendChild(mapNameAndIcon);
+
+    let mapNameTop = document.createElement('div');
+    mapNameTop.id = 'map-name-top';
+    mapNameTop.classList.add('map-name-top');
+    mapNameAndIcon.appendChild(mapNameTop);
+
+    //difficulty icon
+    let mapDifficultyIcon = document.createElement('img');
+    mapDifficultyIcon.id = 'map-difficulty-icon';
+    mapDifficultyIcon.classList.add('map-difficulty-icon');
+    mapDifficultyIcon.src = `./Assets/DifficultyIcon/Map${constants.mapsInOrder[map]}Btn.png`;
+    mapNameTop.appendChild(mapDifficultyIcon);
+
+    let mapNameAndMedals = document.createElement('div');
+    mapNameAndMedals.id = 'map-name-and-medals';
+    mapNameAndMedals.classList.add('map-name-and-medals');
+    mapNameTop.appendChild(mapNameAndMedals);
+    //map name
+    let mapName = document.createElement('p');
+    mapName.id = 'map-name';
+    mapName.classList.add('map-name-large');
+    mapName.classList.add('black-outline');
+    mapName.innerHTML = getLocValue(map);
+    mapNameAndMedals.appendChild(mapName);
+    //map progress single
+    let mapProgressSingle = document.createElement('div');
+    mapProgressSingle.id = 'map-progress-single';
+    mapProgressSingle.classList.add('map-progress-subtext');
+    mapProgressSingle.innerHTML = `${Object.values(processedMapData.Medals.single[map]).filter(a=>a==true).length}/15 Single Player Medals`;
+    mapNameAndMedals.appendChild(mapProgressSingle);
+
+    //map progress coop
+    let mapProgressCoop = document.createElement('div');
+    mapProgressCoop.id = 'map-progress-coop';
+    mapProgressCoop.classList.add('map-progress-subtext');
+    mapProgressCoop.innerHTML = `${Object.values(processedMapData.Medals.coop[map]).filter(a=>a==true).length}/15 Coop Medals`;
+    mapNameAndMedals.appendChild(mapProgressCoop);
+
+    //map icon with border
+    let mapIcon = document.createElement('img');
+    mapIcon.id = 'map-icon';
+    mapIcon.classList.add('map-icon');
+    mapIcon.src = getMapIcon(map);
+    mapNameAndIcon.appendChild(mapIcon);
+
+    //single medals 5x3
+    let mapProgressSingleMedals = document.createElement('div');
+    mapProgressSingleMedals.id = 'map-progress-single-medals';
+    mapProgressSingleMedals.classList.add('map-progress-medals');
+    mapLeftColumn.appendChild(mapProgressSingleMedals);
+
+    switch(processedMapData.Borders["single"][map]) {
+        case "None":
+            mapProgressSingleMedals.classList.add('none-border');
+            break;
+        case "Bronze":
+            mapProgressSingleMedals.classList.add('bronze-border');
+            break;
+        case "Silver":
+            mapProgressSingleMedals.classList.add('silver-border');
+            break;
+        case "Gold":
+            mapProgressSingleMedals.classList.add('gold-border');
+            break;
+        case "Black":
+            mapProgressSingleMedals.classList.add('black-border');
+            break;
+    }
+
+    for (let [difficulty, completed] of Object.entries(processedMapData.Medals.single[map])) {
+        if (completed == null) { continue; }
+        let medalDiv = document.createElement('div');
+        medalDiv.id = `${difficulty}-div`;
+        medalDiv.classList.add('medal-div');
+        mapProgressSingleMedals.appendChild(medalDiv);
+
+        let medalImg = document.createElement('img');
+        medalImg.id = `${difficulty}-img`;
+        medalImg.classList.add('medal-img');
+        medalImg.src = getMedalIcon(completed ? `Medal${medalMap[difficulty]}` : "MedalEmpty");
+        medalImg.style.display = "none";
+        medalImg.addEventListener('load', () => {
+            if(medalImg.width < medalImg.height){
+                medalImg.style.width = `${ratioCalc(3,70,256,0,medalImg.width)}px`
+            } else {
+                medalImg.style.height = `${ratioCalc(3,70,256,0,medalImg.height)}px`
+            }
+            medalImg.style.removeProperty('display');
+        })
+        medalDiv.appendChild(medalImg);
+    }
+
+    //coop medals 5x3
+    let mapProgressCoopMedals = document.createElement('div');
+    mapProgressCoopMedals.id = 'map-progress-coop-medals';
+    mapProgressCoopMedals.classList.add('map-progress-medals');
+    mapLeftColumn.appendChild(mapProgressCoopMedals);
+
+    for (let [difficulty, completed] of Object.entries(processedMapData.Medals.coop[map])) {
+        if (completed == null) { continue; }
+        let medalDiv = document.createElement('div');
+        medalDiv.id = `${difficulty}-div`;
+        medalDiv.classList.add('medal-div');
+        mapProgressCoopMedals.appendChild(medalDiv);
+
+        let medalImg = document.createElement('img');
+        medalImg.id = `${difficulty}-img`;
+        medalImg.classList.add('medal-img');
+        medalImg.src = getMedalIcon(completed ? `Medal${medalMap[difficulty]}` : "MedalCoopEmpty");
+        medalImg.style.display = "none";
+        medalImg.addEventListener('load', () => {
+            if(medalImg.width < medalImg.height){
+                medalImg.style.width = `${ratioCalc(3,70,256,0,medalImg.width)}px`
+            } else {
+                medalImg.style.height = `${ratioCalc(3,70,256,0,medalImg.height)}px`
+            }
+            medalImg.style.removeProperty('display');
+        })
+        medalDiv.appendChild(medalImg);
+    }
+
+    switch(processedMapData.Borders["coop"][map]) {
+        case "None":
+            mapProgressCoopMedals.classList.add('coop-border');
+            break;
+        case "Bronze":
+            mapProgressCoopMedals.classList.add('bronze-border');
+            break;
+        case "Silver":
+            mapProgressCoopMedals.classList.add('silver-border');
+            break;
+        case "Gold":
+            mapProgressCoopMedals.classList.add('gold-border');
+            break;
+        case "Black":
+            mapProgressCoopMedals.classList.add('black-border');
+            break;
+    }
+
+    let mapRightColumn = document.createElement('div');
+    mapRightColumn.id = 'map-right-column';
+    mapRightColumn.classList.add('map-right-column');
+    mapBelowHeaderBar.appendChild(mapRightColumn);
+
+    
+    //Stats
+    let rightColumnHeader = document.createElement('div');
+    rightColumnHeader.id = 'right-column-header';
+    rightColumnHeader.classList.add('right-column-header');
+    mapRightColumn.appendChild(rightColumnHeader);
+
+    let rightColumnHeaderText = document.createElement('p');
+    rightColumnHeaderText.id = 'right-column-header-text';
+    rightColumnHeaderText.classList.add('column-header-text');
+    rightColumnHeaderText.classList.add('black-outline');
+    rightColumnHeaderText.innerHTML = 'Mode Stats';
+    rightColumnHeader.appendChild(rightColumnHeaderText);
+
+    let mapProgressCoopToggle = document.createElement('div');
+    mapProgressCoopToggle.id = 'maps-progress-coop-toggle';
+    mapProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
+    rightColumnHeader.appendChild(mapProgressCoopToggle);
+
+    let mapProgressCoopToggleText = document.createElement('p');
+    mapProgressCoopToggleText.id = 'maps-progress-coop-toggle-text';
+    mapProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text');
+    mapProgressCoopToggleText.classList.add('black-outline');
+    mapProgressCoopToggleText.innerHTML = "Co-op: ";
+    mapProgressCoopToggle.appendChild(mapProgressCoopToggleText);
+
+    let mapProgressCoopToggleInput = document.createElement('input');
+    mapProgressCoopToggleInput.id = 'maps-progress-coop-toggle-input';
+    mapProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
+    mapProgressCoopToggleInput.type = 'checkbox';
+    mapProgressCoopToggleInput.addEventListener('change', () => {
+        onChangeCoopToggle(mapProgressCoopToggleInput.checked);
+        generateMapRightColStats(map, coopEnabled)
+    })
+    mapProgressCoopToggleInput.checked = coopEnabled;
+    mapProgressCoopToggle.appendChild(mapProgressCoopToggleInput);
+
+
+
+    let mapStatsContainer = document.createElement('div');
+    mapStatsContainer.id = 'map-stats-container';
+    mapStatsContainer.classList.add('map-stats-container');
+    mapRightColumn.appendChild(mapStatsContainer);
+
+    generateMapRightColStats(map, coopEnabled);
+}
+
+function generateMapRightColStats(map,coop){
+    let mapStatsContainer = document.getElementById('map-stats-container');
+    mapStatsContainer.innerHTML = "";
+
+    for (let [difficulty, data] of Object.entries(coop ? processedMapData.Maps[map].coop : processedMapData.Maps[map].single)) {
+        if (data == undefined) { continue; }
+        let mapStatsDiv = document.createElement('div');
+        mapStatsDiv.id = `${difficulty}-div`;
+        mapStatsDiv.classList.add('map-stats-div');
+        mapStatsContainer.appendChild(mapStatsDiv);
+
+        let mapStatsIcon = document.createElement('img');
+        mapStatsIcon.id = `${difficulty}-icon`;
+        mapStatsIcon.classList.add('map-stats-icon');
+        mapStatsIcon.src = getModeIcon(difficulty);
+        mapStatsDiv.appendChild(mapStatsIcon);
+
+        let mapStatsTextDiv = document.createElement('div');
+        mapStatsTextDiv.id = `${difficulty}-text-div`;
+        mapStatsTextDiv.classList.add('map-stats-text-div');
+        mapStatsDiv.appendChild(mapStatsTextDiv);
+
+        let mapStatsDifficultyText = document.createElement('p');
+        mapStatsDifficultyText.id = `${difficulty}-text`;
+        mapStatsDifficultyText.classList.add('map-stats-text-mode');
+        mapStatsDifficultyText.classList.add('black-outline');
+        mapStatsDifficultyText.innerHTML = getLocValue(`Mode ${difficulty}`);
+        mapStatsTextDiv.appendChild(mapStatsDifficultyText);
+
+        let mapStatsText = document.createElement('p');
+        mapStatsText.id = `${difficulty}-text`;
+        mapStatsText.classList.add('map-stats-text');
+        mapStatsText.innerHTML = `Times Completed: ${data.timesCompleted}`;
+        mapStatsTextDiv.appendChild(mapStatsText);
+
+        let mapStatsBestRound = document.createElement('p');
+        mapStatsBestRound.id = `${difficulty}-best-round`;
+        mapStatsBestRound.classList.add('map-stats-text');
+        mapStatsBestRound.innerHTML = `Best Round: ${data.bestRound}`;
+        mapStatsTextDiv.appendChild(mapStatsBestRound);
+    }
+
+    if (mapStatsContainer.innerHTML == "") {
+        let noDataFound = document.createElement('p');
+        noDataFound.id = 'no-data-found';
+        noDataFound.classList.add('no-data-found');
+        noDataFound.classList.add('black-outline');
+        noDataFound.innerHTML = "No Data Found.";
+        mapStatsContainer.appendChild(noDataFound);
+    }
+}
+
+function generateMapsGridView(){
+    let mapsProgressContainer = document.getElementById('maps-progress-container');
+    mapsProgressContainer.innerHTML = "";
+
+    let mapsGridContainer = document.createElement('div');
+    mapsGridContainer.id = 'maps-grid-container';
+    mapsGridContainer.classList.add('maps-grid-container');
+    mapsProgressContainer.appendChild(mapsGridContainer);
+
+    for (let [map, difficulty] of Object.entries(constants.mapsInOrder)) {
+        if (!_btd6usersave.parameters.mapProgress.default.allowed.includes(map)) { continue; }
+        if (processedMapData.Borders[coopEnabled ? "coop" : "single"][map] == null) { continue; }
+        if (currentDifficultyFilter != "All" && difficulty != currentDifficultyFilter) { continue; }
+
+
+        let mapDiv = document.createElement('div');
+        mapDiv.id = `${map}-div`;
+        mapDiv.classList.add('map-div');
+        switch(processedMapData.Borders[coopEnabled ? "coop" : "single"][map]) {
+            case "None":
+                coopEnabled ? mapDiv.classList.add('coop-border') : mapDiv.classList.add('none-border');
+                break;
+            case "Bronze":
+                mapDiv.classList.add('bronze-border');
+                break;
+            case "Silver":
+                mapDiv.classList.add('silver-border');
+                break;
+            case "Gold":
+                mapDiv.classList.add('gold-border');
+                break;
+            case "Black":
+                mapDiv.classList.add('black-border');
+                break;
+        }
+        mapsGridContainer.appendChild(mapDiv);
+
+        let mapImg = document.createElement('img');
+        mapImg.id = `${map}-img`;
+        mapImg.classList.add('map-img');
+        mapImg.src = getMapIcon(map);
+        mapDiv.appendChild(mapImg);
+
+        let mapName = document.createElement('p');
+        mapName.id = `${map}-name`;
+        mapName.classList.add(`map-name`);
+        mapName.classList.add('black-outline');
+        mapName.innerHTML = getLocValue(map);
+        mapDiv.appendChild(mapName);
+
+        let mapProgress = document.createElement('div');
+        mapProgress.id = `${map}-progress`;
+        mapProgress.classList.add(`map-progress`);
+        mapDiv.appendChild(mapProgress);
+
+        mapDiv.addEventListener('click', () => {
+            onSelectMap(map);
+        })
+    }
+}
+
+function generateMapsListView(){
+    let mapsProgressContainer = document.getElementById('maps-progress-container');
+    mapsProgressContainer.innerHTML = "";
+
+    let mapsListContainer = document.createElement('div');
+    mapsListContainer.id = 'maps-list-container';
+    mapsListContainer.classList.add('maps-list-container');
+    mapsProgressContainer.appendChild(mapsListContainer);
+
+    let colorToggle = false;
+    for (let [map, difficulty] of Object.entries(constants.mapsInOrder)) {
+        if (!_btd6usersave.parameters.mapProgress.default.allowed.includes(map)) { continue; }
+        if (processedMapData.Borders[coopEnabled ? "coop" : "single"][map] == null) { continue; }
+        if (currentDifficultyFilter != "All" && difficulty != currentDifficultyFilter) { continue; }
+
+        let mapContainer = document.createElement('div');
+        mapContainer.id = `${map}-container`;
+        mapContainer.classList.add('map-container');
+        colorToggle ? mapContainer.style.backgroundColor = "var(--profile-secondary)" : mapContainer.style.backgroundColor = "var(--profile-tertiary)"; ;
+        colorToggle = !colorToggle;
+        mapsListContainer.appendChild(mapContainer);
+
+        let mapDiv = document.createElement('div');
+        mapDiv.id = `${map}-div`;
+        mapDiv.classList.add('map-div');
+        switch(processedMapData.Borders[coopEnabled ? "coop" : "single"][map]) {
+            case "None":
+                coopEnabled ? mapDiv.classList.add('coop-border') : mapDiv.classList.add('none-border');
+                break;
+            case "Bronze":
+                mapDiv.classList.add('bronze-border');
+                break;
+            case "Silver":
+                mapDiv.classList.add('silver-border');
+                break;
+            case "Gold":
+                mapDiv.classList.add('gold-border');
+                break;
+            case "Black":
+                mapDiv.classList.add('black-border');
+                break;
+        }
+        mapContainer.appendChild(mapDiv);
+
+        let mapImg = document.createElement('img');
+        mapImg.id = `${map}-img`;
+        mapImg.classList.add('map-img');
+        mapImg.src = getMapIcon(map);
+        mapDiv.appendChild(mapImg);
+
+        let mapName = document.createElement('p');
+        mapName.id = `${map}-name`;
+        mapName.classList.add(`map-name`);
+        mapName.classList.add('black-outline');
+        mapName.innerHTML = getLocValue(map);
+        mapDiv.appendChild(mapName);
+
+        let mapSections = document.createElement('div');
+        mapSections.id = `${map}-sections`;
+        mapSections.classList.add(`map-sections`);
+        mapContainer.appendChild(mapSections);
+
+        let mapSection = document.createElement('div');
+        mapSection.id = `${map}-section`;
+        mapSection.classList.add(`map-section`);
+        mapSections.appendChild(mapSection);
+
+        let mapLabelMedals = document.createElement('p');
+        mapLabelMedals.id = `${map}-label-medals`;
+        mapLabelMedals.classList.add(`map-label-medals`);
+        mapLabelMedals.classList.add('black-outline');
+        // mapLabelMedals.innerHTML = "Medals:";
+        mapSection.appendChild(mapLabelMedals);
+
+        let mapLabelBestRound = document.createElement('p');
+        mapLabelBestRound.id = `${map}-label-best-round`;
+        mapLabelBestRound.classList.add(`map-label-rounds`);
+        mapLabelBestRound.classList.add('black-outline');
+        mapLabelBestRound.innerHTML = "Best Round:";
+        mapSection.appendChild(mapLabelBestRound);
+
+        let mapLabelTimesCompleted = document.createElement('p');
+        mapLabelTimesCompleted.id = `${map}-label-times-completed`;
+        mapLabelTimesCompleted.classList.add(`map-label-completed`);
+        mapLabelTimesCompleted.classList.add('black-outline');
+        mapLabelTimesCompleted.innerHTML = "Times Completed:";
+        mapSection.appendChild(mapLabelTimesCompleted);
+
+        for (let [difficulty, data] of Object.entries(coopEnabled ? processedMapData.Maps[map].coop : processedMapData.Maps[map].single)) {
+            if (data == undefined) { continue; }
+            let mapSectionColumn = document.createElement('div');
+            mapSectionColumn.id = `${map}-${difficulty}-column`;
+            mapSectionColumn.classList.add(`map-section-column`);
+            mapSections.appendChild(mapSectionColumn);
+
+            let mapSectionMedal = document.createElement('div');
+            mapSectionMedal.id = `${map}-${difficulty}-medal`;
+            mapSectionMedal.classList.add(`map-section-medal`);
+            mapSectionColumn.appendChild(mapSectionMedal);
+
+            let mapSectionMedalImg = document.createElement('img');
+            mapSectionMedalImg.id = `${map}-${difficulty}-medal-img`;
+            mapSectionMedalImg.classList.add(`map-section-medal-img`);
+            mapSectionMedalImg.src = getMedalIcon(data.bestRound == 0 ? "MedalEmpty" : `Medal${medalMap[difficulty]}`);
+            mapSectionMedalImg.style.display = "none";
+            mapSectionMedalImg.addEventListener('load', () => {
+                if(mapSectionMedalImg.width < mapSectionMedalImg.height){
+                    mapSectionMedalImg.style.width = `${ratioCalc(3,70,256,0,mapSectionMedalImg.width)}px`
+                } else {
+                    mapSectionMedalImg.style.height = `${ratioCalc(3,70,256,0,mapSectionMedalImg.height)}px`
+                }
+                mapSectionMedalImg.style.removeProperty('display');
+            })
+            mapSectionMedal.appendChild(mapSectionMedalImg);
+
+            let mapSectionBestRound = document.createElement('p');
+            mapSectionBestRound.id = `${map}-${difficulty}-best-round`;
+            mapSectionBestRound.classList.add(`map-section-text`);
+            mapSectionBestRound.classList.add('black-outline');
+            mapSectionBestRound.innerHTML = data.bestRound;
+            mapSectionColumn.appendChild(mapSectionBestRound);
+
+            let mapSectionTimesCompleted = document.createElement('p');
+            mapSectionTimesCompleted.id = `${map}-${difficulty}-times-completed`;
+            mapSectionTimesCompleted.classList.add(`map-section-text`);
+            mapSectionTimesCompleted.classList.add('black-outline');
+            mapSectionTimesCompleted.innerHTML = data.timesCompleted;
+            mapSectionColumn.appendChild(mapSectionTimesCompleted);
+        }
+
+        mapDiv.addEventListener('click', () => {
+            onSelectMap(map);
+        })
+    }
 }
 
 function changeHexBGColor(color){

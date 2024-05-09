@@ -118,7 +118,12 @@ let locJSONOverrides = {
     "PsimbalsSkinName": "PsimbalsPsiSkinName",
     "PsimbalsSkinDescription": "PsimbalsPsiSkinDescription",
     "GadgeteerGeraldoSkinName": "GentlemonkeyGadgeteerGeraldoSkinName",
-    "GadgeteerGeraldoSkinDescription": "GentlemonkeyGadgeteerGeraldoSkinDescription"
+    "GadgeteerGeraldoSkinDescription": "GentlemonkeyGadgeteerGeraldoSkinDescription",
+    "Mode Easy": "Easy",
+    "Mode Medium": "Medium",
+    "Mode Hard": "Hard",
+    "Mode Impoppable": "Impoppable",
+    "Mode Sandbox": "Sandbox"
 }
 
 let medalMap = {
@@ -214,6 +219,10 @@ function fixAchievementName(name){
 
 function getMedalIcon(medal){
     return `Assets/MedalIcon/${medal}.png`;
+}
+
+function getModeIcon(mode){
+    return `Assets/ModeIcon/${mode}Btn.png`;
 }
 
 function getLocValue(key){
