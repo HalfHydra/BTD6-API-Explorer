@@ -38,6 +38,11 @@ let processedMapData = {
 
 let currentlySelectedHero = "";
 
+let currentMapView = "grid";
+let coopEnabled = false;
+let currentDifficultyFilter = "All";
+let mapPage = 0;
+
 fetch('./data/English.json')
     .then(response => response.json())
     .then(data => {
@@ -814,6 +819,10 @@ function changeProgressTab(selector){
             generateKnowledgeProgress();
             break;
         case "MapProgress":
+            currentMapView = "grid";
+            coopEnabled = false;
+            currentDifficultyFilter = "All";
+            mapPage = 0;
             generateMapsProgress();
             break;
         case "Powers":
@@ -1789,26 +1798,25 @@ function generateMapsProgress(){
     let mapProgressContainer = document.createElement('div');
     mapProgressContainer.id = 'map-progress-container';
     mapProgressContainer.classList.add('map-progress-container');
+    mapProgressContainer.style.display = "none";
     progressContent.appendChild(mapProgressContainer);
 
     onChangeMapView("grid");
 }
-let currentMapView = "grid";
-let coopEnabled = false;
-let currentDifficultyFilter = "All";
+
 function onChangeMapView(view){
     switch(view){
         case "grid":
             currentMapView = "grid";
-            generateMapsGridView(coopEnabled);
+            generateMapsGridView();
             break;
         case "list":
             currentMapView = "list";
-            generateMapsListView(coopEnabled);
+            generateMapsListView();
             break;
         case "game":
             currentMapView = "game";
-            //generateMapsGameView(coopEnabled);
+            generateMapsGameView();
             break;
     }
 }
@@ -1821,10 +1829,10 @@ function onChangeCoopToggle(coop){
             generateMapsGridView();
             break;
         case "list":
-            //generateMapsListView(coopEnabled);
+            generateMapsListView();
             break;
         case "game":
-            //generateMapsGameView(coopEnabled);
+            generateMapsGameView();
             break;
     }
 }
@@ -1836,10 +1844,10 @@ function onChangeDifficultyFilter(difficulty){
             generateMapsGridView();
             break;
         case "list":
-            //generateMapsListView(difficulty);
+            generateMapsListView();
             break;
         case "game":
-            //generateMapsGameView(difficulty);
+            generateMapsGameView();
             break;
     }
 }
@@ -2243,6 +2251,8 @@ function generateMapsListView(){
         if (!_btd6usersave.parameters.mapProgress.default.allowed.includes(map)) { continue; }
         if (processedMapData.Borders[coopEnabled ? "coop" : "single"][map] == null) { continue; }
         if (currentDifficultyFilter != "All" && difficulty != currentDifficultyFilter) { continue; }
+        // determine if every value of the map is undefined
+        if (Object.entries(coopEnabled ? processedMapData.Maps[map].coop : processedMapData.Maps[map].single).every(([key, value]) => value == undefined)) { continue;}
 
         let mapContainer = document.createElement('div');
         mapContainer.id = `${map}-container`;
@@ -2332,9 +2342,11 @@ function generateMapsListView(){
             let mapSectionMedalImg = document.createElement('img');
             mapSectionMedalImg.id = `${map}-${difficulty}-medal-img`;
             mapSectionMedalImg.classList.add(`map-section-medal-img`);
-            mapSectionMedalImg.src = getMedalIcon(data.bestRound == 0 ? "MedalEmpty" : `Medal${medalMap[difficulty]}`);
+            mapSectionMedalImg.src = getMedalIcon(difficulty == "Clicks" && data.completedWithoutLoadingSave ? `Medal${coopEnabled ? "Coop" : ""}${medalMap["CHIMPS-BLACK"]}` : `Medal${coopEnabled ? "Coop" : ""}${medalMap[difficulty]}`);
             mapSectionMedalImg.style.display = "none";
-            mapSectionMedalImg.addEventListener('load', () => {
+            // if the medal is not obtained
+            if (!data.completed && data.bestRound < constants.modeBestRoundFix[difficulty] && !data.completedWithoutLoadingSave) { mapSectionMedalImg.style.filter = "brightness(0.5)" } ;
+             mapSectionMedalImg.addEventListener('load', () => {
                 if(mapSectionMedalImg.width < mapSectionMedalImg.height){
                     mapSectionMedalImg.style.width = `${ratioCalc(3,70,256,0,mapSectionMedalImg.width)}px`
                 } else {
@@ -2361,6 +2373,147 @@ function generateMapsListView(){
 
         mapDiv.addEventListener('click', () => {
             onSelectMap(map);
+        })
+    }
+}
+
+function generateMapsGameView() {
+    let mapsProgressContainer = document.getElementById('maps-progress-container');
+    mapsProgressContainer.innerHTML = "";
+
+    let mapsGameContainer = document.createElement('div');
+    mapsGameContainer.id = 'maps-game-container';
+    mapsGameContainer.classList.add('maps-game-container');
+    mapsProgressContainer.appendChild(mapsGameContainer);
+
+    //generate 6 maps based on the current page
+    let maps = Object.keys(constants.mapsInOrder).filter(value => Object.keys(btd6usersave.mapProgress).includes(value)); //Object.keys(constants.mapsInOrder);
+    if (currentDifficultyFilter != "All") { maps = maps.filter(map => constants.mapsInOrder[map] == currentDifficultyFilter) }
+    let maxPage = Math.ceil(maps.length / 6) - 1;
+    if (mapPage > maxPage) { mapPage = 0; }
+    if (mapPage < 0) { mapPage = maxPage; }
+    let mapsToDisplay = maps.slice(mapPage * 6, mapPage * 6 + 6);
+
+    let mapPrevArrow = document.createElement('div');
+    mapPrevArrow.id = 'map-prev-arrow';
+    mapPrevArrow.classList.add('map-arrow');
+    mapsGameContainer.appendChild(mapPrevArrow);
+
+    let mapPrevArrowImg = document.createElement('img');
+    mapPrevArrowImg.id = 'map-prev-arrow-img';
+    mapPrevArrowImg.classList.add('map-arrow-img');
+    mapPrevArrowImg.src = "./Assets/UI/PrevArrow.png";
+    mapPrevArrow.appendChild(mapPrevArrowImg);
+
+    let mapsGameGrid = document.createElement('div');
+    mapsGameGrid.id = 'maps-game-grid';
+    mapsGameGrid.classList.add('maps-game-grid');
+    mapsGameContainer.appendChild(mapsGameGrid);
+
+    for (let map of mapsToDisplay) {
+        let mapDiv = document.createElement('div');
+        mapDiv.id = `${map}-div`;
+        mapDiv.classList.add('map-div-ingame');
+        switch(processedMapData.Borders[coopEnabled ? "coop" : "single"][map]) {
+            case "None":
+                coopEnabled ? mapDiv.classList.add('coop-border') : mapDiv.classList.add('none-border');
+                break;
+            case "Bronze":
+                mapDiv.classList.add('bronze-border');
+                break;
+            case "Silver":
+                mapDiv.classList.add('silver-border');
+                break;
+            case "Gold":
+                mapDiv.classList.add('gold-border');
+                break;
+            case "Black":
+                mapDiv.classList.add('black-border');
+                break;
+        }
+        mapsGameGrid.appendChild(mapDiv);
+
+        let mapImg = document.createElement('img');
+        mapImg.id = `${map}-img`;
+        mapImg.classList.add('map-img-ingame');
+        mapImg.src = getMapIcon(map);
+        mapDiv.appendChild(mapImg);
+
+        let mapName = document.createElement('p');
+        mapName.id = `${map}-name`;
+        mapName.classList.add(`map-name`);
+        mapName.classList.add('black-outline');
+        mapName.innerHTML = getLocValue(map);
+        mapDiv.appendChild(mapName);
+
+        //medals
+        for (let [difficulty, completed] of (coopEnabled ? Object.entries(processedMapData.Medals.coop[map]) : Object.entries(processedMapData.Medals.single[map]))) {
+            if (completed == null) { continue; }
+            let medalDiv = document.createElement('div');
+            medalDiv.id = `${difficulty}-div`;
+            let largeMedals = ["Easy", "Medium", "Hard", "Impoppable"]
+            largeMedals.includes(difficulty) ? medalDiv.classList.add('medal-div-large') : medalDiv.classList.add('medal-div-small');
+            medalDiv.classList.add(`medal-div-${difficulty.toLowerCase()}`);
+            mapDiv.appendChild(medalDiv);
+    
+            let medalImg = document.createElement('img');
+            medalImg.id = `${difficulty}-img`;
+            medalImg.classList.add('medal-img');
+            medalImg.src = getMedalIcon(completed ? `Medal${medalMap[difficulty]}` : "MedalEmpty");
+            if(!completed) { medalImg.classList.add("medal-div-unobtained") }
+            medalImg.style.display = "none";
+            medalImg.addEventListener('load', () => {
+                if(medalImg.width < medalImg.height){
+                    medalImg.style.width = `${ratioCalc(3,70,256,0,medalImg.width)}px`
+                } else {
+                    medalImg.style.height = `${ratioCalc(3,70,256,0,medalImg.height)}px`
+                }
+                medalImg.style.removeProperty('display');
+            })
+            medalDiv.appendChild(medalImg);
+        }    
+
+        mapDiv.addEventListener('click', () => {
+            onSelectMap(map);
+        })
+    }
+
+    let mapNextArrow = document.createElement('div');
+    mapNextArrow.id = 'map-next-arrow';
+    mapNextArrow.classList.add('map-arrow');
+    mapsGameContainer.appendChild(mapNextArrow);
+
+    let mapNextArrowImg = document.createElement('img');
+    mapNextArrowImg.id = 'map-next-arrow-img';
+    mapNextArrowImg.classList.add('map-arrow-img');
+    mapNextArrowImg.src = "./Assets/UI/NextArrow.png";
+    mapNextArrow.appendChild(mapNextArrowImg);
+
+    mapPrevArrow.addEventListener('click', () => {
+        mapPage--;
+        generateMapsGameView();
+    })
+
+    mapNextArrow.addEventListener('click', () => {
+        mapPage++;
+        generateMapsGameView();
+    })
+
+    let mapPageDots = document.createElement('div');
+    mapPageDots.id = 'map-page-dots';
+    mapPageDots.classList.add('map-page-dots');
+    mapsProgressContainer.appendChild(mapPageDots);
+
+    for (let i = 0; i <= maxPage; i++) {
+        let mapPageDot = document.createElement('div');
+        mapPageDot.id = `map-page-dot-${i}`;
+        mapPageDot.classList.add('map-page-dot');
+        if (i == mapPage) { mapPageDot.classList.add('map-page-dot-active'); }
+        mapPageDots.appendChild(mapPageDot);
+
+        mapPageDot.addEventListener('click', () => {
+            mapPage = i;
+            generateMapsGameView();
         })
     }
 }

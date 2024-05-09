@@ -1212,7 +1212,7 @@
     border: 10px solid transparent;
     border-image-source: url(../Assets/UI/MainBgPanelHematite.png);
     border-image-slice: 60;
-    background-color: #9F7842;
+    background: linear-gradient(180deg, #293548 0%, #121824 100%);
     border-radius: 20px;
 }
 .map-name {
@@ -1294,6 +1294,13 @@
     height: 30px;
     min-width: 100px;
     margin-right: 10px;
+    height: 30px;
+    min-width: 100px;
+    margin-right: 10px;
+    font-family: 'GardeniaBold';
+    background-color: #34547F;
+    color: white;
+    text-align: center;
 }
 
 .map-difficulty-icon {
@@ -1414,6 +1421,150 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+.maps-game-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 540px;
+    align-items: center;
+}
+.map-img-ingame {
+    width: 298px;
+    height: 190px;
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+}
+.map-div-ingame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    border-radius: 20px;
+    position: relative;
+    padding-bottom: 40px;
+}
+.maps-progress-container {
+    width: 100%;
+    background-color: var(--profile-secondary);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-radius: 0 10px 10px 0;
+}
+.maps-game-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.medal-div-large {
+    display: flex;
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 5px 0px;
+}
+.medal-div-small {
+    display: flex;
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 5px 0px;
+    transform: scale(0.6);
+}
+.medal-div-easy {
+    left: 0%;
+    top: 160px;
+}
+.medal-div-medium {
+    left: 25%;
+    top: 160px;
+}
+.medal-div-hard {
+    left: 50%;
+    top: 160px;
+}
+.medal-div-impoppable {
+    left: 75%;
+    top: 160px;
+}
+.medal-div-primaryonly{
+    left: -8%;
+    top: 180px;
+}
+.medal-div-deflation {
+    left: 8%;
+    top: 180px;
+}
+.medal-div-militaryonly {
+    left: 17%;
+    top: 180px;
+}
+.medal-div-reverse {
+    left: 33%;
+    top: 180px;
+}
+.medal-div-apopalypse {
+    left: 25%;
+    top: 190px;
+    z-index: 3;
+}
+.medal-div-magiconly {
+    left: 40%;
+    top: 160px;
+}
+.medal-div-alternatebloonsrounds {
+    left: 60%;
+    top: 160px;
+}
+.medal-div-doublemoabhealth {
+    left: 45%;
+    top: 185px;
+}
+.medal-div-halfcash {
+    left: 55%;
+    top: 185px;
+    z-index: 3;
+}
+.medal-div-clicks {
+    left: 67%;
+    top: 185px;
+}
+.medal-div-chimps-black {
+    left: 83%;
+    top: 185px;
+}
+.medal-div-unobtained{
+    filter: opacity(0.2);
+}
+.map-arrow-img {
+    width: 50px;
+    padding: 0 12px 0 0;
+}
+.map-page-dots {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+.map-page-dot {
+    background-image: url(../Assets/UI/PagePipOff.png);
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 0 10px;
+}
+.map-page-dot-active {
+    background-image: url(../Assets/UI/PagePipOn.png);
+}
+.map-name-game {
+    position: absolute;
+    font-size: 20px;
 }
 
 .black-outline {
