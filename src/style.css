@@ -1613,6 +1613,126 @@
 .power-progress-text {
     font-size: 28px;
 }
+
+
+.insta-monkeys-header-bar {
+    display: flex;
+    justify-content: space-between;
+    /* padding: 10px; */
+    width: 100%;
+    background-color: var(--profile-primary)
+}
+.towers-container {
+    max-width: 850px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.tower-container {
+    width: 150px;
+    height: 150px;
+    background-image: url(../Assets/UI/InstaTowersContainer.png);
+    background-size: contain;
+    position: relative;
+    margin: 15px 10px;
+}
+.tower-img {
+    position: absolute;
+    height: 150px;
+    max-width: 150px;
+}
+.tower-name {
+    position: absolute;
+    height: 30px;
+    width: 153px;
+    /* margin-top: 14px; */
+    bottom: -10px;
+    text-align: center;
+    color: white;
+    font-family: 'Luckiest Guy';
+    font-size: 18px;
+}
+.insta-progress {
+    position: absolute;
+    background-image: url(../Assets/UI/NotificationYellow.png);
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0;
+    margin-top: -10px;
+    margin-right: -10px;
+}
+.insta-monkey-top-bar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+}
+.insta-monkey-header-div {
+    display: flex;
+    width: 600px;
+    border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/TitleContainer.png);
+    border-image-slice: 90;
+    background: linear-gradient(#804A24 100%, transparent) no-repeat;
+    justify-content: space-between;
+}
+.insta-monkey-name {
+    font-size: 32px;
+}
+.insta-monkey-progress {
+    width: 120px;
+}
+.insta-monkey-progress-text {
+    font-size: 32px;
+    color: #9AE42C;
+    text-align: center;
+}
+.MkOffRed {
+    background-image: url(../Assets/UI/MkOffRed.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+}
+.MkOffGreen {
+    background-image: url(../Assets/UI/MkOffGreen.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+}
+.insta-arrow-img {
+    width: 50px;
+    padding: 0 12px;
+}
+.insta-monkey-progress-container {
+    width: 100%;
+    justify-content: center;
+}
+.insta-monkey-icons-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 840px;
+}
+.insta-monkey-tier-container {
+    padding: 10px;
+}
+.insta-monkey-tier-img {
+    width: 100px;
+}
+.insta-monkey-tier-text {
+    position: absolute;
+    font-size: 24px;
+    margin-top: -10px;
+    width: 100px;
+    text-align: center;
+}
+.insta-monkey-main-container {
+    display:flex;
+}
 .black-outline {
     -webkit-text-stroke: 0.7px black;
     text-shadow: 1px 0px 0px #000, -1px 0px 0 #000, 0px 1px 0 #000, 1px 0px 0px #000, 1px 2px 0px #000, -1px -1px 0 #000, -1px 2px 0 #000, 1px -1px 0px #000;
@@ -1690,7 +1810,7 @@ p {
     user-select: none;
 }
 
-input[type='checkbox'] {
+.maps-progress-coop-toggle-input {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -1701,9 +1821,23 @@ input[type='checkbox'] {
     border: 2px solid #2B466A;
 }
 
-input[type='checkbox']:checked {
+.maps-progress-coop-toggle-input:checked {
     background: url('../Assets/UI/Checked.png');
     background-size: 25px 25px;
+}
+
+.insta-progress-missing-toggle-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    background-image: url('../Assets/UI/MkOffRed.png');
+    background-size: contain;
+    border-radius: 5px;
+}
+.insta-progress-missing-toggle-input:checked {
+    background-image: url('../Assets/UI/MkOnGreen.png');
 }
 
 @keyframes glow{

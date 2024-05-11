@@ -43,6 +43,14 @@ let coopEnabled = false;
 let currentDifficultyFilter = "All";
 let mapPage = 0;
 
+let currentInstaView = "game";
+
+let processedInstaData = {
+    "TowerTotal": {},
+    "TowerTierTotals": {},
+    "TowerMissingByTier": {}
+}
+
 fetch('./data/English.json')
     .then(response => response.json())
     .then(data => {
@@ -82,6 +90,7 @@ function generateIfReady(){
         generateExtras()
         generateProgressSubText()
         generateMapData()
+        generateInstaData()
         generateOverview()
         isGenerated.push('overview');
         changeTab('overview');
@@ -346,6 +355,72 @@ function generateMapData() {
 
 
     }
+}
+
+function generateInstaData(){
+    let towerTotal = {};
+    let towerTierTotals = {};
+    let towerMissingByTier = {};
+    for (let [tower, data] of Object.entries(btd6usersave.instaTowers)){
+        towerTotal[tower] = 0;
+        let towerTiersTemplate = {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0
+        }
+        towerTierTotals[tower] = towerTierTotals[tower] || towerTiersTemplate;
+        let missingInstasTemplate = {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        }
+        towerMissingByTier[tower] = towerMissingByTier[tower] || missingInstasTemplate;
+        for (let [tier, count] of Object.entries(data)){
+            towerTotal[tower] += count;
+            if (constants.instaTiers["5"].includes(tier)) {
+                towerTierTotals[tower]["5"] += 1;
+            }
+            if (constants.instaTiers["4"].includes(tier)) {
+                towerTierTotals[tower]["4"] += 1;
+            }
+            if (constants.instaTiers["3"].includes(tier)) {
+                towerTierTotals[tower]["3"] += 1;
+            }
+            if (constants.instaTiers["2"].includes(tier)) {
+                towerTierTotals[tower]["2"] += 1;
+            }
+            if (constants.instaTiers["1"].includes(tier)) {
+                towerTierTotals[tower]["1"] += 1;
+            }
+        }
+
+        constants.collectionOrder.forEach((tier) => {
+            if (data[tier] == null){
+                if (constants.instaTiers["5"].includes(tier)){
+                    towerMissingByTier[tower]["5"].push(tier);
+                }
+                if (constants.instaTiers["4"].includes(tier)){
+                    towerMissingByTier[tower]["4"].push(tier);
+                }
+                if (constants.instaTiers["3"].includes(tier)){
+                    towerMissingByTier[tower]["3"].push(tier);
+                }
+                if (constants.instaTiers["2"].includes(tier)){
+                    towerMissingByTier[tower]["2"].push(tier);
+                }
+                if (constants.instaTiers["1"].includes(tier)){
+                    towerMissingByTier[tower]["1"].push(tier);
+                }
+            }
+        })
+    }
+    processedInstaData["TowerTotal"] = towerTotal;
+    processedInstaData["TowerTierTotals"] = towerTierTotals;
+    processedInstaData["TowerMissingByTier"] = towerMissingByTier;
 }
 
 const container = document.createElement('div');
@@ -829,7 +904,7 @@ function changeProgressTab(selector){
             generatePowersProgress();
             break;
         case "InstaMonkeys":
-            //generateInstaMonkeysProgress();
+            generateInstaMonkeysProgress();
             break;
         case "Achievements":
             //generateAchievementsProgress();
@@ -1805,17 +1880,15 @@ function generateMapsProgress(){
 }
 
 function onChangeMapView(view){
+    currentMapView = view;
     switch(view){
         case "grid":
-            currentMapView = "grid";
             generateMapsGridView();
             break;
         case "list":
-            currentMapView = "list";
             generateMapsListView();
             break;
         case "game":
-            currentMapView = "game";
             generateMapsGameView();
             break;
     }
@@ -2558,6 +2631,316 @@ function generatePowersProgress() {
         powerProgressText.innerHTML = `${value.quantity}`;
         powerProgress.appendChild(powerProgressText);
     }
+}
+
+function generateInstaMonkeysProgress() {
+    let progressContent = document.getElementById('progress-content');
+    progressContent.innerHTML = "";
+
+    let instaMonkeysHeaderBar = document.createElement('div');
+    instaMonkeysHeaderBar.id = 'insta-monkeys-header-bar';
+    instaMonkeysHeaderBar.classList.add('insta-monkeys-header-bar');
+    progressContent.appendChild(instaMonkeysHeaderBar);
+
+    let instaMonkeysViews = document.createElement('div');
+    instaMonkeysViews.id = 'insta-monkeys-views';
+    instaMonkeysViews.classList.add('maps-progress-views');
+    instaMonkeysHeaderBar.appendChild(instaMonkeysViews);
+
+    let instaMonkeysGameView = document.createElement('div');
+    instaMonkeysGameView.id = 'insta-monkeys-game-view';
+    instaMonkeysGameView.classList.add('maps-progress-view');
+    instaMonkeysGameView.classList.add('black-outline');
+    instaMonkeysGameView.innerHTML = "Game";
+    instaMonkeysGameView.addEventListener('click', () => {
+        onChangeInstaMonkeysView("game");
+    })
+    instaMonkeysViews.appendChild(instaMonkeysGameView);
+
+    let instaMonkeysListView = document.createElement('div');
+    instaMonkeysListView.id = 'insta-monkeys-list-view';
+    instaMonkeysListView.classList.add('maps-progress-view');
+    instaMonkeysListView.classList.add('black-outline');
+    instaMonkeysListView.innerHTML = "List";
+    instaMonkeysListView.addEventListener('click', () => {
+        onChangeInstaMonkeysView("list");
+    })
+    instaMonkeysViews.appendChild(instaMonkeysListView);
+
+    let instaMonkeysMissingView = document.createElement('div');
+    instaMonkeysMissingView.id = 'insta-monkeys-missing-view';
+    instaMonkeysMissingView.classList.add('maps-progress-view');
+    instaMonkeysMissingView.classList.add('black-outline');
+    instaMonkeysMissingView.innerHTML = "Missing";
+    instaMonkeysMissingView.addEventListener('click', () => {
+        onChangeInstaMonkeysView("missing");
+    })
+    instaMonkeysViews.appendChild(instaMonkeysMissingView);
+
+    let instaMonkeysExtras = document.createElement('div');
+    instaMonkeysExtras.id = 'insta-monkeys-extras';
+    instaMonkeysExtras.classList.add('maps-progress-views');
+    instaMonkeysHeaderBar.appendChild(instaMonkeysExtras);
+
+    let instaMonkeysObtainView = document.createElement('div');
+    instaMonkeysObtainView.id = 'insta-monkeys-obtain-view';
+    instaMonkeysObtainView.classList.add('maps-progress-view');
+    instaMonkeysObtainView.classList.add('black-outline');
+    instaMonkeysObtainView.innerHTML = "Where To Get";
+    instaMonkeysObtainView.addEventListener('click', () => {
+        onChangeInstaMonkeysView("obtain");
+    })
+    instaMonkeysExtras.appendChild(instaMonkeysObtainView);
+
+    let instaMonkeysRotationsView = document.createElement('div');
+    instaMonkeysRotationsView.id = 'insta-monkeys-rotations-view';
+    instaMonkeysRotationsView.classList.add('maps-progress-view');
+    instaMonkeysRotationsView.classList.add('black-outline');
+    instaMonkeysRotationsView.innerHTML = "Event Rotations";
+    instaMonkeysRotationsView.addEventListener('click', () => {
+        onChangeInstaMonkeysView("rotations");
+    })
+    instaMonkeysExtras.appendChild(instaMonkeysRotationsView);
+
+    let instaMonkeysProgressContainer = document.createElement('div');
+    instaMonkeysProgressContainer.id = 'insta-monkeys-progress-container';
+    instaMonkeysProgressContainer.classList.add('insta-monkeys-progress-container');
+    progressContent.appendChild(instaMonkeysProgressContainer);
+
+    let instaMonkeyProgressContainer = document.createElement('div');
+    instaMonkeyProgressContainer.id = 'insta-monkey-progress-container';
+    instaMonkeyProgressContainer.classList.add('insta-monkey-progress-container');
+    instaMonkeyProgressContainer.style.display = "none";
+    progressContent.appendChild(instaMonkeyProgressContainer);
+
+    onChangeInstaMonkeysView("game");
+}
+
+function onChangeInstaMonkeysView(view) {
+    currentInstaView = view;
+    switch (view) {
+        case "game":
+            generateInstaGameView();
+            break;
+        case "list":
+            break;
+        case "missing":
+            break;
+        case "obtain":
+            break;
+        case "rotations":
+            break;
+    }
+}
+
+function generateInstaGameView(){
+    document.getElementById('insta-monkey-progress-container').style.display = "none";
+    let instaMonkeysProgressContainer = document.getElementById('insta-monkeys-progress-container');
+    instaMonkeysProgressContainer.innerHTML = "";
+    instaMonkeysProgressContainer.style.removeProperty('display');
+
+    let instaMonkeyGameContainer = document.createElement('div');
+    instaMonkeyGameContainer.id = 'insta-monkey-game-container';
+    instaMonkeyGameContainer.classList.add('insta-monkey-game-container');
+    instaMonkeysProgressContainer.appendChild(instaMonkeyGameContainer);
+
+    let towersContainer = document.createElement('div');
+    towersContainer.id = 'towers-container';
+    towersContainer.classList.add('towers-container');
+    instaMonkeyGameContainer.appendChild(towersContainer);
+
+    Object.keys(constants.towersInOrder).forEach(tower => {
+        let towerContainer = document.createElement('div');
+        towerContainer.id = `${tower}-container`;
+        towerContainer.classList.add('tower-container');
+        towerContainer.addEventListener('click', () => {
+            onSelectInstaTower(tower);
+        })
+        towersContainer.appendChild(towerContainer);
+
+        let towerImg = document.createElement('img');
+        towerImg.id = `${tower}-img`;
+        towerImg.classList.add(`tower-img`);
+        towerImg.src = getInstaContainerIcon(tower,'000');
+        towerContainer.appendChild(towerImg);
+
+        let towerName = document.createElement('p');
+        towerName.id = `${tower}-name`;
+        towerName.classList.add(`tower-name`);
+        towerName.classList.add('black-outline');
+        towerName.innerHTML = getLocValue(tower);
+        towerContainer.appendChild(towerName);
+
+        let towerTotalDiv = document.createElement('p');
+        towerTotalDiv.id = `${tower}-total-div`;
+        towerTotalDiv.classList.add(`insta-progress`);
+        towerContainer.appendChild(towerTotalDiv);
+
+        let towerTotal = document.createElement('p');
+        towerTotal.id = `${tower}-total`;
+        towerTotal.classList.add(`power-progress-text`);
+        towerTotal.classList.add('black-outline');
+        towerTotal.innerHTML = processedInstaData.TowerTotal[tower];
+        towerTotalDiv.appendChild(towerTotal);
+    }) 
+}
+
+function onSelectInstaTower(tower) {
+    document.getElementById('insta-monkeys-progress-container').style.display = "none";
+    document.getElementById('insta-monkey-progress-container').style.display = "flex";
+    generateSingleInstaTower(tower);
+}
+
+function generateSingleInstaTower(tower) {
+    let instaMonkeyProgressContainer = document.getElementById('insta-monkey-progress-container');
+    instaMonkeyProgressContainer.innerHTML = "";
+
+    let instaMonkeyDiv = document.createElement('div');
+    instaMonkeyDiv.id = `${tower}-div`;
+    instaMonkeyDiv.classList.add('insta-monkey-div');
+    instaMonkeyProgressContainer.appendChild(instaMonkeyDiv);
+    
+    let instaMonkeyTopBar = document.createElement('div');
+    instaMonkeyTopBar.id = `${tower}-top-bar`;
+    instaMonkeyTopBar.classList.add('insta-monkey-top-bar');
+    instaMonkeyDiv.appendChild(instaMonkeyTopBar);
+
+    let instaPrevArrow = document.createElement('div');
+    instaPrevArrow.id = 'map-prev-arrow';
+    instaPrevArrow.classList.add('insta-arrow');
+    instaPrevArrow.addEventListener('click', () => {
+        onSelectInstaPrevArrow(tower);
+    })
+    instaMonkeyTopBar.appendChild(instaPrevArrow);
+
+    let instaPrevArrowImg = document.createElement('img');
+    instaPrevArrowImg.id = 'map-prev-arrow-img';
+    instaPrevArrowImg.classList.add('map-arrow-img');
+    instaPrevArrowImg.src = "./Assets/UI/PrevArrow.png";
+    instaPrevArrow.appendChild(instaPrevArrowImg);
+
+    let instaMonkeyHeaderDiv = document.createElement('div');
+    instaMonkeyHeaderDiv.id = `${tower}-header-div`;
+    instaMonkeyHeaderDiv.classList.add('insta-monkey-header-div');
+    instaMonkeyTopBar.appendChild(instaMonkeyHeaderDiv);
+
+    let instaNextArrow = document.createElement('div');
+    instaNextArrow.id = 'map-next-arrow';
+    instaNextArrow.classList.add('insta-arrow');
+    instaNextArrow.addEventListener('click', () => {
+        onSelectInstaNextArrow(tower);
+    })
+    instaMonkeyTopBar.appendChild(instaNextArrow);
+
+    let instaNextArrowImg = document.createElement('img');
+    instaNextArrowImg.id = 'map-next-arrow-img';
+    instaNextArrowImg.classList.add('map-arrow-img');
+    instaNextArrowImg.src = "./Assets/UI/NextArrow.png";
+    instaNextArrow.appendChild(instaNextArrowImg);
+
+
+    let instaProgressMissingToggle = document.createElement('div');
+    instaProgressMissingToggle.id = 'maps-progress-coop-toggle';
+    instaProgressMissingToggle.classList.add('maps-progress-coop-toggle');  
+    instaMonkeyHeaderDiv.appendChild(instaProgressMissingToggle);
+
+    let instaProgressMissingToggleText = document.createElement('p');
+    instaProgressMissingToggleText.id = 'maps-progress-coop-toggle-text';
+    instaProgressMissingToggleText.classList.add('maps-progress-coop-toggle-text');
+    instaProgressMissingToggleText.classList.add('black-outline');
+    instaProgressMissingToggleText.innerHTML = "Missing: ";
+    instaProgressMissingToggle.appendChild(instaProgressMissingToggleText);
+
+    let instaProgressMissingToggleInput = document.createElement('input');
+    instaProgressMissingToggleInput.id = 'insta-progress-missing-toggle-input';
+    instaProgressMissingToggleInput.classList.add('insta-progress-missing-toggle-input');
+    instaProgressMissingToggleInput.classList.add('MkOffRed');
+    instaProgressMissingToggleInput.type = 'checkbox';
+    instaProgressMissingToggleInput.addEventListener('change', () => {
+        onSelectMissingToggle()
+    })
+    instaProgressMissingToggleInput.checked = coopEnabled;
+    instaProgressMissingToggle.appendChild(instaProgressMissingToggleInput);
+
+    let instaMonkeyName = document.createElement('p');
+    instaMonkeyName.id = `${tower}-name`;
+    instaMonkeyName.classList.add('insta-monkey-name');
+    instaMonkeyName.classList.add('black-outline');
+    instaMonkeyName.innerHTML = getLocValue(tower);
+    instaMonkeyHeaderDiv.appendChild(instaMonkeyName);
+
+    let instaMonkeyProgress = document.createElement('div');
+    instaMonkeyProgress.id = `${tower}-progress`;
+    instaMonkeyProgress.classList.add('insta-monkey-progress');
+    instaMonkeyHeaderDiv.appendChild(instaMonkeyProgress);
+
+    let instaMonkeyProgressText = document.createElement('p');
+    instaMonkeyProgressText.id = `${tower}-progress-text`;
+    instaMonkeyProgressText.classList.add('insta-monkey-progress-text');
+    instaMonkeyProgressText.classList.add('black-outline');
+    instaMonkeyProgressText.innerHTML = `${Object.values(processedInstaData.TowerTierTotals[tower]).reduce((a, b) => a + b, 0)}/64`;
+    instaMonkeyProgress.appendChild(instaMonkeyProgressText);
+
+    let instaMonkeyMainContainer = document.createElement('div');
+    instaMonkeyMainContainer.id = `${tower}-main-container`;
+    instaMonkeyMainContainer.classList.add('insta-monkey-main-container');
+    instaMonkeyDiv.appendChild(instaMonkeyMainContainer);
+
+    generateInstaMonkeyIcons(tower);
+}
+
+function generateInstaMonkeyIcons(tower){
+    let instaMonkeyMainContainer = document.getElementById(`${tower}-main-container`);
+    instaMonkeyMainContainer.innerHTML = "";
+
+    let instaMonkeyIconsContainer = document.createElement('div');
+    instaMonkeyIconsContainer.id = `${tower}-icons-container`;
+    instaMonkeyIconsContainer.classList.add('insta-monkey-icons-container');
+    instaMonkeyMainContainer.appendChild(instaMonkeyIconsContainer);
+
+    constants.collectionOrder.forEach(tiers => {
+        let instaMonkeyTierContainer = document.createElement('div');
+        instaMonkeyTierContainer.id = `${tower}-${tiers}-container`;
+        instaMonkeyTierContainer.classList.add('insta-monkey-tier-container');
+        if (!btd6usersave.instaTowers[tower][tiers]) { 
+            instaMonkeyTierContainer.style.display = "none";
+            instaMonkeyTierContainer.classList.add('insta-monkey-unobtained');
+        }
+        instaMonkeyIconsContainer.appendChild(instaMonkeyTierContainer);
+
+        let instaMonkeyTierImg = document.createElement('img');
+        instaMonkeyTierImg.id = `${tower}-${tiers}-img`;
+        instaMonkeyTierImg.classList.add('insta-monkey-tier-img');
+        instaMonkeyTierImg.src = btd6usersave.instaTowers[tower][tiers] ? getInstaMonkeyIcon(tower,tiers) : "./Assets/UI/InstaUncollected.png";
+        instaMonkeyTierContainer.appendChild(instaMonkeyTierImg);
+
+        let instaMonkeyTierText = document.createElement('p');
+        instaMonkeyTierText.id = `${tower}-${tiers}-text`;
+        instaMonkeyTierText.classList.add('insta-monkey-tier-text');
+        instaMonkeyTierText.classList.add('black-outline');
+        instaMonkeyTierText.innerHTML = `${tiers[0]}-${tiers[1]}-${tiers[2]}`;
+        instaMonkeyTierContainer.appendChild(instaMonkeyTierText);
+    })
+}
+
+function onSelectMissingToggle(){
+    for (let element of document.getElementsByClassName('insta-monkey-unobtained')) {
+        element.style.display = document.getElementById('insta-progress-missing-toggle-input').checked ? "block" : "none";
+    }
+}
+
+function onSelectInstaPrevArrow(tower){
+    let towers = Object.keys(constants.towersInOrder);
+    let index = towers.indexOf(tower);
+    index == 0 ? index = towers.length - 1 : index--
+    onSelectInstaTower(towers[index]);
+}
+
+function onSelectInstaNextArrow(tower){
+    let towers = Object.keys(constants.towersInOrder);
+    let index = towers.indexOf(tower);
+    index == towers.length - 1 ? index = 0 : index++
+    onSelectInstaTower(towers[index]);
 }
 
 function changeHexBGColor(color){

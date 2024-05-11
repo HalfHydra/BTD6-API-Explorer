@@ -170,7 +170,19 @@ function getInstaContainerIcon(towerType, upgrade) {
 }
 
 function getInstaMonkeyIcon(towerType, upgrade) {
-    return `Assets/InstaMonkeyIcon/${upgrade}-${towerType}Insta.png`;
+    let instaTiers = Math.max(upgrade[0], upgrade[1], upgrade[2]);
+    switch(Math.max(upgrade[0], upgrade[1], upgrade[2])) {
+        case parseInt(upgrade[0]):
+            instaTiers = `${instaTiers}00`;
+            break;
+        case parseInt(upgrade[1]):
+            instaTiers = `0${instaTiers}0`;
+            break;
+        case parseInt(upgrade[2]):
+            instaTiers = `00${instaTiers}`;
+            break;
+    }
+    return towerType == "WizardMonkey" ? `Assets/InstaMonkeyIcon/${instaTiers}-WizardInsta.png` : `Assets/InstaMonkeyIcon/${instaTiers}-${towerType}Insta.png`;
 }
 
 function getUpgradeAssetPath(upgrade) {
