@@ -442,7 +442,6 @@ header.appendChild(headerDiv);
 const title = document.createElement('h1');
 title.id = 'title';
 title.classList.add('title');
-title.classList.add('black-outline');
 title.innerHTML = 'Bloons TD 6 OAK Tool';
 headerDiv.appendChild(title);
 
