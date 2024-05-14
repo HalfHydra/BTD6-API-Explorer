@@ -2659,6 +2659,14 @@ function generateInstaMonkeysProgress() {
     instaMonkeysViews.classList.add('maps-progress-views');
     instaMonkeysHeaderBar.appendChild(instaMonkeysViews);
 
+    let mapsProgressViewsText = document.createElement('p');
+    mapsProgressViewsText.id = 'maps-progress-views-text';
+    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressViewsText.classList.add('black-outline');
+    mapsProgressViewsText.innerHTML = "Display Type:";
+    instaMonkeysViews.appendChild(mapsProgressViewsText);
+
+
     let instaMonkeysGameView = document.createElement('div');
     instaMonkeysGameView.id = 'insta-monkeys-game-view';
     instaMonkeysGameView.classList.add('maps-progress-view');
@@ -2679,15 +2687,15 @@ function generateInstaMonkeysProgress() {
     })
     instaMonkeysViews.appendChild(instaMonkeysListView);
 
-    let instaMonkeysMissingView = document.createElement('div');
-    instaMonkeysMissingView.id = 'insta-monkeys-missing-view';
-    instaMonkeysMissingView.classList.add('maps-progress-view');
-    instaMonkeysMissingView.classList.add('black-outline');
-    instaMonkeysMissingView.innerHTML = "Missing";
-    instaMonkeysMissingView.addEventListener('click', () => {
-        onChangeInstaMonkeysView("missing");
-    })
-    instaMonkeysViews.appendChild(instaMonkeysMissingView);
+    // let instaMonkeysMissingView = document.createElement('div');
+    // instaMonkeysMissingView.id = 'insta-monkeys-missing-view';
+    // instaMonkeysMissingView.classList.add('maps-progress-view');
+    // instaMonkeysMissingView.classList.add('black-outline');
+    // instaMonkeysMissingView.innerHTML = "Missing";
+    // instaMonkeysMissingView.addEventListener('click', () => {
+    //     onChangeInstaMonkeysView("missing");
+    // })
+    // instaMonkeysViews.appendChild(instaMonkeysMissingView);
 
     let instaMonkeysExtras = document.createElement('div');
     instaMonkeysExtras.id = 'insta-monkeys-extras';
@@ -2702,7 +2710,7 @@ function generateInstaMonkeysProgress() {
     instaMonkeysObtainView.addEventListener('click', () => {
         onChangeInstaMonkeysView("obtain");
     })
-    instaMonkeysExtras.appendChild(instaMonkeysObtainView);
+    // instaMonkeysExtras.appendChild(instaMonkeysObtainView);
 
     let instaMonkeysRotationsView = document.createElement('div');
     instaMonkeysRotationsView.id = 'insta-monkeys-rotations-view';
@@ -2712,7 +2720,7 @@ function generateInstaMonkeysProgress() {
     instaMonkeysRotationsView.addEventListener('click', () => {
         onChangeInstaMonkeysView("rotations");
     })
-    instaMonkeysExtras.appendChild(instaMonkeysRotationsView);
+    // instaMonkeysExtras.appendChild(instaMonkeysRotationsView);
 
     let instaMonkeysProgressContainer = document.createElement('div');
     instaMonkeysProgressContainer.id = 'insta-monkeys-progress-container';
@@ -2739,8 +2747,8 @@ function onChangeInstaMonkeysView(view) {
         case "list":
             generateInstaListView();
             break;
-        case "missing":
-            break;
+        // case "missing":
+        //     break;
         case "obtain":
             break;
         case "rotations":
@@ -2929,6 +2937,21 @@ function generateInstaMonkeyIcons(tower){
         }
         instaMonkeyIconsContainer.appendChild(instaMonkeyTierContainer);
 
+        if (btd6usersave.instaTowers[tower][tiers] > 1){
+            let towerTotalDiv = document.createElement('p');
+            towerTotalDiv.id = `${tower}-total-div`;
+            towerTotalDiv.classList.add(`insta-progress`);
+            towerTotalDiv.classList.add('insta-tier-scale')
+            instaMonkeyTierContainer.appendChild(towerTotalDiv);
+
+            let towerTotal = document.createElement('p');
+            towerTotal.id = `${tower}-total`;
+            towerTotal.classList.add(`power-progress-text`);
+            towerTotal.classList.add('black-outline');
+            towerTotal.innerHTML = btd6usersave.instaTowers[tower][tiers];
+            towerTotalDiv.appendChild(towerTotal);
+        }
+
         let instaMonkeyTierImg = document.createElement('img');
         instaMonkeyTierImg.id = `${tower}-${tiers}-img`;
         instaMonkeyTierImg.classList.add('insta-monkey-tier-img');
@@ -3085,6 +3108,25 @@ function generateInstaListView(){
             instaMonkeyTierDiv.appendChild(instaMonkeyTierText);
         }
     })
+}
+
+function generateInstaObtainGuide() {
+    let progressContent = document.getElementById('insta-monkeys-progress-container');
+    progressContent.innerHTML = "";
+
+    let titleGuideText = document.createElement('p');
+    titleGuideText.id = 'insta-monkeys-guide-title-text';
+    titleGuideText.classList.add('insta-monkeys-guide-title-text');
+    titleGuideText.classList.add('black-outline');
+    titleGuideText.innerHTML = "Where To Get More Insta Monkeys";
+    progressContent.appendChild(titleGuideText);
+
+    let titleGuideDesc = document.createElement('p');
+    titleGuideDesc.id = 'insta-monkeys-guide-title-desc';
+    titleGuideDesc.classList.add('insta-monkeys-guide-title-desc');
+    titleGuideDesc.classList.add('black-outline');
+    titleGuideDesc.innerHTML = "Select a button to read more about that method.";
+    progressContent.appendChild(titleGuideDesc);
 }
 
 function changeHexBGColor(color){

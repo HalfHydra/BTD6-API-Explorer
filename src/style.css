@@ -1724,6 +1724,7 @@
 }
 .insta-monkey-tier-container {
     padding: 10px;
+    position: relative;
 }
 .insta-monkey-tier-img {
     width: 100px;
@@ -1827,6 +1828,13 @@
 .insta-topbar-black {
     border-image-source: url(../Assets/UI/TitleContainerBlack.png);
     background: linear-gradient(#070d18 0%, #03050a 100%, transparent) no-repeat;
+}
+.insta-monkey-game-container {
+    display:flex;
+    align-items: center;
+}
+.insta-tier-scale {
+    transform: scale(0.85);
 }
 
 .black-outline {
