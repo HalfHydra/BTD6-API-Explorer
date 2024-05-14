@@ -2835,6 +2835,14 @@ function generateSingleInstaTower(tower) {
     let instaMonkeyHeaderDiv = document.createElement('div');
     instaMonkeyHeaderDiv.id = `${tower}-header-div`;
     instaMonkeyHeaderDiv.classList.add('insta-monkey-header-div');
+    switch(processedInstaData.TowerBorders[tower]) {
+        case "Gold":
+            instaMonkeyHeaderDiv.classList.add("insta-topbar-gold")
+            break;
+        case "Black":
+            instaMonkeyHeaderDiv.classList.add("insta-topbar-black")
+            break;
+    }
     instaMonkeyTopBar.appendChild(instaMonkeyHeaderDiv);
 
     let instaNextArrow = document.createElement('div');

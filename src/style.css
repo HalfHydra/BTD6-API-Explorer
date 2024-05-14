@@ -1820,6 +1820,14 @@
     flex-direction: column;
     justify-content: space-around;
 }
+.insta-topbar-gold {
+    border-image-source: url(../Assets/UI/TitleContainerGold.png);
+    background: linear-gradient(#ffad00 100%, transparent) no-repeat;
+}
+.insta-topbar-black {
+    border-image-source: url(../Assets/UI/TitleContainerBlack.png);
+    background: linear-gradient(#070d18 0%, #03050a 100%, transparent) no-repeat;
+}
 
 .black-outline {
     -webkit-text-stroke: 0.7px black;
