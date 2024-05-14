@@ -48,7 +48,8 @@ let currentInstaView = "game";
 let processedInstaData = {
     "TowerTotal": {},
     "TowerTierTotals": {},
-    "TowerMissingByTier": {}
+    "TowerMissingByTier": {},
+    "TowerBorders": {}
 }
 
 fetch('./data/English.json')
@@ -361,6 +362,7 @@ function generateInstaData(){
     let towerTotal = {};
     let towerTierTotals = {};
     let towerMissingByTier = {};
+    let towerBorders = {};
     for (let [tower, data] of Object.entries(btd6usersave.instaTowers)){
         towerTotal[tower] = 0;
         let towerTiersTemplate = {
@@ -417,10 +419,21 @@ function generateInstaData(){
                 }
             }
         })
+
+        if (towerTierTotals[tower]["4"] == constants.instaTiers["4"].length && towerTierTotals[tower]["3"] == constants.instaTiers["3"].length && towerTierTotals[tower]["2"] == constants.instaTiers["2"].length && towerTierTotals[tower]["1"] == constants.instaTiers["1"].length){
+            if (towerTierTotals[tower]["5"] == constants.instaTiers["5"].length) {
+                towerBorders[tower] = "Black";
+                continue;
+            }
+            towerBorders[tower] = "Gold";
+        } else {
+            towerBorders[tower] = "";
+        }
     }
     processedInstaData["TowerTotal"] = towerTotal;
     processedInstaData["TowerTierTotals"] = towerTierTotals;
     processedInstaData["TowerMissingByTier"] = towerMissingByTier;
+    processedInstaData["TowerBorders"] = towerBorders;
 }
 
 const container = document.createElement('div');
@@ -442,7 +455,7 @@ header.appendChild(headerDiv);
 const title = document.createElement('h1');
 title.id = 'title';
 title.classList.add('title');
-title.innerHTML = 'Bloons TD 6 OAK Tool';
+title.innerHTML = 'Bloons TD 6 API Explorer';
 headerDiv.appendChild(title);
 
 // const titleImg = document.createElement('img');
@@ -2717,11 +2730,14 @@ function generateInstaMonkeysProgress() {
 
 function onChangeInstaMonkeysView(view) {
     currentInstaView = view;
+    document.getElementById('insta-monkeys-progress-container').style.removeProperty('display');
+    document.getElementById('insta-monkey-progress-container').style.display = "none";
     switch (view) {
         case "game":
             generateInstaGameView();
             break;
         case "list":
+            generateInstaListView();
             break;
         case "missing":
             break;
@@ -2733,10 +2749,8 @@ function onChangeInstaMonkeysView(view) {
 }
 
 function generateInstaGameView(){
-    document.getElementById('insta-monkey-progress-container').style.display = "none";
     let instaMonkeysProgressContainer = document.getElementById('insta-monkeys-progress-container');
     instaMonkeysProgressContainer.innerHTML = "";
-    instaMonkeysProgressContainer.style.removeProperty('display');
 
     let instaMonkeyGameContainer = document.createElement('div');
     instaMonkeyGameContainer.id = 'insta-monkey-game-container';
@@ -2752,6 +2766,7 @@ function generateInstaGameView(){
         let towerContainer = document.createElement('div');
         towerContainer.id = `${tower}-container`;
         towerContainer.classList.add('tower-container');
+        towerContainer.style.backgroundImage = `url(./Assets/UI/InstaTowersContainer${processedInstaData.TowerBorders[tower]}.png)`
         towerContainer.addEventListener('click', () => {
             onSelectInstaTower(tower);
         })
@@ -2795,8 +2810,7 @@ function generateSingleInstaTower(tower) {
     instaMonkeyProgressContainer.innerHTML = "";
 
     let instaMonkeyDiv = document.createElement('div');
-    instaMonkeyDiv.id = `${tower}-div`;
-    instaMonkeyDiv.classList.add('insta-monkey-div');
+    // instaMonkeyDiv.classList.add('insta-monkey-div');
     instaMonkeyProgressContainer.appendChild(instaMonkeyDiv);
     
     let instaMonkeyTopBar = document.createElement('div');
@@ -2940,6 +2954,129 @@ function onSelectInstaNextArrow(tower){
     let index = towers.indexOf(tower);
     index == towers.length - 1 ? index = 0 : index++
     onSelectInstaTower(towers[index]);
+}
+
+function generateInstaListView(){
+    let instaMonkeysProgressContainer = document.getElementById('insta-monkeys-progress-container');
+    instaMonkeysProgressContainer.innerHTML = "";
+
+    let instaMonkeysListContainer = document.createElement('div');
+    instaMonkeysListContainer.id = 'insta-monkeys-list-container';
+    instaMonkeysListContainer.classList.add('insta-monkeys-list-container');
+    instaMonkeysProgressContainer.appendChild(instaMonkeysListContainer);
+
+    let instaMonkeysList = document.createElement('div');
+    instaMonkeysList.id = 'insta-monkeys-list';
+    instaMonkeysList.classList.add('insta-monkeys-list');
+    instaMonkeysListContainer.appendChild(instaMonkeysList);
+
+    Object.keys(constants.towersInOrder).forEach(tower => {
+        if(processedInstaData.TowerTierTotals[tower] == null) { return; }
+        let instaMonkeyDiv = document.createElement('div');
+        instaMonkeyDiv.id = `${tower}-div`;
+        instaMonkeyDiv.classList.add('insta-monkey-div');
+        instaMonkeysList.appendChild(instaMonkeyDiv);
+
+        let instaTowerContainer = document.createElement('div');
+        instaTowerContainer.id = `${tower}-container`;
+        instaTowerContainer.classList.add('tower-container');
+        instaTowerContainer.style.backgroundImage = `url(./Assets/UI/InstaTowersContainer${processedInstaData.TowerBorders[tower]}.png)`
+        instaTowerContainer.addEventListener('click', () => {
+            onSelectInstaTower(tower);
+        })
+        instaMonkeyDiv.appendChild(instaTowerContainer);
+
+        let instaMonkeyImg = document.createElement('img');
+        instaMonkeyImg.id = `${tower}-img`;
+        instaMonkeyImg.classList.add('tower-img');
+        instaMonkeyImg.src = getInstaContainerIcon(tower,'000');
+        instaTowerContainer.appendChild(instaMonkeyImg);
+
+        let instaMonkeyName = document.createElement('p');
+        instaMonkeyName.id = `${tower}-name`;
+        instaMonkeyName.classList.add(`tower-name`);
+        instaMonkeyName.classList.add('black-outline');
+        instaMonkeyName.innerHTML = getLocValue(tower);
+        instaTowerContainer.appendChild(instaMonkeyName);
+
+        let instaMonkeyTopBottom = document.createElement('div');
+        instaMonkeyTopBottom.id = `${tower}-top-bottom`;
+        instaMonkeyTopBottom.classList.add('insta-monkey-top-bottom');
+        instaMonkeyDiv.appendChild(instaMonkeyTopBottom);
+
+        let instaMonkeyProgress = document.createElement('div');
+        instaMonkeyProgress.id = `${tower}-progress`;
+        instaMonkeyProgress.classList.add('insta-monkey-progress-list');
+        instaMonkeyTopBottom.appendChild(instaMonkeyProgress);
+
+        let instaMonkeyTotal = document.createElement('div');
+        instaMonkeyTotal.classList.add('insta-monkey-total');
+        instaMonkeyProgress.appendChild(instaMonkeyTotal);
+
+        let instaMonkeysTotalLabelText = document.createElement('p');
+        instaMonkeysTotalLabelText.id = `${tower}-total-label-text`;
+        instaMonkeysTotalLabelText.classList.add('insta-monkey-progress-label-text');
+        instaMonkeysTotalLabelText.classList.add('black-outline');
+        instaMonkeysTotalLabelText.innerHTML = "Total Instas:";
+        instaMonkeyTotal.appendChild(instaMonkeysTotalLabelText);
+
+        let instaMonkeysTotalText = document.createElement('p');
+        instaMonkeysTotalText.id = `${tower}-total-text`;
+        instaMonkeysTotalText.classList.add('insta-monkey-total-text');
+        instaMonkeysTotalText.classList.add('black-outline');
+        instaMonkeysTotalText.innerHTML = processedInstaData.TowerTotal[tower];
+        instaMonkeyTotal.appendChild(instaMonkeysTotalText);
+
+        let instaMonkeyTierProgress = document.createElement('div');
+        instaMonkeyTierProgress.id = `${tower}-tier-progress`;
+        instaMonkeyTierProgress.classList.add('insta-monkey-tier-progress');
+        instaMonkeyProgress.appendChild(instaMonkeyTierProgress);
+
+        let instaMonkeyProgressLabelText = document.createElement('p');
+        instaMonkeyProgressLabelText.id = `${tower}-progress-label-text`;
+        instaMonkeyProgressLabelText.classList.add('insta-monkey-progress-label-text');
+        instaMonkeyProgressLabelText.classList.add('black-outline');
+        instaMonkeyProgressLabelText.innerHTML = "Unique Instas:";
+        instaMonkeyTierProgress.appendChild(instaMonkeyProgressLabelText);
+
+        let instaMonkeyProgressText = document.createElement('p');
+        instaMonkeyProgressText.id = `${tower}-progress-text`;
+        instaMonkeyProgressText.classList.add('insta-monkey-progress-text');
+        instaMonkeyProgressText.classList.add('black-outline');
+        instaMonkeyProgressText.innerHTML = `${Object.values(processedInstaData.TowerTierTotals[tower]).reduce((a, b) => a + b, 0)}/64`;
+        instaMonkeyTierProgress.appendChild(instaMonkeyProgressText);
+
+        let instaMonkeyTiersContainer = document.createElement('div');
+        instaMonkeyTiersContainer.id = `${tower}-tiers-container`;
+        instaMonkeyTiersContainer.classList.add('insta-monkey-tiers-container');
+        instaMonkeyTopBottom.appendChild(instaMonkeyTiersContainer);
+
+        let instaMonkeyTiersLabel = document.createElement('p');
+        instaMonkeyTiersLabel.id = `${tower}-tiers-label`;
+        instaMonkeyTiersLabel.classList.add('insta-monkey-tiers-label');
+        instaMonkeyTiersLabel.classList.add('black-outline');
+        instaMonkeyTiersLabel.innerHTML = "Unique By Tier:";
+        instaMonkeyTiersContainer.appendChild(instaMonkeyTiersLabel);
+
+        for (let [tier, tierTotal] of Object.entries(processedInstaData.TowerTierTotals[tower])) {
+            let instaMonkeyTierDiv = document.createElement('div');
+            instaMonkeyTierDiv.classList.add('insta-monkey-tier-div');
+            instaMonkeyTiersContainer.appendChild(instaMonkeyTierDiv);
+
+            // let instaMonkeyTierImg = document.createElement('img');
+            // instaMonkeyTierImg.classList.add('insta-monkey-tier-img');
+            // instaMonkeyTierImg.src = tierTotal == 0 ? "./Assets/UI/InstaUncollected.png" : getInstaMonkeyIcon(tower,constants.collectionOrder[index]);
+            // instaMonkeyTierDiv.appendChild(instaMonkeyTierImg);
+
+            let instaMonkeyTierText = document.createElement('p');
+            instaMonkeyTierText.classList.add('insta-monkey-tier-text-list');
+            instaMonkeyTierText.classList.add(`insta-tier-text-${tier}`)
+            tier == "5" ? instaMonkeyTierText.classList.add('t5-insta-outline') : instaMonkeyTierText.classList.add('black-outline');
+            instaMonkeyTierDiv.style.backgroundImage = `url(./Assets/UI/InstaTier${tier}Container.png)`
+            instaMonkeyTierText.innerHTML = `${tierTotal}/${constants.instaTiers[tier].length}`;
+            instaMonkeyTierDiv.appendChild(instaMonkeyTierText);
+        }
+    })
 }
 
 function changeHexBGColor(color){

@@ -1636,7 +1636,6 @@
 .tower-container {
     width: 150px;
     height: 150px;
-    background-image: url(../Assets/UI/InstaTowersContainer.png);
     background-size: contain;
     position: relative;
     margin: 15px 10px;
@@ -1692,7 +1691,7 @@
 }
 .insta-monkey-progress-text {
     font-size: 32px;
-    color: #9AE42C;
+    color: #44D900;
     text-align: center;
 }
 .MkOffRed {
@@ -1739,6 +1738,89 @@
 .insta-monkey-main-container {
     display:flex;
 }
+.insta-monkey-tier-text-list {
+    font-size: 28px;
+    text-align: center;
+}
+.insta-monkey-div {
+    display: flex;
+    /* width: 370px; */
+    width: 770px;
+    justify-content: space-between;
+    margin: 5px;
+    padding: 5px;
+    background-color: var(--profile-secondary);
+    border-radius: 10px;
+    border: 5px solid var(--profile-primary);
+}
+.insta-monkey-progress-label-text {
+    font-size: 24px;
+    text-align: center;
+    /* width: 85px; */
+}
+.insta-monkey-tiers-label {
+    font-size: 24px;
+    text-align: center;
+    width: 100px;
+}
+.insta-monkey-tiers-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.insta-monkey-progress-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+}
+.insta-tier-text-1 {
+    /* color: #DEEBF1; */
+    color: #c7d2d7;
+}
+.insta-tier-text-2 {
+    color: #76D900;
+}
+.insta-tier-text-3 {
+    color: #00C8EF;
+}
+.insta-tier-text-4 {
+    color: #D000F1;
+}
+.insta-tier-text-5 {
+    color: #FFF100;
+}
+.insta-monkeys-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.insta-monkey-total-text {
+    font-size: 32px;
+    color: #FFD700;
+    text-align: center;
+}
+.insta-monkey-progress-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+.insta-monkey-tier-div {
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.insta-monkey-top-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 .black-outline {
     -webkit-text-stroke: 0.7px black;
     text-shadow: 1px 0px 0px #000, -1px 0px 0 #000, 0px 1px 0 #000, 1px 0px 0px #000, 1px 2px 0px #000, -1px -1px 0 #000, -1px 2px 0 #000, 1px -1px 0px #000;
@@ -1754,7 +1836,9 @@
 .subtitle-outline {
     -webkit-text-stroke: 0.7px #E63C00;
     text-shadow: 1px 0px 0px #E63C00, -1px 0px 0 #E63C00, 0px 1px 0 #E63C00, 1px 0px 0px #E63C00, 1px 2px 0px #E63C00, -1px -1px 0 #E63C00, -1px 2px 0 #E63C00, 1px -1px 0px #E63C00;
-
+}
+.t5-insta-outline {
+    text-shadow: 1px 0px 0px #FF7800, -1px 0px 0 #FF7800, 0px 1px 0 #FF7800, 1px 0px 0px #FF7800, 1px 2px 0px #FF7800, -1px -1px 0 #FF7800, -1px 2px 0 #FF7800, 1px -1px 0px #FF7800;
 }
 
 .upgrade-tooltip {
