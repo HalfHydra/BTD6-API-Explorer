@@ -1626,7 +1626,8 @@
     justify-content: space-between;
     /* padding: 10px; */
     width: 100%;
-    background-color: var(--profile-primary)
+    background-color: var(--profile-primary);
+    border-radius: 10px;
 }
 .towers-container {
     max-width: 850px;
@@ -1835,6 +1836,88 @@
 }
 .insta-tier-scale {
     transform: scale(0.85);
+}
+.achievements-progress-container {
+    width: 100%;
+}
+.achievements-header-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: var(--profile-primary);
+    border-radius: 10px;
+}
+.achievement-div {
+    width: 580px;
+    background-color: var(--profile-primary); 
+    margin:10px;
+    border-radius:10px;
+}
+.achievement-icon-div {
+    width: 100px;
+    height: 100px;
+    background-image: url(../Assets/UI/UpgradeContainerTier5.png);
+    background-size: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    transform: scale(0.85);
+}
+.achievement-icon-img {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    position: absolute;
+}
+.achievement-top-div {
+    display: flex;
+}
+.achievement-rewards-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 450px;
+    background-color: var(--profile-tertiary);
+    border-radius: 10px;
+    margin-left: 10px;
+    height: 107px;
+    align-items: center;
+}
+.achievement-reward-img {
+    width: 100px;
+    height: 80px;
+    object-fit: contain;
+}
+.achievement-name-text {
+    font-size: 28px;
+}
+.achievement-desc-text {
+    font-family: 'GardeniaBold';
+    font-size: 20px;
+}
+.achievements-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.achievement-text-div {
+    width: 470px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.achievement-reward-text {
+    font-size: 24px;
+    text-align: center;
+}
+.achievement-bottom-div {
+    display: flex;
+    padding-bottom: 10px;
+    align-items: center;
+}
+.achievement-completed-check {
+    width: 100px;
+    height: 80px;
+    object-fit: contain;
 }
 
 .black-outline {

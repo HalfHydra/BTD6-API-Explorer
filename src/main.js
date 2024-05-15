@@ -919,7 +919,7 @@ function changeProgressTab(selector){
             generateInstaMonkeysProgress();
             break;
         case "Achievements":
-            //generateAchievementsProgress();
+            generateAchievementsProgress();
             break;
         case "Extras":
             //generateExtrasProgress();
@@ -1493,7 +1493,6 @@ function generateHeroProgressHero(hero, nameColor){
     heroProgressMiddle.appendChild(heroSkinsDiv);
 
     constants.heroSkins[hero].forEach((skin) => {
-        console.log(`${skin}, ${btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin]}`)
         if ((btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == false || btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == null) && skin != hero) { return; }
 
         // || skin == hero
@@ -1843,7 +1842,6 @@ function generateMapsProgress(){
     mapProgressFilterDifficultySelect.id = 'map-progress-filter-difficulty-select';
     mapProgressFilterDifficultySelect.classList.add('map-progress-filter-difficulty-select');
     mapProgressFilterDifficultySelect.addEventListener('change', () => {
-        console.log(mapProgressFilterDifficultySelect.value);
         onChangeDifficultyFilter(mapProgressFilterDifficultySelect.value);
     })
     let options = ["All","Beginner","Intermediate","Advanced","Expert"]
@@ -3127,6 +3125,274 @@ function generateInstaObtainGuide() {
     titleGuideDesc.classList.add('black-outline');
     titleGuideDesc.innerHTML = "Select a button to read more about that method.";
     progressContent.appendChild(titleGuideDesc);
+}
+
+function generateAchievementsProgress() {
+    let progressContent = document.getElementById('progress-content');
+    progressContent.innerHTML = "";
+
+    let achievementsProgressContainer = document.createElement('div');
+    achievementsProgressContainer.id = 'achievements-progress-container';
+    achievementsProgressContainer.classList.add('achievements-progress-container');
+    progressContent.appendChild(achievementsProgressContainer);
+
+    //headerbar
+    let achievementsHeaderBar = document.createElement('div');
+    achievementsHeaderBar.id = 'achievements-header-bar';
+    achievementsHeaderBar.classList.add('achievements-header-bar');
+    achievementsProgressContainer.appendChild(achievementsHeaderBar);
+    //buttons for grid and list view for achievements
+    let achievementsViews = document.createElement('div');
+    achievementsViews.id = 'achievements-views';
+    achievementsViews.classList.add('maps-progress-views');
+    achievementsHeaderBar.appendChild(achievementsViews);
+    //filter for all, locked, or unlocked
+    // let achievementsFilters = document.createElement('div');
+    // achievementsFilters.id = 'achievements-filters';
+    // achievementsFilters.classList.add('maps-progress-views');
+    // achievementsHeaderBar.appendChild(achievementsFilters);
+
+    // let achievementStatusFilter = document.createElement('div');
+    // achievementStatusFilter.id = 'achievement-status-filter';
+    // achievementStatusFilter.classList.add('maps-progress-views');
+    // achievementStatusFilter.classList.add('black-outline');
+    // achievementStatusFilter.innerHTML = "All";
+    // achievementStatusFilter.addEventListener('click', () => {
+    //     onChangeAchievementsFilter("all");
+    // })
+    // achievementsFilters.appendChild(achievementStatusFilter);
+
+    let mapsProgressViewsText = document.createElement('p');
+    mapsProgressViewsText.id = 'maps-progress-views-text';
+    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressViewsText.classList.add('black-outline');
+    mapsProgressViewsText.innerHTML = "Display Type:";
+    achievementsViews.appendChild(mapsProgressViewsText);
+
+    let achievementsGameView = document.createElement('div');
+    achievementsGameView.id = 'achievements-game-view';
+    achievementsGameView.classList.add('maps-progress-view');
+    achievementsGameView.classList.add('black-outline');
+    achievementsGameView.innerHTML = "Game";
+    achievementsGameView.addEventListener('click', () => {
+        onChangeAchievementsView("game");
+    })
+    achievementsViews.appendChild(achievementsGameView);
+
+    let achievementsListView = document.createElement('div');
+    achievementsListView.id = 'achievements-list-view';
+    achievementsListView.classList.add('maps-progress-view');
+    achievementsListView.classList.add('black-outline');
+    achievementsListView.innerHTML = "List";
+    achievementsListView.addEventListener('click', () => {
+        onChangeAchievementsView("list");
+    })
+    achievementsViews.appendChild(achievementsListView);
+
+    let mapsProgressFilter = document.createElement('div');
+    mapsProgressFilter.id = 'maps-progress-filter';
+    mapsProgressFilter.classList.add('maps-progress-filter');
+    achievementsHeaderBar.appendChild(mapsProgressFilter);
+
+    let mapProgressFilterDifficulty = document.createElement('div');
+    mapProgressFilterDifficulty.id = 'map-progress-filter-difficulty';
+    mapProgressFilterDifficulty.classList.add('map-progress-filter-difficulty');
+    mapsProgressFilter.appendChild(mapProgressFilterDifficulty);
+
+    let mapsProgressFilterDifficultyText = document.createElement('p');
+    mapsProgressFilterDifficultyText.id = 'maps-progress-filter-difficulty-text';
+    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressFilterDifficultyText.classList.add('black-outline');
+    mapsProgressFilterDifficultyText.innerHTML = "Filter:";
+    mapProgressFilterDifficulty.appendChild(mapsProgressFilterDifficultyText);
+
+    let mapProgressFilterDifficultySelect = document.createElement('select');
+    mapProgressFilterDifficultySelect.id = 'map-progress-filter-difficulty-select';
+    mapProgressFilterDifficultySelect.classList.add('map-progress-filter-difficulty-select');
+    mapProgressFilterDifficultySelect.addEventListener('change', () => {
+        onChangeDifficultyFilter(mapProgressFilterDifficultySelect.value);
+    })
+    let options = ["All","Locked","Unlocked"]
+    options.forEach((option) => {
+        let difficultyOption = document.createElement('option');
+        difficultyOption.value = option;
+        difficultyOption.innerHTML = option;
+        mapProgressFilterDifficultySelect.appendChild(difficultyOption);
+    })
+    mapProgressFilterDifficulty.appendChild(mapProgressFilterDifficultySelect);
+
+    let AchievementsContainer = document.createElement('div');
+    AchievementsContainer.id = 'achievements-container';
+    AchievementsContainer.classList.add('achievements-container');
+    progressContent.appendChild(AchievementsContainer);
+
+    generateAchievementsGameView();
+}
+
+function generateAchievementsGameView(){
+    //grid view
+    let AchievementsContainer = document.getElementById('achievements-container');
+    AchievementsContainer.innerHTML = "";
+
+    for (let id in constants.achievementGameOrder) {
+        let achievementData = achievementsJSON[id];
+        let achievementClaimed = btd6usersave.achievementsClaimed.includes(reverseAchievementNameFixMap[achievementData.name] || achievementData.name);
+
+        let achievementDiv = document.createElement('div');
+        achievementDiv.classList.add('achievement-div');
+        AchievementsContainer.appendChild(achievementDiv);
+
+        let achievementTopDiv = document.createElement('div');
+        achievementTopDiv.classList.add('achievement-top-div');
+        achievementDiv.appendChild(achievementTopDiv);
+
+        let achievementIconDiv = document.createElement('div');
+        achievementIconDiv.classList.add('achievement-icon-div');
+        achievementTopDiv.appendChild(achievementIconDiv);
+
+        let achievementIconImg = document.createElement('img');
+        achievementIconImg.classList.add('achievement-icon-img');
+        achievementIconImg.src = getAchievementIcon(achievementData.model.achievementIcon);
+        achievementIconDiv.appendChild(achievementIconImg);
+
+        let achievementTextDiv = document.createElement('div');
+        achievementTextDiv.classList.add('achievement-text-div');
+        achievementTopDiv.appendChild(achievementTextDiv);
+
+        let achievementNameText = document.createElement('p');
+        achievementNameText.classList.add('achievement-name-text');
+        achievementNameText.classList.add('black-outline');
+        achievementNameText.innerHTML = getLocValue(`Achievement ${achievementData.model.achievementId} Name`);
+        achievementTextDiv.appendChild(achievementNameText);
+
+        let achievementDescText = document.createElement('p');
+        achievementDescText.classList.add('achievement-desc-text');
+        let achievementDesc = getLocValue(`Achievement ${achievementData.model.achievementId} Description`)
+        achievementDescText.innerHTML = achievementDesc.indexOf("{0}") != -1 ? achievementDesc.replace("{0}", achievementData.model.achievementGoal.toLocaleString()) : achievementDesc;
+        achievementTextDiv.appendChild(achievementDescText);
+
+        let achievementBottomDiv = document.createElement('div');
+        achievementBottomDiv.classList.add('achievement-bottom-div');
+        achievementDiv.appendChild(achievementBottomDiv);
+
+        let achievementRewardsDiv = document.createElement('div');
+        achievementRewardsDiv.classList.add('achievement-rewards-div');
+        achievementBottomDiv.appendChild(achievementRewardsDiv);
+
+        for (let [index, data] of Object.entries(processRewardsString(achievementData.model.loot))) {
+            let achievementRewardDiv = document.createElement('div');
+            achievementRewardDiv.classList.add('achievement-reward-div');
+            achievementRewardsDiv.appendChild(achievementRewardDiv);
+
+            let achievementRewardImg = document.createElement('img');
+            achievementRewardImg.classList.add('achievement-reward-img');
+            achievementRewardImg.src = getRewardIcon(data);
+            achievementRewardDiv.appendChild(achievementRewardImg);
+
+            let achievementRewardText = document.createElement('p');
+            achievementRewardText.classList.add('achievement-reward-text');
+            achievementRewardText.classList.add('black-outline');
+            let text = "";
+            switch (data.type) {
+                case "InstaMonkey":
+                    text = data.tiers.split("").join("-")
+                    break;
+                case "Knowledge":
+                    text = "+ " + data.amount.toLocaleString()
+                    break;
+                case "Power":
+                case "RandomInstaMonkey":
+                    text = "X " + data.amount.toLocaleString()
+                    break;
+                default:
+                    text = data.amount ? data.amount.toLocaleString() : "";
+                    break;
+            }
+            achievementRewardText.innerHTML = text;
+            achievementRewardDiv.appendChild(achievementRewardText);
+        }
+
+        let achievementCompletedCheck = document.createElement('img');
+        achievementCompletedCheck.classList.add('achievement-completed-check');
+        achievementCompletedCheck.src = achievementClaimed ? "./Assets/UI/TickGreenIcon.png" : "";
+        achievementBottomDiv.appendChild(achievementCompletedCheck);
+
+        achievementDiv.addEventListener('click', () => {
+            // onSelectAchievement(achievement);
+        })
+    }
+    //top div
+    //icon div
+    //icon img
+    //name text
+    //desc text
+    //bottom div
+    //rewards div
+    //looped reward div
+    //looped reward img
+    //looped reward text
+    //completed check
+}
+
+function generateAchivementsListView(){
+    //list view
+    //looped list div
+    //icon div from above
+    //name and desc div
+    //name text
+    //desc text
+    //rewards div from above
+    //checkmark for completed
+}
+
+function processRewardsString(input){
+    let result = {};
+    let rewards = input.split("#");
+    let counter = 0;
+    for (let reward of rewards) {
+        result[counter] = {};
+        let rewardData = reward.split(":");
+        let rewardType = rewardData[0];
+        if (!["MonkeyMoney","Power","InstaMonkey","KnowledgePoints","RandomInstaMonkey","Trophy"].includes(rewardType)) {
+            result[counter].type = "Other";
+            result[counter].value = rewardType;
+            counter++;
+            continue;
+        }
+        let params = rewardData[1].split(",");
+        switch (rewardType) {
+            case "MonkeyMoney":
+                result[counter].type = "MonkeyMoney";
+                result[counter].amount = parseInt(params[0]);
+                break;
+            case "Power":
+                result[counter].type = "Power";
+                result[counter].power = params[0];
+                result[counter].amount = parseInt(params[1]);
+                if(params[1] == null) { result[counter].amount = 1;}
+                break;
+            case "InstaMonkey":
+                result[counter].type = "InstaMonkey";
+                result[counter].tower = params[0];
+                result[counter].tiers = params[1];
+                break;
+            case "KnowledgePoints":
+                result[counter].type = "KnowledgePoints";
+                result[counter].amount = parseInt(params[0]);
+                break;
+            case "RandomInstaMonkey":
+                result[counter].type = "RandomInstaMonkey";
+                result[counter].tier = params[0];
+                result[counter].amount = parseInt(params[1]);
+                break;
+            case "Trophy":
+                result[counter].type = "Trophy";
+                result[counter].trophy = params[0];
+                break;
+        }
+        counter++;
+    }
+    return result;
 }
 
 function changeHexBGColor(color){

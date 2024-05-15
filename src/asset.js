@@ -38,6 +38,11 @@ const achievementNameFixMap = {
     "InstaCentury": "Insta Century"
 }
 
+const reverseAchievementNameFixMap = Object.entries(achievementNameFixMap).reduce((acc, [key, value]) => {
+    acc[value] = key;
+    return acc;
+}, {});
+
 const skinNameFixMap = {
     "ObynOceanGuardian": "OceanObyn",
     "MoltenObyn": "MountainObyn",
@@ -235,6 +240,25 @@ function getMedalIcon(medal){
 
 function getModeIcon(mode){
     return `Assets/ModeIcon/${mode}Btn.png`;
+}
+
+function getRewardIcon(rewardData){
+    switch(rewardData.type){
+        case "MonkeyMoney":
+            return `Assets/UI/BloonjaminsIcon.png`;
+        case "Power":
+            return getPowerIcon(rewardData.power);
+        case "InstaMonkey":
+            return getInstaMonkeyIcon(rewardData.tower, rewardData.tiers);
+        case "KnowledgePoints":
+            return `Assets/UI/KnowledgeIcon.png`;
+        case "RandomInstaMonkey":
+            return `Assets/UI/InstaRandomTier${rewardData.tier == 0 ? 1 : rewardData.tier}.png`;
+        case "Trophy":
+            return `Assets/UI/TrophyIcon.png`;
+        default:
+            return `Assets/UI/${rewardData.value}Icon.png`;
+    }
 }
 
 function getLocValue(key){
