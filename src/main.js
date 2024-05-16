@@ -882,16 +882,16 @@ function generateOverview(){
         let towerImg = document.createElement('img');
         towerImg.id = 'tower-img';
         towerImg.classList.add('hero-img');
-        towerImg.src = getTowerAssetPath(tower,"000");
-        towerImg.style.display = "none";
-        towerImg.addEventListener('load', () => {
-            if(towerImg.width < towerImg.height){
-                towerImg.style.width = `${ratioCalc(3,150,800,0,towerImg.width)}px`
-            } else {
-                towerImg.style.height = `${ratioCalc(3,150,800,0,towerImg.height)}px`
-            }
-            towerImg.style.removeProperty('display');
-        })
+        towerImg.src = getInstaContainerIcon(tower,"000");
+        // towerImg.style.display = "none";
+        // towerImg.addEventListener('load', () => {
+        //     if(towerImg.width < towerImg.height){
+        //         towerImg.style.width = `${ratioCalc(3,150,800,0,towerImg.width)}px`
+        //     } else {
+        //         towerImg.style.height = `${ratioCalc(3,150,800,0,towerImg.height)}px`
+        //     }
+        //     towerImg.style.removeProperty('display');
+        // })
         towerDiv.appendChild(towerImg);
 
         let towerText = document.createElement('p');
