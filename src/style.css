@@ -1499,7 +1499,7 @@
     background-color: var(--profile-secondary);
     padding-bottom: 20px;
     margin-bottom: 20px;
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 0 10px 10px;
 }
 .maps-game-container {
     display: flex;
@@ -2220,5 +2220,11 @@ p {
     }
     .content {
         overflow-x: hidden;
+    }
+    .map-container {
+        overflow-x: scroll;
+    }
+    .maps-progress-views {
+        padding: 10px 5px;
     }
 }
