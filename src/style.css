@@ -2008,39 +2008,19 @@
 }
 
 .upgrade-tooltip {
-    visibility: hidden;
     width: 415px;
     height: 90px;
     background-color: #F4F3E2;
     color: black;
     font-family: "GardeniaBold";
     line-height: 22px;
-    text-align: left;
     border-radius: 26px;
-    position: absolute;
-    z-index: 5;
-    bottom: 110%;
-    left: 50%;
-    margin-left: -222px;
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     border: 20px solid transparent;
     border-image-slice: 50;
     border-image-source: url(../Assets/UI/SpeechBubbleSquare.png);
-}
-.upgrade-tooltip::after {
-    content: "";
-    position: absolute;
-    top: 117%;
-    left: 50%;
-    margin-left: -20px;
-    border-width: 15px;
-    border-style: solid;
-    border-image-source: url(../Assets/UI/SpeechBubblePoint2.png);
-    border-image-slice: 35;
 }
 .upgrade-div:hover .upgrade-tooltip {
     visibility: visible;

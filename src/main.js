@@ -1235,7 +1235,7 @@ function generateTowerProgressTower(tower){
     let towerProgressContentDesc = document.createElement('p');
     towerProgressContentDesc.id = 'tower-progress-content-desc';
     towerProgressContentDesc.classList.add('tower-progress-content-desc'+ (paragonUnlocked ? '-paragon' : ''));
-    towerProgressContentDesc.innerHTML = locJSON[`${tower} Description`];;
+    towerProgressContentDesc.innerHTML = locJSON[`${tower} Description`];
     towerProgressContentTop.appendChild(towerProgressContentDesc);
 
     let towerNameAndPortrait = document.createElement('div');
@@ -1261,6 +1261,12 @@ function generateTowerProgressTower(tower){
     towerProgressPortrait.classList.add('tower-progress-portrait-img');
     towerProgressPortrait.src = getTowerAssetPath(tower,"000");
     towerProgressPortraitDiv.appendChild(towerProgressPortrait);
+
+    let upgradeTooltip = document.createElement('div');
+    upgradeTooltip.id = `upgrade-tooltip`;
+    upgradeTooltip.classList.add('upgrade-tooltip');
+    upgradeTooltip.innerHTML = locJSON[`${tower} Description`];
+    towerProgressContent.appendChild(upgradeTooltip);
 
     let towerProgressMainDiv = document.createElement('div');
     towerProgressMainDiv.id = 'tower-progress-main-div';
@@ -1394,14 +1400,9 @@ function generateUpgradeIcon(tower, upgrade, status, row, tier, paragon, grayOut
     upgradeText.innerHTML = getLocValue(upgrade);
     upgradeDiv.appendChild(upgradeText);
 
-    let upgradeTooltip = document.createElement('div');
-    upgradeTooltip.id = `${tower}-${upgrade}-tooltip`;
-    upgradeTooltip.classList.add('upgrade-tooltip');
-    upgradeTooltip.innerHTML = getLocValue(`${upgrade} Description`);
-    upgradeDiv.appendChild(upgradeTooltip);
-
     upgradeDiv.addEventListener('click', () => {
         onSelectTowerUpgrade(tower, upgrade, towerUpgrade);
+        document.getElementById("upgrade-tooltip").innerHTML = getLocValue(`${upgrade} Description`);
         Array.from(document.getElementsByClassName('upgrade-glow')).forEach((glow) => {
             glow.classList.remove('upgrade-glow');
         });
@@ -1448,14 +1449,9 @@ function generateParagonIcon(tower, upgrade, status){
     paragonText.innerHTML = getLocValue(upgrade);
     paragonDiv.appendChild(paragonText);
 
-    let paragonTooltip = document.createElement('div');
-    paragonTooltip.id = `${tower}-${upgrade}-tooltip`;
-    paragonTooltip.classList.add('upgrade-tooltip');
-    paragonTooltip.innerHTML = getLocValue(`${upgrade} Description`);
-    paragonDiv.appendChild(paragonTooltip);
-
     paragonDiv.addEventListener('click', () => {
         onSelectTowerUpgradeParagon(tower, upgrade, "Paragon");
+        document.getElementById("upgrade-tooltip").innerHTML = getLocValue(`${upgrade} Description`);
         Array.from(document.getElementsByClassName('upgrade-glow')).forEach((glow) => {
             glow.classList.remove('upgrade-glow');
         });
