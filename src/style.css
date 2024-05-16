@@ -213,7 +213,6 @@
 .content {
     max-width: 1200px;
     margin: 0 auto;
-    overflow-x: hidden;
 }
 .content-div {
     border-radius: 10px;
@@ -2218,5 +2217,8 @@ p {
     }
     .insta-monkey-icons-container {
         justify-content: center;
+    }
+    .content {
+        overflow-x: hidden;
     }
 }
