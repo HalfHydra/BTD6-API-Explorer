@@ -1201,7 +1201,6 @@ function generateTowerProgressTower(tower){
     unlockedAllT5 = unlockedAllT5 === 15;
 
     let paragonUnlocked = constants.paragonsAvailable.includes(tower) ? btd6usersave.acquiredUpgrades[`${tower} Paragon`] : false;
-    paragonUnlocked ? changeHexBGColor(constants.ParagonBGColor) : changeHexBGColor()
 
     let towerProgressTop = document.createElement('div');
     towerProgressTop.id = 'tower-progress-top';
@@ -1279,6 +1278,7 @@ function generateTowerProgressTower(tower){
         selector.style.display = "none";
     }
     document.getElementById(`${tower}-selector-highlight`).style.display = "block";
+    paragonUnlocked ? changeHexBGColor(constants.ParagonBGColor) : changeHexBGColor()
 
     return towerProgressContent;
 }
@@ -1594,7 +1594,6 @@ function generateHeroesProgress(){
 
 function generateHeroProgressHero(hero, nameColor){
     currentlySelectedHero = hero;
-    changeHexBGColor(constants.HeroBGColors[hero]);
 
     let heroProgressContent = document.getElementById('hero-progress-content');
     heroProgressContent.innerHTML = "";
@@ -1697,9 +1696,9 @@ function generateHeroProgressHero(hero, nameColor){
         heroSkin.src = getHeroIconCircle(skin);
         heroSkin.addEventListener('click', () => {
             let colorToUse = constants.HeroBGColors[skin] ? constants.HeroBGColors[skin] : constants.HeroBGColors[hero];
-            document.getElementById("hero-portrait-glow").style.background = `radial-gradient(circle, rgb(${colorToUse[0] * 255},${colorToUse[1] * 255},${colorToUse[2] * 255}) 0%, transparent 70%)`
             changeHexBGColor(colorToUse);
             changeHeroSkin(skin, hero == skin);
+            document.getElementById("hero-portrait-glow").style.background = `radial-gradient(circle, rgb(${colorToUse[0] * 255},${colorToUse[1] * 255},${colorToUse[2] * 255}) 0%, transparent 70%)`
         })
         heroSkinsDiv.appendChild(heroSkin);
     })
@@ -1771,6 +1770,7 @@ function generateHeroProgressHero(hero, nameColor){
         selector.style.display = "none";
     }
     document.getElementById(`${hero}-selector-highlight`).style.display = "block";
+    changeHexBGColor(constants.HeroBGColors[hero]);
 
     return heroProgressContent;
 }
@@ -1782,6 +1782,10 @@ function changeHeroSkin(skin, isOriginal){
     let heroProgressDesc = document.getElementById('hero-progress-desc');
     heroProgressDesc.innerHTML = isOriginal ? getLocValue(`${skin} Description`) : getLocValue(`${skin}SkinDescription`);
     changeHeroLevelPortrait(1);
+    //stupid hack to fix ios redraw
+    document.body.style.display = "none"
+    document.body.offsetHeight;
+    document.body.style.removeProperty("display")
 }
 
 function changeHeroLevelPortrait(level){

@@ -3,7 +3,7 @@
 
 <head>
     <title>OAKTool</title>
-    <meta name="viewport" content="width=800, initial-scale=1">
+    <meta name="viewport" content="width=800">
     <link rel="stylesheet" href="./src/reset.css">
     <link rel="stylesheet" href="./src/style.css">
     <style>
@@ -220,13 +220,15 @@
             });
             observer.observe(document.body, { childList: true, subtree: true });
         });
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
     </script>
 </head>
 
 <body>
     <div id="loading" class="loading-div">
         <div class="loading-icon">
-            <div class="loading-glow"></div>
+            <!-- <div class="loading-glow"></div> -->
             <div class="loading-container"></div>
             <img class="loading-head" src="../Assets/UI/UpgradeContainerTier5LockedHead.png">
             <p class="loading-text">LOADING...</p>
