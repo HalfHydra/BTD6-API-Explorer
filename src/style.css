@@ -406,16 +406,58 @@
     border-radius: 15px;
 }
 
-.top-heroes-div{
-    border: 20px solid transparent;
-    /* padding: 15px; */
-    border-image-source: url(../Assets/UI/StatsRibbon.png);
-    border-image-slice: 50;
-    background-color: #9F7842;
-    border-radius: 20px;
-    /* margin-left: 10px; */
+.top-heroes-top-ribbon-div{
     display: inline-block;
-    /* margin-right: 50px; */
+    background-image: url(../Assets/UI/StatsRibbonLong.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 340px;
+    height: 60px;
+}
+.top-heroes-text {
+    font-size: 32px;
+    padding: 14px 30px;
+}
+.top-heroes-monkeys-div {
+    background-color: var(--profile-tertiary);
+    border-radius: 10px;
+    width: 520px;
+    margin: 10px 0;
+}
+.top-heroes-top-div {
+    display: flex;
+    justify-content: space-between;
+}
+.hero-div {
+    background-image: url(../Assets/UI/InstaTowersContainerGold.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 10px;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.hero-img {
+    width: 150px;
+    object-fit: contain;
+}
+.hero-text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 32px;
+}
+.top-3-heroes-div {
+    display: flex;
+    justify-content: space-evenly;
+}
+.other-heroes-div {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .progress-clipboard {
@@ -1895,10 +1937,12 @@
 .achievement-desc-text {
     font-family: 'GardeniaBold';
     font-size: 20px;
+    padding-top: 4px;
 }
 .achievements-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .achievement-text-div {
     width: 470px;
@@ -1918,6 +1962,28 @@
     width: 100px;
     height: 80px;
     object-fit: contain;
+}
+.extra-progress-div {
+    display: flex;
+    flex-wrap: wrap;
+    width: 700px;
+    background-color: var(--profile-primary);
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 3px solid var(--profile-tertiary);
+}
+.extra-progress-img {
+    width:100px;
+    height: 100px;
+    object-fit: contain;
+    padding-left: 10px;
+}
+.extra-progress-text {
+    font-size: 32px;
+    text-align: center;
+    width: 490px;
 }
 
 .black-outline {
@@ -2100,5 +2166,17 @@ p {
     .hero-progress-div {
         width: 220px;
         /* margin-left: -1vh; */
+    }
+}
+
+@media (max-width: 850px) {
+    .towers-container {
+        justify-content: center;
+    }
+    .maps-progress-view-list {
+        display:none;
+    }
+    .map-progress-filter-difficulty-select {
+        margin-right: 0px;
     }
 }

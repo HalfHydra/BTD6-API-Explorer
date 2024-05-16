@@ -38,12 +38,18 @@ let processedMapData = {
 
 let currentlySelectedHero = "";
 
+let allHeroesShown = false;
+let allTowersShown = false;
+
 let currentMapView = "grid";
 let coopEnabled = false;
 let currentDifficultyFilter = "All";
 let mapPage = 0;
 
 let currentInstaView = "game";
+
+let currentAchievementFilter = "game";
+let currentAchievementRewardFilter = "None";
 
 let processedInstaData = {
     "TowerTotal": {},
@@ -142,6 +148,7 @@ function generateStats(){
     profileStats["Highest Round (All Time)"] = btd6publicprofile.gameplay["highestRound"];
     profileStats["Highest Round (CHIMPS)"] = btd6publicprofile.gameplay["highestRoundCHIMPS"];
     profileStats["Highest Round (Deflation)"] = btd6publicprofile.gameplay["highestRoundDeflation"];
+    profileStats["Monkeys Placed"] = btd6publicprofile.gameplay["monkeysPlaced"];
     profileStats["Total Pop Count"] = btd6publicprofile.bloonsPopped["bloonsPopped"];
     profileStats["Total Co-Op Pop Count"] = btd6publicprofile.bloonsPopped["coopBloonsPopped"];
     profileStats["Camo Bloons Popped"] = btd6publicprofile.bloonsPopped["camosPopped"];
@@ -152,11 +159,14 @@ function generateStats(){
     profileStats["MOABs Popped"] = btd6publicprofile.bloonsPopped["moabsPopped"];
     profileStats["BFBs Popped"] = btd6publicprofile.bloonsPopped["bfbsPopped"];
     profileStats["ZOMGs Popped"] = btd6publicprofile.bloonsPopped["zomgsPopped"];
+    profileStats["DDTs Popped"] = btd6publicprofile.bloonsPopped["ddtsPopped"];
     profileStats["BADs Popped"] = btd6publicprofile.bloonsPopped["badsPopped"];
     profileStats["Bloons Leaked"] = btd6publicprofile.bloonsPopped["bloonsLeaked"];
     profileStats["Cash Generated"] = btd6publicprofile.gameplay["cashEarned"];
     profileStats["Cash Gifted"] = btd6publicprofile.gameplay["coopCashGiven"];
+    profileStats["Abilities Used"] = btd6publicprofile.gameplay["abilitiesUsed"];
     profileStats["Powers Used"] = btd6publicprofile.gameplay["powersUsed"];
+    profileStats["Insta Monkeys Used"] = btd6publicprofile.gameplay["instaMonkeysUsed"];
     profileStats["Daily Reward Chests Opened"] = btd6publicprofile.gameplay["dailyRewards"];
     profileStats["Challenges Completed"] = btd6publicprofile.gameplay["challengesCompleted"];
     profileStats["Achievements"] = btd6publicprofile.gameplay["achievements"];
@@ -172,6 +182,7 @@ function generateStats(){
     profileStats["Collection Chests Opened"] = btd6publicprofile.gameplay["collectionChestsOpened"];
     profileStats["Golden Bloons Popped"] = btd6publicprofile.bloonsPopped["goldenBloonsPopped"];
     profileStats["Monkey Teams Wins"] = btd6publicprofile.gameplay["monkeyTeamsWins"];
+    profileStats["Bosses Popped"] = btd6publicprofile.bloonsPopped["bossesPopped"];
     profileStats["Damage Done To Bosses"] = btd6publicprofile.gameplay["damageDoneToBosses"];
 
     //stats from usersave
@@ -253,6 +264,8 @@ function generateExtras(){
     extrasUnlocked["Big Monkey Towers"] = btd6usersave["seenBigTowers"];
     extrasUnlocked["Small Monkey Towers"] = btd6usersave["unlockedSmallTowers"];
     //extrasUnlocked["Small Bosses"] = btd6usersave["unlockedSmallBosses"]; hopefully this gets implemented
+    //but in the mean time now we can do this:
+    extrasUnlocked["Small Bosses"] = btd6usersave.achievementsClaimed.includes("25 to Life");
 }
 
 function generateProgressSubText(){
@@ -693,22 +706,201 @@ function generateOverview(){
         medalDiv.appendChild(medalText);
     }
 
+    let topHeroesMonkesyDiv = document.createElement('div');
+    topHeroesMonkesyDiv.id = 'top-heroes-monkeys-div';
+    topHeroesMonkesyDiv.classList.add('top-heroes-monkeys-div');
+    leftColumnDiv.appendChild(topHeroesMonkesyDiv);
+    
     /*let topColumnDiv = document.createElement('div');
     topColumnDiv.id = 'top-column-div';
     topColumnDiv.classList.add('right-column-div');
-    leftColumnDiv.appendChild(topColumnDiv);
+    leftColumnDiv.appendChild(topColumnDiv);*/
 
     let topHeroesDiv = document.createElement('div');
     topHeroesDiv.id = 'top-heroes-div';
     topHeroesDiv.classList.add('top-heroes-div');
-    topColumnDiv.appendChild(topHeroesDiv);*/
+    topHeroesMonkesyDiv.appendChild(topHeroesDiv);
 
-    /*let topHeroesHeaderText = document.createElement('p');
-    topColumnHeaderText.id = 'top-column-header-text';
-    topColumnHeaderText.classList.add('top-header-text');
-    topColumnHeaderText.classList.add('black-outline');
-    topColumnHeaderText.innerHTML = 'Top Heroes';
-    leftColumnHeader.appendChild(topColumnHeaderText);*/
+    let topHeroesTopDiv = document.createElement('div');
+    topHeroesTopDiv.id = 'top-heroes-top-div';
+    topHeroesTopDiv.classList.add('top-heroes-top-div');
+    topHeroesDiv.appendChild(topHeroesTopDiv);
+
+    let topHeroesTopRibbonDiv = document.createElement('div');
+    topHeroesTopRibbonDiv.id = 'top-heroes-top-div';
+    topHeroesTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
+    topHeroesTopDiv.appendChild(topHeroesTopRibbonDiv);
+
+    let topHeroesText = document.createElement('p');
+    topHeroesText.id = 'top-heroes-text';
+    topHeroesText.classList.add('top-heroes-text');
+    topHeroesText.classList.add('black-outline');
+    topHeroesText.innerHTML = 'Top Heroes';
+    topHeroesTopRibbonDiv.appendChild(topHeroesText);
+
+    let mapsProgressCoopToggle = document.createElement('div');
+    mapsProgressCoopToggle.id = 'maps-progress-coop-toggle';
+    mapsProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
+    topHeroesTopDiv.appendChild(mapsProgressCoopToggle);
+
+    let mapsProgressCoopToggleText = document.createElement('p');
+    mapsProgressCoopToggleText.id = 'maps-progress-coop-toggle-text';
+    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressCoopToggleText.classList.add('black-outline');
+    mapsProgressCoopToggleText.innerHTML = "Show All: ";
+    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
+
+    let mapsProgressCoopToggleInput = document.createElement('input');
+    mapsProgressCoopToggleInput.id = 'maps-progress-coop-toggle-input';
+    mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
+    mapsProgressCoopToggleInput.type = 'checkbox';
+    mapsProgressCoopToggleInput.addEventListener('change', () => {
+        mapsProgressCoopToggleInput.checked ? document.getElementById('other-heroes-div').style.display = 'flex' : document.getElementById('other-heroes-div').style.display = 'none';
+    })
+    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
+
+
+    let topHeroesList = document.createElement('div');
+    topHeroesList.id = 'top-heroes-list';
+    topHeroesList.classList.add('top-heroes-list');
+    topHeroesDiv.appendChild(topHeroesList);
+
+    let top3HeroesDiv = document.createElement('div');
+    top3HeroesDiv.id = 'top-3-heroes-div';
+    top3HeroesDiv.classList.add('top-3-heroes-div');
+    topHeroesList.appendChild(top3HeroesDiv);
+
+    let otherHeroesDiv = document.createElement('div');
+    otherHeroesDiv.id = 'other-heroes-div';
+    otherHeroesDiv.classList.add('other-heroes-div');
+    otherHeroesDiv.style.display = 'none';
+    topHeroesList.appendChild(otherHeroesDiv);
+
+    let counter = 0;
+
+    for (let [hero, xp] of Object.entries(btd6publicprofile["heroesPlaced"]).sort((a, b) => b[1] - a[1])){
+        console.log(hero, xp)
+        let heroDiv = document.createElement('div');
+        heroDiv.id = 'hero-div';
+        heroDiv.classList.add('hero-div');
+        counter < 3 ? top3HeroesDiv.appendChild(heroDiv) : otherHeroesDiv.appendChild(heroDiv);
+
+        let heroImg = document.createElement('img');
+        heroImg.id = 'hero-img';
+        heroImg.classList.add('hero-img');
+        heroImg.src = getHeroPortrait(hero,1);
+        heroImg.style.display = "none";
+        heroImg.addEventListener('load', () => {
+            if(heroImg.width < heroImg.height){
+                heroImg.style.width = `${ratioCalc(3,150,1920,0,heroImg.width)}px`
+            } else {
+                heroImg.style.height = `${ratioCalc(3,150,1920,0,heroImg.height)}px`
+            }
+            heroImg.style.removeProperty('display');
+        })
+        heroDiv.appendChild(heroImg);
+
+        let heroText = document.createElement('p');
+        heroText.id = 'hero-text';
+        heroText.classList.add('hero-text');
+        heroText.classList.add('black-outline');
+        heroText.innerHTML = xp.toLocaleString();
+        heroDiv.appendChild(heroText);
+        counter++;
+    }
+
+    let topTowersDiv = document.createElement('div');
+    topTowersDiv.id = 'top-towers-div';
+    topTowersDiv.classList.add('top-heroes-div');
+    topHeroesMonkesyDiv.appendChild(topTowersDiv);
+
+    let topTowersTopDiv = document.createElement('div');
+    topTowersTopDiv.id = 'top-towers-top-div';
+    topTowersTopDiv.classList.add('top-heroes-top-div');
+    topTowersDiv.appendChild(topTowersTopDiv);
+
+    let topTowersTopRibbonDiv = document.createElement('div');
+    topTowersTopRibbonDiv.id = 'top-towers-top-div';
+    topTowersTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
+    topTowersTopDiv.appendChild(topTowersTopRibbonDiv);
+
+    let topTowersText = document.createElement('p');
+    topTowersText.id = 'top-towers-text';
+    topTowersText.classList.add('top-heroes-text');
+    topTowersText.classList.add('black-outline');
+    topTowersText.innerHTML = 'Top Towers';
+    topTowersTopRibbonDiv.appendChild(topTowersText);
+
+    let mapsProgressCoopToggle2 = document.createElement('div');
+    mapsProgressCoopToggle2.id = 'maps-progress-coop-toggle';
+    mapsProgressCoopToggle2.classList.add('maps-progress-coop-toggle');
+    topTowersTopDiv.appendChild(mapsProgressCoopToggle2);
+
+    let mapsProgressCoopToggleText2 = document.createElement('p');
+    mapsProgressCoopToggleText2.id = 'maps-progress-coop-toggle-text';
+    mapsProgressCoopToggleText2.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressCoopToggleText2.classList.add('black-outline');
+    mapsProgressCoopToggleText2.innerHTML = "Show All: ";
+    mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleText2);
+
+    let mapsProgressCoopToggleInput2 = document.createElement('input');
+    mapsProgressCoopToggleInput2.id = 'maps-progress-coop-toggle-input';
+    mapsProgressCoopToggleInput2.classList.add('maps-progress-coop-toggle-input');
+    mapsProgressCoopToggleInput2.type = 'checkbox';
+    mapsProgressCoopToggleInput2.addEventListener('change', () => {
+        mapsProgressCoopToggleInput2.checked ? document.getElementById('other-towers-div').style.display = 'flex' : document.getElementById('other-towers-div').style.display = 'none';
+    })
+    mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleInput2);
+
+    
+    let topTowersList = document.createElement('div');
+    topTowersList.id = 'top-towers-list';
+    topTowersList.classList.add('top-heroes-list');
+    topTowersDiv.appendChild(topTowersList);
+
+    let top3TowersDiv = document.createElement('div');
+    top3TowersDiv.id = 'top-3-towers-div';
+    top3TowersDiv.classList.add('top-3-heroes-div');
+    topTowersList.appendChild(top3TowersDiv);
+
+    let otherTowersDiv = document.createElement('div');
+    otherTowersDiv.id = 'other-towers-div';
+    otherTowersDiv.classList.add('other-heroes-div');
+    otherTowersDiv.style.display = 'none';
+    topTowersList.appendChild(otherTowersDiv);
+
+    counter = 0;
+
+    for (let [tower, xp] of Object.entries(btd6publicprofile["towersPlaced"]).sort((a, b) => b[1] - a[1])){
+        let towerDiv = document.createElement('div');
+        towerDiv.id = 'tower-div';
+        towerDiv.classList.add('hero-div');
+        counter < 3 ? top3TowersDiv.appendChild(towerDiv) : otherTowersDiv.appendChild(towerDiv);
+
+        let towerImg = document.createElement('img');
+        towerImg.id = 'tower-img';
+        towerImg.classList.add('hero-img');
+        towerImg.src = getTowerAssetPath(tower,"000");
+        towerImg.style.display = "none";
+        towerImg.addEventListener('load', () => {
+            if(towerImg.width < towerImg.height){
+                towerImg.style.width = `${ratioCalc(3,150,800,0,towerImg.width)}px`
+            } else {
+                towerImg.style.height = `${ratioCalc(3,150,800,0,towerImg.height)}px`
+            }
+            towerImg.style.removeProperty('display');
+        })
+        towerDiv.appendChild(towerImg);
+
+        let towerText = document.createElement('p');
+        towerText.id = 'tower-text';
+        towerText.classList.add('hero-text');
+        towerText.classList.add('black-outline');
+        towerText.innerHTML = xp.toLocaleString();
+        towerDiv.appendChild(towerText);
+        counter++;
+    }
+
 
     let rightColumnDiv = document.createElement('div');
     rightColumnDiv.id = 'right-column-div';
@@ -922,7 +1114,7 @@ function changeProgressTab(selector){
             generateAchievementsProgress();
             break;
         case "Extras":
-            //generateExtrasProgress();
+            generateExtrasProgress();
             break;
     }
 }
@@ -1803,6 +1995,7 @@ function generateMapsProgress(){
     let mapsProgressList = document.createElement('div');
     mapsProgressList.id = 'maps-progress-list';
     mapsProgressList.classList.add('maps-progress-view');
+    mapsProgressList.classList.add('maps-progress-view-list');
     mapsProgressList.classList.add('black-outline')
     mapsProgressList.innerHTML = "List";
     mapsProgressList.addEventListener('click', () => {
@@ -2704,21 +2897,23 @@ function generateInstaMonkeysProgress() {
     instaMonkeysObtainView.id = 'insta-monkeys-obtain-view';
     instaMonkeysObtainView.classList.add('maps-progress-view');
     instaMonkeysObtainView.classList.add('black-outline');
-    instaMonkeysObtainView.innerHTML = "Where To Get";
+    // instaMonkeysObtainView.innerHTML = "Where To Get";
+    instaMonkeysObtainView.innerHTML = "Coming Soon";
     instaMonkeysObtainView.addEventListener('click', () => {
         onChangeInstaMonkeysView("obtain");
     })
-    // instaMonkeysExtras.appendChild(instaMonkeysObtainView);
+    instaMonkeysExtras.appendChild(instaMonkeysObtainView);
 
     let instaMonkeysRotationsView = document.createElement('div');
     instaMonkeysRotationsView.id = 'insta-monkeys-rotations-view';
     instaMonkeysRotationsView.classList.add('maps-progress-view');
     instaMonkeysRotationsView.classList.add('black-outline');
-    instaMonkeysRotationsView.innerHTML = "Event Rotations";
+    // instaMonkeysRotationsView.innerHTML = "Event Rotations";
+    instaMonkeysRotationsView.innerHTML = "Coming Soon";
     instaMonkeysRotationsView.addEventListener('click', () => {
         onChangeInstaMonkeysView("rotations");
     })
-    // instaMonkeysExtras.appendChild(instaMonkeysRotationsView);
+    instaMonkeysExtras.appendChild(instaMonkeysRotationsView);
 
     let instaMonkeysProgressContainer = document.createElement('div');
     instaMonkeysProgressContainer.id = 'insta-monkeys-progress-container';
@@ -3162,32 +3357,58 @@ function generateAchievementsProgress() {
     // })
     // achievementsFilters.appendChild(achievementStatusFilter);
 
-    let mapsProgressViewsText = document.createElement('p');
-    mapsProgressViewsText.id = 'maps-progress-views-text';
-    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text');
-    mapsProgressViewsText.classList.add('black-outline');
-    mapsProgressViewsText.innerHTML = "Display Type:";
-    achievementsViews.appendChild(mapsProgressViewsText);
+    // let mapsProgressViewsText = document.createElement('p');
+    // mapsProgressViewsText.id = 'maps-progress-views-text';
+    // mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text');
+    // mapsProgressViewsText.classList.add('black-outline');
+    // mapsProgressViewsText.innerHTML = "Filter:";
+    // achievementsViews.appendChild(mapsProgressViewsText);
 
-    let achievementsGameView = document.createElement('div');
-    achievementsGameView.id = 'achievements-game-view';
-    achievementsGameView.classList.add('maps-progress-view');
-    achievementsGameView.classList.add('black-outline');
-    achievementsGameView.innerHTML = "Game";
-    achievementsGameView.addEventListener('click', () => {
-        onChangeAchievementsView("game");
-    })
-    achievementsViews.appendChild(achievementsGameView);
+    // let achievementsGameView = document.createElement('div');
+    // achievementsGameView.id = 'achievements-game-view';
+    // achievementsGameView.classList.add('maps-progress-view');
+    // achievementsGameView.classList.add('black-outline');
+    // achievementsGameView.innerHTML = "Monkey Money";
+    // achievementsGameView.addEventListener('click', () => {
+    //     onChangeAchievementsRewardFilter("Monkey Money");
+    // })
+    // achievementsViews.appendChild(achievementsGameView);
 
-    let achievementsListView = document.createElement('div');
-    achievementsListView.id = 'achievements-list-view';
-    achievementsListView.classList.add('maps-progress-view');
-    achievementsListView.classList.add('black-outline');
-    achievementsListView.innerHTML = "List";
-    achievementsListView.addEventListener('click', () => {
-        onChangeAchievementsView("list");
+    // let achievementsListView = document.createElement('div');
+    // achievementsListView.id = 'achievements-list-view';
+    // achievementsListView.classList.add('maps-progress-view');
+    // achievementsListView.classList.add('black-outline');
+    // achievementsListView.innerHTML = "Knowledge";
+    // achievementsListView.addEventListener('click', () => {
+    //     onChangeAchievementsRewardFilter("knowledge");
+    // })
+    // achievementsViews.appendChild(achievementsListView);
+
+    let mapProgressFilterDifficulty2 = document.createElement('div');
+    mapProgressFilterDifficulty2.id = 'map-progress-filter-difficulty';
+    mapProgressFilterDifficulty2.classList.add('map-progress-filter-difficulty');
+    achievementsViews.appendChild(mapProgressFilterDifficulty2);
+
+    let mapsProgressFilterDifficultyText2 = document.createElement('p');
+    mapsProgressFilterDifficultyText2.id = 'maps-progress-filter-difficulty-text';
+    mapsProgressFilterDifficultyText2.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressFilterDifficultyText2.classList.add('black-outline');
+    mapsProgressFilterDifficultyText2.innerHTML = "Filter:";
+    mapProgressFilterDifficulty2.appendChild(mapsProgressFilterDifficultyText2);
+
+    let mapProgressFilterDifficultySelect2 = document.createElement('select');
+    mapProgressFilterDifficultySelect2.id = 'map-progress-filter-difficulty-select';
+    mapProgressFilterDifficultySelect2.classList.add('map-progress-filter-difficulty-select');
+
+    let options2 = ["None","Monkey Money","Knowledge Points","Insta Monkeys","Hidden Achievements"]
+    options2.forEach((option) => {
+        let difficultyOption = document.createElement('option');
+        difficultyOption.value = option;
+        difficultyOption.innerHTML = option;
+        mapProgressFilterDifficultySelect2.appendChild(difficultyOption);
     })
-    achievementsViews.appendChild(achievementsListView);
+    mapProgressFilterDifficulty2.appendChild(mapProgressFilterDifficultySelect2);
+
 
     let mapsProgressFilter = document.createElement('div');
     mapsProgressFilter.id = 'maps-progress-filter';
@@ -3203,14 +3424,14 @@ function generateAchievementsProgress() {
     mapsProgressFilterDifficultyText.id = 'maps-progress-filter-difficulty-text';
     mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text');
     mapsProgressFilterDifficultyText.classList.add('black-outline');
-    mapsProgressFilterDifficultyText.innerHTML = "Filter:";
+    mapsProgressFilterDifficultyText.innerHTML = "Display:";
     mapProgressFilterDifficulty.appendChild(mapsProgressFilterDifficultyText);
 
     let mapProgressFilterDifficultySelect = document.createElement('select');
     mapProgressFilterDifficultySelect.id = 'map-progress-filter-difficulty-select';
     mapProgressFilterDifficultySelect.classList.add('map-progress-filter-difficulty-select');
     mapProgressFilterDifficultySelect.addEventListener('change', () => {
-        onChangeDifficultyFilter(mapProgressFilterDifficultySelect.value);
+        onChangeAchievementsFilter(mapProgressFilterDifficultySelect.value);
     })
     let options = ["All","Locked","Unlocked"]
     options.forEach((option) => {
@@ -3226,6 +3447,13 @@ function generateAchievementsProgress() {
     AchievementsContainer.classList.add('achievements-container');
     progressContent.appendChild(AchievementsContainer);
 
+    mapProgressFilterDifficultySelect2.addEventListener('change', () => {
+        onChangeAchievementsFilter("Locked");
+        mapProgressFilterDifficultySelect.value = "Locked";
+        onChangeAchievementRewardFilter(mapProgressFilterDifficultySelect2.value);
+    })
+
+    onChangeAchievementsFilter("All");
     generateAchievementsGameView();
 }
 
@@ -3234,7 +3462,43 @@ function generateAchievementsGameView(){
     let AchievementsContainer = document.getElementById('achievements-container');
     AchievementsContainer.innerHTML = "";
 
-    for (let id in constants.achievementGameOrder) {
+    let achievements = constants.achievementGameOrder;
+    switch(currentAchievementFilter){
+        case "Locked":
+            achievements = achievements.filter(achievement => !btd6usersave.achievementsClaimed.includes(reverseAchievementNameFixMap[achievementsJSON[achievement].name] || achievementsJSON[achievement].name));
+            break;
+        case "Unlocked":
+            achievements = achievements.filter(achievement => btd6usersave.achievementsClaimed.includes(reverseAchievementNameFixMap[achievementsJSON[achievement].name] || achievementsJSON[achievement].name));
+            break;
+    }
+
+    switch(currentAchievementRewardFilter){
+        case "Monkey Money":
+            achievements = achievements.filter(achievement => achievementsJSON[achievement].model.loot.includes("MonkeyMoney"));
+            achievements = achievements.sort((a,b) => Object.values(processRewardsString(achievementsJSON[a].model.loot)).find(reward => reward.type == 'MonkeyMoney').amount - Object.values(processRewardsString(achievementsJSON[b].model.loot)).find(reward => reward.type == 'MonkeyMoney').amount)
+            break;
+        case "Knowledge Points":
+            achievements = achievements.filter(achievement => achievementsJSON[achievement].model.loot.includes("KnowledgePoints"));
+            break;
+        case "Insta Monkeys":
+            achievements = achievements.filter(achievement => achievementsJSON[achievement].model.loot.includes("InstaMonkey"));
+            break;
+        case "Hidden Achievements":
+            achievements = achievements.filter(achievement => achievementsJSON[achievement].model.hidden);
+            break;
+    }
+
+    if (achievements.length == 0) {
+        let noDataFound = document.createElement('p');
+        noDataFound.id = 'no-data-found';
+        noDataFound.classList.add('no-data-found');
+        noDataFound.classList.add('black-outline');
+        noDataFound.innerHTML = "No Data Found.";
+        noDataFound.style.width = "100%";
+        AchievementsContainer.appendChild(noDataFound);
+    }
+
+    for (let id of achievements) {
         let achievementData = achievementsJSON[id];
         let achievementClaimed = btd6usersave.achievementsClaimed.includes(reverseAchievementNameFixMap[achievementData.name] || achievementData.name);
 
@@ -3252,7 +3516,7 @@ function generateAchievementsGameView(){
 
         let achievementIconImg = document.createElement('img');
         achievementIconImg.classList.add('achievement-icon-img');
-        achievementIconImg.src = getAchievementIcon(achievementData.model.achievementIcon);
+        achievementIconImg.src = getAchievementIcon(achievementData.model.achievementIcon, achievementClaimed ? false : achievementData.model.hidden);
         achievementIconDiv.appendChild(achievementIconImg);
 
         let achievementTextDiv = document.createElement('div');
@@ -3262,12 +3526,12 @@ function generateAchievementsGameView(){
         let achievementNameText = document.createElement('p');
         achievementNameText.classList.add('achievement-name-text');
         achievementNameText.classList.add('black-outline');
-        achievementNameText.innerHTML = getLocValue(`Achievement ${achievementData.model.achievementId} Name`);
+        achievementNameText.innerHTML = achievementClaimed ? getLocValue(`Achievement ${achievementData.model.achievementId} Name`) : achievementData.model.hidden ? "???" : getLocValue(`Achievement ${achievementData.model.achievementId} Name`);
         achievementTextDiv.appendChild(achievementNameText);
 
         let achievementDescText = document.createElement('p');
         achievementDescText.classList.add('achievement-desc-text');
-        let achievementDesc = getLocValue(`Achievement ${achievementData.model.achievementId} Description`)
+        let achievementDesc = achievementClaimed ? getLocValue(`Achievement ${achievementData.model.achievementId} Description`) : achievementData.model.hidden ? "???" : getLocValue(`Achievement ${achievementData.model.achievementId} Description`);
         achievementDescText.innerHTML = achievementDesc.indexOf("{0}") != -1 ? achievementDesc.replace("{0}", achievementData.model.achievementGoal.toLocaleString()) : achievementDesc;
         achievementTextDiv.appendChild(achievementDescText);
 
@@ -3312,10 +3576,12 @@ function generateAchievementsGameView(){
             achievementRewardDiv.appendChild(achievementRewardText);
         }
 
-        let achievementCompletedCheck = document.createElement('img');
-        achievementCompletedCheck.classList.add('achievement-completed-check');
-        achievementCompletedCheck.src = achievementClaimed ? "./Assets/UI/TickGreenIcon.png" : "";
-        achievementBottomDiv.appendChild(achievementCompletedCheck);
+        if(achievementClaimed) {
+            let achievementCompletedCheck = document.createElement('img');
+            achievementCompletedCheck.classList.add('achievement-completed-check');
+            achievementCompletedCheck.src = "./Assets/UI/TickGreenIcon.png";
+            achievementBottomDiv.appendChild(achievementCompletedCheck);
+        }
 
         achievementDiv.addEventListener('click', () => {
             // onSelectAchievement(achievement);
@@ -3334,15 +3600,44 @@ function generateAchievementsGameView(){
     //completed check
 }
 
-function generateAchivementsListView(){
-    //list view
-    //looped list div
-    //icon div from above
-    //name and desc div
-    //name text
-    //desc text
-    //rewards div from above
-    //checkmark for completed
+function generateExtrasProgress() {
+    let progressContent = document.getElementById('progress-content');
+    progressContent.innerHTML = "";
+
+    let extrasProgressContainer = document.createElement('div');
+    extrasProgressContainer.id = 'extras-progress-container';
+    extrasProgressContainer.classList.add('extras-progress-container');
+    progressContent.appendChild(extrasProgressContainer);
+
+    let extras = [["Big Bloons", "BigBloonsMode"],["Small Bloons", "SmallBloonsMode"],["Big Monkey Towers","BigTowersMode"],["Small Monkey Towers", "SmallTowersMode"],["Small Bosses","SmallBossesMode"]]
+
+    for (let [name, loc] of extras) {
+        if (!extrasUnlocked[name]) { continue; }
+        let extraProgressDiv = document.createElement('div');
+        extraProgressDiv.classList.add('extra-progress-div');
+        extrasProgressContainer.appendChild(extraProgressDiv);
+
+        let extraProgressImg = document.createElement('img');
+        extraProgressImg.classList.add('extra-progress-img');
+        extraProgressImg.src = `./Assets/UI/${loc}Icon.png`;
+        extraProgressDiv.appendChild(extraProgressImg);
+
+        let extraProgressText = document.createElement('p');
+        extraProgressText.classList.add('extra-progress-text');
+        extraProgressText.classList.add('black-outline');
+        extraProgressText.innerHTML = getLocValue(loc);
+        extraProgressDiv.appendChild(extraProgressText);
+    }
+}
+
+function onChangeAchievementsFilter(filter){
+    currentAchievementFilter = filter;
+    generateAchievementsGameView();
+}
+
+function onChangeAchievementRewardFilter(filter){
+    currentAchievementRewardFilter = filter;
+    generateAchievementsGameView();
 }
 
 function processRewardsString(input){
