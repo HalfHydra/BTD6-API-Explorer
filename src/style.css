@@ -82,6 +82,114 @@
     border: 4px solid gold;
 }
 
+.front-page {
+    width: 750px;
+    background-color: var(--profile-primary);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius:10px;
+    border: 3px solid var(--profile-tertiary);
+    padding-bottom: 20px;
+}
+.front-page-text {
+    font-size: 28px;
+    font-family: 'GardeniaBold';
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+.key-entry {
+    height: 40px;
+    width: 320px;
+    font-family: 'GardeniaBold';
+    text-align: center;
+    border-radius: 4px;
+    margin: 15px;
+    font-size: 24px;
+}
+.start-button {
+    border: 15px solid transparent;
+    border-image-source: url(../Assets/UI/GreenBtnSquare.png);
+    border-image-slice: 40;
+    border-radius: 20px;
+    width: 100px;
+    font-family: 'Luckiest Guy';
+    color: white;
+    text-align: center;
+    font-size: 28px;
+    background: linear-gradient(180deg, rgb(103 229 0) 0%, rgb(62 215 0) 100%);
+}
+.where-button {
+    border: 15px solid transparent;
+    border-image-source: url(../Assets/UI/BlueBtnSquare.png);
+    border-image-slice: 40;
+    border-radius: 20px;
+    width: 250px;
+    font-family: 'Luckiest Guy';
+    color: white;
+    text-align: center;
+    font-size: 28px;
+    background: linear-gradient(180deg, rgb(0 217 255) 0%, rgb(0 198 255) 100%);
+}
+.faq-button {
+    width: 100px;
+    margin-left: 10px;
+}
+.info-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 15px;
+}
+.oak-instruction-img {
+    width: 700px;
+    margin: 0 25px;
+}
+.oak-instructions-text {
+    font-family: 'GardeniaBold';
+    font-size: 20px;
+    padding: 20px;
+    line-height: 28px;
+}
+.oak-instructions-header {
+    text-align: center;
+    font-size: 28px;
+}
+.privacy-button {
+    width: 250px;
+    margin-left: 10px;
+}
+.faq-question-div {
+    width: 600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+}
+.arrow-hide-btn {
+    width:50px;
+}
+.faq-question {
+    font-size: 28px;
+    line-height: 32px;
+}
+.faq-answer {
+    width: 600px;
+    font-family: 'GardeniaBold';
+    font-size: 20px;
+    padding: 20px 40px;
+    line-height: 28px;
+    background-color: var(--profile-tertiary);
+    border-radius: 0 0 10px 10px;
+}
+.faq-entry-div {
+    background-color: var(--profile-secondary);
+    border-radius: 10px;
+}
+
 .avatar-frame {
     position: absolute;
 }

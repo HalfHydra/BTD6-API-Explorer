@@ -88,7 +88,32 @@ fetch('./data/Constants.json')
 
 function generateIfReady(){
     if (readyFlags.every(flag => flag === 1)){
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     let imagesToLoad = 0;
+        //     function imageLoaded() {
+        //         imagesToLoad--;
+        //         if (imagesToLoad === 0) {
+        //             document.getElementById("loading").style.transform = "scale(0)";
+        //         }
+        //     }
+        //     let observer = new MutationObserver((mutations) => {
+        //         mutations.forEach((mutation) => {
+        //             if (mutation.type === 'childList') {
+        //                 mutation.addedNodes.forEach((node) => {
+        //                     if (node.nodeName === 'IMG') {
+        //                         imagesToLoad++;
+        //                         node.addEventListener('load', imageLoaded);
+        //                     }
+        //                 });
+        //             }
+        //         });
+        //     });
+        //     observer.observe(document.body, { childList: true, subtree: true });
+        // });
+        // document.getElementById("loading").style.removeProperty("transform")
+        document.getElementById("front-page").style.display = "none";
         document.body.classList.add('transition-bg')
+        generateHeaderTabs();
         generateRankInfo()
         generateVeteranRankInfo()
         generateAchievementsHelper()
@@ -477,30 +502,280 @@ headerDiv.appendChild(title);
 // titleImg.src = './Assets/UI/TitleContainer.png';
 // headerDiv.appendChild(titleImg);
 
-const headerContainer = document.createElement('div');
-headerContainer.id = 'header';
-headerContainer.classList.add('header-container');
-header.appendChild(headerContainer);
-
-let headers = ['Overview', 'Progress', 'Explore', 'Export', 'Settings'];
-
-headers.forEach((headerName) => {
-    headerName = headerName.toLowerCase();
-    let headerElement = document.createElement('p');
-    headerElement.classList.add('header-label');
-    headerElement.classList.add('black-outline');
-    headerElement.id = headerName.toLowerCase();
-    headerElement.innerHTML = headerName;
-    headerElement.addEventListener('click', () => {
-        changeTab(headerName.toLowerCase());
-    })
-    headerContainer.appendChild(headerElement);
-})
-
 const content = document.createElement('div');
 content.id = 'content';
 content.classList.add('content');
 container.appendChild(content);
+
+generateFrontPage()
+function generateFrontPage(){
+    const frontPage = document.createElement('div');
+    frontPage.id = 'front-page';
+    frontPage.classList.add('front-page');
+    content.appendChild(frontPage);
+
+    // const frontPageTitle = document.createElement('h1');
+    // frontPageTitle.id = 'front-page-title';
+    // frontPageTitle.classList.add('front-page-title');
+    // frontPageTitle.innerHTML = 'Bloons TD 6 API Explorer';
+    // frontPage.appendChild(frontPageTitle);
+
+    const frontPageText = document.createElement('p');
+    frontPageText.id = 'front-page-text';
+    frontPageText.classList.add('front-page-text');
+    frontPageText.innerHTML = 'Enter your Open Access Key (OAK) to get started: ';
+    frontPage.appendChild(frontPageText);
+
+    //key entry
+    let keyEntry = document.createElement('input');
+    keyEntry.id = 'key-entry';
+    keyEntry.classList.add('key-entry');
+    keyEntry.placeholder = 'Enter your OAK here';
+    frontPage.appendChild(keyEntry);
+    //start button
+    let startButton = document.createElement('div');
+    startButton.id = 'start-button';
+    startButton.classList.add('start-button');
+    startButton.classList.add('black-outline');
+    startButton.innerHTML = 'Start';
+    startButton.addEventListener('click', () => {
+        let key = document.getElementById('key-entry').value;
+        if (key.length === 0){
+            alert('Please enter a valid OAK! This will start with "oak_".');
+            return;
+        }
+        oak_token = keyEntry.value;
+        getSaveData(oak_token)
+        getPublicProfileData(oak_token)
+        // getBTD6Data(key);
+    })
+    frontPage.appendChild(startButton);
+
+    let infoButtons = document.createElement('div');
+    infoButtons.id = 'info-buttons';
+    infoButtons.classList.add('info-buttons');
+    frontPage.appendChild(infoButtons);
+
+    //where do I get it button
+    let whereButton = document.createElement('p');
+    whereButton.id = 'where-button';
+    whereButton.classList.add('where-button');
+    whereButton.classList.add('black-outline');
+    whereButton.innerHTML = 'How do I get it?';
+    infoButtons.appendChild(whereButton);
+
+    let faqButton = document.createElement('p');
+    faqButton.id = 'faq-button';
+    faqButton.classList.add('where-button')
+    faqButton.classList.add('faq-button');
+    faqButton.classList.add('black-outline');
+    faqButton.innerHTML = 'FAQ';
+    infoButtons.appendChild(faqButton);
+
+    let privacyButton = document.createElement('p');
+    privacyButton.id = 'privacy-button';
+    privacyButton.classList.add('where-button');
+    privacyButton.classList.add('privacy-button');
+    privacyButton.classList.add('black-outline');
+    privacyButton.innerHTML = 'Privacy Policy';
+    infoButtons.appendChild(privacyButton);
+
+    let OAKInstructionsDiv = document.createElement('div');
+    OAKInstructionsDiv.id = 'oak-instructions-div';
+    OAKInstructionsDiv.classList.add('oak-instructions-div');
+    OAKInstructionsDiv.style.display = 'none';
+    frontPage.appendChild(OAKInstructionsDiv);
+
+    let FAQDiv = document.createElement('div');
+    FAQDiv.id = 'faq-div';
+    FAQDiv.classList.add('faq-div');
+    FAQDiv.style.display = 'none';
+    frontPage.appendChild(FAQDiv);
+
+    let privacyDiv = document.createElement('div');
+    privacyDiv.id = 'privacy-div';
+    privacyDiv.classList.add('privacy-div');
+    privacyDiv.style.display = 'none';
+    frontPage.appendChild(privacyDiv);
+
+    whereButton.addEventListener('click', () => {
+        hideAllButOne('oak-instructions')
+    })
+
+    faqButton.addEventListener('click', () => {
+        hideAllButOne('faq')
+    })
+
+    privacyButton.addEventListener('click', () => {
+        hideAllButOne('privacy')
+    })
+
+    function hideAllButOne(tab){
+        ["oak-instructions", "faq", "privacy"].forEach((tabName) => {
+            let tabDiv = document.getElementById(tabName + '-div');
+            if (tabName === tab) {
+                tabDiv.style.display = (tabDiv.style.display === 'none') ? 'block' : 'none';
+            } else {
+                tabDiv.style.display = 'none';
+            }
+        });
+    }
+
+    let OAKInstructionsHeader = document.createElement('p');
+    OAKInstructionsHeader.id = 'oak-instructions-header';
+    OAKInstructionsHeader.classList.add('oak-instructions-header');
+    OAKInstructionsHeader.classList.add('black-outline');
+    OAKInstructionsHeader.innerHTML = 'What is an Open Access Key?';
+    OAKInstructionsDiv.appendChild(OAKInstructionsHeader);
+
+    let OAKInstructionsText = document.createElement('p');
+    OAKInstructionsText.id = 'oak-instructions-text';
+    OAKInstructionsText.classList.add('oak-instructions-text');
+    OAKInstructionsText.innerHTML = 'An Open Access Key (OAK) is a unique key that allows you to access your Bloons TD 6 data from Ninja Kiwi\'s Open Data API.';
+    OAKInstructionsDiv.appendChild(OAKInstructionsText);
+
+    let OAKInstructionsHeader2 = document.createElement('p');
+    OAKInstructionsHeader2.id = 'oak-instructions-header';
+    OAKInstructionsHeader2.classList.add('oak-instructions-header');
+    OAKInstructionsHeader2.classList.add('black-outline');
+    OAKInstructionsHeader2.innerHTML = 'How do I get one?';
+    OAKInstructionsDiv.appendChild(OAKInstructionsHeader2);
+
+    let OAKInstructionsText2 = document.createElement('p');
+    OAKInstructionsText2.id = 'oak-instructions-text2';
+    OAKInstructionsText2.classList.add('oak-instructions-text');
+    OAKInstructionsText2.innerHTML = 'Step 1: Login and Backup your progress with a Ninja Kiwi Account. You can do this by going to settings from the main menu and clicking on the Account button. NOTE: This is not available for BTD6+ on Apple Arcade and BTD6 Netflix. ';
+    OAKInstructionsDiv.appendChild(OAKInstructionsText2);
+
+    let OAKInstuctionImg = document.createElement('img');
+    OAKInstuctionImg.id = 'oak-instruction-img';
+    OAKInstuctionImg.classList.add('oak-instruction-img');
+    OAKInstuctionImg.src = './Assets/UI/OAKTutorial1.jpg';
+    OAKInstructionsDiv.appendChild(OAKInstuctionImg);
+
+    let OAKInstructionsText3 = document.createElement('p');
+    OAKInstructionsText3.id = 'oak-instructions-text3';
+    OAKInstructionsText3.classList.add('oak-instructions-text');
+    OAKInstructionsText3.innerHTML = 'Step 2: Select "Open Data API" at the bottom right of the account screen.';
+    OAKInstructionsDiv.appendChild(OAKInstructionsText3);
+
+    let OAKInstuctionImg2 = document.createElement('img');
+    OAKInstuctionImg2.id = 'oak-instruction-img2';
+    OAKInstuctionImg2.classList.add('oak-instruction-img');
+    OAKInstuctionImg2.src = './Assets/UI/OAKTutorial2.jpg';
+    OAKInstructionsDiv.appendChild(OAKInstuctionImg2);
+
+    let OAKInstructionsText4 = document.createElement('p');
+    OAKInstructionsText4.id = 'oak-instructions-text4';
+    OAKInstructionsText4.classList.add('oak-instructions-text');
+    OAKInstructionsText4.innerHTML = 'Step 3: Generate a key and copy that in to the above text field. It should start with "oak_". Then click "Start" to begin!';
+    OAKInstructionsDiv.appendChild(OAKInstructionsText4);
+
+    let OAKInstuctionImg3 = document.createElement('img');
+    OAKInstuctionImg3.id = 'oak-instruction-img3';
+    OAKInstuctionImg3.classList.add('oak-instruction-img');
+    OAKInstuctionImg3.src = './Assets/UI/OAKTutorial3.jpg';
+    OAKInstructionsDiv.appendChild(OAKInstuctionImg3);
+
+    let faqHeader = document.createElement('p');
+    faqHeader.id = 'faq-header';
+    faqHeader.classList.add('oak-instructions-header');
+    faqHeader.classList.add('black-outline');
+    faqHeader.innerHTML = 'Frequently Asked Questions';
+    FAQDiv.appendChild(faqHeader);
+
+    let FAQ = {
+        "What can I do with this?": "You can view more detailed stats and progress than you can see in the game such as your highest round for every mode on every map you've played. You can also view your Insta Monkey collection and use this as a tracker as the data pulled is always up to date! You'll eventually be able to explore the API for leaderboards, more advanced challenge stats and more!",
+        "How long does the API take to update after I do something in the game?": "15 minutes is the most I've seen. Be sure to press the save button in settings if you want to minimize the time it takes to update!",
+        "Why is this not available for BTD6+ and Netflix?": "This is because the data is stored differently for these versions such as using iCloud for BTD6+. This is not compatible with the Open Data API."
+    }
+
+    for (let [question, answer] of Object.entries(FAQ)){
+        let FAQEntryDiv = document.createElement('div');
+        FAQEntryDiv.classList.add('faq-entry-div');
+        FAQDiv.appendChild(FAQEntryDiv);
+
+        let FAQQuestionDiv = document.createElement('div');
+        FAQQuestionDiv.classList.add('faq-question-div');
+        FAQEntryDiv.appendChild(FAQQuestionDiv);
+
+        let FAQQuestion = document.createElement('p');
+        FAQQuestion.classList.add('faq-question');
+        FAQQuestion.classList.add('black-outline');
+        FAQQuestion.innerHTML = question;
+        FAQQuestionDiv.appendChild(FAQQuestion);
+
+        let arrowHideBtn = document.createElement('img');
+        arrowHideBtn.classList.add('arrow-hide-btn');
+        arrowHideBtn.src = './Assets/UI/ArrowHideBtn.png';
+        FAQQuestionDiv.appendChild(arrowHideBtn);
+
+        let FAQAnswerDiv = document.createElement('div');
+        FAQAnswerDiv.classList.add('faq-answer-div');
+        FAQAnswerDiv.style.display = 'none';
+        FAQEntryDiv.appendChild(FAQAnswerDiv);
+
+        let FAQAnswer = document.createElement('p');
+        FAQAnswer.classList.add('faq-answer');
+        FAQAnswer.innerHTML = answer;
+        FAQAnswerDiv.appendChild(FAQAnswer);
+
+        FAQQuestionDiv.addEventListener('click', () => {
+            if (FAQAnswerDiv.style.display === 'none'){
+                FAQAnswerDiv.style.display = 'block';
+                arrowHideBtn.style.transform = 'rotate(180deg)';
+            } else {
+                FAQAnswerDiv.style.display = 'none';
+                arrowHideBtn.style.transform = 'rotate(0deg)';
+            }
+        })
+    }
+
+    let privacyHeader = document.createElement('p');
+    privacyHeader.id = 'privacy-header';
+    privacyHeader.classList.add('oak-instructions-header');
+    privacyHeader.classList.add('black-outline');
+    privacyHeader.innerHTML = 'Privacy Policy';
+    privacyDiv.appendChild(privacyHeader);
+
+    let privacyText = document.createElement('p');
+    privacyText.id = 'privacy-text';
+    privacyText.classList.add('oak-instructions-text');
+    privacyText.innerHTML = 'This app does not store any data being sent to or retrieved from Ninja Kiwi\'s servers outside of your browser/device.';
+    privacyDiv.appendChild(privacyText);
+}
+
+function generateHeaderTabs(){
+    const headerContainer = document.createElement('div');
+    headerContainer.id = 'header';
+    headerContainer.classList.add('header-container');
+    header.appendChild(headerContainer);
+
+    let headers = ['Overview', 'Progress', 'Explore', 'Export', 'Settings'];
+
+    headers.forEach((headerName) => {
+        headerName = headerName.toLowerCase();
+        let headerElement = document.createElement('p');
+        headerElement.classList.add('header-label');
+        headerElement.classList.add('black-outline');
+        headerElement.id = headerName.toLowerCase();
+        headerElement.innerHTML = headerName;
+        headerElement.addEventListener('click', () => {
+            changeTab(headerName.toLowerCase());
+        })
+        headerContainer.appendChild(headerElement);
+    })
+
+    headers.forEach((headerName) => {
+        headerName = headerName.toLowerCase();
+        let contentElement = document.createElement('div');
+        contentElement.id = headerName + '-content';
+        contentElement.classList.add(`content-div`);
+        contentElement.classList.add(headerName)
+        contentElement.style.display = 'none';
+        content.appendChild(contentElement);
+    })
+}
 
 function changeTab(tab) {
     document.body.scrollTop = 0;
@@ -537,16 +812,6 @@ function changeTab(tab) {
         }
     }
 }
-
-headers.forEach((headerName) => {
-    headerName = headerName.toLowerCase();
-    let contentElement = document.createElement('div');
-    contentElement.id = headerName + '-content';
-    contentElement.classList.add(`content-div`);
-    contentElement.classList.add(headerName)
-    contentElement.style.display = 'none';
-    content.appendChild(contentElement);
-})
 
 let tempXP = 0;
 
@@ -883,15 +1148,6 @@ function generateOverview(){
         towerImg.id = 'tower-img';
         towerImg.classList.add('hero-img');
         towerImg.src = getInstaContainerIcon(tower,"000");
-        // towerImg.style.display = "none";
-        // towerImg.addEventListener('load', () => {
-        //     if(towerImg.width < towerImg.height){
-        //         towerImg.style.width = `${ratioCalc(3,150,800,0,towerImg.width)}px`
-        //     } else {
-        //         towerImg.style.height = `${ratioCalc(3,150,800,0,towerImg.height)}px`
-        //     }
-        //     towerImg.style.removeProperty('display');
-        // })
         towerDiv.appendChild(towerImg);
 
         let towerText = document.createElement('p');

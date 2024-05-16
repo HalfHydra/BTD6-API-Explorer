@@ -197,32 +197,6 @@
             }
         }
     </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let imagesToLoad = 0;
-            function imageLoaded() {
-                imagesToLoad--;
-                if (imagesToLoad === 0) {
-                    document.getElementById("loading").style.transform = "scale(0)";
-                }
-            }
-            let observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.type === 'childList') {
-                        mutation.addedNodes.forEach((node) => {
-                            if (node.nodeName === 'IMG') {
-                                imagesToLoad++;
-                                node.addEventListener('load', imageLoaded);
-                            }
-                        });
-                    }
-                });
-            });
-            observer.observe(document.body, { childList: true, subtree: true });
-        });
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-    </script>
 </head>
 
 <body>
@@ -235,6 +209,11 @@
         </div>
     </div>
 </body>
+<script>
+    document.getElementById("loading").style.transform = "scale(0)";
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+</script>
 <script src="./src/main.js"></script>
 <script src="./src/nkapi.js"></script>
 <script src="./src/asset.js"></script>
