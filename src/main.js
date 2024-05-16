@@ -3454,6 +3454,7 @@ function generateAchievementsProgress() {
     })
 
     onChangeAchievementsFilter("All");
+    onChangeAchievementRewardFilter("None")
     generateAchievementsGameView();
 }
 

@@ -213,6 +213,7 @@
 .content {
     max-width: 1200px;
     margin: 0 auto;
+    overflow-x: hidden;
 }
 .content-div {
     border-radius: 10px;
@@ -2178,5 +2179,44 @@ p {
     }
     .map-progress-filter-difficulty-select {
         margin-right: 0px;
+    }
+    .tower-progress-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .tower-progress-div {
+        position: relative;
+        width: 100vw;
+        margin-left: 0;
+        height: 160px;
+    }
+    .tower-selector-header {
+        display: flex;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        align-items: center;
+        max-width: 100vw;
+        flex-wrap: nowrap;
+    }
+    .tower-progress-main-div {
+        margin-left: 0px;
+    }
+    .tower-progress-top {
+        margin: 0;
+    }
+    .hero-progress-div {
+        width: 100vw;
+        margin-left: 0;
+        height: 180px;
+    }
+    .hero-selector-header {
+        max-width: 100vw;
+        flex-wrap: nowrap;
+    }
+    .hero-progress-bottom {
+        height: calc(100vh - 870px);
+    }
+    .insta-monkey-icons-container {
+        justify-content: center;
     }
 }
