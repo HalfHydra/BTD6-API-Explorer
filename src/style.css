@@ -1350,6 +1350,7 @@
     background-color: #34547F;
     color: white;
     text-align: center;
+    border-radius: 4px;
 }
 
 .map-difficulty-icon {
@@ -1422,7 +1423,7 @@
     padding: 10px;
     border-radius: 10px;
     width: 50%;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 .map-progress-container {
@@ -1939,6 +1940,7 @@
     font-family: 'GardeniaBold';
     font-size: 20px;
     padding-top: 4px;
+    height: 44px;
 }
 .achievements-container {
     display: flex;
@@ -1949,6 +1951,9 @@
     width: 470px;
     margin-left: 10px;
     margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .achievement-reward-text {
     font-size: 24px;
@@ -2170,7 +2175,6 @@ p {
     }
     .map-progress-filter-difficulty-select {
         margin-right: 0px;
-        border-radius: 4px;
     }
     .tower-progress-container {
         flex-direction: column;

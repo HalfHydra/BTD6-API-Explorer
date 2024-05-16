@@ -503,7 +503,8 @@ content.classList.add('content');
 container.appendChild(content);
 
 function changeTab(tab) {
-    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     changeHexBGColor(constants.BGColor)
     let tabs = document.getElementsByClassName('content-div');
     for (let tab of tabs){
@@ -1087,7 +1088,8 @@ function generateProgress(){
 }
 
 function changeProgressTab(selector){
-    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     switch(selector){
         case 'Towers':
             generateTowerProgress();
@@ -3450,8 +3452,6 @@ function generateAchievementsProgress() {
     progressContent.appendChild(AchievementsContainer);
 
     mapProgressFilterDifficultySelect2.addEventListener('change', () => {
-        onChangeAchievementsFilter("Locked");
-        mapProgressFilterDifficultySelect.value = "Locked";
         onChangeAchievementRewardFilter(mapProgressFilterDifficultySelect2.value);
     })
 
@@ -3585,10 +3585,6 @@ function generateAchievementsGameView(){
             achievementCompletedCheck.src = "./Assets/UI/TickGreenIcon.png";
             achievementBottomDiv.appendChild(achievementCompletedCheck);
         }
-
-        achievementDiv.addEventListener('click', () => {
-            // onSelectAchievement(achievement);
-        })
     }
     //top div
     //icon div
