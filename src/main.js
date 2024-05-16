@@ -503,6 +503,7 @@ content.classList.add('content');
 container.appendChild(content);
 
 function changeTab(tab) {
+    window.scrollTo(0, 0);
     changeHexBGColor(constants.BGColor)
     let tabs = document.getElementsByClassName('content-div');
     for (let tab of tabs){
@@ -1086,6 +1087,7 @@ function generateProgress(){
 }
 
 function changeProgressTab(selector){
+    window.scrollTo(0, 0);
     switch(selector){
         case 'Towers':
             generateTowerProgress();
