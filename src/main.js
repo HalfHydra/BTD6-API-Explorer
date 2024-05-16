@@ -482,7 +482,7 @@ headerContainer.id = 'header';
 headerContainer.classList.add('header-container');
 header.appendChild(headerContainer);
 
-let headers = ['Overview', 'Progress', 'Explore', 'FAQ', 'Settings'];
+let headers = ['Overview', 'Progress', 'Explore', 'Export', 'Settings'];
 
 headers.forEach((headerName) => {
     headerName = headerName.toLowerCase();
@@ -3472,6 +3472,9 @@ function generateAchievementsGameView(){
             break;
         case "Unlocked":
             achievements = achievements.filter(achievement => btd6usersave.achievementsClaimed.includes(reverseAchievementNameFixMap[achievementsJSON[achievement].name] || achievementsJSON[achievement].name));
+            break;
+        case "All":
+            achievements = achievements.sort((a,b) => btd6usersave.achievementsClaimed.includes(reverseAchievementNameFixMap[achievementsJSON[a].name] || achievementsJSON[a].name) - btd6usersave.achievementsClaimed.includes(reverseAchievementNameFixMap[achievementsJSON[b].name] || achievementsJSON[b].name));
             break;
     }
 
