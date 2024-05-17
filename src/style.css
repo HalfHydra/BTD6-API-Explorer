@@ -189,6 +189,76 @@
     background-color: var(--profile-secondary);
     border-radius: 10px;
 }
+.error-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 650px;
+    min-height: 300px;
+    background-color: var(--profile-secondary);
+    border-radius: 10px;
+}
+.error-modal-close {
+    width: 50px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.error-modal-header-img {
+    width: 100px;
+    padding: 10px;
+}
+.error-modal-header-text {
+    font-size: 32px;
+}
+.error-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--profile-primary);
+    border-radius: 10px 10px 0 0;
+}
+.error-modal-dummy {
+    width: 100px;
+    padding: 10px;
+}
+.error-modal-overlay {
+    position: fixed; /* Positioning and size */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.4);
+}
+.error-modal-content {
+    font-family: 'GardeniaBold';
+    font-size: 20px;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.previous-oak-entry {
+    width: 500px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-radius: 20px 0 0 20px;
+    margin: 10px;
+}
+.delete-button {
+    width: 60px;
+    position: absolute;
+    right: 10px;
+}
+
+.use-button {
+    width: 60px;
+    position: absolute;
+    right: 80px;
+}
 
 .avatar-frame {
     position: absolute;

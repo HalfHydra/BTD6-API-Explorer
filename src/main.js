@@ -58,59 +58,40 @@ let processedInstaData = {
     "TowerBorders": {}
 }
 
-fetch('./data/English.json')
-    .then(response => response.json())
-    .then(data => {
-        locJSON = data;
-        readyFlags[2] = 1
-        generateIfReady()
-    })
-    .catch(error => console.error('Error:', error));
+function fetchDependencies(){
+    fetch('./data/English.json')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            locJSON = data;
+            readyFlags[2] = 1
+            generateIfReady()
+        })
+        .catch(error => console.error('Error:', error));
 
-fetch('./data/Achievements150.json')
-    .then(response => response.json())
-    .then(data => {
-        achievementsJSON = data;
-        readyFlags[3] = 1
-        generateIfReady()
-    })
-    .catch(error => console.error('Error:', error));
+    fetch('./data/Achievements150.json')
+        .then(response => response.json())
+        .then(data => {
+            achievementsJSON = data;
+            readyFlags[3] = 1
+            generateIfReady()
+        })
+        .catch(error => console.error('Error:', error));
 
-fetch('./data/Constants.json')
-    .then(response => response.json())
-    .then(data => {
-        constants = data;
-        readyFlags[4] = 1
-        generateIfReady()
-    })
-    .catch(error => console.error('Error:', error));
-
+    fetch('./data/Constants.json')
+        .then(response => response.json())
+        .then(data => {
+            constants = data;
+            readyFlags[4] = 1
+            generateIfReady()
+        })
+        .catch(error => console.error('Error:', error));
+    showLoading();
+    generateIfReady()
+}
 
 function generateIfReady(){
     if (readyFlags.every(flag => flag === 1)){
-        // document.addEventListener("DOMContentLoaded", function () {
-        //     let imagesToLoad = 0;
-        //     function imageLoaded() {
-        //         imagesToLoad--;
-        //         if (imagesToLoad === 0) {
-        //             document.getElementById("loading").style.transform = "scale(0)";
-        //         }
-        //     }
-        //     let observer = new MutationObserver((mutations) => {
-        //         mutations.forEach((mutation) => {
-        //             if (mutation.type === 'childList') {
-        //                 mutation.addedNodes.forEach((node) => {
-        //                     if (node.nodeName === 'IMG') {
-        //                         imagesToLoad++;
-        //                         node.addEventListener('load', imageLoaded);
-        //                     }
-        //                 });
-        //             }
-        //         });
-        //     });
-        //     observer.observe(document.body, { childList: true, subtree: true });
-        // });
-        // document.getElementById("loading").style.removeProperty("transform")
         document.getElementById("front-page").style.display = "none";
         document.body.classList.add('transition-bg')
         generateHeaderTabs();
@@ -474,6 +455,31 @@ function generateInstaData(){
     processedInstaData["TowerBorders"] = towerBorders;
 }
 
+function showLoading(){
+    let imagesToLoad = 0;
+    function imageLoaded() {
+        imagesToLoad--;
+        console.log(imagesToLoad);
+        if (imagesToLoad === 0) {
+            document.getElementById("loading").style.transform = "scale(0)";
+        }
+    }
+    let observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeName === 'IMG') {
+                        imagesToLoad++;
+                        node.addEventListener('load', imageLoaded);
+                    }
+                });
+            }
+        });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    document.getElementById("loading").style.removeProperty("transform")
+}
+
 const container = document.createElement('div');
 container.id = 'container';
 document.body.appendChild(container);
@@ -507,6 +513,7 @@ content.id = 'content';
 content.classList.add('content');
 container.appendChild(content);
 
+readLocalStorage()
 generateFrontPage()
 function generateFrontPage(){
     const frontPage = document.createElement('div');
@@ -525,6 +532,50 @@ function generateFrontPage(){
     frontPageText.classList.add('front-page-text');
     frontPageText.innerHTML = 'Enter your Open Access Key (OAK) to get started: ';
     frontPage.appendChild(frontPageText);
+
+    //previousies entered OAK
+    let previousOAK = document.createElement('div');
+    previousOAK.id = 'previous-oak';
+    previousOAK.classList.add('previous-oak');
+    frontPage.appendChild(previousOAK);
+
+    Object.entries(localStorageOAK).forEach(([oak, oakdata]) => {
+        let previousOAKEntry = document.createElement('div');
+        previousOAKEntry.id = 'previous-oak-entry';
+        previousOAKEntry.classList.add('previous-oak-entry');
+        previousOAKEntry.style.backgroundImage = `url(${oakdata.banner})`;
+        previousOAK.appendChild(previousOAKEntry);
+
+        previousOAKEntry.appendChild(generateAvatar(100, oakdata.avatar));
+
+        let profileName = document.createElement('p');
+        profileName.id = 'profile-name';
+        profileName.classList.add('profile-name');
+        profileName.classList.add('black-outline');
+        profileName.innerHTML = oakdata.displayName;
+        previousOAKEntry.appendChild(profileName);
+
+        let useButton = document.createElement('img');
+        useButton.id = 'use-button';
+        useButton.classList.add('use-button');
+        useButton.src = './Assets/UI/ContinueBtn.png';
+        useButton.addEventListener('click', () => {
+            oak_token = oak;
+            getSaveData(oak);
+        })
+        previousOAKEntry.appendChild(useButton);
+
+        let deleteButton = document.createElement('img');
+        deleteButton.id = 'delete-button';
+        deleteButton.classList.add('delete-button');
+        deleteButton.src = './Assets/UI/CloseBtn.png'
+        deleteButton.addEventListener('click', () => {
+            delete localStorageOAK[oak];
+            writeLocalStorage();
+            previousOAK.removeChild(previousOAKEntry);
+        })
+        previousOAKEntry.appendChild(deleteButton);
+    })
 
     //key entry
     let keyEntry = document.createElement('input');
@@ -546,8 +597,6 @@ function generateFrontPage(){
         }
         oak_token = keyEntry.value;
         getSaveData(oak_token)
-        getPublicProfileData(oak_token)
-        // getBTD6Data(key);
     })
     frontPage.appendChild(startButton);
 
@@ -741,7 +790,7 @@ function generateFrontPage(){
     let privacyText = document.createElement('p');
     privacyText.id = 'privacy-text';
     privacyText.classList.add('oak-instructions-text');
-    privacyText.innerHTML = 'This app does not store any data being sent to or retrieved from Ninja Kiwi\'s servers outside of your browser/device.';
+    privacyText.innerHTML = 'This app does not store any data being sent to or retrieved from Ninja Kiwi\'s servers outside of your browser/device. localStorage is used to prevent users from having to re-enter their OAK every time they visit the site. If you would like to delete this stored data, you can do so by clicking the "X" on the profile you would like to delete on this page.';
     privacyDiv.appendChild(privacyText);
 }
 
@@ -823,7 +872,7 @@ function generateOverview(){
     profileHeader.classList.add('profile-banner');
     profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${btd6publicprofile["bannerURL"]}')`;
     document.getElementById('overview-content').appendChild(profileHeader);
-    profileHeader.appendChild(generateAvatar(100));
+    profileHeader.appendChild(generateAvatar(100, btd6publicprofile["avatarURL"]));
 
     let profileTopBottom = document.createElement('div');
     profileTopBottom.id = 'profile-top-bottom';
@@ -1202,7 +1251,7 @@ function generateOverview(){
     }
 }
 
-function generateAvatar(width){
+function generateAvatar(width, src){
     let avatar = document.createElement('div');
     avatar.id = 'avatar';
     avatar.classList.add('avatar');
@@ -1220,7 +1269,7 @@ function generateAvatar(width){
     avatarImg.classList.add('avatar-img');
     avatarImg.classList.add('noSelect')
     avatarImg.style.width = `${width}px`;
-    avatarImg.src = btd6publicprofile["avatarURL"];
+    avatarImg.src = src;
     avatar.appendChild(avatarImg);
     return avatar;
 }
@@ -3973,3 +4022,62 @@ function ratioCalc(unknown, x1, x2, y1, y2){
     }
 }
 
+function errorModal(body, source) {
+    let modalOverlay = document.createElement('div');
+    modalOverlay.classList.add('error-modal-overlay');
+    document.body.appendChild(modalOverlay);
+
+    let modal = document.createElement('div');
+    modal.id = 'error-modal';
+    modal.classList.add('error-modal');
+    modalOverlay.appendChild(modal);
+
+    let modalHeader = document.createElement('div');
+    modalHeader.id = 'error-modal-header';
+    modalHeader.classList.add('error-modal-header');
+    modal.appendChild(modalHeader);
+
+    let modalHeaderImg = document.createElement('img');
+    modalHeaderImg.id = 'error-modal-header-img';
+    modalHeaderImg.classList.add('error-modal-header-img');
+    modalHeaderImg.src = "./Assets/UI/BadConnectionBtn.png";
+    modalHeader.appendChild(modalHeaderImg);
+
+    let modalHeaderText = document.createElement('p');
+    modalHeaderText.id = 'error-modal-header-text';
+    modalHeaderText.classList.add('error-modal-header-text');
+    modalHeaderText.classList.add('black-outline');
+    modalHeaderText.innerHTML = "Error";
+    modalHeader.appendChild(modalHeaderText);
+
+    let dummyElmnt = document.createElement('div');
+    dummyElmnt.classList.add('error-modal-dummy');
+    modalHeader.appendChild(dummyElmnt);
+
+    let modalContent = document.createElement('div');
+    modalContent.id = 'error-modal-content';
+    modalContent.classList.add('error-modal-content');
+    modalContent.innerHTML = (source == "api" ? "Ninja Kiwi API Error: " : "") + body;
+    modal.appendChild(modalContent);
+
+    let modalContent2  = document.createElement('div');
+    modalContent2.id = 'error-modal-content2';
+    modalContent2.classList.add('error-modal-content');
+    switch(body) {
+        case "Invalid user ID / Player Does not play this game":
+            modalContent2.innerHTML = "Please try again or create a new Open Access Key.";
+            break;
+    }
+    modal.appendChild(modalContent2);
+
+    let modalClose = document.createElement('img');
+    modalClose.id = 'error-modal-close';
+    modalClose.classList.add('error-modal-close');
+    modalClose.src = "./Assets/UI/CloseBtn.png";
+    modalClose.addEventListener('click', () => {
+        document.body.removeChild(modalOverlay);
+    })
+    modalContent.appendChild(modalClose);
+
+    
+}
