@@ -763,7 +763,6 @@ function generateFrontPage(){
 
         let FAQQuestion = document.createElement('p');
         FAQQuestion.classList.add('faq-question');
-        FAQQuestion.classList.add('black-outline');
         FAQQuestion.innerHTML = question;
         FAQQuestionDiv.appendChild(FAQQuestion);
 
