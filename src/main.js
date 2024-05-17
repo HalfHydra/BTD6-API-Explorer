@@ -1,5 +1,6 @@
 let readyFlags = [0,0,0,0,0]
-let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
+let pressedStart = false;
+// let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
 let isGenerated = []
 let locJSON = {}
 let achievementsJSON = {}
@@ -193,7 +194,7 @@ function generateStats(){
     //stats from usersave
     profileStats["Daily Challenges Completed"] = btd6usersave["totalDailyChallengesCompleted"];
     profileStats["Consecutive DCs Completed"] = btd6usersave["consecutiveDailyChallengesCompleted"];
-    profileStats["Races Entered"] = btd6usersave["totalRacesEntered"];
+    profileStats["Race Attempts"] = btd6usersave["totalRacesEntered"];
     profileStats["Challenges Played"] = btd6usersave["challengesPlayed"];
     profileStats["Challenges Shared"] = btd6usersave["challengesShared"];
     profileStats["Continues Used"] = btd6usersave["continuesUsed"];
@@ -558,8 +559,11 @@ function generateFrontPage(){
         useButton.classList.add('use-button');
         useButton.src = './Assets/UI/ContinueBtn.png';
         useButton.addEventListener('click', () => {
-            oak_token = oak;
-            getSaveData(oak);
+            if (!pressedStart){
+                pressedStart = true;
+                oak_token = oak;
+                getSaveData(oak);
+            }
         })
         previousOAKEntry.appendChild(useButton);
 
@@ -593,8 +597,11 @@ function generateFrontPage(){
             alert('Please enter a valid OAK! This will start with "oak_".');
             return;
         }
-        oak_token = keyEntry.value;
-        getSaveData(oak_token)
+        if (!pressedStart){
+            pressedStart = true;
+            oak_token = keyEntry.value;
+            getSaveData(oak_token)
+        }
     })
     frontPage.appendChild(startButton);
 
@@ -1065,7 +1072,6 @@ function generateOverview(){
     mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
 
     let mapsProgressCoopToggleInput = document.createElement('input');
-    mapsProgressCoopToggleInput.id = 'maps-progress-coop-toggle-input';
     mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
     mapsProgressCoopToggleInput.type = 'checkbox';
     mapsProgressCoopToggleInput.addEventListener('change', () => {
@@ -1157,7 +1163,6 @@ function generateOverview(){
     mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleText2);
 
     let mapsProgressCoopToggleInput2 = document.createElement('input');
-    mapsProgressCoopToggleInput2.id = 'maps-progress-coop-toggle-input';
     mapsProgressCoopToggleInput2.classList.add('maps-progress-coop-toggle-input');
     mapsProgressCoopToggleInput2.type = 'checkbox';
     mapsProgressCoopToggleInput2.addEventListener('change', () => {
@@ -2595,6 +2600,9 @@ function generateMapDetails(map){
         medalImg.id = `${difficulty}-img`;
         medalImg.classList.add('medal-img');
         medalImg.src = getMedalIcon(completed ? `Medal${medalMap[difficulty]}` : "MedalEmpty");
+        if (processedMapData.Borders["single"][map] == "Black") {
+            medalImg.classList.add("medal-glow")
+        }
         medalImg.style.display = "none";
         medalImg.addEventListener('load', () => {
             if(medalImg.width < medalImg.height){
@@ -2625,6 +2633,9 @@ function generateMapDetails(map){
         medalImg.classList.add('medal-img');
         medalImg.src = getMedalIcon(completed ? `Medal${medalMap[difficulty]}` : "MedalCoopEmpty");
         medalImg.style.display = "none";
+        if (processedMapData.Borders["coop"][map] == "Black") {
+            medalImg.classList.add("medal-glow")
+        }
         medalImg.addEventListener('load', () => {
             if(medalImg.width < medalImg.height){
                 medalImg.style.width = `${ratioCalc(3,70,256,0,medalImg.width)}px`
