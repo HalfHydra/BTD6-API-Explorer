@@ -1947,7 +1947,7 @@ function generateHeroProgressHero(hero, nameColor){
     let heroProgressTrailFX = document.createElement('img');
     heroProgressTrailFX.id = 'hero-progress-trail-fx';
     heroProgressTrailFX.classList.add('hero-progress-trail-fx');
-    heroProgressTrailFX.src = './Assets/UI/TrailFX.png'; 
+    heroProgressTrailFX.src = './Assets/UI/TrailFx.png'; 
     heroProgressHeader.appendChild(heroProgressTrailFX);
 
     //header hero name text

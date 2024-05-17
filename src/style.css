@@ -1419,14 +1419,14 @@
 }
 .none-border {
     border: 10px solid transparent;
-    border-image-source: url(../Assets/UI/MainBgPanel.png);
+    border-image-source: url(../Assets/UI/MainBGPanel.png);
     border-image-slice: 60;
     background-color: #9F7842;
     border-radius: 20px;
 }
 .coop-border {
     border: 10px solid transparent;
-    border-image-source: url(../Assets/UI/MainBgPanelBlue.png);
+    border-image-source: url(../Assets/UI/MainBGPanelBlue.png);
     border-image-slice: 60;
     background: linear-gradient(180deg, #6599d9 0%, #5085d2 100%);
     border-radius: 20px;
@@ -1454,7 +1454,7 @@
 }
 .black-border {
     border: 10px solid transparent;
-    border-image-source: url(../Assets/UI/MainBgPanelHematite.png);
+    border-image-source: url(../Assets/UI/MainBGPanelHematite.png);
     border-image-slice: 60;
     background: linear-gradient(180deg, #293548 0%, #121824 100%);
     border-radius: 20px;
