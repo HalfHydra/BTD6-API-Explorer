@@ -261,6 +261,16 @@
 .return-entry-button {
     width: 300px;
 }
+.version-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px;
+}
+.tool-version-text {
+    font-family: 'GardeniaBold';
+    font-size: 18px;
+}
 
 .avatar-frame {
     position: absolute;

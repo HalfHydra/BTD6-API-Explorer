@@ -59,6 +59,16 @@ let processedInstaData = {
     "TowerBorders": {}
 }
 
+fetch('./data/Constants.json')
+        .then(response => response.json())
+        .then(data => {
+            constants = data;
+            readyFlags[4] = 1
+            generateIfReady()
+            generateVersionInfo()
+        })
+        .catch(error => console.error('Error:', error));
+
 function fetchDependencies(){
     fetch('./data/English.json')
         .then(response => response.json())
@@ -74,15 +84,6 @@ function fetchDependencies(){
         .then(data => {
             achievementsJSON = data;
             readyFlags[3] = 1
-            generateIfReady()
-        })
-        .catch(error => console.error('Error:', error));
-
-    fetch('./data/Constants.json')
-        .then(response => response.json())
-        .then(data => {
-            constants = data;
-            readyFlags[4] = 1
             generateIfReady()
         })
         .catch(error => console.error('Error:', error));
@@ -561,6 +562,7 @@ function generateFrontPage(){
         useButton.addEventListener('click', () => {
             if (!pressedStart){
                 pressedStart = true;
+                document.getElementById("loading").style.removeProperty("transform");
                 oak_token = oak;
                 getSaveData(oak);
             }
@@ -598,9 +600,10 @@ function generateFrontPage(){
             return;
         }
         if (!pressedStart){
+            document.getElementById("loading").style.removeProperty("transform");
             pressedStart = true;
             oak_token = keyEntry.value;
-            getSaveData(oak_token)
+            getSaveData(oak_token);
         }
     })
     frontPage.appendChild(startButton);
@@ -651,6 +654,11 @@ function generateFrontPage(){
     privacyDiv.classList.add('privacy-div');
     privacyDiv.style.display = 'none';
     frontPage.appendChild(privacyDiv);
+
+    let versionDiv = document.createElement('div');
+    versionDiv.id = 'version-div';
+    versionDiv.classList.add('version-div');
+    frontPage.appendChild(versionDiv);
 
     whereButton.addEventListener('click', () => {
         hideAllButOne('oak-instructions')
@@ -797,6 +805,22 @@ function generateFrontPage(){
     privacyText.classList.add('oak-instructions-text');
     privacyText.innerHTML = 'This app does not store any data being sent to or retrieved from Ninja Kiwi\'s servers outside of your browser/device. localStorage is used to prevent users from having to re-enter their OAK every time they visit the site. If you would like to delete this stored data, you can do so by clicking the "X" on the profile you would like to delete on this page.';
     privacyDiv.appendChild(privacyText);
+}
+
+function generateVersionInfo(){
+    let versionDiv = document.getElementById('version-div');
+
+    let toolVersionText = document.createElement('p');
+    toolVersionText.id = 'tool-version-text';
+    toolVersionText.classList.add('tool-version-text');
+    toolVersionText.innerHTML = `App Version: ${constants.version} / Game Content Version: v${constants.projectContentVersion}`;
+    versionDiv.appendChild(toolVersionText);
+
+    // let toolVersionText2 = document.createElement('p');
+    // toolVersionText2.id = 'tool-version-text2';
+    // toolVersionText2.classList.add('tool-version-text');
+    // toolVersionText2.innerHTML = `Game Content Version: v${constants.projectContentVersion}`;
+    // versionDiv.appendChild(toolVersionText2);
 }
 
 function generateHeaderTabs(){
