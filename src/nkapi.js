@@ -22,6 +22,8 @@ async function getSaveData(oak_token) {
             readyFlags[0] = 1
             getPublicProfileData(oak_token)
         } else {
+            document.getElementById("loading").style.transform = "scale(0)";
+            pressedStart = false;
             errorModal(json["error"], "api")
         }
         return json;
@@ -47,7 +49,9 @@ async function getPublicProfileData(oak_token) {
             readyFlags[1] = 1
             fetchDependencies();
         } else {
-            console.log(json["error"])
+            document.getElementById("loading").style.transform = "scale(0)";
+            pressedStart = false;
+            errorModal(json["error"], "api")
         }
         return json;
     } catch (e) {

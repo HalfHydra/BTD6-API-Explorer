@@ -595,7 +595,7 @@ function generateFrontPage(){
     startButton.innerHTML = 'Start';
     startButton.addEventListener('click', () => {
         let key = document.getElementById('key-entry').value;
-        if (key.length === 0){
+        if (key.length < 5 || key.length > 30 || !key.startsWith('oak_')){
             alert('Please enter a valid OAK! This will start with "oak_".');
             return;
         }
