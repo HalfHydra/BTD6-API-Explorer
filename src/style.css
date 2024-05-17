@@ -253,11 +253,13 @@
     position: absolute;
     right: 10px;
 }
-
 .use-button {
     width: 60px;
     position: absolute;
     right: 80px;
+}
+.return-entry-button {
+    width: 300px;
 }
 
 .avatar-frame {

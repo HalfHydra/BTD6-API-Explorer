@@ -62,7 +62,6 @@ function fetchDependencies(){
     fetch('./data/English.json')
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             locJSON = data;
             readyFlags[2] = 1
             generateIfReady()
@@ -459,7 +458,6 @@ function showLoading(){
     let imagesToLoad = 0;
     function imageLoaded() {
         imagesToLoad--;
-        console.log(imagesToLoad);
         if (imagesToLoad === 0) {
             document.getElementById("loading").style.transform = "scale(0)";
         }
@@ -847,15 +845,15 @@ function changeTab(tab) {
                 generateProgress();
                 break;
             case 'explore':
-                //generateExplore();
+                generateExplore();
                 //isGenerated.push(tab);
                 break;
-            case 'maps':
-                //generateMaps();
+            case 'export':
+                generateExport();
                 //isGenerated.push(tab);
                 break;
             case 'settings':
-                //generateSettings();
+                generateSettings();
                 //isGenerated.push(tab);
                 break;
         }
@@ -1095,7 +1093,6 @@ function generateOverview(){
     let counter = 0;
 
     for (let [hero, xp] of Object.entries(btd6publicprofile["heroesPlaced"]).sort((a, b) => b[1] - a[1])){
-        console.log(hero, xp)
         let heroDiv = document.createElement('div');
         heroDiv.id = 'hero-div';
         heroDiv.classList.add('hero-div');
@@ -3945,6 +3942,66 @@ function onChangeAchievementsFilter(filter){
 function onChangeAchievementRewardFilter(filter){
     currentAchievementRewardFilter = filter;
     generateAchievementsGameView();
+}
+
+function generateExplore() {
+    let exploreContent = document.getElementById('explore-content');
+    exploreContent.innerHTML = "";
+
+    let noDataFound = document.createElement('p');
+    noDataFound.id = 'no-data-found';
+    noDataFound.classList.add('no-data-found');
+    noDataFound.classList.add('black-outline');
+    noDataFound.innerHTML = "Coming Soon";
+    exploreContent.appendChild(noDataFound);
+}
+
+function generateExport() {
+    let exportContent = document.getElementById('export-content');
+    exportContent.innerHTML = "";
+
+    let noDataFound = document.createElement('p');
+    noDataFound.id = 'no-data-found';
+    noDataFound.classList.add('no-data-found');
+    noDataFound.classList.add('black-outline');
+    noDataFound.innerHTML = "Coming Soon";
+    exportContent.appendChild(noDataFound);
+}
+
+function generateSettings(){
+    let settingsContent = document.getElementById('settings-content');
+    settingsContent.innerHTML = "";
+
+    let noDataFound = document.createElement('p');
+    noDataFound.id = 'no-data-found';
+    noDataFound.classList.add('no-data-found');
+    noDataFound.classList.add('black-outline');
+    noDataFound.innerHTML = "Coming Soon";
+    settingsContent.appendChild(noDataFound);
+
+    let settingsContainer = document.createElement('div');
+    settingsContainer.id = 'settings-container';
+    settingsContainer.classList.add('settings-container');
+    settingsContent.appendChild(settingsContainer);
+
+    let settingsOptionsContainer = document.createElement('div');
+    settingsOptionsContainer.id = 'settings-options-container';
+    settingsOptionsContainer.classList.add('settings-options-container');
+    settingsContainer.appendChild(settingsOptionsContainer);
+
+    let whereButton = document.createElement('p');
+    whereButton.id = 'where-button';
+    whereButton.classList.add('where-button');
+    whereButton.classList.add('return-entry-button');
+    whereButton.classList.add('black-outline');
+    whereButton.innerHTML = 'Clear Local Storage';
+    whereButton.addEventListener('click', () => {
+        // document.getElementById('front-page').style.display = "block";
+        // document.getElementById('settings-content').style.display = "none";
+        localStorage.clear();
+    })
+    // settingsOptionsContainer.appendChild(whereButton);
+
 }
 
 function processRewardsString(input){
