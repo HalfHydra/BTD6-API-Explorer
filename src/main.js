@@ -543,7 +543,7 @@ function generateFrontPage(){
         let previousOAKEntry = document.createElement('div');
         previousOAKEntry.id = 'previous-oak-entry';
         previousOAKEntry.classList.add('previous-oak-entry');
-        previousOAKEntry.style.backgroundImage = `url(${oakdata.banner})`;
+        previousOAKEntry.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(${oakdata.banner})`;
         previousOAK.appendChild(previousOAKEntry);
 
         previousOAKEntry.appendChild(generateAvatar(100, oakdata.avatar));
