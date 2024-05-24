@@ -1476,8 +1476,15 @@ function generateTowerProgress(){
     towerSelectorHeaderText.id = 'tower-selector-header-text';
     towerSelectorHeaderText.classList.add('tower-selector-header-text');
     towerSelectorHeaderText.classList.add('black-outline');
-    towerSelectorHeaderText.innerHTML = 'Towers';
+    towerSelectorHeaderText.innerHTML = `Towers - ${Object.keys(btd6usersave.unlockedTowers).filter(k => btd6usersave.unlockedTowers[k]).length}/${Object.keys(btd6usersave.unlockedTowers).length}`;
     towerSelectorHeaderTop.appendChild(towerSelectorHeaderText);
+
+    let towerSelectorHeaderText2 = document.createElement('p');
+    towerSelectorHeaderText2.id = 'tower-selector-header-text';
+    towerSelectorHeaderText2.classList.add('tower-selector-header-text');
+    towerSelectorHeaderText2.classList.add('black-outline');
+    towerSelectorHeaderText2.innerHTML = `Upgrades - ${Object.keys(btd6usersave.acquiredUpgrades).filter(k => btd6usersave.acquiredUpgrades[k]).length}/${Object.keys(btd6usersave.acquiredUpgrades).length}`;
+    towerSelectorHeaderTop.appendChild(towerSelectorHeaderText2);
 
     let towerSelectorHeader = document.createElement('div');
     towerSelectorHeader.id = 'tower-selector-header';
@@ -1878,8 +1885,15 @@ function generateHeroesProgress(){
     heroSelectorHeaderText.id = 'hero-selector-header-text';
     heroSelectorHeaderText.classList.add('hero-selector-header-text');
     heroSelectorHeaderText.classList.add('black-outline');
-    heroSelectorHeaderText.innerHTML = 'Heroes';
+    heroSelectorHeaderText.innerHTML = `Heroes - ${Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length}/${Object.keys(btd6usersave.unlockedHeros).length}`;
     heroSelectorHeaderTop.appendChild(heroSelectorHeaderText);
+
+    let heroSelectorHeaderText2 = document.createElement('p');
+    heroSelectorHeaderText2.id = 'hero-selector-header-text';
+    heroSelectorHeaderText2.classList.add('hero-selector-header-text');
+    heroSelectorHeaderText2.classList.add('black-outline');
+    heroSelectorHeaderText2.innerHTML = `Skins - ${Object.keys(btd6usersave.unlockedSkins).filter(k => btd6usersave.unlockedSkins[k]).length}/${Object.keys(btd6usersave.unlockedSkins).length}`;
+    heroSelectorHeaderTop.appendChild(heroSelectorHeaderText2);
 
     let heroSelectorHeader = document.createElement('div');
     heroSelectorHeader.id = 'hero-selector-header';
