@@ -102,9 +102,9 @@ function generateIfReady(){
         generateStats()
         generateMedals()
         generateExtras()
+        generateInstaData()
         generateProgressSubText()
         generateMapData()
-        generateInstaData()
         generateOverview()
         isGenerated.push('overview');
         changeTab('overview');
@@ -281,7 +281,7 @@ function generateProgressSubText(){
     progressSubText["Knowledge"] = `${Object.keys(btd6usersave.acquiredKnowledge).filter(k => btd6usersave.acquiredKnowledge[k]).length}/${Object.keys(btd6usersave.acquiredKnowledge).length} Knowledge Unlocked`;
     progressSubText["MapProgress"] = `${Object.keys(btd6usersave.mapProgress).filter(k => btd6usersave.mapProgress[k]).length}/${constants.totalMaps} Maps Played`;
     progressSubText["Powers"] = `${Object.values(btd6usersave.powers).map(power => power.quantity).reduce((acc, amount) => acc + amount)} Powers Accumulated`
-    progressSubText["InstaMonkeys"] = `${btd6publicprofile.gameplay.instaMonkeyCollection}/${constants.totalInstaMonkeys} Instas Collected`;
+    progressSubText["InstaMonkeys"] = `${Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount)} Instas Accumulated`;
     progressSubText["Achievements"] = `${btd6publicprofile.achievements}/${constants.achievements + constants.hiddenAchievements} Achievements`;
     progressSubText["Extras"] = `${Object.keys(extrasUnlocked).filter(k => extrasUnlocked[k]).length} Extras Unlocked`;
 }
