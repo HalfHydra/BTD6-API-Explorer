@@ -1367,11 +1367,11 @@ function generateProgress(){
     progressClipboardTop.classList.add('progress-clipboard-top');
     progressContent.appendChild(progressClipboardTop);*/
 
-    let progressClipboard = document.createElement('img');
-    progressClipboard.id = 'progress-clipboard';
-    progressClipboard.classList.add('progress-clipboard');
-    progressClipboard.src = '../Assets/UI/ClipboardTop.png';
-    progressContent.appendChild(progressClipboard);
+    // let progressClipboard = document.createElement('img');
+    // progressClipboard.id = 'progress-clipboard';
+    // progressClipboard.classList.add('progress-clipboard');
+    // progressClipboard.src = '../Assets/UI/ClipboardTop.png';
+    // progressContent.appendChild(progressClipboard);
 
     let progressPage = document.createElement('div');
     progressPage.id = 'progress-page';
