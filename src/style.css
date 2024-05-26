@@ -325,7 +325,7 @@
     font-size: 20px;
     color: white;
     position: relative; */
-    height: 52px;
+    height: 54px;
     display: flex;
     font-family: "GardeniaBold";
     justify-content: center;
@@ -717,11 +717,21 @@
 .tower-selector-header-text {
     text-align: center;
     font-size: 18px;
+    padding: 4px;
+    display: inline-block;
+    padding: 8px;
+    border-radius: 10px;
+}
+.tower-selector-header-top {
     border: 10px solid transparent;
     border-image-source: url(../Assets/UI/BarfillContainer.png);
     border-image-slice: 45;
     background-color: #9F7842;
     border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 190px;
 }
 .tower-progress-div {
     height: calc(100vh - 200px);
@@ -1087,12 +1097,22 @@
 .hero-selector-header-text {
     text-align: center;
     font-size: 18px;
+    padding: 4px;
+    display: inline-block;
+    padding: 8px;
+    border-radius: 10px;
+    width: 140px;
+}
+.hero-selector-header-top {
     border: 10px solid transparent;
     border-image-source: url(../Assets/UI/BarfillVeteranContainer.png);
     border-image-slice: 46;
     background-color: #9F7842;
     border-radius: 20px;
     background: linear-gradient(180deg, #2E4A83 0%, #344181 100%);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 .hero-progress-div {
     height: calc(100vh - 200px);
@@ -2187,10 +2207,6 @@
     width: 490px;
 }
 
-.tower-selector-header-top {
-
-}
-
 .black-outline {
     -webkit-text-stroke: 0.7px black;
     text-shadow: 1px 0px 0px #000, -1px 0px 0 #000, 0px 1px 0 #000, 1px 0px 0px #000, 1px 2px 0px #000, -1px -1px 0 #000, -1px 2px 0 #000, 1px -1px 0px #000;
@@ -2296,6 +2312,11 @@ p {
 }
 .insta-progress-missing-toggle-input:checked {
     background-image: url('../Assets/UI/MkOnGreen.png');
+}
+
+.stats-tab-yellow {
+    border-image-source: url(../Assets/UI/StatsTabYellow.png);
+    background: linear-gradient(180deg, #fecf00 0%, #fec600 100%);
 }
 
 @keyframes glow{
@@ -2465,6 +2486,7 @@ p {
     .tower-selector-header-top {
         display: flex;
         justify-content: center;
+        width: auto;
     }
     .hero-selector-header-text {
         padding: 0 20px;

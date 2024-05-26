@@ -828,7 +828,7 @@ function generateHeaderTabs(){
     headerContainer.classList.add('header-container');
     header.appendChild(headerContainer);
 
-    let headers = ['Overview', 'Progress', 'Explore', 'Export', 'Settings'];
+    let headers = ['Overview', 'Progress', 'Events', 'Extras', 'Settings'];
 
     headers.forEach((headerName) => {
         headerName = headerName.toLowerCase();
@@ -875,11 +875,11 @@ function changeTab(tab) {
                 generateProgress();
                 break;
             case 'explore':
-                generateExplore();
+                generateEvents();
                 //isGenerated.push(tab);
                 break;
-            case 'export':
-                generateExport();
+            case 'extras':
+                generateExtrasPage();
                 //isGenerated.push(tab);
                 break;
             case 'settings':
@@ -1877,8 +1877,8 @@ function generateHeroesProgress(){
     heroProgressContainer.appendChild(heroProgressDiv);
 
     let heroSelectorHeaderTop = document.createElement('div');
-    heroSelectorHeaderTop.id = 'tower-selector-header-top';
-    heroSelectorHeaderTop.classList.add('tower-selector-header-top');
+    heroSelectorHeaderTop.id = 'hero-selector-header-top';
+    heroSelectorHeaderTop.classList.add('hero-selector-header-top');
     heroProgressDiv.appendChild(heroSelectorHeaderTop);
 
     let heroSelectorHeaderText = document.createElement('p');
@@ -2434,12 +2434,21 @@ function onChangeMapView(view){
     currentMapView = view;
     switch(view){
         case "grid":
+            document.getElementById('maps-progress-grid').classList.add('stats-tab-yellow');
+            document.getElementById('maps-progress-list').classList.remove('stats-tab-yellow');
+            document.getElementById('maps-progress-game').classList.remove('stats-tab-yellow');
             generateMapsGridView();
             break;
         case "list":
+            document.getElementById('maps-progress-grid').classList.remove('stats-tab-yellow');
+            document.getElementById('maps-progress-list').classList.add('stats-tab-yellow');
+            document.getElementById('maps-progress-game').classList.remove('stats-tab-yellow');
             generateMapsListView();
             break;
         case "game":
+            document.getElementById('maps-progress-grid').classList.remove('stats-tab-yellow');
+            document.getElementById('maps-progress-list').classList.remove('stats-tab-yellow');
+            document.getElementById('maps-progress-game').classList.add('stats-tab-yellow');
             generateMapsGameView();
             break;
     }
@@ -3289,9 +3298,13 @@ function onChangeInstaMonkeysView(view) {
     document.getElementById('insta-monkey-progress-container').style.display = "none";
     switch (view) {
         case "game":
+            document.getElementById('insta-monkeys-game-view').classList.add('stats-tab-yellow');
+            document.getElementById('insta-monkeys-list-view').classList.remove('stats-tab-yellow');
             generateInstaGameView();
             break;
         case "list":
+            document.getElementById('insta-monkeys-game-view').classList.remove('stats-tab-yellow');
+            document.getElementById('insta-monkeys-list-view').classList.add('stats-tab-yellow');
             generateInstaListView();
             break;
         // case "missing":
@@ -3992,28 +4005,40 @@ function onChangeAchievementRewardFilter(filter){
     generateAchievementsGameView();
 }
 
-function generateExplore() {
-    let exploreContent = document.getElementById('explore-content');
-    exploreContent.innerHTML = "";
+function generateEvents(){
+    let eventsContent = document.getElementById('events-content');
+    eventsContent.innerHTML = "";
 
     let noDataFound = document.createElement('p');
     noDataFound.id = 'no-data-found';
     noDataFound.classList.add('no-data-found');
     noDataFound.classList.add('black-outline');
     noDataFound.innerHTML = "Coming Soon";
-    exploreContent.appendChild(noDataFound);
+    eventsContent.appendChild(noDataFound);
 }
 
-function generateExport() {
-    let exportContent = document.getElementById('export-content');
-    exportContent.innerHTML = "";
+// function generateExplore() {
+//     let exploreContent = document.getElementById('explore-content');
+//     exploreContent.innerHTML = "";
+
+//     let noDataFound = document.createElement('p');
+//     noDataFound.id = 'no-data-found';
+//     noDataFound.classList.add('no-data-found');
+//     noDataFound.classList.add('black-outline');
+//     noDataFound.innerHTML = "Coming Soon";
+//     exploreContent.appendChild(noDataFound);
+// }
+
+function generateExtrasPage() {
+    let extrasContent = document.getElementById('extras-content');
+    extrasContent.innerHTML = "";
 
     let noDataFound = document.createElement('p');
     noDataFound.id = 'no-data-found';
     noDataFound.classList.add('no-data-found');
     noDataFound.classList.add('black-outline');
     noDataFound.innerHTML = "Coming Soon";
-    exportContent.appendChild(noDataFound);
+    extrasContent.appendChild(noDataFound);
 }
 
 function generateSettings(){

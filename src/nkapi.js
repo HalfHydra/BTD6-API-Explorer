@@ -12,8 +12,8 @@ let localStorageOAK = {}
 // getPublicProfileData(oak_token)
 
 async function getSaveData(oak_token) {
-    let res = await fetch(`https://data.ninjakiwi.com/btd6/save/${oak_token}`);
-    // let res = await fetch(`./data/PreventAPISpam.txt`);
+    // let res = await fetch(`https://data.ninjakiwi.com/btd6/save/${oak_token}`);
+    let res = await fetch(`./data/PreventAPISpam_UserSave.json`);
     try {
         let json = await res.json();
         if(json["success"] == true){
@@ -33,8 +33,8 @@ async function getSaveData(oak_token) {
 }
 
 async function getPublicProfileData(oak_token) {
-    let res = await fetch(`https://data.ninjakiwi.com/btd6/users/${oak_token}`);
-    // let res = await fetch(`./data/PreventAPISpam_UserID.json`);
+    // let res = await fetch(`https://data.ninjakiwi.com/btd6/users/${oak_token}`);
+    let res = await fetch(`./data/PreventAPISpam_UserID.json`);
     try {
         let json = await res.json();
         if(json["success"]  == true){
@@ -66,4 +66,12 @@ function readLocalStorage(){
 }
 function writeLocalStorage(){
     localStorage.setItem("BTD6OAKStorage", JSON.stringify(localStorageOAK))
+}
+
+function getChallengeIdFromInt(rawId, advanced) {
+    let baseDate = new Date(2024, 4, 25); //0 indexed month
+    let diff = (advanced ? 2101 : 2114) - parseInt(rawId);
+    baseDate.setDate(baseDate.getDate() - diff);
+    let formattedDate = baseDate.toISOString().substring(0, 10).replace(/-/g, '');
+    return (advanced ? 'adv': 'rot') + rawId + formattedDate;
 }
