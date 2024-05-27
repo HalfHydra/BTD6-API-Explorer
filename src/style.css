@@ -669,7 +669,7 @@
 
 .selectors-div {
     width: 600px;
-    padding: 10px;
+    padding: 10px 20px;
     background-color: var(--profile-secondary);
     border-radius: 15px;
 }
@@ -697,8 +697,12 @@
     font-size: 24px;
     color: white;
 }
-
-
+.event-selector-text {
+    font-family: 'Luckiest Guy';
+    font-size: 24px;
+    color: white;
+    filter: drop-shadow(0px 1px 0px black);
+}
 
 .tower-progress-container {
     display: flex;
@@ -2184,6 +2188,12 @@
     height: 80px;
     object-fit: contain;
 }
+
+.events {
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
 .extra-progress-div {
     display: flex;
     flex-wrap: wrap;
@@ -2205,6 +2215,20 @@
     font-size: 32px;
     text-align: center;
     width: 490px;
+}
+
+.events-selector-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    border-radius: 20px;
+    margin: 10px 0;
+    padding: 20px;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: soft-light;
+    border: 5px solid var(--profile-tertiary);
 }
 
 .black-outline {

@@ -874,7 +874,7 @@ function changeTab(tab) {
             case 'progress':
                 generateProgress();
                 break;
-            case 'explore':
+            case 'events':
                 generateEvents();
                 //isGenerated.push(tab);
                 break;
@@ -4005,18 +4005,6 @@ function onChangeAchievementRewardFilter(filter){
     generateAchievementsGameView();
 }
 
-function generateEvents(){
-    let eventsContent = document.getElementById('events-content');
-    eventsContent.innerHTML = "";
-
-    let noDataFound = document.createElement('p');
-    noDataFound.id = 'no-data-found';
-    noDataFound.classList.add('no-data-found');
-    noDataFound.classList.add('black-outline');
-    noDataFound.innerHTML = "Coming Soon";
-    eventsContent.appendChild(noDataFound);
-}
-
 // function generateExplore() {
 //     let exploreContent = document.getElementById('explore-content');
 //     exploreContent.innerHTML = "";
@@ -4029,16 +4017,95 @@ function generateEvents(){
 //     exploreContent.appendChild(noDataFound);
 // }
 
-function generateExtrasPage() {
-    let extrasContent = document.getElementById('extras-content');
-    extrasContent.innerHTML = "";
+function generateEvents(){
+    let eventsContent = document.getElementById('events-content');
+    eventsContent.innerHTML = "";
 
-    let noDataFound = document.createElement('p');
-    noDataFound.id = 'no-data-found';
-    noDataFound.classList.add('no-data-found');
-    noDataFound.classList.add('black-outline');
-    noDataFound.innerHTML = "Coming Soon";
-    extrasContent.appendChild(noDataFound);
+    // let noDataFound = document.createElement('p');
+    // noDataFound.id = 'no-data-found';
+    // noDataFound.classList.add('no-data-found');
+    // noDataFound.classList.add('black-outline');
+    // noDataFound.innerHTML = "Coming Soon";
+    // extrasContent.appendChild(noDataFound);
+
+    let eventsPage = document.createElement('div');
+    eventsPage.id = 'events-page';
+    eventsPage.classList.add('progress-page');
+    eventsContent.appendChild(eventsPage);
+
+    let selectorsDiv = document.createElement('div');
+    selectorsDiv.id = 'selectors-div-events';
+    selectorsDiv.classList.add('selectors-div');
+    eventsPage.appendChild(selectorsDiv);
+
+    let selectors = {
+        'Races': {
+            'img': 'EventRaceBtn',
+            'text': "Races",
+            'bgimg': 'EventBannerSmallRaces'
+        },
+        'Bosses': {
+            'img': 'EventIconNoBoss',
+            'text': "Bosses",
+            'bgimg': 'EventBannerSmallNoBoss'
+        },
+        'Odyssey': {
+            'img': 'OdysseyEventBtn',
+            'text': "Odyssey",
+            'bgimg': 'EventBannerSmallOdyssey'
+        },
+        'ContestedTerritory': {
+            'img': 'ContestedTerritoryEventBtn',
+            'text': "Contested Territory",
+            'bgimg': 'EventBannerSmallCT'
+        },
+        'DailyChallenges': {
+            'img': 'DailyChallengeBtn',
+            'text': "Daily Challenges",
+            'bgcolor': 'radial-gradient(circle, transparent 50%, rgba(0,0,0,1) 100%),linear-gradient(45deg, rgb(70,148,213), rgb(70,148,213))'
+        },
+        'AdvancedDailyChallenges': {
+            'img': 'DailyChallengeBtn',
+            'text': "Advanced Daily Challenges",
+            'bgcolor': 'radial-gradient(circle, transparent 50%, rgba(0,0,0,1) 100%),linear-gradient(45deg, rgb(234,99,52), rgb(234,99,52))'
+        },
+        'CoopDailyChallenges': {
+            'img': 'DailyChallengeBtn',
+            'text': "Coop Challenges",
+            'bgcolor': 'radial-gradient(circle, transparent 50%, rgba(0,0,0,1) 100%),linear-gradient(45deg, rgb(255,150,0), rgb(255,150,0))'
+        }
+    }
+
+    Object.entries(selectors).forEach(([selector,object]) => {
+        let selectorDiv = document.createElement('div');
+        selectorDiv.id = selector.toLowerCase() + '-div';
+        selectorDiv.classList.add('events-selector-div');
+        object.bgcolor ? selectorDiv.style.background = object.bgcolor : selectorDiv.style.backgroundImage = `url(../Assets/EventBanner/${object.bgimg}.png)`;
+        /*selectorDiv.innerHTML = progressSubText[selector];*/
+        selectorDiv.addEventListener('click', () => {
+            changeProgressTab(selector);
+        })
+        selectorsDiv.appendChild(selectorDiv);
+
+        let selectorImg = document.createElement('img');
+        selectorImg.id = selector.toLowerCase() + '-img';
+        selectorImg.classList.add('selector-img');
+        selectorImg.src = `../Assets/UI/${object.img}.png`;
+        selectorDiv.appendChild(selectorImg);
+
+        let selectorText = document.createElement('p');
+        selectorText.id = selector.toLowerCase() + '-text';
+        selectorText.classList.add('event-selector-text');
+        selectorText.classList.add('black-outline');
+        selectorText.innerHTML = object.text;
+        selectorDiv.appendChild(selectorText);
+
+        let selectorGoImg = document.createElement('img');
+        selectorGoImg.id = selector.toLowerCase() + '-go-img';
+        selectorGoImg.classList.add('selector-go-img');
+        selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
+        selectorDiv.appendChild(selectorGoImg);
+    })
 }
 
 function generateSettings(){
