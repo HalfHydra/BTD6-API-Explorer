@@ -283,6 +283,72 @@
         148,
         149
     ],
+    "dailyChallenges": {
+        "standard": {
+            "firstId": 660,
+            "firstDate": "2020-06-01"
+        },
+        "advanced": {
+            "firstId": 647,
+            "firstDate": "2020-06-01"
+        }
+    },
+    "collection": {
+        "crateRewards": {
+            "instaMonkey": {
+                "wood": {
+                    "quantityChance": {
+                        "2": 1
+                    },
+                    "tierChance": {
+                        "1": 0.8,
+                        "2": 0.2
+                    }
+                },
+                "bronze": {
+                    "quantityChance": {
+                        "2": 1
+                    },
+                    "tierChance": {
+                        "1": 0.2,
+                        "2": 0.7,
+                        "3": 0.1
+                    }
+                },
+                "silver": {
+                    "quantityChance": {
+                        "2": 1
+                    },
+                    "tierChance": {
+                        "2": 0.4,
+                        "3": 0.55,
+                        "4": 0.05
+                    }
+                },
+                "gold": {
+                    "quantityChance": {
+                        "2": 0.9,
+                        "3": 0.1
+                    },
+                    "tierChance": {
+                        "3": 0.6,
+                        "4": 0.4
+                    }
+                },
+                "diamond": {
+                    "quantityChance": {
+                        "2": 0.6,
+                        "3": 0.4
+                    },
+                    "tierChance": {
+                        "3": 0.35,
+                        "4": 0.6,
+                        "5": 0.05
+                    }
+                }
+            }
+        }
+    },
     "BGColor": [0.000, 0.498, 1.000],
     "ParagonBGColor": [0.522, 0.000, 1.000],
     "HeroBGColors": {

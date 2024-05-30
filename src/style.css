@@ -2231,6 +2231,68 @@
     border: 5px solid var(--profile-tertiary);
 }
 
+.race-div {
+    display:flex;
+    justify-content: space-between;
+    width: 750px;
+    background-image: url(../Assets/EventBanner/EventBannerSmallRaces.png);
+    background-size: cover;
+    background-position: center;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+}
+.race-map-div {
+    border-width: 7px;
+}
+.race-info-top-div {
+    width: 450px;
+    display: flex;
+    justify-content: space-between;
+}
+.race-info-middle-div {
+    display: flex;
+    justify-content: space-between;
+}
+.race-info-bottom-div {
+    display: flex;
+    justify-content: space-between;
+}
+.race-info-rules {
+    width: 180px;
+}
+
+.race-info-leaderboard {
+    width: 180px;
+}
+.race-info-name {
+    font-size: 24px;
+}
+.race-time-left {
+    font-size: 24px;
+    width: 90px;
+}
+.race-info-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-right: 10px;
+}
+.race-info-dates {
+    font-size: 20px;
+}
+.race-info-total-scores {
+    font-size: 20px;
+}
+.race-map-img {
+    width: 250px;
+    height: 160px;
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+}
+
 .black-outline {
     -webkit-text-stroke: 0.7px black;
     text-shadow: 1px 0px 0px #000, -1px 0px 0 #000, 0px 1px 0 #000, 1px 0px 0px #000, 1px 2px 0px #000, -1px -1px 0 #000, -1px 2px 0 #000, 1px -1px 0px #000;

@@ -59,6 +59,8 @@ let processedInstaData = {
     "TowerBorders": {}
 }
 
+let timerInterval = null;
+
 fetch('./data/Constants.json')
         .then(response => response.json())
         .then(data => {
@@ -480,6 +482,10 @@ function showLoading(){
     document.getElementById("loading").style.removeProperty("transform")
 }
 
+function hideLoading(){
+    document.getElementById("loading").style.transform = "scale(0)";
+}
+
 const container = document.createElement('div');
 container.id = 'container';
 document.body.appendChild(container);
@@ -852,11 +858,24 @@ function generateHeaderTabs(){
         contentElement.style.display = 'none';
         content.appendChild(contentElement);
     })
+
+    let extraContent = ['Challenge', 'PublicProfile', 'Leaderboard'];
+    extraContent.forEach((headerName) => {
+        headerName = headerName.toLowerCase();
+        let contentElement = document.createElement('div');
+        contentElement.id = headerName + '-content';
+        contentElement.classList.add(`sub-content-div`);
+        contentElement.classList.add(headerName)
+        contentElement.style.display = 'none';
+        content.appendChild(contentElement);
+    })
+
 }
 
 function changeTab(tab) {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+    if(timerInterval) { clearInterval(timerInterval); }
     changeHexBGColor(constants.BGColor)
     let tabs = document.getElementsByClassName('content-div');
     for (let tab of tabs){
@@ -1420,6 +1439,7 @@ function generateProgress(){
 function changeProgressTab(selector){
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+    if(timerInterval) { clearInterval(timerInterval); }
     switch(selector){
         case 'Towers':
             generateTowerProgress();
@@ -4005,18 +4025,6 @@ function onChangeAchievementRewardFilter(filter){
     generateAchievementsGameView();
 }
 
-// function generateExplore() {
-//     let exploreContent = document.getElementById('explore-content');
-//     exploreContent.innerHTML = "";
-
-//     let noDataFound = document.createElement('p');
-//     noDataFound.id = 'no-data-found';
-//     noDataFound.classList.add('no-data-found');
-//     noDataFound.classList.add('black-outline');
-//     noDataFound.innerHTML = "Coming Soon";
-//     exploreContent.appendChild(noDataFound);
-// }
-
 function generateEvents(){
     let eventsContent = document.getElementById('events-content');
     eventsContent.innerHTML = "";
@@ -4083,7 +4091,7 @@ function generateEvents(){
         object.bgcolor ? selectorDiv.style.background = object.bgcolor : selectorDiv.style.backgroundImage = `url(../Assets/EventBanner/${object.bgimg}.png)`;
         /*selectorDiv.innerHTML = progressSubText[selector];*/
         selectorDiv.addEventListener('click', () => {
-            changeProgressTab(selector);
+            changeEventTab(selector);
         })
         selectorsDiv.appendChild(selectorDiv);
 
@@ -4106,6 +4114,121 @@ function generateEvents(){
         selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
         selectorDiv.appendChild(selectorGoImg);
     })
+}
+
+function changeEventTab(selector){
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    if(timerInterval) { clearInterval(timerInterval); }
+    switch(selector){
+        case 'Races':
+            showLoading();
+            getRacesData();
+            break;
+    }
+}
+
+function generateRaces(){
+    let eventsContent = document.getElementById('events-content');
+    eventsContent.innerHTML = "";
+
+    Object.values(racesData).forEach((race, index) => {
+        let raceDiv = document.createElement('div');
+        raceDiv.classList.add("race-div");
+        eventsContent.appendChild(raceDiv);
+
+        let raceMapDiv = document.createElement('div');
+        raceMapDiv.classList.add("race-map-div", "silver-border");
+        raceDiv.appendChild(raceMapDiv);
+
+        let raceMapImg = document.createElement('img');
+        raceMapImg.classList.add("race-map-img");
+        raceMapImg.src = "./Assets/MapIcon/MapLoadingImage.png"
+        raceMapDiv.appendChild(raceMapImg);
+
+        let raceChallengeIcons = document.createElement('div');
+        raceChallengeIcons.classList.add("race-challenge-icons");
+        raceMapDiv.appendChild(raceChallengeIcons);
+
+        let raceMapRounds = document.createElement('p');
+        raceMapRounds.classList.add("race-map-rounds");
+        raceMapDiv.appendChild(raceMapRounds);
+
+        let raceInfoDiv = document.createElement('div');
+        raceInfoDiv.classList.add("race-info-div");
+        raceDiv.appendChild(raceInfoDiv);
+
+        let raceInfoTopDiv = document.createElement('div');
+        raceInfoTopDiv.classList.add("race-info-top-div");
+        raceInfoDiv.appendChild(raceInfoTopDiv);
+
+        let raceInfoMiddleDiv = document.createElement('div');
+        raceInfoMiddleDiv.classList.add("race-info-middle-div");
+        raceInfoDiv.appendChild(raceInfoMiddleDiv);
+
+        let raceInfoBottomDiv = document.createElement('div');
+        raceInfoBottomDiv.classList.add("race-info-bottom-div");
+        raceInfoDiv.appendChild(raceInfoBottomDiv);
+
+        let raceInfoName = document.createElement('p');
+        raceInfoName.classList.add("race-info-name", "black-outline");
+        raceInfoName.innerHTML = race.name;
+        raceInfoTopDiv.appendChild(raceInfoName);
+
+        let raceTimeLeft = document.createElement('p');
+        raceTimeLeft.id = 'race-time-left';
+        raceTimeLeft.classList.add("race-time-left", "black-outline");
+        raceTimeLeft.innerHTML = "Finished";
+        raceInfoTopDiv.appendChild(raceTimeLeft);    
+        if (new Date(race.end) > new Date()) {
+            updateTimer(new Date(race.end), raceTimeLeft.id);
+            timerInterval = setInterval(() => updateTimer(new Date(race.end), raceTimeLeft.id), 1000)
+        }
+
+        let raceInfoDates = document.createElement('p');
+        raceInfoDates.classList.add("race-info-dates", "black-outline");
+        //formatted as "XX/XX/XX XX:XX - XX/XX/XX XX:XX"
+        raceInfoDates.innerHTML = `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`;
+        raceInfoMiddleDiv.appendChild(raceInfoDates);
+
+        let raceInfoTotalScores = document.createElement('p');
+        raceInfoTotalScores.classList.add("race-info-total-scores", "black-outline");
+        raceInfoTotalScores.innerHTML = `Total Scores: ${race.totalScores == 0 ? "No Data" : race.totalScores.toLocaleString()}`
+        raceInfoMiddleDiv.appendChild(raceInfoTotalScores);
+
+        let raceInfoRules = document.createElement('div');
+        raceInfoRules.classList.add("race-info-rules", "start-button", "black-outline");
+        raceInfoRules.innerHTML = "Rules"
+        raceInfoRules.addEventListener('click', () => {
+            showChallengeModel('race', race.metadata);
+        })
+        raceInfoBottomDiv.appendChild(raceInfoRules);
+
+        let raceInfoLeaderboard = document.createElement('div');
+        raceInfoLeaderboard.classList.add("race-info-leaderboard", "start-button", "black-outline");
+        raceInfoLeaderboard.innerHTML = "Leaderboard"
+        raceInfoBottomDiv.appendChild(raceInfoLeaderboard);
+
+        let observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(async entry => {
+                if (entry.isIntersecting) {
+                    await getRaceMetadata(index);
+                    console.log(race.metadata)
+                    observer.unobserve(entry.target);
+                    raceMapImg.src = Object.keys(constants.mapsInOrder).includes(race.metadata.map) ? getMapIcon(race.metadata.map) : race.metadata.mapURL;
+                }
+            });
+        });
+        observer.observe(raceMapDiv);
+    })
+}
+
+function showChallengeModel(source, metadata){
+
+}
+
+function exitChallengeModel(source){
+
 }
 
 function generateSettings(){
@@ -4192,6 +4315,31 @@ function processRewardsString(input){
         counter++;
     }
     return result;
+}
+
+function formatTime(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = Math.floor(seconds % 60);
+    return [hours, minutes, secs].map(v => v < 10 ? "0" + v : v).join(":");
+}
+
+function getRemainingTime(targetTime) {
+    const now = new Date();
+    const remainingTime = (targetTime - now) / 1000; // convert to seconds
+    return remainingTime;
+}
+
+function updateTimer(targetTime, elementId) {
+    const remainingTime = getRemainingTime(targetTime);
+    const timerElement = document.getElementById(elementId);
+
+    if (remainingTime > 48 * 3600) {
+        const days = Math.ceil(remainingTime / (24 * 3600));
+        timerElement.textContent = `${days} days`;
+    } else {
+        timerElement.textContent = formatTime(remainingTime);
+    }
 }
 
 function changeHexBGColor(color){
