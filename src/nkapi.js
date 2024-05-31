@@ -92,7 +92,7 @@ async function getRacesData() {
 }
 
 async function getRaceMetadata(key) {
-    if (racesData && racesData[key] && racesData[key]["metadata"].startsWith("https://")) {
+    if (racesData && racesData[key] && typeof racesData[key]["metadata"] === 'string') {
         return fetchData(racesData[key]["metadata"], (json) => {
             console.log(`fetched ${racesData[key]["metadata"]}`)
             racesData[key]["metadata"] = json["body"];
