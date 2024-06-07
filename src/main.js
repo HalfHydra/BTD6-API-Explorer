@@ -4053,7 +4053,7 @@ function generateEvents(){
             'bgimg': 'EventBannerSmallRaces'
         },
         'Bosses': {
-            'img': 'EventIconNoBoss',
+            'img': 'BossesBtn',
             'text': "Bosses",
             'bgimg': 'EventBannerSmallNoBoss'
         },
@@ -4198,9 +4198,9 @@ function generateRaces(){
 
         let raceInfoRules = document.createElement('div');
         raceInfoRules.classList.add("race-info-rules", "start-button", "black-outline");
-        raceInfoRules.innerHTML = "Rules"
+        raceInfoRules.innerHTML = "Details"
         raceInfoRules.addEventListener('click', () => {
-            showChallengeModel('race', race.metadata);
+            showChallengeModel('events', race.metadata, "Race");
         })
         raceInfoBottomDiv.appendChild(raceInfoRules);
 
@@ -4223,12 +4223,531 @@ function generateRaces(){
     })
 }
 
-function showChallengeModel(source, metadata){
+function processChallenge(metadata){
+    let result = {};
+    if (metadata.leastCashUsed != "-1") {
+        result.scoringType = "Least Cash"
+    } else if (metadata.leastTiersUsed != "-1") {
+        result.scoringType = "Least Tiers"
+    } else {
+        result.scoringType = null;
+    }
+    return result;
+}
 
+function showChallengeModel(source, metadata, challengeType){
+    document.getElementById('challenge-content').style.display = "flex";
+    document.getElementById('challenge-content').innerHTML = "";
+    document.getElementById(`${source}-content`).style.display = "none";
+
+    let challengeExtraData = processChallenge(metadata);
+
+    let challengeModel = document.createElement('div');
+    challengeModel.classList.add('challenge-model');
+    document.getElementById('challenge-content').appendChild(challengeModel);
+
+    let challengeModelHeader = document.createElement('div');
+    challengeModelHeader.classList.add('challenge-model-header');
+    challengeModel.appendChild(challengeModelHeader);
+
+    let challengeModelHeaderIcons = document.createElement('div');
+    challengeModelHeaderIcons.classList.add('challenge-model-header-icons');
+    challengeModelHeader.appendChild(challengeModelHeaderIcons);
+
+    let challengeModelHeaderIcon = document.createElement('img');
+    challengeModelHeaderIcon.classList.add('challenge-model-header-difficulty');
+    switch(challengeType){
+        case "Race":
+            challengeModelHeaderIcon.src = "./Assets/UI/EventRaceBtn.png";
+            break;
+        case "Boss":
+            challengeModelHeaderIcon.src = "./Assets/UI/BossesBtn.png";
+            break;
+        case "Odyssey":
+            challengeModelHeaderIcon.src = "./Assets/UI/OdysseyEventBtn.png";
+            break;
+        case "ContestedTerritory":
+            challengeModelHeaderIcon.src = "./Assets/UI/ContestedTerritoryEventBtn.png";
+            break;
+        case "Daily":
+        case "AdvancedDaily":
+        case "CoopDaily":
+            challengeModelHeaderIcon.src = "./Assets/UI/DailyChallengeBtn.png";
+            break;
+        case "Custom":
+            challengeModelHeaderIcon.src = "./Assets/UI/CreateChallengeIcon.png";
+            break;
+    }
+    challengeModelHeaderIcons.appendChild(challengeModelHeaderIcon);
+
+    // let challengeModelHeaderDifficulty = document.createElement('img');
+    // challengeModelHeaderDifficulty.classList.add('challenge-model-header-difficulty');
+    // challengeModelHeaderDifficulty.src = getModeIcon(metadata.difficulty);
+    // challengeModelHeaderIcons.appendChild(challengeModelHeaderDifficulty);
+
+    // if (metadata.mode != "Standard"){
+    //     let challengeModelHeaderMode = document.createElement('img');
+    //     challengeModelHeaderMode.classList.add('challenge-model-header-difficulty');
+    //     challengeModelHeaderMode.src = getModeIcon(metadata.mode);
+    //     challengeModelHeaderIcons.appendChild(challengeModelHeaderMode);
+    // }
+
+    let challengeModelHeaderTexts = document.createElement('div');
+    challengeModelHeaderTexts.classList.add('challenge-model-header-texts');
+    challengeModelHeader.appendChild(challengeModelHeaderTexts);
+
+    let challengeModelHeaderName = document.createElement('p');
+    challengeModelHeaderName.classList.add('challenge-model-header-name');
+    challengeModelHeaderName.classList.add('black-outline');
+    challengeModelHeaderName.innerHTML = metadata.name;
+    challengeModelHeaderTexts.appendChild(challengeModelHeaderName);
+
+    let challengeModelHeaderModeDiff = document.createElement('p');
+    challengeModelHeaderModeDiff.classList.add('challenge-model-header-mode-diff');
+    challengeModelHeaderModeDiff.classList.add('black-outline');
+    challengeModelHeaderModeDiff.innerHTML = `${metadata.difficulty} - ${getLocValue("Mode " + metadata.mode)} ${challengeExtraData.scoringType == null ? "" : ` - ${challengeExtraData.scoringType}`}`;
+    challengeModelHeaderTexts.appendChild(challengeModelHeaderModeDiff);
+
+    let challengeHeaderRightContainer = document.createElement('div');
+    challengeHeaderRightContainer.classList.add('challenge-header-right-container');
+    challengeModelHeader.appendChild(challengeHeaderRightContainer);
+
+    let challengeHeaderExitBtn = document.createElement('div');
+    challengeHeaderExitBtn.classList.add('challenge-header-exit-btn');
+    challengeHeaderExitBtn.classList.add('maps-progress-view');
+    challengeHeaderExitBtn.classList.add('black-outline');
+    challengeHeaderExitBtn.innerHTML = "Exit";
+    challengeHeaderExitBtn.addEventListener('click', () => {
+        exitChallengeModel(source);
+    })
+    challengeHeaderRightContainer.appendChild(challengeHeaderExitBtn);
+
+    let challengeModelTop = document.createElement('div');
+    challengeModelTop.classList.add('challenge-model-top');
+    challengeModel.appendChild(challengeModelTop);
+
+    let challengeModelMapIcon = document.createElement('img');
+    challengeModelMapIcon.classList.add('challenge-model-map-icon', 'boss-border');
+    challengeModelMapIcon.src = getMapIcon(metadata.map);
+    challengeModelTop.appendChild(challengeModelMapIcon);
+
+    let challengeModelSettings = document.createElement('div');
+    challengeModelSettings.classList.add('challenge-model-settings');
+    challengeModelTop.appendChild(challengeModelSettings);
+
+    let challengeModelSettingsLeft = document.createElement('div');
+    challengeModelSettingsLeft.classList.add('challenge-model-settings-left');
+    challengeModelSettings.appendChild(challengeModelSettingsLeft);
+
+    let challengeModelSettingsRight = document.createElement('div');
+    challengeModelSettingsRight.classList.add('challenge-model-settings-right');
+    challengeModelSettings.appendChild(challengeModelSettingsRight);
+
+    let challengeSettings = {
+        'Starting Cash': {
+            "icon": "CoinIcon",
+            "key": "startingCash",
+        },
+        'Start Round': {
+            "icon": "StartRoundIconSmall",
+            "key": "startRound",
+        },
+        'Starting Lives': {
+            "icon": "LivesIcon",
+            "key": "lives",
+        },
+        'End Round': {
+            "icon": "EndRoundIconSmall",
+            "key": "endRound",
+        },
+        'Max Lives': {
+            "icon": "LivesIcon",
+            "key": "maxLives",
+        },
+        'Max Monkeys': {
+            "icon": "MaxMonkeysIcon",
+            "key": "maxTowers",
+        }
+    }
+
+    Object.entries(challengeSettings).forEach(([setting,data], index) => {
+        let challengeSetting = document.createElement('div');
+        challengeSetting.classList.add('challenge-setting');
+
+        index % 2 ? challengeModelSettingsRight.appendChild(challengeSetting) : challengeModelSettingsLeft.appendChild(challengeSetting);
+        // challengeModelSettings.appendChild(challengeSetting);
+
+        let challengeSettingIcon = document.createElement('img');
+        challengeSettingIcon.classList.add('challenge-setting-icon');
+        challengeSettingIcon.src = `./Assets/UI/${data.icon}.png`;
+        challengeSetting.appendChild(challengeSettingIcon);
+
+        let challengeSettingTexts = document.createElement('div');
+        challengeSettingTexts.classList.add('challenge-setting-texts');
+        challengeSetting.appendChild(challengeSettingTexts);
+
+        let challengeSettingText = document.createElement('p');
+        challengeSettingText.classList.add('challenge-setting-text', 'black-outline');
+        challengeSettingText.innerHTML = setting + ":";
+        challengeSettingTexts.appendChild(challengeSettingText);
+
+        let challengeSettingValue = document.createElement('p');
+        challengeSettingValue.classList.add('challenge-setting-value', 'black-outline');
+        challengeSettingValue.innerHTML = metadata[data.key];
+        challengeSettingTexts.appendChild(challengeSettingValue);
+        if (data.key = "maxTowers" && (metadata[data.key] == 0 || metadata[data.key] == 9999)) { challengeSettingValue.innerHTML = "Unlimited"; }
+    })
+    //special conditions
+    if (challengeExtraData.scoringType != null) {
+        let challengeSetting = document.createElement('div');
+        challengeSetting.classList.add('challenge-setting');
+        challengeModelSettings.appendChild(challengeSetting);
+
+        let challengeSettingIcon = document.createElement('img');
+        challengeSettingIcon.classList.add('challenge-setting-icon');
+        challengeSetting.appendChild(challengeSettingIcon);
+
+        let challengeSettingTexts = document.createElement('div');
+        challengeSettingTexts.classList.add('challenge-setting-texts');
+        challengeSetting.appendChild(challengeSettingTexts);
+
+        let challengeSettingText = document.createElement('p');
+        challengeSettingText.classList.add('challenge-setting-text', 'black-outline');
+        challengeSettingTexts.appendChild(challengeSettingText);
+
+        let challengeSettingValue = document.createElement('p');
+        challengeSettingValue.classList.add('challenge-setting-value', 'black-outline');
+        challengeSettingValue.innerHTML = 'ERROR';
+        challengeSettingTexts.appendChild(challengeSettingValue);
+
+        switch (challengeExtraData.scoringType) {
+            case "Least Cash":
+                challengeSettingText.innerHTML = "Least Cash:";
+                challengeSettingIcon.src = `./Assets/UI/LeastCashIconSmall.png`;
+                challengeSettingValue.innerHTML = metadata.leastCashUsed;
+                break;
+            case "Least Tiers":
+                challengeSettingText.innerHTML = "Least Tiers:";
+                challengeSettingIcon.src = `./Assets/UI/LeastTiersIconSmall.png`;
+                challengeSettingValue.innerHTML =  metadata.leastTiersUsed;
+                break;
+        }
+    }
+
+    let challengeSetting = document.createElement('div');
+    challengeSetting.classList.add('challenge-setting');
+    challengeModelSettings.appendChild(challengeSetting);
+
+    let challengeSettingIcon = document.createElement('img');
+    challengeSettingIcon.classList.add('challenge-setting-icon');
+    challengeSetting.appendChild(challengeSettingIcon);
+
+    let challengeSettingTexts = document.createElement('div');
+    challengeSettingTexts.classList.add('challenge-setting-texts');
+    challengeSetting.appendChild(challengeSettingTexts);
+
+    let challengeSettingText = document.createElement('p');
+    challengeSettingText.classList.add('challenge-setting-text', 'black-outline');
+    challengeSettingTexts.appendChild(challengeSettingText);
+
+    switch(challengeType) {
+        case "Race":
+            challengeSettingText.innerHTML = "Race Event";
+            challengeSettingIcon.src = `./Assets/UI/RaceIcon.png`;
+            break;
+        case "Boss":
+            //get actual boss type
+            challengeSettingText.innerHTML = "Boss Event";
+            challengeSettingIcon.src = `./Assets/BossIcon/BloonariusPortrait.png`;
+            break;
+        case "EliteBoss":
+            challengeSettingText.innerHTML = "Elite Boss Event";
+            challengeSettingIcon.src = `./Assets/BossIcon/BloonariusPortraitElite.png`;
+            break;
+        case "Daily":
+            challengeSettingText.innerHTML = "Daily Challenge";
+            challengeSettingIcon.src = `./Assets/UI/ChallengesIcon.png`;
+            break;
+        case "AdvancedDaily":
+            challengeSettingText.innerHTML = "Advanced Daily";
+            challengeSettingIcon.src = `./Assets/UI/ChallengesIcon.png`;
+            break;
+        case "CoopDaily":
+            challengeSettingText.innerHTML = "Coop Challenge";
+            challengeSettingIcon.src = `./Assets/UI/ChallengesIcon.png`;
+            break;
+        case "Custom":
+            challengeSettingText.innerHTML = "Custom Challenge";
+            challengeSettingIcon.src = `./Assets/UI/CustomChallenge.png`;
+            break;
+    }
+
+    let heroesToDisplay = {};
+    let towersToDisplay = {};
+    let shouldUseHeroList = false;
+
+    Object.entries(metadata._towers).forEach(([tower, data]) => {
+        if (data.max == 0) { return; }
+        if (tower === "ChosenPrimaryHero") { shouldUseHeroList = true; }
+        data.isHero ? heroesToDisplay[data.tower] = data : towersToDisplay[data.tower] = data;
+    })
+
+    console.log(heroesToDisplay)
+    console.log(towersToDisplay)
+
+    if (shouldUseHeroList) {
+        let heroSelectorHeader = document.createElement('div');
+        heroSelectorHeader.classList.add('challenge-tower-selector');
+        challengeModel.appendChild(heroSelectorHeader);
+    }
+
+    let towerSelectorHeader = document.createElement('div');
+    towerSelectorHeader.classList.add('challenge-tower-selector');
+    challengeModel.appendChild(towerSelectorHeader);
+
+    for (let [tower, nameColor] of Object.entries(constants.heroesInOrder)) {
+        if (!heroesToDisplay[tower]) { continue; }
+        let towerSelector = document.createElement('div');
+        towerSelector.id = tower + '-selector';
+        towerSelector.classList.add(`tower-selector-hero`);
+
+        let towerSelectorImg = document.createElement('img');
+        towerSelectorImg.id = tower + '-selector-img';
+        towerSelectorImg.classList.add('hero-selector-img');
+        towerSelectorImg.src = getInstaContainerIcon(tower,"000");
+        towerSelector.appendChild(towerSelectorImg);
+
+        shouldUseHeroList ?  heroSelectorHeader.appendChild(towerSelector) : towerSelectorHeader.appendChild(towerSelector);
+    }
+
+    for (let [tower, category] of Object.entries(constants.towersInOrder)) {
+        if (!towersToDisplay[tower]) { continue; }
+        let towerSelector = document.createElement('div');
+        towerSelector.id = tower + '-selector';
+        towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
+        towerSelectorHeader.appendChild(towerSelector);
+
+        let towerSelectorImg = document.createElement('img');
+        towerSelectorImg.id = tower + '-selector-img';
+        towerSelectorImg.classList.add('tower-selector-img');
+        towerSelectorImg.src = getInstaContainerIcon(tower,"000");
+        towerSelector.appendChild(towerSelectorImg);
+
+        if (towersToDisplay[tower].path1NumBlockedTiers != 0 || towersToDisplay[tower].path2NumBlockedTiers != 0  || towersToDisplay[tower].path3NumBlockedTiers != 0 ) {
+            let towerSelectorTiers = document.createElement('p');
+            towerSelectorTiers.classList.add('tower-selector-tiers', 'black-outline');
+            towerSelectorTiers.innerHTML = `${towersToDisplay[tower].path1NumBlockedTiers == -1 ? "0" : 5 - towersToDisplay[tower].path1NumBlockedTiers}-${towersToDisplay[tower].path2NumBlockedTiers == -1 ? "0" : 5- towersToDisplay[tower].path2NumBlockedTiers}-${towersToDisplay[tower].path3NumBlockedTiers == -1 ? "0" : 5 - towersToDisplay[tower].path3NumBlockedTiers}`;
+            towerSelector.appendChild(towerSelectorTiers);
+        } else if (towersToDisplay[tower].hasOwnProperty('restrictParagon') && towersToDisplay[tower].restrictParagon) {
+            let towerSelectorTiers = document.createElement('p');
+            towerSelectorTiers.classList.add('tower-selector-tiers', 'black-outline');
+            towerSelectorTiers.innerHTML = "5-5-5";
+            towerSelector.appendChild(towerSelectorTiers);
+        }
+    }
+
+    let challengeModelColumns = document.createElement('div');
+    challengeModelColumns.classList.add('challenge-model-columns');
+    challengeModel.appendChild(challengeModelColumns);
+
+    let challengeModelLeft = document.createElement('div');
+    challengeModelLeft.classList.add('challenge-model-left');
+    challengeModelColumns.appendChild(challengeModelLeft);
+
+    let challengeModelRight = document.createElement('div');
+    challengeModelRight.classList.add('challenge-model-right');
+    challengeModelColumns.appendChild(challengeModelRight);
+
+    let modifiers = challengeModifiers(metadata);
+
+    let challengeModifiersDiv = document.createElement('div');
+    challengeModifiersDiv.classList.add('challenge-modifiers-div');
+    challengeModelLeft.appendChild(challengeModifiersDiv);
+
+    let challengeModifiersHeader = document.createElement('p');
+    challengeModifiersHeader.classList.add('challenge-modifiers-header');
+    challengeModifiersHeader.classList.add('black-outline');
+    challengeModifiersHeader.innerHTML = "Modifiers";
+    challengeModifiersDiv.appendChild(challengeModifiersHeader);
+
+    Object.entries(modifiers).forEach(([modifier, data]) => {
+        let challengeModifier = document.createElement('div');
+        challengeModifier.classList.add('challenge-modifier');
+        challengeModifiersDiv.appendChild(challengeModifier);
+
+        let challengeModifierIcon = document.createElement('img');
+        challengeModifierIcon.classList.add('challenge-modifier-icon');
+        challengeModifierIcon.src = `./Assets/ChallengeRulesIcon/${data.icon}.png`;
+        challengeModifier.appendChild(challengeModifierIcon);
+
+        let challengeModifierTexts = document.createElement('div');
+        challengeModifierTexts.classList.add('challenge-modifier-texts');
+        challengeModifier.appendChild(challengeModifierTexts);
+
+        let challengeModifierLabel = document.createElement('p');
+        challengeModifierLabel.classList.add('challenge-modifier-text');
+        challengeModifierLabel.classList.add('black-outline');
+        challengeModifierLabel.innerHTML = `${modifier}:`;
+        challengeModifierTexts.appendChild(challengeModifierLabel);
+
+        let challengeModifierValue = document.createElement('p');
+        challengeModifierValue.classList.add('challenge-modifier-value');
+        challengeModifierValue.classList.add('black-outline');
+        challengeModifierValue.innerHTML = isNaN(data.value) ? data.value : `${data.value * 100}%`;
+        challengeModifierTexts.appendChild(challengeModifierValue);
+    })
+
+    let rulesMap = {
+        "Monkey Knowledge Disabled": "NoKnowledgeIcon",
+        "No Lives Lost": "NoLivesLostIcon",
+        "Selling Disabled": "SellingDisabledIcon",
+        "Powers Disabled": "PowersDisabledIcon",
+        "No Continues": "NoContinuesIcon",
+        "All Camo": "AllCamoIcon",
+        "All Regrow": "AllRegenIcon",
+        "Double Cash Disabled": "NoDoubleCashIcon",
+        "No Round 100 Reward": "NoInstaMonkeys",
+        "Custom Rounds": "CustomRoundIcon",
+        "Paragon Limit": "ParagonLimitIcon"
+    }
+
+    let rules = challengeRules(metadata);
+
+    let challengeRulesHeader = document.createElement('p');
+    challengeRulesHeader.classList.add('challenge-rules-header');
+    challengeRulesHeader.classList.add('black-outline');
+    challengeRulesHeader.innerHTML = "Rules";
+    challengeModelRight.appendChild(challengeRulesHeader);
+
+    let challengeRulesDiv = document.createElement('div');
+    challengeRulesDiv.classList.add('challenge-rules-div');
+    challengeModelRight.appendChild(challengeRulesDiv);
+
+    rules.forEach(rule => {
+        if (rule == "No Round 100 Reward" && challengeType != "AdvancedDaily") { return; }
+        if (rule == "Paragon Limit" && metadata.maxParagons == 0 && challengeType != "Boss") { return; }
+        let challengeRule = document.createElement('div');
+        challengeRule.classList.add('challenge-rule');
+        challengeRulesDiv.appendChild(challengeRule);
+
+        let challengeRuleIcon = document.createElement('img');
+        challengeRuleIcon.classList.add('challenge-modifier-icon');
+        challengeRuleIcon.src = `./Assets/ChallengeRulesIcon/${rulesMap[rule]}.png`;
+        challengeRule.appendChild(challengeRuleIcon);
+
+        let challengeRuleText = document.createElement('p');
+        challengeRuleText.classList.add('challenge-rule-text');
+        challengeRuleText.classList.add('black-outline');
+        challengeRuleText.innerHTML = rule;
+        challengeRule.appendChild(challengeRuleText);
+    });
+}
+
+function challengeModifiers(metadata){
+    let result = {}
+    if (metadata._bloonModifiers.speedMultiplier != 1) {
+        result["Bloon Speed"] = {
+            "value": metadata._bloonModifiers.speedMultiplier,
+            "icon": metadata._bloonModifiers.speedMultiplier > 1 ? "FasterBloonsIcon" : "SlowerBloonsIcon"
+        }
+    }
+    if (metadata._bloonModifiers.moabSpeedMultiplier != 1) {
+        result["MOAB Speed"] = {
+            "value": metadata._bloonModifiers.moabSpeedMultiplier,
+            "icon": metadata._bloonModifiers.moabSpeedMultiplier > 1 ? "FasterMoabIcon" : "SlowerMoabIcon"
+        }
+    }
+    //regrowRateMultiplier
+    if (metadata._bloonModifiers.regrowRateMultiplier != 1) {
+        result["Regrow Rate"] = {
+            "value": metadata._bloonModifiers.regrowRateMultiplier,
+            "icon": metadata._bloonModifiers.regrowRateMultiplier > 1 ? "RegrowRateIncreaseIcon" : "RegrowRateDecreaseIcon"
+        }
+    }
+    //abilityCooldownReductionMultiplier
+    if (metadata.abilityCooldownReductionMultiplier != 1) {
+        result["Ability Cooldown Rate"] = {
+            "value": metadata.abilityCooldownReductionMultiplier,
+            "icon": metadata.abilityCooldownReductionMultiplier > 1 ? "AbilityCooldownReductionDecreaseIcon" : "AbilityCooldownReductionIncreaseIcon"
+        }
+    }
+    //removeableCostMultiplier
+    if (metadata.removeableCostMultiplier != 1) {
+        result["Removeable Cost"] = {
+            "value": metadata.removeableCostMultiplier == 0 ? "Free" : metadata.removeableCostMultiplier == 12 ? "Disabled" : metadata.removeableCostMultiplier,
+            "icon": metadata.removeableCostMultiplier > 1 ? "RemovableCostIncreaseIcon" : "RemovableCostDecreaseIcon"
+        }
+    }
+    //healthMultipliers
+    if (metadata._bloonModifiers.healthMultipliers.bloons != 1) {
+        result["Ceramic Health"] = {
+            "value": metadata._bloonModifiers.healthMultipliers.bloons,
+            "icon": metadata._bloonModifiers.healthMultipliers.bloons > 1 ? "CeramicIncreaseHPIcon.png" : "CeramicDecreaseHPIcon"
+        }
+    }
+    //moabs
+    if (metadata._bloonModifiers.healthMultipliers.moabs != 1) {
+        result["MOAB Health"] = {
+            "value": metadata._bloonModifiers.healthMultipliers.moabs,
+            "icon": metadata._bloonModifiers.healthMultipliers.moabs > 1 ? "MoabBoostIcon" : "MOABDecreaseHPIcon"
+        }
+    }
+    //boss
+    if (metadata._bloonModifiers.healthMultipliers.boss != 1) {
+        result["Boss Health"] = {
+            "value": metadata._bloonModifiers.healthMultipliers.boss,
+            "icon": metadata._bloonModifiers.healthMultipliers.boss > 1 ? "BossBoostIcon" : "BossDecreaseHPIcon"
+        }
+    }
+    //boss speed
+    if (metadata._bloonModifiers.bossSpeedMultiplier != 1) {
+        result["Boss Speed"] = {
+            "value": metadata._bloonModifiers.bossSpeedMultiplier,
+            "icon": metadata._bloonModifiers.bossSpeedMultiplier > 1 ? "FasterBossIcon" : "SlowerBossIcon"
+        }
+    }
+    return result;
+}
+
+function challengeRules(metadata){
+    let result = [];
+    if(metadata.disableMK) {
+        result.push("Monkey Knowledge Disabled");
+    }
+    if(metadata.lives == 1) {
+        result.push("No Lives Lost");
+    }
+    if(metadata.disableSelling) {
+        result.push("Selling Disabled");
+    }
+    if(metadata.disablePowers) {
+        result.push("Powers Disabled");
+    }
+    if(metadata.noContinues) {
+        result.push("No Continues");
+    }
+    if(metadata._bloonModifiers.allCamo) {
+        result.push("All Camo");
+    }
+    if(metadata._bloonModifiers.allRegen) {
+        result.push("All Regrow");
+    }
+    if(metadata.disableDoubleCash) {
+        result.push("Double Cash Disabled");
+    }
+    result.push("No Round 100 Reward")
+    if((metadata.roundSets.includes("default") && metadata.roundSets.length > 1) || metadata.roundSets.length == 1 && metadata.roundSets[0] != "default") {
+        result.push("Custom Rounds");
+    }
+    if(metadata.maxParagons != 10) {
+        result.push("Paragon Limit");
+    }
+    return result;
 }
 
 function exitChallengeModel(source){
-
+    document.getElementById('challenge-content').style.display = "none";
+    document.getElementById(`${source}-content`).style.display = "flex";
 }
 
 function generateSettings(){

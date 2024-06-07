@@ -30,7 +30,7 @@
         "EngineerMonkey": "Support",
         "BeastHandler": "Support"
     },
-    "heroesInOrder": {"Quincy": "Blue", "Gwendolin": "Yellow", "StrikerJones": "Grey", "ObynGreenfoot": "Aqua", "CaptainChurchill": "Grey", "Benjamin": "Aqua", "PatFusty": "Green", "Ezili":"Purple", "Adora":"Yellow", "Etienne":"Grey", "Sauda":"Grey", "AdmiralBrickell":"Yellow", "Psi":"Yellow", "Geraldo":"Aqua", "Corvus": "Aqua"},
+    "heroesInOrder": {"Quincy": "Blue", "Gwendolin": "Yellow", "StrikerJones": "Grey", "ObynGreenfoot": "Aqua", "CaptainChurchill": "Grey", "Benjamin": "Aqua", "PatFusty": "Green", "Ezili":"Purple", "Adora":"Yellow", "Etienne":"Grey", "Sauda":"Grey", "AdmiralBrickell":"Yellow", "Psi":"Yellow", "Geraldo":"Aqua", "Corvus": "Aqua", "Rosalia": "Green"},
     "mapsInOrder": {
         "Tutorial": "Beginner",
         "InTheLoop": "Beginner",
