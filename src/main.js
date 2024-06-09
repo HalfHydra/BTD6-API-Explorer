@@ -4994,8 +4994,13 @@ function showLeaderboard(source, metadata, type) {
     leaderboardFooterPageInput.classList.add('leaderboard-footer-page-input');
     leaderboardFooterPageInput.type = "number";
     leaderboardFooterPageInput.min = "1";
-    leaderboardFooterPageInput.max = "100";
+    leaderboardFooterPageInput.max = "20";
     leaderboardFooterPageInput.value = `${leaderboardPage}`;
+    //keep the value above 0 and below 21
+    leaderboardFooterPageInput.addEventListener('change', () => {
+        if (leaderboardFooterPageInput.value < 1) { leaderboardFooterPageInput.value = 1; }
+        if (leaderboardFooterPageInput.value > 20) { leaderboardFooterPageInput.value = 20; }
+    })
     leaderboardFooterRight.appendChild(leaderboardFooterPageInput);
 
     let selectorGoImg = document.createElement('img');
@@ -5114,6 +5119,11 @@ async function generateLeaderboardEntries(metadata){
 function exitChallengeModel(source){
     document.getElementById('challenge-content').style.display = "none";
     document.getElementById(`${source}-content`).style.display = "flex";
+}
+
+function openProfile(profile){
+    console.log(profile)
+    //
 }
 
 function generateSettings(){
