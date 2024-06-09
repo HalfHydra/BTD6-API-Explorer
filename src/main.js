@@ -4207,6 +4207,9 @@ function generateRaces(){
         let raceInfoLeaderboard = document.createElement('div');
         raceInfoLeaderboard.classList.add("race-info-leaderboard", "start-button", "black-outline");
         raceInfoLeaderboard.innerHTML = "Leaderboard"
+        raceInfoLeaderboard.addEventListener('click', () => {
+            showLeaderboard('events', race, "Race");
+        })
         raceInfoBottomDiv.appendChild(raceInfoLeaderboard);
 
         let observer = new IntersectionObserver((entries, observer) => {
@@ -4232,6 +4235,33 @@ function processChallenge(metadata){
     } else {
         result.scoringType = null;
     }
+
+    result["Date Created"] = metadata.createdAt;
+    result["ID"] = metadata.id;
+    result["Creator"] = metadata.creator;
+    result["Game Version"] = metadata.gameVersion;
+    result["Random Seed"] = metadata.seed;
+
+    result["Stats"] = {
+        "Plays": metadata.plays,
+        "Wins": metadata.wins,
+        "Losses": metadata.losses,
+        "Restarts": metadata.restarts,
+        "Upvotes": metadata.upvotes,
+        "Unique Plays": metadata.playsUnique,
+        "Unique Wins": metadata.winsUnique,
+        "Unique Losses": metadata.lossesUnique
+    }
+
+    result["Player Completion Rate"] = metadata.winsUnique - metadata.playsUnique == 0 ? "100%" : `${((metadata.winsUnique / metadata.playsUnique) * 100).toFixed(2)}%`;
+    result["Player Win Rate"] = metadata.playsUnique == 0 ? "0%" : `${((metadata.wins / (metadata.plays + metadata.restarts)) * 100).toFixed(2)}%`;
+
+    result.statsValid = false;
+    //if all of result['Stats'] is not zero
+    if (metadata.id != "n/a") {
+        result.statsValid = true;
+    }
+    console.log(result);
     return result;
 }
 
@@ -4297,14 +4327,12 @@ function showChallengeModel(source, metadata, challengeType){
     challengeModelHeader.appendChild(challengeModelHeaderTexts);
 
     let challengeModelHeaderName = document.createElement('p');
-    challengeModelHeaderName.classList.add('challenge-model-header-name');
-    challengeModelHeaderName.classList.add('black-outline');
+    challengeModelHeaderName.classList.add('challenge-model-header-name','black-outline');
     challengeModelHeaderName.innerHTML = metadata.name;
     challengeModelHeaderTexts.appendChild(challengeModelHeaderName);
 
     let challengeModelHeaderModeDiff = document.createElement('p');
-    challengeModelHeaderModeDiff.classList.add('challenge-model-header-mode-diff');
-    challengeModelHeaderModeDiff.classList.add('black-outline');
+    challengeModelHeaderModeDiff.classList.add('challenge-model-header-mode-diff','black-outline');
     challengeModelHeaderModeDiff.innerHTML = `${metadata.difficulty} - ${getLocValue("Mode " + metadata.mode)} ${challengeExtraData.scoringType == null ? "" : ` - ${challengeExtraData.scoringType}`}`;
     challengeModelHeaderTexts.appendChild(challengeModelHeaderModeDiff);
 
@@ -4314,13 +4342,21 @@ function showChallengeModel(source, metadata, challengeType){
 
     let challengeHeaderExitBtn = document.createElement('div');
     challengeHeaderExitBtn.classList.add('challenge-header-exit-btn');
-    challengeHeaderExitBtn.classList.add('maps-progress-view');
-    challengeHeaderExitBtn.classList.add('black-outline');
+    challengeHeaderExitBtn.classList.add('maps-progress-view','black-outline');
     challengeHeaderExitBtn.innerHTML = "Exit";
     challengeHeaderExitBtn.addEventListener('click', () => {
         exitChallengeModel(source);
     })
     challengeHeaderRightContainer.appendChild(challengeHeaderExitBtn);
+
+    // let challengeHeaderStatsBtn = document.createElement('div');
+    // challengeHeaderStatsBtn.classList.add('challenge-header-stats-btn');
+    // challengeHeaderStatsBtn.classList.add('maps-progress-view','black-outline');
+    // challengeHeaderStatsBtn.innerHTML = "Stats";
+    // challengeHeaderStatsBtn.addEventListener('click', () => {
+    //     showChallengeStats(metadata, challengeType);
+    // })
+    // challengeHeaderRightContainer.appendChild(challengeHeaderStatsBtn);
 
     let challengeModelTop = document.createElement('div');
     challengeModelTop.classList.add('challenge-model-top');
@@ -4641,6 +4677,74 @@ function showChallengeModel(source, metadata, challengeType){
         challengeRuleText.innerHTML = rule;
         challengeRule.appendChild(challengeRuleText);
     });
+
+    if(challengeExtraData.statsValid) {
+        let challengeStatsDiv = document.createElement('div');
+        challengeStatsDiv.classList.add('challenge-stats-div');
+        challengeModel.appendChild(challengeStatsDiv);
+
+        let challengeStatsHeader = document.createElement('p');
+        challengeStatsHeader.classList.add('challenge-stats-header');
+        challengeStatsHeader.classList.add('black-outline');
+        challengeStatsHeader.innerHTML = "Stats";
+        challengeStatsDiv.appendChild(challengeStatsHeader);
+
+        let challengeStatsLeft = document.createElement('div');
+        challengeStatsLeft.classList.add('challenge-stats-left');
+        challengeStatsDiv.appendChild(challengeStatsLeft);
+
+        let leftStats = ["ID", "Creator", "Date Created", "Game Version", "Random Seed"]
+        leftStats.forEach(stat => {
+            let challengeStat = document.createElement('div');
+            challengeStat.classList.add('challenge-stat');
+            challengeStatsLeft.appendChild(challengeStat);
+
+            let challengeStatLabel = document.createElement('p');
+            challengeStatLabel.classList.add('challenge-stat-label');
+            challengeStatLabel.classList.add('black-outline');
+            challengeStatLabel.innerHTML = stat;
+            challengeStat.appendChild(challengeStatLabel);
+
+            let challengeStatValue = document.createElement('p');
+            challengeStatValue.classList.add('challenge-stat-value');
+            challengeStatValue.classList.add('black-outline');
+            challengeStatValue.innerHTML = challengeExtraData[stat];
+            challengeStat.appendChild(challengeStatValue);
+        })
+
+        // if (stat == "Player Completion Rate" || stat == "Player Win Rate") {
+        //     let challengeStatIcon = document.createElement('img');
+        //     challengeStatIcon.classList.add('challenge-stat-icon');
+        //     challengeStatIcon.src = `./Assets/ChallengeStatsIcon/${stat.replace(" ", "")}Icon.png`;
+        //     challengeStat.appendChild(challengeStatIcon);
+
+        //     let challengeStatIconValue = document.createElement('p');
+        //     challengeStatIconValue.classList.add('challenge-stat-icon-value');
+        //     challengeStatIconValue.classList.add('black-outline');
+        //     challengeStatIconValue.innerHTML = value;
+        //     challengeStat.appendChild(challengeStatIconValue);
+        // }
+
+        let challengeStatsRight = document.createElement('div');
+        challengeStatsRight.classList.add('challenge-stats-right');
+        challengeStatsDiv.appendChild(challengeStatsRight);
+
+        challengeExtraData["Stats"].forEach(([stat, value]) => {
+            let challengeStat = document.createElement('div');
+            challengeStat.classList.add('challenge-stat');
+            challengeStatsRight.appendChild(challengeStat);
+
+            let challengeStatLabel = document.createElement('p');
+            challengeStatLabel.classList.add('challenge-stat-label');
+            challengeStatLabel.innerHTML = stat;
+            challengeStat.appendChild(challengeStatLabel);
+
+            let challengeStatValue = document.createElement('p');
+            challengeStatValue.classList.add('challenge-stat-value');
+            challengeStatValue.innerHTML = value;
+            challengeStat.appendChild(challengeStatValue);
+        })
+    }
 }
 
 function challengeModifiers(metadata){
@@ -4745,6 +4849,268 @@ function challengeRules(metadata){
     return result;
 }
 
+function showLeaderboard(source, metadata, type) {
+    if (leaderboardLink != metadata.leaderboard) { leaderboardPage = 1 }
+    leaderboardLink = metadata.leaderboard;
+
+    let leaderboardContent = document.getElementById('leaderboard-content');
+    leaderboardContent.style.display = "flex";
+    leaderboardContent.innerHTML = "";
+    document.getElementById(`${source}-content`).style.display = "none";
+
+    let leaderboardDiv = document.createElement('div');
+    leaderboardDiv.classList.add('leaderboard-div');
+    leaderboardContent.appendChild(leaderboardDiv);
+
+    let leaderboardTop = document.createElement('div');
+    leaderboardTop.classList.add('leaderboard-top');
+    leaderboardDiv.appendChild(leaderboardTop);
+
+    let leaderboardHeader = document.createElement('div');
+    leaderboardHeader.classList.add('leaderboard-header');
+    leaderboardTop.appendChild(leaderboardHeader);
+
+    //left div
+    let leaderboardHeaderLeft = document.createElement('div');
+    leaderboardHeaderLeft.classList.add('leaderboard-header-left');
+    leaderboardHeader.appendChild(leaderboardHeaderLeft);
+    //exit button (should clear the leaderboard timer)
+    let leaderboardHeaderExit = document.createElement('div');
+    leaderboardHeaderExit.classList.add('leaderboard-header-exit','maps-progress-view','black-outline');
+    leaderboardHeaderExit.innerHTML = "Exit";
+    leaderboardHeaderExit.addEventListener('click', () => {
+        leaderboardContent.style.display = "none";
+        document.getElementById(`${source}-content`).style.display = "flex";
+    })
+    leaderboardHeaderLeft.appendChild(leaderboardHeaderExit);
+
+    //middle div
+    let leaderboardHeaderMiddle = document.createElement('div');
+    leaderboardHeaderMiddle.classList.add('leaderboard-header-middle');
+    leaderboardHeader.appendChild(leaderboardHeaderMiddle);
+    //header
+
+    let leaderboardHeaderTitle = document.createElement('div');
+    leaderboardHeaderTitle.classList.add('leaderboard-header-title', 'black-outline');
+    leaderboardHeaderMiddle.appendChild(leaderboardHeaderTitle);
+
+    switch(type) {
+        case "Race":
+            leaderboardHeaderTitle.innerHTML = "Race Leaderboard"
+            break;
+    }
+    //img
+
+    //right div
+    let leaderboardHeaderRight = document.createElement('div');
+    leaderboardHeaderRight.classList.add('leaderboard-header-right');
+    leaderboardHeader.appendChild(leaderboardHeaderRight);
+    //time left
+
+    let leaderboardColumnLabels = document.createElement('div');
+    leaderboardColumnLabels.classList.add('leaderboard-column-labels');
+    leaderboardTop.appendChild(leaderboardColumnLabels);
+
+    let leaderboardEntries = document.createElement('div');
+    leaderboardEntries.id = 'leaderboard-entries';
+    leaderboardEntries.classList.add('leaderboard-entries');
+    leaderboardDiv.appendChild(leaderboardEntries);
+
+    let leaderboardFooter = document.createElement('div');
+    leaderboardFooter.classList.add('leaderboard-footer');
+    leaderboardDiv.appendChild(leaderboardFooter);
+
+    //left div
+    let leaderboardFooterLeft = document.createElement('div');
+    leaderboardFooterLeft.classList.add('leaderboard-footer-left');
+    leaderboardFooter.appendChild(leaderboardFooterLeft);
+    //refresh button
+    let leaderboardFooterRefresh = document.createElement('img');
+    leaderboardFooterRefresh.classList.add('leaderboard-footer-refresh');
+    leaderboardFooterRefresh.src = "./Assets/UI/RefreshBtn.png";
+    leaderboardFooterRefresh.addEventListener('click', () => {
+        if(!refreshRateLimited) {
+        generateLeaderboardEntries(metadata)
+        leaderboardFooterRefresh.style.filter = "grayscale(1) brightness(0.5)"
+        setTimeout(() => {
+            leaderboardFooterRefresh.style.filter = "none";
+            refreshRateLimited = false;
+        }, 10000)
+        refreshRateLimited = true;
+        }
+    })
+    leaderboardFooterLeft.appendChild(leaderboardFooterRefresh);
+
+    //middle div
+    let leaderboardFooterMiddle = document.createElement('div');
+    leaderboardFooterMiddle.classList.add('leaderboard-footer-middle');
+    leaderboardFooter.appendChild(leaderboardFooterMiddle);
+    //page left
+
+    let leaderboardFooterPageLeft = document.createElement('img');
+    leaderboardFooterPageLeft.classList.add('leaderboard-footer-page-left','black-outline');
+    leaderboardFooterPageLeft.src = "./Assets/UI/NextArrowSmallYellow.png";
+    leaderboardFooterMiddle.appendChild(leaderboardFooterPageLeft);
+    //page number
+    let leaderboardFooterPageNumber = document.createElement('div');
+    leaderboardFooterPageNumber.classList.add('leaderboard-footer-page-number','black-outline');
+    leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (${(leaderboardPage * 50) - 49} - ${leaderboardPage * 50})`;
+    leaderboardFooterMiddle.appendChild(leaderboardFooterPageNumber);
+    //page right
+    let leaderboardFooterPageRight = document.createElement('img');
+    leaderboardFooterPageRight.classList.add('leaderboard-footer-page-right','black-outline');
+    leaderboardFooterPageRight.src = "./Assets/UI/NextArrowSmallYellow.png";
+    leaderboardFooterPageLeft.addEventListener('click', () => {
+        leaderboardPage--;
+        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (${(leaderboardPage * 50) - 49} - ${leaderboardPage * 50})`;
+        leaderboardEntries.innerHTML = "";
+        copyLoadingIcon(leaderboardEntries)
+
+        generateLeaderboardEntries(metadata)
+    })
+    leaderboardFooterPageRight.addEventListener('click', () => {
+        leaderboardPage++;
+        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (${(leaderboardPage * 50) - 49} - ${leaderboardPage * 50})`;
+        leaderboardEntries.innerHTML = "";
+        copyLoadingIcon(leaderboardEntries)
+
+        generateLeaderboardEntries(metadata)
+    })
+    leaderboardFooterMiddle.appendChild(leaderboardFooterPageRight);
+
+    //right div
+    let leaderboardFooterRight = document.createElement('div');
+    leaderboardFooterRight.classList.add('leaderboard-footer-right');
+    leaderboardFooter.appendChild(leaderboardFooterRight);
+
+    //Goto label
+    // let leaderboardFooterGoto = document.createElement('p');
+    // leaderboardFooterGoto.classList.add('leaderboard-footer-goto','black-outline');
+    // leaderboardFooterGoto.innerHTML = "Go to:";
+    // leaderboardFooterRight.appendChild(leaderboardFooterGoto);
+
+    //enter a page number
+    let leaderboardFooterPageInput = document.createElement('input');
+    leaderboardFooterPageInput.classList.add('leaderboard-footer-page-input');
+    leaderboardFooterPageInput.type = "number";
+    leaderboardFooterPageInput.min = "1";
+    leaderboardFooterPageInput.max = "100";
+    leaderboardFooterPageInput.value = `${leaderboardPage}`;
+    leaderboardFooterRight.appendChild(leaderboardFooterPageInput);
+
+    let selectorGoImg = document.createElement('img');
+    selectorGoImg.classList.add('leaderboard-go-img');
+    selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
+    selectorGoImg.addEventListener('click', () => {
+        leaderboardPage = leaderboardFooterPageInput.value;
+        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (${(leaderboardPage * 50) - 49} - ${leaderboardPage * 50})`;
+        leaderboardEntries.innerHTML = "";
+        copyLoadingIcon(leaderboardEntries)
+        generateLeaderboardEntries(metadata)
+    })
+    leaderboardFooterRight.appendChild(selectorGoImg);
+
+    copyLoadingIcon(leaderboardEntries)
+    generateLeaderboardEntries(metadata);
+}
+
+async function generateLeaderboardEntries(metadata){
+    await getRaceLeaderboardData();
+    console.log(leaderboardData)
+
+    let leaderboardEntries = document.getElementById('leaderboard-entries');
+    leaderboardEntries.innerHTML = "";
+
+    if(leaderboardData != null) {
+        leaderboardData.forEach((entry, index) => {
+            let scorePartsObj = {}
+            
+            entry.scoreParts.forEach((part, index) => {
+                scorePartsObj[part.name] = part;
+            })
+
+            let leaderboardEntry = document.createElement('div');
+            leaderboardEntry.classList.add('leaderboard-entry');
+            leaderboardEntries.appendChild(leaderboardEntry);
+
+            let leaderboardEntryDiv = document.createElement('div');
+            leaderboardEntryDiv.classList.add('leaderboard-entry-div');
+            leaderboardEntry.appendChild(leaderboardEntryDiv);
+
+            let leaderboardEntryRank = document.createElement('p');
+            leaderboardEntryRank.classList.add('leaderboard-entry-rank');
+            leaderboardEntryRank.classList.add('black-outline');
+            leaderboardEntryRank.innerHTML = index + ((leaderboardPage - 1)  * 50) + 1;
+            leaderboardEntryDiv.appendChild(leaderboardEntryRank);
+
+            let leaderboardEntryPlayer = document.createElement('div');
+            leaderboardEntryPlayer.classList.add('leaderboard-entry-player');
+            leaderboardEntryDiv.appendChild(leaderboardEntryPlayer);
+
+            let leaderboardEntryIcon = document.createElement('img');
+            leaderboardEntryIcon.classList.add('leaderboard-entry-icon');
+            leaderboardEntryIcon.src = `./Assets/ProfileAvatar/ProfileAvatar01.png`;
+            leaderboardEntryPlayer.appendChild(leaderboardEntryIcon);
+
+            let leaderboardEntryName = document.createElement('p');
+            leaderboardEntryName.classList.add('leaderboard-entry-name','leaderboard-outline');
+            leaderboardEntryName.innerHTML = entry.displayName;
+            leaderboardEntryPlayer.appendChild(leaderboardEntryName);
+
+            let leaderboardEntryTimeSubmitDiv = document.createElement('div');
+            leaderboardEntryTimeSubmitDiv.classList.add('leaderboard-entry-time-submit-div');
+            leaderboardEntryDiv.appendChild(leaderboardEntryTimeSubmitDiv);
+
+            let submittedDate = new Date(metadata.start + scorePartsObj["Time after event start"].score)
+
+            let leaderboardEntryTimeSubmitted = document.createElement('p');
+            leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted','leaderboard-outline');
+            leaderboardEntryTimeSubmitted.innerHTML = submittedDate.toLocaleString();
+            leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmitted);
+
+            let leaderboardEntryTimeSubmittedRelative = document.createElement('p');
+            leaderboardEntryTimeSubmittedRelative.classList.add('leaderboard-entry-time-submitted-relative','leaderboard-outline');
+            leaderboardEntryTimeSubmittedRelative.innerHTML = relativeTime(new Date(), submittedDate);
+            leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
+
+            let leaderboardEntryScore = document.createElement('div')
+            leaderboardEntryScore.classList.add('leaderboard-entry-score');
+            leaderboardEntryDiv.appendChild(leaderboardEntryScore);
+
+            let leaderboardEntryMainScore = document.createElement('p');
+            leaderboardEntryMainScore.classList.add('leaderboard-entry-main-score','leaderboard-outline');
+            leaderboardEntryMainScore.innerHTML = formatScoreTime(entry.score);
+            leaderboardEntryScore.appendChild(leaderboardEntryMainScore);
+
+            let leaderboardProfileBtn = document.createElement('img');
+            leaderboardProfileBtn.classList.add('leaderboard-profile-btn');
+            leaderboardProfileBtn.src = "./Assets/UI/InfoBtn.png";
+            leaderboardEntry.appendChild(leaderboardProfileBtn);
+
+            //observer to check for if profile should be queried
+            let observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(async observerentry => {
+                    if (observerentry.isIntersecting) {
+                        let userProfile = await getUserProfile(entry.profile);
+                        console.log(userProfile)
+                        leaderboardEntryIcon.src = userProfile.avatarURL;
+                        leaderboardEntryDiv.style.backgroundImage = `url(${userProfile.bannerURL})`;
+                        observer.unobserve(observerentry.target);
+                        // raceMapImg.src = Object.keys(constants.mapsInOrder).includes(race.metadata.map) ? getMapIcon(race.metadata.map) : race.metadata.mapURL;
+                    }
+                });
+            });
+            observer.observe(leaderboardEntryIcon);
+        })
+    } else {
+        let noDataFound = document.createElement('p');
+        noDataFound.classList.add('no-data-found');
+        noDataFound.classList.add('black-outline');
+        noDataFound.innerHTML = "No Data Found";
+        leaderboardEntries.appendChild(noDataFound);
+    }
+}
+
 function exitChallengeModel(source){
     document.getElementById('challenge-content').style.display = "none";
     document.getElementById(`${source}-content`).style.display = "flex";
@@ -4836,11 +5202,32 @@ function processRewardsString(input){
     return result;
 }
 
+function copyLoadingIcon(destination){
+    let clone = document.getElementsByClassName('loading-icon')[0].cloneNode(true)
+    clone.classList.add('loading-icon-leaderboard');
+    clone.style.height = "unset"
+    destination.appendChild(clone)
+}
+
 function formatTime(seconds) {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = Math.floor(seconds % 60);
     return [hours, minutes, secs].map(v => v < 10 ? "0" + v : v).join(":");
+}
+
+function formatScoreTime(milliseconds) {
+    let totalSeconds = Math.floor(milliseconds / 1000);
+    let remainingMilliseconds = milliseconds % 1000;
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = totalSeconds % 60;
+
+    // Pad minutes and seconds with leading zeros if necessary
+    minutes = minutes.toString().padStart(2, '0');
+    seconds = seconds.toString().padStart(2, '0');
+    remainingMilliseconds = remainingMilliseconds.toString().padStart(3, '0');
+
+    return `${minutes}:${seconds}.${remainingMilliseconds}`;
 }
 
 function getRemainingTime(targetTime) {
@@ -4858,6 +5245,25 @@ function updateTimer(targetTime, elementId) {
         timerElement.textContent = `${days} days`;
     } else {
         timerElement.textContent = formatTime(remainingTime);
+    }
+}
+
+function relativeTime(current, previous) {
+    const units = [
+        { name: "year", ms: 365 * 24 * 60 * 60 * 1000 },
+        { name: "month", ms: 30 * 24 * 60 * 60 * 1000 },
+        { name: "day", ms: 24 * 60 * 60 * 1000 },
+        { name: "hour", ms: 60 * 60 * 1000 },
+        { name: "minute", ms: 60 * 1000 },
+        { name: "second", ms: 1000 }
+    ];
+
+    const elapsed = current - previous;
+
+    for (const unit of units) {
+        if (elapsed < unit.ms) continue;
+        let time = Math.round(elapsed / unit.ms);
+        return `${time} ${unit.name}${time > 1 ? 's' : ''} ago`;
     }
 }
 
@@ -4921,7 +5327,7 @@ function errorModal(body, source) {
     let modalContent = document.createElement('div');
     modalContent.id = 'error-modal-content';
     modalContent.classList.add('error-modal-content');
-    modalContent.innerHTML = (source == "api" ? "Ninja Kiwi API Error: " : "") + body;
+    modalContent.innerHTML = (source == "api" ? "" : "") + body; //Ninja Kiwi API Error: 
     modal.appendChild(modalContent);
 
     let modalContent2  = document.createElement('div');

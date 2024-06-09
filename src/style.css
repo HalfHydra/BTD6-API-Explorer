@@ -1687,6 +1687,7 @@
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    flex-direction: row-reverse;
 }
 .map-next-and-prev {
     display: flex;
@@ -2331,6 +2332,7 @@
     padding: 10px;
     width: calc(100% - 20px);
     border-radius: 10px 10px 0 0;
+    flex-direction: row-reverse;
 }
 .challenge-model {
     width: 100%;
@@ -2348,8 +2350,9 @@
     display: flex;
     height: 100px;
     width: 120px;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: flex-start;
-    justify-content: flex-end;
 }
 .challenge-model-header-icons {
     width: 120px;
@@ -2504,6 +2507,163 @@
     color: #EE5E25;
 }
 
+.leaderboard-div {
+    display: flex;
+    height: calc(100vh - 160px);
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.leaderboard-header {
+    /* height: 150px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.leaderboard-footer {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    /* background-color: var(--profile-primary); */
+    border-radius: 10px;
+    padding: 0 10px;
+}
+.leaderboard-footer-middle {
+    display: flex;
+    align-items: center;
+    width: 450px;
+    justify-content: space-between;
+}
+.leaderboard-header-title {
+    background-image: url(../Assets/UI/Ribbon.png);
+    height: 90px;
+    max-width: 500px;
+    padding: 0 50px;
+    background-size: contain;
+    position: relative;
+    color: white;
+    font-size: 36px;
+    font-family: 'Luckiest Guy';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.leaderboard-header-title::before, .leaderboard-header-title::after {
+    content: '';
+    width: 56px;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 25% 50%);
+    background-image: url(../Assets/UI/RibbonEdge.png);
+    background-size: contain;
+}
+.leaderboard-header-title::before {
+    left: -54px;
+}
+.leaderboard-header-middle {
+    filter: hue-rotate(170deg) saturate(2);
+}
+.leaderboard-header-title::after {
+    right: -54px;
+    transform: scaleX(-1);
+}
+.leaderboard-header-left {
+    width: 80px;
+}
+.leaderboard-header-right {
+    width: 80px;
+}
+.leaderboard-footer-refresh {
+    height: 100%;
+}
+.leaderboard-footer-page-left {
+    transform: scaleX(-1); 
+    height:50px;
+}
+.leaderboard-footer-page-right {
+    height:50px;
+}
+.leaderboard-footer-page-number {
+    color:white;
+    font-size: 32px;
+    font-family: 'Luckiest Guy';
+}
+.leaderboard-footer-page-input {
+    height: 50px;
+    width: 50px;
+    font-size: 32px;
+    font-family: 'GardeniaBold';
+    text-align: center;
+    margin: 0 10px;
+}
+.leaderboard-footer-left {
+    width: 140px;
+}
+.leaderboard-footer-right {
+    display: flex;
+    align-items: center;
+    width: 140px;
+}
+.leaderboard-go-img {
+    width: 60px;
+}
+.leaderboard-footer-goto {
+    font-size: 32px;
+}
+.leaderboard-entry {
+    display: flex;
+    width: 800px;
+    align-items: center;
+    justify-content: space-between;
+}
+.leaderboard-entry-div {
+    display: flex;
+    width: 740px;
+    padding: 10px 0;
+    margin: 5px 0;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 20px;
+    background-color: var(--profile-primary);
+    border-radius: 20px;
+    box-shadow: 0px 0px 0px 4px var(--profile-secondary) inset;
+}
+.leaderboard-entry-icon {
+    height: 60px;
+}
+.leaderboard-entry-player {
+    display: flex;
+    width: 300px;
+    align-items: center;
+}
+.leaderboard-entries {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+.leaderboard-profile-btn {
+    height:50px;
+}
+.leaderboard-entry-rank {
+    font-size: 32px;
+    width: 60px;
+    text-align: center;
+}
+.leaderboard-entry-time-submitted {
+    width: 215px;
+}
+.leaderboard-entry-main-score {
+    width: 100px;
+}
+.leaderboard-entry-name {
+    padding-left: 10px;
+}
+.leaderboard-entry-time-submit-div {
+    text-align: center;
+}
+
 .black-outline {
     -webkit-text-stroke: 0.7px black;
     text-shadow: 1px 0px 0px #000, -1px 0px 0 #000, 0px 1px 0 #000, 1px 0px 0px #000, 1px 2px 0px #000, -1px -1px 0 #000, -1px 2px 0 #000, 1px -1px 0px #000;
@@ -2522,6 +2682,15 @@
 }
 .t5-insta-outline {
     text-shadow: 1px 0px 0px #FF7800, -1px 0px 0 #FF7800, 0px 1px 0 #FF7800, 1px 0px 0px #FF7800, 1px 2px 0px #FF7800, -1px -1px 0 #FF7800, -1px 2px 0 #FF7800, 1px -1px 0px #FF7800;
+}
+.leaderboard-outline {
+    -webkit-text-stroke: 0.7px #1D525F;
+    text-shadow: 1px 0px 0px #1D525F, -1px 0px 0 #1D525F, 0px 1px 0 #1D525F, 1px 0px 0px #1D525F, 1px 2px 0px #1D525F, -1px -1px 0 #1D525F, -1px 2px 0 #1D525F, 1px -1px 0px #1D525F;
+}
+
+.loading-icon-leaderboard {
+    position: absolute;
+    top: 50%;
 }
 
 .upgrade-tooltip {
@@ -2672,7 +2841,7 @@ p {
     }
   }
 
-@media (max-width: 1299px) {
+@media (max-width: 1199px) {
     .tower-progress-div {
         width: 105px;
         margin-left: 0px;
@@ -2680,6 +2849,9 @@ p {
     .hero-progress-div {
         width: 220px;
         /* margin-left: -1vh; */
+    }
+    .tower-selector-header-top {
+        width: 83px;
     }
 }
 

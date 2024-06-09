@@ -261,6 +261,14 @@ function getRewardIcon(rewardData){
     }
 }
 
+function getProfileIcon(profile){
+    return `Assets/ProfileAvatar/${profile}.png`;
+}
+
+function getProfileBanner(banner){
+    return `Assets/ProfileBanner/${banner}.png`;
+}
+
 function getLocValue(key){
     if(locJSONOverrides[key]) return locJSON[locJSONOverrides[key]];
     return locJSON[key];

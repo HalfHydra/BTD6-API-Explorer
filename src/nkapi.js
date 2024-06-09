@@ -8,7 +8,17 @@ let _btd6publicprofile = {} // the model
 
 let racesData = null;
 
+let leaderboardData = null;
+// let leaderboardNext = null;
+// let leaderboardPrev = null;
+let leaderboardLink = null;
+let leaderboardPage = 1;
+
 let localStorageOAK = {}
+
+let refreshRateLimited = false;
+
+let profileCache = {}
 
 // getSaveData(oak_token)
 // getPublicProfileData(oak_token)
@@ -82,7 +92,8 @@ async function getPublicProfileData(oak_token) {
 
 async function getRacesData() {
     if (racesData == null) {
-        fetchData(`./data/PreventAPISpam_Races.json`, (json) => {
+        //./data/PreventAPISpam_Races.json
+        fetchData(`https://data.ninjakiwi.com/btd6/races`, (json) => {
             racesData = json["body"];
             generateRaces();
         });
@@ -101,6 +112,46 @@ async function getRaceMetadata(key) {
     } else {
         return racesData[key];
     }
+}
+
+async function getRaceLeaderboardData() {
+    if (leaderboardLink) {
+        leaderboardData = null;
+        return fetchData(`${leaderboardLink}?page=${leaderboardPage}`, (json) => {
+            console.log(`fetched ${leaderboardLink}?page=${leaderboardPage}`)
+            leaderboardData = json["body"];
+            // if (json["next"] == null) {
+            //     document.getElementById("leaderboardNext").style.display = "none";
+            // } else {
+            //     document.getElementById("leaderboardNext").style.display = "block";
+            // }
+            // if (json["prev"] == null) {
+            //     document.getElementById("leaderboardPrev").style.display = "none";
+            // } else {
+            //     document.getElementById("leaderboardPrev").style.display = "block";
+            // }
+            // leaderboardNext = json["next"];
+            // leaderboardPrev = json["prev"];
+            // leaderboardLink = racesData[key]["leaderboard"];
+            // leaderboardPage = page;
+            return leaderboardData;
+        });
+    } else {
+        return errorModal("Leaderboard Fetch Error: No leaderboard data found");
+    }
+}
+
+async function getUserProfile(key) {
+    let player = key.split("/").pop();
+    if (profileCache[player] == null) {
+        await fetchData(key, (json) => {
+            console.log(`fetched ${key}`)
+            profileCache[player] = json["body"];
+        });
+    } else {
+        console.log(`used cache for ${player}`)
+    }
+    return profileCache[player];
 }
 
 function readLocalStorage(){
