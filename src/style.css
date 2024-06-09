@@ -387,6 +387,7 @@
     color: white;
     margin-left: 14px;
     padding: 10px;
+    width: 300px;
 }
 
 .profile-banner {
@@ -396,6 +397,27 @@
     background-size: cover;
     border-radius: 10px;
     width: 100%;
+}
+
+.profile-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-followers {
+    width: 150px;
+    text-align: center;
+    margin-right: 30px;
+}
+
+.followers-count {
+    font-size: 24px;
+    font-family: 'GardeniaBold';
+    color: white;
+    padding: 0 10px;
+    background-color: #2c4357b5;
+    border-radius: 6px;
+    margin-top: 5px;
 }
 
 .profile-bottom {

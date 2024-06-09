@@ -225,7 +225,16 @@ function generateMedals(){
         tempCoop["MedalCoop" + value] = btd6publicprofile["_medalsMultiplayer"][key] || 0;
     }
     medalsInOrder = {...medalsInOrder, ...tempCoop};
-    //boss badges when they are added
+    medalsInOrder["PhayzeEliteBadge"] = btd6publicprofile["bossBadgesElite"]["Phayze"] || 0;
+    medalsInOrder["PhayzeBadge"] = btd6publicprofile["bossBadgesNormal"]["Phayze"] || 0;
+    medalsInOrder["DreadbloonEliteBadge"] = btd6publicprofile["bossBadgesElite"]["Dreadbloon"] || 0;
+    medalsInOrder["DreadbloonBadge"] = btd6publicprofile["bossBadgesNormal"]["Dreadbloon"] || 0;
+    medalsInOrder["VortexEliteBadge"] = btd6publicprofile["bossBadgesElite"]["Vortex"] || 0;
+    medalsInOrder["VortexBadge"] = btd6publicprofile["bossBadgesNormal"]["Vortex"] || 0;
+    medalsInOrder["LychEliteBadge"] = btd6publicprofile["bossBadgesElite"]["Lych"] || 0;
+    medalsInOrder["LychBadge"] = btd6publicprofile["bossBadgesNormal"]["Lych"] || 0;
+    medalsInOrder["BloonariusEliteBadge"] = btd6publicprofile["bossBadgesElite"]["Bloonarius"] || 0;
+    medalsInOrder["BloonariusBadge"] = btd6publicprofile["bossBadgesNormal"]["Bloonarius"] || 0;
     medalsInOrder["MedalEventBronzeMedal"] = btd6publicprofile["_medalsRace"]["Bronze"] || 0;
     medalsInOrder["MedalEventSilverMedal"] = btd6publicprofile["_medalsRace"]["Silver"] || 0;
     medalsInOrder["MedalEventGoldSilverMedal"] = btd6publicprofile["_medalsRace"]["GoldSilver"] || 0;
@@ -937,6 +946,21 @@ function generateOverview(){
     profileName.classList.add('black-outline');
     profileName.innerHTML = btd6publicprofile["displayName"];
     profileTop.appendChild(profileName);
+
+    let profileFollowers = document.createElement('div')
+    profileFollowers.classList.add('profile-followers');
+    profileTop.appendChild(profileFollowers);
+
+    let followersLabel = document.createElement('p');
+    followersLabel.classList.add('followers-label');
+    followersLabel.classList.add('black-outline');
+    followersLabel.innerHTML = 'Followers';
+    profileFollowers.appendChild(followersLabel);
+
+    let followersCount = document.createElement('p');
+    followersCount.classList.add('followers-count');
+    followersCount.innerHTML = btd6publicprofile["followers"].toLocaleString();
+    profileFollowers.appendChild(followersCount);
 
     let profileBottom = document.createElement('div');
     profileBottom.id = 'profile-bottom';
