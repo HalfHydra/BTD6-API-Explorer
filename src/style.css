@@ -207,6 +207,11 @@
     top: 5px;
     right: 5px;
 }
+.modal-close {
+    width: 50px;
+    top: 5px;
+    right: 5px;
+}
 .error-modal-header-img {
     width: 100px;
     padding: 10px;
@@ -387,7 +392,7 @@
     color: white;
     margin-left: 14px;
     padding: 10px;
-    width: 300px;
+    /* width: 300px; */
 }
 
 .profile-banner {
@@ -1708,8 +1713,9 @@
 .single-map-progress-header-bar {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
-    flex-direction: row-reverse;
+    padding: 10px 30px;
+    position: relative;
+    align-items: center;
 }
 .map-next-and-prev {
     display: flex;
@@ -2354,7 +2360,7 @@
     padding: 10px;
     width: calc(100% - 20px);
     border-radius: 10px 10px 0 0;
-    flex-direction: row-reverse;
+    position: relative;
 }
 .challenge-model {
     width: 100%;
@@ -2374,7 +2380,7 @@
     width: 120px;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: flex-end;
 }
 .challenge-model-header-icons {
     width: 120px;
@@ -2541,6 +2547,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    flex-direction: row-reverse;
 }
 .leaderboard-footer {
     height: 70px;
@@ -2684,6 +2692,26 @@
 }
 .leaderboard-entry-time-submit-div {
     text-align: center;
+}
+.publicprofile-div {
+    background-color: var(--profile-primary);
+    border-radius: 10px;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+.rank-star-public {
+    width: 75px;
+    height: 75px;
+}
+
+.profile-top-public {
+    display: flex;
+    justify-content: space-between;
+    width: 650px;
+    align-items: center;
 }
 
 .black-outline {

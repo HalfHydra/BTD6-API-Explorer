@@ -122,8 +122,6 @@ let locJSONOverrides = {
     "LifeguardBrickellSkinDescription": "LifeguardBrickellAdmiralBrickellSkinDescription",
     "PsimbalsSkinName": "PsimbalsPsiSkinName",
     "PsimbalsSkinDescription": "PsimbalsPsiSkinDescription",
-    "GadgeteerGeraldoSkinName": "GentlemonkeyGadgeteerGeraldoSkinName",
-    "GadgeteerGeraldoSkinDescription": "GentlemonkeyGadgeteerGeraldoSkinDescription",
     "Mode Easy": "Easy",
     "Mode Medium": "Medium",
     "Mode Hard": "Hard",

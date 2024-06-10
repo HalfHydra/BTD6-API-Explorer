@@ -2586,15 +2586,23 @@ function generateMapDetails(map){
     })
     mapNextAndPrev.appendChild(mapProgressNextBtn);
 
-    let mapProgressExitBtn = document.createElement('div');
-    mapProgressExitBtn.id = 'map-progress-exit-btn';
-    mapProgressExitBtn.classList.add('maps-progress-view');
-    mapProgressExitBtn.classList.add('black-outline');
-    mapProgressExitBtn.innerHTML = "Exit";
-    mapProgressExitBtn.addEventListener('click', () => {
+    // let mapProgressExitBtn = document.createElement('div');
+    // mapProgressExitBtn.id = 'map-progress-exit-btn';
+    // mapProgressExitBtn.classList.add('maps-progress-view');
+    // mapProgressExitBtn.classList.add('black-outline');
+    // mapProgressExitBtn.innerHTML = "Exit";
+    // mapProgressExitBtn.addEventListener('click', () => {
+    //     onExitMap();
+    // })
+    // mapProgressHeaderBar.appendChild(mapProgressExitBtn);
+
+    let modalClose = document.createElement('img');
+    modalClose.classList.add('modal-close');
+    modalClose.src = "./Assets/UI/CloseBtn.png";
+    modalClose.addEventListener('click', () => {
         onExitMap();
     })
-    mapProgressHeaderBar.appendChild(mapProgressExitBtn);
+    mapProgressHeaderBar.appendChild(modalClose);
 
     let mapBelowHeaderBar = document.createElement('div');
     mapBelowHeaderBar.id = 'map-below-header-bar';
@@ -4364,14 +4372,22 @@ function showChallengeModel(source, metadata, challengeType){
     challengeHeaderRightContainer.classList.add('challenge-header-right-container');
     challengeModelHeader.appendChild(challengeHeaderRightContainer);
 
-    let challengeHeaderExitBtn = document.createElement('div');
-    challengeHeaderExitBtn.classList.add('challenge-header-exit-btn');
-    challengeHeaderExitBtn.classList.add('maps-progress-view','black-outline');
-    challengeHeaderExitBtn.innerHTML = "Exit";
-    challengeHeaderExitBtn.addEventListener('click', () => {
+    // let challengeHeaderExitBtn = document.createElement('div');
+    // challengeHeaderExitBtn.classList.add('challenge-header-exit-btn');
+    // challengeHeaderExitBtn.classList.add('maps-progress-view','black-outline');
+    // challengeHeaderExitBtn.innerHTML = "Exit";
+    // challengeHeaderExitBtn.addEventListener('click', () => {
+    //     exitChallengeModel(source);
+    // })
+    // challengeHeaderRightContainer.appendChild(challengeHeaderExitBtn);
+
+    let modalClose = document.createElement('img');
+    modalClose.classList.add('modal-close');
+    modalClose.src = "./Assets/UI/CloseBtn.png";
+    modalClose.addEventListener('click', () => {
         exitChallengeModel(source);
     })
-    challengeHeaderRightContainer.appendChild(challengeHeaderExitBtn);
+    challengeHeaderRightContainer.appendChild(modalClose);
 
     // let challengeHeaderStatsBtn = document.createElement('div');
     // challengeHeaderStatsBtn.classList.add('challenge-header-stats-btn');
@@ -4899,14 +4915,23 @@ function showLeaderboard(source, metadata, type) {
     leaderboardHeaderLeft.classList.add('leaderboard-header-left');
     leaderboardHeader.appendChild(leaderboardHeaderLeft);
     //exit button (should clear the leaderboard timer)
-    let leaderboardHeaderExit = document.createElement('div');
-    leaderboardHeaderExit.classList.add('leaderboard-header-exit','maps-progress-view','black-outline');
-    leaderboardHeaderExit.innerHTML = "Exit";
-    leaderboardHeaderExit.addEventListener('click', () => {
+    // let leaderboardHeaderExit = document.createElement('div');
+    // leaderboardHeaderExit.classList.add('leaderboard-header-exit','maps-progress-view','black-outline');
+    // leaderboardHeaderExit.innerHTML = "Exit";
+    // leaderboardHeaderExit.addEventListener('click', () => {
+    //     leaderboardContent.style.display = "none";
+    //     document.getElementById(`${source}-content`).style.display = "flex";
+    // })
+    // leaderboardHeaderLeft.appendChild(leaderboardHeaderExit);
+
+    let modalClose = document.createElement('img');
+    modalClose.classList.add('modal-close');
+    modalClose.src = "./Assets/UI/CloseBtn.png";
+    modalClose.addEventListener('click', () => {
         leaderboardContent.style.display = "none";
         document.getElementById(`${source}-content`).style.display = "flex";
     })
-    leaderboardHeaderLeft.appendChild(leaderboardHeaderExit);
+    leaderboardHeaderLeft.appendChild(modalClose);
 
     //middle div
     let leaderboardHeaderMiddle = document.createElement('div');
@@ -5114,6 +5139,9 @@ async function generateLeaderboardEntries(metadata){
             let leaderboardProfileBtn = document.createElement('img');
             leaderboardProfileBtn.classList.add('leaderboard-profile-btn');
             leaderboardProfileBtn.src = "./Assets/UI/InfoBtn.png";
+            leaderboardProfileBtn.addEventListener('click', () => {
+                openProfile('leaderboard', entry);
+            })
             leaderboardEntry.appendChild(leaderboardProfileBtn);
 
             //observer to check for if profile should be queried
@@ -5145,9 +5173,500 @@ function exitChallengeModel(source){
     document.getElementById(`${source}-content`).style.display = "flex";
 }
 
-function openProfile(profile){
-    console.log(profile)
-    //
+async function openProfile(source, profile){
+    profile = await getUserProfile(profile.profile)
+    
+    document.getElementById(`${source}-content`).style.display = "none";
+    let publicProfileContent = document.getElementById('publicprofile-content');
+    publicProfileContent.style.display = "flex";
+    publicProfileContent.innerHTML = "";
+    
+    let publicProfileDiv = document.createElement('div');
+    publicProfileDiv.classList.add('publicprofile-div');
+    publicProfileContent.appendChild(publicProfileDiv);
+
+    // let challengeHeaderExitBtn = document.createElement('div');
+    // challengeHeaderExitBtn.classList.add('challenge-header-exit-btn');
+    // challengeHeaderExitBtn.classList.add('maps-progress-view','black-outline');
+    // challengeHeaderExitBtn.innerHTML = "Exit";
+    // challengeHeaderExitBtn.addEventListener('click', () => {
+    //     exitProfile(source);
+    // })
+    // publicProfileDiv.appendChild(challengeHeaderExitBtn);
+
+    let modalClose = document.createElement('img');
+    modalClose.classList.add('error-modal-close');
+    modalClose.src = "./Assets/UI/CloseBtn.png";
+    modalClose.addEventListener('click', () => {
+        exitProfile(source);
+    })
+    publicProfileDiv.appendChild(modalClose);
+
+    let profileHeader = document.createElement('div');
+    profileHeader.id = 'profile-header';
+    profileHeader.classList.add('profile-header');
+    profileHeader.classList.add('profile-banner');
+    profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${profile["bannerURL"]}')`;
+    publicProfileDiv.appendChild(profileHeader);
+    profileHeader.appendChild(generateAvatar(100, profile["avatarURL"]));
+
+    let profileTopBottom = document.createElement('div');
+    profileTopBottom.id = 'profile-top-bottom';
+    profileTopBottom.classList.add('profile-top-bottom');
+    profileHeader.appendChild(profileTopBottom);
+
+    let profileTop = document.createElement('div');
+    profileTop.id = 'profile-top';
+    profileTop.classList.add('profile-top-public');
+    profileTopBottom.appendChild(profileTop);
+
+    let profileName = document.createElement('p');
+    profileName.id = 'profile-name';
+    profileName.classList.add('profile-name');
+    profileName.classList.add('black-outline');
+    profileName.innerHTML = profile["displayName"];
+    profileTop.appendChild(profileName);
+
+    let rankStar = document.createElement('div');
+    rankStar.id = 'rank-star';
+    rankStar.classList.add('rank-star-public');
+    profileTop.appendChild(rankStar);
+
+    let rankImg = document.createElement('img');
+    rankImg.id = 'rank-img';
+    rankImg.classList.add('rank-img');
+    rankImg.src = '../Assets/UI/LvlHolder.png';
+    rankStar.appendChild(rankImg);
+
+    let rankText = document.createElement('p');
+    rankText.id = 'rank-text';
+    rankText.classList.add('rank-text');
+    rankText.classList.add('black-outline');
+    rankText.innerHTML = profile.rank;
+    rankStar.appendChild(rankText);
+
+    let rankStarVeteran = document.createElement('div');
+    rankStarVeteran.id = 'rank-star';
+    rankStarVeteran.classList.add('rank-star-public');
+    profileTop.appendChild(rankStarVeteran);
+
+    let rankImgVeteran = document.createElement('img');
+    rankImgVeteran.id = 'rank-img';
+    rankImgVeteran.classList.add('rank-img');
+    rankImgVeteran.src = '../Assets/UI/LvlHolderVeteran.png';
+    rankStarVeteran.appendChild(rankImgVeteran);
+
+    let rankTextVeteran = document.createElement('p');
+    rankTextVeteran.id = 'rank-text';
+    rankTextVeteran.classList.add('rank-text');
+    rankTextVeteran.classList.add('black-outline');
+    rankTextVeteran.innerHTML = profile.veteranRank;
+    rankStarVeteran.appendChild(rankTextVeteran);
+
+    let profileFollowers = document.createElement('div')
+    profileFollowers.classList.add('profile-followers');
+    profileTop.appendChild(profileFollowers);
+
+    let followersLabel = document.createElement('p');
+    followersLabel.classList.add('followers-label');
+    followersLabel.classList.add('black-outline');
+    followersLabel.innerHTML = 'Followers';
+    profileFollowers.appendChild(followersLabel);
+
+    let followersCount = document.createElement('p');
+    followersCount.classList.add('followers-count');
+    followersCount.innerHTML = profile["followers"].toLocaleString();
+    profileFollowers.appendChild(followersCount);
+
+
+    let belowProfileHeader = document.createElement('div');
+    belowProfileHeader.id = 'below-profile-header';
+    belowProfileHeader.classList.add('below-profile-header');
+    publicProfileDiv.appendChild(belowProfileHeader);
+
+    let leftColumnDiv = document.createElement('div');
+    leftColumnDiv.id = 'left-column-div';
+    leftColumnDiv.classList.add('left-column-div');
+    belowProfileHeader.appendChild(leftColumnDiv);
+
+    let leftColumnHeader = document.createElement('div');
+    leftColumnHeader.id = 'left-column-header';
+    leftColumnHeader.classList.add('left-column-header');
+    leftColumnDiv.appendChild(leftColumnHeader);
+
+    let leftColumnHeaderText = document.createElement('p');
+    leftColumnHeaderText.id = 'left-column-header-text';
+    leftColumnHeaderText.classList.add('column-header-text');
+    leftColumnHeaderText.classList.add('black-outline');
+    leftColumnHeaderText.innerHTML = 'Medals';
+    leftColumnHeader.appendChild(leftColumnHeaderText);
+
+    let publicMedals = {};
+    let tempCoop = {};
+    for (let [key, value] of Object.entries(medalMap)){
+        publicMedals["Medal" + value] = profile["_medalsSinglePlayer"][key] || 0;
+        tempCoop["MedalCoop" + value] = profile["_medalsMultiplayer"][key] || 0;
+    }
+    publicMedals = {...publicMedals, ...tempCoop};
+    publicMedals["PhayzeEliteBadge"] = profile["bossBadgesElite"]["Phayze"] || 0;
+    publicMedals["PhayzeBadge"] = profile["bossBadgesNormal"]["Phayze"] || 0;
+    publicMedals["DreadbloonEliteBadge"] = profile["bossBadgesElite"]["Dreadbloon"] || 0;
+    publicMedals["DreadbloonBadge"] = profile["bossBadgesNormal"]["Dreadbloon"] || 0;
+    publicMedals["VortexEliteBadge"] = profile["bossBadgesElite"]["Vortex"] || 0;
+    publicMedals["VortexBadge"] = profile["bossBadgesNormal"]["Vortex"] || 0;
+    publicMedals["LychEliteBadge"] = profile["bossBadgesElite"]["Lych"] || 0;
+    publicMedals["LychBadge"] = profile["bossBadgesNormal"]["Lych"] || 0;
+    publicMedals["BloonariusEliteBadge"] = profile["bossBadgesElite"]["Bloonarius"] || 0;
+    publicMedals["BloonariusBadge"] = profile["bossBadgesNormal"]["Bloonarius"] || 0;
+    publicMedals["MedalEventBronzeMedal"] = profile["_medalsRace"]["Bronze"] || 0;
+    publicMedals["MedalEventSilverMedal"] = profile["_medalsRace"]["Silver"] || 0;
+    publicMedals["MedalEventGoldSilverMedal"] = profile["_medalsRace"]["GoldSilver"] || 0;
+    publicMedals["MedalEventDoubleGoldMedal"] = profile["_medalsRace"]["DoubleGold"] || 0;
+    publicMedals["MedalEventGoldDiamondMedal"] = profile["_medalsRace"]["GoldDiamond"] || 0;
+    publicMedals["MedalEventRedDiamondMedal"] = profile["_medalsRace"]["RedDiamond"] || 0;
+    publicMedals["MedalEventBlackDiamondMedal"] = profile["_medalsRace"]["BlackDiamond"] || 0;
+    publicMedals["OdysseyStarIcon"] = profile.gameplay["totalOdysseyStars"] || 0;
+    publicMedals["BossMedalEventBronzeMedal"] = profile["_medalsBoss"]["Bronze"] || 0;
+    publicMedals["BossMedalEventSilverMedal"] = profile["_medalsBoss"]["Silver"] || 0;
+    publicMedals["BossMedalEventDoubleSilverMedal"] = profile["_medalsBoss"]["DoubleSilver"] || 0;
+    publicMedals["BossMedalEventGoldSilverMedal"] = profile["_medalsBoss"]["GoldSilver"] || 0;
+    publicMedals["BossMedalEventDoubleGoldMedal"] = profile["_medalsBoss"]["DoubleGold"] || 0;
+    publicMedals["BossMedalEventGoldDiamondMedal"] = profile["_medalsBoss"]["GoldDiamond"] || 0;
+    publicMedals["BossMedalEventDiamondMedal"] = profile["_medalsBoss"]["Diamond"] || 0;
+    publicMedals["BossMedalEventRedDiamondMedal"] = profile["_medalsBoss"]["RedDiamond"] || 0;
+    publicMedals["BossMedalEventBlackDiamondMedal"] = profile["_medalsBoss"]["BlackDiamond"] || 0;
+    publicMedals["EliteBossMedalEventBronzeMedal"] = profile["_medalsBossElite"]["Bronze"] || 0;
+    publicMedals["EliteBossMedalEventSilverMedal"] = profile["_medalsBossElite"]["Silver"] || 0;
+    publicMedals["EliteBossMedalEventDoubleSilverMedal"] = profile["_medalsBossElite"]["DoubleSilver"] || 0;
+    publicMedals["EliteBossMedalEventGoldSilverMedal"] = profile["_medalsBossElite"]["GoldSilver"] || 0;
+    publicMedals["EliteBossMedalEventDoubleGoldMedal"] = profile["_medalsBossElite"]["DoubleGold"] || 0;
+    publicMedals["EliteBossMedalEventGoldDiamondMedal"] = profile["_medalsBossElite"]["GoldDiamond"] || 0;
+    publicMedals["EliteBossMedalEventDiamondMedal"] = profile["_medalsBossElite"]["Diamond"] || 0;
+    publicMedals["EliteBossMedalEventRedDiamondMedal"] = profile["_medalsBossElite"]["RedDiamond"] || 0;
+    publicMedals["EliteBossMedalEventBlackDiamondMedal"] = profile["_medalsBossElite"]["BlackDiamond"] || 0;
+    publicMedals["CtLocalPlayerBronzeMedal"] = profile["_medalsCTLocal"]["Bronze"] || 0;
+    publicMedals["CtLocalPlayerSilverMedal"] = profile["_medalsCTLocal"]["Silver"] || 0;
+    publicMedals["CtLocalPlayerDoubleGoldMedal"] = profile["_medalsCTLocal"]["DoubleGold"] || 0;
+    publicMedals["CtLocalPlayerDiamondMedal"] = profile["_medalsCTLocal"]["Diamond"] || 0;
+    publicMedals["CtLocalPlayerRedDiamondMedal"] = profile["_medalsCTLocal"]["RedDiamond"] || 0;
+    publicMedals["CtLocalPlayerBlackDiamondMedal"] = profile["_medalsCTLocal"]["BlackDiamond"] || 0;
+    publicMedals["CtGlobalPlayerBronzeMedal"] = profile["_medalsCTGlobal"]["Bronze"] || 0;
+    publicMedals["CtGlobalPlayerSilverMedal"] = profile["_medalsCTGlobal"]["Silver"] || 0;
+    publicMedals["CtGlobalPlayerDoubleSilverMedal"] = profile["_medalsCTGlobal"]["DoubleSilver"] || 0;
+    publicMedals["CtGlobalPlayerGoldSilverMedal"] = profile["_medalsCTGlobal"]["GoldSilver"] || 0;
+    publicMedals["CtGlobalPlayerDoubleGoldMedal"] = profile["_medalsCTGlobal"]["DoubleGold"] || 0;
+    publicMedals["CtGlobalPlayerGoldDiamondMedal"] = profile["_medalsCTGlobal"]["GoldDiamond"] || 0;
+    publicMedals["CtGlobalPlayerDiamondMedal"] = profile["_medalsCTGlobal"]["Diamond"] || 0;
+
+    let currencyAndMedalsDiv = document.createElement('div');
+    currencyAndMedalsDiv.id = 'currency-medals-div';
+    currencyAndMedalsDiv.classList.add('currency-medals-div');
+    leftColumnDiv.appendChild(currencyAndMedalsDiv);
+
+    let medalsDiv = document.createElement('div');
+    medalsDiv.id = 'medals-div';
+    medalsDiv.classList.add('medals-div');
+    currencyAndMedalsDiv.appendChild(medalsDiv);
+
+    for (let [medal, num] of Object.entries(publicMedals)){
+        if(num === 0) { continue; }
+        let medalDiv = document.createElement('div');
+        medalDiv.id = 'medal-div';
+        medalDiv.classList.add('medal-div');
+        medalsDiv.appendChild(medalDiv);
+
+        let medalImg = document.createElement('img');
+        medalImg.id = 'medal-img';
+        medalImg.classList.add('medal-img');
+        medalImg.src = getMedalIcon(medal);
+        medalImg.style.display = "none";
+        medalImg.addEventListener('load', () => {
+            if(medalImg.width < medalImg.height){
+                medalImg.style.width = `${ratioCalc(3,70,256,0,medalImg.width)}px`
+            } else {
+                medalImg.style.height = `${ratioCalc(3,70,256,0,medalImg.height)}px`
+            }
+            medalImg.style.removeProperty('display');
+        })
+        medalDiv.appendChild(medalImg);
+
+        let medalText = document.createElement('p');
+        medalText.id = 'medal-text';
+        medalText.classList.add('medal-text');
+        medalText.classList.add('black-outline');
+        medalText.innerHTML = num.toLocaleString();
+        medalDiv.appendChild(medalText);
+    }
+
+    let topHeroesMonkesyDiv = document.createElement('div');
+    topHeroesMonkesyDiv.id = 'top-heroes-monkeys-div';
+    topHeroesMonkesyDiv.classList.add('top-heroes-monkeys-div');
+    leftColumnDiv.appendChild(topHeroesMonkesyDiv);
+    
+    /*let topColumnDiv = document.createElement('div');
+    topColumnDiv.id = 'top-column-div';
+    topColumnDiv.classList.add('right-column-div');
+    leftColumnDiv.appendChild(topColumnDiv);*/
+
+    let topHeroesDiv = document.createElement('div');
+    topHeroesDiv.id = 'top-heroes-div';
+    topHeroesDiv.classList.add('top-heroes-div');
+    topHeroesMonkesyDiv.appendChild(topHeroesDiv);
+
+    let topHeroesTopDiv = document.createElement('div');
+    topHeroesTopDiv.id = 'top-heroes-top-div';
+    topHeroesTopDiv.classList.add('top-heroes-top-div');
+    topHeroesDiv.appendChild(topHeroesTopDiv);
+
+    let topHeroesTopRibbonDiv = document.createElement('div');
+    topHeroesTopRibbonDiv.id = 'top-heroes-top-div';
+    topHeroesTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
+    topHeroesTopDiv.appendChild(topHeroesTopRibbonDiv);
+
+    let topHeroesText = document.createElement('p');
+    topHeroesText.id = 'top-heroes-text';
+    topHeroesText.classList.add('top-heroes-text');
+    topHeroesText.classList.add('black-outline');
+    topHeroesText.innerHTML = 'Top Heroes';
+    topHeroesTopRibbonDiv.appendChild(topHeroesText);
+
+    let mapsProgressCoopToggle = document.createElement('div');
+    mapsProgressCoopToggle.id = 'maps-progress-coop-toggle';
+    mapsProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
+    topHeroesTopDiv.appendChild(mapsProgressCoopToggle);
+
+    let mapsProgressCoopToggleText = document.createElement('p');
+    mapsProgressCoopToggleText.id = 'maps-progress-coop-toggle-text';
+    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressCoopToggleText.classList.add('black-outline');
+    mapsProgressCoopToggleText.innerHTML = "Show All: ";
+    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
+
+    let mapsProgressCoopToggleInput = document.createElement('input');
+    mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
+    mapsProgressCoopToggleInput.type = 'checkbox';
+    mapsProgressCoopToggleInput.addEventListener('change', () => {
+        mapsProgressCoopToggleInput.checked ? document.getElementById('other-heroes-div-public').style.display = 'flex' : document.getElementById('other-heroes-div-public').style.display = 'none';
+    })
+    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
+
+
+    let topHeroesList = document.createElement('div');
+    topHeroesList.id = 'top-heroes-list';
+    topHeroesList.classList.add('top-heroes-list');
+    topHeroesDiv.appendChild(topHeroesList);
+
+    let top3HeroesDiv = document.createElement('div');
+    top3HeroesDiv.id = 'top-3-heroes-div';
+    top3HeroesDiv.classList.add('top-3-heroes-div');
+    topHeroesList.appendChild(top3HeroesDiv);
+
+    let otherHeroesDiv = document.createElement('div');
+    otherHeroesDiv.id = 'other-heroes-div-public';
+    otherHeroesDiv.classList.add('other-heroes-div');
+    otherHeroesDiv.style.display = 'none';
+    topHeroesList.appendChild(otherHeroesDiv);
+
+    let counter = 0;
+
+    for (let [hero, xp] of Object.entries(profile["heroesPlaced"]).sort((a, b) => b[1] - a[1])){
+        let heroDiv = document.createElement('div');
+        heroDiv.id = 'hero-div';
+        heroDiv.classList.add('hero-div');
+        counter < 3 ? top3HeroesDiv.appendChild(heroDiv) : otherHeroesDiv.appendChild(heroDiv);
+
+        let heroImg = document.createElement('img');
+        heroImg.id = 'hero-img';
+        heroImg.classList.add('hero-img');
+        heroImg.src = getHeroPortrait(hero,1);
+        heroImg.style.display = "none";
+        heroImg.addEventListener('load', () => {
+            if(heroImg.width < heroImg.height){
+                heroImg.style.width = `${ratioCalc(3,150,1920,0,heroImg.width)}px`
+            } else {
+                heroImg.style.height = `${ratioCalc(3,150,1920,0,heroImg.height)}px`
+            }
+            heroImg.style.removeProperty('display');
+        })
+        heroDiv.appendChild(heroImg);
+
+        let heroText = document.createElement('p');
+        heroText.id = 'hero-text';
+        heroText.classList.add('hero-text');
+        heroText.classList.add('black-outline');
+        heroText.innerHTML = xp.toLocaleString();
+        heroDiv.appendChild(heroText);
+        counter++;
+    }
+
+    let topTowersDiv = document.createElement('div');
+    topTowersDiv.id = 'top-towers-div';
+    topTowersDiv.classList.add('top-heroes-div');
+    topHeroesMonkesyDiv.appendChild(topTowersDiv);
+
+    let topTowersTopDiv = document.createElement('div');
+    topTowersTopDiv.id = 'top-towers-top-div';
+    topTowersTopDiv.classList.add('top-heroes-top-div');
+    topTowersDiv.appendChild(topTowersTopDiv);
+
+    let topTowersTopRibbonDiv = document.createElement('div');
+    topTowersTopRibbonDiv.id = 'top-towers-top-div';
+    topTowersTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
+    topTowersTopDiv.appendChild(topTowersTopRibbonDiv);
+
+    let topTowersText = document.createElement('p');
+    topTowersText.id = 'top-towers-text';
+    topTowersText.classList.add('top-heroes-text');
+    topTowersText.classList.add('black-outline');
+    topTowersText.innerHTML = 'Top Towers';
+    topTowersTopRibbonDiv.appendChild(topTowersText);
+
+    let mapsProgressCoopToggle2 = document.createElement('div');
+    mapsProgressCoopToggle2.id = 'maps-progress-coop-toggle';
+    mapsProgressCoopToggle2.classList.add('maps-progress-coop-toggle');
+    topTowersTopDiv.appendChild(mapsProgressCoopToggle2);
+
+    let mapsProgressCoopToggleText2 = document.createElement('p');
+    mapsProgressCoopToggleText2.id = 'maps-progress-coop-toggle-text';
+    mapsProgressCoopToggleText2.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressCoopToggleText2.classList.add('black-outline');
+    mapsProgressCoopToggleText2.innerHTML = "Show All: ";
+    mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleText2);
+
+    let mapsProgressCoopToggleInput2 = document.createElement('input');
+    mapsProgressCoopToggleInput2.classList.add('maps-progress-coop-toggle-input');
+    mapsProgressCoopToggleInput2.type = 'checkbox';
+    mapsProgressCoopToggleInput2.addEventListener('change', () => {
+        mapsProgressCoopToggleInput2.checked ? document.getElementById('other-towers-div-public').style.display = 'flex' : document.getElementById('other-towers-div-public').style.display = 'none';
+    })
+    mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleInput2);
+
+    
+    let topTowersList = document.createElement('div');
+    topTowersList.id = 'top-towers-list';
+    topTowersList.classList.add('top-heroes-list');
+    topTowersDiv.appendChild(topTowersList);
+
+    let top3TowersDiv = document.createElement('div');
+    top3TowersDiv.id = 'top-3-towers-div';
+    top3TowersDiv.classList.add('top-3-heroes-div');
+    topTowersList.appendChild(top3TowersDiv);
+
+    let otherTowersDiv = document.createElement('div');
+    otherTowersDiv.id = 'other-towers-div-public';
+    otherTowersDiv.classList.add('other-heroes-div');
+    otherTowersDiv.style.display = 'none';
+    topTowersList.appendChild(otherTowersDiv);
+
+    counter = 0;
+
+    for (let [tower, xp] of Object.entries(profile["towersPlaced"]).sort((a, b) => b[1] - a[1])){
+        let towerDiv = document.createElement('div');
+        towerDiv.id = 'tower-div';
+        towerDiv.classList.add('hero-div');
+        counter < 3 ? top3TowersDiv.appendChild(towerDiv) : otherTowersDiv.appendChild(towerDiv);
+
+        let towerImg = document.createElement('img');
+        towerImg.id = 'tower-img';
+        towerImg.classList.add('hero-img');
+        towerImg.src = getInstaContainerIcon(tower,"000");
+        towerDiv.appendChild(towerImg);
+
+        let towerText = document.createElement('p');
+        towerText.id = 'tower-text';
+        towerText.classList.add('hero-text');
+        towerText.classList.add('black-outline');
+        towerText.innerHTML = xp.toLocaleString();
+        towerDiv.appendChild(towerText);
+        counter++;
+    }
+
+
+    let rightColumnDiv = document.createElement('div');
+    rightColumnDiv.id = 'right-column-div';
+    rightColumnDiv.classList.add('right-column-div');
+    belowProfileHeader.appendChild(rightColumnDiv);
+
+    let rightColumnHeader = document.createElement('div');
+    rightColumnHeader.id = 'right-column-header';
+    rightColumnHeader.classList.add('right-column-header');
+    rightColumnDiv.appendChild(rightColumnHeader);
+
+    let rightColumnHeaderText = document.createElement('p');
+    rightColumnHeaderText.id = 'right-column-header-text';
+    rightColumnHeaderText.classList.add('column-header-text');
+    rightColumnHeaderText.classList.add('black-outline');
+    rightColumnHeaderText.innerHTML = 'Overall Stats';
+    rightColumnHeader.appendChild(rightColumnHeaderText);
+
+    let statsPublic = {};
+    statsPublic["Games Played"] = profile.gameplay["gameCount"];
+    statsPublic["Games Won"] = profile.gameplay["gamesWon"];
+    statsPublic["Highest Round (All Time)"] = profile.gameplay["highestRound"];
+    statsPublic["Highest Round (CHIMPS)"] = profile.gameplay["highestRoundCHIMPS"];
+    statsPublic["Highest Round (Deflation)"] = profile.gameplay["highestRoundDeflation"];
+    statsPublic["Monkeys Placed"] = profile.gameplay["monkeysPlaced"];
+    statsPublic["Total Pop Count"] = profile.bloonsPopped["bloonsPopped"];
+    statsPublic["Total Co-Op Pop Count"] = profile.bloonsPopped["coopBloonsPopped"];
+    statsPublic["Camo Bloons Popped"] = profile.bloonsPopped["camosPopped"];
+    statsPublic["Lead Bloons Popped"] = profile.bloonsPopped["leadsPopped"];
+    statsPublic["Purple Bloons Popped"] = profile.bloonsPopped["purplesPopped"];
+    statsPublic["Regrow Bloons Popped"] = profile.bloonsPopped["regrowsPopped"];
+    statsPublic["Ceramic Bloons Popped"] = profile.bloonsPopped["ceramicsPopped"];
+    statsPublic["MOABs Popped"] = profile.bloonsPopped["moabsPopped"];
+    statsPublic["BFBs Popped"] = profile.bloonsPopped["bfbsPopped"];
+    statsPublic["ZOMGs Popped"] = profile.bloonsPopped["zomgsPopped"];
+    statsPublic["DDTs Popped"] = profile.bloonsPopped["ddtsPopped"];
+    statsPublic["BADs Popped"] = profile.bloonsPopped["badsPopped"];
+    statsPublic["Bloons Leaked"] = profile.bloonsPopped["bloonsLeaked"];
+    statsPublic["Cash Generated"] = profile.gameplay["cashEarned"];
+    statsPublic["Cash Gifted"] = profile.gameplay["coopCashGiven"];
+    statsPublic["Abilities Used"] = profile.gameplay["abilitiesUsed"];
+    statsPublic["Powers Used"] = profile.gameplay["powersUsed"];
+    statsPublic["Insta Monkeys Used"] = profile.gameplay["instaMonkeysUsed"];
+    statsPublic["Daily Reward Chests Opened"] = profile.gameplay["dailyRewards"];
+    statsPublic["Challenges Completed"] = profile.gameplay["challengesCompleted"];
+    statsPublic["Achievements"] = `${profile["achievements"]}/150`;
+    statsPublic["Odysseys Completed"] = profile.gameplay["totalOdysseysCompleted"];
+    statsPublic["Lifetime Trophies"] = profile.gameplay["totalTrophiesEarned"];
+    statsPublic["Necro Bloons Reanimated"] = profile.bloonsPopped["necroBloonsReanimated"];
+    statsPublic["Transforming Tonics Used"] = profile.bloonsPopped["transformingTonicsUsed"];
+    statsPublic["Most Experienced Monkey"] = locJSON[profile["mostExperiencedMonkey"]];
+    statsPublic["Insta Monkey Collection"] = `${profile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}`;
+    statsPublic["Collection Chests Opened"] = profile.gameplay["collectionChestsOpened"];
+    statsPublic["Golden Bloons Popped"] = profile.bloonsPopped["goldenBloonsPopped"];
+    statsPublic["Monkey Teams Wins"] = profile.gameplay["monkeyTeamsWins"];
+    statsPublic["Bosses Popped"] = profile.bloonsPopped["bossesPopped"];
+    statsPublic["Damage Done To Bosses"] = profile.gameplay["damageDoneToBosses"];
+
+    let profileStatsDiv = document.createElement('div');
+    profileStatsDiv.id = 'profile-stats';
+    profileStatsDiv.classList.add('profile-stats');
+    rightColumnDiv.appendChild(profileStatsDiv);
+
+    for (let [key, value] of Object.entries(statsPublic)){
+        let stat = document.createElement('div');
+        stat.id = 'stat';
+        stat.classList.add('stat');
+        profileStatsDiv.appendChild(stat);
+
+        let statName = document.createElement('p');
+        statName.id = 'stat-name';
+        statName.classList.add('stat-name');
+        statName.innerHTML = key;
+        stat.appendChild(statName);
+
+        let statValue = document.createElement('p');
+        statValue.id = 'stat-value';
+        statValue.classList.add('stat-value');
+        statValue.innerHTML = value.toLocaleString();
+        stat.appendChild(statValue);
+    }
+}
+
+function exitProfile(source){
+    document.getElementById('publicprofile-content').style.display = "none";
+    document.getElementById(`${source}-content`).style.display = "flex";
 }
 
 function generateSettings(){
@@ -5375,7 +5894,6 @@ function errorModal(body, source) {
     modal.appendChild(modalContent2);
 
     let modalClose = document.createElement('img');
-    modalClose.id = 'error-modal-close';
     modalClose.classList.add('error-modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
