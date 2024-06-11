@@ -20,6 +20,8 @@ let refreshRateLimited = false;
 
 let profileCache = {}
 
+let bossesData = null;
+
 // getSaveData(oak_token)
 // getPublicProfileData(oak_token)
     // let res = await fetch(`https://data.ninjakiwi.com/btd6/save/${oak_token}`);
@@ -138,6 +140,29 @@ async function getRaceLeaderboardData() {
         });
     } else {
         return errorModal("Leaderboard Fetch Error: No leaderboard data found");
+    }
+}
+
+async function getBossesData() {
+    if (bossesData == null) {
+        fetchData(`https://data.ninjakiwi.com/btd6/bosses`, (json) => {
+            bossesData = json["body"];
+            generateBosses();
+        });
+    } else {
+        generateBosses();
+    }
+}
+
+async function getBossMetadata(key, elite) {
+    if (bossesData && bossesData[key] && typeof bossesData[key][elite ? "metadataElite" : "metadataStandard"] === 'string') {
+        return fetchData(bossesData[key][elite ? "metadataElite" : "metadataStandard"], (json) => {
+            console.log(`fetched ${bossesData[key][elite ? "metadataElite" : "metadataStandard"]}`)
+            bossesData[key][elite ? "metadataElite" : "metadataStandard"] = json["body"];
+            return bossesData[key];
+        });
+    } else {
+        return bossesData[key];
     }
 }
 

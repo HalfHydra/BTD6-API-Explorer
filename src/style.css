@@ -2303,6 +2303,28 @@
 }
 .race-map-div {
     border-width: 7px;
+    position:relative;
+}
+.race-map-rounds {
+    text-align: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    font-size: 24px;
+}
+.race-challenge-icons {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: flex-end;
+    top: 0;
+    align-content: flex-start;
+    flex-wrap: wrap-reverse;
+}
+.challenge-modifier-icon-event, .challenge-rule-icon-event  {
+    width: 60px;
+    height: 60px;
 }
 .race-info-top-div {
     width: 450px;
@@ -2335,7 +2357,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding-right: 10px;
+    padding: 10px;
 }
 .race-info-dates {
     font-size: 20px;
@@ -2712,6 +2734,17 @@
     justify-content: space-between;
     width: 650px;
     align-items: center;
+}
+
+.boss-map-boss-icon {
+    position: absolute;
+    width: 140px;
+    right: 0;
+    transform: scaleX(-1);
+}
+.boss-info-div {
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 10px;
 }
 
 .black-outline {

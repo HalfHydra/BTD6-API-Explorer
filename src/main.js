@@ -61,6 +61,20 @@ let processedInstaData = {
 
 let timerInterval = null;
 
+let rulesMap = {
+    "Monkey Knowledge Disabled": "NoKnowledgeIcon",
+    "No Lives Lost": "NoLivesLostIcon",
+    "Selling Disabled": "SellingDisabledIcon",
+    "Powers Disabled": "PowersDisabledIcon",
+    "No Continues": "NoContinuesIcon",
+    "All Camo": "AllCamoIcon",
+    "All Regrow": "AllRegenIcon",
+    "Double Cash Disabled": "NoDoubleCashIcon",
+    "No Round 100 Reward": "NoInstaMonkeys",
+    "Custom Rounds": "CustomRoundIcon",
+    "Paragon Limit": "ParagonLimitIcon"
+}
+
 fetch('./data/Constants.json')
         .then(response => response.json())
         .then(data => {
@@ -4157,6 +4171,10 @@ function changeEventTab(selector){
             showLoading();
             getRacesData();
             break;
+        case 'Bosses':
+            showLoading();
+            getBossesData();
+            break;
     }
 }
 
@@ -4183,7 +4201,7 @@ function generateRaces(){
         raceMapDiv.appendChild(raceChallengeIcons);
 
         let raceMapRounds = document.createElement('p');
-        raceMapRounds.classList.add("race-map-rounds");
+        raceMapRounds.classList.add("race-map-rounds", 'black-outline');
         raceMapDiv.appendChild(raceMapRounds);
 
         let raceInfoDiv = document.createElement('div');
@@ -4251,12 +4269,158 @@ function generateRaces(){
                     console.log(race.metadata)
                     observer.unobserve(entry.target);
                     raceMapImg.src = Object.keys(constants.mapsInOrder).includes(race.metadata.map) ? getMapIcon(race.metadata.map) : race.metadata.mapURL;
+                    let modifiers = challengeModifiers(race.metadata);
+                    let rules = challengeRules(race.metadata)
+                    for (let modifier of Object.values(modifiers)) {
+                        console.log(modifier)
+                        let challengeModifierIcon = document.createElement('img');
+                        challengeModifierIcon.classList.add('challenge-modifier-icon-event');
+                        challengeModifierIcon.src = `./Assets/ChallengeRulesIcon/${modifier.icon}.png`;
+                        raceChallengeIcons.appendChild(challengeModifierIcon);
+                    }
+                    for (let rule of rules) {
+                        console.log(rule)
+                        if (rule == "No Round 100 Reward") { continue; }
+                        if (rule == "Paragon Limit") { continue; }
+                        let challengeRuleIcon = document.createElement('img');
+                        challengeRuleIcon.classList.add('challenge-rule-icon-event');
+                        challengeRuleIcon.src = `./Assets/ChallengeRulesIcon/${rulesMap[rule]}.png`;
+                        raceChallengeIcons.appendChild(challengeRuleIcon);
+                    }
+                    raceMapRounds.innerHTML = `Rounds ${race.metadata.startRound}/${race.metadata.endRound}`
                 }
             });
         });
         observer.observe(raceMapDiv);
     })
 }
+
+function generateBosses(elite){
+    let eventsContent = document.getElementById('events-content');
+    eventsContent.innerHTML = "";
+
+    Object.values(bossesData).forEach((race, index) => {
+        //get only the numbers
+        let titleCaseBoss = race.bossType.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
+        let bossName = `${elite ? "Elite" : ""} ${titleCaseBoss} ${race.name.replace(/\D/g,'')}`;
+
+        let raceDiv = document.createElement('div');
+        raceDiv.classList.add("race-div");
+        raceDiv.style.backgroundImage = `url(../Assets/EventBanner/EventBannerSmall${titleCaseBoss}.png)`;
+        eventsContent.appendChild(raceDiv);
+
+        let raceMapDiv = document.createElement('div');
+        raceMapDiv.classList.add("race-map-div", "boss-border");
+        raceDiv.appendChild(raceMapDiv);
+
+        let raceMapImg = document.createElement('img');
+        raceMapImg.classList.add("race-map-img");
+        raceMapImg.src = "./Assets/MapIcon/MapLoadingImage.png"
+        raceMapDiv.appendChild(raceMapImg);
+
+        let bossMapBossIcon = document.createElement('img')
+        bossMapBossIcon.classList.add("boss-map-boss-icon");
+        //make race.bossType title case
+        bossMapBossIcon.src = `./Assets/BossIcon/${titleCaseBoss}Portrait.png`
+        raceMapDiv.appendChild(bossMapBossIcon);
+
+        let raceChallengeIcons = document.createElement('div');
+        raceChallengeIcons.classList.add("race-challenge-icons");
+        raceMapDiv.appendChild(raceChallengeIcons);
+
+        let raceMapRounds = document.createElement('p');
+        raceMapRounds.classList.add("race-map-rounds");
+        raceMapDiv.appendChild(raceMapRounds);
+
+        let raceInfoDiv = document.createElement('div');
+        raceInfoDiv.classList.add("race-info-div","boss-info-div");
+        raceDiv.appendChild(raceInfoDiv);
+
+        let raceInfoTopDiv = document.createElement('div');
+        raceInfoTopDiv.classList.add("race-info-top-div");
+        raceInfoDiv.appendChild(raceInfoTopDiv);
+
+        let raceInfoMiddleDiv = document.createElement('div');
+        raceInfoMiddleDiv.classList.add("race-info-middle-div");
+        raceInfoDiv.appendChild(raceInfoMiddleDiv);
+
+        let raceInfoBottomDiv = document.createElement('div');
+        raceInfoBottomDiv.classList.add("race-info-bottom-div");
+        raceInfoDiv.appendChild(raceInfoBottomDiv);
+
+        let raceInfoName = document.createElement('p');
+        raceInfoName.classList.add("race-info-name", "black-outline");
+        raceInfoName.innerHTML = bossName;
+        raceInfoTopDiv.appendChild(raceInfoName);
+
+        let raceTimeLeft = document.createElement('p');
+        raceTimeLeft.id = 'race-time-left';
+        raceTimeLeft.classList.add("race-time-left", "black-outline");
+        raceTimeLeft.innerHTML = "Finished";
+        raceInfoTopDiv.appendChild(raceTimeLeft);    
+        if (new Date(race.end) > new Date()) {
+            updateTimer(new Date(race.end), raceTimeLeft.id);
+            timerInterval = setInterval(() => updateTimer(new Date(race.end), raceTimeLeft.id), 1000)
+        }
+
+        let raceInfoDates = document.createElement('p');
+        raceInfoDates.classList.add("race-info-dates", "black-outline");
+        //formatted as "XX/XX/XX XX:XX - XX/XX/XX XX:XX"
+        raceInfoDates.innerHTML = `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`;
+        raceInfoMiddleDiv.appendChild(raceInfoDates);
+
+        let raceInfoTotalScores = document.createElement('p');
+        raceInfoTotalScores.classList.add("race-info-total-scores", "black-outline");
+        raceInfoTotalScores.innerHTML = `Total Scores: ${race.totalScores_standard == 0 ? "No Data" : race.totalScores_standard.toLocaleString()}`
+        raceInfoMiddleDiv.appendChild(raceInfoTotalScores);
+
+        let raceInfoRules = document.createElement('div');
+        raceInfoRules.classList.add("race-info-rules", "start-button", "black-outline");
+        raceInfoRules.innerHTML = "Details"
+        raceInfoRules.addEventListener('click', () => {
+            showChallengeModel('events', race.metadata, "Race");
+        })
+        raceInfoBottomDiv.appendChild(raceInfoRules);
+
+        let raceInfoLeaderboard = document.createElement('div');
+        raceInfoLeaderboard.classList.add("race-info-leaderboard", "start-button", "black-outline");
+        raceInfoLeaderboard.innerHTML = "Leaderboard"
+        raceInfoLeaderboard.addEventListener('click', () => {
+            showLeaderboard('events', race, "Race");
+        })
+        raceInfoBottomDiv.appendChild(raceInfoLeaderboard);
+
+        let observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(async entry => {
+                if (entry.isIntersecting) {
+                    await getBossMetadata(index, false);
+                    console.log(race.metadataStandard)
+                    observer.unobserve(entry.target);
+                    let modifiers = challengeModifiers(race.metadataStandard);
+                    let rules = challengeRules(race.metadataStandard)
+                    for (let modifier of Object.values(modifiers)) {
+                        console.log(modifier)
+                        let challengeModifierIcon = document.createElement('img');
+                        challengeModifierIcon.classList.add('challenge-modifier-icon-event');
+                        challengeModifierIcon.src = `./Assets/ChallengeRulesIcon/${modifier.icon}.png`;
+                        raceChallengeIcons.appendChild(challengeModifierIcon);
+                    }
+                    for (let rule of rules) {
+                        console.log(rule)
+                        if (rule == "No Round 100 Reward") { continue; }
+                        let challengeRuleIcon = document.createElement('img');
+                        challengeRuleIcon.classList.add('challenge-rule-icon-event');
+                        challengeRuleIcon.src = `./Assets/ChallengeRulesIcon/${rulesMap[rule]}.png`;
+                        raceChallengeIcons.appendChild(challengeRuleIcon);
+                    }
+                    raceMapImg.src = Object.keys(constants.mapsInOrder).includes(race.metadataStandard.map) ? getMapIcon(race.metadataStandard.map) : race.metadata.mapURL;
+                }
+            });
+        });
+        observer.observe(raceMapDiv);
+    })
+}
+
 
 function processChallenge(metadata){
     let result = {};
@@ -4404,7 +4568,7 @@ function showChallengeModel(source, metadata, challengeType){
 
     let challengeModelMapIcon = document.createElement('img');
     challengeModelMapIcon.classList.add('challenge-model-map-icon', 'boss-border');
-    challengeModelMapIcon.src = getMapIcon(metadata.map);
+    challengeModelMapIcon.src = Object.keys(constants.mapsInOrder).includes(metadata.map) ? getMapIcon(metadata.map) : metadata.mapURL;
     challengeModelTop.appendChild(challengeModelMapIcon);
 
     let challengeModelSettings = document.createElement('div');
@@ -4672,20 +4836,6 @@ function showChallengeModel(source, metadata, challengeType){
         challengeModifierValue.innerHTML = isNaN(data.value) ? data.value : `${data.value * 100}%`;
         challengeModifierTexts.appendChild(challengeModifierValue);
     })
-
-    let rulesMap = {
-        "Monkey Knowledge Disabled": "NoKnowledgeIcon",
-        "No Lives Lost": "NoLivesLostIcon",
-        "Selling Disabled": "SellingDisabledIcon",
-        "Powers Disabled": "PowersDisabledIcon",
-        "No Continues": "NoContinuesIcon",
-        "All Camo": "AllCamoIcon",
-        "All Regrow": "AllRegenIcon",
-        "Double Cash Disabled": "NoDoubleCashIcon",
-        "No Round 100 Reward": "NoInstaMonkeys",
-        "Custom Rounds": "CustomRoundIcon",
-        "Paragon Limit": "ParagonLimitIcon"
-    }
 
     let rules = challengeRules(metadata);
 
