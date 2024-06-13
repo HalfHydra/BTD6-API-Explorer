@@ -5304,12 +5304,12 @@ function showLeaderboard(source, metadata, type) {
     leaderboardFooterPageInput.classList.add('leaderboard-footer-page-input');
     leaderboardFooterPageInput.type = "number";
     leaderboardFooterPageInput.min = "1";
-    leaderboardFooterPageInput.max = "20";
+    leaderboardFooterPageInput.max = 1000 / leaderboardPageEntryCount;
     leaderboardFooterPageInput.value = `${leaderboardPage}`;
     //keep the value above 0 and below 21
     leaderboardFooterPageInput.addEventListener('change', () => {
         if (leaderboardFooterPageInput.value < 1) { leaderboardFooterPageInput.value = 1; }
-        if (leaderboardFooterPageInput.value > 20) { leaderboardFooterPageInput.value = 20; }
+        if (leaderboardFooterPageInput.value > (1000 / leaderboardPageEntryCount)) { leaderboardFooterPageInput.value = (1000 / leaderboardPageEntryCount) }
     })
     leaderboardFooterRight.appendChild(leaderboardFooterPageInput);
 
@@ -5376,26 +5376,96 @@ async function generateLeaderboardEntries(metadata){
             leaderboardEntryTimeSubmitDiv.classList.add('leaderboard-entry-time-submit-div');
             leaderboardEntryDiv.appendChild(leaderboardEntryTimeSubmitDiv);
 
-            let submittedDate = new Date(metadata.start + scorePartsObj["Time after event start"].score)
-
-            let leaderboardEntryTimeSubmitted = document.createElement('p');
-            leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted','leaderboard-outline');
-            leaderboardEntryTimeSubmitted.innerHTML = submittedDate.toLocaleString();
-            leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmitted);
-
-            let leaderboardEntryTimeSubmittedRelative = document.createElement('p');
-            leaderboardEntryTimeSubmittedRelative.classList.add('leaderboard-entry-time-submitted-relative','leaderboard-outline');
-            leaderboardEntryTimeSubmittedRelative.innerHTML = relativeTime(new Date(), submittedDate);
-            leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
-
             let leaderboardEntryScore = document.createElement('div')
             leaderboardEntryScore.classList.add('leaderboard-entry-score');
             leaderboardEntryDiv.appendChild(leaderboardEntryScore);
 
+            let leaderboardEntryScoreIcon = document.createElement('img');
+            leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon');
+            leaderboardEntryScoreIcon.src = "./Assets/UI/StopWatch.png";
+            leaderboardEntryScore.appendChild(leaderboardEntryScoreIcon);
+            
             let leaderboardEntryMainScore = document.createElement('p');
             leaderboardEntryMainScore.classList.add('leaderboard-entry-main-score','leaderboard-outline');
-            leaderboardEntryMainScore.innerHTML = formatScoreTime(entry.score);
             leaderboardEntryScore.appendChild(leaderboardEntryMainScore);
+
+            console.log(metadata)
+
+            if(metadata.hasOwnProperty('leaderboard') && metadata.leaderboard.includes('races')) {
+                let submittedDate = new Date(metadata.start + scorePartsObj["Time after event start"].score)
+
+                let leaderboardEntryTimeSubmitted = document.createElement('p');
+                leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted','leaderboard-outline');
+                leaderboardEntryTimeSubmitted.innerHTML = submittedDate.toLocaleString();
+                leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmitted);
+
+                let leaderboardEntryTimeSubmittedRelative = document.createElement('p');
+                leaderboardEntryTimeSubmittedRelative.classList.add('leaderboard-entry-time-submitted-relative','leaderboard-outline');
+                leaderboardEntryTimeSubmittedRelative.innerHTML = relativeTime(new Date(), submittedDate);
+                leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
+
+                leaderboardEntryMainScore.innerHTML = formatScoreTime(entry.score);
+            }
+            if(metadata.hasOwnProperty('bossType')) {
+                switch(metadata.scoringType) {
+                    case "GameTime":
+                        let submittedDate = new Date(metadata.start + scorePartsObj["Time after event start"].score)
+
+                        let leaderboardEntryTimeSubmitted = document.createElement('p');
+                        leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted','leaderboard-outline');
+                        leaderboardEntryTimeSubmitted.innerHTML = submittedDate.toLocaleString();
+                        leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmitted);
+
+                        let leaderboardEntryTimeSubmittedRelative = document.createElement('p');
+                        leaderboardEntryTimeSubmittedRelative.classList.add('leaderboard-entry-time-submitted-relative','leaderboard-outline');
+                        leaderboardEntryTimeSubmittedRelative.innerHTML = relativeTime(new Date(), submittedDate);
+                        leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
+
+                        leaderboardEntryMainScore.innerHTML = formatScoreTime(entry.score);
+                        break;
+                    case "LeastCash":
+                        leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
+                        leaderboardEntryScoreIcon.src = `./Assets/UI/LeastCashIconSmall.png`;
+                        leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
+
+                        let leaderboardEntryGameTime = document.createElement('div');
+                        leaderboardEntryGameTime.classList.add('leaderboard-entry-game-time');
+                        leaderboardEntryDiv.appendChild(leaderboardEntryGameTime);
+
+                        let leaderboardEntryGameTimeIcon = document.createElement('img');
+                        leaderboardEntryGameTimeIcon.classList.add('leaderboard-entry-score-icon');
+                        leaderboardEntryGameTimeIcon.src = "./Assets/UI/StopWatch.png";
+                        leaderboardEntryGameTime.appendChild(leaderboardEntryGameTimeIcon);
+
+                        let leaderboardEntryGameTimeValue = document.createElement('p');
+                        leaderboardEntryGameTimeValue.classList.add('leaderboard-entry-game-time-value','leaderboard-outline');
+                        leaderboardEntryGameTimeValue.innerHTML = formatScoreTime(scorePartsObj["Game Time"].score);
+                        leaderboardEntryGameTime.appendChild(leaderboardEntryGameTimeValue);
+
+                        break;
+                    case "LeastTiers":
+                        leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
+                        leaderboardEntryScoreIcon.src = `./Assets/UI/LeastTiersIconSmall.png`;
+                        leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
+
+                        let leaderboardEntryGameTimeTiers = document.createElement('div');
+                        leaderboardEntryGameTimeTiers.classList.add('leaderboard-entry-game-time');
+                        leaderboardEntryDiv.appendChild(leaderboardEntryGameTimeTiers);
+
+                        let leaderboardEntryGameTimeTiersIcon = document.createElement('img');
+                        leaderboardEntryGameTimeTiersIcon.classList.add('leaderboard-entry-score-icon');
+                        leaderboardEntryGameTimeTiersIcon.src = "./Assets/UI/StopWatch.png";
+                        leaderboardEntryGameTimeTiers.appendChild(leaderboardEntryGameTimeTiersIcon);
+
+                        let leaderboardEntryGameTimeTiersValue = document.createElement('p');
+                        leaderboardEntryGameTimeTiersValue.classList.add('leaderboard-entry-game-time-value','leaderboard-outline');
+                        leaderboardEntryGameTimeTiersValue.innerHTML = formatScoreTime(scorePartsObj["Game Time"].score);
+                        leaderboardEntryGameTimeTiers.appendChild(leaderboardEntryGameTimeTiersValue);
+
+                        leaderboardEntryScore.classList.add('leaderboard-entry-score-tiers')
+                        break;
+                }
+            }
 
             let leaderboardProfileBtn = document.createElement('img');
             leaderboardProfileBtn.classList.add('leaderboard-profile-btn');
@@ -6033,15 +6103,24 @@ function formatTime(seconds) {
 function formatScoreTime(milliseconds) {
     let totalSeconds = Math.floor(milliseconds / 1000);
     let remainingMilliseconds = milliseconds % 1000;
+    let hours = Math.floor(totalSeconds / 3600);
+    totalSeconds = totalSeconds % 3600; // Subtract the hours
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = totalSeconds % 60;
 
-    // Pad minutes and seconds with leading zeros if necessary
+    // Pad minutes, seconds and milliseconds with leading zeros if necessary
     minutes = minutes.toString().padStart(2, '0');
     seconds = seconds.toString().padStart(2, '0');
     remainingMilliseconds = remainingMilliseconds.toString().padStart(3, '0');
 
-    return `${minutes}:${seconds}.${remainingMilliseconds}`;
+    // Only include hours in the output if they are greater than 0
+    let timeString = `${minutes}:${seconds}.${remainingMilliseconds}`;
+    if (hours > 0) {
+        hours = hours.toString().padStart(2, '0');
+        timeString = `${hours}:${timeString}`;
+    }
+
+    return timeString;
 }
 
 function getRemainingTime(targetTime) {
