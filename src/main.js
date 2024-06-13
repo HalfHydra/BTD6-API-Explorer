@@ -75,6 +75,8 @@ let rulesMap = {
     "Paragon Limit": "ParagonLimitIcon"
 }
 
+let showElite = false;
+
 fetch('./data/Constants.json')
         .then(response => response.json())
         .then(data => {
@@ -4299,10 +4301,57 @@ function generateBosses(elite){
     let eventsContent = document.getElementById('events-content');
     eventsContent.innerHTML = "";
 
+    let switchBanner = document.createElement('div');
+    switchBanner.classList.add('switch-banner');
+    switchBanner.style.backgroundImage = `url(../Assets/UI/${!showElite ? "Elite" : ""}Ribbon.png)`;
+    eventsContent.appendChild(switchBanner);
+
+    let switchBossDiv = document.createElement('div');
+    switchBossDiv.classList.add("switch-boss-div");
+    switchBanner.appendChild(switchBossDiv);
+
+    let bosses = ["Bloonarius", "Lych", "Vortex", "Dreadbloon", "Phayze"]
+
+    for (let boss of bosses) {
+        let bossIcon = document.createElement('img')
+        bossIcon.classList.add("switch-boss-img");
+        bossIcon.src = `./Assets/BossIcon/${boss}Portrait${!showElite ? "Elite" : ""}.png`
+        switchBossDiv.appendChild(bossIcon);
+    }
+
+    let switchText = document.createElement('p');
+    switchText.classList.add('switch-text', 'black-outline');
+    switchText.innerHTML = `Switch to ${!showElite ? "Elite" : "Standard"}  Bosses`;
+    switchBanner.appendChild(switchText);
+
+    switchBanner.addEventListener('click', () => {
+        showElite = !showElite;
+        if (timerInterval) { clearInterval(timerInterval); }
+        generateBosses(showElite);
+    })
+
+    // let switchRightDiv = document.createElement('div');
+    // switchRightDiv.classList.add("switch-right-div");
+    // switchBanner.appendChild(switchRightDiv);
+
+    // let switchGoImg = document.createElement('img');
+    // switchGoImg.classList.add('leaderboard-go-img');
+    // switchGoImg.src = '../Assets/UI/ContinueBtn.png';
+    // switchRightDiv.appendChild(switchGoImg);
+
+
     Object.values(bossesData).forEach((race, index) => {
         //get only the numbers
         let titleCaseBoss = race.bossType.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
-        let bossName = `${elite ? "Elite" : ""} ${titleCaseBoss} ${race.name.replace(/\D/g,'')}`;
+        let bossNumber = race.name.replace(/\D/g,'');
+        let bossName = `${elite ? "Elite" : ""} ${titleCaseBoss} ${bossNumber}`;
+
+        let eventData = {
+            'name': titleCaseBoss,
+            'elite': elite,
+            'eventNumber': bossNumber,
+            'scoringType': race.scoringType
+        }
 
         let raceDiv = document.createElement('div');
         raceDiv.classList.add("race-div");
@@ -4321,7 +4370,7 @@ function generateBosses(elite){
         let bossMapBossIcon = document.createElement('img')
         bossMapBossIcon.classList.add("boss-map-boss-icon");
         //make race.bossType title case
-        bossMapBossIcon.src = `./Assets/BossIcon/${titleCaseBoss}Portrait.png`
+        bossMapBossIcon.src = `./Assets/BossIcon/${titleCaseBoss}Portrait${elite ? "Elite" : ""}.png`
         raceMapDiv.appendChild(bossMapBossIcon);
 
         let raceChallengeIcons = document.createElement('div');
@@ -4345,7 +4394,7 @@ function generateBosses(elite){
         raceInfoDiv.appendChild(raceInfoMiddleDiv);
 
         let raceInfoBottomDiv = document.createElement('div');
-        raceInfoBottomDiv.classList.add("race-info-bottom-div");
+        raceInfoBottomDiv.classList.add("race-info-bottom-div", elite ? "btn-rotate-boss-elite" : "btn-rotate-boss");
         raceInfoDiv.appendChild(raceInfoBottomDiv);
 
         let raceInfoName = document.createElement('p');
@@ -4353,14 +4402,14 @@ function generateBosses(elite){
         raceInfoName.innerHTML = bossName;
         raceInfoTopDiv.appendChild(raceInfoName);
 
-        let raceTimeLeft = document.createElement('p');
-        raceTimeLeft.id = 'race-time-left';
-        raceTimeLeft.classList.add("race-time-left", "black-outline");
-        raceTimeLeft.innerHTML = "Finished";
-        raceInfoTopDiv.appendChild(raceTimeLeft);    
+        let bossTimeLeft = document.createElement('p');
+        bossTimeLeft.id = 'boss-time-left';
+        bossTimeLeft.classList.add("race-time-left", "black-outline");
+        bossTimeLeft.innerHTML = "Finished";
+        raceInfoTopDiv.appendChild(bossTimeLeft);    
         if (new Date(race.end) > new Date()) {
-            updateTimer(new Date(race.end), raceTimeLeft.id);
-            timerInterval = setInterval(() => updateTimer(new Date(race.end), raceTimeLeft.id), 1000)
+            updateTimer(new Date(race.end), bossTimeLeft.id);
+            timerInterval = setInterval(() => updateTimer(new Date(race.end), bossTimeLeft.id), 1000)
         }
 
         let raceInfoDates = document.createElement('p');
@@ -4371,14 +4420,14 @@ function generateBosses(elite){
 
         let raceInfoTotalScores = document.createElement('p');
         raceInfoTotalScores.classList.add("race-info-total-scores", "black-outline");
-        raceInfoTotalScores.innerHTML = `Total Scores: ${race.totalScores_standard == 0 ? "No Data" : race.totalScores_standard.toLocaleString()}`
+        raceInfoTotalScores.innerHTML = `Total Scores: ${(elite ? race.totalScores_elite : race.totalScores_standard) == 0 ? "No Data" : (elite ? race.totalScores_elite : race.totalScores_standard).toLocaleString()}`
         raceInfoMiddleDiv.appendChild(raceInfoTotalScores);
 
         let raceInfoRules = document.createElement('div');
         raceInfoRules.classList.add("race-info-rules", "start-button", "black-outline");
         raceInfoRules.innerHTML = "Details"
         raceInfoRules.addEventListener('click', () => {
-            showChallengeModel('events', race.metadata, "Race");
+            showChallengeModel('events', (elite ? race.metadataElite : race.metadataStandard),"Boss", eventData);
         })
         raceInfoBottomDiv.appendChild(raceInfoRules);
 
@@ -4386,18 +4435,30 @@ function generateBosses(elite){
         raceInfoLeaderboard.classList.add("race-info-leaderboard", "start-button", "black-outline");
         raceInfoLeaderboard.innerHTML = "Leaderboard"
         raceInfoLeaderboard.addEventListener('click', () => {
-            showLeaderboard('events', race, "Race");
+            showLeaderboard('events', race, elite ? "BossElite" : "Boss");
         })
         raceInfoBottomDiv.appendChild(raceInfoLeaderboard);
 
         let observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(async entry => {
                 if (entry.isIntersecting) {
-                    await getBossMetadata(index, false);
-                    console.log(race.metadataStandard)
+                    await getBossMetadata(index, elite);
+                    let challengeScoreTypeIcon = document.createElement('img');
+                    challengeScoreTypeIcon.classList.add('challenge-modifier-icon-event');
+                    switch(race.scoringType){
+                        case "LeastCash":
+                            challengeScoreTypeIcon.src = `./Assets/ChallengeRulesIcon/LeastCashIcon.png`;
+                            raceChallengeIcons.appendChild(challengeScoreTypeIcon);
+                            break;
+                        case "LeastTiers":
+                            challengeScoreTypeIcon.src = `./Assets/ChallengeRulesIcon/LeastTiersIcon.png`;
+                            raceChallengeIcons.appendChild(challengeScoreTypeIcon);
+                            break;
+                    }
+                    console.log(elite ? race.metadataElite : race.metadataStandard)
                     observer.unobserve(entry.target);
-                    let modifiers = challengeModifiers(race.metadataStandard);
-                    let rules = challengeRules(race.metadataStandard)
+                    let modifiers = challengeModifiers(elite ? race.metadataElite : race.metadataStandard);
+                    let rules = challengeRules(elite ? race.metadataElite : race.metadataStandard)
                     for (let modifier of Object.values(modifiers)) {
                         console.log(modifier)
                         let challengeModifierIcon = document.createElement('img');
@@ -4413,7 +4474,7 @@ function generateBosses(elite){
                         challengeRuleIcon.src = `./Assets/ChallengeRulesIcon/${rulesMap[rule]}.png`;
                         raceChallengeIcons.appendChild(challengeRuleIcon);
                     }
-                    raceMapImg.src = Object.keys(constants.mapsInOrder).includes(race.metadataStandard.map) ? getMapIcon(race.metadataStandard.map) : race.metadata.mapURL;
+                    raceMapImg.src = Object.keys(constants.mapsInOrder).includes(elite ? race.metadataElite.map : race.metadataStandard.map) ? getMapIcon(elite ? race.metadataElite.map : race.metadataStandard.map) : elite ? race.metadataElite.mapURL : race.metadataStandard.mapURL;
                 }
             });
         });
@@ -4461,12 +4522,24 @@ function processChallenge(metadata){
     return result;
 }
 
-function showChallengeModel(source, metadata, challengeType){
+function showChallengeModel(source, metadata, challengeType, eventData){
     document.getElementById('challenge-content').style.display = "flex";
     document.getElementById('challenge-content').innerHTML = "";
     document.getElementById(`${source}-content`).style.display = "none";
 
+    console.log(eventData)
+
     let challengeExtraData = processChallenge(metadata);
+    if (challengeType == "Boss" && eventData.scoringType != "GameTime") {
+        switch(eventData.scoringType){
+            case "LeastCash":
+                challengeExtraData.scoringType = "Least Cash";
+                break;
+            case "LeastTiers":
+                challengeExtraData.scoringType = "Least Tiers";
+                break;
+        }
+    }
 
     let challengeModel = document.createElement('div');
     challengeModel.classList.add('challenge-model');
@@ -4482,28 +4555,6 @@ function showChallengeModel(source, metadata, challengeType){
 
     let challengeModelHeaderIcon = document.createElement('img');
     challengeModelHeaderIcon.classList.add('challenge-model-header-difficulty');
-    switch(challengeType){
-        case "Race":
-            challengeModelHeaderIcon.src = "./Assets/UI/EventRaceBtn.png";
-            break;
-        case "Boss":
-            challengeModelHeaderIcon.src = "./Assets/UI/BossesBtn.png";
-            break;
-        case "Odyssey":
-            challengeModelHeaderIcon.src = "./Assets/UI/OdysseyEventBtn.png";
-            break;
-        case "ContestedTerritory":
-            challengeModelHeaderIcon.src = "./Assets/UI/ContestedTerritoryEventBtn.png";
-            break;
-        case "Daily":
-        case "AdvancedDaily":
-        case "CoopDaily":
-            challengeModelHeaderIcon.src = "./Assets/UI/DailyChallengeBtn.png";
-            break;
-        case "Custom":
-            challengeModelHeaderIcon.src = "./Assets/UI/CreateChallengeIcon.png";
-            break;
-    }
     challengeModelHeaderIcons.appendChild(challengeModelHeaderIcon);
 
     // let challengeModelHeaderDifficulty = document.createElement('img');
@@ -4637,42 +4688,6 @@ function showChallengeModel(source, metadata, challengeType){
         challengeSettingTexts.appendChild(challengeSettingValue);
         if (data.key = "maxTowers" && (metadata[data.key] == 0 || metadata[data.key] == 9999)) { challengeSettingValue.innerHTML = "Unlimited"; }
     })
-    //special conditions
-    if (challengeExtraData.scoringType != null) {
-        let challengeSetting = document.createElement('div');
-        challengeSetting.classList.add('challenge-setting');
-        challengeModelSettings.appendChild(challengeSetting);
-
-        let challengeSettingIcon = document.createElement('img');
-        challengeSettingIcon.classList.add('challenge-setting-icon');
-        challengeSetting.appendChild(challengeSettingIcon);
-
-        let challengeSettingTexts = document.createElement('div');
-        challengeSettingTexts.classList.add('challenge-setting-texts');
-        challengeSetting.appendChild(challengeSettingTexts);
-
-        let challengeSettingText = document.createElement('p');
-        challengeSettingText.classList.add('challenge-setting-text', 'black-outline');
-        challengeSettingTexts.appendChild(challengeSettingText);
-
-        let challengeSettingValue = document.createElement('p');
-        challengeSettingValue.classList.add('challenge-setting-value', 'black-outline');
-        challengeSettingValue.innerHTML = 'ERROR';
-        challengeSettingTexts.appendChild(challengeSettingValue);
-
-        switch (challengeExtraData.scoringType) {
-            case "Least Cash":
-                challengeSettingText.innerHTML = "Least Cash:";
-                challengeSettingIcon.src = `./Assets/UI/LeastCashIconSmall.png`;
-                challengeSettingValue.innerHTML = metadata.leastCashUsed;
-                break;
-            case "Least Tiers":
-                challengeSettingText.innerHTML = "Least Tiers:";
-                challengeSettingIcon.src = `./Assets/UI/LeastTiersIconSmall.png`;
-                challengeSettingValue.innerHTML =  metadata.leastTiersUsed;
-                break;
-        }
-    }
 
     let challengeSetting = document.createElement('div');
     challengeSetting.classList.add('challenge-setting');
@@ -4692,34 +4707,86 @@ function showChallengeModel(source, metadata, challengeType){
 
     switch(challengeType) {
         case "Race":
+            challengeModelHeaderIcon.src = "./Assets/UI/EventRaceBtn.png";
+
             challengeSettingText.innerHTML = "Race Event";
             challengeSettingIcon.src = `./Assets/UI/RaceIcon.png`;
             break;
         case "Boss":
             //get actual boss type
-            challengeSettingText.innerHTML = "Boss Event";
-            challengeSettingIcon.src = `./Assets/BossIcon/BloonariusPortrait.png`;
+            challengeModelHeaderIcon.src = `./Assets/BossIcon/${eventData.name}EventIcon.png`;
+            challengeSettingText.innerHTML = `${eventData.elite ? "Elite " : ""}Boss Event`;
+            challengeSettingIcon.src = `./Assets/BossIcon/${eventData.name}Portrait${eventData.elite ? "Elite" : ""}.png`;
+            challengeModelHeaderName.innerHTML = `${eventData.elite ? "Elite " : ""}${eventData.name} ${eventData.eventNumber}`;
             break;
-        case "EliteBoss":
-            challengeSettingText.innerHTML = "Elite Boss Event";
-            challengeSettingIcon.src = `./Assets/BossIcon/BloonariusPortraitElite.png`;
+        case "Odyssey":
+            challengeModelHeaderIcon.src = "./Assets/UI/OdysseyEventBtn.png";
+            break;
+        case "ContestedTerritory":
+            challengeModelHeaderIcon.src = "./Assets/UI/ContestedTerritoryEventBtn.png";
             break;
         case "Daily":
             challengeSettingText.innerHTML = "Daily Challenge";
             challengeSettingIcon.src = `./Assets/UI/ChallengesIcon.png`;
+            challengeModelHeaderIcon.src = "./Assets/UI/DailyChallengeBtn.png";
             break;
         case "AdvancedDaily":
             challengeSettingText.innerHTML = "Advanced Daily";
             challengeSettingIcon.src = `./Assets/UI/ChallengesIcon.png`;
+            challengeModelHeaderIcon.src = "./Assets/UI/DailyChallengeBtn.png";
             break;
         case "CoopDaily":
             challengeSettingText.innerHTML = "Coop Challenge";
             challengeSettingIcon.src = `./Assets/UI/ChallengesIcon.png`;
+            challengeModelHeaderIcon.src = "./Assets/UI/DailyChallengeBtn.png";
             break;
         case "Custom":
             challengeSettingText.innerHTML = "Custom Challenge";
             challengeSettingIcon.src = `./Assets/UI/CustomChallenge.png`;
+            challengeModelHeaderIcon.src = "./Assets/UI/CreateChallengeIcon.png";
             break;
+    }
+
+    //special conditions
+    if (challengeExtraData.scoringType != null) {
+        let hideScoringValue = (challengeType == "Boss");
+        console.log(hideScoringValue)
+
+        let challengeSetting = document.createElement('div');
+        challengeSetting.classList.add('challenge-setting');
+        challengeModelSettings.appendChild(challengeSetting);
+
+        let challengeSettingIcon = document.createElement('img');
+        challengeSettingIcon.classList.add('challenge-setting-icon');
+        challengeSetting.appendChild(challengeSettingIcon);
+
+        let challengeSettingTexts = document.createElement('div');
+        challengeSettingTexts.classList.add('challenge-setting-texts');
+        challengeSetting.appendChild(challengeSettingTexts);
+
+        let challengeSettingText = document.createElement('p');
+        challengeSettingText.classList.add('challenge-setting-text', 'black-outline');
+        challengeSettingTexts.appendChild(challengeSettingText);
+
+        let challengeSettingValue = document.createElement('p');
+        challengeSettingValue.classList.add('challenge-setting-value', 'black-outline');
+        challengeSettingValue.innerHTML = 'ERROR';
+        if (!hideScoringValue) {
+            challengeSettingTexts.appendChild(challengeSettingValue);
+        }
+
+        switch (challengeExtraData.scoringType) {
+            case "Least Cash":
+                challengeSettingText.innerHTML = hideScoringValue ? "Least Cash" :  "Least Cash:";
+                challengeSettingIcon.src = `./Assets/UI/LeastCashIconSmall.png`;
+                challengeSettingValue.innerHTML = metadata.leastCashUsed;
+                break;
+            case "Least Tiers":
+                challengeSettingText.innerHTML = hideScoringValue ? "Least Tiers" :  "Least Tiers:";
+                challengeSettingIcon.src = `./Assets/UI/LeastTiersIconSmall.png`;
+                challengeSettingValue.innerHTML =  metadata.leastTiersUsed;
+                break;
+        }
     }
 
     let heroesToDisplay = {};
@@ -4728,12 +4795,13 @@ function showChallengeModel(source, metadata, challengeType){
 
     Object.entries(metadata._towers).forEach(([tower, data]) => {
         if (data.max == 0) { return; }
-        if (tower === "ChosenPrimaryHero") { shouldUseHeroList = true; }
+        if (data.tower === "ChosenPrimaryHero" && data.max != 0) { shouldUseHeroList = true; }
         data.isHero ? heroesToDisplay[data.tower] = data : towersToDisplay[data.tower] = data;
     })
 
     console.log(heroesToDisplay)
     console.log(towersToDisplay)
+    console.log(shouldUseHeroList)
 
     if (shouldUseHeroList) {
         let heroSelectorHeader = document.createElement('div');
@@ -4745,19 +4813,32 @@ function showChallengeModel(source, metadata, challengeType){
     towerSelectorHeader.classList.add('challenge-tower-selector');
     challengeModel.appendChild(towerSelectorHeader);
 
-    for (let [tower, nameColor] of Object.entries(constants.heroesInOrder)) {
-        if (!heroesToDisplay[tower]) { continue; }
+    if (shouldUseHeroList) {
         let towerSelector = document.createElement('div');
-        towerSelector.id = tower + '-selector';
         towerSelector.classList.add(`tower-selector-hero`);
+        towerSelectorHeader.appendChild(towerSelector)
 
         let towerSelectorImg = document.createElement('img');
-        towerSelectorImg.id = tower + '-selector-img';
         towerSelectorImg.classList.add('hero-selector-img');
-        towerSelectorImg.src = getInstaContainerIcon(tower,"000");
+        towerSelectorImg.src = `./Assets/UI/AllHeroesIcon.png`;
         towerSelector.appendChild(towerSelectorImg);
+    } else {
+        for (let [tower, nameColor] of Object.entries(constants.heroesInOrder)) {
+            if (!heroesToDisplay[tower]) { continue; }
+            let towerSelector = document.createElement('div');
+            towerSelector.id = tower + '-selector';
+            towerSelector.classList.add(`tower-selector-hero`);
 
-        shouldUseHeroList ?  heroSelectorHeader.appendChild(towerSelector) : towerSelectorHeader.appendChild(towerSelector);
+            let towerSelectorImg = document.createElement('img');
+            towerSelectorImg.id = tower + '-selector-img';
+            towerSelectorImg.classList.add('hero-selector-img');
+            towerSelectorImg.src = getInstaContainerIcon(tower,"000");
+            towerSelector.appendChild(towerSelectorImg);
+
+            towerSelectorHeader.appendChild(towerSelector)
+
+            // shouldUseHeroList ?  heroSelectorHeader.appendChild(towerSelector) : towerSelectorHeader.appendChild(towerSelector);
+        }
     }
 
     for (let [tower, category] of Object.entries(constants.towersInOrder)) {
@@ -4833,7 +4914,7 @@ function showChallengeModel(source, metadata, challengeType){
         let challengeModifierValue = document.createElement('p');
         challengeModifierValue.classList.add('challenge-modifier-value');
         challengeModifierValue.classList.add('black-outline');
-        challengeModifierValue.innerHTML = isNaN(data.value) ? data.value : `${data.value * 100}%`;
+        challengeModifierValue.innerHTML = isNaN(data.value) ? data.value : `${(data.value * 100).toFixed(0)}%`;
         challengeModifierTexts.appendChild(challengeModifierValue);
     })
 
@@ -4861,11 +4942,23 @@ function showChallengeModel(source, metadata, challengeType){
         challengeRuleIcon.src = `./Assets/ChallengeRulesIcon/${rulesMap[rule]}.png`;
         challengeRule.appendChild(challengeRuleIcon);
 
+        let challengeRuleTextDiv = document.createElement('div');
+        challengeRuleTextDiv.classList.add('challenge-rule-text-div');
+        challengeRule.appendChild(challengeRuleTextDiv);
+
         let challengeRuleText = document.createElement('p');
         challengeRuleText.classList.add('challenge-rule-text');
         challengeRuleText.classList.add('black-outline');
         challengeRuleText.innerHTML = rule;
-        challengeRule.appendChild(challengeRuleText);
+        challengeRuleTextDiv.appendChild(challengeRuleText);
+
+        if(rule == "Paragon Limit") {
+            let challengeRuleValue = document.createElement('p');
+            challengeRuleValue.classList.add('challenge-rule-value');
+            challengeRuleValue.classList.add('black-outline');
+            challengeRuleValue.innerHTML = metadata.maxParagons;
+            challengeRuleTextDiv.appendChild(challengeRuleValue);
+        }
     });
 
     if(challengeExtraData.statsValid) {
@@ -5040,8 +5133,19 @@ function challengeRules(metadata){
 }
 
 function showLeaderboard(source, metadata, type) {
-    if (leaderboardLink != metadata.leaderboard) { leaderboardPage = 1 }
-    leaderboardLink = metadata.leaderboard;
+    switch(type){
+        case "Boss":
+            if (leaderboardLink != metadata.leaderboard_standard_players_1) { leaderboardPage = 1 }
+            leaderboardLink = metadata.leaderboard_standard_players_1;
+            break;
+        case "BossElite":
+            if (leaderboardLink != metadata.leaderboard_elite_players_1) { leaderboardPage = 1 }
+            leaderboardLink = metadata.leaderboard_elite_players_1;
+            break
+        default:
+            if (leaderboardLink != metadata.leaderboard) { leaderboardPage = 1 }
+            leaderboardLink = metadata.leaderboard;
+    }
 
     let leaderboardContent = document.getElementById('leaderboard-content');
     leaderboardContent.style.display = "flex";
@@ -5085,17 +5189,23 @@ function showLeaderboard(source, metadata, type) {
 
     //middle div
     let leaderboardHeaderMiddle = document.createElement('div');
-    leaderboardHeaderMiddle.classList.add('leaderboard-header-middle');
+    leaderboardHeaderMiddle.classList.add(`leaderboard-header-middle-${type.toLowerCase()}`);
     leaderboardHeader.appendChild(leaderboardHeaderMiddle);
     //header
 
     let leaderboardHeaderTitle = document.createElement('div');
-    leaderboardHeaderTitle.classList.add('leaderboard-header-title', 'black-outline');
+    leaderboardHeaderTitle.classList.add(`leaderboard-header-${type.toLowerCase()}`, 'black-outline');
     leaderboardHeaderMiddle.appendChild(leaderboardHeaderTitle);
 
     switch(type) {
         case "Race":
             leaderboardHeaderTitle.innerHTML = "Race Leaderboard"
+            break;
+        case "Boss":
+            leaderboardHeaderTitle.innerHTML = "Boss Leaderboard"
+            break;
+        case "BossElite":
+            leaderboardHeaderTitle.innerHTML = "Elite Boss Leaderboard"
             break;
     }
     //img
@@ -5152,8 +5262,9 @@ function showLeaderboard(source, metadata, type) {
     leaderboardFooterMiddle.appendChild(leaderboardFooterPageLeft);
     //page number
     let leaderboardFooterPageNumber = document.createElement('div');
+    leaderboardFooterPageNumber.id = 'leaderboard-footer-page-number';
     leaderboardFooterPageNumber.classList.add('leaderboard-footer-page-number','black-outline');
-    leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (${(leaderboardPage * 50) - 49} - ${leaderboardPage * 50})`;
+    leaderboardFooterPageNumber.innerHTML = `Loading...`;
     leaderboardFooterMiddle.appendChild(leaderboardFooterPageNumber);
     //page right
     let leaderboardFooterPageRight = document.createElement('img');
@@ -5161,7 +5272,7 @@ function showLeaderboard(source, metadata, type) {
     leaderboardFooterPageRight.src = "./Assets/UI/NextArrowSmallYellow.png";
     leaderboardFooterPageLeft.addEventListener('click', () => {
         leaderboardPage--;
-        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (${(leaderboardPage * 50) - 49} - ${leaderboardPage * 50})`;
+        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (#${(leaderboardPage * leaderboardPageEntryCount) - (leaderboardPageEntryCount - 1)} - ${leaderboardPage * leaderboardPageEntryCount})`;
         leaderboardEntries.innerHTML = "";
         copyLoadingIcon(leaderboardEntries)
 
@@ -5169,7 +5280,7 @@ function showLeaderboard(source, metadata, type) {
     })
     leaderboardFooterPageRight.addEventListener('click', () => {
         leaderboardPage++;
-        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (${(leaderboardPage * 50) - 49} - ${leaderboardPage * 50})`;
+        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (#${(leaderboardPage * leaderboardPageEntryCount) - (leaderboardPageEntryCount - 1)} - ${leaderboardPage * leaderboardPageEntryCount})`;
         leaderboardEntries.innerHTML = "";
         copyLoadingIcon(leaderboardEntries)
 
@@ -5207,7 +5318,7 @@ function showLeaderboard(source, metadata, type) {
     selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
     selectorGoImg.addEventListener('click', () => {
         leaderboardPage = leaderboardFooterPageInput.value;
-        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (${(leaderboardPage * 50) - 49} - ${leaderboardPage * 50})`;
+        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (#${(leaderboardPage * leaderboardPageEntryCount) - (leaderboardPageEntryCount - 1)} - ${leaderboardPage * leaderboardPageEntryCount})`;
         leaderboardEntries.innerHTML = "";
         copyLoadingIcon(leaderboardEntries)
         generateLeaderboardEntries(metadata)
@@ -5219,7 +5330,7 @@ function showLeaderboard(source, metadata, type) {
 }
 
 async function generateLeaderboardEntries(metadata){
-    await getRaceLeaderboardData();
+    await getLeaderboardData();
     console.log(leaderboardData)
 
     let leaderboardEntries = document.getElementById('leaderboard-entries');
@@ -5244,7 +5355,7 @@ async function generateLeaderboardEntries(metadata){
             let leaderboardEntryRank = document.createElement('p');
             leaderboardEntryRank.classList.add('leaderboard-entry-rank');
             leaderboardEntryRank.classList.add('black-outline');
-            leaderboardEntryRank.innerHTML = index + ((leaderboardPage - 1)  * 50) + 1;
+            leaderboardEntryRank.innerHTML = index + ((leaderboardPage - 1)  * leaderboardPageEntryCount) + 1;
             leaderboardEntryDiv.appendChild(leaderboardEntryRank);
 
             let leaderboardEntryPlayer = document.createElement('div');

@@ -2461,10 +2461,11 @@
 .challenge-tower-selector {
     display: flex;
     /* overflow-x: scroll; */
+    overflow-x: auto;
     overflow-y: hidden;
     align-items: center;
     max-width: 100vw;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     touch-action: manipulation;
     padding: 10px;
     background-color: var(--profile-secondary);
@@ -2476,10 +2477,13 @@
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
-    min-height: 150px;
+    /* min-height: 150px; */
+    min-width: 300px;
 }
 .challenge-model-left {
-    width: 400px;
+    /* width: 400px; */
+    display: flex;
+    flex-direction: row;
 }
 .challenge-model-right {
     max-width: 650px;
@@ -2586,7 +2590,7 @@
     width: 450px;
     justify-content: space-between;
 }
-.leaderboard-header-title {
+.leaderboard-header-race {
     background-image: url(../Assets/UI/Ribbon.png);
     height: 90px;
     max-width: 500px;
@@ -2600,7 +2604,7 @@
     align-items: center;
     justify-content: center;
 }
-.leaderboard-header-title::before, .leaderboard-header-title::after {
+.leaderboard-header-race::before, .leaderboard-header-race::after {
     content: '';
     width: 56px;
     height: 100%;
@@ -2610,16 +2614,87 @@
     background-image: url(../Assets/UI/RibbonEdge.png);
     background-size: contain;
 }
-.leaderboard-header-title::before {
+.leaderboard-header-race::before {
     left: -54px;
 }
-.leaderboard-header-middle {
+.leaderboard-header-middle-race {
     filter: hue-rotate(170deg) saturate(2);
 }
-.leaderboard-header-title::after {
+.leaderboard-header-race::after {
     right: -54px;
     transform: scaleX(-1);
 }
+
+.leaderboard-header-boss {
+    background-image: url(../Assets/UI/Ribbon.png);
+    height: 90px;
+    max-width: 500px;
+    padding: 0 50px;
+    background-size: contain;
+    position: relative;
+    color: white;
+    font-size: 36px;
+    font-family: 'Luckiest Guy';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.leaderboard-header-boss::before, .leaderboard-header-boss::after {
+    content: '';
+    width: 56px;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 25% 50%);
+    background-image: url(../Assets/UI/RibbonEdge.png);
+    background-size: contain;
+}
+.leaderboard-header-boss::before {
+    left: -54px;
+}
+.leaderboard-header-middle-boss {
+    /* filter: hue-rotate(170deg) saturate(2); */
+}
+.leaderboard-header-boss::after {
+    right: -54px;
+    transform: scaleX(-1);
+}
+
+.leaderboard-header-bosselite {
+    background-image: url(../Assets/UI/EliteRibbon.png);
+    height: 90px;
+    max-width: 500px;
+    padding: 0 50px;
+    background-size: contain;
+    position: relative;
+    color: white;
+    font-size: 36px;
+    font-family: 'Luckiest Guy';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.leaderboard-header-bosselite::before, .leaderboard-header-bosselite::after {
+    content: '';
+    width: 56px;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 25% 50%);
+    background-image: url(../Assets/UI/EliteRibbonEdge.png);
+    background-size: contain;
+}
+.leaderboard-header-bosselite::before {
+    left: -54px;
+}
+.leaderboard-header-middle-bosselite {
+    /* filter: hue-rotate(170deg) saturate(2); */
+}
+.leaderboard-header-bosselite::after {
+    right: -54px;
+    transform: scaleX(-1);
+}
+
 .leaderboard-header-left {
     width: 80px;
 }
@@ -2667,7 +2742,6 @@
     display: flex;
     width: 800px;
     align-items: center;
-    justify-content: space-between;
 }
 .leaderboard-entry-div {
     display: flex;
@@ -2680,6 +2754,8 @@
     background-color: var(--profile-primary);
     border-radius: 20px;
     box-shadow: 0px 0px 0px 4px var(--profile-secondary) inset;
+    background-size: cover;
+    background-position: center;
 }
 .leaderboard-entry-icon {
     height: 60px;
@@ -2694,9 +2770,13 @@
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
+
+    max-width: 900px;
+    margin: 0 auto;
 }
 .leaderboard-profile-btn {
     height:50px;
+    padding-left: 4px;
 }
 .leaderboard-entry-rank {
     font-size: 32px;
@@ -2745,6 +2825,55 @@
 .boss-info-div {
     background-color: rgba(0,0,0,0.3);
     border-radius: 10px;
+}
+
+.switch-banner {
+    display: flex;
+    width: 750px;
+    align-items: center;
+    background-size: contain;
+    padding: 10px;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    border: 5px solid black;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+}
+.switch-boss-img {
+    width: 60px;
+    object-fit: contain;
+}
+.switch-boss-div {
+    width: 300px;
+}
+.switch-right-div {
+
+}
+.switch-text {
+    font-size: 32px;
+    width: 450px;
+    text-align: center;
+}
+
+.btn-rotate-boss {
+    filter: hue-rotate(75deg);
+}
+.btn-rotate-boss-elite {
+    filter: hue-rotate(160deg);
+}
+
+.challenge-rule-text-div {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+}
+.challenge-rule-value {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    padding-top: 8px;
 }
 
 .black-outline {
@@ -2868,6 +2997,10 @@ p {
     background: linear-gradient(180deg, #fecf00 0%, #fec600 100%);
 }
 
+/* * {
+    outline: 1px solid red;
+  } */
+
 @keyframes glow{
     to {
       box-shadow: 0px 0px 5px 5px #ffdf98;
@@ -2954,7 +3087,7 @@ p {
     }
     .tower-progress-div {
         position: relative;
-        width: 100vw;
+        width: 100%;
         margin-left: 0;
         height: 160px;
     }
@@ -2963,12 +3096,22 @@ p {
         overflow-x: scroll;
         overflow-y: hidden;
         align-items: center;
+        /* max-width: 100%; */
+        /* max-width: unset; */
         max-width: 100vw;
         flex-wrap: nowrap;
         touch-action: manipulation;
     }
     .tower-progress-main-div {
         margin-left: 0px;
+    }
+    /* .upgrade-container {
+        flex-direction: column;
+    } */
+    .upgrade-container-paragon {
+        height: 470px;
+        width: unset;
+        margin-left: 0;
     }
     .tower-progress-top {
         margin: 0;
@@ -2993,7 +3136,8 @@ p {
         justify-content: center;
     }
     .content {
-        overflow-x: hidden;
+        /* overflow-x: hidden; */
+        overflow: hidden;
     }
     .map-container {
         overflow-x: scroll;
@@ -3044,6 +3188,11 @@ p {
         padding: 0 20px;
         margin: 0 20px;
     }
+
+    .challenge-tower-selector {
+        flex-wrap: nowrap;
+    }
+
     img {
         -webkit-user-select:none;
         -webkit-touch-callout:none;

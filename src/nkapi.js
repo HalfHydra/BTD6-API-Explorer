@@ -13,6 +13,7 @@ let leaderboardData = null;
 // let leaderboardPrev = null;
 let leaderboardLink = null;
 let leaderboardPage = 1;
+let leaderboardPageEntryCount = null;
 
 let localStorageOAK = {}
 
@@ -116,12 +117,14 @@ async function getRaceMetadata(key) {
     }
 }
 
-async function getRaceLeaderboardData() {
+async function getLeaderboardData() {
     if (leaderboardLink) {
         leaderboardData = null;
         return fetchData(`${leaderboardLink}?page=${leaderboardPage}`, (json) => {
             console.log(`fetched ${leaderboardLink}?page=${leaderboardPage}`)
             leaderboardData = json["body"];
+            leaderboardPageEntryCount = leaderboardData.length;
+            document.getElementById('leaderboard-footer-page-number').innerHTML = `Page ${leaderboardPage} (#${(leaderboardPage * leaderboardPageEntryCount) - (leaderboardPageEntryCount - 1)} - ${leaderboardPage * leaderboardPageEntryCount})`;
             // if (json["next"] == null) {
             //     document.getElementById("leaderboardNext").style.display = "none";
             // } else {
@@ -147,10 +150,10 @@ async function getBossesData() {
     if (bossesData == null) {
         fetchData(`https://data.ninjakiwi.com/btd6/bosses`, (json) => {
             bossesData = json["body"];
-            generateBosses();
+            generateBosses(showElite);
         });
     } else {
-        generateBosses();
+        generateBosses(showElite);
     }
 }
 
