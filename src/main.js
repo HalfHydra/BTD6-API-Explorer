@@ -4177,6 +4177,11 @@ function changeEventTab(selector){
             showLoading();
             getBossesData();
             break;
+        case "Odyssey":
+            break;
+        case "ContestedTerritory":
+            getCTData();
+            break;
     }
 }
 
@@ -4232,7 +4237,9 @@ function generateRaces(){
         raceTimeLeft.classList.add("race-time-left", "black-outline");
         raceTimeLeft.innerHTML = "Finished";
         raceInfoTopDiv.appendChild(raceTimeLeft);    
-        if (new Date(race.end) > new Date()) {
+        if(new Date() < new Date(race.start)) {
+            raceTimeLeft.innerHTML = "Coming Soon!";
+        } else if (new Date(race.end) > new Date()) {
             updateTimer(new Date(race.end), raceTimeLeft.id);
             timerInterval = setInterval(() => updateTimer(new Date(race.end), raceTimeLeft.id), 1000)
         }
@@ -4407,7 +4414,9 @@ function generateBosses(elite){
         bossTimeLeft.classList.add("race-time-left", "black-outline");
         bossTimeLeft.innerHTML = "Finished";
         raceInfoTopDiv.appendChild(bossTimeLeft);    
-        if (new Date(race.end) > new Date()) {
+        if(new Date() < new Date(race.start)) {
+            bossTimeLeft.innerHTML = "Coming Soon!";
+        } else if (new Date(race.end) > new Date()) {
             updateTimer(new Date(race.end), bossTimeLeft.id);
             timerInterval = setInterval(() => updateTimer(new Date(race.end), bossTimeLeft.id), 1000)
         }
@@ -4479,6 +4488,117 @@ function generateBosses(elite){
             });
         });
         observer.observe(raceMapDiv);
+    })
+}
+
+function generateCTs(){
+    let eventsContent = document.getElementById('events-content');
+    eventsContent.innerHTML = "";
+
+    Object.values(CTData).forEach((race, index) => {
+        let raceDiv = document.createElement('div');
+        raceDiv.classList.add("race-div", "ct-div");
+        raceDiv.style.backgroundImage = `url(../Assets/ProfileBanner/TeamsBanner8.png)`;
+        eventsContent.appendChild(raceDiv);
+
+        // let raceMapDiv = document.createElement('div');
+        // raceMapDiv.classList.add("race-map-div", "silver-border");
+        // raceDiv.appendChild(raceMapDiv);
+
+        // let raceMapImg = document.createElement('img');
+        // raceMapImg.classList.add("race-map-img");
+        // raceMapImg.src = "./Assets/EventBanner/EventBannerSmallCT.png"
+        // raceMapDiv.appendChild(raceMapImg);
+
+        let raceInfoDiv = document.createElement('div');
+        raceInfoDiv.classList.add("ct-info-div");
+        raceDiv.appendChild(raceInfoDiv);
+
+        let raceInfoTopDiv = document.createElement('div');
+        raceInfoTopDiv.classList.add("ct-info-top-div");
+        raceInfoDiv.appendChild(raceInfoTopDiv);
+
+        let raceInfoBottomDiv = document.createElement('div');
+        raceInfoBottomDiv.classList.add("ct-info-bottom-div");
+        raceInfoDiv.appendChild(raceInfoBottomDiv);
+
+        let raceInfoName = document.createElement('p');
+        raceInfoName.classList.add("race-info-name", "black-outline");
+        raceInfoName.innerHTML = "Contested Territory";
+        raceInfoTopDiv.appendChild(raceInfoName);
+
+        let raceTimeLeft = document.createElement('p');
+        raceTimeLeft.id = 'race-time-left';
+        raceTimeLeft.classList.add("race-time-left", "black-outline");
+        raceTimeLeft.innerHTML = "Finished";
+        raceInfoTopDiv.appendChild(raceTimeLeft);    
+        if(new Date() < new Date(race.start)) {
+            raceTimeLeft.innerHTML = "Coming Soon!";
+        } else if (new Date(race.end) > new Date()) {
+            updateTimer(new Date(race.end), raceTimeLeft.id);
+            timerInterval = setInterval(() => updateTimer(new Date(race.end), raceTimeLeft.id), 1000)
+        }
+
+        let ctInfoLeftDiv = document.createElement('div');
+        ctInfoLeftDiv.classList.add("ct-info-left-div");
+        raceInfoBottomDiv.appendChild(ctInfoLeftDiv);
+
+        let raceInfoDates = document.createElement('p');
+        raceInfoDates.classList.add("race-info-dates", "ct-info-dates", "black-outline");
+        //formatted as "XX/XX/XX XX:XX - XX/XX/XX XX:XX"
+        raceInfoDates.innerHTML = `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`;
+        ctInfoLeftDiv.appendChild(raceInfoDates);
+
+        let raceInfoRules = document.createElement('div');
+        raceInfoRules.classList.add("race-info-rules", "start-button", "blue-btn", "black-outline");
+        raceInfoRules.innerHTML = "Relic Reveal"
+        raceInfoRules.addEventListener('click', () => {
+            // showChallengeModel('events', race.metadata, "CT");
+        })
+        ctInfoLeftDiv.appendChild(raceInfoRules);
+
+        let CTLeaderboardsDiv = document.createElement('div');
+        CTLeaderboardsDiv.classList.add("ct-leaderboards-div");
+        raceInfoBottomDiv.appendChild(CTLeaderboardsDiv);
+
+        let CTLeaderboardsHeader = document.createElement('p');
+        CTLeaderboardsHeader.classList.add("ct-leaderboards-header", "black-outline");
+        CTLeaderboardsHeader.innerHTML = "Leaderboards";
+        CTLeaderboardsDiv.appendChild(CTLeaderboardsHeader);
+
+        let CTLeaderboardsBtns = document.createElement('div');
+        CTLeaderboardsBtns.classList.add("ct-leaderboards-btns");
+        CTLeaderboardsDiv.appendChild(CTLeaderboardsBtns);
+
+        let ctPlayerLeaderboard = document.createElement('div');
+        ctPlayerLeaderboard.classList.add("race-info-leaderboard", "ct-info-leaderboard", "start-button", "blue-btn", "black-outline");
+        ctPlayerLeaderboard.innerHTML = "Players"
+        ctPlayerLeaderboard.addEventListener('click', () => {
+            showLeaderboard('events', race, "CTPlayer");
+        })
+        CTLeaderboardsBtns.appendChild(ctPlayerLeaderboard);
+
+        let ctTeamsLeaderboard = document.createElement('div');
+        ctTeamsLeaderboard.classList.add("race-info-leaderboard", "ct-info-leaderboard", "start-button", "blue-btn", "black-outline");
+        ctTeamsLeaderboard.innerHTML = "Teams"
+        ctTeamsLeaderboard.addEventListener('click', () => {
+            showLeaderboard('events', race, "CTTeam");
+        })
+        CTLeaderboardsBtns.appendChild(ctTeamsLeaderboard);
+
+        let raceInfoMiddleDiv = document.createElement('div');
+        raceInfoMiddleDiv.classList.add("race-info-middle-div", "ct-info-middle-div");
+        CTLeaderboardsDiv.appendChild(raceInfoMiddleDiv);
+
+        let raceInfoTotalScores = document.createElement('p');
+        raceInfoTotalScores.classList.add("race-info-total-scores", "black-outline");
+        raceInfoTotalScores.innerHTML = `Total Scores: ${race.totalScores_player == 0 ? "No Data" : race.totalScores_player.toLocaleString()}`
+        raceInfoMiddleDiv.appendChild(raceInfoTotalScores);
+
+        let raceInfoTotalScores2 = document.createElement('p');
+        raceInfoTotalScores2.classList.add("race-info-total-scores", "black-outline");
+        raceInfoTotalScores2.innerHTML = `Total Scores: ${race.totalScores_team == 0 ? "No Data" : race.totalScores_team.toLocaleString()}`
+        raceInfoMiddleDiv.appendChild(raceInfoTotalScores2);
     })
 }
 
@@ -5142,6 +5262,14 @@ function showLeaderboard(source, metadata, type) {
             if (leaderboardLink != metadata.leaderboard_elite_players_1) { leaderboardPage = 1 }
             leaderboardLink = metadata.leaderboard_elite_players_1;
             break
+        case "CTPlayer":
+            if (leaderboardLink != metadata.leaderboard_player) { leaderboardPage = 1 }
+            leaderboardLink = metadata.leaderboard_player;
+            break;
+        case "CTTeam":
+            if (leaderboardLink != metadata.leaderboard_team) { leaderboardPage = 1 }
+            leaderboardLink = metadata.leaderboard_team;
+            break;
         default:
             if (leaderboardLink != metadata.leaderboard) { leaderboardPage = 1 }
             leaderboardLink = metadata.leaderboard;
@@ -5206,6 +5334,12 @@ function showLeaderboard(source, metadata, type) {
             break;
         case "BossElite":
             leaderboardHeaderTitle.innerHTML = "Elite Boss Leaderboard"
+            break;
+        case "CTPlayer":
+            leaderboardHeaderTitle.innerHTML = "Contested Territory <br> Player Leaderboard"
+            break;
+        case "CTTeam":
+            leaderboardHeaderTitle.innerHTML = "Contested Territory <br> Team Leaderboard"
             break;
     }
     //img
@@ -5326,10 +5460,10 @@ function showLeaderboard(source, metadata, type) {
     leaderboardFooterRight.appendChild(selectorGoImg);
 
     copyLoadingIcon(leaderboardEntries)
-    generateLeaderboardEntries(metadata);
+    generateLeaderboardEntries(metadata, type);
 }
 
-async function generateLeaderboardEntries(metadata){
+async function generateLeaderboardEntries(metadata, type){
     await getLeaderboardData();
     console.log(leaderboardData)
 
@@ -5340,12 +5474,19 @@ async function generateLeaderboardEntries(metadata){
         leaderboardData.forEach((entry, index) => {
             let scorePartsObj = {}
             
-            entry.scoreParts.forEach((part, index) => {
-                scorePartsObj[part.name] = part;
-            })
+            if(entry.hasOwnProperty("scoreParts")) {
+                entry.scoreParts.forEach((part, index) => {
+                    scorePartsObj[part.name] = part;
+                })
+            }
 
             let leaderboardEntry = document.createElement('div');
             leaderboardEntry.classList.add('leaderboard-entry');
+            if(type != "CTTeam") {
+            leaderboardEntry.addEventListener('click', () => {
+                openProfile('leaderboard', entry);
+            })
+        }
             leaderboardEntries.appendChild(leaderboardEntry);
 
             let leaderboardEntryDiv = document.createElement('div');
@@ -5362,10 +5503,30 @@ async function generateLeaderboardEntries(metadata){
             leaderboardEntryPlayer.classList.add('leaderboard-entry-player');
             leaderboardEntryDiv.appendChild(leaderboardEntryPlayer);
 
-            let leaderboardEntryIcon = document.createElement('img');
-            leaderboardEntryIcon.classList.add('leaderboard-entry-icon');
-            leaderboardEntryIcon.src = `./Assets/ProfileAvatar/ProfileAvatar01.png`;
-            leaderboardEntryPlayer.appendChild(leaderboardEntryIcon);
+            let leaderboardEntryIcon = null;
+            let leaderboardEntryFrame = null;
+            let leaderboardEntryEmblem = null;
+
+            if(type == "CTTeam") {
+                leaderboardEntryIcon = document.createElement('div');
+                leaderboardEntryIcon.classList.add('leaderboard-entry-icon-ct');
+                leaderboardEntryPlayer.appendChild(leaderboardEntryIcon);
+
+                leaderboardEntryFrame = document.createElement('img');
+                leaderboardEntryFrame.classList.add('leaderboard-entry-frame');
+                leaderboardEntryFrame.src = `./Assets/UI/TeamFrame1.png`;
+                leaderboardEntryIcon.appendChild(leaderboardEntryFrame);
+
+                leaderboardEntryEmblem = document.createElement('img');
+                leaderboardEntryEmblem.classList.add('leaderboard-entry-emblem');
+                leaderboardEntryEmblem.src = `./Assets/UI/TeamIcon1.png`;
+                leaderboardEntryIcon.appendChild(leaderboardEntryEmblem);
+            } else {
+                leaderboardEntryIcon = document.createElement('img');
+                leaderboardEntryIcon.classList.add('leaderboard-entry-icon');
+                leaderboardEntryIcon.src = `./Assets/ProfileAvatar/ProfileAvatar01.png`;
+                leaderboardEntryPlayer.appendChild(leaderboardEntryIcon);
+            }
 
             let leaderboardEntryName = document.createElement('p');
             leaderboardEntryName.classList.add('leaderboard-entry-name','leaderboard-outline');
@@ -5466,14 +5627,22 @@ async function generateLeaderboardEntries(metadata){
                         break;
                 }
             }
+            if(metadata.hasOwnProperty('tiles')) {
+                leaderboardEntryScoreIcon.src = `./Assets/UI/CtPointsIconSmall.png`;
+                leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
+                leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
+                leaderboardEntryPlayer.classList.add('leaderboard-entry-team');
+            }
 
-            let leaderboardProfileBtn = document.createElement('img');
-            leaderboardProfileBtn.classList.add('leaderboard-profile-btn');
-            leaderboardProfileBtn.src = "./Assets/UI/InfoBtn.png";
-            leaderboardProfileBtn.addEventListener('click', () => {
-                openProfile('leaderboard', entry);
-            })
-            leaderboardEntry.appendChild(leaderboardProfileBtn);
+            // let leaderboardProfileBtn = document.createElement('img');
+            // leaderboardProfileBtn.classList.add('leaderboard-profile-btn');
+            // leaderboardProfileBtn.src = "./Assets/UI/InfoBtn.png";
+            // leaderboardProfileBtn.addEventListener('click', () => {
+            //     openProfile('leaderboard', entry);
+            // })
+            // if (type != "CTTeam") {
+            //     leaderboardEntry.appendChild(leaderboardProfileBtn);
+            // }
 
             //observer to check for if profile should be queried
             let observer = new IntersectionObserver((entries, observer) => {
@@ -5481,10 +5650,18 @@ async function generateLeaderboardEntries(metadata){
                     if (observerentry.isIntersecting) {
                         let userProfile = await getUserProfile(entry.profile);
                         console.log(userProfile)
-                        leaderboardEntryIcon.src = userProfile.avatarURL;
-                        leaderboardEntryDiv.style.backgroundImage = `url(${userProfile.bannerURL})`;
-                        observer.unobserve(observerentry.target);
-                        // raceMapImg.src = Object.keys(constants.mapsInOrder).includes(race.metadata.map) ? getMapIcon(race.metadata.map) : race.metadata.mapURL;
+                        if(userProfile.hasOwnProperty('owner')) {
+                            leaderboardEntryFrame.src = userProfile.frameURL;
+                            leaderboardEntryEmblem.src = userProfile.iconURL;
+                            leaderboardEntryDiv.style.backgroundImage = `url(${parseInt(userProfile.banner.replace(/\D/g,'')) > constants.profileBanners ? getProfileBanner(userProfile.banner) : userProfile.bannerURL})`;
+                            // leaderboardEntryPlayer.style.width = "470px";
+                            observer.unobserve(observerentry.target);
+                        } else {
+                            leaderboardEntryIcon.src = userProfile.avatarURL;
+                            leaderboardEntryIcon.src = `url(${parseInt(userProfile.avatar.replace(/\D/g,'')) > constants.profileAvatars ? getProfileIcon(userProfile.avatar) : userProfile.bannerURL})`;
+                            leaderboardEntryDiv.style.backgroundImage = `url(${parseInt(userProfile.banner.replace(/\D/g,'')) > constants.profileBanners ? getProfileBanner(userProfile.banner) : userProfile.bannerURL})`;
+                            observer.unobserve(observerentry.target);
+                        }
                     }
                 });
             });
@@ -5494,6 +5671,7 @@ async function generateLeaderboardEntries(metadata){
         let noDataFound = document.createElement('p');
         noDataFound.classList.add('no-data-found');
         noDataFound.classList.add('black-outline');
+        noDataFound.style.width = "250px";
         noDataFound.innerHTML = "No Data Found";
         leaderboardEntries.appendChild(noDataFound);
     }

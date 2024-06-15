@@ -2300,6 +2300,7 @@
     margin: 10px;
     border-radius: 10px;
     padding: 10px;
+    height: 175px;
 }
 .race-map-div {
     border-width: 7px;
@@ -2351,7 +2352,7 @@
 }
 .race-time-left {
     font-size: 24px;
-    width: 90px;
+    min-width: 90px;
 }
 .race-info-div {
     display: flex;
@@ -2695,6 +2696,42 @@
     transform: scaleX(-1);
 }
 
+.leaderboard-header-ctplayer, .leaderboard-header-ctteam {
+    background-image: url(../Assets/UI/CTRibbon.png);
+    height: 90px;
+    max-width: 500px;
+    padding: 0 50px;
+    background-size: contain;
+    position: relative;
+    color: white;
+    font-size: 36px;
+    font-family: 'Luckiest Guy';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.leaderboard-header-ctplayer::before, .leaderboard-header-ctplayer::after, .leaderboard-header-ctteam::before, .leaderboard-header-ctteam::after {
+    content: '';
+    width: 56px;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 25% 50%);
+    background-image: url(../Assets/UI/CTRibbonEdge.png);
+    background-size: contain;
+}
+.leaderboard-header-ctplayer::before, .leaderboard-header-ctteam::before {
+    left: -54px;
+}
+.leaderboard-header-middle-ctplayer, .leaderboard-header-middle-ctteam {
+    /* filter: hue-rotate(170deg) saturate(2); */
+}
+.leaderboard-header-ctplayer::after, .leaderboard-header-ctteam::after {
+    right: -54px;
+    transform: scaleX(-1);
+}
+
 .leaderboard-header-left {
     width: 80px;
 }
@@ -2742,6 +2779,7 @@
     display: flex;
     width: 800px;
     align-items: center;
+    justify-content: center;
 }
 .leaderboard-entry-div {
     display: flex;
@@ -2899,6 +2937,74 @@
     align-items: center;
     padding-left: 8px;
     padding-top: 8px;
+}
+
+.ct-info-top-div {
+    display: flex;
+    justify-content: space-between;
+}
+.ct-info-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px;
+    width: 730px;
+}
+.ct-leaderboards-btns {
+    display: flex;
+}
+.ct-leaderboards-header {
+    text-align: center;
+    font-size: 24px;
+}
+.ct-info-bottom-div {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: flex-end; */
+}
+.ct-div {
+    background-position: -580px;
+}
+.ct-info-middle-div {
+    justify-content: space-around;
+}
+.ct-info-leaderboard {
+    margin: 10px;
+}
+.ct-info-left-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.ct-info-dates {
+    padding-top: 10px;
+}
+.blue-btn {
+    border: 15px solid transparent;
+    border-image-source: url(../Assets/UI/BlueBtnSquare.png);
+    border-image-slice: 40;
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgb(0 216 255) 0%, rgb(0 198 255) 100%);
+}
+
+.leaderboard-entry-frame {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    position: absolute;
+}
+.leaderboard-entry-emblem {
+    height: 60px;
+    object-fit: contain;
+    position: relative;
+}
+.leaderboard-entry-icon-ct {
+    height: 60px;
+    width: 60px;
+    position: relative;
+}
+.leaderboard-entry-team {
+    width: 470px;
 }
 
 .black-outline {
