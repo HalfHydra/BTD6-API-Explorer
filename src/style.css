@@ -3002,9 +3002,77 @@
     height: 60px;
     width: 60px;
     position: relative;
+    background-color: var(--profile-secondary);
+    border-radius: 8px;
 }
 .leaderboard-entry-team {
     width: 470px;
+}
+
+.relics-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.relic-div {
+    display: flex;
+    max-width: 580px;
+    height: 105px;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 5px;
+    align-items: center;
+}
+.relic-icon {
+    width: 75px;
+}
+.relic-name {
+    font-size: 24px;
+}
+.relic-description {
+    font-family: GardeniaBold;
+    padding-top: 5px;
+    font-size: 18px;
+}
+.relic-id {
+    font-family: GardeniaBold;
+    font-size: 24px;
+    padding: 16px 8px;
+    margin: 8px;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    color: white;
+    width: 45px;
+    text-align: center;
+}
+.relic-text-div {
+    background-color: rgba(0,0,0,0.2);
+    padding: 6px;
+    margin: 0px 10px;
+    border-radius: 10px;
+    width: 400px;
+    height: 85%;
+}
+.relic-tile-view {
+    display: none;
+}
+.relic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.relic-header-views {
+    display: flex;
+    width: 160px;
+}
+.relic-header-right {
+    display: flex;
+    width: 160px;
+    justify-content: flex-end;
+}
+.relic-header-title {
+    font-size: 28px;
+    text-align: center;
 }
 
 .black-outline {

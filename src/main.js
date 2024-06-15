@@ -884,7 +884,7 @@ function generateHeaderTabs(){
         content.appendChild(contentElement);
     })
 
-    let extraContent = ['Challenge', 'PublicProfile', 'Leaderboard'];
+    let extraContent = ['Challenge', 'PublicProfile', 'Leaderboard', 'Relics'];
     extraContent.forEach((headerName) => {
         headerName = headerName.toLowerCase();
         let contentElement = document.createElement('div');
@@ -4550,10 +4550,13 @@ function generateCTs(){
         ctInfoLeftDiv.appendChild(raceInfoDates);
 
         let raceInfoRules = document.createElement('div');
-        raceInfoRules.classList.add("race-info-rules", "start-button", "blue-btn", "black-outline");
+        raceInfoRules.classList.add("race-info-rules", "start-button", "currency-trophies-div", "black-outline");
         raceInfoRules.innerHTML = "Relic Reveal"
         raceInfoRules.addEventListener('click', () => {
             // showChallengeModel('events', race.metadata, "CT");
+            console.log(race);
+            showLoading();
+            openRelics('events', race.tiles, `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`)
         })
         ctInfoLeftDiv.appendChild(raceInfoRules);
 
@@ -5653,13 +5656,12 @@ async function generateLeaderboardEntries(metadata, type){
                         if(userProfile.hasOwnProperty('owner')) {
                             leaderboardEntryFrame.src = userProfile.frameURL;
                             leaderboardEntryEmblem.src = userProfile.iconURL;
-                            leaderboardEntryDiv.style.backgroundImage = `url(${parseInt(userProfile.banner.replace(/\D/g,'')) > constants.profileBanners ? getProfileBanner(userProfile.banner) : userProfile.bannerURL})`;
+                            leaderboardEntryDiv.style.backgroundImage = `url(${parseInt(userProfile.banner.replace(/\D/g,'')) <= constants.profileBanners ? getProfileBanner(userProfile.banner) : userProfile.bannerURL})`;
                             // leaderboardEntryPlayer.style.width = "470px";
                             observer.unobserve(observerentry.target);
                         } else {
-                            leaderboardEntryIcon.src = userProfile.avatarURL;
-                            leaderboardEntryIcon.src = `url(${parseInt(userProfile.avatar.replace(/\D/g,'')) > constants.profileAvatars ? getProfileIcon(userProfile.avatar) : userProfile.bannerURL})`;
-                            leaderboardEntryDiv.style.backgroundImage = `url(${parseInt(userProfile.banner.replace(/\D/g,'')) > constants.profileBanners ? getProfileBanner(userProfile.banner) : userProfile.bannerURL})`;
+                            leaderboardEntryIcon.src = parseInt(userProfile.avatar.replace(/\D/g,'')) <= constants.profileAvatars ? getProfileIcon(userProfile.avatar) : userProfile.avatarURL;
+                            leaderboardEntryDiv.style.backgroundImage = `url(${(parseInt(userProfile.banner.replace(/\D/g,'')) <= constants.profileBanners) ? getProfileBanner(userProfile.banner) : userProfile.bannerURL})`;
                             observer.unobserve(observerentry.target);
                         }
                     }
@@ -6176,6 +6178,148 @@ async function openProfile(source, profile){
 function exitProfile(source){
     document.getElementById('publicprofile-content').style.display = "none";
     document.getElementById(`${source}-content`).style.display = "flex";
+}
+
+async function openRelics(source, tilesLink, eventDates) {
+    document.getElementById(`${source}-content`).style.display = "none";
+    let relicsContent = document.getElementById('relics-content');
+    relicsContent.style.display = "flex";
+    relicsContent.innerHTML = "";
+
+    let relicContainer = document.createElement('div');
+    relicContainer.classList.add('relic-container');
+    relicsContent.appendChild(relicContainer);
+
+    console.log(tilesLink)
+    let data = await getCTTiles(tilesLink)
+    console.log(data)
+
+    let relicHeader = document.createElement('div');
+    relicHeader.classList.add('relic-header');
+    relicContainer.appendChild(relicHeader);
+
+    let relicHeaderViews = document.createElement('div');
+    relicHeaderViews.classList.add('relic-header-views');
+    relicHeader.appendChild(relicHeaderViews);
+
+    let relicDetailView = document.createElement('div');
+    relicDetailView.classList.add('maps-progress-view', 'black-outline', 'stats-tab-yellow');
+    relicDetailView.innerHTML = "List";
+    relicHeaderViews.appendChild(relicDetailView);
+
+    let relicTileView = document.createElement('div');
+    relicTileView.classList.add('maps-progress-view','black-outline');
+    relicTileView.innerHTML = "Tile";
+    relicHeaderViews.appendChild(relicTileView);
+
+    relicDetailView.addEventListener('click', () => {
+        relicDetailView.classList.add('stats-tab-yellow');
+        relicTileView.classList.remove('stats-tab-yellow');
+        document.querySelectorAll('.relic-text-div').forEach(element => {
+            if (element.classList.contains('relic-tile-view')) {
+                element.classList.remove('relic-tile-view');
+            }
+        })
+    })
+
+    relicTileView.addEventListener('click', () => {
+        relicTileView.classList.add('stats-tab-yellow');
+        relicDetailView.classList.remove('stats-tab-yellow');
+        document.querySelectorAll('.relic-text-div').forEach(element => {
+            if (!element.classList.contains('relic-tile-view')) {
+                element.classList.add('relic-tile-view');
+            }
+        })
+    })
+
+    let relicHeaderTitle = document.createElement('p');
+    relicHeaderTitle.classList.add('relic-header-title','black-outline');
+    relicHeaderTitle.innerHTML = `Contested Territory<br>${eventDates}`;
+    relicHeader.appendChild(relicHeaderTitle);
+
+    let relicHeaderRight = document.createElement('div');
+    relicHeaderRight.classList.add('relic-header-right');
+    relicHeader.appendChild(relicHeaderRight);
+
+    let modalClose = document.createElement('img');
+    modalClose.classList.add('modal-close');
+    modalClose.src = "./Assets/UI/CloseBtn.png";
+    modalClose.addEventListener('click', () => {
+        relicsContent.style.display = "none";
+        document.getElementById(`${source}-content`).style.display = "flex";
+    })
+    relicHeaderRight.appendChild(modalClose);
+
+    //get only elements with "Relic" in the key "type" in data.tiles entries of .type
+    let relics =  data.tiles.filter(tile => tile.type.includes("Relic"))
+    console.log(relics)
+    // sort the relics alphabetically by "id"
+    relics.sort((a, b) => a.id.localeCompare(b.id))
+    console.log(relics)
+
+    let relicsDiv = document.createElement('div');
+    relicsDiv.classList.add('relics-div');
+    relicContainer.appendChild(relicsDiv);
+
+    relics.forEach(relic => {
+        let relicTypeName = relic.type.split(" ")[2];
+        console.log(relicTypeName)
+
+        let relicDiv = document.createElement('div');
+        relicDiv.classList.add('relic-div');
+        relicsDiv.appendChild(relicDiv);
+
+        switch(relic.id.charAt(0)){
+            case "A":
+                relicDiv.style.backgroundColor = "#9C55E4"
+                break;
+            case "B":
+                relicDiv.style.backgroundColor = "#E978AA"
+                break;
+            case "C":
+                relicDiv.style.backgroundColor = "#00DD6B"
+                break;
+            case "D":
+                relicDiv.style.backgroundColor = "#04A6F3"
+                break;
+            case "E":
+                relicDiv.style.backgroundColor = "#F7D302"
+                break;
+            case "F":
+                relicDiv.style.backgroundColor = "#F4413F"
+                break;
+            case "M":
+                relicDiv.style.backgroundColor = "#B9E546"
+                break;
+        }
+
+        //relicID
+        let relicID = document.createElement('p');
+        relicID.classList.add('relic-id');
+        relicID.innerHTML = relic.id;
+        relicDiv.appendChild(relicID);
+        //relicIcon
+        let relicIcon = document.createElement('img');
+        relicIcon.classList.add('relic-icon');
+        relicIcon.src = `./Assets/RelicIcon/${relicTypeName}.png`
+        relicDiv.appendChild(relicIcon);
+
+        let relicTextDiv = document.createElement('div');
+        relicTextDiv.classList.add('relic-text-div');
+        relicDiv.appendChild(relicTextDiv);
+        //relicName
+        let relicName = document.createElement('p');
+        relicName.classList.add('relic-name');
+        relicName.classList.add('black-outline');
+        relicName.innerHTML = getLocValue(`Relic${relicTypeName}`);
+        relicTextDiv.appendChild(relicName);
+        //relicDescription
+        let relicDescription = document.createElement('p');
+        relicDescription.classList.add('relic-description');
+        relicDescription.innerHTML = getLocValue(`Relic${relicTypeName}Description`);
+        relicTextDiv.appendChild(relicDescription);
+    })
+
 }
 
 function generateSettings(){

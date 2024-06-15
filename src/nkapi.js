@@ -50,7 +50,7 @@ async function fetchData(url, onSuccess) {
 }
 
 async function getSaveData(oak_token) {
-    fetchData(`./data/PreventAPISpam_UserSave.json`, (json) => {
+    fetchData(`https://data.ninjakiwi.com/btd6/save/${oak_token}`, (json) => {
         btd6usersave = json["body"]
         _btd6usersave = json["model"]
         readyFlags[0] = 1
@@ -59,7 +59,7 @@ async function getSaveData(oak_token) {
 }
 
 async function getPublicProfileData(oak_token) {
-    fetchData(`./data/PreventAPISpam_UserID.json`, (json) => {
+    fetchData(`https://data.ninjakiwi.com/btd6/users/${oak_token}`, (json) => {
         btd6publicprofile = json["body"]
         _btd6publicprofile = json["model"]
         localStorageOAK[oak_token] = {
@@ -180,6 +180,16 @@ async function getCTData() {
     } else {
         generateCTs();
     }
+}
+
+async function getCTTiles(key) {
+    let tiles = null;
+    await fetchData(key, (json) => {
+        console.log(`fetched ${key}`)
+        tiles = json["body"];
+        return tiles;
+    });
+    return tiles
 }
 
 async function getUserProfile(key) {
