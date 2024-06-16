@@ -25,6 +25,10 @@ let bossesData = null;
 
 let CTData = null;
 
+let DCData = null;
+
+let challengesCache = {}
+
 // getSaveData(oak_token)
 // getPublicProfileData(oak_token)
     // let res = await fetch(`https://data.ninjakiwi.com/btd6/save/${oak_token}`);
@@ -190,6 +194,31 @@ async function getCTTiles(key) {
         return tiles;
     });
     return tiles
+}
+
+async function getDailyChallengesData() {
+    if (DCData == null) {
+        await fetchData(`https://data.ninjakiwi.com/btd6/challenges/filter/daily`, (json) => {
+            DCData = json["body"];
+            return DCData;
+        });
+    } else {
+        console.log('no bad!')
+        return DCData;
+    }
+}
+
+async function getChallengeMetadata(challengeId) {
+    if (challengesCache[challengeId] == null) {
+        await fetchData(`https://data.ninjakiwi.com/btd6/challenges/challenge/${challengeId}`, (json) => {
+            console.log(`fetched ${challengeId}`)
+            challengesCache[challengeId] = json["body"];
+            return challengesCache[challengeId];
+        });
+    } else {
+        console.log(`used cache for ${challengeId}`)
+    }
+    return challengesCache[challengeId];
 }
 
 async function getUserProfile(key) {

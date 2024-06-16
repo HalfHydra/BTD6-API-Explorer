@@ -2324,8 +2324,10 @@
     flex-wrap: wrap-reverse;
 }
 .challenge-modifier-icon-event, .challenge-rule-icon-event  {
-    width: 60px;
-    height: 60px;
+    /* width: 60px;
+    height: 60px; */
+    width: 50px;
+    height: 50px;
 }
 .race-info-top-div {
     width: 450px;
@@ -2488,7 +2490,8 @@
 }
 .challenge-model-right {
     max-width: 650px;
-    min-width: 380px;
+    /* min-width: 380px; */
+    min-width: 360px;
     background-color: var(--profile-secondary);
     padding: 10px;
     margin: 10px;
@@ -3074,9 +3077,70 @@
     font-size: 28px;
     text-align: center;
 }
+.challenge-info-name {
+    font-size: 24px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+}
+.challenge-date {
+    font-size: 22px;
+}
+.event-challenge-div {
+    background-image: unset;
+    background-color: var(--profile-primary);
+    height: 190px;
+    align-items: center;
+}
+.challenge-info-left-right {
+    display: flex;
+    justify-content: space-between;
+}
+.challenge-info-middle-div {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+
+    border-radius: 10px;
+    padding: 0 5px;
+    background-color: var(--profile-secondary);
+}
+.challenge-stat {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px;
+}
+.challenge-stat-key {
+    font-family: GardeniaBold;
+    font-size: 20px;
+}
+.challenge-stat-value {
+    font-family: GardeniaBold;
+    font-size: 20px;
+    width: 60px;
+}
+.challenge-stats-div {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+}
+.challenge-info-bottom-div {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--profile-secondary);
+    padding: 10px;
+    border-radius: 10px;
+}
+.challenge-info-top-div {
+    width: 450px;
+    display: flex;
+    justify-content: space-between;
+}
 
 .black-outline {
-    -webkit-text-stroke: 0.7px black;
+    /* -webkit-text-stroke: 0.7px black; */
+    -webkit-text-stroke: 0.03em black;
     text-shadow: 1px 0px 0px #000, -1px 0px 0 #000, 0px 1px 0 #000, 1px 0px 0px #000, 1px 2px 0px #000, -1px -1px 0 #000, -1px 2px 0 #000, 1px -1px 0px #000;
 }
 .mm-outline {

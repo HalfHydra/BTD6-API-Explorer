@@ -4182,6 +4182,18 @@ function changeEventTab(selector){
         case "ContestedTerritory":
             getCTData();
             break;
+        case "DailyChallenges":
+            showLoading();
+            generateChallenges("DailyChallenges");
+            break;
+        case "AdvancedDailyChallenges":
+            showLoading();
+            generateChallenges("AdvancedDailyChallenges");
+            break;
+        case "CoopDailyChallenges":
+            showLoading();
+            generateChallenges("CoopDailyChallenges");
+            break;
     }
 }
 
@@ -4605,6 +4617,184 @@ function generateCTs(){
     })
 }
 
+async function generateChallenges(type) {
+    let eventsContent = document.getElementById('events-content');
+    eventsContent.innerHTML = "";
+
+    await getDailyChallengesData();
+
+    //filter the challenges that include "Standard", "Advanced", "coop" as the beginning of the name key if the type is DailyChallenges, AdvancedDailyChallenges, CoopDailyChallenges
+    let challenges = Object.values(DCData).filter(challenge => {
+        switch (type) {
+            case "DailyChallenges":
+                return challenge.name.startsWith("Standard");
+            case "AdvancedDailyChallenges":
+                return challenge.name.startsWith("Advanced");
+            case "CoopDailyChallenges":
+                return challenge.name.startsWith("coop");
+        }
+    })
+
+    // if CoopDailyChallenges, filter challenge.createdAt at a new Date and check if it less than the current day
+    let now = new Date();
+
+    if (type == "CoopDailyChallenges") {
+        challenges = challenges.filter(challenge => new Date(challenge.createdAt) < now);
+        challenges = challenges.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    }
+
+    Object.values(challenges).forEach((challenge, index) => {
+        let regex = /^(Standard|Advanced|coop)(?: (\d+))?: (.*)$/;
+        let match = challenge.name.match(regex);
+
+        let challengeType = "";
+        let challengeNumber = "";
+        let challengeName = "";
+
+        if (match) {
+            challengeType = match[1] || null;
+            challengeNumber = match[2] || null;
+            challengeName = match[3] || null;
+        }
+
+        let challengeDiv = document.createElement('div');
+        challengeDiv.classList.add("race-div", "event-challenge-div");
+        eventsContent.appendChild(challengeDiv);
+
+        let challengeMapDiv = document.createElement('div');
+        challengeMapDiv.classList.add("race-map-div", "silver-border");
+        challengeDiv.appendChild(challengeMapDiv);
+
+        let challengeMapImg = document.createElement('img');
+        challengeMapImg.classList.add("race-map-img");
+        challengeMapImg.src = "./Assets/MapIcon/MapLoadingImage.png"
+        challengeMapDiv.appendChild(challengeMapImg);
+
+        let challengeChallengeIcons = document.createElement('div');
+        challengeChallengeIcons.classList.add("race-challenge-icons");
+        challengeMapDiv.appendChild(challengeChallengeIcons);
+
+        let challengeMapRounds = document.createElement('p');
+        challengeMapRounds.classList.add("race-map-rounds", 'black-outline');
+        challengeMapDiv.appendChild(challengeMapRounds);
+
+        let challengeInfoDiv = document.createElement('div');
+        challengeInfoDiv.classList.add("race-info-div");
+        challengeDiv.appendChild(challengeInfoDiv);
+
+        let challengeInfoTopDiv = document.createElement('div');
+        challengeInfoTopDiv.classList.add("challenge-info-top-div");
+        challengeInfoDiv.appendChild(challengeInfoTopDiv);
+
+        let challengeInfoLeftRight = document.createElement('div');
+        challengeInfoLeftRight.classList.add("challenge-info-left-right");
+        challengeInfoDiv.appendChild(challengeInfoLeftRight);
+
+        let challengeInfoMiddleDiv = document.createElement('div');
+        challengeInfoMiddleDiv.classList.add("challenge-info-middle-div");
+        challengeInfoLeftRight.appendChild(challengeInfoMiddleDiv);
+
+        let challengeInfoBottomDiv = document.createElement('div');
+        challengeInfoBottomDiv.classList.add("challenge-info-bottom-div");
+        challengeInfoLeftRight.appendChild(challengeInfoBottomDiv);
+
+        let challengeInfoName = document.createElement('p');
+        challengeInfoName.classList.add("challenge-info-name", "black-outline");
+        // challengeInfoName.innerHTML = challenge.name.replace("Standard ", "#").replace("Advanced ", "#").replace("coop - ", "");
+        challengeInfoName.innerHTML = type == "CoopDailyChallenges" ? challenge.name.replace("coop - ", "") : challengeName;
+        challengeInfoTopDiv.appendChild(challengeInfoName);
+
+        //challengeDate
+        let challengeDate = document.createElement('p');
+        challengeDate.classList.add("challenge-date", "black-outline");
+        challengeDate.innerHTML = `${new Date(challenge.createdAt).toLocaleDateString()}`;
+        challengeInfoMiddleDiv.appendChild(challengeDate);
+
+        let challengeTypeText = document.createElement('p');
+        challengeTypeText.classList.add("challenge-date", "black-outline");
+        challengeTypeText.innerHTML = type == "CoopDailyChallenges" ? "Coop" : `${challengeType} ${challengeNumber}`;
+        challengeInfoMiddleDiv.appendChild(challengeTypeText);
+
+        // if (challengeNumber != null) {
+        //     let challengeNumberText = document.createElement('p');
+        //     challengeNumberText.classList.add("challenge-date", "black-outline");
+        //     challengeNumberText.innerHTML = challengeNumber;
+        //     challengeInfoMiddleDiv.appendChild(challengeNumberText);
+        // }
+
+        let challengeInfoRules = document.createElement('div');
+        challengeInfoRules.classList.add("challenge-info-rules", "start-button", "black-outline");
+        challengeInfoRules.innerHTML = "Details"
+        challengeInfoRules.addEventListener('click', async () => {
+            showChallengeModel('events', await getChallengeMetadata(challenge.id), type);
+        })
+        challengeInfoMiddleDiv.appendChild(challengeInfoRules);
+
+        let challengeStats = ["Attempts", "Wins", "Fails", "Unique Players", "Victorious Players"]
+
+        let challengeStatsDiv = document.createElement('div');
+        challengeStatsDiv.classList.add("challenge-stats-div");
+        challengeInfoBottomDiv.appendChild(challengeStatsDiv);
+
+        for (let value of challengeStats) {
+            let challengeStat = document.createElement('div');
+            challengeStat.classList.add("challenge-stat");
+            challengeStatsDiv.appendChild(challengeStat);
+
+            let challengeStatKey = document.createElement('p');
+            challengeStatKey.classList.add("challenge-stat-key");
+            challengeStatKey.innerHTML = value;
+            challengeStat.appendChild(challengeStatKey);
+
+            let challengeStatValue = document.createElement('p');
+            challengeStatValue.id = `${challenge.id}-${value}`
+            challengeStatValue.classList.add("challenge-stat-value");
+            challengeStatValue.innerHTML = "Loading...";
+            challengeStat.appendChild(challengeStatValue);
+        }
+
+        let observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(async entry => {
+                if (entry.isIntersecting) {
+                    let challengeData = await getChallengeMetadata(challenge.id);
+                    observer.unobserve(entry.target);
+                    let modifiers = challengeModifiers(challengeData);
+                    let rules = challengeRules(challengeData)
+                    for (let modifier of Object.values(modifiers)) {
+                        console.log(modifier)
+                        let challengeModifierIcon = document.createElement('img');
+                        challengeModifierIcon.classList.add('challenge-modifier-icon-event');
+                        challengeModifierIcon.src = `./Assets/ChallengeRulesIcon/${modifier.icon}.png`;
+                        challengeChallengeIcons.appendChild(challengeModifierIcon);
+                    }
+                    for (let rule of rules) {
+                        console.log(rule)
+                        if (rule == "No Round 100 Reward" && type != "AdvancedDailyChallenges") { continue; }
+                        if (rule == "Paragon Limit") { continue; }
+                        let challengeRuleIcon = document.createElement('img');
+                        challengeRuleIcon.classList.add('challenge-rule-icon-event');
+                        challengeRuleIcon.src = `./Assets/ChallengeRulesIcon/${rulesMap[rule]}.png`;
+                        challengeChallengeIcons.appendChild(challengeRuleIcon);
+                    }
+                    challengeMapImg.src = Object.keys(constants.mapsInOrder).includes(challengeData.map) ? getMapIcon(challengeData.map) : challengeData.mapURL;
+                    challengeMapRounds.innerHTML = `Rounds ${challengeData.startRound}/${challengeData.endRound}`
+                    challengeStats = {
+                        "Attempts": challengeData.plays + challengeData.restarts,
+                        "Wins": challengeData.winsUnique,
+                        "Fails": challengeData.lossesUnique + challengeData.restarts,
+                        "Unique Players": challengeData.playsUnique,
+                        "Victorious Players": challengeData.winsUnique,
+                    }
+                    for (let [key, value] of Object.entries(challengeStats)) {
+                        document.getElementById(`${challenge.id}-${key}`).innerHTML = value;
+                    }
+                }
+            });
+        });
+        observer.observe(challengeMapDiv);
+
+    })
+}
 
 function processChallenge(metadata){
     let result = {};
