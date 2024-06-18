@@ -2389,6 +2389,7 @@
 }
 .challenge-model {
     width: 100%;
+    position: relative;
 }
 .challenge-model-header-difficulty {
     width: 100px;
@@ -3118,12 +3119,23 @@
 .challenge-stat-value {
     font-family: GardeniaBold;
     font-size: 20px;
-    width: 60px;
+    /* width: 60px; */
 }
 .challenge-stats-div {
     display: flex;
     flex-direction: column;
     width: 260px;
+}
+.challenge-model-stats-div {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 50px;
+    top: 80px;
+    background-color: var(--profile-primary);
+    border-radius: 10px;
+    border: 4px solid white;
+    padding: 10px;
 }
 .challenge-info-bottom-div {
     display: flex;
@@ -3136,6 +3148,141 @@
     width: 450px;
     display: flex;
     justify-content: space-between;
+}
+.challenge-stats-left {
+    width: 370px;
+    background-color: var(--profile-secondary);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 10px;
+}
+.challenge-stats-right {
+    /* width: 300px; */
+    width: 230px;
+    background-color: var(--profile-secondary);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+.challenge-model-stat-value {
+    font-family: GardeniaBold;
+    font-size: 20px;
+}
+.challenge-stat-label {
+    font-family: GardeniaBold;
+    font-size: 20px;
+}
+.challenge-stats-left-right {
+    display: flex;
+}
+.challenge-stats-header {
+    font-size: 28px;
+    text-align: center;
+}
+.challenge-creator {
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    border-radius: 6px;
+    height: 45px;
+}
+.challenge-creator-name {
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+.challenge-upvote-icon, .challenge-trophy-icon, .challenge-skull-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+.challenge-upvote-div {
+    display: flex;
+    align-items: center;
+    padding-right: 5px;
+}
+.challenge-trophy-div {
+    display: flex;
+    align-items: center;
+    padding-right: 5px;
+}
+.challenge-skull-div {
+    display: flex;
+    align-items: center;
+}
+.challenge-usv-div {
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: space-evenly;
+}
+.challenge-upvote-value, .challenge-trophy-value, .challenge-skull-value {
+    font-size: 20px;
+    font-family: GardeniaBold;
+    background-color: rgba(0,0,0,0.3);
+    padding: 8px;
+    border-radius: 10px;
+}
+.challenge-upvote-value {
+    width: 60px;
+}
+.challenge-stats-btn {
+    width: 50px;
+    padding-right: 8px;
+}
+.challenge-header-right-top {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.challenge-id {
+    font-size: 24px;
+    padding: 10px;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+.challenge-header-right-bottom {
+    display: flex;
+    height: 50px;
+    align-items: flex-end;
+}
+.quick-stat {
+    display: flex;
+    align-items: center;
+    margin: 4px;
+}
+.quick-stat-icon {
+    width: 40px;
+    object-fit: contain;
+    -webkit-filter: drop-shadow(1px 1px 0 white)
+                drop-shadow(-1px 1px 0 white)
+                drop-shadow(1px -1px 0 white)
+                drop-shadow(-1px -1px 0 white);
+
+    filter: drop-shadow(1px 1px 0 white)
+            drop-shadow(-1px 1px 0 white)
+            drop-shadow(1px -1px 0 white)
+            drop-shadow(-1px -1px 0 white);
+}
+.quick-stat-name {
+    font-family: GardeniaBold;
+    font-size: 22px;
+    padding-left: 10px;
+}
+.quick-stats-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+}
+.quick-stats-header {
+    text-align: center;;
+}
+.quick-stats-div {
+    background-color: var(--profile-tertiary);
+    border-radius: 10px;
 }
 
 .black-outline {
