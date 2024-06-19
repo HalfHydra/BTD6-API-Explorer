@@ -250,3 +250,11 @@ function getChallengeIdFromInt(rawId, advanced) {
     let formattedDate = baseDate.toISOString().substring(0, 10).replace(/-/g, '');
     return (advanced ? 'adv': 'rot') + rawId + formattedDate;
 }
+
+function getChallengeIDFromDate(date, advanced) {
+    let baseDate = new Date(date);
+    let diffInMs = new Date(2024, 4, 25).getTime() - baseDate.getTime();
+    let diffInDays = Math.floor(diffInMs / 86400000);
+    let diff = (advanced ? 2101 : 2114) - diffInDays;
+    return (advanced ? 'adv': 'rot') + diff + date.replace(/-/g, '');
+}

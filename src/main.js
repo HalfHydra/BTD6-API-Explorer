@@ -869,7 +869,7 @@ function generateHeaderTabs(){
     headerContainer.classList.add('header-container');
     header.appendChild(headerContainer);
 
-    let headers = ['Overview', 'Progress', 'Events', 'Extras', 'Settings'];
+    let headers = ['Overview', 'Progress', 'Events', 'Explore', 'Extras'];
 
     headers.forEach((headerName) => {
         headerName = headerName.toLowerCase();
@@ -894,7 +894,7 @@ function generateHeaderTabs(){
         content.appendChild(contentElement);
     })
 
-    let extraContent = ['Challenge', 'PublicProfile', 'Leaderboard', 'Relics'];
+    let extraContent = ['Challenge', 'PublicProfile', 'Leaderboard', "Browser", 'Relics'];
     extraContent.forEach((headerName) => {
         headerName = headerName.toLowerCase();
         let contentElement = document.createElement('div');
@@ -930,15 +930,15 @@ function changeTab(tab) {
                 break;
             case 'events':
                 generateEvents();
-                //isGenerated.push(tab);
+                break;
+            case "explore":
+                generateExplore();
                 break;
             case 'extras':
                 generateExtrasPage();
-                //isGenerated.push(tab);
                 break;
             case 'settings':
                 generateSettings();
-                //isGenerated.push(tab);
                 break;
         }
     }
@@ -1335,6 +1335,8 @@ function generateOverview(){
     }
 
     Object.entries(progressSubText).forEach(([stat,text]) => {
+        if(text.includes("0 Extras") || text.includes("0 CHIMPS")) { return }
+        if(text.match(/0\/[0-9]+ Paragons/)) { return }
         let quickStat = document.createElement('div');
         quickStat.classList.add('quick-stat');
         quickStatsContent.appendChild(quickStat);
@@ -4706,6 +4708,8 @@ async function generateChallenges(type) {
         challenges = challenges.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     }
 
+    let latestChallenge = 0;
+
     Object.values(challenges).forEach((challenge, index) => {
         let regex = /^(Standard|Advanced|coop)(?: (\d+))?: (.*)$/;
         let match = challenge.name.match(regex);
@@ -4718,6 +4722,10 @@ async function generateChallenges(type) {
             challengeType = match[1] || null;
             challengeNumber = match[2] || null;
             challengeName = match[3] || null;
+
+            if (challengeNumber != null && challengeNumber > latestChallenge) {
+                latestChallenge = challengeNumber;
+            }
         }
 
         let challengeDiv = document.createElement('div');
@@ -4855,8 +4863,99 @@ async function generateChallenges(type) {
             });
         });
         observer.observe(challengeMapDiv);
-
     })
+
+    if (type == "DailyChallenges" || type == "AdvancedDailyChallenges") {
+        let challengeDiv = document.createElement('div');
+        challengeDiv.classList.add("race-div", "event-select-challenge-div");
+        eventsContent.appendChild(challengeDiv);
+
+        //title text
+        let challengeInfoName = document.createElement('p');
+        challengeInfoName.classList.add("challenge-select-info-name", "black-outline");
+        challengeInfoName.innerHTML = `Older ${type == "DailyChallenges" ? "Standard" : "Advanced"} Challenges (Unstable)`;
+        challengeDiv.appendChild(challengeInfoName);
+
+        //desc text
+        let challengeInfoDesc = document.createElement('p');
+        challengeInfoDesc.classList.add("challenge-info-desc");
+        challengeInfoDesc.innerHTML = `Select a challenge by entering a date or ID below. IDs can be no less than 1000, and the date cannot be earlier than ${type == "DailyChallenges" ? new Date(Date.UTC(2021, 4, 7)).toISOString().split('T')[0] : new Date(Date.UTC(2021, 4, 20)).toISOString().split('T')[0]} for ${type == "DailyChallenges" ? "Standard" : "Advanced"} challenges.`;
+        challengeDiv.appendChild(challengeInfoDesc);
+
+        let challengeSelectors = document.createElement('div');
+        challengeSelectors.classList.add("challenge-selectors");
+        challengeDiv.appendChild(challengeSelectors);
+
+        let challengeSelectorDate = document.createElement('div');
+        challengeSelectorDate.classList.add("challenge-selector-date");
+        challengeSelectors.appendChild(challengeSelectorDate);
+
+        let challengeSelectorDateText = document.createElement('p');
+        challengeSelectorDateText.classList.add("challenge-selector-date-text", "black-outline");
+        challengeSelectorDateText.innerHTML = "Date";
+        challengeSelectorDate.appendChild(challengeSelectorDateText);
+
+        //input for day selector
+        let challengeSelectorDateInput = document.createElement('input');
+        challengeSelectorDateInput.classList.add("challenge-selector-date-input");
+        challengeSelectorDateInput.type = "date";//earlier selectable date is 05/07/2021 for regular dailychallenges and 05/20/2021 for AdvancedDailyChallenges
+        // challengeSelectorDateInput.min = type == "DailyChallenges" ? "2021-05-07" : "2021-05-20";
+        // challengeSelectorDateInput.max = new Date();
+        challengeSelectorDateInput.value = new Date().toISOString().split('T')[0];
+        challengeSelectorDateInput.addEventListener('change', () => {
+            if (new Date(challengeSelectorDateInput.value) > new Date()) { challengeSelectorDateInput.value = new Date().toISOString().split('T')[0] }
+            if (new Date(challengeSelectorDateInput.value) < new Date(type == "DailyChallenges" ? "2021-05-07" : "2021-05-20")) { challengeSelectorDateInput.value = type == "DailyChallenges" ? "2021-05-07" : "2021-05-20"; }
+        })
+        // challengeSelectorDateInput.value = new Date().toISOString().split('T')[0];
+        challengeSelectorDate.appendChild(challengeSelectorDateInput);
+
+        let challengeSelectorDateImg = document.createElement('img');
+        challengeSelectorDateImg.classList.add("challenge-selector-date-img");
+        challengeSelectorDateImg.src = "../Assets/UI/ContinueBtn.png";
+        challengeSelectorDateImg.addEventListener('click', async () => {
+            console.log(challengeSelectorDateInput.value)
+            console.log(getChallengeIDFromDate(challengeSelectorDateInput.value), type)
+            showChallengeModel('events', await getChallengeMetadata(getChallengeIDFromDate(challengeSelectorDateInput.value,type == "AdvancedDailyChallenges")), type);
+        })
+        challengeSelectorDate.appendChild(challengeSelectorDateImg);
+
+        let challengeSelectorOR = document.createElement('p');
+        challengeSelectorOR.classList.add("challenge-selector-or", "black-outline");
+        challengeSelectorOR.innerHTML = "OR";
+        challengeSelectors.appendChild(challengeSelectorOR);
+
+        let challengeSelectorID = document.createElement('div');
+        challengeSelectorID.classList.add("challenge-selector-id");
+        challengeSelectors.appendChild(challengeSelectorID);
+
+        let challengeSelectorIDText = document.createElement('p');
+        challengeSelectorIDText.classList.add("challenge-selector-id-text", "black-outline");
+        challengeSelectorIDText.innerHTML = "Challenge ID";
+        challengeSelectorID.appendChild(challengeSelectorIDText);
+
+        //input for ID selector
+        let challengeSelectorIDInput = document.createElement('input');
+        challengeSelectorIDInput.classList.add("challenge-selector-id-input");
+        challengeSelectorIDInput.type = "number";
+        //keep the value above 1000 and below the latest challenge number
+        challengeSelectorIDInput.min = 1000;
+        challengeSelectorIDInput.max = latestChallenge;
+        challengeSelectorIDInput.value = latestChallenge - 1;
+        challengeSelectorIDInput.addEventListener('change', () => {
+            if (challengeSelectorIDInput.value < 1000) { challengeSelectorIDInput.value = 1000; }
+            if (challengeSelectorIDInput.value > latestChallenge) { challengeSelectorIDInput.value = latestChallenge; }
+        })
+        challengeSelectorID.appendChild(challengeSelectorIDInput);
+
+        let challengeSelectorIDImg = document.createElement('img');
+        challengeSelectorIDImg.classList.add("challenge-selector-id-img");
+        challengeSelectorIDImg.src = "../Assets/UI/ContinueBtn.png";
+        challengeSelectorIDImg.addEventListener('click', async () => {
+            console.log(challengeSelectorIDInput.value)
+            showChallengeModel('events', await getChallengeMetadata(getChallengeIdFromInt(challengeSelectorIDInput.value, type == "AdvancedDailyChallenges")), type);
+        })
+        challengeSelectorID.appendChild(challengeSelectorIDImg);
+    }
 }
 
 function processChallenge(metadata){
@@ -6683,6 +6782,77 @@ async function openRelics(source, tilesLink, eventDates) {
         relicTextDiv.appendChild(relicDescription);
     })
 
+}
+
+function generateExplore() {
+    let exploreContent = document.getElementById('explore-content');
+    exploreContent.innerHTML = "";
+
+    let explorePage = document.createElement('div');
+    explorePage.classList.add('progress-page');
+    exploreContent.appendChild(explorePage);
+
+    let selectorsDiv = document.createElement('div');
+    selectorsDiv.classList.add('selectors-div');
+    explorePage.appendChild(selectorsDiv);
+
+    let selectors = ['Challenge Browser', 'Map Browser'];
+
+    selectors.forEach((selector) => {
+        let selectorDiv = document.createElement('div');
+        selectorDiv.id = selector.toLowerCase() + '-div';
+        selectorDiv.classList.add('selector-div', 'blueprint-bg');
+        selectorDiv.addEventListener('click', () => {
+            exploreContent.style.display = "none";
+            document.getElementById('browser-content').style.display = "flex"
+            changeBrowserTab(selector);
+        })
+        selectorsDiv.appendChild(selectorDiv);
+
+        let selectorImg = document.createElement('img');
+        selectorImg.id = selector.toLowerCase() + '-img';
+        selectorImg.classList.add('selector-img');
+        selectorDiv.appendChild(selectorImg);
+
+        switch(selector){
+            case 'Challenge Browser':
+                selectorImg.src = '../Assets/UI/PatchNotesMonkeyIcon.png';
+                break;
+            case 'Map Browser':
+                selectorImg.src = '../Assets/UI/MapEditorBtn.png';
+                break;
+        }
+
+        let selectorText = document.createElement('p');
+        selectorText.id = selector.toLowerCase() + '-text';
+        selectorText.classList.add('selector-text','black-outline');
+        selectorText.innerHTML = selector;
+        selectorDiv.appendChild(selectorText);
+
+        let selectorGoImg = document.createElement('img');
+        selectorGoImg.id = selector.toLowerCase() + '-go-img';
+        selectorGoImg.classList.add('selector-go-img');
+        selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
+        selectorDiv.appendChild(selectorGoImg);
+    })
+}
+
+function changeBrowserTab(selected){
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    switch(selected){
+        case 'Challenge Browser':
+            generateBrowser("explore", "Challenge Browser", null);
+            break;
+        case 'Map Browser':
+            generateBrowser("explore", "Map Browser", null);
+            break;
+    }
+}
+
+function generateBrowser(source, type, data){
+    let browserContent = document.getElementById('browser-content');
+    browserContent.innerHTML = "";
 }
 
 function generateSettings(){

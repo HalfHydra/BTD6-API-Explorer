@@ -3284,6 +3284,66 @@
     background-color: var(--profile-tertiary);
     border-radius: 10px;
 }
+.event-select-challenge-div {
+    display: flex;
+    flex-direction: column;
+    background: var(--profile-primary);
+}
+.challenge-selectors {
+    display: flex;
+    justify-content: space-between;
+}
+.challenge-selector-date-img, .challenge-selector-id-img {
+    width: 50px;
+}
+.challenge-selector-date, .challenge-selector-id {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgba(0,0,0,0.3);
+    padding: 10px;
+    border-radius: 10px;
+}
+.challenge-selector-or {
+    display: flex;
+    align-items: center;
+}
+.challenge-info-desc {
+    font-size: 20px;
+    line-height: 28px;
+    font-family: GardeniaBold;
+    text-align: center;
+}
+.challenge-select-info-name {
+    font-size: 24px;
+    /* height: 48px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.challenge-selector-date-text, .challenge-selector-id-text {
+    font-size: 24px;
+}
+.challenge-selector-date-input, .challenge-selector-id-input {
+    height: 40px;
+    font-family: GardeniaBold;
+    font-size: 20px;
+    text-align: center;;
+}
+.challenge-selector-or {
+    font-size: 32px;
+}
+.explore {
+    flex-wrap: wrap;
+    align-content: center;
+}
+.blueprint-bg {
+    border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/BlueprintPanel.png);
+    border-image-slice: 50;
+    background: linear-gradient(180deg, #1467ac 0%, #208ed5 100%);
+}
 
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */
