@@ -77,7 +77,7 @@ let rulesMap = {
 
 let showElite = false;
 
-let currentBrowserView = "game";
+let currentBrowserView = "grid";
 
 fetch('./data/Constants.json')
         .then(response => response.json())
@@ -5238,6 +5238,11 @@ console.log(metadata)
             let challengeID = document.createElement('p');
             challengeID.classList.add('challenge-id', 'black-outline');
             challengeID.innerHTML = metadata.id;
+            challengeID.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                copyID(metadata.id, challengeID)
+            })
             challengeHeaderRightBottom.appendChild(challengeID);
             break;
     }
@@ -7028,7 +7033,8 @@ function generateBrowser(source, type, data){
             mapsProgressGrid.classList.add('maps-progress-view-selected');
             mapsProgressGrid.innerHTML = "Grid";
             mapsProgressGrid.addEventListener('click', () => {
-                onChangeMapView("grid");
+                currentBrowserView = "Grid";
+                generateBrowserEntries(type)
             })
             mapsProgressViews.appendChild(mapsProgressGrid);
             
@@ -7039,7 +7045,8 @@ function generateBrowser(source, type, data){
             mapsProgressGame.classList.add('black-outline')
             mapsProgressGame.innerHTML = "List";
             mapsProgressGame.addEventListener('click', () => {
-                onChangeMapView("game");
+                currentBrowserView = "List";
+                generateBrowserEntries(type)
             })
             mapsProgressViews.appendChild(mapsProgressGame);
 
@@ -7060,7 +7067,7 @@ function generateBrowser(source, type, data){
             mapsProgressGameMap.classList.add('black-outline')
             mapsProgressGameMap.innerHTML = "Grid";
             mapsProgressGameMap.addEventListener('click', () => {
-                onChangeMapView("game");
+                onChangeMapView("grid");
             })
             mapsProgressViews.appendChild(mapsProgressGameMap);
 
@@ -7134,7 +7141,6 @@ async function generateBrowserEntries(type){
 function generateChallengeEntries(destination) {
     browserData.forEach(async (entry, index) => {
         let challengeEntry = document.createElement('div');
-        challengeEntry.classList.add('challenge-entry');
         challengeEntry.addEventListener('click', async () => {
             showChallengeModel('browser', await getChallengeMetadata(entry.id), "Custom");
         })
@@ -7143,6 +7149,7 @@ function generateChallengeEntries(destination) {
         switch(currentBrowserView) {
             case "Grid":
                 destination.classList.add('challenge-card-entries');
+                challengeEntry.classList.add('challenge-entry');
                 //top
                 let challengeTop = document.createElement('div');
                 challengeTop.classList.add('challenge-top');
@@ -7275,6 +7282,11 @@ function generateChallengeEntries(destination) {
                 let challengeID = document.createElement('p');
                 challengeID.classList.add('browser-id', 'black-outline');
                 challengeID.innerHTML = entry.id;
+                challengeID.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    copyID(entry.id, challengeID)
+                })
                 challengeIDandPlay.appendChild(challengeID);
 
                 let selectorCopyImg = document.createElement('img');
@@ -7283,15 +7295,7 @@ function generateChallengeEntries(destination) {
                 selectorCopyImg.addEventListener('click', (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    navigator.clipboard.writeText(entry.id).then(function() {
-                        console.log('Copying to clipboard was successful!');
-                        challengeID.innerHTML = "Copied!";
-                        setTimeout(() => {
-                            challengeID.innerHTML = entry.id;
-                        }, 2000);
-                    }, function(err) {
-                        console.log('Could not copy text: ', err);
-                    });
+                    copyID(entry.id, challengeID)
                 });
                 challengeIDandPlay.appendChild(selectorCopyImg);
 
@@ -7346,10 +7350,176 @@ function generateChallengeEntries(destination) {
                 });
                 observer.observe(challengeEntry);
                 break;
-            case "Game":
+            case "List":
+                challengeEntry.classList.add('browser-list-entry');
+
+                let challengeMapImg2 = document.createElement('img');
+                challengeMapImg2.classList.add("browser-list-map-img");
+                challengeMapImg2.src = "./Assets/MapIcon/MapLoadingImage.png"
+                challengeEntry.appendChild(challengeMapImg2);
+
+                let browserTopBottom = document.createElement('div');
+                browserTopBottom.classList.add('browser-top-bottom');
+                challengeEntry.appendChild(browserTopBottom);
+
+                let browserListEntryTop = document.createElement('div');
+                browserListEntryTop.classList.add('browser-list-entry-top');
+                browserTopBottom.appendChild(browserListEntryTop);
+
+                let browserListEntryBottom = document.createElement('div');
+                browserListEntryBottom.classList.add('browser-list-entry-bottom');
+                browserTopBottom.appendChild(browserListEntryBottom);
+
+                let challengeNameList = document.createElement('p');
+                challengeNameList.classList.add('challenge-name', 'browser-list-name', 'black-outline');
+                challengeNameList.innerHTML = entry.name;
+                if (entry.name.length > 30) { challengeNameList.style.fontSize = '18px' } 
+                browserListEntryTop.appendChild(challengeNameList);
+
+                let challengeCreator2 = document.createElement('div');
+                challengeCreator2.classList.add('challenge-creator','browser-challenge-creator');
+                browserListEntryTop.appendChild(challengeCreator2);
+    
+                let avatar2 = document.createElement('div');
+                avatar2.classList.add('avatar');
+                challengeCreator2.appendChild(avatar2);
+    
+                let width2 = 45;
+    
+                let avatarFrame2 = document.createElement('img');
+                avatarFrame2.classList.add('avatar-frame','noSelect');
+                avatarFrame2.style.width = `${width2}px`;
+                avatarFrame2.src = '../Assets/UI/InstaTowersContainer.png';
+                avatar2.appendChild(avatarFrame2);
+    
+                let avatarImg2 = document.createElement('img');
+                avatarImg2.classList.add('avatar-img','noSelect');
+                avatarImg2.style.width = `${width2}px`;
+                avatarImg2.src = getProfileIcon("ProfileAvatar01");
+                avatar2.appendChild(avatarImg2);
+    
+                let challengeCreatorName2 = document.createElement('p');
+                challengeCreatorName2.classList.add('browser-creator-name', 'black-outline');
+                challengeCreatorName2.innerHTML = "Loading...";
+                challengeCreator2.appendChild(challengeCreatorName2);
+
+                let challengeUSVDiv2 = document.createElement('div');
+                challengeUSVDiv2.classList.add('browser-usv-list-div');
+                browserListEntryBottom.appendChild(challengeUSVDiv2);
+
+                let challengeUpvoteDiv2 = document.createElement('div');
+                challengeUpvoteDiv2.classList.add('challenge-upvote-div');
+                challengeUSVDiv2.appendChild(challengeUpvoteDiv2);
+
+                let challengeUpvoteIcon2 = document.createElement('img');
+                challengeUpvoteIcon2.classList.add('browser-upvote-icon');
+                challengeUpvoteIcon2.src = "./Assets/UI/ChallengeThumbsUpIcon.png";
+                challengeUpvoteDiv2.appendChild(challengeUpvoteIcon2);
+
+                let challengeUpvoteValue2 = document.createElement('p');
+                challengeUpvoteValue2.classList.add('browser-upvote-value');
+                challengeUpvoteValue2.innerHTML = 0;
+                // challengeUpvoteValue.innerHTML = challengeExtraData["Upvotes"];
+                challengeUpvoteDiv2.appendChild(challengeUpvoteValue2);
+
+                let challengeTrophyDiv2 = document.createElement('div');
+                challengeTrophyDiv2.classList.add('challenge-trophy-div');
+                challengeUSVDiv2.appendChild(challengeTrophyDiv2);
+
+                let challengeTrophyIcon2 = document.createElement('img');
+                challengeTrophyIcon2.classList.add('browser-trophy-icon');
+                challengeTrophyIcon2.src = "./Assets/UI/ChallengeTrophyIcon.png";
+                challengeTrophyDiv2.appendChild(challengeTrophyIcon2);
+
+                let challengeTrophyValue2 = document.createElement('p');
+                challengeTrophyValue2.classList.add('browser-trophy-value');
+                // challengeTrophyValue.innerHTML = challengeExtraData["Player Completion Rate"];
+                challengeTrophyValue2.innerHTML = 0;
+                challengeTrophyDiv2.appendChild(challengeTrophyValue2);
+
+                let challengeSkullDiv2 = document.createElement('div');
+                challengeSkullDiv2.classList.add('challenge-skull-div');
+                challengeUSVDiv2.appendChild(challengeSkullDiv2);
+
+                let challengeSkullIcon2 = document.createElement('img');
+                challengeSkullIcon2.classList.add('browser-skull-icon');
+                challengeSkullIcon2.src = "./Assets/UI/DeathRateIcon.png";
+                challengeSkullDiv2.appendChild(challengeSkullIcon2);
+
+                let challengeSkullValue2 = document.createElement('p');
+                challengeSkullValue2.classList.add('browser-skull-value');
+                // challengeSkullValue.innerHTML = challengeExtraData["Player Win Rate"];
+                challengeSkullValue2.innerHTML = 0;
+                challengeSkullDiv2.appendChild(challengeSkullValue2);
+
+                let challengeIDandPlay2 = document.createElement('div');
+                challengeIDandPlay2.classList.add('challenge-id-and-play');
+                browserListEntryBottom.appendChild(challengeIDandPlay2);
+
+                let challengeID2 = document.createElement('p');
+                challengeID2.classList.add('browser-id', 'black-outline');
+                challengeID2.innerHTML = entry.id;
+                challengeID2.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    copyID(entry.id, challengeID2)
+                });
+                challengeIDandPlay2.appendChild(challengeID2);
+
+                let selectorCopyImg2 = document.createElement('img');
+                selectorCopyImg2.classList.add('browser-copy-img');
+                selectorCopyImg2.src = '../Assets/UI/CopyClipboardBtn.png';
+                selectorCopyImg2.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    copyID(entry.id, challengeID2)
+                });
+                challengeIDandPlay2.appendChild(selectorCopyImg2);
+
+                let selectorGoImg2 = document.createElement('img');
+                selectorGoImg2.classList.add('browser-go-img');
+                selectorGoImg2.src = '../Assets/UI/GoBtnSmall.png';
+                selectorGoImg2.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    window.open(`btd6://Challenge/${entry.id}`, '_blank');
+                });
+                challengeIDandPlay2.appendChild(selectorGoImg2);
+
+                let observer2 = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(async observerentry => {
+                        if (observerentry.isIntersecting) {
+                            let challengeData = await getChallengeMetadata(entry.id);
+                            console.log(challengeData)
+                            challengeMapImg2.src = challengeData.mapURL;
+                            challengeUpvoteValue2.innerHTML = challengeData.upvotes.toLocaleString();
+                            challengeTrophyValue2.innerHTML = challengeData.playsUnique == 0 ? "0%" : challengeData.winsUnique - challengeData.playsUnique == 0 ? "0%" : `${((challengeData.winsUnique / challengeData.playsUnique) * 100).toFixed(2)}%`;
+                            challengeSkullValue2.innerHTML = challengeData.playsUnique == 0 ? "0%" : `${((challengeData.wins / (challengeData.plays + challengeData.restarts)) * 100).toFixed(2)}%`;
+                            let creatorData = await getUserProfile(challengeData.creator);
+                            challengeCreatorName2.innerHTML = creatorData.displayName;
+                            if (creatorData.displayName.length > 14) { challengeCreatorName2.style.fontSize = '17px' }
+                            avatarImg2.src = getProfileIcon(creatorData.avatar);
+                            challengeCreator2.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(${getProfileBanner(creatorData.banner)})`;
+                            observer.unobserve(observerentry.target);
+                        }
+                    });
+                });
+                observer2.observe(challengeEntry);
                 break;
         }
     })
+}
+
+function copyID(ID, copiedTextDest) {
+    navigator.clipboard.writeText(ID).then(function() {
+        console.log('Copying to clipboard was successful!');
+        copiedTextDest.innerHTML = "Copied!";
+        setTimeout(() => {
+            copiedTextDest.innerHTML = ID;
+        }, 2000);
+    }, function(err) {
+        console.log('Could not copy text: ', err);
+    });
 }
 
 function generateMapGameEntries(destination) {

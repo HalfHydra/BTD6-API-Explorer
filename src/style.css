@@ -3420,6 +3420,7 @@
     text-align: center;
     font-size: 20px;
     padding: 6px;
+    /* font-family: GardeniaBold; */
 }
 .browser-upvote-icon, .browser-trophy-icon, .browser-skull-icon {
     width: 35px;
@@ -3464,6 +3465,45 @@
     font-size: 20px;
     padding-left: 10px;
     max-width: 150px;
+    /* font-family: GardeniaBold;
+    -webkit-text-stroke: 0.01em black; */
+}
+.browser-list-entry {
+    width: 770px;
+    display: flex;
+    background-color: var(--profile-primary);
+    margin: 5px;
+    border-radius: 10px;
+}
+.browser-list-name {
+    width: 370px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+.browser-list-entry-top {
+    display: flex;   
+}
+.browser-list-entry-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+.browser-usv-list-div {
+    display: flex;
+    padding: 5px 5px;
+    width: 390px;
+    justify-content: space-evenly;
+}
+.browser-list-map-img {
+    width: 156px;
+    height: 100px;
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+}
+.browser-challenge-creator {
+    width: 220px;
 }
 
 .black-outline {
