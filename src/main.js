@@ -77,6 +77,8 @@ let rulesMap = {
 
 let showElite = false;
 
+let currentBrowserView = "game";
+
 fetch('./data/Constants.json')
         .then(response => response.json())
         .then(data => {
@@ -1396,24 +1398,23 @@ function generateOverview(){
     }
 }
 
-function generateAvatar(width, src){
+function generateAvatar(size, src){
     let avatar = document.createElement('div');
-    avatar.id = 'avatar';
+    avatar.style.width = `${size}px`;
+    avatar.style.height = `${size}px`;
     avatar.classList.add('avatar');
 
     let avatarFrame = document.createElement('img');
     avatarFrame.id = 'avatar-frame';
-    avatarFrame.classList.add('avatar-frame');
-    avatarFrame.classList.add('noSelect')
-    avatarFrame.style.width = `${width}px`;
+    avatarFrame.classList.add('avatar-frame','noSelect');
+    avatarFrame.style.width = `${size}px`;
     avatarFrame.src = '../Assets/UI/InstaTowersContainer.png';
     avatar.appendChild(avatarFrame);
 
     let avatarImg = document.createElement('img');
     avatarImg.id = 'avatar-img';
-    avatarImg.classList.add('avatar-img');
-    avatarImg.classList.add('noSelect')
-    avatarImg.style.width = `${width}px`;
+    avatarImg.classList.add('avatar-img','noSelect');
+    avatarImg.style.width = `${size}px`;
     avatarImg.src = src;
     avatar.appendChild(avatarImg);
     return avatar;
@@ -4172,7 +4173,7 @@ function generateEvents(){
         },
         'Odyssey': {
             'img': 'OdysseyEventBtn',
-            'text': "Odyssey",
+            'text': "Odyssey (Coming Soon)",
             'bgimg': 'EventBannerSmallOdyssey'
         },
         'ContestedTerritory': {
@@ -4901,7 +4902,7 @@ async function generateChallenges(type) {
         challengeSelectorDateInput.type = "date";//earlier selectable date is 05/07/2021 for regular dailychallenges and 05/20/2021 for AdvancedDailyChallenges
         // challengeSelectorDateInput.min = type == "DailyChallenges" ? "2021-05-07" : "2021-05-20";
         // challengeSelectorDateInput.max = new Date();
-        challengeSelectorDateInput.value = new Date().toISOString().split('T')[0];
+        challengeSelectorDateInput.value =  new Date(Date.now()).toISOString().split('T')[0];
         challengeSelectorDateInput.addEventListener('change', () => {
             if (new Date(challengeSelectorDateInput.value) > new Date()) { challengeSelectorDateInput.value = new Date().toISOString().split('T')[0] }
             if (new Date(challengeSelectorDateInput.value) < new Date(type == "DailyChallenges" ? "2021-05-07" : "2021-05-20")) { challengeSelectorDateInput.value = type == "DailyChallenges" ? "2021-05-07" : "2021-05-20"; }
@@ -4985,7 +4986,7 @@ function processChallenge(metadata){
     }
 
     result["Upvotes"] = metadata.upvotes;
-    result["Player Completion Rate"] = metadata.winsUnique - metadata.playsUnique == 0 ? "100%" : `${((metadata.winsUnique / metadata.playsUnique) * 100).toFixed(2)}%`;
+    result["Player Completion Rate"] = metadata.playsUnique == 0 ? "0%" : metadata.winsUnique - metadata.playsUnique == 0 ? "100%" : `${((metadata.winsUnique / metadata.playsUnique) * 100).toFixed(2)}%`;
     result["Player Win Rate"] = metadata.playsUnique == 0 ? "0%" : `${((metadata.wins / (metadata.plays + metadata.restarts)) * 100).toFixed(2)}%`;
 
     result.statsValid = false;
@@ -5143,7 +5144,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             "key": "maxTowers",
         }
     }
-
+console.log(metadata)
     Object.entries(challengeSettings).forEach(([setting,data], index) => {
         let challengeSetting = document.createElement('div');
         challengeSetting.classList.add('challenge-setting');
@@ -5169,7 +5170,8 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         challengeSettingValue.classList.add('challenge-setting-value', 'black-outline');
         challengeSettingValue.innerHTML = metadata[data.key];
         challengeSettingTexts.appendChild(challengeSettingValue);
-        if (data.key = "maxTowers" && (metadata[data.key] == 0 || metadata[data.key] == 9999)) { challengeSettingValue.innerHTML = "Unlimited"; }
+        if (data.key == "maxTowers" && (metadata[data.key] == 0 || metadata[data.key] == 9999)) { challengeSettingValue.innerHTML = "Unlimited"; }
+        if((data.key == "maxLives" || data.key == "lives" || data.key == "startingCash" || data.key == "startRound" || data.key == "endRound") && metadata[data.key] == 0) { challengeSettingValue.innerHTML = "Default"; }
     })
 
     let challengeSetting = document.createElement('div');
@@ -5507,7 +5509,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
 
         let challengeTrophyValue = document.createElement('p');
         challengeTrophyValue.classList.add('challenge-trophy-value');
-        challengeTrophyValue.innerHTML = challengeExtraData["Player Win Rate"];
+        challengeTrophyValue.innerHTML = challengeExtraData["Player Completion Rate"];
         challengeTrophyDiv.appendChild(challengeTrophyValue);
 
         let challengeSkullDiv = document.createElement('div');
@@ -5521,7 +5523,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
 
         let challengeSkullValue = document.createElement('p');
         challengeSkullValue.classList.add('challenge-skull-value');
-        challengeSkullValue.innerHTML = challengeExtraData["Player Completion Rate"];
+        challengeSkullValue.innerHTML = challengeExtraData["Player Win Rate"];
         challengeSkullDiv.appendChild(challengeSkullValue);
         //Creator
         if(challengeExtraData["Creator"] != "n/a" && challengeExtraData["Creator"] != null) {
@@ -5630,21 +5632,21 @@ function challengeModifiers(metadata){
         }
     }
     //regrowRateMultiplier
-    if (metadata._bloonModifiers.regrowRateMultiplier != 1) {
+    if (metadata._bloonModifiers.hasOwnProperty('regrowRateMultiplier') && metadata._bloonModifiers.regrowRateMultiplier != 1) {
         result["Regrow Rate"] = {
             "value": metadata._bloonModifiers.regrowRateMultiplier,
             "icon": metadata._bloonModifiers.regrowRateMultiplier > 1 ? "RegrowRateIncreaseIcon" : "RegrowRateDecreaseIcon"
         }
     }
     //abilityCooldownReductionMultiplier
-    if (metadata.abilityCooldownReductionMultiplier != 1) {
+    if (metadata.hasOwnProperty('abilityCooldownReductionMultiplier') && metadata.abilityCooldownReductionMultiplier != 1) {
         result["Ability Cooldown Rate"] = {
             "value": metadata.abilityCooldownReductionMultiplier,
             "icon": metadata.abilityCooldownReductionMultiplier > 1 ? "AbilityCooldownReductionDecreaseIcon" : "AbilityCooldownReductionIncreaseIcon"
         }
     }
     //removeableCostMultiplier
-    if (metadata.removeableCostMultiplier != 1) {
+    if (metadata.removeableCostMultiplier != 1 && metadata.removeableCostMultiplier != -1) {
         result["Removeable Cost"] = {
             "value": metadata.removeableCostMultiplier == 0 ? "Free" : metadata.removeableCostMultiplier == 12 ? "Disabled" : metadata.removeableCostMultiplier,
             "icon": metadata.removeableCostMultiplier > 1 ? "RemovableCostIncreaseIcon" : "RemovableCostDecreaseIcon"
@@ -5665,14 +5667,14 @@ function challengeModifiers(metadata){
         }
     }
     //boss
-    if (metadata._bloonModifiers.healthMultipliers.boss != 1) {
+    if (metadata._bloonModifiers.healthMultipliers.hasOwnProperty('boss') && metadata._bloonModifiers.healthMultipliers.boss != 1) {
         result["Boss Health"] = {
             "value": metadata._bloonModifiers.healthMultipliers.boss,
             "icon": metadata._bloonModifiers.healthMultipliers.boss > 1 ? "BossBoostIcon" : "BossDecreaseHPIcon"
         }
     }
     //boss speed
-    if (metadata._bloonModifiers.bossSpeedMultiplier != 1) {
+    if (metadata._bloonModifiers.hasOwnProperty('bossSpeedMultiplier') && metadata._bloonModifiers.bossSpeedMultiplier != 1) {
         result["Boss Speed"] = {
             "value": metadata._bloonModifiers.bossSpeedMultiplier,
             "icon": metadata._bloonModifiers.bossSpeedMultiplier > 1 ? "FasterBossIcon" : "SlowerBossIcon"
@@ -6842,9 +6844,13 @@ function changeBrowserTab(selected){
     document.documentElement.scrollTop = 0;
     switch(selected){
         case 'Challenge Browser':
+            browserLink = "https://data.ninjakiwi.com/btd6/challenges/filter/"
+            currentBrowserView = "Grid";
             generateBrowser("explore", "Challenge Browser", null);
             break;
         case 'Map Browser':
+            browserLink = "https://data.ninjakiwi.com/btd6/maps/filter/"
+            currentBrowserView = "Game";
             generateBrowser("explore", "Map Browser", null);
             break;
     }
@@ -6853,6 +6859,527 @@ function changeBrowserTab(selected){
 function generateBrowser(source, type, data){
     let browserContent = document.getElementById('browser-content');
     browserContent.innerHTML = "";
+
+    let browserDiv = document.createElement('div');
+    browserDiv.classList.add('browser-div');
+    browserContent.appendChild(browserDiv);
+
+    let mapsProgressHeaderBar = document.createElement('div');
+    mapsProgressHeaderBar.classList.add('maps-progress-header-bar', 'browser-header-bar');
+    browserDiv.appendChild(mapsProgressHeaderBar);
+
+    let mapProgressHeaderTop = document.createElement('div');
+    mapProgressHeaderTop.classList.add('map-progress-header-top');
+    mapsProgressHeaderBar.appendChild(mapProgressHeaderTop);
+
+    let mapsProgressHeaderTitle = document.createElement('p');
+    mapsProgressHeaderTitle.classList.add('browser-header-title','black-outline');
+    mapsProgressHeaderTitle.innerHTML = type;
+    mapProgressHeaderTop.appendChild(mapsProgressHeaderTitle);
+
+    let mapsProgressHeaderDesc = document.createElement('p');
+    mapsProgressHeaderDesc.classList.add('browser-header-desc');
+    mapsProgressHeaderDesc.innerHTML = "Only 100 entries (4 pages) are available on the API. You can enter a specific ID at the bottom right";
+    mapProgressHeaderTop.appendChild(mapsProgressHeaderDesc);
+
+    let mapProgressHeaderBottom = document.createElement('div');
+    mapProgressHeaderBottom.classList.add('map-progress-header-bottom');
+    mapsProgressHeaderBar.appendChild(mapProgressHeaderBottom);
+
+    let mapsProgressViews = document.createElement('div');
+    mapsProgressViews.id = 'maps-progress-views';
+    mapsProgressViews.classList.add('maps-progress-views');
+    mapProgressHeaderBottom.appendChild(mapsProgressViews);
+
+    let mapsProgressViewsText = document.createElement('p');
+    mapsProgressViewsText.id = 'maps-progress-views-text';
+    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressViewsText.classList.add('black-outline');
+    mapsProgressViewsText.innerHTML = "Display Type:";
+    mapsProgressViews.appendChild(mapsProgressViewsText);
+
+    let mapsProgressFilter = document.createElement('div');
+    mapsProgressFilter.id = 'maps-progress-filter';
+    mapsProgressFilter.classList.add('maps-progress-filter');
+    mapsProgressHeaderBar.appendChild(mapsProgressFilter);
+
+    let mapProgressFilterDifficulty = document.createElement('div');
+    mapProgressFilterDifficulty.id = 'map-progress-filter-difficulty';
+    mapProgressFilterDifficulty.classList.add('map-progress-filter-difficulty');
+    mapsProgressFilter.appendChild(mapProgressFilterDifficulty);
+
+    let mapsProgressFilterDifficultyText = document.createElement('p');
+    mapsProgressFilterDifficultyText.id = 'maps-progress-filter-difficulty-text';
+    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressFilterDifficultyText.classList.add('black-outline');
+    mapsProgressFilterDifficultyText.innerHTML = "Category Type:";
+    mapProgressFilterDifficulty.appendChild(mapsProgressFilterDifficultyText);
+
+    let mapProgressFilterDifficultySelect = document.createElement('select');
+    mapProgressFilterDifficultySelect.id = 'map-progress-filter-difficulty-select';
+    mapProgressFilterDifficultySelect.classList.add('map-progress-filter-difficulty-select');
+    mapProgressFilterDifficultySelect.addEventListener('change', () => {
+        changeBrowserFilter(type, mapProgressFilterDifficultySelect.value);
+    })
+    mapProgressFilterDifficulty.appendChild(mapProgressFilterDifficultySelect);
+
+    let leaderboardEntries = document.createElement('div');
+    leaderboardEntries.id = 'browser-entries';
+    // leaderboardEntries.classList.add('leaderboard-entries');
+    browserDiv.appendChild(leaderboardEntries);
+
+    let leaderboardFooter = document.createElement('div');
+    leaderboardFooter.classList.add('browser-footer');
+    browserDiv.appendChild(leaderboardFooter);
+
+    //left div
+    let leaderboardFooterLeft = document.createElement('div');
+    leaderboardFooterLeft.classList.add('leaderboard-footer-left', 'browser-footer-left');
+    leaderboardFooter.appendChild(leaderboardFooterLeft);
+    //refresh button
+    let leaderboardFooterRefresh = document.createElement('img');
+    leaderboardFooterRefresh.classList.add('leaderboard-footer-refresh');
+    leaderboardFooterRefresh.src = "./Assets/UI/RefreshBtn.png";
+    leaderboardFooterRefresh.addEventListener('click', () => {
+        if(!refreshRateLimited) {
+        generateLeaderboardEntries(metadata)
+        leaderboardFooterRefresh.style.filter = "grayscale(1) brightness(0.5)"
+        setTimeout(() => {
+            leaderboardFooterRefresh.style.filter = "none";
+            refreshRateLimited = false;
+        }, 10000)
+        refreshRateLimited = true;
+        }
+    })
+    leaderboardFooterLeft.appendChild(leaderboardFooterRefresh);
+
+    //middle div
+    let leaderboardFooterMiddle = document.createElement('div');
+    leaderboardFooterMiddle.classList.add('leaderboard-footer-middle', 'browser-footer-middle');
+    leaderboardFooter.appendChild(leaderboardFooterMiddle);
+    //page left
+
+    let leaderboardFooterPageLeft = document.createElement('img');
+    leaderboardFooterPageLeft.classList.add('leaderboard-footer-page-left','black-outline');
+    leaderboardFooterPageLeft.src = "./Assets/UI/NextArrowSmallYellow.png";
+    leaderboardFooterMiddle.appendChild(leaderboardFooterPageLeft);
+    //page number
+    let leaderboardFooterPageNumber = document.createElement('div');
+    leaderboardFooterPageNumber.id = 'browser-footer-page-number';
+    leaderboardFooterPageNumber.classList.add('leaderboard-footer-page-number','black-outline');
+    leaderboardFooterPageNumber.innerHTML = `Loading...`;
+    leaderboardFooterMiddle.appendChild(leaderboardFooterPageNumber);
+    //page right
+    let leaderboardFooterPageRight = document.createElement('img');
+    leaderboardFooterPageRight.classList.add('leaderboard-footer-page-right','black-outline');
+    leaderboardFooterPageRight.src = "./Assets/UI/NextArrowSmallYellow.png";
+    leaderboardFooterPageLeft.addEventListener('click', () => {
+        leaderboardPage--;
+        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (#${(leaderboardPage * leaderboardPageEntryCount) - (leaderboardPageEntryCount - 1)} - ${leaderboardPage * leaderboardPageEntryCount})`;
+        leaderboardEntries.innerHTML = "";
+        copyLoadingIcon(leaderboardEntries)
+
+        generateLeaderboardEntries(metadata)
+    })
+    leaderboardFooterPageRight.addEventListener('click', () => {
+        leaderboardPage++;
+        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (#${(leaderboardPage * leaderboardPageEntryCount) - (leaderboardPageEntryCount - 1)} - ${leaderboardPage * leaderboardPageEntryCount})`;
+        leaderboardEntries.innerHTML = "";
+        copyLoadingIcon(leaderboardEntries)
+
+        generateLeaderboardEntries(metadata)
+    })
+    leaderboardFooterMiddle.appendChild(leaderboardFooterPageRight);
+
+    //right div
+    let leaderboardFooterRight = document.createElement('div');
+    leaderboardFooterRight.classList.add('leaderboard-footer-right', 'browser-footer-right');
+    leaderboardFooter.appendChild(leaderboardFooterRight);
+
+    //Goto label
+    let leaderboardFooterGoto = document.createElement('p');
+    leaderboardFooterGoto.classList.add('leaderboard-footer-goto','black-outline');
+    leaderboardFooterGoto.innerHTML = "ID:";
+    leaderboardFooterRight.appendChild(leaderboardFooterGoto);
+
+    //enter a page number
+    let leaderboardFooterPageInput = document.createElement('input');
+    leaderboardFooterPageInput.classList.add('leaderboard-footer-page-input', 'browser-footer-input');
+    leaderboardFooterPageInput.type = "text";
+    leaderboardFooterPageInput.value = type == "Map Browser" ? "ZMYXDVU" : "ZMGVLCF";
+    leaderboardFooterRight.appendChild(leaderboardFooterPageInput);
+
+    let selectorGoImg = document.createElement('img');
+    selectorGoImg.classList.add('leaderboard-go-img');
+    selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
+    selectorGoImg.addEventListener('click', async () => {
+        showChallengeModel('browser', await getChallengeMetadata(leaderboardFooterPageInput.value), "Custom");
+    })
+    leaderboardFooterRight.appendChild(selectorGoImg);
+
+    // copyLoadingIcon(leaderboardEntries)
+
+    switch(type) {
+        case "Challenge Browser":
+            let mapsProgressGrid = document.createElement('div');
+            mapsProgressGrid.id = 'maps-progress-grid';
+            mapsProgressGrid.classList.add('maps-progress-view');
+            mapsProgressGrid.classList.add('black-outline')
+            mapsProgressGrid.classList.add('maps-progress-view-selected');
+            mapsProgressGrid.innerHTML = "Grid";
+            mapsProgressGrid.addEventListener('click', () => {
+                onChangeMapView("grid");
+            })
+            mapsProgressViews.appendChild(mapsProgressGrid);
+            
+
+            let mapsProgressGame = document.createElement('div');
+            mapsProgressGame.id = 'maps-progress-game';
+            mapsProgressGame.classList.add('maps-progress-view');
+            mapsProgressGame.classList.add('black-outline')
+            mapsProgressGame.innerHTML = "List";
+            mapsProgressGame.addEventListener('click', () => {
+                onChangeMapView("game");
+            })
+            mapsProgressViews.appendChild(mapsProgressGame);
+
+
+            let options = ["Featured", "Newest"]
+            options.forEach((option) => {
+                let difficultyOption = document.createElement('option');
+                difficultyOption.value = option;
+                difficultyOption.innerHTML = option;
+                mapProgressFilterDifficultySelect.appendChild(difficultyOption);
+            })
+            changeBrowserFilter(type, "Featured")
+            break;
+        case "Map Browser":
+            let mapsProgressGameMap = document.createElement('div');
+            mapsProgressGameMap.id = 'maps-progress-game';
+            mapsProgressGameMap.classList.add('maps-progress-view');
+            mapsProgressGameMap.classList.add('black-outline')
+            mapsProgressGameMap.innerHTML = "Grid";
+            mapsProgressGameMap.addEventListener('click', () => {
+                onChangeMapView("game");
+            })
+            mapsProgressViews.appendChild(mapsProgressGameMap);
+
+            let mapsProgressGallery = document.createElement('div');
+            mapsProgressGallery.id = 'maps-progress-gallery';
+            mapsProgressGallery.classList.add('maps-progress-view');
+            mapsProgressGallery.classList.add('maps-progress-view-list');
+            mapsProgressGallery.classList.add('black-outline')
+            mapsProgressGallery.innerHTML = "Gallery";
+            mapsProgressGallery.addEventListener('click', () => {
+                onChangeMapView("gallery");
+            })
+            mapsProgressViews.appendChild(mapsProgressGallery);
+
+            let optionsMap = ["Most Liked", "Trending", "Newest"]
+            optionsMap.forEach((option) => {
+                let difficultyOption = document.createElement('option');
+                difficultyOption.value = option;
+                difficultyOption.innerHTML = option;
+                mapProgressFilterDifficultySelect.appendChild(difficultyOption);
+            })
+            changeBrowserFilter(type, "Most Liked")
+            break;
+    }
+}
+
+function changeBrowserFilter(type, filter){
+    switch(filter) {
+        case "Newest":
+            browserFilter = "newest";
+            break;
+        case "Featured":
+            browserFilter = "trending";
+            break;
+        case "Trending":
+            browserFilter = "trending";
+            break;
+        case "Most Liked":
+            browserFilter = "mostLiked";
+            break;
+    }
+    generateBrowserEntries(type);
+}
+
+async function generateBrowserEntries(type){
+    await getBrowserData();
+    console.log(browserData)
+
+    let browserEntries = document.getElementById('browser-entries');
+    browserEntries.innerHTML = "";
+
+    if(browserData != null) {
+        switch(type) {
+            case "Challenge Browser":
+                generateChallengeEntries(browserEntries);
+                break;
+            case "Map Browser":
+                generateMapGameEntries(browserEntries);
+                break;
+        }
+    } else {
+        let noDataFound = document.createElement('p');
+        noDataFound.classList.add('no-data-found');
+        noDataFound.classList.add('black-outline');
+        noDataFound.style.width = "250px";
+        noDataFound.innerHTML = "No Data Found";
+        browserEntries.appendChild(noDataFound);
+    }
+}
+
+function generateChallengeEntries(destination) {
+    browserData.forEach(async (entry, index) => {
+        let challengeEntry = document.createElement('div');
+        challengeEntry.classList.add('challenge-entry');
+        challengeEntry.addEventListener('click', async () => {
+            showChallengeModel('browser', await getChallengeMetadata(entry.id), "Custom");
+        })
+        destination.appendChild(challengeEntry);
+
+        switch(currentBrowserView) {
+            case "Grid":
+                destination.classList.add('challenge-card-entries');
+                //top
+                let challengeTop = document.createElement('div');
+                challengeTop.classList.add('challenge-top');
+                challengeEntry.appendChild(challengeTop);
+                //name
+                let challengeName = document.createElement('p');
+                challengeName.classList.add('challenge-name','black-outline');
+                challengeName.innerHTML = entry.name;
+                if (entry.name.length > 30) { challengeName.style.fontSize = '18px' } 
+                challengeTop.appendChild(challengeName);
+
+                //middle
+                let challengeMiddle = document.createElement('div');
+                challengeMiddle.classList.add('challenge-middle');
+                challengeEntry.appendChild(challengeMiddle);
+                //left
+                let challengeLeft = document.createElement('div');
+                challengeLeft.classList.add('challenge-left');
+                challengeMiddle.appendChild(challengeLeft);
+                //mapdiv
+                let challengeMapDiv = document.createElement('div');
+                challengeMapDiv.classList.add("race-map-div", "silver-border");
+                challengeLeft.appendChild(challengeMapDiv);
+
+                let challengeMapImg = document.createElement('img');
+                challengeMapImg.classList.add("race-map-img");
+                challengeMapImg.src = "./Assets/MapIcon/MapLoadingImage.png"
+                challengeMapDiv.appendChild(challengeMapImg);
+
+                let challengeChallengeIcons = document.createElement('div');
+                challengeChallengeIcons.classList.add("race-challenge-icons");
+                challengeMapDiv.appendChild(challengeChallengeIcons);
+
+                let challengeMapRounds = document.createElement('p');
+                challengeMapRounds.classList.add("race-map-rounds", 'black-outline');
+                challengeMapDiv.appendChild(challengeMapRounds);
+                //right
+                let challengeUSVDiv = document.createElement('div');
+                challengeUSVDiv.classList.add('browser-usv-div');
+                challengeMiddle.appendChild(challengeUSVDiv);
+
+                let challengeUpvoteDiv = document.createElement('div');
+                challengeUpvoteDiv.classList.add('challenge-upvote-div');
+                challengeUSVDiv.appendChild(challengeUpvoteDiv);
+
+                let challengeUpvoteIcon = document.createElement('img');
+                challengeUpvoteIcon.classList.add('browser-upvote-icon');
+                challengeUpvoteIcon.src = "./Assets/UI/ChallengeThumbsUpIcon.png";
+                challengeUpvoteDiv.appendChild(challengeUpvoteIcon);
+
+                let challengeUpvoteValue = document.createElement('p');
+                challengeUpvoteValue.classList.add('browser-upvote-value');
+                challengeUpvoteValue.innerHTML = 0;
+                // challengeUpvoteValue.innerHTML = challengeExtraData["Upvotes"];
+                challengeUpvoteDiv.appendChild(challengeUpvoteValue);
+
+                let challengeTrophyDiv = document.createElement('div');
+                challengeTrophyDiv.classList.add('challenge-trophy-div');
+                challengeUSVDiv.appendChild(challengeTrophyDiv);
+
+                let challengeTrophyIcon = document.createElement('img');
+                challengeTrophyIcon.classList.add('browser-trophy-icon');
+                challengeTrophyIcon.src = "./Assets/UI/ChallengeTrophyIcon.png";
+                challengeTrophyDiv.appendChild(challengeTrophyIcon);
+
+                let challengeTrophyValue = document.createElement('p');
+                challengeTrophyValue.classList.add('browser-trophy-value');
+                // challengeTrophyValue.innerHTML = challengeExtraData["Player Completion Rate"];
+                challengeTrophyValue.innerHTML = 0;
+                challengeTrophyDiv.appendChild(challengeTrophyValue);
+
+                let challengeSkullDiv = document.createElement('div');
+                challengeSkullDiv.classList.add('challenge-skull-div');
+                challengeUSVDiv.appendChild(challengeSkullDiv);
+
+                let challengeSkullIcon = document.createElement('img');
+                challengeSkullIcon.classList.add('browser-skull-icon');
+                challengeSkullIcon.src = "./Assets/UI/DeathRateIcon.png";
+                challengeSkullDiv.appendChild(challengeSkullIcon);
+
+                let challengeSkullValue = document.createElement('p');
+                challengeSkullValue.classList.add('browser-skull-value');
+                // challengeSkullValue.innerHTML = challengeExtraData["Player Win Rate"];
+                challengeSkullValue.innerHTML =0;
+                challengeSkullDiv.appendChild(challengeSkullValue);
+
+                //bottom
+                let challengeBottom = document.createElement('div');
+                challengeBottom.classList.add('challenge-bottom');
+                challengeEntry.appendChild(challengeBottom);
+
+
+                let challengeCreator = document.createElement('div');
+                challengeCreator.classList.add('challenge-creator');
+                challengeBottom.appendChild(challengeCreator);
+    
+                let avatar = document.createElement('div');
+                avatar.classList.add('avatar');
+                challengeCreator.appendChild(avatar);
+    
+                let width = 50;
+    
+                let avatarFrame = document.createElement('img');
+                avatarFrame.classList.add('avatar-frame','noSelect');
+                avatarFrame.style.width = `${width}px`;
+                avatarFrame.src = '../Assets/UI/InstaTowersContainer.png';
+                avatar.appendChild(avatarFrame);
+    
+                let avatarImg = document.createElement('img');
+                avatarImg.classList.add('avatar-img','noSelect');
+                avatarImg.style.width = `${width}px`;
+                avatarImg.src = getProfileIcon("ProfileAvatar01");
+                avatar.appendChild(avatarImg);
+    
+                let challengeCreatorName = document.createElement('p');
+                challengeCreatorName.classList.add('browser-creator-name', 'black-outline');
+                challengeCreatorName.innerHTML = "Loading...";
+                challengeCreator.appendChild(challengeCreatorName);
+                //async function to change avatar to actual src
+                // await getUserProfile(challengeExtraData["Creator"]).then(data => {
+                //     challengeCreatorName.innerHTML = data.displayName;
+                //     avatarImg.src = getProfileIcon(data.avatar);
+                //     challengeCreator.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(data.banner)})`;
+                // });
+
+                let challengeIDandPlay = document.createElement('div');
+                challengeIDandPlay.classList.add('challenge-id-and-play');
+                challengeBottom.appendChild(challengeIDandPlay);
+
+                let challengeID = document.createElement('p');
+                challengeID.classList.add('browser-id', 'black-outline');
+                challengeID.innerHTML = entry.id;
+                challengeIDandPlay.appendChild(challengeID);
+
+                let selectorCopyImg = document.createElement('img');
+                selectorCopyImg.classList.add('browser-copy-img');
+                selectorCopyImg.src = '../Assets/UI/CopyClipboardBtn.png';
+                selectorCopyImg.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    navigator.clipboard.writeText(entry.id).then(function() {
+                        console.log('Copying to clipboard was successful!');
+                        challengeID.innerHTML = "Copied!";
+                        setTimeout(() => {
+                            challengeID.innerHTML = entry.id;
+                        }, 2000);
+                    }, function(err) {
+                        console.log('Could not copy text: ', err);
+                    });
+                });
+                challengeIDandPlay.appendChild(selectorCopyImg);
+
+                let selectorGoImg = document.createElement('img');
+                selectorGoImg.classList.add('browser-go-img');
+                selectorGoImg.src = '../Assets/UI/GoBtnSmall.png';
+                selectorGoImg.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    window.open(`btd6://Challenge/${entry.id}`, '_blank');
+                });
+                challengeIDandPlay.appendChild(selectorGoImg);
+
+                //ID
+                //Open Game
+                //creator
+                let observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(async observerentry => {
+                        if (observerentry.isIntersecting) {
+                            let challengeData = await getChallengeMetadata(entry.id);
+                            console.log(challengeData)
+                            challengeMapImg.src = challengeData.mapURL;
+                            let modifiers = challengeModifiers(challengeData);
+                            let rules = challengeRules(challengeData)
+                            for (let modifier of Object.values(modifiers)) {
+                                console.log(modifier)
+                                let challengeModifierIcon = document.createElement('img');
+                                challengeModifierIcon.classList.add('challenge-modifier-icon-event');
+                                challengeModifierIcon.src = `./Assets/ChallengeRulesIcon/${modifier.icon}.png`;
+                                challengeChallengeIcons.appendChild(challengeModifierIcon);
+                            }
+                            for (let rule of rules) {
+                                if (rule == "No Round 100 Reward") { continue; }
+                                if (rule == "Paragon Limit") { continue; }
+                                let challengeRuleIcon = document.createElement('img');
+                                challengeRuleIcon.classList.add('challenge-rule-icon-event');
+                                challengeRuleIcon.src = `./Assets/ChallengeRulesIcon/${rulesMap[rule]}.png`;
+                                challengeChallengeIcons.appendChild(challengeRuleIcon);
+                            }
+                            challengeMapRounds.innerHTML = `Rounds ${challengeData.startRound == 0 ? constants.startRound[challengeData.mode == "Standard" ? challengeData.difficulty : challengeData.mode] : challengeData.startRound}/${challengeData.endRound}`
+                            challengeUpvoteValue.innerHTML = challengeData.upvotes.toLocaleString();
+                            challengeTrophyValue.innerHTML = challengeData.playsUnique == 0 ? "0%" : challengeData.winsUnique - challengeData.playsUnique == 0 ? "0%" : `${((challengeData.winsUnique / challengeData.playsUnique) * 100).toFixed(2)}%`;
+                            challengeSkullValue.innerHTML = challengeData.playsUnique == 0 ? "0%" : `${((challengeData.wins / (challengeData.plays + challengeData.restarts)) * 100).toFixed(2)}%`;
+                            let creatorData = await getUserProfile(challengeData.creator);
+                            challengeCreatorName.innerHTML = creatorData.displayName;
+                            if (creatorData.displayName.length > 14) { challengeCreatorName.style.fontSize = '17px' }
+                            avatarImg.src = getProfileIcon(creatorData.avatar);
+                            challengeBottom.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(creatorData.banner)})`;
+                            observer.unobserve(observerentry.target);
+                        }
+                    });
+                });
+                observer.observe(challengeEntry);
+                break;
+            case "Game":
+                break;
+        }
+    })
+}
+
+function generateMapGameEntries(destination) {
+    browserData.forEach((entry, index) => {
+        let mapEntry = document.createElement('div');
+        mapEntry.classList.add('map-entry');
+        mapEntry.addEventListener('click', () => {
+            showMapModel('browser', entry, "Custom");
+        })
+        destination.appendChild(mapEntry);
+
+        switch(currentBrowserView) {
+            case "Gallery":
+                break;
+            case "Game":
+                break;
+        }
+
+
+        let observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(async observerentry => {
+                if (observerentry.isIntersecting) {
+                    // let mapData = await getMapData(entry.id);
+                    // console.log(mapData)
+                    observer.unobserve(observerentry.target);
+                }
+            });
+        });
+        observer.observe(mapEntry);
+    })
 }
 
 function generateSettings(){

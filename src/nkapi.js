@@ -9,8 +9,6 @@ let _btd6publicprofile = {} // the model
 let racesData = null;
 
 let leaderboardData = null;
-// let leaderboardNext = null;
-// let leaderboardPrev = null;
 let leaderboardLink = null;
 let leaderboardPage = 1;
 let leaderboardPageEntryCount = null;
@@ -28,6 +26,13 @@ let CTData = null;
 let DCData = null;
 
 let challengesCache = {}
+
+let browserData = null;
+let browserLink = null;
+let browserPage = 1;
+let browserPageEntryCount = null;
+
+let browserFilter = "newest";
 
 // getSaveData(oak_token)
 // getPublicProfileData(oak_token)
@@ -131,20 +136,6 @@ async function getLeaderboardData() {
             leaderboardData = json["body"];
             leaderboardPageEntryCount = leaderboardData.length;
             document.getElementById('leaderboard-footer-page-number').innerHTML = `Page ${leaderboardPage} (#${(leaderboardPage * leaderboardPageEntryCount) - (leaderboardPageEntryCount - 1)} - ${leaderboardPage * leaderboardPageEntryCount})`;
-            // if (json["next"] == null) {
-            //     document.getElementById("leaderboardNext").style.display = "none";
-            // } else {
-            //     document.getElementById("leaderboardNext").style.display = "block";
-            // }
-            // if (json["prev"] == null) {
-            //     document.getElementById("leaderboardPrev").style.display = "none";
-            // } else {
-            //     document.getElementById("leaderboardPrev").style.display = "block";
-            // }
-            // leaderboardNext = json["next"];
-            // leaderboardPrev = json["prev"];
-            // leaderboardLink = racesData[key]["leaderboard"];
-            // leaderboardPage = page;
             return leaderboardData;
         });
     } else {
@@ -219,6 +210,21 @@ async function getChallengeMetadata(challengeId) {
         console.log(`used cache for ${challengeId}`)
     }
     return challengesCache[challengeId];
+}
+
+async function getBrowserData() {
+    if (browserLink) {
+        browserData = null;
+        return fetchData(`${browserLink}${browserFilter}?page=${browserPage}`, (json) => {
+            console.log(`fetched ${browserLink}?page=${browserPage}`)
+            browserData = json["body"];
+            browserPageEntryCount = browserData.length;
+            document.getElementById('browser-footer-page-number').innerHTML = `Page ${leaderboardPage} of 4`;
+            return leaderboardData;
+        });
+    } else {
+        return errorModal("Content Browser Fetch Error: No data found");
+    }
 }
 
 async function getUserProfile(key) {

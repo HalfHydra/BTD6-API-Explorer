@@ -266,7 +266,7 @@ function getProfileIcon(profile){
 }
 
 function getProfileBanner(banner){
-    return `Assets/ProfileBanner/${banner}.png`;
+    return banner == "" ? "Assets/ProfileBanner/TeamsBannerDeafult.png" : `Assets/ProfileBanner/${banner}.png`;
 }
 
 function getLocValue(key){
