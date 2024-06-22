@@ -3249,7 +3249,7 @@
 .challenge-header-right-bottom {
     display: flex;
     height: 50px;
-    align-items: flex-end;
+    align-items: center;
 }
 .quick-stat {
     display: flex;
@@ -3394,6 +3394,8 @@
     flex-wrap: wrap;
     justify-content: center;
     background-color: var(--profile-secondary);
+
+    height: 100%;
 }
 .challenge-bottom {
     display: flex;
@@ -3504,6 +3506,12 @@
 }
 .browser-challenge-creator {
     width: 220px;
+}
+.gallery-id {
+    text-align: center;
+    border-radius: unset;
+    padding: 4px;
+    font-size: 22px;
 }
 
 .black-outline {
@@ -3628,7 +3636,7 @@ p {
     background: linear-gradient(180deg, #fecf00 0%, #fec600 100%);
 }
 
-.overview, .events, .explore, .extras, .challenge, .publicprofile, .relics {
+.overview, .progress-page, .events, .explore, .extras, .challenge, .publicprofile, .relics {
     margin-bottom: 30px;
 }
 
@@ -3638,6 +3646,11 @@ p {
     width: 100%;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.error-modal-ok-button-div {
+    display: flex;
+    justify-content: center;
 }
 
 /* * {

@@ -166,6 +166,8 @@ let saveSkintoSkinMap = {
     "WolfpackQuincy": "Wolfpack Quincy"
 }
 
+let knownProblematicMaps = ["ZMYVERW", "ZMYUWTV", "ZMYUDTK", "ZMYVPGA", "ZMYVPFH", "ZMYWHPC"]
+
 function getTowerAssetPath(towerType, upgrade) {
     return towerType == "WizardMonkey" ? `Assets/TowerIcon/${upgrade}-Wizard.png` : `Assets/TowerIcon/${upgrade}-${towerType}.png`;
 }
@@ -267,6 +269,10 @@ function getProfileIcon(profile){
 
 function getProfileBanner(banner){
     return banner == "" ? "Assets/ProfileBanner/TeamsBannerDeafult.png" : `Assets/ProfileBanner/${banner}.png`;
+}
+
+function getCustomMapIcon(id) {
+    return knownProblematicMaps.includes(id) ? `Assets/CustomMapIcon/${id}.jpg` : `https://data.ninjakiwi.com/btd6/maps/map/${id}/preview`;
 }
 
 function getLocValue(key){

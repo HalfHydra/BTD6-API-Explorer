@@ -34,6 +34,12 @@ let browserPageEntryCount = null;
 
 let browserFilter = "newest";
 
+let cacheBust = false;
+
+let isErrorModalOpen = false;
+
+let customMapsCache = {}
+
 // getSaveData(oak_token)
 // getPublicProfileData(oak_token)
     // let res = await fetch(`https://data.ninjakiwi.com/btd6/save/${oak_token}`);
@@ -41,15 +47,32 @@ let browserFilter = "newest";
 
 
 async function fetchData(url, onSuccess) {
-    let res = await fetch(url);
+    let res = null;
+    try {
+        if (cacheBust) {
+            res = await fetch(url, {cache: "reload"});
+            cacheBust = false;
+        } else {
+            res = await fetch(url);
+        }
+    } catch (e) {
+        console.log(e)
+        errorModal(`You have hit the rate limit.<br>If you are browsing the leaderboards or content browsers, please slow down!<br><br>The rate limit will clear after a short time.`, "api")
+        return `You have hit the rate limit. [${e}]`;
+    }
     try {
         let json = await res.json();
         if(json["success"] == true){
             onSuccess(json);
         } else {
-            document.getElementById("loading").style.transform = "scale(0)";
-            pressedStart = false;
-            errorModal(json["error"], "api")
+            if(json["reason"] == "Rate limit") {
+                isErrorModalOpen = true;
+                errorModal("You have hit the rate limit. Please try again later.", "api");
+            } else {
+                document.getElementById("loading").style.transform = "scale(0)";
+                pressedStart = false;
+                errorModal(json["error"], "api");
+            }
         }
         return json;
     } catch (e) {
@@ -219,7 +242,7 @@ async function getBrowserData() {
             console.log(`fetched ${browserLink}?page=${browserPage}`)
             browserData = json["body"];
             browserPageEntryCount = browserData.length;
-            document.getElementById('browser-footer-page-number').innerHTML = `Page ${leaderboardPage} of 4`;
+            document.getElementById('browser-footer-page-number').innerHTML = `Page ${browserPage} of 4`;
             return leaderboardData;
         });
     } else {
@@ -238,6 +261,19 @@ async function getUserProfile(key) {
         console.log(`used cache for ${player}`)
     }
     return profileCache[player];
+}
+
+async function getCustomMapMetadata(mapId) {
+    if (customMapsCache[mapId] == null) {
+        await fetchData(`https://data.ninjakiwi.com/btd6/maps/map/${mapId}`, (json) => {
+            console.log(`fetched ${mapId}`)
+            customMapsCache[mapId] = json["body"];
+            return customMapsCache[mapId];
+        });
+    } else {
+        console.log(`used cache for ${mapId}`)
+    }
+    return customMapsCache[mapId];
 }
 
 function readLocalStorage(){
