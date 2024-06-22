@@ -902,7 +902,7 @@ function generateHeaderTabs(){
         content.appendChild(contentElement);
     })
 
-    let extraContent = ['Challenge', 'PublicProfile', 'Leaderboard', "Browser", 'Relics'];
+    let extraContent = ['Challenge', "Map", 'PublicProfile', 'Leaderboard', "Browser", 'Relics'];
     extraContent.forEach((headerName) => {
         headerName = headerName.toLowerCase();
         let contentElement = document.createElement('div');
@@ -4974,21 +4974,24 @@ async function generateChallenges(type) {
     }
 }
 
-function processChallenge(metadata){
+function processChallenge(metadata, map){
     let result = {};
-    if (metadata.leastCashUsed != "-1") {
-        result.scoringType = "Least Cash"
-    } else if (metadata.leastTiersUsed != "-1") {
-        result.scoringType = "Least Tiers"
-    } else {
-        result.scoringType = null;
+    console.log(map);
+    if (map == null) {
+        if (metadata.leastCashUsed != "-1") {
+            result.scoringType = "Least Cash"
+        } else if (metadata.leastTiersUsed != "-1") {
+            result.scoringType = "Least Tiers"
+        } else {
+            result.scoringType = null;
+        }
+        result["Random Seed"] = metadata.seed;
     }
 
     result["Date Created"] = new Date(metadata.createdAt).toLocaleDateString();
     result["ID"] = metadata.id;
     result["Creator"] = metadata.creator;
     result["Game Version"] = metadata.gameVersion;
-    result["Random Seed"] = metadata.seed;
 
     result["Stats"] = {
         "Plays": metadata.plays,
@@ -6191,6 +6194,11 @@ function exitChallengeModel(source){
     document.getElementById(`${source}-content`).style.display = "flex";
 }
 
+function exitMapModel(source){
+    document.getElementById('map-content').style.display = "none";
+    document.getElementById(`${source}-content`).style.display = "flex";
+}
+
 async function openProfile(source, profile){
     profile = await getUserProfile(profile.profile)
     if (profile == null) { return; }
@@ -6889,16 +6897,15 @@ function changeBrowserTab(selected){
     switch(selected){
         case 'Challenge Browser':
             browserLink = "https://data.ninjakiwi.com/btd6/challenges/filter/"
-            generateBrowser("explore", "Challenge Browser", null);
             break;
         case 'Map Browser':
             browserLink = "https://data.ninjakiwi.com/btd6/maps/filter/"
-            generateBrowser("explore", "Map Browser", null);
             break;
     }
+    generateBrowser(selected);
 }
 
-function generateBrowser(source, type, data){
+function generateBrowser(type){
     let browserContent = document.getElementById('browser-content');
     browserContent.innerHTML = "";
 
@@ -7557,15 +7564,15 @@ function generateMapGameEntries(destination) {
     browserData.forEach((entry, index) => {
         let mapEntry = document.createElement('div');
         // mapEntry.classList.add('map-entry');
-        mapEntry.addEventListener('click', () => {
-            showMapModel('browser', entry, "Custom");
+        mapEntry.addEventListener('click', async () => {
+            showMapModel('browser', await getCustomMapMetadata(entry.id));
         })
         destination.appendChild(mapEntry);
         console.log(currentBrowserView)
         switch(currentBrowserView) {
             case "Grid":
                 destination.classList.add('challenge-card-entries');
-                mapEntry.classList.add('challenge-entry');
+                mapEntry.classList.add('challenge-entry', "map-browser-bg");
                 
                 let challengeTop = document.createElement('div');
                 challengeTop.classList.add('challenge-top');
@@ -7575,6 +7582,7 @@ function generateMapGameEntries(destination) {
                 challengeName.classList.add('challenge-name','black-outline');
                 challengeName.innerHTML = entry.name;
                 if (entry.name.length > 30) { challengeName.style.fontSize = '18px' } 
+                if (entry.name.length > 35) { challengeName.style.fontSize = '17px' } 
                 challengeTop.appendChild(challengeName);
 
                 let challengeMiddle = document.createElement('div');
@@ -7769,6 +7777,239 @@ function generateMapGameEntries(destination) {
         });
         observer.observe(mapEntry);
     })
+}
+
+async function showMapModel(source, metadata) {
+    if (metadata == null) { return; }
+    let mapContent = document.getElementById('map-content');
+    mapContent.style.display = "flex";
+    mapContent.innerHTML = "";
+    document.getElementById(`${source}-content`).style.display = "none";
+
+    let challengeExtraData = processChallenge(metadata);
+
+    let challengeModel = document.createElement('div');
+    challengeModel.classList.add('challenge-model');
+    mapContent.appendChild(challengeModel);
+
+    let challengeModelHeader = document.createElement('div');
+    challengeModelHeader.classList.add('challenge-model-header');
+    challengeModel.appendChild(challengeModelHeader);
+
+    let challengeModelHeaderIcons = document.createElement('div');
+    challengeModelHeaderIcons.classList.add('challenge-model-header-icons');
+    challengeModelHeader.appendChild(challengeModelHeaderIcons);
+
+    let challengeModelHeaderIcon = document.createElement('img');
+    challengeModelHeaderIcon.classList.add('challenge-model-header-difficulty');
+    challengeModelHeaderIcon.src = "./Assets/UI/EditMapIcon.png";
+    challengeModelHeaderIcons.appendChild(challengeModelHeaderIcon);
+
+    let challengeModelHeaderTexts = document.createElement('div');
+    challengeModelHeaderTexts.classList.add('challenge-model-header-texts');
+    challengeModelHeader.appendChild(challengeModelHeaderTexts);
+
+    let challengeModelHeaderName = document.createElement('p');
+    challengeModelHeaderName.classList.add('challenge-model-header-name','black-outline');
+    challengeModelHeaderName.innerHTML = metadata.name;
+    challengeModelHeaderTexts.appendChild(challengeModelHeaderName);
+
+    let challengeHeaderRightContainer = document.createElement('div');
+    challengeHeaderRightContainer.classList.add('challenge-header-right-container');
+    challengeModelHeader.appendChild(challengeHeaderRightContainer);
+
+    let challengeHeaderRightTop = document.createElement('div');
+    challengeHeaderRightTop.classList.add('challenge-header-right-top');
+    challengeHeaderRightContainer.appendChild(challengeHeaderRightTop);
+
+    let modalClose = document.createElement('img');
+    modalClose.classList.add('modal-close');
+    modalClose.src = "./Assets/UI/CloseBtn.png";
+    modalClose.addEventListener('click', () => {
+        exitMapModel(source);
+    })
+    challengeHeaderRightTop.appendChild(modalClose);
+
+    let challengeHeaderRightBottom = document.createElement('div');
+    challengeHeaderRightBottom.classList.add('challenge-header-right-bottom');
+    challengeHeaderRightContainer.appendChild(challengeHeaderRightBottom);
+
+    let challengeID = document.createElement('p');
+    challengeID.classList.add('challenge-id', 'black-outline');
+    challengeID.innerHTML = metadata.id;
+    challengeID.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        copyID(metadata.id, challengeID)
+    })
+    challengeHeaderRightBottom.appendChild(challengeID);
+
+    let selectorCopyImg = document.createElement('img');
+    selectorCopyImg.classList.add('browser-copy-img');
+    selectorCopyImg.src = '../Assets/UI/CopyClipboardBtn.png';
+    selectorCopyImg.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        copyID(metadata.id, challengeID)
+    });
+    challengeHeaderRightBottom.appendChild(selectorCopyImg);
+
+    let selectorGoImg = document.createElement('img');
+    selectorGoImg.classList.add('browser-go-img');
+    selectorGoImg.src = '../Assets/UI/GoBtnSmall.png';
+    selectorGoImg.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        window.open(`btd6://Challenge/${metadata.id}`, '_blank');
+    });
+    challengeHeaderRightBottom.appendChild(selectorGoImg);
+
+    let challengeModelTop = document.createElement('div');
+    challengeModelTop.classList.add('map-model-top', 'map-model-bg');
+    challengeModel.appendChild(challengeModelTop);
+
+    let challengeModelMapIcon = document.createElement('img');
+    challengeModelMapIcon.classList.add('map-model-img', 'boss-border');
+    challengeModelMapIcon.src = Object.keys(constants.mapsInOrder).includes(metadata.map) ? getMapIcon(metadata.map) : metadata.mapURL;
+    challengeModelTop.appendChild(challengeModelMapIcon);
+
+    if(challengeExtraData.statsValid) {
+        let challengeStatsDiv = document.createElement('div');
+        challengeStatsDiv.classList.add('map-model-stats-div');
+        challengeModelTop.appendChild(challengeStatsDiv);
+
+        let challengeStatsHeader = document.createElement('p');
+        challengeStatsHeader.classList.add('challenge-stats-header', 'black-outline');
+        challengeStatsHeader.innerHTML = "Challenge Stats";
+        challengeStatsDiv.appendChild(challengeStatsHeader);
+
+        let challengeStatsLeftRight = document.createElement('div');
+        challengeStatsLeftRight.classList.add('challenge-stats-left-right');
+        challengeStatsDiv.appendChild(challengeStatsLeftRight);
+
+        let challengeStatsLeft = document.createElement('div');
+        challengeStatsLeft.classList.add('challenge-stats-left');
+        challengeStatsLeftRight.appendChild(challengeStatsLeft);
+
+        //ID
+
+        //Upvote Trophy Skull
+        let challengeUSVDiv = document.createElement('div');
+        challengeUSVDiv.classList.add('challenge-usv-div');
+        challengeStatsLeft.appendChild(challengeUSVDiv);
+
+        if (challengeExtraData["Upvotes"] != 0) {
+            let challengeUpvoteDiv = document.createElement('div');
+            challengeUpvoteDiv.classList.add('challenge-upvote-div');
+            challengeUSVDiv.appendChild(challengeUpvoteDiv);
+
+            let challengeUpvoteIcon = document.createElement('img');
+            challengeUpvoteIcon.classList.add('challenge-upvote-icon');
+            challengeUpvoteIcon.src = "./Assets/UI/ChallengeThumbsUpIcon.png";
+            challengeUpvoteDiv.appendChild(challengeUpvoteIcon);
+
+            let challengeUpvoteValue = document.createElement('p');
+            challengeUpvoteValue.classList.add('challenge-upvote-value');
+            challengeUpvoteValue.innerHTML = challengeExtraData["Upvotes"];
+            challengeUpvoteDiv.appendChild(challengeUpvoteValue);
+        }
+
+        let challengeTrophyDiv = document.createElement('div');
+        challengeTrophyDiv.classList.add('challenge-trophy-div');
+        challengeUSVDiv.appendChild(challengeTrophyDiv);
+
+        let challengeTrophyIcon = document.createElement('img');
+        challengeTrophyIcon.classList.add('challenge-trophy-icon');
+        challengeTrophyIcon.src = "./Assets/UI/ChallengeTrophyIcon.png";
+        challengeTrophyDiv.appendChild(challengeTrophyIcon);
+
+        let challengeTrophyValue = document.createElement('p');
+        challengeTrophyValue.classList.add('challenge-trophy-value');
+        challengeTrophyValue.innerHTML = challengeExtraData["Player Completion Rate"];
+        challengeTrophyDiv.appendChild(challengeTrophyValue);
+
+        let challengeSkullDiv = document.createElement('div');
+        challengeSkullDiv.classList.add('challenge-skull-div');
+        challengeUSVDiv.appendChild(challengeSkullDiv);
+
+        let challengeSkullIcon = document.createElement('img');
+        challengeSkullIcon.classList.add('challenge-skull-icon');
+        challengeSkullIcon.src = "./Assets/UI/DeathRateIcon.png";
+        challengeSkullDiv.appendChild(challengeSkullIcon);
+
+        let challengeSkullValue = document.createElement('p');
+        challengeSkullValue.classList.add('challenge-skull-value');
+        challengeSkullValue.innerHTML = challengeExtraData["Player Win Rate"];
+        challengeSkullDiv.appendChild(challengeSkullValue);
+        //Creator
+        if(challengeExtraData["Creator"] != "n/a" && challengeExtraData["Creator"] != null) {
+            let challengeCreator = document.createElement('div');
+            challengeCreator.classList.add('challenge-creator');
+            challengeStatsLeft.appendChild(challengeCreator);
+
+            let avatar = document.createElement('div');
+            avatar.classList.add('avatar');
+            challengeCreator.appendChild(avatar);
+
+            let width = 50;
+
+            let avatarFrame = document.createElement('img');
+            avatarFrame.classList.add('avatar-frame','noSelect');
+            avatarFrame.style.width = `${width}px`;
+            avatarFrame.src = '../Assets/UI/InstaTowersContainer.png';
+            avatar.appendChild(avatarFrame);
+
+            let avatarImg = document.createElement('img');
+            avatarImg.classList.add('avatar-img','noSelect');
+            avatarImg.style.width = `${width}px`;
+            avatarImg.src = getProfileIcon("ProfileAvatar01");
+            avatar.appendChild(avatarImg);
+
+            let challengeCreatorName = document.createElement('p');
+            challengeCreatorName.classList.add('challenge-creator-name', 'black-outline');
+            challengeCreatorName.innerHTML = "Loading...";
+            challengeCreator.appendChild(challengeCreatorName);
+            //async function to change avatar to actual src
+            await getUserProfile(challengeExtraData["Creator"]).then(data => {
+                challengeCreatorName.innerHTML = data.displayName;
+                avatarImg.src = getProfileIcon(data.avatar);
+                challengeCreator.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(data.banner)})`;
+            });
+        }
+
+        let leftStats = ["Date Created", "Game Version"]
+        leftStats.forEach(stat => {
+            if(stat == "Game Version" && challengeExtraData[stat] == 0){ return; }
+            let challengeStat = document.createElement('div');
+            challengeStat.classList.add('challenge-stat');
+            challengeStatsLeft.appendChild(challengeStat);
+
+            let challengeStatLabel = document.createElement('p');
+            challengeStatLabel.classList.add('challenge-stat-label');
+            challengeStatLabel.innerHTML = `${stat}: ${challengeExtraData[stat]}`;
+            challengeStat.appendChild(challengeStatLabel);
+        })
+
+        let challengeStatsRight = document.createElement('div');
+        challengeStatsRight.classList.add('challenge-stats-right');
+        challengeStatsLeftRight.appendChild(challengeStatsRight);
+
+        Object.entries(challengeExtraData["Stats"]).forEach(([stat, value]) => {
+            let challengeStat = document.createElement('div');
+            challengeStat.classList.add('challenge-stat');
+            challengeStatsRight.appendChild(challengeStat);
+
+            let challengeStatLabel = document.createElement('p');
+            challengeStatLabel.classList.add('challenge-stat-label');
+            challengeStatLabel.innerHTML = stat;
+            challengeStat.appendChild(challengeStatLabel);
+
+            let challengeStatValue = document.createElement('p');
+            challengeStatValue.classList.add('challenge-model-stat-value');
+            challengeStatValue.innerHTML = value.toLocaleString();
+            challengeStat.appendChild(challengeStatValue);
+        })
+    }
 }
 
 function generateSettings(){
