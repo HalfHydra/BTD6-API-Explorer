@@ -79,6 +79,8 @@ let showElite = false;
 
 let currentBrowserView = "grid";
 
+let currentRoundsetView = "Default";
+
 fetch('./data/Constants.json')
         .then(response => response.json())
         .then(data => {
@@ -204,7 +206,7 @@ function generateStats(){
     profileStats["Transforming Tonics Used"] = btd6publicprofile.bloonsPopped["transformingTonicsUsed"];
     profileStats["Most Experienced Monkey"] = btd6publicprofile["mostExperiencedMonkey"];
     profileStats["Most Experienced Monkey XP"] = btd6usersave.towerXP[btd6publicprofile["mostExperiencedMonkey"]];
-    profileStats["Most Experienced Monkey"] = locJSON[profileStats["Most Experienced Monkey"]];
+    profileStats["Most Experienced Monkey"] = getLocValue(profileStats["Most Experienced Monkey"]);
     profileStats["Insta Monkey Collection"] = `${btd6publicprofile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}`;
     profileStats["Collection Chests Opened"] = btd6publicprofile.gameplay["collectionChestsOpened"];
     profileStats["Golden Bloons Popped"] = btd6publicprofile.bloonsPopped["goldenBloonsPopped"];
@@ -916,8 +918,7 @@ function generateHeaderTabs(){
 }
 
 function changeTab(tab) {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    resetScroll();
     if(timerInterval) { clearInterval(timerInterval); }
     changeHexBGColor(constants.BGColor)
     let tabs = document.getElementsByClassName('content-div');
@@ -1548,8 +1549,7 @@ function generateProgress(){
 }
 
 function changeProgressTab(selector){
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    resetScroll();
     if(timerInterval) { clearInterval(timerInterval); }
     switch(selector){
         case 'Towers':
@@ -1692,7 +1692,7 @@ function generateTowerProgressTower(tower){
     towerProgressContentText.id = 'tower-progress-content-text';
     towerProgressContentText.classList.add('tower-progress-content-text');
     towerProgressContentText.classList.add(paragonUnlocked ? 'knowledge-outline' : 'black-outline');
-    towerProgressContentText.innerHTML = locJSON[tower];
+    towerProgressContentText.innerHTML = getLocValue(tower);
     towerProgressInfoContainer.appendChild(towerProgressContentText);
 
     let towerProgressContentXP = document.createElement('p');
@@ -1705,7 +1705,7 @@ function generateTowerProgressTower(tower){
     let towerProgressContentDesc = document.createElement('p');
     towerProgressContentDesc.id = 'tower-progress-content-desc';
     towerProgressContentDesc.classList.add('tower-progress-content-desc'+ (paragonUnlocked ? '-paragon' : ''));
-    towerProgressContentDesc.innerHTML = locJSON[`${tower} Description`];
+    towerProgressContentDesc.innerHTML = getLocValue(`${tower} Description`);
     towerProgressContentTop.appendChild(towerProgressContentDesc);
 
     let towerNameAndPortrait = document.createElement('div');
@@ -1717,7 +1717,7 @@ function generateTowerProgressTower(tower){
     towerPortraitName.id = 'tower-portrait-name';
     towerPortraitName.classList.add('tower-portrait-name');
     towerPortraitName.classList.add('black-outline');
-    towerPortraitName.innerHTML = locJSON[tower];
+    towerPortraitName.innerHTML = getLocValue(tower);
     towerNameAndPortrait.appendChild(towerPortraitName);
 
     let towerProgressPortraitDiv = document.createElement('div');
@@ -1735,7 +1735,7 @@ function generateTowerProgressTower(tower){
     let upgradeTooltip = document.createElement('div');
     upgradeTooltip.id = `upgrade-tooltip`;
     upgradeTooltip.classList.add('upgrade-tooltip');
-    upgradeTooltip.innerHTML = locJSON[`${tower} Description`];
+    upgradeTooltip.innerHTML = getLocValue(`${tower} Description`);
     towerProgressContent.appendChild(upgradeTooltip);
 
     let towerProgressMainDiv = document.createElement('div');
@@ -2101,7 +2101,7 @@ function generateHeroProgressHero(hero, nameColor){
     heroProgressHeaderText.classList.add('hero-progress-header-text');
     heroProgressHeaderText.style.backgroundImage = `url('../Assets/UI/${nameColor}TxtTextureMain.png')`;
     // heroProgressHeaderText.classList.add('black-outline');
-    heroProgressHeaderText.innerHTML = locJSON[hero];
+    heroProgressHeaderText.innerHTML = getLocValue(hero);
     heroProgressHeader.appendChild(heroProgressHeaderText);
 
     //header hero name subtitle
@@ -4240,8 +4240,7 @@ function generateEvents(){
 }
 
 function changeEventTab(selector){
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    resetScroll();
     if(timerInterval) { clearInterval(timerInterval); }
     switch(selector){
         case 'Races':
@@ -4346,6 +4345,7 @@ function generateRaces(){
         raceInfoRules.classList.add("race-info-rules", "start-button", "black-outline");
         raceInfoRules.innerHTML = "Details"
         raceInfoRules.addEventListener('click', () => {
+            showLoading();
             showChallengeModel('events', race.metadata, "Race");
         })
         raceInfoBottomDiv.appendChild(raceInfoRules);
@@ -4525,6 +4525,7 @@ function generateBosses(elite){
         raceInfoRules.classList.add("race-info-rules", "start-button", "black-outline");
         raceInfoRules.innerHTML = "Details"
         raceInfoRules.addEventListener('click', () => {
+            showLoading();
             showChallengeModel('events', (elite ? race.metadataElite : race.metadataStandard),"Boss", eventData);
         })
         raceInfoBottomDiv.appendChild(raceInfoRules);
@@ -4811,6 +4812,7 @@ async function generateChallenges(type) {
         challengeInfoRules.classList.add("challenge-info-rules", "start-button", "black-outline");
         challengeInfoRules.innerHTML = "Details"
         challengeInfoRules.addEventListener('click', async () => {
+            showLoading();
             showChallengeModel('events', await getChallengeMetadata(challenge.id), type);
         })
         challengeInfoMiddleDiv.appendChild(challengeInfoRules);
@@ -4931,6 +4933,7 @@ async function generateChallenges(type) {
         challengeSelectorDateImg.addEventListener('click', async () => {
             console.log(challengeSelectorDateInput.value)
             console.log(getChallengeIDFromDate(challengeSelectorDateInput.value), type)
+            showLoading();
             showChallengeModel('events', await getChallengeMetadata(getChallengeIDFromDate(challengeSelectorDateInput.value,type == "AdvancedDailyChallenges")), type);
         })
         challengeSelectorDate.appendChild(challengeSelectorDateImg);
@@ -4956,7 +4959,7 @@ async function generateChallenges(type) {
         //keep the value above 1000 and below the latest challenge number
         challengeSelectorIDInput.min = 1000;
         challengeSelectorIDInput.max = latestChallenge;
-        challengeSelectorIDInput.value = latestChallenge - 1;
+        challengeSelectorIDInput.value = latestChallenge;
         challengeSelectorIDInput.addEventListener('change', () => {
             if (challengeSelectorIDInput.value < 1000) { challengeSelectorIDInput.value = 1000; }
             if (challengeSelectorIDInput.value > latestChallenge) { challengeSelectorIDInput.value = latestChallenge; }
@@ -4968,6 +4971,7 @@ async function generateChallenges(type) {
         challengeSelectorIDImg.src = "../Assets/UI/ContinueBtn.png";
         challengeSelectorIDImg.addEventListener('click', async () => {
             console.log(challengeSelectorIDInput.value)
+            showLoading();
             showChallengeModel('events', await getChallengeMetadata(getChallengeIdFromInt(challengeSelectorIDInput.value, type == "AdvancedDailyChallenges")), type);
         })
         challengeSelectorID.appendChild(challengeSelectorIDImg);
@@ -5021,7 +5025,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     document.getElementById('challenge-content').style.display = "flex";
     document.getElementById('challenge-content').innerHTML = "";
     document.getElementById(`${source}-content`).style.display = "none";
-
+    resetScroll();
     console.log(eventData)
 
     let challengeExtraData = processChallenge(metadata);
@@ -6202,6 +6206,7 @@ function exitMapModel(source){
 async function openProfile(source, profile){
     profile = await getUserProfile(profile.profile)
     if (profile == null) { return; }
+    resetScroll();
     document.getElementById(`${source}-content`).style.display = "none";
     let publicProfileContent = document.getElementById('publicprofile-content');
     publicProfileContent.style.display = "flex";
@@ -6657,7 +6662,7 @@ async function openProfile(source, profile){
     statsPublic["Lifetime Trophies"] = profile.gameplay["totalTrophiesEarned"];
     statsPublic["Necro Bloons Reanimated"] = profile.bloonsPopped["necroBloonsReanimated"];
     statsPublic["Transforming Tonics Used"] = profile.bloonsPopped["transformingTonicsUsed"];
-    statsPublic["Most Experienced Monkey"] = locJSON[profile["mostExperiencedMonkey"]];
+    statsPublic["Most Experienced Monkey"] = getLocValue(profile["mostExperiencedMonkey"]);
     statsPublic["Insta Monkey Collection"] = `${profile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}`;
     statsPublic["Collection Chests Opened"] = profile.gameplay["collectionChestsOpened"];
     statsPublic["Golden Bloons Popped"] = profile.bloonsPopped["goldenBloonsPopped"];
@@ -6696,6 +6701,10 @@ function exitProfile(source){
 }
 
 async function openRelics(source, tilesLink, eventDates) {
+    console.log(tilesLink)
+    let data = await getCTTiles(tilesLink)
+    console.log(data)
+    if (data == null) { return; }
     document.getElementById(`${source}-content`).style.display = "none";
     let relicsContent = document.getElementById('relics-content');
     relicsContent.style.display = "flex";
@@ -6704,10 +6713,7 @@ async function openRelics(source, tilesLink, eventDates) {
     let relicContainer = document.createElement('div');
     relicContainer.classList.add('relic-container');
     relicsContent.appendChild(relicContainer);
-
-    console.log(tilesLink)
-    let data = await getCTTiles(tilesLink)
-    console.log(data)
+    resetScroll();
 
     let relicHeader = document.createElement('div');
     relicHeader.classList.add('relic-header');
@@ -6891,8 +6897,7 @@ function generateExplore() {
 }
 
 function changeBrowserTab(selected){
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    resetScroll();
     currentBrowserView = "Grid";
     switch(selected){
         case 'Challenge Browser':
@@ -7063,7 +7068,8 @@ function generateBrowser(type){
     selectorGoImg.classList.add('leaderboard-go-img');
     selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
     selectorGoImg.addEventListener('click', async () => {
-        showChallengeModel('browser', await getChallengeMetadata(leaderboardFooterPageInput.value), "Custom");
+        showLoading();
+        type == "Map Browser" ? showMapModel('browser', await getCustomMapMetadata(leaderboardFooterPageInput.value)) : showChallengeModel('browser', await getChallengeMetadata(leaderboardFooterPageInput.value), "Custom");
     })
     leaderboardFooterRight.appendChild(selectorGoImg);
 
@@ -7108,8 +7114,7 @@ function generateBrowser(type){
         case "Map Browser":
             let mapsProgressGameMap = document.createElement('div');
             mapsProgressGameMap.id = 'maps-progress-game';
-            mapsProgressGameMap.classList.add('maps-progress-view');
-            mapsProgressGameMap.classList.add('black-outline')
+            mapsProgressGameMap.classList.add('maps-progress-view', 'black-outline');
             mapsProgressGameMap.innerHTML = "Grid";
             mapsProgressGameMap.addEventListener('click', () => {
                 currentBrowserView = "Grid";
@@ -7119,9 +7124,7 @@ function generateBrowser(type){
 
             let mapsProgressGallery = document.createElement('div');
             mapsProgressGallery.id = 'maps-progress-gallery';
-            mapsProgressGallery.classList.add('maps-progress-view');
-            mapsProgressGallery.classList.add('maps-progress-view-list');
-            mapsProgressGallery.classList.add('black-outline')
+            mapsProgressGallery.classList.add('maps-progress-view', 'black-outline');
             mapsProgressGallery.innerHTML = "Gallery";
             mapsProgressGallery.addEventListener('click', () => {
                 currentBrowserView = "Gallery";
@@ -7139,6 +7142,8 @@ function generateBrowser(type){
             changeBrowserFilter(type, "Most Liked")
             break;
     }
+    leaderboardEntries.classList.add('challenge-card-entries');
+    copyLoadingIcon(leaderboardEntries)
 }
 
 function changeBrowserFilter(type, filter){
@@ -7190,13 +7195,13 @@ function generateChallengeEntries(destination) {
     browserData.forEach(async (entry, index) => {
         let challengeEntry = document.createElement('div');
         challengeEntry.addEventListener('click', async () => {
+            showLoading();
             showChallengeModel('browser', await getChallengeMetadata(entry.id), "Custom");
         })
         destination.appendChild(challengeEntry);
 
         switch(currentBrowserView) {
             case "Grid":
-                destination.classList.add('challenge-card-entries');
                 challengeEntry.classList.add('challenge-entry');
                 
                 let challengeTop = document.createElement('div');
@@ -7565,13 +7570,13 @@ function generateMapGameEntries(destination) {
         let mapEntry = document.createElement('div');
         // mapEntry.classList.add('map-entry');
         mapEntry.addEventListener('click', async () => {
+            showLoading();
             showMapModel('browser', await getCustomMapMetadata(entry.id));
         })
         destination.appendChild(mapEntry);
         console.log(currentBrowserView)
         switch(currentBrowserView) {
             case "Grid":
-                destination.classList.add('challenge-card-entries');
                 mapEntry.classList.add('challenge-entry', "map-browser-bg");
                 
                 let challengeTop = document.createElement('div');
@@ -7781,6 +7786,7 @@ function generateMapGameEntries(destination) {
 
 async function showMapModel(source, metadata) {
     if (metadata == null) { return; }
+    resetScroll();
     let mapContent = document.getElementById('map-content');
     mapContent.style.display = "flex";
     mapContent.innerHTML = "";
@@ -8012,6 +8018,95 @@ async function showMapModel(source, metadata) {
     }
 }
 
+function generateExtrasPage() {
+    let extrasContent = document.getElementById('extras-content');
+    extrasContent.innerHTML = "";
+
+    let noDataFound = document.createElement('p');
+    noDataFound.id = 'no-data-found';
+    noDataFound.classList.add('no-data-found');
+    noDataFound.classList.add('black-outline');
+    noDataFound.innerHTML = "Coming Soon";
+    extrasContent.appendChild(noDataFound);
+
+    let explorePage = document.createElement('div');
+    explorePage.classList.add('progress-page');
+    // extrasContent.appendChild(explorePage);
+
+    let selectorsDiv = document.createElement('div');
+    selectorsDiv.classList.add('selectors-div');
+    explorePage.appendChild(selectorsDiv);
+
+    let selectors = ['Custom Round Sets', 'Monkey Money Helper', 'Export Data', 'Send Feedback', 'Settings'];
+
+    selectors.forEach((selector) => {
+        let selectorDiv = document.createElement('div');
+        selectorDiv.id = selector.toLowerCase() + '-div';
+        selectorDiv.classList.add('selector-div', 'blueprint-bg');
+        // selectorDiv.addEventListener('click', () => {
+        //     extrasContent.style.display = "none";
+        //     document.getElementById('roundset-content').style.display = "flex"
+        //     changeExtrasTab(selector);
+        // })
+        selectorsDiv.appendChild(selectorDiv);
+
+        let selectorImg = document.createElement('img');
+        selectorImg.id = selector.toLowerCase() + '-img';
+        selectorImg.classList.add('selector-img');
+        selectorDiv.appendChild(selectorImg);
+
+        switch(selector){
+            case 'Custom Round Sets':
+                selectorImg.src = '../Assets/ChallengeRulesIcon/CustomRoundIcon.png';
+                break;
+            case 'Monkey Money Helper':
+                selectorImg.src = '../Assets/UI/WoodenRoundButton.png';
+                break;
+            default: 
+                selectorImg.src = '../Assets/UI/WoodenRoundButton.png';
+                break;
+        }
+
+        let selectorText = document.createElement('p');
+        selectorText.id = selector.toLowerCase() + '-text';
+        selectorText.classList.add('selector-text','black-outline');
+        selectorText.innerHTML = selector;
+        selectorDiv.appendChild(selectorText);
+
+        let selectorGoImg = document.createElement('img');
+        selectorGoImg.id = selector.toLowerCase() + '-go-img';
+        selectorGoImg.classList.add('selector-go-img');
+        selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
+        selectorDiv.appendChild(selectorGoImg);
+    })
+}
+
+function changeExtrasTab(selected){
+    resetScroll();
+    currentBrowserView = "Grid";
+    switch(selected){
+        case 'Custom Round Sets':
+            generateRoundsets();
+            break;
+    }
+}
+
+function generateRoundsets() {
+    let roundsetsContent = document.getElementById('roundsets-content');
+    roundsetsContent.innerHTML = "";
+
+    let roundsetsContainer = document.createElement('div');
+    roundsetsContainer.classList.add('roundsets-container');
+    roundsetsContent.appendChild(roundsetsContainer);
+
+    switch(view){
+        case "Default":
+            break;
+        case "Grid":
+            break;
+    }
+}
+
 function generateSettings(){
     let settingsContent = document.getElementById('settings-content');
     settingsContent.innerHTML = "";
@@ -8195,6 +8290,11 @@ function ratioCalc(unknown, x1, x2, y1, y2){
             // x1/x2 == y1/y2
             return y1 * (x2/x1)
     }
+}
+
+function resetScroll() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 }
 
 function errorModal(body, source) {

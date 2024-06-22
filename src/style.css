@@ -3337,7 +3337,7 @@
 .challenge-selector-or {
     font-size: 32px;
 }
-.explore {
+.explore, .extras {
     flex-wrap: wrap;
     align-content: center;
 }
@@ -3394,7 +3394,7 @@
     flex-wrap: wrap;
     justify-content: center;
     background-color: var(--profile-secondary);
-
+    width: 100%;
     height: 100%;
 }
 .challenge-bottom {
