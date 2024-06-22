@@ -305,24 +305,30 @@ function generateExtras(){
 }
 
 function generateProgressSubText(){
-    progressSubText["Towers"] = `${Object.keys(btd6usersave.unlockedTowers).filter(k => btd6usersave.unlockedTowers[k]).length}/${Object.keys(btd6usersave.unlockedTowers).length} Towers Unlocked`;
-    
+    let towersCount = Object.keys(btd6usersave.unlockedTowers).filter(k => btd6usersave.unlockedTowers[k]).length;
+    progressSubText["Towers"] = `${towersCount}/${Object.keys(btd6usersave.unlockedTowers).length} Towers Unlocked`;
     let upgrades = Object.keys(btd6usersave.acquiredUpgrades);
     let upgradesUnlocked = upgrades.filter(k => btd6usersave.acquiredUpgrades[k]);
     progressSubText["Upgrades"] = `${upgradesUnlocked.length}/${upgrades.length} Upgrades Unlocked`;
     let paragons = upgrades.filter(k => k.includes("Paragon"));
     let paragonsUnlocked = paragons.filter(k => btd6usersave.acquiredUpgrades[k]);
-    if (paragonsUnlocked.length > 0) { progressSubText["Paragons"] = `${paragonsUnlocked.length}/${paragons.length} Paragons Unlocked` }
-    progressSubText["Heroes"] = `${Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length}/${Object.keys(btd6usersave.unlockedHeros).length} Heroes Unlocked`;
-    progressSubText["Skins"] = `${Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).filter(k => btd6usersave.unlockedSkins[k]).length}/${Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).length} Hero Skins Unlocked`;
+    if (paragonsUnlocked.length > 0) { progressSubText["Paragons"] = `${paragonsUnlocked.length}/${paragons.length} Paragon${paragonsUnlocked.length != 1 ? "s" : ""} Unlocked` }
+    let heroesUnlocked = Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length;
+    progressSubText["Heroes"] = `${heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeros).length} Hero${heroesUnlocked != 1 ? "es" : ""} Unlocked`;
+    let skinsUnlocked = Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).filter(k => btd6usersave.unlockedSkins[k]).length
+    progressSubText["Skins"] = `${skinsUnlocked}/${Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).length} Hero Skin${skinsUnlocked != 1 ? "s" : ""} Unlocked`;
     progressSubText["Knowledge"] = `${Object.keys(btd6usersave.acquiredKnowledge).filter(k => btd6usersave.acquiredKnowledge[k]).length}/${Object.keys(btd6usersave.acquiredKnowledge).length} Knowledge Unlocked`;
-    progressSubText["MapProgress"] = `${Object.keys(btd6usersave.mapProgress).filter(k => btd6usersave.mapProgress[k]).length} Maps Played`;
+    let mapsPlayed = Object.keys(btd6usersave.mapProgress).filter(k => btd6usersave.mapProgress[k]).length
+    progressSubText["MapProgress"] = `${mapsPlayed} Map${mapsPlayed != 1 ? "s" : ""} Played`;
     let chimpsTotal = Object.values(processedMapData.Medals.single).map(map => map["Clicks"]).filter(medal => medal).length;
-    if (chimpsTotal > 0) { progressSubText["CHIMPS"] = `${chimpsTotal} CHIMPS Medals Earned` }
-    progressSubText["Powers"] = `${Object.values(btd6usersave.powers).map(power => power.quantity).reduce((acc, amount) => acc + amount)} Powers Accumulated`
-    progressSubText["InstaMonkeys"] = `${Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount)} Instas Accumulated`;
-    progressSubText["Achievements"] = `${btd6publicprofile.achievements}/${constants.achievements + constants.hiddenAchievements} Achievements`;
-    progressSubText["Extras"] = `${Object.keys(extrasUnlocked).filter(k => extrasUnlocked[k]).length} Extras Unlocked`;
+    if (chimpsTotal > 0) { progressSubText["CHIMPS"] = `${chimpsTotal} CHIMPS Medal${chimpsTotal != 1 ? "s" : ""} Earned` }
+    let powersTotal = Object.values(btd6usersave.powers).map(power => power.quantity).reduce((acc, amount) => acc + amount)
+    progressSubText["Powers"] = `${powersTotal} Power${powersTotal != 1 ? "s" : ""} Accumulated`
+    let instaTotal = Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount)
+    progressSubText["InstaMonkeys"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Accumulated`;
+    progressSubText["Achievements"] = `${btd6publicprofile.achievements}/${constants.achievements + constants.hiddenAchievements} Achievement${btd6publicprofile.achievements != 1 ? "s" : ""} Earned`;
+    let extrasTotal = Object.keys(extrasUnlocked).filter(k => extrasUnlocked[k]).length;
+    progressSubText["Extras"] = `${extrasTotal} Extra${extrasTotal != 1 ? "s" : ""} Unlocked`;
 }
 
 function generateMapData() {
@@ -5677,7 +5683,7 @@ function challengeModifiers(metadata){
     if (metadata.hasOwnProperty('abilityCooldownReductionMultiplier') && metadata.abilityCooldownReductionMultiplier != 1) {
         result["Ability Cooldown Rate"] = {
             "value": metadata.abilityCooldownReductionMultiplier,
-            "icon": metadata.abilityCooldownReductionMultiplier > 1 ? "AbilityCooldownReductionDecreaseIcon" : "AbilityCooldownReductionIncreaseIcon"
+            "icon": metadata.abilityCooldownReductionMultiplier > 1 ? "AbilityCooldownReductionIncreaseIcon" : "AbilityCooldownReductionDecreaseIcon"
         }
     }
     //removeableCostMultiplier
