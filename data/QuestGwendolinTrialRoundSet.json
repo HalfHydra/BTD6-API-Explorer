@@ -1,0 +1,359 @@
+{
+    "rounds": [
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Lead",
+                    "count": 1,
+                    "start": 0,
+                    "duration": 1
+                }
+            ],
+            "roundNumber": 1,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Blue",
+                    "count": 40,
+                    "start": 0,
+                    "duration": 5
+                }
+            ],
+            "roundNumber": 2,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Red",
+                    "count": 4,
+                    "start": 0,
+                    "duration": 4
+                },
+                {
+                    "bloon": "Green",
+                    "count": 1,
+                    "start": 6,
+                    "duration": 1
+                },
+                {
+                    "bloon": "Rainbow",
+                    "count": 15,
+                    "start": 9,
+                    "duration": 3.5
+                }
+            ],
+            "roundNumber": 3,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Lead",
+                    "count": 7,
+                    "start": 0,
+                    "duration": 20
+                },
+                {
+                    "bloon": "Rainbow",
+                    "count": 6,
+                    "start": 1,
+                    "duration": 14
+                }
+            ],
+            "roundNumber": 4,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Ceramic",
+                    "count": 30,
+                    "start": 4,
+                    "duration": 8
+                },
+                {
+                    "bloon": "CeramicFortified",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 8
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 30,
+                    "start": 8,
+                    "duration": 8
+                }
+            ],
+            "roundNumber": 5,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Ceramic",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 10
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 5,
+                    "start": 5.329999923706055,
+                    "duration": 5
+                },
+                {
+                    "bloon": "Rainbow",
+                    "count": 40,
+                    "start": 7,
+                    "duration": 8
+                }
+            ],
+            "roundNumber": 6,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 5,
+                    "start": 0,
+                    "duration": 5.1389899253845215
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 5,
+                    "start": 5.699999809265137,
+                    "duration": 4.949999809265137
+                },
+                {
+                    "bloon": "CeramicFortified",
+                    "count": 10,
+                    "start": 11.812000274658203,
+                    "duration": 10.84000015258789
+                }
+            ],
+            "roundNumber": 7,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 8,
+                    "start": 0,
+                    "duration": 10.84000015258789
+                },
+                {
+                    "bloon": "CeramicFortifiedCamo",
+                    "count": 8,
+                    "start": 11.420000076293945,
+                    "duration": 0.5699999928474426
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 1,
+                    "start": 12,
+                    "duration": 5
+                }
+            ],
+            "roundNumber": 8,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bfb",
+                    "count": 6,
+                    "start": 0,
+                    "duration": 18.950000762939453
+                }
+            ],
+            "roundNumber": 9,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "CeramicFortifiedCamo",
+                    "count": 60,
+                    "start": 0,
+                    "duration": 35
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 4,
+                    "start": 5,
+                    "duration": 20
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 18,
+                    "start": 25,
+                    "duration": 10
+                }
+            ],
+            "roundNumber": 10,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 1,
+                    "start": 0,
+                    "duration": 1
+                },
+                {
+                    "bloon": "LeadFortified",
+                    "count": 50,
+                    "start": 2,
+                    "duration": 15
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 10,
+                    "start": 5,
+                    "duration": 10
+                }
+            ],
+            "roundNumber": 11,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Green",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 5.130000114440918
+                },
+                {
+                    "bloon": "Blue",
+                    "count": 15,
+                    "start": 5.699999809265137,
+                    "duration": 6.070000171661377
+                },
+                {
+                    "bloon": "Yellow",
+                    "count": 5,
+                    "start": 14.270000457763672,
+                    "duration": 3.1166000366210938
+                }
+            ],
+            "roundNumber": 12,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Blue",
+                    "count": 50,
+                    "start": 0,
+                    "duration": 30
+                },
+                {
+                    "bloon": "Green",
+                    "count": 23,
+                    "start": 2.2100000381469727,
+                    "duration": 30
+                }
+            ],
+            "roundNumber": 13,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Red",
+                    "count": 18,
+                    "start": 0,
+                    "duration": 9.706999778747559
+                },
+                {
+                    "bloon": "Red",
+                    "count": 31,
+                    "start": 9.5,
+                    "duration": 17.1299991607666
+                },
+                {
+                    "bloon": "Blue",
+                    "count": 5,
+                    "start": 2.8540000915527344,
+                    "duration": 1.1166670322418213
+                },
+                {
+                    "bloon": "Blue",
+                    "count": 10,
+                    "start": 15.960000038146973,
+                    "duration": 1.3799999952316284
+                },
+                {
+                    "bloon": "Green",
+                    "count": 5,
+                    "start": 5.70999002456665,
+                    "duration": 1.1160000562667847
+                },
+                {
+                    "bloon": "Green",
+                    "count": 5,
+                    "start": 19.837499618530273,
+                    "duration": 1.3874000310897827
+                },
+                {
+                    "bloon": "Yellow",
+                    "count": 4,
+                    "start": 8.564000129699707,
+                    "duration": 0.949999988079071
+                },
+                {
+                    "bloon": "Yellow",
+                    "count": 5,
+                    "start": 23.70800018310547,
+                    "duration": 1.5540000200271606
+                }
+            ],
+            "roundNumber": 14,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Red",
+                    "count": 20,
+                    "start": 0,
+                    "duration": 25
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 5,
+                    "start": 17.549999237060547,
+                    "duration": 3
+                },
+                {
+                    "bloon": "Green",
+                    "count": 12,
+                    "start": 5.679999828338623,
+                    "duration": 15
+                },
+                {
+                    "bloon": "Yellow",
+                    "count": 10,
+                    "start": 8.869999885559082,
+                    "duration": 12
+                },
+                {
+                    "bloon": "Blue",
+                    "count": 15,
+                    "start": 2.7799999713897705,
+                    "duration": 20
+                }
+            ],
+            "roundNumber": 16,
+            "addToRound": false
+        }
+    ],
+    "scale": 0.8500000238418579
+}

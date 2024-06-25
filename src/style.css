@@ -2990,7 +2990,7 @@
     border-image-source: url(../Assets/UI/BlueBtnSquare.png);
     border-image-slice: 40;
     border-radius: 20px;
-    background: linear-gradient(180deg, rgb(0 216 255) 0%, rgb(0 198 255) 100%);
+    background: linear-gradient(180deg, #00d8ff 0%, #00c6ff 100%);
 }
 
 .leaderboard-entry-frame {
@@ -3548,6 +3548,125 @@
     padding: 10px 0;
     flex-direction: column;
     border-radius: 0 0 10px 10px;
+}
+
+.roundset-selector-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    margin: 10px 0px;
+}
+.roundset-selector-img {
+    width: 75px;
+}
+.roundset-selector-go-img {
+    width: 75px;
+}
+
+.wood-container {
+    border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/BarfillContainer.png);
+    border-image-slice: 40;
+    background-color: #9F7842;
+}
+.veteran-container {
+    border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/BarfillVeteranContainer.png);
+    border-image-slice: 40;
+    background: linear-gradient(180deg, #2E4A83 0%, #344181 100%);
+}
+.other-roundset-selector-img {
+    width: 100px;
+}
+.other-roundsets-selector-text {
+    font-family: 'Luckiest Guy';
+    font-size: 24px;
+    color: white;
+    margin: 10px 0;
+    text-align: center;
+}
+.other-roundsets-selector-div {
+    display: flex;
+    flex-wrap: wrap;
+}
+.other-roundset-selector-div {
+    display: flex;
+    position: relative;
+}
+.other-roundset-selector-text {
+    position: absolute;
+    right: 4px;
+    font-size: 24px;
+}
+.roundset-header-bar {
+    background-color: var(--profile-primary);
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+}
+.roundset-header-bar-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+.roundset-header-text {
+    font-size: 32px;
+    text-align: center;
+    padding:10px;
+    display: flex;
+    align-items: center;
+}
+.roundset-header-title {
+    display: flex;
+    justify-content: space-between;
+}
+.roundset-header-left, .roundset-header-right {
+    width: 60;
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+.roundset {
+    flex-direction: column;
+}
+.round-div {
+    display: flex;
+    padding: 5px;
+}
+.round-bloon-groups {
+    display: flex;
+    flex-wrap: wrap;
+}
+.bloon-group-bloon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+.round-number {
+    display: flex;
+    font-size: 36px;
+    justify-content: center;
+    align-items: center;
+    min-width: 75px;
+}
+.bloon-group-div {
+    position: relative;
+}
+.bloon-group-number {
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.rounds-content {
+    background-color: var(--profile-secondary);
+}
+.round-div-alt {
+    background-color: var(--profile-tertiary);
 }
 
 .black-outline {

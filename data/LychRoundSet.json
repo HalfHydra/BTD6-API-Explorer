@@ -1,0 +1,214 @@
+{
+    "rounds": [
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Ceramic",
+                    "count": 6,
+                    "start": 10,
+                    "duration": 8
+                }
+            ],
+            "roundNumber": 40,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 12.600000381469727,
+                    "duration": 1
+                }
+            ],
+            "roundNumber": 41,
+            "addToRound": true
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 1,
+                    "duration": 1
+                }
+            ],
+            "roundNumber": 42,
+            "addToRound": true
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "MoabFortified",
+                    "count": 1,
+                    "start": 5,
+                    "duration": 1
+                }
+            ],
+            "roundNumber": 43,
+            "addToRound": true
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 2,
+                    "start": 9,
+                    "duration": 10
+                }
+            ],
+            "roundNumber": 44,
+            "addToRound": true
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "MoabFortified",
+                    "count": 1,
+                    "start": 9,
+                    "duration": 1
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 27,
+                    "duration": 1
+                }
+            ],
+            "roundNumber": 45,
+            "addToRound": true
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 1,
+                    "duration": 5
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 1,
+                    "start": 5,
+                    "duration": 1
+                }
+            ],
+            "roundNumber": 46,
+            "addToRound": true
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "MoabFortified",
+                    "count": 2,
+                    "start": 1,
+                    "duration": 5
+                }
+            ],
+            "roundNumber": 47,
+            "addToRound": true
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "MoabFortified",
+                    "count": 2,
+                    "start": 10,
+                    "duration": 17
+                }
+            ],
+            "roundNumber": 48,
+            "addToRound": true
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 6,
+                    "start": 10,
+                    "duration": 20
+                }
+            ],
+            "roundNumber": 60,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bfb",
+                    "count": 6,
+                    "start": 10,
+                    "duration": 20
+                }
+            ],
+            "roundNumber": 80,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 2,
+                    "start": 10,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 3,
+                    "start": 10,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 2,
+                    "start": 15,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 3,
+                    "start": 15,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 2,
+                    "start": 22,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 3,
+                    "start": 22,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 2,
+                    "start": 27,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 3,
+                    "start": 27,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 4,
+                    "start": 34,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 6,
+                    "start": 34,
+                    "duration": 0.10000000149011612
+                }
+            ],
+            "roundNumber": 100,
+            "addToRound": false
+        }
+    ]
+}

@@ -1,0 +1,214 @@
+{
+    "rounds": [
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Blue",
+                    "count": 12,
+                    "start": 0,
+                    "duration": 5.1389899253845215
+                },
+                {
+                    "bloon": "Red",
+                    "count": 5,
+                    "start": 5.699999809265137,
+                    "duration": 2.2839999198913574
+                },
+                {
+                    "bloon": "Blue",
+                    "count": 15,
+                    "start": 8.600000381469727,
+                    "duration": 7.900000095367432
+                },
+                {
+                    "bloon": "Yellow",
+                    "count": 6,
+                    "start": 3,
+                    "duration": 13
+                }
+            ],
+            "roundNumber": 5,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Yellow",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 5.130000114440918
+                },
+                {
+                    "bloon": "Green",
+                    "count": 15,
+                    "start": 5.699999809265137,
+                    "duration": 6.070000171661377
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 5,
+                    "start": 14.270000457763672,
+                    "duration": 3.1166000366210938
+                }
+            ],
+            "roundNumber": 12,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "YellowCamo",
+                    "count": 1,
+                    "start": 0,
+                    "duration": 1
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 20,
+                    "start": 3,
+                    "duration": 6
+                }
+            ],
+            "roundNumber": 24,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Lead",
+                    "count": 9,
+                    "start": 0,
+                    "duration": 13.070097923278809
+                },
+                {
+                    "bloon": "Yellow",
+                    "count": 4,
+                    "start": 3,
+                    "duration": 6
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 5,
+                    "start": 9,
+                    "duration": 6
+                }
+            ],
+            "roundNumber": 30,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Ceramic",
+                    "count": 6,
+                    "start": 10,
+                    "duration": 8
+                }
+            ],
+            "roundNumber": 40,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Black",
+                    "count": 60,
+                    "start": 0,
+                    "duration": 18.77083396911621
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 60,
+                    "start": 18.84583282470703,
+                    "duration": 27.358333587646484
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 60,
+                    "start": 45,
+                    "duration": 1
+                }
+            ],
+            "roundNumber": 41,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 6,
+                    "start": 10,
+                    "duration": 20
+                }
+            ],
+            "roundNumber": 60,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bfb",
+                    "count": 6,
+                    "start": 10,
+                    "duration": 20
+                }
+            ],
+            "roundNumber": 80,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 2,
+                    "start": 10,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 3,
+                    "start": 10,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 2,
+                    "start": 15,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 3,
+                    "start": 15,
+                    "duration": 0.10000000149011612
+                }
+            ],
+            "roundNumber": 100,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 12,
+                    "start": 0,
+                    "duration": 45
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 12,
+                    "start": 1.5,
+                    "duration": 45
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 24,
+                    "start": 6,
+                    "duration": 45
+                }
+            ],
+            "roundNumber": 120,
+            "addToRound": false
+        }
+    ]
+}

@@ -1,0 +1,94 @@
+{
+    "rounds": [
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Ceramic",
+                    "count": 6,
+                    "start": 10,
+                    "duration": 8
+                }
+            ],
+            "roundNumber": 40,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 6,
+                    "start": 10,
+                    "duration": 20
+                }
+            ],
+            "roundNumber": 60,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bfb",
+                    "count": 6,
+                    "start": 10,
+                    "duration": 20
+                }
+            ],
+            "roundNumber": 80,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 2,
+                    "start": 10,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 3,
+                    "start": 10,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 2,
+                    "start": 15,
+                    "duration": 0.10000000149011612
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 3,
+                    "start": 15,
+                    "duration": 0.10000000149011612
+                }
+            ],
+            "roundNumber": 100,
+            "addToRound": false
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 12,
+                    "start": 0,
+                    "duration": 45
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 12,
+                    "start": 1.5,
+                    "duration": 45
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 24,
+                    "start": 6,
+                    "duration": 45
+                }
+            ],
+            "roundNumber": 120,
+            "addToRound": false
+        }
+    ]
+}

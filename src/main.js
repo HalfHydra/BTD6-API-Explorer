@@ -79,7 +79,14 @@ let showElite = false;
 
 let currentBrowserView = "grid";
 
-let currentRoundsetView = "Default";
+let currentRoundsetView = "Simple";
+let roundsetProcessed = null;
+
+let canvas = null;
+let ctx = null;
+let bloons = [];
+let background = new Image();
+background.src = "../Assets/UI/RoundPreview.png";
 
 fetch('./data/Constants.json')
         .then(response => response.json())
@@ -904,7 +911,7 @@ function generateHeaderTabs(){
         content.appendChild(contentElement);
     })
 
-    let extraContent = ['Challenge', "Map", 'PublicProfile', 'Leaderboard', "Browser", 'Relics'];
+    let extraContent = ['Challenge', "Map", 'PublicProfile', 'Leaderboard', "Browser", 'Relics', 'Roundset'];
     extraContent.forEach((headerName) => {
         headerName = headerName.toLowerCase();
         let contentElement = document.createElement('div');
@@ -995,10 +1002,12 @@ function generateOverview(){
     followersLabel.innerHTML = 'Followers';
     profileFollowers.appendChild(followersLabel);
 
-    let followersCount = document.createElement('p');
-    followersCount.classList.add('followers-count');
-    followersCount.innerHTML = btd6publicprofile["followers"].toLocaleString();
-    profileFollowers.appendChild(followersCount);
+    if ( btd6publicprofile["followers"] > 0 ) {
+        let followersCount = document.createElement('p');
+        followersCount.classList.add('followers-count');
+        followersCount.innerHTML = btd6publicprofile["followers"].toLocaleString();
+        profileFollowers.appendChild(followersCount);
+    }
 
     let profileBottom = document.createElement('div');
     profileBottom.id = 'profile-bottom';
@@ -5711,7 +5720,7 @@ function challengeModifiers(metadata){
     if (metadata._bloonModifiers.healthMultipliers.moabs != 1) {
         result["MOAB Health"] = {
             "value": metadata._bloonModifiers.healthMultipliers.moabs,
-            "icon": metadata._bloonModifiers.healthMultipliers.moabs > 1 ? "MoabBoostIcon" : "MOABDecreaseHPIcon"
+            "icon": metadata._bloonModifiers.healthMultipliers.moabs > 1 ? "MoabBoostIcon" : "MoabDecreaseHPIcon"
         }
     }
     //boss
@@ -7376,7 +7385,7 @@ function generateChallengeEntries(destination) {
                                 challengeRuleIcon.src = `./Assets/ChallengeRulesIcon/${rulesMap[rule]}.png`;
                                 challengeChallengeIcons.appendChild(challengeRuleIcon);
                             }
-                            challengeMapRounds.innerHTML = `Rounds ${challengeData.startRound == 0 ? constants.startRound[challengeData.mode == "Standard" ? challengeData.difficulty : challengeData.mode] : challengeData.startRound}/${challengeData.endRound}`
+                            challengeMapRounds.innerHTML = `Rounds ${challengeData.startRound == 0 ? constants.startRound[challengeData.difficulty] : challengeData.startRound}/${challengeData.endRound == 0 ? constants.endRound[challengeData.difficulty] : challengeData.endRound}`
                             challengeUpvoteValue.innerHTML = challengeData.upvotes.toLocaleString();
                             challengeTrophyValue.innerHTML = challengeData.playsUnique == 0 ? "0%" : challengeData.winsUnique - challengeData.playsUnique == 0 ? "0%" : `${((challengeData.winsUnique / challengeData.playsUnique) * 100).toFixed(2)}%`;
                             challengeSkullValue.innerHTML = challengeData.playsUnique == 0 ? "0%" : `${((challengeData.wins / (challengeData.plays + challengeData.restarts)) * 100).toFixed(2)}%`;
@@ -8022,16 +8031,16 @@ function generateExtrasPage() {
     let extrasContent = document.getElementById('extras-content');
     extrasContent.innerHTML = "";
 
-    let noDataFound = document.createElement('p');
-    noDataFound.id = 'no-data-found';
-    noDataFound.classList.add('no-data-found');
-    noDataFound.classList.add('black-outline');
-    noDataFound.innerHTML = "Coming Soon";
-    extrasContent.appendChild(noDataFound);
+    // let noDataFound = document.createElement('p');
+    // noDataFound.id = 'no-data-found';
+    // noDataFound.classList.add('no-data-found');
+    // noDataFound.classList.add('black-outline');
+    // noDataFound.innerHTML = "Coming Soon";
+    // extrasContent.appendChild(noDataFound);
 
     let explorePage = document.createElement('div');
     explorePage.classList.add('progress-page');
-    // extrasContent.appendChild(explorePage);
+    extrasContent.appendChild(explorePage);
 
     let selectorsDiv = document.createElement('div');
     selectorsDiv.classList.add('selectors-div');
@@ -8043,11 +8052,11 @@ function generateExtrasPage() {
         let selectorDiv = document.createElement('div');
         selectorDiv.id = selector.toLowerCase() + '-div';
         selectorDiv.classList.add('selector-div', 'blueprint-bg');
-        // selectorDiv.addEventListener('click', () => {
-        //     extrasContent.style.display = "none";
-        //     document.getElementById('roundset-content').style.display = "flex"
-        //     changeExtrasTab(selector);
-        // })
+        selectorDiv.addEventListener('click', () => {
+            extrasContent.style.display = "none";
+            document.getElementById('extras-content').style.display = "flex"
+            changeExtrasTab(selector);
+        })
         selectorsDiv.appendChild(selectorDiv);
 
         let selectorImg = document.createElement('img');
@@ -8083,7 +8092,6 @@ function generateExtrasPage() {
 
 function changeExtrasTab(selected){
     resetScroll();
-    currentBrowserView = "Grid";
     switch(selected){
         case 'Custom Round Sets':
             generateRoundsets();
@@ -8092,19 +8100,345 @@ function changeExtrasTab(selected){
 }
 
 function generateRoundsets() {
-    let roundsetsContent = document.getElementById('roundsets-content');
+    let roundsetsContent = document.getElementById('extras-content');
     roundsetsContent.innerHTML = "";
 
-    let roundsetsContainer = document.createElement('div');
-    roundsetsContainer.classList.add('roundsets-container');
-    roundsetsContent.appendChild(roundsetsContainer);
+    let roundsetPage = document.createElement('div');
+    roundsetPage.classList.add('progress-page');
+    roundsetsContent.appendChild(roundsetPage);
 
-    switch(view){
-        case "Default":
+    let selectorsDiv = document.createElement('div');
+    selectorsDiv.classList.add('selectors-div');
+    roundsetPage.appendChild(selectorsDiv);;
+    
+    let normalRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type != "quest"));
+    let otherRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "quest"));
+
+    Object.entries(normalRoundsets).forEach(([roundset, data]) => {
+        let roundsetDiv = document.createElement('div');
+        roundsetDiv.classList.add('roundset-selector-div');
+        data.type == "boss" ? roundsetDiv.classList.add('veteran-container') : roundsetDiv.classList.add('wood-container');
+        roundsetDiv.addEventListener('click', () => {
+            showLoading();
+            showRoundsetModel('extras', roundset);
+        })
+        selectorsDiv.appendChild(roundsetDiv);
+
+        let roundsetIcon = document.createElement('img');
+        roundsetIcon.classList.add('roundset-selector-img');
+        roundsetIcon.src = `../Assets/UI/${data.icon}.png`;
+        roundsetDiv.appendChild(roundsetIcon);
+
+        let roundsetText = document.createElement('p');
+        roundsetText.classList.add('selector-text', 'black-outline');
+        roundsetText.innerHTML = data.name;
+        roundsetDiv.appendChild(roundsetText);
+
+        let roundsetGoImg = document.createElement('img');
+        roundsetGoImg.classList.add('selector-go-img');
+        roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
+        roundsetDiv.appendChild(roundsetGoImg);
+    })
+
+    let otherRoundsetText = document.createElement('p');
+    otherRoundsetText.classList.add('other-roundsets-selector-text', 'black-outline');
+    otherRoundsetText.innerHTML = "Quest Custom Rounds";
+    selectorsDiv.appendChild(otherRoundsetText);
+
+    let otherRoundsetDiv = document.createElement('div');
+    otherRoundsetDiv.classList.add('other-roundsets-selector-div');
+    selectorsDiv.appendChild(otherRoundsetDiv);
+
+
+    Object.entries(otherRoundsets).forEach(([roundset, data]) => {
+        let roundsetDiv = document.createElement('div');
+        roundsetDiv.classList.add('other-roundset-selector-div');
+        roundsetDiv.addEventListener('click', () => {
+            showRoundsetModel('extras', roundset);
+        })
+        otherRoundsetDiv.appendChild(roundsetDiv);
+
+        let roundsetText = document.createElement('p');
+        roundsetText.classList.add('other-roundset-selector-text', 'black-outline');
+        // roundsetText.innerHTML = roundset;
+        let stage = roundset.match(/(Part|Stage)(\d+)/i);
+        if (stage != null) {
+            roundsetText.innerHTML = `${stage[1]} ${stage[2]}`;
+            roundsetDiv.appendChild(roundsetText);
+        }
+
+        let roundsetIcon = document.createElement('img');
+        roundsetIcon.classList.add('other-roundset-selector-img');
+        roundsetIcon.src = `../Assets/QuestIcon/${data.icon}.png`;
+        roundsetDiv.appendChild(roundsetIcon);
+    })
+}
+
+async function showRoundsetModel(source, roundset) {
+    let roundsetContent = document.getElementById('roundset-content');
+    roundsetContent.style.display = "flex";
+    roundsetContent.innerHTML = "";
+    document.getElementById(`${source}-content`).style.display = "none";
+    resetScroll();
+
+    let roundsetData = await fetch(`./data/${roundset}.json`).then(response => response.json());
+    //if the roundset name is any of the following: BloonariusRoundSet, LychRoundSet, VortexRoundSet, DreadbloonRoundSet, PhayzeRoundSet
+    //then the roundset is a boss roundset
+    let bossRoundset = ["BloonariusRoundSet", "LychRoundSet", "VortexRoundSet", "DreadbloonRoundSet", "PhayzeRoundSet"].includes(roundset);
+    if (bossRoundset) {
+        let defaultRoundsetData = await fetch(`./data/DefaultRoundSet.json`).then(response => response.json());
+        roundsetProcessed =  processRoundset(defaultRoundsetData, roundsetData);
+    } else {
+        roundsetProcessed =  processRoundset(roundsetData);
+    }
+    console.log(roundsetProcessed)
+
+    let headerBar = document.createElement('div');
+    headerBar.classList.add('roundset-header-bar');
+    roundsetContent.appendChild(headerBar);
+
+    let roundsetHeaderTitle = document.createElement('div');
+    roundsetHeaderTitle.classList.add('roundset-header-title');
+    headerBar.appendChild(roundsetHeaderTitle);
+
+    let leftDiv = document.createElement('div');
+    leftDiv.classList.add('roundset-header-left');
+    roundsetHeaderTitle.appendChild(leftDiv);
+
+    let roundsetHeaderText = document.createElement('p');
+    roundsetHeaderText.classList.add('roundset-header-text', 'black-outline');
+    roundsetHeaderText.innerHTML = constants.roundSets[roundset].name;
+    roundsetHeaderTitle.appendChild(roundsetHeaderText);
+
+    let rightDiv = document.createElement('div');
+    rightDiv.classList.add('roundset-header-right');
+    roundsetHeaderTitle.appendChild(rightDiv);
+
+    let modalClose = document.createElement('img');
+    modalClose.classList.add('modal-close');
+    modalClose.src = "./Assets/UI/CloseBtn.png";
+    modalClose.addEventListener('click', () => {
+        roundsetContent.style.display = "none";
+        document.getElementById(`${source}-content`).style.display = "flex";
+    })
+    rightDiv.appendChild(modalClose);
+
+    let mapsProgressHeaderBar = document.createElement('div');
+    mapsProgressHeaderBar.classList.add('roundset-header-bar-bottom');
+    headerBar.appendChild(mapsProgressHeaderBar);
+
+    let mapsProgressViews = document.createElement('div');
+    mapsProgressViews.classList.add('maps-progress-views');
+    mapsProgressHeaderBar.appendChild(mapsProgressViews);
+
+    let mapsProgressViewsText = document.createElement('p');
+    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text','black-outline');
+    mapsProgressViewsText.innerHTML = "Display Type:";
+    mapsProgressViews.appendChild(mapsProgressViewsText);
+
+    let mapsProgressGrid = document.createElement('div');
+    mapsProgressGrid.classList.add('maps-progress-view','black-outline');
+    mapsProgressGrid.classList.add('maps-progress-view-selected');
+    mapsProgressGrid.innerHTML = "Simple";
+    mapsProgressViews.appendChild(mapsProgressGrid);
+
+    let mapsProgressList = document.createElement('div');
+    mapsProgressList.classList.add('maps-progress-view','black-outline');
+    mapsProgressList.innerHTML = "Topper";
+    mapsProgressViews.appendChild(mapsProgressList);
+
+    let mapsProgressGame = document.createElement('div');
+    mapsProgressGame.classList.add('maps-progress-view','maps-progress-view-list','black-outline');
+    mapsProgressGame.innerHTML = "Preview";
+    mapsProgressViews.appendChild(mapsProgressGame);
+
+    let mapsProgressFilter = document.createElement('div');
+    mapsProgressFilter.classList.add('maps-progress-filter');
+    mapsProgressHeaderBar.appendChild(mapsProgressFilter);
+
+    let mapProgressFilterDifficulty = document.createElement('div');
+    mapProgressFilterDifficulty.classList.add('map-progress-filter-difficulty');
+
+    let mapsProgressFilterDifficultyText = document.createElement('p');
+    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressFilterDifficultyText.classList.add('black-outline');
+    mapsProgressFilterDifficultyText.innerHTML = "Only Modified:";
+    mapProgressFilterDifficulty.appendChild(mapsProgressFilterDifficultyText);
+
+    let onlyModifiedToggleInput = document.createElement('input');
+    onlyModifiedToggleInput.classList.add('maps-progress-coop-toggle-input');
+    onlyModifiedToggleInput.type = 'checkbox';
+    mapProgressFilterDifficulty.appendChild(onlyModifiedToggleInput);
+
+    if (bossRoundset) {
+        onlyModifiedToggleInput.checked = true;
+        mapsProgressFilter.appendChild(mapProgressFilterDifficulty);
+    }
+
+    let mapsProgressCoopToggle = document.createElement('div');
+    mapsProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
+    mapsProgressFilter.appendChild(mapsProgressCoopToggle);
+
+    let mapsProgressCoopToggleText = document.createElement('p');
+    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressCoopToggleText.classList.add('black-outline');
+    mapsProgressCoopToggleText.innerHTML = "Reverse:";
+    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
+
+    let mapsProgressCoopToggleInput = document.createElement('input');
+    mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
+    mapsProgressCoopToggleInput.type = 'checkbox';
+    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
+
+
+    let roundsContent = document.createElement('div');
+    roundsContent.id = 'rounds-content';
+    roundsContent.classList.add('rounds-content');
+    roundsetContent.appendChild(roundsContent);
+
+    mapsProgressGrid.addEventListener('click', () => {
+        currentRoundsetView = "Simple";
+        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
+    })
+    mapsProgressList.addEventListener('click', () => {
+        currentRoundsetView = "Topper";
+        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
+    })
+    mapsProgressGame.addEventListener('click', () => {
+        currentRoundsetView = "Preview";
+        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
+    })
+
+    mapsProgressCoopToggleInput.addEventListener('change', () => {
+        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
+    })
+    onlyModifiedToggleInput.addEventListener('change', () => {
+        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
+    })
+    generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked)
+}
+
+function processRoundset(data, defaultAppend){
+    if(defaultAppend != null) {
+        defaultAppend.rounds.forEach((round, index) => {
+            let roundIndex = data.rounds.findIndex(round_b => round_b.roundNumber == round.roundNumber);
+            if(round.addToRound) {
+                if (roundIndex != -1) {
+                    data.rounds[roundIndex].bloonGroups = data.rounds[roundIndex].bloonGroups.concat(round.bloonGroups);
+                    data.rounds[roundIndex].addToRound = true;
+                }
+            } else {
+                if (roundIndex != -1) {
+                    data.rounds[roundIndex] = round;
+                }
+            }
+        })
+    }
+    return data;
+}
+
+async function generateRounds(type, reverse, modified) {
+    let roundsContent = document.getElementById('rounds-content');
+    roundsContent.innerHTML = "";
+
+    switch(type) {
+        case "Simple":
+            let alternate = false;
+            roundsetProcessed.rounds.forEach(async (round, index) => {
+                if (modified && !round.hasOwnProperty("addToRound")) { return; }
+                let roundDiv = document.createElement('div');
+                roundDiv.classList.add('round-div');
+                if (alternate) { roundDiv.classList.add('round-div-alt') }
+            
+                let roundNumber = document.createElement('p');
+                roundNumber.classList.add('round-number', 'black-outline');
+                roundNumber.innerHTML = round.roundNumber;
+                roundDiv.appendChild(roundNumber);
+            
+                let roundBloonGroups = document.createElement('div');
+                roundBloonGroups.classList.add('round-bloon-groups');
+                roundDiv.appendChild(roundBloonGroups);
+
+                let fragment = document.createDocumentFragment();
+            
+                round.bloonGroups.forEach((bloonGroup, index) => {
+                    let bloonGroupDiv = document.createElement('div');
+                    bloonGroupDiv.classList.add('bloon-group-div');
+            
+                    let bloonGroupNumber = document.createElement('p');
+                    bloonGroupNumber.classList.add('bloon-group-number', 'black-outline');
+                    bloonGroupNumber.innerHTML = "x" + bloonGroup.count;
+                    bloonGroupDiv.appendChild(bloonGroupNumber);
+            
+                    let bloonGroupBloon = document.createElement('img');
+                    bloonGroupBloon.classList.add('bloon-group-bloon');
+                    bloonGroupBloon.src = `../Assets/BloonIcon/${bloonGroup.bloon}.png`;
+                    bloonGroupBloon.loading = 'lazy';
+                    bloonGroupDiv.appendChild(bloonGroupBloon);
+            
+                    fragment.appendChild(bloonGroupDiv);
+                })
+            
+                roundBloonGroups.appendChild(fragment);
+                roundsContent.appendChild(roundDiv);
+                alternate = !alternate;
+            })
             break;
-        case "Grid":
+        case "Topper":
+            break;
+        case "Preview":
+            canvas = document.createElement('canvas');
+            canvas.id = 'roundset-canvas';
+            canvas.width = 800;
+            canvas.height = 300;
+            roundsContent.appendChild(canvas);
+
+            ctx = canvas.getContext('2d');
+            startRound(roundsetProcessed.rounds[0]);
+            update();
             break;
     }
+}
+
+function spawnBloon(bloonGroup) {
+    let interval = bloonGroup.duration / bloonGroup.count;
+    let count = 0;
+    let spawnInterval = setInterval(() => {
+        if (count >= bloonGroup.count) {
+            clearInterval(spawnInterval);
+            return;
+        }
+        bloons.push({
+            x: -100,
+            y: 150,
+            speed: 1,
+            img: bloonGroup.bloon
+        });
+        count++;
+    }, interval * 1000);
+}
+
+function startRound(round) {
+    for (let bloonGroup of round.bloonGroups) {
+        setTimeout(() => {
+            spawnBloon(bloonGroup);
+        }, bloonGroup.start * 1000);
+    }
+}
+
+function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+    for (let bloon of bloons) {
+        bloon.x += bloon.speed;
+        let bloonimg = new Image();
+        bloonimg.src = `../Assets/BloonIcon/${bloon.img}.png`;
+        ctx.beginPath();
+        ctx.drawImage(bloonimg, bloon.x, bloon.y, 50, 50);
+        ctx.fill();
+    }
+
+    requestAnimationFrame(update);
 }
 
 function generateSettings(){
@@ -8112,9 +8446,7 @@ function generateSettings(){
     settingsContent.innerHTML = "";
 
     let noDataFound = document.createElement('p');
-    noDataFound.id = 'no-data-found';
-    noDataFound.classList.add('no-data-found');
-    noDataFound.classList.add('black-outline');
+    noDataFound.classList.add('no-data-found','black-outline');
     noDataFound.innerHTML = "Coming Soon";
     settingsContent.appendChild(noDataFound);
 

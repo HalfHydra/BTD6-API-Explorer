@@ -39,6 +39,153 @@
         "Impoppable": 100,
         "Clicks": 100
     },
+    "roundSets": {
+        "DefaultRoundSet": {
+            "name": "Standard Rounds",
+            "icon": "DefaultRoundSetIcon",
+            "type": "normal"
+        },
+        "AlternateRoundSet": {
+            "name": "Alternate Bloon Rounds",
+            "icon": "AlternateRoundSetIcon",
+            "type": "normal"
+        },
+        "BloonariusRoundSet": {
+            "name": "Bloonarius Event Rounds",
+            "icon": "BloonariusRoundSetIcon",
+            "type": "boss"
+        },
+        "LychRoundSet": {
+            "name": "Lych Event Rounds",
+            "icon": "LychRoundSetIcon",
+            "type": "boss"
+        },
+        "VortexRoundSet": {
+            "name": "Vortex Event Rounds",
+            "icon": "VortexRoundSetIcon",
+            "type": "boss"
+        },
+        "DreadbloonRoundSet": {
+            "name": "Dreadbloon Event Rounds",
+            "icon": "DreadbloonRoundSetIcon",
+            "type": "boss"
+        },
+        "PhayzeRoundSet": {
+            "name": "Phayze Event Rounds",
+            "icon": "PhayzeRoundSetIcon",
+            "type": "boss"
+        },
+        "AcceleratedRoundSet": {
+            "name": "Accelerated Rounds",
+            "icon": "QuestIconAcceleratedRoundSet",
+            "type": "quest"
+        },
+        "EnduranceRoundSet": {
+            "name": "Phayze One - Endurance Rounds",
+            "icon": "QuestIconPhayzeOne",
+            "type": "quest"
+        },
+        "FastUpgradesRoundSet": {
+            "name": "Fast Upgrades Rounds",
+            "icon": "QuestIconFastUpgradesRemake",
+            "type": "quest"
+        },
+        "MOABMadnessRoundSet": {
+            "name": "MOAB Madness Rounds",
+            "icon": "QuestIconMoabMadness",
+            "type": "quest"
+        },
+        "QuestBrickellTrialRoundSet": {
+            "name": "Brickell Bootcamp Rounds",
+            "icon": "QuestIconBrickell",
+            "type": "quest"
+        },
+        "QuestChurchillTrialRoundSet": {
+            "name": "Royal Tank Academy Rounds",
+            "icon": "QuestIconCaptainChurchill",
+            "type": "quest"
+        },
+        "QuestCorvusTrialRoundSet": {
+            "name": "A Guide to the Book of Spirits Rounds",
+            "icon": "QuestIconCorvus",
+            "type": "quest"
+        },
+        "QuestEtienneTrialRoundSet": {
+            "name": "Drone Flying 101 Rounds",
+            "icon": "QuestIconDroneFlying101",
+            "type": "quest"
+        },
+        "QuestGeraldoTrialRoundSet": {
+            "name": "One Stop Pop Shop! Rounds",
+            "icon": "QuestIconGeraldo",
+            "type": "quest"
+        },
+        "QuestGwendolinTrialRoundSet": {
+            "name": "Trial By Fire Rounds",
+            "icon": "QuestIconGwendolin",
+            "type": "quest"
+        },
+        "QuestObynTrialRoundSet": {
+            "name": "Obyn's Gardening School Rounds",
+            "icon": "QuestIconObynsGardeningSchool",
+            "type": "quest"
+        },
+        "QuestPatTrialRoundSet": {
+            "name": "Pat Trial Rounds",
+            "icon": "QuestIconPatFusty",
+            "type": "quest"
+        },
+        "QuestPsiTrialRoundSet": {
+            "name": "Psi Insight! Rounds",
+            "icon": "QuestIconPsi",
+            "type": "quest"
+        },
+        "QuestQuincyTrialRoundSet": {
+            "name": "Quincy, Student of Quincy Rounds",
+            "icon": "QuestIconQuincyTestOfQuincy",
+            "type": "quest"
+        },
+        "QuestRosaliaTrialRoundSet": {
+            "name": "Tinkerer's Tutorial Rounds",
+            "icon": "QuestIconRosalia",
+            "type": "quest"
+        },
+        "QuestSaudaTrialRoundSet": {
+            "name": "Blade Sauda Nowhere Rounds",
+            "icon": "QuestIconBladeSaudaNowhere",
+            "type": "quest"
+        },
+        "QuestStrikerTrialRoundSet": {
+            "name": "Striker Instruction! Rounds",
+            "icon": "QuestIconStrikerJones",
+            "type": "quest"
+        },
+        "BouncyDartsTaleStage1RoundSet": {
+            "name": "New Dart Just Dropped Stage 1",
+            "icon": "QuestIconBouncyDarts",
+            "type": "quest"
+        },
+        "BouncyDartsTaleStage2RoundSet": {
+            "name": "New Dart Just Dropped Stage 2",
+            "icon": "QuestIconBouncyDarts",
+            "type": "quest"
+        },
+        "ScoopsTaleIPart1RoundSet": {
+            "name": "Scoop's Tall Tale Part 1",
+            "icon": "QuestIconScoopsTale1",
+            "type": "quest"
+        },
+        "ScoopsTaleIPart2RoundSet": {
+            "name": "Scoop's Tall Tale Part 2",
+            "icon": "QuestIconScoopsTale1",
+            "type": "quest"
+        },
+        "ScoopsTaleIPart3RoundSet": {
+            "name": "Scoop's Tall Tale Part 3",
+            "icon": "QuestIconScoopsTale1",
+            "type": "quest"
+        }
+    },
     "towersInOrder": {
         "DartMonkey": "Primary",
         "BoomerangMonkey": "Primary",
