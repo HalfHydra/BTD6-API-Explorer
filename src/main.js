@@ -82,12 +82,6 @@ let currentBrowserView = "grid";
 let currentRoundsetView = "Simple";
 let roundsetProcessed = null;
 
-let canvas = null;
-let ctx = null;
-let bloons = [];
-let background = new Image();
-background.src = "../Assets/UI/RoundPreview.png";
-
 fetch('./data/Constants.json')
         .then(response => response.json())
         .then(data => {
@@ -8247,11 +8241,6 @@ async function showRoundsetModel(source, roundset) {
     mapsProgressList.innerHTML = "Topper";
     mapsProgressViews.appendChild(mapsProgressList);
 
-    let mapsProgressGame = document.createElement('div');
-    mapsProgressGame.classList.add('maps-progress-view','maps-progress-view-list','black-outline');
-    mapsProgressGame.innerHTML = "Preview";
-    mapsProgressViews.appendChild(mapsProgressGame);
-
     let mapsProgressFilter = document.createElement('div');
     mapsProgressFilter.classList.add('maps-progress-filter');
     mapsProgressHeaderBar.appendChild(mapsProgressFilter);
@@ -8302,10 +8291,6 @@ async function showRoundsetModel(source, roundset) {
     })
     mapsProgressList.addEventListener('click', () => {
         currentRoundsetView = "Topper";
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
-    })
-    mapsProgressGame.addEventListener('click', () => {
-        currentRoundsetView = "Preview";
         generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
     })
 
@@ -8386,59 +8371,7 @@ async function generateRounds(type, reverse, modified) {
             break;
         case "Topper":
             break;
-        case "Preview":
-            canvas = document.createElement('canvas');
-            canvas.id = 'roundset-canvas';
-            canvas.width = 800;
-            canvas.height = 300;
-            roundsContent.appendChild(canvas);
-
-            ctx = canvas.getContext('2d');
-            startRound(roundsetProcessed.rounds[0]);
-            update();
-            break;
     }
-}
-
-function spawnBloon(bloonGroup) {
-    let interval = bloonGroup.duration / bloonGroup.count;
-    let count = 0;
-    let spawnInterval = setInterval(() => {
-        if (count >= bloonGroup.count) {
-            clearInterval(spawnInterval);
-            return;
-        }
-        bloons.push({
-            x: -100,
-            y: 150,
-            speed: 1,
-            img: bloonGroup.bloon
-        });
-        count++;
-    }, interval * 1000);
-}
-
-function startRound(round) {
-    for (let bloonGroup of round.bloonGroups) {
-        setTimeout(() => {
-            spawnBloon(bloonGroup);
-        }, bloonGroup.start * 1000);
-    }
-}
-
-function update() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-    for (let bloon of bloons) {
-        bloon.x += bloon.speed;
-        let bloonimg = new Image();
-        bloonimg.src = `../Assets/BloonIcon/${bloon.img}.png`;
-        ctx.beginPath();
-        ctx.drawImage(bloonimg, bloon.x, bloon.y, 50, 50);
-        ctx.fill();
-    }
-
-    requestAnimationFrame(update);
 }
 
 function generateSettings(){
