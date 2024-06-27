@@ -8241,6 +8241,11 @@ async function showRoundsetModel(source, roundset) {
     mapsProgressList.innerHTML = "Topper";
     mapsProgressViews.appendChild(mapsProgressList);
 
+    let mapsProgressGame = document.createElement('div');
+    mapsProgressGame.classList.add('maps-progress-view','maps-progress-view-list','black-outline');
+    mapsProgressGame.innerHTML = "Preview";
+    mapsProgressViews.appendChild(mapsProgressGame);
+
     let mapsProgressFilter = document.createElement('div');
     mapsProgressFilter.classList.add('maps-progress-filter');
     mapsProgressHeaderBar.appendChild(mapsProgressFilter);
@@ -8293,14 +8298,20 @@ async function showRoundsetModel(source, roundset) {
         currentRoundsetView = "Topper";
         generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
     })
+    mapsProgressGame.addEventListener('click', () => {
+        currentRoundsetView = "Preview";
+        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
+    })
+
 
     mapsProgressCoopToggleInput.addEventListener('change', () => {
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
+        onChangeReverse(mapsProgressCoopToggleInput.checked)
     })
     onlyModifiedToggleInput.addEventListener('change', () => {
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
+        onChangeModified(onlyModifiedToggleInput.checked)
     })
     generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked)
+    onChangeModified(onlyModifiedToggleInput.checked)
 }
 
 function processRoundset(data, defaultAppend){
@@ -8330,8 +8341,9 @@ async function generateRounds(type, reverse, modified) {
         case "Simple":
             let alternate = false;
             roundsetProcessed.rounds.forEach(async (round, index) => {
-                if (modified && !round.hasOwnProperty("addToRound")) { return; }
+                // if (modified && !round.hasOwnProperty("addToRound")) { return; }
                 let roundDiv = document.createElement('div');
+                roundDiv.id = `round-${round.roundNumber}`;
                 roundDiv.classList.add('round-div');
                 if (alternate) { roundDiv.classList.add('round-div-alt') }
             
@@ -8341,12 +8353,12 @@ async function generateRounds(type, reverse, modified) {
                 roundDiv.appendChild(roundNumber);
             
                 let roundBloonGroups = document.createElement('div');
+                roundBloonGroups.id = `round-${round.roundNumber}-groups`;
                 roundBloonGroups.classList.add('round-bloon-groups');
                 roundDiv.appendChild(roundBloonGroups);
 
                 let fragment = document.createDocumentFragment();
-            
-                round.bloonGroups.forEach((bloonGroup, index) => {
+                round.bloonGroups.sort((a, b) => a.start - b.start).forEach((bloonGroup, index) => {
                     let bloonGroupDiv = document.createElement('div');
                     bloonGroupDiv.classList.add('bloon-group-div');
             
@@ -8371,7 +8383,46 @@ async function generateRounds(type, reverse, modified) {
             break;
         case "Topper":
             break;
+        case "Preview":
+            canvas = document.createElement('canvas');
+            canvas.id = 'roundset-canvas';
+            canvas.classList.add('roundset-canvas')
+            canvas.width = 800;
+            canvas.height = 300;
+            roundsContent.appendChild(canvas);
+
+            ctx = canvas.getContext('2d');
+
+            if (previewInterval != null) { clearInterval(previewInterval); }
+            previewInterval = setInterval(()=>{
+                update();
+                render();
+            }, 1000/60);
+            break;
     }
+}
+
+function onChangeModified(modified) {
+    let alternate = false;
+    roundsetProcessed.rounds.forEach(async (round, index) => {
+        let roundDiv = document.getElementById(`round-${round.roundNumber}`);
+        if (modified && !round.hasOwnProperty("addToRound")) {
+            roundDiv.style.display = "none";
+        } else {
+            roundDiv.style.display = "flex";
+            if (alternate) { roundDiv.classList.add('round-div-alt') } else if (Array.from(roundDiv.classList).includes('round-div-alt')) { roundDiv.classList.remove('round-div-alt') }
+            alternate = !alternate;
+        }
+
+    })
+}
+
+function onChangeReverse(reverse) {
+    roundsetProcessed.rounds.forEach(async (round, index) => {
+        let groupsDiv = document.getElementById(`round-${round.roundNumber}-groups`); 
+        let groups = Array.from(groupsDiv.children);
+        groups.reverse().forEach(group => groupsDiv.appendChild(group));
+    })
 }
 
 function generateSettings(){

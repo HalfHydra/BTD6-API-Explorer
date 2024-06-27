@@ -3668,6 +3668,13 @@
 .round-div-alt {
     background-color: var(--profile-tertiary);
 }
+.roundset-simple-reverse {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+.roundset-canvas {
+    background-image: url(../Assets/UI/RoundPreview.png);
+}
 
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */

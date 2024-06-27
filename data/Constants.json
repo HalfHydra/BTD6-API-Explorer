@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "beta 1.0.0",
     "projectContentVersion": 43,
     "totalInstaMonkeys": 1472,
     "achievements": 138,
@@ -185,6 +185,104 @@
             "icon": "QuestIconScoopsTale1",
             "type": "quest"
         }
+    },
+    "incomeSets": {
+        "AcceleratedIncomeSet": [
+            {
+                "threshold": 5,
+                "multiplier": 1.2000000476837158
+            },
+            {
+                "threshold": 10,
+                "multiplier": 0.699999988079071
+            },
+            {
+                "threshold": 15,
+                "multiplier": 0.3499999940395355
+            },
+            {
+                "threshold": 20,
+                "multiplier": 0.20000000298023224
+            },
+            {
+                "threshold": 25,
+                "multiplier": 0.05000000074505806
+            },
+            {
+                "threshold": 30,
+                "multiplier": 0.05000000074505806
+            }
+        ],
+        "DefaultIncomeSet": [
+            {
+                "threshold": 50,
+                "multiplier": 1
+            },
+            {
+                "threshold": 60,
+                "multiplier": 0.5
+            },
+            {
+                "threshold": 85,
+                "multiplier": 0.20000000298023224
+            },
+            {
+                "threshold": 100,
+                "multiplier": 0.10000000149011612
+            },
+            {
+                "threshold": 120,
+                "multiplier": 0.05000000074505806
+            }
+        ],
+        "MOABMadnessIncomeSet": [
+            {
+                "threshold": 1,
+                "multiplier": 0.5
+            },
+            {
+                "threshold": 2,
+                "multiplier": 0.4000000059604645
+            },
+            {
+                "threshold": 3,
+                "multiplier": 0.30000001192092896
+            },
+            {
+                "threshold": 4,
+                "multiplier": 0.20000000298023224
+            },
+            {
+                "threshold": 5,
+                "multiplier": 0.10000000149011612
+            }
+        ]
+    },
+    "bloonToRBE": {
+        "Red": 1,
+        "Blue": 2,
+        "Green": 3,
+        "Yellow": 4,
+        "Pink": 5,
+        "Black": 11,
+        "White": 11,
+        "Purple": 11,
+        "Lead": 23,
+        "LeadFortified": 26,
+        "Zebra": 23,
+        "Rainbow": 47,
+        "Ceramic": 104,
+        "CeramicFortified": 114,
+        "MOAB": 616,
+        "MoabFortified": 856,
+        "BFB": 3164,
+        "BFBFortified": 4824,
+        "ZOMG": 16656,
+        "ZOMGFortified": 27296,
+        "DdtCamo": 896,
+        "DdtFortifiedCamo": 1416,
+        "BAD": 64000,
+        "BadFortified": 114840
     },
     "towersInOrder": {
         "DartMonkey": "Primary",
