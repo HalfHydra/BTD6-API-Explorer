@@ -10,7 +10,11 @@
                 }
             ],
             "roundNumber": 1,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 40,
+            "income": 141,
+            "rbeSum": 40,
+            "incomeSum": 141
         },
         {
             "bloonGroups": [
@@ -28,7 +32,11 @@
                 }
             ],
             "roundNumber": 2,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 140,
+            "income": 242,
+            "rbeSum": 180,
+            "incomeSum": 383
         },
         {
             "bloonGroups": [
@@ -58,7 +66,11 @@
                 }
             ],
             "roundNumber": 3,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 300,
+            "income": 403,
+            "rbeSum": 480,
+            "incomeSum": 786
         },
         {
             "bloonGroups": [
@@ -88,7 +100,11 @@
                 }
             ],
             "roundNumber": 4,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 520,
+            "income": 624,
+            "rbeSum": 1000,
+            "incomeSum": 1410
         },
         {
             "bloonGroups": [
@@ -118,7 +134,11 @@
                 }
             ],
             "roundNumber": 5,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 3294,
+            "income": 1760,
+            "rbeSum": 4294,
+            "incomeSum": 3170
         },
         {
             "bloonGroups": [
@@ -148,7 +168,11 @@
                 }
             ],
             "roundNumber": 6,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 3930,
+            "income": 3060,
+            "rbeSum": 8224,
+            "incomeSum": 6230
         },
         {
             "bloonGroups": [
@@ -166,7 +190,11 @@
                 }
             ],
             "roundNumber": 7,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 6530,
+            "income": 5462,
+            "rbeSum": 14754,
+            "incomeSum": 11692
         },
         {
             "bloonGroups": [
@@ -196,7 +224,11 @@
                 }
             ],
             "roundNumber": 8,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 8247,
+            "income": 6230,
+            "rbeSum": 23001,
+            "incomeSum": 17922
         },
         {
             "bloonGroups": [
@@ -226,7 +258,11 @@
                 }
             ],
             "roundNumber": 9,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 11085,
+            "income": 10384,
+            "rbeSum": 34086,
+            "incomeSum": 28306
         },
         {
             "bloonGroups": [
@@ -244,7 +280,11 @@
                 }
             ],
             "roundNumber": 10,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 6264,
+            "income": 3539,
+            "rbeSum": 40350,
+            "incomeSum": 31845
         },
         {
             "bloonGroups": [
@@ -280,7 +320,11 @@
                 }
             ],
             "roundNumber": 11,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 18966,
+            "income": 14644,
+            "rbeSum": 59316,
+            "incomeSum": 46489
         },
         {
             "bloonGroups": [
@@ -310,7 +354,11 @@
                 }
             ],
             "roundNumber": 12,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 7496,
+            "income": 4303,
+            "rbeSum": 66812,
+            "incomeSum": 50792
         },
         {
             "bloonGroups": [
@@ -334,7 +382,11 @@
                 }
             ],
             "roundNumber": 13,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 6410,
+            "income": 4396,
+            "rbeSum": 73222,
+            "incomeSum": 55188
         },
         {
             "bloonGroups": [
@@ -352,7 +404,11 @@
                 }
             ],
             "roundNumber": 14,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 5628,
+            "income": 3163,
+            "rbeSum": 78850,
+            "incomeSum": 58351
         },
         {
             "bloonGroups": [
@@ -376,7 +432,11 @@
                 }
             ],
             "roundNumber": 15,
-            "addToRound": false
+            "addToRound": false,
+            "rbe": 13184,
+            "income": 12359,
+            "rbeSum": 92034,
+            "incomeSum": 70710
         }
     ]
 }

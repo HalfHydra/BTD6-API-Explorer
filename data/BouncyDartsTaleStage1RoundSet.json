@@ -1,1 +1,4291 @@
-{"rounds": [{"bloonGroups": [{"bloon": "Red", "count": 5, "start": 0, "duration": 17.5125}], "roundNumber": 1}, {"bloonGroups": [{"bloon": "Red", "count": 10, "start": 0, "duration": 19}], "roundNumber": 2}, {"bloonGroups": [{"bloon": "Red", "count": 5, "start": 0, "duration": 5.1}, {"bloon": "Blue", "count": 2, "start": 5.7, "duration": 7.948000081380209}, {"bloon": "Red", "count": 5, "start": 9.709999593098958, "duration": 16.70999959309896}], "roundNumber": 3}, {"bloonGroups": [{"bloon": "Red", "count": 25, "start": 0, "duration": 12}, {"bloon": "Lead", "count": 1, "start": 13, "duration": 15.5}], "roundNumber": 4}, {"bloonGroups": [{"bloon": "Blue", "count": 50, "start": 0, "duration": 15}, {"bloon": "Green", "count": 20, "start": 5.7, "duration": 15.7}, {"bloon": "Blue", "count": 100, "start": 8.6, "duration": 28.6}], "roundNumber": 5}, {"bloonGroups": [{"bloon": "Green", "count": 50, "start": 0, "duration": 10}, {"bloon": "Blue", "count": 50, "start": 5.329999796549479, "duration": 10.32999979654948}, {"bloon": "Blue", "count": 150, "start": 10.8, "duration": 40.8}], "roundNumber": 6}, {"bloonGroups": [{"bloon": "Green", "count": 50, "start": 0, "duration": 20}, {"bloon": "PinkCamo", "count": 5, "start": 30, "duration": 40}, {"bloon": "Blue", "count": 150, "start": 11.812000528971355, "duration": 31.81199951171875}, {"bloon": "Blue", "count": 50, "start": 22.809999593098958, "duration": 26.80099894205729}], "roundNumber": 7}, {"bloonGroups": [{"bloon": "Blue", "count": 150, "start": 0, "duration": 40}, {"bloon": "Green", "count": 75, "start": 20, "duration": 50}, {"bloon": "YellowCamo", "count": 10, "start": 14.029999796549479, "duration": 16}, {"bloon": "Green", "count": 50, "start": 30, "duration": 80}], "roundNumber": 8}, {"bloonGroups": [{"bloon": "Green", "count": 1000, "start": 0, "duration": 100}], "roundNumber": 9}, {"bloonGroups": [{"bloon": "Yellow", "count": 200, "start": 0, "duration": 35}, {"bloon": "Blue", "count": 20, "start": 35, "duration": 44}, {"bloon": "Ceramic", "count": 22, "start": 44, "duration": 64}], "roundNumber": 10}, {"bloonGroups": [{"bloon": "Red", "count": 3, "start": 0, "duration": 1}, {"bloon": "Moab", "count": 1, "start": 4.469999694824219, "duration": 10.750998942057292}, {"bloon": "Moab", "count": 1, "start": 10.870000203450521, "duration": 14.67000020345052}, {"bloon": "Moab", "count": 1, "start": 14.590000406901042, "duration": 19.15999959309896}], "roundNumber": 11}, {"bloonGroups": [{"bloon": "White", "count": 25, "start": 0, "duration": 10.033333333333333}, {"bloon": "Rainbow", "count": 5, "start": 14.354166666666666, "duration": 16.63816630045573}, {"bloon": "Pink", "count": 35, "start": 19.2125, "duration": 26.208331298828124}, {"bloon": "Black", "count": 30, "start": 26.759999593098957, "duration": 33.75583292643229}], "roundNumber": 12}, {"bloonGroups": [{"bloon": "Pink", "count": 40, "start": 0, "duration": 1.5125}, {"bloon": "Pink", "count": 40, "start": 8.489999898274739, "duration": 9.83583272298177}, {"bloon": "Pink", "count": 60, "start": 16.98999938964844, "duration": 20.990000406901043}, {"bloon": "GreenRegrowCamo", "count": 10, "start": 4.01000010172526, "duration": 5.355833435058594}, {"bloon": "GreenRegrowCamo", "count": 10, "start": 12.67000020345052, "duration": 14.01583251953125}], "roundNumber": 13}, {"bloonGroups": [{"bloon": "Black", "count": 25, "start": 0, "duration": 10.849000040690104}, {"bloon": "White", "count": 25, "start": 11.42000020345052, "duration": 22.269000244140624}, {"bloon": "Lead", "count": 15, "start": 22.84000040690104, "duration": 30.834000651041666}, {"bloon": "Zebra", "count": 10, "start": 31.405000813802083, "duration": 36.54399820963542}, {"bloon": "WhiteCamo", "count": 7, "start": 41.916666666666664, "duration": 43.50833333333333}], "roundNumber": 14}, {"bloonGroups": [{"bloon": "White", "count": 17, "start": 0, "duration": 3.595833333333333}, {"bloon": "Lead", "count": 14, "start": 4.833333333333333, "duration": 13.39833272298177}, {"bloon": "Zebra", "count": 10, "start": 12.0875, "duration": 18.368499755859375}, {"bloon": "Ceramic", "count": 2, "start": 27.059999593098958, "duration": 29.059999593098958}, {"bloon": "Pink", "count": 42, "start": 2, "duration": 25.41099853515625}], "roundNumber": 15}, {"bloonGroups": [{"bloon": "Black", "count": 10, "start": 0, "duration": 5.138999938964844}, {"bloon": "White", "count": 10, "start": 5.71000010172526, "duration": 10.849000040690104}, {"bloon": "RainbowRegrow", "count": 2, "start": 35.93000081380208, "duration": 37.93000081380208}, {"bloon": "Zebra", "count": 20, "start": 12.790000406901042, "duration": 23.63899943033854}, {"bloon": "Rainbow", "count": 18, "start": 24.79000040690104, "duration": 34.49700113932292}], "roundNumber": 16}, {"bloonGroups": [{"bloon": "Moab", "count": 1, "start": 0, "duration": 1}], "roundNumber": 17}, {"bloonGroups": [{"bloon": "Black", "count": 60, "start": 0, "duration": 18.770833333333332}, {"bloon": "Zebra", "count": 60, "start": 18.845833333333335, "duration": 46.204166666666666}], "roundNumber": 18}, {"bloonGroups": [{"bloon": "RainbowRegrow", "count": 6, "start": 0, "duration": 5}, {"bloon": "RainbowCamo", "count": 5, "start": 6.6, "duration": 11.6}], "roundNumber": 19}, {"bloonGroups": [{"bloon": "Rainbow", "count": 10, "start": 0, "duration": 5.138999938964844}, {"bloon": "Ceramic", "count": 7, "start": 3.5541666666666667, "duration": 9.26416727701823}], "roundNumber": 20}, {"bloonGroups": [{"bloon": "Zebra", "count": 10, "start": 0, "duration": 10}, {"bloon": "Zebra", "count": 10, "start": 9.916666666666666, "duration": 16.916667683919272}, {"bloon": "Zebra", "count": 10, "start": 16.833334350585936, "duration": 20.833333333333332}, {"bloon": "Zebra", "count": 10, "start": 20.75, "duration": 22.75}, {"bloon": "Zebra", "count": 10, "start": 22.666666666666668, "duration": 23.666666666666668}], "roundNumber": 21}, {"bloonGroups": [{"bloon": "White", "count": 25, "start": 0, "duration": 10.033333333333333}, {"bloon": "Rainbow", "count": 5, "start": 14.354166666666666, "duration": 16.63816630045573}, {"bloon": "Pink", "count": 35, "start": 19.2125, "duration": 26.208331298828124}, {"bloon": "Black", "count": 30, "start": 26.759999593098957, "duration": 33.75583292643229}], "roundNumber": 22}, {"bloonGroups": [{"bloon": "Pink", "count": 40, "start": 0, "duration": 1.5125}, {"bloon": "Pink", "count": 40, "start": 8.489999898274739, "duration": 9.83583272298177}, {"bloon": "Pink", "count": 60, "start": 16.98999938964844, "duration": 20.990000406901043}, {"bloon": "GreenRegrowCamo", "count": 10, "start": 4.01000010172526, "duration": 5.355833435058594}, {"bloon": "GreenRegrowCamo", "count": 10, "start": 12.67000020345052, "duration": 14.01583251953125}], "roundNumber": 23}, {"bloonGroups": [{"bloon": "Black", "count": 25, "start": 0, "duration": 10.849000040690104}, {"bloon": "White", "count": 25, "start": 11.42000020345052, "duration": 22.269000244140624}, {"bloon": "Lead", "count": 15, "start": 22.84000040690104, "duration": 30.834000651041666}, {"bloon": "Zebra", "count": 10, "start": 31.405000813802083, "duration": 36.54399820963542}, {"bloon": "WhiteCamo", "count": 7, "start": 41.916666666666664, "duration": 43.50833333333333}], "roundNumber": 24}, {"bloonGroups": [{"bloon": "White", "count": 17, "start": 0, "duration": 3.595833333333333}, {"bloon": "Lead", "count": 14, "start": 4.833333333333333, "duration": 13.39833272298177}, {"bloon": "Zebra", "count": 10, "start": 12.0875, "duration": 18.368499755859375}, {"bloon": "Ceramic", "count": 2, "start": 27.059999593098958, "duration": 29.059999593098958}, {"bloon": "Pink", "count": 42, "start": 2, "duration": 25.41099853515625}], "roundNumber": 25}, {"bloonGroups": [{"bloon": "Black", "count": 10, "start": 0, "duration": 5.138999938964844}, {"bloon": "White", "count": 10, "start": 5.71000010172526, "duration": 10.849000040690104}, {"bloon": "RainbowRegrow", "count": 2, "start": 35.93000081380208, "duration": 37.93000081380208}, {"bloon": "Zebra", "count": 20, "start": 12.790000406901042, "duration": 23.63899943033854}, {"bloon": "Rainbow", "count": 18, "start": 24.79000040690104, "duration": 34.49700113932292}], "roundNumber": 26}, {"bloonGroups": [{"bloon": "Moab", "count": 1, "start": 0, "duration": 1}], "roundNumber": 27}, {"bloonGroups": [{"bloon": "Black", "count": 60, "start": 0, "duration": 18.770833333333332}, {"bloon": "Zebra", "count": 60, "start": 18.845833333333335, "duration": 46.204166666666666}], "roundNumber": 28}, {"bloonGroups": [{"bloon": "RainbowRegrow", "count": 6, "start": 0, "duration": 5}, {"bloon": "RainbowCamo", "count": 5, "start": 6.6, "duration": 11.6}], "roundNumber": 29}, {"bloonGroups": [{"bloon": "Rainbow", "count": 10, "start": 0, "duration": 5.138999938964844}, {"bloon": "Ceramic", "count": 7, "start": 3.5541666666666667, "duration": 9.26416727701823}], "roundNumber": 30}, {"bloonGroups": [{"bloon": "Zebra", "count": 10, "start": 0, "duration": 10}, {"bloon": "Zebra", "count": 10, "start": 9.916666666666666, "duration": 16.916667683919272}, {"bloon": "Zebra", "count": 10, "start": 16.833334350585936, "duration": 20.833333333333332}, {"bloon": "Zebra", "count": 10, "start": 20.75, "duration": 22.75}, {"bloon": "Zebra", "count": 10, "start": 22.666666666666668, "duration": 23.666666666666668}], "roundNumber": 31}, {"bloonGroups": [{"bloon": "White", "count": 25, "start": 0, "duration": 10.033333333333333}, {"bloon": "Rainbow", "count": 5, "start": 14.354166666666666, "duration": 16.63816630045573}, {"bloon": "Pink", "count": 35, "start": 19.2125, "duration": 26.208331298828124}, {"bloon": "Black", "count": 30, "start": 26.759999593098957, "duration": 33.75583292643229}], "roundNumber": 32}, {"bloonGroups": [{"bloon": "Pink", "count": 40, "start": 0, "duration": 1.5125}, {"bloon": "Pink", "count": 40, "start": 8.489999898274739, "duration": 9.83583272298177}, {"bloon": "Pink", "count": 60, "start": 16.98999938964844, "duration": 20.990000406901043}, {"bloon": "GreenRegrowCamo", "count": 10, "start": 4.01000010172526, "duration": 5.355833435058594}, {"bloon": "GreenRegrowCamo", "count": 10, "start": 12.67000020345052, "duration": 14.01583251953125}], "roundNumber": 33}, {"bloonGroups": [{"bloon": "Black", "count": 25, "start": 0, "duration": 10.849000040690104}, {"bloon": "White", "count": 25, "start": 11.42000020345052, "duration": 22.269000244140624}, {"bloon": "Lead", "count": 15, "start": 22.84000040690104, "duration": 30.834000651041666}, {"bloon": "Zebra", "count": 10, "start": 31.405000813802083, "duration": 36.54399820963542}, {"bloon": "WhiteCamo", "count": 7, "start": 41.916666666666664, "duration": 43.50833333333333}], "roundNumber": 34}, {"bloonGroups": [{"bloon": "White", "count": 17, "start": 0, "duration": 3.595833333333333}, {"bloon": "Lead", "count": 14, "start": 4.833333333333333, "duration": 13.39833272298177}, {"bloon": "Zebra", "count": 10, "start": 12.0875, "duration": 18.368499755859375}, {"bloon": "Ceramic", "count": 2, "start": 27.059999593098958, "duration": 29.059999593098958}, {"bloon": "Pink", "count": 42, "start": 2, "duration": 25.41099853515625}], "roundNumber": 35}, {"bloonGroups": [{"bloon": "Black", "count": 10, "start": 0, "duration": 5.138999938964844}, {"bloon": "White", "count": 10, "start": 5.71000010172526, "duration": 10.849000040690104}, {"bloon": "RainbowRegrow", "count": 2, "start": 35.93000081380208, "duration": 37.93000081380208}, {"bloon": "Zebra", "count": 20, "start": 12.790000406901042, "duration": 23.63899943033854}, {"bloon": "Rainbow", "count": 18, "start": 24.79000040690104, "duration": 34.49700113932292}], "roundNumber": 36}, {"bloonGroups": [{"bloon": "Moab", "count": 1, "start": 0, "duration": 1}], "roundNumber": 37}, {"bloonGroups": [{"bloon": "Black", "count": 60, "start": 0, "duration": 18.770833333333332}, {"bloon": "Zebra", "count": 60, "start": 18.845833333333335, "duration": 46.204166666666666}], "roundNumber": 38}, {"bloonGroups": [{"bloon": "RainbowRegrow", "count": 6, "start": 0, "duration": 5}, {"bloon": "RainbowCamo", "count": 5, "start": 6.6, "duration": 11.6}], "roundNumber": 39}, {"bloonGroups": [{"bloon": "Rainbow", "count": 10, "start": 0, "duration": 5.138999938964844}, {"bloon": "Ceramic", "count": 7, "start": 3.5541666666666667, "duration": 9.26416727701823}], "roundNumber": 40}, {"bloonGroups": [{"bloon": "Zebra", "count": 10, "start": 0, "duration": 10}, {"bloon": "Zebra", "count": 10, "start": 9.916666666666666, "duration": 16.916667683919272}, {"bloon": "Zebra", "count": 10, "start": 16.833334350585936, "duration": 20.833333333333332}, {"bloon": "Zebra", "count": 10, "start": 20.75, "duration": 22.75}, {"bloon": "Zebra", "count": 10, "start": 22.666666666666668, "duration": 23.666666666666668}], "roundNumber": 41}, {"bloonGroups": [{"bloon": "Rainbow", "count": 25, "start": 0, "duration": 13.704000854492188}, {"bloon": "Pink", "count": 180, "start": 18.080000813802084, "duration": 53.08000081380208}, {"bloon": "LeadFortified", "count": 4, "start": 50.6, "duration": 53.1}, {"bloon": "PurpleCamo", "count": 10, "start": 14.35, "duration": 17.35}], "roundNumber": 42}, {"bloonGroups": [{"bloon": "CeramicFortified", "count": 6, "start": 0, "duration": 7}], "roundNumber": 43}, {"bloonGroups": [{"bloon": "Ceramic", "count": 12, "start": 0, "duration": 6.2810002644856775}, {"bloon": "PinkCamo", "count": 70, "start": 6.5, "duration": 24.645829264322916}], "roundNumber": 44}, {"bloonGroups": [{"bloon": "PinkRegrow", "count": 40, "start": 0, "duration": 15}, {"bloon": "Rainbow", "count": 40, "start": 30.54000040690104, "duration": 50.54000244140625}, {"bloon": "CeramicFortified", "count": 3, "start": 51.72000325520833, "duration": 55.72000325520833}, {"bloon": "PurpleRegrowCamo", "count": 30, "start": 15.290000406901042, "duration": 30.29000040690104}], "roundNumber": 45}, {"bloonGroups": [{"bloon": "Rainbow", "count": 10, "start": 4, "duration": 9.138899739583334}, {"bloon": "Rainbow", "count": 10, "start": 40.1, "duration": 45.23889973958333}, {"bloon": "RainbowRegrow", "count": 10, "start": 41.380000813802084, "duration": 46.518900553385414}, {"bloon": "Ceramic", "count": 18, "start": 15.5, "duration": 22.03700154622396}, {"bloon": "Zebra", "count": 20, "start": 29.275, "duration": 32.787497965494794}, {"bloon": "Green", "count": 343, "start": 0, "duration": 50}], "roundNumber": 46}, {"bloonGroups": [{"bloon": "Moab", "count": 1, "start": 0, "duration": 1}, {"bloon": "Moab", "count": 1, "start": 27.978900146484374, "duration": 28.978900146484374}, {"bloon": "LeadFortified", "count": 8, "start": 3.0599998474121093, "duration": 7.057000223795573}, {"bloon": "Red", "count": 20, "start": 9.887000528971354, "duration": 11.232000732421875}, {"bloon": "Ceramic", "count": 20, "start": 16.558999633789064, "duration": 27.408001708984376}], "roundNumber": 47}, {"bloonGroups": [{"bloon": "CeramicCamo", "count": 15, "start": 0, "duration": 18}, {"bloon": "RainbowRegrow", "count": 10, "start": 19, "duration": 24.13899129231771}], "roundNumber": 48}, {"bloonGroups": [{"bloon": "Rainbow", "count": 25, "start": 0, "duration": 13.703989664713541}, {"bloon": "Moab", "count": 1, "start": 14.274900309244792, "duration": 15.274900309244792}, {"bloon": "Moab", "count": 1, "start": 17.7010009765625, "duration": 18.7010009765625}, {"bloon": "Ceramic", "count": 5, "start": 14.845989990234376, "duration": 17.130389404296874}, {"bloon": "Ceramic", "count": 5, "start": 18.27199910481771, "duration": 20.555898030598957}], "roundNumber": 49}, {"bloonGroups": [{"bloon": "PinkCamo", "count": 80, "start": 0, "duration": 35}, {"bloon": "Moab", "count": 1, "start": 19.610001627604166, "duration": 20.610001627604166}, {"bloon": "Moab", "count": 1, "start": 27.069999186197915, "duration": 28.069999186197915}, {"bloon": "Moab", "count": 1, "start": 31.080000813802084, "duration": 32.08000081380208}], "roundNumber": 50}, {"bloonGroups": [{"bloon": "Ceramic", "count": 35, "start": 0, "duration": 19.413999430338542}, {"bloon": "Moab", "count": 1, "start": 6.229166158040365, "duration": 7.229166158040365}, {"bloon": "Moab", "count": 1, "start": 11.991000366210937, "duration": 12.991000366210937}], "roundNumber": 51}, {"bloonGroups": [{"bloon": "Moab", "count": 1, "start": 28.78330078125, "duration": 29.78330078125}, {"bloon": "Ceramic", "count": 10, "start": 0, "duration": 1.1637500762939452}, {"bloon": "Ceramic", "count": 10, "start": 7.833330281575521, "duration": 9.304130045572917}, {"bloon": "Ceramic", "count": 10, "start": 14.416000366210938, "duration": 15.886832682291667}, {"bloon": "Ceramic", "count": 15, "start": 22.16659952799479, "duration": 23.074930826822918}], "roundNumber": 52}, {"bloonGroups": [{"bloon": "RainbowCamo", "count": 40, "start": 0, "duration": 12}, {"bloon": "Moab", "count": 1, "start": 15.179099527994792, "duration": 16.17909952799479}], "roundNumber": 53}, {"bloonGroups": [{"bloon": "Moab", "count": 2, "start": 0, "duration": 0.5709999720255534}, {"bloon": "Moab", "count": 2, "start": 12.561899820963541, "duration": 13.132899983723958}, {"bloon": "Rainbow", "count": 40, "start": 0.9700000127156575, "duration": 26.22833251953125}], "roundNumber": 54}, {"bloonGroups": [{"bloon": "Moab", "count": 5, "start": 0, "duration": 43.98332926432292}, {"bloon": "Ceramic", "count": 15, "start": 0, "duration": 22}, {"bloon": "CeramicFortified", "count": 10, "start": 23.530000813802083, "duration": 43.52999674479167}], "roundNumber": 55}, {"bloonGroups": [{"bloon": "Ceramic", "count": 20, "start": 0, "duration": 10}, {"bloon": "LeadCamo", "count": 50, "start": 10.166000366210938, "duration": 17.616959635416666}, {"bloon": "CeramicRegrow", "count": 10, "start": 18.15999959309896, "duration": 26.15999959309896}], "roundNumber": 56}, {"bloonGroups": [{"bloon": "Bfb", "count": 1, "start": 0, "duration": 1}], "roundNumber": 57}, {"bloonGroups": [{"bloon": "ZebraRegrow", "count": 150, "start": 0, "duration": 20}, {"bloon": "Moab", "count": 5, "start": 1.9166599273681642, "duration": 15.94999287923177}], "roundNumber": 58}, {"bloonGroups": [{"bloon": "Moab", "count": 5, "start": 1.0833300272623698, "duration": 21.083329264322916}, {"bloon": "Purple", "count": 250, "start": 0, "duration": 40}, {"bloon": "RainbowRegrowCamo", "count": 15, "start": 40.3, "duration": 48.29399820963542}, {"bloon": "MoabFortified", "count": 2, "start": 32.13999837239583, "duration": 37.13999837239583}], "roundNumber": 59}, {"bloonGroups": [{"bloon": "Ceramic", "count": 40, "start": 3.8791600545247396, "duration": 4.079159800211588}, {"bloon": "Ceramic", "count": 40, "start": 20.083329264322916, "duration": 20.283331298828124}, {"bloon": "Ceramic", "count": 42, "start": 36.41659749348958, "duration": 36.6166015625}, {"bloon": "Lead", "count": 75, "start": 0, "duration": 42.25399983723958}], "roundNumber": 60}, {"bloonGroups": [{"bloon": "Moab", "count": 6, "start": 0, "duration": 4}, {"bloon": "MoabFortified", "count": 3, "start": 5.530000305175781, "duration": 9.530000813802083}], "roundNumber": 61}, {"bloonGroups": [{"bloon": "Zebra", "count": 100, "start": 0, "duration": 32.358333333333334}, {"bloon": "Rainbow", "count": 70, "start": 32.59583333333333, "duration": 46.9038330078125}, {"bloon": "Ceramic", "count": 50, "start": 47.31666259765625, "duration": 58.16566162109375}, {"bloon": "Moab", "count": 3, "start": 58.5666015625, "duration": 59.136600748697916}, {"bloon": "Bfb", "count": 2, "start": 60, "duration": 62}], "roundNumber": 62}, {"bloonGroups": [{"bloon": "Moab", "count": 2, "start": 0, "duration": 0.5}, {"bloon": "Moab", "count": 2, "start": 7, "duration": 7.5}, {"bloon": "Moab", "count": 4, "start": 13.916660563151042, "duration": 14.916660563151042}, {"bloon": "MoabFortified", "count": 3, "start": 20.75, "duration": 22.75}], "roundNumber": 63}, {"bloonGroups": [{"bloon": "Moab", "count": 4, "start": 0, "duration": 2.2839998881022137}, {"bloon": "Moab", "count": 4, "start": 24.154158528645834, "duration": 26.438059488932293}, {"bloon": "CeramicRegrowFortifiedCamo", "count": 13, "start": 9.095833333333333, "duration": 17.08983154296875}], "roundNumber": 64}, {"bloonGroups": [{"bloon": "Moab", "count": 4, "start": 0, "duration": 1.7129989624023438}, {"bloon": "Bfb", "count": 1, "start": 7.44166005452474, "duration": 8.441660054524739}], "roundNumber": 65}, {"bloonGroups": [{"bloon": "LeadFortified", "count": 40, "start": 0, "duration": 16.558990478515625}, {"bloon": "Ceramic", "count": 50, "start": 17.129998779296876, "duration": 42.12999674479167}, {"bloon": "BlackRegrow", "count": 40, "start": 5.46000010172526, "duration": 15.459999593098958}], "roundNumber": 66}, {"bloonGroups": [{"bloon": "Rainbow", "count": 200, "start": 0, "duration": 40}, {"bloon": "Moab", "count": 4, "start": 40, "duration": 41.14200032552083}, {"bloon": "WhiteRegrowCamo", "count": 120, "start": 0, "duration": 38}], "roundNumber": 67}, {"bloonGroups": [{"bloon": "Moab", "count": 10, "start": 4.41666005452474, "duration": 9.416660563151042}, {"bloon": "Ceramic", "count": 30, "start": 0, "duration": 16.549998982747397}], "roundNumber": 68}, {"bloonGroups": [{"bloon": "Bfb", "count": 1, "start": 3.4166600545247396, "duration": 3.9166600545247396}, {"bloon": "Bfb", "count": 1, "start": 16.116666666666667, "duration": 16.616666666666667}, {"bloon": "CeramicRegrow", "count": 38, "start": 0, "duration": 21.697998046875}], "roundNumber": 69}, {"bloonGroups": [{"bloon": "Moab", "count": 7, "start": 0, "duration": 2.2839998881022137}, {"bloon": "Moab", "count": 1, "start": 26.38330078125, "duration": 26.954300944010416}, {"bloon": "Bfb", "count": 2, "start": 13.4, "duration": 16.4}], "roundNumber": 70}, {"bloonGroups": [{"bloon": "Ceramic", "count": 50, "start": 0, "duration": 20}, {"bloon": "CeramicFortified", "count": 60, "start": 54.86000162760417, "duration": 82.38500162760417}, {"bloon": "Bfb", "count": 1, "start": 43.93000081380208, "duration": 44.43000081380208}, {"bloon": "CeramicRegrowFortifiedCamo", "count": 25, "start": 21.139998372395834, "duration": 41.13999837239583}], "roundNumber": 71}, {"bloonGroups": [{"bloon": "Bfb", "count": 1, "start": 0, "duration": 0.1}, {"bloon": "Bfb", "count": 3, "start": 9.706990559895834, "duration": 9.806990559895834}, {"bloon": "Bfb", "count": 3, "start": 22.4875, "duration": 22.5875}, {"bloon": "Lead", "count": 14, "start": 0.5709999720255534, "duration": 7.993999226888021}, {"bloon": "LeadFortified", "count": 14, "start": 10.276999918619792, "duration": 17.7}, {"bloon": "MoabFortified", "count": 1, "start": 8.720000203450521, "duration": 9.290999348958334}, {"bloon": "MoabFortified", "count": 2, "start": 18.27199910481771, "duration": 21.27199910481771}], "roundNumber": 72}, {"bloonGroups": [{"bloon": "CeramicRegrow", "count": 60, "start": 0, "duration": 1.7769999186197916}], "roundNumber": 73}, {"bloonGroups": [{"bloon": "Moab", "count": 11, "start": 0, "duration": 58.920833333333334}, {"bloon": "Bfb", "count": 5, "start": 26.66666056315104, "duration": 31.220827229817708}], "roundNumber": 74}, {"bloonGroups": [{"bloon": "Rainbow", "count": 150, "start": 0, "duration": 90}, {"bloon": "Ceramic", "count": 75, "start": 10, "duration": 11.166600545247396}, {"bloon": "CeramicCamo", "count": 72, "start": 77.91666666666667, "duration": 79.1208251953125}, {"bloon": "Bfb", "count": 1, "start": 44.08332926432292, "duration": 45.796329752604166}, {"bloon": "Purple", "count": 80, "start": 64.4, "duration": 79.4}], "roundNumber": 75}, {"bloonGroups": [{"bloon": "RainbowRegrow", "count": 500, "start": 0, "duration": 60}, {"bloon": "Bfb", "count": 4, "start": 3.1666600545247396, "duration": 38.16665852864583}, {"bloon": "BfbFortified", "count": 2, "start": 47.22000325520833, "duration": 57.22000325520833}], "roundNumber": 76}, {"bloonGroups": [{"bloon": "Zomg", "count": 1, "start": 0, "duration": 2}], "roundNumber": 77}, {"bloonGroups": [{"bloon": "Bfb", "count": 9, "start": 0, "duration": 20}, {"bloon": "Bfb", "count": 8, "start": 21.469999186197917, "duration": 26.469999186197917}], "roundNumber": 78}, {"bloonGroups": [{"bloon": "BfbFortified", "count": 5, "start": 21.680000813802085, "duration": 35.68000081380208}, {"bloon": "Bfb", "count": 10, "start": 0, "duration": 20}], "roundNumber": 79}, {"bloonGroups": [{"bloon": "Ceramic", "count": 40, "start": 0, "duration": 60}, {"bloon": "CeramicRegrow", "count": 40, "start": 0.1, "duration": 60.1}, {"bloon": "CeramicFortified", "count": 40, "start": 0.2, "duration": 60.2}, {"bloon": "Moab", "count": 30, "start": 24.940000406901042, "duration": 34.94000244140625}], "roundNumber": 80}, {"bloonGroups": [{"bloon": "Moab", "count": 50, "start": 0, "duration": 25}, {"bloon": "Bfb", "count": 10, "start": 5, "duration": 25}], "roundNumber": 81}, {"bloonGroups": [{"bloon": "Zomg", "count": 2, "start": 0, "duration": 10}], "roundNumber": 82}, {"bloonGroups": [{"bloon": "BfbFortified", "count": 5, "start": -0.15, "duration": 20.85}], "roundNumber": 83}, {"bloonGroups": [{"bloon": "Zomg", "count": 4, "start": 0, "duration": 10}], "roundNumber": 84}, {"bloonGroups": [{"bloon": "Bfb", "count": 8, "start": 0, "duration": 5}, {"bloon": "Moab", "count": 18, "start": 5.840000406901042, "duration": 10.840000406901042}, {"bloon": "Zomg", "count": 2, "start": 11.55, "duration": 14.55}], "roundNumber": 85}, {"bloonGroups": [{"bloon": "MoabFortified", "count": 20, "start": 0, "duration": 10}, {"bloon": "BfbFortified", "count": 8, "start": 10.739999389648437, "duration": 20.740000406901043}], "roundNumber": 86}, {"bloonGroups": [{"bloon": "LeadRegrowFortifiedCamo", "count": 50, "start": 0, "duration": 10}, {"bloon": "DdtCamo", "count": 3, "start": 10.4, "duration": 11.9}], "roundNumber": 87}, {"bloonGroups": [{"bloon": "CeramicFortified", "count": 100, "start": 0, "duration": 30}, {"bloon": "Bfb", "count": 20, "start": 7.380000305175781, "duration": 17.380000813802084}], "roundNumber": 88}, {"bloonGroups": [{"bloon": "MoabFortified", "count": 50, "start": 0, "duration": 35}, {"bloon": "Zomg", "count": 4, "start": 12.959999593098958, "duration": 18.95999959309896}], "roundNumber": 89}, {"bloonGroups": [{"bloon": "BfbFortified", "count": 10, "start": 0, "duration": 20}, {"bloon": "DdtCamo", "count": 6, "start": 12.35, "duration": 14.35}], "roundNumber": 90}, {"bloonGroups": [{"bloon": "Bfb", "count": 25, "start": 0, "duration": 15}, {"bloon": "Zomg", "count": 6, "start": 1.6099999745686848, "duration": 14.609999593098959}], "roundNumber": 91}, {"bloonGroups": [{"bloon": "PurpleRegrowCamo", "count": 500, "start": 0, "duration": 30}, {"bloon": "LeadRegrowFortifiedCamo", "count": 250, "start": 0, "duration": 30}, {"bloon": "DdtCamo", "count": 30, "start": 30.809999593098958, "duration": 50.80999755859375}, {"bloon": "MoabFortified", "count": 50, "start": 30.80999755859375, "duration": 50.80999755859375}], "roundNumber": 92}, {"bloonGroups": [{"bloon": "Bfb", "count": 10, "start": 0, "duration": 5}, {"bloon": "MoabFortified", "count": 20, "start": 5.5, "duration": 10.5}, {"bloon": "MoabFortified", "count": 20, "start": 16.04000040690104, "duration": 21.04000040690104}, {"bloon": "Bfb", "count": 10, "start": 10.739999389648437, "duration": 15.739999389648437}, {"bloon": "Bfb", "count": 10, "start": 21.620001220703124, "duration": 26.620001220703124}, {"bloon": "Zomg", "count": 6, "start": 27.120001220703124, "duration": 32.12000325520833}], "roundNumber": 93}, {"bloonGroups": [{"bloon": "ZomgFortified", "count": 2, "start": 0, "duration": 5}], "roundNumber": 94}, {"bloonGroups": [{"bloon": "BfbFortified", "count": 30, "start": 0, "duration": 30}, {"bloon": "Zomg", "count": 8, "start": 0, "duration": 5}], "roundNumber": 95}, {"bloonGroups": [{"bloon": "Moab", "count": 60, "start": 0, "duration": 12}, {"bloon": "DdtFortifiedCamo", "count": 9, "start": 6.51000010172526, "duration": 11.510000610351563}], "roundNumber": 96}, {"bloonGroups": [{"bloon": "Bad", "count": 1, "start": 0, "duration": 0.1}], "roundNumber": 97}, {"bloonGroups": [{"bloon": "Purple", "count": 250, "start": 0, "duration": 6}, {"bloon": "MoabFortified", "count": 10, "start": 5, "duration": 7}, {"bloon": "Purple", "count": 200, "start": 7.5, "duration": 9.5}, {"bloon": "CeramicFortified", "count": 50, "start": 7, "duration": 8}], "roundNumber": 98}, {"bloonGroups": [{"bloon": "Zomg", "count": 1, "start": 0, "duration": 0.1}, {"bloon": "ZomgFortified", "count": 1, "start": 9.5, "duration": 9.6}, {"bloon": "ZomgFortified", "count": 2, "start": 19, "duration": 19.1}, {"bloon": "DdtCamo", "count": 18, "start": 10, "duration": 41}, {"bloon": "DdtFortifiedCamo", "count": 12, "start": 19.5, "duration": 46.5}, {"bloon": "Bfb", "count": 3, "start": 12, "duration": 12.5}, {"bloon": "BfbFortified", "count": 3, "start": 21.5, "duration": 22.5}], "roundNumber": 99}, {"bloonGroups": [{"bloon": "Moab", "count": 100, "start": 5, "duration": 15}, {"bloon": "MoabFortified", "count": 50, "start": 6.5, "duration": 15}, {"bloon": "ZomgFortified", "count": 10, "start": 0, "duration": 7}, {"bloon": "Purple", "count": 64, "start": 6, "duration": 7}, {"bloon": "Purple", "count": 66, "start": 12, "duration": 13}, {"bloon": "Purple", "count": 68, "start": 18, "duration": 19}], "roundNumber": 100}, {"bloonGroups": [{"bloon": "MoabFortified", "count": 150, "start": 0, "duration": 22}, {"bloon": "Bfb", "count": 10, "start": 0, "duration": 15}, {"bloon": "LeadFortified", "count": 100, "start": 0, "duration": 2.5}, {"bloon": "Bfb", "count": 8, "start": 2.5, "duration": 14.25}, {"bloon": "Purple", "count": 100, "start": 2.5, "duration": 5}, {"bloon": "Bfb", "count": 7, "start": 5, "duration": 15}, {"bloon": "Ceramic", "count": 100, "start": 5, "duration": 7.5}, {"bloon": "BfbFortified", "count": 5, "start": 7.5, "duration": 14.25}, {"bloon": "LeadFortified", "count": 100, "start": 7.5, "duration": 10}, {"bloon": "BfbFortified", "count": 4, "start": 10, "duration": 15}, {"bloon": "Purple", "count": 100, "start": 10, "duration": 12.5}, {"bloon": "BfbFortified", "count": 5, "start": 12.5, "duration": 15}, {"bloon": "Ceramic", "count": 100, "start": 12.5, "duration": 15}, {"bloon": "Moab", "count": 25, "start": 18, "duration": 22}], "roundNumber": 101}, {"bloonGroups": [{"bloon": "Ceramic", "count": 100, "start": 0, "duration": 4}, {"bloon": "Bfb", "count": 30, "start": 4, "duration": 7}, {"bloon": "CeramicFortified", "count": 300, "start": 7, "duration": 9}, {"bloon": "LeadFortified", "count": 25, "start": 0, "duration": 9}], "roundNumber": 102}, {"bloonGroups": [{"bloon": "DdtCamo", "count": 21, "start": 0, "duration": 30}, {"bloon": "DdtCamo", "count": 18, "start": 5, "duration": 30}, {"bloon": "DdtCamo", "count": 15, "start": 10, "duration": 30}, {"bloon": "DdtFortifiedCamo", "count": 12, "start": 15, "duration": 30}, {"bloon": "DdtFortifiedCamo", "count": 9, "start": 20, "duration": 30}, {"bloon": "DdtFortifiedCamo", "count": 6, "start": 25, "duration": 30}, {"bloon": "DdtCamo", "count": 12, "start": 33, "duration": 33.5}], "roundNumber": 103}, {"bloonGroups": [{"bloon": "ZomgFortified", "count": 10, "start": 2, "duration": 7}, {"bloon": "CeramicFortified", "count": 100, "start": 0, "duration": 9}, {"bloon": "PurpleCamo", "count": 444, "start": 1, "duration": 10}], "roundNumber": 104}, {"bloonGroups": [{"bloon": "Zomg", "count": 9, "start": 0, "duration": 15}, {"bloon": "ZomgFortified", "count": 10, "start": 14, "duration": 24}], "roundNumber": 105}, {"bloonGroups": [{"bloon": "Zomg", "count": 15, "start": 0, "duration": 18}, {"bloon": "Purple", "count": 15, "start": 0, "duration": 18}, {"bloon": "Bfb", "count": 15, "start": 0, "duration": 18}, {"bloon": "MoabFortified", "count": 15, "start": 0, "duration": 18}, {"bloon": "BfbFortified", "count": 15, "start": 0, "duration": 18}, {"bloon": "MoabFortified", "count": 15, "start": 0, "duration": 18}], "roundNumber": 106}, {"bloonGroups": [{"bloon": "Bfb", "count": 25, "start": 0, "duration": 36}, {"bloon": "DdtCamo", "count": 9, "start": 0, "duration": 12}, {"bloon": "DdtCamo", "count": 9, "start": 12, "duration": 22}, {"bloon": "DdtFortifiedCamo", "count": 6, "start": 22, "duration": 30}, {"bloon": "DdtFortifiedCamo", "count": 6, "start": 30, "duration": 36}], "roundNumber": 107}, {"bloonGroups": [{"bloon": "ZomgFortified", "count": 9, "start": 7, "duration": 13}, {"bloon": "Zomg", "count": 17, "start": 0, "duration": 13}, {"bloon": "Zomg", "count": 5, "start": 16.5, "duration": 18.5}], "roundNumber": 108}, {"bloonGroups": [{"bloon": "BfbFortified", "count": 27, "start": 0, "duration": 20}, {"bloon": "DdtFortifiedCamo", "count": 21, "start": 7, "duration": 20}], "roundNumber": 109}, {"bloonGroups": [{"bloon": "BfbFortified", "count": 15, "start": 7, "duration": 21}, {"bloon": "MoabFortified", "count": 75, "start": 0, "duration": 17.5}, {"bloon": "CeramicCamo", "count": 42, "start": 14, "duration": 15.5}, {"bloon": "CeramicFortified", "count": 42, "start": 20, "duration": 21.5}], "roundNumber": 110}, {"bloonGroups": [{"bloon": "DdtCamo", "count": 9, "start": 0, "duration": 30}, {"bloon": "DdtFortifiedCamo", "count": 6, "start": 2.5, "duration": 30}, {"bloon": "MoabFortified", "count": 36, "start": 0, "duration": 10}, {"bloon": "Moab", "count": 24, "start": 5, "duration": 15}, {"bloon": "Bfb", "count": 12, "start": 10, "duration": 20}, {"bloon": "BfbFortified", "count": 8, "start": 15, "duration": 25}, {"bloon": "Zomg", "count": 5, "start": 20, "duration": 25}, {"bloon": "ZomgFortified", "count": 3, "start": 25, "duration": 30}], "roundNumber": 111}, {"bloonGroups": [{"bloon": "DdtCamo", "count": 9, "start": 0, "duration": 30}, {"bloon": "DdtFortifiedCamo", "count": 6, "start": 2.5, "duration": 30}, {"bloon": "MoabFortified", "count": 36, "start": 20, "duration": 30}, {"bloon": "Moab", "count": 24, "start": 15, "duration": 25}, {"bloon": "Bfb", "count": 12, "start": 10, "duration": 20}, {"bloon": "BfbFortified", "count": 8, "start": 5, "duration": 15}, {"bloon": "Zomg", "count": 5, "start": 5, "duration": 10}, {"bloon": "ZomgFortified", "count": 3, "start": 0, "duration": 5}], "roundNumber": 112}, {"bloonGroups": [{"bloon": "ZomgFortified", "count": 8, "start": 0, "duration": 3}, {"bloon": "BfbFortified", "count": 18, "start": 5, "duration": 15}, {"bloon": "Purple", "count": 100, "start": 5, "duration": 15}, {"bloon": "Purple", "count": 100, "start": 8, "duration": 15}, {"bloon": "Purple", "count": 200, "start": 11, "duration": 15}], "roundNumber": 113}, {"bloonGroups": [{"bloon": "Lead", "count": 250, "start": 0, "duration": 14}, {"bloon": "DdtCamo", "count": 27, "start": 3, "duration": 14}, {"bloon": "DdtFortifiedCamo", "count": 18, "start": 3, "duration": 14}], "roundNumber": 114}, {"bloonGroups": [{"bloon": "Zomg", "count": 12, "start": 0, "duration": 16}, {"bloon": "DdtFortifiedCamo", "count": 30, "start": 7.5, "duration": 14.5}], "roundNumber": 115}, {"bloonGroups": [{"bloon": "Bad", "count": 2, "start": 0, "duration": 10}, {"bloon": "Bad", "count": 1, "start": 25, "duration": 26}], "roundNumber": 116}, {"bloonGroups": [{"bloon": "Zomg", "count": 12, "start": 0, "duration": 45}, {"bloon": "Bfb", "count": 12, "start": 1.5, "duration": 46.5}, {"bloon": "MoabFortified", "count": 24, "start": 6, "duration": 51}], "roundNumber": 117}, {"bloonGroups": [{"bloon": "BfbFortified", "count": 14, "start": 0, "duration": 5}, {"bloon": "MoabFortified", "count": 28, "start": 5, "duration": 10}, {"bloon": "ZomgFortified", "count": 6, "start": 10, "duration": 15}], "roundNumber": 118}, {"bloonGroups": [{"bloon": "Bfb", "count": 40, "start": 0, "duration": 0.2}, {"bloon": "BfbFortified", "count": 20, "start": 0.1, "duration": 0.1}, {"bloon": "LeadFortified", "count": 75, "start": 5, "duration": 20}, {"bloon": "LeadFortified", "count": 75, "start": 5, "duration": 20}, {"bloon": "LeadFortified", "count": 75, "start": 5, "duration": 20}], "roundNumber": 119}, {"bloonGroups": [{"bloon": "ZomgFortified", "count": 8, "start": 0, "duration": 40}, {"bloon": "Moab", "count": 200, "start": 0, "duration": 40}], "roundNumber": 120}, {"bloonGroups": [{"bloon": "BfbFortified", "count": 75, "start": 0, "duration": 30}], "roundNumber": 121}, {"bloonGroups": [{"bloon": "Moab", "count": 18, "start": 15, "duration": 40}, {"bloon": "Moab", "count": 15, "start": 19.419999186197916, "duration": 40}, {"bloon": "Moab", "count": 12, "start": 23.830000813802084, "duration": 40}, {"bloon": "Moab", "count": 9, "start": 28.25, "duration": 40}, {"bloon": "Moab", "count": 6, "start": 32.65999959309896, "duration": 39.98999837239583}, {"bloon": "Moab", "count": 3, "start": 37.08000081380208, "duration": 40}, {"bloon": "Zomg", "count": 6, "start": 0, "duration": 25}, {"bloon": "Zomg", "count": 5, "start": 5, "duration": 25}, {"bloon": "Zomg", "count": 4, "start": 10, "duration": 25}, {"bloon": "Zomg", "count": 3, "start": 15, "duration": 25}, {"bloon": "Zomg", "count": 2, "start": 20, "duration": 25}, {"bloon": "Zomg", "count": 1, "start": 25, "duration": 26}, {"bloon": "Bfb", "count": 12, "start": 5, "duration": 30}, {"bloon": "Bfb", "count": 10, "start": 9.55, "duration": 30}, {"bloon": "Bfb", "count": 8, "start": 14.1, "duration": 30}, {"bloon": "Bfb", "count": 6, "start": 18.65, "duration": 30}, {"bloon": "Bfb", "count": 4, "start": 23.2, "duration": 30}, {"bloon": "Bfb", "count": 2, "start": 27.75, "duration": 30}], "roundNumber": 122}, {"bloonGroups": [{"bloon": "DdtCamo", "count": 99, "start": 6, "duration": 27}, {"bloon": "LeadRegrowFortifiedCamo", "count": 1, "start": 0, "duration": 1}], "roundNumber": 123}, {"bloonGroups": [{"bloon": "Moab", "count": 48, "start": 0, "duration": 7}, {"bloon": "Bfb", "count": 24, "start": 5, "duration": 14}], "roundNumber": 124}, {"bloonGroups": [{"bloon": "DdtFortifiedCamo", "count": 39, "start": 0, "duration": 18}, {"bloon": "CeramicFortifiedCamo", "count": 200, "start": 9, "duration": 13.5}, {"bloon": "Bfb", "count": 30, "start": 10, "duration": 28}], "roundNumber": 125}, {"bloonGroups": [{"bloon": "ZomgFortified", "count": 7, "start": 0, "duration": 17}, {"bloon": "LeadFortifiedCamo", "count": 77, "start": 4, "duration": 5}, {"bloon": "PurpleCamo", "count": 77, "start": 6, "duration": 7}, {"bloon": "CeramicCamo", "count": 77, "start": 8, "duration": 9}, {"bloon": "Zomg", "count": 7, "start": 10, "duration": 10}, {"bloon": "DdtCamo", "count": 9, "start": 17, "duration": 17}, {"bloon": "DdtCamo", "count": 3, "start": 21, "duration": 22}, {"bloon": "DdtCamo", "count": 3, "start": 24, "duration": 25}, {"bloon": "DdtCamo", "count": 3, "start": 27, "duration": 28}], "roundNumber": 126}, {"bloonGroups": [{"bloon": "Moab", "count": 48, "start": 24, "duration": 40}, {"bloon": "DdtFortifiedCamo", "count": 3, "start": 24, "duration": 24}, {"bloon": "DdtCamo", "count": 6, "start": 28, "duration": 28}, {"bloon": "DdtFortifiedCamo", "count": 3, "start": 32, "duration": 32}, {"bloon": "DdtCamo", "count": 6, "start": 36, "duration": 36}, {"bloon": "MoabFortified", "count": 48, "start": 40, "duration": 40}, {"bloon": "DdtCamo", "count": 27, "start": 4, "duration": 20}, {"bloon": "Moab", "count": 12, "start": 0, "duration": 0}, {"bloon": "MoabFortified", "count": 9, "start": 4, "duration": 4}, {"bloon": "Moab", "count": 12, "start": 8, "duration": 8}, {"bloon": "MoabFortified", "count": 9, "start": 12, "duration": 12}, {"bloon": "Moab", "count": 12, "start": 16, "duration": 16}, {"bloon": "DdtCamo", "count": 9, "start": 20, "duration": 20}], "roundNumber": 127}, {"bloonGroups": [{"bloon": "ZomgFortified", "count": 18, "start": 0, "duration": 39}], "roundNumber": 128}, {"bloonGroups": [{"bloon": "Zomg", "count": 5, "start": 0, "duration": 1}, {"bloon": "Zomg", "count": 4, "start": 5, "duration": 5}, {"bloon": "ZomgFortified", "count": 3, "start": 10, "duration": 11}, {"bloon": "PurpleCamo", "count": 100, "start": 15, "duration": 16}, {"bloon": "Zomg", "count": 5, "start": 25, "duration": 26}, {"bloon": "Zomg", "count": 4, "start": 30, "duration": 30}, {"bloon": "ZomgFortified", "count": 3, "start": 35, "duration": 36}, {"bloon": "PurpleCamo", "count": 100, "start": 40, "duration": 41}], "roundNumber": 129}, {"bloonGroups": [{"bloon": "MoabFortified", "count": 6, "start": 0, "duration": 1}, {"bloon": "BfbFortified", "count": 6, "start": 0, "duration": 1}, {"bloon": "ZomgFortified", "count": 2, "start": 0, "duration": 1}, {"bloon": "MoabFortified", "count": 6, "start": 12, "duration": 13}, {"bloon": "BfbFortified", "count": 6, "start": 12, "duration": 13}, {"bloon": "ZomgFortified", "count": 2, "start": 12, "duration": 13}, {"bloon": "Moab", "count": 9, "start": 24, "duration": 25}, {"bloon": "Bfb", "count": 9, "start": 24, "duration": 25}, {"bloon": "Zomg", "count": 3, "start": 24, "duration": 25}, {"bloon": "Moab", "count": 9, "start": 36, "duration": 37}, {"bloon": "Bfb", "count": 9, "start": 36, "duration": 37}, {"bloon": "Zomg", "count": 3, "start": 36, "duration": 37}, {"bloon": "Moab", "count": 9, "start": 42, "duration": 43}, {"bloon": "Bfb", "count": 9, "start": 42, "duration": 43}, {"bloon": "Zomg", "count": 3, "start": 42, "duration": 43}], "roundNumber": 130}, {"bloonGroups": [{"bloon": "BfbFortified", "count": 12, "start": 0, "duration": 24}, {"bloon": "Bfb", "count": 10, "start": 4.3600001017252605, "duration": 24}, {"bloon": "Bfb", "count": 8, "start": 8.739999389648437, "duration": 24}, {"bloon": "Bfb", "count": 6, "start": 13.1, "duration": 24}, {"bloon": "Bfb", "count": 4, "start": 17.45999959309896, "duration": 24.00999755859375}], "roundNumber": 131}, {"bloonGroups": [{"bloon": "ZomgFortified", "count": 7, "start": 0, "duration": 24}, {"bloon": "ZomgFortified", "count": 7, "start": 0, "duration": 24}, {"bloon": "DdtFortifiedCamo", "count": 7, "start": 0, "duration": 24}, {"bloon": "DdtFortifiedCamo", "count": 7, "start": 0, "duration": 24}, {"bloon": "DdtFortifiedCamo", "count": 7, "start": 0, "duration": 24}], "roundNumber": 132}, {"bloonGroups": [{"bloon": "MoabFortified", "count": 96, "start": 0, "duration": 45}, {"bloon": "Bfb", "count": 24, "start": 0, "duration": 45}], "roundNumber": 133}, {"bloonGroups": [{"bloon": "Zomg", "count": 18, "start": 0, "duration": 0.1}, {"bloon": "Bfb", "count": 24, "start": 2, "duration": 2.0999998728434246}, {"bloon": "Moab", "count": 48, "start": 8, "duration": 8.100000508626302}], "roundNumber": 134}, {"bloonGroups": [{"bloon": "DdtFortifiedCamo", "count": 33, "start": 0, "duration": 40}, {"bloon": "DdtFortifiedCamo", "count": 27, "start": 7, "duration": 40}, {"bloon": "DdtFortifiedCamo", "count": 21, "start": 14, "duration": 40}, {"bloon": "DdtCamo", "count": 18, "start": 21, "duration": 40}, {"bloon": "DdtCamo", "count": 15, "start": 28, "duration": 40}, {"bloon": "DdtCamo", "count": 12, "start": 35, "duration": 40}], "roundNumber": 135}, {"bloonGroups": [{"bloon": "Moab", "count": 109, "start": 0, "duration": 45}, {"bloon": "Moab", "count": 18, "start": 5, "duration": 9}, {"bloon": "MoabFortified", "count": 18, "start": 9, "duration": 13}, {"bloon": "Moab", "count": 18, "start": 13, "duration": 21}, {"bloon": "MoabFortified", "count": 18, "start": 21, "duration": 25}, {"bloon": "Moab", "count": 18, "start": 25, "duration": 29}, {"bloon": "MoabFortified", "count": 18, "start": 29, "duration": 33}, {"bloon": "Moab", "count": 18, "start": 33, "duration": 41}, {"bloon": "MoabFortified", "count": 18, "start": 41, "duration": 45}], "roundNumber": 136}, {"bloonGroups": [{"bloon": "BadFortified", "count": 1, "start": 0, "duration": 1}, {"bloon": "Bad", "count": 1, "start": 45, "duration": 46}], "roundNumber": 137}]}
+{
+    "rounds": [
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Red",
+                    "count": 5,
+                    "start": 0,
+                    "duration": 17.5125
+                }
+            ],
+            "roundNumber": 1,
+            "rbe": 5,
+            "income": 106,
+            "rbeSum": 5,
+            "incomeSum": 106
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Red",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 19
+                }
+            ],
+            "roundNumber": 2,
+            "rbe": 10,
+            "income": 112,
+            "rbeSum": 15,
+            "incomeSum": 218
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Red",
+                    "count": 5,
+                    "start": 0,
+                    "duration": 5.1
+                },
+                {
+                    "bloon": "Blue",
+                    "count": 2,
+                    "start": 5.7,
+                    "duration": 7.948000081380209
+                },
+                {
+                    "bloon": "Red",
+                    "count": 5,
+                    "start": 9.709999593098958,
+                    "duration": 16.70999959309896
+                }
+            ],
+            "roundNumber": 3,
+            "rbe": 14,
+            "income": 117,
+            "rbeSum": 29,
+            "incomeSum": 335
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Red",
+                    "count": 25,
+                    "start": 0,
+                    "duration": 12
+                },
+                {
+                    "bloon": "Lead",
+                    "count": 1,
+                    "start": 13,
+                    "duration": 15.5
+                }
+            ],
+            "roundNumber": 4,
+            "rbe": 48,
+            "income": 152,
+            "rbeSum": 77,
+            "incomeSum": 487
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Blue",
+                    "count": 50,
+                    "start": 0,
+                    "duration": 15
+                },
+                {
+                    "bloon": "Green",
+                    "count": 20,
+                    "start": 5.7,
+                    "duration": 15.7
+                },
+                {
+                    "bloon": "Blue",
+                    "count": 100,
+                    "start": 8.6,
+                    "duration": 28.6
+                }
+            ],
+            "roundNumber": 5,
+            "rbe": 360,
+            "income": 465,
+            "rbeSum": 437,
+            "incomeSum": 952
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Green",
+                    "count": 50,
+                    "start": 0,
+                    "duration": 10
+                },
+                {
+                    "bloon": "Blue",
+                    "count": 50,
+                    "start": 5.329999796549479,
+                    "duration": 10.32999979654948
+                },
+                {
+                    "bloon": "Blue",
+                    "count": 150,
+                    "start": 10.8,
+                    "duration": 40.8
+                }
+            ],
+            "roundNumber": 6,
+            "rbe": 550,
+            "income": 656,
+            "rbeSum": 987,
+            "incomeSum": 1608
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Green",
+                    "count": 50,
+                    "start": 0,
+                    "duration": 20
+                },
+                {
+                    "bloon": "PinkCamo",
+                    "count": 5,
+                    "start": 30,
+                    "duration": 40
+                },
+                {
+                    "bloon": "Blue",
+                    "count": 150,
+                    "start": 11.812000528971355,
+                    "duration": 31.81199951171875
+                },
+                {
+                    "bloon": "Blue",
+                    "count": 50,
+                    "start": 22.809999593098958,
+                    "duration": 26.80099894205729
+                }
+            ],
+            "roundNumber": 7,
+            "rbe": 575,
+            "income": 682,
+            "rbeSum": 1562,
+            "incomeSum": 2290
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Blue",
+                    "count": 150,
+                    "start": 0,
+                    "duration": 40
+                },
+                {
+                    "bloon": "Green",
+                    "count": 75,
+                    "start": 20,
+                    "duration": 50
+                },
+                {
+                    "bloon": "YellowCamo",
+                    "count": 10,
+                    "start": 14.029999796549479,
+                    "duration": 16
+                },
+                {
+                    "bloon": "Green",
+                    "count": 50,
+                    "start": 30,
+                    "duration": 80
+                }
+            ],
+            "roundNumber": 8,
+            "rbe": 715,
+            "income": 823,
+            "rbeSum": 2277,
+            "incomeSum": 3113
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Green",
+                    "count": 1000,
+                    "start": 0,
+                    "duration": 100
+                }
+            ],
+            "roundNumber": 9,
+            "rbe": 3000,
+            "income": 3109,
+            "rbeSum": 5277,
+            "incomeSum": 6222
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Yellow",
+                    "count": 200,
+                    "start": 0,
+                    "duration": 35
+                },
+                {
+                    "bloon": "Blue",
+                    "count": 20,
+                    "start": 35,
+                    "duration": 44
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 22,
+                    "start": 44,
+                    "duration": 64
+                }
+            ],
+            "roundNumber": 10,
+            "rbe": 3128,
+            "income": 3040,
+            "rbeSum": 8405,
+            "incomeSum": 9262
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Red",
+                    "count": 3,
+                    "start": 0,
+                    "duration": 1
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 4.469999694824219,
+                    "duration": 10.750998942057292
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 10.870000203450521,
+                    "duration": 14.67000020345052
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 14.590000406901042,
+                    "duration": 19.15999959309896
+                }
+            ],
+            "roundNumber": 11,
+            "rbe": 1851,
+            "income": 1257,
+            "rbeSum": 10256,
+            "incomeSum": 10519
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "White",
+                    "count": 25,
+                    "start": 0,
+                    "duration": 10.033333333333333
+                },
+                {
+                    "bloon": "Rainbow",
+                    "count": 5,
+                    "start": 14.354166666666666,
+                    "duration": 16.63816630045573
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 35,
+                    "start": 19.2125,
+                    "duration": 26.208331298828124
+                },
+                {
+                    "bloon": "Black",
+                    "count": 30,
+                    "start": 26.759999593098957,
+                    "duration": 33.75583292643229
+                }
+            ],
+            "roundNumber": 12,
+            "rbe": 1015,
+            "income": 1127,
+            "rbeSum": 11271,
+            "incomeSum": 11646
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Pink",
+                    "count": 40,
+                    "start": 0,
+                    "duration": 1.5125
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 40,
+                    "start": 8.489999898274739,
+                    "duration": 9.83583272298177
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 60,
+                    "start": 16.98999938964844,
+                    "duration": 20.990000406901043
+                },
+                {
+                    "bloon": "GreenRegrowCamo",
+                    "count": 10,
+                    "start": 4.01000010172526,
+                    "duration": 5.355833435058594
+                },
+                {
+                    "bloon": "GreenRegrowCamo",
+                    "count": 10,
+                    "start": 12.67000020345052,
+                    "duration": 14.01583251953125
+                }
+            ],
+            "roundNumber": 13,
+            "rbe": 760,
+            "income": 873,
+            "rbeSum": 12031,
+            "incomeSum": 12519
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Black",
+                    "count": 25,
+                    "start": 0,
+                    "duration": 10.849000040690104
+                },
+                {
+                    "bloon": "White",
+                    "count": 25,
+                    "start": 11.42000020345052,
+                    "duration": 22.269000244140624
+                },
+                {
+                    "bloon": "Lead",
+                    "count": 15,
+                    "start": 22.84000040690104,
+                    "duration": 30.834000651041666
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 31.405000813802083,
+                    "duration": 36.54399820963542
+                },
+                {
+                    "bloon": "WhiteCamo",
+                    "count": 7,
+                    "start": 41.916666666666664,
+                    "duration": 43.50833333333333
+                }
+            ],
+            "roundNumber": 14,
+            "rbe": 1202,
+            "income": 1316,
+            "rbeSum": 13233,
+            "incomeSum": 13835
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "White",
+                    "count": 17,
+                    "start": 0,
+                    "duration": 3.595833333333333
+                },
+                {
+                    "bloon": "Lead",
+                    "count": 14,
+                    "start": 4.833333333333333,
+                    "duration": 13.39833272298177
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 12.0875,
+                    "duration": 18.368499755859375
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 2,
+                    "start": 27.059999593098958,
+                    "duration": 29.059999593098958
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 42,
+                    "start": 2,
+                    "duration": 25.41099853515625
+                }
+            ],
+            "roundNumber": 15,
+            "rbe": 1157,
+            "income": 1254,
+            "rbeSum": 14390,
+            "incomeSum": 15089
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Black",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 5.138999938964844
+                },
+                {
+                    "bloon": "White",
+                    "count": 10,
+                    "start": 5.71000010172526,
+                    "duration": 10.849000040690104
+                },
+                {
+                    "bloon": "RainbowRegrow",
+                    "count": 2,
+                    "start": 35.93000081380208,
+                    "duration": 37.93000081380208
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 20,
+                    "start": 12.790000406901042,
+                    "duration": 23.63899943033854
+                },
+                {
+                    "bloon": "Rainbow",
+                    "count": 18,
+                    "start": 24.79000040690104,
+                    "duration": 34.49700113932292
+                }
+            ],
+            "roundNumber": 16,
+            "rbe": 1620,
+            "income": 1736,
+            "rbeSum": 16010,
+            "incomeSum": 16825
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 0,
+                    "duration": 1
+                }
+            ],
+            "roundNumber": 17,
+            "rbe": 616,
+            "income": 498,
+            "rbeSum": 16626,
+            "incomeSum": 17323
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Black",
+                    "count": 60,
+                    "start": 0,
+                    "duration": 18.770833333333332
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 60,
+                    "start": 18.845833333333335,
+                    "duration": 46.204166666666666
+                }
+            ],
+            "roundNumber": 18,
+            "rbe": 2040,
+            "income": 2158,
+            "rbeSum": 18666,
+            "incomeSum": 19481
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "RainbowRegrow",
+                    "count": 6,
+                    "start": 0,
+                    "duration": 5
+                },
+                {
+                    "bloon": "RainbowCamo",
+                    "count": 5,
+                    "start": 6.6,
+                    "duration": 11.6
+                }
+            ],
+            "roundNumber": 19,
+            "rbe": 517,
+            "income": 636,
+            "rbeSum": 19183,
+            "incomeSum": 20117
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Rainbow",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 5.138999938964844
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 7,
+                    "start": 3.5541666666666667,
+                    "duration": 9.26416727701823
+                }
+            ],
+            "roundNumber": 20,
+            "rbe": 1198,
+            "income": 1255,
+            "rbeSum": 20381,
+            "incomeSum": 21372
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 10
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 9.916666666666666,
+                    "duration": 16.916667683919272
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 16.833334350585936,
+                    "duration": 20.833333333333332
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 20.75,
+                    "duration": 22.75
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 22.666666666666668,
+                    "duration": 23.666666666666668
+                }
+            ],
+            "roundNumber": 21,
+            "rbe": 1150,
+            "income": 1271,
+            "rbeSum": 21531,
+            "incomeSum": 22643
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "White",
+                    "count": 25,
+                    "start": 0,
+                    "duration": 10.033333333333333
+                },
+                {
+                    "bloon": "Rainbow",
+                    "count": 5,
+                    "start": 14.354166666666666,
+                    "duration": 16.63816630045573
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 35,
+                    "start": 19.2125,
+                    "duration": 26.208331298828124
+                },
+                {
+                    "bloon": "Black",
+                    "count": 30,
+                    "start": 26.759999593098957,
+                    "duration": 33.75583292643229
+                }
+            ],
+            "roundNumber": 22,
+            "rbe": 1015,
+            "income": 1137,
+            "rbeSum": 22546,
+            "incomeSum": 23780
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Pink",
+                    "count": 40,
+                    "start": 0,
+                    "duration": 1.5125
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 40,
+                    "start": 8.489999898274739,
+                    "duration": 9.83583272298177
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 60,
+                    "start": 16.98999938964844,
+                    "duration": 20.990000406901043
+                },
+                {
+                    "bloon": "GreenRegrowCamo",
+                    "count": 10,
+                    "start": 4.01000010172526,
+                    "duration": 5.355833435058594
+                },
+                {
+                    "bloon": "GreenRegrowCamo",
+                    "count": 10,
+                    "start": 12.67000020345052,
+                    "duration": 14.01583251953125
+                }
+            ],
+            "roundNumber": 23,
+            "rbe": 760,
+            "income": 883,
+            "rbeSum": 23306,
+            "incomeSum": 24663
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Black",
+                    "count": 25,
+                    "start": 0,
+                    "duration": 10.849000040690104
+                },
+                {
+                    "bloon": "White",
+                    "count": 25,
+                    "start": 11.42000020345052,
+                    "duration": 22.269000244140624
+                },
+                {
+                    "bloon": "Lead",
+                    "count": 15,
+                    "start": 22.84000040690104,
+                    "duration": 30.834000651041666
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 31.405000813802083,
+                    "duration": 36.54399820963542
+                },
+                {
+                    "bloon": "WhiteCamo",
+                    "count": 7,
+                    "start": 41.916666666666664,
+                    "duration": 43.50833333333333
+                }
+            ],
+            "roundNumber": 24,
+            "rbe": 1202,
+            "income": 1326,
+            "rbeSum": 24508,
+            "incomeSum": 25989
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "White",
+                    "count": 17,
+                    "start": 0,
+                    "duration": 3.595833333333333
+                },
+                {
+                    "bloon": "Lead",
+                    "count": 14,
+                    "start": 4.833333333333333,
+                    "duration": 13.39833272298177
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 12.0875,
+                    "duration": 18.368499755859375
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 2,
+                    "start": 27.059999593098958,
+                    "duration": 29.059999593098958
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 42,
+                    "start": 2,
+                    "duration": 25.41099853515625
+                }
+            ],
+            "roundNumber": 25,
+            "rbe": 1157,
+            "income": 1264,
+            "rbeSum": 25665,
+            "incomeSum": 27253
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Black",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 5.138999938964844
+                },
+                {
+                    "bloon": "White",
+                    "count": 10,
+                    "start": 5.71000010172526,
+                    "duration": 10.849000040690104
+                },
+                {
+                    "bloon": "RainbowRegrow",
+                    "count": 2,
+                    "start": 35.93000081380208,
+                    "duration": 37.93000081380208
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 20,
+                    "start": 12.790000406901042,
+                    "duration": 23.63899943033854
+                },
+                {
+                    "bloon": "Rainbow",
+                    "count": 18,
+                    "start": 24.79000040690104,
+                    "duration": 34.49700113932292
+                }
+            ],
+            "roundNumber": 26,
+            "rbe": 1620,
+            "income": 1746,
+            "rbeSum": 27285,
+            "incomeSum": 28999
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 0,
+                    "duration": 1
+                }
+            ],
+            "roundNumber": 27,
+            "rbe": 616,
+            "income": 508,
+            "rbeSum": 27901,
+            "incomeSum": 29507
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Black",
+                    "count": 60,
+                    "start": 0,
+                    "duration": 18.770833333333332
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 60,
+                    "start": 18.845833333333335,
+                    "duration": 46.204166666666666
+                }
+            ],
+            "roundNumber": 28,
+            "rbe": 2040,
+            "income": 2168,
+            "rbeSum": 29941,
+            "incomeSum": 31675
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "RainbowRegrow",
+                    "count": 6,
+                    "start": 0,
+                    "duration": 5
+                },
+                {
+                    "bloon": "RainbowCamo",
+                    "count": 5,
+                    "start": 6.6,
+                    "duration": 11.6
+                }
+            ],
+            "roundNumber": 29,
+            "rbe": 517,
+            "income": 646,
+            "rbeSum": 30458,
+            "incomeSum": 32321
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Rainbow",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 5.138999938964844
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 7,
+                    "start": 3.5541666666666667,
+                    "duration": 9.26416727701823
+                }
+            ],
+            "roundNumber": 30,
+            "rbe": 1198,
+            "income": 1265,
+            "rbeSum": 31656,
+            "incomeSum": 33586
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 10
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 9.916666666666666,
+                    "duration": 16.916667683919272
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 16.833334350585936,
+                    "duration": 20.833333333333332
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 20.75,
+                    "duration": 22.75
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 22.666666666666668,
+                    "duration": 23.666666666666668
+                }
+            ],
+            "roundNumber": 31,
+            "rbe": 1150,
+            "income": 1281,
+            "rbeSum": 32806,
+            "incomeSum": 34867
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "White",
+                    "count": 25,
+                    "start": 0,
+                    "duration": 10.033333333333333
+                },
+                {
+                    "bloon": "Rainbow",
+                    "count": 5,
+                    "start": 14.354166666666666,
+                    "duration": 16.63816630045573
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 35,
+                    "start": 19.2125,
+                    "duration": 26.208331298828124
+                },
+                {
+                    "bloon": "Black",
+                    "count": 30,
+                    "start": 26.759999593098957,
+                    "duration": 33.75583292643229
+                }
+            ],
+            "roundNumber": 32,
+            "rbe": 1015,
+            "income": 1147,
+            "rbeSum": 33821,
+            "incomeSum": 36014
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Pink",
+                    "count": 40,
+                    "start": 0,
+                    "duration": 1.5125
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 40,
+                    "start": 8.489999898274739,
+                    "duration": 9.83583272298177
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 60,
+                    "start": 16.98999938964844,
+                    "duration": 20.990000406901043
+                },
+                {
+                    "bloon": "GreenRegrowCamo",
+                    "count": 10,
+                    "start": 4.01000010172526,
+                    "duration": 5.355833435058594
+                },
+                {
+                    "bloon": "GreenRegrowCamo",
+                    "count": 10,
+                    "start": 12.67000020345052,
+                    "duration": 14.01583251953125
+                }
+            ],
+            "roundNumber": 33,
+            "rbe": 760,
+            "income": 893,
+            "rbeSum": 34581,
+            "incomeSum": 36907
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Black",
+                    "count": 25,
+                    "start": 0,
+                    "duration": 10.849000040690104
+                },
+                {
+                    "bloon": "White",
+                    "count": 25,
+                    "start": 11.42000020345052,
+                    "duration": 22.269000244140624
+                },
+                {
+                    "bloon": "Lead",
+                    "count": 15,
+                    "start": 22.84000040690104,
+                    "duration": 30.834000651041666
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 31.405000813802083,
+                    "duration": 36.54399820963542
+                },
+                {
+                    "bloon": "WhiteCamo",
+                    "count": 7,
+                    "start": 41.916666666666664,
+                    "duration": 43.50833333333333
+                }
+            ],
+            "roundNumber": 34,
+            "rbe": 1202,
+            "income": 1336,
+            "rbeSum": 35783,
+            "incomeSum": 38243
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "White",
+                    "count": 17,
+                    "start": 0,
+                    "duration": 3.595833333333333
+                },
+                {
+                    "bloon": "Lead",
+                    "count": 14,
+                    "start": 4.833333333333333,
+                    "duration": 13.39833272298177
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 12.0875,
+                    "duration": 18.368499755859375
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 2,
+                    "start": 27.059999593098958,
+                    "duration": 29.059999593098958
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 42,
+                    "start": 2,
+                    "duration": 25.41099853515625
+                }
+            ],
+            "roundNumber": 35,
+            "rbe": 1157,
+            "income": 1274,
+            "rbeSum": 36940,
+            "incomeSum": 39517
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Black",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 5.138999938964844
+                },
+                {
+                    "bloon": "White",
+                    "count": 10,
+                    "start": 5.71000010172526,
+                    "duration": 10.849000040690104
+                },
+                {
+                    "bloon": "RainbowRegrow",
+                    "count": 2,
+                    "start": 35.93000081380208,
+                    "duration": 37.93000081380208
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 20,
+                    "start": 12.790000406901042,
+                    "duration": 23.63899943033854
+                },
+                {
+                    "bloon": "Rainbow",
+                    "count": 18,
+                    "start": 24.79000040690104,
+                    "duration": 34.49700113932292
+                }
+            ],
+            "roundNumber": 36,
+            "rbe": 1620,
+            "income": 1756,
+            "rbeSum": 38560,
+            "incomeSum": 41273
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 0,
+                    "duration": 1
+                }
+            ],
+            "roundNumber": 37,
+            "rbe": 616,
+            "income": 518,
+            "rbeSum": 39176,
+            "incomeSum": 41791
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Black",
+                    "count": 60,
+                    "start": 0,
+                    "duration": 18.770833333333332
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 60,
+                    "start": 18.845833333333335,
+                    "duration": 46.204166666666666
+                }
+            ],
+            "roundNumber": 38,
+            "rbe": 2040,
+            "income": 2178,
+            "rbeSum": 41216,
+            "incomeSum": 43969
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "RainbowRegrow",
+                    "count": 6,
+                    "start": 0,
+                    "duration": 5
+                },
+                {
+                    "bloon": "RainbowCamo",
+                    "count": 5,
+                    "start": 6.6,
+                    "duration": 11.6
+                }
+            ],
+            "roundNumber": 39,
+            "rbe": 517,
+            "income": 656,
+            "rbeSum": 41733,
+            "incomeSum": 44625
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Rainbow",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 5.138999938964844
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 7,
+                    "start": 3.5541666666666667,
+                    "duration": 9.26416727701823
+                }
+            ],
+            "roundNumber": 40,
+            "rbe": 1198,
+            "income": 1275,
+            "rbeSum": 42931,
+            "incomeSum": 45900
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 10
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 9.916666666666666,
+                    "duration": 16.916667683919272
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 16.833334350585936,
+                    "duration": 20.833333333333332
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 20.75,
+                    "duration": 22.75
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 10,
+                    "start": 22.666666666666668,
+                    "duration": 23.666666666666668
+                }
+            ],
+            "roundNumber": 41,
+            "rbe": 1150,
+            "income": 1291,
+            "rbeSum": 44081,
+            "incomeSum": 47191
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Rainbow",
+                    "count": 25,
+                    "start": 0,
+                    "duration": 13.704000854492188
+                },
+                {
+                    "bloon": "Pink",
+                    "count": 180,
+                    "start": 18.080000813802084,
+                    "duration": 53.08000081380208
+                },
+                {
+                    "bloon": "LeadFortified",
+                    "count": 4,
+                    "start": 50.6,
+                    "duration": 53.1
+                },
+                {
+                    "bloon": "PurpleCamo",
+                    "count": 10,
+                    "start": 14.35,
+                    "duration": 17.35
+                }
+            ],
+            "roundNumber": 42,
+            "rbe": 2289,
+            "income": 2419,
+            "rbeSum": 46370,
+            "incomeSum": 49610
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "CeramicFortified",
+                    "count": 6,
+                    "start": 0,
+                    "duration": 7
+                }
+            ],
+            "roundNumber": 43,
+            "rbe": 684,
+            "income": 713,
+            "rbeSum": 47054,
+            "incomeSum": 50323
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Ceramic",
+                    "count": 12,
+                    "start": 0,
+                    "duration": 6.2810002644856775
+                },
+                {
+                    "bloon": "PinkCamo",
+                    "count": 70,
+                    "start": 6.5,
+                    "duration": 24.645829264322916
+                }
+            ],
+            "roundNumber": 44,
+            "rbe": 1598,
+            "income": 1634,
+            "rbeSum": 48652,
+            "incomeSum": 51957
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "PinkRegrow",
+                    "count": 40,
+                    "start": 0,
+                    "duration": 15
+                },
+                {
+                    "bloon": "Rainbow",
+                    "count": 40,
+                    "start": 30.54000040690104,
+                    "duration": 50.54000244140625
+                },
+                {
+                    "bloon": "CeramicFortified",
+                    "count": 3,
+                    "start": 51.72000325520833,
+                    "duration": 55.72000325520833
+                },
+                {
+                    "bloon": "PurpleRegrowCamo",
+                    "count": 30,
+                    "start": 15.290000406901042,
+                    "duration": 30.29000040690104
+                }
+            ],
+            "roundNumber": 45,
+            "rbe": 2752,
+            "income": 2840,
+            "rbeSum": 51404,
+            "incomeSum": 54797
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Rainbow",
+                    "count": 10,
+                    "start": 4,
+                    "duration": 9.138899739583334
+                },
+                {
+                    "bloon": "Rainbow",
+                    "count": 10,
+                    "start": 40.1,
+                    "duration": 45.23889973958333
+                },
+                {
+                    "bloon": "RainbowRegrow",
+                    "count": 10,
+                    "start": 41.380000813802084,
+                    "duration": 46.518900553385414
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 18,
+                    "start": 15.5,
+                    "duration": 22.03700154622396
+                },
+                {
+                    "bloon": "Zebra",
+                    "count": 20,
+                    "start": 29.275,
+                    "duration": 32.787497965494794
+                },
+                {
+                    "bloon": "Green",
+                    "count": 343,
+                    "start": 0,
+                    "duration": 50
+                }
+            ],
+            "roundNumber": 46,
+            "rbe": 4771,
+            "income": 4755,
+            "rbeSum": 56175,
+            "incomeSum": 59552
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 0,
+                    "duration": 1
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 27.978900146484374,
+                    "duration": 28.978900146484374
+                },
+                {
+                    "bloon": "LeadFortified",
+                    "count": 8,
+                    "start": 3.0599998474121093,
+                    "duration": 7.057000223795573
+                },
+                {
+                    "bloon": "Red",
+                    "count": 20,
+                    "start": 9.887000528971354,
+                    "duration": 11.232000732421875
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 20,
+                    "start": 16.558999633789064,
+                    "duration": 27.408001708984376
+                }
+            ],
+            "roundNumber": 47,
+            "rbe": 3540,
+            "income": 3013,
+            "rbeSum": 59715,
+            "incomeSum": 62565
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "CeramicCamo",
+                    "count": 15,
+                    "start": 0,
+                    "duration": 18
+                },
+                {
+                    "bloon": "RainbowRegrow",
+                    "count": 10,
+                    "start": 19,
+                    "duration": 24.13899129231771
+                }
+            ],
+            "roundNumber": 48,
+            "rbe": 2030,
+            "income": 2043,
+            "rbeSum": 61745,
+            "incomeSum": 64608
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Rainbow",
+                    "count": 25,
+                    "start": 0,
+                    "duration": 13.703989664713541
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 14.274900309244792,
+                    "duration": 15.274900309244792
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 17.7010009765625,
+                    "duration": 18.7010009765625
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 5,
+                    "start": 14.845989990234376,
+                    "duration": 17.130389404296874
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 5,
+                    "start": 18.27199910481771,
+                    "duration": 20.555898030598957
+                }
+            ],
+            "roundNumber": 49,
+            "rbe": 3447,
+            "income": 3036,
+            "rbeSum": 65192,
+            "incomeSum": 67644
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "PinkCamo",
+                    "count": 80,
+                    "start": 0,
+                    "duration": 35
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 19.610001627604166,
+                    "duration": 20.610001627604166
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 27.069999186197915,
+                    "duration": 28.069999186197915
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 31.080000813802084,
+                    "duration": 32.08000081380208
+                }
+            ],
+            "roundNumber": 50,
+            "rbe": 2248,
+            "income": 1693,
+            "rbeSum": 67440,
+            "incomeSum": 69337
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Ceramic",
+                    "count": 35,
+                    "start": 0,
+                    "duration": 19.413999430338542
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 6.229166158040365,
+                    "duration": 7.229166158040365
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 11.991000366210937,
+                    "duration": 12.991000366210937
+                }
+            ],
+            "roundNumber": 51,
+            "rbe": 4872,
+            "income": 2194.5,
+            "rbeSum": 72312,
+            "incomeSum": 71531.5
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 28.78330078125,
+                    "duration": 29.78330078125
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 1.1637500762939452
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 10,
+                    "start": 7.833330281575521,
+                    "duration": 9.304130045572917
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 10,
+                    "start": 14.416000366210938,
+                    "duration": 15.886832682291667
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 15,
+                    "start": 22.16659952799479,
+                    "duration": 23.074930826822918
+                }
+            ],
+            "roundNumber": 52,
+            "rbe": 5296,
+            "income": 2480.0,
+            "rbeSum": 77608,
+            "incomeSum": 74011.5
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "RainbowCamo",
+                    "count": 40,
+                    "start": 0,
+                    "duration": 12
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 15.179099527994792,
+                    "duration": 16.17909952799479
+                }
+            ],
+            "roundNumber": 53,
+            "rbe": 2496,
+            "income": 1283.5,
+            "rbeSum": 80104,
+            "incomeSum": 75295.0
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 2,
+                    "start": 0,
+                    "duration": 0.5709999720255534
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 2,
+                    "start": 12.561899820963541,
+                    "duration": 13.132899983723958
+                },
+                {
+                    "bloon": "Rainbow",
+                    "count": 40,
+                    "start": 0.9700000127156575,
+                    "duration": 26.22833251953125
+                }
+            ],
+            "roundNumber": 54,
+            "rbe": 4344,
+            "income": 1856.0,
+            "rbeSum": 84448,
+            "incomeSum": 77151.0
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 5,
+                    "start": 0,
+                    "duration": 43.98332926432292
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 15,
+                    "start": 0,
+                    "duration": 22
+                },
+                {
+                    "bloon": "CeramicFortified",
+                    "count": 10,
+                    "start": 23.530000813802083,
+                    "duration": 43.52999674479167
+                }
+            ],
+            "roundNumber": 55,
+            "rbe": 5780,
+            "income": 2295.0,
+            "rbeSum": 90228,
+            "incomeSum": 79446.0
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Ceramic",
+                    "count": 20,
+                    "start": 0,
+                    "duration": 10
+                },
+                {
+                    "bloon": "LeadCamo",
+                    "count": 50,
+                    "start": 10.166000366210938,
+                    "duration": 17.616959635416666
+                },
+                {
+                    "bloon": "CeramicRegrow",
+                    "count": 10,
+                    "start": 18.15999959309896,
+                    "duration": 26.15999959309896
+                }
+            ],
+            "roundNumber": 56,
+            "rbe": 4270,
+            "income": 2156.0,
+            "rbeSum": 94498,
+            "incomeSum": 81602.0
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bfb",
+                    "count": 1,
+                    "start": 0,
+                    "duration": 1
+                }
+            ],
+            "roundNumber": 57,
+            "rbe": 3164,
+            "income": 919.5,
+            "rbeSum": 97662,
+            "incomeSum": 82521.5
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "ZebraRegrow",
+                    "count": 150,
+                    "start": 0,
+                    "duration": 20
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 5,
+                    "start": 1.9166599273681642,
+                    "duration": 15.94999287923177
+                }
+            ],
+            "roundNumber": 58,
+            "rbe": 6530,
+            "income": 2835.5,
+            "rbeSum": 104192,
+            "incomeSum": 85357.0
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 5,
+                    "start": 1.0833300272623698,
+                    "duration": 21.083329264322916
+                },
+                {
+                    "bloon": "Purple",
+                    "count": 250,
+                    "start": 0,
+                    "duration": 40
+                },
+                {
+                    "bloon": "RainbowRegrowCamo",
+                    "count": 15,
+                    "start": 40.3,
+                    "duration": 48.29399820963542
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 2,
+                    "start": 32.13999837239583,
+                    "duration": 37.13999837239583
+                }
+            ],
+            "roundNumber": 59,
+            "rbe": 8247,
+            "income": 3220.0,
+            "rbeSum": 112439,
+            "incomeSum": 88577.0
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Ceramic",
+                    "count": 40,
+                    "start": 3.8791600545247396,
+                    "duration": 4.079159800211588
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 40,
+                    "start": 20.083329264322916,
+                    "duration": 20.283331298828124
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 42,
+                    "start": 36.41659749348958,
+                    "duration": 36.6166015625
+                },
+                {
+                    "bloon": "Lead",
+                    "count": 75,
+                    "start": 0,
+                    "duration": 42.25399983723958
+                }
+            ],
+            "roundNumber": 60,
+            "rbe": 14413,
+            "income": 6817.5,
+            "rbeSum": 126852,
+            "incomeSum": 95394.5
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 6,
+                    "start": 0,
+                    "duration": 4
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 3,
+                    "start": 5.530000305175781,
+                    "duration": 9.530000813802083
+                }
+            ],
+            "roundNumber": 61,
+            "rbe": 6264,
+            "income": 846.8000102192163,
+            "rbeSum": 133116,
+            "incomeSum": 96241.30001021922
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zebra",
+                    "count": 100,
+                    "start": 0,
+                    "duration": 32.358333333333334
+                },
+                {
+                    "bloon": "Rainbow",
+                    "count": 70,
+                    "start": 32.59583333333333,
+                    "duration": 46.9038330078125
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 50,
+                    "start": 47.31666259765625,
+                    "duration": 58.16566162109375
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 3,
+                    "start": 58.5666015625,
+                    "duration": 59.136600748697916
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 2,
+                    "start": 60,
+                    "duration": 62
+                }
+            ],
+            "roundNumber": 62,
+            "rbe": 18966,
+            "income": 3068.600043311715,
+            "rbeSum": 152082,
+            "incomeSum": 99309.90005353093
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 2,
+                    "start": 0,
+                    "duration": 0.5
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 2,
+                    "start": 7,
+                    "duration": 7.5
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 4,
+                    "start": 13.916660563151042,
+                    "duration": 14.916660563151042
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 3,
+                    "start": 20.75,
+                    "duration": 22.75
+                }
+            ],
+            "roundNumber": 63,
+            "rbe": 7496,
+            "income": 1001.2000124901533,
+            "rbeSum": 159578,
+            "incomeSum": 100311.10006602108
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 4,
+                    "start": 0,
+                    "duration": 2.2839998881022137
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 4,
+                    "start": 24.154158528645834,
+                    "duration": 26.438059488932293
+                },
+                {
+                    "bloon": "CeramicRegrowFortifiedCamo",
+                    "count": 13,
+                    "start": 9.095833333333333,
+                    "duration": 17.08983154296875
+                }
+            ],
+            "roundNumber": 64,
+            "rbe": 6410,
+            "income": 1020.6000127643347,
+            "rbeSum": 165988,
+            "incomeSum": 101331.70007878542
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 4,
+                    "start": 0,
+                    "duration": 1.7129989624023438
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 1,
+                    "start": 7.44166005452474,
+                    "duration": 8.441660054524739
+                }
+            ],
+            "roundNumber": 65,
+            "rbe": 5628,
+            "income": 774.8000090867281,
+            "rbeSum": 171616,
+            "incomeSum": 102106.50008787215
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "LeadFortified",
+                    "count": 40,
+                    "start": 0,
+                    "duration": 16.558990478515625
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 50,
+                    "start": 17.129998779296876,
+                    "duration": 42.12999674479167
+                },
+                {
+                    "bloon": "BlackRegrow",
+                    "count": 40,
+                    "start": 5.46000010172526,
+                    "duration": 15.459999593098958
+                }
+            ],
+            "roundNumber": 66,
+            "rbe": 6680,
+            "income": 1388.000018209219,
+            "rbeSum": 178296,
+            "incomeSum": 103494.50010608137
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Rainbow",
+                    "count": 200,
+                    "start": 0,
+                    "duration": 40
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 4,
+                    "start": 40,
+                    "duration": 41.14200032552083
+                },
+                {
+                    "bloon": "WhiteRegrowCamo",
+                    "count": 120,
+                    "start": 0,
+                    "duration": 38
+                }
+            ],
+            "roundNumber": 67,
+            "rbe": 13184,
+            "income": 2615.8000364899635,
+            "rbeSum": 191480,
+            "incomeSum": 106110.30014257133
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 10,
+                    "start": 4.41666005452474,
+                    "duration": 9.416660563151042
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 30,
+                    "start": 0,
+                    "duration": 16.549998982747397
+                }
+            ],
+            "roundNumber": 68,
+            "rbe": 9280,
+            "income": 1500.0000198483467,
+            "rbeSum": 200760,
+            "incomeSum": 107610.30016241968
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bfb",
+                    "count": 1,
+                    "start": 3.4166600545247396,
+                    "duration": 3.9166600545247396
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 1,
+                    "start": 16.116666666666667,
+                    "duration": 16.616666666666667
+                },
+                {
+                    "bloon": "CeramicRegrow",
+                    "count": 38,
+                    "start": 0,
+                    "duration": 21.697998046875
+                }
+            ],
+            "roundNumber": 69,
+            "rbe": 10280,
+            "income": 1501.0000198483467,
+            "rbeSum": 211040,
+            "incomeSum": 109111.30018226802
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 7,
+                    "start": 0,
+                    "duration": 2.2839998881022137
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 1,
+                    "start": 26.38330078125,
+                    "duration": 26.954300944010416
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 2,
+                    "start": 13.4,
+                    "duration": 16.4
+                }
+            ],
+            "roundNumber": 70,
+            "rbe": 11256,
+            "income": 1389.6000181734562,
+            "rbeSum": 222296,
+            "incomeSum": 110500.90020044148
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Ceramic",
+                    "count": 50,
+                    "start": 0,
+                    "duration": 20
+                },
+                {
+                    "bloon": "CeramicFortified",
+                    "count": 60,
+                    "start": 54.86000162760417,
+                    "duration": 82.38500162760417
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 1,
+                    "start": 43.93000081380208,
+                    "duration": 44.43000081380208
+                },
+                {
+                    "bloon": "CeramicRegrowFortifiedCamo",
+                    "count": 25,
+                    "start": 21.139998372395834,
+                    "duration": 41.13999837239583
+                }
+            ],
+            "roundNumber": 71,
+            "rbe": 18054,
+            "income": 3041.0000427663326,
+            "rbeSum": 240350,
+            "incomeSum": 113541.90024320781
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bfb",
+                    "count": 1,
+                    "start": 0,
+                    "duration": 0.1
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 3,
+                    "start": 9.706990559895834,
+                    "duration": 9.806990559895834
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 3,
+                    "start": 22.4875,
+                    "duration": 22.5875
+                },
+                {
+                    "bloon": "Lead",
+                    "count": 14,
+                    "start": 0.5709999720255534,
+                    "duration": 7.993999226888021
+                },
+                {
+                    "bloon": "LeadFortified",
+                    "count": 14,
+                    "start": 10.276999918619792,
+                    "duration": 17.7
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 1,
+                    "start": 8.720000203450521,
+                    "duration": 9.290999348958334
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 2,
+                    "start": 18.27199910481771,
+                    "duration": 21.27199910481771
+                }
+            ],
+            "roundNumber": 72,
+            "rbe": 25402,
+            "income": 2664.400037139654,
+            "rbeSum": 265752,
+            "incomeSum": 116206.30028034747
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "CeramicRegrow",
+                    "count": 60,
+                    "start": 0,
+                    "duration": 1.7769999186197916
+                }
+            ],
+            "roundNumber": 73,
+            "rbe": 6240,
+            "income": 1313.0000169873238,
+            "rbeSum": 271992,
+            "incomeSum": 117519.30029733479
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 11,
+                    "start": 0,
+                    "duration": 58.920833333333334
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 5,
+                    "start": 26.66666056315104,
+                    "duration": 31.220827229817708
+                }
+            ],
+            "roundNumber": 74,
+            "rbe": 22596,
+            "income": 2537.200035214424,
+            "rbeSum": 294588,
+            "incomeSum": 120056.50033254921
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Rainbow",
+                    "count": 150,
+                    "start": 0,
+                    "duration": 90
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 75,
+                    "start": 10,
+                    "duration": 11.166600545247396
+                },
+                {
+                    "bloon": "CeramicCamo",
+                    "count": 72,
+                    "start": 77.91666666666667,
+                    "duration": 79.1208251953125
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 1,
+                    "start": 44.08332926432292,
+                    "duration": 45.796329752604166
+                },
+                {
+                    "bloon": "Purple",
+                    "count": 80,
+                    "start": 64.4,
+                    "duration": 79.4
+                }
+            ],
+            "roundNumber": 75,
+            "rbe": 26382,
+            "income": 4859.000069797039,
+            "rbeSum": 320970,
+            "incomeSum": 124915.50040234625
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "RainbowRegrow",
+                    "count": 500,
+                    "start": 0,
+                    "duration": 60
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 4,
+                    "start": 3.1666600545247396,
+                    "duration": 38.16665852864583
+                },
+                {
+                    "bloon": "BfbFortified",
+                    "count": 2,
+                    "start": 47.22000325520833,
+                    "duration": 57.22000325520833
+                }
+            ],
+            "roundNumber": 76,
+            "rbe": 45804,
+            "income": 6706.000097304583,
+            "rbeSum": 366774,
+            "incomeSum": 131621.50049965084
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 1,
+                    "start": 0,
+                    "duration": 2
+                }
+            ],
+            "roundNumber": 77,
+            "rbe": 16656,
+            "income": 1397.200018182397,
+            "rbeSum": 383430,
+            "incomeSum": 133018.70051783323
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bfb",
+                    "count": 9,
+                    "start": 0,
+                    "duration": 20
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 8,
+                    "start": 21.469999186197917,
+                    "duration": 26.469999186197917
+                }
+            ],
+            "roundNumber": 78,
+            "rbe": 53788,
+            "income": 5363.000077262521,
+            "rbeSum": 437218,
+            "incomeSum": 138381.70059509575
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "BfbFortified",
+                    "count": 5,
+                    "start": 21.680000813802085,
+                    "duration": 35.68000081380208
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 20
+                }
+            ],
+            "roundNumber": 79,
+            "rbe": 55760,
+            "income": 4754.0000681728125,
+            "rbeSum": 492978,
+            "incomeSum": 143135.70066326857
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Ceramic",
+                    "count": 40,
+                    "start": 0,
+                    "duration": 60
+                },
+                {
+                    "bloon": "CeramicRegrow",
+                    "count": 40,
+                    "start": 0.1,
+                    "duration": 60.1
+                },
+                {
+                    "bloon": "CeramicFortified",
+                    "count": 40,
+                    "start": 0.2,
+                    "duration": 60.2
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 30,
+                    "start": 24.940000406901042,
+                    "duration": 34.94000244140625
+                }
+            ],
+            "roundNumber": 80,
+            "rbe": 31360,
+            "income": 4746.000068038702,
+            "rbeSum": 524338,
+            "incomeSum": 147881.70073130727
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 50,
+                    "start": 0,
+                    "duration": 25
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 10,
+                    "start": 5,
+                    "duration": 25
+                }
+            ],
+            "roundNumber": 81,
+            "rbe": 49980.0,
+            "income": 7041.000102221966,
+            "rbeSum": 574318.0,
+            "incomeSum": 154922.70083352923
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 2,
+                    "start": 0,
+                    "duration": 10
+                }
+            ],
+            "roundNumber": 82,
+            "rbe": 29504.0,
+            "income": 2622.400036364794,
+            "rbeSum": 603822.0,
+            "incomeSum": 157545.10086989403
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "BfbFortified",
+                    "count": 5,
+                    "start": -0.15,
+                    "duration": 20.85
+                }
+            ],
+            "roundNumber": 83,
+            "rbe": 26140.0,
+            "income": 1708.0000227242708,
+            "rbeSum": 629962.0,
+            "incomeSum": 159253.1008926183
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 4,
+                    "start": 0,
+                    "duration": 10
+                }
+            ],
+            "roundNumber": 84,
+            "rbe": 60608.0,
+            "income": 5064.800072729588,
+            "rbeSum": 690570.0,
+            "incomeSum": 164317.9009653479
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bfb",
+                    "count": 8,
+                    "start": 0,
+                    "duration": 5
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 18,
+                    "start": 5.840000406901042,
+                    "duration": 10.840000406901042
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 2,
+                    "start": 11.55,
+                    "duration": 14.55
+                }
+            ],
+            "roundNumber": 85,
+            "rbe": 61464.0,
+            "income": 6437.00009316206,
+            "rbeSum": 752034.0,
+            "incomeSum": 170754.90105850995
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "MoabFortified",
+                    "count": 20,
+                    "start": 0,
+                    "duration": 10
+                },
+                {
+                    "bloon": "BfbFortified",
+                    "count": 8,
+                    "start": 10.739999389648437,
+                    "duration": 20.740000406901043
+                }
+            ],
+            "roundNumber": 86,
+            "rbe": 62464.0,
+            "income": 2168.0000295341015,
+            "rbeSum": 814498.0,
+            "incomeSum": 172922.90108804405
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "LeadRegrowFortifiedCamo",
+                    "count": 50,
+                    "start": 0,
+                    "duration": 10
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 3,
+                    "start": 10.4,
+                    "duration": 11.9
+                }
+            ],
+            "roundNumber": 87,
+            "rbe": 2684.0,
+            "income": 336.30000222474337,
+            "rbeSum": 817182.0,
+            "incomeSum": 173259.2010902688
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "CeramicFortified",
+                    "count": 100,
+                    "start": 0,
+                    "duration": 30
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 20,
+                    "start": 7.380000305175781,
+                    "duration": 17.380000813802084
+                }
+            ],
+            "roundNumber": 88,
+            "rbe": 69360.0,
+            "income": 4188.000059604645,
+            "rbeSum": 886542.0,
+            "incomeSum": 177447.20114987344
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "MoabFortified",
+                    "count": 50,
+                    "start": 0,
+                    "duration": 35
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 4,
+                    "start": 12.959999593098958,
+                    "duration": 18.95999959309896
+                }
+            ],
+            "roundNumber": 89,
+            "rbe": 113808.0,
+            "income": 4534.400064751506,
+            "rbeSum": 1000350.0,
+            "incomeSum": 181981.60121462494
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "BfbFortified",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 20
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 6,
+                    "start": 12.35,
+                    "duration": 14.35
+                }
+            ],
+            "roundNumber": 90,
+            "rbe": 60992.0,
+            "income": 1943.6000261306763,
+            "rbeSum": 1061342.0,
+            "incomeSum": 183925.20124075562
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bfb",
+                    "count": 25,
+                    "start": 0,
+                    "duration": 15
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 6,
+                    "start": 1.6099999745686848,
+                    "duration": 14.609999593098959
+                }
+            ],
+            "roundNumber": 91,
+            "rbe": 172262.0,
+            "income": 7664.100111357868,
+            "rbeSum": 1233604.0,
+            "incomeSum": 191589.30135211349
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "PurpleRegrowCamo",
+                    "count": 500,
+                    "start": 0,
+                    "duration": 30
+                },
+                {
+                    "bloon": "LeadRegrowFortifiedCamo",
+                    "count": 250,
+                    "start": 0,
+                    "duration": 30
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 30,
+                    "start": 30.809999593098958,
+                    "duration": 50.80999755859375
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 50,
+                    "start": 30.80999755859375,
+                    "duration": 50.80999755859375
+                }
+            ],
+            "roundNumber": 92,
+            "rbe": 78940.0,
+            "income": 3715.000052496791,
+            "rbeSum": 1312544.0,
+            "incomeSum": 195304.30140461028
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bfb",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 5
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 20,
+                    "start": 5.5,
+                    "duration": 10.5
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 20,
+                    "start": 16.04000040690104,
+                    "duration": 21.04000040690104
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 10,
+                    "start": 10.739999389648437,
+                    "duration": 15.739999389648437
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 10,
+                    "start": 21.620001220703124,
+                    "duration": 26.620001220703124
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 6,
+                    "start": 27.120001220703124,
+                    "duration": 32.12000325520833
+                }
+            ],
+            "roundNumber": 93,
+            "rbe": 231692.0,
+            "income": 9952.600145429373,
+            "rbeSum": 1544236.0,
+            "incomeSum": 205256.90155003965
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 2,
+                    "start": 0,
+                    "duration": 5
+                }
+            ],
+            "roundNumber": 94,
+            "rbe": 67584.0,
+            "income": 1414.200018182397,
+            "rbeSum": 1611820.0,
+            "incomeSum": 206671.10156822205
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "BfbFortified",
+                    "count": 30,
+                    "start": 0,
+                    "duration": 30
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 8,
+                    "start": 0,
+                    "duration": 5
+                }
+            ],
+            "roundNumber": 95,
+            "rbe": 317256.0,
+            "income": 9650.8001409024,
+            "rbeSum": 1929076.0,
+            "incomeSum": 216321.90170912445
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 60,
+                    "start": 0,
+                    "duration": 12
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 9,
+                    "start": 6.51000010172526,
+                    "duration": 11.510000610351563
+                }
+            ],
+            "roundNumber": 96,
+            "rbe": 46272.0,
+            "income": 2824.9000391736627,
+            "rbeSum": 1975348.0,
+            "incomeSum": 219146.8017482981
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bad",
+                    "count": 1,
+                    "start": 0,
+                    "duration": 0.1
+                }
+            ],
+            "roundNumber": 97,
+            "rbe": 64728.0,
+            "income": 1531.6000198870897,
+            "rbeSum": 2040076.0,
+            "incomeSum": 220678.4017681852
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Purple",
+                    "count": 250,
+                    "start": 0,
+                    "duration": 6
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 10,
+                    "start": 5,
+                    "duration": 7
+                },
+                {
+                    "bloon": "Purple",
+                    "count": 200,
+                    "start": 7.5,
+                    "duration": 9.5
+                },
+                {
+                    "bloon": "CeramicFortified",
+                    "count": 50,
+                    "start": 7,
+                    "duration": 8
+                }
+            ],
+            "roundNumber": 98,
+            "rbe": 19660.0,
+            "income": 1324.0000167787075,
+            "rbeSum": 2059736.0,
+            "incomeSum": 222002.4017849639
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 1,
+                    "start": 0,
+                    "duration": 0.1
+                },
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 1,
+                    "start": 9.5,
+                    "duration": 9.6
+                },
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 2,
+                    "start": 19,
+                    "duration": 19.1
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 18,
+                    "start": 10,
+                    "duration": 41
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 12,
+                    "start": 19.5,
+                    "duration": 46.5
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 3,
+                    "start": 12,
+                    "duration": 12.5
+                },
+                {
+                    "bloon": "BfbFortified",
+                    "count": 3,
+                    "start": 21.5,
+                    "duration": 22.5
+                }
+            ],
+            "roundNumber": 99,
+            "rbe": 187790.0,
+            "income": 4697.4000670313835,
+            "rbeSum": 2247526.0,
+            "incomeSum": 226699.8018519953
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 100,
+                    "start": 5,
+                    "duration": 15
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 50,
+                    "start": 6.5,
+                    "duration": 15
+                },
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 7
+                },
+                {
+                    "bloon": "Purple",
+                    "count": 64,
+                    "start": 6,
+                    "duration": 7
+                },
+                {
+                    "bloon": "Purple",
+                    "count": 66,
+                    "start": 12,
+                    "duration": 13
+                },
+                {
+                    "bloon": "Purple",
+                    "count": 68,
+                    "start": 18,
+                    "duration": 19
+                }
+            ],
+            "roundNumber": 100,
+            "rbe": 471908.0,
+            "income": 12134.800177842379,
+            "rbeSum": 2719434.0,
+            "incomeSum": 238834.60202983767
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "MoabFortified",
+                    "count": 150,
+                    "start": 0,
+                    "duration": 22
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 10,
+                    "start": 0,
+                    "duration": 15
+                },
+                {
+                    "bloon": "LeadFortified",
+                    "count": 100,
+                    "start": 0,
+                    "duration": 2.5
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 8,
+                    "start": 2.5,
+                    "duration": 14.25
+                },
+                {
+                    "bloon": "Purple",
+                    "count": 100,
+                    "start": 2.5,
+                    "duration": 5
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 7,
+                    "start": 5,
+                    "duration": 15
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 100,
+                    "start": 5,
+                    "duration": 7.5
+                },
+                {
+                    "bloon": "BfbFortified",
+                    "count": 5,
+                    "start": 7.5,
+                    "duration": 14.25
+                },
+                {
+                    "bloon": "LeadFortified",
+                    "count": 100,
+                    "start": 7.5,
+                    "duration": 10
+                },
+                {
+                    "bloon": "BfbFortified",
+                    "count": 4,
+                    "start": 10,
+                    "duration": 15
+                },
+                {
+                    "bloon": "Purple",
+                    "count": 100,
+                    "start": 10,
+                    "duration": 12.5
+                },
+                {
+                    "bloon": "BfbFortified",
+                    "count": 5,
+                    "start": 12.5,
+                    "duration": 15
+                },
+                {
+                    "bloon": "Ceramic",
+                    "count": 100,
+                    "start": 12.5,
+                    "duration": 15
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 25,
+                    "start": 18,
+                    "duration": 22
+                }
+            ],
+            "roundNumber": 101,
+            "rbe": 365797.0,
+            "income": 7588.500110082328,
+            "rbeSum": 3085231.0,
+            "incomeSum": 246423.10213992
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Ceramic",
+                    "count": 100,
+                    "start": 0,
+                    "duration": 4
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 30,
+                    "start": 4,
+                    "duration": 7
+                },
+                {
+                    "bloon": "CeramicFortified",
+                    "count": 300,
+                    "start": 7,
+                    "duration": 9
+                },
+                {
+                    "bloon": "LeadFortified",
+                    "count": 25,
+                    "start": 0,
+                    "duration": 9
+                }
+            ],
+            "roundNumber": 102,
+            "rbe": 145590.0,
+            "income": 4398.250062528998,
+            "rbeSum": 3230821.0,
+            "incomeSum": 250821.352202449
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "DdtCamo",
+                    "count": 21,
+                    "start": 0,
+                    "duration": 30
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 18,
+                    "start": 5,
+                    "duration": 30
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 15,
+                    "start": 10,
+                    "duration": 30
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 12,
+                    "start": 15,
+                    "duration": 30
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 9,
+                    "start": 20,
+                    "duration": 30
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 6,
+                    "start": 25,
+                    "duration": 30
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 12,
+                    "start": 33,
+                    "duration": 33.5
+                }
+            ],
+            "roundNumber": 103,
+            "rbe": 106175.99999999999,
+            "income": 1974.6500263996422,
+            "rbeSum": 3336997.0,
+            "incomeSum": 252796.00222884864
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 10,
+                    "start": 2,
+                    "duration": 7
+                },
+                {
+                    "bloon": "CeramicFortified",
+                    "count": 100,
+                    "start": 0,
+                    "duration": 9
+                },
+                {
+                    "bloon": "PurpleCamo",
+                    "count": 444,
+                    "start": 1,
+                    "duration": 10
+                }
+            ],
+            "roundNumber": 104,
+            "rbe": 417384.0,
+            "income": 3862.7000545188785,
+            "rbeSum": 3754381.0,
+            "incomeSum": 256658.70228336751
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 9,
+                    "start": 0,
+                    "duration": 15
+                },
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 10,
+                    "start": 14,
+                    "duration": 24
+                }
+            ],
+            "roundNumber": 105,
+            "rbe": 599588.0,
+            "income": 6000.950086366385,
+            "rbeSum": 4353969.0,
+            "incomeSum": 262659.6523697339
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 15,
+                    "start": 0,
+                    "duration": 18
+                },
+                {
+                    "bloon": "Purple",
+                    "count": 15,
+                    "start": 0,
+                    "duration": 18
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 15,
+                    "start": 0,
+                    "duration": 18
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 15,
+                    "start": 0,
+                    "duration": 18
+                },
+                {
+                    "bloon": "BfbFortified",
+                    "count": 15,
+                    "start": 0,
+                    "duration": 18
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 15,
+                    "start": 0,
+                    "duration": 18
+                }
+            ],
+            "roundNumber": 106,
+            "rbe": 517920.0,
+            "income": 7645.250110853463,
+            "rbeSum": 4871889.0,
+            "incomeSum": 270304.90248058736
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bfb",
+                    "count": 25,
+                    "start": 0,
+                    "duration": 36
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 9,
+                    "start": 0,
+                    "duration": 12
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 9,
+                    "start": 12,
+                    "duration": 22
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 6,
+                    "start": 22,
+                    "duration": 30
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 6,
+                    "start": 30,
+                    "duration": 36
+                }
+            ],
+            "roundNumber": 107,
+            "rbe": 133265.0,
+            "income": 2684.750036921352,
+            "rbeSum": 5005154.0,
+            "incomeSum": 272989.6525175087
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 9,
+                    "start": 7,
+                    "duration": 13
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 17,
+                    "start": 0,
+                    "duration": 13
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 5,
+                    "start": 16.5,
+                    "duration": 18.5
+                }
+            ],
+            "roundNumber": 108,
+            "rbe": 889472.0,
+            "income": 9664.550140913576,
+            "rbeSum": 5894626.0,
+            "incomeSum": 282654.2026584223
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "BfbFortified",
+                    "count": 27,
+                    "start": 0,
+                    "duration": 20
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 21,
+                    "start": 7,
+                    "duration": 20
+                }
+            ],
+            "roundNumber": 109,
+            "rbe": 246978.0,
+            "income": 2667.800036638975,
+            "rbeSum": 6141604.0,
+            "incomeSum": 285322.00269506127
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "BfbFortified",
+                    "count": 15,
+                    "start": 7,
+                    "duration": 21
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 75,
+                    "start": 0,
+                    "duration": 17.5
+                },
+                {
+                    "bloon": "CeramicCamo",
+                    "count": 42,
+                    "start": 14,
+                    "duration": 15.5
+                },
+                {
+                    "bloon": "CeramicFortified",
+                    "count": 42,
+                    "start": 20,
+                    "duration": 21.5
+                }
+            ],
+            "roundNumber": 110,
+            "rbe": 219852.0,
+            "income": 3181.5000442788005,
+            "rbeSum": 6361456.0,
+            "incomeSum": 288503.50273934007
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "DdtCamo",
+                    "count": 9,
+                    "start": 0,
+                    "duration": 30
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 6,
+                    "start": 2.5,
+                    "duration": 30
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 36,
+                    "start": 0,
+                    "duration": 10
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 24,
+                    "start": 5,
+                    "duration": 15
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 12,
+                    "start": 10,
+                    "duration": 20
+                },
+                {
+                    "bloon": "BfbFortified",
+                    "count": 8,
+                    "start": 15,
+                    "duration": 25
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 5,
+                    "start": 20,
+                    "duration": 25
+                },
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 3,
+                    "start": 25,
+                    "duration": 30
+                }
+            ],
+            "roundNumber": 111,
+            "rbe": 456476.0,
+            "income": 5605.150080379099,
+            "rbeSum": 6817932.0,
+            "incomeSum": 294108.65281971917
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "DdtCamo",
+                    "count": 9,
+                    "start": 0,
+                    "duration": 30
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 6,
+                    "start": 2.5,
+                    "duration": 30
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 36,
+                    "start": 20,
+                    "duration": 30
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 24,
+                    "start": 15,
+                    "duration": 25
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 12,
+                    "start": 10,
+                    "duration": 20
+                },
+                {
+                    "bloon": "BfbFortified",
+                    "count": 8,
+                    "start": 5,
+                    "duration": 15
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 5,
+                    "start": 5,
+                    "duration": 10
+                },
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 3,
+                    "start": 0,
+                    "duration": 5
+                }
+            ],
+            "roundNumber": 112,
+            "rbe": 465456.0,
+            "income": 5606.150080379099,
+            "rbeSum": 7283388.0,
+            "incomeSum": 299714.80290009826
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 8,
+                    "start": 0,
+                    "duration": 3
+                },
+                {
+                    "bloon": "BfbFortified",
+                    "count": 18,
+                    "start": 5,
+                    "duration": 15
+                },
+                {
+                    "bloon": "Purple",
+                    "count": 100,
+                    "start": 5,
+                    "duration": 15
+                },
+                {
+                    "bloon": "Purple",
+                    "count": 100,
+                    "start": 8,
+                    "duration": 15
+                },
+                {
+                    "bloon": "Purple",
+                    "count": 200,
+                    "start": 11,
+                    "duration": 15
+                }
+            ],
+            "roundNumber": 113,
+            "rbe": 543500.0,
+            "income": 4145.900058604777,
+            "rbeSum": 7826888.0,
+            "incomeSum": 303860.70295870304
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Lead",
+                    "count": 250,
+                    "start": 0,
+                    "duration": 14
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 27,
+                    "start": 3,
+                    "duration": 14
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 18,
+                    "start": 3,
+                    "duration": 14
+                }
+            ],
+            "roundNumber": 114,
+            "rbe": 71230.0,
+            "income": 1158.750014077872,
+            "rbeSum": 7898118.0,
+            "incomeSum": 305019.4529727809
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 12,
+                    "start": 0,
+                    "duration": 16
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 30,
+                    "start": 7.5,
+                    "duration": 14.5
+                }
+            ],
+            "roundNumber": 115,
+            "rbe": 377184.0,
+            "income": 4447.100063063204,
+            "rbeSum": 8275302.0,
+            "incomeSum": 309466.5530358441
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bad",
+                    "count": 2,
+                    "start": 0,
+                    "duration": 10
+                },
+                {
+                    "bloon": "Bad",
+                    "count": 1,
+                    "start": 25,
+                    "duration": 26
+                }
+            ],
+            "roundNumber": 116,
+            "rbe": 300480.0,
+            "income": 2217.9000298306346,
+            "rbeSum": 8575782.0,
+            "incomeSum": 311684.45306567475
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 12,
+                    "start": 0,
+                    "duration": 45
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 12,
+                    "start": 1.5,
+                    "duration": 46.5
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 24,
+                    "start": 6,
+                    "duration": 51
+                }
+            ],
+            "roundNumber": 117,
+            "rbe": 409668.0,
+            "income": 5249.800074994564,
+            "rbeSum": 8985450.0,
+            "incomeSum": 316934.2531406693
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "BfbFortified",
+                    "count": 14,
+                    "start": 0,
+                    "duration": 5
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 28,
+                    "start": 5,
+                    "duration": 10
+                },
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 6,
+                    "start": 10,
+                    "duration": 15
+                }
+            ],
+            "roundNumber": 118,
+            "rbe": 490520.0,
+            "income": 3649.2000511288643,
+            "rbeSum": 9475970.0,
+            "incomeSum": 320583.4531917982
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bfb",
+                    "count": 40,
+                    "start": 0,
+                    "duration": 0.2
+                },
+                {
+                    "bloon": "BfbFortified",
+                    "count": 20,
+                    "start": 0.1,
+                    "duration": 0.1
+                },
+                {
+                    "bloon": "LeadFortified",
+                    "count": 75,
+                    "start": 5,
+                    "duration": 20
+                },
+                {
+                    "bloon": "LeadFortified",
+                    "count": 75,
+                    "start": 5,
+                    "duration": 20
+                },
+                {
+                    "bloon": "LeadFortified",
+                    "count": 75,
+                    "start": 5,
+                    "duration": 20
+                }
+            ],
+            "roundNumber": 119,
+            "rbe": 368730.0,
+            "income": 4872.750069346279,
+            "rbeSum": 9844700.0,
+            "incomeSum": 325456.20326114446
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 8,
+                    "start": 0,
+                    "duration": 40
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 200,
+                    "start": 0,
+                    "duration": 40
+                }
+            ],
+            "roundNumber": 120,
+            "rbe": 599936.0,
+            "income": 6470.400093138218,
+            "rbeSum": 10444636.0,
+            "incomeSum": 331926.6033542827
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "BfbFortified",
+                    "count": 75,
+                    "start": 0,
+                    "duration": 30
+                }
+            ],
+            "roundNumber": 121,
+            "rbe": 704850.0,
+            "income": 2508.5,
+            "rbeSum": 11149486.0,
+            "incomeSum": 334435.1033542827
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 18,
+                    "start": 15,
+                    "duration": 40
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 15,
+                    "start": 19.419999186197916,
+                    "duration": 40
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 12,
+                    "start": 23.830000813802084,
+                    "duration": 40
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 9,
+                    "start": 28.25,
+                    "duration": 40
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 6,
+                    "start": 32.65999959309896,
+                    "duration": 39.98999837239583
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 3,
+                    "start": 37.08000081380208,
+                    "duration": 40
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 6,
+                    "start": 0,
+                    "duration": 25
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 5,
+                    "start": 5,
+                    "duration": 25
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 4,
+                    "start": 10,
+                    "duration": 25
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 3,
+                    "start": 15,
+                    "duration": 25
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 2,
+                    "start": 20,
+                    "duration": 25
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 1,
+                    "start": 25,
+                    "duration": 26
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 12,
+                    "start": 5,
+                    "duration": 30
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 10,
+                    "start": 9.55,
+                    "duration": 30
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 8,
+                    "start": 14.1,
+                    "duration": 30
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 6,
+                    "start": 18.65,
+                    "duration": 30
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 4,
+                    "start": 23.2,
+                    "duration": 30
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 2,
+                    "start": 27.75,
+                    "duration": 30
+                }
+            ],
+            "roundNumber": 122,
+            "rbe": 868224.0,
+            "income": 4545.4800000000005,
+            "rbeSum": 12017710.0,
+            "incomeSum": 338980.58335428266
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "DdtCamo",
+                    "count": 99,
+                    "start": 6,
+                    "duration": 27
+                },
+                {
+                    "bloon": "LeadRegrowFortifiedCamo",
+                    "count": 1,
+                    "start": 0,
+                    "duration": 1
+                }
+            ],
+            "roundNumber": 123,
+            "rbe": 127918.0,
+            "income": 977.52,
+            "rbeSum": 12145628.0,
+            "incomeSum": 339958.1033542827
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 48,
+                    "start": 0,
+                    "duration": 7
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 24,
+                    "start": 5,
+                    "duration": 14
+                }
+            ],
+            "roundNumber": 124,
+            "rbe": 157728.0,
+            "income": 1321.76,
+            "rbeSum": 12303356.0,
+            "incomeSum": 341279.8633542827
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 39,
+                    "start": 0,
+                    "duration": 18
+                },
+                {
+                    "bloon": "CeramicFortifiedCamo",
+                    "count": 200,
+                    "start": 9,
+                    "duration": 13.5
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 30,
+                    "start": 10,
+                    "duration": 28
+                }
+            ],
+            "roundNumber": 125,
+            "rbe": 287758.0,
+            "income": 1817.18,
+            "rbeSum": 12591114.0,
+            "incomeSum": 343097.0433542827
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 7,
+                    "start": 0,
+                    "duration": 17
+                },
+                {
+                    "bloon": "LeadFortifiedCamo",
+                    "count": 77,
+                    "start": 4,
+                    "duration": 5
+                },
+                {
+                    "bloon": "PurpleCamo",
+                    "count": 77,
+                    "start": 6,
+                    "duration": 7
+                },
+                {
+                    "bloon": "CeramicCamo",
+                    "count": 77,
+                    "start": 8,
+                    "duration": 9
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 7,
+                    "start": 10,
+                    "duration": 10
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 9,
+                    "start": 17,
+                    "duration": 17
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 3,
+                    "start": 21,
+                    "duration": 22
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 3,
+                    "start": 24,
+                    "duration": 25
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 3,
+                    "start": 27,
+                    "duration": 28
+                }
+            ],
+            "roundNumber": 126,
+            "rbe": 729052.0,
+            "income": 2237.76,
+            "rbeSum": 13320166.0,
+            "incomeSum": 345334.8033542827
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 48,
+                    "start": 24,
+                    "duration": 40
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 3,
+                    "start": 24,
+                    "duration": 24
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 6,
+                    "start": 28,
+                    "duration": 28
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 3,
+                    "start": 32,
+                    "duration": 32
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 6,
+                    "start": 36,
+                    "duration": 36
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 48,
+                    "start": 40,
+                    "duration": 40
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 27,
+                    "start": 4,
+                    "duration": 20
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 12,
+                    "start": 0,
+                    "duration": 0
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 9,
+                    "start": 4,
+                    "duration": 4
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 12,
+                    "start": 8,
+                    "duration": 8
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 9,
+                    "start": 12,
+                    "duration": 12
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 12,
+                    "start": 16,
+                    "duration": 16
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 9,
+                    "start": 20,
+                    "duration": 20
+                }
+            ],
+            "roundNumber": 127,
+            "rbe": 277728.0,
+            "income": 1781.48,
+            "rbeSum": 13597894.0,
+            "incomeSum": 347116.28335428267
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 18,
+                    "start": 0,
+                    "duration": 39
+                }
+            ],
+            "roundNumber": 128,
+            "rbe": 1299456.0,
+            "income": 2424.36,
+            "rbeSum": 14897350.0,
+            "incomeSum": 349540.64335428266
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 5,
+                    "start": 0,
+                    "duration": 1
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 4,
+                    "start": 5,
+                    "duration": 5
+                },
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 3,
+                    "start": 10,
+                    "duration": 11
+                },
+                {
+                    "bloon": "PurpleCamo",
+                    "count": 100,
+                    "start": 15,
+                    "duration": 16
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 5,
+                    "start": 25,
+                    "duration": 26
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 4,
+                    "start": 30,
+                    "duration": 30
+                },
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 3,
+                    "start": 35,
+                    "duration": 36
+                },
+                {
+                    "bloon": "PurpleCamo",
+                    "count": 100,
+                    "start": 40,
+                    "duration": 41
+                }
+            ],
+            "roundNumber": 129,
+            "rbe": 1133688.0,
+            "income": 3181.48,
+            "rbeSum": 16031038.0,
+            "incomeSum": 352722.12335428264
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "MoabFortified",
+                    "count": 6,
+                    "start": 0,
+                    "duration": 1
+                },
+                {
+                    "bloon": "BfbFortified",
+                    "count": 6,
+                    "start": 0,
+                    "duration": 1
+                },
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 2,
+                    "start": 0,
+                    "duration": 1
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 6,
+                    "start": 12,
+                    "duration": 13
+                },
+                {
+                    "bloon": "BfbFortified",
+                    "count": 6,
+                    "start": 12,
+                    "duration": 13
+                },
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 2,
+                    "start": 12,
+                    "duration": 13
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 9,
+                    "start": 24,
+                    "duration": 25
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 9,
+                    "start": 24,
+                    "duration": 25
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 3,
+                    "start": 24,
+                    "duration": 25
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 9,
+                    "start": 36,
+                    "duration": 37
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 9,
+                    "start": 36,
+                    "duration": 37
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 3,
+                    "start": 36,
+                    "duration": 37
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 9,
+                    "start": 42,
+                    "duration": 43
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 9,
+                    "start": 42,
+                    "duration": 43
+                },
+                {
+                    "bloon": "Zomg",
+                    "count": 3,
+                    "start": 42,
+                    "duration": 43
+                }
+            ],
+            "roundNumber": 130,
+            "rbe": 1037826.0,
+            "income": 3302.94,
+            "rbeSum": 17068864.0,
+            "incomeSum": 356025.06335428264
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "BfbFortified",
+                    "count": 12,
+                    "start": 0,
+                    "duration": 24
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 10,
+                    "start": 4.3600001017252605,
+                    "duration": 24
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 8,
+                    "start": 8.739999389648437,
+                    "duration": 24
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 6,
+                    "start": 13.1,
+                    "duration": 24
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 4,
+                    "start": 17.45999959309896,
+                    "duration": 24.00999755859375
+                }
+            ],
+            "roundNumber": 131,
+            "rbe": 339740.00000000006,
+            "income": 1451.0,
+            "rbeSum": 17408604.0,
+            "incomeSum": 357476.06335428264
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 7,
+                    "start": 0,
+                    "duration": 24
+                },
+                {
+                    "bloon": "ZomgFortified",
+                    "count": 7,
+                    "start": 0,
+                    "duration": 24
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 7,
+                    "start": 0,
+                    "duration": 24
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 7,
+                    "start": 0,
+                    "duration": 24
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 7,
+                    "start": 0,
+                    "duration": 24
+                }
+            ],
+            "roundNumber": 132,
+            "rbe": 1253280.0,
+            "income": 2100.3,
+            "rbeSum": 18661884.0,
+            "incomeSum": 359576.3633542826
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "MoabFortified",
+                    "count": 96,
+                    "start": 0,
+                    "duration": 45
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 24,
+                    "start": 0,
+                    "duration": 45
+                }
+            ],
+            "roundNumber": 133,
+            "rbe": 369144.0,
+            "income": 1696.52,
+            "rbeSum": 19031028.0,
+            "incomeSum": 361272.88335428265
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 18,
+                    "start": 0,
+                    "duration": 0.1
+                },
+                {
+                    "bloon": "Bfb",
+                    "count": 24,
+                    "start": 2,
+                    "duration": 2.0999998728434246
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 48,
+                    "start": 8,
+                    "duration": 8.100000508626302
+                }
+            ],
+            "roundNumber": 134,
+            "rbe": 1042464.0,
+            "income": 3528.12,
+            "rbeSum": 20073492.0,
+            "incomeSum": 364801.00335428264
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 33,
+                    "start": 0,
+                    "duration": 40
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 27,
+                    "start": 7,
+                    "duration": 40
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 21,
+                    "start": 14,
+                    "duration": 40
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 18,
+                    "start": 21,
+                    "duration": 40
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 15,
+                    "start": 28,
+                    "duration": 40
+                },
+                {
+                    "bloon": "DdtCamo",
+                    "count": 12,
+                    "start": 35,
+                    "duration": 40
+                }
+            ],
+            "roundNumber": 135,
+            "rbe": 405612.0,
+            "income": 1195.12,
+            "rbeSum": 20479104.0,
+            "incomeSum": 365996.12335428264
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 109,
+                    "start": 0,
+                    "duration": 45
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 18,
+                    "start": 5,
+                    "duration": 9
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 18,
+                    "start": 9,
+                    "duration": 13
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 18,
+                    "start": 13,
+                    "duration": 21
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 18,
+                    "start": 21,
+                    "duration": 25
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 18,
+                    "start": 25,
+                    "duration": 29
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 18,
+                    "start": 29,
+                    "duration": 33
+                },
+                {
+                    "bloon": "Moab",
+                    "count": 18,
+                    "start": 33,
+                    "duration": 41
+                },
+                {
+                    "bloon": "MoabFortified",
+                    "count": 18,
+                    "start": 41,
+                    "duration": 45
+                }
+            ],
+            "roundNumber": 136,
+            "rbe": 372096.0,
+            "income": 2163.86,
+            "rbeSum": 20851200.0,
+            "incomeSum": 368159.9833542826
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "BadFortified",
+                    "count": 1,
+                    "start": 0,
+                    "duration": 1
+                },
+                {
+                    "bloon": "Bad",
+                    "count": 1,
+                    "start": 45,
+                    "duration": 46
+                }
+            ],
+            "roundNumber": 137,
+            "rbe": 589820.0,
+            "income": 770.84,
+            "rbeSum": 21441020.0,
+            "incomeSum": 368930.82335428265
+        }
+    ]
+}

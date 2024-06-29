@@ -81,6 +81,7 @@ let currentBrowserView = "grid";
 
 let currentRoundsetView = "Simple";
 let roundsetProcessed = null;
+let currentPreviewRound = 0;
 
 fetch('./data/Constants.json')
         .then(response => response.json())
@@ -8238,7 +8239,7 @@ async function showRoundsetModel(source, roundset) {
 
     let mapsProgressList = document.createElement('div');
     mapsProgressList.classList.add('maps-progress-view','black-outline');
-    mapsProgressList.innerHTML = "Topper";
+    mapsProgressList.innerHTML = "Detailed";
     mapsProgressViews.appendChild(mapsProgressList);
 
     let mapsProgressGame = document.createElement('div');
@@ -8280,6 +8281,7 @@ async function showRoundsetModel(source, roundset) {
     mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
 
     let mapsProgressCoopToggleInput = document.createElement('input');
+    mapsProgressCoopToggleInput.id = "roundset-reverse-checkbox"
     mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
     mapsProgressCoopToggleInput.type = 'checkbox';
     mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
@@ -8310,6 +8312,7 @@ async function showRoundsetModel(source, roundset) {
     onlyModifiedToggleInput.addEventListener('change', () => {
         onChangeModified(onlyModifiedToggleInput.checked)
     })
+    currentRoundsetView = "Simple";
     generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked)
     onChangeModified(onlyModifiedToggleInput.checked)
 }
@@ -8380,24 +8383,334 @@ async function generateRounds(type, reverse, modified) {
                 roundsContent.appendChild(roundDiv);
                 alternate = !alternate;
             })
+            if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
             break;
         case "Topper":
+            let roundsDetailedDiv = document.createElement('div');
+            roundsDetailedDiv.classList.add('rounds-detailed-div');
+            roundsContent.appendChild(roundsDetailedDiv);
+
+            let fragment = document.createDocumentFragment();
+
+            roundsetProcessed.rounds.forEach(async (round, index) => {
+                let roundDiv = document.createElement('div');
+                roundDiv.id = `round-${round.roundNumber}`;
+                roundDiv.classList.add('round-div-detailed');
+                if (reverse) { roundDiv.classList.add('round-div-reverse') }
+                // roundsDetailedDiv.appendChild(roundDiv);
+
+                let roundsDivHeader = document.createElement('div');
+                roundsDivHeader.classList.add('rounds-div-header');
+                roundDiv.appendChild(roundsDivHeader);
+
+                //roundnumber text
+                let roundNumber = document.createElement('p');
+                roundNumber.classList.add('round-number', 'round-number-detailed', 'black-outline');
+                roundNumber.innerHTML = `Round ${round.roundNumber}`;
+                roundsDivHeader.appendChild(roundNumber);
+                //total duration text
+                let rbeDiv = document.createElement('div');
+                rbeDiv.classList.add('rbe-div');
+                roundsDivHeader.appendChild(rbeDiv);
+
+                let rbeImg = document.createElement('img');
+                rbeImg.classList.add('rbe-img');
+                rbeImg.src = "../Assets/BloonIcon/Red.png";
+                rbeDiv.appendChild(rbeImg);
+
+                let rbeTextDiv = document.createElement('div');
+                rbeTextDiv.classList.add('rbe-text-div');
+                rbeDiv.appendChild(rbeTextDiv);
+                //RBE text
+                let roundRBE = document.createElement('p');
+                roundRBE.classList.add('round-rbe', 'black-outline');
+                roundRBE.innerHTML = `RBE: ${round.rbe.toLocaleString()}`;
+                rbeTextDiv.appendChild(roundRBE);
+                //total RBE text
+                let roundRBETotal = document.createElement('p');
+                roundRBETotal.classList.add('round-rbe-total', 'black-outline');
+                roundRBETotal.innerHTML = `Total: ${round.rbeSum.toLocaleString()}`;
+                rbeTextDiv.appendChild(roundRBETotal);
+
+                let incomeDiv = document.createElement('div');
+                incomeDiv.classList.add('income-div');
+                roundsDivHeader.appendChild(incomeDiv);
+
+                let incomeImg = document.createElement('img');
+                incomeImg.classList.add('income-img');
+                incomeImg.src = "../Assets/UI/CoinIcon.png";
+                incomeDiv.appendChild(incomeImg);
+
+                let incomeTextDiv = document.createElement('div');
+                incomeTextDiv.classList.add('income-text-div');
+                incomeDiv.appendChild(incomeTextDiv);
+                //income text
+                let roundIncome = document.createElement('p');
+                roundIncome.classList.add('round-income', 'black-outline');
+                roundIncome.innerHTML = `Income: ${round.income.toLocaleString()}`;
+                incomeTextDiv.appendChild(roundIncome);
+                //total income text
+                let roundIncomeTotal = document.createElement('p');
+                roundIncomeTotal.classList.add('round-income-total', 'black-outline');
+                roundIncomeTotal.innerHTML = `Total: ${round.incomeSum.toLocaleString()}`;
+                incomeTextDiv.appendChild(roundIncomeTotal);
+
+                //get the highest value for duration
+                let roundDuration = Math.max(...round.bloonGroups.map(group => group.duration));
+
+                let roundDurationText = document.createElement('p');
+                roundDurationText.classList.add('round-duration', 'black-outline');
+                roundDurationText.innerHTML = `Duration: ${roundDuration.toFixed(2)}s`;
+                // roundDuration.innerHTML = formatTime(round.duration);
+                roundsDivHeader.appendChild(roundDurationText);
+
+                //timelinediv
+                let timelineDiv = document.createElement('div');
+                timelineDiv.classList.add('timeline-div');
+                roundDiv.appendChild(timelineDiv);
+                //for each bloon group
+                round.bloonGroups.forEach((bloonGroup, index) => {
+                    let bloonGroupDiv = document.createElement('div');
+                    bloonGroupDiv.classList.add('bloon-group-div-detailed');
+                    timelineDiv.appendChild(bloonGroupDiv);
+                    //bloon group div
+                    //leftdiv
+                    let leftDiv = document.createElement('div');
+                    leftDiv.classList.add('left-div');
+                    bloonGroupDiv.appendChild(leftDiv);
+                    //bloon image
+                    let bloonImage = document.createElement('img');
+                    bloonImage.classList.add('bloon-image');
+                    bloonImage.src = `../Assets/BloonIcon/${bloonGroup.bloon}.png`;
+                    leftDiv.appendChild(bloonImage);
+                    //bloon count
+                    let bloonCount = document.createElement('p');
+                    bloonCount.classList.add('bloon-count', 'black-outline');
+                    bloonCount.innerHTML = "x" + bloonGroup.count;
+                    leftDiv.appendChild(bloonCount);
+                    //rightdiv
+                    let rightDiv = document.createElement('div');
+                    rightDiv.classList.add('timeline-right-div');
+                    bloonGroupDiv.appendChild(rightDiv);
+                    //bloonbar
+                    let bloonBar = document.createElement('div');
+                    bloonBar.classList.add('bloon-bar');
+                    rightDiv.appendChild(bloonBar);
+
+                    let bloonBarFill = document.createElement('div');
+                    bloonBarFill.classList.add('bloon-bar-fill');
+                    bloonBarFill.style.background = bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].color;
+                    if (!bloonGroup.bloon.includes("Rainbow")) {
+                        bloonBarFill.style.border = `4px solid ${bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].border}`;
+                    }
+                    // bloonBarFill.style.width = `${((bloonGroup.duration - bloonGroup.start) / roundDuration) * 100}%`;
+                    // bloonBarFill.style.left = `${(bloonGroup.start / roundDuration) * 100}%`;
+                    // let widthPercentage = ((bloonGroup.duration - bloonGroup.start) / roundDuration) * 100;
+                    // let leftPercentage = (bloonGroup.start / roundDuration) * 100;
+
+                    // if (widthPercentage < 30 / bloonBar.offsetWidth * 100) {
+                    //     let excess = 30 / bloonBar.offsetWidth * 100 - widthPercentage;
+                    //     widthPercentage = 30 / bloonBar.offsetWidth * 100;
+                    //     leftPercentage = Math.max(0, leftPercentage - excess);
+                    // }
+
+                    // bloonBarFill.style.width = `${widthPercentage}%`;
+                    // bloonBarFill.style.left = `${leftPercentage}%`;
+
+                    // let widthPercentage = ((bloonGroup.duration - bloonGroup.start) / roundDuration) * 100;
+                    // let leftPercentage = (bloonGroup.start / roundDuration) * 100;
+
+                    // let minWidthPercentage = (30 / 600) * 100; // Calculate the percentage for the minimum width
+
+                    // if (widthPercentage < minWidthPercentage) {
+                    //     let excess = minWidthPercentage - widthPercentage;
+                    //     widthPercentage = minWidthPercentage;
+                    //     leftPercentage = Math.max(0, leftPercentage - excess);
+                    // }
+
+                    // bloonBarFill.style.width = `${widthPercentage}%`;
+                    // bloonBarFill.style.left = `${leftPercentage}%`;
+
+                    let widthPercentage = ((bloonGroup.duration - bloonGroup.start) / roundDuration) * 100;
+                    let leftPercentage = (bloonGroup.start / roundDuration) * 100;
+            
+                    let minWidthPercentage = (30 / 600) * 100; // Calculate the percentage for the minimum width
+            
+                    if (widthPercentage < minWidthPercentage) {
+                        widthPercentage = minWidthPercentage;
+                    }
+            
+                    if (leftPercentage + widthPercentage > 100) {
+                        leftPercentage = 100 - widthPercentage;
+                    }
+            
+                    bloonBarFill.style.width = `${widthPercentage}%`;
+                    bloonBarFill.style.left = `${leftPercentage}%`;
+
+                    bloonBar.appendChild(bloonBarFill);
+                })
+                fragment.appendChild(roundDiv);
+            })
+            roundsDetailedDiv.appendChild(fragment);
+            if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
             break;
         case "Preview":
+            let previewDiv = document.createElement('div');
+            previewDiv.classList.add('preview-div');
+            roundsContent.appendChild(previewDiv);
+
+            let previewHeader = document.createElement('div');
+            previewHeader.classList.add('preview-header');
+            previewDiv.appendChild(previewHeader);
+
+            let roundNumber = document.createElement('p');
+            roundNumber.classList.add('round-number', 'round-number-preview', 'black-outline');
+            roundNumber.innerHTML = `Round 1`;
+            previewHeader.appendChild(roundNumber);
+
+            let selectRoundNum = document.createElement('input');
+            selectRoundNum.classList.add('select-round-num');
+            selectRoundNum.type = 'number';
+            selectRoundNum.min = 1;
+            selectRoundNum.max = roundsetProcessed.rounds.length;
+            selectRoundNum.value = 1;
+            selectRoundNum.addEventListener('change', () => {
+                if (selectRoundNum.value < 1) { selectRoundNum.value = 1 }
+                if (selectRoundNum.value > roundsetProcessed.rounds.length) { selectRoundNum.value = roundsetProcessed.rounds.length }
+                roundNumber.innerHTML = `Round ${selectRoundNum.value}`;
+                currentPreviewRound = selectRoundNum.value - 1;
+                updatePreviewRoundTimeline()
+            })
+            previewHeader.appendChild(selectRoundNum);
+            
+            let previewRightDiv = document.createElement('div');
+            previewRightDiv.classList.add('preview-right-div');
+            previewHeader.appendChild(previewRightDiv);
+
+            //clear button
+            let clearButton = document.createElement('img');
+            clearButton.classList.add('clear-button');
+            clearButton.src = "../Assets/UI/DestroyBloonsBtn.png";
+            clearButton.addEventListener('click', () => {
+                clearPreview()
+            })
+            previewRightDiv.appendChild(clearButton);
+
+            //play normal
+            let playNormalButton = document.createElement('img');
+            playNormalButton.classList.add('play-normal-button');
+            playNormalButton.src = "../Assets/UI/GoBtnSmall.png";
+            playNormalButton.addEventListener('click', () => {
+                speedMultiplier = 1;
+                roundNumber.innerHTML = `Round ${currentPreviewRound + 1}`;
+                clearPreview()
+                startRound(roundsetProcessed.rounds[currentPreviewRound])
+            })
+            previewRightDiv.appendChild(playNormalButton);
+
+            //play fast forward
+            let playFastButton = document.createElement('img');
+            playFastButton.classList.add('play-fast-button');
+            playFastButton.src = "../Assets/UI/FastForwardBtn.png";
+            playFastButton.addEventListener('click', () => {
+                speedMultiplier = 3;
+                roundNumber.innerHTML = `Round ${currentPreviewRound + 1}`;
+                clearPreview()
+                startRound(roundsetProcessed.rounds[currentPreviewRound])
+            })
+            previewRightDiv.appendChild(playFastButton);
+
             canvas = document.createElement('canvas');
             canvas.id = 'roundset-canvas';
             canvas.classList.add('roundset-canvas')
             canvas.width = 800;
             canvas.height = 300;
-            roundsContent.appendChild(canvas);
+            previewDiv.appendChild(canvas);
+
+            let previewFooterDiv = document.createElement('div');
+            previewFooterDiv.classList.add('preview-footer-div');
+            previewDiv.appendChild(previewFooterDiv);
+
+            let difficultyDiv = document.createElement('div');
+            difficultyDiv.classList.add('difficulty-div');
+            previewFooterDiv.appendChild(difficultyDiv);
+
+            let difficultyEasy = document.createElement('div');
+            difficultyEasy.classList.add('maps-progress-view', 'black-outline');
+            difficultyEasy.innerHTML = "Easy";
+            difficultyDiv.appendChild(difficultyEasy);
+
+            let difficultyMedium = document.createElement('div');
+            difficultyMedium.classList.add('maps-progress-view', 'black-outline');
+            difficultyMedium.innerHTML = "Medium";
+            difficultyDiv.appendChild(difficultyMedium);
+
+            let difficultyHard = document.createElement('div');
+            difficultyHard.classList.add('maps-progress-view', 'black-outline');
+            difficultyHard.innerHTML = "Hard";
+            difficultyDiv.appendChild(difficultyHard);
+
+            let nextPrevDiv = document.createElement('div');
+            nextPrevDiv.classList.add('next-prev-div');
+            previewFooterDiv.appendChild(nextPrevDiv);
+
+            let prevRound = document.createElement('div');
+            prevRound.classList.add('maps-progress-view', 'black-outline');
+            prevRound.innerHTML = "Previous";
+            prevRound.addEventListener('click', () => {
+                currentPreviewRound--;
+                if (currentPreviewRound < 0) { currentPreviewRound = roundsetProcessed.rounds.length - 1 }
+                selectRoundNum.value = currentPreviewRound + 1;
+                updatePreviewRoundTimeline()
+            })
+            nextPrevDiv.appendChild(prevRound);
+
+            let nextRound = document.createElement('div');
+            nextRound.classList.add('maps-progress-view', 'black-outline');
+            nextRound.innerHTML = "Next";
+            nextRound.addEventListener('click', () => {
+                currentPreviewRound++;
+                if (currentPreviewRound >= roundsetProcessed.rounds.length) { currentPreviewRound = 0 }
+                selectRoundNum.value = currentPreviewRound + 1;
+                updatePreviewRoundTimeline()
+            })
+            nextPrevDiv.appendChild(nextRound);
+            
+            let roundInfoDiv = document.createElement('div');
+            roundInfoDiv.id = 'preview-round-info-div';
+            roundInfoDiv.classList.add('round-info-div');
+            previewDiv.appendChild(roundInfoDiv);
 
             ctx = canvas.getContext('2d');
 
-            if (previewInterval != null) { clearInterval(previewInterval); }
-            previewInterval = setInterval(()=>{
-                update();
-                render();
-            }, 1000/60);
+            // if (previewInterval != null) { clearInterval(previewInterval); }
+            // previewInterval = setInterval(()=>{
+            //     update();
+            //     render();
+            // }, 1000/60);
+
+            let lastUpdateTime = 0;
+            let updateInterval = 1000 / 60; // The desired update interval (in milliseconds)
+
+            function gameLoop(currentTime) {
+                requestAnimationFrame(gameLoop);
+
+                // Calculate the time elapsed since the last update
+                let deltaTime = currentTime - lastUpdateTime;
+
+                // Only update the game if the desired interval has passed
+                if (deltaTime >= updateInterval) {
+                    update();
+                    render();
+                    lastUpdateTime = currentTime;
+                }
+            }
+
+            // Start the game loop
+            requestAnimationFrame(gameLoop);
+
+            if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
+            updatePreviewRoundTimeline()
             break;
     }
 }
@@ -8417,12 +8730,202 @@ function onChangeModified(modified) {
     })
 }
 
-function onChangeReverse(reverse) {
-    roundsetProcessed.rounds.forEach(async (round, index) => {
-        let groupsDiv = document.getElementById(`round-${round.roundNumber}-groups`); 
-        let groups = Array.from(groupsDiv.children);
-        groups.reverse().forEach(group => groupsDiv.appendChild(group));
+function onChangeReverse() {
+    switch(currentRoundsetView) {
+        case "Simple":
+            roundsetProcessed.rounds.forEach((round, index) => {
+                let groupsDiv = document.getElementById(`round-${round.roundNumber}-groups`); 
+                let groups = Array.from(groupsDiv.children);
+                groups.reverse().forEach(group => groupsDiv.appendChild(group));
+            });
+            break;
+        case "Topper":
+            let timelineDivs = document.getElementsByClassName('timeline-div');
+            for (let timelineDiv of timelineDivs) {
+                timelineDiv.classList.toggle('timeline-div-reverse');
+            }
+            let timelineDivss = document.getElementsByClassName('timeline-right-div');
+            for (let timelineDiv of timelineDivss) {
+                timelineDiv.classList.toggle('flip-horizontal');
+            }
+            break;
+    }
+}
+
+function updatePreviewRoundTimeline() {
+    let contentDiv = document.getElementById('preview-round-info-div');
+    contentDiv.innerHTML = "";
+
+    let round = roundsetProcessed.rounds[currentPreviewRound];
+
+    let roundDiv = document.createElement('div');
+    roundDiv.classList.add('round-div-detailed');
+    // if (reverse) { roundDiv.classList.add('round-div-reverse') }
+    contentDiv.appendChild(roundDiv);
+
+    let roundsDivHeader = document.createElement('div');
+    roundsDivHeader.classList.add('rounds-div-header');
+    roundDiv.appendChild(roundsDivHeader);
+
+    //roundnumber text
+    let roundNumber = document.createElement('p');
+    roundNumber.classList.add('round-number', 'round-number-detailed', 'black-outline');
+    roundNumber.innerHTML = `Round ${round.roundNumber}`;
+    roundsDivHeader.appendChild(roundNumber);
+    //total duration text
+    let rbeDiv = document.createElement('div');
+    rbeDiv.classList.add('rbe-div');
+    roundsDivHeader.appendChild(rbeDiv);
+
+    let rbeImg = document.createElement('img');
+    rbeImg.classList.add('rbe-img');
+    rbeImg.src = "../Assets/BloonIcon/Red.png";
+    rbeDiv.appendChild(rbeImg);
+
+    let rbeTextDiv = document.createElement('div');
+    rbeTextDiv.classList.add('rbe-text-div');
+    rbeDiv.appendChild(rbeTextDiv);
+    //RBE text
+    let roundRBE = document.createElement('p');
+    roundRBE.classList.add('round-rbe', 'black-outline');
+    roundRBE.innerHTML = `RBE: ${round.rbe.toLocaleString()}`;
+    rbeTextDiv.appendChild(roundRBE);
+    //total RBE text
+    let roundRBETotal = document.createElement('p');
+    roundRBETotal.classList.add('round-rbe-total', 'black-outline');
+    roundRBETotal.innerHTML = `Total: ${round.rbeSum.toLocaleString()}`;
+    rbeTextDiv.appendChild(roundRBETotal);
+
+    let incomeDiv = document.createElement('div');
+    incomeDiv.classList.add('income-div');
+    roundsDivHeader.appendChild(incomeDiv);
+
+    let incomeImg = document.createElement('img');
+    incomeImg.classList.add('income-img');
+    incomeImg.src = "../Assets/UI/CoinIcon.png";
+    incomeDiv.appendChild(incomeImg);
+
+    let incomeTextDiv = document.createElement('div');
+    incomeTextDiv.classList.add('income-text-div');
+    incomeDiv.appendChild(incomeTextDiv);
+    //income text
+    let roundIncome = document.createElement('p');
+    roundIncome.classList.add('round-income', 'black-outline');
+    roundIncome.innerHTML = `Income: ${round.income.toLocaleString()}`;
+    incomeTextDiv.appendChild(roundIncome);
+    //total income text
+    let roundIncomeTotal = document.createElement('p');
+    roundIncomeTotal.classList.add('round-income-total', 'black-outline');
+    roundIncomeTotal.innerHTML = `Total: ${round.incomeSum.toLocaleString()}`;
+    incomeTextDiv.appendChild(roundIncomeTotal);
+
+    //get the highest value for duration
+    let roundDuration = Math.max(...round.bloonGroups.map(group => group.duration));
+
+    let roundDurationText = document.createElement('p');
+    roundDurationText.classList.add('round-duration', 'black-outline');
+    roundDurationText.innerHTML = `Duration: ${roundDuration.toFixed(2)}s`;
+    // roundDuration.innerHTML = formatTime(round.duration);
+    roundsDivHeader.appendChild(roundDurationText);
+
+    //timelinediv
+    let timelineDiv = document.createElement('div');
+    timelineDiv.id = "preview-timeline-div"
+    timelineDiv.classList.add('timeline-div');
+    roundDiv.appendChild(timelineDiv);
+    //for each bloon group
+    round.bloonGroups.forEach((bloonGroup, index) => {
+        let bloonGroupDiv = document.createElement('div');
+        bloonGroupDiv.classList.add('bloon-group-div-detailed');
+        timelineDiv.appendChild(bloonGroupDiv);
+        //bloon group div
+        //leftdiv
+        let leftDiv = document.createElement('div');
+        leftDiv.classList.add('left-div');
+        bloonGroupDiv.appendChild(leftDiv);
+        //bloon image
+        let bloonImage = document.createElement('img');
+        bloonImage.classList.add('bloon-image');
+        bloonImage.src = `../Assets/BloonIcon/${bloonGroup.bloon}.png`;
+        leftDiv.appendChild(bloonImage);
+        //bloon count
+        let bloonCount = document.createElement('p');
+        bloonCount.classList.add('bloon-count', 'black-outline');
+        bloonCount.innerHTML = "x" + bloonGroup.count;
+        leftDiv.appendChild(bloonCount);
+        //rightdiv
+        let rightDiv = document.createElement('div');
+        rightDiv.classList.add('timeline-right-div');
+        bloonGroupDiv.appendChild(rightDiv);
+        //bloonbar
+        let bloonBar = document.createElement('div');
+        bloonBar.classList.add('bloon-bar');
+        rightDiv.appendChild(bloonBar);
+
+        let bloonBarFill = document.createElement('div');
+        bloonBarFill.classList.add('bloon-bar-fill');
+        bloonBarFill.style.background = bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].color;
+        if (!bloonGroup.bloon.includes("Rainbow")) {
+            bloonBarFill.style.border = `4px solid ${bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].border}`;
+        }
+
+        // let widthPercentage = ((bloonGroup.duration - bloonGroup.start) / roundDuration) * 100;
+        // let leftPercentage = (bloonGroup.start / roundDuration) * 100;
+
+        // let minWidthPercentage = (30 / 600) * 100; // Calculate the percentage for the minimum width
+
+        // if (widthPercentage < minWidthPercentage) {
+        //     let excess = minWidthPercentage - widthPercentage;
+        //     widthPercentage = minWidthPercentage;
+        //     leftPercentage = Math.max(0, leftPercentage - excess);
+        // }
+
+        // bloonBarFill.style.width = `${widthPercentage}%`;
+        // bloonBarFill.style.left = `${leftPercentage}%`;
+
+        let widthPercentage = ((bloonGroup.duration - bloonGroup.start) / roundDuration) * 100;
+        let leftPercentage = (bloonGroup.start / roundDuration) * 100;
+
+        let minWidthPercentage = (30 / 600) * 100; // Calculate the percentage for the minimum width
+
+        if (widthPercentage < minWidthPercentage) {
+            widthPercentage = minWidthPercentage;
+        }
+
+        if (leftPercentage + widthPercentage > 100) {
+            leftPercentage = 100 - widthPercentage;
+        }
+
+        bloonBarFill.style.width = `${widthPercentage}%`;
+        bloonBarFill.style.left = `${leftPercentage}%`;
+
+        bloonBar.appendChild(bloonBarFill);
     })
+}
+
+function addTimelinePlayhead(duration) {
+    let timelineDiv = document.getElementById('preview-timeline-div');
+    let playhead = document.createElement('div');
+    playhead.id = 'preview-playhead'
+    playhead.classList.add('playhead');
+    timelineDiv.appendChild(playhead);
+    //animate the playhead with an animation that travels the duration of the round
+    playhead.style.animation = `playhead ${duration}s linear`;
+    playhead.addEventListener('animationend', function() {
+        playhead.remove();
+    });
+}
+
+function clearPreview(){
+    // if an element with the id preview-playhead exists, delete it
+    if (document.getElementById('preview-playhead')) { document.getElementById('preview-playhead').remove() }
+    for (let timeout of bloonGroupsTimeouts){
+        clearTimeout(timeout);
+    }
+    for (let interval of spawnIntervals) {
+        clearInterval(interval);
+    }
+    bloons.length = 0;
 }
 
 function generateSettings(){

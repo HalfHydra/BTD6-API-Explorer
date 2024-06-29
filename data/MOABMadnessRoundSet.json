@@ -1,1 +1,79 @@
-{"rounds": [{"bloonGroups": [{"bloon": "Moab", "count": 50, "start": 0, "duration": 50}], "roundNumber": 1}, {"bloonGroups": [{"bloon": "Bfb", "count": 50, "start": 0, "duration": 50}], "roundNumber": 2}, {"bloonGroups": [{"bloon": "DdtFortifiedCamo", "count": 50, "start": 0, "duration": 50}], "roundNumber": 3}, {"bloonGroups": [{"bloon": "Zomg", "count": 50, "start": 0, "duration": 50}], "roundNumber": 4}, {"bloonGroups": [{"bloon": "Bad", "count": 50, "start": 0, "duration": 60}], "roundNumber": 5}]}
+{
+    "rounds": [
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Moab",
+                    "count": 50,
+                    "start": 0,
+                    "duration": 50
+                }
+            ],
+            "roundNumber": 1,
+            "rbe": 30800,
+            "income": 9626.0,
+            "rbeSum": 30800,
+            "incomeSum": 9626.0
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bfb",
+                    "count": 50,
+                    "start": 0,
+                    "duration": 50
+                }
+            ],
+            "roundNumber": 2,
+            "rbe": 158200,
+            "income": 30602.000454485416,
+            "rbeSum": 189000,
+            "incomeSum": 40228.00045448542
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 50,
+                    "start": 0,
+                    "duration": 50
+                }
+            ],
+            "roundNumber": 3,
+            "rbe": 62800,
+            "income": 5818.000227093697,
+            "rbeSum": 251800,
+            "incomeSum": 46046.00068157911
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Zomg",
+                    "count": 50,
+                    "start": 0,
+                    "duration": 50
+                }
+            ],
+            "roundNumber": 4,
+            "rbe": 832800,
+            "income": 61114.000909119844,
+            "rbeSum": 1084600,
+            "incomeSum": 107160.00159069896
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bad",
+                    "count": 50,
+                    "start": 0,
+                    "duration": 60
+                }
+            ],
+            "roundNumber": 5,
+            "rbe": 2788000,
+            "income": 66835.00099435449,
+            "rbeSum": 3872600,
+            "incomeSum": 173995.00258505344
+        }
+    ]
+}

@@ -5,6 +5,7 @@
 // background.src = "../Assets/UI/RoundPreview.png";
 
 let previewInterval;
+let speedMultiplier = 1;
 
 let bloonsData = {
     "Red": {
@@ -12,102 +13,148 @@ let bloonsData = {
         "rbe": 1,
         "speed": 25,
         "layer": 1,
+        "scale": 0.8,
+        "color": "#ED0F0F",
+        "border": "#690000"
     },
     "Blue": {
         "name": "Blue",
         "rbe": 2,
         "speed": 35,
-        "layer": 2
+        "layer": 2,
+        "scale": 0.85,
+        "color": "#2797E0",
+        "border": "#004772"
     },
     "Green": {
         "name": "Green",
         "rbe": 3,
         "speed": 45,
-        "layer": 3
+        "layer": 3,
+        "scale": 0.9,
+        "color": "#77A80F",
+        "border": "#3D5400"
     },
     "Yellow": {
         "name": "Yellow",
         "rbe": 4,
         "speed": 80,
-        "layer": 4
+        "layer": 4,
+        "scale": 0.95,
+        "color": "#FFD50F",
+        "border": "#8E620C"
     },
     "Pink": {
         "name": "Pink",
         "rbe": 5,
         "speed": 87.5,
-        "layer": 5
+        "layer": 5,
+        "scale": 1,
+        "color": "#F15060",
+        "border": "#A92626"
     },
     "Black": {
         "name": "Black",
         "rbe": 11,
         "speed": 45,
-        "layer": 6
+        "layer": 6,
+        "scale": 0.58,
+        "color": "#161616",
+        "border": "#414141"
     },
     "Purple": {
         "name": "Purple",
         "rbe": 11,
         "speed": 75,
-        "layer": 7
+        "layer": 7,
+        "scale": 0.95,
+        "color": "#9326E0",
+        "border": "#00E4FF"
     },
     "White": {
         "name": "White",
         "rbe": 12,
         "speed": 50,
-        "layer": 6
+        "layer": 6,
+        "scale": 0.58,
+        "color": "#D7D7D7",
+        "border": "#727272"
     },
     "Lead": {
         "name": "Lead",
         "rbe": 23,
         "speed": 25,
-        "layer": 7
+        "layer": 7,
+        "scale": 0.95,
+        "color": "#7E7E7E",
+        "border": "#2F2F2F"
     },
     "Zebra": {
         "name": "Zebra",
         "rbe": 23,
         "speed": 45,
-        "layer": 7
+        "layer": 7,
+        "scale": 0.9,
+        "color": "repeating-linear-gradient(145deg, #040404, #040404 10px, #ffffff 10px, #ffffff 20px)",
+        "border": "#5A5A5A"
     },
     "Rainbow": {
         "name": "Rainbow",
         "rbe": 47,
         "speed": 55,
-        "layer": 8
+        "layer": 8,
+        "scale": 1,
+        "color": "linear-gradient(180deg, rgba(228,26,26,1) 0%, rgba(255,159,0,1) 16%, rgba(255,224,0,1) 33%, rgba(125,181,4,1) 48%, rgba(83,176,222,1) 66%, rgba(226,74,226,1) 84%, rgba(132,21,132,1) 100%)",
+        "border": "transparent"
     },
     "Ceramic": {
         "name": "Ceramic",
         "rbe": 47,
         "speed": 62.5,
-        "layer": 9
+        "layer": 9,
+        "scale": 1,
+        "color": "#BE6C1D",
+        "border": "#61370B"
     },
     "Moab": {
         "name": "Moab",
         "rbe": 616,
         "speed": 25,
-        "layer": 10
+        "layer": 10,
+        "color": "#2AC2FF",
+        "border": "#FFFFFF"
     },
     "Bfb": {
         "name": "Bfb",
         "rbe": 3164,
         "speed": 6.25,
-        "layer": 11
+        "layer": 11,
+        "color": "#C00505",
+        "border": "#FFFFFF"
     },
     "Zomg": {
         "name": "Zomg",
         "rbe": 16656,
         "speed": 4.5,
-        "layer": 12
+        "layer": 12,
+        "color": "#575757",
+        "border": "#B7F700"
     },
     "Ddt": {
         "name": "Ddt",
         "rbe": 3164,
         "speed": 66,
-        "layer": 12
+        "layer": 12,
+        "color": "#3C3C3C",
+        "border": "#A5A5A5"
     },
     "Bad": {
         "name": "Bad",
         "rbe": 16464,
         "speed": 4.5,
-        "layer": 13
+        "layer": 13,
+        "color": "#AB02AC",
+        "border": "#500151"
     }
 }
 
@@ -515,18 +562,18 @@ let bloonImageMap = {
 
 class Bloon {
     constructor(type) {
-        this.speed = 0.125 * bloonsData[type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].speed;
-        this.x = -200;
+        this.speed = 0.13 * bloonsData[type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].speed;
+        this.x = -(ratioCalc(1, 0, 100, bloonImageMap[type].width, bloonImageMap[type].height));
         this.type = type;
     }
     move() {
-        this.x += this.speed;
+        this.x += this.speed  * speedMultiplier;
     }
     // move(delta) {
     //     this.x += this.speed * delta;
     //   }
     shouldDelete() {
-        const certainValue = 800; // replace with your value
+        const certainValue = 800; 
         return this.x >= certainValue;
     }
     render(ctx) {
@@ -537,18 +584,18 @@ class Bloon {
 
 class Blimp {
     constructor(type) {
-        this.speed = 0.125 * bloonsData[type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].speed;
+        this.speed = 0.13 * bloonsData[type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].speed;
         this.x = -(bloonImageMap[type].width * 1.62);
         this.type = type;
     }
     move() {
-        this.x += this.speed;
+        this.x += this.speed * speedMultiplier;
     }
     // move(delta) {
     //     this.x += this.speed * delta;
     //   }
     shouldDelete() {
-        const certainValue = 800; // replace with your value
+        const certainValue = 800; 
         return this.x >= certainValue;
     }
     render(ctx) {
@@ -569,21 +616,6 @@ const update = () => {
     })
 }
 
-// let lastTime = Date.now();
-
-// const update = () => {
-//   const now = Date.now();
-//   const delta = (now - lastTime) / 1000; // convert to seconds
-//   lastTime = now;
-
-//   bloons.forEach((bloon, i) => {
-//     bloon.move(delta);
-//     if (bloon.shouldDelete()) {
-//       bloons.splice(i, 1);
-//     }
-//   });
-// };
-
 const render = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     bloons.forEach(bloon => bloon.render(ctx));
@@ -592,23 +624,31 @@ const render = () => {
 let canvas;
 let ctx;
 
+let bloonGroupsTimeouts = []
+let spawnIntervals = []
+
 function startRound(round) {
+    addTimelinePlayhead((Math.max(...round.bloonGroups.map(group => group.duration)))/speedMultiplier);
     for (let bloonGroup of round.bloonGroups) {
-        setTimeout(() => {
+        bloonGroupsTimeouts.push(setTimeout(() => {
             spawnBloon(bloonGroup);
-        }, bloonGroup.start * 1000);
+        }, bloonGroup.start * 1000 / speedMultiplier));
     }
 }
 
 function spawnBloon(bloonGroup) {
-    let interval = (bloonGroup.duration - bloonGroup.start) / bloonGroup.count;
+    // let interval = ((bloonGroup.duration - bloonGroup.start) / bloonGroup.count) * 1000 / speedMultiplier;
+    // let interval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.count - 1)) * 1000 / speedMultiplier;
+    let interval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.count - 1)) * 1000 / speedMultiplier;
+    console.log(interval)
     let count = 0;
-    let spawnInterval = setInterval(() => {
+
+    // Function to spawn a bloon
+    function spawn() {
         if (count >= bloonGroup.count) {
             clearInterval(spawnInterval);
             return;
         }
-        // ["Moab", "MoabFortified", "Bfb", "BfbFortified", "Zomg", "ZomgFortified", "DdtCamo", "DdtFortifiedCamo", "Bad", "BadFortified"].includes(bloonGroup.bloon) ? bloons.push(new Blimp(bloonGroup.bloon)) : bloons.push(new Bloon(bloonGroup.bloon));
         let bloonType = bloonGroup.bloon;
         let bloon = ["Moab", "MoabFortified", "Bfb", "BfbFortified", "Zomg", "ZomgFortified", "DdtCamo", "DdtFortifiedCamo", "Bad", "BadFortified"].includes(bloonType) ? new Blimp(bloonType) : new Bloon(bloonType);
         let layer = bloonsData[bloonType.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].layer;
@@ -618,10 +658,44 @@ function spawnBloon(bloonGroup) {
         } else {
             bloons.splice(index, 0, bloon);
         }
-        // bloons.push(new Bloon(bloonGroup.bloon));
         count++;
-    }, interval * 1000);
+    }
+
+    // // Immediately spawn the first bloon
+    spawn();
+
+    // Spawn the first bloon after bloonGroup.start
+    // bloonGroupsTimeouts.push(setTimeout(spawn, bloonGroup.start * 1000 / speedMultiplier));
+    bloonGroupsTimeouts.push(setTimeout(spawn, (bloonGroup.start + interval) * 1000 / speedMultiplier));
+
+
+    // Then continue spawning at the interval
+    let spawnInterval = setInterval(spawn, interval);
+    spawnIntervals.push(spawnInterval);
 }
+
+// function spawnBloon(bloonGroup) {
+//     let interval = ((bloonGroup.duration - bloonGroup.start) / bloonGroup.count) * 1000 / speedMultiplier;
+//     let count = 0;
+//     let spawnInterval = setInterval(() => {
+//         if (count >= bloonGroup.count) {
+//             clearInterval(spawnInterval);
+//             return;
+//         }
+//         let bloonType = bloonGroup.bloon;
+//         let bloon = ["Moab", "MoabFortified", "Bfb", "BfbFortified", "Zomg", "ZomgFortified", "DdtCamo", "DdtFortifiedCamo", "Bad", "BadFortified"].includes(bloonType) ? new Blimp(bloonType) : new Bloon(bloonType);
+//         let layer = bloonsData[bloonType.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].layer;
+//         let index = bloons.findIndex(b => bloonsData[b.type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].layer > layer);
+//         if (index === -1) {
+//             bloons.push(bloon);
+//         } else {
+//             bloons.splice(index, 0, bloon);
+//         }
+//         // bloons.push(new Bloon(bloonGroup.bloon));
+//         count++;
+//     }, interval);
+//     spawnIntervals.push(spawnInterval);
+// }
 
 //   window.addEventListener('load',()=>{
 //     canvas = document.getElementById('roundset-canvas');
