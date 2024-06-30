@@ -3674,6 +3674,7 @@
 }
 .roundset-canvas {
     background-image: url(../Assets/UI/RoundPreview.png);
+    border-radius: 10px;
 }
 
 .rounds-div-header {
@@ -3804,6 +3805,13 @@
     display: flex;
     justify-content: flex-start;
     padding: 0 10px;
+}
+.preview-container-div {
+    display: flex;
+    justify-content: center;
+}
+.income-img {
+    padding-right: 2px;
 }
 
 .black-outline {

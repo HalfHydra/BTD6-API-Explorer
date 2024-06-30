@@ -8233,8 +8233,7 @@ async function showRoundsetModel(source, roundset) {
     mapsProgressViews.appendChild(mapsProgressViewsText);
 
     let mapsProgressGrid = document.createElement('div');
-    mapsProgressGrid.classList.add('maps-progress-view','black-outline');
-    mapsProgressGrid.classList.add('maps-progress-view-selected');
+    mapsProgressGrid.classList.add('maps-progress-view', 'stats-tab-yellow', 'black-outline');
     mapsProgressGrid.innerHTML = "Simple";
     mapsProgressViews.appendChild(mapsProgressGrid);
 
@@ -8294,14 +8293,23 @@ async function showRoundsetModel(source, roundset) {
     roundsetContent.appendChild(roundsContent);
 
     mapsProgressGrid.addEventListener('click', () => {
+        mapsProgressGrid.classList.add('stats-tab-yellow');
+        mapsProgressList.classList.remove('stats-tab-yellow');
+        mapsProgressGame.classList.remove('stats-tab-yellow');
         currentRoundsetView = "Simple";
         generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
     })
     mapsProgressList.addEventListener('click', () => {
+        mapsProgressList.classList.add('stats-tab-yellow');
+        mapsProgressGrid.classList.remove('stats-tab-yellow');
+        mapsProgressGame.classList.remove('stats-tab-yellow');
         currentRoundsetView = "Topper";
         generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
     })
     mapsProgressGame.addEventListener('click', () => {
+        mapsProgressGame.classList.add('stats-tab-yellow');
+        mapsProgressGrid.classList.remove('stats-tab-yellow');
+        mapsProgressList.classList.remove('stats-tab-yellow');
         currentRoundsetView = "Preview";
         generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
     })
@@ -8393,25 +8401,28 @@ async function generateRounds(type, reverse, modified) {
             roundsDetailedDiv.classList.add('rounds-detailed-div');
             roundsContent.appendChild(roundsDetailedDiv);
 
+            copyLoadingIcon(roundsDetailedDiv);
+
+            setTimeout(() => {
             let fragment = document.createDocumentFragment();
+
+            let minWidthPercentage = (30 / 600) * 100;
 
             roundsetProcessed.rounds.forEach(async (round, index) => {
                 let roundDiv = document.createElement('div');
                 roundDiv.id = `round-${round.roundNumber}`;
                 roundDiv.classList.add('round-div-detailed');
                 if (reverse) { roundDiv.classList.add('round-div-reverse') }
-                // roundsDetailedDiv.appendChild(roundDiv);
 
                 let roundsDivHeader = document.createElement('div');
                 roundsDivHeader.classList.add('rounds-div-header');
                 roundDiv.appendChild(roundsDivHeader);
 
-                //roundnumber text
                 let roundNumber = document.createElement('p');
                 roundNumber.classList.add('round-number', 'round-number-detailed', 'black-outline');
                 roundNumber.innerHTML = `Round ${round.roundNumber}`;
                 roundsDivHeader.appendChild(roundNumber);
-                //total duration text
+
                 let rbeDiv = document.createElement('div');
                 rbeDiv.classList.add('rbe-div');
                 roundsDivHeader.appendChild(rbeDiv);
@@ -8424,12 +8435,12 @@ async function generateRounds(type, reverse, modified) {
                 let rbeTextDiv = document.createElement('div');
                 rbeTextDiv.classList.add('rbe-text-div');
                 rbeDiv.appendChild(rbeTextDiv);
-                //RBE text
+
                 let roundRBE = document.createElement('p');
                 roundRBE.classList.add('round-rbe', 'black-outline');
                 roundRBE.innerHTML = `RBE: ${round.rbe.toLocaleString()}`;
                 rbeTextDiv.appendChild(roundRBE);
-                //total RBE text
+                
                 let roundRBETotal = document.createElement('p');
                 roundRBETotal.classList.add('round-rbe-total', 'black-outline');
                 roundRBETotal.innerHTML = `Total: ${round.rbeSum.toLocaleString()}`;
@@ -8447,55 +8458,50 @@ async function generateRounds(type, reverse, modified) {
                 let incomeTextDiv = document.createElement('div');
                 incomeTextDiv.classList.add('income-text-div');
                 incomeDiv.appendChild(incomeTextDiv);
-                //income text
+                
                 let roundIncome = document.createElement('p');
                 roundIncome.classList.add('round-income', 'black-outline');
                 roundIncome.innerHTML = `Income: ${round.income.toLocaleString()}`;
                 incomeTextDiv.appendChild(roundIncome);
-                //total income text
+                
                 let roundIncomeTotal = document.createElement('p');
                 roundIncomeTotal.classList.add('round-income-total', 'black-outline');
                 roundIncomeTotal.innerHTML = `Total: ${round.incomeSum.toLocaleString()}`;
                 incomeTextDiv.appendChild(roundIncomeTotal);
 
-                //get the highest value for duration
                 let roundDuration = Math.max(...round.bloonGroups.map(group => group.duration));
 
                 let roundDurationText = document.createElement('p');
                 roundDurationText.classList.add('round-duration', 'black-outline');
                 roundDurationText.innerHTML = `Duration: ${roundDuration.toFixed(2)}s`;
-                // roundDuration.innerHTML = formatTime(round.duration);
                 roundsDivHeader.appendChild(roundDurationText);
 
-                //timelinediv
                 let timelineDiv = document.createElement('div');
                 timelineDiv.classList.add('timeline-div');
                 roundDiv.appendChild(timelineDiv);
-                //for each bloon group
                 round.bloonGroups.forEach((bloonGroup, index) => {
                     let bloonGroupDiv = document.createElement('div');
                     bloonGroupDiv.classList.add('bloon-group-div-detailed');
                     timelineDiv.appendChild(bloonGroupDiv);
-                    //bloon group div
-                    //leftdiv
+
                     let leftDiv = document.createElement('div');
                     leftDiv.classList.add('left-div');
                     bloonGroupDiv.appendChild(leftDiv);
-                    //bloon image
+
                     let bloonImage = document.createElement('img');
                     bloonImage.classList.add('bloon-image');
                     bloonImage.src = `../Assets/BloonIcon/${bloonGroup.bloon}.png`;
                     leftDiv.appendChild(bloonImage);
-                    //bloon count
+
                     let bloonCount = document.createElement('p');
                     bloonCount.classList.add('bloon-count', 'black-outline');
                     bloonCount.innerHTML = "x" + bloonGroup.count;
                     leftDiv.appendChild(bloonCount);
-                    //rightdiv
+                    
                     let rightDiv = document.createElement('div');
                     rightDiv.classList.add('timeline-right-div');
                     bloonGroupDiv.appendChild(rightDiv);
-                    //bloonbar
+                    
                     let bloonBar = document.createElement('div');
                     bloonBar.classList.add('bloon-bar');
                     rightDiv.appendChild(bloonBar);
@@ -8506,38 +8512,9 @@ async function generateRounds(type, reverse, modified) {
                     if (!bloonGroup.bloon.includes("Rainbow")) {
                         bloonBarFill.style.border = `4px solid ${bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].border}`;
                     }
-                    // bloonBarFill.style.width = `${((bloonGroup.duration - bloonGroup.start) / roundDuration) * 100}%`;
-                    // bloonBarFill.style.left = `${(bloonGroup.start / roundDuration) * 100}%`;
-                    // let widthPercentage = ((bloonGroup.duration - bloonGroup.start) / roundDuration) * 100;
-                    // let leftPercentage = (bloonGroup.start / roundDuration) * 100;
-
-                    // if (widthPercentage < 30 / bloonBar.offsetWidth * 100) {
-                    //     let excess = 30 / bloonBar.offsetWidth * 100 - widthPercentage;
-                    //     widthPercentage = 30 / bloonBar.offsetWidth * 100;
-                    //     leftPercentage = Math.max(0, leftPercentage - excess);
-                    // }
-
-                    // bloonBarFill.style.width = `${widthPercentage}%`;
-                    // bloonBarFill.style.left = `${leftPercentage}%`;
-
-                    // let widthPercentage = ((bloonGroup.duration - bloonGroup.start) / roundDuration) * 100;
-                    // let leftPercentage = (bloonGroup.start / roundDuration) * 100;
-
-                    // let minWidthPercentage = (30 / 600) * 100; // Calculate the percentage for the minimum width
-
-                    // if (widthPercentage < minWidthPercentage) {
-                    //     let excess = minWidthPercentage - widthPercentage;
-                    //     widthPercentage = minWidthPercentage;
-                    //     leftPercentage = Math.max(0, leftPercentage - excess);
-                    // }
-
-                    // bloonBarFill.style.width = `${widthPercentage}%`;
-                    // bloonBarFill.style.left = `${leftPercentage}%`;
 
                     let widthPercentage = ((bloonGroup.duration - bloonGroup.start) / roundDuration) * 100;
                     let leftPercentage = (bloonGroup.start / roundDuration) * 100;
-            
-                    let minWidthPercentage = (30 / 600) * 100; // Calculate the percentage for the minimum width
             
                     if (widthPercentage < minWidthPercentage) {
                         widthPercentage = minWidthPercentage;
@@ -8554,13 +8531,19 @@ async function generateRounds(type, reverse, modified) {
                 })
                 fragment.appendChild(roundDiv);
             })
+            roundsDetailedDiv.innerHTML = "";
             roundsDetailedDiv.appendChild(fragment);
             if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
+            }, 0)
             break;
         case "Preview":
+            let previewContainerDiv = document.createElement('div');
+            previewContainerDiv.classList.add('preview-container-div');
+            roundsContent.appendChild(previewContainerDiv);
+
             let previewDiv = document.createElement('div');
             previewDiv.classList.add('preview-div');
-            roundsContent.appendChild(previewDiv);
+            previewContainerDiv.appendChild(previewDiv);
 
             let previewHeader = document.createElement('div');
             previewHeader.classList.add('preview-header');
@@ -8639,7 +8622,7 @@ async function generateRounds(type, reverse, modified) {
             previewFooterDiv.appendChild(difficultyDiv);
 
             let difficultyEasy = document.createElement('div');
-            difficultyEasy.classList.add('maps-progress-view', 'black-outline');
+            difficultyEasy.classList.add('maps-progress-view', 'stats-tab-yellow', 'black-outline');
             difficultyEasy.innerHTML = "Easy";
             difficultyDiv.appendChild(difficultyEasy);
 
@@ -8652,6 +8635,25 @@ async function generateRounds(type, reverse, modified) {
             difficultyHard.classList.add('maps-progress-view', 'black-outline');
             difficultyHard.innerHTML = "Hard";
             difficultyDiv.appendChild(difficultyHard);
+
+            difficultyEasy.addEventListener('click', () => {
+                difficultySpeedModifier = 1;
+                difficultyEasy.classList.add('stats-tab-yellow');
+                difficultyMedium.classList.remove('stats-tab-yellow');
+                difficultyHard.classList.remove('stats-tab-yellow');
+            })
+            difficultyMedium.addEventListener('click', () => {
+                difficultySpeedModifier = 1.1;
+                difficultyEasy.classList.remove('stats-tab-yellow');
+                difficultyMedium.classList.add('stats-tab-yellow');
+                difficultyHard.classList.remove('stats-tab-yellow');
+            })
+            difficultyHard.addEventListener('click', () => {
+                difficultySpeedModifier = 1.26;
+                difficultyEasy.classList.remove('stats-tab-yellow');
+                difficultyMedium.classList.remove('stats-tab-yellow');
+                difficultyHard.classList.add('stats-tab-yellow');
+            })
 
             let nextPrevDiv = document.createElement('div');
             nextPrevDiv.classList.add('next-prev-div');

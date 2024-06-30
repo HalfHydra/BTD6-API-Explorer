@@ -563,7 +563,7 @@ class Bloon {
         this.type = type;
     }
     move(deltaTime) {
-        this.x += this.speed * deltaTime * 6.86 * speedMultiplier;
+        this.x += this.speed * deltaTime * 6.86 * speedMultiplier * roundSpeedModifier * difficultySpeedModifier;
     }
     shouldDelete() {
         const certainValue = 800; 
@@ -582,7 +582,7 @@ class Blimp {
         this.type = type;
     }
     move(deltaTime) {
-        this.x += this.speed * deltaTime * 6.86 * speedMultiplier;
+        this.x += this.speed * deltaTime * 6.86 * speedMultiplier * roundSpeedModifier * difficultySpeedModifier;
     }
     shouldDelete() {
         const certainValue = 800; 
@@ -598,6 +598,8 @@ class Blimp {
 const bloons = [];
 
 let currentRoundGroups;
+let difficultySpeedModifier = 1;
+let roundSpeedModifier = 1;
 
 const update = (deltaTime) => {
     const now = performance.now();
@@ -637,6 +639,7 @@ const render = () => {
 }
 
 function startRound(round) {
+    roundSpeedModifier = calcRoundSpeed(round.roundNumber);
     currentRoundGroups = JSON.parse(JSON.stringify(round));
     addTimelinePlayhead((Math.max(...currentRoundGroups.bloonGroups.map(group => group.duration)))/speedMultiplier);
     for (let bloonGroup of currentRoundGroups.bloonGroups) {
@@ -662,6 +665,17 @@ function spawnBloon(bloonGroup) {
             bloons.splice(index, 0, bloon);
         }
     }
+}
+
+function calcRoundSpeed(round) {
+    let speed = 0;
+    if (round <= 80) speed = 1;
+    else if (round <= 100) speed = 1 + (round - 80) * 0.02;
+    else if (round <= 150) speed = 1.6 + (round - 101) * 0.02;
+    else if (round <= 200) speed = 3.0 + (round - 151) * 0.02;
+    else if (round <= 250) speed = 4.5 + (round - 201) * 0.02;
+    else speed = 6.0 + (round - 252) * 0.02;
+    return speed;
 }
 
 // function spawnBloon(bloonGroup) {
