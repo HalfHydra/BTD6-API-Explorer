@@ -1,10 +1,6 @@
-// let canvas = null;
-// let ctx = null;
-// let bloons = [];
-// let background = new Image();
-// background.src = "../Assets/UI/RoundPreview.png";
+let canvas;
+let ctx;
 
-let previewInterval;
 let speedMultiplier = 1;
 
 let bloonsData = {
@@ -562,16 +558,13 @@ let bloonImageMap = {
 
 class Bloon {
     constructor(type) {
-        this.speed = 0.13 * bloonsData[type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].speed;
+        this.speed = bloonsData[type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].speed;
         this.x = -(ratioCalc(1, 0, 100, bloonImageMap[type].width, bloonImageMap[type].height));
         this.type = type;
     }
-    move() {
-        this.x += this.speed  * speedMultiplier;
+    move(deltaTime) {
+        this.x += this.speed * deltaTime * 6.86 * speedMultiplier;
     }
-    // move(delta) {
-    //     this.x += this.speed * delta;
-    //   }
     shouldDelete() {
         const certainValue = 800; 
         return this.x >= certainValue;
@@ -584,16 +577,13 @@ class Bloon {
 
 class Blimp {
     constructor(type) {
-        this.speed = 0.13 * bloonsData[type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].speed;
+        this.speed = bloonsData[type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].speed;
         this.x = -(bloonImageMap[type].width * 1.62);
         this.type = type;
     }
-    move() {
-        this.x += this.speed * speedMultiplier;
+    move(deltaTime) {
+        this.x += this.speed * deltaTime * 6.86 * speedMultiplier;
     }
-    // move(delta) {
-    //     this.x += this.speed * delta;
-    //   }
     shouldDelete() {
         const certainValue = 800; 
         return this.x >= certainValue;
@@ -607,13 +597,38 @@ class Blimp {
 
 const bloons = [];
 
-const update = () => {
+let currentRoundGroups;
+
+const update = (deltaTime) => {
+    const now = performance.now();
+
     bloons.forEach((bloon, i) => {
-        bloon.move()
+        bloon.move(deltaTime);
         if (bloon.shouldDelete()) {
             bloons.splice(i, 1);
         }
-    })
+    });
+
+    if(currentRoundGroups != null) {
+        currentRoundGroups.bloonGroups.forEach(bloonGroup => {
+            if (now >= bloonGroup.startTime && bloonGroup.count > 0) {
+                if (bloonGroup.activeTime == 0) {
+                    bloonGroup.spawnBloon();
+                    bloonGroup.count--;
+                }
+                bloonGroup.activeTime += deltaTime;
+                bloonGroup.spawnAccumulator += deltaTime;
+                while (bloonGroup.spawnAccumulator >= bloonGroup.spawnInterval) {
+                    const spawnCount = Math.floor(bloonGroup.spawnAccumulator / bloonGroup.spawnInterval);
+                    for (let i = 0; i < spawnCount; i++) {
+                        bloonGroup.spawnBloon();
+                        bloonGroup.count--;
+                    }
+                    bloonGroup.spawnAccumulator -= bloonGroup.spawnInterval * spawnCount;
+                }
+            }
+        });
+    }
 }
 
 const render = () => {
@@ -621,34 +636,22 @@ const render = () => {
     bloons.forEach(bloon => bloon.render(ctx));
 }
 
-let canvas;
-let ctx;
-
-let bloonGroupsTimeouts = []
-let spawnIntervals = []
-
 function startRound(round) {
-    addTimelinePlayhead((Math.max(...round.bloonGroups.map(group => group.duration)))/speedMultiplier);
-    for (let bloonGroup of round.bloonGroups) {
-        bloonGroupsTimeouts.push(setTimeout(() => {
-            spawnBloon(bloonGroup);
-        }, bloonGroup.start * 1000 / speedMultiplier));
+    currentRoundGroups = JSON.parse(JSON.stringify(round));
+    addTimelinePlayhead((Math.max(...currentRoundGroups.bloonGroups.map(group => group.duration)))/speedMultiplier);
+    for (let bloonGroup of currentRoundGroups.bloonGroups) {
+        bloonGroup.startTime = performance.now() + (bloonGroup.start * 1000) / speedMultiplier;
+        bloonGroup.activeTime = 0;
+        bloonGroup.spawnAccumulator = 0;
+        // bloonGroup.originalCount = bloonGroup.count;
+        // bloonGroup.spawnInterval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.originalCount - 1)) / speedMultiplier;
+        bloonGroup.spawnInterval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.count - 1)) / speedMultiplier;
+        bloonGroup.spawnBloon = spawnBloon(bloonGroup);
     }
 }
 
 function spawnBloon(bloonGroup) {
-    // let interval = ((bloonGroup.duration - bloonGroup.start) / bloonGroup.count) * 1000 / speedMultiplier;
-    // let interval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.count - 1)) * 1000 / speedMultiplier;
-    let interval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.count - 1)) * 1000 / speedMultiplier;
-    console.log(interval)
-    let count = 0;
-
-    // Function to spawn a bloon
-    function spawn() {
-        if (count >= bloonGroup.count) {
-            clearInterval(spawnInterval);
-            return;
-        }
+    return function() {
         let bloonType = bloonGroup.bloon;
         let bloon = ["Moab", "MoabFortified", "Bfb", "BfbFortified", "Zomg", "ZomgFortified", "DdtCamo", "DdtFortifiedCamo", "Bad", "BadFortified"].includes(bloonType) ? new Blimp(bloonType) : new Bloon(bloonType);
         let layer = bloonsData[bloonType.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].layer;
@@ -658,21 +661,46 @@ function spawnBloon(bloonGroup) {
         } else {
             bloons.splice(index, 0, bloon);
         }
-        count++;
     }
-
-    // // Immediately spawn the first bloon
-    spawn();
-
-    // Spawn the first bloon after bloonGroup.start
-    // bloonGroupsTimeouts.push(setTimeout(spawn, bloonGroup.start * 1000 / speedMultiplier));
-    bloonGroupsTimeouts.push(setTimeout(spawn, (bloonGroup.start + interval) * 1000 / speedMultiplier));
-
-
-    // Then continue spawning at the interval
-    let spawnInterval = setInterval(spawn, interval);
-    spawnIntervals.push(spawnInterval);
 }
+
+// function spawnBloon(bloonGroup) {
+//     // let interval = ((bloonGroup.duration - bloonGroup.start) / bloonGroup.count) * 1000 / speedMultiplier;
+//     // let interval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.count - 1)) * 1000 / speedMultiplier;
+//     let interval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.count - 1)) * 1000 / speedMultiplier;
+//     // console.log(interval)
+//     let count = 0;
+
+//     // Function to spawn a bloon
+//     function spawn() {
+//         if (count >= bloonGroup.count) {
+//             clearInterval(spawnInterval);
+//             return;
+//         }
+//         let bloonType = bloonGroup.bloon;
+//         let bloon = ["Moab", "MoabFortified", "Bfb", "BfbFortified", "Zomg", "ZomgFortified", "DdtCamo", "DdtFortifiedCamo", "Bad", "BadFortified"].includes(bloonType) ? new Blimp(bloonType) : new Bloon(bloonType);
+//         let layer = bloonsData[bloonType.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].layer;
+//         let index = bloons.findIndex(b => bloonsData[b.type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].layer > layer);
+//         if (index === -1) {
+//             bloons.push(bloon);
+//         } else {
+//             bloons.splice(index, 0, bloon);
+//         }
+//         count++;
+//     }
+
+//     // // Immediately spawn the first bloon
+//     spawn();
+
+//     // Spawn the first bloon after bloonGroup.start
+//     // bloonGroupsTimeouts.push(setTimeout(spawn, bloonGroup.start * 1000 / speedMultiplier));
+//     bloonGroupsTimeouts.push(setTimeout(spawn, (bloonGroup.start + interval) * 1000 / speedMultiplier));
+
+
+//     // Then continue spawning at the interval
+//     let spawnInterval = setInterval(spawn, interval);
+//     spawnIntervals.push(spawnInterval);
+// }
 
 // function spawnBloon(bloonGroup) {
 //     let interval = ((bloonGroup.duration - bloonGroup.start) / bloonGroup.count) * 1000 / speedMultiplier;

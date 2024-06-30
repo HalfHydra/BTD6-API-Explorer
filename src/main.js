@@ -82,6 +82,7 @@ let currentBrowserView = "grid";
 let currentRoundsetView = "Simple";
 let roundsetProcessed = null;
 let currentPreviewRound = 0;
+let previewActive = false;
 
 fetch('./data/Constants.json')
         .then(response => response.json())
@@ -8342,6 +8343,7 @@ async function generateRounds(type, reverse, modified) {
 
     switch(type) {
         case "Simple":
+            resetPreview();
             let alternate = false;
             roundsetProcessed.rounds.forEach(async (round, index) => {
                 // if (modified && !round.hasOwnProperty("addToRound")) { return; }
@@ -8386,6 +8388,7 @@ async function generateRounds(type, reverse, modified) {
             if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
             break;
         case "Topper":
+            resetPreview();
             let roundsDetailedDiv = document.createElement('div');
             roundsDetailedDiv.classList.add('rounds-detailed-div');
             roundsContent.appendChild(roundsDetailedDiv);
@@ -8565,7 +8568,7 @@ async function generateRounds(type, reverse, modified) {
 
             let roundNumber = document.createElement('p');
             roundNumber.classList.add('round-number', 'round-number-preview', 'black-outline');
-            roundNumber.innerHTML = `Round 1`;
+            roundNumber.innerHTML = `Round ${currentPreviewRound + 1}`;
             previewHeader.appendChild(roundNumber);
 
             let selectRoundNum = document.createElement('input');
@@ -8573,7 +8576,7 @@ async function generateRounds(type, reverse, modified) {
             selectRoundNum.type = 'number';
             selectRoundNum.min = 1;
             selectRoundNum.max = roundsetProcessed.rounds.length;
-            selectRoundNum.value = 1;
+            selectRoundNum.value = currentPreviewRound + 1;
             selectRoundNum.addEventListener('change', () => {
                 if (selectRoundNum.value < 1) { selectRoundNum.value = 1 }
                 if (selectRoundNum.value > roundsetProcessed.rounds.length) { selectRoundNum.value = roundsetProcessed.rounds.length }
@@ -8689,25 +8692,26 @@ async function generateRounds(type, reverse, modified) {
             //     render();
             // }, 1000/60);
 
-            let lastUpdateTime = 0;
-            let updateInterval = 1000 / 60; // The desired update interval (in milliseconds)
+            let lastFrameTime = performance.now();
 
-            function gameLoop(currentTime) {
-                requestAnimationFrame(gameLoop);
-
-                // Calculate the time elapsed since the last update
-                let deltaTime = currentTime - lastUpdateTime;
-
-                // Only update the game if the desired interval has passed
-                if (deltaTime >= updateInterval) {
-                    update();
-                    render();
-                    lastUpdateTime = currentTime;
+            function previewRender() {
+                if (!previewActive) {
+                    console.log('stopping')
+                    return;
                 }
+
+                const now = performance.now();
+                const deltaTime = (now - lastFrameTime) / 1000;
+                lastFrameTime = now;
+                
+                update(deltaTime);
+                render();
+                requestAnimationFrame(previewRender);
             }
 
-            // Start the game loop
-            requestAnimationFrame(gameLoop);
+            previewActive = true;
+
+            requestAnimationFrame(previewRender);
 
             if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
             updatePreviewRoundTimeline()
@@ -8917,15 +8921,14 @@ function addTimelinePlayhead(duration) {
 }
 
 function clearPreview(){
-    // if an element with the id preview-playhead exists, delete it
     if (document.getElementById('preview-playhead')) { document.getElementById('preview-playhead').remove() }
-    for (let timeout of bloonGroupsTimeouts){
-        clearTimeout(timeout);
-    }
-    for (let interval of spawnIntervals) {
-        clearInterval(interval);
-    }
+    currentRoundGroups = null;
     bloons.length = 0;
+}
+
+function resetPreview() {
+    previewActive = false;
+    clearPreview();
 }
 
 function generateSettings(){
