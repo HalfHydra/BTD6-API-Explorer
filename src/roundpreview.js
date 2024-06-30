@@ -620,13 +620,21 @@ const update = (deltaTime) => {
                 }
                 bloonGroup.activeTime += deltaTime;
                 bloonGroup.spawnAccumulator += deltaTime;
-                while (bloonGroup.spawnAccumulator >= bloonGroup.spawnInterval) {
-                    const spawnCount = Math.floor(bloonGroup.spawnAccumulator / bloonGroup.spawnInterval);
-                    for (let i = 0; i < spawnCount; i++) {
+                if (bloonGroup.spawnInterval === 0) {
+                    for (let i = 0; i < bloonGroup.count; i++) {
                         bloonGroup.spawnBloon();
-                        bloonGroup.count--;
                     }
-                    bloonGroup.spawnAccumulator -= bloonGroup.spawnInterval * spawnCount;
+                    bloonGroup.count = 0;
+                    bloonGroup.spawnAccumulator = 0;
+                } else {
+                    while (bloonGroup.spawnAccumulator >= bloonGroup.spawnInterval) {
+                        const spawnCount = Math.floor(bloonGroup.spawnAccumulator / bloonGroup.spawnInterval);
+                        for (let i = 0; i < spawnCount; i++) {
+                            bloonGroup.spawnBloon();
+                            bloonGroup.count--;
+                        }
+                        bloonGroup.spawnAccumulator -= bloonGroup.spawnInterval * spawnCount;
+                    }
                 }
             }
         });
@@ -646,9 +654,11 @@ function startRound(round) {
         bloonGroup.startTime = performance.now() + (bloonGroup.start * 1000) / speedMultiplier;
         bloonGroup.activeTime = 0;
         bloonGroup.spawnAccumulator = 0;
-        // bloonGroup.originalCount = bloonGroup.count;
-        // bloonGroup.spawnInterval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.originalCount - 1)) / speedMultiplier;
         bloonGroup.spawnInterval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.count - 1)) / speedMultiplier;
+        if (!isFinite(bloonGroup.spawnInterval)) {
+            console.log('fixed it')
+            bloonGroup.spawnInterval = 0; // Set to a default value or handle this case as needed
+        }
         bloonGroup.spawnBloon = spawnBloon(bloonGroup);
     }
 }
