@@ -649,6 +649,15 @@ const render = () => {
 function startRound(round) {
     roundSpeedModifier = calcRoundSpeed(round.roundNumber);
     currentRoundGroups = JSON.parse(JSON.stringify(round));
+    if (document.getElementById('roundset-reverse-checkbox').checked) { 
+        let roundDuration = Math.max(...round.bloonGroups.map(group => group.duration));
+        for (let bloonGroup of currentRoundGroups.bloonGroups) {
+            let oldDuration = bloonGroup.duration -  bloonGroup.start;
+            bloonGroup.start = roundDuration - bloonGroup.duration;
+            bloonGroup.duration =  bloonGroup.start + oldDuration;
+        }
+        console.log(currentRoundGroups)
+    }
     addTimelinePlayhead((Math.max(...currentRoundGroups.bloonGroups.map(group => group.duration)))/speedMultiplier);
     for (let bloonGroup of currentRoundGroups.bloonGroups) {
         bloonGroup.startTime = performance.now() + (bloonGroup.start * 1000) / speedMultiplier;
@@ -656,7 +665,6 @@ function startRound(round) {
         bloonGroup.spawnAccumulator = 0;
         bloonGroup.spawnInterval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.count - 1)) / speedMultiplier;
         if (!isFinite(bloonGroup.spawnInterval)) {
-            console.log('fixed it')
             bloonGroup.spawnInterval = 0; // Set to a default value or handle this case as needed
         }
         bloonGroup.spawnBloon = spawnBloon(bloonGroup);

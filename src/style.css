@@ -3813,6 +3813,12 @@
 .income-img {
     padding-right: 2px;
 }
+.map-browser-selector {
+    border: 5px solid white;
+    border-image-source: unset;
+    padding: 12px;
+    border-radius: 10px;
+}
 
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */
