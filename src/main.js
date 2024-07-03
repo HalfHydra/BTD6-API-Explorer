@@ -82,7 +82,10 @@ let currentBrowserView = "grid";
 let currentRoundsetView = "Simple";
 let roundsetProcessed = null;
 let currentPreviewRound = 0;
+let currentIndexInModifiedRounds = 0;
 let previewActive = false;
+let previewIsModifiedOnly = false;
+let currentModifiedRounds = []
 
 fetch('./data/Constants.json')
         .then(response => response.json())
@@ -8180,15 +8183,15 @@ async function showRoundsetModel(source, roundset) {
     resetScroll();
 
     let roundsetData = await fetch(`./data/${roundset}.json`).then(response => response.json());
-    //if the roundset name is any of the following: BloonariusRoundSet, LychRoundSet, VortexRoundSet, DreadbloonRoundSet, PhayzeRoundSet
-    //then the roundset is a boss roundset
     let bossRoundset = ["BloonariusRoundSet", "LychRoundSet", "VortexRoundSet", "DreadbloonRoundSet", "PhayzeRoundSet"].includes(roundset);
-    if (bossRoundset) {
-        let defaultRoundsetData = await fetch(`./data/DefaultRoundSet.json`).then(response => response.json());
-        roundsetProcessed =  processRoundset(defaultRoundsetData, roundsetData);
-    } else {
-        roundsetProcessed =  processRoundset(roundsetData);
-    }
+    // Might be used later for other roundsets that use the addToRound feature, but for now obsolete.
+    // if (bossRoundset) {
+    //     let defaultRoundsetData = await fetch(`./data/DefaultRoundSet.json`).then(response => response.json());
+    //     roundsetProcessed =  processRoundset(defaultRoundsetData, roundsetData);
+    // } else {
+    //     roundsetProcessed =  processRoundset(roundsetData);
+    // }
+    roundsetProcessed =  processRoundset(roundsetData);
     console.log(roundsetProcessed)
 
     let headerBar = document.createElement('div');
@@ -8263,11 +8266,19 @@ async function showRoundsetModel(source, roundset) {
     mapProgressFilterDifficulty.appendChild(mapsProgressFilterDifficultyText);
 
     let onlyModifiedToggleInput = document.createElement('input');
+    onlyModifiedToggleInput.id = "roundset-modified-checkbox"
     onlyModifiedToggleInput.classList.add('maps-progress-coop-toggle-input');
     onlyModifiedToggleInput.type = 'checkbox';
     mapProgressFilterDifficulty.appendChild(onlyModifiedToggleInput);
 
     if (bossRoundset) {
+        //get all rounds that have the key "modified" and append their roundNumber to currentModifiedRounds
+        currentModifiedRounds = [];
+        roundsetProcessed.rounds.forEach((round, index) => {
+            if (round.hasOwnProperty("modified")) {
+                currentModifiedRounds.push(round.roundNumber);
+            }
+        });
         onlyModifiedToggleInput.checked = true;
         mapsProgressFilter.appendChild(mapProgressFilterDifficulty);
     }
@@ -8396,6 +8407,7 @@ async function generateRounds(type, reverse, modified) {
                 alternate = !alternate;
             })
             if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
+            if (document.getElementById('roundset-modified-checkbox').checked) { onChangeModified(true) }
             break;
         case "Topper":
             resetPreview();
@@ -8536,6 +8548,7 @@ async function generateRounds(type, reverse, modified) {
             roundsDetailedDiv.innerHTML = "";
             roundsDetailedDiv.appendChild(fragment);
             if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
+            if (document.getElementById('roundset-modified-checkbox').checked) { onChangeModified(true) }
             }, 0)
             break;
         case "Preview":
@@ -8552,11 +8565,13 @@ async function generateRounds(type, reverse, modified) {
             previewDiv.appendChild(previewHeader);
 
             let roundNumber = document.createElement('p');
+            roundNumber.id = 'round-number-preview';
             roundNumber.classList.add('round-number', 'round-number-preview', 'black-outline');
             roundNumber.innerHTML = `Round ${currentPreviewRound + 1}`;
             previewHeader.appendChild(roundNumber);
 
             let selectRoundNum = document.createElement('input');
+            selectRoundNum.id = 'select-round-num-preview';
             selectRoundNum.classList.add('select-round-num');
             selectRoundNum.type = 'number';
             selectRoundNum.min = 1;
@@ -8665,8 +8680,15 @@ async function generateRounds(type, reverse, modified) {
             prevRound.classList.add('maps-progress-view', 'black-outline');
             prevRound.innerHTML = "Previous";
             prevRound.addEventListener('click', () => {
-                currentPreviewRound--;
-                if (currentPreviewRound < 0) { currentPreviewRound = roundsetProcessed.rounds.length - 1 }
+                let modified = document.getElementById('roundset-modified-checkbox').checked;
+                if (modified) {
+                    currentIndexInModifiedRounds--;
+                    if (currentIndexInModifiedRounds < 0) { currentIndexInModifiedRounds = currentModifiedRounds.length - 1 }
+                    currentPreviewRound = currentModifiedRounds[currentIndexInModifiedRounds] - 1;
+                } else {
+                    currentPreviewRound--;
+                    if (currentPreviewRound < 0) { currentPreviewRound = roundsetProcessed.rounds.length - 1 }
+                }
                 selectRoundNum.value = currentPreviewRound + 1;
                 updatePreviewRoundTimeline()
             })
@@ -8676,8 +8698,15 @@ async function generateRounds(type, reverse, modified) {
             nextRound.classList.add('maps-progress-view', 'black-outline');
             nextRound.innerHTML = "Next";
             nextRound.addEventListener('click', () => {
-                currentPreviewRound++;
-                if (currentPreviewRound >= roundsetProcessed.rounds.length) { currentPreviewRound = 0 }
+                let modified = document.getElementById('roundset-modified-checkbox').checked;
+                if (modified) {
+                    currentIndexInModifiedRounds++;
+                    if (currentIndexInModifiedRounds >= currentModifiedRounds.length) { currentIndexInModifiedRounds = 0 }
+                    currentPreviewRound = currentModifiedRounds[currentIndexInModifiedRounds] - 1;
+                } else {
+                    currentPreviewRound++;
+                    if (currentPreviewRound >= roundsetProcessed.rounds.length) { currentPreviewRound = 0 }
+                }
                 selectRoundNum.value = currentPreviewRound + 1;
                 updatePreviewRoundTimeline()
             })
@@ -8717,25 +8746,53 @@ async function generateRounds(type, reverse, modified) {
 
             requestAnimationFrame(previewRender);
 
-            if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
+            if (document.getElementById('roundset-modified-checkbox').checked) { onChangeModified(true) }
             updatePreviewRoundTimeline()
+            if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
             break;
     }
 }
 
 function onChangeModified(modified) {
-    let alternate = false;
-    roundsetProcessed.rounds.forEach(async (round, index) => {
-        let roundDiv = document.getElementById(`round-${round.roundNumber}`);
-        if (modified && !round.hasOwnProperty("addToRound")) {
-            roundDiv.style.display = "none";
-        } else {
-            roundDiv.style.display = "flex";
-            if (alternate) { roundDiv.classList.add('round-div-alt') } else if (Array.from(roundDiv.classList).includes('round-div-alt')) { roundDiv.classList.remove('round-div-alt') }
-            alternate = !alternate;
-        }
+    switch(currentRoundsetView) {
+        case "Simple":
+            let alternate = false;
+            roundsetProcessed.rounds.forEach(async (round, index) => {
+                let roundDiv = document.getElementById(`round-${round.roundNumber}`);
+                if (modified && !round.hasOwnProperty("modified")) {
+                    roundDiv.style.display = "none";
+                } else {
+                    roundDiv.style.display = "flex";
+                    if (alternate) { roundDiv.classList.add('round-div-alt') } else if (Array.from(roundDiv.classList).includes('round-div-alt')) { roundDiv.classList.remove('round-div-alt') }
+                    alternate = !alternate;
+                }
 
-    })
+            })
+            break;
+        case "Topper":
+            roundsetProcessed.rounds.forEach(async (round, index) => {
+                let roundDiv = document.getElementById(`round-${round.roundNumber}`);
+                if (modified && !round.hasOwnProperty("modified")) {
+                    roundDiv.style.display = "none";
+                } else {
+                    roundDiv.style.display = "flex";
+                }
+            })
+            break;
+        case "Preview":
+            if(modified) {
+                currentPreviewRound = currentModifiedRounds[0] - 1;
+                document.getElementById('round-number-preview').innerHTML = `Round ${currentModifiedRounds[0]}`;
+                document.getElementById('select-round-num-preview').value = currentModifiedRounds[0];
+                updatePreviewRoundTimeline()
+            } else {
+                currentPreviewRound = 0;
+                document.getElementById('round-number-preview').innerHTML = `Round ${currentPreviewRound + 1}`;
+                document.getElementById('select-round-num-preview').value = currentPreviewRound + 1;
+                updatePreviewRoundTimeline()
+            }
+            break;
+    }
 }
 
 function onChangeReverse() {

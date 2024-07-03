@@ -652,11 +652,10 @@ function startRound(round) {
     if (document.getElementById('roundset-reverse-checkbox').checked) { 
         let roundDuration = Math.max(...round.bloonGroups.map(group => group.duration));
         for (let bloonGroup of currentRoundGroups.bloonGroups) {
-            let oldDuration = bloonGroup.duration -  bloonGroup.start;
+            let oldDuration = bloonGroup.duration - bloonGroup.start;
             bloonGroup.start = roundDuration - bloonGroup.duration;
-            bloonGroup.duration =  bloonGroup.start + oldDuration;
+            bloonGroup.duration = bloonGroup.start + oldDuration;
         }
-        console.log(currentRoundGroups)
     }
     addTimelinePlayhead((Math.max(...currentRoundGroups.bloonGroups.map(group => group.duration)))/speedMultiplier);
     for (let bloonGroup of currentRoundGroups.bloonGroups) {
