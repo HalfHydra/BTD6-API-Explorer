@@ -84,7 +84,7 @@ let roundsetProcessed = null;
 let currentPreviewRound = 0;
 let currentIndexInModifiedRounds = 0;
 let previewActive = false;
-let previewIsModifiedOnly = false;
+let previewModified = null;
 let currentModifiedRounds = []
 
 fetch('./data/Constants.json')
@@ -8281,6 +8281,10 @@ async function showRoundsetModel(source, roundset) {
         });
         onlyModifiedToggleInput.checked = true;
         mapsProgressFilter.appendChild(mapProgressFilterDifficulty);
+
+        previewModified = onlyModifiedToggleInput;
+    } else  {
+        previewModified = null;
     }
 
     let mapsProgressCoopToggle = document.createElement('div');
@@ -8407,7 +8411,7 @@ async function generateRounds(type, reverse, modified) {
                 alternate = !alternate;
             })
             if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
-            if (document.getElementById('roundset-modified-checkbox').checked) { onChangeModified(true) }
+            if (previewModified != null && previewModified.checked) { onChangeModified(true) }
             break;
         case "Topper":
             resetPreview();
@@ -8548,7 +8552,7 @@ async function generateRounds(type, reverse, modified) {
             roundsDetailedDiv.innerHTML = "";
             roundsDetailedDiv.appendChild(fragment);
             if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
-            if (document.getElementById('roundset-modified-checkbox').checked) { onChangeModified(true) }
+            if (previewModified != null && previewModified.checked) { onChangeModified(true) }
             }, 0)
             break;
         case "Preview":
@@ -8680,8 +8684,7 @@ async function generateRounds(type, reverse, modified) {
             prevRound.classList.add('maps-progress-view', 'black-outline');
             prevRound.innerHTML = "Previous";
             prevRound.addEventListener('click', () => {
-                let modified = document.getElementById('roundset-modified-checkbox').checked;
-                if (modified) {
+                if (previewModified != null && previewModified.checked) {
                     currentIndexInModifiedRounds--;
                     if (currentIndexInModifiedRounds < 0) { currentIndexInModifiedRounds = currentModifiedRounds.length - 1 }
                     currentPreviewRound = currentModifiedRounds[currentIndexInModifiedRounds] - 1;
@@ -8698,8 +8701,7 @@ async function generateRounds(type, reverse, modified) {
             nextRound.classList.add('maps-progress-view', 'black-outline');
             nextRound.innerHTML = "Next";
             nextRound.addEventListener('click', () => {
-                let modified = document.getElementById('roundset-modified-checkbox').checked;
-                if (modified) {
+                if (previewModified != null && previewModified.checked) {
                     currentIndexInModifiedRounds++;
                     if (currentIndexInModifiedRounds >= currentModifiedRounds.length) { currentIndexInModifiedRounds = 0 }
                     currentPreviewRound = currentModifiedRounds[currentIndexInModifiedRounds] - 1;
@@ -8746,7 +8748,7 @@ async function generateRounds(type, reverse, modified) {
 
             requestAnimationFrame(previewRender);
 
-            if (document.getElementById('roundset-modified-checkbox').checked) { onChangeModified(true) }
+            if (previewModified != null && previewModified.checked) { onChangeModified(true) }
             updatePreviewRoundTimeline()
             if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
             break;
