@@ -559,8 +559,11 @@ let bloonImageMap = {
 class Bloon {
     constructor(type) {
         this.speed = bloonsData[type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].speed;
+        this.scale = bloonsData[type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].scale;
         this.x = -(ratioCalc(1, 0, 100, bloonImageMap[type].width, bloonImageMap[type].height));
+        this.y = 100 + ((100 - this.scale * 100) / 2);
         this.type = type;
+        this.width = ratioCalc(1, 0, 100, bloonImageMap[type].width, bloonImageMap[type].height);
     }
     move(deltaTime) {
         this.x += this.speed * deltaTime * 6.86 * speedMultiplier * roundSpeedModifier * difficultySpeedModifier;
@@ -571,7 +574,7 @@ class Bloon {
     }
     render(ctx) {
         let spriteData = bloonImageMap[this.type];
-        ctx.drawImage(bloons_spritesheet, spriteData.x, spriteData.y, spriteData.width, spriteData.height, this.x, 100, ratioCalc(1, 0, 100, spriteData.width, spriteData.height), 100);
+        ctx.drawImage(bloons_spritesheet, spriteData.x, spriteData.y, spriteData.width, spriteData.height, this.x, this.y, this.scale * this.width, this.scale * 100);
     }
 }
 
