@@ -267,8 +267,16 @@ function getProfileIcon(profile){
     return `Assets/ProfileAvatar/${profile}.png`;
 }
 
-function getProfileBanner(banner){
-    return banner == "" ? "Assets/ProfileBanner/TeamsBannerDeafult.png" : `Assets/ProfileBanner/${banner}.png`;
+function getProfileAvatar(profileData) {
+    let avatarIndex = parseInt(profileData.avatar.replace(/\D/g,''));
+    if (profileData.avatar == "" || isNaN(avatarIndex)) return "Assets/ProfileAvatar/ProfileAvatar01.png";
+    return (avatarIndex <= constants.profileAvatars) ? `Assets/ProfileAvatar/${profileData.avatar}.png` : profileData.avatarURL
+}
+
+function getProfileBanner(profileData) {
+    let bannerIndex = parseInt(profileData.banner.replace(/\D/g,''));
+    if (profileData.banner == "" || isNaN(bannerIndex)) return "Assets/ProfileBanner/TeamsBannerDeafult.png";
+    return (bannerIndex <= constants.profileBanners) ? `Assets/ProfileBanner/${profileData.banner}.png` : profileData.bannerURL
 }
 
 function getCustomMapIcon(id) {

@@ -48,6 +48,7 @@ let currentDifficultyFilter = "All";
 let mapPage = 0;
 
 let currentInstaView = "game";
+let instasMissingToggle = false;
 
 let currentAchievementFilter = "game";
 let currentAchievementRewardFilter = "None";
@@ -303,13 +304,11 @@ function generateMedals(){
 }
 
 function generateExtras(){
-    extrasUnlocked["Big Bloons"] = btd6usersave["unlockedBigBloons"];
-    extrasUnlocked["Small Bloons"] = btd6usersave["unlockedSmallBloons"];
-    extrasUnlocked["Big Monkey Towers"] = btd6usersave["seenBigTowers"];
-    extrasUnlocked["Small Monkey Towers"] = btd6usersave["unlockedSmallTowers"];
-    //extrasUnlocked["Small Bosses"] = btd6usersave["unlockedSmallBosses"]; hopefully this gets implemented
-    //but in the mean time now we can do this:
-    extrasUnlocked["Small Bosses"] = btd6usersave.achievementsClaimed.includes("25 to Life");
+    if (btd6usersave["unlockedBigBloons"]){ extrasUnlocked["Big Bloons"] = btd6usersave["bigBloonsActive"] }
+    if (btd6usersave["unlockedSmallBloons"]){ extrasUnlocked["Small Bloons"] = btd6usersave["smallBloonsActive"] }
+    if (btd6usersave["seenBigTowers"]){ extrasUnlocked["Big Monkey Towers"] = btd6usersave["bigTowersActive"] }
+    if (btd6usersave["unlockedSmallTowers"]){ extrasUnlocked["Small Monkey Towers"] = btd6usersave["smallTowersActive"] }
+    if (btd6usersave["unlockedSmallBosses"]){ extrasUnlocked["Small Bosses"] = btd6usersave["smallBossesActive"] }
 }
 
 function generateProgressSubText(){
@@ -330,12 +329,13 @@ function generateProgressSubText(){
     progressSubText["MapProgress"] = `${mapsPlayed} Map${mapsPlayed != 1 ? "s" : ""} Played`;
     let chimpsTotal = Object.values(processedMapData.Medals.single).map(map => map["Clicks"]).filter(medal => medal).length;
     if (chimpsTotal > 0) { progressSubText["CHIMPS"] = `${chimpsTotal} CHIMPS Medal${chimpsTotal != 1 ? "s" : ""} Earned` }
-    let powersTotal = Object.values(btd6usersave.powers).map(power => power.quantity).reduce((acc, amount) => acc + amount)
+    // let powersTotal = Object.values(btd6usersave.powers).map(power => power.quantity).reduce((acc, amount) => acc + amount)
+    let powersTotal = Object.values(btd6usersave.powers).map(power => (typeof power === 'object' && power.quantity) ? power.quantity : 0).reduce((acc, amount) => acc + amount);
     progressSubText["Powers"] = `${powersTotal} Power${powersTotal != 1 ? "s" : ""} Accumulated`
     let instaTotal = Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount)
     progressSubText["InstaMonkeys"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Accumulated`;
     progressSubText["Achievements"] = `${btd6publicprofile.achievements}/${constants.achievements + constants.hiddenAchievements} Achievement${btd6publicprofile.achievements != 1 ? "s" : ""} Earned`;
-    let extrasTotal = Object.keys(extrasUnlocked).filter(k => extrasUnlocked[k]).length;
+    let extrasTotal = Object.keys(extrasUnlocked).length;
     progressSubText["Extras"] = `${extrasTotal} Extra${extrasTotal != 1 ? "s" : ""} Unlocked`;
 }
 
@@ -374,14 +374,28 @@ function generateMapData() {
         //this is necessary because sometimes maps will randomly show up as incomplete despite having parameters such as a completed best round number or "completedWithoutLoadSave" is true.
         //this is a workaround to ensure that the map is marked as completed if it meets the requirements for a bronze/silver/gold/black border
         for (let [difficulty, diffData] of Object.entries(mapData["single"])) {
-            if (diffData && diffData["completed"] === false && (diffData["bestRound"] >= constants.modeBestRoundFix[difficulty] || diffData.completedWithoutLoadingSave) ) {
+            if (diffData && diffData["completed"] === false && (diffData["bestRound"] >= constants.endRound[difficulty] || diffData.completedWithoutLoadingSave) ) {
+                diffData["completed"] = true;
+            }
+        }
+
+        //the opposite is also true, sometimes "completed" will be true even when the highest round is not of the required amount for it to even be considered completed
+        for (let [difficulty, diffData] of Object.entries(mapData["single"])) {
+            if (diffData && diffData["completed"] === true && (diffData["bestRound"] < constants.endRound[difficulty]) && diffData.timesCompleted == 0) {
+                diffData["completed"] = false;
+            }
+        }
+        
+
+        for (let [difficulty, diffData] of Object.entries(mapData["coop"])) {
+            if (diffData && diffData["completed"] === false && (diffData["bestRound"] >= constants.endRound[difficulty] || diffData.completedWithoutLoadingSave) ) {
                 diffData["completed"] = true;
             }
         }
 
         for (let [difficulty, diffData] of Object.entries(mapData["coop"])) {
-            if (diffData && diffData["completed"] === false && (diffData["bestRound"] >= constants.modeBestRoundFix[difficulty] || diffData.completedWithoutLoadingSave) ) {
-                diffData["completed"] = true;
+            if (diffData && diffData["completed"] === true && (diffData["bestRound"] < constants.endRound[difficulty]) && diffData.timesCompleted  == 0) {
+                diffData["completed"] = false;
             }
         }
 
@@ -396,8 +410,9 @@ function generateMapData() {
             (diffData && diffData["completed"]) ? processedMapData.Medals.coop[map][difficulty] = true : processedMapData.Medals.coop[map][difficulty] = false;
         }
 
-        processedMapData.Medals.single[map]["CHIMPS-BLACK"] = mapData["single"]["Clicks"] ? mapData["single"]["Clicks"].completedWithoutLoadingSave : false;
-        processedMapData.Medals.coop[map]["CHIMPS-BLACK"] = mapData["coop"]["Clicks"] ? mapData["coop"]["Clicks"].completedWithoutLoadingSave : false;
+        console.log(mapData["coop"]["Clicks"])
+        processedMapData.Medals.single[map]["CHIMPS-BLACK"] = mapData["single"]["Clicks"] && mapData["single"]["Clicks"].completed ? mapData["single"]["Clicks"].completedWithoutLoadingSave : false;
+        processedMapData.Medals.coop[map]["CHIMPS-BLACK"] = mapData["coop"]["Clicks"] && mapData["coop"]["Clicks"].completed ? mapData["coop"]["Clicks"].completedWithoutLoadingSave : false;
 
         let bronzeBorder = ["Easy", "PrimaryOnly", "Deflation"].every(key => 
             mapData["single"][key] && mapData["single"][key]["completed"] === true
@@ -970,7 +985,7 @@ function generateOverview(){
     profileHeader.id = 'profile-header';
     profileHeader.classList.add('profile-header');
     profileHeader.classList.add('profile-banner');
-    profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${btd6publicprofile["bannerURL"]}')`;
+    profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${getProfileBanner(btd6publicprofile)}')`;
     document.getElementById('overview-content').appendChild(profileHeader);
     profileHeader.appendChild(generateAvatar(100, btd6publicprofile["avatarURL"]));
 
@@ -991,17 +1006,17 @@ function generateOverview(){
     profileName.innerHTML = btd6publicprofile["displayName"];
     profileTop.appendChild(profileName);
 
-    let profileFollowers = document.createElement('div')
-    profileFollowers.classList.add('profile-followers');
-    profileTop.appendChild(profileFollowers);
-
-    let followersLabel = document.createElement('p');
-    followersLabel.classList.add('followers-label');
-    followersLabel.classList.add('black-outline');
-    followersLabel.innerHTML = 'Followers';
-    profileFollowers.appendChild(followersLabel);
-
     if ( btd6publicprofile["followers"] > 0 ) {
+        let profileFollowers = document.createElement('div')
+        profileFollowers.classList.add('profile-followers');
+        profileTop.appendChild(profileFollowers);
+
+        let followersLabel = document.createElement('p');
+        followersLabel.classList.add('followers-label');
+        followersLabel.classList.add('black-outline');
+        followersLabel.innerHTML = 'Followers';
+        profileFollowers.appendChild(followersLabel);
+
         let followersCount = document.createElement('p');
         followersCount.classList.add('followers-count');
         followersCount.innerHTML = btd6publicprofile["followers"].toLocaleString();
@@ -1028,10 +1043,65 @@ function generateOverview(){
     leftColumnDiv.classList.add('left-column-div');
     belowProfileHeader.appendChild(leftColumnDiv);
 
+    let quickStatsDiv = document.createElement('div');
+    quickStatsDiv.classList.add('quick-stats-div');
+    leftColumnDiv.appendChild(quickStatsDiv);
+
+    let quickStatsHeader = document.createElement('div');
+    quickStatsHeader.classList.add('quick-stats-header');
+    quickStatsDiv.appendChild(quickStatsHeader);
+
+    let quickStatsHeaderText = document.createElement('p');
+    quickStatsHeaderText.classList.add('column-header-text','black-outline');
+    quickStatsHeaderText.innerHTML = 'Quick Stats';
+    quickStatsHeader.appendChild(quickStatsHeaderText);
+
+    let quickStatsContent = document.createElement('div');
+    quickStatsContent.classList.add('quick-stats-content');
+    quickStatsDiv.appendChild(quickStatsContent);
+
+    let statIcons = {
+        "Towers": "../Assets/UI/MaxMonkeysIcon.png",
+        "Heroes": "../Assets/UI/AllHeroesIcon.png",
+        "Extras": "../Assets/UI/SmallBloonsModeIcon.png",
+        "Achievements": "../Assets/AchievementIcon/AchievementsIcon.png",
+        "CHIMPS": "../Assets/MedalIcon/MedalImpoppableRuby.png",
+        "InstaMonkeys": "../Assets/UI/InstaIcon.png",
+        "MapProgress": "../Assets/UI/StartRoundIconSmall.png",
+        "Paragons": "../Assets/UI/ParagonPip.png",
+        "Powers": "../Assets/UI/PowerContainer.png",
+        "Skins": "../Assets/UI/TopHatSprite.png",
+        "Upgrades": "../Assets/UI/UpgradeIcon.png",
+        "Knowledge": "../Assets/UI/KnowledgeIcon.png"
+    }
+
+    Object.entries(progressSubText).forEach(([stat,text]) => {
+        if(text.includes("0 Extras") || text.includes("0 CHIMPS")) { return }
+        if(text.match(/0\/[0-9]+ Paragons/)) { return }
+        let quickStat = document.createElement('div');
+        quickStat.classList.add('quick-stat');
+        quickStatsContent.appendChild(quickStat);
+
+        let statIcon = document.createElement('img');
+        statIcon.classList.add('quick-stat-icon');
+        statIcon.src = statIcons[stat];
+        quickStat.appendChild(statIcon);
+
+        let statName = document.createElement('p');
+        statName.classList.add('quick-stat-name');
+        statName.innerHTML = text;
+        quickStat.appendChild(statName);
+    })
+
+    let currencyAndMedalsDiv = document.createElement('div');
+    currencyAndMedalsDiv.id = 'currency-medals-div';
+    currencyAndMedalsDiv.classList.add('currency-medals-div');
+    leftColumnDiv.appendChild(currencyAndMedalsDiv);
+
     let leftColumnHeader = document.createElement('div');
     leftColumnHeader.id = 'left-column-header';
     leftColumnHeader.classList.add('left-column-header');
-    leftColumnDiv.appendChild(leftColumnHeader);
+    currencyAndMedalsDiv.appendChild(leftColumnHeader);
 
     let leftColumnHeaderText = document.createElement('p');
     leftColumnHeaderText.id = 'left-column-header-text';
@@ -1039,11 +1109,6 @@ function generateOverview(){
     leftColumnHeaderText.classList.add('black-outline');
     leftColumnHeaderText.innerHTML = 'Currency and Medals';
     leftColumnHeader.appendChild(leftColumnHeaderText);
-
-    let currencyAndMedalsDiv = document.createElement('div');
-    currencyAndMedalsDiv.id = 'currency-medals-div';
-    currencyAndMedalsDiv.classList.add('currency-medals-div');
-    leftColumnDiv.appendChild(currencyAndMedalsDiv);
 
     let currencyDiv = document.createElement('div');
     currencyDiv.id = 'currency-div';
@@ -1211,6 +1276,7 @@ function generateOverview(){
     let counter = 0;
 
     for (let [hero, xp] of Object.entries(btd6publicprofile["heroesPlaced"]).sort((a, b) => b[1] - a[1])){
+        if(xp === 0) { continue; }
         let heroDiv = document.createElement('div');
         heroDiv.id = 'hero-div';
         heroDiv.classList.add('hero-div');
@@ -1302,6 +1368,7 @@ function generateOverview(){
     counter = 0;
 
     for (let [tower, xp] of Object.entries(btd6publicprofile["towersPlaced"]).sort((a, b) => b[1] - a[1])){
+        if(xp === 0) { continue; }
         let towerDiv = document.createElement('div');
         towerDiv.id = 'tower-div';
         towerDiv.classList.add('hero-div');
@@ -1322,56 +1389,6 @@ function generateOverview(){
         counter++;
     }
 
-    let quickStatsDiv = document.createElement('div');
-    quickStatsDiv.classList.add('quick-stats-div');
-    leftColumnDiv.appendChild(quickStatsDiv);
-
-    let quickStatsHeader = document.createElement('div');
-    quickStatsHeader.classList.add('quick-stats-header');
-    quickStatsDiv.appendChild(quickStatsHeader);
-
-    let quickStatsHeaderText = document.createElement('p');
-    quickStatsHeaderText.classList.add('column-header-text','black-outline');
-    quickStatsHeaderText.innerHTML = 'Quick Stats';
-    quickStatsHeader.appendChild(quickStatsHeaderText);
-
-    let quickStatsContent = document.createElement('div');
-    quickStatsContent.classList.add('quick-stats-content');
-    quickStatsDiv.appendChild(quickStatsContent);
-
-    let statIcons = {
-        "Towers": "../Assets/UI/MaxMonkeysIcon.png",
-        "Heroes": "../Assets/UI/AllHeroesIcon.png",
-        "Extras": "../Assets/UI/SmallBloonsModeIcon.png",
-        "Achievements": "../Assets/AchievementIcon/AchievementsIcon.png",
-        "CHIMPS": "../Assets/MedalIcon/MedalImpoppableRuby.png",
-        "InstaMonkeys": "../Assets/UI/InstaIcon.png",
-        "MapProgress": "../Assets/UI/StartRoundIconSmall.png",
-        "Paragons": "../Assets/UI/ParagonPip.png",
-        "Powers": "../Assets/UI/PowerContainer.png",
-        "Skins": "../Assets/UI/TopHatSprite.png",
-        "Upgrades": "../Assets/UI/UpgradeIcon.png",
-        "Knowledge": "../Assets/UI/KnowledgeIcon.png"
-    }
-
-    Object.entries(progressSubText).forEach(([stat,text]) => {
-        if(text.includes("0 Extras") || text.includes("0 CHIMPS")) { return }
-        if(text.match(/0\/[0-9]+ Paragons/)) { return }
-        let quickStat = document.createElement('div');
-        quickStat.classList.add('quick-stat');
-        quickStatsContent.appendChild(quickStat);
-
-        let statIcon = document.createElement('img');
-        statIcon.classList.add('quick-stat-icon');
-        statIcon.src = statIcons[stat];
-        quickStat.appendChild(statIcon);
-
-        let statName = document.createElement('p');
-        statName.classList.add('quick-stat-name');
-        statName.innerHTML = text;
-        quickStat.appendChild(statName);
-    })
-
 
 
     let rightColumnDiv = document.createElement('div');
@@ -1379,22 +1396,20 @@ function generateOverview(){
     rightColumnDiv.classList.add('right-column-div');
     belowProfileHeader.appendChild(rightColumnDiv);
 
-    let rightColumnHeader = document.createElement('div');
-    rightColumnHeader.id = 'right-column-header';
-    rightColumnHeader.classList.add('right-column-header');
-    rightColumnDiv.appendChild(rightColumnHeader);
-
-    let rightColumnHeaderText = document.createElement('p');
-    rightColumnHeaderText.id = 'right-column-header-text';
-    rightColumnHeaderText.classList.add('column-header-text');
-    rightColumnHeaderText.classList.add('black-outline');
-    rightColumnHeaderText.innerHTML = 'Overall Stats';
-    rightColumnHeader.appendChild(rightColumnHeaderText);
-
     let profileStatsDiv = document.createElement('div');
     profileStatsDiv.id = 'profile-stats';
     profileStatsDiv.classList.add('profile-stats');
     rightColumnDiv.appendChild(profileStatsDiv);
+
+    let rightColumnHeader = document.createElement('div');
+    rightColumnHeader.classList.add('overview-right-column-header');
+    profileStatsDiv.appendChild(rightColumnHeader);
+
+    let rightColumnHeaderText = document.createElement('p');
+    rightColumnHeaderText.classList.add('column-header-text');
+    rightColumnHeaderText.classList.add('black-outline');
+    rightColumnHeaderText.innerHTML = 'Overall Stats';
+    rightColumnHeader.appendChild(rightColumnHeaderText);
 
     for (let [key, value] of Object.entries(profileStats)){
         let stat = document.createElement('div');
@@ -2321,27 +2336,32 @@ function generateKnowledgeProgress(){
     let progressContent = document.getElementById('progress-content');
     progressContent.innerHTML = "";
 
+    let totals = [0,0,0]
+    for (let [knowledge, obtained] of Object.entries(btd6usersave.acquiredKnowledge)) {
+        obtained ? totals[0] += 1 : constants.RecommendedKnowledge.includes(knowledge) ? totals[1] += 1 : totals[2] += 1;
+    }
+
     let knowledgeProgressContainer = document.createElement('div');
     knowledgeProgressContainer.id = 'knowledge-progress-container';
     knowledgeProgressContainer.classList.add('knowledge-progress-container');
     progressContent.appendChild(knowledgeProgressContainer);
 
-    let recommendedKnowledgeContainerDiv = document.createElement('div');
-    recommendedKnowledgeContainerDiv.id = 'recommended-knowledge-container-div';
-    recommendedKnowledgeContainerDiv.classList.add('knowledge-progress-container-div');
-    knowledgeProgressContainer.appendChild(recommendedKnowledgeContainerDiv);
+    // let recommendedKnowledgeContainerDiv = document.createElement('div');
+    // recommendedKnowledgeContainerDiv.id = 'recommended-knowledge-container-div';
+    // recommendedKnowledgeContainerDiv.classList.add('knowledge-progress-container-div');
+    // knowledgeProgressContainer.appendChild(recommendedKnowledgeContainerDiv);
 
-    let recommendedKnowledgeHeader = document.createElement('p');
-    recommendedKnowledgeHeader.id = 'left-column-header-text';
-    recommendedKnowledgeHeader.classList.add('column-header-text');
-    recommendedKnowledgeHeader.classList.add('black-outline');
-    recommendedKnowledgeHeader.innerHTML = 'Recommended Knowledge Points';
-    recommendedKnowledgeContainerDiv.appendChild(recommendedKnowledgeHeader);
+    // let recommendedKnowledgeHeader = document.createElement('p');
+    // recommendedKnowledgeHeader.id = 'left-column-header-text';
+    // recommendedKnowledgeHeader.classList.add('column-header-text');
+    // recommendedKnowledgeHeader.classList.add('black-outline');
+    // recommendedKnowledgeHeader.innerHTML = `${totals[1]} Recommended Knowledge Points`;
+    // recommendedKnowledgeContainerDiv.appendChild(recommendedKnowledgeHeader);
 
-    let recommendedKnowledgeDiv = document.createElement('div');
-    recommendedKnowledgeDiv.id = 'recommended-knowledge-div';
-    recommendedKnowledgeDiv.classList.add('knowledge-progress-div');
-    recommendedKnowledgeContainerDiv.appendChild(recommendedKnowledgeDiv);
+    // let recommendedKnowledgeDiv = document.createElement('div');
+    // recommendedKnowledgeDiv.id = 'recommended-knowledge-div';
+    // recommendedKnowledgeDiv.classList.add('knowledge-progress-div');
+    // recommendedKnowledgeContainerDiv.appendChild(recommendedKnowledgeDiv);
 
     let knowledgeProgressUnlockedContainerDiv = document.createElement('div');
     knowledgeProgressUnlockedContainerDiv.classList.add('knowledge-progress-container-div');
@@ -2351,7 +2371,7 @@ function generateKnowledgeProgress(){
     knowledgeProgressUnlockedHeader.id = 'right-column-header-text';
     knowledgeProgressUnlockedHeader.classList.add('column-header-text');
     knowledgeProgressUnlockedHeader.classList.add('black-outline');
-    knowledgeProgressUnlockedHeader.innerHTML = 'Unlocked Knowledge Points';
+    knowledgeProgressUnlockedHeader.innerHTML = `${totals[0]} Unlocked Knowledge Points`;
     knowledgeProgressUnlockedContainerDiv.appendChild(knowledgeProgressUnlockedHeader);
 
     let knowledgeProgressUnlockedDiv = document.createElement('div');
@@ -2367,7 +2387,7 @@ function generateKnowledgeProgress(){
     knowledgeProgressLockedHeader.id = 'right-column-header-text';
     knowledgeProgressLockedHeader.classList.add('column-header-text');
     knowledgeProgressLockedHeader.classList.add('black-outline');
-    knowledgeProgressLockedHeader.innerHTML = 'Locked Knowledge Points';
+    knowledgeProgressLockedHeader.innerHTML = `${totals[2] + totals[1]} Locked Knowledge Points`;
     knowledgeProgressLockedContainerDiv.appendChild(knowledgeProgressLockedHeader);
 
     let knowledgeProgressLockedDiv = document.createElement('div');
@@ -2379,7 +2399,9 @@ function generateKnowledgeProgress(){
         let knowledgeIconDiv = document.createElement('div');
         knowledgeIconDiv.id = `${knowledge}-icon-div`;
         knowledgeIconDiv.classList.add('knowledge-icon-div');
-        obtained ? knowledgeProgressUnlockedDiv.appendChild(knowledgeIconDiv) : constants.RecommendedKnowledge.includes(knowledge) ? recommendedKnowledgeDiv.appendChild(knowledgeIconDiv) : knowledgeProgressLockedDiv.appendChild(knowledgeIconDiv);
+        // obtained ? knowledgeProgressUnlockedDiv.appendChild(knowledgeIconDiv) : constants.RecommendedKnowledge.includes(knowledge) ? recommendedKnowledgeDiv.appendChild(knowledgeIconDiv) : knowledgeProgressLockedDiv.appendChild(knowledgeIconDiv);
+        obtained ? knowledgeProgressUnlockedDiv.appendChild(knowledgeIconDiv) : knowledgeProgressLockedDiv.appendChild(knowledgeIconDiv);
+
 
         let knowledgeGlow = document.createElement('div');
         knowledgeGlow.id = `${knowledge}-glow`;
@@ -2401,9 +2423,9 @@ function generateKnowledgeProgress(){
         })
     }
 
-    if (recommendedKnowledgeDiv.innerHTML == "") {
-        recommendedKnowledgeHeader.style.display = "none";
-    }
+    // if (recommendedKnowledgeDiv.innerHTML == "") {
+    //     recommendedKnowledgeHeader.style.display = "none";
+    // }
     if (knowledgeProgressLockedDiv.innerHTML == "") {
         knowledgeProgressLockedHeader.style.display = "none";
     }
@@ -2468,6 +2490,17 @@ function generateMapsProgress(){
     mapsProgressViewsText.innerHTML = "Display Type:";
     mapsProgressViews.appendChild(mapsProgressViewsText);
 
+    let mapsProgressGame = document.createElement('div');
+    mapsProgressGame.id = 'maps-progress-game';
+    mapsProgressGame.classList.add('maps-progress-view');
+    mapsProgressGame.classList.add('black-outline')
+    mapsProgressGame.innerHTML = "Game";
+    mapsProgressGame.addEventListener('click', () => {
+        onChangeMapView("game");
+    })
+    mapsProgressViews.appendChild(mapsProgressGame);
+
+
     let mapsProgressGrid = document.createElement('div');
     mapsProgressGrid.id = 'maps-progress-grid';
     mapsProgressGrid.classList.add('maps-progress-view');
@@ -2489,16 +2522,6 @@ function generateMapsProgress(){
         onChangeMapView("list");
     })
     mapsProgressViews.appendChild(mapsProgressList);
-
-    let mapsProgressGame = document.createElement('div');
-    mapsProgressGame.id = 'maps-progress-game';
-    mapsProgressGame.classList.add('maps-progress-view');
-    mapsProgressGame.classList.add('black-outline')
-    mapsProgressGame.innerHTML = "Game";
-    mapsProgressGame.addEventListener('click', () => {
-        onChangeMapView("game");
-    })
-    mapsProgressViews.appendChild(mapsProgressGame);
 
 
     let mapsProgressFilter = document.createElement('div');
@@ -2566,7 +2589,7 @@ function generateMapsProgress(){
     mapProgressContainer.style.display = "none";
     progressContent.appendChild(mapProgressContainer);
 
-    onChangeMapView("grid");
+    onChangeMapView("game");
 }
 
 function onChangeMapView(view){
@@ -3032,6 +3055,8 @@ function generateMapsListView(){
     mapsListContainer.classList.add('maps-list-container');
     mapsProgressContainer.appendChild(mapsListContainer);
 
+    let fragment = document.createDocumentFragment();
+
     let colorToggle = false;
     for (let [map, difficulty] of Object.entries(constants.mapsInOrder)) {
         if (!_btd6usersave.parameters.mapProgress.default.allowed.includes(map)) { continue; }
@@ -3045,7 +3070,7 @@ function generateMapsListView(){
         mapContainer.classList.add('map-container');
         colorToggle ? mapContainer.style.backgroundColor = "var(--profile-secondary)" : mapContainer.style.backgroundColor = "var(--profile-tertiary)"; ;
         colorToggle = !colorToggle;
-        mapsListContainer.appendChild(mapContainer);
+        fragment.appendChild(mapContainer);
 
         let mapDiv = document.createElement('div');
         mapDiv.id = `${map}-div`;
@@ -3131,7 +3156,7 @@ function generateMapsListView(){
             mapSectionMedalImg.src = getMedalIcon(difficulty == "Clicks" && data.completedWithoutLoadingSave ? `Medal${coopEnabled ? "Coop" : ""}${medalMap["CHIMPS-BLACK"]}` : `Medal${coopEnabled ? "Coop" : ""}${medalMap[difficulty]}`);
             mapSectionMedalImg.style.display = "none";
             // if the medal is not obtained
-            if (!data.completed && data.bestRound < constants.modeBestRoundFix[difficulty] && !data.completedWithoutLoadingSave) { mapSectionMedalImg.style.filter = "brightness(0.5)" } ;
+            if (!data.completed && data.bestRound < constants.endRound[difficulty] && !data.completedWithoutLoadingSave) { mapSectionMedalImg.style.filter = "brightness(0.5)" } ;
              mapSectionMedalImg.addEventListener('load', () => {
                 if(mapSectionMedalImg.width < mapSectionMedalImg.height){
                     mapSectionMedalImg.style.width = `${ratioCalc(3,70,256,0,mapSectionMedalImg.width)}px`
@@ -3161,6 +3186,7 @@ function generateMapsListView(){
             onSelectMap(map);
         })
     }
+    mapsListContainer.appendChild(fragment);
 }
 
 function generateMapsGameView() {
@@ -3341,7 +3367,7 @@ function generatePowersProgress() {
         powerProgressText.id = `${power}-progress-text`;
         powerProgressText.classList.add('power-progress-text');
         powerProgressText.classList.add('black-outline');
-        powerProgressText.innerHTML = `${value.quantity}`;
+        powerProgressText.innerHTML = `${value.quantity || 0}`;
         powerProgress.appendChild(powerProgressText);
     }
 }
@@ -3477,11 +3503,21 @@ function generateInstaGameView(){
     towersContainer.classList.add('towers-container');
     instaMonkeyGameContainer.appendChild(towersContainer);
 
-    Object.keys(constants.towersInOrder).forEach(tower => {
+
+    let firstInstas = [], grayInstas = [];
+    Object.keys(constants.towersInOrder).forEach(key => {
+        if (processedInstaData.TowerTotal[key] !== undefined) {
+            firstInstas.push(key);
+        } else {
+            grayInstas.push(key);
+        }
+    });
+
+    firstInstas.concat(grayInstas).forEach(tower => {
         let towerContainer = document.createElement('div');
         towerContainer.id = `${tower}-container`;
         towerContainer.classList.add('tower-container');
-        towerContainer.style.backgroundImage = `url(./Assets/UI/InstaTowersContainer${processedInstaData.TowerBorders[tower]}.png)`
+        towerContainer.style.backgroundImage = `url(./Assets/UI/InstaTowersContainer${processedInstaData.TowerBorders[tower] || ""}.png)`
         towerContainer.addEventListener('click', () => {
             onSelectInstaTower(tower);
         })
@@ -3500,17 +3536,21 @@ function generateInstaGameView(){
         towerName.innerHTML = getLocValue(tower);
         towerContainer.appendChild(towerName);
 
-        let towerTotalDiv = document.createElement('p');
-        towerTotalDiv.id = `${tower}-total-div`;
-        towerTotalDiv.classList.add(`insta-progress`);
-        towerContainer.appendChild(towerTotalDiv);
+        if (processedInstaData.TowerTotal[tower] != undefined) { 
+            let towerTotalDiv = document.createElement('p');
+            towerTotalDiv.id = `${tower}-total-div`;
+            towerTotalDiv.classList.add(`insta-progress`);
+            towerContainer.appendChild(towerTotalDiv);
 
-        let towerTotal = document.createElement('p');
-        towerTotal.id = `${tower}-total`;
-        towerTotal.classList.add(`power-progress-text`);
-        towerTotal.classList.add('black-outline');
-        towerTotal.innerHTML = processedInstaData.TowerTotal[tower];
-        towerTotalDiv.appendChild(towerTotal);
+            let towerTotal = document.createElement('p');
+            towerTotal.id = `${tower}-total`;
+            towerTotal.classList.add(`power-progress-text`);
+            towerTotal.classList.add('black-outline');
+            towerTotal.innerHTML = processedInstaData.TowerTotal[tower] || 0;
+            towerTotalDiv.appendChild(towerTotal);
+        } else {
+            towerContainer.classList.add('insta-tower-container-none');
+        }
     }) 
 }
 
@@ -3525,7 +3565,6 @@ function generateSingleInstaTower(tower) {
     instaMonkeyProgressContainer.innerHTML = "";
 
     let instaMonkeyDiv = document.createElement('div');
-    // instaMonkeyDiv.classList.add('insta-monkey-div');
     instaMonkeyProgressContainer.appendChild(instaMonkeyDiv);
     
     let instaMonkeyTopBar = document.createElement('div');
@@ -3595,7 +3634,7 @@ function generateSingleInstaTower(tower) {
     instaProgressMissingToggleInput.addEventListener('change', () => {
         onSelectMissingToggle()
     })
-    instaProgressMissingToggleInput.checked = coopEnabled;
+    instaProgressMissingToggleInput.checked = instasMissingToggle;
     instaProgressMissingToggle.appendChild(instaProgressMissingToggleInput);
 
     let instaMonkeyName = document.createElement('p');
@@ -3614,7 +3653,7 @@ function generateSingleInstaTower(tower) {
     instaMonkeyProgressText.id = `${tower}-progress-text`;
     instaMonkeyProgressText.classList.add('insta-monkey-progress-text');
     instaMonkeyProgressText.classList.add('black-outline');
-    instaMonkeyProgressText.innerHTML = `${Object.values(processedInstaData.TowerTierTotals[tower]).reduce((a, b) => a + b, 0)}/64`;
+    instaMonkeyProgressText.innerHTML = `${processedInstaData.TowerTierTotals[tower] ? Object.values(processedInstaData.TowerTierTotals[tower]).reduce((a, b) => a + b, 0) : 0}/64`;
     instaMonkeyProgress.appendChild(instaMonkeyProgressText);
 
     let instaMonkeyMainContainer = document.createElement('div');
@@ -3623,6 +3662,7 @@ function generateSingleInstaTower(tower) {
     instaMonkeyDiv.appendChild(instaMonkeyMainContainer);
 
     generateInstaMonkeyIcons(tower);
+    onSelectMissingToggle();
 }
 
 function generateInstaMonkeyIcons(tower){
@@ -3638,13 +3678,13 @@ function generateInstaMonkeyIcons(tower){
         let instaMonkeyTierContainer = document.createElement('div');
         instaMonkeyTierContainer.id = `${tower}-${tiers}-container`;
         instaMonkeyTierContainer.classList.add('insta-monkey-tier-container');
-        if (!btd6usersave.instaTowers[tower][tiers]) { 
+        if (!btd6usersave.instaTowers.hasOwnProperty(tower) || !btd6usersave.instaTowers[tower][tiers]) { 
             instaMonkeyTierContainer.style.display = "none";
             instaMonkeyTierContainer.classList.add('insta-monkey-unobtained');
         }
         instaMonkeyIconsContainer.appendChild(instaMonkeyTierContainer);
 
-        if (btd6usersave.instaTowers[tower][tiers] > 1){
+        if (btd6usersave.instaTowers.hasOwnProperty(tower) && btd6usersave.instaTowers[tower][tiers] > 1){
             let towerTotalDiv = document.createElement('p');
             towerTotalDiv.id = `${tower}-total-div`;
             towerTotalDiv.classList.add(`insta-progress`);
@@ -3662,7 +3702,7 @@ function generateInstaMonkeyIcons(tower){
         let instaMonkeyTierImg = document.createElement('img');
         instaMonkeyTierImg.id = `${tower}-${tiers}-img`;
         instaMonkeyTierImg.classList.add('insta-monkey-tier-img');
-        instaMonkeyTierImg.src = btd6usersave.instaTowers[tower][tiers] ? getInstaMonkeyIcon(tower,tiers) : "./Assets/UI/InstaUncollected.png";
+        instaMonkeyTierImg.src = btd6usersave.instaTowers.hasOwnProperty(tower) && btd6usersave.instaTowers[tower][tiers] ? getInstaMonkeyIcon(tower,tiers) : "./Assets/UI/InstaUncollected.png";
         instaMonkeyTierContainer.appendChild(instaMonkeyTierImg);
 
         let instaMonkeyTierText = document.createElement('p');
@@ -3675,8 +3715,9 @@ function generateInstaMonkeyIcons(tower){
 }
 
 function onSelectMissingToggle(){
+    instasMissingToggle = document.getElementById('insta-progress-missing-toggle-input').checked;
     for (let element of document.getElementsByClassName('insta-monkey-unobtained')) {
-        element.style.display = document.getElementById('insta-progress-missing-toggle-input').checked ? "block" : "none";
+        element.style.display = instasMissingToggle ? "block" : "none";
     }
 }
 
@@ -3715,10 +3756,19 @@ function generateInstaListView(){
         instaMonkeyDiv.classList.add('insta-monkey-div');
         instaMonkeysList.appendChild(instaMonkeyDiv);
 
+        switch(processedInstaData.TowerBorders[tower]) {
+            case "Gold":
+                instaMonkeyDiv.classList.add("insta-list-gold");
+                break;
+            case "Black":
+                instaMonkeyDiv.classList.add("insta-list-black");
+                break;
+        }
+
         let instaTowerContainer = document.createElement('div');
         instaTowerContainer.id = `${tower}-container`;
         instaTowerContainer.classList.add('tower-container');
-        instaTowerContainer.style.backgroundImage = `url(./Assets/UI/InstaTowersContainer${processedInstaData.TowerBorders[tower]}.png)`
+        instaTowerContainer.style.backgroundImage = `url(./Assets/UI/InstaTowersContainer${processedInstaData.TowerBorders[tower] || ""}.png)`
         instaTowerContainer.addEventListener('click', () => {
             onSelectInstaTower(tower);
         })
@@ -4128,7 +4178,6 @@ function generateExtrasProgress() {
     let extras = [["Big Bloons", "BigBloonsMode"],["Small Bloons", "SmallBloonsMode"],["Big Monkey Towers","BigTowersMode"],["Small Monkey Towers", "SmallTowersMode"],["Small Bosses","SmallBossesMode"]]
 
     for (let [name, loc] of extras) {
-        if (!extrasUnlocked[name]) { continue; }
         let extraProgressDiv = document.createElement('div');
         extraProgressDiv.classList.add('extra-progress-div');
         extrasProgressContainer.appendChild(extraProgressDiv);
@@ -4143,6 +4192,13 @@ function generateExtrasProgress() {
         extraProgressText.classList.add('black-outline');
         extraProgressText.innerHTML = getLocValue(loc);
         extraProgressDiv.appendChild(extraProgressText);
+
+        if(extrasUnlocked[name]) {
+            let extraProgressTick = document.createElement('img');
+            extraProgressTick.classList.add('extra-progress-tick');
+            extraProgressTick.src = "./Assets/UI/TickGreenIcon.png";
+            extraProgressDiv.appendChild(extraProgressTick);
+        }
     }
 }
 
@@ -4733,6 +4789,100 @@ async function generateChallenges(type) {
 
     let latestChallenge = 0;
 
+    if (type == "DailyChallenges" || type == "AdvancedDailyChallenges") {
+        let challengeDiv = document.createElement('div');
+        challengeDiv.classList.add("race-div", "event-select-challenge-div");
+        eventsContent.appendChild(challengeDiv);
+
+        //title text
+        let challengeInfoName = document.createElement('p');
+        challengeInfoName.classList.add("challenge-select-info-name", "black-outline");
+        challengeInfoName.innerHTML = `${type == "DailyChallenges" ? "Standard" : "Advanced"} Challenges`;
+        challengeDiv.appendChild(challengeInfoName);
+
+        //desc text
+        let challengeInfoDesc = document.createElement('p');
+        challengeInfoDesc.classList.add("challenge-info-desc");
+        challengeInfoDesc.innerHTML = `Select a challenge by entering a date or ID below. IDs can be no less than 1000, and the date cannot be earlier than ${type == "DailyChallenges" ? new Date(Date.UTC(2021, 4, 7)).toISOString().split('T')[0] : new Date(Date.UTC(2021, 4, 20)).toISOString().split('T')[0]} for ${type == "DailyChallenges" ? "Standard" : "Advanced"} challenges.`;
+        challengeDiv.appendChild(challengeInfoDesc);
+
+        let challengeSelectors = document.createElement('div');
+        challengeSelectors.classList.add("challenge-selectors");
+        challengeDiv.appendChild(challengeSelectors);
+
+        let challengeSelectorDate = document.createElement('div');
+        challengeSelectorDate.classList.add("challenge-selector-date");
+        challengeSelectors.appendChild(challengeSelectorDate);
+
+        let challengeSelectorDateText = document.createElement('p');
+        challengeSelectorDateText.classList.add("challenge-selector-date-text", "black-outline");
+        challengeSelectorDateText.innerHTML = "Date";
+        challengeSelectorDate.appendChild(challengeSelectorDateText);
+
+        //input for day selector
+        let challengeSelectorDateInput = document.createElement('input');
+        challengeSelectorDateInput.classList.add("challenge-selector-date-input");
+        challengeSelectorDateInput.type = "date";//earlier selectable date is 05/07/2021 for regular dailychallenges and 05/20/2021 for AdvancedDailyChallenges
+        // challengeSelectorDateInput.min = type == "DailyChallenges" ? "2021-05-07" : "2021-05-20";
+        // challengeSelectorDateInput.max = new Date();
+        challengeSelectorDateInput.value =  new Date(Date.now()).toISOString().split('T')[0];
+        challengeSelectorDateInput.addEventListener('change', () => {
+            if (new Date(challengeSelectorDateInput.value) > new Date()) { challengeSelectorDateInput.value = new Date().toISOString().split('T')[0] }
+            if (new Date(challengeSelectorDateInput.value) < new Date(type == "DailyChallenges" ? "2021-05-07" : "2021-05-20")) { challengeSelectorDateInput.value = type == "DailyChallenges" ? "2021-05-07" : "2021-05-20"; }
+        })
+        // challengeSelectorDateInput.value = new Date().toISOString().split('T')[0];
+        challengeSelectorDate.appendChild(challengeSelectorDateInput);
+
+        let challengeSelectorDateImg = document.createElement('img');
+        challengeSelectorDateImg.classList.add("challenge-selector-date-img");
+        challengeSelectorDateImg.src = "../Assets/UI/ContinueBtn.png";
+        challengeSelectorDateImg.addEventListener('click', async () => {
+            console.log(challengeSelectorDateInput.value)
+            console.log(getChallengeIDFromDate(challengeSelectorDateInput.value), type)
+            showLoading();
+            showChallengeModel('events', await getChallengeMetadata(getChallengeIDFromDate(challengeSelectorDateInput.value,type == "AdvancedDailyChallenges")), type);
+        })
+        challengeSelectorDate.appendChild(challengeSelectorDateImg);
+
+        let challengeSelectorOR = document.createElement('p');
+        challengeSelectorOR.classList.add("challenge-selector-or", "black-outline");
+        challengeSelectorOR.innerHTML = "OR";
+        challengeSelectors.appendChild(challengeSelectorOR);
+
+        let challengeSelectorID = document.createElement('div');
+        challengeSelectorID.classList.add("challenge-selector-id");
+        challengeSelectors.appendChild(challengeSelectorID);
+
+        let challengeSelectorIDText = document.createElement('p');
+        challengeSelectorIDText.classList.add("challenge-selector-id-text", "black-outline");
+        challengeSelectorIDText.innerHTML = "Challenge ID";
+        challengeSelectorID.appendChild(challengeSelectorIDText);
+
+        //input for ID selector
+        let challengeSelectorIDInput = document.createElement('input');
+        challengeSelectorIDInput.classList.add("challenge-selector-id-input");
+        challengeSelectorIDInput.type = "number";
+        //keep the value above 1000 and below the latest challenge number
+        challengeSelectorIDInput.min = 1000;
+        challengeSelectorIDInput.max = latestChallenge;
+        challengeSelectorIDInput.value = latestChallenge;
+        challengeSelectorIDInput.addEventListener('change', () => {
+            if (challengeSelectorIDInput.value < 1000) { challengeSelectorIDInput.value = 1000; }
+            if (challengeSelectorIDInput.value > latestChallenge) { challengeSelectorIDInput.value = latestChallenge; }
+        })
+        challengeSelectorID.appendChild(challengeSelectorIDInput);
+
+        let challengeSelectorIDImg = document.createElement('img');
+        challengeSelectorIDImg.classList.add("challenge-selector-id-img");
+        challengeSelectorIDImg.src = "../Assets/UI/ContinueBtn.png";
+        challengeSelectorIDImg.addEventListener('click', async () => {
+            console.log(challengeSelectorIDInput.value)
+            showLoading();
+            showChallengeModel('events', await getChallengeMetadata(getChallengeIdFromInt(challengeSelectorIDInput.value, type == "AdvancedDailyChallenges")), type);
+        })
+        challengeSelectorID.appendChild(challengeSelectorIDImg);
+    }
+
     Object.values(challenges).forEach((challenge, index) => {
         let regex = /^(Standard|Advanced|coop)(?: (\d+))?: (.*)$/;
         let match = challenge.name.match(regex);
@@ -4890,100 +5040,6 @@ async function generateChallenges(type) {
         });
         observer.observe(challengeMapDiv);
     })
-
-    if (type == "DailyChallenges" || type == "AdvancedDailyChallenges") {
-        let challengeDiv = document.createElement('div');
-        challengeDiv.classList.add("race-div", "event-select-challenge-div");
-        eventsContent.appendChild(challengeDiv);
-
-        //title text
-        let challengeInfoName = document.createElement('p');
-        challengeInfoName.classList.add("challenge-select-info-name", "black-outline");
-        challengeInfoName.innerHTML = `Older ${type == "DailyChallenges" ? "Standard" : "Advanced"} Challenges (Unstable)`;
-        challengeDiv.appendChild(challengeInfoName);
-
-        //desc text
-        let challengeInfoDesc = document.createElement('p');
-        challengeInfoDesc.classList.add("challenge-info-desc");
-        challengeInfoDesc.innerHTML = `Select a challenge by entering a date or ID below. IDs can be no less than 1000, and the date cannot be earlier than ${type == "DailyChallenges" ? new Date(Date.UTC(2021, 4, 7)).toISOString().split('T')[0] : new Date(Date.UTC(2021, 4, 20)).toISOString().split('T')[0]} for ${type == "DailyChallenges" ? "Standard" : "Advanced"} challenges.`;
-        challengeDiv.appendChild(challengeInfoDesc);
-
-        let challengeSelectors = document.createElement('div');
-        challengeSelectors.classList.add("challenge-selectors");
-        challengeDiv.appendChild(challengeSelectors);
-
-        let challengeSelectorDate = document.createElement('div');
-        challengeSelectorDate.classList.add("challenge-selector-date");
-        challengeSelectors.appendChild(challengeSelectorDate);
-
-        let challengeSelectorDateText = document.createElement('p');
-        challengeSelectorDateText.classList.add("challenge-selector-date-text", "black-outline");
-        challengeSelectorDateText.innerHTML = "Date";
-        challengeSelectorDate.appendChild(challengeSelectorDateText);
-
-        //input for day selector
-        let challengeSelectorDateInput = document.createElement('input');
-        challengeSelectorDateInput.classList.add("challenge-selector-date-input");
-        challengeSelectorDateInput.type = "date";//earlier selectable date is 05/07/2021 for regular dailychallenges and 05/20/2021 for AdvancedDailyChallenges
-        // challengeSelectorDateInput.min = type == "DailyChallenges" ? "2021-05-07" : "2021-05-20";
-        // challengeSelectorDateInput.max = new Date();
-        challengeSelectorDateInput.value =  new Date(Date.now()).toISOString().split('T')[0];
-        challengeSelectorDateInput.addEventListener('change', () => {
-            if (new Date(challengeSelectorDateInput.value) > new Date()) { challengeSelectorDateInput.value = new Date().toISOString().split('T')[0] }
-            if (new Date(challengeSelectorDateInput.value) < new Date(type == "DailyChallenges" ? "2021-05-07" : "2021-05-20")) { challengeSelectorDateInput.value = type == "DailyChallenges" ? "2021-05-07" : "2021-05-20"; }
-        })
-        // challengeSelectorDateInput.value = new Date().toISOString().split('T')[0];
-        challengeSelectorDate.appendChild(challengeSelectorDateInput);
-
-        let challengeSelectorDateImg = document.createElement('img');
-        challengeSelectorDateImg.classList.add("challenge-selector-date-img");
-        challengeSelectorDateImg.src = "../Assets/UI/ContinueBtn.png";
-        challengeSelectorDateImg.addEventListener('click', async () => {
-            console.log(challengeSelectorDateInput.value)
-            console.log(getChallengeIDFromDate(challengeSelectorDateInput.value), type)
-            showLoading();
-            showChallengeModel('events', await getChallengeMetadata(getChallengeIDFromDate(challengeSelectorDateInput.value,type == "AdvancedDailyChallenges")), type);
-        })
-        challengeSelectorDate.appendChild(challengeSelectorDateImg);
-
-        let challengeSelectorOR = document.createElement('p');
-        challengeSelectorOR.classList.add("challenge-selector-or", "black-outline");
-        challengeSelectorOR.innerHTML = "OR";
-        challengeSelectors.appendChild(challengeSelectorOR);
-
-        let challengeSelectorID = document.createElement('div');
-        challengeSelectorID.classList.add("challenge-selector-id");
-        challengeSelectors.appendChild(challengeSelectorID);
-
-        let challengeSelectorIDText = document.createElement('p');
-        challengeSelectorIDText.classList.add("challenge-selector-id-text", "black-outline");
-        challengeSelectorIDText.innerHTML = "Challenge ID";
-        challengeSelectorID.appendChild(challengeSelectorIDText);
-
-        //input for ID selector
-        let challengeSelectorIDInput = document.createElement('input');
-        challengeSelectorIDInput.classList.add("challenge-selector-id-input");
-        challengeSelectorIDInput.type = "number";
-        //keep the value above 1000 and below the latest challenge number
-        challengeSelectorIDInput.min = 1000;
-        challengeSelectorIDInput.max = latestChallenge;
-        challengeSelectorIDInput.value = latestChallenge;
-        challengeSelectorIDInput.addEventListener('change', () => {
-            if (challengeSelectorIDInput.value < 1000) { challengeSelectorIDInput.value = 1000; }
-            if (challengeSelectorIDInput.value > latestChallenge) { challengeSelectorIDInput.value = latestChallenge; }
-        })
-        challengeSelectorID.appendChild(challengeSelectorIDInput);
-
-        let challengeSelectorIDImg = document.createElement('img');
-        challengeSelectorIDImg.classList.add("challenge-selector-id-img");
-        challengeSelectorIDImg.src = "../Assets/UI/ContinueBtn.png";
-        challengeSelectorIDImg.addEventListener('click', async () => {
-            console.log(challengeSelectorIDInput.value)
-            showLoading();
-            showChallengeModel('events', await getChallengeMetadata(getChallengeIdFromInt(challengeSelectorIDInput.value, type == "AdvancedDailyChallenges")), type);
-        })
-        challengeSelectorID.appendChild(challengeSelectorIDImg);
-    }
 }
 
 function processChallenge(metadata, map){
@@ -5602,7 +5658,7 @@ console.log(metadata)
             let avatarImg = document.createElement('img');
             avatarImg.classList.add('avatar-img','noSelect');
             avatarImg.style.width = `${width}px`;
-            avatarImg.src = getProfileIcon("ProfileAvatar01");
+            avatarImg.src = "../Assets/ProfileAvatar/ProfileAvatar01.png";
             avatar.appendChild(avatarImg);
 
             let challengeCreatorName = document.createElement('p');
@@ -5612,8 +5668,8 @@ console.log(metadata)
             //async function to change avatar to actual src
             await getUserProfile(challengeExtraData["Creator"]).then(data => {
                 challengeCreatorName.innerHTML = data.displayName;
-                avatarImg.src = getProfileIcon(data.avatar);
-                challengeCreator.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(data.banner)})`;
+                avatarImg.src = getProfileAvatar(data);
+                challengeCreator.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(data)})`;
             });
         }
 
@@ -6177,12 +6233,12 @@ async function generateLeaderboardEntries(metadata, type){
                             if(userProfile.hasOwnProperty('owner')) {
                                 leaderboardEntryFrame.src = userProfile.frameURL;
                                 leaderboardEntryEmblem.src = userProfile.iconURL;
-                                leaderboardEntryDiv.style.backgroundImage = `url(${parseInt(userProfile.banner.replace(/\D/g,'')) <= constants.profileBanners ? getProfileBanner(userProfile.banner) : userProfile.bannerURL})`;
+                                leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
                                 // leaderboardEntryPlayer.style.width = "470px";
                                 observer.unobserve(observerentry.target);
                             } else {
-                                leaderboardEntryIcon.src = parseInt(userProfile.avatar.replace(/\D/g,'')) <= constants.profileAvatars ? getProfileIcon(userProfile.avatar) : userProfile.avatarURL;
-                                leaderboardEntryDiv.style.backgroundImage = `url(${(parseInt(userProfile.banner.replace(/\D/g,'')) <= constants.profileBanners) ? getProfileBanner(userProfile.banner) : userProfile.bannerURL})`;
+                                leaderboardEntryIcon.src = getProfileAvatar(userProfile);
+                                leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
                                 observer.unobserve(observerentry.target);
                             }
                         }
@@ -6245,9 +6301,9 @@ async function openProfile(source, profile){
     profileHeader.id = 'profile-header';
     profileHeader.classList.add('profile-header');
     profileHeader.classList.add('profile-banner');
-    profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${profile["bannerURL"]}')`;
+    profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${getProfileBanner(profile)}')`;
     publicProfileDiv.appendChild(profileHeader);
-    profileHeader.appendChild(generateAvatar(100, profile["avatarURL"]));
+    profileHeader.appendChild(generateAvatar(100, getProfileAvatar(profile)));
 
     let profileTopBottom = document.createElement('div');
     profileTopBottom.id = 'profile-top-bottom';
@@ -6628,7 +6684,7 @@ async function openProfile(source, profile){
 
     let rightColumnHeader = document.createElement('div');
     rightColumnHeader.id = 'right-column-header';
-    rightColumnHeader.classList.add('right-column-header');
+    rightColumnHeader.classList.add('overview-right-column-header');
     rightColumnDiv.appendChild(rightColumnHeader);
 
     let rightColumnHeaderText = document.createElement('p');
@@ -7319,7 +7375,7 @@ function generateChallengeEntries(destination) {
                 let avatarImg = document.createElement('img');
                 avatarImg.classList.add('avatar-img','noSelect');
                 avatarImg.style.width = `${width}px`;
-                avatarImg.src = getProfileIcon("ProfileAvatar01");
+                avatarImg.src = "../Assets/ProfileAvatar/ProfileAvatar01.png";
                 avatar.appendChild(avatarImg);
     
                 let challengeCreatorName = document.createElement('p');
@@ -7394,8 +7450,8 @@ function generateChallengeEntries(destination) {
                             if ( creatorData == null ) { return; }
                             challengeCreatorName.innerHTML = creatorData.displayName;
                             if (creatorData.displayName.length > 13) { challengeCreatorName.style.fontSize = '17px' }
-                            avatarImg.src = getProfileIcon(creatorData.avatar);
-                            challengeBottom.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(creatorData.banner)})`;
+                            avatarImg.src = getProfileAvatar(creatorData);
+                            challengeBottom.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(creatorData)})`;
                         }
                     });
                 });
@@ -7446,7 +7502,7 @@ function generateChallengeEntries(destination) {
                 let avatarImg2 = document.createElement('img');
                 avatarImg2.classList.add('avatar-img','noSelect');
                 avatarImg2.style.width = `${width2}px`;
-                avatarImg2.src = getProfileIcon("ProfileAvatar01");
+                avatarImg2.src = "../Assets/ProfileAvatar/ProfileAvatar01.png";
                 avatar2.appendChild(avatarImg2);
     
                 let challengeCreatorName2 = document.createElement('p');
@@ -7552,8 +7608,8 @@ function generateChallengeEntries(destination) {
                             if ( creatorData == null ) { return; }
                             challengeCreatorName2.innerHTML = creatorData.displayName;
                             if (creatorData.displayName.length > 13) { challengeCreatorName2.style.fontSize = '17px' }
-                            avatarImg2.src = getProfileIcon(creatorData.avatar);
-                            challengeCreator2.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(${getProfileBanner(creatorData.banner)})`;
+                            avatarImg2.src = getProfileAvatar(creatorData);
+                            challengeCreator2.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(${getProfileBanner(creatorData)})`;
                         }
                     });
                 });
@@ -7691,7 +7747,7 @@ function generateMapGameEntries(destination) {
                 let avatarImg = document.createElement('img');
                 avatarImg.classList.add('avatar-img','noSelect');
                 avatarImg.style.width = `${width}px`;
-                avatarImg.src = getProfileIcon("ProfileAvatar01");
+                avatarImg.src = "../Assets/ProfileAvatar/ProfileAvatar01.png";
                 avatar.appendChild(avatarImg);
     
                 let challengeCreatorName = document.createElement('p');
@@ -7747,8 +7803,8 @@ function generateMapGameEntries(destination) {
                             if ( creatorData == null ) { return; }
                             challengeCreatorName.innerHTML = creatorData.displayName;
                             if (creatorData.displayName.length > 13) { challengeCreatorName.style.fontSize = '17px' }
-                            avatarImg.src = getProfileIcon(creatorData.avatar);
-                            challengeBottom.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(creatorData.banner)})`;
+                            avatarImg.src = getProfileAvatar(creatorData);
+                            challengeBottom.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(creatorData)})`;
                         }
                     });
                 });
@@ -7978,7 +8034,7 @@ async function showMapModel(source, metadata) {
             let avatarImg = document.createElement('img');
             avatarImg.classList.add('avatar-img','noSelect');
             avatarImg.style.width = `${width}px`;
-            avatarImg.src = getProfileIcon("ProfileAvatar01");
+            avatarImg.src = "../Assets/ProfileAvatar/ProfileAvatar01.png";
             avatar.appendChild(avatarImg);
 
             let challengeCreatorName = document.createElement('p');
@@ -7988,8 +8044,8 @@ async function showMapModel(source, metadata) {
             //async function to change avatar to actual src
             await getUserProfile(challengeExtraData["Creator"]).then(data => {
                 challengeCreatorName.innerHTML = data.displayName;
-                avatarImg.src = getProfileIcon(data.avatar);
-                challengeCreator.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(data.banner)})`;
+                avatarImg.src = getProfileAvatar(data);
+                challengeCreator.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(data)})`;
             });
         }
 
@@ -8233,7 +8289,7 @@ async function showRoundsetModel(source, roundset) {
     mapsProgressHeaderBar.appendChild(mapsProgressViews);
 
     let mapsProgressViewsText = document.createElement('p');
-    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text','black-outline');
+    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text','maps-progress-view-list','black-outline');
     mapsProgressViewsText.innerHTML = "Display Type:";
     mapsProgressViews.appendChild(mapsProgressViewsText);
 
@@ -8248,7 +8304,7 @@ async function showRoundsetModel(source, roundset) {
     mapsProgressViews.appendChild(mapsProgressList);
 
     let mapsProgressGame = document.createElement('div');
-    mapsProgressGame.classList.add('maps-progress-view','maps-progress-view-list','black-outline');
+    mapsProgressGame.classList.add('maps-progress-view','black-outline');
     mapsProgressGame.innerHTML = "Preview";
     mapsProgressViews.appendChild(mapsProgressGame);
 
@@ -8338,6 +8394,7 @@ async function showRoundsetModel(source, roundset) {
     onlyModifiedToggleInput.addEventListener('change', () => {
         onChangeModified(onlyModifiedToggleInput.checked)
     })
+    currentPreviewRound = 0;
     currentRoundsetView = "Simple";
     generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked)
     onChangeModified(onlyModifiedToggleInput.checked)
@@ -8441,29 +8498,6 @@ async function generateRounds(type, reverse, modified) {
                 roundNumber.innerHTML = `Round ${round.roundNumber}`;
                 roundsDivHeader.appendChild(roundNumber);
 
-                let rbeDiv = document.createElement('div');
-                rbeDiv.classList.add('rbe-div');
-                roundsDivHeader.appendChild(rbeDiv);
-
-                let rbeImg = document.createElement('img');
-                rbeImg.classList.add('rbe-img');
-                rbeImg.src = "../Assets/BloonIcon/Red.png";
-                rbeDiv.appendChild(rbeImg);
-
-                let rbeTextDiv = document.createElement('div');
-                rbeTextDiv.classList.add('rbe-text-div');
-                rbeDiv.appendChild(rbeTextDiv);
-
-                let roundRBE = document.createElement('p');
-                roundRBE.classList.add('round-rbe', 'black-outline');
-                roundRBE.innerHTML = `RBE: ${round.rbe.toLocaleString()}`;
-                rbeTextDiv.appendChild(roundRBE);
-                
-                let roundRBETotal = document.createElement('p');
-                roundRBETotal.classList.add('round-rbe-total', 'black-outline');
-                roundRBETotal.innerHTML = `Total: ${round.rbeSum.toLocaleString()}`;
-                rbeTextDiv.appendChild(roundRBETotal);
-
                 let incomeDiv = document.createElement('div');
                 incomeDiv.classList.add('income-div');
                 roundsDivHeader.appendChild(incomeDiv);
@@ -8486,6 +8520,29 @@ async function generateRounds(type, reverse, modified) {
                 roundIncomeTotal.classList.add('round-income-total', 'black-outline');
                 roundIncomeTotal.innerHTML = `Total: ${round.incomeSum.toLocaleString()}`;
                 incomeTextDiv.appendChild(roundIncomeTotal);
+
+                let rbeDiv = document.createElement('div');
+                rbeDiv.classList.add('rbe-div');
+                roundsDivHeader.appendChild(rbeDiv);
+
+                let rbeImg = document.createElement('img');
+                rbeImg.classList.add('rbe-img');
+                rbeImg.src = "../Assets/BloonIcon/Red.png";
+                rbeDiv.appendChild(rbeImg);
+
+                let rbeTextDiv = document.createElement('div');
+                rbeTextDiv.classList.add('rbe-text-div');
+                rbeDiv.appendChild(rbeTextDiv);
+
+                let roundRBE = document.createElement('p');
+                roundRBE.classList.add('round-rbe', 'black-outline');
+                roundRBE.innerHTML = `RBE: ${round.rbe.toLocaleString()}`;
+                rbeTextDiv.appendChild(roundRBE);
+                
+                let roundRBETotal = document.createElement('p');
+                roundRBETotal.classList.add('round-rbe-total', 'black-outline');
+                roundRBETotal.innerHTML = `Total: ${round.rbeSum.toLocaleString()}`;
+                rbeTextDiv.appendChild(roundRBETotal);
 
                 let roundDuration = Math.max(...round.bloonGroups.map(group => group.duration));
 
@@ -8844,29 +8901,6 @@ function updatePreviewRoundTimeline() {
     roundNumber.classList.add('round-number', 'round-number-detailed', 'black-outline');
     roundNumber.innerHTML = `Round ${round.roundNumber}`;
     roundsDivHeader.appendChild(roundNumber);
-    
-    let rbeDiv = document.createElement('div');
-    rbeDiv.classList.add('rbe-div');
-    roundsDivHeader.appendChild(rbeDiv);
-
-    let rbeImg = document.createElement('img');
-    rbeImg.classList.add('rbe-img');
-    rbeImg.src = "../Assets/BloonIcon/Red.png";
-    rbeDiv.appendChild(rbeImg);
-
-    let rbeTextDiv = document.createElement('div');
-    rbeTextDiv.classList.add('rbe-text-div');
-    rbeDiv.appendChild(rbeTextDiv);
-    
-    let roundRBE = document.createElement('p');
-    roundRBE.classList.add('round-rbe', 'black-outline');
-    roundRBE.innerHTML = `RBE: ${round.rbe.toLocaleString()}`;
-    rbeTextDiv.appendChild(roundRBE);
-    
-    let roundRBETotal = document.createElement('p');
-    roundRBETotal.classList.add('round-rbe-total', 'black-outline');
-    roundRBETotal.innerHTML = `Total: ${round.rbeSum.toLocaleString()}`;
-    rbeTextDiv.appendChild(roundRBETotal);
 
     let incomeDiv = document.createElement('div');
     incomeDiv.classList.add('income-div');
@@ -8890,6 +8924,29 @@ function updatePreviewRoundTimeline() {
     roundIncomeTotal.classList.add('round-income-total', 'black-outline');
     roundIncomeTotal.innerHTML = `Total: ${round.incomeSum.toLocaleString()}`;
     incomeTextDiv.appendChild(roundIncomeTotal);
+
+    let rbeDiv = document.createElement('div');
+    rbeDiv.classList.add('rbe-div');
+    roundsDivHeader.appendChild(rbeDiv);
+
+    let rbeImg = document.createElement('img');
+    rbeImg.classList.add('rbe-img');
+    rbeImg.src = "../Assets/BloonIcon/Red.png";
+    rbeDiv.appendChild(rbeImg);
+
+    let rbeTextDiv = document.createElement('div');
+    rbeTextDiv.classList.add('rbe-text-div');
+    rbeDiv.appendChild(rbeTextDiv);
+    
+    let roundRBE = document.createElement('p');
+    roundRBE.classList.add('round-rbe', 'black-outline');
+    roundRBE.innerHTML = `RBE: ${round.rbe.toLocaleString()}`;
+    rbeTextDiv.appendChild(roundRBE);
+    
+    let roundRBETotal = document.createElement('p');
+    roundRBETotal.classList.add('round-rbe-total', 'black-outline');
+    roundRBETotal.innerHTML = `Total: ${round.rbeSum.toLocaleString()}`;
+    rbeTextDiv.appendChild(roundRBETotal);
 
     let roundDuration = Math.max(...round.bloonGroups.map(group => group.duration));
 

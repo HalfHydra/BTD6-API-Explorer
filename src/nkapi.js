@@ -83,8 +83,8 @@ async function fetchData(url, onSuccess) {
 
 async function getSaveData(oak_token) {
     cacheBust = true;
-    fetchData(`./data/PreventAPISpam_UserSave.json`, (json) => {
-    // fetchData(`https://data.ninjakiwi.com/btd6/save/${oak_token}`, (json) => {
+    // fetchData(`./data/PreventAPISpam_UserSave.json`, (json) => {
+    fetchData(`https://data.ninjakiwi.com/btd6/save/${oak_token}`, (json) => {
         btd6usersave = json["body"]
         _btd6usersave = json["model"]
         readyFlags[0] = 1
@@ -94,14 +94,14 @@ async function getSaveData(oak_token) {
 
 async function getPublicProfileData(oak_token) {
     cacheBust = true;
-    fetchData(`./data/PreventAPISpam_UserID.json`, (json) => {
-    // fetchData(`https://data.ninjakiwi.com/btd6/users/${oak_token}`, (json) => {
+    // fetchData(`./data/PreventAPISpam_UserID.json`, (json) => {
+    fetchData(`https://data.ninjakiwi.com/btd6/users/${oak_token}`, (json) => {
         btd6publicprofile = json["body"]
         _btd6publicprofile = json["model"]
         localStorageOAK[oak_token] = {
             "displayName": btd6publicprofile["displayName"],
-            "avatar": btd6publicprofile["avatarURL"],
-            "banner": btd6publicprofile["bannerURL"]
+            "avatar": getProfileAvatar(btd6publicprofile),
+            "banner": getProfileBanner(btd6publicprofile)
         }
         writeLocalStorage()
         readyFlags[1] = 1
