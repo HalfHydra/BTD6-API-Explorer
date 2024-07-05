@@ -258,32 +258,6 @@
             }
         ]
     },
-    "bloonToRBE": {
-        "Red": 1,
-        "Blue": 2,
-        "Green": 3,
-        "Yellow": 4,
-        "Pink": 5,
-        "Black": 11,
-        "White": 11,
-        "Purple": 11,
-        "Lead": 23,
-        "LeadFortified": 26,
-        "Zebra": 23,
-        "Rainbow": 47,
-        "Ceramic": 104,
-        "CeramicFortified": 114,
-        "MOAB": 616,
-        "MoabFortified": 856,
-        "BFB": 3164,
-        "BFBFortified": 4824,
-        "ZOMG": 16656,
-        "ZOMGFortified": 27296,
-        "DdtCamo": 896,
-        "DdtFortifiedCamo": 1416,
-        "BAD": 64000,
-        "BadFortified": 114840
-    },
     "towersInOrder": {
         "DartMonkey": "Primary",
         "BoomerangMonkey": "Primary",
@@ -385,22 +359,6 @@
         "DarkCastle": "Expert",
         "MuddyPuddles": "Expert",
         "#ouch": "Expert"
-    },
-    "modeBestRoundFix": {
-        "Easy": 40,
-        "PrimaryOnly": 40,
-        "Deflation": 60,
-        "Medium": 60,
-        "MilitaryOnly": 60,
-        "Apopalypse": 60,
-        "Reverse": 60,
-        "Hard": 80,
-        "MagicOnly": 80,
-        "DoubleMoabHealth": 80,
-        "HalfCash": 80,
-        "AlternateBloonsRounds": 80,
-        "Impoppable": 100,
-        "Clicks": 100
     },
     "paragonsAvailable": ["DartMonkey", "BoomerangMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "WizardMonkey", "NinjaMonkey", "EngineerMonkey"],
     "instaTiers": {

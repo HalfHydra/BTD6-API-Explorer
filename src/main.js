@@ -142,7 +142,6 @@ function generateIfReady(){
 }
 
 function generateRankInfo(){
-    // btd6usersave["xp"] = 125235498
     if (btd6usersave["xp"] === 180000000){
         rankInfo["rank"] = 155;
         rankInfo["xp"] = null;
@@ -316,9 +315,9 @@ function generateProgressSubText(){
     progressSubText["Towers"] = `${towersCount}/${Object.keys(btd6usersave.unlockedTowers).length} Towers Unlocked`;
     let upgrades = Object.keys(btd6usersave.acquiredUpgrades);
     let upgradesUnlocked = upgrades.filter(k => btd6usersave.acquiredUpgrades[k]);
-    progressSubText["Upgrades"] = `${upgradesUnlocked.length}/${upgrades.length} Upgrades Unlocked`;
-    let paragons = upgrades.filter(k => k.includes("Paragon"));
+    let paragons = upgrades.filter(k => k.includes("Paragon") && k != "Sentry Paragon");
     let paragonsUnlocked = paragons.filter(k => btd6usersave.acquiredUpgrades[k]);
+    progressSubText["Upgrades"] = `${upgradesUnlocked.length - paragonsUnlocked.length}/${upgrades.length - paragons.length} Upgrades Unlocked`;
     if (paragonsUnlocked.length > 0) { progressSubText["Paragons"] = `${paragonsUnlocked.length}/${paragons.length} Paragon${paragonsUnlocked.length != 1 ? "s" : ""} Unlocked` }
     let heroesUnlocked = Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length;
     progressSubText["Heroes"] = `${heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeros).length} Hero${heroesUnlocked != 1 ? "es" : ""} Unlocked`;
@@ -4318,6 +4317,7 @@ function changeEventTab(selector){
         case "Odyssey":
             break;
         case "ContestedTerritory":
+            showLoading();
             getCTData();
             break;
         case "DailyChallenges":
@@ -4651,6 +4651,8 @@ function generateCTs(){
     let eventsContent = document.getElementById('events-content');
     eventsContent.innerHTML = "";
 
+    document.getElementById("loading").style.transform = "scale(0)";
+
     Object.values(CTData).forEach((race, index) => {
         let raceDiv = document.createElement('div');
         raceDiv.classList.add("race-div", "ct-div");
@@ -4788,6 +4790,21 @@ async function generateChallenges(type) {
     }
 
     let latestChallenge = 0;
+
+    Object.values(challenges).forEach((challenge, index) => {
+        let regex = /^(Standard|Advanced|coop)(?: (\d+))?: (.*)$/;
+        let match = challenge.name.match(regex);
+
+        let challengeNumber = "";
+
+        if (match) {
+            challengeNumber = match[2] || null;
+
+            if (challengeNumber != null && challengeNumber > latestChallenge) {
+                latestChallenge = challengeNumber;
+            }
+        }
+    })
 
     if (type == "DailyChallenges" || type == "AdvancedDailyChallenges") {
         let challengeDiv = document.createElement('div');
@@ -5348,7 +5365,11 @@ console.log(metadata)
             selectorGoImg.addEventListener('click', (event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                window.open(`btd6://Challenge/${metadata.id}`, '_blank');
+                // window.open(`btd6://Challenge/${metadata.id}`, '_blank');
+                let iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = `btd6://Challenge/${metadata.id}`;
+                document.body.appendChild(iframe);
             });
             challengeHeaderRightBottom.appendChild(selectorGoImg);
             break;
@@ -5559,10 +5580,40 @@ console.log(metadata)
         challengeRuleText.innerHTML = rule;
         challengeRuleTextDiv.appendChild(challengeRuleText);
 
+        console.log(metadata.roundSets)
+        if(rule == "Custom Rounds" && challengeType == "Boss")  {
+            let roundset = null;
+            if (metadata.roundSets.includes("bloonarius")) {
+                roundset = "BloonariusRoundSet";
+            }
+            if (metadata.roundSets.includes("lych")) {
+                roundset = "LychRoundSet";
+            }
+            if (metadata.roundSets.includes("vortex")) {
+                roundset = "VortexRoundSet";
+            }
+            if (metadata.roundSets.includes("dreadbloon")) {
+                roundset = "DreadbloonRoundSet";
+            }
+            if (metadata.roundSets.includes("phayze")) {
+                roundset = "PhayzeRoundSet";
+            }
+
+            if(roundset != null) {
+                let challengeRuleValue = document.createElement('div');
+                challengeRuleValue.classList.add('challenge-rule-subtext','start-button','black-outline');
+                challengeRuleValue.innerHTML = "Open";
+                challengeRuleTextDiv.appendChild(challengeRuleValue);
+
+                challengeRuleValue.addEventListener('click', () => {
+                    showRoundsetModel('challenge', roundset);
+                })
+            }
+        }
+
         if(rule == "Paragon Limit") {
             let challengeRuleValue = document.createElement('p');
-            challengeRuleValue.classList.add('challenge-rule-value');
-            challengeRuleValue.classList.add('black-outline');
+            challengeRuleValue.classList.add('challenge-rule-value', 'black-outline');
             challengeRuleValue.innerHTML = metadata.maxParagons;
             challengeRuleTextDiv.appendChild(challengeRuleValue);
         }
@@ -5586,6 +5637,14 @@ console.log(metadata)
         let challengeStatsLeft = document.createElement('div');
         challengeStatsLeft.classList.add('challenge-stats-left');
         challengeStatsLeftRight.appendChild(challengeStatsLeft);
+
+        let challengeStatsX = document.createElement('p');
+        challengeStatsX.classList.add('challenge-stats-x');
+        challengeStatsX.innerHTML = "X";
+        challengeStatsX.addEventListener('click', () => {
+            challengeStatsDiv.style.display = "none";
+        })
+        challengeStatsDiv.appendChild(challengeStatsX);
 
         //ID
 
@@ -5670,6 +5729,9 @@ console.log(metadata)
                 challengeCreatorName.innerHTML = data.displayName;
                 avatarImg.src = getProfileAvatar(data);
                 challengeCreator.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(data)})`;
+                challengeCreator.addEventListener('click', () => {
+                    openProfile('challenge', challengeExtraData["Creator"]);
+                })
             });
         }
 
@@ -5894,11 +5956,9 @@ function showLeaderboard(source, metadata, type) {
     })
     leaderboardHeaderLeft.appendChild(modalClose);
 
-    //middle div
     let leaderboardHeaderMiddle = document.createElement('div');
     leaderboardHeaderMiddle.classList.add(`leaderboard-header-middle-${type.toLowerCase()}`);
     leaderboardHeader.appendChild(leaderboardHeaderMiddle);
-    //header
 
     let leaderboardHeaderTitle = document.createElement('div');
     leaderboardHeaderTitle.classList.add(`leaderboard-header-${type.toLowerCase()}`, 'black-outline');
@@ -5921,15 +5981,14 @@ function showLeaderboard(source, metadata, type) {
             leaderboardHeaderTitle.innerHTML = "Contested Territory <br> Team Leaderboard"
             break;
     }
-    //img
 
-    //right div
+
     let leaderboardHeaderRight = document.createElement('div');
     leaderboardHeaderRight.classList.add('leaderboard-header-right');
     leaderboardHeader.appendChild(leaderboardHeaderRight);
-    //time left
 
     let leaderboardColumnLabels = document.createElement('div');
+    leaderboardColumnLabels.id = 'leaderboard-column-labels';
     leaderboardColumnLabels.classList.add('leaderboard-column-labels');
     leaderboardTop.appendChild(leaderboardColumnLabels);
 
@@ -6046,6 +6105,35 @@ async function generateLeaderboardEntries(metadata, type){
     await getLeaderboardData();
     console.log(leaderboardData)
 
+    let columnsType = null;
+    switch(type) {
+        case "CTTeam":
+            columnsType = "CTTeam";
+            break;
+        case "CTPlayer":
+            columnsType = "CTPlayer";
+            break;
+    }
+    if(metadata.hasOwnProperty('leaderboard') && metadata.leaderboard.includes('races')) {
+        columnsType = "GameTime";
+    }
+    if(metadata.hasOwnProperty('bossType')) {
+        switch(metadata.scoringType) {
+            case "GameTime":
+                columnsType = "GameTime";
+                break;
+            case "LeastCash":
+                columnsType = "LeastCash";
+                break;
+            case "LeastTiers":
+                columnsType = "LeastTiers";
+                break;
+        }
+    }
+
+    generateLeaderboardHeader(columnsType);
+
+
     let leaderboardEntries = document.getElementById('leaderboard-entries');
     leaderboardEntries.innerHTML = "";
 
@@ -6063,7 +6151,7 @@ async function generateLeaderboardEntries(metadata, type){
             leaderboardEntry.classList.add('leaderboard-entry');
             if(type != "CTTeam") {
             leaderboardEntry.addEventListener('click', () => {
-                openProfile('leaderboard', entry);
+                openProfile('leaderboard', entry.profile);
             })
         }
             leaderboardEntries.appendChild(leaderboardEntry);
@@ -6181,7 +6269,6 @@ async function generateLeaderboardEntries(metadata, type){
                         leaderboardEntryGameTimeValue.classList.add('leaderboard-entry-game-time-value','leaderboard-outline');
                         leaderboardEntryGameTimeValue.innerHTML = formatScoreTime(scorePartsObj["Game Time"].score);
                         leaderboardEntryGameTime.appendChild(leaderboardEntryGameTimeValue);
-
                         break;
                     case "LeastTiers":
                         leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
@@ -6257,6 +6344,64 @@ async function generateLeaderboardEntries(metadata, type){
     }
 }
 
+function generateLeaderboardHeader(columnsType){
+    let leaderboardColumnLabels = document.getElementById('leaderboard-column-labels');
+
+    let leaderboardColumnRank = document.createElement('p');
+    leaderboardColumnRank.classList.add('leaderboard-column-rank', 'black-outline');
+    leaderboardColumnRank.innerHTML = "Rank";
+    leaderboardColumnLabels.appendChild(leaderboardColumnRank);
+
+    let leaderboardColumnName = document.createElement('p');
+    leaderboardColumnName.classList.add('leaderboard-column-name', 'black-outline');
+    leaderboardColumnName.innerHTML = "Player";
+    leaderboardColumnLabels.appendChild(leaderboardColumnName);
+
+    switch (columnsType) {
+        case "GameTime":
+            let leaderboardColumnTimeSubmitted = document.createElement('p');
+            leaderboardColumnTimeSubmitted.classList.add('leaderboard-column-time-submitted','black-outline');
+            leaderboardColumnTimeSubmitted.innerHTML = "Time Submitted";
+            leaderboardColumnLabels.appendChild(leaderboardColumnTimeSubmitted);
+
+            let leaderboardColumnTimeScore = document.createElement('p');
+            leaderboardColumnTimeScore.classList.add('leaderboard-column-time-score','black-outline');
+            leaderboardColumnTimeScore.innerHTML = "Game Time";
+            leaderboardColumnLabels.appendChild(leaderboardColumnTimeScore);
+            break;
+        case "LeastCash":
+            let leaderboardColumnCashSpent = document.createElement('p');
+            leaderboardColumnCashSpent.classList.add('leaderboard-column-cash-spent','black-outline');
+            leaderboardColumnCashSpent.innerHTML = "Cash Spent";
+            leaderboardColumnLabels.appendChild(leaderboardColumnCashSpent);
+
+            let leaderboardColumnLCTimeScore = document.createElement('p');
+            leaderboardColumnLCTimeScore.classList.add('leaderboard-column-time-score','black-outline');
+            leaderboardColumnLCTimeScore.innerHTML = "Game Time";
+            leaderboardColumnLabels.appendChild(leaderboardColumnLCTimeScore);
+            break;
+        case "LeastTiers":
+            let leaderboardColumnTiersUsed = document.createElement('p');
+            leaderboardColumnTiersUsed.classList.add('leaderboard-column-tiers-used','black-outline');
+            leaderboardColumnTiersUsed.innerHTML = "Tiers Used";
+            leaderboardColumnLabels.appendChild(leaderboardColumnTiersUsed);
+
+            let leaderboardColumnLTTimeScore = document.createElement('p');
+            leaderboardColumnLTTimeScore.classList.add('leaderboard-column-time-score','black-outline');
+            leaderboardColumnLTTimeScore.innerHTML = "Game Time";
+            leaderboardColumnLabels.appendChild(leaderboardColumnLTTimeScore);
+            break;
+        case "CTTeam":
+            leaderboardColumnName.innerHTML = "Team";
+        case "CTPlayer":
+            let leaderboardColumnCTPoints = document.createElement('p');
+            leaderboardColumnCTPoints.classList.add('leaderboard-column-ct-points','black-outline');
+            leaderboardColumnCTPoints.innerHTML = "CT Points";
+            leaderboardColumnLabels.appendChild(leaderboardColumnCTPoints);
+            break;
+    }
+}
+
 function exitChallengeModel(source){
     document.getElementById('challenge-content').style.display = "none";
     document.getElementById(`${source}-content`).style.display = "flex";
@@ -6268,7 +6413,7 @@ function exitMapModel(source){
 }
 
 async function openProfile(source, profile){
-    profile = await getUserProfile(profile.profile)
+    profile = await getUserProfile(profile)
     if (profile == null) { return; }
     resetScroll();
     document.getElementById(`${source}-content`).style.display = "none";
@@ -6565,6 +6710,7 @@ async function openProfile(source, profile){
     let counter = 0;
 
     for (let [hero, xp] of Object.entries(profile["heroesPlaced"]).sort((a, b) => b[1] - a[1])){
+        if(xp === 0) { continue; }
         let heroDiv = document.createElement('div');
         heroDiv.id = 'hero-div';
         heroDiv.classList.add('hero-div');
@@ -6656,6 +6802,7 @@ async function openProfile(source, profile){
     counter = 0;
 
     for (let [tower, xp] of Object.entries(profile["towersPlaced"]).sort((a, b) => b[1] - a[1])){
+        if(xp === 0) { continue; }
         let towerDiv = document.createElement('div');
         towerDiv.id = 'tower-div';
         towerDiv.classList.add('hero-div');
@@ -6960,6 +7107,72 @@ function generateExplore() {
         selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
         selectorDiv.appendChild(selectorGoImg);
     })
+
+    let enterCodeSelectors = ['Enter Challenge ID', 'Enter Map ID']
+
+    enterCodeSelectors.forEach((selector) => {
+        let selectorDiv = document.createElement('div');
+        selectorDiv.id = selector.toLowerCase() + '-div';
+        selectorDiv.classList.add('selector-div');
+        selectorsDiv.appendChild(selectorDiv);
+
+        let selectorImg = document.createElement('img');
+        selectorImg.id = selector.toLowerCase() + '-img';
+        selectorImg.classList.add('selector-img');
+        selectorDiv.appendChild(selectorImg);
+
+        let enterCodeMiddleDiv = document.createElement('div');
+        enterCodeMiddleDiv.classList.add('enter-code-middle-div');
+        selectorDiv.appendChild(enterCodeMiddleDiv);
+
+        let selectorText = document.createElement('p');
+        selectorText.id = selector.toLowerCase() + '-text';
+        selectorText.classList.add('selector-text','selector-text-code','black-outline');
+        selectorText.innerHTML = selector;
+        enterCodeMiddleDiv.appendChild(selectorText);
+
+        let selectorInput = document.createElement('input');
+        selectorInput.id = selector.toLowerCase() + '-input';
+        selectorInput.classList.add('selector-input');
+        selectorInput.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+        })
+        enterCodeMiddleDiv.appendChild(selectorInput);
+
+        let selectorGoImg = document.createElement('img');
+        selectorGoImg.id = selector.toLowerCase() + '-go-img';
+        selectorGoImg.classList.add('selector-go-img');
+        selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
+        selectorDiv.appendChild(selectorGoImg);
+
+        switch(selector){
+            case 'Enter Challenge ID':
+                selectorImg.src = '../Assets/UI/EnterCodeIcon.png';
+                selectorDiv.classList.add('blueprint-bg');
+                selectorInput.value = "ZMGVLCF";
+                selectorGoImg.addEventListener('click', async () => {
+                    showLoading();
+                    let challengeID = selectorInput.value.trim();
+                    if(challengeID.length > 6){
+                        showChallengeModel('explore', await getChallengeMetadata(challengeID), "Custom");
+                    }
+                })
+                break;
+            case 'Enter Map ID':
+                selectorImg.src = '../Assets/UI/EnterCodeIcon.png';
+                selectorDiv.classList.add('map-model-bg', 'map-browser-selector');
+                selectorInput.value = "ZMYXDVU";
+                selectorGoImg.addEventListener('click', async () => {
+                    showLoading();
+                    let mapID = selectorInput.value.trim();
+                    if(mapID.length > 6){
+                        showMapModel('explore', await getCustomMapMetadata(mapID));
+                    }
+                })
+                break;
+        }
+    })
 }
 
 function changeBrowserTab(selected){
@@ -7135,7 +7348,7 @@ function generateBrowser(type){
     selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
     selectorGoImg.addEventListener('click', async () => {
         showLoading();
-        type == "Map Browser" ? showMapModel('browser', await getCustomMapMetadata(leaderboardFooterPageInput.value)) : showChallengeModel('browser', await getChallengeMetadata(leaderboardFooterPageInput.value), "Custom");
+        type == "Map Browser" ? showMapModel('browser', await getCustomMapMetadata(leaderboardFooterPageInput.value.trim())) : showChallengeModel('browser', await getChallengeMetadata(leaderboardFooterPageInput.value.trim()), "Custom");
     })
     leaderboardFooterRight.appendChild(selectorGoImg);
 
@@ -7144,28 +7357,30 @@ function generateBrowser(type){
     switch(type) {
         case "Challenge Browser":
             let mapsProgressGrid = document.createElement('div');
-            mapsProgressGrid.id = 'maps-progress-grid';
-            mapsProgressGrid.classList.add('maps-progress-view');
-            mapsProgressGrid.classList.add('black-outline')
-            mapsProgressGrid.classList.add('maps-progress-view-selected');
+            mapsProgressGrid.classList.add('maps-progress-view', 'stats-tab-yellow', 'black-outline');
             mapsProgressGrid.innerHTML = "Grid";
-            mapsProgressGrid.addEventListener('click', () => {
-                currentBrowserView = "Grid";
-                generateBrowserEntries(type)
-            })
             mapsProgressViews.appendChild(mapsProgressGrid);
             
 
             let mapsProgressGame = document.createElement('div');
             mapsProgressGame.id = 'maps-progress-game';
-            mapsProgressGame.classList.add('maps-progress-view');
-            mapsProgressGame.classList.add('black-outline')
+            mapsProgressGame.classList.add('maps-progress-view', 'black-outline');
             mapsProgressGame.innerHTML = "List";
-            mapsProgressGame.addEventListener('click', () => {
-                currentBrowserView = "List";
+            mapsProgressViews.appendChild(mapsProgressGame);
+
+            mapsProgressGrid.addEventListener('click', () => {
+                currentBrowserView = "Grid";
+                mapsProgressGrid.classList.add('stats-tab-yellow');
+                mapsProgressGame.classList.remove('stats-tab-yellow');
                 generateBrowserEntries(type)
             })
-            mapsProgressViews.appendChild(mapsProgressGame);
+
+            mapsProgressGame.addEventListener('click', () => {
+                currentBrowserView = "List";
+                mapsProgressGame.classList.add('stats-tab-yellow');
+                mapsProgressGrid.classList.remove('stats-tab-yellow');
+                generateBrowserEntries(type)
+            })
 
 
             let options = ["Featured", "Newest"]
@@ -7180,23 +7395,28 @@ function generateBrowser(type){
         case "Map Browser":
             let mapsProgressGameMap = document.createElement('div');
             mapsProgressGameMap.id = 'maps-progress-game';
-            mapsProgressGameMap.classList.add('maps-progress-view', 'black-outline');
+            mapsProgressGameMap.classList.add('maps-progress-view', 'stats-tab-yellow', 'black-outline');
             mapsProgressGameMap.innerHTML = "Grid";
-            mapsProgressGameMap.addEventListener('click', () => {
-                currentBrowserView = "Grid";
-                generateBrowserEntries(type);
-            })
             mapsProgressViews.appendChild(mapsProgressGameMap);
 
             let mapsProgressGallery = document.createElement('div');
             mapsProgressGallery.id = 'maps-progress-gallery';
             mapsProgressGallery.classList.add('maps-progress-view', 'black-outline');
             mapsProgressGallery.innerHTML = "Gallery";
+            mapsProgressViews.appendChild(mapsProgressGallery);
+
+            mapsProgressGameMap.addEventListener('click', () => {
+                currentBrowserView = "Grid";
+                mapsProgressGameMap.classList.add('stats-tab-yellow');
+                mapsProgressGallery.classList.remove('stats-tab-yellow');
+                generateBrowserEntries(type);
+            })
             mapsProgressGallery.addEventListener('click', () => {
                 currentBrowserView = "Gallery";
+                mapsProgressGallery.classList.add('stats-tab-yellow');
+                mapsProgressGameMap.classList.remove('stats-tab-yellow');
                 generateBrowserEntries(type)
             })
-            mapsProgressViews.appendChild(mapsProgressGallery);
 
             let optionsMap = ["Most Liked", "Trending", "Newest"]
             optionsMap.forEach((option) => {
@@ -7413,7 +7633,8 @@ function generateChallengeEntries(destination) {
                 selectorGoImg.addEventListener('click', (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    window.open(`btd6://Challenge/${entry.id}`, '_blank');
+                    // window.open(`btd6://Challenge/${entry.id}`, '_blank');
+                    openBTD6Link(`btd6://Challenge/${entry.id}`)
                 });
                 challengeIDandPlay.appendChild(selectorGoImg);
 
@@ -7589,7 +7810,8 @@ function generateChallengeEntries(destination) {
                 selectorGoImg2.addEventListener('click', (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    window.open(`btd6://Challenge/${entry.id}`, '_blank');
+                    // window.open(`btd6://Challenge/${entry.id}`, '_blank');
+                    openBTD6Link(`btd6://Challenge/${entry.id}`)
                 });
                 challengeIDandPlay2.appendChild(selectorGoImg2);
 
@@ -7785,7 +8007,8 @@ function generateMapGameEntries(destination) {
                 selectorGoImg.addEventListener('click', (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    window.open(`btd6://Challenge/${entry.id}`, '_blank');
+                    // window.open(`btd6://Challenge/${entry.id}`, '_blank');
+                    openBTD6Link(`btd6://Map/${entry.id}`)
                 });
                 challengeIDandPlay.appendChild(selectorGoImg);
 
@@ -7932,7 +8155,8 @@ async function showMapModel(source, metadata) {
     selectorGoImg.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        window.open(`btd6://Challenge/${metadata.id}`, '_blank');
+        // window.open(`btd6://Challenge/${metadata.id}`, '_blank');
+        openBTD6Link(`btd6://Map/${metadata.id}`);
     });
     challengeHeaderRightBottom.appendChild(selectorGoImg);
 
@@ -8046,6 +8270,9 @@ async function showMapModel(source, metadata) {
                 challengeCreatorName.innerHTML = data.displayName;
                 avatarImg.src = getProfileAvatar(data);
                 challengeCreator.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(data)})`;
+                challengeCreator.addEventListener('click', () => {
+                    openProfile('map', challengeExtraData["Creator"]);
+                })
             });
         }
 
@@ -8651,7 +8878,6 @@ async function generateRounds(type, reverse, modified) {
             previewRightDiv.classList.add('preview-right-div');
             previewHeader.appendChild(previewRightDiv);
 
-            //clear button
             let clearButton = document.createElement('img');
             clearButton.classList.add('clear-button');
             clearButton.src = "../Assets/UI/DestroyBloonsBtn.png";
@@ -8660,7 +8886,6 @@ async function generateRounds(type, reverse, modified) {
             })
             previewRightDiv.appendChild(clearButton);
 
-            //play normal
             let playNormalButton = document.createElement('img');
             playNormalButton.classList.add('play-normal-button');
             playNormalButton.src = "../Assets/UI/GoBtnSmall.png";
@@ -8672,7 +8897,6 @@ async function generateRounds(type, reverse, modified) {
             })
             previewRightDiv.appendChild(playNormalButton);
 
-            //play fast forward
             let playFastButton = document.createElement('img');
             playFastButton.classList.add('play-fast-button');
             playFastButton.src = "../Assets/UI/FastForwardBtn.png";
@@ -8840,6 +9064,7 @@ function onChangeModified(modified) {
             break;
         case "Preview":
             if(modified) {
+                currentIndexInModifiedRounds = 0;
                 currentPreviewRound = currentModifiedRounds[0] - 1;
                 document.getElementById('round-number-preview').innerHTML = `Round ${currentModifiedRounds[0]}`;
                 document.getElementById('select-round-num-preview').value = currentModifiedRounds[0];
@@ -9119,6 +9344,13 @@ function processRewardsString(input){
         counter++;
     }
     return result;
+}
+
+function openBTD6Link(link){
+    let iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = link;
+    document.body.appendChild(iframe);
 }
 
 function copyLoadingIcon(destination){

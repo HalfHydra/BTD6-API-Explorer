@@ -667,7 +667,7 @@ function startRound(round) {
         bloonGroup.spawnAccumulator = 0;
         bloonGroup.spawnInterval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.count - 1)) / speedMultiplier;
         if (!isFinite(bloonGroup.spawnInterval)) {
-            bloonGroup.spawnInterval = 0; // Set to a default value or handle this case as needed
+            bloonGroup.spawnInterval = 0;
         }
         bloonGroup.spawnBloon = spawnBloon(bloonGroup);
     }
@@ -697,73 +697,3 @@ function calcRoundSpeed(round) {
     else speed = 6.0 + (round - 252) * 0.02;
     return speed;
 }
-
-// function spawnBloon(bloonGroup) {
-//     // let interval = ((bloonGroup.duration - bloonGroup.start) / bloonGroup.count) * 1000 / speedMultiplier;
-//     // let interval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.count - 1)) * 1000 / speedMultiplier;
-//     let interval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.count - 1)) * 1000 / speedMultiplier;
-//     // console.log(interval)
-//     let count = 0;
-
-//     // Function to spawn a bloon
-//     function spawn() {
-//         if (count >= bloonGroup.count) {
-//             clearInterval(spawnInterval);
-//             return;
-//         }
-//         let bloonType = bloonGroup.bloon;
-//         let bloon = ["Moab", "MoabFortified", "Bfb", "BfbFortified", "Zomg", "ZomgFortified", "DdtCamo", "DdtFortifiedCamo", "Bad", "BadFortified"].includes(bloonType) ? new Blimp(bloonType) : new Bloon(bloonType);
-//         let layer = bloonsData[bloonType.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].layer;
-//         let index = bloons.findIndex(b => bloonsData[b.type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].layer > layer);
-//         if (index === -1) {
-//             bloons.push(bloon);
-//         } else {
-//             bloons.splice(index, 0, bloon);
-//         }
-//         count++;
-//     }
-
-//     // // Immediately spawn the first bloon
-//     spawn();
-
-//     // Spawn the first bloon after bloonGroup.start
-//     // bloonGroupsTimeouts.push(setTimeout(spawn, bloonGroup.start * 1000 / speedMultiplier));
-//     bloonGroupsTimeouts.push(setTimeout(spawn, (bloonGroup.start + interval) * 1000 / speedMultiplier));
-
-
-//     // Then continue spawning at the interval
-//     let spawnInterval = setInterval(spawn, interval);
-//     spawnIntervals.push(spawnInterval);
-// }
-
-// function spawnBloon(bloonGroup) {
-//     let interval = ((bloonGroup.duration - bloonGroup.start) / bloonGroup.count) * 1000 / speedMultiplier;
-//     let count = 0;
-//     let spawnInterval = setInterval(() => {
-//         if (count >= bloonGroup.count) {
-//             clearInterval(spawnInterval);
-//             return;
-//         }
-//         let bloonType = bloonGroup.bloon;
-//         let bloon = ["Moab", "MoabFortified", "Bfb", "BfbFortified", "Zomg", "ZomgFortified", "DdtCamo", "DdtFortifiedCamo", "Bad", "BadFortified"].includes(bloonType) ? new Blimp(bloonType) : new Bloon(bloonType);
-//         let layer = bloonsData[bloonType.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].layer;
-//         let index = bloons.findIndex(b => bloonsData[b.type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].layer > layer);
-//         if (index === -1) {
-//             bloons.push(bloon);
-//         } else {
-//             bloons.splice(index, 0, bloon);
-//         }
-//         // bloons.push(new Bloon(bloonGroup.bloon));
-//         count++;
-//     }, interval);
-//     spawnIntervals.push(spawnInterval);
-// }
-
-//   window.addEventListener('load',()=>{
-//     canvas = document.getElementById('roundset-canvas');
-//     ctx = canvas.getContext('2d');
-//     setInterval(()=>{
-//       update();
-//       render();
-//     }, 1000/60);
-//   })

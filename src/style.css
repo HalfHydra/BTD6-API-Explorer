@@ -48,6 +48,7 @@
     background-attachment: scroll;
     background-blend-mode: multiply;
     background-color: rgb(0, 127, 255);
+    scrollbar-color: #ffffff54 #0000;
 }
 .transition-bg {
     transition: background-color 0.25s;
@@ -1297,6 +1298,7 @@
     min-height: 100px;
     height: calc(100vh - 730px);
     overflow-y: scroll;
+    scrollbar-color: #ffffff3d #0000;
 }
 .hero-progress-bottom::-webkit-scrollbar {
     width: 5px;
@@ -2814,7 +2816,7 @@
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
-
+    overflow-x: hidden;
     max-width: 900px;
     margin: 0 auto;
 }
@@ -3526,6 +3528,7 @@
 }
 .map-model-img {
     min-width: 770px;
+    min-height: 535px;
 }
 .map-model-stats-div {
     display: flex;
@@ -3846,6 +3849,56 @@
 .insta-list-black {
     background: linear-gradient(180deg, #070d18 0%, #03050a 100%);
     border: 5px solid #465160;
+}
+
+.leaderboard-column-labels {
+    width: 700px;
+    display: flex;
+    margin: 0 auto;
+    padding-right: 20px;
+    justify-content: space-between;
+}
+
+.leaderboard-column-name {
+    width: 160px;
+}
+.leaderboard-column-ct-points {
+    width: 270px;
+    text-align: right;
+    padding-right: 30px;
+}
+.leaderboard-column-cash-spent, .leaderboard-column-tiers-used {
+    padding-left: 30px;
+}
+.challenge-stats-x {
+    position: absolute;
+    font-size: 32px;
+    color: var(--profile-secondary);
+    font-weight: bold;
+    left: 20px;
+}
+.enter-code-middle-div {
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.selector-text-code {
+    width: 230px;
+    text-align: center;
+}
+.selector-input {
+    font-size: 20px;
+    font-family: GardeniaBold;
+    text-align: center;
+    width: 100px;
+}
+.challenge-rule-subtext {
+    font-size: 20px;
+    border-width: 8px;
+    width: 60px;
+    margin-left: 8px;
+    margin-top: 8px;
 }
 
 .black-outline {
