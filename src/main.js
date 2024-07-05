@@ -8473,7 +8473,7 @@ function generateRoundsets() {
     })
 }
 
-async function showRoundsetModel(source, roundset, startingCash) {
+async function showRoundsetModel(source, roundset) {
     let roundsetContent = document.getElementById('roundset-content');
     roundsetContent.style.display = "flex";
     roundsetContent.innerHTML = "";
@@ -8491,10 +8491,6 @@ async function showRoundsetModel(source, roundset, startingCash) {
     // }
     roundsetProcessed =  processRoundset(roundsetData);
     console.log(roundsetProcessed)
-
-    if (startingCash == null) {
-        startingCash = constants.roundSets[roundset].startingCash;
-    }
 
     let headerBar = document.createElement('div');
     headerBar.classList.add('roundset-header-bar');
@@ -8616,21 +8612,21 @@ async function showRoundsetModel(source, roundset, startingCash) {
         mapsProgressList.classList.remove('stats-tab-yellow');
         mapsProgressGame.classList.remove('stats-tab-yellow');
         currentRoundsetView = "Simple";
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked, startingCash);
+        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
     })
     mapsProgressList.addEventListener('click', () => {
         mapsProgressList.classList.add('stats-tab-yellow');
         mapsProgressGrid.classList.remove('stats-tab-yellow');
         mapsProgressGame.classList.remove('stats-tab-yellow');
         currentRoundsetView = "Topper";
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked, startingCash);
+        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
     })
     mapsProgressGame.addEventListener('click', () => {
         mapsProgressGame.classList.add('stats-tab-yellow');
         mapsProgressGrid.classList.remove('stats-tab-yellow');
         mapsProgressList.classList.remove('stats-tab-yellow');
         currentRoundsetView = "Preview";
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked, startingCash);
+        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
     })
 
 
@@ -8642,7 +8638,7 @@ async function showRoundsetModel(source, roundset, startingCash) {
     })
     currentPreviewRound = 0;
     currentRoundsetView = "Simple";
-    generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked, startingCash)
+    generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked)
     onChangeModified(onlyModifiedToggleInput.checked)
 }
 
@@ -8665,7 +8661,7 @@ function processRoundset(data, defaultAppend){
     return data;
 }
 
-async function generateRounds(type, reverse, modified, startingCash) {
+async function generateRounds(type, reverse, modified) {
     let roundsContent = document.getElementById('rounds-content');
     roundsContent.innerHTML = "";
 
@@ -8775,12 +8771,12 @@ async function generateRounds(type, reverse, modified, startingCash) {
                 
                 let roundIncome = document.createElement('p');
                 roundIncome.classList.add('round-income', 'black-outline');
-                roundIncome.innerHTML = `Income: ${(round.roundNumber == 1 && startingCash ? round.income + startingCash : round.income).toLocaleString()}`;
+                roundIncome.innerHTML = `Income: ${round.income.toLocaleString()}`;
                 incomeTextDiv.appendChild(roundIncome);
                 
                 let roundIncomeTotal = document.createElement('p');
                 roundIncomeTotal.classList.add('round-income-total', 'black-outline');
-                roundIncomeTotal.innerHTML = `Total: ${(round.incomeSum + startingCash).toLocaleString()}`;
+                roundIncomeTotal.innerHTML = `Total: ${round.incomeSum.toLocaleString()}`;
                 incomeTextDiv.appendChild(roundIncomeTotal);
 
                 let rbeDiv = document.createElement('div');
