@@ -3901,6 +3901,16 @@
     margin-top: 8px;
 }
 
+.disclaimer-div {
+    display: flex;
+}
+.disclaimer, .disclaimer-link {
+    font-family: GardeniaBold;
+    color: white;
+    text-decoration: none;
+    margin: 5px;
+}
+
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */
     -webkit-text-stroke: 0.03em black;

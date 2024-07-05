@@ -43,147 +43,176 @@
         "DefaultRoundSet": {
             "name": "Standard Rounds",
             "icon": "DefaultRoundSetIcon",
-            "type": "normal"
+            "type": "normal",
+            "startingCash": 650
         },
         "AlternateRoundSet": {
             "name": "Alternate Bloon Rounds",
             "icon": "AlternateRoundSetIcon",
-            "type": "normal"
+            "type": "normal",
+            "startingCash": 650
         },
         "BloonariusRoundSet": {
             "name": "Bloonarius Event Rounds",
             "icon": "BloonariusRoundSetIcon",
-            "type": "boss"
+            "type": "boss",
+            "startingCash": 650
         },
         "LychRoundSet": {
             "name": "Lych Event Rounds",
             "icon": "LychRoundSetIcon",
-            "type": "boss"
+            "type": "boss",
+            "startingCash": 650
         },
         "VortexRoundSet": {
             "name": "Vortex Event Rounds",
             "icon": "VortexRoundSetIcon",
-            "type": "boss"
+            "type": "boss",
+            "startingCash": 650
         },
         "DreadbloonRoundSet": {
             "name": "Dreadbloon Event Rounds",
             "icon": "DreadbloonRoundSetIcon",
-            "type": "boss"
+            "type": "boss",
+            "startingCash": 650
         },
         "PhayzeRoundSet": {
             "name": "Phayze Event Rounds",
             "icon": "PhayzeRoundSetIcon",
-            "type": "boss"
+            "type": "boss",
+            "startingCash": 650
         },
         "AcceleratedRoundSet": {
             "name": "Accelerated Rounds",
             "icon": "QuestIconAcceleratedRoundSet",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 2000
         },
         "EnduranceRoundSet": {
             "name": "Phayze One - Endurance Rounds",
             "icon": "QuestIconPhayzeOne",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 2000
         },
         "FastUpgradesRoundSet": {
             "name": "Fast Upgrades Rounds",
             "icon": "QuestIconFastUpgradesRemake",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 650
         },
         "MOABMadnessRoundSet": {
             "name": "MOAB Madness Rounds",
             "icon": "QuestIconMoabMadness",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 50000
         },
         "QuestBrickellTrialRoundSet": {
             "name": "Brickell Bootcamp Rounds",
             "icon": "QuestIconBrickell",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 650
         },
         "QuestChurchillTrialRoundSet": {
             "name": "Royal Tank Academy Rounds",
             "icon": "QuestIconCaptainChurchill",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 170
         },
         "QuestCorvusTrialRoundSet": {
             "name": "A Guide to the Book of Spirits Rounds",
             "icon": "QuestIconCorvus",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 1
         },
         "QuestEtienneTrialRoundSet": {
             "name": "Drone Flying 101 Rounds",
             "icon": "QuestIconDroneFlying101",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 650
         },
         "QuestGeraldoTrialRoundSet": {
             "name": "One Stop Pop Shop! Rounds",
             "icon": "QuestIconGeraldo",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 3
         },
         "QuestGwendolinTrialRoundSet": {
             "name": "Trial By Fire Rounds",
             "icon": "QuestIconGwendolin",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 650
         },
         "QuestObynTrialRoundSet": {
             "name": "Obyn's Gardening School Rounds",
             "icon": "QuestIconObynsGardeningSchool",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 650
         },
         "QuestPatTrialRoundSet": {
             "name": "Pat Trial Rounds",
             "icon": "QuestIconPatFusty",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 800
         },
         "QuestPsiTrialRoundSet": {
             "name": "Psi Insight! Rounds",
             "icon": "QuestIconPsi",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 100
         },
         "QuestQuincyTrialRoundSet": {
             "name": "Quincy, Student of Quincy Rounds",
             "icon": "QuestIconQuincyTestOfQuincy",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 850
         },
         "QuestRosaliaTrialRoundSet": {
             "name": "Tinkerer's Tutorial Rounds",
             "icon": "QuestIconRosalia",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 650
         },
         "QuestSaudaTrialRoundSet": {
             "name": "Blade Sauda Nowhere Rounds",
             "icon": "QuestIconBladeSaudaNowhere",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 650
         },
         "QuestStrikerTrialRoundSet": {
             "name": "Striker Instruction! Rounds",
             "icon": "QuestIconStrikerJones",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 650
         },
         "BouncyDartsTaleStage1RoundSet": {
             "name": "New Dart Just Dropped Stage 1",
             "icon": "QuestIconBouncyDarts",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 10
         },
         "BouncyDartsTaleStage2RoundSet": {
             "name": "New Dart Just Dropped Stage 2",
             "icon": "QuestIconBouncyDarts",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 1000
         },
         "ScoopsTaleIPart1RoundSet": {
             "name": "Scoop's Tall Tale Part 1",
             "icon": "QuestIconScoopsTale1",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 250
         },
         "ScoopsTaleIPart2RoundSet": {
             "name": "Scoop's Tall Tale Part 2",
             "icon": "QuestIconScoopsTale1",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 500
         },
         "ScoopsTaleIPart3RoundSet": {
             "name": "Scoop's Tall Tale Part 3",
             "icon": "QuestIconScoopsTale1",
-            "type": "quest"
+            "type": "quest",
+            "startingCash": 5000
         }
     },
     "incomeSets": {

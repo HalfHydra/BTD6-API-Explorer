@@ -969,9 +969,6 @@ function changeTab(tab) {
             case 'extras':
                 generateExtrasPage();
                 break;
-            case 'settings':
-                generateSettings();
-                break;
         }
     }
 }
@@ -8330,7 +8327,13 @@ function generateExtrasPage() {
     selectorsDiv.classList.add('selectors-div');
     explorePage.appendChild(selectorsDiv);
 
-    let selectors = ['Custom Round Sets', 'Monkey Money Helper', 'Export Data', 'Send Feedback', 'Settings'];
+    let selectors = [
+        'Custom Round Sets', 
+        // 'Monkey Money Helper', 
+        // 'Export Data', 
+        'Send Feedback'
+        // 'Settings'
+    ];
 
     selectors.forEach((selector) => {
         let selectorDiv = document.createElement('div');
@@ -8354,6 +8357,12 @@ function generateExtrasPage() {
                 break;
             case 'Monkey Money Helper':
                 selectorImg.src = '../Assets/UI/WoodenRoundButton.png';
+                break;
+            case "Send Feedback":
+                selectorImg.src = '../Assets/UI/FeedbackBtn.png';
+                break;
+            case "Settings":
+                selectorImg.src = '../Assets/UI/OptionsBtn.png';
                 break;
             default: 
                 selectorImg.src = '../Assets/UI/WoodenRoundButton.png';
@@ -8379,6 +8388,12 @@ function changeExtrasTab(selected){
     switch(selected){
         case 'Custom Round Sets':
             generateRoundsets();
+            break;
+        case 'Send Feedback':
+            window.open('https://forms.gle/Tg1PuRNj2ftojMde6', '_blank');
+            break;
+        case 'Settings':
+            generateSettings();
             break;
     }
 }
@@ -8458,7 +8473,7 @@ function generateRoundsets() {
     })
 }
 
-async function showRoundsetModel(source, roundset) {
+async function showRoundsetModel(source, roundset, startingCash) {
     let roundsetContent = document.getElementById('roundset-content');
     roundsetContent.style.display = "flex";
     roundsetContent.innerHTML = "";
@@ -8476,6 +8491,10 @@ async function showRoundsetModel(source, roundset) {
     // }
     roundsetProcessed =  processRoundset(roundsetData);
     console.log(roundsetProcessed)
+
+    if (startingCash == null) {
+        startingCash = constants.roundSets[roundset].startingCash;
+    }
 
     let headerBar = document.createElement('div');
     headerBar.classList.add('roundset-header-bar');
@@ -8597,21 +8616,21 @@ async function showRoundsetModel(source, roundset) {
         mapsProgressList.classList.remove('stats-tab-yellow');
         mapsProgressGame.classList.remove('stats-tab-yellow');
         currentRoundsetView = "Simple";
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
+        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked, startingCash);
     })
     mapsProgressList.addEventListener('click', () => {
         mapsProgressList.classList.add('stats-tab-yellow');
         mapsProgressGrid.classList.remove('stats-tab-yellow');
         mapsProgressGame.classList.remove('stats-tab-yellow');
         currentRoundsetView = "Topper";
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
+        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked, startingCash);
     })
     mapsProgressGame.addEventListener('click', () => {
         mapsProgressGame.classList.add('stats-tab-yellow');
         mapsProgressGrid.classList.remove('stats-tab-yellow');
         mapsProgressList.classList.remove('stats-tab-yellow');
         currentRoundsetView = "Preview";
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
+        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked, startingCash);
     })
 
 
@@ -8623,7 +8642,7 @@ async function showRoundsetModel(source, roundset) {
     })
     currentPreviewRound = 0;
     currentRoundsetView = "Simple";
-    generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked)
+    generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked, startingCash)
     onChangeModified(onlyModifiedToggleInput.checked)
 }
 
@@ -8646,7 +8665,7 @@ function processRoundset(data, defaultAppend){
     return data;
 }
 
-async function generateRounds(type, reverse, modified) {
+async function generateRounds(type, reverse, modified, startingCash) {
     let roundsContent = document.getElementById('rounds-content');
     roundsContent.innerHTML = "";
 
@@ -8708,6 +8727,22 @@ async function generateRounds(type, reverse, modified) {
             setTimeout(() => {
             let fragment = document.createDocumentFragment();
 
+            let disclaimerDiv = document.createElement('div');
+            disclaimerDiv.classList.add('disclaimer-div');
+            fragment.appendChild(disclaimerDiv);
+
+            let disclaimer = document.createElement('p');
+            disclaimer.classList.add('disclaimer', 'black-outline');
+            disclaimer.innerHTML = "This layout is based on Topper's website:";
+            disclaimerDiv.appendChild(disclaimer);
+
+            let disclaimerLink = document.createElement('a');
+            disclaimerLink.classList.add('disclaimer-link', 'black-outline');
+            disclaimerLink.href = "https://topper64.co.uk/nk/btd6/rounds/";
+            disclaimerLink.target = "_blank";
+            disclaimerLink.innerHTML = "Topper's Round Information";
+            disclaimerDiv.appendChild(disclaimerLink);
+
             let minWidthPercentage = (30 / 600) * 100;
 
             roundsetProcessed.rounds.forEach(async (round, index) => {
@@ -8740,12 +8775,12 @@ async function generateRounds(type, reverse, modified) {
                 
                 let roundIncome = document.createElement('p');
                 roundIncome.classList.add('round-income', 'black-outline');
-                roundIncome.innerHTML = `Income: ${round.income.toLocaleString()}`;
+                roundIncome.innerHTML = `Income: ${(round.roundNumber == 1 && startingCash ? round.income + startingCash : round.income).toLocaleString()}`;
                 incomeTextDiv.appendChild(roundIncome);
                 
                 let roundIncomeTotal = document.createElement('p');
                 roundIncomeTotal.classList.add('round-income-total', 'black-outline');
-                roundIncomeTotal.innerHTML = `Total: ${round.incomeSum.toLocaleString()}`;
+                roundIncomeTotal.innerHTML = `Total: ${(round.incomeSum + startingCash).toLocaleString()}`;
                 incomeTextDiv.appendChild(roundIncomeTotal);
 
                 let rbeDiv = document.createElement('div');
@@ -9263,7 +9298,7 @@ function resetPreview() {
 }
 
 function generateSettings(){
-    let settingsContent = document.getElementById('settings-content');
+    let settingsContent = document.getElementById('extras-content');
     settingsContent.innerHTML = "";
 
     let noDataFound = document.createElement('p');
@@ -9291,8 +9326,10 @@ function generateSettings(){
         // document.getElementById('front-page').style.display = "block";
         // document.getElementById('settings-content').style.display = "none";
         localStorage.clear();
+        //reload the page
+        location.reload();
     })
-    // settingsOptionsContainer.appendChild(whereButton);
+    settingsOptionsContainer.appendChild(whereButton);
 
 }
 
