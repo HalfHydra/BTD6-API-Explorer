@@ -1,7 +1,5 @@
 let readyFlags = [0,0,0,0,0]
 let pressedStart = false;
-// let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
-let isGenerated = []
 let locJSON = {}
 let achievementsJSON = {}
 let achievementsHelper = {}
@@ -89,44 +87,35 @@ let previewModified = null;
 let currentModifiedRounds = []
 
 fetch('./data/Constants.json')
-        .then(response => response.json())
-        .then(data => {
-            constants = data;
-            readyFlags[4] = 1
-            generateIfReady()
-            generateVersionInfo()
-        })
-        .catch(error => {
-            console.error('Error:', error)
-            errorModal(error, "js")
+    .then(response => response.json())
+    .then(data => {
+        constants = data;
+        readyFlags[4] = 1
+        generateVersionInfo()
+    })
+    .catch(error => {
+        console.error('Error:', error)
+        errorModal(error, "js")
+});
+
+function fetchDependencies() {
+    Promise.all([
+        fetch('./data/English.json').then(response => response.json()),
+        fetch('./data/Achievements150.json').then(response => response.json())
+    ])
+    .then(([englishData, achievementsData]) => {
+        locJSON = englishData;
+        achievementsJSON = achievementsData;
+        readyFlags[2] = 1;
+        readyFlags[3] = 1;
+        generateIfReady();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        errorModal(error, "js");
     });
 
-function fetchDependencies(){
-    fetch('./data/English.json')
-        .then(response => response.json())
-        .then(data => {
-            locJSON = data;
-            readyFlags[2] = 1
-            generateIfReady()
-        })
-        .catch(error => {
-            console.error('Error:', error)
-            errorModal(error, "js")
-    });
-
-    fetch('./data/Achievements150.json')
-        .then(response => response.json())
-        .then(data => {
-            achievementsJSON = data;
-            readyFlags[3] = 1
-            generateIfReady()
-        })
-        .catch(error => {
-            console.error('Error:', error)
-            errorModal(error, "js")
-    });
     showLoading();
-    generateIfReady()
 }
 
 function generateIfReady(){
@@ -144,9 +133,7 @@ function generateIfReady(){
         generateMapData()
         generateProgressSubText()
         generateOverview()
-        isGenerated.push('overview');
         changeTab('overview');
-        // document.getElementById("loading").style.transform = "scale(0)";
     }
 }
 
@@ -229,7 +216,7 @@ function generateStats(){
     profileStats["Bosses Popped"] = btd6publicprofile.bloonsPopped["bossesPopped"];
     profileStats["Damage Done To Bosses"] = btd6publicprofile.gameplay["damageDoneToBosses"];
 
-    //stats from usersave
+    //stats not in game
     profileStats["Daily Challenges Completed"] = btd6usersave["totalDailyChallengesCompleted"];
     profileStats["Consecutive DCs Completed"] = btd6usersave["consecutiveDailyChallengesCompleted"];
     profileStats["Race Attempts"] = btd6usersave["totalRacesEntered"];
@@ -240,7 +227,6 @@ function generateStats(){
     //Calculate the hidden and normal achievements
     let hiddenAchievements = 0;
     let normalAchievements = 0;
-    //for (let [name, model] of Object.entries(achievementsHelper)){
     btd6usersave.achievementsClaimed.forEach((achievement) => {
         let achievementModel = achievementsHelper[fixAchievementName(achievement)];
         if(!achievementModel) { return }
@@ -338,7 +324,6 @@ function generateProgressSubText(){
     progressSubText["MapProgress"] = `${mapsPlayed} Map${mapsPlayed != 1 ? "s" : ""} Played`;
     let chimpsTotal = Object.values(processedMapData.Medals.single).map(map => map["Clicks"]).filter(medal => medal).length;
     if (chimpsTotal > 0) { progressSubText["CHIMPS"] = `${chimpsTotal} CHIMPS Medal${chimpsTotal != 1 ? "s" : ""} Earned` }
-    // let powersTotal = Object.values(btd6usersave.powers).map(power => power.quantity).reduce((acc, amount) => acc + amount)
     let powersTotal = Object.values(btd6usersave.powers).map(power => (typeof power === 'object' && power.quantity) ? power.quantity : 0).reduce((acc, amount) => acc + amount);
     progressSubText["Powers"] = `${powersTotal} Power${powersTotal != 1 ? "s" : ""} Accumulated`
     let instaTotal = Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount)
@@ -394,7 +379,6 @@ function generateMapData() {
                 diffData["completed"] = false;
             }
         }
-        
 
         for (let [difficulty, diffData] of Object.entries(mapData["coop"])) {
             if (diffData && diffData["completed"] === false && (diffData["bestRound"] >= constants.endRound[difficulty] || diffData.completedWithoutLoadingSave) ) {
@@ -419,7 +403,6 @@ function generateMapData() {
             (diffData && diffData["completed"]) ? processedMapData.Medals.coop[map][difficulty] = true : processedMapData.Medals.coop[map][difficulty] = false;
         }
 
-        console.log(mapData["coop"]["Clicks"])
         processedMapData.Medals.single[map]["CHIMPS-BLACK"] = mapData["single"]["Clicks"] && mapData["single"]["Clicks"].completed ? mapData["single"]["Clicks"].completedWithoutLoadingSave : false;
         processedMapData.Medals.coop[map]["CHIMPS-BLACK"] = mapData["coop"]["Clicks"] && mapData["coop"]["Clicks"].completed ? mapData["coop"]["Clicks"].completedWithoutLoadingSave : false;
 
@@ -450,8 +433,6 @@ function generateMapData() {
         processedMapData["Borders"]["coop"][map] = blackBorder ? "Black" : goldBorder ? "Gold" : silverBorder ? "Silver" : bronzeBorder ? "Bronze" : "None";
         
         processedMapData["Maps"][map] = mapData;
-
-
     }
 }
 
@@ -562,35 +543,24 @@ function hideLoading(){
 }
 
 const container = document.createElement('div');
-container.id = 'container';
 document.body.appendChild(container);
 
 document.body.classList.add('hex-bg');
 
 const header = document.createElement('div');
-header.id = 'header';
 header.classList.add('header');
 container.appendChild(header);
 
 const headerDiv = document.createElement('div');
-headerDiv.id = 'header-div';
 headerDiv.classList.add('header-div');
 header.appendChild(headerDiv);
 
 const title = document.createElement('h1');
-title.id = 'title';
 title.classList.add('title');
 title.innerHTML = 'Bloons TD 6 API Explorer';
 headerDiv.appendChild(title);
 
-// const titleImg = document.createElement('img');
-// titleImg.id = 'title-img';
-// titleImg.classList.add('title-img');
-// titleImg.src = './Assets/UI/TitleContainer.png';
-// headerDiv.appendChild(titleImg);
-
 const content = document.createElement('div');
-content.id = 'content';
 content.classList.add('content');
 container.appendChild(content);
 
@@ -605,11 +575,6 @@ function generateFrontPage(){
     frontPage.id = 'front-page';
     frontPage.classList.add('front-page');
     content.appendChild(frontPage);
-    // const frontPageTitle = document.createElement('h1');
-    // frontPageTitle.id = 'front-page-title';
-    // frontPageTitle.classList.add('front-page-title');
-    // frontPageTitle.innerHTML = 'Bloons TD 6 API Explorer';
-    // frontPage.appendChild(frontPageTitle);
 
     let disclaimerText = document.createElement('p');
     disclaimerText.classList.add('disclaimer-text');
@@ -617,20 +582,16 @@ function generateFrontPage(){
     frontPage.appendChild(disclaimerText);
 
     let frontPageText = document.createElement('p');
-    frontPageText.id = 'front-page-text';
     frontPageText.classList.add('front-page-text');
     frontPageText.innerHTML = 'Enter your Open Access Key (OAK) to get started: ';
     frontPage.appendChild(frontPageText);
 
-    //previousies entered OAK
     let previousOAK = document.createElement('div');
-    previousOAK.id = 'previous-oak';
     previousOAK.classList.add('previous-oak');
     frontPage.appendChild(previousOAK);
 
     Object.entries(localStorageOAK).forEach(([oak, oakdata]) => {
         let previousOAKEntry = document.createElement('div');
-        previousOAKEntry.id = 'previous-oak-entry';
         previousOAKEntry.classList.add('previous-oak-entry');
         previousOAKEntry.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(${oakdata.banner})`;
         previousOAK.appendChild(previousOAKEntry);
@@ -638,14 +599,11 @@ function generateFrontPage(){
         previousOAKEntry.appendChild(generateAvatar(100, oakdata.avatar));
 
         let profileName = document.createElement('p');
-        profileName.id = 'profile-name';
-        profileName.classList.add('profile-name');
-        profileName.classList.add('black-outline');
+        profileName.classList.add('profile-name','black-outline');
         profileName.innerHTML = oakdata.displayName;
         previousOAKEntry.appendChild(profileName);
 
         let useButton = document.createElement('img');
-        useButton.id = 'use-button';
         useButton.classList.add('use-button');
         useButton.src = './Assets/UI/ContinueBtn.png';
         useButton.addEventListener('click', () => {
@@ -659,7 +617,6 @@ function generateFrontPage(){
         previousOAKEntry.appendChild(useButton);
 
         let deleteButton = document.createElement('img');
-        deleteButton.id = 'delete-button';
         deleteButton.classList.add('delete-button');
         deleteButton.src = './Assets/UI/CloseBtn.png'
         deleteButton.addEventListener('click', () => {
@@ -674,15 +631,14 @@ function generateFrontPage(){
     let oakEntryDiv = document.createElement('div');
     oakEntryDiv.classList.add('oak-entry-div');
     frontPage.appendChild(oakEntryDiv);
-    //key entry
+    
     let keyEntry = document.createElement('input');
     keyEntry.classList.add('key-entry');
     keyEntry.placeholder = 'Enter your OAK here';
     oakEntryDiv.appendChild(keyEntry);
-    //start button
+    
     let startButton = document.createElement('div');
-    startButton.classList.add('start-button');
-    startButton.classList.add('black-outline');
+    startButton.classList.add('start-button','black-outline');
     startButton.innerHTML = 'Start';
     startButton.addEventListener('click', () => {
         let key = keyEntry.value;
@@ -832,7 +788,6 @@ function generateFrontPage(){
     feedbackButton.id = 'feedback-button';
     feedbackButton.addEventListener('click', () => {
         hideAllButOne('feedback')
-        // window.open('https://forms.gle/Tg1PuRNj2ftojMde6', '_blank');
     })
 
     function hideAllButOne(tab){
@@ -851,57 +806,46 @@ function generateFrontPage(){
     }
 
     let OAKInstructionsHeader = document.createElement('p');
-    OAKInstructionsHeader.id = 'oak-instructions-header';
-    OAKInstructionsHeader.classList.add('oak-instructions-header');
-    OAKInstructionsHeader.classList.add('black-outline');
+    OAKInstructionsHeader.classList.add('oak-instructions-header','black-outline');
     OAKInstructionsHeader.innerHTML = 'What is an Open Access Key?';
     OAKInstructionsDiv.appendChild(OAKInstructionsHeader);
 
     let OAKInstructionsText = document.createElement('p');
-    OAKInstructionsText.id = 'oak-instructions-text';
     OAKInstructionsText.classList.add('oak-instructions-text');
-    OAKInstructionsText.innerHTML = 'An Open Access Key (OAK) is a unique key that allows you to access your Bloons TD 6 data from Ninja Kiwi\'s Open Data API.';
+    OAKInstructionsText.innerHTML = 'An Open Access Key (OAK) is a unique key that allows you to access your Bloons TD 6 data from Ninja Kiwi\'s Open Data API. The site will use this to fetch your information from the API.';
     OAKInstructionsDiv.appendChild(OAKInstructionsText);
 
     let OAKInstructionsHeader2 = document.createElement('p');
-    OAKInstructionsHeader2.id = 'oak-instructions-header';
-    OAKInstructionsHeader2.classList.add('oak-instructions-header');
-    OAKInstructionsHeader2.classList.add('black-outline');
+    OAKInstructionsHeader2.classList.add('oak-instructions-header','black-outline');
     OAKInstructionsHeader2.innerHTML = 'How do I get one?';
     OAKInstructionsDiv.appendChild(OAKInstructionsHeader2);
 
     let OAKInstructionsText2 = document.createElement('p');
-    OAKInstructionsText2.id = 'oak-instructions-text2';
     OAKInstructionsText2.classList.add('oak-instructions-text');
     OAKInstructionsText2.innerHTML = 'Step 1: Login and Backup your progress with a Ninja Kiwi Account. You can do this by going to settings from the main menu and clicking on the Account button. NOTE: This site is not available for BTD6+ on Apple Arcade and BTD6 Netflix. ';
     OAKInstructionsDiv.appendChild(OAKInstructionsText2);
 
     let OAKInstuctionImg = document.createElement('img');
-    OAKInstuctionImg.id = 'oak-instruction-img';
     OAKInstuctionImg.classList.add('oak-instruction-img');
     OAKInstuctionImg.src = './Assets/UI/OAKTutorial1.jpg';
     OAKInstructionsDiv.appendChild(OAKInstuctionImg);
 
     let OAKInstructionsText3 = document.createElement('p');
-    OAKInstructionsText3.id = 'oak-instructions-text3';
     OAKInstructionsText3.classList.add('oak-instructions-text');
     OAKInstructionsText3.innerHTML = 'Step 2: Select "Open Data API" at the bottom right of the account screen.';
     OAKInstructionsDiv.appendChild(OAKInstructionsText3);
 
     let OAKInstuctionImg2 = document.createElement('img');
-    OAKInstuctionImg2.id = 'oak-instruction-img2';
     OAKInstuctionImg2.classList.add('oak-instruction-img');
     OAKInstuctionImg2.src = './Assets/UI/OAKTutorial2.jpg';
     OAKInstructionsDiv.appendChild(OAKInstuctionImg2);
 
     let OAKInstructionsText4 = document.createElement('p');
-    OAKInstructionsText4.id = 'oak-instructions-text4';
     OAKInstructionsText4.classList.add('oak-instructions-text');
     OAKInstructionsText4.innerHTML = 'Step 3: Generate a key and copy that in to the above text field. It should start with "oak_". Then click "Start" to begin!';
     OAKInstructionsDiv.appendChild(OAKInstructionsText4);
 
     let OAKInstuctionImg3 = document.createElement('img');
-    OAKInstuctionImg3.id = 'oak-instruction-img3';
     OAKInstuctionImg3.classList.add('oak-instruction-img');
     OAKInstuctionImg3.src = './Assets/UI/OAKTutorial3.jpg';
     OAKInstructionsDiv.appendChild(OAKInstuctionImg3);
@@ -912,9 +856,7 @@ function generateFrontPage(){
     OAKInstructionsDiv.appendChild(oakInstructionFooter);
 
     let faqHeader = document.createElement('p');
-    faqHeader.id = 'faq-header';
-    faqHeader.classList.add('oak-instructions-header');
-    faqHeader.classList.add('black-outline');
+    faqHeader.classList.add('oak-instructions-header','black-outline');
     faqHeader.innerHTML = 'Frequently Asked Questions';
     FAQDiv.appendChild(faqHeader);
 
@@ -965,13 +907,11 @@ function generateFrontPage(){
     }
 
     let privacyHeader = document.createElement('p');
-    privacyHeader.id = 'privacy-header';
     privacyHeader.classList.add('oak-instructions-header','black-outline');
     privacyHeader.innerHTML = 'Privacy Policy';
     privacyDiv.appendChild(privacyHeader);
 
     let privacyText = document.createElement('p');
-    privacyText.id = 'privacy-text';
     privacyText.classList.add('oak-instructions-text');
     privacyText.innerHTML = 'This app does not store any data being sent to or retrieved from Ninja Kiwi\'s Open Data API outside of your browser/device. The localStorage browser feature is used to prevent users from having to re-enter their OAK every time they visit the site. If you would like to delete this stored data, you can do so by clicking the "X" on the profile you would like to delete on this homepage.';
     privacyDiv.appendChild(privacyText);
@@ -982,13 +922,11 @@ function generateFrontPage(){
     knownIssuesDiv.appendChild(knownIsseusHeader);
 
     let knownIssuesText = document.createElement('p');
-    knownIssuesText.id = 'known-issues-text';
     knownIssuesText.classList.add('oak-instructions-text');
-    knownIssuesText.innerHTML = '- Rosalia is missing from the Heroes Placed sections on profiles.<br>- Tinkerton is missing from the maps section.';
+    knownIssuesText.innerHTML = '- Rosalia is missing from the Top Heroes sections on profiles.<br>- Tinkerton is missing from the maps section.';
     knownIssuesDiv.appendChild(knownIssuesText);
     
     let trailerVideo = document.createElement('video');
-    trailerVideo.id = 'trailer-video';
     trailerVideo.preload = 'none';
     trailerVideo.classList.add('trailer-video');
     trailerVideo.src = './Assets/Trailer/Trailer.mp4';
@@ -1020,21 +958,13 @@ function generateVersionInfo(){
     let versionDiv = document.getElementById('version-div');
 
     let toolVersionText = document.createElement('p');
-    toolVersionText.id = 'tool-version-text';
     toolVersionText.classList.add('tool-version-text');
     toolVersionText.innerHTML = `App Version: ${constants.version} / Game Content Version: v${constants.projectContentVersion}`;
     versionDiv.appendChild(toolVersionText);
-
-    // let toolVersionText2 = document.createElement('p');
-    // toolVersionText2.id = 'tool-version-text2';
-    // toolVersionText2.classList.add('tool-version-text');
-    // toolVersionText2.innerHTML = `Game Content Version: v${constants.projectContentVersion}`;
-    // versionDiv.appendChild(toolVersionText2);
 }
 
 function generateHeaderTabs(){
     const headerContainer = document.createElement('div');
-    headerContainer.id = 'header';
     headerContainer.classList.add('header-container');
     header.appendChild(headerContainer);
 
@@ -1043,8 +973,7 @@ function generateHeaderTabs(){
     headers.forEach((headerName) => {
         headerName = headerName.toLowerCase();
         let headerElement = document.createElement('p');
-        headerElement.classList.add('header-label');
-        headerElement.classList.add('black-outline');
+        headerElement.classList.add('header-label','black-outline');
         headerElement.id = headerName.toLowerCase();
         headerElement.innerHTML = headerName;
         headerElement.addEventListener('click', () => {
@@ -1090,25 +1019,22 @@ function changeTab(tab) {
     }
     document.getElementById(tab + '-content').style.display = 'flex';
     document.getElementById(tab).classList.add('selected');
-    if(!isGenerated.includes(tab)){
-        switch(tab){
-            case 'overview':
-                generateOverview();
-                isGenerated.push(tab);
-                break;
-            case 'progress':
-                generateProgress();
-                break;
-            case 'events':
-                generateEvents();
-                break;
-            case "explore":
-                generateExplore();
-                break;
-            case 'extras':
-                generateExtrasPage();
-                break;
-        }
+    switch(tab){
+        case 'overview':
+            generateOverview();
+            break;
+        case 'progress':
+            generateProgress();
+            break;
+        case 'events':
+            generateEvents();
+            break;
+        case "explore":
+            generateExplore();
+            break;
+        case 'extras':
+            generateExtrasPage();
+            break;
     }
 }
 
@@ -1117,7 +1043,6 @@ let tempXP = 0;
 function generateOverview(){
 
     let profileHeader = document.createElement('div');
-    profileHeader.id = 'profile-header';
     profileHeader.classList.add('profile-header');
     profileHeader.classList.add('profile-banner');
     profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${getProfileBanner(btd6publicprofile)}')`;
@@ -1125,30 +1050,25 @@ function generateOverview(){
     profileHeader.appendChild(generateAvatar(100, btd6publicprofile["avatarURL"]));
 
     let profileTopBottom = document.createElement('div');
-    profileTopBottom.id = 'profile-top-bottom';
     profileTopBottom.classList.add('profile-top-bottom');
     profileHeader.appendChild(profileTopBottom);
 
     let profileTop = document.createElement('div');
-    profileTop.id = 'profile-top';
     profileTop.classList.add('profile-top');
     profileTopBottom.appendChild(profileTop);
 
     let profileName = document.createElement('p');
-    profileName.id = 'profile-name';
-    profileName.classList.add('profile-name');
-    profileName.classList.add('black-outline');
+    profileName.classList.add('profile-name','black-outline');
     profileName.innerHTML = btd6publicprofile["displayName"];
     profileTop.appendChild(profileName);
 
-    if ( btd6publicprofile["followers"] > 0 ) {
+    if (btd6publicprofile["followers"] > 0 ) {
         let profileFollowers = document.createElement('div')
         profileFollowers.classList.add('profile-followers');
         profileTop.appendChild(profileFollowers);
 
         let followersLabel = document.createElement('p');
-        followersLabel.classList.add('followers-label');
-        followersLabel.classList.add('black-outline');
+        followersLabel.classList.add('followers-label','black-outline');
         followersLabel.innerHTML = 'Followers';
         profileFollowers.appendChild(followersLabel);
 
@@ -1159,7 +1079,6 @@ function generateOverview(){
     }
 
     let profileBottom = document.createElement('div');
-    profileBottom.id = 'profile-bottom';
     profileBottom.classList.add('profile-bottom');
     profileTopBottom.appendChild(profileBottom);
 
@@ -1169,12 +1088,10 @@ function generateOverview(){
     }
 
     let belowProfileHeader = document.createElement('div');
-    belowProfileHeader.id = 'below-profile-header';
     belowProfileHeader.classList.add('below-profile-header');
     document.getElementById('overview-content').appendChild(belowProfileHeader);
 
     let leftColumnDiv = document.createElement('div');
-    leftColumnDiv.id = 'left-column-div';
     leftColumnDiv.classList.add('left-column-div');
     belowProfileHeader.appendChild(leftColumnDiv);
 
@@ -1229,95 +1146,75 @@ function generateOverview(){
     })
 
     let currencyAndMedalsDiv = document.createElement('div');
-    currencyAndMedalsDiv.id = 'currency-medals-div';
     currencyAndMedalsDiv.classList.add('currency-medals-div');
     leftColumnDiv.appendChild(currencyAndMedalsDiv);
 
     let leftColumnHeader = document.createElement('div');
-    leftColumnHeader.id = 'left-column-header';
     leftColumnHeader.classList.add('left-column-header');
     currencyAndMedalsDiv.appendChild(leftColumnHeader);
 
     let leftColumnHeaderText = document.createElement('p');
-    leftColumnHeaderText.id = 'left-column-header-text';
-    leftColumnHeaderText.classList.add('column-header-text');
-    leftColumnHeaderText.classList.add('black-outline');
+    leftColumnHeaderText.classList.add('column-header-text','black-outline');
     leftColumnHeaderText.innerHTML = 'Currency and Medals';
     leftColumnHeader.appendChild(leftColumnHeaderText);
 
     let currencyDiv = document.createElement('div');
-    currencyDiv.id = 'currency-div';
     currencyDiv.classList.add('currency-div');
     currencyAndMedalsDiv.appendChild(currencyDiv);
 
     let currencyMMDiv = document.createElement('div');
-    currencyMMDiv.id = 'currency-mm-div';
     currencyMMDiv.classList.add('currency-mm-div');
     currencyDiv.appendChild(currencyMMDiv);
 
     let currencyMMImg = document.createElement('img');
-    currencyMMImg.id = 'currency-mm-img';
     currencyMMImg.classList.add('currency-mm-img');
     currencyMMImg.src = '../Assets/UI/BloonjaminsIcon.png';
     currencyMMDiv.appendChild(currencyMMImg);
 
     let currencyMMText = document.createElement('p');
-    currencyMMText.id = 'currency-mm-text';
-    currencyMMText.classList.add('currency-mm-text');
-    currencyMMText.classList.add('mm-outline');
+    currencyMMText.classList.add('currency-mm-text','mm-outline');
     currencyMMText.innerHTML = "$" + btd6usersave["monkeyMoney"].toLocaleString();
     currencyMMDiv.appendChild(currencyMMText);
 
     let currencyKnowledgeDiv = document.createElement('div');
-    currencyKnowledgeDiv.id = 'currency-knowledge-div';
     currencyKnowledgeDiv.classList.add('currency-knowledge-div');
     currencyDiv.appendChild(currencyKnowledgeDiv);
 
     let currencyKnowledgeImg = document.createElement('img');
-    currencyKnowledgeImg.id = 'currency-knowledge-img';
     currencyKnowledgeImg.classList.add('currency-knowledge-img');
     currencyKnowledgeImg.src = '../Assets/UI/KnowledgeIcon.png';
     currencyKnowledgeDiv.appendChild(currencyKnowledgeImg);
 
     let currencyKnowledgeText = document.createElement('p');
-    currencyKnowledgeText.id = 'currency-knowledge-text';
-    currencyKnowledgeText.classList.add('currency-knowledge-text');
-    currencyKnowledgeText.classList.add('knowledge-outline');
+    currencyKnowledgeText.classList.add('currency-knowledge-text','knowledge-outline');
     currencyKnowledgeText.innerHTML = btd6usersave["knowledgePoints"].toLocaleString();
     currencyKnowledgeDiv.appendChild(currencyKnowledgeText);
 
     let currencyTrophiesDiv = document.createElement('div');
-    currencyTrophiesDiv.id = 'currency-trophies-div';
     currencyTrophiesDiv.classList.add('currency-trophies-div');
     currencyDiv.appendChild(currencyTrophiesDiv);
 
     let currencyTrophiesImg = document.createElement('img');
-    currencyTrophiesImg.id = 'currency-trophies-img';
     currencyTrophiesImg.classList.add('currency-trophies-img');
     currencyTrophiesImg.src = '../Assets/UI/TrophyIcon.png';
     currencyTrophiesDiv.appendChild(currencyTrophiesImg);
 
     let currencyTrophiesText = document.createElement('p');
-    currencyTrophiesText.id = 'currency-trophies-text';
-    currencyTrophiesText.classList.add('currency-trophies-text');
-    currencyTrophiesText.classList.add('black-outline');
+    currencyTrophiesText.classList.add('currency-trophies-text','black-outline');
     currencyTrophiesText.innerHTML = btd6usersave["trophies"].toLocaleString();
     currencyTrophiesDiv.appendChild(currencyTrophiesText);
 
     let medalsDiv = document.createElement('div');
-    medalsDiv.id = 'medals-div';
     medalsDiv.classList.add('medals-div');
     currencyAndMedalsDiv.appendChild(medalsDiv);
 
     for (let [medal, num] of Object.entries(medalsInOrder)){
         if(num === 0) { continue; }
         let medalDiv = document.createElement('div');
-        medalDiv.id = 'medal-div';
         medalDiv.classList.add('medal-div');
         medalsDiv.appendChild(medalDiv);
 
         let medalImg = document.createElement('img');
-        medalImg.id = 'medal-img';
         medalImg.classList.add('medal-img');
         medalImg.src = getMedalIcon(medal);
         medalImg.style.display = "none";
@@ -1332,81 +1229,62 @@ function generateOverview(){
         medalDiv.appendChild(medalImg);
 
         let medalText = document.createElement('p');
-        medalText.id = 'medal-text';
-        medalText.classList.add('medal-text');
-        medalText.classList.add('black-outline');
+        medalText.classList.add('medal-text','black-outline');
         medalText.innerHTML = num.toLocaleString();
         medalDiv.appendChild(medalText);
     }
 
     let topHeroesMonkesyDiv = document.createElement('div');
-    topHeroesMonkesyDiv.id = 'top-heroes-monkeys-div';
     topHeroesMonkesyDiv.classList.add('top-heroes-monkeys-div');
     leftColumnDiv.appendChild(topHeroesMonkesyDiv);
-    
-    /*let topColumnDiv = document.createElement('div');
-    topColumnDiv.id = 'top-column-div';
-    topColumnDiv.classList.add('right-column-div');
-    leftColumnDiv.appendChild(topColumnDiv);*/
 
     let topHeroesDiv = document.createElement('div');
-    topHeroesDiv.id = 'top-heroes-div';
     topHeroesDiv.classList.add('top-heroes-div');
     topHeroesMonkesyDiv.appendChild(topHeroesDiv);
 
     let topHeroesTopDiv = document.createElement('div');
-    topHeroesTopDiv.id = 'top-heroes-top-div';
     topHeroesTopDiv.classList.add('top-heroes-top-div');
     topHeroesDiv.appendChild(topHeroesTopDiv);
 
     let topHeroesTopRibbonDiv = document.createElement('div');
-    topHeroesTopRibbonDiv.id = 'top-heroes-top-div';
     topHeroesTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
     topHeroesTopDiv.appendChild(topHeroesTopRibbonDiv);
 
     let topHeroesText = document.createElement('p');
-    topHeroesText.id = 'top-heroes-text';
-    topHeroesText.classList.add('top-heroes-text');
-    topHeroesText.classList.add('black-outline');
+    topHeroesText.classList.add('top-heroes-text','black-outline');
     topHeroesText.innerHTML = 'Top Heroes';
     topHeroesTopRibbonDiv.appendChild(topHeroesText);
 
     let mapsProgressCoopToggle = document.createElement('div');
-    mapsProgressCoopToggle.id = 'maps-progress-coop-toggle';
     mapsProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
     topHeroesTopDiv.appendChild(mapsProgressCoopToggle);
 
     let mapsProgressCoopToggleText = document.createElement('p');
-    mapsProgressCoopToggleText.id = 'maps-progress-coop-toggle-text';
-    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text');
-    mapsProgressCoopToggleText.classList.add('black-outline');
+    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressCoopToggleText.innerHTML = "Show All: ";
     mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
 
     let mapsProgressCoopToggleInput = document.createElement('input');
     mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
     mapsProgressCoopToggleInput.type = 'checkbox';
-    mapsProgressCoopToggleInput.addEventListener('change', () => {
-        mapsProgressCoopToggleInput.checked ? document.getElementById('other-heroes-div').style.display = 'flex' : document.getElementById('other-heroes-div').style.display = 'none';
-    })
     mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
 
-
     let topHeroesList = document.createElement('div');
-    topHeroesList.id = 'top-heroes-list';
     topHeroesList.classList.add('top-heroes-list');
     topHeroesDiv.appendChild(topHeroesList);
 
     let top3HeroesDiv = document.createElement('div');
-    top3HeroesDiv.id = 'top-3-heroes-div';
     top3HeroesDiv.classList.add('top-3-heroes-div');
     topHeroesList.appendChild(top3HeroesDiv);
 
     let otherHeroesDiv = document.createElement('div');
-    otherHeroesDiv.id = 'other-heroes-div';
     otherHeroesDiv.classList.add('other-heroes-div');
     otherHeroesDiv.style.display = 'none';
     topHeroesList.appendChild(otherHeroesDiv);
+
+    mapsProgressCoopToggleInput.addEventListener('change', () => {
+        mapsProgressCoopToggleInput.checked ? otherHeroesDiv.style.display = 'flex' : otherHeroesDiv.style.display = 'none';
+    })
 
     let counter = 0;
     let heroesList = Object.keys(constants.heroesInOrder);
@@ -1415,12 +1293,10 @@ function generateOverview(){
         if(xp === 0) { continue; }
         if(!heroesList.includes(hero)) { continue; }
         let heroDiv = document.createElement('div');
-        heroDiv.id = 'hero-div';
         heroDiv.classList.add('hero-div');
         counter < 3 ? top3HeroesDiv.appendChild(heroDiv) : otherHeroesDiv.appendChild(heroDiv);
 
         let heroImg = document.createElement('img');
-        heroImg.id = 'hero-img';
         heroImg.classList.add('hero-img');
         heroImg.src = getHeroPortrait(hero,1);
         heroImg.style.display = "none";
@@ -1435,72 +1311,60 @@ function generateOverview(){
         heroDiv.appendChild(heroImg);
 
         let heroText = document.createElement('p');
-        heroText.id = 'hero-text';
-        heroText.classList.add('hero-text');
-        heroText.classList.add('black-outline');
+        heroText.classList.add('hero-text','black-outline');
         heroText.innerHTML = xp.toLocaleString();
         heroDiv.appendChild(heroText);
         counter++;
     }
 
     let topTowersDiv = document.createElement('div');
-    topTowersDiv.id = 'top-towers-div';
     topTowersDiv.classList.add('top-heroes-div');
     topHeroesMonkesyDiv.appendChild(topTowersDiv);
 
     let topTowersTopDiv = document.createElement('div');
-    topTowersTopDiv.id = 'top-towers-top-div';
     topTowersTopDiv.classList.add('top-heroes-top-div');
     topTowersDiv.appendChild(topTowersTopDiv);
 
     let topTowersTopRibbonDiv = document.createElement('div');
-    topTowersTopRibbonDiv.id = 'top-towers-top-div';
     topTowersTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
     topTowersTopDiv.appendChild(topTowersTopRibbonDiv);
 
     let topTowersText = document.createElement('p');
-    topTowersText.id = 'top-towers-text';
-    topTowersText.classList.add('top-heroes-text');
-    topTowersText.classList.add('black-outline');
+    topTowersText.classList.add('top-heroes-text','black-outline');
     topTowersText.innerHTML = 'Top Towers';
     topTowersTopRibbonDiv.appendChild(topTowersText);
 
     let mapsProgressCoopToggle2 = document.createElement('div');
-    mapsProgressCoopToggle2.id = 'maps-progress-coop-toggle';
     mapsProgressCoopToggle2.classList.add('maps-progress-coop-toggle');
     topTowersTopDiv.appendChild(mapsProgressCoopToggle2);
 
     let mapsProgressCoopToggleText2 = document.createElement('p');
-    mapsProgressCoopToggleText2.id = 'maps-progress-coop-toggle-text';
-    mapsProgressCoopToggleText2.classList.add('maps-progress-coop-toggle-text');
-    mapsProgressCoopToggleText2.classList.add('black-outline');
+    mapsProgressCoopToggleText2.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressCoopToggleText2.innerHTML = "Show All: ";
     mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleText2);
 
     let mapsProgressCoopToggleInput2 = document.createElement('input');
     mapsProgressCoopToggleInput2.classList.add('maps-progress-coop-toggle-input');
     mapsProgressCoopToggleInput2.type = 'checkbox';
-    mapsProgressCoopToggleInput2.addEventListener('change', () => {
-        mapsProgressCoopToggleInput2.checked ? document.getElementById('other-towers-div').style.display = 'flex' : document.getElementById('other-towers-div').style.display = 'none';
-    })
     mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleInput2);
 
     
     let topTowersList = document.createElement('div');
-    topTowersList.id = 'top-towers-list';
     topTowersList.classList.add('top-heroes-list');
     topTowersDiv.appendChild(topTowersList);
 
     let top3TowersDiv = document.createElement('div');
-    top3TowersDiv.id = 'top-3-towers-div';
     top3TowersDiv.classList.add('top-3-heroes-div');
     topTowersList.appendChild(top3TowersDiv);
 
     let otherTowersDiv = document.createElement('div');
-    otherTowersDiv.id = 'other-towers-div';
     otherTowersDiv.classList.add('other-heroes-div');
     otherTowersDiv.style.display = 'none';
     topTowersList.appendChild(otherTowersDiv);
+
+    mapsProgressCoopToggleInput2.addEventListener('change', () => {
+        mapsProgressCoopToggleInput2.checked ? otherTowersDiv.style.display = 'flex' : otherTowersDiv.style.display = 'none';
+    })
 
     counter = 0;
     let towersList = Object.keys(constants.towersInOrder);
@@ -1509,20 +1373,16 @@ function generateOverview(){
         if(xp === 0) { continue; }
         if(!towersList.includes(tower)) { continue; }
         let towerDiv = document.createElement('div');
-        towerDiv.id = 'tower-div';
         towerDiv.classList.add('hero-div');
         counter < 3 ? top3TowersDiv.appendChild(towerDiv) : otherTowersDiv.appendChild(towerDiv);
 
         let towerImg = document.createElement('img');
-        towerImg.id = 'tower-img';
         towerImg.classList.add('hero-img');
         towerImg.src = getInstaContainerIcon(tower,"000");
         towerDiv.appendChild(towerImg);
 
         let towerText = document.createElement('p');
-        towerText.id = 'tower-text';
-        towerText.classList.add('hero-text');
-        towerText.classList.add('black-outline');
+        towerText.classList.add('hero-text','black-outline');
         towerText.innerHTML = xp.toLocaleString();
         towerDiv.appendChild(towerText);
         counter++;
@@ -1531,12 +1391,10 @@ function generateOverview(){
 
 
     let rightColumnDiv = document.createElement('div');
-    rightColumnDiv.id = 'right-column-div';
     rightColumnDiv.classList.add('right-column-div');
     belowProfileHeader.appendChild(rightColumnDiv);
 
     let profileStatsDiv = document.createElement('div');
-    profileStatsDiv.id = 'profile-stats';
     profileStatsDiv.classList.add('profile-stats');
     rightColumnDiv.appendChild(profileStatsDiv);
 
@@ -1545,25 +1403,21 @@ function generateOverview(){
     profileStatsDiv.appendChild(rightColumnHeader);
 
     let rightColumnHeaderText = document.createElement('p');
-    rightColumnHeaderText.classList.add('column-header-text');
-    rightColumnHeaderText.classList.add('black-outline');
+    rightColumnHeaderText.classList.add('column-header-text','black-outline');
     rightColumnHeaderText.innerHTML = 'Overall Stats';
     rightColumnHeader.appendChild(rightColumnHeaderText);
 
     for (let [key, value] of Object.entries(profileStats)){
         let stat = document.createElement('div');
-        stat.id = 'stat';
         stat.classList.add('stat');
         profileStatsDiv.appendChild(stat);
 
         let statName = document.createElement('p');
-        statName.id = 'stat-name';
         statName.classList.add('stat-name');
         statName.innerHTML = key;
         stat.appendChild(statName);
 
         let statValue = document.createElement('p');
-        statValue.id = 'stat-value';
         statValue.classList.add('stat-value');
         statValue.innerHTML = value.toLocaleString();
         stat.appendChild(statValue);
@@ -1581,14 +1435,12 @@ function generateAvatar(size, src){
     avatar.classList.add('avatar');
 
     let avatarFrame = document.createElement('img');
-    avatarFrame.id = 'avatar-frame';
     avatarFrame.classList.add('avatar-frame','noSelect');
     avatarFrame.style.width = `${size}px`;
     avatarFrame.src = '../Assets/UI/InstaTowersContainer.png';
     avatar.appendChild(avatarFrame);
 
     let avatarImg = document.createElement('img');
-    avatarImg.id = 'avatar-img';
     avatarImg.classList.add('avatar-img','noSelect');
     avatarImg.style.width = `${size}px`;
     avatarImg.src = src;
@@ -1598,34 +1450,27 @@ function generateAvatar(size, src){
 
 function generateRank(veteran){
     let rank = document.createElement('div');
-    rank.id = 'rank';
     rank.classList.add('rank');
 
     let rankStar = document.createElement('div');
-    rankStar.id = 'rank-star';
     rankStar.classList.add('rank-star');
     rank.appendChild(rankStar);
 
     let rankImg = document.createElement('img');
-    rankImg.id = 'rank-img';
     rankImg.classList.add('rank-img');
     rankImg.src = veteran ? '../Assets/UI/LvlHolderVeteran.png' : '../Assets/UI/LvlHolder.png';
     rankStar.appendChild(rankImg);
 
     let rankText = document.createElement('p');
-    rankText.id = 'rank-text';
-    rankText.classList.add('rank-text');
-    rankText.classList.add('black-outline');
+    rankText.classList.add('rank-text','black-outline');
     rankText.innerHTML = veteran ? rankInfoVeteran["rank"] : rankInfo["rank"];
     rankStar.appendChild(rankText);
 
     let rankBar = document.createElement('div');
-    rankBar.id = 'rank-bar';
     rankBar.classList.add('rank-bar');
     rank.appendChild(rankBar);
 
     let rankBarFill = document.createElement('div');
-    rankBarFill.id = 'rank-bar-fill';
     rankBarFill.classList.add('rank-bar-fill');
     if (veteran) { 
         rankBar.classList.add('rank-bar-veteran');
@@ -1636,14 +1481,7 @@ function generateRank(veteran){
     }
     rankBar.appendChild(rankBarFill);
 
-    // let rankBarFrameImg = document.createElement('img');
-    // rankBarFrameImg.id = 'rank-bar-frame-img';
-    // rankBarFrameImg.classList.add('rank-bar-frame-img');
-    // rankBarFrameImg.src = '../Assets/UI/XPBarFrame.png';
-    // rankBar.appendChild(rankBarFrameImg);
-
     let rankBarText = document.createElement('p');
-    rankBarText.id = 'rank-bar-text';
     rankBarText.classList.add('rank-bar-text');
     if (veteran) {
         rankBarText.innerHTML = rankInfoVeteran["xp"] === null ? "Max Level" : `${rankInfoVeteran["xp"].toLocaleString()}/${rankInfoVeteran["xpGoal"].toLocaleString()}`;
@@ -1659,24 +1497,12 @@ function generateRank(veteran){
 function generateProgress(){
     let progressContent = document.getElementById('progress-content');
     progressContent.innerHTML = "";
-    /*let progressClipboardTop = document.createElement('div');
-    progressClipboardTop.id = 'progress-clipboard-top';
-    progressClipboardTop.classList.add('progress-clipboard-top');
-    progressContent.appendChild(progressClipboardTop);*/
-
-    // let progressClipboard = document.createElement('img');
-    // progressClipboard.id = 'progress-clipboard';
-    // progressClipboard.classList.add('progress-clipboard');
-    // progressClipboard.src = '../Assets/UI/ClipboardTop.png';
-    // progressContent.appendChild(progressClipboard);
 
     let progressPage = document.createElement('div');
-    progressPage.id = 'progress-page';
     progressPage.classList.add('progress-page');
     progressContent.appendChild(progressPage);
 
     let selectorsDiv = document.createElement('div');
-    selectorsDiv.id = 'selectors-div';
     selectorsDiv.classList.add('selectors-div');
     progressPage.appendChild(selectorsDiv);
 
@@ -1685,29 +1511,23 @@ function generateProgress(){
     selectors.forEach((selector) => {
         if(progressSubText[selector].includes("0 Extras")) { return; }
         let selectorDiv = document.createElement('div');
-        selectorDiv.id = selector.toLowerCase() + '-div';
         selectorDiv.classList.add('selector-div');
-        /*selectorDiv.innerHTML = progressSubText[selector];*/
         selectorDiv.addEventListener('click', () => {
             changeProgressTab(selector);
         })
         selectorsDiv.appendChild(selectorDiv);
 
         let selectorImg = document.createElement('img');
-        selectorImg.id = selector.toLowerCase() + '-img';
         selectorImg.classList.add('selector-img');
         selectorImg.src = selector == "Heroes" ? `../Assets/HeroIconCircle/HeroIcon${btd6usersave.primaryHero}.png` : '../Assets/UI/' + selector.replace(" ","") + 'Btn.png';
         selectorDiv.appendChild(selectorImg);
 
         let selectorText = document.createElement('p');
-        selectorText.id = selector.toLowerCase() + '-text';
-        selectorText.classList.add('selector-text');
-        selectorText.classList.add('black-outline');
+        selectorText.classList.add('selector-text','black-outline');
         selectorText.innerHTML = progressSubText[selector];
         selectorDiv.appendChild(selectorText);
 
         let selectorGoImg = document.createElement('img');
-        selectorGoImg.id = selector.toLowerCase() + '-go-img';
         selectorGoImg.classList.add('selector-go-img');
         selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
         selectorDiv.appendChild(selectorGoImg);
@@ -1755,36 +1575,28 @@ function generateTowerProgress(){
     progressContent.innerHTML = "";
 
     let towerProgressContainer = document.createElement('div');
-    towerProgressContainer.id = 'tower-progress-container';
     towerProgressContainer.classList.add('tower-progress-container');
     progressContent.appendChild(towerProgressContainer);
 
     let towerProgressDiv = document.createElement('div');
-    towerProgressDiv.id = 'tower-progress-div';
     towerProgressDiv.classList.add('tower-progress-div');
     towerProgressContainer.appendChild(towerProgressDiv);
 
     let towerSelectorHeaderTop = document.createElement('div');
-    towerSelectorHeaderTop.id = 'tower-selector-header-top';
     towerSelectorHeaderTop.classList.add('tower-selector-header-top');
     towerProgressDiv.appendChild(towerSelectorHeaderTop);
 
     let towerSelectorHeaderText = document.createElement('p');
-    towerSelectorHeaderText.id = 'tower-selector-header-text';
-    towerSelectorHeaderText.classList.add('tower-selector-header-text');
-    towerSelectorHeaderText.classList.add('black-outline');
+    towerSelectorHeaderText.classList.add('tower-selector-header-text','black-outline');
     towerSelectorHeaderText.innerHTML = `Towers - ${Object.keys(btd6usersave.unlockedTowers).filter(k => btd6usersave.unlockedTowers[k]).length}/${Object.keys(btd6usersave.unlockedTowers).length}`;
     towerSelectorHeaderTop.appendChild(towerSelectorHeaderText);
 
     let towerSelectorHeaderText2 = document.createElement('p');
-    towerSelectorHeaderText2.id = 'tower-selector-header-text';
-    towerSelectorHeaderText2.classList.add('tower-selector-header-text');
-    towerSelectorHeaderText2.classList.add('black-outline');
+    towerSelectorHeaderText2.classList.add('tower-selector-header-text','black-outline');
     towerSelectorHeaderText2.innerHTML = `Upgrades - ${Object.keys(btd6usersave.acquiredUpgrades).filter(k => btd6usersave.acquiredUpgrades[k]).length}/${Object.keys(btd6usersave.acquiredUpgrades).length}`;
     towerSelectorHeaderTop.appendChild(towerSelectorHeaderText2);
 
     let towerSelectorHeader = document.createElement('div');
-    towerSelectorHeader.id = 'tower-selector-header';
     towerSelectorHeader.classList.add('tower-selector-header');
     towerProgressDiv.appendChild(towerSelectorHeader);
 
@@ -1803,7 +1615,6 @@ function generateTowerProgress(){
         towerSelectorHeader.appendChild(towerSelector);
 
         let towerSelectorImg = document.createElement('img');
-        towerSelectorImg.id = tower + '-selector-img';
         towerSelectorImg.classList.add('tower-selector-img');
         towerSelectorImg.src = getInstaContainerIcon(tower,"000");
         towerSelector.appendChild(towerSelectorImg);
@@ -1839,50 +1650,40 @@ function generateTowerProgressTower(tower){
     let paragonUnlocked = constants.paragonsAvailable.includes(tower) ? btd6usersave.acquiredUpgrades[`${tower} Paragon`] : false;
 
     let towerProgressTop = document.createElement('div');
-    towerProgressTop.id = 'tower-progress-top';
     towerProgressTop.classList.add('tower-progress-top');
     if (paragonUnlocked) { towerProgressTop.classList.add('tower-progress-top-paragon') }
     towerProgressContent.appendChild(towerProgressTop);
 
     let towerProgressContentTop = document.createElement('div');
-    towerProgressContentTop.id = 'tower-progress-content-top';
     towerProgressContentTop.classList.add('tower-progress-content-top');
     towerProgressTop.appendChild(towerProgressContentTop);
 
     let towerProgressInfoContainer = document.createElement('div');
-    towerProgressInfoContainer.id = 'tower-progress-info-container';
     towerProgressInfoContainer.classList.add('tower-progress-info-container');
     towerProgressContentTop.appendChild(towerProgressInfoContainer);
 
     let towerProgressContentText = document.createElement('p');
-    towerProgressContentText.id = 'tower-progress-content-text';
-    towerProgressContentText.classList.add('tower-progress-content-text');
-    towerProgressContentText.classList.add(paragonUnlocked ? 'knowledge-outline' : 'black-outline');
+    towerProgressContentText.classList.add('tower-progress-content-text', paragonUnlocked ? 'knowledge-outline' : 'black-outline');
     towerProgressContentText.innerHTML = getLocValue(tower);
     towerProgressInfoContainer.appendChild(towerProgressContentText);
 
     let towerProgressContentXP = document.createElement('p');
-    towerProgressContentXP.id = 'tower-progress-content-xp';
-    towerProgressContentXP.classList.add('tower-progress-content-xp');
-    towerProgressContentXP.classList.add('mm-outline');
+    towerProgressContentXP.classList.add('tower-progress-content-xp','mm-outline');
     towerProgressContentXP.innerHTML = `XP: ${btd6usersave.towerXP[tower].toLocaleString()}`;
     towerProgressInfoContainer.appendChild(towerProgressContentXP);
 
     let towerProgressContentDesc = document.createElement('p');
-    towerProgressContentDesc.id = 'tower-progress-content-desc';
     towerProgressContentDesc.classList.add('tower-progress-content-desc'+ (paragonUnlocked ? '-paragon' : ''));
     towerProgressContentDesc.innerHTML = getLocValue(`${tower} Description`);
     towerProgressContentTop.appendChild(towerProgressContentDesc);
 
     let towerNameAndPortrait = document.createElement('div');
-    towerNameAndPortrait.id = 'tower-name-and-portrait';
     towerNameAndPortrait.classList.add('tower-name-and-portrait');
     towerProgressContent.appendChild(towerNameAndPortrait);
 
     let towerPortraitName = document.createElement('p');
     towerPortraitName.id = 'tower-portrait-name';
-    towerPortraitName.classList.add('tower-portrait-name');
-    towerPortraitName.classList.add('black-outline');
+    towerPortraitName.classList.add('tower-portrait-name','black-outline');
     towerPortraitName.innerHTML = getLocValue(tower);
     towerNameAndPortrait.appendChild(towerPortraitName);
 
@@ -1905,14 +1706,12 @@ function generateTowerProgressTower(tower){
     towerProgressContent.appendChild(upgradeTooltip);
 
     let towerProgressMainDiv = document.createElement('div');
-    towerProgressMainDiv.id = 'tower-progress-main-div';
     towerProgressMainDiv.classList.add('tower-progress-main-div');
     towerProgressContent.appendChild(towerProgressMainDiv);
 
     towerProgressMainDiv.appendChild(makeUpgradeButtons(tower, unlockedAllT5, paragonUnlocked));
 
     let towerProgressBottom = document.createElement('div');
-    towerProgressBottom.id = 'tower-progress-bottom';
     towerProgressBottom.classList.add('tower-progress-bottom');
     towerProgressContent.appendChild(towerProgressBottom);
 
@@ -1927,26 +1726,21 @@ function generateTowerProgressTower(tower){
 
 function makeUpgradeButtons(tower, unlockedAllT5, paragonUnlocked){
     let upgradeContainer = document.createElement('div');
-    upgradeContainer.id = 'upgrade-container';
     upgradeContainer.classList.add('upgrade-container');
 
     let upgradeRows = document.createElement('div');
-    upgradeRows.id = 'upgrade-rows';
     upgradeRows.classList.add('upgrade-rows');
     upgradeContainer.appendChild(upgradeRows);
 
     let row1 = document.createElement('div');
-    row1.id = 'upgrade-row-1';
     row1.classList.add('upgrade-row');
     upgradeRows.appendChild(row1);
 
     let row2 = document.createElement('div');
-    row2.id = 'upgrade-row-2';
     row2.classList.add('upgrade-row');
     upgradeRows.appendChild(row2);
 
     let row3 = document.createElement('div');
-    row3.id = 'upgrade-row-3';
     row3.classList.add('upgrade-row');
     upgradeRows.appendChild(row3);
 
@@ -1980,17 +1774,11 @@ function makeUpgradeButtons(tower, unlockedAllT5, paragonUnlocked){
     if (constants.paragonsAvailable.includes(tower) && unlockedAllT5){
 
         let upgradeContainerParagon = document.createElement('div');
-        upgradeContainerParagon.id = 'upgrade-container-paragon';
         upgradeContainerParagon.classList.add('upgrade-container-paragon');
         upgradeContainer.appendChild(upgradeContainerParagon);
 
         upgradeContainerParagon.appendChild(generateParagonIcon(tower, `${tower} Paragon`, btd6usersave.acquiredUpgrades[`${tower} Paragon`] ? "unlocked" : "locked"));
     }
-
-    // constants.towerPaths[tower].path1.forEach((upgrade) => {
-
-    //     generateUpgradeIcon(tower, upgrade, upgradeStatus);
-    // })
     return upgradeContainer;
 }
 
@@ -2013,25 +1801,21 @@ function generateUpgradeIcon(tower, upgrade, status, row, tier, paragon, grayOut
 
     let upgradeGlow = document.createElement('div');
     upgradeGlow.id = `${tower}-${upgrade}-glow`;
-    // upgradeGlow.classList.add('upgrade-glow');
     upgradeDiv.appendChild(upgradeGlow);
 
     let upgradeBGImg = document.createElement('div');
-    upgradeBGImg.id = `${tower}-${upgrade}-bg-img`;
     upgradeBGImg.classList.add('upgrade-bg-img');
     let enoughXP = btd6usersave.towerXP[tower] >= constants.towerPaths[tower][`path${row}`][upgrade];
     tier == 4 ? btd6usersave.acquiredUpgrades[upgrade] ? upgradeBGImg.classList.add(`upgrade-t5`) : upgradeBGImg.classList.add(`upgrade-t5-locked`) : upgradeBGImg.classList.add(`upgrade-${paragon ? "paragon" : status == "unlocked" ? status : (enoughXP ? "green" : "red")}`);
     upgradeDiv.appendChild(upgradeBGImg);
 
     let upgradeImg = document.createElement('img');
-    upgradeImg.id = `${tower}-${upgrade}-img`;
     upgradeImg.classList.add('upgrade-img');
     upgradeImg.src = getUpgradeAssetPath(upgrade);
     if (!btd6usersave.acquiredUpgrades[upgrade] && tier == 4) { upgradeImg.style.visibility = "hidden";}
     upgradeDiv.appendChild(upgradeImg);
 
     let upgradeText = document.createElement('p');
-    upgradeText.id = `${tower}-${upgrade}-text`;
     upgradeText.classList.add('upgrade-text');
     upgradeText.innerHTML = getLocValue(upgrade);
     upgradeDiv.appendChild(upgradeText);
@@ -2062,25 +1846,21 @@ function generateParagonIcon(tower, upgrade, status){
 
 
     let paragonBGImg = document.createElement('div');
-    paragonBGImg.id = `${tower}-${upgrade}-bg-img`;
     paragonBGImg.classList.add('upgrade-bg-img');
     paragonBGImg.classList.add(`upgrade-paragon-special${btd6usersave.acquiredUpgrades[upgrade] ? "" : "-locked"}`);
     paragonDiv.appendChild(paragonBGImg);
 
     let paragonGlow = document.createElement('div');
     paragonGlow.id = `paragon-glow`;
-    // upgradeGlow.classList.add('upgrade-glow');
     paragonDiv.appendChild(paragonGlow);
 
     let paragonImg = document.createElement('img');
-    paragonImg.id = `${tower}-paragon-img`;
     paragonImg.classList.add('upgrade-img');
     paragonImg.src = getUpgradeAssetPath(`${tower} Paragon`);
     if (!btd6usersave.acquiredUpgrades[upgrade]) { paragonImg.style.visibility = "hidden";}
     paragonDiv.appendChild(paragonImg);
 
     let paragonText = document.createElement('p');
-    paragonText.id = `${tower}-${upgrade}-text`;
     paragonText.classList.add('upgrade-text');
     paragonText.innerHTML = getLocValue(upgrade);
     paragonDiv.appendChild(paragonText);
@@ -2164,42 +1944,33 @@ function generateHeroesProgress(){
     progressContent.innerHTML = "";
 
     let heroProgressContainer = document.createElement('div');
-    heroProgressContainer.id = 'tower-progress-container';
     heroProgressContainer.classList.add('tower-progress-container');
     progressContent.appendChild(heroProgressContainer);
 
     let heroProgressDiv = document.createElement('div');
-    heroProgressDiv.id = 'hero-progress-div';
     heroProgressDiv.classList.add('hero-progress-div');
     heroProgressContainer.appendChild(heroProgressDiv);
 
     let heroSelectorHeaderTop = document.createElement('div');
-    heroSelectorHeaderTop.id = 'hero-selector-header-top';
     heroSelectorHeaderTop.classList.add('hero-selector-header-top');
     heroProgressDiv.appendChild(heroSelectorHeaderTop);
 
     let heroSelectorHeaderText = document.createElement('p');
-    heroSelectorHeaderText.id = 'hero-selector-header-text';
-    heroSelectorHeaderText.classList.add('hero-selector-header-text');
-    heroSelectorHeaderText.classList.add('black-outline');
+    heroSelectorHeaderText.classList.add('hero-selector-header-text','black-outline');
     heroSelectorHeaderText.innerHTML = `Heroes - ${Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length}/${Object.keys(btd6usersave.unlockedHeros).length}`;
     heroSelectorHeaderTop.appendChild(heroSelectorHeaderText);
 
     let heroSelectorHeaderText2 = document.createElement('p');
-    heroSelectorHeaderText2.id = 'hero-selector-header-text';
-    heroSelectorHeaderText2.classList.add('hero-selector-header-text');
-    heroSelectorHeaderText2.classList.add('black-outline');
+    heroSelectorHeaderText2.classList.add('hero-selector-header-text','black-outline');
     heroSelectorHeaderText2.innerHTML = `Skins - ${Object.keys(btd6usersave.unlockedSkins).filter(k => btd6usersave.unlockedSkins[k]).length}/${Object.keys(btd6usersave.unlockedSkins).length}`;
     heroSelectorHeaderTop.appendChild(heroSelectorHeaderText2);
 
     let heroSelectorHeader = document.createElement('div');
-    heroSelectorHeader.id = 'hero-selector-header';
     heroSelectorHeader.classList.add('hero-selector-header');
     heroProgressDiv.appendChild(heroSelectorHeader);
 
     for (let [hero, nameColor] of Object.entries(constants.heroesInOrder)) {
         let heroSelector = document.createElement('div');
-        heroSelector.id = hero + '-selector';
         heroSelector.classList.add(`hero-selector-div`);
         if(!btd6usersave.unlockedHeros[hero]){ 
             heroSelector.classList.add(`hero-selector-div-disabled`);
@@ -2212,7 +1983,6 @@ function generateHeroesProgress(){
         heroSelectorHeader.appendChild(heroSelector);
 
         let heroSelectorImg = document.createElement('img');
-        heroSelectorImg.id = hero + '-selector-img';
         heroSelectorImg.classList.add('hero-selector-img');
         heroSelectorImg.src = getHeroSquareIcon(hero);
         heroSelector.appendChild(heroSelectorImg);
@@ -2237,50 +2007,37 @@ function generateHeroProgressHero(hero, nameColor){
     let heroProgressContent = document.getElementById('hero-progress-content');
     heroProgressContent.innerHTML = "";
 
-    //a div for containing the top, middle, and bottom divs
     let heroProgressContainer = document.createElement('div');
-    heroProgressContainer.id = 'hero-progress-container';
     heroProgressContainer.classList.add('hero-progress-container');
     heroProgressContent.appendChild(heroProgressContainer);
 
-    //top div
     let heroProgressTop = document.createElement('div');
-    heroProgressTop.id = 'hero-progress-top';
     heroProgressTop.classList.add('hero-progress-top');
     heroProgressContainer.appendChild(heroProgressTop);
 
-    //header text div
     let heroProgressHeader = document.createElement('div');
-    heroProgressHeader.id = 'hero-progress-header';
     heroProgressHeader.classList.add('hero-progress-header');
     heroProgressTop.appendChild(heroProgressHeader);
 
     let heroProgressTrailFX = document.createElement('img');
-    heroProgressTrailFX.id = 'hero-progress-trail-fx';
     heroProgressTrailFX.classList.add('hero-progress-trail-fx');
     heroProgressTrailFX.src = './Assets/UI/TrailFx.png'; 
     heroProgressHeader.appendChild(heroProgressTrailFX);
 
-    //header hero name text
     let heroProgressHeaderText = document.createElement('p');
     heroProgressHeaderText.id = 'hero-progress-header-text';
     heroProgressHeaderText.classList.add('hero-progress-header-text');
     heroProgressHeaderText.style.backgroundImage = `url('../Assets/UI/${nameColor}TxtTextureMain.png')`;
-    // heroProgressHeaderText.classList.add('black-outline');
     heroProgressHeaderText.innerHTML = getLocValue(hero);
     heroProgressHeader.appendChild(heroProgressHeaderText);
 
-    //header hero name subtitle
     let heroProgressHeaderSubtitle = document.createElement('p');
     heroProgressHeaderSubtitle.id = 'hero-progress-header-subtitle';
-    heroProgressHeaderSubtitle.classList.add('hero-progress-header-subtitle');
-    heroProgressHeaderSubtitle.classList.add('subtitle-outline');
+    heroProgressHeaderSubtitle.classList.add('hero-progress-header-subtitle','subtitle-outline');
     heroProgressHeaderSubtitle.innerHTML = getLocValue(`${hero} Short Description`);
     heroProgressHeader.appendChild(heroProgressHeaderSubtitle);
 
-    //middle div
     let heroProgressMiddle = document.createElement('div');
-    heroProgressMiddle.id = 'hero-progress-middle';
     heroProgressMiddle.classList.add('hero-progress-middle');
     heroProgressContainer.appendChild(heroProgressMiddle);
 
@@ -2291,43 +2048,32 @@ function generateHeroProgressHero(hero, nameColor){
 
     updatePortraitLevelButtons(hero)
 
-    //hero portrait div
     let heroPortraitDiv = document.createElement('div');
-    heroPortraitDiv.id = 'hero-portrait-div';
     heroPortraitDiv.classList.add('hero-portrait-div');
     heroProgressMiddle.appendChild(heroPortraitDiv);
 
-    //hero portrait img
     let heroPortraitImg = document.createElement('img');
     heroPortraitImg.id = 'hero-portrait-img';
     heroPortraitImg.classList.add('hero-portrait-img');
     heroPortraitImg.src = getHeroPortrait(hero, 1);
     heroPortraitDiv.appendChild(heroPortraitImg);
 
-    //hero portrait bar
     let heroPortraitBar = document.createElement('div');
-    heroPortraitBar.id = 'hero-portrait-bar';
     heroPortraitBar.classList.add('hero-portrait-bar');
     heroPortraitDiv.appendChild(heroPortraitBar);
 
-    //hero portrait glow
     let heroPortraitGlow = document.createElement('div');
     heroPortraitGlow.id = 'hero-portrait-glow';
     heroPortraitGlow.classList.add('hero-portrait-glow');
     heroPortraitGlow.style.background = `radial-gradient(circle, rgb(${constants.HeroBGColors[hero][0] * 255},${constants.HeroBGColors[hero][1] * 255},${constants.HeroBGColors[hero][2] * 255}) 0%, transparent 70%)`
-    // heroPortraitGlow.src = './Assets/UI/GlowUi.png';
     heroPortraitDiv.appendChild(heroPortraitGlow);
 
-    //hero skins div
     let heroSkinsDiv = document.createElement('div');
-    heroSkinsDiv.id = 'hero-skins-div';
     heroSkinsDiv.classList.add('hero-skins-div');
     heroProgressMiddle.appendChild(heroSkinsDiv);
 
     constants.heroSkins[hero].forEach((skin) => {
         if ((btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == false || btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == null) && skin != hero) { return; }
-
-        // || skin == hero
 
         let heroSkin = document.createElement('img');
         heroSkin.id = `${hero}-${skin}-skin`;
@@ -2342,64 +2088,36 @@ function generateHeroProgressHero(hero, nameColor){
         heroSkinsDiv.appendChild(heroSkin);
     })
 
-    //bottom div
     let heroProgressBottom = document.createElement('div');
-    heroProgressBottom.id = 'hero-progress-bottom';
     heroProgressBottom.classList.add('hero-progress-bottom');
     heroProgressContainer.appendChild(heroProgressBottom);
 
-    //hero desc text
     let heroProgressDesc = document.createElement('p');
     heroProgressDesc.id = 'hero-progress-desc';
     heroProgressDesc.classList.add('hero-progress-desc');
     heroProgressDesc.innerHTML = getLocValue(`${hero} Description`);
     heroProgressBottom.appendChild(heroProgressDesc);
 
-    //hero level descs div
     let heroLevelDescs = document.createElement('div');
-    heroLevelDescs.id = 'hero-level-descs';
     heroLevelDescs.classList.add('hero-level-descs');
     heroProgressBottom.appendChild(heroLevelDescs);
 
     for (let i = 1; i<21; i++){
         let heroLevelDescDiv = document.createElement('div');
-        heroLevelDescDiv.id = `hero-level-desc-div-${i}`;
         heroLevelDescDiv.classList.add('hero-level-desc-div');
         heroLevelDescs.appendChild(heroLevelDescDiv);
 
         let heroLevelDescIconDiv = document.createElement('div');
-        heroLevelDescIconDiv.id = `hero-level-desc-icon-div-${i}`;
         heroLevelDescIconDiv.classList.add('hero-level-desc-icon-div');
         i == 20 ? heroLevelDescIconDiv.classList.add('hero-level-desc-image-purple') : constants.heroLevelIcons[hero].includes(i) ? heroLevelDescIconDiv.classList.add("hero-level-desc-image-gold")  : heroLevelDescIconDiv.classList.add('hero-level-desc-image');
         heroLevelDescDiv.appendChild(heroLevelDescIconDiv);
 
         let heroLevelDescText = document.createElement('p');
-        heroLevelDescText.id = `hero-level-desc-text-${i}`;
-        heroLevelDescText.classList.add('hero-level-desc-text');
-        heroLevelDescText.classList.add('black-outline');
+        heroLevelDescText.classList.add('hero-level-desc-text','black-outline');
         heroLevelDescText.innerHTML = i;
         heroLevelDescIconDiv.appendChild(heroLevelDescText);
 
-        // let heroLevelDescImage = document.createElement('img');
-        // heroLevelDescImage.id = `hero-level-desc-image-${i}`;
-        // switch (i){
-        //     case 20:
-        //         heroLevelDescImage.classList.add('hero-level-desc-image-purple');
-        //         heroLevelDescImage.src = "./Assets/UI/HeroLevelBadge07.png"
-        //         break;
-        //     case constants.heroLevelIcons[hero].includes(i):
-        //         heroLevelDescImage.classList.add('hero-level-desc-image-gold');
-        //         heroLevelDescImage.src = "./Assets/UI/HeroLevelBadge06.png"
-        //         break;
-        //     default:
-        //         heroLevelDescImage.classList.add('hero-level-desc-image');
-        //         heroLevelDescImage.src = "./Assets/UI/HeroLevelBadge04.png"
-        //         break;
-        // }
-        // heroLevelDescIconDiv.appendChild(heroLevelDescImage);
-
         let heroLevelDesc = document.createElement('p');
-        heroLevelDesc.id = `hero-level-desc-${i}`;
         heroLevelDesc.classList.add('hero-level-desc');
         heroLevelDesc.innerHTML = getLocValue(`${hero} Level ${i} Description`);
         heroLevelDescDiv.appendChild(heroLevelDesc);
@@ -2463,8 +2181,7 @@ function updatePortraitLevelButtons(hero){
         } else {
             let heroLevelSelectBtnText = document.createElement('p');
             heroLevelSelectBtnText.id = `${level}-level-select-text`;
-            heroLevelSelectBtnText.classList.add('hero-level-select-text');
-            heroLevelSelectBtnText.classList.add('black-outline');
+            heroLevelSelectBtnText.classList.add('hero-level-select-text','black-outline');
             heroLevelSelectBtnText.innerHTML = level;
             heroLevelSelectBtnDiv.appendChild(heroLevelSelectBtnText);
         }
@@ -2511,14 +2228,11 @@ function generateKnowledgeProgress(){
     knowledgeProgressContainer.appendChild(knowledgeProgressUnlockedContainerDiv);
 
     let knowledgeProgressUnlockedHeader = document.createElement('p');
-    knowledgeProgressUnlockedHeader.id = 'right-column-header-text';
-    knowledgeProgressUnlockedHeader.classList.add('column-header-text');
-    knowledgeProgressUnlockedHeader.classList.add('black-outline');
+    knowledgeProgressUnlockedHeader.classList.add('column-header-text','black-outline');
     knowledgeProgressUnlockedHeader.innerHTML = `${totals[0]} Unlocked Knowledge Points`;
     knowledgeProgressUnlockedContainerDiv.appendChild(knowledgeProgressUnlockedHeader);
 
     let knowledgeProgressUnlockedDiv = document.createElement('div');
-    knowledgeProgressUnlockedDiv.id = 'knowledge-progress-unlocked-div';
     knowledgeProgressUnlockedDiv.classList.add('knowledge-progress-div');
     knowledgeProgressUnlockedContainerDiv.appendChild(knowledgeProgressUnlockedDiv);
 
@@ -2527,21 +2241,17 @@ function generateKnowledgeProgress(){
     knowledgeProgressContainer.appendChild(knowledgeProgressLockedContainerDiv);
 
     let knowledgeProgressLockedHeader = document.createElement('p');
-    knowledgeProgressLockedHeader.id = 'right-column-header-text';
-    knowledgeProgressLockedHeader.classList.add('column-header-text');
-    knowledgeProgressLockedHeader.classList.add('black-outline');
+    knowledgeProgressLockedHeader.classList.add('column-header-text','black-outline');
     knowledgeProgressLockedHeader.innerHTML = `${totals[2] + totals[1]} Locked Knowledge Points`;
     knowledgeProgressLockedContainerDiv.appendChild(knowledgeProgressLockedHeader);
 
     let knowledgeProgressLockedDiv = document.createElement('div');
-    knowledgeProgressLockedDiv.id = 'knowledge-progress-locked-div';
     knowledgeProgressLockedDiv.classList.add('knowledge-progress-div');
     knowledgeProgressLockedContainerDiv.appendChild(knowledgeProgressLockedDiv);
 
     for (let [knowledge, obtained] of Object.entries(btd6usersave.acquiredKnowledge)) {
         if (!getLocValue(knowledge)) { continue; }
         let knowledgeIconDiv = document.createElement('div');
-        knowledgeIconDiv.id = `${knowledge}-icon-div`;
         knowledgeIconDiv.classList.add('knowledge-icon-div');
         // obtained ? knowledgeProgressUnlockedDiv.appendChild(knowledgeIconDiv) : constants.RecommendedKnowledge.includes(knowledge) ? recommendedKnowledgeDiv.appendChild(knowledgeIconDiv) : knowledgeProgressLockedDiv.appendChild(knowledgeIconDiv);
         obtained ? knowledgeProgressUnlockedDiv.appendChild(knowledgeIconDiv) : knowledgeProgressLockedDiv.appendChild(knowledgeIconDiv);
@@ -2553,7 +2263,6 @@ function generateKnowledgeProgress(){
         knowledgeIconDiv.appendChild(knowledgeGlow);
 
         let knowledgeIcon = document.createElement('img');
-        knowledgeIcon.id = `${knowledge}-icon`;
         knowledgeIcon.classList.add('knowledge-icon');
         knowledgeIcon.src = getKnowledgeAssetPath(knowledge);
         knowledgeIconDiv.appendChild(knowledgeIcon);
@@ -2578,27 +2287,23 @@ function generateKnowledgeProgress(){
     }
 
 
-    let tooltipContainerHelpMe = document.createElement('div');
-    tooltipContainerHelpMe.id = 'tooltip-container-help-me';
-    tooltipContainerHelpMe.classList.add('tooltip-container-help-me');
-    knowledgeProgressContainer.appendChild(tooltipContainerHelpMe);
+    let tooltipContainerDiv = document.createElement('div');
+    tooltipContainerDiv.classList.add('tooltip-container-div');
+    knowledgeProgressContainer.appendChild(tooltipContainerDiv);
 
     let knowledgeProgressFloatingTooltip = document.createElement('div');
     knowledgeProgressFloatingTooltip.id = 'knowledge-progress-floating-tooltip';
     knowledgeProgressFloatingTooltip.classList.add('knowledge-progress-floating-tooltip');
-    tooltipContainerHelpMe.appendChild(knowledgeProgressFloatingTooltip);
+    tooltipContainerDiv.appendChild(knowledgeProgressFloatingTooltip);
 
     let knowledgeNameText = document.createElement('p');
     knowledgeNameText.id = `knowledge-name-text`;
-    knowledgeNameText.classList.add('knowledge-name-text');
-    knowledgeNameText.classList.add('black-outline');
-    // knowledgeNameText.innerHTML = getLocValue(knowledge);
+    knowledgeNameText.classList.add('knowledge-name-text','black-outline');
     knowledgeProgressFloatingTooltip.appendChild(knowledgeNameText);
 
     let knowledgeDescText = document.createElement('p');
     knowledgeDescText.id = `knowledge-desc-text`;
     knowledgeDescText.classList.add('knowledge-desc-text');
-    // knowledgeDescText.innerHTML = getLocValue(`${knowledge}Description`);
     knowledgeProgressFloatingTooltip.appendChild(knowledgeDescText);
 }
 
@@ -2628,16 +2333,12 @@ function generateMapsProgress(){
     mapsProgressHeaderBar.appendChild(mapsProgressViews);
 
     let mapsProgressViewsText = document.createElement('p');
-    mapsProgressViewsText.id = 'maps-progress-views-text';
-    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text');
-    mapsProgressViewsText.classList.add('black-outline');
+    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressViewsText.innerHTML = "Display Type:";
     mapsProgressViews.appendChild(mapsProgressViewsText);
 
     let mapsProgressGame = document.createElement('div');
-    mapsProgressGame.id = 'maps-progress-game';
-    mapsProgressGame.classList.add('maps-progress-view');
-    mapsProgressGame.classList.add('black-outline')
+    mapsProgressGame.classList.add('maps-progress-view','black-outline');
     mapsProgressGame.innerHTML = "Game";
     mapsProgressGame.addEventListener('click', () => {
         onChangeMapView("game");
@@ -2646,10 +2347,7 @@ function generateMapsProgress(){
 
 
     let mapsProgressGrid = document.createElement('div');
-    mapsProgressGrid.id = 'maps-progress-grid';
-    mapsProgressGrid.classList.add('maps-progress-view');
-    mapsProgressGrid.classList.add('black-outline')
-    mapsProgressGrid.classList.add('maps-progress-view-selected');
+    mapsProgressGrid.classList.add('maps-progress-view','black-outline','maps-progress-view-selected');
     mapsProgressGrid.innerHTML = "Grid";
     mapsProgressGrid.addEventListener('click', () => {
         onChangeMapView("grid");
@@ -2657,10 +2355,7 @@ function generateMapsProgress(){
     mapsProgressViews.appendChild(mapsProgressGrid);
 
     let mapsProgressList = document.createElement('div');
-    mapsProgressList.id = 'maps-progress-list';
-    mapsProgressList.classList.add('maps-progress-view');
-    mapsProgressList.classList.add('maps-progress-view-list');
-    mapsProgressList.classList.add('black-outline')
+    mapsProgressList.classList.add('maps-progress-view','black-outline', 'maps-progress-view-list');
     mapsProgressList.innerHTML = "List";
     mapsProgressList.addEventListener('click', () => {
         onChangeMapView("list");
@@ -2669,19 +2364,15 @@ function generateMapsProgress(){
 
 
     let mapsProgressFilter = document.createElement('div');
-    mapsProgressFilter.id = 'maps-progress-filter';
     mapsProgressFilter.classList.add('maps-progress-filter');
     mapsProgressHeaderBar.appendChild(mapsProgressFilter);
 
     let mapProgressFilterDifficulty = document.createElement('div');
-    mapProgressFilterDifficulty.id = 'map-progress-filter-difficulty';
     mapProgressFilterDifficulty.classList.add('map-progress-filter-difficulty');
     mapsProgressFilter.appendChild(mapProgressFilterDifficulty);
 
     let mapsProgressFilterDifficultyText = document.createElement('p');
-    mapsProgressFilterDifficultyText.id = 'maps-progress-filter-difficulty-text';
-    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text');
-    mapsProgressFilterDifficultyText.classList.add('black-outline');
+    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressFilterDifficultyText.innerHTML = "Filter Difficulty:";
     mapProgressFilterDifficulty.appendChild(mapsProgressFilterDifficultyText);
 
@@ -2701,14 +2392,11 @@ function generateMapsProgress(){
     mapProgressFilterDifficulty.appendChild(mapProgressFilterDifficultySelect);
 
     let mapsProgressCoopToggle = document.createElement('div');
-    mapsProgressCoopToggle.id = 'maps-progress-coop-toggle';
     mapsProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
     mapsProgressFilter.appendChild(mapsProgressCoopToggle);
 
     let mapsProgressCoopToggleText = document.createElement('p');
-    mapsProgressCoopToggleText.id = 'maps-progress-coop-toggle-text';
-    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text');
-    mapsProgressCoopToggleText.classList.add('black-outline');
+    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressCoopToggleText.innerHTML = "Co-op: ";
     mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
 
@@ -2809,19 +2497,15 @@ function generateMapDetails(map){
     mapProgressContainer.innerHTML = "";
 
     let mapProgressHeaderBar = document.createElement('div');
-    mapProgressHeaderBar.id = 'map-progress-header-bar';
     mapProgressHeaderBar.classList.add('single-map-progress-header-bar');
     mapProgressContainer.appendChild(mapProgressHeaderBar);
 
     let mapNextAndPrev = document.createElement('div');
-    mapNextAndPrev.id = 'map-next-and-prev';
     mapNextAndPrev.classList.add('map-next-and-prev');
     mapProgressHeaderBar.appendChild(mapNextAndPrev);
 
     let mapProgressPrevBtn = document.createElement('div');
-    mapProgressPrevBtn.id = 'map-progress-prev-btn';
-    mapProgressPrevBtn.classList.add('maps-progress-view');
-    mapProgressPrevBtn.classList.add('black-outline');
+    mapProgressPrevBtn.classList.add('maps-progress-view','black-outline');
     mapProgressPrevBtn.innerHTML = "Previous";
     mapProgressPrevBtn.addEventListener('click', () => {
         let maps = Object.keys(constants.mapsInOrder).filter(value => Object.keys(btd6usersave.mapProgress).includes(value));; //Object.keys(constants.mapsInOrder);
@@ -2834,9 +2518,7 @@ function generateMapDetails(map){
     mapNextAndPrev.appendChild(mapProgressPrevBtn);
 
     let mapProgressNextBtn = document.createElement('div');
-    mapProgressNextBtn.id = 'map-progress-next-btn';
-    mapProgressNextBtn.classList.add('maps-progress-view');
-    mapProgressNextBtn.classList.add('black-outline');
+    mapProgressNextBtn.classList.add('maps-progress-view','black-outline');
     mapProgressNextBtn.innerHTML = "Next";
     mapProgressNextBtn.addEventListener('click', () => {
         let maps = Object.keys(constants.mapsInOrder).filter(value => Object.keys(btd6usersave.mapProgress).includes(value));; //Object.keys(constants.mapsInOrder);
@@ -2848,16 +2530,6 @@ function generateMapDetails(map){
     })
     mapNextAndPrev.appendChild(mapProgressNextBtn);
 
-    // let mapProgressExitBtn = document.createElement('div');
-    // mapProgressExitBtn.id = 'map-progress-exit-btn';
-    // mapProgressExitBtn.classList.add('maps-progress-view');
-    // mapProgressExitBtn.classList.add('black-outline');
-    // mapProgressExitBtn.innerHTML = "Exit";
-    // mapProgressExitBtn.addEventListener('click', () => {
-    //     onExitMap();
-    // })
-    // mapProgressHeaderBar.appendChild(mapProgressExitBtn);
-
     let modalClose = document.createElement('img');
     modalClose.classList.add('modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
@@ -2867,67 +2539,51 @@ function generateMapDetails(map){
     mapProgressHeaderBar.appendChild(modalClose);
 
     let mapBelowHeaderBar = document.createElement('div');
-    mapBelowHeaderBar.id = 'map-below-header-bar';
     mapBelowHeaderBar.classList.add('map-below-header-bar');
     mapProgressContainer.appendChild(mapBelowHeaderBar);
 
     let mapLeftColumn = document.createElement('div');
-    mapLeftColumn.id = 'map-left-column';
     mapLeftColumn.classList.add('map-left-column');
     mapBelowHeaderBar.appendChild(mapLeftColumn);
 
     let mapNameAndIcon = document.createElement('div');
-    mapNameAndIcon.id = 'map-progress-div';
     mapNameAndIcon.classList.add('map-progress-div');
     mapLeftColumn.appendChild(mapNameAndIcon);
 
     let mapNameTop = document.createElement('div');
-    mapNameTop.id = 'map-name-top';
     mapNameTop.classList.add('map-name-top');
     mapNameAndIcon.appendChild(mapNameTop);
 
-    //difficulty icon
     let mapDifficultyIcon = document.createElement('img');
-    mapDifficultyIcon.id = 'map-difficulty-icon';
     mapDifficultyIcon.classList.add('map-difficulty-icon');
     mapDifficultyIcon.src = `./Assets/DifficultyIcon/Map${constants.mapsInOrder[map]}Btn.png`;
     mapNameTop.appendChild(mapDifficultyIcon);
 
     let mapNameAndMedals = document.createElement('div');
-    mapNameAndMedals.id = 'map-name-and-medals';
     mapNameAndMedals.classList.add('map-name-and-medals');
     mapNameTop.appendChild(mapNameAndMedals);
-    //map name
+    
     let mapName = document.createElement('p');
-    mapName.id = 'map-name';
-    mapName.classList.add('map-name-large');
-    mapName.classList.add('black-outline');
+    mapName.classList.add('map-name-large','black-outline');
     mapName.innerHTML = getLocValue(map);
     mapNameAndMedals.appendChild(mapName);
-    //map progress single
+    
     let mapProgressSingle = document.createElement('div');
-    mapProgressSingle.id = 'map-progress-single';
     mapProgressSingle.classList.add('map-progress-subtext');
     mapProgressSingle.innerHTML = `${Object.values(processedMapData.Medals.single[map]).filter(a=>a==true).length}/15 Single Player Medals`;
     mapNameAndMedals.appendChild(mapProgressSingle);
 
-    //map progress coop
     let mapProgressCoop = document.createElement('div');
-    mapProgressCoop.id = 'map-progress-coop';
     mapProgressCoop.classList.add('map-progress-subtext');
     mapProgressCoop.innerHTML = `${Object.values(processedMapData.Medals.coop[map]).filter(a=>a==true).length}/15 Coop Medals`;
     mapNameAndMedals.appendChild(mapProgressCoop);
 
-    //map icon with border
     let mapIcon = document.createElement('img');
-    mapIcon.id = 'map-icon';
     mapIcon.classList.add('map-icon');
     mapIcon.src = getMapIcon(map);
     mapNameAndIcon.appendChild(mapIcon);
 
-    //single medals 5x3
     let mapProgressSingleMedals = document.createElement('div');
-    mapProgressSingleMedals.id = 'map-progress-single-medals';
     mapProgressSingleMedals.classList.add('map-progress-medals');
     mapLeftColumn.appendChild(mapProgressSingleMedals);
 
@@ -2952,12 +2608,10 @@ function generateMapDetails(map){
     for (let [difficulty, completed] of Object.entries(processedMapData.Medals.single[map])) {
         if (completed == null) { continue; }
         let medalDiv = document.createElement('div');
-        medalDiv.id = `${difficulty}-div`;
         medalDiv.classList.add('medal-div');
         mapProgressSingleMedals.appendChild(medalDiv);
 
         let medalImg = document.createElement('img');
-        medalImg.id = `${difficulty}-img`;
         medalImg.classList.add('medal-img');
         medalImg.src = getMedalIcon(completed ? `Medal${medalMap[difficulty]}` : "MedalEmpty");
         if (processedMapData.Borders["single"][map] == "Black") {
@@ -2975,21 +2629,17 @@ function generateMapDetails(map){
         medalDiv.appendChild(medalImg);
     }
 
-    //coop medals 5x3
     let mapProgressCoopMedals = document.createElement('div');
-    mapProgressCoopMedals.id = 'map-progress-coop-medals';
     mapProgressCoopMedals.classList.add('map-progress-medals');
     mapLeftColumn.appendChild(mapProgressCoopMedals);
 
     for (let [difficulty, completed] of Object.entries(processedMapData.Medals.coop[map])) {
         if (completed == null) { continue; }
         let medalDiv = document.createElement('div');
-        medalDiv.id = `${difficulty}-div`;
         medalDiv.classList.add('medal-div');
         mapProgressCoopMedals.appendChild(medalDiv);
 
         let medalImg = document.createElement('img');
-        medalImg.id = `${difficulty}-img`;
         medalImg.classList.add('medal-img');
         medalImg.src = getMedalIcon(completed ? `Medal${medalMap[difficulty]}` : "MedalCoopEmpty");
         medalImg.style.display = "none";
@@ -3026,33 +2676,24 @@ function generateMapDetails(map){
     }
 
     let mapRightColumn = document.createElement('div');
-    mapRightColumn.id = 'map-right-column';
     mapRightColumn.classList.add('map-right-column');
     mapBelowHeaderBar.appendChild(mapRightColumn);
 
-    
-    //Stats
     let rightColumnHeader = document.createElement('div');
-    rightColumnHeader.id = 'right-column-header';
     rightColumnHeader.classList.add('right-column-header');
     mapRightColumn.appendChild(rightColumnHeader);
 
     let rightColumnHeaderText = document.createElement('p');
-    rightColumnHeaderText.id = 'right-column-header-text';
-    rightColumnHeaderText.classList.add('column-header-text');
-    rightColumnHeaderText.classList.add('black-outline');
+    rightColumnHeaderText.classList.add('column-header-text','black-outline');
     rightColumnHeaderText.innerHTML = 'Mode Stats';
     rightColumnHeader.appendChild(rightColumnHeaderText);
 
     let mapProgressCoopToggle = document.createElement('div');
-    mapProgressCoopToggle.id = 'maps-progress-coop-toggle';
     mapProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
     rightColumnHeader.appendChild(mapProgressCoopToggle);
 
     let mapProgressCoopToggleText = document.createElement('p');
-    mapProgressCoopToggleText.id = 'maps-progress-coop-toggle-text';
-    mapProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text');
-    mapProgressCoopToggleText.classList.add('black-outline');
+    mapProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapProgressCoopToggleText.innerHTML = "Co-op: ";
     mapProgressCoopToggle.appendChild(mapProgressCoopToggleText);
 
@@ -3066,8 +2707,6 @@ function generateMapDetails(map){
     })
     mapProgressCoopToggleInput.checked = coopEnabled;
     mapProgressCoopToggle.appendChild(mapProgressCoopToggleInput);
-
-
 
     let mapStatsContainer = document.createElement('div');
     mapStatsContainer.id = 'map-stats-container';
@@ -3084,36 +2723,29 @@ function generateMapRightColStats(map,coop){
     for (let [difficulty, data] of Object.entries(coop ? processedMapData.Maps[map].coop : processedMapData.Maps[map].single)) {
         if (data == undefined) { continue; }
         let mapStatsDiv = document.createElement('div');
-        mapStatsDiv.id = `${difficulty}-div`;
         mapStatsDiv.classList.add('map-stats-div');
         mapStatsContainer.appendChild(mapStatsDiv);
 
         let mapStatsIcon = document.createElement('img');
-        mapStatsIcon.id = `${difficulty}-icon`;
         mapStatsIcon.classList.add('map-stats-icon');
         mapStatsIcon.src = getModeIcon(difficulty);
         mapStatsDiv.appendChild(mapStatsIcon);
 
         let mapStatsTextDiv = document.createElement('div');
-        mapStatsTextDiv.id = `${difficulty}-text-div`;
         mapStatsTextDiv.classList.add('map-stats-text-div');
         mapStatsDiv.appendChild(mapStatsTextDiv);
 
         let mapStatsDifficultyText = document.createElement('p');
-        mapStatsDifficultyText.id = `${difficulty}-text`;
-        mapStatsDifficultyText.classList.add('map-stats-text-mode');
-        mapStatsDifficultyText.classList.add('black-outline');
+        mapStatsDifficultyText.classList.add('map-stats-text-mode','black-outline');
         mapStatsDifficultyText.innerHTML = getLocValue(`Mode ${difficulty}`);
         mapStatsTextDiv.appendChild(mapStatsDifficultyText);
 
         let mapStatsText = document.createElement('p');
-        mapStatsText.id = `${difficulty}-text`;
         mapStatsText.classList.add('map-stats-text');
         mapStatsText.innerHTML = `Times Completed: ${data.timesCompleted}`;
         mapStatsTextDiv.appendChild(mapStatsText);
 
         let mapStatsBestRound = document.createElement('p');
-        mapStatsBestRound.id = `${difficulty}-best-round`;
         mapStatsBestRound.classList.add('map-stats-text');
         mapStatsBestRound.innerHTML = `Best Round: ${data.bestRound}`;
         mapStatsTextDiv.appendChild(mapStatsBestRound);
@@ -3121,9 +2753,7 @@ function generateMapRightColStats(map,coop){
 
     if (mapStatsContainer.innerHTML == "") {
         let noDataFound = document.createElement('p');
-        noDataFound.id = 'no-data-found';
-        noDataFound.classList.add('no-data-found');
-        noDataFound.classList.add('black-outline');
+        noDataFound.classList.add('no-data-found','black-outline');
         noDataFound.innerHTML = "No Data Found.";
         mapStatsContainer.appendChild(noDataFound);
     }
@@ -3134,7 +2764,6 @@ function generateMapsGridView(){
     mapsProgressContainer.innerHTML = "";
 
     let mapsGridContainer = document.createElement('div');
-    mapsGridContainer.id = 'maps-grid-container';
     mapsGridContainer.classList.add('maps-grid-container');
     mapsProgressContainer.appendChild(mapsGridContainer);
 
@@ -3145,7 +2774,6 @@ function generateMapsGridView(){
 
 
         let mapDiv = document.createElement('div');
-        mapDiv.id = `${map}-div`;
         mapDiv.classList.add('map-div');
         switch(processedMapData.Borders[coopEnabled ? "coop" : "single"][map]) {
             case "None":
@@ -3167,20 +2795,16 @@ function generateMapsGridView(){
         mapsGridContainer.appendChild(mapDiv);
 
         let mapImg = document.createElement('img');
-        mapImg.id = `${map}-img`;
         mapImg.classList.add('map-img');
         mapImg.src = getMapIcon(map);
         mapDiv.appendChild(mapImg);
 
         let mapName = document.createElement('p');
-        mapName.id = `${map}-name`;
-        mapName.classList.add(`map-name`);
-        mapName.classList.add('black-outline');
+        mapName.classList.add(`map-name`,'black-outline');
         mapName.innerHTML = getLocValue(map);
         mapDiv.appendChild(mapName);
 
         let mapProgress = document.createElement('div');
-        mapProgress.id = `${map}-progress`;
         mapProgress.classList.add(`map-progress`);
         mapDiv.appendChild(mapProgress);
 
@@ -3195,7 +2819,6 @@ function generateMapsListView(){
     mapsProgressContainer.innerHTML = "";
 
     let mapsListContainer = document.createElement('div');
-    mapsListContainer.id = 'maps-list-container';
     mapsListContainer.classList.add('maps-list-container');
     mapsProgressContainer.appendChild(mapsListContainer);
 
@@ -3206,18 +2829,15 @@ function generateMapsListView(){
         if (!_btd6usersave.parameters.mapProgress.default.allowed.includes(map)) { continue; }
         if (processedMapData.Borders[coopEnabled ? "coop" : "single"][map] == null) { continue; }
         if (currentDifficultyFilter != "All" && difficulty != currentDifficultyFilter) { continue; }
-        // determine if every value of the map is undefined
         if (Object.entries(coopEnabled ? processedMapData.Maps[map].coop : processedMapData.Maps[map].single).every(([key, value]) => value == undefined)) { continue;}
 
         let mapContainer = document.createElement('div');
-        mapContainer.id = `${map}-container`;
         mapContainer.classList.add('map-container');
         colorToggle ? mapContainer.style.backgroundColor = "var(--profile-secondary)" : mapContainer.style.backgroundColor = "var(--profile-tertiary)"; ;
         colorToggle = !colorToggle;
         fragment.appendChild(mapContainer);
 
         let mapDiv = document.createElement('div');
-        mapDiv.id = `${map}-div`;
         mapDiv.classList.add('map-div');
         switch(processedMapData.Borders[coopEnabled ? "coop" : "single"][map]) {
             case "None":
@@ -3239,67 +2859,52 @@ function generateMapsListView(){
         mapContainer.appendChild(mapDiv);
 
         let mapImg = document.createElement('img');
-        mapImg.id = `${map}-img`;
         mapImg.classList.add('map-img');
         mapImg.src = getMapIcon(map);
         mapDiv.appendChild(mapImg);
 
         let mapName = document.createElement('p');
-        mapName.id = `${map}-name`;
-        mapName.classList.add(`map-name`);
-        mapName.classList.add('black-outline');
+        mapName.classList.add(`map-name`,'black-outline');
         mapName.innerHTML = getLocValue(map);
         mapDiv.appendChild(mapName);
 
         let mapSections = document.createElement('div');
-        mapSections.id = `${map}-sections`;
         mapSections.classList.add(`map-sections`);
         mapContainer.appendChild(mapSections);
 
         let mapSection = document.createElement('div');
-        mapSection.id = `${map}-section`;
         mapSection.classList.add(`map-section`);
         mapSections.appendChild(mapSection);
 
         let mapLabelMedals = document.createElement('p');
-        mapLabelMedals.id = `${map}-label-medals`;
-        mapLabelMedals.classList.add(`map-label-medals`);
-        mapLabelMedals.classList.add('black-outline');
-        // mapLabelMedals.innerHTML = "Medals:";
+        mapLabelMedals.classList.add(`map-label-medals`,'black-outline');
         mapSection.appendChild(mapLabelMedals);
 
         let mapLabelBestRound = document.createElement('p');
-        mapLabelBestRound.id = `${map}-label-best-round`;
-        mapLabelBestRound.classList.add(`map-label-rounds`);
-        mapLabelBestRound.classList.add('black-outline');
+        mapLabelBestRound.classList.add(`map-label-rounds`,'black-outline');
         mapLabelBestRound.innerHTML = "Best Round:";
         mapSection.appendChild(mapLabelBestRound);
 
         let mapLabelTimesCompleted = document.createElement('p');
-        mapLabelTimesCompleted.id = `${map}-label-times-completed`;
-        mapLabelTimesCompleted.classList.add(`map-label-completed`);
-        mapLabelTimesCompleted.classList.add('black-outline');
+        mapLabelTimesCompleted.classList.add(`map-label-completed`,'black-outline');
         mapLabelTimesCompleted.innerHTML = "Times Completed:";
         mapSection.appendChild(mapLabelTimesCompleted);
 
         for (let [difficulty, data] of Object.entries(coopEnabled ? processedMapData.Maps[map].coop : processedMapData.Maps[map].single)) {
             if (data == undefined) { continue; }
             let mapSectionColumn = document.createElement('div');
-            mapSectionColumn.id = `${map}-${difficulty}-column`;
             mapSectionColumn.classList.add(`map-section-column`);
             mapSections.appendChild(mapSectionColumn);
 
             let mapSectionMedal = document.createElement('div');
-            mapSectionMedal.id = `${map}-${difficulty}-medal`;
             mapSectionMedal.classList.add(`map-section-medal`);
             mapSectionColumn.appendChild(mapSectionMedal);
 
             let mapSectionMedalImg = document.createElement('img');
-            mapSectionMedalImg.id = `${map}-${difficulty}-medal-img`;
             mapSectionMedalImg.classList.add(`map-section-medal-img`);
             mapSectionMedalImg.src = getMedalIcon(difficulty == "Clicks" && data.completedWithoutLoadingSave ? `Medal${coopEnabled ? "Coop" : ""}${medalMap["CHIMPS-BLACK"]}` : `Medal${coopEnabled ? "Coop" : ""}${medalMap[difficulty]}`);
             mapSectionMedalImg.style.display = "none";
-            // if the medal is not obtained
+
             if (!data.completed && data.bestRound < constants.endRound[difficulty] && !data.completedWithoutLoadingSave) { mapSectionMedalImg.style.filter = "brightness(0.5)" } ;
              mapSectionMedalImg.addEventListener('load', () => {
                 if(mapSectionMedalImg.width < mapSectionMedalImg.height){
@@ -3312,16 +2917,12 @@ function generateMapsListView(){
             mapSectionMedal.appendChild(mapSectionMedalImg);
 
             let mapSectionBestRound = document.createElement('p');
-            mapSectionBestRound.id = `${map}-${difficulty}-best-round`;
-            mapSectionBestRound.classList.add(`map-section-text`);
-            mapSectionBestRound.classList.add('black-outline');
+            mapSectionBestRound.classList.add(`map-section-text`,'black-outline');
             mapSectionBestRound.innerHTML = data.bestRound;
             mapSectionColumn.appendChild(mapSectionBestRound);
 
             let mapSectionTimesCompleted = document.createElement('p');
-            mapSectionTimesCompleted.id = `${map}-${difficulty}-times-completed`;
-            mapSectionTimesCompleted.classList.add(`map-section-text`);
-            mapSectionTimesCompleted.classList.add('black-outline');
+            mapSectionTimesCompleted.classList.add(`map-section-text`,'black-outline');
             mapSectionTimesCompleted.innerHTML = data.timesCompleted;
             mapSectionColumn.appendChild(mapSectionTimesCompleted);
         }
@@ -3338,11 +2939,9 @@ function generateMapsGameView() {
     mapsProgressContainer.innerHTML = "";
 
     let mapsGameContainer = document.createElement('div');
-    mapsGameContainer.id = 'maps-game-container';
     mapsGameContainer.classList.add('maps-game-container');
     mapsProgressContainer.appendChild(mapsGameContainer);
 
-    //generate 6 maps based on the current page
     let maps = Object.keys(constants.mapsInOrder).filter(value => Object.keys(btd6usersave.mapProgress).includes(value)); //Object.keys(constants.mapsInOrder);
     if (currentDifficultyFilter != "All") { maps = maps.filter(map => constants.mapsInOrder[map] == currentDifficultyFilter) }
     let maxPage = Math.ceil(maps.length / 6) - 1;
@@ -3351,24 +2950,20 @@ function generateMapsGameView() {
     let mapsToDisplay = maps.slice(mapPage * 6, mapPage * 6 + 6);
 
     let mapPrevArrow = document.createElement('div');
-    mapPrevArrow.id = 'map-prev-arrow';
     mapPrevArrow.classList.add('map-arrow');
     mapsGameContainer.appendChild(mapPrevArrow);
 
     let mapPrevArrowImg = document.createElement('img');
-    mapPrevArrowImg.id = 'map-prev-arrow-img';
     mapPrevArrowImg.classList.add('map-arrow-img');
     mapPrevArrowImg.src = "./Assets/UI/PrevArrow.png";
     mapPrevArrow.appendChild(mapPrevArrowImg);
 
     let mapsGameGrid = document.createElement('div');
-    mapsGameGrid.id = 'maps-game-grid';
     mapsGameGrid.classList.add('maps-game-grid');
     mapsGameContainer.appendChild(mapsGameGrid);
 
     for (let map of mapsToDisplay) {
         let mapDiv = document.createElement('div');
-        mapDiv.id = `${map}-div`;
         mapDiv.classList.add('map-div-ingame');
         switch(processedMapData.Borders[coopEnabled ? "coop" : "single"][map]) {
             case "None":
@@ -3390,30 +2985,24 @@ function generateMapsGameView() {
         mapsGameGrid.appendChild(mapDiv);
 
         let mapImg = document.createElement('img');
-        mapImg.id = `${map}-img`;
         mapImg.classList.add('map-img-ingame');
         mapImg.src = getMapIcon(map);
         mapDiv.appendChild(mapImg);
 
         let mapName = document.createElement('p');
-        mapName.id = `${map}-name`;
-        mapName.classList.add(`map-name`);
-        mapName.classList.add('black-outline');
+        mapName.classList.add(`map-name`,'black-outline');
         mapName.innerHTML = getLocValue(map);
         mapDiv.appendChild(mapName);
 
-        //medals
         for (let [difficulty, completed] of (coopEnabled ? Object.entries(processedMapData.Medals.coop[map]) : Object.entries(processedMapData.Medals.single[map]))) {
             if (completed == null) { continue; }
             let medalDiv = document.createElement('div');
-            medalDiv.id = `${difficulty}-div`;
             let largeMedals = ["Easy", "Medium", "Hard", "Impoppable"]
             largeMedals.includes(difficulty) ? medalDiv.classList.add('medal-div-large') : medalDiv.classList.add('medal-div-small');
             medalDiv.classList.add(`medal-div-${difficulty.toLowerCase()}`);
             mapDiv.appendChild(medalDiv);
     
             let medalImg = document.createElement('img');
-            medalImg.id = `${difficulty}-img`;
             medalImg.classList.add('medal-img');
             medalImg.src = getMedalIcon(completed ? `Medal${medalMap[difficulty]}` : "MedalEmpty");
             if(!completed) { medalImg.classList.add("medal-div-unobtained") }
@@ -3435,12 +3024,10 @@ function generateMapsGameView() {
     }
 
     let mapNextArrow = document.createElement('div');
-    mapNextArrow.id = 'map-next-arrow';
     mapNextArrow.classList.add('map-arrow');
     mapsGameContainer.appendChild(mapNextArrow);
 
     let mapNextArrowImg = document.createElement('img');
-    mapNextArrowImg.id = 'map-next-arrow-img';
     mapNextArrowImg.classList.add('map-arrow-img');
     mapNextArrowImg.src = "./Assets/UI/NextArrow.png";
     mapNextArrow.appendChild(mapNextArrowImg);
@@ -3456,13 +3043,11 @@ function generateMapsGameView() {
     })
 
     let mapPageDots = document.createElement('div');
-    mapPageDots.id = 'map-page-dots';
     mapPageDots.classList.add('map-page-dots');
     mapsProgressContainer.appendChild(mapPageDots);
 
     for (let i = 0; i <= maxPage; i++) {
         let mapPageDot = document.createElement('div');
-        mapPageDot.id = `map-page-dot-${i}`;
         mapPageDot.classList.add('map-page-dot');
         if (i == mapPage) { mapPageDot.classList.add('map-page-dot-active'); }
         mapPageDots.appendChild(mapPageDot);
@@ -3479,38 +3064,30 @@ function generatePowersProgress() {
     progressContent.innerHTML = "";
 
     let powersProgressContainer = document.createElement('div');
-    powersProgressContainer.id = 'powers-progress-container';
     powersProgressContainer.classList.add('powers-progress-container');
     progressContent.appendChild(powersProgressContainer);
 
     for (let [power, value] of Object.entries(btd6usersave.powers)) {
         let powerDiv = document.createElement('div');
-        powerDiv.id = `${power}-div`;
         powerDiv.classList.add('power-div');
         powersProgressContainer.appendChild(powerDiv);
 
         let powerImg = document.createElement('img');
-        powerImg.id = `${power}-img`;
         powerImg.classList.add('power-img');
         powerImg.src = getPowerIcon(power);
         powerDiv.appendChild(powerImg);
 
         let powerName = document.createElement('p');
-        powerName.id = `${power}-name`;
-        powerName.classList.add('power-name');
-        powerName.classList.add('black-outline');
+        powerName.classList.add('power-name','black-outline');
         powerName.innerHTML = getLocValue(power);
         powerDiv.appendChild(powerName);
 
         let powerProgress = document.createElement('div');
-        powerProgress.id = `${power}-progress`;
         powerProgress.classList.add('power-progress');
         powerDiv.appendChild(powerProgress);
 
         let powerProgressText = document.createElement('p');
-        powerProgressText.id = `${power}-progress-text`;
-        powerProgressText.classList.add('power-progress-text');
-        powerProgressText.classList.add('black-outline');
+        powerProgressText.classList.add('power-progress-text','black-outline');
         powerProgressText.innerHTML = `${value.quantity || 0}`;
         powerProgress.appendChild(powerProgressText);
     }
@@ -3521,18 +3098,15 @@ function generateInstaMonkeysProgress() {
     progressContent.innerHTML = "";
 
     let instaMonkeysHeaderBar = document.createElement('div');
-    instaMonkeysHeaderBar.id = 'insta-monkeys-header-bar';
     instaMonkeysHeaderBar.classList.add('insta-monkeys-header-bar');
     progressContent.appendChild(instaMonkeysHeaderBar);
 
     let instaMonkeysViews = document.createElement('div');
-    instaMonkeysViews.id = 'insta-monkeys-views';
     instaMonkeysViews.classList.add('maps-progress-views');
     instaMonkeysHeaderBar.appendChild(instaMonkeysViews);
 
     let mapsProgressViewsText = document.createElement('p');
-    mapsProgressViewsText.id = 'maps-progress-views-text';
-    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text');
+    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressViewsText.classList.add('black-outline');
     mapsProgressViewsText.innerHTML = "Display Type:";
     instaMonkeysViews.appendChild(mapsProgressViewsText);
@@ -3540,8 +3114,7 @@ function generateInstaMonkeysProgress() {
 
     let instaMonkeysGameView = document.createElement('div');
     instaMonkeysGameView.id = 'insta-monkeys-game-view';
-    instaMonkeysGameView.classList.add('maps-progress-view');
-    instaMonkeysGameView.classList.add('black-outline');
+    instaMonkeysGameView.classList.add('maps-progress-view','black-outline');
     instaMonkeysGameView.innerHTML = "Game";
     instaMonkeysGameView.addEventListener('click', () => {
         onChangeInstaMonkeysView("game");
@@ -3550,33 +3123,20 @@ function generateInstaMonkeysProgress() {
 
     let instaMonkeysListView = document.createElement('div');
     instaMonkeysListView.id = 'insta-monkeys-list-view';
-    instaMonkeysListView.classList.add('maps-progress-view');
-    instaMonkeysListView.classList.add('black-outline');
+    instaMonkeysListView.classList.add('maps-progress-view','black-outline');
     instaMonkeysListView.innerHTML = "List";
     instaMonkeysListView.addEventListener('click', () => {
         onChangeInstaMonkeysView("list");
     })
     instaMonkeysViews.appendChild(instaMonkeysListView);
 
-    // let instaMonkeysMissingView = document.createElement('div');
-    // instaMonkeysMissingView.id = 'insta-monkeys-missing-view';
-    // instaMonkeysMissingView.classList.add('maps-progress-view');
-    // instaMonkeysMissingView.classList.add('black-outline');
-    // instaMonkeysMissingView.innerHTML = "Missing";
-    // instaMonkeysMissingView.addEventListener('click', () => {
-    //     onChangeInstaMonkeysView("missing");
-    // })
-    // instaMonkeysViews.appendChild(instaMonkeysMissingView);
-
     let instaMonkeysExtras = document.createElement('div');
-    instaMonkeysExtras.id = 'insta-monkeys-extras';
     instaMonkeysExtras.classList.add('maps-progress-views');
     instaMonkeysHeaderBar.appendChild(instaMonkeysExtras);
 
     let instaMonkeysObtainView = document.createElement('div');
     instaMonkeysObtainView.id = 'insta-monkeys-obtain-view';
-    instaMonkeysObtainView.classList.add('maps-progress-view');
-    instaMonkeysObtainView.classList.add('black-outline');
+    instaMonkeysObtainView.classList.add('maps-progress-view','black-outline');
     // instaMonkeysObtainView.innerHTML = "Where To Get";
     instaMonkeysObtainView.innerHTML = "Coming Soon";
     instaMonkeysObtainView.addEventListener('click', () => {
@@ -3624,8 +3184,6 @@ function onChangeInstaMonkeysView(view) {
             document.getElementById('insta-monkeys-list-view').classList.add('stats-tab-yellow');
             generateInstaListView();
             break;
-        // case "missing":
-        //     break;
         case "obtain":
             break;
         case "rotations":
@@ -3638,12 +3196,10 @@ function generateInstaGameView(){
     instaMonkeysProgressContainer.innerHTML = "";
 
     let instaMonkeyGameContainer = document.createElement('div');
-    instaMonkeyGameContainer.id = 'insta-monkey-game-container';
     instaMonkeyGameContainer.classList.add('insta-monkey-game-container');
     instaMonkeysProgressContainer.appendChild(instaMonkeyGameContainer);
 
     let towersContainer = document.createElement('div');
-    towersContainer.id = 'towers-container';
     towersContainer.classList.add('towers-container');
     instaMonkeyGameContainer.appendChild(towersContainer);
 
@@ -3659,7 +3215,6 @@ function generateInstaGameView(){
 
     firstInstas.concat(grayInstas).forEach(tower => {
         let towerContainer = document.createElement('div');
-        towerContainer.id = `${tower}-container`;
         towerContainer.classList.add('tower-container');
         towerContainer.style.backgroundImage = `url(./Assets/UI/InstaTowersContainer${processedInstaData.TowerBorders[tower] || ""}.png)`
         towerContainer.addEventListener('click', () => {
@@ -3668,28 +3223,22 @@ function generateInstaGameView(){
         towersContainer.appendChild(towerContainer);
 
         let towerImg = document.createElement('img');
-        towerImg.id = `${tower}-img`;
         towerImg.classList.add(`tower-img`);
         towerImg.src = getInstaContainerIcon(tower,'000');
         towerContainer.appendChild(towerImg);
 
         let towerName = document.createElement('p');
-        towerName.id = `${tower}-name`;
-        towerName.classList.add(`tower-name`);
-        towerName.classList.add('black-outline');
+        towerName.classList.add(`tower-name`,'black-outline');
         towerName.innerHTML = getLocValue(tower);
         towerContainer.appendChild(towerName);
 
         if (processedInstaData.TowerTotal[tower] != undefined) { 
             let towerTotalDiv = document.createElement('p');
-            towerTotalDiv.id = `${tower}-total-div`;
             towerTotalDiv.classList.add(`insta-progress`);
             towerContainer.appendChild(towerTotalDiv);
 
             let towerTotal = document.createElement('p');
-            towerTotal.id = `${tower}-total`;
-            towerTotal.classList.add(`power-progress-text`);
-            towerTotal.classList.add('black-outline');
+            towerTotal.classList.add(`power-progress-text`,'black-outline');
             towerTotal.innerHTML = processedInstaData.TowerTotal[tower] || 0;
             towerTotalDiv.appendChild(towerTotal);
         } else {
@@ -3712,12 +3261,10 @@ function generateSingleInstaTower(tower) {
     instaMonkeyProgressContainer.appendChild(instaMonkeyDiv);
     
     let instaMonkeyTopBar = document.createElement('div');
-    instaMonkeyTopBar.id = `${tower}-top-bar`;
     instaMonkeyTopBar.classList.add('insta-monkey-top-bar');
     instaMonkeyDiv.appendChild(instaMonkeyTopBar);
 
     let instaPrevArrow = document.createElement('div');
-    instaPrevArrow.id = 'map-prev-arrow';
     instaPrevArrow.classList.add('insta-arrow');
     instaPrevArrow.addEventListener('click', () => {
         onSelectInstaPrevArrow(tower);
@@ -3725,13 +3272,11 @@ function generateSingleInstaTower(tower) {
     instaMonkeyTopBar.appendChild(instaPrevArrow);
 
     let instaPrevArrowImg = document.createElement('img');
-    instaPrevArrowImg.id = 'map-prev-arrow-img';
     instaPrevArrowImg.classList.add('map-arrow-img');
     instaPrevArrowImg.src = "./Assets/UI/PrevArrow.png";
     instaPrevArrow.appendChild(instaPrevArrowImg);
 
     let instaMonkeyHeaderDiv = document.createElement('div');
-    instaMonkeyHeaderDiv.id = `${tower}-header-div`;
     instaMonkeyHeaderDiv.classList.add('insta-monkey-header-div');
     switch(processedInstaData.TowerBorders[tower]) {
         case "Gold":
@@ -3744,7 +3289,6 @@ function generateSingleInstaTower(tower) {
     instaMonkeyTopBar.appendChild(instaMonkeyHeaderDiv);
 
     let instaNextArrow = document.createElement('div');
-    instaNextArrow.id = 'map-next-arrow';
     instaNextArrow.classList.add('insta-arrow');
     instaNextArrow.addEventListener('click', () => {
         onSelectInstaNextArrow(tower);
@@ -3752,51 +3296,40 @@ function generateSingleInstaTower(tower) {
     instaMonkeyTopBar.appendChild(instaNextArrow);
 
     let instaNextArrowImg = document.createElement('img');
-    instaNextArrowImg.id = 'map-next-arrow-img';
     instaNextArrowImg.classList.add('map-arrow-img');
     instaNextArrowImg.src = "./Assets/UI/NextArrow.png";
     instaNextArrow.appendChild(instaNextArrowImg);
 
 
     let instaProgressMissingToggle = document.createElement('div');
-    instaProgressMissingToggle.id = 'maps-progress-coop-toggle';
     instaProgressMissingToggle.classList.add('maps-progress-coop-toggle');  
     instaMonkeyHeaderDiv.appendChild(instaProgressMissingToggle);
 
     let instaProgressMissingToggleText = document.createElement('p');
-    instaProgressMissingToggleText.id = 'maps-progress-coop-toggle-text';
-    instaProgressMissingToggleText.classList.add('maps-progress-coop-toggle-text');
-    instaProgressMissingToggleText.classList.add('black-outline');
+    instaProgressMissingToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
     instaProgressMissingToggleText.innerHTML = "Missing: ";
     instaProgressMissingToggle.appendChild(instaProgressMissingToggleText);
 
     let instaProgressMissingToggleInput = document.createElement('input');
-    instaProgressMissingToggleInput.id = 'insta-progress-missing-toggle-input';
-    instaProgressMissingToggleInput.classList.add('insta-progress-missing-toggle-input');
-    instaProgressMissingToggleInput.classList.add('MkOffRed');
+    instaProgressMissingToggleInput.classList.add('insta-progress-missing-toggle-input','MkOffRed');
     instaProgressMissingToggleInput.type = 'checkbox';
     instaProgressMissingToggleInput.addEventListener('change', () => {
-        onSelectMissingToggle()
+        onSelectMissingToggle(instaProgressMissingToggleInput.checked)
     })
     instaProgressMissingToggleInput.checked = instasMissingToggle;
     instaProgressMissingToggle.appendChild(instaProgressMissingToggleInput);
 
     let instaMonkeyName = document.createElement('p');
-    instaMonkeyName.id = `${tower}-name`;
-    instaMonkeyName.classList.add('insta-monkey-name');
-    instaMonkeyName.classList.add('black-outline');
+    instaMonkeyName.classList.add('insta-monkey-name','black-outline');
     instaMonkeyName.innerHTML = getLocValue(tower);
     instaMonkeyHeaderDiv.appendChild(instaMonkeyName);
 
     let instaMonkeyProgress = document.createElement('div');
-    instaMonkeyProgress.id = `${tower}-progress`;
     instaMonkeyProgress.classList.add('insta-monkey-progress');
     instaMonkeyHeaderDiv.appendChild(instaMonkeyProgress);
 
     let instaMonkeyProgressText = document.createElement('p');
-    instaMonkeyProgressText.id = `${tower}-progress-text`;
-    instaMonkeyProgressText.classList.add('insta-monkey-progress-text');
-    instaMonkeyProgressText.classList.add('black-outline');
+    instaMonkeyProgressText.classList.add('insta-monkey-progress-text','black-outline');
     instaMonkeyProgressText.innerHTML = `${processedInstaData.TowerTierTotals[tower] ? Object.values(processedInstaData.TowerTierTotals[tower]).reduce((a, b) => a + b, 0) : 0}/64`;
     instaMonkeyProgress.appendChild(instaMonkeyProgressText);
 
@@ -3814,13 +3347,11 @@ function generateInstaMonkeyIcons(tower){
     instaMonkeyMainContainer.innerHTML = "";
 
     let instaMonkeyIconsContainer = document.createElement('div');
-    instaMonkeyIconsContainer.id = `${tower}-icons-container`;
     instaMonkeyIconsContainer.classList.add('insta-monkey-icons-container');
     instaMonkeyMainContainer.appendChild(instaMonkeyIconsContainer);
 
     constants.collectionOrder.forEach(tiers => {
         let instaMonkeyTierContainer = document.createElement('div');
-        instaMonkeyTierContainer.id = `${tower}-${tiers}-container`;
         instaMonkeyTierContainer.classList.add('insta-monkey-tier-container');
         if (!btd6usersave.instaTowers.hasOwnProperty(tower) || !btd6usersave.instaTowers[tower][tiers]) { 
             instaMonkeyTierContainer.style.display = "none";
@@ -3830,36 +3361,29 @@ function generateInstaMonkeyIcons(tower){
 
         if (btd6usersave.instaTowers.hasOwnProperty(tower) && btd6usersave.instaTowers[tower][tiers] > 1){
             let towerTotalDiv = document.createElement('p');
-            towerTotalDiv.id = `${tower}-total-div`;
-            towerTotalDiv.classList.add(`insta-progress`);
-            towerTotalDiv.classList.add('insta-tier-scale')
+            towerTotalDiv.classList.add(`insta-progress`,'insta-tier-scale');
             instaMonkeyTierContainer.appendChild(towerTotalDiv);
 
             let towerTotal = document.createElement('p');
-            towerTotal.id = `${tower}-total`;
-            towerTotal.classList.add(`power-progress-text`);
-            towerTotal.classList.add('black-outline');
+            towerTotal.classList.add(`power-progress-text`,'black-outline');
             towerTotal.innerHTML = btd6usersave.instaTowers[tower][tiers];
             towerTotalDiv.appendChild(towerTotal);
         }
 
         let instaMonkeyTierImg = document.createElement('img');
-        instaMonkeyTierImg.id = `${tower}-${tiers}-img`;
         instaMonkeyTierImg.classList.add('insta-monkey-tier-img');
         instaMonkeyTierImg.src = btd6usersave.instaTowers.hasOwnProperty(tower) && btd6usersave.instaTowers[tower][tiers] ? getInstaMonkeyIcon(tower,tiers) : "./Assets/UI/InstaUncollected.png";
         instaMonkeyTierContainer.appendChild(instaMonkeyTierImg);
 
         let instaMonkeyTierText = document.createElement('p');
-        instaMonkeyTierText.id = `${tower}-${tiers}-text`;
-        instaMonkeyTierText.classList.add('insta-monkey-tier-text');
-        instaMonkeyTierText.classList.add('black-outline');
+        instaMonkeyTierText.classList.add('insta-monkey-tier-text','black-outline');
         instaMonkeyTierText.innerHTML = `${tiers[0]}-${tiers[1]}-${tiers[2]}`;
         instaMonkeyTierContainer.appendChild(instaMonkeyTierText);
     })
 }
 
-function onSelectMissingToggle(){
-    instasMissingToggle = document.getElementById('insta-progress-missing-toggle-input').checked;
+function onSelectMissingToggle(enabled){
+    instasMissingToggle = enabled;
     for (let element of document.getElementsByClassName('insta-monkey-unobtained')) {
         element.style.display = instasMissingToggle ? "block" : "none";
     }
@@ -3884,19 +3408,16 @@ function generateInstaListView(){
     instaMonkeysProgressContainer.innerHTML = "";
 
     let instaMonkeysListContainer = document.createElement('div');
-    instaMonkeysListContainer.id = 'insta-monkeys-list-container';
     instaMonkeysListContainer.classList.add('insta-monkeys-list-container');
     instaMonkeysProgressContainer.appendChild(instaMonkeysListContainer);
 
     let instaMonkeysList = document.createElement('div');
-    instaMonkeysList.id = 'insta-monkeys-list';
     instaMonkeysList.classList.add('insta-monkeys-list');
     instaMonkeysListContainer.appendChild(instaMonkeysList);
 
     Object.keys(constants.towersInOrder).forEach(tower => {
         if(processedInstaData.TowerTierTotals[tower] == null) { return; }
         let instaMonkeyDiv = document.createElement('div');
-        instaMonkeyDiv.id = `${tower}-div`;
         instaMonkeyDiv.classList.add('insta-monkey-div');
         instaMonkeysList.appendChild(instaMonkeyDiv);
 
@@ -3910,7 +3431,6 @@ function generateInstaListView(){
         }
 
         let instaTowerContainer = document.createElement('div');
-        instaTowerContainer.id = `${tower}-container`;
         instaTowerContainer.classList.add('tower-container');
         instaTowerContainer.style.backgroundImage = `url(./Assets/UI/InstaTowersContainer${processedInstaData.TowerBorders[tower] || ""}.png)`
         instaTowerContainer.addEventListener('click', () => {
@@ -3919,25 +3439,20 @@ function generateInstaListView(){
         instaMonkeyDiv.appendChild(instaTowerContainer);
 
         let instaMonkeyImg = document.createElement('img');
-        instaMonkeyImg.id = `${tower}-img`;
         instaMonkeyImg.classList.add('tower-img');
         instaMonkeyImg.src = getInstaContainerIcon(tower,'000');
         instaTowerContainer.appendChild(instaMonkeyImg);
 
         let instaMonkeyName = document.createElement('p');
-        instaMonkeyName.id = `${tower}-name`;
-        instaMonkeyName.classList.add(`tower-name`);
-        instaMonkeyName.classList.add('black-outline');
+        instaMonkeyName.classList.add(`tower-name`,'black-outline');
         instaMonkeyName.innerHTML = getLocValue(tower);
         instaTowerContainer.appendChild(instaMonkeyName);
 
         let instaMonkeyTopBottom = document.createElement('div');
-        instaMonkeyTopBottom.id = `${tower}-top-bottom`;
         instaMonkeyTopBottom.classList.add('insta-monkey-top-bottom');
         instaMonkeyDiv.appendChild(instaMonkeyTopBottom);
 
         let instaMonkeyProgress = document.createElement('div');
-        instaMonkeyProgress.id = `${tower}-progress`;
         instaMonkeyProgress.classList.add('insta-monkey-progress-list');
         instaMonkeyTopBottom.appendChild(instaMonkeyProgress);
 
@@ -3946,47 +3461,35 @@ function generateInstaListView(){
         instaMonkeyProgress.appendChild(instaMonkeyTotal);
 
         let instaMonkeysTotalLabelText = document.createElement('p');
-        instaMonkeysTotalLabelText.id = `${tower}-total-label-text`;
-        instaMonkeysTotalLabelText.classList.add('insta-monkey-progress-label-text');
-        instaMonkeysTotalLabelText.classList.add('black-outline');
+        instaMonkeysTotalLabelText.classList.add('insta-monkey-progress-label-text','black-outline');
         instaMonkeysTotalLabelText.innerHTML = "Total Instas:";
         instaMonkeyTotal.appendChild(instaMonkeysTotalLabelText);
 
         let instaMonkeysTotalText = document.createElement('p');
-        instaMonkeysTotalText.id = `${tower}-total-text`;
-        instaMonkeysTotalText.classList.add('insta-monkey-total-text');
-        instaMonkeysTotalText.classList.add('black-outline');
+        instaMonkeysTotalText.classList.add('insta-monkey-total-text','black-outline');
         instaMonkeysTotalText.innerHTML = processedInstaData.TowerTotal[tower];
         instaMonkeyTotal.appendChild(instaMonkeysTotalText);
 
         let instaMonkeyTierProgress = document.createElement('div');
-        instaMonkeyTierProgress.id = `${tower}-tier-progress`;
         instaMonkeyTierProgress.classList.add('insta-monkey-tier-progress');
         instaMonkeyProgress.appendChild(instaMonkeyTierProgress);
 
         let instaMonkeyProgressLabelText = document.createElement('p');
-        instaMonkeyProgressLabelText.id = `${tower}-progress-label-text`;
-        instaMonkeyProgressLabelText.classList.add('insta-monkey-progress-label-text');
-        instaMonkeyProgressLabelText.classList.add('black-outline');
+        instaMonkeyProgressLabelText.classList.add('insta-monkey-progress-label-text','black-outline');
         instaMonkeyProgressLabelText.innerHTML = "Unique Instas:";
         instaMonkeyTierProgress.appendChild(instaMonkeyProgressLabelText);
 
         let instaMonkeyProgressText = document.createElement('p');
-        instaMonkeyProgressText.id = `${tower}-progress-text`;
-        instaMonkeyProgressText.classList.add('insta-monkey-progress-text');
-        instaMonkeyProgressText.classList.add('black-outline');
+        instaMonkeyProgressText.classList.add('insta-monkey-progress-text','black-outline');
         instaMonkeyProgressText.innerHTML = `${Object.values(processedInstaData.TowerTierTotals[tower]).reduce((a, b) => a + b, 0)}/64`;
         instaMonkeyTierProgress.appendChild(instaMonkeyProgressText);
 
         let instaMonkeyTiersContainer = document.createElement('div');
-        instaMonkeyTiersContainer.id = `${tower}-tiers-container`;
         instaMonkeyTiersContainer.classList.add('insta-monkey-tiers-container');
         instaMonkeyTopBottom.appendChild(instaMonkeyTiersContainer);
 
         let instaMonkeyTiersLabel = document.createElement('p');
-        instaMonkeyTiersLabel.id = `${tower}-tiers-label`;
-        instaMonkeyTiersLabel.classList.add('insta-monkey-tiers-label');
-        instaMonkeyTiersLabel.classList.add('black-outline');
+        instaMonkeyTiersLabel.classList.add('insta-monkey-tiers-label','black-outline');
         instaMonkeyTiersLabel.innerHTML = "Unique By Tier:";
         instaMonkeyTiersContainer.appendChild(instaMonkeyTiersLabel);
 
@@ -3995,15 +3498,8 @@ function generateInstaListView(){
             instaMonkeyTierDiv.classList.add('insta-monkey-tier-div');
             instaMonkeyTiersContainer.appendChild(instaMonkeyTierDiv);
 
-            // let instaMonkeyTierImg = document.createElement('img');
-            // instaMonkeyTierImg.classList.add('insta-monkey-tier-img');
-            // instaMonkeyTierImg.src = tierTotal == 0 ? "./Assets/UI/InstaUncollected.png" : getInstaMonkeyIcon(tower,constants.collectionOrder[index]);
-            // instaMonkeyTierDiv.appendChild(instaMonkeyTierImg);
-
             let instaMonkeyTierText = document.createElement('p');
-            instaMonkeyTierText.classList.add('insta-monkey-tier-text-list');
-            instaMonkeyTierText.classList.add(`insta-tier-text-${tier}`)
-            tier == "5" ? instaMonkeyTierText.classList.add('t5-insta-outline') : instaMonkeyTierText.classList.add('black-outline');
+            instaMonkeyTierText.classList.add('insta-monkey-tier-text-list', `insta-tier-text-${tier}`, tier == "5" ? "t5-insta-outline" : "black-outline");
             instaMonkeyTierDiv.style.backgroundImage = `url(./Assets/UI/InstaTier${tier}Container.png)`
             instaMonkeyTierText.innerHTML = `${tierTotal}/${constants.instaTiers[tier].length}`;
             instaMonkeyTierDiv.appendChild(instaMonkeyTierText);
@@ -4016,16 +3512,12 @@ function generateInstaObtainGuide() {
     progressContent.innerHTML = "";
 
     let titleGuideText = document.createElement('p');
-    titleGuideText.id = 'insta-monkeys-guide-title-text';
-    titleGuideText.classList.add('insta-monkeys-guide-title-text');
-    titleGuideText.classList.add('black-outline');
+    titleGuideText.classList.add('insta-monkeys-guide-title-text','black-outline');
     titleGuideText.innerHTML = "Where To Get More Insta Monkeys";
     progressContent.appendChild(titleGuideText);
 
     let titleGuideDesc = document.createElement('p');
-    titleGuideDesc.id = 'insta-monkeys-guide-title-desc';
-    titleGuideDesc.classList.add('insta-monkeys-guide-title-desc');
-    titleGuideDesc.classList.add('black-outline');
+    titleGuideDesc.classList.add('insta-monkeys-guide-title-desc','black-outline');
     titleGuideDesc.innerHTML = "Select a button to read more about that method.";
     progressContent.appendChild(titleGuideDesc);
 }
@@ -4035,77 +3527,27 @@ function generateAchievementsProgress() {
     progressContent.innerHTML = "";
 
     let achievementsProgressContainer = document.createElement('div');
-    achievementsProgressContainer.id = 'achievements-progress-container';
     achievementsProgressContainer.classList.add('achievements-progress-container');
     progressContent.appendChild(achievementsProgressContainer);
 
-    //headerbar
     let achievementsHeaderBar = document.createElement('div');
-    achievementsHeaderBar.id = 'achievements-header-bar';
     achievementsHeaderBar.classList.add('achievements-header-bar');
     achievementsProgressContainer.appendChild(achievementsHeaderBar);
-    //buttons for grid and list view for achievements
+    
     let achievementsViews = document.createElement('div');
-    achievementsViews.id = 'achievements-views';
     achievementsViews.classList.add('maps-progress-views');
     achievementsHeaderBar.appendChild(achievementsViews);
-    //filter for all, locked, or unlocked
-    // let achievementsFilters = document.createElement('div');
-    // achievementsFilters.id = 'achievements-filters';
-    // achievementsFilters.classList.add('maps-progress-views');
-    // achievementsHeaderBar.appendChild(achievementsFilters);
-
-    // let achievementStatusFilter = document.createElement('div');
-    // achievementStatusFilter.id = 'achievement-status-filter';
-    // achievementStatusFilter.classList.add('maps-progress-views');
-    // achievementStatusFilter.classList.add('black-outline');
-    // achievementStatusFilter.innerHTML = "All";
-    // achievementStatusFilter.addEventListener('click', () => {
-    //     onChangeAchievementsFilter("all");
-    // })
-    // achievementsFilters.appendChild(achievementStatusFilter);
-
-    // let mapsProgressViewsText = document.createElement('p');
-    // mapsProgressViewsText.id = 'maps-progress-views-text';
-    // mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text');
-    // mapsProgressViewsText.classList.add('black-outline');
-    // mapsProgressViewsText.innerHTML = "Filter:";
-    // achievementsViews.appendChild(mapsProgressViewsText);
-
-    // let achievementsGameView = document.createElement('div');
-    // achievementsGameView.id = 'achievements-game-view';
-    // achievementsGameView.classList.add('maps-progress-view');
-    // achievementsGameView.classList.add('black-outline');
-    // achievementsGameView.innerHTML = "Monkey Money";
-    // achievementsGameView.addEventListener('click', () => {
-    //     onChangeAchievementsRewardFilter("Monkey Money");
-    // })
-    // achievementsViews.appendChild(achievementsGameView);
-
-    // let achievementsListView = document.createElement('div');
-    // achievementsListView.id = 'achievements-list-view';
-    // achievementsListView.classList.add('maps-progress-view');
-    // achievementsListView.classList.add('black-outline');
-    // achievementsListView.innerHTML = "Knowledge";
-    // achievementsListView.addEventListener('click', () => {
-    //     onChangeAchievementsRewardFilter("knowledge");
-    // })
-    // achievementsViews.appendChild(achievementsListView);
 
     let mapProgressFilterDifficulty2 = document.createElement('div');
-    mapProgressFilterDifficulty2.id = 'map-progress-filter-difficulty';
     mapProgressFilterDifficulty2.classList.add('map-progress-filter-difficulty');
     achievementsViews.appendChild(mapProgressFilterDifficulty2);
 
     let mapsProgressFilterDifficultyText2 = document.createElement('p');
-    mapsProgressFilterDifficultyText2.id = 'maps-progress-filter-difficulty-text';
-    mapsProgressFilterDifficultyText2.classList.add('maps-progress-coop-toggle-text');
-    mapsProgressFilterDifficultyText2.classList.add('black-outline');
+    mapsProgressFilterDifficultyText2.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressFilterDifficultyText2.innerHTML = "Filter:";
     mapProgressFilterDifficulty2.appendChild(mapsProgressFilterDifficultyText2);
 
     let mapProgressFilterDifficultySelect2 = document.createElement('select');
-    mapProgressFilterDifficultySelect2.id = 'map-progress-filter-difficulty-select';
     mapProgressFilterDifficultySelect2.classList.add('map-progress-filter-difficulty-select');
 
     let options2 = ["None","Monkey Money","Knowledge Points","Insta Monkeys","Hidden Achievements"]
@@ -4119,24 +3561,19 @@ function generateAchievementsProgress() {
 
 
     let mapsProgressFilter = document.createElement('div');
-    mapsProgressFilter.id = 'maps-progress-filter';
     mapsProgressFilter.classList.add('maps-progress-filter');
     achievementsHeaderBar.appendChild(mapsProgressFilter);
 
     let mapProgressFilterDifficulty = document.createElement('div');
-    mapProgressFilterDifficulty.id = 'map-progress-filter-difficulty';
     mapProgressFilterDifficulty.classList.add('map-progress-filter-difficulty');
     mapsProgressFilter.appendChild(mapProgressFilterDifficulty);
 
     let mapsProgressFilterDifficultyText = document.createElement('p');
-    mapsProgressFilterDifficultyText.id = 'maps-progress-filter-difficulty-text';
-    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text');
-    mapsProgressFilterDifficultyText.classList.add('black-outline');
+    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressFilterDifficultyText.innerHTML = "Display:";
     mapProgressFilterDifficulty.appendChild(mapsProgressFilterDifficultyText);
 
     let mapProgressFilterDifficultySelect = document.createElement('select');
-    mapProgressFilterDifficultySelect.id = 'map-progress-filter-difficulty-select';
     mapProgressFilterDifficultySelect.classList.add('map-progress-filter-difficulty-select');
     mapProgressFilterDifficultySelect.addEventListener('change', () => {
         onChangeAchievementsFilter(mapProgressFilterDifficultySelect.value);
@@ -4165,7 +3602,6 @@ function generateAchievementsProgress() {
 }
 
 function generateAchievementsGameView(){
-    //grid view
     let AchievementsContainer = document.getElementById('achievements-container');
     AchievementsContainer.innerHTML = "";
 
@@ -4200,9 +3636,7 @@ function generateAchievementsGameView(){
 
     if (achievements.length == 0) {
         let noDataFound = document.createElement('p');
-        noDataFound.id = 'no-data-found';
-        noDataFound.classList.add('no-data-found');
-        noDataFound.classList.add('black-outline');
+        noDataFound.classList.add('no-data-found','black-outline');
         noDataFound.innerHTML = "No Data Found.";
         noDataFound.style.width = "100%";
         AchievementsContainer.appendChild(noDataFound);
@@ -4236,8 +3670,7 @@ function generateAchievementsGameView(){
         achievementTopDiv.appendChild(achievementTextDiv);
 
         let achievementNameText = document.createElement('p');
-        achievementNameText.classList.add('achievement-name-text');
-        achievementNameText.classList.add('black-outline');
+        achievementNameText.classList.add('achievement-name-text','black-outline');
         achievementNameText.innerHTML = achievementClaimed ? getLocValue(`Achievement ${achievementData.model.achievementId} Name`) : achievementData.model.hidden ? "???" : getLocValue(`Achievement ${achievementData.model.achievementId} Name`);
         achievementTextDiv.appendChild(achievementNameText);
 
@@ -4266,8 +3699,7 @@ function generateAchievementsGameView(){
             achievementRewardDiv.appendChild(achievementRewardImg);
 
             let achievementRewardText = document.createElement('p');
-            achievementRewardText.classList.add('achievement-reward-text');
-            achievementRewardText.classList.add('black-outline');
+            achievementRewardText.classList.add('achievement-reward-text','black-outline');
             let text = "";
             switch (data.type) {
                 case "InstaMonkey":
@@ -4297,17 +3729,6 @@ function generateAchievementsGameView(){
     }
 
     AchievementsContainer.appendChild(fragment);
-    //top div
-    //icon div
-    //icon img
-    //name text
-    //desc text
-    //bottom div
-    //rewards div
-    //looped reward div
-    //looped reward img
-    //looped reward text
-    //completed check
 }
 
 function generateExtrasProgress() {
@@ -4315,13 +3736,13 @@ function generateExtrasProgress() {
     progressContent.innerHTML = "";
 
     let extrasProgressContainer = document.createElement('div');
-    extrasProgressContainer.id = 'extras-progress-container';
     extrasProgressContainer.classList.add('extras-progress-container');
     progressContent.appendChild(extrasProgressContainer);
 
     let extras = [["Big Bloons", "BigBloonsMode"],["Small Bloons", "SmallBloonsMode"],["Big Monkey Towers","BigTowersMode"],["Small Monkey Towers", "SmallTowersMode"],["Small Bosses","SmallBossesMode"]]
 
     for (let [name, loc] of extras) {
+        if(extrasUnlocked[name] == undefined) { continue; }
         let extraProgressDiv = document.createElement('div');
         extraProgressDiv.classList.add('extra-progress-div');
         extrasProgressContainer.appendChild(extraProgressDiv);
@@ -4332,8 +3753,7 @@ function generateExtrasProgress() {
         extraProgressDiv.appendChild(extraProgressImg);
 
         let extraProgressText = document.createElement('p');
-        extraProgressText.classList.add('extra-progress-text');
-        extraProgressText.classList.add('black-outline');
+        extraProgressText.classList.add('extra-progress-text','black-outline');
         extraProgressText.innerHTML = getLocValue(loc);
         extraProgressDiv.appendChild(extraProgressText);
 
@@ -4360,20 +3780,11 @@ function generateEvents(){
     let eventsContent = document.getElementById('events-content');
     eventsContent.innerHTML = "";
 
-    // let noDataFound = document.createElement('p');
-    // noDataFound.id = 'no-data-found';
-    // noDataFound.classList.add('no-data-found');
-    // noDataFound.classList.add('black-outline');
-    // noDataFound.innerHTML = "Coming Soon";
-    // extrasContent.appendChild(noDataFound);
-
     let eventsPage = document.createElement('div');
-    eventsPage.id = 'events-page';
     eventsPage.classList.add('progress-page');
     eventsContent.appendChild(eventsPage);
 
     let selectorsDiv = document.createElement('div');
-    selectorsDiv.id = 'selectors-div-events';
     selectorsDiv.classList.add('selectors-div');
     eventsPage.appendChild(selectorsDiv);
 
@@ -4417,7 +3828,6 @@ function generateEvents(){
 
     Object.entries(selectors).forEach(([selector,object]) => {
         let selectorDiv = document.createElement('div');
-        selectorDiv.id = selector.toLowerCase() + '-div';
         selectorDiv.classList.add('events-selector-div');
         object.bgcolor ? selectorDiv.style.background = object.bgcolor : selectorDiv.style.backgroundImage = `url(../Assets/EventBanner/${object.bgimg}.png)`;
         /*selectorDiv.innerHTML = progressSubText[selector];*/
@@ -4427,20 +3837,16 @@ function generateEvents(){
         selectorsDiv.appendChild(selectorDiv);
 
         let selectorImg = document.createElement('img');
-        selectorImg.id = selector.toLowerCase() + '-img';
         selectorImg.classList.add('selector-img');
         selectorImg.src = `../Assets/UI/${object.img}.png`;
         selectorDiv.appendChild(selectorImg);
 
         let selectorText = document.createElement('p');
-        selectorText.id = selector.toLowerCase() + '-text';
-        selectorText.classList.add('event-selector-text');
-        selectorText.classList.add('black-outline');
+        selectorText.classList.add('event-selector-text','black-outline');
         selectorText.innerHTML = object.text;
         selectorDiv.appendChild(selectorText);
 
         let selectorGoImg = document.createElement('img');
-        selectorGoImg.id = selector.toLowerCase() + '-go-img';
         selectorGoImg.classList.add('selector-go-img');
         selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
         selectorDiv.appendChild(selectorGoImg);
@@ -4541,7 +3947,6 @@ function generateRaces(){
 
         let raceInfoDates = document.createElement('p');
         raceInfoDates.classList.add("race-info-dates", "black-outline");
-        //formatted as "XX/XX/XX XX:XX - XX/XX/XX XX:XX"
         raceInfoDates.innerHTML = `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`;
         raceInfoMiddleDiv.appendChild(raceInfoDates);
 
@@ -4572,20 +3977,17 @@ function generateRaces(){
                 if (entry.isIntersecting) {
                     await getRaceMetadata(index);
                     if (typeof racesData[index]["metadata"] != 'string') {
-                        console.log(race.metadata)
                         observer.unobserve(entry.target);
                         raceMapImg.src = Object.keys(constants.mapsInOrder).includes(race.metadata.map) ? getMapIcon(race.metadata.map) : race.metadata.mapURL;
                         let modifiers = challengeModifiers(race.metadata);
                         let rules = challengeRules(race.metadata)
                         for (let modifier of Object.values(modifiers)) {
-                            console.log(modifier)
                             let challengeModifierIcon = document.createElement('img');
                             challengeModifierIcon.classList.add('challenge-modifier-icon-event');
                             challengeModifierIcon.src = `./Assets/ChallengeRulesIcon/${modifier.icon}.png`;
                             raceChallengeIcons.appendChild(challengeModifierIcon);
                         }
                         for (let rule of rules) {
-                            console.log(rule)
                             if (rule == "No Round 100 Reward") { continue; }
                             if (rule == "Paragon Limit") { continue; }
                             let challengeRuleIcon = document.createElement('img');
@@ -4635,18 +4037,7 @@ function generateBosses(elite){
         generateBosses(showElite);
     })
 
-    // let switchRightDiv = document.createElement('div');
-    // switchRightDiv.classList.add("switch-right-div");
-    // switchBanner.appendChild(switchRightDiv);
-
-    // let switchGoImg = document.createElement('img');
-    // switchGoImg.classList.add('leaderboard-go-img');
-    // switchGoImg.src = '../Assets/UI/ContinueBtn.png';
-    // switchRightDiv.appendChild(switchGoImg);
-
-
     Object.values(bossesData).forEach((race, index) => {
-        //get only the numbers
         let titleCaseBoss = race.bossType.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
         let bossNumber = race.name.replace(/\D/g,'');
         let bossName = `${elite ? "Elite" : ""} ${titleCaseBoss} ${bossNumber}`;
@@ -4674,7 +4065,6 @@ function generateBosses(elite){
 
         let bossMapBossIcon = document.createElement('img')
         bossMapBossIcon.classList.add("boss-map-boss-icon");
-        //make race.bossType title case
         bossMapBossIcon.src = `./Assets/BossIcon/${titleCaseBoss}Portrait${elite ? "Elite" : ""}.png`
         raceMapDiv.appendChild(bossMapBossIcon);
 
@@ -4721,7 +4111,6 @@ function generateBosses(elite){
 
         let raceInfoDates = document.createElement('p');
         raceInfoDates.classList.add("race-info-dates", "black-outline");
-        //formatted as "XX/XX/XX XX:XX - XX/XX/XX XX:XX"
         raceInfoDates.innerHTML = `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`;
         raceInfoMiddleDiv.appendChild(raceInfoDates);
 
@@ -4764,19 +4153,16 @@ function generateBosses(elite){
                                 raceChallengeIcons.appendChild(challengeScoreTypeIcon);
                                 break;
                         }
-                        console.log(elite ? race.metadataElite : race.metadataStandard)
                         observer.unobserve(entry.target);
                         let modifiers = challengeModifiers(elite ? race.metadataElite : race.metadataStandard);
                         let rules = challengeRules(elite ? race.metadataElite : race.metadataStandard)
                         for (let modifier of Object.values(modifiers)) {
-                            console.log(modifier)
                             let challengeModifierIcon = document.createElement('img');
                             challengeModifierIcon.classList.add('challenge-modifier-icon-event');
                             challengeModifierIcon.src = `./Assets/ChallengeRulesIcon/${modifier.icon}.png`;
                             raceChallengeIcons.appendChild(challengeModifierIcon);
                         }
                         for (let rule of rules) {
-                            console.log(rule)
                             if (rule == "No Round 100 Reward") { continue; }
                             let challengeRuleIcon = document.createElement('img');
                             challengeRuleIcon.classList.add('challenge-rule-icon-event');
@@ -4803,15 +4189,6 @@ function generateCTs(){
         raceDiv.classList.add("race-div", "ct-div");
         raceDiv.style.backgroundImage = `url(../Assets/ProfileBanner/TeamsBanner8.png)`;
         eventsContent.appendChild(raceDiv);
-
-        // let raceMapDiv = document.createElement('div');
-        // raceMapDiv.classList.add("race-map-div", "silver-border");
-        // raceDiv.appendChild(raceMapDiv);
-
-        // let raceMapImg = document.createElement('img');
-        // raceMapImg.classList.add("race-map-img");
-        // raceMapImg.src = "./Assets/EventBanner/EventBannerSmallCT.png"
-        // raceMapDiv.appendChild(raceMapImg);
 
         let raceInfoDiv = document.createElement('div');
         raceInfoDiv.classList.add("ct-info-div");
@@ -4848,7 +4225,6 @@ function generateCTs(){
 
         let raceInfoDates = document.createElement('p');
         raceInfoDates.classList.add("race-info-dates", "ct-info-dates", "black-outline");
-        //formatted as "XX/XX/XX XX:XX - XX/XX/XX XX:XX"
         raceInfoDates.innerHTML = `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`;
         ctInfoLeftDiv.appendChild(raceInfoDates);
 
@@ -4856,8 +4232,6 @@ function generateCTs(){
         raceInfoRules.classList.add("race-info-rules", "start-button", "currency-trophies-div", "black-outline");
         raceInfoRules.innerHTML = "Relic Reveal"
         raceInfoRules.addEventListener('click', () => {
-            // showChallengeModel('events', race.metadata, "CT");
-            console.log(race);
             showLoading();
             openRelics('events', race.tiles, `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`)
         })
@@ -4914,7 +4288,6 @@ async function generateChallenges(type) {
 
     await getDailyChallengesData();
 
-    //filter the challenges that include "Standard", "Advanced", "coop" as the beginning of the name key if the type is DailyChallenges, AdvancedDailyChallenges, CoopDailyChallenges
     let challenges = Object.values(DCData).filter(challenge => {
         switch (type) {
             case "DailyChallenges":
@@ -4926,7 +4299,6 @@ async function generateChallenges(type) {
         }
     })
 
-    // if CoopDailyChallenges, filter challenge.createdAt at a new Date and check if it less than the current day
     let now = new Date();
 
     if (type == "CoopDailyChallenges") {
@@ -4956,13 +4328,11 @@ async function generateChallenges(type) {
         challengeDiv.classList.add("race-div", "event-select-challenge-div");
         eventsContent.appendChild(challengeDiv);
 
-        //title text
         let challengeInfoName = document.createElement('p');
         challengeInfoName.classList.add("challenge-select-info-name", "black-outline");
         challengeInfoName.innerHTML = `${type == "DailyChallenges" ? "Standard" : "Advanced"} Challenges`;
         challengeDiv.appendChild(challengeInfoName);
 
-        //desc text
         let challengeInfoDesc = document.createElement('p');
         challengeInfoDesc.classList.add("challenge-info-desc");
         challengeInfoDesc.innerHTML = `Select a challenge by entering a date or ID below. IDs can be no less than 1000, and the date cannot be earlier than ${type == "DailyChallenges" ? new Date(Date.UTC(2021, 4, 7)).toISOString().split('T')[0] : new Date(Date.UTC(2021, 4, 20)).toISOString().split('T')[0]} for ${type == "DailyChallenges" ? "Standard" : "Advanced"} challenges.`;
@@ -4981,26 +4351,20 @@ async function generateChallenges(type) {
         challengeSelectorDateText.innerHTML = "Date";
         challengeSelectorDate.appendChild(challengeSelectorDateText);
 
-        //input for day selector
         let challengeSelectorDateInput = document.createElement('input');
         challengeSelectorDateInput.classList.add("challenge-selector-date-input");
-        challengeSelectorDateInput.type = "date";//earlier selectable date is 05/07/2021 for regular dailychallenges and 05/20/2021 for AdvancedDailyChallenges
-        // challengeSelectorDateInput.min = type == "DailyChallenges" ? "2021-05-07" : "2021-05-20";
-        // challengeSelectorDateInput.max = new Date();
+        challengeSelectorDateInput.type = "date";
         challengeSelectorDateInput.value =  new Date(Date.now()).toISOString().split('T')[0];
         challengeSelectorDateInput.addEventListener('change', () => {
             if (new Date(challengeSelectorDateInput.value) > new Date()) { challengeSelectorDateInput.value = new Date().toISOString().split('T')[0] }
             if (new Date(challengeSelectorDateInput.value) < new Date(type == "DailyChallenges" ? "2021-05-07" : "2021-05-20")) { challengeSelectorDateInput.value = type == "DailyChallenges" ? "2021-05-07" : "2021-05-20"; }
         })
-        // challengeSelectorDateInput.value = new Date().toISOString().split('T')[0];
         challengeSelectorDate.appendChild(challengeSelectorDateInput);
 
         let challengeSelectorDateImg = document.createElement('img');
         challengeSelectorDateImg.classList.add("challenge-selector-date-img");
         challengeSelectorDateImg.src = "../Assets/UI/ContinueBtn.png";
         challengeSelectorDateImg.addEventListener('click', async () => {
-            console.log(challengeSelectorDateInput.value)
-            console.log(getChallengeIDFromDate(challengeSelectorDateInput.value), type)
             showLoading();
             showChallengeModel('events', await getChallengeMetadata(getChallengeIDFromDate(challengeSelectorDateInput.value,type == "AdvancedDailyChallenges")), type);
         })
@@ -5020,11 +4384,9 @@ async function generateChallenges(type) {
         challengeSelectorIDText.innerHTML = "Challenge ID";
         challengeSelectorID.appendChild(challengeSelectorIDText);
 
-        //input for ID selector
         let challengeSelectorIDInput = document.createElement('input');
         challengeSelectorIDInput.classList.add("challenge-selector-id-input");
         challengeSelectorIDInput.type = "number";
-        //keep the value above 1000 and below the latest challenge number
         challengeSelectorIDInput.min = 1000;
         challengeSelectorIDInput.max = latestChallenge;
         challengeSelectorIDInput.value = latestChallenge;
@@ -5038,7 +4400,6 @@ async function generateChallenges(type) {
         challengeSelectorIDImg.classList.add("challenge-selector-id-img");
         challengeSelectorIDImg.src = "../Assets/UI/ContinueBtn.png";
         challengeSelectorIDImg.addEventListener('click', async () => {
-            console.log(challengeSelectorIDInput.value)
             showLoading();
             showChallengeModel('events', await getChallengeMetadata(getChallengeIdFromInt(challengeSelectorIDInput.value, type == "AdvancedDailyChallenges")), type);
         })
@@ -5106,11 +4467,9 @@ async function generateChallenges(type) {
 
         let challengeInfoName = document.createElement('p');
         challengeInfoName.classList.add("challenge-info-name", "black-outline");
-        // challengeInfoName.innerHTML = challenge.name.replace("Standard ", "#").replace("Advanced ", "#").replace("coop - ", "");
         challengeInfoName.innerHTML = type == "CoopDailyChallenges" ? challenge.name.replace("coop - ", "") : challengeName;
         challengeInfoTopDiv.appendChild(challengeInfoName);
 
-        //challengeDate
         let challengeDate = document.createElement('p');
         challengeDate.classList.add("challenge-date", "black-outline");
         challengeDate.innerHTML = `${new Date(challenge.createdAt).toLocaleDateString()}`;
@@ -5120,13 +4479,6 @@ async function generateChallenges(type) {
         challengeTypeText.classList.add("challenge-date", "black-outline");
         challengeTypeText.innerHTML = type == "CoopDailyChallenges" ? "Coop" : `${challengeType} ${challengeNumber}`;
         challengeInfoMiddleDiv.appendChild(challengeTypeText);
-
-        // if (challengeNumber != null) {
-        //     let challengeNumberText = document.createElement('p');
-        //     challengeNumberText.classList.add("challenge-date", "black-outline");
-        //     challengeNumberText.innerHTML = challengeNumber;
-        //     challengeInfoMiddleDiv.appendChild(challengeNumberText);
-        // }
 
         let challengeInfoRules = document.createElement('div');
         challengeInfoRules.classList.add("challenge-info-rules", "start-button", "black-outline");
@@ -5169,14 +4521,12 @@ async function generateChallenges(type) {
                         let modifiers = challengeModifiers(challengeData);
                         let rules = challengeRules(challengeData)
                         for (let modifier of Object.values(modifiers)) {
-                            console.log(modifier)
                             let challengeModifierIcon = document.createElement('img');
                             challengeModifierIcon.classList.add('challenge-modifier-icon-event');
                             challengeModifierIcon.src = `./Assets/ChallengeRulesIcon/${modifier.icon}.png`;
                             challengeChallengeIcons.appendChild(challengeModifierIcon);
                         }
                         for (let rule of rules) {
-                            console.log(rule)
                             if (rule == "No Round 100 Reward" && type != "AdvancedDailyChallenges") { continue; }
                             if (rule == "Paragon Limit") { continue; }
                             let challengeRuleIcon = document.createElement('img');
@@ -5206,7 +4556,6 @@ async function generateChallenges(type) {
 
 function processChallenge(metadata, map){
     let result = {};
-    console.log(map);
     if (map == null) {
         if (metadata.leastCashUsed != "-1") {
             result.scoringType = "Least Cash"
@@ -5238,11 +4587,9 @@ function processChallenge(metadata, map){
     result["Player Win Rate"] = metadata.playsUnique == 0 ? "0%" : `${((metadata.wins / (metadata.plays + metadata.restarts)) * 100).toFixed(2)}%`;
 
     result.statsValid = false;
-    //if all of result['Stats'] is not zero
     if (metadata.id != "n/a") {
         result.statsValid = true;
     }
-    console.log(result);
     return result;
 }
 
@@ -5252,7 +4599,6 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     document.getElementById('challenge-content').innerHTML = "";
     document.getElementById(`${source}-content`).style.display = "none";
     resetScroll();
-    console.log(eventData)
 
     let challengeExtraData = processChallenge(metadata);
     if (challengeType == "Boss" && eventData.scoringType != "GameTime") {
@@ -5312,15 +4658,6 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     challengeHeaderRightContainer.classList.add('challenge-header-right-container');
     challengeModelHeader.appendChild(challengeHeaderRightContainer);
 
-    // let challengeHeaderExitBtn = document.createElement('div');
-    // challengeHeaderExitBtn.classList.add('challenge-header-exit-btn');
-    // challengeHeaderExitBtn.classList.add('maps-progress-view','black-outline');
-    // challengeHeaderExitBtn.innerHTML = "Exit";
-    // challengeHeaderExitBtn.addEventListener('click', () => {
-    //     exitChallengeModel(source);
-    // })
-    // challengeHeaderRightContainer.appendChild(challengeHeaderExitBtn);
-
     let challengeHeaderRightTop = document.createElement('div');
     challengeHeaderRightTop.classList.add('challenge-header-right-top');
     challengeHeaderRightContainer.appendChild(challengeHeaderRightTop);
@@ -5336,15 +4673,6 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     let challengeHeaderRightBottom = document.createElement('div');
     challengeHeaderRightBottom.classList.add('challenge-header-right-bottom');
     challengeHeaderRightContainer.appendChild(challengeHeaderRightBottom);
-
-    // let challengeHeaderStatsBtn = document.createElement('div');
-    // challengeHeaderStatsBtn.classList.add('challenge-header-stats-btn');
-    // challengeHeaderStatsBtn.classList.add('maps-progress-view','black-outline');
-    // challengeHeaderStatsBtn.innerHTML = "Stats";
-    // challengeHeaderStatsBtn.addEventListener('click', () => {
-    //     showChallengeStats(metadata, challengeType);
-    // })
-    // challengeHeaderRightContainer.appendChild(challengeHeaderStatsBtn);
 
     let challengeModelTop = document.createElement('div');
     challengeModelTop.classList.add('challenge-model-top');
@@ -5393,13 +4721,12 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             "key": "maxTowers",
         }
     }
-console.log(metadata)
+
     Object.entries(challengeSettings).forEach(([setting,data], index) => {
         let challengeSetting = document.createElement('div');
         challengeSetting.classList.add('challenge-setting');
 
         index % 2 ? challengeModelSettingsRight.appendChild(challengeSetting) : challengeModelSettingsLeft.appendChild(challengeSetting);
-        // challengeModelSettings.appendChild(challengeSetting);
 
         let challengeSettingIcon = document.createElement('img');
         challengeSettingIcon.classList.add('challenge-setting-icon');
@@ -5448,7 +4775,6 @@ console.log(metadata)
             challengeModelHeader.style.backgroundColor = "#FFC300";
             break;
         case "Boss":
-            //get actual boss type
             challengeModelHeaderIcon.src = `./Assets/BossIcon/${eventData.name}EventIcon.png`;
             challengeSettingText.innerHTML = `${eventData.elite ? "Elite " : ""}Boss Event`;
             challengeSettingIcon.src = `./Assets/BossIcon/${eventData.name}Portrait${eventData.elite ? "Elite" : ""}.png`;
@@ -5510,7 +4836,6 @@ console.log(metadata)
             selectorGoImg.addEventListener('click', (event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                // window.open(`btd6://Challenge/${metadata.id}`, '_blank');
                 let iframe = document.createElement('iframe');
                 iframe.style.display = 'none';
                 iframe.src = `btd6://Challenge/${metadata.id}`;
@@ -5520,10 +4845,8 @@ console.log(metadata)
             break;
     }
 
-    //special conditions
     if (challengeExtraData.scoringType != null) {
         let hideScoringValue = (challengeType == "Boss");
-        console.log(hideScoringValue)
 
         let challengeSetting = document.createElement('div');
         challengeSetting.classList.add('challenge-setting');
@@ -5572,10 +4895,6 @@ console.log(metadata)
         data.isHero ? heroesToDisplay[data.tower] = data : towersToDisplay[data.tower] = data;
     })
 
-    console.log(heroesToDisplay)
-    console.log(towersToDisplay)
-    console.log(shouldUseHeroList)
-
     if (shouldUseHeroList) {
         let heroSelectorHeader = document.createElement('div');
         heroSelectorHeader.classList.add('challenge-tower-selector');
@@ -5599,30 +4918,24 @@ console.log(metadata)
         for (let [tower, nameColor] of Object.entries(constants.heroesInOrder)) {
             if (!heroesToDisplay[tower]) { continue; }
             let towerSelector = document.createElement('div');
-            towerSelector.id = tower + '-selector';
             towerSelector.classList.add(`tower-selector-hero`);
 
             let towerSelectorImg = document.createElement('img');
-            towerSelectorImg.id = tower + '-selector-img';
             towerSelectorImg.classList.add('hero-selector-img');
             towerSelectorImg.src = getInstaContainerIcon(tower,"000");
             towerSelector.appendChild(towerSelectorImg);
 
             towerSelectorHeader.appendChild(towerSelector)
-
-            // shouldUseHeroList ?  heroSelectorHeader.appendChild(towerSelector) : towerSelectorHeader.appendChild(towerSelector);
         }
     }
 
     for (let [tower, category] of Object.entries(constants.towersInOrder)) {
         if (!towersToDisplay[tower]) { continue; }
         let towerSelector = document.createElement('div');
-        towerSelector.id = tower + '-selector';
         towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
         towerSelectorHeader.appendChild(towerSelector);
 
         let towerSelectorImg = document.createElement('img');
-        towerSelectorImg.id = tower + '-selector-img';
         towerSelectorImg.classList.add('tower-selector-img');
         towerSelectorImg.src = getInstaContainerIcon(tower,"000");
         towerSelector.appendChild(towerSelectorImg);
@@ -5659,8 +4972,7 @@ console.log(metadata)
     challengeModelLeft.appendChild(challengeModifiersDiv);
 
     let challengeModifiersHeader = document.createElement('p');
-    challengeModifiersHeader.classList.add('challenge-modifiers-header');
-    challengeModifiersHeader.classList.add('black-outline');
+    challengeModifiersHeader.classList.add('challenge-modifiers-header','black-outline');
     challengeModifiersHeader.innerHTML = "Modifiers";
     challengeModifiersDiv.appendChild(challengeModifiersHeader);
 
@@ -5679,14 +4991,12 @@ console.log(metadata)
         challengeModifier.appendChild(challengeModifierTexts);
 
         let challengeModifierLabel = document.createElement('p');
-        challengeModifierLabel.classList.add('challenge-modifier-text');
-        challengeModifierLabel.classList.add('black-outline');
+        challengeModifierLabel.classList.add('challenge-modifier-text','black-outline');
         challengeModifierLabel.innerHTML = `${modifier}:`;
         challengeModifierTexts.appendChild(challengeModifierLabel);
 
         let challengeModifierValue = document.createElement('p');
-        challengeModifierValue.classList.add('challenge-modifier-value');
-        challengeModifierValue.classList.add('black-outline');
+        challengeModifierValue.classList.add('challenge-modifier-value','black-outline');
         challengeModifierValue.innerHTML = isNaN(data.value) ? data.value : `${(data.value * 100).toFixed(0)}%`;
         challengeModifierTexts.appendChild(challengeModifierValue);
     })
@@ -5694,8 +5004,7 @@ console.log(metadata)
     let rules = challengeRules(metadata);
 
     let challengeRulesHeader = document.createElement('p');
-    challengeRulesHeader.classList.add('challenge-rules-header');
-    challengeRulesHeader.classList.add('black-outline');
+    challengeRulesHeader.classList.add('challenge-rules-header','black-outline');
     challengeRulesHeader.innerHTML = "Rules";
     challengeModelRight.appendChild(challengeRulesHeader);
 
@@ -5720,12 +5029,10 @@ console.log(metadata)
         challengeRule.appendChild(challengeRuleTextDiv);
 
         let challengeRuleText = document.createElement('p');
-        challengeRuleText.classList.add('challenge-rule-text');
-        challengeRuleText.classList.add('black-outline');
+        challengeRuleText.classList.add('challenge-rule-text','black-outline');
         challengeRuleText.innerHTML = rule;
         challengeRuleTextDiv.appendChild(challengeRuleText);
 
-        console.log(metadata.roundSets)
         if(rule == "Custom Rounds" && challengeType == "Boss")  {
             let roundset = null;
             if (metadata.roundSets.includes("bloonarius")) {
@@ -5791,9 +5098,6 @@ console.log(metadata)
         })
         challengeStatsDiv.appendChild(challengeStatsX);
 
-        //ID
-
-        //Upvote Trophy Skull
         let challengeUSVDiv = document.createElement('div');
         challengeUSVDiv.classList.add('challenge-usv-div');
         challengeStatsLeft.appendChild(challengeUSVDiv);
@@ -5841,7 +5145,7 @@ console.log(metadata)
         challengeSkullValue.classList.add('challenge-skull-value');
         challengeSkullValue.innerHTML = challengeExtraData["Player Win Rate"];
         challengeSkullDiv.appendChild(challengeSkullValue);
-        //Creator
+        
         if(challengeExtraData["Creator"] != "n/a" && challengeExtraData["Creator"] != null) {
             let challengeCreator = document.createElement('div');
             challengeCreator.classList.add('challenge-creator');
@@ -5869,7 +5173,7 @@ console.log(metadata)
             challengeCreatorName.classList.add('challenge-creator-name', 'black-outline');
             challengeCreatorName.innerHTML = "Loading...";
             challengeCreator.appendChild(challengeCreatorName);
-            //async function to change avatar to actual src
+            
             await getUserProfile(challengeExtraData["Creator"]).then(data => {
                 challengeCreatorName.innerHTML = data.displayName;
                 avatarImg.src = getProfileAvatar(data);
@@ -5892,19 +5196,6 @@ console.log(metadata)
             challengeStatLabel.innerHTML = `${stat}: ${challengeExtraData[stat]}`;
             challengeStat.appendChild(challengeStatLabel);
         })
-
-        // if (stat == "Player Completion Rate" || stat == "Player Win Rate") {
-        //     let challengeStatIcon = document.createElement('img');
-        //     challengeStatIcon.classList.add('challenge-stat-icon');
-        //     challengeStatIcon.src = `./Assets/ChallengeStatsIcon/${stat.replace(" ", "")}Icon.png`;
-        //     challengeStat.appendChild(challengeStatIcon);
-
-        //     let challengeStatIconValue = document.createElement('p');
-        //     challengeStatIconValue.classList.add('challenge-stat-icon-value');
-        //     challengeStatIconValue.classList.add('black-outline');
-        //     challengeStatIconValue.innerHTML = value;
-        //     challengeStat.appendChild(challengeStatIconValue);
-        // }
 
         let challengeStatsRight = document.createElement('div');
         challengeStatsRight.classList.add('challenge-stats-right');
@@ -5950,49 +5241,42 @@ function challengeModifiers(metadata){
             "icon": metadata._bloonModifiers.moabSpeedMultiplier > 1 ? "FasterMoabIcon" : "SlowerMoabIcon"
         }
     }
-    //regrowRateMultiplier
     if (metadata._bloonModifiers.hasOwnProperty('regrowRateMultiplier') && metadata._bloonModifiers.regrowRateMultiplier != 1) {
         result["Regrow Rate"] = {
             "value": metadata._bloonModifiers.regrowRateMultiplier,
             "icon": metadata._bloonModifiers.regrowRateMultiplier > 1 ? "RegrowRateIncreaseIcon" : "RegrowRateDecreaseIcon"
         }
     }
-    //abilityCooldownReductionMultiplier
     if (metadata.hasOwnProperty('abilityCooldownReductionMultiplier') && metadata.abilityCooldownReductionMultiplier != 1) {
         result["Ability Cooldown Rate"] = {
             "value": metadata.abilityCooldownReductionMultiplier,
             "icon": metadata.abilityCooldownReductionMultiplier > 1 ? "AbilityCooldownReductionIncreaseIcon" : "AbilityCooldownReductionDecreaseIcon"
         }
     }
-    //removeableCostMultiplier
     if (metadata.removeableCostMultiplier != 1 && metadata.removeableCostMultiplier != -1) {
         result["Removeable Cost"] = {
             "value": metadata.removeableCostMultiplier == 0 ? "Free" : metadata.removeableCostMultiplier == 12 ? "Disabled" : metadata.removeableCostMultiplier,
             "icon": metadata.removeableCostMultiplier > 1 ? "RemovableCostIncreaseIcon" : "RemovableCostDecreaseIcon"
         }
     }
-    //healthMultipliers
     if (metadata._bloonModifiers.healthMultipliers.bloons != 1) {
         result["Ceramic Health"] = {
             "value": metadata._bloonModifiers.healthMultipliers.bloons,
             "icon": metadata._bloonModifiers.healthMultipliers.bloons > 1 ? "CeramicIncreaseHPIcon.png" : "CeramicDecreaseHPIcon"
         }
     }
-    //moabs
     if (metadata._bloonModifiers.healthMultipliers.moabs != 1) {
         result["MOAB Health"] = {
             "value": metadata._bloonModifiers.healthMultipliers.moabs,
             "icon": metadata._bloonModifiers.healthMultipliers.moabs > 1 ? "MoabBoostIcon" : "MoabDecreaseHPIcon"
         }
     }
-    //boss
     if (metadata._bloonModifiers.healthMultipliers.hasOwnProperty('boss') && metadata._bloonModifiers.healthMultipliers.boss != 1) {
         result["Boss Health"] = {
             "value": metadata._bloonModifiers.healthMultipliers.boss,
             "icon": metadata._bloonModifiers.healthMultipliers.boss > 1 ? "BossBoostIcon" : "BossDecreaseHPIcon"
         }
     }
-    //boss speed
     if (metadata._bloonModifiers.hasOwnProperty('bossSpeedMultiplier') && metadata._bloonModifiers.bossSpeedMultiplier != 1) {
         result["Boss Speed"] = {
             "value": metadata._bloonModifiers.bossSpeedMultiplier,
@@ -6078,19 +5362,9 @@ function showLeaderboard(source, metadata, type) {
     leaderboardHeader.classList.add('leaderboard-header');
     leaderboardTop.appendChild(leaderboardHeader);
 
-    //left div
     let leaderboardHeaderLeft = document.createElement('div');
     leaderboardHeaderLeft.classList.add('leaderboard-header-left');
     leaderboardHeader.appendChild(leaderboardHeaderLeft);
-    //exit button (should clear the leaderboard timer)
-    // let leaderboardHeaderExit = document.createElement('div');
-    // leaderboardHeaderExit.classList.add('leaderboard-header-exit','maps-progress-view','black-outline');
-    // leaderboardHeaderExit.innerHTML = "Exit";
-    // leaderboardHeaderExit.addEventListener('click', () => {
-    //     leaderboardContent.style.display = "none";
-    //     document.getElementById(`${source}-content`).style.display = "flex";
-    // })
-    // leaderboardHeaderLeft.appendChild(leaderboardHeaderExit);
 
     let modalClose = document.createElement('img');
     modalClose.classList.add('modal-close');
@@ -6146,11 +5420,10 @@ function showLeaderboard(source, metadata, type) {
     leaderboardFooter.classList.add('leaderboard-footer');
     leaderboardDiv.appendChild(leaderboardFooter);
 
-    //left div
     let leaderboardFooterLeft = document.createElement('div');
     leaderboardFooterLeft.classList.add('leaderboard-footer-left');
     leaderboardFooter.appendChild(leaderboardFooterLeft);
-    //refresh button
+    
     let leaderboardFooterRefresh = document.createElement('img');
     leaderboardFooterRefresh.classList.add('leaderboard-footer-refresh');
     leaderboardFooterRefresh.src = "./Assets/UI/RefreshBtn.png";
@@ -6167,23 +5440,21 @@ function showLeaderboard(source, metadata, type) {
     })
     leaderboardFooterLeft.appendChild(leaderboardFooterRefresh);
 
-    //middle div
     let leaderboardFooterMiddle = document.createElement('div');
     leaderboardFooterMiddle.classList.add('leaderboard-footer-middle');
     leaderboardFooter.appendChild(leaderboardFooterMiddle);
-    //page left
 
     let leaderboardFooterPageLeft = document.createElement('img');
     leaderboardFooterPageLeft.classList.add('leaderboard-footer-page-left','black-outline');
     leaderboardFooterPageLeft.src = "./Assets/UI/NextArrowSmallYellow.png";
     leaderboardFooterMiddle.appendChild(leaderboardFooterPageLeft);
-    //page number
+    
     let leaderboardFooterPageNumber = document.createElement('div');
     leaderboardFooterPageNumber.id = 'leaderboard-footer-page-number';
     leaderboardFooterPageNumber.classList.add('leaderboard-footer-page-number','black-outline');
     leaderboardFooterPageNumber.innerHTML = `Loading...`;
     leaderboardFooterMiddle.appendChild(leaderboardFooterPageNumber);
-    //page right
+    
     let leaderboardFooterPageRight = document.createElement('img');
     leaderboardFooterPageRight.classList.add('leaderboard-footer-page-right','black-outline');
     leaderboardFooterPageRight.src = "./Assets/UI/NextArrowSmallYellow.png";
@@ -6205,25 +5476,21 @@ function showLeaderboard(source, metadata, type) {
     })
     leaderboardFooterMiddle.appendChild(leaderboardFooterPageRight);
 
-    //right div
     let leaderboardFooterRight = document.createElement('div');
     leaderboardFooterRight.classList.add('leaderboard-footer-right');
     leaderboardFooter.appendChild(leaderboardFooterRight);
 
-    //Goto label
     // let leaderboardFooterGoto = document.createElement('p');
     // leaderboardFooterGoto.classList.add('leaderboard-footer-goto','black-outline');
     // leaderboardFooterGoto.innerHTML = "Go to:";
     // leaderboardFooterRight.appendChild(leaderboardFooterGoto);
 
-    //enter a page number
     let leaderboardFooterPageInput = document.createElement('input');
     leaderboardFooterPageInput.classList.add('leaderboard-footer-page-input');
     leaderboardFooterPageInput.type = "number";
     leaderboardFooterPageInput.min = "1";
     leaderboardFooterPageInput.max = 1000 / leaderboardPageEntryCount;
     leaderboardFooterPageInput.value = `${leaderboardPage}`;
-    //keep the value above 0 and below 21
     leaderboardFooterPageInput.addEventListener('change', () => {
         if (leaderboardFooterPageInput.value < 1) { leaderboardFooterPageInput.value = 1; }
         if (leaderboardFooterPageInput.value > (1000 / leaderboardPageEntryCount)) { leaderboardFooterPageInput.value = (1000 / leaderboardPageEntryCount) }
@@ -6248,7 +5515,6 @@ function showLeaderboard(source, metadata, type) {
 
 async function generateLeaderboardEntries(metadata, type){
     await getLeaderboardData();
-    console.log(leaderboardData)
 
     let columnsType = null;
     switch(type) {
@@ -6306,8 +5572,7 @@ async function generateLeaderboardEntries(metadata, type){
             leaderboardEntry.appendChild(leaderboardEntryDiv);
 
             let leaderboardEntryRank = document.createElement('p');
-            leaderboardEntryRank.classList.add('leaderboard-entry-rank');
-            leaderboardEntryRank.classList.add('black-outline');
+            leaderboardEntryRank.classList.add('leaderboard-entry-rank','black-outline');
             leaderboardEntryRank.innerHTML = index + ((leaderboardPage - 1)  * leaderboardPageEntryCount) + 1;
             leaderboardEntryDiv.appendChild(leaderboardEntryRank);
 
@@ -6361,8 +5626,6 @@ async function generateLeaderboardEntries(metadata, type){
             let leaderboardEntryMainScore = document.createElement('p');
             leaderboardEntryMainScore.classList.add('leaderboard-entry-main-score','leaderboard-outline');
             leaderboardEntryScore.appendChild(leaderboardEntryMainScore);
-
-            console.log(metadata)
 
             if(metadata.hasOwnProperty('leaderboard') && metadata.leaderboard.includes('races')) {
                 let submittedDate = new Date(metadata.start + scorePartsObj["Time after event start"].score)
@@ -6445,28 +5708,15 @@ async function generateLeaderboardEntries(metadata, type){
                 leaderboardEntryPlayer.classList.add('leaderboard-entry-team');
             }
 
-            // let leaderboardProfileBtn = document.createElement('img');
-            // leaderboardProfileBtn.classList.add('leaderboard-profile-btn');
-            // leaderboardProfileBtn.src = "./Assets/UI/InfoBtn.png";
-            // leaderboardProfileBtn.addEventListener('click', () => {
-            //     openProfile('leaderboard', entry);
-            // })
-            // if (type != "CTTeam") {
-            //     leaderboardEntry.appendChild(leaderboardProfileBtn);
-            // }
-
-            //observer to check for if profile should be queried
             let observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(async observerentry => {
                     if (observerentry.isIntersecting) {
                         let userProfile = await getUserProfile(entry.profile);
                         if (userProfile != null) {
-                            console.log(userProfile)
                             if(userProfile.hasOwnProperty('owner')) {
                                 leaderboardEntryFrame.src = userProfile.frameURL;
                                 leaderboardEntryEmblem.src = userProfile.iconURL;
                                 leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                                // leaderboardEntryPlayer.style.width = "470px";
                                 observer.unobserve(observerentry.target);
                             } else {
                                 leaderboardEntryIcon.src = getProfileAvatar(userProfile);
@@ -6481,8 +5731,7 @@ async function generateLeaderboardEntries(metadata, type){
         })
     } else {
         let noDataFound = document.createElement('p');
-        noDataFound.classList.add('no-data-found');
-        noDataFound.classList.add('black-outline');
+        noDataFound.classList.add('no-data-found','black-outline');
         noDataFound.style.width = "250px";
         noDataFound.innerHTML = "No Data Found";
         leaderboardEntries.appendChild(noDataFound);
@@ -6571,15 +5820,6 @@ async function openProfile(source, profile){
     publicProfileDiv.classList.add('publicprofile-div');
     publicProfileContent.appendChild(publicProfileDiv);
 
-    // let challengeHeaderExitBtn = document.createElement('div');
-    // challengeHeaderExitBtn.classList.add('challenge-header-exit-btn');
-    // challengeHeaderExitBtn.classList.add('maps-progress-view','black-outline');
-    // challengeHeaderExitBtn.innerHTML = "Exit";
-    // challengeHeaderExitBtn.addEventListener('click', () => {
-    //     exitProfile(source);
-    // })
-    // publicProfileDiv.appendChild(challengeHeaderExitBtn);
-
     let modalClose = document.createElement('img');
     modalClose.classList.add('error-modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
@@ -6589,63 +5829,49 @@ async function openProfile(source, profile){
     publicProfileDiv.appendChild(modalClose);
 
     let profileHeader = document.createElement('div');
-    profileHeader.id = 'profile-header';
-    profileHeader.classList.add('profile-header');
-    profileHeader.classList.add('profile-banner');
+    profileHeader.classList.add('profile-header','profile-banner');
     profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${getProfileBanner(profile)}')`;
     publicProfileDiv.appendChild(profileHeader);
     profileHeader.appendChild(generateAvatar(100, getProfileAvatar(profile)));
 
     let profileTopBottom = document.createElement('div');
-    profileTopBottom.id = 'profile-top-bottom';
     profileTopBottom.classList.add('profile-top-bottom');
     profileHeader.appendChild(profileTopBottom);
 
     let profileTop = document.createElement('div');
-    profileTop.id = 'profile-top';
     profileTop.classList.add('profile-top-public');
     profileTopBottom.appendChild(profileTop);
 
     let profileName = document.createElement('p');
-    profileName.id = 'profile-name';
-    profileName.classList.add('profile-name');
-    profileName.classList.add('black-outline');
+    profileName.classList.add('profile-name','black-outline');
     profileName.innerHTML = profile["displayName"];
     profileTop.appendChild(profileName);
 
     let rankStar = document.createElement('div');
-    rankStar.id = 'rank-star';
     rankStar.classList.add('rank-star-public');
     profileTop.appendChild(rankStar);
 
     let rankImg = document.createElement('img');
-    rankImg.id = 'rank-img';
     rankImg.classList.add('rank-img');
     rankImg.src = '../Assets/UI/LvlHolder.png';
     rankStar.appendChild(rankImg);
 
     let rankText = document.createElement('p');
-    rankText.id = 'rank-text';
-    rankText.classList.add('rank-text');
-    rankText.classList.add('black-outline');
+    rankText.classList.add('rank-text','black-outline');
     rankText.innerHTML = profile.rank;
     rankStar.appendChild(rankText);
 
     let rankStarVeteran = document.createElement('div');
-    rankStarVeteran.id = 'rank-star';
     rankStarVeteran.classList.add('rank-star-public');
     profileTop.appendChild(rankStarVeteran);
 
     let rankImgVeteran = document.createElement('img');
-    rankImgVeteran.id = 'rank-img';
     rankImgVeteran.classList.add('rank-img');
     rankImgVeteran.src = '../Assets/UI/LvlHolderVeteran.png';
     rankStarVeteran.appendChild(rankImgVeteran);
 
     let rankTextVeteran = document.createElement('p');
-    rankTextVeteran.id = 'rank-text';
-    rankTextVeteran.classList.add('rank-text');
-    rankTextVeteran.classList.add('black-outline');
+    rankTextVeteran.classList.add('rank-text','black-outline');
     rankTextVeteran.innerHTML = profile.veteranRank;
     rankStarVeteran.appendChild(rankTextVeteran);
 
@@ -6654,8 +5880,7 @@ async function openProfile(source, profile){
     profileTop.appendChild(profileFollowers);
 
     let followersLabel = document.createElement('p');
-    followersLabel.classList.add('followers-label');
-    followersLabel.classList.add('black-outline');
+    followersLabel.classList.add('followers-label','black-outline');
     followersLabel.innerHTML = 'Followers';
     profileFollowers.appendChild(followersLabel);
 
@@ -6666,24 +5891,19 @@ async function openProfile(source, profile){
 
 
     let belowProfileHeader = document.createElement('div');
-    belowProfileHeader.id = 'below-profile-header';
     belowProfileHeader.classList.add('below-profile-header');
     publicProfileDiv.appendChild(belowProfileHeader);
 
     let leftColumnDiv = document.createElement('div');
-    leftColumnDiv.id = 'left-column-div';
     leftColumnDiv.classList.add('left-column-div');
     belowProfileHeader.appendChild(leftColumnDiv);
 
     let leftColumnHeader = document.createElement('div');
-    leftColumnHeader.id = 'left-column-header';
     leftColumnHeader.classList.add('left-column-header');
     leftColumnDiv.appendChild(leftColumnHeader);
 
     let leftColumnHeaderText = document.createElement('p');
-    leftColumnHeaderText.id = 'left-column-header-text';
-    leftColumnHeaderText.classList.add('column-header-text');
-    leftColumnHeaderText.classList.add('black-outline');
+    leftColumnHeaderText.classList.add('column-header-text','black-outline');
     leftColumnHeaderText.innerHTML = 'Medals';
     leftColumnHeader.appendChild(leftColumnHeaderText);
 
@@ -6745,24 +5965,20 @@ async function openProfile(source, profile){
     publicMedals["CtGlobalPlayerDiamondMedal"] = profile["_medalsCTGlobal"]["Diamond"] || 0;
 
     let currencyAndMedalsDiv = document.createElement('div');
-    currencyAndMedalsDiv.id = 'currency-medals-div';
     currencyAndMedalsDiv.classList.add('currency-medals-div');
     leftColumnDiv.appendChild(currencyAndMedalsDiv);
 
     let medalsDiv = document.createElement('div');
-    medalsDiv.id = 'medals-div';
     medalsDiv.classList.add('medals-div');
     currencyAndMedalsDiv.appendChild(medalsDiv);
 
     for (let [medal, num] of Object.entries(publicMedals)){
         if(num === 0) { continue; }
         let medalDiv = document.createElement('div');
-        medalDiv.id = 'medal-div';
         medalDiv.classList.add('medal-div');
         medalsDiv.appendChild(medalDiv);
 
         let medalImg = document.createElement('img');
-        medalImg.id = 'medal-img';
         medalImg.classList.add('medal-img');
         medalImg.src = getMedalIcon(medal);
         medalImg.style.display = "none";
@@ -6777,81 +5993,62 @@ async function openProfile(source, profile){
         medalDiv.appendChild(medalImg);
 
         let medalText = document.createElement('p');
-        medalText.id = 'medal-text';
-        medalText.classList.add('medal-text');
-        medalText.classList.add('black-outline');
+        medalText.classList.add('medal-text','black-outline');
         medalText.innerHTML = num.toLocaleString();
         medalDiv.appendChild(medalText);
     }
 
     let topHeroesMonkesyDiv = document.createElement('div');
-    topHeroesMonkesyDiv.id = 'top-heroes-monkeys-div';
     topHeroesMonkesyDiv.classList.add('top-heroes-monkeys-div');
     leftColumnDiv.appendChild(topHeroesMonkesyDiv);
-    
-    /*let topColumnDiv = document.createElement('div');
-    topColumnDiv.id = 'top-column-div';
-    topColumnDiv.classList.add('right-column-div');
-    leftColumnDiv.appendChild(topColumnDiv);*/
 
     let topHeroesDiv = document.createElement('div');
-    topHeroesDiv.id = 'top-heroes-div';
     topHeroesDiv.classList.add('top-heroes-div');
     topHeroesMonkesyDiv.appendChild(topHeroesDiv);
 
     let topHeroesTopDiv = document.createElement('div');
-    topHeroesTopDiv.id = 'top-heroes-top-div';
     topHeroesTopDiv.classList.add('top-heroes-top-div');
     topHeroesDiv.appendChild(topHeroesTopDiv);
 
     let topHeroesTopRibbonDiv = document.createElement('div');
-    topHeroesTopRibbonDiv.id = 'top-heroes-top-div';
     topHeroesTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
     topHeroesTopDiv.appendChild(topHeroesTopRibbonDiv);
 
     let topHeroesText = document.createElement('p');
-    topHeroesText.id = 'top-heroes-text';
-    topHeroesText.classList.add('top-heroes-text');
-    topHeroesText.classList.add('black-outline');
+    topHeroesText.classList.add('top-heroes-text','black-outline');
     topHeroesText.innerHTML = 'Top Heroes';
     topHeroesTopRibbonDiv.appendChild(topHeroesText);
 
     let mapsProgressCoopToggle = document.createElement('div');
-    mapsProgressCoopToggle.id = 'maps-progress-coop-toggle';
     mapsProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
     topHeroesTopDiv.appendChild(mapsProgressCoopToggle);
 
     let mapsProgressCoopToggleText = document.createElement('p');
-    mapsProgressCoopToggleText.id = 'maps-progress-coop-toggle-text';
-    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text');
-    mapsProgressCoopToggleText.classList.add('black-outline');
+    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressCoopToggleText.innerHTML = "Show All: ";
     mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
 
     let mapsProgressCoopToggleInput = document.createElement('input');
     mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
     mapsProgressCoopToggleInput.type = 'checkbox';
-    mapsProgressCoopToggleInput.addEventListener('change', () => {
-        mapsProgressCoopToggleInput.checked ? document.getElementById('other-heroes-div-public').style.display = 'flex' : document.getElementById('other-heroes-div-public').style.display = 'none';
-    })
     mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
 
-
     let topHeroesList = document.createElement('div');
-    topHeroesList.id = 'top-heroes-list';
     topHeroesList.classList.add('top-heroes-list');
     topHeroesDiv.appendChild(topHeroesList);
 
     let top3HeroesDiv = document.createElement('div');
-    top3HeroesDiv.id = 'top-3-heroes-div';
     top3HeroesDiv.classList.add('top-3-heroes-div');
     topHeroesList.appendChild(top3HeroesDiv);
 
     let otherHeroesDiv = document.createElement('div');
-    otherHeroesDiv.id = 'other-heroes-div-public';
     otherHeroesDiv.classList.add('other-heroes-div');
     otherHeroesDiv.style.display = 'none';
     topHeroesList.appendChild(otherHeroesDiv);
+
+    mapsProgressCoopToggleInput.addEventListener('change', () => {
+        mapsProgressCoopToggleInput.checked ? otherHeroesDiv.style.display = 'flex' : otherHeroesDiv.style.display = 'none';
+    })
 
     let counter = 0;
 
@@ -6861,12 +6058,10 @@ async function openProfile(source, profile){
         if(xp === 0) { continue; }
         if(!heroesList.includes(hero)) { continue; }
         let heroDiv = document.createElement('div');
-        heroDiv.id = 'hero-div';
         heroDiv.classList.add('hero-div');
         counter < 3 ? top3HeroesDiv.appendChild(heroDiv) : otherHeroesDiv.appendChild(heroDiv);
 
         let heroImg = document.createElement('img');
-        heroImg.id = 'hero-img';
         heroImg.classList.add('hero-img');
         heroImg.src = getHeroPortrait(hero,1);
         heroImg.style.display = "none";
@@ -6881,72 +6076,59 @@ async function openProfile(source, profile){
         heroDiv.appendChild(heroImg);
 
         let heroText = document.createElement('p');
-        heroText.id = 'hero-text';
-        heroText.classList.add('hero-text');
-        heroText.classList.add('black-outline');
+        heroText.classList.add('hero-text','black-outline');
         heroText.innerHTML = xp.toLocaleString();
         heroDiv.appendChild(heroText);
         counter++;
     }
 
     let topTowersDiv = document.createElement('div');
-    topTowersDiv.id = 'top-towers-div';
     topTowersDiv.classList.add('top-heroes-div');
     topHeroesMonkesyDiv.appendChild(topTowersDiv);
 
     let topTowersTopDiv = document.createElement('div');
-    topTowersTopDiv.id = 'top-towers-top-div';
     topTowersTopDiv.classList.add('top-heroes-top-div');
     topTowersDiv.appendChild(topTowersTopDiv);
 
     let topTowersTopRibbonDiv = document.createElement('div');
-    topTowersTopRibbonDiv.id = 'top-towers-top-div';
     topTowersTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
     topTowersTopDiv.appendChild(topTowersTopRibbonDiv);
 
     let topTowersText = document.createElement('p');
-    topTowersText.id = 'top-towers-text';
-    topTowersText.classList.add('top-heroes-text');
-    topTowersText.classList.add('black-outline');
+    topTowersText.classList.add('top-heroes-text','black-outline');
     topTowersText.innerHTML = 'Top Towers';
     topTowersTopRibbonDiv.appendChild(topTowersText);
 
     let mapsProgressCoopToggle2 = document.createElement('div');
-    mapsProgressCoopToggle2.id = 'maps-progress-coop-toggle';
     mapsProgressCoopToggle2.classList.add('maps-progress-coop-toggle');
     topTowersTopDiv.appendChild(mapsProgressCoopToggle2);
 
     let mapsProgressCoopToggleText2 = document.createElement('p');
-    mapsProgressCoopToggleText2.id = 'maps-progress-coop-toggle-text';
-    mapsProgressCoopToggleText2.classList.add('maps-progress-coop-toggle-text');
-    mapsProgressCoopToggleText2.classList.add('black-outline');
+    mapsProgressCoopToggleText2.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressCoopToggleText2.innerHTML = "Show All: ";
     mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleText2);
 
     let mapsProgressCoopToggleInput2 = document.createElement('input');
-    mapsProgressCoopToggleInput2.classList.add('maps-progress-coop-toggle-input');
     mapsProgressCoopToggleInput2.type = 'checkbox';
-    mapsProgressCoopToggleInput2.addEventListener('change', () => {
-        mapsProgressCoopToggleInput2.checked ? document.getElementById('other-towers-div-public').style.display = 'flex' : document.getElementById('other-towers-div-public').style.display = 'none';
-    })
     mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleInput2);
 
     
     let topTowersList = document.createElement('div');
-    topTowersList.id = 'top-towers-list';
     topTowersList.classList.add('top-heroes-list');
     topTowersDiv.appendChild(topTowersList);
 
     let top3TowersDiv = document.createElement('div');
-    top3TowersDiv.id = 'top-3-towers-div';
     top3TowersDiv.classList.add('top-3-heroes-div');
     topTowersList.appendChild(top3TowersDiv);
 
     let otherTowersDiv = document.createElement('div');
-    otherTowersDiv.id = 'other-towers-div-public';
     otherTowersDiv.classList.add('other-heroes-div');
     otherTowersDiv.style.display = 'none';
     topTowersList.appendChild(otherTowersDiv);
+
+    mapsProgressCoopToggleInput2.addEventListener('change', () => {
+        mapsProgressCoopToggleInput2.checked ? otherTowersDiv.style.display = 'flex' : otherTowersDiv.style.display = 'none';
+    })
 
     counter = 0;
 
@@ -6956,20 +6138,16 @@ async function openProfile(source, profile){
         if(xp === 0) { continue; }
         if(!towersList.includes(tower)) { continue; }
         let towerDiv = document.createElement('div');
-        towerDiv.id = 'tower-div';
         towerDiv.classList.add('hero-div');
         counter < 3 ? top3TowersDiv.appendChild(towerDiv) : otherTowersDiv.appendChild(towerDiv);
 
         let towerImg = document.createElement('img');
-        towerImg.id = 'tower-img';
         towerImg.classList.add('hero-img');
         towerImg.src = getInstaContainerIcon(tower,"000");
         towerDiv.appendChild(towerImg);
 
         let towerText = document.createElement('p');
-        towerText.id = 'tower-text';
-        towerText.classList.add('hero-text');
-        towerText.classList.add('black-outline');
+        towerText.classList.add('hero-text','black-outline');
         towerText.innerHTML = xp.toLocaleString();
         towerDiv.appendChild(towerText);
         counter++;
@@ -6977,19 +6155,15 @@ async function openProfile(source, profile){
 
 
     let rightColumnDiv = document.createElement('div');
-    rightColumnDiv.id = 'right-column-div';
     rightColumnDiv.classList.add('right-column-div');
     belowProfileHeader.appendChild(rightColumnDiv);
 
     let rightColumnHeader = document.createElement('div');
-    rightColumnHeader.id = 'right-column-header';
     rightColumnHeader.classList.add('overview-right-column-header');
     rightColumnDiv.appendChild(rightColumnHeader);
 
     let rightColumnHeaderText = document.createElement('p');
-    rightColumnHeaderText.id = 'right-column-header-text';
-    rightColumnHeaderText.classList.add('column-header-text');
-    rightColumnHeaderText.classList.add('black-outline');
+    rightColumnHeaderText.classList.add('column-header-text','black-outline');
     rightColumnHeaderText.innerHTML = 'Overall Stats';
     rightColumnHeader.appendChild(rightColumnHeaderText);
 
@@ -7034,24 +6208,20 @@ async function openProfile(source, profile){
     statsPublic["Damage Done To Bosses"] = profile.gameplay["damageDoneToBosses"];
 
     let profileStatsDiv = document.createElement('div');
-    profileStatsDiv.id = 'profile-stats';
     profileStatsDiv.classList.add('profile-stats');
     rightColumnDiv.appendChild(profileStatsDiv);
 
     for (let [key, value] of Object.entries(statsPublic)){
         let stat = document.createElement('div');
-        stat.id = 'stat';
         stat.classList.add('stat');
         profileStatsDiv.appendChild(stat);
 
         let statName = document.createElement('p');
-        statName.id = 'stat-name';
         statName.classList.add('stat-name');
         statName.innerHTML = key;
         stat.appendChild(statName);
 
         let statValue = document.createElement('p');
-        statValue.id = 'stat-value';
         statValue.classList.add('stat-value');
         statValue.innerHTML = value.toLocaleString();
         stat.appendChild(statValue);
@@ -7064,9 +6234,7 @@ function exitProfile(source){
 }
 
 async function openRelics(source, tilesLink, eventDates) {
-    console.log(tilesLink)
     let data = await getCTTiles(tilesLink)
-    console.log(data)
     if (data == null) { return; }
     document.getElementById(`${source}-content`).style.display = "none";
     let relicsContent = document.getElementById('relics-content');
@@ -7134,12 +6302,8 @@ async function openRelics(source, tilesLink, eventDates) {
     })
     relicHeaderRight.appendChild(modalClose);
 
-    //get only elements with "Relic" in the key "type" in data.tiles entries of .type
     let relics =  data.tiles.filter(tile => tile.type.includes("Relic"))
-    console.log(relics)
-    // sort the relics alphabetically by "id"
     relics.sort((a, b) => a.id.localeCompare(b.id))
-    console.log(relics)
 
     let relicsDiv = document.createElement('div');
     relicsDiv.classList.add('relics-div');
@@ -7147,7 +6311,6 @@ async function openRelics(source, tilesLink, eventDates) {
 
     relics.forEach(relic => {
         let relicTypeName = relic.type.split(" ")[2];
-        console.log(relicTypeName)
 
         let relicDiv = document.createElement('div');
         relicDiv.classList.add('relic-div');
@@ -7177,12 +6340,11 @@ async function openRelics(source, tilesLink, eventDates) {
                 break;
         }
 
-        //relicID
         let relicID = document.createElement('p');
         relicID.classList.add('relic-id');
         relicID.innerHTML = relic.id;
         relicDiv.appendChild(relicID);
-        //relicIcon
+        
         let relicIcon = document.createElement('img');
         relicIcon.classList.add('relic-icon');
         relicIcon.src = `./Assets/RelicIcon/${relicTypeName}.png`
@@ -7191,19 +6353,17 @@ async function openRelics(source, tilesLink, eventDates) {
         let relicTextDiv = document.createElement('div');
         relicTextDiv.classList.add('relic-text-div');
         relicDiv.appendChild(relicTextDiv);
-        //relicName
+        
         let relicName = document.createElement('p');
-        relicName.classList.add('relic-name');
-        relicName.classList.add('black-outline');
+        relicName.classList.add('relic-name','black-outline');
         relicName.innerHTML = getLocValue(`Relic${relicTypeName}`);
         relicTextDiv.appendChild(relicName);
-        //relicDescription
+        
         let relicDescription = document.createElement('p');
         relicDescription.classList.add('relic-description');
         relicDescription.innerHTML = getLocValue(`Relic${relicTypeName}Description`);
         relicTextDiv.appendChild(relicDescription);
     })
-
 }
 
 function generateExplore() {
@@ -7222,7 +6382,6 @@ function generateExplore() {
 
     selectors.forEach((selector) => {
         let selectorDiv = document.createElement('div');
-        selectorDiv.id = selector.toLowerCase() + '-div';
         selectorDiv.classList.add('selector-div');
         selectorDiv.addEventListener('click', () => {
             exploreContent.style.display = "none";
@@ -7232,7 +6391,6 @@ function generateExplore() {
         selectorsDiv.appendChild(selectorDiv);
 
         let selectorImg = document.createElement('img');
-        selectorImg.id = selector.toLowerCase() + '-img';
         selectorImg.classList.add('selector-img');
         selectorDiv.appendChild(selectorImg);
 
@@ -7248,13 +6406,11 @@ function generateExplore() {
         }
 
         let selectorText = document.createElement('p');
-        selectorText.id = selector.toLowerCase() + '-text';
         selectorText.classList.add('selector-text','black-outline');
         selectorText.innerHTML = selector;
         selectorDiv.appendChild(selectorText);
 
         let selectorGoImg = document.createElement('img');
-        selectorGoImg.id = selector.toLowerCase() + '-go-img';
         selectorGoImg.classList.add('selector-go-img');
         selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
         selectorDiv.appendChild(selectorGoImg);
@@ -7264,12 +6420,10 @@ function generateExplore() {
 
     enterCodeSelectors.forEach((selector) => {
         let selectorDiv = document.createElement('div');
-        selectorDiv.id = selector.toLowerCase() + '-div';
         selectorDiv.classList.add('selector-div');
         selectorsDiv.appendChild(selectorDiv);
 
         let selectorImg = document.createElement('img');
-        selectorImg.id = selector.toLowerCase() + '-img';
         selectorImg.classList.add('selector-img');
         selectorDiv.appendChild(selectorImg);
 
@@ -7278,13 +6432,11 @@ function generateExplore() {
         selectorDiv.appendChild(enterCodeMiddleDiv);
 
         let selectorText = document.createElement('p');
-        selectorText.id = selector.toLowerCase() + '-text';
         selectorText.classList.add('selector-text','selector-text-code','black-outline');
         selectorText.innerHTML = selector;
         enterCodeMiddleDiv.appendChild(selectorText);
 
         let selectorInput = document.createElement('input');
-        selectorInput.id = selector.toLowerCase() + '-input';
         selectorInput.classList.add('selector-input');
         selectorInput.addEventListener('click', (event) => {
             event.preventDefault();
@@ -7293,7 +6445,6 @@ function generateExplore() {
         enterCodeMiddleDiv.appendChild(selectorInput);
 
         let selectorGoImg = document.createElement('img');
-        selectorGoImg.id = selector.toLowerCase() + '-go-img';
         selectorGoImg.classList.add('selector-go-img');
         selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
         selectorDiv.appendChild(selectorGoImg);
@@ -7372,36 +6523,28 @@ function generateBrowser(type){
     mapsProgressHeaderBar.appendChild(mapProgressHeaderBottom);
 
     let mapsProgressViews = document.createElement('div');
-    mapsProgressViews.id = 'maps-progress-views';
     mapsProgressViews.classList.add('maps-progress-views');
     mapProgressHeaderBottom.appendChild(mapsProgressViews);
 
     let mapsProgressViewsText = document.createElement('p');
-    mapsProgressViewsText.id = 'maps-progress-views-text';
-    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text');
-    mapsProgressViewsText.classList.add('black-outline');
+    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressViewsText.innerHTML = "Display Type:";
     mapsProgressViews.appendChild(mapsProgressViewsText);
 
     let mapsProgressFilter = document.createElement('div');
-    mapsProgressFilter.id = 'maps-progress-filter';
     mapsProgressFilter.classList.add('maps-progress-filter');
     mapsProgressHeaderBar.appendChild(mapsProgressFilter);
 
     let mapProgressFilterDifficulty = document.createElement('div');
-    mapProgressFilterDifficulty.id = 'map-progress-filter-difficulty';
     mapProgressFilterDifficulty.classList.add('map-progress-filter-difficulty');
     mapsProgressFilter.appendChild(mapProgressFilterDifficulty);
 
     let mapsProgressFilterDifficultyText = document.createElement('p');
-    mapsProgressFilterDifficultyText.id = 'maps-progress-filter-difficulty-text';
-    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text');
-    mapsProgressFilterDifficultyText.classList.add('black-outline');
+    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressFilterDifficultyText.innerHTML = "Category Type:";
     mapProgressFilterDifficulty.appendChild(mapsProgressFilterDifficultyText);
 
     let mapProgressFilterDifficultySelect = document.createElement('select');
-    mapProgressFilterDifficultySelect.id = 'map-progress-filter-difficulty-select';
     mapProgressFilterDifficultySelect.classList.add('map-progress-filter-difficulty-select');
     mapProgressFilterDifficultySelect.addEventListener('change', () => {
         changeBrowserFilter(type, mapProgressFilterDifficultySelect.value);
@@ -7410,18 +6553,16 @@ function generateBrowser(type){
 
     let leaderboardEntries = document.createElement('div');
     leaderboardEntries.id = 'browser-entries';
-    // leaderboardEntries.classList.add('leaderboard-entries');
     browserDiv.appendChild(leaderboardEntries);
 
     let leaderboardFooter = document.createElement('div');
     leaderboardFooter.classList.add('browser-footer');
     browserDiv.appendChild(leaderboardFooter);
 
-    //left div
     let leaderboardFooterLeft = document.createElement('div');
     leaderboardFooterLeft.classList.add('leaderboard-footer-left', 'browser-footer-left');
     leaderboardFooter.appendChild(leaderboardFooterLeft);
-    //refresh button
+    
     let leaderboardFooterRefresh = document.createElement('img');
     leaderboardFooterRefresh.classList.add('leaderboard-footer-refresh');
     leaderboardFooterRefresh.src = "./Assets/UI/RefreshBtn.png";
@@ -7439,23 +6580,21 @@ function generateBrowser(type){
     })
     leaderboardFooterLeft.appendChild(leaderboardFooterRefresh);
 
-    //middle div
     let leaderboardFooterMiddle = document.createElement('div');
     leaderboardFooterMiddle.classList.add('leaderboard-footer-middle', 'browser-footer-middle');
     leaderboardFooter.appendChild(leaderboardFooterMiddle);
-    //page left
 
     let leaderboardFooterPageLeft = document.createElement('img');
     leaderboardFooterPageLeft.classList.add('leaderboard-footer-page-left','black-outline');
     leaderboardFooterPageLeft.src = "./Assets/UI/NextArrowSmallYellow.png";
     leaderboardFooterMiddle.appendChild(leaderboardFooterPageLeft);
-    //page number
+    
     let leaderboardFooterPageNumber = document.createElement('div');
     leaderboardFooterPageNumber.id = 'browser-footer-page-number';
     leaderboardFooterPageNumber.classList.add('leaderboard-footer-page-number','black-outline');
     leaderboardFooterPageNumber.innerHTML = `Loading...`;
     leaderboardFooterMiddle.appendChild(leaderboardFooterPageNumber);
-    //page right
+    
     let leaderboardFooterPageRight = document.createElement('img');
     leaderboardFooterPageRight.classList.add('leaderboard-footer-page-right','black-outline');
     leaderboardFooterPageRight.src = "./Assets/UI/NextArrowSmallYellow.png";
@@ -7477,18 +6616,15 @@ function generateBrowser(type){
     })
     leaderboardFooterMiddle.appendChild(leaderboardFooterPageRight);
 
-    //right div
     let leaderboardFooterRight = document.createElement('div');
     leaderboardFooterRight.classList.add('leaderboard-footer-right', 'browser-footer-right');
     leaderboardFooter.appendChild(leaderboardFooterRight);
 
-    //Goto label
     let leaderboardFooterGoto = document.createElement('p');
     leaderboardFooterGoto.classList.add('leaderboard-footer-goto','black-outline');
     leaderboardFooterGoto.innerHTML = "ID:";
     leaderboardFooterRight.appendChild(leaderboardFooterGoto);
 
-    //enter a page number
     let leaderboardFooterPageInput = document.createElement('input');
     leaderboardFooterPageInput.classList.add('leaderboard-footer-page-input', 'browser-footer-input');
     leaderboardFooterPageInput.type = "text";
@@ -7504,8 +6640,6 @@ function generateBrowser(type){
     })
     leaderboardFooterRight.appendChild(selectorGoImg);
 
-    // copyLoadingIcon(leaderboardEntries)
-
     switch(type) {
         case "Challenge Browser":
             let mapsProgressGrid = document.createElement('div');
@@ -7515,7 +6649,6 @@ function generateBrowser(type){
             
 
             let mapsProgressGame = document.createElement('div');
-            mapsProgressGame.id = 'maps-progress-game';
             mapsProgressGame.classList.add('maps-progress-view', 'black-outline');
             mapsProgressGame.innerHTML = "List";
             mapsProgressViews.appendChild(mapsProgressGame);
@@ -7546,13 +6679,11 @@ function generateBrowser(type){
             break;
         case "Map Browser":
             let mapsProgressGameMap = document.createElement('div');
-            mapsProgressGameMap.id = 'maps-progress-game';
             mapsProgressGameMap.classList.add('maps-progress-view', 'stats-tab-yellow', 'black-outline');
             mapsProgressGameMap.innerHTML = "Grid";
             mapsProgressViews.appendChild(mapsProgressGameMap);
 
             let mapsProgressGallery = document.createElement('div');
-            mapsProgressGallery.id = 'maps-progress-gallery';
             mapsProgressGallery.classList.add('maps-progress-view', 'black-outline');
             mapsProgressGallery.innerHTML = "Gallery";
             mapsProgressViews.appendChild(mapsProgressGallery);
@@ -7605,7 +6736,6 @@ function changeBrowserFilter(type, filter){
 
 async function generateBrowserEntries(type){
     await getBrowserData();
-    console.log(browserData)
 
     let browserEntries = document.getElementById('browser-entries');
     browserEntries.innerHTML = "";
@@ -7621,8 +6751,7 @@ async function generateBrowserEntries(type){
         }
     } else {
         let noDataFound = document.createElement('p');
-        noDataFound.classList.add('no-data-found');
-        noDataFound.classList.add('black-outline');
+        noDataFound.classList.add('no-data-found','black-outline');
         noDataFound.style.width = "250px";
         noDataFound.innerHTML = "No Data Found";
         browserEntries.appendChild(noDataFound);
@@ -7785,7 +6914,6 @@ function generateChallengeEntries(destination) {
                 selectorGoImg.addEventListener('click', (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    // window.open(`btd6://Challenge/${entry.id}`, '_blank');
                     openBTD6Link(`btd6://Challenge/${entry.id}`)
                 });
                 challengeIDandPlay.appendChild(selectorGoImg);
@@ -7796,12 +6924,10 @@ function generateChallengeEntries(destination) {
                             observer.unobserve(observerentry.target);
                             let challengeData = await getChallengeMetadata(entry.id);
                             if (challengeData == null) { return; }
-                            console.log(challengeData)
                             challengeMapImg.src = challengeData.mapURL;
                             let modifiers = challengeModifiers(challengeData);
                             let rules = challengeRules(challengeData)
                             for (let modifier of Object.values(modifiers)) {
-                                console.log(modifier)
                                 let challengeModifierIcon = document.createElement('img');
                                 challengeModifierIcon.classList.add('challenge-modifier-icon-event');
                                 challengeModifierIcon.src = `./Assets/ChallengeRulesIcon/${modifier.icon}.png`;
@@ -7899,7 +7025,6 @@ function generateChallengeEntries(destination) {
                 let challengeUpvoteValue2 = document.createElement('p');
                 challengeUpvoteValue2.classList.add('browser-upvote-value');
                 challengeUpvoteValue2.innerHTML = 0;
-                // challengeUpvoteValue.innerHTML = challengeExtraData["Upvotes"];
                 challengeUpvoteDiv2.appendChild(challengeUpvoteValue2);
 
                 let challengeTrophyDiv2 = document.createElement('div');
@@ -7913,7 +7038,6 @@ function generateChallengeEntries(destination) {
 
                 let challengeTrophyValue2 = document.createElement('p');
                 challengeTrophyValue2.classList.add('browser-trophy-value');
-                // challengeTrophyValue.innerHTML = challengeExtraData["Player Completion Rate"];
                 challengeTrophyValue2.innerHTML = 0;
                 challengeTrophyDiv2.appendChild(challengeTrophyValue2);
 
@@ -7928,7 +7052,6 @@ function generateChallengeEntries(destination) {
 
                 let challengeSkullValue2 = document.createElement('p');
                 challengeSkullValue2.classList.add('browser-skull-value');
-                // challengeSkullValue.innerHTML = challengeExtraData["Player Win Rate"];
                 challengeSkullValue2.innerHTML = 0;
                 challengeSkullDiv2.appendChild(challengeSkullValue2);
 
@@ -7962,7 +7085,6 @@ function generateChallengeEntries(destination) {
                 selectorGoImg2.addEventListener('click', (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    // window.open(`btd6://Challenge/${entry.id}`, '_blank');
                     openBTD6Link(`btd6://Challenge/${entry.id}`)
                 });
                 challengeIDandPlay2.appendChild(selectorGoImg2);
@@ -7973,7 +7095,6 @@ function generateChallengeEntries(destination) {
                             observer.unobserve(observerentry.target);
                             let challengeData = await getChallengeMetadata(entry.id);
                             if (challengeData == null) { return; }
-                            console.log(challengeData)
                             challengeMapImg2.src = challengeData.mapURL;
                             challengeUpvoteValue2.innerHTML = challengeData.upvotes.toLocaleString();
                             challengeTrophyValue2.innerHTML = challengeData.playsUnique == 0 ? "0%" : challengeData.winsUnique - challengeData.playsUnique == 0 ? "0%" : `${((challengeData.winsUnique / challengeData.playsUnique) * 100).toFixed(2)}%`;
@@ -8008,13 +7129,11 @@ function copyID(ID, copiedTextDest) {
 function generateMapGameEntries(destination) {
     browserData.forEach((entry, index) => {
         let mapEntry = document.createElement('div');
-        // mapEntry.classList.add('map-entry');
         mapEntry.addEventListener('click', async () => {
             showLoading();
             showMapModel('browser', await getCustomMapMetadata(entry.id));
         })
         destination.appendChild(mapEntry);
-        console.log(currentBrowserView)
         switch(currentBrowserView) {
             case "Grid":
                 mapEntry.classList.add('challenge-entry', "map-browser-bg");
@@ -8159,7 +7278,6 @@ function generateMapGameEntries(destination) {
                 selectorGoImg.addEventListener('click', (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    // window.open(`btd6://Challenge/${entry.id}`, '_blank');
                     openBTD6Link(`btd6://Map/${entry.id}`)
                 });
                 challengeIDandPlay.appendChild(selectorGoImg);
@@ -8170,7 +7288,6 @@ function generateMapGameEntries(destination) {
                             observer.unobserve(observerentry.target);
                             let customMapData = await getCustomMapMetadata(entry.id);
                             if (customMapData == null) { return; }
-                            console.log(customMapData)
                             challengeUpvoteValue.innerHTML = customMapData.upvotes.toLocaleString();
                             challengeTrophyValue.innerHTML = customMapData.playsUnique == 0 ? "0%" : customMapData.winsUnique - customMapData.playsUnique == 0 ? "0%" : `${((customMapData.winsUnique / customMapData.playsUnique) * 100).toFixed(2)}%`;
                             challengeSkullValue.innerHTML = customMapData.playsUnique == 0 ? "0%" : `${((customMapData.wins / (customMapData.plays + customMapData.restarts)) * 100).toFixed(2)}%`;
@@ -8215,8 +7332,6 @@ function generateMapGameEntries(destination) {
         let observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(async observerentry => {
                 if (observerentry.isIntersecting) {
-                    // let mapData = await getMapData(entry.id);
-                    // console.log(mapData)
                     observer.unobserve(observerentry.target);
                 }
             });
@@ -8307,7 +7422,6 @@ async function showMapModel(source, metadata) {
     selectorGoImg.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        // window.open(`btd6://Challenge/${metadata.id}`, '_blank');
         openBTD6Link(`btd6://Map/${metadata.id}`);
     });
     challengeHeaderRightBottom.appendChild(selectorGoImg);
@@ -8339,9 +7453,6 @@ async function showMapModel(source, metadata) {
         challengeStatsLeft.classList.add('challenge-stats-left');
         challengeStatsLeftRight.appendChild(challengeStatsLeft);
 
-        //ID
-
-        //Upvote Trophy Skull
         let challengeUSVDiv = document.createElement('div');
         challengeUSVDiv.classList.add('challenge-usv-div');
         challengeStatsLeft.appendChild(challengeUSVDiv);
@@ -8389,7 +7500,7 @@ async function showMapModel(source, metadata) {
         challengeSkullValue.classList.add('challenge-skull-value');
         challengeSkullValue.innerHTML = challengeExtraData["Player Win Rate"];
         challengeSkullDiv.appendChild(challengeSkullValue);
-        //Creator
+        
         if(challengeExtraData["Creator"] != "n/a" && challengeExtraData["Creator"] != null) {
             let challengeCreator = document.createElement('div');
             challengeCreator.classList.add('challenge-creator');
@@ -8417,7 +7528,7 @@ async function showMapModel(source, metadata) {
             challengeCreatorName.classList.add('challenge-creator-name', 'black-outline');
             challengeCreatorName.innerHTML = "Loading...";
             challengeCreator.appendChild(challengeCreatorName);
-            //async function to change avatar to actual src
+            
             await getUserProfile(challengeExtraData["Creator"]).then(data => {
                 challengeCreatorName.innerHTML = data.displayName;
                 avatarImg.src = getProfileAvatar(data);
@@ -8467,13 +7578,6 @@ function generateExtrasPage() {
     let extrasContent = document.getElementById('extras-content');
     extrasContent.innerHTML = "";
 
-    // let noDataFound = document.createElement('p');
-    // noDataFound.id = 'no-data-found';
-    // noDataFound.classList.add('no-data-found');
-    // noDataFound.classList.add('black-outline');
-    // noDataFound.innerHTML = "Coming Soon";
-    // extrasContent.appendChild(noDataFound);
-
     let explorePage = document.createElement('div');
     explorePage.classList.add('progress-page');
     extrasContent.appendChild(explorePage);
@@ -8492,7 +7596,6 @@ function generateExtrasPage() {
 
     selectors.forEach((selector) => {
         let selectorDiv = document.createElement('div');
-        selectorDiv.id = selector.toLowerCase() + '-div';
         selectorDiv.classList.add('selector-div', 'blueprint-bg');
         selectorDiv.addEventListener('click', () => {
             extrasContent.style.display = "none";
@@ -8502,7 +7605,6 @@ function generateExtrasPage() {
         selectorsDiv.appendChild(selectorDiv);
 
         let selectorImg = document.createElement('img');
-        selectorImg.id = selector.toLowerCase() + '-img';
         selectorImg.classList.add('selector-img');
         selectorDiv.appendChild(selectorImg);
 
@@ -8525,13 +7627,11 @@ function generateExtrasPage() {
         }
 
         let selectorText = document.createElement('p');
-        selectorText.id = selector.toLowerCase() + '-text';
         selectorText.classList.add('selector-text','black-outline');
         selectorText.innerHTML = selector;
         selectorDiv.appendChild(selectorText);
 
         let selectorGoImg = document.createElement('img');
-        selectorGoImg.id = selector.toLowerCase() + '-go-img';
         selectorGoImg.classList.add('selector-go-img');
         selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
         selectorDiv.appendChild(selectorGoImg);
@@ -8614,7 +7714,7 @@ function generateRoundsets() {
 
         let roundsetText = document.createElement('p');
         roundsetText.classList.add('other-roundset-selector-text', 'black-outline');
-        // roundsetText.innerHTML = roundset;
+
         let stage = roundset.match(/(Part|Stage)(\d+)/i);
         if (stage != null) {
             roundsetText.innerHTML = `${stage[1]} ${stage[2]}`;
@@ -8645,7 +7745,6 @@ async function showRoundsetModel(source, roundset) {
     //     roundsetProcessed =  processRoundset(roundsetData);
     // }
     roundsetProcessed =  processRoundset(roundsetData);
-    console.log(roundsetProcessed)
 
     let headerBar = document.createElement('div');
     headerBar.classList.add('roundset-header-bar');
@@ -8713,8 +7812,7 @@ async function showRoundsetModel(source, roundset) {
     mapProgressFilterDifficulty.classList.add('map-progress-filter-difficulty');
 
     let mapsProgressFilterDifficultyText = document.createElement('p');
-    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text');
-    mapsProgressFilterDifficultyText.classList.add('black-outline');
+    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressFilterDifficultyText.innerHTML = "Only Modified:";
     mapProgressFilterDifficulty.appendChild(mapsProgressFilterDifficultyText);
 
@@ -8725,7 +7823,6 @@ async function showRoundsetModel(source, roundset) {
     mapProgressFilterDifficulty.appendChild(onlyModifiedToggleInput);
 
     if (bossRoundset) {
-        //get all rounds that have the key "modified" and append their roundNumber to currentModifiedRounds
         currentModifiedRounds = [];
         roundsetProcessed.rounds.forEach((round, index) => {
             if (round.hasOwnProperty("modified")) {
@@ -8745,8 +7842,7 @@ async function showRoundsetModel(source, roundset) {
     mapsProgressFilter.appendChild(mapsProgressCoopToggle);
 
     let mapsProgressCoopToggleText = document.createElement('p');
-    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text');
-    mapsProgressCoopToggleText.classList.add('black-outline');
+    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressCoopToggleText.innerHTML = "Reverse:";
     mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
 
@@ -8827,7 +7923,6 @@ async function generateRounds(type, reverse, modified) {
             roundsetProcessed.rounds.forEach(async (round, index) => {
                 // if (modified && !round.hasOwnProperty("addToRound")) { return; }
                 let roundDiv = document.createElement('div');
-                roundDiv.id = `round-${round.roundNumber}`;
                 roundDiv.classList.add('round-div');
                 if (alternate) { roundDiv.classList.add('round-div-alt') }
             
@@ -8837,7 +7932,6 @@ async function generateRounds(type, reverse, modified) {
                 roundDiv.appendChild(roundNumber);
             
                 let roundBloonGroups = document.createElement('div');
-                roundBloonGroups.id = `round-${round.roundNumber}-groups`;
                 roundBloonGroups.classList.add('round-bloon-groups');
                 roundDiv.appendChild(roundBloonGroups);
 
@@ -8898,7 +7992,6 @@ async function generateRounds(type, reverse, modified) {
 
             roundsetProcessed.rounds.forEach(async (round, index) => {
                 let roundDiv = document.createElement('div');
-                roundDiv.id = `round-${round.roundNumber}`;
                 roundDiv.classList.add('round-div-detailed');
                 if (reverse) { roundDiv.classList.add('round-div-reverse') }
 
@@ -9095,7 +8188,6 @@ async function generateRounds(type, reverse, modified) {
             previewRightDiv.appendChild(playFastButton);
 
             canvas = document.createElement('canvas');
-            canvas.id = 'roundset-canvas';
             canvas.classList.add('roundset-canvas')
             canvas.width = 800;
             canvas.height = 300;
@@ -9188,17 +8280,10 @@ async function generateRounds(type, reverse, modified) {
 
             ctx = canvas.getContext('2d');
 
-            // if (previewInterval != null) { clearInterval(previewInterval); }
-            // previewInterval = setInterval(()=>{
-            //     update();
-            //     render();
-            // }, 1000/60);
-
             let lastFrameTime = performance.now();
 
             function previewRender() {
                 if (!previewActive) {
-                    console.log('stopping')
                     return;
                 }
 
@@ -9458,26 +8543,18 @@ function generateSettings(){
     settingsContent.appendChild(noDataFound);
 
     let settingsContainer = document.createElement('div');
-    settingsContainer.id = 'settings-container';
     settingsContainer.classList.add('settings-container');
     settingsContent.appendChild(settingsContainer);
 
     let settingsOptionsContainer = document.createElement('div');
-    settingsOptionsContainer.id = 'settings-options-container';
     settingsOptionsContainer.classList.add('settings-options-container');
     settingsContainer.appendChild(settingsOptionsContainer);
 
     let whereButton = document.createElement('p');
-    whereButton.id = 'where-button';
-    whereButton.classList.add('where-button');
-    whereButton.classList.add('return-entry-button');
-    whereButton.classList.add('black-outline');
+    whereButton.classList.add('where-button','return-entry-button','black-outline');
     whereButton.innerHTML = 'Clear Local Storage';
     whereButton.addEventListener('click', () => {
-        // document.getElementById('front-page').style.display = "block";
-        // document.getElementById('settings-content').style.display = "none";
         localStorage.clear();
-        //reload the page
         location.reload();
     })
     settingsOptionsContainer.appendChild(whereButton);
@@ -9559,16 +8636,14 @@ function formatScoreTime(milliseconds) {
     let totalSeconds = Math.floor(milliseconds / 1000);
     let remainingMilliseconds = milliseconds % 1000;
     let hours = Math.floor(totalSeconds / 3600);
-    totalSeconds = totalSeconds % 3600; // Subtract the hours
+    totalSeconds = totalSeconds % 3600;
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = totalSeconds % 60;
 
-    // Pad minutes, seconds and milliseconds with leading zeros if necessary
     minutes = minutes.toString().padStart(2, '0');
     seconds = seconds.toString().padStart(2, '0');
     remainingMilliseconds = remainingMilliseconds.toString().padStart(3, '0');
 
-    // Only include hours in the output if they are greater than 0
     let timeString = `${minutes}:${seconds}.${remainingMilliseconds}`;
     if (hours > 0) {
         hours = hours.toString().padStart(2, '0');
@@ -9580,7 +8655,7 @@ function formatScoreTime(milliseconds) {
 
 function getRemainingTime(targetTime) {
     const now = new Date();
-    const remainingTime = (targetTime - now) / 1000; // convert to seconds
+    const remainingTime = (targetTime - now) / 1000;
     return remainingTime;
 }
 
@@ -9646,7 +8721,6 @@ function resetScroll() {
 }
 
 function errorModal(body, source, force) {
-    console.log(force);
     if (isErrorModalOpen && !force) { return; }
     let modalOverlay = document.createElement('div');
     modalOverlay.classList.add('error-modal-overlay');
@@ -9669,9 +8743,7 @@ function errorModal(body, source, force) {
     modalHeader.appendChild(modalHeaderImg);
 
     let modalHeaderText = document.createElement('p');
-    modalHeaderText.id = 'error-modal-header-text';
-    modalHeaderText.classList.add('error-modal-header-text');
-    modalHeaderText.classList.add('black-outline');
+    modalHeaderText.classList.add('error-modal-header-text','black-outline');
     modalHeaderText.innerHTML = "Error";
     modalHeader.appendChild(modalHeaderText);
 
@@ -9682,11 +8754,10 @@ function errorModal(body, source, force) {
     let modalContent = document.createElement('div');
     modalContent.id = 'error-modal-content';
     modalContent.classList.add('error-modal-content');
-    modalContent.innerHTML = (source == "api" ? "" : "") + body; //Ninja Kiwi API Error: 
+    modalContent.innerHTML = (source == "api" ? "" : "") + body;
     modal.appendChild(modalContent);
 
     let modalContent2  = document.createElement('div');
-    modalContent2.id = 'error-modal-content2';
     modalContent2.classList.add('error-modal-content');
     switch(body) {
         case "Invalid user ID / Player Does not play this game":
@@ -9716,7 +8787,5 @@ function errorModal(body, source, force) {
         document.body.removeChild(modalOverlay);
     })
     modalContent.appendChild(modalClose);
-
     isErrorModalOpen = true;
-    
 }

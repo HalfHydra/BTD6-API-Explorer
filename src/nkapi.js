@@ -1,10 +1,10 @@
 let oak_token = ""
 
 let btd6usersave = {};
-let _btd6usersave = {}; // the model
+let _btd6usersave = {};
 
 let btd6publicprofile = {}
-let _btd6publicprofile = {} // the model
+let _btd6publicprofile = {}
 
 let racesData = null;
 
@@ -39,12 +39,6 @@ let cacheBust = false;
 let isErrorModalOpen = false;
 
 let customMapsCache = {}
-
-// getSaveData(oak_token)
-// getPublicProfileData(oak_token)
-    // let res = await fetch(`https://data.ninjakiwi.com/btd6/save/${oak_token}`);
-    // let res = await fetch(`https://data.ninjakiwi.com/btd6/users/${oak_token}`);
-
 
 async function fetchData(url, onSuccess) {
     let res = null;
@@ -94,8 +88,6 @@ async function getSaveData(oak_token) {
     });
     console.log('recahed here when expired')
     if(expiryCheck){
-        //close all other error modals
-        //delete all existing elements with class error-modal-overlay
         let elements = document.getElementsByClassName("error-modal-overlay");
         for(element of elements){
             element.parentNode.removeChild(element);
@@ -124,31 +116,8 @@ async function getPublicProfileData(oak_token) {
     });
 }
 
-// async function getRacesData(){
-//     if (racesData == null) {
-//         fetchData(`./data/PreventAPISpam_Races.json`, (json) => {
-//             racesData = json["body"];
-//             let promises = Object.entries(racesData).map(([key, value]) => {
-//                 console.log(`fetching ${value["metadata"]}`)
-//                 return fetchData(value["metadata"], (json) => {
-//                     console.log(`fetched ${value["metadata"]}`)
-//                     return json["body"];
-//                 }).then((json) => {
-//                     value["metadata"] = json["body"];
-//                 });
-//             });
-//             Promise.all(promises).then(() => {
-//                 generateRaces();
-//             });
-//         });
-//     } else {
-//         generateRaces();
-//     }
-// }
-
 async function getRacesData() {
     if (racesData == null) {
-        //./data/PreventAPISpam_Races.json
         fetchData(`https://data.ninjakiwi.com/btd6/races`, (json) => {
             racesData = json["body"];
             generateRaces();
@@ -161,7 +130,6 @@ async function getRacesData() {
 async function getRaceMetadata(key) {
     if (racesData && racesData[key] && typeof racesData[key]["metadata"] === 'string') {
         return fetchData(racesData[key]["metadata"], (json) => {
-            console.log(`fetched ${racesData[key]["metadata"]}`)
             racesData[key]["metadata"] = json["body"];
             return racesData[key];
         });
@@ -174,7 +142,6 @@ async function getLeaderboardData() {
     if (leaderboardLink) {
         leaderboardData = null;
         return fetchData(`${leaderboardLink}?page=${leaderboardPage}`, (json) => {
-            console.log(`fetched ${leaderboardLink}?page=${leaderboardPage}`)
             leaderboardData = json["body"];
             leaderboardPageEntryCount = leaderboardData.length;
             document.getElementById('leaderboard-footer-page-number').innerHTML = `Page ${leaderboardPage} (#${(leaderboardPage * leaderboardPageEntryCount) - (leaderboardPageEntryCount - 1)} - ${leaderboardPage * leaderboardPageEntryCount})`;
