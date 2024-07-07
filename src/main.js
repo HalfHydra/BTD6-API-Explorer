@@ -96,7 +96,10 @@ fetch('./data/Constants.json')
             generateIfReady()
             generateVersionInfo()
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error)
+            errorModal(error, "js")
+    });
 
 function fetchDependencies(){
     fetch('./data/English.json')
@@ -106,7 +109,10 @@ function fetchDependencies(){
             readyFlags[2] = 1
             generateIfReady()
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error)
+            errorModal(error, "js")
+    });
 
     fetch('./data/Achievements150.json')
         .then(response => response.json())
@@ -115,7 +121,10 @@ function fetchDependencies(){
             readyFlags[3] = 1
             generateIfReady()
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error)
+            errorModal(error, "js")
+    });
     showLoading();
     generateIfReady()
 }
@@ -178,7 +187,7 @@ function generateAchievementsHelper(){
 }
 
 function generateStats(){
-    profileStats["Games Played"] = btd6publicprofile.gameplay["gameCount"];
+    profileStats["Games Played"] = btd6usersave["gamesPlayed"];
     profileStats["Games Won"] = btd6publicprofile.gameplay["gamesWon"];
     profileStats["Highest Round (All Time)"] = btd6publicprofile.gameplay["highestRound"];
     profileStats["Highest Round (CHIMPS)"] = btd6publicprofile.gameplay["highestRoundCHIMPS"];
@@ -233,8 +242,9 @@ function generateStats(){
     let normalAchievements = 0;
     //for (let [name, model] of Object.entries(achievementsHelper)){
     btd6usersave.achievementsClaimed.forEach((achievement) => {
-        let model = achievementsHelper[fixAchievementName(achievement)];
-        if (model.model.hidden){
+        let achievementModel = achievementsHelper[fixAchievementName(achievement)];
+        if(!achievementModel) { return }
+        if (achievementModel.model.hidden){
             hiddenAchievements += 1;
         } else {
             normalAchievements += 1;
@@ -587,18 +597,26 @@ container.appendChild(content);
 readLocalStorage()
 generateFrontPage()
 function generateFrontPage(){
+    if(document.getElementById('front-page') != null){
+        document.getElementById('front-page').remove();
+    }
+
     const frontPage = document.createElement('div');
     frontPage.id = 'front-page';
     frontPage.classList.add('front-page');
     content.appendChild(frontPage);
-
     // const frontPageTitle = document.createElement('h1');
     // frontPageTitle.id = 'front-page-title';
     // frontPageTitle.classList.add('front-page-title');
     // frontPageTitle.innerHTML = 'Bloons TD 6 API Explorer';
     // frontPage.appendChild(frontPageTitle);
 
-    const frontPageText = document.createElement('p');
+    let disclaimerText = document.createElement('p');
+    disclaimerText.classList.add('disclaimer-text');
+    disclaimerText.innerHTML = 'This site is not affiliated with Ninja Kiwi. All game assets belong to Ninja Kiwi.';
+    frontPage.appendChild(disclaimerText);
+
+    let frontPageText = document.createElement('p');
     frontPageText.id = 'front-page-text';
     frontPageText.classList.add('front-page-text');
     frontPageText.innerHTML = 'Enter your Open Access Key (OAK) to get started: ';
@@ -652,22 +670,24 @@ function generateFrontPage(){
         previousOAKEntry.appendChild(deleteButton);
     })
 
+
+    let oakEntryDiv = document.createElement('div');
+    oakEntryDiv.classList.add('oak-entry-div');
+    frontPage.appendChild(oakEntryDiv);
     //key entry
     let keyEntry = document.createElement('input');
-    keyEntry.id = 'key-entry';
     keyEntry.classList.add('key-entry');
     keyEntry.placeholder = 'Enter your OAK here';
-    frontPage.appendChild(keyEntry);
+    oakEntryDiv.appendChild(keyEntry);
     //start button
     let startButton = document.createElement('div');
-    startButton.id = 'start-button';
     startButton.classList.add('start-button');
     startButton.classList.add('black-outline');
     startButton.innerHTML = 'Start';
     startButton.addEventListener('click', () => {
-        let key = document.getElementById('key-entry').value;
+        let key = keyEntry.value;
         if (key.length < 5 || key.length > 30 || !key.startsWith('oak_')){
-            alert('Please enter a valid OAK! This will start with "oak_".');
+            errorModal('Please enter a valid OAK! This will start with "oak_".');
             return;
         }
         if (!pressedStart){
@@ -677,42 +697,66 @@ function generateFrontPage(){
             getSaveData(oak_token);
         }
     })
-    frontPage.appendChild(startButton);
+    oakEntryDiv.appendChild(startButton);
 
-    let infoButtons = document.createElement('div');
-    infoButtons.id = 'info-buttons';
-    infoButtons.classList.add('info-buttons');
-    frontPage.appendChild(infoButtons);
+    let getOakDiv = document.createElement('div');
+    getOakDiv.classList.add('get-oak-div');
+    frontPage.appendChild(getOakDiv);
 
-    //where do I get it button
+    let whereText = document.createElement('p');
+    whereText.classList.add('where-text');
+    whereText.innerHTML = 'Don\'t have one? Read here:';
+    getOakDiv.appendChild(whereText);
+
     let whereButton = document.createElement('p');
-    whereButton.id = 'where-button';
-    whereButton.classList.add('where-button');
-    whereButton.classList.add('black-outline');
-    whereButton.innerHTML = 'How do I get it?';
-    infoButtons.appendChild(whereButton);
-
-    let faqButton = document.createElement('p');
-    faqButton.id = 'faq-button';
-    faqButton.classList.add('where-button')
-    faqButton.classList.add('faq-button');
-    faqButton.classList.add('black-outline');
-    faqButton.innerHTML = 'FAQ';
-    infoButtons.appendChild(faqButton);
-
-    let privacyButton = document.createElement('p');
-    privacyButton.id = 'privacy-button';
-    privacyButton.classList.add('where-button');
-    privacyButton.classList.add('privacy-button');
-    privacyButton.classList.add('black-outline');
-    privacyButton.innerHTML = 'Privacy Policy';
-    infoButtons.appendChild(privacyButton);
+    whereButton.classList.add('where-button','black-outline');
+    whereButton.innerHTML = 'View OAK Guide';
+    getOakDiv.appendChild(whereButton);
 
     let OAKInstructionsDiv = document.createElement('div');
     OAKInstructionsDiv.id = 'oak-instructions-div';
     OAKInstructionsDiv.classList.add('oak-instructions-div');
     OAKInstructionsDiv.style.display = 'none';
     frontPage.appendChild(OAKInstructionsDiv);
+
+    let OtherInfoHeader = document.createElement('p');
+    OtherInfoHeader.classList.add('site-info-header','black-outline');
+    OtherInfoHeader.innerHTML = 'Site Information';
+    frontPage.appendChild(OtherInfoHeader);
+
+    let infoButtons = document.createElement('div');
+    infoButtons.classList.add('info-buttons');
+    frontPage.appendChild(infoButtons);
+
+    let trailerButton = document.createElement('p');
+    trailerButton.classList.add('where-button','black-outline');
+    trailerButton.innerHTML = 'Watch Trailer';
+    infoButtons.appendChild(trailerButton);
+
+    let faqButton = document.createElement('p');
+    faqButton.classList.add('where-button','black-outline')
+    faqButton.innerHTML = 'FAQ';
+    infoButtons.appendChild(faqButton);
+
+    let knownIssuesButton = document.createElement('p');
+    knownIssuesButton.classList.add('where-button','black-outline');
+    knownIssuesButton.innerHTML = 'Known Issues';
+    infoButtons.appendChild(knownIssuesButton);
+
+    let changelogButton = document.createElement('p');
+    changelogButton.classList.add('where-button','black-outline');
+    changelogButton.innerHTML = 'Changelog';
+    infoButtons.appendChild(changelogButton);
+
+    let privacyButton = document.createElement('p');
+    privacyButton.classList.add('where-button', 'black-outline');
+    privacyButton.innerHTML = 'Privacy Policy';
+    infoButtons.appendChild(privacyButton);
+
+    let feedbackButton = document.createElement('p');
+    feedbackButton.classList.add('where-button','black-outline');
+    feedbackButton.innerHTML = 'Send Feedback';
+    infoButtons.appendChild(feedbackButton);
 
     let FAQDiv = document.createElement('div');
     FAQDiv.id = 'faq-div';
@@ -726,30 +770,82 @@ function generateFrontPage(){
     privacyDiv.style.display = 'none';
     frontPage.appendChild(privacyDiv);
 
+    let knownIssuesDiv = document.createElement('div');
+    knownIssuesDiv.id = 'known-issues-div';
+    knownIssuesDiv.classList.add('known-issues-div');
+    knownIssuesDiv.style.display = 'none';
+    frontPage.appendChild(knownIssuesDiv);
+
+    let changelogDiv = document.createElement('div');
+    changelogDiv.id = 'changelog-div';
+    changelogDiv.classList.add('changelog-div');
+    changelogDiv.style.display = 'none';
+    frontPage.appendChild(changelogDiv);
+
+    let trailerDiv = document.createElement('div');
+    trailerDiv.id = 'trailer-div';
+    trailerDiv.classList.add('trailer-div');
+    trailerDiv.style.display = 'none';
+    frontPage.appendChild(trailerDiv);
+
+    let feedbackDiv = document.createElement('div');
+    feedbackDiv.id = 'feedback-div';
+    feedbackDiv.classList.add('feedback-div');
+    feedbackDiv.style.display = 'none';
+    frontPage.appendChild(feedbackDiv);
+
     let versionDiv = document.createElement('div');
     versionDiv.id = 'version-div';
     versionDiv.classList.add('version-div');
     frontPage.appendChild(versionDiv);
 
+    whereButton.id = 'oak-instructions-button';
     whereButton.addEventListener('click', () => {
         hideAllButOne('oak-instructions')
     })
 
+    faqButton.id = 'faq-button';
     faqButton.addEventListener('click', () => {
         hideAllButOne('faq')
     })
 
+    privacyButton.id = 'privacy-button';
     privacyButton.addEventListener('click', () => {
         hideAllButOne('privacy')
     })
 
+    knownIssuesButton.id = 'known-issues-button';
+    knownIssuesButton.addEventListener('click', () => {
+        hideAllButOne('known-issues')
+    })
+
+    changelogButton.id = 'changelog-button';
+    changelogButton.addEventListener('click', () => {
+        hideAllButOne('changelog')
+    })
+
+    trailerButton.id = 'trailer-button';
+    trailerButton.addEventListener('click', () => {
+        hideAllButOne('trailer')
+    })
+
+    feedbackButton.id = 'feedback-button';
+    feedbackButton.addEventListener('click', () => {
+        hideAllButOne('feedback')
+        // window.open('https://forms.gle/Tg1PuRNj2ftojMde6', '_blank');
+    })
+
     function hideAllButOne(tab){
-        ["oak-instructions", "faq", "privacy"].forEach((tabName) => {
-            let tabDiv = document.getElementById(tabName + '-div');
-            if (tabName === tab) {
-                tabDiv.style.display = (tabDiv.style.display === 'none') ? 'block' : 'none';
+        ["oak-instructions", "faq", "privacy", "known-issues","changelog","trailer", "feedback"].forEach((tabName) => {
+            let contentDiv = document.getElementById(tabName + '-div');
+            let tabButton = document.getElementById(tabName + '-button');
+            if (tabName === tab && contentDiv.style.display == 'none') {
+                tabButton.classList.add('square-btn-yellow');
+                contentDiv.style.display = 'block';
+                activeTab = tab;
             } else {
-                tabDiv.style.display = 'none';
+                tabButton.classList.remove('square-btn-yellow');
+                contentDiv.style.display = 'none';
             }
         });
     }
@@ -810,6 +906,11 @@ function generateFrontPage(){
     OAKInstuctionImg3.src = './Assets/UI/OAKTutorial3.jpg';
     OAKInstructionsDiv.appendChild(OAKInstuctionImg3);
 
+    let oakInstructionFooter = document.createElement('p');
+    oakInstructionFooter.classList.add('oak-instructions-text');
+    oakInstructionFooter.innerHTML = 'You can read more about the Open Data API here: <a href="https://support.ninjakiwi.com/hc/en-us/articles/13438499873937-Open-Data-API" target="_blank", style="color:white";>Open Data API Article</a>';
+    OAKInstructionsDiv.appendChild(oakInstructionFooter);
+
     let faqHeader = document.createElement('p');
     faqHeader.id = 'faq-header';
     faqHeader.classList.add('oak-instructions-header');
@@ -818,8 +919,8 @@ function generateFrontPage(){
     FAQDiv.appendChild(faqHeader);
 
     let FAQ = {
-        "What can I do with this?": "You can view more detailed stats and progress than you can see in the game such as your highest round for every mode on every map you've played. You can also view your Insta Monkey collection and use this as a tracker as the data pulled is always up to date! You'll eventually be able to explore the API for leaderboards, more advanced challenge stats and more!",
-        "How long does the API take to update after I do something in the game?": "15 minutes is the most I've seen. Be sure to press the save button in settings if you want to minimize the time it takes to update!",
+        "What can I do with this?": "A lot. Some key things are tracking your progress automatically, viewing events and leaderboards, browsing user generated content, and as a bonus feature: viewing round information. You can also view more detailed stats and progress than you can see in the game such as your highest round for every mode on every map you've played. Those who are working on their Insta Monkey collection can use this as a tracker as the data pulled is always up to date!",
+        "How long does the API take to update after I do something in the game?": "15 minutes is the most I've seen. Be sure to press the save button in settings if you want to minimize the time it takes to update! It should not take more than 24 hours to update in any circumstance (browser caching, etc).",
         "Why is this not available for BTD6+ and Netflix?": "This is because the data is stored differently for these versions such as using iCloud for BTD6+. This is not compatible with the Open Data API."
     }
 
@@ -865,16 +966,54 @@ function generateFrontPage(){
 
     let privacyHeader = document.createElement('p');
     privacyHeader.id = 'privacy-header';
-    privacyHeader.classList.add('oak-instructions-header');
-    privacyHeader.classList.add('black-outline');
+    privacyHeader.classList.add('oak-instructions-header','black-outline');
     privacyHeader.innerHTML = 'Privacy Policy';
     privacyDiv.appendChild(privacyHeader);
 
     let privacyText = document.createElement('p');
     privacyText.id = 'privacy-text';
     privacyText.classList.add('oak-instructions-text');
-    privacyText.innerHTML = 'This app does not store any data being sent to or retrieved from Ninja Kiwi\'s servers outside of your browser/device. localStorage is used to prevent users from having to re-enter their OAK every time they visit the site. If you would like to delete this stored data, you can do so by clicking the "X" on the profile you would like to delete on this page.';
+    privacyText.innerHTML = 'This app does not store any data being sent to or retrieved from Ninja Kiwi\'s Open Data API outside of your browser/device. The localStorage browser feature is used to prevent users from having to re-enter their OAK every time they visit the site. If you would like to delete this stored data, you can do so by clicking the "X" on the profile you would like to delete on this homepage.';
     privacyDiv.appendChild(privacyText);
+
+    let knownIsseusHeader = document.createElement('p');
+    knownIsseusHeader.classList.add('oak-instructions-header','black-outline');
+    knownIsseusHeader.innerHTML = 'Known Issues';
+    knownIssuesDiv.appendChild(knownIsseusHeader);
+
+    let knownIssuesText = document.createElement('p');
+    knownIssuesText.id = 'known-issues-text';
+    knownIssuesText.classList.add('oak-instructions-text');
+    knownIssuesText.innerHTML = '- Rosalia is missing from the Heroes Placed sections on profiles.<br>- Tinkerton is missing from the maps section.';
+    knownIssuesDiv.appendChild(knownIssuesText);
+    
+    let trailerVideo = document.createElement('video');
+    trailerVideo.id = 'trailer-video';
+    trailerVideo.preload = 'none';
+    trailerVideo.classList.add('trailer-video');
+    trailerVideo.src = './Assets/Trailer/TrailerFinalCompressed.mp4';
+    trailerVideo.controls = true;
+    trailerDiv.appendChild(trailerVideo);
+
+    let changelogHeader = document.createElement('p');
+    changelogHeader.classList.add('oak-instructions-header','black-outline');
+    changelogHeader.innerHTML = 'Changelog';
+    changelogDiv.appendChild(changelogHeader);
+
+    let changelogText = document.createElement('p');
+    changelogText.classList.add('oak-instructions-text');
+    changelogText.innerHTML = 'v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>The Insta Monkeys Rotation selector will also be added soon.';
+    changelogDiv.appendChild(changelogText);
+
+    let feedbackHeader = document.createElement('p');
+    feedbackHeader.classList.add('oak-instructions-header','black-outline');
+    feedbackHeader.innerHTML = 'Send Feedback';
+    feedbackDiv.appendChild(feedbackHeader);
+
+    let feedbackText = document.createElement('p');
+    feedbackText.classList.add('oak-instructions-text');
+    feedbackText.innerHTML = 'If you have any feedback, suggestions of things to add or change, and most importantly bug reports, please fill out this anonymous form: <a href="https://forms.gle/Tg1PuRNj2ftojMde6" target="_blank" style="color: white;">Feedback Form</a>';
+    feedbackDiv.appendChild(feedbackText);
 }
 
 function generateVersionInfo(){
@@ -1270,9 +1409,11 @@ function generateOverview(){
     topHeroesList.appendChild(otherHeroesDiv);
 
     let counter = 0;
+    let heroesList = Object.keys(constants.heroesInOrder);
 
     for (let [hero, xp] of Object.entries(btd6publicprofile["heroesPlaced"]).sort((a, b) => b[1] - a[1])){
         if(xp === 0) { continue; }
+        if(!heroesList.includes(hero)) { continue; }
         let heroDiv = document.createElement('div');
         heroDiv.id = 'hero-div';
         heroDiv.classList.add('hero-div');
@@ -1362,9 +1503,11 @@ function generateOverview(){
     topTowersList.appendChild(otherTowersDiv);
 
     counter = 0;
+    let towersList = Object.keys(constants.towersInOrder);
 
     for (let [tower, xp] of Object.entries(btd6publicprofile["towersPlaced"]).sort((a, b) => b[1] - a[1])){
         if(xp === 0) { continue; }
+        if(!towersList.includes(tower)) { continue; }
         let towerDiv = document.createElement('div');
         towerDiv.id = 'tower-div';
         towerDiv.classList.add('hero-div');
@@ -1424,6 +1567,10 @@ function generateOverview(){
         statValue.classList.add('stat-value');
         statValue.innerHTML = value.toLocaleString();
         stat.appendChild(statValue);
+    }
+
+    if(parseInt(btd6usersave.latestGameVersion.split(".")[0]) > constants.projectContentVersion) {
+        errorModal(`The content of this site (v${constants.projectContentVersion}.0) is out of date with the current version (v${btd6usersave.latestGameVersion.split(".")[0]}.0). New content might be missing, but everything else should remain functional.`, "api", true)
     }
 }
 
@@ -2392,6 +2539,7 @@ function generateKnowledgeProgress(){
     knowledgeProgressLockedContainerDiv.appendChild(knowledgeProgressLockedDiv);
 
     for (let [knowledge, obtained] of Object.entries(btd6usersave.acquiredKnowledge)) {
+        if (!getLocValue(knowledge)) { continue; }
         let knowledgeIconDiv = document.createElement('div');
         knowledgeIconDiv.id = `${knowledge}-icon-div`;
         knowledgeIconDiv.classList.add('knowledge-icon-div');
@@ -6343,6 +6491,7 @@ async function generateLeaderboardEntries(metadata, type){
 
 function generateLeaderboardHeader(columnsType){
     let leaderboardColumnLabels = document.getElementById('leaderboard-column-labels');
+    leaderboardColumnLabels.innerHTML = "";
 
     let leaderboardColumnRank = document.createElement('p');
     leaderboardColumnRank.classList.add('leaderboard-column-rank', 'black-outline');
@@ -6706,8 +6855,11 @@ async function openProfile(source, profile){
 
     let counter = 0;
 
+    let heroesList = Object.keys(constants.heroesInOrder);
+
     for (let [hero, xp] of Object.entries(profile["heroesPlaced"]).sort((a, b) => b[1] - a[1])){
         if(xp === 0) { continue; }
+        if(!heroesList.includes(hero)) { continue; }
         let heroDiv = document.createElement('div');
         heroDiv.id = 'hero-div';
         heroDiv.classList.add('hero-div');
@@ -6798,8 +6950,11 @@ async function openProfile(source, profile){
 
     counter = 0;
 
+    let towersList = Object.keys(constants.towersInOrder);
+
     for (let [tower, xp] of Object.entries(profile["towersPlaced"]).sort((a, b) => b[1] - a[1])){
         if(xp === 0) { continue; }
+        if(!towersList.includes(tower)) { continue; }
         let towerDiv = document.createElement('div');
         towerDiv.id = 'tower-div';
         towerDiv.classList.add('hero-div');
@@ -8728,12 +8883,12 @@ async function generateRounds(type, reverse, modified) {
             fragment.appendChild(disclaimerDiv);
 
             let disclaimer = document.createElement('p');
-            disclaimer.classList.add('disclaimer', 'black-outline');
+            disclaimer.classList.add('disclaimer');
             disclaimer.innerHTML = "This layout is based on Topper's website:";
             disclaimerDiv.appendChild(disclaimer);
 
             let disclaimerLink = document.createElement('a');
-            disclaimerLink.classList.add('disclaimer-link', 'black-outline');
+            disclaimerLink.classList.add('disclaimer-link');
             disclaimerLink.href = "https://topper64.co.uk/nk/btd6/rounds/";
             disclaimerLink.target = "_blank";
             disclaimerLink.innerHTML = "Topper's Round Information";
@@ -9490,8 +9645,9 @@ function resetScroll() {
     document.documentElement.scrollTop = 0;
 }
 
-function errorModal(body, source) {
-    if (isErrorModalOpen) { return; }
+function errorModal(body, source, force) {
+    console.log(force);
+    if (isErrorModalOpen && !force) { return; }
     let modalOverlay = document.createElement('div');
     modalOverlay.classList.add('error-modal-overlay');
     document.body.appendChild(modalOverlay);
