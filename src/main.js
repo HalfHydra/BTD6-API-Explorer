@@ -873,7 +873,7 @@ function generateFrontPage(){
     let OAKInstructionsText2 = document.createElement('p');
     OAKInstructionsText2.id = 'oak-instructions-text2';
     OAKInstructionsText2.classList.add('oak-instructions-text');
-    OAKInstructionsText2.innerHTML = 'Step 1: Login and Backup your progress with a Ninja Kiwi Account. You can do this by going to settings from the main menu and clicking on the Account button. NOTE: This is not available for BTD6+ on Apple Arcade and BTD6 Netflix. ';
+    OAKInstructionsText2.innerHTML = 'Step 1: Login and Backup your progress with a Ninja Kiwi Account. You can do this by going to settings from the main menu and clicking on the Account button. NOTE: This site is not available for BTD6+ on Apple Arcade and BTD6 Netflix. ';
     OAKInstructionsDiv.appendChild(OAKInstructionsText2);
 
     let OAKInstuctionImg = document.createElement('img');
@@ -991,7 +991,7 @@ function generateFrontPage(){
     trailerVideo.id = 'trailer-video';
     trailerVideo.preload = 'none';
     trailerVideo.classList.add('trailer-video');
-    trailerVideo.src = './Assets/Trailer/TrailerFinalCompressed.mp4';
+    trailerVideo.src = './Assets/Trailer/Trailer.mp4';
     trailerVideo.controls = true;
     trailerDiv.appendChild(trailerVideo);
 
@@ -1002,7 +1002,7 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = 'v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>The Insta Monkeys Rotation selector will also be added soon.';
+    changelogText.innerHTML = 'v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.';
     changelogDiv.appendChild(changelogText);
 
     let feedbackHeader = document.createElement('p');
