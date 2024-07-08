@@ -1041,12 +1041,14 @@ function changeTab(tab) {
 let tempXP = 0;
 
 function generateOverview(){
+    let overviewContent = document.getElementById('overview-content');
+    overviewContent.innerHTML = '';
 
     let profileHeader = document.createElement('div');
     profileHeader.classList.add('profile-header');
     profileHeader.classList.add('profile-banner');
     profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${getProfileBanner(btd6publicprofile)}')`;
-    document.getElementById('overview-content').appendChild(profileHeader);
+    overviewContent.appendChild(profileHeader);
     profileHeader.appendChild(generateAvatar(100, btd6publicprofile["avatarURL"]));
 
     let profileTopBottom = document.createElement('div');
@@ -1089,7 +1091,7 @@ function generateOverview(){
 
     let belowProfileHeader = document.createElement('div');
     belowProfileHeader.classList.add('below-profile-header');
-    document.getElementById('overview-content').appendChild(belowProfileHeader);
+    overviewContent.appendChild(belowProfileHeader);
 
     let leftColumnDiv = document.createElement('div');
     leftColumnDiv.classList.add('left-column-div');
@@ -1348,7 +1350,6 @@ function generateOverview(){
     mapsProgressCoopToggleInput2.type = 'checkbox';
     mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleInput2);
 
-    
     let topTowersList = document.createElement('div');
     topTowersList.classList.add('top-heroes-list');
     topTowersDiv.appendChild(topTowersList);
@@ -1387,8 +1388,6 @@ function generateOverview(){
         towerDiv.appendChild(towerText);
         counter++;
     }
-
-
 
     let rightColumnDiv = document.createElement('div');
     rightColumnDiv.classList.add('right-column-div');
@@ -2338,6 +2337,7 @@ function generateMapsProgress(){
     mapsProgressViews.appendChild(mapsProgressViewsText);
 
     let mapsProgressGame = document.createElement('div');
+    mapsProgressGame.id = 'maps-progress-game';
     mapsProgressGame.classList.add('maps-progress-view','black-outline');
     mapsProgressGame.innerHTML = "Game";
     mapsProgressGame.addEventListener('click', () => {
@@ -2347,6 +2347,7 @@ function generateMapsProgress(){
 
 
     let mapsProgressGrid = document.createElement('div');
+    mapsProgressGrid.id = 'maps-progress-grid';
     mapsProgressGrid.classList.add('maps-progress-view','black-outline','maps-progress-view-selected');
     mapsProgressGrid.innerHTML = "Grid";
     mapsProgressGrid.addEventListener('click', () => {
@@ -2355,6 +2356,7 @@ function generateMapsProgress(){
     mapsProgressViews.appendChild(mapsProgressGrid);
 
     let mapsProgressList = document.createElement('div');
+    mapsProgressList.id = 'maps-progress-list';
     mapsProgressList.classList.add('maps-progress-view','black-outline', 'maps-progress-view-list');
     mapsProgressList.innerHTML = "List";
     mapsProgressList.addEventListener('click', () => {
@@ -3372,8 +3374,12 @@ function generateInstaMonkeyIcons(tower){
 
         let instaMonkeyTierImg = document.createElement('img');
         instaMonkeyTierImg.classList.add('insta-monkey-tier-img');
-        instaMonkeyTierImg.src = btd6usersave.instaTowers.hasOwnProperty(tower) && btd6usersave.instaTowers[tower][tiers] ? getInstaMonkeyIcon(tower,tiers) : "./Assets/UI/InstaUncollected.png";
+        instaMonkeyTierImg.src = btd6usersave.instaTowers.hasOwnProperty(tower) && btd6usersave.instaTowers[tower][tiers] != undefined ? getInstaMonkeyIcon(tower,tiers) : "./Assets/UI/InstaUncollected.png";
         instaMonkeyTierContainer.appendChild(instaMonkeyTierImg);
+
+        if (btd6usersave.instaTowers[tower][tiers] == 0) {
+            instaMonkeyTierImg.classList.add('upgrade-after-locked');
+        }
 
         let instaMonkeyTierText = document.createElement('p');
         instaMonkeyTierText.classList.add('insta-monkey-tier-text','black-outline');
@@ -7923,6 +7929,7 @@ async function generateRounds(type, reverse, modified) {
             roundsetProcessed.rounds.forEach(async (round, index) => {
                 // if (modified && !round.hasOwnProperty("addToRound")) { return; }
                 let roundDiv = document.createElement('div');
+                roundDiv.id = `round-${round.roundNumber}`;
                 roundDiv.classList.add('round-div');
                 if (alternate) { roundDiv.classList.add('round-div-alt') }
             
@@ -7932,6 +7939,7 @@ async function generateRounds(type, reverse, modified) {
                 roundDiv.appendChild(roundNumber);
             
                 let roundBloonGroups = document.createElement('div');
+                roundBloonGroups.id = `round-${round.roundNumber}-groups`;
                 roundBloonGroups.classList.add('round-bloon-groups');
                 roundDiv.appendChild(roundBloonGroups);
 
@@ -7992,6 +8000,7 @@ async function generateRounds(type, reverse, modified) {
 
             roundsetProcessed.rounds.forEach(async (round, index) => {
                 let roundDiv = document.createElement('div');
+                roundDiv.id = `round-${round.roundNumber}`;
                 roundDiv.classList.add('round-div-detailed');
                 if (reverse) { roundDiv.classList.add('round-div-reverse') }
 

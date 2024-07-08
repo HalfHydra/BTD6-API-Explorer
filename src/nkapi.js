@@ -86,7 +86,6 @@ async function getSaveData(oak_token) {
         expiryCheck = false;
         getPublicProfileData(oak_token)
     });
-    console.log('recahed here when expired')
     if(expiryCheck){
         let elements = document.getElementsByClassName("error-modal-overlay");
         for(element of elements){
@@ -166,7 +165,6 @@ async function getBossesData() {
 async function getBossMetadata(key, elite) {
     if (bossesData && bossesData[key] && typeof bossesData[key][elite ? "metadataElite" : "metadataStandard"] === 'string') {
         return fetchData(bossesData[key][elite ? "metadataElite" : "metadataStandard"], (json) => {
-            console.log(`fetched ${bossesData[key][elite ? "metadataElite" : "metadataStandard"]}`)
             bossesData[key][elite ? "metadataElite" : "metadataStandard"] = json["body"];
             return bossesData[key];
         });
@@ -189,7 +187,6 @@ async function getCTData() {
 async function getCTTiles(key) {
     let tiles = null;
     await fetchData(key, (json) => {
-        console.log(`fetched ${key}`)
         tiles = json["body"];
         return tiles;
     });
@@ -203,7 +200,6 @@ async function getDailyChallengesData() {
             return DCData;
         });
     } else {
-        console.log('no bad!')
         return DCData;
     }
 }
@@ -211,12 +207,11 @@ async function getDailyChallengesData() {
 async function getChallengeMetadata(challengeId) {
     if (challengesCache[challengeId] == null) {
         await fetchData(`https://data.ninjakiwi.com/btd6/challenges/challenge/${challengeId}`, (json) => {
-            console.log(`fetched ${challengeId}`)
             challengesCache[challengeId] = json["body"];
             return challengesCache[challengeId];
         });
     } else {
-        console.log(`used cache for ${challengeId}`)
+        // console.log(`used cache for ${challengeId}`)
     }
     return challengesCache[challengeId];
 }
@@ -225,7 +220,6 @@ async function getBrowserData() {
     if (browserLink) {
         browserData = null;
         return fetchData(`${browserLink}${browserFilter}?page=${browserPage}`, (json) => {
-            console.log(`fetched ${browserLink}?page=${browserPage}`)
             browserData = json["body"];
             browserPageEntryCount = browserData.length;
             document.getElementById('browser-footer-page-number').innerHTML = `Page ${browserPage} of 4`;
@@ -240,11 +234,10 @@ async function getUserProfile(key) {
     let player = key.split("/").pop();
     if (profileCache[player] == null) {
         await fetchData(key, (json) => {
-            console.log(`fetched ${key}`)
             profileCache[player] = json["body"];
         });
     } else {
-        console.log(`used cache for ${player}`)
+        // console.log(`used cache for ${player}`)
     }
     return profileCache[player];
 }
@@ -252,12 +245,11 @@ async function getUserProfile(key) {
 async function getCustomMapMetadata(mapId) {
     if (customMapsCache[mapId] == null) {
         await fetchData(`https://data.ninjakiwi.com/btd6/maps/map/${mapId}`, (json) => {
-            console.log(`fetched ${mapId}`)
             customMapsCache[mapId] = json["body"];
             return customMapsCache[mapId];
         });
     } else {
-        console.log(`used cache for ${mapId}`)
+        // console.log(`used cache for ${mapId}`)
     }
     return customMapsCache[mapId];
 }

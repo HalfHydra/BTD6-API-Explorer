@@ -53,31 +53,31 @@
             "startingCash": 650
         },
         "BloonariusRoundSet": {
-            "name": "Bloonarius Event Rounds",
+            "name": "Bloonarius Custom Rounds",
             "icon": "BloonariusRoundSetIcon",
             "type": "boss",
             "startingCash": 650
         },
         "LychRoundSet": {
-            "name": "Lych Event Rounds",
+            "name": "Lych Custom Rounds",
             "icon": "LychRoundSetIcon",
             "type": "boss",
             "startingCash": 650
         },
         "VortexRoundSet": {
-            "name": "Vortex Event Rounds",
+            "name": "Vortex Custom Rounds",
             "icon": "VortexRoundSetIcon",
             "type": "boss",
             "startingCash": 650
         },
         "DreadbloonRoundSet": {
-            "name": "Dreadbloon Event Rounds",
+            "name": "Dreadbloon Custom Rounds",
             "icon": "DreadbloonRoundSetIcon",
             "type": "boss",
             "startingCash": 650
         },
         "PhayzeRoundSet": {
-            "name": "Phayze Event Rounds",
+            "name": "Phayze Custom Rounds",
             "icon": "PhayzeRoundSetIcon",
             "type": "boss",
             "startingCash": 650

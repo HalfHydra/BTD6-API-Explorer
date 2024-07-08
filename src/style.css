@@ -3911,7 +3911,7 @@
 .disclaimer, .disclaimer-link {
     font-family: GardeniaBold;
     color: white;
-    text-decoration: none;
+    /* text-decoration: none; */
     margin: 5px;
 }
 .oak-entry-div {
