@@ -3341,7 +3341,7 @@ function generateSingleInstaTower(tower) {
     instaMonkeyDiv.appendChild(instaMonkeyMainContainer);
 
     generateInstaMonkeyIcons(tower);
-    onSelectMissingToggle();
+    onSelectMissingToggle(instaProgressMissingToggleInput.checked);
 }
 
 function generateInstaMonkeyIcons(tower){
@@ -4544,8 +4544,8 @@ async function generateChallenges(type) {
                         challengeMapRounds.innerHTML = `Rounds ${challengeData.startRound}/${challengeData.endRound}`
                         challengeStats = {
                             "Attempts": challengeData.plays + challengeData.restarts,
-                            "Wins": challengeData.winsUnique,
-                            "Fails": challengeData.lossesUnique + challengeData.restarts,
+                            "Wins": challengeData.wins,
+                            "Fails": challengeData.losses + challengeData.restarts,
                             "Unique Players": challengeData.playsUnique,
                             "Victorious Players": challengeData.winsUnique,
                         }
@@ -4980,7 +4980,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     let challengeModifiersHeader = document.createElement('p');
     challengeModifiersHeader.classList.add('challenge-modifiers-header','black-outline');
     challengeModifiersHeader.innerHTML = "Modifiers";
-    challengeModifiersDiv.appendChild(challengeModifiersHeader);
+
 
     Object.entries(modifiers).forEach(([modifier, data]) => {
         let challengeModifier = document.createElement('div');
@@ -5006,6 +5006,15 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         challengeModifierValue.innerHTML = isNaN(data.value) ? data.value : `${(data.value * 100).toFixed(0)}%`;
         challengeModifierTexts.appendChild(challengeModifierValue);
     })
+
+    if (challengeModifiersDiv.children.length == 0) {
+        let none = document.createElement('p');
+        none.classList.add('challenge-modifier-none');
+        none.innerHTML = "None";
+        challengeModifiersDiv.appendChild(none);
+    }
+
+    challengeModifiersDiv.prepend(challengeModifiersHeader);
 
     let rules = challengeRules(metadata);
 
@@ -5076,6 +5085,16 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             challengeRuleTextDiv.appendChild(challengeRuleValue);
         }
     });
+
+    if (challengeRulesDiv.children.length == 0) {
+        let none = document.createElement('p');
+        none.classList.add('challenge-modifier-none');
+        none.innerHTML = "None";
+        challengeRulesDiv.appendChild(none);
+    }
+
+    challengeModelRight.prepend(challengeRulesHeader);
+
 
     if(challengeExtraData.statsValid) {
         let challengeStatsDiv = document.createElement('div');
@@ -5411,6 +5430,13 @@ function showLeaderboard(source, metadata, type) {
     let leaderboardHeaderRight = document.createElement('div');
     leaderboardHeaderRight.classList.add('leaderboard-header-right');
     leaderboardHeader.appendChild(leaderboardHeaderRight);
+
+    if(type == "Boss" || type == "BossElite") {
+        let leaderboardDisclaimer = document.createElement('p');
+        leaderboardDisclaimer.classList.add('leaderboard-disclaimer','black-outline');
+        leaderboardDisclaimer.innerHTML = "Note: Only singleplayer boss leaderboards are available on the API currently.";
+        leaderboardTop.appendChild(leaderboardDisclaimer);
+    }
 
     let leaderboardColumnLabels = document.createElement('div');
     leaderboardColumnLabels.id = 'leaderboard-column-labels';

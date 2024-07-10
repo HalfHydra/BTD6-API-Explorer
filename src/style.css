@@ -2490,7 +2490,7 @@
     margin: 10px;
     border-radius: 10px;
     /* min-height: 150px; */
-    min-width: 300px;
+    min-width: 360px;
 }
 .challenge-model-left {
     /* width: 400px; */
@@ -3954,6 +3954,16 @@
     padding: 10px;
     margin: 0 20px;
     border-radius: 10px;
+}
+.leaderboard-disclaimer {
+    text-align: center;
+    margin: 10px;
+}
+.challenge-modifier-none {
+    font-size: 24px;
+    text-align: center;
+    font-family: GardeniaBold;
+    margin: 16px;
 }
 
 .black-outline {
