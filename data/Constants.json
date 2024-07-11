@@ -86,133 +86,155 @@
             "name": "Accelerated Rounds",
             "icon": "QuestIconAcceleratedRoundSet",
             "type": "quest",
-            "startingCash": 2000
+            "startingCash": 2000,
+            "endRound": 30
         },
         "EnduranceRoundSet": {
             "name": "Phayze One - Endurance Rounds",
             "icon": "QuestIconPhayzeOne",
             "type": "quest",
-            "startingCash": 2000
+            "startingCash": 2000,
+            "endRound": 205
         },
         "FastUpgradesRoundSet": {
             "name": "Fast Upgrades Rounds",
             "icon": "QuestIconFastUpgradesRemake",
             "type": "quest",
-            "startingCash": 650
+            "startingCash": 650,
+            "endRound": 6
         },
         "MOABMadnessRoundSet": {
             "name": "MOAB Madness Rounds",
             "icon": "QuestIconMoabMadness",
             "type": "quest",
-            "startingCash": 50000
+            "startingCash": 50000,
+            "endRound": 5
         },
         "QuestBrickellTrialRoundSet": {
             "name": "Brickell Bootcamp Rounds",
             "icon": "QuestIconBrickell",
             "type": "quest",
-            "startingCash": 650
+            "startingCash": 650,
+            "endRound": 15
         },
         "QuestChurchillTrialRoundSet": {
             "name": "Royal Tank Academy Rounds",
             "icon": "QuestIconCaptainChurchill",
             "type": "quest",
-            "startingCash": 170
+            "startingCash": 170,
+            "endRound": 15
         },
         "QuestCorvusTrialRoundSet": {
             "name": "A Guide to the Book of Spirits Rounds",
             "icon": "QuestIconCorvus",
             "type": "quest",
-            "startingCash": 1
+            "startingCash": 1,
+            "endRound": 15
         },
         "QuestEtienneTrialRoundSet": {
             "name": "Drone Flying 101 Rounds",
             "icon": "QuestIconDroneFlying101",
             "type": "quest",
-            "startingCash": 650
+            "startingCash": 650,
+            "endRound": 15
         },
         "QuestGeraldoTrialRoundSet": {
             "name": "One Stop Pop Shop! Rounds",
             "icon": "QuestIconGeraldo",
             "type": "quest",
-            "startingCash": 3
+            "startingCash": 3,
+            "endRound": 15
         },
         "QuestGwendolinTrialRoundSet": {
             "name": "Trial By Fire Rounds",
             "icon": "QuestIconGwendolin",
             "type": "quest",
-            "startingCash": 650
+            "startingCash": 650,
+            "endRound": 11
         },
         "QuestObynTrialRoundSet": {
             "name": "Obyn's Gardening School Rounds",
             "icon": "QuestIconObynsGardeningSchool",
             "type": "quest",
-            "startingCash": 650
+            "startingCash": 650,
+            "endRound": 15
         },
         "QuestPatTrialRoundSet": {
             "name": "Pat Trial Rounds",
             "icon": "QuestIconPatFusty",
             "type": "quest",
-            "startingCash": 800
+            "startingCash": 800,
+            "endRound": 15
         },
         "QuestPsiTrialRoundSet": {
             "name": "Psi Insight! Rounds",
             "icon": "QuestIconPsi",
             "type": "quest",
-            "startingCash": 100
+            "startingCash": 100,
+            "endRound": 15
         },
         "QuestQuincyTrialRoundSet": {
             "name": "Quincy, Student of Quincy Rounds",
             "icon": "QuestIconQuincyTestOfQuincy",
             "type": "quest",
-            "startingCash": 850
+            "startingCash": 850,
+            "endRound": 15
         },
         "QuestRosaliaTrialRoundSet": {
             "name": "Tinkerer's Tutorial Rounds",
             "icon": "QuestIconRosalia",
             "type": "quest",
-            "startingCash": 650
+            "startingCash": 650,
+            "endRound": 15
         },
         "QuestSaudaTrialRoundSet": {
             "name": "Blade Sauda Nowhere Rounds",
             "icon": "QuestIconBladeSaudaNowhere",
             "type": "quest",
-            "startingCash": 650
+            "startingCash": 650,
+            "endRound": 16
         },
         "QuestStrikerTrialRoundSet": {
             "name": "Striker Instruction! Rounds",
             "icon": "QuestIconStrikerJones",
             "type": "quest",
-            "startingCash": 650
+            "startingCash": 650,
+            "endRound": 15
         },
         "BouncyDartsTaleStage1RoundSet": {
             "name": "New Dart Just Dropped Stage 1",
             "icon": "QuestIconBouncyDarts",
             "type": "quest",
-            "startingCash": 10
+            "startingCash": 10,
+            "endRound": 137
         },
         "BouncyDartsTaleStage2RoundSet": {
             "name": "New Dart Just Dropped Stage 2",
             "icon": "QuestIconBouncyDarts",
             "type": "quest",
-            "startingCash": 1000
+            "startingCash": 1000,
+            "endRound": 140
         },
         "ScoopsTaleIPart1RoundSet": {
             "name": "Scoop's Tall Tale Part 1",
             "icon": "QuestIconScoopsTale1",
             "type": "quest",
-            "startingCash": 250
+            "startingCash": 250,
+            "endRound": 13
         },
         "ScoopsTaleIPart2RoundSet": {
             "name": "Scoop's Tall Tale Part 2",
             "icon": "QuestIconScoopsTale1",
             "type": "quest",
-            "startingCash": 500
+            "startingCash": 500,
+            "endRound": 15
         },
         "ScoopsTaleIPart3RoundSet": {
             "name": "Scoop's Tall Tale Part 3",
             "icon": "QuestIconScoopsTale1",
             "type": "quest",
-            "startingCash": 5000
+            "startingCash": 5000,
+            "endRound": 23
         }
     },
     "incomeSets": {
