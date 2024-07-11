@@ -6,7 +6,7 @@
                     "bloon": "Red",
                     "count": 30,
                     "start": 0,
-                    "duration": 16
+                    "end": 16
                 }
             ],
             "roundNumber": 1,
@@ -21,7 +21,7 @@
                     "bloon": "Green",
                     "count": 40,
                     "start": 0,
-                    "duration": 14
+                    "end": 14
                 }
             ],
             "roundNumber": 2,
@@ -36,7 +36,7 @@
                     "bloon": "Lead",
                     "count": 50,
                     "start": 0,
-                    "duration": 16
+                    "end": 16
                 }
             ],
             "roundNumber": 3,
@@ -51,7 +51,7 @@
                     "bloon": "Ceramic",
                     "count": 90,
                     "start": 0,
-                    "duration": 24
+                    "end": 24
                 }
             ],
             "roundNumber": 4,
@@ -66,7 +66,7 @@
                     "bloon": "Bfb",
                     "count": 3,
                     "start": 0,
-                    "duration": 6
+                    "end": 6
                 }
             ],
             "roundNumber": 5,
@@ -81,19 +81,19 @@
                     "bloon": "Moab",
                     "count": 30,
                     "start": 0,
-                    "duration": 12
+                    "end": 12
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 9,
                     "start": 6.51000010172526,
-                    "duration": 11.510000610351563
+                    "end": 11.510000610351563
                 },
                 {
                     "bloon": "Bad",
                     "count": 1,
                     "start": 14.279999796549479,
-                    "duration": 19.279998779296875
+                    "end": 19.279998779296875
                 }
             ],
             "roundNumber": 6,

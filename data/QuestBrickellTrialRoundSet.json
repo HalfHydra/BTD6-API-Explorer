@@ -6,11 +6,10 @@
                     "bloon": "Blue",
                     "count": 20,
                     "start": 0,
-                    "duration": 6.5
+                    "end": 6.5
                 }
             ],
             "roundNumber": 1,
-            "addToRound": false,
             "rbe": 40,
             "income": 141,
             "rbeSum": 40,
@@ -22,17 +21,16 @@
                     "bloon": "Blue",
                     "count": 40,
                     "start": 0,
-                    "duration": 7.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "Green",
                     "count": 20,
                     "start": 0.5,
-                    "duration": 7
+                    "end": 7.5
                 }
             ],
             "roundNumber": 2,
-            "addToRound": false,
             "rbe": 140,
             "income": 242,
             "rbeSum": 180,
@@ -44,29 +42,28 @@
                     "bloon": "Blue",
                     "count": 10,
                     "start": 0,
-                    "duration": 3
+                    "end": 3
                 },
                 {
                     "bloon": "Green",
                     "count": 10,
                     "start": 4,
-                    "duration": 4
+                    "end": 8
                 },
                 {
                     "bloon": "Blue",
                     "count": 10,
                     "start": 9,
-                    "duration": 3.5
+                    "end": 12.5
                 },
                 {
                     "bloon": "Lead",
                     "count": 10,
                     "start": 3,
-                    "duration": 6
+                    "end": 9
                 }
             ],
             "roundNumber": 3,
-            "addToRound": false,
             "rbe": 300,
             "income": 403,
             "rbeSum": 480,
@@ -78,29 +75,28 @@
                     "bloon": "Green",
                     "count": 40,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "GreenCamo",
                     "count": 40,
                     "start": 6,
-                    "duration": 8
+                    "end": 14
                 },
                 {
                     "bloon": "Yellow",
                     "count": 40,
                     "start": 10,
-                    "duration": 8
+                    "end": 18
                 },
                 {
                     "bloon": "GreenCamo",
                     "count": 40,
                     "start": 15,
-                    "duration": 8
+                    "end": 23
                 }
             ],
             "roundNumber": 4,
-            "addToRound": false,
             "rbe": 520,
             "income": 624,
             "rbeSum": 1000,
@@ -112,29 +108,28 @@
                     "bloon": "Blue",
                     "count": 20,
                     "start": 0,
-                    "duration": 5
+                    "end": 5
                 },
                 {
                     "bloon": "Red",
                     "count": 30,
                     "start": 5,
-                    "duration": 5
+                    "end": 10
                 },
                 {
                     "bloon": "Yellow",
                     "count": 15,
                     "start": 5,
-                    "duration": 5
+                    "end": 10
                 },
                 {
                     "bloon": "Bfb",
                     "count": 1,
                     "start": 12,
-                    "duration": 1
+                    "end": 13
                 }
             ],
             "roundNumber": 5,
-            "addToRound": false,
             "rbe": 3294,
             "income": 1760,
             "rbeSum": 4294,
@@ -146,29 +141,28 @@
                     "bloon": "Ceramic",
                     "count": 4,
                     "start": 0,
-                    "duration": 2
+                    "end": 2
                 },
                 {
                     "bloon": "Lead",
                     "count": 15,
                     "start": 2,
-                    "duration": 8
+                    "end": 10
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 15,
                     "start": 5,
-                    "duration": 8
+                    "end": 13
                 },
                 {
                     "bloon": "Moab",
                     "count": 4,
                     "start": 5,
-                    "duration": 8
+                    "end": 13
                 }
             ],
             "roundNumber": 6,
-            "addToRound": false,
             "rbe": 3930,
             "income": 3060,
             "rbeSum": 8224,
@@ -180,17 +174,16 @@
                     "bloon": "Zebra",
                     "count": 150,
                     "start": 0,
-                    "duration": 20
+                    "end": 20
                 },
                 {
                     "bloon": "Moab",
                     "count": 5,
                     "start": 1.916659951210022,
-                    "duration": 14.033332824707031
+                    "end": 15.949992775917053
                 }
             ],
             "roundNumber": 7,
-            "addToRound": false,
             "rbe": 6530,
             "income": 5462,
             "rbeSum": 14754,
@@ -202,29 +195,28 @@
                     "bloon": "Moab",
                     "count": 5,
                     "start": 1.0833300352096558,
-                    "duration": 20
+                    "end": 21.083330035209656
                 },
                 {
                     "bloon": "Purple",
                     "count": 250,
                     "start": 0,
-                    "duration": 40
+                    "end": 40
                 },
                 {
                     "bloon": "RainbowRegrowCamo",
                     "count": 15,
                     "start": 40.29999923706055,
-                    "duration": 7.99399995803833
+                    "end": 48.29399919509888
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 2,
                     "start": 32.13999938964844,
-                    "duration": 5
+                    "end": 37.13999938964844
                 }
             ],
             "roundNumber": 8,
-            "addToRound": false,
             "rbe": 8247,
             "income": 6230,
             "rbeSum": 23001,
@@ -236,29 +228,28 @@
                     "bloon": "Ceramic",
                     "count": 30,
                     "start": 3.879159927368164,
-                    "duration": 0.20000000298023224
+                    "end": 4.079159930348396
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 30,
                     "start": 20.083330154418945,
-                    "duration": 0.20000000298023224
+                    "end": 20.283330157399178
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 30,
                     "start": 36.41659927368164,
-                    "duration": 0.20000000298023224
+                    "end": 36.61659927666187
                 },
                 {
                     "bloon": "Lead",
                     "count": 75,
                     "start": 0,
-                    "duration": 42.25400161743164
+                    "end": 42.25400161743164
                 }
             ],
             "roundNumber": 9,
-            "addToRound": false,
             "rbe": 11085,
             "income": 10384,
             "rbeSum": 34086,
@@ -270,17 +261,16 @@
                     "bloon": "Moab",
                     "count": 6,
                     "start": 0,
-                    "duration": 4
+                    "end": 4
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 3,
                     "start": 5.53000020980835,
-                    "duration": 4
+                    "end": 9.53000020980835
                 }
             ],
             "roundNumber": 10,
-            "addToRound": false,
             "rbe": 6264,
             "income": 3539,
             "rbeSum": 40350,
@@ -292,35 +282,34 @@
                     "bloon": "Zebra",
                     "count": 100,
                     "start": 0,
-                    "duration": 32.358333587646484
+                    "end": 32.358333587646484
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 70,
                     "start": 32.59583282470703,
-                    "duration": 14.307999610900879
+                    "end": 46.90383243560791
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 50,
                     "start": 47.3166618347168,
-                    "duration": 10.848999977111816
+                    "end": 58.16566181182861
                 },
                 {
                     "bloon": "Moab",
                     "count": 3,
                     "start": 58.56660079956055,
-                    "duration": 0.5699999928474426
+                    "end": 59.13660079240799
                 },
                 {
                     "bloon": "Bfb",
                     "count": 2,
                     "start": 60,
-                    "duration": 2
+                    "end": 62
                 }
             ],
             "roundNumber": 11,
-            "addToRound": false,
             "rbe": 18966,
             "income": 14644,
             "rbeSum": 59316,
@@ -332,29 +321,28 @@
                     "bloon": "Moab",
                     "count": 2,
                     "start": 0,
-                    "duration": 0.5
+                    "end": 0.5
                 },
                 {
                     "bloon": "Moab",
                     "count": 2,
                     "start": 7,
-                    "duration": 0.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "Moab",
                     "count": 4,
                     "start": 13.91666030883789,
-                    "duration": 1
+                    "end": 14.91666030883789
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 3,
                     "start": 20.75,
-                    "duration": 2
+                    "end": 22.75
                 }
             ],
             "roundNumber": 12,
-            "addToRound": false,
             "rbe": 7496,
             "income": 4303,
             "rbeSum": 66812,
@@ -366,23 +354,22 @@
                     "bloon": "Moab",
                     "count": 4,
                     "start": 0,
-                    "duration": 2.2839999198913574
+                    "end": 2.2839999198913574
                 },
                 {
                     "bloon": "Moab",
                     "count": 4,
                     "start": 24.154159545898438,
-                    "duration": 2.283900022506714
+                    "end": 26.43805956840515
                 },
                 {
                     "bloon": "CeramicRegrowFortifiedCamo",
                     "count": 13,
                     "start": 9.095832824707031,
-                    "duration": 7.99399995803833
+                    "end": 17.08983278274536
                 }
             ],
             "roundNumber": 13,
-            "addToRound": false,
             "rbe": 6410,
             "income": 4396,
             "rbeSum": 73222,
@@ -394,17 +381,16 @@
                     "bloon": "Moab",
                     "count": 4,
                     "start": 0,
-                    "duration": 1.7129989862442017
+                    "end": 1.7129989862442017
                 },
                 {
                     "bloon": "Bfb",
                     "count": 1,
                     "start": 7.441659927368164,
-                    "duration": 1
+                    "end": 8.441659927368164
                 }
             ],
             "roundNumber": 14,
-            "addToRound": false,
             "rbe": 5628,
             "income": 3163,
             "rbeSum": 78850,
@@ -416,23 +402,22 @@
                     "bloon": "Rainbow",
                     "count": 200,
                     "start": 0,
-                    "duration": 40
+                    "end": 40
                 },
                 {
                     "bloon": "Moab",
                     "count": 4,
                     "start": 40,
-                    "duration": 1.1419990062713623
+                    "end": 41.14199900627136
                 },
                 {
                     "bloon": "WhiteRegrowCamo",
                     "count": 120,
                     "start": 0,
-                    "duration": 38
+                    "end": 38
                 }
             ],
             "roundNumber": 15,
-            "addToRound": false,
             "rbe": 13184,
             "income": 12359,
             "rbeSum": 92034,

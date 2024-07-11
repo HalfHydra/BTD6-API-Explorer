@@ -6,13 +6,13 @@
                     "bloon": "Pink",
                     "count": 5,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "Yellow",
                     "count": 10,
                     "start": 5.5,
-                    "duration": 10
+                    "end": 10
                 }
             ],
             "roundNumber": 1,
@@ -27,25 +27,25 @@
                     "bloon": "Pink",
                     "count": 5,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 2,
                     "start": 2.5,
-                    "duration": 7.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "Yellow",
                     "count": 10,
                     "start": 5.5,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "Lead",
                     "count": 1,
                     "start": 5,
-                    "duration": 6
+                    "end": 6
                 }
             ],
             "roundNumber": 2,
@@ -60,25 +60,25 @@
                     "bloon": "Blue",
                     "count": 10,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 6,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "Green",
                     "count": 10,
                     "start": 5.5,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "LeadFortified",
                     "count": 1,
                     "start": 5,
-                    "duration": 6
+                    "end": 6
                 }
             ],
             "roundNumber": 3,
@@ -93,25 +93,25 @@
                     "bloon": "Yellow",
                     "count": 20,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "RainbowCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "Yellow",
                     "count": 20,
                     "start": 5.5,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "LeadFortifiedCamo",
                     "count": 1,
                     "start": 5,
-                    "duration": 6
+                    "end": 6
                 }
             ],
             "roundNumber": 4,
@@ -126,25 +126,25 @@
                     "bloon": "PinkCamo",
                     "count": 15,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 3,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "Yellow",
                     "count": 20,
                     "start": 2.5,
-                    "duration": 7
+                    "end": 7
                 },
                 {
                     "bloon": "Lead",
                     "count": 5,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 }
             ],
             "roundNumber": 5,
@@ -159,25 +159,25 @@
                     "bloon": "Pink",
                     "count": 20,
                     "start": 0,
-                    "duration": 5
+                    "end": 5
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 5,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "RainbowCamo",
                     "count": 5,
                     "start": 5.5,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "Lead",
                     "count": 5,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 }
             ],
             "roundNumber": 6,
@@ -192,25 +192,25 @@
                     "bloon": "PinkRegrow",
                     "count": 20,
                     "start": 0,
-                    "duration": 5
+                    "end": 5
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 5,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "YellowRegrow",
                     "count": 20,
                     "start": 5.5,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "CeramicCamo",
                     "count": 5,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 }
             ],
             "roundNumber": 7,
@@ -225,25 +225,25 @@
                     "bloon": "Pink",
                     "count": 20,
                     "start": 0,
-                    "duration": 5
+                    "end": 5
                 },
                 {
                     "bloon": "RainbowRegrow",
                     "count": 5,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "Yellow",
                     "count": 40,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "Purple",
                     "count": 10,
                     "start": 4,
-                    "duration": 6
+                    "end": 6
                 }
             ],
             "roundNumber": 8,
@@ -258,19 +258,19 @@
                     "bloon": "Zebra",
                     "count": 20,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "RainbowRegrow",
                     "count": 10,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "LeadCamo",
                     "count": 20,
                     "start": 5.5,
-                    "duration": 10
+                    "end": 10
                 }
             ],
             "roundNumber": 9,
@@ -285,19 +285,19 @@
                     "bloon": "Ceramic",
                     "count": 8,
                     "start": 0,
-                    "duration": 5
+                    "end": 5
                 },
                 {
                     "bloon": "RainbowRegrow",
                     "count": 8,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "CeramicCamo",
                     "count": 5,
                     "start": 5.5,
-                    "duration": 10
+                    "end": 10
                 }
             ],
             "roundNumber": 10,
@@ -312,19 +312,19 @@
                     "bloon": "LeadFortifiedCamo",
                     "count": 20,
                     "start": 0,
-                    "duration": 5
+                    "end": 5
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 5,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "Moab",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 7.5
+                    "end": 7.5
                 }
             ],
             "roundNumber": 11,
@@ -339,25 +339,25 @@
                     "bloon": "Rainbow",
                     "count": 20,
                     "start": 0,
-                    "duration": 5
+                    "end": 5
                 },
                 {
                     "bloon": "CeramicRegrowFortifiedCamo",
                     "count": 5,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 15,
                     "start": 5.5,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "Moab",
                     "count": 3,
                     "start": 1,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 12,
@@ -372,19 +372,19 @@
                     "bloon": "CeramicCamo",
                     "count": 10,
                     "start": 0,
-                    "duration": 5
+                    "end": 5
                 },
                 {
                     "bloon": "Moab",
                     "count": 4,
                     "start": 0,
-                    "duration": 10
+                    "end": 10
                 },
                 {
                     "bloon": "CeramicFortified",
                     "count": 10,
                     "start": 5.5,
-                    "duration": 10
+                    "end": 10
                 }
             ],
             "roundNumber": 13,

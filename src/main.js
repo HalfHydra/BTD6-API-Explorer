@@ -8085,7 +8085,7 @@ async function generateRounds(type, reverse, modified) {
                 roundRBETotal.innerHTML = `Total: ${round.rbeSum.toLocaleString()}`;
                 rbeTextDiv.appendChild(roundRBETotal);
 
-                let roundDuration = Math.max(...round.bloonGroups.map(group => group.duration));
+                let roundDuration = Math.max(...round.bloonGroups.map(group => group.end));
 
                 let roundDurationText = document.createElement('p');
                 roundDurationText.classList.add('round-duration', 'black-outline');
@@ -8129,7 +8129,7 @@ async function generateRounds(type, reverse, modified) {
                         bloonBarFill.style.border = `4px solid ${bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].border}`;
                     }
 
-                    let widthPercentage = ((bloonGroup.duration - bloonGroup.start) / roundDuration) * 100;
+                    let widthPercentage = ((bloonGroup.end - bloonGroup.start) / roundDuration) * 100;
                     let leftPercentage = (bloonGroup.start / roundDuration) * 100;
             
                     if (widthPercentage < minWidthPercentage) {
@@ -8479,7 +8479,7 @@ function updatePreviewRoundTimeline() {
     roundRBETotal.innerHTML = `Total: ${round.rbeSum.toLocaleString()}`;
     rbeTextDiv.appendChild(roundRBETotal);
 
-    let roundDuration = Math.max(...round.bloonGroups.map(group => group.duration));
+    let roundDuration = Math.max(...round.bloonGroups.map(group => group.end));
 
     let roundDurationText = document.createElement('p');
     roundDurationText.classList.add('round-duration', 'black-outline');
@@ -8526,7 +8526,7 @@ function updatePreviewRoundTimeline() {
             bloonBarFill.style.border = `4px solid ${bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].border}`;
         }
 
-        let widthPercentage = ((bloonGroup.duration - bloonGroup.start) / roundDuration) * 100;
+        let widthPercentage = ((bloonGroup.end - bloonGroup.start) / roundDuration) * 100;
         let leftPercentage = (bloonGroup.start / roundDuration) * 100;
 
         if (widthPercentage < minWidthPercentage) {

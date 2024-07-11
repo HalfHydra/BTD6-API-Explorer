@@ -653,19 +653,19 @@ function startRound(round) {
     roundSpeedModifier = calcRoundSpeed(round.roundNumber);
     currentRoundGroups = JSON.parse(JSON.stringify(round));
     if (document.getElementById('roundset-reverse-checkbox').checked) { 
-        let roundDuration = Math.max(...round.bloonGroups.map(group => group.duration));
+        let roundDuration = Math.max(...round.bloonGroups.map(group => group.end));
         for (let bloonGroup of currentRoundGroups.bloonGroups) {
-            let oldDuration = bloonGroup.duration - bloonGroup.start;
-            bloonGroup.start = roundDuration - bloonGroup.duration;
-            bloonGroup.duration = bloonGroup.start + oldDuration;
+            let oldDuration = bloonGroup.end - bloonGroup.start;
+            bloonGroup.start = roundDuration - bloonGroup.end;
+            bloonGroup.end = bloonGroup.start + oldDuration;
         }
     }
-    addTimelinePlayhead((Math.max(...currentRoundGroups.bloonGroups.map(group => group.duration)))/speedMultiplier);
+    addTimelinePlayhead((Math.max(...currentRoundGroups.bloonGroups.map(group => group.end)))/speedMultiplier);
     for (let bloonGroup of currentRoundGroups.bloonGroups) {
         bloonGroup.startTime = performance.now() + (bloonGroup.start * 1000) / speedMultiplier;
         bloonGroup.activeTime = 0;
         bloonGroup.spawnAccumulator = 0;
-        bloonGroup.spawnInterval = ((bloonGroup.duration - bloonGroup.start) / (bloonGroup.count - 1)) / speedMultiplier;
+        bloonGroup.spawnInterval = ((bloonGroup.end - bloonGroup.start) / (bloonGroup.count - 1)) / speedMultiplier;
         if (!isFinite(bloonGroup.spawnInterval)) {
             bloonGroup.spawnInterval = 0;
         }

@@ -6,7 +6,7 @@
                     "bloon": "Moab",
                     "count": 50,
                     "start": 0,
-                    "duration": 50
+                    "end": 50
                 }
             ],
             "roundNumber": 1,
@@ -21,7 +21,7 @@
                     "bloon": "Bfb",
                     "count": 50,
                     "start": 0,
-                    "duration": 50
+                    "end": 50
                 }
             ],
             "roundNumber": 2,
@@ -36,7 +36,7 @@
                     "bloon": "DdtFortifiedCamo",
                     "count": 50,
                     "start": 0,
-                    "duration": 50
+                    "end": 50
                 }
             ],
             "roundNumber": 3,
@@ -51,7 +51,7 @@
                     "bloon": "Zomg",
                     "count": 50,
                     "start": 0,
-                    "duration": 50
+                    "end": 50
                 }
             ],
             "roundNumber": 4,
@@ -66,7 +66,7 @@
                     "bloon": "Bad",
                     "count": 50,
                     "start": 0,
-                    "duration": 60
+                    "end": 60
                 }
             ],
             "roundNumber": 5,

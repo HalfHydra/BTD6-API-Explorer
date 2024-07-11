@@ -6,7 +6,7 @@
                     "bloon": "Red",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 1,
@@ -21,13 +21,13 @@
                     "bloon": "Red",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Blue",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 2,
@@ -42,13 +42,13 @@
                     "bloon": "Red",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Blue",
                     "count": 4,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 3,
@@ -63,13 +63,13 @@
                     "bloon": "Red",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Blue",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 4,
@@ -84,13 +84,13 @@
                     "bloon": "Red",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Blue",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 5,
@@ -105,19 +105,19 @@
                     "bloon": "Red",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Blue",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Green",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 6,
@@ -132,19 +132,19 @@
                     "bloon": "Red",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Blue",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Green",
                     "count": 4,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 7,
@@ -159,19 +159,19 @@
                     "bloon": "Red",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Blue",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Green",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 8,
@@ -186,19 +186,19 @@
                     "bloon": "Red",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Blue",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Green",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 9,
@@ -213,25 +213,25 @@
                     "bloon": "Red",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Blue",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Green",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Yellow",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 10,
@@ -246,25 +246,25 @@
                     "bloon": "Red",
                     "count": 6,
                     "start": 0,
-                    "duration": 7.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "Blue",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Green",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Yellow",
                     "count": 4,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 11,
@@ -279,25 +279,25 @@
                     "bloon": "Red",
                     "count": 4,
                     "start": 0,
-                    "duration": 6.75
+                    "end": 6.75
                 },
                 {
                     "bloon": "Blue",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Green",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Yellow",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 12,
@@ -312,25 +312,25 @@
                     "bloon": "Red",
                     "count": 2,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "Blue",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Green",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Yellow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 13,
@@ -345,25 +345,25 @@
                     "bloon": "Blue",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Green",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Yellow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Pink",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 14,
@@ -378,25 +378,25 @@
                     "bloon": "Blue",
                     "count": 6,
                     "start": 0,
-                    "duration": 7.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "Green",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Yellow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Pink",
                     "count": 4,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 15,
@@ -411,25 +411,25 @@
                     "bloon": "Blue",
                     "count": 4,
                     "start": 0,
-                    "duration": 6.75
+                    "end": 6.75
                 },
                 {
                     "bloon": "Green",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Yellow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Pink",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 16,
@@ -444,25 +444,25 @@
                     "bloon": "Blue",
                     "count": 2,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "Green",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Yellow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Pink",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 17,
@@ -477,25 +477,25 @@
                     "bloon": "Green",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Yellow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Pink",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Black",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 18,
@@ -510,25 +510,25 @@
                     "bloon": "Green",
                     "count": 6,
                     "start": 0,
-                    "duration": 7.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "Yellow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Pink",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Black",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 19,
@@ -543,25 +543,25 @@
                     "bloon": "Green",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Yellow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Pink",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "White",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 20,
@@ -576,25 +576,25 @@
                     "bloon": "Green",
                     "count": 6,
                     "start": 0,
-                    "duration": 7.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "Yellow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Pink",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "White",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 21,
@@ -609,25 +609,25 @@
                     "bloon": "Green",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Yellow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Pink",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Purple",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 22,
@@ -642,25 +642,25 @@
                     "bloon": "Green",
                     "count": 6,
                     "start": 0,
-                    "duration": 7.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "Yellow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Pink",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Purple",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 23,
@@ -675,25 +675,25 @@
                     "bloon": "YellowCamo",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Pink",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "White",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zebra",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 24,
@@ -708,25 +708,25 @@
                     "bloon": "Yellow",
                     "count": 6,
                     "start": 0,
-                    "duration": 7.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "Pink",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Black",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zebra",
                     "count": 4,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 25,
@@ -741,25 +741,25 @@
                     "bloon": "Yellow",
                     "count": 3,
                     "start": 0,
-                    "duration": 6
+                    "end": 6
                 },
                 {
                     "bloon": "Pink",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Purple",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zebra",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 26,
@@ -774,25 +774,25 @@
                     "bloon": "Purple",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "White",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Black",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zebra",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 27,
@@ -807,25 +807,25 @@
                     "bloon": "PinkCamo",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Black",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zebra",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Lead",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 28,
@@ -840,25 +840,25 @@
                     "bloon": "Pink",
                     "count": 6,
                     "start": 0,
-                    "duration": 7.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "White",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zebra",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Lead",
                     "count": 4,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 29,
@@ -873,25 +873,25 @@
                     "bloon": "Pink",
                     "count": 4,
                     "start": 0,
-                    "duration": 6.75
+                    "end": 6.75
                 },
                 {
                     "bloon": "White",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zebra",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Lead",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 30,
@@ -906,25 +906,25 @@
                     "bloon": "Pink",
                     "count": 3,
                     "start": 0,
-                    "duration": 6
+                    "end": 6
                 },
                 {
                     "bloon": "White",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zebra",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Lead",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 31,
@@ -939,25 +939,25 @@
                     "bloon": "Purple",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zebra",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Lead",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 32,
@@ -972,25 +972,25 @@
                     "bloon": "Black",
                     "count": 6,
                     "start": 0,
-                    "duration": 7.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "ZebraCamo",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Lead",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 4,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 33,
@@ -1005,25 +1005,25 @@
                     "bloon": "White",
                     "count": 4,
                     "start": 0,
-                    "duration": 6.75
+                    "end": 6.75
                 },
                 {
                     "bloon": "Zebra",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Lead",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 34,
@@ -1038,25 +1038,25 @@
                     "bloon": "Purple",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zebra",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Lead",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 35,
@@ -1071,25 +1071,25 @@
                     "bloon": "Zebra",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Lead",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 1,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 36,
@@ -1104,25 +1104,25 @@
                     "bloon": "Zebra",
                     "count": 6,
                     "start": 0,
-                    "duration": 7.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "Lead",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 37,
@@ -1137,25 +1137,25 @@
                     "bloon": "Zebra",
                     "count": 4,
                     "start": 0,
-                    "duration": 6.75
+                    "end": 6.75
                 },
                 {
                     "bloon": "Lead",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "RainbowCamo",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 38,
@@ -1170,25 +1170,25 @@
                     "bloon": "Zebra",
                     "count": 2,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "Lead",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 39,
@@ -1203,25 +1203,25 @@
                     "bloon": "Lead",
                     "count": 6,
                     "start": 0,
-                    "duration": 7.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 5,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 1,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 40,
@@ -1236,25 +1236,25 @@
                     "bloon": "Lead",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 5,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 1,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 41,
@@ -1269,25 +1269,25 @@
                     "bloon": "Lead",
                     "count": 2,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 5,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 42,
@@ -1302,25 +1302,25 @@
                     "bloon": "Lead",
                     "count": 4,
                     "start": 0,
-                    "duration": 6.75
+                    "end": 6.75
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 5,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 43,
@@ -1335,25 +1335,25 @@
                     "bloon": "Rainbow",
                     "count": 6,
                     "start": 0,
-                    "duration": 7.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "LeadFortified",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 44,
@@ -1368,25 +1368,25 @@
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "LeadFortified",
                     "count": 4,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 45,
@@ -1401,25 +1401,25 @@
                     "bloon": "Rainbow",
                     "count": 4,
                     "start": 0,
-                    "duration": 6.75
+                    "end": 6.75
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 4,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "LeadFortified",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 46,
@@ -1434,25 +1434,25 @@
                     "bloon": "Rainbow",
                     "count": 2,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "CeramicCamo",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 4,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "LeadFortified",
                     "count": 10,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 47,
@@ -1467,25 +1467,25 @@
                     "bloon": "Ceramic",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 3,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "LeadFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 48,
@@ -1500,25 +1500,25 @@
                     "bloon": "Ceramic",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 3,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "LeadFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 49,
@@ -1533,25 +1533,25 @@
                     "bloon": "Ceramic",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 4,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "LeadFortified",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 50,
@@ -1566,25 +1566,25 @@
                     "bloon": "Ceramic",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 4,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "LeadFortified",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "RainbowCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 51,
@@ -1599,25 +1599,25 @@
                     "bloon": "Moab",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "LeadFortified",
                     "count": 2,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 52,
@@ -1632,25 +1632,25 @@
                     "bloon": "Moab",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "LeadFortified",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 53,
@@ -1665,25 +1665,25 @@
                     "bloon": "Moab",
                     "count": 2,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "LeadFortified",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 54,
@@ -1698,25 +1698,25 @@
                     "bloon": "Moab",
                     "count": 2,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "LeadFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 55,
@@ -1731,25 +1731,25 @@
                     "bloon": "LeadFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 56,
@@ -1764,25 +1764,25 @@
                     "bloon": "LeadFortified",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 4,
                     "start": 2.25,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 57,
@@ -1797,25 +1797,25 @@
                     "bloon": "LeadFortified",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 58,
@@ -1830,25 +1830,25 @@
                     "bloon": "LeadFortified",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 5,
                     "start": 1.8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 59,
@@ -1863,25 +1863,25 @@
                     "bloon": "Rainbow",
                     "count": 1,
                     "start": 8.100000508626302,
-                    "duration": 8.100000508626302
+                    "end": 8.100000508626302
                 },
                 {
                     "bloon": "Moab",
                     "count": 2,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "Purple",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 1,
                     "start": 8.100000508626302,
-                    "duration": 8.100000508626302
+                    "end": 8.100000508626302
                 }
             ],
             "roundNumber": 60,
@@ -1896,25 +1896,25 @@
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 1,
                     "start": 2.7,
-                    "duration": 7.2
+                    "end": 7.2
                 },
                 {
                     "bloon": "Purple",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 1,
                     "start": 8.100000508626302,
-                    "duration": 8.100000508626302
+                    "end": 8.100000508626302
                 }
             ],
             "roundNumber": 61,
@@ -1929,25 +1929,25 @@
                     "bloon": "Rainbow",
                     "count": 2,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 2,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "Purple",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 1,
                     "start": 8.100000508626302,
-                    "duration": 8.100000508626302
+                    "end": 8.100000508626302
                 }
             ],
             "roundNumber": 62,
@@ -1962,25 +1962,25 @@
                     "bloon": "Rainbow",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 1,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "Lead",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 1,
                     "start": 8.100000508626302,
-                    "duration": 8.100000508626302
+                    "end": 8.100000508626302
                 }
             ],
             "roundNumber": 63,
@@ -1995,25 +1995,25 @@
                     "bloon": "MoabFortified",
                     "count": 2,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "PurpleCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 1,
                     "start": 8.100000508626302,
-                    "duration": 8.100000508626302
+                    "end": 8.100000508626302
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 64,
@@ -2028,25 +2028,25 @@
                     "bloon": "Moab",
                     "count": 3,
                     "start": 0,
-                    "duration": 6
+                    "end": 6
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 1,
                     "start": 8.100000508626302,
-                    "duration": 8.100000508626302
+                    "end": 8.100000508626302
                 },
                 {
                     "bloon": "CeramicFortified",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 65,
@@ -2061,25 +2061,25 @@
                     "bloon": "MoabFortified",
                     "count": 2,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "LeadFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 1,
                     "start": 8.100000508626302,
-                    "duration": 8.100000508626302
+                    "end": 8.100000508626302
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 66,
@@ -2094,25 +2094,25 @@
                     "bloon": "Moab",
                     "count": 4,
                     "start": 0,
-                    "duration": 6.75
+                    "end": 6.75
                 },
                 {
                     "bloon": "CeramicCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 1,
                     "start": 8.100000508626302,
-                    "duration": 8.100000508626302
+                    "end": 8.100000508626302
                 },
                 {
                     "bloon": "CeramicFortified",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 67,
@@ -2127,25 +2127,25 @@
                     "bloon": "Rainbow",
                     "count": 2,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 2,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 1,
                     "start": 0,
-                    "duration": 1
+                    "end": 1
                 }
             ],
             "roundNumber": 68,
@@ -2160,25 +2160,25 @@
                     "bloon": "Rainbow",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "CeramicFortified",
                     "count": 1,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 2,
                     "start": 2.25,
-                    "duration": 6.75
+                    "end": 6.75
                 }
             ],
             "roundNumber": 69,
@@ -2193,25 +2193,25 @@
                     "bloon": "Rainbow",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 2,
                     "start": 2.25,
-                    "duration": 6.75
+                    "end": 6.75
                 }
             ],
             "roundNumber": 70,
@@ -2226,25 +2226,25 @@
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "CeramicFortified",
                     "count": 2,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 3,
                     "start": 1.5,
-                    "duration": 7.5
+                    "end": 7.5
                 }
             ],
             "roundNumber": 71,
@@ -2259,25 +2259,25 @@
                     "bloon": "BfbFortified",
                     "count": 1,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 72,
@@ -2292,25 +2292,25 @@
                     "bloon": "Bfb",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 4,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "RainbowCamo",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 73,
@@ -2325,25 +2325,25 @@
                     "bloon": "BfbFortified",
                     "count": 1,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 74,
@@ -2358,25 +2358,25 @@
                     "bloon": "Bfb",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "CeramicFortified",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 75,
@@ -2391,25 +2391,25 @@
                     "bloon": "RainbowCamo",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 18,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "CeramicFortified",
                     "count": 6,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "Lead",
                     "count": 12,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 76,
@@ -2424,25 +2424,25 @@
                     "bloon": "Rainbow",
                     "count": 15,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 18,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "CeramicFortified",
                     "count": 9,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "Lead",
                     "count": 18,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 77,
@@ -2457,25 +2457,25 @@
                     "bloon": "Ceramic",
                     "count": 6,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Lead",
                     "count": 9,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 78,
@@ -2490,25 +2490,25 @@
                     "bloon": "Ceramic",
                     "count": 24,
                     "start": 0,
-                    "duration": 4.5
+                    "end": 4.5
                 },
                 {
                     "bloon": "Moab",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "LeadCamo",
                     "count": 6,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 79,
@@ -2523,25 +2523,25 @@
                     "bloon": "Purple",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 2,
                     "start": 3,
-                    "duration": 7.5
+                    "end": 7.5
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 3,
                     "start": 1,
-                    "duration": 5.5
+                    "end": 5.5
                 },
                 {
                     "bloon": "Zomg",
                     "count": 1,
                     "start": 2.7,
-                    "duration": 2.7
+                    "end": 2.7
                 }
             ],
             "roundNumber": 80,
@@ -2556,25 +2556,25 @@
                     "bloon": "Purple",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0.75,
-                    "duration": 8.25
+                    "end": 8.25
                 },
                 {
                     "bloon": "Zomg",
                     "count": 1,
                     "start": 2.7,
-                    "duration": 2.7
+                    "end": 2.7
                 }
             ],
             "roundNumber": 81,
@@ -2589,25 +2589,25 @@
                     "bloon": "PurpleCamo",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 1,
                     "start": 2.7,
-                    "duration": 2.7
+                    "end": 2.7
                 }
             ],
             "roundNumber": 82,
@@ -2622,25 +2622,25 @@
                     "bloon": "Purple",
                     "count": 54,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 15,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 1,
                     "start": 2.7,
-                    "duration": 2.7
+                    "end": 2.7
                 }
             ],
             "roundNumber": 83,
@@ -2655,25 +2655,25 @@
                     "bloon": "Ceramic",
                     "count": 15,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 1,
                     "start": 2.7,
-                    "duration": 2.7
+                    "end": 2.7
                 },
                 {
                     "bloon": "Moab",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 84,
@@ -2688,25 +2688,25 @@
                     "bloon": "Ceramic",
                     "count": 18,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "RainbowCamo",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 1,
                     "start": 2.7,
-                    "duration": 2.7
+                    "end": 2.7
                 },
                 {
                     "bloon": "Moab",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 85,
@@ -2721,25 +2721,25 @@
                     "bloon": "Purple",
                     "count": 15,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 1,
                     "start": 2.7,
-                    "duration": 2.7
+                    "end": 2.7
                 },
                 {
                     "bloon": "Moab",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 86,
@@ -2754,25 +2754,25 @@
                     "bloon": "PurpleCamo",
                     "count": 18,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "RainbowCamo",
                     "count": 15,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 1,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 87,
@@ -2787,25 +2787,25 @@
                     "bloon": "Rainbow",
                     "count": 30,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 1,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 18,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 1,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 88,
@@ -2820,25 +2820,25 @@
                     "bloon": "Rainbow",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 1,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 30,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 89,
@@ -2853,25 +2853,25 @@
                     "bloon": "RainbowCamo",
                     "count": 18,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 1,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 21,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 6,
                     "start": 1.7,
-                    "duration": 9.2
+                    "end": 9.2
                 }
             ],
             "roundNumber": 90,
@@ -2886,25 +2886,25 @@
                     "bloon": "Rainbow",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 1,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 36,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 91,
@@ -2919,25 +2919,25 @@
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 1,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 92,
@@ -2952,25 +2952,25 @@
                     "bloon": "ZomgFortified",
                     "count": 1,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 93,
@@ -2985,25 +2985,25 @@
                     "bloon": "Zomg",
                     "count": 1,
                     "start": 4.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Moab",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 94,
@@ -3018,25 +3018,25 @@
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "MoabFortified",
                     "count": 6,
                     "start": 1.5,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 1,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 95,
@@ -3051,25 +3051,25 @@
                     "bloon": "Moab",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 96,
@@ -3084,25 +3084,25 @@
                     "bloon": "Moab",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 97,
@@ -3117,25 +3117,25 @@
                     "bloon": "Moab",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 9,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 98,
@@ -3150,25 +3150,25 @@
                     "bloon": "MoabFortified",
                     "count": 15,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 18,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 99,
@@ -3183,13 +3183,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 100,
@@ -3204,25 +3204,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 101,
@@ -3237,25 +3237,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 102,
@@ -3270,25 +3270,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 103,
@@ -3303,25 +3303,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 104,
@@ -3336,25 +3336,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 105,
@@ -3369,25 +3369,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 106,
@@ -3402,13 +3402,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 107,
@@ -3423,25 +3423,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 108,
@@ -3456,25 +3456,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 109,
@@ -3489,25 +3489,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 110,
@@ -3522,25 +3522,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 111,
@@ -3555,25 +3555,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 112,
@@ -3588,25 +3588,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 113,
@@ -3621,13 +3621,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 114,
@@ -3642,25 +3642,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 115,
@@ -3675,25 +3675,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 116,
@@ -3708,25 +3708,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 117,
@@ -3741,25 +3741,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 118,
@@ -3774,25 +3774,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 119,
@@ -3807,25 +3807,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 120,
@@ -3840,13 +3840,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 121,
@@ -3861,25 +3861,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 122,
@@ -3894,25 +3894,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 123,
@@ -3927,25 +3927,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 124,
@@ -3960,25 +3960,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 125,
@@ -3993,25 +3993,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 126,
@@ -4026,25 +4026,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 127,
@@ -4059,13 +4059,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 128,
@@ -4080,25 +4080,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 129,
@@ -4113,25 +4113,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 130,
@@ -4146,25 +4146,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 131,
@@ -4179,25 +4179,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 132,
@@ -4212,25 +4212,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 133,
@@ -4245,25 +4245,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 134,
@@ -4278,13 +4278,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 135,
@@ -4299,25 +4299,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 136,
@@ -4332,25 +4332,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 137,
@@ -4365,25 +4365,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 138,
@@ -4398,25 +4398,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 139,
@@ -4431,25 +4431,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 140,
@@ -4464,25 +4464,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 141,
@@ -4497,13 +4497,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 142,
@@ -4518,25 +4518,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 143,
@@ -4551,25 +4551,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 144,
@@ -4584,25 +4584,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 145,
@@ -4617,25 +4617,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 146,
@@ -4650,25 +4650,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 147,
@@ -4683,25 +4683,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 148,
@@ -4716,13 +4716,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 149,
@@ -4737,25 +4737,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 150,
@@ -4770,25 +4770,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 151,
@@ -4803,25 +4803,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 152,
@@ -4836,25 +4836,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 153,
@@ -4869,25 +4869,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 154,
@@ -4902,25 +4902,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 155,
@@ -4935,13 +4935,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 156,
@@ -4956,25 +4956,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 157,
@@ -4989,25 +4989,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 158,
@@ -5022,25 +5022,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 159,
@@ -5055,25 +5055,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 160,
@@ -5088,25 +5088,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 161,
@@ -5121,25 +5121,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 162,
@@ -5154,13 +5154,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 163,
@@ -5175,25 +5175,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 164,
@@ -5208,25 +5208,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 165,
@@ -5241,25 +5241,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 166,
@@ -5274,25 +5274,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 167,
@@ -5307,25 +5307,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 168,
@@ -5340,25 +5340,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 169,
@@ -5373,13 +5373,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 170,
@@ -5394,25 +5394,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 171,
@@ -5427,25 +5427,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 172,
@@ -5460,25 +5460,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 173,
@@ -5493,25 +5493,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 174,
@@ -5526,25 +5526,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 175,
@@ -5559,25 +5559,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 176,
@@ -5592,13 +5592,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 177,
@@ -5613,25 +5613,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 178,
@@ -5646,25 +5646,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 179,
@@ -5679,25 +5679,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 180,
@@ -5712,25 +5712,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 181,
@@ -5745,25 +5745,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 182,
@@ -5778,25 +5778,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 183,
@@ -5811,13 +5811,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 184,
@@ -5832,25 +5832,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 185,
@@ -5865,25 +5865,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 186,
@@ -5898,25 +5898,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 187,
@@ -5931,25 +5931,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 188,
@@ -5964,25 +5964,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 189,
@@ -5997,25 +5997,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 190,
@@ -6030,13 +6030,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 191,
@@ -6051,25 +6051,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 192,
@@ -6084,25 +6084,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 193,
@@ -6117,25 +6117,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 194,
@@ -6150,25 +6150,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 195,
@@ -6183,25 +6183,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 196,
@@ -6216,25 +6216,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 197,
@@ -6249,13 +6249,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 198,
@@ -6270,25 +6270,25 @@
                     "bloon": "Moab",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 3,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 199,
@@ -6303,25 +6303,25 @@
                     "bloon": "MoabFortified",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 6,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 3,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 200,
@@ -6336,25 +6336,25 @@
                     "bloon": "MoabFortified",
                     "count": 24,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 201,
@@ -6369,25 +6369,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "BfbFortified",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 202,
@@ -6402,25 +6402,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 16,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Zomg",
                     "count": 2,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 203,
@@ -6435,25 +6435,25 @@
                     "bloon": "Moab",
                     "count": 12,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "DdtCamo",
                     "count": 8,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Bfb",
                     "count": 4,
                     "start": 0,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "ZomgFortified",
                     "count": 4,
                     "start": 3,
-                    "duration": 9
+                    "end": 9
                 }
             ],
             "roundNumber": 204,
@@ -6468,13 +6468,13 @@
                     "bloon": "Bad",
                     "count": 1,
                     "start": 8,
-                    "duration": 9
+                    "end": 9
                 },
                 {
                     "bloon": "Red",
                     "count": 3,
                     "start": 0,
-                    "duration": 27
+                    "end": 27
                 }
             ],
             "roundNumber": 205,
