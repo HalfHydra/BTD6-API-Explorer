@@ -784,9 +784,6 @@ function generateFrontPage(){
     })
 
     trailerButton.id = 'trailer-button';
-    trailerButton.addEventListener('click', () => {
-        hideAllButOne('trailer')
-    })
 
     feedbackButton.id = 'feedback-button';
     feedbackButton.addEventListener('click', () => {
@@ -921,6 +918,11 @@ function generateFrontPage(){
     trailerVideo.controls = true;
     trailerDiv.appendChild(trailerVideo);
 
+    trailerButton.addEventListener('click', () => {
+        hideAllButOne('trailer')
+        trailerVideo.play();
+    })
+
     let changelogHeader = document.createElement('p');
     changelogHeader.classList.add('oak-instructions-header','black-outline');
     changelogHeader.innerHTML = 'Changelog';
@@ -928,7 +930,7 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = 'v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.';
+    changelogText.innerHTML = 'v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.<br><br>v1.0.1: Bug Fix<br>- Rework roundset processing to fix numerous bugs<br>- Other minor UI fixes';
     changelogDiv.appendChild(changelogText);
 
     let feedbackHeader = document.createElement('p');
@@ -2494,6 +2496,7 @@ function onSelectMap(map){
     document.getElementById('maps-progress-container').style.display = "none";
     document.getElementById('maps-progress-header-bar').style.display = "none";
     document.getElementById('map-progress-container').style.display = "flex";
+    resetScroll();
     generateMapDetails(map);
 }
 
@@ -3391,7 +3394,7 @@ function generateInstaMonkeyIcons(tower){
         instaMonkeyTierImg.src = btd6usersave.instaTowers.hasOwnProperty(tower) && btd6usersave.instaTowers[tower][tiers] != undefined ? getInstaMonkeyIcon(tower,tiers) : "./Assets/UI/InstaUncollected.png";
         instaMonkeyTierContainer.appendChild(instaMonkeyTierImg);
 
-        if (btd6usersave.instaTowers[tower][tiers] == 0) {
+        if (btd6usersave.instaTowers.hasOwnProperty(tower) && btd6usersave.instaTowers[tower][tiers] == 0) {
             instaMonkeyTierImg.classList.add('upgrade-after-locked');
         }
 
@@ -3575,7 +3578,7 @@ function generateAchievementsProgress() {
     let mapProgressFilterDifficultySelect2 = document.createElement('select');
     mapProgressFilterDifficultySelect2.classList.add('map-progress-filter-difficulty-select');
 
-    let options2 = ["None","Monkey Money","Knowledge Points","Insta Monkeys","Hidden Achievements"]
+    let options2 = ["None",/*"Monkey Money",*/"Knowledge Points","Insta Monkeys","Hidden Achievements"]
     options2.forEach((option) => {
         let difficultyOption = document.createElement('option');
         difficultyOption.value = option;
@@ -3702,7 +3705,7 @@ function generateAchievementsGameView(){
         let achievementDescText = document.createElement('p');
         achievementDescText.classList.add('achievement-desc-text');
         let achievementDesc = achievementClaimed ? getLocValue(`Achievement ${achievementData.model.achievementId} Description`) : achievementData.model.hidden ? "???" : getLocValue(`Achievement ${achievementData.model.achievementId} Description`);
-        achievementDescText.innerHTML = achievementDesc.indexOf("{0}") != -1 ? achievementDesc.replace("{0}", achievementData.model.achievementGoal.toLocaleString()) : achievementDesc;
+        achievementDescText.innerHTML = achievementDesc.indexOf("{0}") != -1 ? achievementDesc.replace("{0}", " " + achievementData.model.achievementGoal.toLocaleString()) : achievementDesc;
         achievementTextDiv.appendChild(achievementDescText);
 
         let achievementBottomDiv = document.createElement('div');
@@ -3783,7 +3786,7 @@ function generateExtrasProgress() {
         extraProgressText.innerHTML = locked ? "???" : getLocValue(loc);
         extraProgressDiv.appendChild(extraProgressText);
 
-        if(extrasUnlocked[name]) {
+        if(!locked) {
             let extraProgressTick = document.createElement('img');
             extraProgressTick.classList.add('extra-progress-tick');
             extraProgressTick.src = "./Assets/UI/TickGreenIcon.png";
@@ -5114,7 +5117,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         }
 
         let roundset = metadata.roundSets.filter(value => value !== 'default' && value !== 'bloonarius' && value !== 'lych' && value !== 'vortex' && value !== 'dreadbloon' && value !== 'phayze')
-        if (rule == "Custom Rounds" && constants.skuRoundsets.includes(roundset[0])) {
+        if (rule == "Custom Rounds" && constants.skuRoundsets.includes(roundset[0]) && metadata.mode != "AlternateBloonsRounds") {
             console.log(roundset[0])
 
             let challengeRuleValue = document.createElement('div');
@@ -5245,17 +5248,27 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
 
             let challengeCreatorName = document.createElement('p');
             challengeCreatorName.classList.add('challenge-creator-name', 'black-outline');
-            challengeCreatorName.innerHTML = "Loading...";
+            challengeCreatorName.innerHTML = preventRateLimiting ? "Click to Load Creator" : "Loading...";
             challengeCreator.appendChild(challengeCreatorName);
             
-            await getUserProfile(challengeExtraData["Creator"]).then(data => {
+            challengeCreator.addEventListener('click', async () => {
+                challengeCreatorName.innerHTML = "Loading...";
+                let data = await getUserProfile(challengeExtraData["Creator"])
+                if (data == null) { 
+                    challengeCreatorName.innerHTML = "Click to Load Creator";
+                    return; 
+                }
                 challengeCreatorName.innerHTML = data.displayName;
                 avatarImg.src = getProfileAvatar(data);
                 challengeCreator.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(data)})`;
+                challengeCreator.removeEventListener('click', arguments.callee);
                 challengeCreator.addEventListener('click', () => {
                     openProfile('challenge', challengeExtraData["Creator"]);
                 })
             });
+            if(!preventRateLimiting) {
+                challengeCreator.click();
+            }
         }
 
         let leftStats = ["Date Created", "Game Version", "Random Seed"]
@@ -6199,9 +6212,9 @@ async function openProfile(source, profile){
     mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleText2);
 
     let mapsProgressCoopToggleInput2 = document.createElement('input');
+    mapsProgressCoopToggleInput2.classList.add('maps-progress-coop-toggle-input');
     mapsProgressCoopToggleInput2.type = 'checkbox';
     mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleInput2);
-
     
     let topTowersList = document.createElement('div');
     topTowersList.classList.add('top-heroes-list');
@@ -6221,7 +6234,6 @@ async function openProfile(source, profile){
     })
 
     counter = 0;
-
     let towersList = Object.keys(constants.towersInOrder);
 
     for (let [tower, xp] of Object.entries(profile["towersPlaced"]).sort((a, b) => b[1] - a[1])){
@@ -6971,7 +6983,7 @@ function generateChallengeEntries(destination) {
     
                 let challengeCreatorName = document.createElement('p');
                 challengeCreatorName.classList.add('browser-creator-name', 'black-outline');
-                challengeCreatorName.innerHTML = "Loading...";
+                challengeCreatorName.innerHTML = preventRateLimiting ? "Click to Load Creator" : "Loading...";
                 challengeCreator.appendChild(challengeCreatorName);
 
                 let challengeIDandPlay = document.createElement('div');
@@ -7014,7 +7026,7 @@ function generateChallengeEntries(destination) {
                             observer.unobserve(observerentry.target);
                             let challengeData = await getChallengeMetadata(entry.id);
                             if (challengeData == null) { return; }
-                            challengeMapImg.src = challengeData.mapURL;
+                            challengeMapImg.src = Object.keys(constants.mapsInOrder).includes(challengeData.map) ? getMapIcon(challengeData.map) : challengeData.mapURL;
                             let modifiers = challengeModifiers(challengeData);
                             let rules = challengeRules(challengeData)
                             for (let modifier of Object.values(modifiers)) {
@@ -7035,12 +7047,25 @@ function generateChallengeEntries(destination) {
                             challengeUpvoteValue.innerHTML = challengeData.upvotes.toLocaleString();
                             challengeTrophyValue.innerHTML = challengeData.playsUnique == 0 ? "0%" : challengeData.winsUnique - challengeData.playsUnique == 0 ? "0%" : `${((challengeData.winsUnique / challengeData.playsUnique) * 100).toFixed(2)}%`;
                             challengeSkullValue.innerHTML = challengeData.playsUnique == 0 ? "0%" : `${((challengeData.wins / (challengeData.plays + challengeData.restarts)) * 100).toFixed(2)}%`;
-                            let creatorData = await getUserProfile(challengeData.creator);
-                            if ( creatorData == null ) { return; }
-                            challengeCreatorName.innerHTML = creatorData.displayName;
-                            if (creatorData.displayName.length > 13) { challengeCreatorName.style.fontSize = '17px' }
-                            avatarImg.src = getProfileAvatar(creatorData);
-                            challengeBottom.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(creatorData)})`;
+                            challengeCreator.addEventListener('click', async (event) => {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                challengeCreatorName.innerHTML = "Loading...";
+                                let creatorData = await getUserProfile(challengeData.creator);
+                                if (creatorData == null) { 
+                                    challengeCreatorName.innerHTML = "Click to Load Creator";
+                                    return; 
+                                }
+                                challengeCreatorName.innerHTML = creatorData.displayName;
+                                if (creatorData.displayName.length > 13) { challengeCreatorName.style.fontSize = '17px' }
+                                avatarImg.src = getProfileAvatar(creatorData);
+                                challengeBottom.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(creatorData)})`;
+                                challengeCreator.removeEventListener('click', arguments.callee);
+                                challengeCreator.addEventListener('click', () => openProfile("browser", challengeData.creator));
+                            })
+                            if (!preventRateLimiting) {
+                                challengeCreator.click();
+                            }
                         }
                     });
                 });
@@ -7096,7 +7121,7 @@ function generateChallengeEntries(destination) {
     
                 let challengeCreatorName2 = document.createElement('p');
                 challengeCreatorName2.classList.add('browser-creator-name', 'black-outline');
-                challengeCreatorName2.innerHTML = "Loading...";
+                challengeCreatorName2.innerHTML = preventRateLimiting ? "Click to Load Creator" : "Loading...";
                 challengeCreator2.appendChild(challengeCreatorName2);
 
                 let challengeUSVDiv2 = document.createElement('div');
@@ -7185,16 +7210,29 @@ function generateChallengeEntries(destination) {
                             observer.unobserve(observerentry.target);
                             let challengeData = await getChallengeMetadata(entry.id);
                             if (challengeData == null) { return; }
-                            challengeMapImg2.src = challengeData.mapURL;
+                            challengeMapImg2.src = Object.keys(constants.mapsInOrder).includes(challengeData.map) ? getMapIcon(challengeData.map) : challengeData.mapURL;
                             challengeUpvoteValue2.innerHTML = challengeData.upvotes.toLocaleString();
                             challengeTrophyValue2.innerHTML = challengeData.playsUnique == 0 ? "0%" : challengeData.winsUnique - challengeData.playsUnique == 0 ? "0%" : `${((challengeData.winsUnique / challengeData.playsUnique) * 100).toFixed(2)}%`;
                             challengeSkullValue2.innerHTML = challengeData.playsUnique == 0 ? "0%" : `${((challengeData.wins / (challengeData.plays + challengeData.restarts)) * 100).toFixed(2)}%`;
-                            let creatorData = await getUserProfile(challengeData.creator);
-                            if ( creatorData == null ) { return; }
-                            challengeCreatorName2.innerHTML = creatorData.displayName;
-                            if (creatorData.displayName.length > 13) { challengeCreatorName2.style.fontSize = '17px' }
-                            avatarImg2.src = getProfileAvatar(creatorData);
-                            challengeCreator2.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(${getProfileBanner(creatorData)})`;
+                            challengeCreator2.addEventListener('click', async (event) => {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                challengeCreatorName2.innerHTML = "Loading...";
+                                let creatorData = await getUserProfile(challengeData.creator);
+                                if ( creatorData == null ) { 
+                                    challengeCreatorName2.innerHTML = "Click to Load Creator";
+                                    return; 
+                                }
+                                challengeCreatorName2.innerHTML = creatorData.displayName;
+                                if (creatorData.displayName.length > 13) { challengeCreatorName2.style.fontSize = '17px' }
+                                avatarImg2.src = getProfileAvatar(creatorData);
+                                challengeCreator2.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(${getProfileBanner(creatorData)})`;
+                                challengeCreator2.removeEventListener('click', arguments.callee);
+                                challengeCreator2.addEventListener('click', () => openProfile("browser", challengeData.creator));
+                            })
+                            if (!preventRateLimiting) {
+                                challengeCreator2.click();
+                            }
                         }
                     });
                 });
@@ -7335,7 +7373,7 @@ function generateMapGameEntries(destination) {
     
                 let challengeCreatorName = document.createElement('p');
                 challengeCreatorName.classList.add('browser-creator-name', 'black-outline');
-                challengeCreatorName.innerHTML = "Loading...";
+                challengeCreatorName.innerHTML = preventRateLimiting ? "Click to Load Creator" : "Loading...";
                 challengeCreator.appendChild(challengeCreatorName);
 
                 let challengeIDandPlay = document.createElement('div');
@@ -7381,12 +7419,25 @@ function generateMapGameEntries(destination) {
                             challengeUpvoteValue.innerHTML = customMapData.upvotes.toLocaleString();
                             challengeTrophyValue.innerHTML = customMapData.playsUnique == 0 ? "0%" : customMapData.winsUnique - customMapData.playsUnique == 0 ? "0%" : `${((customMapData.winsUnique / customMapData.playsUnique) * 100).toFixed(2)}%`;
                             challengeSkullValue.innerHTML = customMapData.playsUnique == 0 ? "0%" : `${((customMapData.wins / (customMapData.plays + customMapData.restarts)) * 100).toFixed(2)}%`;
-                            let creatorData = await getUserProfile(customMapData.creator);
-                            if ( creatorData == null ) { return; }
-                            challengeCreatorName.innerHTML = creatorData.displayName;
-                            if (creatorData.displayName.length > 13) { challengeCreatorName.style.fontSize = '17px' }
-                            avatarImg.src = getProfileAvatar(creatorData);
-                            challengeBottom.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(creatorData)})`;
+                            challengeCreator.addEventListener('click', async (event) => {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                challengeCreatorName.innerHTML = "Loading...";
+                                let creatorData = await getUserProfile(customMapData.creator);
+                                if ( creatorData == null ) { 
+                                    challengeCreatorName.innerHTML = "Click to Load Creator";
+                                    return; 
+                                }
+                                challengeCreatorName.innerHTML = creatorData.displayName;
+                                if (creatorData.displayName.length > 13) { challengeCreatorName.style.fontSize = '17px' }
+                                avatarImg.src = getProfileAvatar(creatorData);
+                                challengeBottom.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(creatorData)})`;
+                                challengeCreator.removeEventListener('click', arguments.callee);
+                                challengeCreator.addEventListener('click', () => openProfile("browser", customMapData.creator));
+                            })
+                            if (!preventRateLimiting) {
+                                challengeCreator.click();
+                            }
                         }
                     });
                 });
@@ -7616,17 +7667,27 @@ async function showMapModel(source, metadata) {
 
             let challengeCreatorName = document.createElement('p');
             challengeCreatorName.classList.add('challenge-creator-name', 'black-outline');
-            challengeCreatorName.innerHTML = "Loading...";
+            challengeCreatorName.innerHTML = preventRateLimiting ? "Click to Load Creator" : "Loading...";
             challengeCreator.appendChild(challengeCreatorName);
             
-            await getUserProfile(challengeExtraData["Creator"]).then(data => {
+            challengeCreator.addEventListener('click', async () => {
+                challengeCreatorName.innerHTML = "Loading...";
+                let data = await getUserProfile(challengeExtraData["Creator"])
+                if (data == null) { 
+                    challengeCreatorName.innerHTML = "Click to Load Creator";
+                    return; 
+                }
                 challengeCreatorName.innerHTML = data.displayName;
                 avatarImg.src = getProfileAvatar(data);
                 challengeCreator.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(data)})`;
+                challengeCreator.removeEventListener('click', arguments.callee);
                 challengeCreator.addEventListener('click', () => {
                     openProfile('map', challengeExtraData["Creator"]);
                 })
             });
+            if(!preventRateLimiting) {
+                challengeCreator.click();
+            }
         }
 
         let leftStats = ["Date Created", "Game Version"]
@@ -7793,7 +7854,6 @@ function generateRoundsets() {
     otherRoundsetDiv.classList.add('other-roundsets-selector-div');
     selectorsDiv.appendChild(otherRoundsetDiv);
 
-
     Object.entries(otherRoundsets).forEach(([roundset, data]) => {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('other-roundset-selector-div');
@@ -7816,6 +7876,38 @@ function generateRoundsets() {
         roundsetIcon.src = `../Assets/QuestIcon/${data.icon}.png`;
         roundsetDiv.appendChild(roundsetIcon);
     })
+
+    let skuRoundsetDiv = document.createElement('div');
+    skuRoundsetDiv.classList.add('sku-roundset-selector-div');
+    selectorsDiv.appendChild(skuRoundsetDiv);
+
+    let skuRoundsetText = document.createElement('p');
+    skuRoundsetText.classList.add('other-roundsets-selector-text', 'black-outline');
+    skuRoundsetText.innerHTML = "Other Custom Rounds";
+    skuRoundsetDiv.appendChild(skuRoundsetText);
+
+    let skuRoundsetDesc = document.createElement('p');
+    skuRoundsetDesc.classList.add('sku-roundset-selector-desc');
+    skuRoundsetDesc.innerHTML = "These mostly old roundsets will have only been used in one-off events such as Odysseys, Races, or Bosses and may not have ended up being used for their intended purpose despite their name. Take these roundsets with a grain of salt. I'm including them on the viewer for completeness sake.";
+    skuRoundsetDiv.appendChild(skuRoundsetDesc);
+
+    let skuRoundsetsDiv = document.createElement('div');
+    skuRoundsetsDiv.classList.add('sku-roundsets-selector-div');
+    skuRoundsetDiv.appendChild(skuRoundsetsDiv);
+
+    constants.skuRoundsets.forEach(roundset => {
+        let roundsetDiv = document.createElement('div');
+        roundsetDiv.classList.add('sku-roundset-selector-div');
+        roundsetDiv.addEventListener('click', () => {
+            showRoundsetModel('extras', roundset);
+        })
+        skuRoundsetsDiv.appendChild(roundsetDiv);
+
+        let roundsetText = document.createElement('p');
+        roundsetText.classList.add('sku-roundset-selector-text', 'black-outline');
+        roundsetText.innerHTML = roundset;
+        roundsetDiv.appendChild(roundsetText);
+    });
 }
 
 async function showRoundsetModel(source, roundset) {
@@ -8024,6 +8116,19 @@ async function generateRounds(type, reverse, modified) {
     let roundsContent = document.getElementById('rounds-content');
     roundsContent.innerHTML = "";
 
+    //get if all the round numbers don't have any gaps between them
+    let roundsetHasNoGaps = true;
+    let roundsetHasNoGapsArray = [];
+    roundsetProcessed.rounds.forEach((round, index) => {
+        roundsetHasNoGapsArray.push(round.roundNumber);
+    });
+    for (let i = 0; i < roundsetHasNoGapsArray.length; i++) {
+        if (roundsetHasNoGapsArray[i] != i + 1) {
+            roundsetHasNoGaps = false;
+            break;
+        }
+    }
+
     switch(type) {
         case "Simple":
             resetPreview();
@@ -8136,7 +8241,7 @@ async function generateRounds(type, reverse, modified) {
                 let roundIncomeTotal = document.createElement('p');
                 roundIncomeTotal.classList.add('round-income-total', 'black-outline');
                 roundIncomeTotal.innerHTML = `Total: ${round.incomeSum.toLocaleString()}`;
-                incomeTextDiv.appendChild(roundIncomeTotal);
+                if (roundsetHasNoGaps){ incomeTextDiv.appendChild(roundIncomeTotal); }
 
                 let rbeDiv = document.createElement('div');
                 rbeDiv.classList.add('rbe-div');
@@ -8159,7 +8264,7 @@ async function generateRounds(type, reverse, modified) {
                 let roundRBETotal = document.createElement('p');
                 roundRBETotal.classList.add('round-rbe-total', 'black-outline');
                 roundRBETotal.innerHTML = `Total: ${round.rbeSum.toLocaleString()}`;
-                rbeTextDiv.appendChild(roundRBETotal);
+                if (roundsetHasNoGaps){ rbeTextDiv.appendChild(roundRBETotal); }
 
                 let roundDuration = Math.max(...round.bloonGroups.map(group => group.end));
 
@@ -8852,6 +8957,11 @@ function ratioCalc(unknown, x1, x2, y1, y2){
 function resetScroll() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+    let viewport = document.querySelector('meta[name="viewport"]');
+    if (viewport) {
+        viewport.content = "initial-scale=0.1";
+        viewport.content = "width=800";
+    }
 }
 
 function errorModal(body, source, force) {
@@ -8896,9 +9006,29 @@ function errorModal(body, source, force) {
     switch(body) {
         case "Invalid user ID / Player Does not play this game":
             modalContent2.innerHTML = "Please try again or create a new Open Access Key.";
+            modal.appendChild(modalContent2);
             break;
     }
-    modal.appendChild(modalContent2);
+
+    if(source == "ratelimit") {
+        let mapsProgressCoopToggle = document.createElement('div');
+        mapsProgressCoopToggle.classList.add('error-toggle-div');  
+        modal.appendChild(mapsProgressCoopToggle);
+
+        let mapsProgressCoopToggleText = document.createElement('p');
+        mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
+        mapsProgressCoopToggleText.innerHTML = "Manually Load Profiles: ";
+        mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
+
+        let mapsProgressCoopToggleInput = document.createElement('input');
+        mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
+        mapsProgressCoopToggleInput.type = 'checkbox';
+        mapsProgressCoopToggleInput.checked = preventRateLimiting;
+        mapsProgressCoopToggleInput.addEventListener('change', () => {
+            mapsProgressCoopToggleInput.checked ? preventRateLimiting = true : preventRateLimiting = false;
+        })
+        mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
+    }
 
     let okButtonDiv = document.createElement('div');
     okButtonDiv.classList.add('error-modal-ok-button-div');

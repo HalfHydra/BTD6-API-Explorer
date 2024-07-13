@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "projectContentVersion": 43,
     "totalInstaMonkeys": 1472,
     "achievements": 138,
@@ -39,7 +39,7 @@
         "Impoppable": 100,
         "Clicks": 100
     },
-    "skuRoundsets": ["bloonarius","lych","1roundEarly","2roundEarly","3roundEarly","4roundEarly","5roundEarly","DDTbadness","vortex","countdownGroupOf5","monkeyVSmachines","dreadbloon","rabbitYear","valentinesCF","TheFinalGambit","eggs","BeastHandlerjourney","QuestSaudaTrialRoundSet","QuestQuincyTrialRoundSet","Apocrypha3","phayze","QuestGwendolinTrialRoundSet","QuestBrickellTrialRoundSet","31Plus","allOrNothingEnd60","allOrNothingEnd80","alternateRound140","raceExperiment"],
+    "skuRoundsets": ["1roundEarly","2roundEarly","3roundEarly","4roundEarly","5roundEarly","DDTbadness","countdownGroupOf5","monkeyVSmachines","rabbitYear","valentinesCF","TheFinalGambit","eggs","BeastHandlerjourney","Apocrypha3","31Plus","allOrNothingEnd60","allOrNothingEnd80","alternateRound140","raceExperiment"],
     "roundSets": {
         "DefaultRoundSet": {
             "name": "Standard Rounds",

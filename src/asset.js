@@ -268,12 +268,14 @@ function getProfileIcon(profile){
 }
 
 function getProfileAvatar(profileData) {
+    if(profileData.avatar == 0) return "Assets/ProfileAvatar/ProfileAvatar01.png";
     let avatarIndex = parseInt(profileData.avatar.replace(/\D/g,''));
     if (profileData.avatar == "" || isNaN(avatarIndex)) return "Assets/ProfileAvatar/ProfileAvatar01.png";
     return (avatarIndex <= constants.profileAvatars) ? `Assets/ProfileAvatar/${profileData.avatar}.png` : profileData.avatarURL
 }
 
 function getProfileBanner(profileData) {
+    if(profileData.banner == 0) return "Assets/ProfileBanner/TeamsBannerDeafult.png";
     let bannerIndex = parseInt(profileData.banner.replace(/\D/g,''));
     if (profileData.banner == "" || isNaN(bannerIndex)) return "Assets/ProfileBanner/TeamsBannerDeafult.png";
     return (bannerIndex <= constants.profileBanners) ? `Assets/ProfileBanner/${profileData.banner}.png` : profileData.bannerURL

@@ -3984,6 +3984,30 @@
     max-width: 800px;
 }
 
+.sku-roundset-selector-desc {
+    font-family: GardeniaBold;
+    line-height: 24px;
+}
+.sku-roundsets-selector-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 12px;
+}
+.sku-roundset-selector-text {
+    padding: 8px;
+    margin: 4px;
+    font-size: 18px;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+.error-toggle-div {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    justify-content: center;
+}
+
 .boss-text {
     background: linear-gradient(180deg, #DA3A00 0%, #FA8500 100%);
     background-clip: text;
@@ -4101,6 +4125,11 @@ p {
     font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
     color: white;
     user-select: none;
+}
+
+option {
+    font-family: inherit;
+    font-size: inherit;
 }
 
 .maps-progress-coop-toggle-input {

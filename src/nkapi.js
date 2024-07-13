@@ -40,18 +40,29 @@ let isErrorModalOpen = false;
 
 let customMapsCache = {}
 
+let rateLimited = false;
+let preventRateLimiting = false;
+
 async function fetchData(url, onSuccess) {
     let res = null;
     try {
         if (cacheBust) {
             res = await fetch(url, {cache: "reload"});
             cacheBust = false;
+            rateLimited = false;
         } else {
             res = await fetch(url);
+            rateLimited = false;
         }
     } catch (e) {
-        console.log(e)
-        errorModal(`You have hit the rate limit.<br>If you are browsing the leaderboards or content browsers, please slow down!<br><br>The rate limit will clear after a short time.`, "api")
+        if (!navigator.onLine) {
+            errorModal(`You are currently offline. Please check your internet connection.`, "api");
+            return `You are currently offline. [${e}]`;
+        }
+        rateLimited = true;        
+        errorModal(`You have hit the rate limit.<br>If you are browsing the leaderboards or content browsers, please slow down!<br><br>The rate limit will clear after a short time. You can also help prevent rate limiting by toggling the setting below which stops player profiles from loading automatically.`, "ratelimit")
+        hideLoading();
+        pressedStart = false;
         return `You have hit the rate limit. [${e}]`;
     }
     try {
@@ -86,7 +97,7 @@ async function getSaveData(oak_token) {
         expiryCheck = false;
         getPublicProfileData(oak_token)
     });
-    if(expiryCheck){
+    if(expiryCheck && !rateLimited){
         let elements = document.getElementsByClassName("error-modal-overlay");
         for(element of elements){
             element.parentNode.removeChild(element);
