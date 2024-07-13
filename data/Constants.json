@@ -39,6 +39,7 @@
         "Impoppable": 100,
         "Clicks": 100
     },
+    "skuRoundsets": ["bloonarius","lych","1roundEarly","2roundEarly","3roundEarly","4roundEarly","5roundEarly","DDTbadness","vortex","countdownGroupOf5","monkeyVSmachines","dreadbloon","rabbitYear","valentinesCF","TheFinalGambit","eggs","BeastHandlerjourney","QuestSaudaTrialRoundSet","QuestQuincyTrialRoundSet","Apocrypha3","phayze","QuestGwendolinTrialRoundSet","QuestBrickellTrialRoundSet","31Plus","allOrNothingEnd60","allOrNothingEnd80","alternateRound140","raceExperiment"],
     "roundSets": {
         "DefaultRoundSet": {
             "name": "Standard Rounds",

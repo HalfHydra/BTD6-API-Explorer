@@ -7,3 +7,4 @@ src/asset_test.js
 BTD6AssetStaging.html
 BTD6InstaMonkeysStaging.html
 data/PreventAPISpam_UserSave.json
+.vscode/settings.json

@@ -325,7 +325,8 @@ function generateProgressSubText(){
     let mapsPlayed = Object.keys(btd6usersave.mapProgress).filter(k => btd6usersave.mapProgress[k]).length
     progressSubText["MapProgress"] = `${mapsPlayed} Map${mapsPlayed != 1 ? "s" : ""} Played`;
     let chimpsTotal = Object.values(processedMapData.Medals.single).map(map => map["Clicks"]).filter(medal => medal).length;
-    if (chimpsTotal > 0) { progressSubText["CHIMPS"] = `${chimpsTotal} CHIMPS Medal${chimpsTotal != 1 ? "s" : ""} Earned` }
+    let chimpsTotalCoop = Object.values(processedMapData.Medals.coop).map(map => map["Clicks"]).filter(medal => medal).length;
+    if (chimpsTotal + chimpsTotalCoop > 0) { progressSubText["CHIMPS"] = `${chimpsTotal + chimpsTotalCoop} CHIMPS Medal${chimpsTotal + chimpsTotalCoop != 1 ? "s" : ""} Earned` }
     let powersTotal = Object.values(btd6usersave.powers).map(power => (typeof power === 'object' && power.quantity) ? power.quantity : 0).reduce((acc, amount) => acc + amount);
     progressSubText["Powers"] = `${powersTotal} Power${powersTotal != 1 ? "s" : ""} Accumulated`
     let instaTotal = Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount)
@@ -792,21 +793,6 @@ function generateFrontPage(){
         hideAllButOne('feedback')
     })
 
-    function hideAllButOne(tab){
-        ["oak-instructions", "faq", "privacy", "known-issues","changelog","trailer", "feedback"].forEach((tabName) => {
-            let contentDiv = document.getElementById(tabName + '-div');
-            let tabButton = document.getElementById(tabName + '-button');
-            if (tabName === tab && contentDiv.style.display == 'none') {
-                tabButton.classList.add('square-btn-yellow');
-                contentDiv.style.display = 'block';
-                activeTab = tab;
-            } else {
-                tabButton.classList.remove('square-btn-yellow');
-                contentDiv.style.display = 'none';
-            }
-        });
-    }
-
     let OAKInstructionsHeader = document.createElement('p');
     OAKInstructionsHeader.classList.add('oak-instructions-header','black-outline');
     OAKInstructionsHeader.innerHTML = 'What is an Open Access Key?';
@@ -925,7 +911,7 @@ function generateFrontPage(){
 
     let knownIssuesText = document.createElement('p');
     knownIssuesText.classList.add('oak-instructions-text');
-    knownIssuesText.innerHTML = '- Rosalia is missing from the Top Heroes sections on profiles.<br>- Tinkerton is missing from the maps section.';
+    knownIssuesText.innerHTML = '- Rosalia is missing from the Top Heroes sections on profiles.<br>- Tinkerton is missing from the maps section.<br>- Insta Monkeys that are collected but used do not show up.';
     knownIssuesDiv.appendChild(knownIssuesText);
     
     let trailerVideo = document.createElement('video');
@@ -954,6 +940,22 @@ function generateFrontPage(){
     feedbackText.classList.add('oak-instructions-text');
     feedbackText.innerHTML = 'If you have any feedback, suggestions of things to add or change, and most importantly bug reports, please fill out this anonymous form: <a href="https://forms.gle/Tg1PuRNj2ftojMde6" target="_blank" style="color: white;">Feedback Form</a>';
     feedbackDiv.appendChild(feedbackText);
+
+    function hideAllButOne(tab){
+        ["oak-instructions", "faq", "privacy", "known-issues","changelog","trailer", "feedback"].forEach((tabName) => {
+            trailerVideo.pause();
+            let contentDiv = document.getElementById(tabName + '-div');
+            let tabButton = document.getElementById(tabName + '-button');
+            if (tabName === tab && contentDiv.style.display == 'none') {
+                tabButton.classList.add('square-btn-yellow');
+                contentDiv.style.display = 'block';
+                activeTab = tab;
+            } else {
+                tabButton.classList.remove('square-btn-yellow');
+                contentDiv.style.display = 'none';
+            }
+        });
+    }
 }
 
 function generateVersionInfo(){
@@ -2074,18 +2076,23 @@ function generateHeroProgressHero(hero, nameColor){
     heroProgressMiddle.appendChild(heroSkinsDiv);
 
     constants.heroSkins[hero].forEach((skin) => {
-        if ((btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == false || btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == null) && skin != hero) { return; }
+        if ((btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == null) && skin != hero) { return; }
 
         let heroSkin = document.createElement('img');
         heroSkin.id = `${hero}-${skin}-skin`;
         heroSkin.classList.add('hero-skin');
         heroSkin.src = getHeroIconCircle(skin);
-        heroSkin.addEventListener('click', () => {
-            let colorToUse = constants.HeroBGColors[skin] ? constants.HeroBGColors[skin] : constants.HeroBGColors[hero];
-            changeHexBGColor(colorToUse);
-            changeHeroSkin(skin, hero == skin);
-            document.getElementById("hero-portrait-glow").style.background = `radial-gradient(circle, rgb(${colorToUse[0] * 255},${colorToUse[1] * 255},${colorToUse[2] * 255}) 0%, transparent 70%)`
-        })
+
+        if (btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == false) {
+            heroSkin.classList.add('insta-tower-container-none');
+        } else {
+            heroSkin.addEventListener('click', () => {
+                let colorToUse = constants.HeroBGColors[skin] ? constants.HeroBGColors[skin] : constants.HeroBGColors[hero];
+                changeHexBGColor(colorToUse);
+                changeHeroSkin(skin, hero == skin);
+                document.getElementById("hero-portrait-glow").style.background = `radial-gradient(circle, rgb(${colorToUse[0] * 255},${colorToUse[1] * 255},${colorToUse[2] * 255}) 0%, transparent 70%)`
+            })
+        }
         heroSkinsDiv.appendChild(heroSkin);
     })
 
@@ -3337,6 +3344,11 @@ function generateSingleInstaTower(tower) {
     instaMonkeyProgressText.innerHTML = `${processedInstaData.TowerTierTotals[tower] ? Object.values(processedInstaData.TowerTierTotals[tower]).reduce((a, b) => a + b, 0) : 0}/64`;
     instaMonkeyProgress.appendChild(instaMonkeyProgressText);
 
+    let instaBugDisclaimer = document.createElement('p');
+    instaBugDisclaimer.classList.add('insta-disclaimer','insta-monkey-unobtained','black-outline');
+    instaBugDisclaimer.innerHTML = "Note: Some Insta Monkeys that are obtained and then used will not accurately count or display as previously collected. This will be fixed in the future.";
+    instaMonkeyDiv.appendChild(instaBugDisclaimer);
+
     let instaMonkeyMainContainer = document.createElement('div');
     instaMonkeyMainContainer.id = `${tower}-main-container`;
     instaMonkeyMainContainer.classList.add('insta-monkey-main-container');
@@ -3422,6 +3434,11 @@ function generateInstaListView(){
     let instaMonkeysList = document.createElement('div');
     instaMonkeysList.classList.add('insta-monkeys-list');
     instaMonkeysListContainer.appendChild(instaMonkeysList);
+
+    let instaBugDisclaimer = document.createElement('p');
+    instaBugDisclaimer.classList.add('insta-disclaimer','black-outline');
+    instaBugDisclaimer.innerHTML = "Note: Some Insta Monkeys that are obtained and then used will not accurately count or display as previously collected. This will be fixed in the future.";
+    instaMonkeysList.appendChild(instaBugDisclaimer);
 
     Object.keys(constants.towersInOrder).forEach(tower => {
         if(processedInstaData.TowerTierTotals[tower] == null) { return; }
@@ -3750,19 +3767,20 @@ function generateExtrasProgress() {
     let extras = [["Big Bloons", "BigBloonsMode"],["Small Bloons", "SmallBloonsMode"],["Big Monkey Towers","BigTowersMode"],["Small Monkey Towers", "SmallTowersMode"],["Small Bosses","SmallBossesMode"]]
 
     for (let [name, loc] of extras) {
-        if(extrasUnlocked[name] == undefined) { continue; }
+        let locked = extrasUnlocked[name] == undefined;
+
         let extraProgressDiv = document.createElement('div');
         extraProgressDiv.classList.add('extra-progress-div');
         extrasProgressContainer.appendChild(extraProgressDiv);
 
         let extraProgressImg = document.createElement('img');
         extraProgressImg.classList.add('extra-progress-img');
-        extraProgressImg.src = `./Assets/UI/${loc}Icon.png`;
+        extraProgressImg.src = locked ? `./Assets/AchievementIcon/HiddenIcon.png` : `./Assets/UI/${loc}Icon.png`;
         extraProgressDiv.appendChild(extraProgressImg);
 
         let extraProgressText = document.createElement('p');
         extraProgressText.classList.add('extra-progress-text','black-outline');
-        extraProgressText.innerHTML = getLocValue(loc);
+        extraProgressText.innerHTML = locked ? "???" : getLocValue(loc);
         extraProgressDiv.appendChild(extraProgressText);
 
         if(extrasUnlocked[name]) {
@@ -3964,11 +3982,12 @@ function generateRaces(){
         raceInfoMiddleDiv.appendChild(raceInfoTotalScores);
 
         let raceInfoRules = document.createElement('div');
-        raceInfoRules.classList.add("race-info-rules", "start-button", "black-outline");
+        raceInfoRules.classList.add("race-info-rules", "start-button", 'hero-selector-div-disabled', "black-outline");
         raceInfoRules.innerHTML = "Details"
         raceInfoRules.addEventListener('click', () => {
+            if (typeof racesData[index]["metadata"] == 'string') { return; }
             showLoading();
-            showChallengeModel('events', race.metadata, "Race");
+            showChallengeModel('events',  race.metadata, "Race");
         })
         raceInfoBottomDiv.appendChild(raceInfoRules);
 
@@ -3986,6 +4005,7 @@ function generateRaces(){
                     await getRaceMetadata(index);
                     if (typeof racesData[index]["metadata"] != 'string') {
                         observer.unobserve(entry.target);
+                        raceInfoRules.classList.remove('hero-selector-div-disabled');
                         raceMapImg.src = Object.keys(constants.mapsInOrder).includes(race.metadata.map) ? getMapIcon(race.metadata.map) : race.metadata.mapURL;
                         let modifiers = challengeModifiers(race.metadata);
                         let rules = challengeRules(race.metadata)
@@ -4097,7 +4117,7 @@ function generateBosses(elite){
         raceInfoDiv.appendChild(raceInfoMiddleDiv);
 
         let raceInfoBottomDiv = document.createElement('div');
-        raceInfoBottomDiv.classList.add("race-info-bottom-div", elite ? "btn-rotate-boss-elite" : "btn-rotate-boss");
+        raceInfoBottomDiv.classList.add("race-info-bottom-div");
         raceInfoDiv.appendChild(raceInfoBottomDiv);
 
         let raceInfoName = document.createElement('p');
@@ -4128,16 +4148,17 @@ function generateBosses(elite){
         raceInfoMiddleDiv.appendChild(raceInfoTotalScores);
 
         let raceInfoRules = document.createElement('div');
-        raceInfoRules.classList.add("race-info-rules", "start-button", "black-outline");
+        raceInfoRules.classList.add("race-info-rules", "start-button", 'hero-selector-div-disabled', elite ? "btn-rotate-boss-elite" : "btn-rotate-boss", "black-outline");
         raceInfoRules.innerHTML = "Details"
         raceInfoRules.addEventListener('click', () => {
+            if (typeof bossesData[index]["metadata"] == 'string') { return; }
             showLoading();
             showChallengeModel('events', (elite ? race.metadataElite : race.metadataStandard),"Boss", eventData);
         })
         raceInfoBottomDiv.appendChild(raceInfoRules);
 
         let raceInfoLeaderboard = document.createElement('div');
-        raceInfoLeaderboard.classList.add("race-info-leaderboard", "start-button", "black-outline");
+        raceInfoLeaderboard.classList.add("race-info-leaderboard", "start-button", elite ? "btn-rotate-boss-elite" : "btn-rotate-boss", "black-outline");
         raceInfoLeaderboard.innerHTML = "Leaderboard"
         raceInfoLeaderboard.addEventListener('click', () => {
             showLeaderboard('events', race, elite ? "BossElite" : "Boss");
@@ -4148,6 +4169,7 @@ function generateBosses(elite){
             entries.forEach(async entry => {
                 if (entry.isIntersecting) {
                     await getBossMetadata(index, elite);
+                    raceInfoRules.classList.remove('hero-selector-div-disabled');
                     if (typeof bossesData[index][elite ? "metadataElite" : "metadataStandard"] != 'string') {
                         let challengeScoreTypeIcon = document.createElement('img');
                         challengeScoreTypeIcon.classList.add('challenge-modifier-icon-event');
@@ -4903,15 +4925,24 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         data.isHero ? heroesToDisplay[data.tower] = data : towersToDisplay[data.tower] = data;
     })
 
-    if (shouldUseHeroList) {
-        let heroSelectorHeader = document.createElement('div');
-        heroSelectorHeader.classList.add('challenge-tower-selector');
-        challengeModel.appendChild(heroSelectorHeader);
-    }
+    // if (shouldUseHeroList) {
+    //     let heroSelectorHeader = document.createElement('div');
+    //     heroSelectorHeader.classList.add('challenge-tower-selector');
+    //     challengeModel.appendChild(heroSelectorHeader);
+    // }
+
+    let towerSelector = document.createElement('div');
+    towerSelector.classList.add('challenge-towers-list');
+    challengeModel.appendChild(towerSelector);
 
     let towerSelectorHeader = document.createElement('div');
     towerSelectorHeader.classList.add('challenge-tower-selector');
-    challengeModel.appendChild(towerSelectorHeader);
+    towerSelector.appendChild(towerSelectorHeader);
+
+    // let towerSelectorExcluded = document.createElement('div');
+    // towerSelectorExcluded.style.display = "none";
+    // towerSelectorExcluded.classList.add('challenge-tower-selector');
+    // towerSelector.appendChild(towerSelectorExcluded);
 
     if (shouldUseHeroList) {
         let towerSelector = document.createElement('div');
@@ -4934,6 +4965,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             towerSelector.appendChild(towerSelectorImg);
 
             towerSelectorHeader.appendChild(towerSelector)
+            // heroesToDisplay[tower] ? towerSelectorHeader.appendChild(towerSelector) : towerSelectorExcluded.appendChild(towerSelector);
         }
     }
 
@@ -4941,7 +4973,8 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         if (!towersToDisplay[tower]) { continue; }
         let towerSelector = document.createElement('div');
         towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
-        towerSelectorHeader.appendChild(towerSelector);
+        towerSelectorHeader.appendChild(towerSelector)
+        // towersToDisplay[tower] ? towerSelectorHeader.appendChild(towerSelector) : towerSelectorExcluded.appendChild(towerSelector);
 
         let towerSelectorImg = document.createElement('img');
         towerSelectorImg.classList.add('tower-selector-img');
@@ -5078,6 +5111,20 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
                     showRoundsetModel('challenge', roundset);
                 })
             }
+        }
+
+        let roundset = metadata.roundSets.filter(value => value !== 'default' && value !== 'bloonarius' && value !== 'lych' && value !== 'vortex' && value !== 'dreadbloon' && value !== 'phayze')
+        if (rule == "Custom Rounds" && constants.skuRoundsets.includes(roundset[0])) {
+            console.log(roundset[0])
+
+            let challengeRuleValue = document.createElement('div');
+            challengeRuleValue.classList.add('challenge-rule-subtext','start-button','black-outline');
+            challengeRuleValue.innerHTML = "Open";
+            challengeRuleTextDiv.appendChild(challengeRuleValue);
+
+            challengeRuleValue.addEventListener('click', () => {
+                showRoundsetModel('challenge', roundset[0]);
+            })
         }
 
         if(rule == "Paragon Limit") {
@@ -5407,24 +5454,33 @@ function showLeaderboard(source, metadata, type) {
     leaderboardHeader.appendChild(leaderboardHeaderMiddle);
 
     let leaderboardHeaderTitle = document.createElement('div');
-    leaderboardHeaderTitle.classList.add(`leaderboard-header-${type.toLowerCase()}`, 'black-outline');
+    leaderboardHeaderTitle.classList.add(`leaderboard-header-${type.toLowerCase()}`);
     leaderboardHeaderMiddle.appendChild(leaderboardHeaderTitle);
+
+    let leaderboardHeaderTitleText = document.createElement('p');
+    leaderboardHeaderTitleText.classList.add('leaderboard-header-title-text');
+    leaderboardHeaderTitle.appendChild(leaderboardHeaderTitleText); 
 
     switch(type) {
         case "Race":
-            leaderboardHeaderTitle.innerHTML = "Race Leaderboard"
+            leaderboardHeaderTitleText.classList.add("black-outline");
+            leaderboardHeaderTitleText.innerHTML = "Race Leaderboard"
             break;
         case "Boss":
-            leaderboardHeaderTitle.innerHTML = "Boss Leaderboard"
+            leaderboardHeaderTitleText.classList.add("black-outline");
+            leaderboardHeaderTitleText.innerHTML = "Boss Leaderboard"
             break;
         case "BossElite":
-            leaderboardHeaderTitle.innerHTML = "Elite Boss Leaderboard"
+            leaderboardHeaderTitleText.classList.add("black-outline");
+            leaderboardHeaderTitleText.innerHTML = "Elite Boss Leaderboard"
             break;
         case "CTPlayer":
-            leaderboardHeaderTitle.innerHTML = "Contested Territory <br> Player Leaderboard"
+            leaderboardHeaderTitleText.classList.add("ct-text");
+            leaderboardHeaderTitleText.innerHTML = "Contested Territory <br> Player Leaderboard"
             break;
         case "CTTeam":
-            leaderboardHeaderTitle.innerHTML = "Contested Territory <br> Team Leaderboard"
+            leaderboardHeaderTitleText.classList.add("ct-text");
+            leaderboardHeaderTitleText.innerHTML = "Contested Territory <br> Team Leaderboard"
             break;
     }
 
@@ -6549,7 +6605,7 @@ function generateBrowser(type){
 
     let mapsProgressHeaderDesc = document.createElement('p');
     mapsProgressHeaderDesc.classList.add('browser-header-desc');
-    mapsProgressHeaderDesc.innerHTML = "Only 100 entries (4 pages) are available on the API. You can enter a specific ID at the bottom right";
+    mapsProgressHeaderDesc.innerHTML = "This is not a replacement for the in-game browser, this exists to show what's available on the API.<br>Only 100 entries (4 pages) are available on the API. You can enter a specific ID at the bottom right.";
     mapProgressHeaderTop.appendChild(mapsProgressHeaderDesc);
 
     let mapProgressHeaderBottom = document.createElement('div');
@@ -8174,6 +8230,7 @@ async function generateRounds(type, reverse, modified) {
             }, 0)
             break;
         case "Preview":
+            resetPreview();
             let previewContainerDiv = document.createElement('div');
             previewContainerDiv.classList.add('preview-container-div');
             roundsContent.appendChild(previewContainerDiv);

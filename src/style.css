@@ -677,14 +677,15 @@
 }
 .top-3-heroes-div {
     display: flex;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
+    padding: 0 20px;
     min-height: 160px;
 }
 .other-heroes-div {
     display: flex;
-    justify-content: space-evenly;
     flex-direction: row;
     flex-wrap: wrap;
+    padding: 0 20px;
 }
 
 .progress-clipboard {
@@ -2931,10 +2932,14 @@
 }
 
 .btn-rotate-boss {
-    filter: hue-rotate(75deg);
+    /* filter: hue-rotate(75deg); */
+    border-image-source: url(../Assets/UI/BossBtnSquare.png);
+    background: linear-gradient(180deg, #0ca5cc 0%, #18a8ce 100%);
 }
 .btn-rotate-boss-elite {
-    filter: hue-rotate(160deg);
+    /* filter: hue-rotate(160deg); */
+    border-image-source: url(../Assets/UI/TwitchBtnSquare.png);
+    background: linear-gradient(180deg, #9900ff 0%, #a600ff 100%);
 }
 
 .challenge-rule-text-div {
@@ -3072,6 +3077,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: var(--profile-primary);
+    padding: 8px;
+    border-radius: 10px;
 }
 .relic-header-views {
     display: flex;
@@ -3264,6 +3272,7 @@
 }
 .quick-stat-icon {
     width: 40px;
+    min-height: 39px;
     object-fit: contain;
     -webkit-filter: drop-shadow(1px 1px 0 white)
                 drop-shadow(-1px 1px 0 white)
@@ -3860,6 +3869,7 @@
     display: flex;
     margin: 0 auto;
     padding-right: 20px;
+    padding-top: 10px;
     justify-content: space-between;
 }
 
@@ -3958,12 +3968,35 @@
 .leaderboard-disclaimer {
     text-align: center;
     margin: 10px;
+    font-size: 18px;
 }
 .challenge-modifier-none {
     font-size: 24px;
     text-align: center;
     font-family: GardeniaBold;
     margin: 16px;
+}
+
+.insta-disclaimer {
+    text-align: center;
+    margin: 10px;
+    font-size: 18px;
+    max-width: 800px;
+}
+
+.boss-text {
+    background: linear-gradient(180deg, #DA3A00 0%, #FA8500 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(1px 0px 0px #000) drop-shadow(-1px 0px 0 #000) drop-shadow(0px 1px 0 #000) drop-shadow(1px 0px 0px #000) drop-shadow(1px 2px 0px #000) drop-shadow(-1px -1px 0 #000) drop-shadow(-1px 2px 0 #000) drop-shadow(1px -1px 0px #000);
+}
+.ct-text {
+    background: linear-gradient(180deg, #FFE900 0%, #FFB700 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(1px 0px 0px #000) drop-shadow(-1px 0px 0 #000) drop-shadow(0px 1px 0 #000) drop-shadow(1px 0px 0px #000) drop-shadow(1px 2px 0px #000) drop-shadow(-1px -1px 0 #000) drop-shadow(-1px 2px 0 #000) drop-shadow(1px -1px 0px #000);
 }
 
 .black-outline {
