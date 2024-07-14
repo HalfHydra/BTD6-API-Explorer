@@ -807,7 +807,7 @@ function generateFrontPage(){
 
     let OAKInstructionsText2 = document.createElement('p');
     OAKInstructionsText2.classList.add('oak-instructions-text');
-    OAKInstructionsText2.innerHTML = 'Step 1: Login and Backup your progress with a Ninja Kiwi Account. You can do this by going to settings from the main menu and clicking on the Account button. NOTE: This site is not available for BTD6+ on Apple Arcade and BTD6 Netflix. ';
+    OAKInstructionsText2.innerHTML = 'Step 1: Login and Backup your progress with a Ninja Kiwi Account in BTD6. You can do this by going to settings from the main menu and clicking on the Account button. NOTE: This site is not available for BTD6+ on Apple Arcade and BTD6 Netflix. ';
     OAKInstructionsDiv.appendChild(OAKInstructionsText2);
 
     let OAKInstuctionImg = document.createElement('img');
@@ -930,7 +930,7 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = 'v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.<br><br>v1.0.1: Bug Fix<br>- Rework roundset processing to fix numerous bugs<br>- Other minor UI fixes';
+    changelogText.innerHTML = 'v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.<br><br>v1.0.1: Bug Fixes<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes';
     changelogDiv.appendChild(changelogText);
 
     let feedbackHeader = document.createElement('p');
@@ -4869,10 +4869,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             selectorGoImg.addEventListener('click', (event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                let iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                iframe.src = `btd6://Challenge/${metadata.id}`;
-                document.body.appendChild(iframe);
+                openBTD6Link(`btd6://Challenge/${metadata.id}`);
             });
             challengeHeaderRightBottom.appendChild(selectorGoImg);
             break;
@@ -8851,10 +8848,7 @@ function processRewardsString(input){
 }
 
 function openBTD6Link(link){
-    let iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = link;
-    document.body.appendChild(iframe);
+    window.location.href = link;
 }
 
 function copyLoadingIcon(destination){
@@ -8957,11 +8951,6 @@ function ratioCalc(unknown, x1, x2, y1, y2){
 function resetScroll() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-    let viewport = document.querySelector('meta[name="viewport"]');
-    if (viewport) {
-        viewport.content = "initial-scale=0.1";
-        viewport.content = "width=800";
-    }
 }
 
 function errorModal(body, source, force) {

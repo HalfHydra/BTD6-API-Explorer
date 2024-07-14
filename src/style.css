@@ -2424,6 +2424,7 @@
 }
 .challenge-model-header-name {
     margin: 4px;
+    text-align: center;
 }
 .challenge-model-map-icon {
     min-width: 471px;
