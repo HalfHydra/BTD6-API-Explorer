@@ -3556,15 +3556,77 @@ function generateInstaObtainGuide() {
     let progressContent = document.getElementById('insta-monkeys-progress-container');
     progressContent.innerHTML = "";
 
+    let obtainGuideDiv = document.createElement('div');
+    obtainGuideDiv.classList.add('insta-monkeys-obtain-guide');
+    progressContent.appendChild(obtainGuideDiv);
+
     let titleGuideText = document.createElement('p');
     titleGuideText.classList.add('insta-monkeys-guide-title-text','black-outline');
     titleGuideText.innerHTML = "Where To Get More Insta Monkeys";
-    progressContent.appendChild(titleGuideText);
+    obtainGuideDiv.appendChild(titleGuideText);
 
-    let titleGuideDesc = document.createElement('p');
-    titleGuideDesc.classList.add('insta-monkeys-guide-title-desc','black-outline');
-    titleGuideDesc.innerHTML = "Select a button to read more about that method.";
-    progressContent.appendChild(titleGuideDesc);
+    let methods = {
+        "Collection": {
+            "name": "Collection Events",
+            "desc": "Collection events are the main way to get Insta Monkeys. They usually happen around holidays. During the event, collect as much of the event currency as possible to open crates that contain random Insta Monkeys. You can use the Collection Event tab to help you view the odds of getting a new Insta Monkey from each of the chest types."},
+        "Daily": {
+            "name": "Daily Challenges",
+            "desc": "Daily Challenges often have random Insta Monkeys ranging from T1 to T3 as a reward. Coop Daily Challenges also give a random T1-T3 Insta Monkey. During a Collection event, these will give event currency for opening Insta Monkey chests."
+        },
+        "Boss": {
+            "name": "Boss Events",
+            "desc": "Boss events happen every week. Defeating the Tier 4 and Tier 5 bosses in these events give random Insta Monkeys. The Normal Boss rewards include a T2 and T3 Insta Monkey, and the Elite Boss rewards include a T3 and T4 Insta Monkey."
+        },
+        "Odyssey": {
+            "name": "Odyssey Events",
+            "desc": "Odyssey events give Insta Monkeys for completing the event and opening the chest. Medium difficulty usually gives a predetermined T3 Insta, and Hard gives a predetermined T4 Insta. During Collection events, Odysseys will give collection event currency instead for Insta Monkey chests."
+        },
+        "Ranked" : {
+            "name": "Ranked Events",
+            "desc": "Ranked events give random Insta Monkeys depending on your leaderboard placement. You can view Races, Bosses, and Contested Territory leaderboard rewards at the bottom right of the leaderboard. There is also a Mini Leaderboard for each event which gives extra rewards including Insta Monkeys."
+        },
+        "R100": {
+            "name": "100 Rounds Rewards",
+            "desc": "Every 100 rounds you complete in a game, you get a random Insta Monkey. The tier of the Insta Monkey is dependent on the difficulty of the map. Beginner gives T0-T2, Intermediate gives T1-T3, Advanced gives T2-T4, Expert gives T3-T4. Round 200 and beyond also guarantees T3-T4 regardless of difficulty."
+        },
+        "Chest": {
+            "name": "Daily Chest",
+            "desc": "The daily chest gives a random Insta Monkey on some days. The tiers range from T1-T4."
+        },
+        "Shop": {
+            "name": "Shop",
+            "desc": "Need more Instas? The shop has some Insta packs you can purchase."
+        }
+    }
+
+    let instaMonkeyGuideContainer = document.createElement('div');
+    instaMonkeyGuideContainer.classList.add('insta-monkey-guide-container');
+    obtainGuideDiv.appendChild(instaMonkeyGuideContainer);
+
+    Object.keys(methods).forEach(method => {
+        let instaMonkeyGuideMethod = document.createElement('div');
+        instaMonkeyGuideMethod.classList.add('insta-monkey-guide-method');
+        instaMonkeyGuideContainer.appendChild(instaMonkeyGuideMethod);
+
+        let instaMonkeyGuideTextDiv = document.createElement('div');
+        instaMonkeyGuideTextDiv.classList.add('insta-monkey-guide-text-div');
+        instaMonkeyGuideMethod.appendChild(instaMonkeyGuideTextDiv);
+
+        let instaMonkeyGuideMethodText = document.createElement('p');
+        instaMonkeyGuideMethodText.classList.add('insta-monkey-guide-method-text','black-outline');
+        instaMonkeyGuideMethodText.innerHTML = methods[method].name;
+        instaMonkeyGuideTextDiv.appendChild(instaMonkeyGuideMethodText);
+
+        let instaMonkeyGuideMethodDesc = document.createElement('p');
+        instaMonkeyGuideMethodDesc.classList.add('insta-monkey-guide-method-desc');
+        instaMonkeyGuideMethodDesc.innerHTML = methods[method].desc;
+        instaMonkeyGuideTextDiv.appendChild(instaMonkeyGuideMethodDesc);
+
+        let instaMonkeyImage = document.createElement('img');
+        instaMonkeyImage.classList.add('insta-monkey-guide-method-img');
+        instaMonkeyImage.src = `./Assets/UI/Obtain${method}.png`;
+        instaMonkeyGuideMethod.appendChild(instaMonkeyImage);
+    })
 }
 
 function generateInstaCollectionEventHelper(){
@@ -3697,6 +3759,7 @@ function generateCollectionEventTowerInfo(tower) {
 
     let instaTowerAndMissingToggle = document.createElement('div');
     instaTowerAndMissingToggle.classList.add('insta-tower-and-missing-toggle');
+    if(tower == "All") { instaTowerAndMissingToggle.classList.add('insta-collection-all') }
     instaMonkeyDiv.appendChild(instaTowerAndMissingToggle);
 
     let instaTowerContainer = document.createElement('div');

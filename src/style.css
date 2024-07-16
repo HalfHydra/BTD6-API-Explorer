@@ -4138,6 +4138,46 @@
     align-items: center;
     width: 75%;
 }
+.insta-collection-all {
+    justify-content: center;
+}
+.insta-monkey-guide-method {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 350px;
+    background-color: var(--profile-tertiary);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+.insta-monkeys-obtain-guide {
+    width: 100%;
+    background-color: var(--profile-secondary)
+}
+.insta-monkey-guide-method-img {
+    width: 350px;
+}
+.insta-monkey-guide-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.insta-monkey-guide-method-text {
+    font-size: 28px;
+    text-align: center;
+}
+.insta-monkey-guide-method-desc {
+    font-size: 18px;
+    font-family: GardeniaBold;
+    padding: 8px 0;
+    line-height: 24px;
+}
+.insta-monkeys-guide-title-text {
+    font-size: 32px;
+    text-align: center;
+    margin: 8px;
+}
 
 .boss-text {
     background: linear-gradient(180deg, #DA3A00 0%, #FA8500 100%);
