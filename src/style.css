@@ -201,7 +201,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 650px;
-    min-height: 300px;
+    /* min-height: 300px; */
     background-color: var(--profile-secondary);
     border-radius: 10px;
 }
@@ -246,6 +246,7 @@
 .error-modal-content {
     font-family: 'GardeniaBold';
     font-size: 20px;
+    line-height: 24px;
     padding: 20px;
     color: white;
     text-align: center;
@@ -4027,6 +4028,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    margin: 20px 0px;
 }
 .collection-event-chest-selector {
     width: 150px;
@@ -4039,6 +4041,7 @@
 .collection-event-tower-selectors {
     display: flex;
     flex-wrap: wrap;
+    margin: 20px 0px;
 }
 .collection-tower-icon {
     width: 100px;
@@ -4303,6 +4306,14 @@ option {
     font-size: inherit;
 }
 
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.upgrade-div, .tower-selector-primary, .tower-selector-military, .tower-selector-magic, .tower-selector-support, .hero-selector-div, .hero-level-select-btn, .hero-skin, .hero-level-select-text, .maps-progress-view, .map-div-ingame, .map-arrow-img, .map-page-dot, .modal-close, .tower-container, .tower-container-collection, .collection-event-chest-selector, .collection-event-tower-selector, .knowledge-icon-div, .selector-div, .events-selector-div, .switch-banner, .start-button, .leaderboard-entry-div, .leaderboard-footer-refresh, .leaderboard-go-img, .leaderboard-footer-page-left, .leaderboard-footer-page-right, .challenge-selector-date-img, .challenge-selector-id-img, .challenge-stats-btn, .browser-copy-img, .challenge-id, .race-map-div, .challenge-entry, .challenge-creator, .error-modal-close, .roundset-selector-div, .other-roundset-selector-div, .sku-roundset-selector-text {
+    cursor: pointer;
+}
+
 .maps-progress-coop-toggle-input {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -4353,6 +4364,7 @@ option {
 .error-modal-ok-button-div {
     display: flex;
     justify-content: center;
+    padding: 20px;
 }
 
 /* * {
@@ -4440,12 +4452,6 @@ option {
 }
 
 @media (max-width: 850px) {
-    .collection-desc-text {
-        font-family: GardeniaBold;
-        font-size: 12px;
-        line-height: 18px;
-    }    
-
     .leaderboard-footer-right, .leaderboard-footer-left {
         width: 160px;
     }
@@ -4544,6 +4550,8 @@ option {
         /* height: calc(100vh - 1100px); */
         height: calc(calc(var(--vh, 1vh) * 100) - 910px);
         /* min-height: -webkit-fill-available; */
+        overflow-y: scroll;
+        min-height: 330px;
     }
     .insta-monkey-icons-container {
         justify-content: center;

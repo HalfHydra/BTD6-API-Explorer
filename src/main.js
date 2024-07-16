@@ -332,9 +332,9 @@ function generateProgressSubText(){
     let chimpsTotalCoop = Object.values(processedMapData.Medals.coop).map(map => map["Clicks"]).filter(medal => medal).length;
     if (chimpsTotal + chimpsTotalCoop > 0) { progressSubText["CHIMPS"] = `${chimpsTotal + chimpsTotalCoop} CHIMPS Medal${chimpsTotal + chimpsTotalCoop != 1 ? "s" : ""} Earned` }
     let powersTotal = Object.values(btd6usersave.powers).map(power => (typeof power === 'object' && power.quantity) ? power.quantity : 0).reduce((acc, amount) => acc + amount);
-    progressSubText["Powers"] = `${powersTotal} Power${powersTotal != 1 ? "s" : ""} Accumulated`
+    progressSubText["Powers"] = `${powersTotal} Power${powersTotal != 1 ? "s" : ""} Collected`
     let instaTotal = Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount)
-    progressSubText["InstaMonkeys"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Accumulated`;
+    progressSubText["InstaMonkeys"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Collected`;
     progressSubText["Achievements"] = `${btd6publicprofile.achievements}/${constants.achievements + constants.hiddenAchievements} Achievement${btd6publicprofile.achievements != 1 ? "s" : ""} Earned`;
     let extrasTotal = Object.keys(extrasUnlocked).length;
     progressSubText["Extras"] = `${extrasTotal} Extra${extrasTotal != 1 ? "s" : ""} Unlocked`;
@@ -850,7 +850,7 @@ function generateFrontPage(){
     FAQDiv.appendChild(faqHeader);
 
     let FAQ = {
-        "What can I do with this?": "A lot. Some key uses are tracking your progress automatically, viewing events and leaderboards up to two months in the past, browsing user generated content, and as a bonus feature: viewing round information. You can also view more detailed stats and progress than you can see in the game such as your highest round for every mode on every map you've played. Those who are working on their Insta Monkey collection can use this as a tracker as the data pulled is always up to date!",
+        "What can I do with this?": "Some primary uses are tracking your progress automatically, viewing events and leaderboards up to two months in the past, browsing user generated content, and as a bonus feature: viewing round information. You can also view more detailed stats and progress than you can see in the game such as your highest round for every mode on every map you've played. Those who are working on their Insta Monkey collection can use this as a tracker as the data pulled is always up to date!",
         "How long does the API take to update after I do something in the game?": "15 minutes is the most I've seen. Be sure to press the save button in settings if you want to minimize the time it takes to update! It should not take more than 24 hours to update in any circumstance (browser caching, etc).",
         "Why is this not available for BTD6+ and Netflix?": "This is because the data is stored differently for these versions such as using iCloud for BTD6+. This is not compatible with the Open Data API."
     }
@@ -1517,7 +1517,7 @@ function generateProgress(){
 
     currentInstaView = "game";
 
-    let selectors = ['Towers', 'Heroes', 'Knowledge', 'MapProgress', 'Powers', 'InstaMonkeys', 'Achievements', 'Extras'];
+    let selectors = ['Towers', 'Heroes', 'MapProgress', 'Powers', 'InstaMonkeys', 'Knowledge', 'Achievements', 'Extras'];
 
     selectors.forEach((selector) => {
         if(progressSubText[selector].includes("0 Extras")) { return; }
@@ -3646,7 +3646,7 @@ function generateInstaCollectionEventHelper(){
 
     let instaMonkeyCollectionDescText = document.createElement('p');
     instaMonkeyCollectionDescText.classList.add('collection-desc-text');
-    instaMonkeyCollectionDescText.innerHTML = "Select a chest to view the chances of getting a new insta monkey from that chest type based on your collection. You can also select a tower from below to see the odds of when you select that featured tower in the event. The chances list are for each individual insta monkey, so if a chest gives 2 Insta Monkeys, that is the odds of each individual insta monkey drawn.";
+    instaMonkeyCollectionDescText.innerHTML = "Select a chest to view the chances of getting a new Insta Monkey from it based on your collection. You can also select a tower from below to see the odds of when you select that Featured Insta in the event. The chances list are for each individual Insta Monkey received, so if a chest gives 2 Insta Monkeys, that is the odds for each individual Insta Monkey acquired.";
     instaMonkeyCollectionContainer.appendChild(instaMonkeyCollectionDescText);
 
     let collectionEventChestSelectors = document.createElement('div');
@@ -3710,7 +3710,6 @@ function generateCollectionEventTowerInfo(tower) {
 
     let chances = [];
     if(tower == "All") {
-        //get all towers chances for each tier
         for(let i = 1; i<6; i++) {
             let value = 0;
             Object.keys(constants.towersInOrder).forEach(tower => {
@@ -3724,16 +3723,12 @@ function generateCollectionEventTowerInfo(tower) {
             chances.push(value > 0 ? value / constants.instaTiers[i].length : 0);
         }
     }
-    console.log(chances)
 
     let tierChances = constants.collection.crateRewards.instaMonkey[currentCollectionChest].tierChance;
     chances.forEach((chance, index) => {
-        console.log(`Chance: ${chance} Tier Chance: ${tierChances[index + 1]}`)
         let chestTierChance = tierChances[index + 1] || 0;
         chances[index] = chance * chestTierChance;
     })
-
-    console.log(chances)
 
     let collectionEventTowerInfo = document.getElementById('collection-event-tower-info');
     collectionEventTowerInfo.innerHTML = "";
@@ -3858,14 +3853,12 @@ function generateCollectionEventTowerInfo(tower) {
     instaMonkeyTiersContainer.appendChild(instaMonkeyTiersLabel);
 
     let tierCounts = tower == "All" ? Object.entries([1, 2, 3, 4, 5].reduce((acc, key) => ({ ...acc, [key]: Object.values(processedInstaData.TowerTierTotals).map(tower => tower[key] || 0).reduce((a, b) => a + b, 0) }), {})) : Object.entries(processedInstaData.TowerTierTotals[tower]);
-    console.log(tierCounts);
     for (let [tier, tierTotal] of tierCounts) {
         let instaMonkeyTierDiv = document.createElement('div');
         instaMonkeyTierDiv.classList.add('insta-monkey-tier-div');
         instaMonkeyTiersContainer.appendChild(instaMonkeyTierDiv);
 
         if (tower == "All") {
-            //tower == "All" ? constants.instaTiers[tier].length * Object.keys(constants.towersInOrder).length : 
             let instaMonkeyTierText = document.createElement('p');
             instaMonkeyTierText.classList.add('insta-monkey-tier-text-list', `insta-tier-text-${tier}`, tier == "5" ? "t5-insta-outline" : "black-outline");
             instaMonkeyTierDiv.style.backgroundImage = `url(./Assets/UI/InstaTier${tier}Container.png)`
@@ -4262,17 +4255,17 @@ function generateEvents(){
     let selectors = {
         'Races': {
             'img': 'EventRaceBtn',
-            'text': "Races",
+            'text': "Race Events",
             'bgimg': 'EventBannerSmallRaces'
         },
         'Bosses': {
             'img': 'BossesBtn',
-            'text': "Bosses",
+            'text': "Boss Events",
             'bgimg': 'EventBannerSmallNoBoss'
         },
         'Odyssey': {
             'img': 'OdysseyEventBtn',
-            'text': "Odyssey (Coming Soon)",
+            'text': "Odyssey Events (Coming Soon)",
             'bgimg': 'EventBannerSmallOdyssey'
         },
         'ContestedTerritory': {
@@ -4319,6 +4312,7 @@ function generateEvents(){
 
         let selectorGoImg = document.createElement('img');
         selectorGoImg.classList.add('selector-go-img');
+        if(selector == 'Odyssey') { selectorGoImg.classList.add('hero-selector-div-disabled'); }
         selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
         selectorDiv.appendChild(selectorGoImg);
     })
@@ -4829,7 +4823,7 @@ async function generateChallenges(type) {
         let challengeSelectorDateInput = document.createElement('input');
         challengeSelectorDateInput.classList.add("challenge-selector-date-input");
         challengeSelectorDateInput.type = "date";
-        challengeSelectorDateInput.value =  new Date(Date.now()).toISOString().split('T')[0];
+        challengeSelectorDateInput.value =  new Date(challengeIdToDate(getChallengeIdFromInt(latestChallenge, type == "AdvancedDailyChallenges"))).toISOString().split('T')[0];
         challengeSelectorDateInput.addEventListener('change', () => {
             if (new Date(challengeSelectorDateInput.value) > new Date()) { challengeSelectorDateInput.value = new Date().toISOString().split('T')[0] }
             if (new Date(challengeSelectorDateInput.value) < new Date(type == "DailyChallenges" ? "2021-05-07" : "2021-05-20")) { challengeSelectorDateInput.value = type == "DailyChallenges" ? "2021-05-07" : "2021-05-20"; }
@@ -4864,7 +4858,7 @@ async function generateChallenges(type) {
         challengeSelectorIDInput.type = "number";
         challengeSelectorIDInput.min = 1000;
         challengeSelectorIDInput.max = latestChallenge;
-        challengeSelectorIDInput.value = latestChallenge - 1;
+        challengeSelectorIDInput.value = latestChallenge;
         challengeSelectorIDInput.addEventListener('change', () => {
             if (challengeSelectorIDInput.value < 1000) { challengeSelectorIDInput.value = 1000; }
             if (challengeSelectorIDInput.value > latestChallenge) { challengeSelectorIDInput.value = latestChallenge; }
@@ -4947,7 +4941,7 @@ async function generateChallenges(type) {
 
         let challengeDate = document.createElement('p');
         challengeDate.classList.add("challenge-date", "black-outline");
-        challengeDate.innerHTML = `${new Date(challengeIdToDate(challenge.id)).toLocaleDateString()}`;
+        challengeDate.innerHTML = `${type == "CoopDailyChallenges" ? new Date(challenge.createdAt).toLocaleDateString() : new Date(challengeIdToDate(challenge.id)).toLocaleDateString()}`;
         challengeInfoMiddleDiv.appendChild(challengeDate);
 
         let challengeTypeText = document.createElement('p');
@@ -5557,8 +5551,6 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
 
         let roundset = metadata.roundSets.filter(value => value !== 'default' && value !== 'bloonarius' && value !== 'lych' && value !== 'vortex' && value !== 'dreadbloon' && value !== 'phayze')
         if (rule == "Custom Rounds" && constants.skuRoundsets.includes(roundset[0]) && metadata.mode != "AlternateBloonsRounds") {
-            console.log(roundset[0])
-
             let challengeRuleValue = document.createElement('div');
             challengeRuleValue.classList.add('challenge-rule-subtext','start-button','black-outline');
             challengeRuleValue.innerHTML = "Open";
@@ -7690,6 +7682,7 @@ function copyID(ID, copiedTextDest) {
         }, 2000);
     }, function(err) {
         console.log('Could not copy text: ', err);
+        errorModal(`Failed to copy text "${ID}" to clipboard. ${err}`);
     });
 }
 
@@ -8714,7 +8707,7 @@ async function generateRounds(type, reverse, modified) {
                 roundRBETotal.innerHTML = `Total: ${round.rbeSum.toLocaleString()}`;
                 if (roundsetHasNoGaps){ rbeTextDiv.appendChild(roundRBETotal); }
 
-                let roundDuration = Math.max(...round.bloonGroups.map(group => group.end));
+                let roundDuration = round.bloonGroups.length ? Math.max(...round.bloonGroups.map(group => group.end)) : 0;
 
                 let roundDurationText = document.createElement('p');
                 roundDurationText.classList.add('round-duration', 'black-outline');
@@ -9131,7 +9124,7 @@ function updatePreviewRoundTimeline() {
     roundRBETotal.innerHTML = `Total: ${round.rbeSum.toLocaleString()}`;
     rbeTextDiv.appendChild(roundRBETotal);
 
-    let roundDuration = Math.max(...round.bloonGroups.map(group => group.end));
+    let roundDuration = round.bloonGroups.length ? Math.max(...round.bloonGroups.map(group => group.end)) : 0;
 
     let roundDurationText = document.createElement('p');
     roundDurationText.classList.add('round-duration', 'black-outline');
