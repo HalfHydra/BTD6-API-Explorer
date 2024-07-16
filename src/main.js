@@ -88,6 +88,10 @@ let currentModifiedRounds = []
 let roundPreviewFilterType;
 let currentRoundsetEndRound = 140;
 
+let currentCollectionChest = "None";
+let currentCollectionTower = "All";
+let collectionMissingToggle = false;
+
 fetch('./data/Constants.json')
     .then(response => response.json())
     .then(data => {
@@ -837,7 +841,7 @@ function generateFrontPage(){
 
     let oakInstructionFooter = document.createElement('p');
     oakInstructionFooter.classList.add('oak-instructions-text');
-    oakInstructionFooter.innerHTML = 'You can read more about the Open Data API here: <a href="https://support.ninjakiwi.com/hc/en-us/articles/13438499873937-Open-Data-API" target="_blank", style="color:white";>Open Data API Article</a>';
+    oakInstructionFooter.innerHTML = 'You can read more about the Open Data API here: <a href="https://ninja.kiwi/opendatafaq" target="_blank", style="color:white";>Open Data API Article</a>';
     OAKInstructionsDiv.appendChild(oakInstructionFooter);
 
     let faqHeader = document.createElement('p');
@@ -846,7 +850,7 @@ function generateFrontPage(){
     FAQDiv.appendChild(faqHeader);
 
     let FAQ = {
-        "What can I do with this?": "A lot. Some key things are tracking your progress automatically, viewing events and leaderboards, browsing user generated content, and as a bonus feature: viewing round information. You can also view more detailed stats and progress than you can see in the game such as your highest round for every mode on every map you've played. Those who are working on their Insta Monkey collection can use this as a tracker as the data pulled is always up to date!",
+        "What can I do with this?": "A lot. Some key uses are tracking your progress automatically, viewing events and leaderboards up to two months in the past, browsing user generated content, and as a bonus feature: viewing round information. You can also view more detailed stats and progress than you can see in the game such as your highest round for every mode on every map you've played. Those who are working on their Insta Monkey collection can use this as a tracker as the data pulled is always up to date!",
         "How long does the API take to update after I do something in the game?": "15 minutes is the most I've seen. Be sure to press the save button in settings if you want to minimize the time it takes to update! It should not take more than 24 hours to update in any circumstance (browser caching, etc).",
         "Why is this not available for BTD6+ and Netflix?": "This is because the data is stored differently for these versions such as using iCloud for BTD6+. This is not compatible with the Open Data API."
     }
@@ -930,7 +934,7 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = 'v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.<br><br>v1.0.1: Bug Fixes<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes';
+    changelogText.innerHTML = 'v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.<br><br>v1.0.1: Bug Fixes<br>- Daily challenges now show the correct associated date<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes';
     changelogDiv.appendChild(changelogText);
 
     let feedbackHeader = document.createElement('p');
@@ -940,7 +944,7 @@ function generateFrontPage(){
 
     let feedbackText = document.createElement('p');
     feedbackText.classList.add('oak-instructions-text');
-    feedbackText.innerHTML = 'If you have any feedback, suggestions of things to add or change, and most importantly bug reports, please fill out this anonymous form: <a href="https://forms.gle/Tg1PuRNj2ftojMde6" target="_blank" style="color: white;">Feedback Form</a>';
+    feedbackText.innerHTML = 'If you have any feedback, things to add or change on the site, or most importantly bug reports, please fill out this anonymous form: <a href="https://forms.gle/Tg1PuRNj2ftojMde6" target="_blank" style="color: white;">Feedback Form</a>';
     feedbackDiv.appendChild(feedbackText);
 
     function hideAllButOne(tab){
@@ -2444,18 +2448,21 @@ function onChangeMapView(view){
             document.getElementById('maps-progress-grid').classList.add('stats-tab-yellow');
             document.getElementById('maps-progress-list').classList.remove('stats-tab-yellow');
             document.getElementById('maps-progress-game').classList.remove('stats-tab-yellow');
+            document.getElementById('maps-progress-header-bar').classList.add('border-top-only');
             generateMapsGridView();
             break;
         case "list":
             document.getElementById('maps-progress-grid').classList.remove('stats-tab-yellow');
             document.getElementById('maps-progress-list').classList.add('stats-tab-yellow');
             document.getElementById('maps-progress-game').classList.remove('stats-tab-yellow');
+            document.getElementById('maps-progress-header-bar').classList.add('border-top-only');
             generateMapsListView();
             break;
         case "game":
             document.getElementById('maps-progress-grid').classList.remove('stats-tab-yellow');
             document.getElementById('maps-progress-list').classList.remove('stats-tab-yellow');
             document.getElementById('maps-progress-game').classList.add('stats-tab-yellow');
+            document.getElementById('maps-progress-header-bar').classList.remove('border-top-only');
             generateMapsGameView();
             break;
     }
@@ -3131,6 +3138,7 @@ function generateInstaMonkeysProgress() {
     instaMonkeysGameView.classList.add('maps-progress-view','black-outline');
     instaMonkeysGameView.innerHTML = "Game";
     instaMonkeysGameView.addEventListener('click', () => {
+        instaMonkeysHeaderBar.classList.remove('border-top-only');
         onChangeInstaMonkeysView("game");
     })
     instaMonkeysViews.appendChild(instaMonkeysGameView);
@@ -3140,6 +3148,7 @@ function generateInstaMonkeysProgress() {
     instaMonkeysListView.classList.add('maps-progress-view','black-outline');
     instaMonkeysListView.innerHTML = "List";
     instaMonkeysListView.addEventListener('click', () => {
+        instaMonkeysHeaderBar.classList.remove('border-top-only');
         onChangeInstaMonkeysView("list");
     })
     instaMonkeysViews.appendChild(instaMonkeysListView);
@@ -3152,22 +3161,22 @@ function generateInstaMonkeysProgress() {
     instaMonkeysObtainView.id = 'insta-monkeys-obtain-view';
     instaMonkeysObtainView.classList.add('maps-progress-view','black-outline');
     // instaMonkeysObtainView.innerHTML = "Where To Get";
-    instaMonkeysObtainView.innerHTML = "Coming Soon";
+    instaMonkeysObtainView.innerHTML = "Get More";
     instaMonkeysObtainView.addEventListener('click', () => {
+        instaMonkeysHeaderBar.classList.add('border-top-only');
         onChangeInstaMonkeysView("obtain");
     })
     instaMonkeysExtras.appendChild(instaMonkeysObtainView);
 
-    let instaMonkeysRotationsView = document.createElement('div');
-    instaMonkeysRotationsView.id = 'insta-monkeys-rotations-view';
-    instaMonkeysRotationsView.classList.add('maps-progress-view');
-    instaMonkeysRotationsView.classList.add('black-outline');
-    // instaMonkeysRotationsView.innerHTML = "Event Rotations";
-    instaMonkeysRotationsView.innerHTML = "Coming Soon";
-    instaMonkeysRotationsView.addEventListener('click', () => {
-        onChangeInstaMonkeysView("rotations");
+    let instaMonkeysCollectionView = document.createElement('div');
+    instaMonkeysCollectionView.id = 'insta-monkeys-collection-view';
+    instaMonkeysCollectionView.classList.add('maps-progress-view','black-outline');
+    instaMonkeysCollectionView.innerHTML = "Collection Event";
+    instaMonkeysCollectionView.addEventListener('click', () => {
+        instaMonkeysHeaderBar.classList.add('border-top-only');
+        onChangeInstaMonkeysView("collection");
     })
-    instaMonkeysExtras.appendChild(instaMonkeysRotationsView);
+    instaMonkeysExtras.appendChild(instaMonkeysCollectionView);
 
     let instaMonkeysProgressContainer = document.createElement('div');
     instaMonkeysProgressContainer.id = 'insta-monkeys-progress-container';
@@ -3187,20 +3196,23 @@ function onChangeInstaMonkeysView(view) {
     currentInstaView = view;
     document.getElementById('insta-monkeys-progress-container').style.removeProperty('display');
     document.getElementById('insta-monkey-progress-container').style.display = "none";
+    let instaTabs = ['game','list','obtain','collection'];
+    instaTabs.forEach(tab => {
+        document.getElementById(`insta-monkeys-${tab}-view`).classList.remove('stats-tab-yellow');
+    })
+    document.getElementById(`insta-monkeys-${view}-view`).classList.add('stats-tab-yellow');
     switch (view) {
         case "game":
-            document.getElementById('insta-monkeys-game-view').classList.add('stats-tab-yellow');
-            document.getElementById('insta-monkeys-list-view').classList.remove('stats-tab-yellow');
             generateInstaGameView();
             break;
         case "list":
-            document.getElementById('insta-monkeys-game-view').classList.remove('stats-tab-yellow');
-            document.getElementById('insta-monkeys-list-view').classList.add('stats-tab-yellow');
             generateInstaListView();
             break;
         case "obtain":
+            generateInstaObtainGuide();
             break;
-        case "rotations":
+        case "collection":
+            generateInstaCollectionEventHelper();
             break;
     }
 }
@@ -3548,6 +3560,368 @@ function generateInstaObtainGuide() {
     titleGuideDesc.classList.add('insta-monkeys-guide-title-desc','black-outline');
     titleGuideDesc.innerHTML = "Select a button to read more about that method.";
     progressContent.appendChild(titleGuideDesc);
+}
+
+function generateInstaCollectionEventHelper(){
+    let instaMonkeysProgressContainer = document.getElementById('insta-monkeys-progress-container');
+    instaMonkeysProgressContainer.innerHTML = "";
+
+    currentCollectionChest = "None"
+
+    let instaMonkeyCollectionContainer = document.createElement('div');
+    instaMonkeyCollectionContainer.classList.add('insta-monkey-collection-container');
+    instaMonkeysProgressContainer.appendChild(instaMonkeyCollectionContainer);
+    
+    let collectionHeaderTitleText = document.createElement('p');
+    collectionHeaderTitleText.classList.add('collection-header-title-text', 'black-outline');
+    collectionHeaderTitleText.innerHTML = "Collection Event Odds";
+    instaMonkeyCollectionContainer.appendChild(collectionHeaderTitleText); 
+
+    let instaMonkeyCollectionDescText = document.createElement('p');
+    instaMonkeyCollectionDescText.classList.add('collection-desc-text');
+    instaMonkeyCollectionDescText.innerHTML = "Select a chest to view the chances of getting a new insta monkey from that chest type based on your collection. You can also select a tower from below to see the odds of when you select that featured tower in the event. The chances list are for each individual insta monkey, so if a chest gives 2 Insta Monkeys, that is the odds of each individual insta monkey drawn.";
+    instaMonkeyCollectionContainer.appendChild(instaMonkeyCollectionDescText);
+
+    let collectionEventChestSelectors = document.createElement('div');
+    collectionEventChestSelectors.classList.add('collection-event-chest-selectors');
+    instaMonkeyCollectionContainer.appendChild(collectionEventChestSelectors);
+
+    let selectorMap = {
+        "wood": "Wooden",
+        "bronze": "Bronze",
+        "silver": "Silver",
+        "gold": "Gold",
+        "diamond": "Diamond"
+    }
+
+    Object.keys(selectorMap).forEach(chest => {
+        let collectionEventChestSelector = document.createElement('img');
+        collectionEventChestSelector.id = `collection-event-chest-selector-${chest}`;
+        collectionEventChestSelector.classList.add('collection-event-chest-selector');
+        collectionEventChestSelector.src = `./Assets/UI/EventMysteryBox${selectorMap[chest]}Icon.png`;
+        collectionEventChestSelector.addEventListener('click', () => {
+            onSelectCollectionEventChest(chest);
+        })
+        collectionEventChestSelectors.appendChild(collectionEventChestSelector);
+    })
+
+    let collectionEventTowerSelectors = document.createElement('div');
+    collectionEventTowerSelectors.classList.add('collection-event-tower-selectors');
+    instaMonkeyCollectionContainer.appendChild(collectionEventTowerSelectors);
+
+    Object.keys(constants.towersInOrder).forEach(tower => {
+        let collectionEventTowerSelector = document.createElement('div');
+        collectionEventTowerSelector.classList.add('collection-event-tower-selector');
+        collectionEventTowerSelector.addEventListener('click', () => {
+            currentCollectionTower === tower ? currentCollectionTower = "All" : currentCollectionTower = tower;
+            for (element of document.getElementsByClassName('collection-event-tower-selector')) {
+                element.classList.remove('collection-event-tower-selector-active');
+            }
+            if (currentCollectionTower != "All") { collectionEventTowerSelector.classList.add('collection-event-tower-selector-active') }
+            generateCollectionEventTowerInfo(currentCollectionTower);
+        })
+        collectionEventTowerSelectors.appendChild(collectionEventTowerSelector);
+
+        let collectionEventTowerImg = document.createElement('img');
+        collectionEventTowerImg.classList.add('collection-tower-icon');
+        collectionEventTowerImg.src = getInstaMonkeyIcon(tower,'000');
+        collectionEventTowerSelector.appendChild(collectionEventTowerImg);
+    })
+
+    let collectionEventTowerInfo = document.createElement('div');
+    collectionEventTowerInfo.id = 'collection-event-tower-info';
+    collectionEventTowerInfo.classList.add('collection-event-tower-info');
+    instaMonkeyCollectionContainer.appendChild(collectionEventTowerInfo);
+
+    generateCollectionEventTowerInfo(currentCollectionTower);
+}
+
+function generateCollectionEventTowerInfo(tower) {
+    if(currentCollectionChest == "None") {
+        onSelectCollectionEventChest("wood");
+    }
+
+    let chances = [];
+    if(tower == "All") {
+        //get all towers chances for each tier
+        for(let i = 1; i<6; i++) {
+            let value = 0;
+            Object.keys(constants.towersInOrder).forEach(tower => {
+                value += processedInstaData.TowerMissingByTier[tower][i].length || 0;
+            })
+            chances.push(value > 0 ? value / (constants.instaTiers[i].length * Object.keys(constants.towersInOrder).length) : 0);
+        }
+    } else {
+        for(let i = 1; i<6; i++) {
+            let value = processedInstaData.TowerMissingByTier[tower][i].length || 0;
+            chances.push(value > 0 ? value / constants.instaTiers[i].length : 0);
+        }
+    }
+    console.log(chances)
+
+    let tierChances = constants.collection.crateRewards.instaMonkey[currentCollectionChest].tierChance;
+    chances.forEach((chance, index) => {
+        console.log(`Chance: ${chance} Tier Chance: ${tierChances[index + 1]}`)
+        let chestTierChance = tierChances[index + 1] || 0;
+        chances[index] = chance * chestTierChance;
+    })
+
+    console.log(chances)
+
+    let collectionEventTowerInfo = document.getElementById('collection-event-tower-info');
+    collectionEventTowerInfo.innerHTML = "";
+
+    let instaMonkeyAndMissingDiv = document.createElement('div');
+    instaMonkeyAndMissingDiv.classList.add('insta-monkey-div', 'insta-monkey-collection-div');
+    collectionEventTowerInfo.appendChild(instaMonkeyAndMissingDiv);
+
+    let instaMonkeyDiv = document.createElement('div');
+    instaMonkeyDiv.classList.add('insta-monkey-collection-main-div');
+    instaMonkeyAndMissingDiv.appendChild(instaMonkeyDiv);
+
+    if (tower != "All") {
+        switch(processedInstaData.TowerBorders[tower]) {
+            case "Gold":
+                instaMonkeyAndMissingDiv.classList.add("insta-list-gold");
+                break;
+            case "Black":
+                instaMonkeyAndMissingDiv.classList.add("insta-list-black");
+                break;
+        }
+    }
+
+    let instaTowerAndMissingToggle = document.createElement('div');
+    instaTowerAndMissingToggle.classList.add('insta-tower-and-missing-toggle');
+    instaMonkeyDiv.appendChild(instaTowerAndMissingToggle);
+
+    let instaTowerContainer = document.createElement('div');
+    instaTowerContainer.classList.add('tower-container-collection');
+    instaTowerContainer.style.backgroundImage = `url(./Assets/UI/InstaTowersContainer${processedInstaData.TowerBorders[tower] || ""}.png)`
+    if(tower != "All") {
+        instaTowerContainer.addEventListener('click', () => {
+            onSelectInstaTower(tower);
+        })
+    }
+    instaTowerAndMissingToggle.appendChild(instaTowerContainer);
+
+    let instaMonkeyImg = document.createElement('img');
+    instaMonkeyImg.classList.add('tower-img');
+    instaMonkeyImg.src = tower == "All" ? "./Assets/UI/AllTowersIcon.png" : getInstaContainerIcon(tower,'000');
+    instaTowerContainer.appendChild(instaMonkeyImg);
+
+    let instaMonkeyName = document.createElement('p');
+    instaMonkeyName.classList.add(`tower-name`,'black-outline');
+    instaMonkeyName.innerHTML = tower == "All" ? "All Towers" : getLocValue(tower);
+    instaTowerContainer.appendChild(instaMonkeyName);
+    
+    let mapsProgressCoopToggle = document.createElement('div');
+    mapsProgressCoopToggle.classList.add('insta-missing-toggle-div');  
+
+    let mapsProgressCoopToggleText = document.createElement('p');
+    mapsProgressCoopToggleText.classList.add('insta-collection-missing-label','black-outline');
+    mapsProgressCoopToggleText.innerHTML = "Show Missing: ";
+    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
+
+    let mapsProgressCoopToggleInput = document.createElement('input');
+    mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
+    mapsProgressCoopToggleInput.type = 'checkbox';
+    mapsProgressCoopToggleInput.checked = collectionMissingToggle;
+    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
+    if(tower != "All") {
+        instaTowerAndMissingToggle.appendChild(mapsProgressCoopToggle);
+    }
+
+    let instaMonkeyTopBottom = document.createElement('div');
+    instaMonkeyTopBottom.classList.add('insta-monkey-top-bottom');
+    instaMonkeyDiv.appendChild(instaMonkeyTopBottom);
+
+    let instaMonkeyProgress = document.createElement('div');
+    instaMonkeyProgress.classList.add('insta-monkey-progress-list');
+    instaMonkeyTopBottom.appendChild(instaMonkeyProgress);
+
+    let instaMonkeyTotal = document.createElement('div');
+    instaMonkeyTotal.classList.add('insta-monkey-total');
+    instaMonkeyProgress.appendChild(instaMonkeyTotal);
+
+    let instaMonkeysTotalLabelText = document.createElement('p');
+    instaMonkeysTotalLabelText.classList.add('insta-monkey-progress-label-text','black-outline');
+    instaMonkeysTotalLabelText.innerHTML = "Total Instas:";
+    instaMonkeyTotal.appendChild(instaMonkeysTotalLabelText);
+
+    let instaMonkeysTotalText = document.createElement('p');
+    instaMonkeysTotalText.classList.add('insta-monkey-total-text','black-outline');
+    instaMonkeysTotalText.innerHTML = tower == "All" ? Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount) : processedInstaData.TowerTotal[tower];
+    instaMonkeyTotal.appendChild(instaMonkeysTotalText);
+
+    let instaMonkeyTierProgress = document.createElement('div');
+    instaMonkeyTierProgress.classList.add('insta-monkey-tier-progress');
+    instaMonkeyProgress.appendChild(instaMonkeyTierProgress);
+
+    let instaMonkeyProgressLabelText = document.createElement('p');
+    instaMonkeyProgressLabelText.classList.add('insta-monkey-progress-label-text','black-outline');
+    instaMonkeyProgressLabelText.innerHTML = "Unique Instas:";
+    instaMonkeyTierProgress.appendChild(instaMonkeyProgressLabelText);
+
+    let instaMonkeyProgressText = document.createElement('p');
+    instaMonkeyProgressText.classList.add('insta-monkey-progress-text','black-outline');
+    instaMonkeyProgressText.innerHTML = tower == "All" ? `${btd6publicprofile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}` : `${Object.values(processedInstaData.TowerTierTotals[tower]).reduce((a, b) => a + b, 0)}/64`;
+    instaMonkeyTierProgress.appendChild(instaMonkeyProgressText);
+
+    let instaMonkeyNewChance = document.createElement('div');
+    instaMonkeyNewChance.classList.add('insta-monkey-new-chance');
+    instaMonkeyProgress.appendChild(instaMonkeyNewChance);
+
+    let instaMonkeyNewChanceText = document.createElement('p');
+    instaMonkeyNewChanceText.classList.add('insta-monkey-progress-label-text','black-outline');
+    instaMonkeyNewChanceText.innerHTML = "Total New Chance:";
+    instaMonkeyNewChance.appendChild(instaMonkeyNewChanceText);
+
+    let instaMonkeyNewChanceValue = document.createElement('p');
+    instaMonkeyNewChanceValue.classList.add('insta-monkey-total-chance-text','black-outline');
+    instaMonkeyNewChance.appendChild(instaMonkeyNewChanceValue);
+
+    let instaMonkeyTiersContainer = document.createElement('div');
+    instaMonkeyTiersContainer.classList.add('insta-monkey-tiers-container');
+    instaMonkeyTopBottom.appendChild(instaMonkeyTiersContainer);
+
+    let instaMonkeyTiersLabel = document.createElement('p');
+    instaMonkeyTiersLabel.classList.add('insta-monkey-tiers-label','black-outline');
+    instaMonkeyTiersLabel.innerHTML = "Unique By Tier:";
+    instaMonkeyTiersContainer.appendChild(instaMonkeyTiersLabel);
+
+    let tierCounts = tower == "All" ? Object.entries([1, 2, 3, 4, 5].reduce((acc, key) => ({ ...acc, [key]: Object.values(processedInstaData.TowerTierTotals).map(tower => tower[key] || 0).reduce((a, b) => a + b, 0) }), {})) : Object.entries(processedInstaData.TowerTierTotals[tower]);
+    console.log(tierCounts);
+    for (let [tier, tierTotal] of tierCounts) {
+        let instaMonkeyTierDiv = document.createElement('div');
+        instaMonkeyTierDiv.classList.add('insta-monkey-tier-div');
+        instaMonkeyTiersContainer.appendChild(instaMonkeyTierDiv);
+
+        if (tower == "All") {
+            //tower == "All" ? constants.instaTiers[tier].length * Object.keys(constants.towersInOrder).length : 
+            let instaMonkeyTierText = document.createElement('p');
+            instaMonkeyTierText.classList.add('insta-monkey-tier-text-list', `insta-tier-text-${tier}`, tier == "5" ? "t5-insta-outline" : "black-outline");
+            instaMonkeyTierDiv.style.backgroundImage = `url(./Assets/UI/InstaTier${tier}Container.png)`
+            instaMonkeyTierText.innerHTML = `${tierTotal}`;
+            instaMonkeyTierDiv.appendChild(instaMonkeyTierText);
+
+            let fractionBar = document.createElement('p');
+            fractionBar.classList.add('insta-monkey-tier-fraction-bar', `insta-tier-text-${tier}`, tier == "5" ? "t5-insta-outline" : "black-outline");
+            instaMonkeyTierDiv.appendChild(fractionBar);
+
+            let instaMonkeyTierTextBottom = document.createElement('p');
+            instaMonkeyTierTextBottom.classList.add('insta-monkey-tier-text-list',`insta-tier-text-${tier}`, tier == "5" ? "t5-insta-outline" : "black-outline");
+            instaMonkeyTierTextBottom.innerHTML = `${constants.instaTiers[tier].length * Object.keys(constants.towersInOrder).length}`;
+            instaMonkeyTierDiv.appendChild(instaMonkeyTierTextBottom);
+        } else {
+            let instaMonkeyTierText = document.createElement('p');
+            instaMonkeyTierText.classList.add('insta-monkey-tier-text-list', `insta-tier-text-${tier}`, tier == "5" ? "t5-insta-outline" : "black-outline");
+            instaMonkeyTierDiv.style.backgroundImage = `url(./Assets/UI/InstaTier${tier}Container.png)`
+            instaMonkeyTierText.innerHTML = `${tierTotal}/${constants.instaTiers[tier].length}`;
+            instaMonkeyTierDiv.appendChild(instaMonkeyTierText);
+        }
+    }
+
+    let instaMonkeyChanceContainer = document.createElement('div');
+    instaMonkeyChanceContainer.classList.add('insta-monkey-chance-container');
+    instaMonkeyTopBottom.appendChild(instaMonkeyChanceContainer);
+
+    let instaMonkeyChanceText = document.createElement('p');
+    instaMonkeyChanceText.classList.add('insta-monkey-tiers-label','black-outline');
+    instaMonkeyChanceText.innerHTML = "New Chance:";
+    instaMonkeyChanceContainer.appendChild(instaMonkeyChanceText);
+
+    for (let [tier, tierTotal] of tierCounts) {
+        let instaMonkeyChance = document.createElement('div');
+        instaMonkeyChance.classList.add('insta-monkey-chance-div');
+        instaMonkeyChanceContainer.appendChild(instaMonkeyChance);
+
+        let instaMonkeyChanceTier = document.createElement('p');
+        instaMonkeyChanceTier.classList.add('insta-monkey-chance-text-list','black-outline');
+        instaMonkeyChanceTier.innerHTML = (chances[tier - 1] * 100).toFixed(2) + "%";
+        if(chances[tier - 1] == 0) {
+            instaMonkeyChanceTier.classList.add('insta-monkey-chance-zero');
+        }
+        instaMonkeyChance.appendChild(instaMonkeyChanceTier);
+    }
+    instaMonkeyNewChanceValue.innerHTML = `${(chances.reduce((a, b) => a + b, 0) * 100).toFixed(2)}%`;
+    if (chances.reduce((a, b) => a + b, 0) == 0) {
+        instaMonkeyNewChanceValue.classList.add('insta-monkey-chance-zero');
+    } 
+
+    let instaMonkeysMissingContainer = document.createElement('div');
+    instaMonkeysMissingContainer.style.display = "none";
+    instaMonkeysMissingContainer.classList.add('insta-monkeys-missing-container');
+    instaMonkeyAndMissingDiv.appendChild(instaMonkeysMissingContainer);
+
+    mapsProgressCoopToggleInput.addEventListener('change', () => {
+        instaMonkeysMissingContainer.style.display = mapsProgressCoopToggleInput.checked ? "flex" : "none";
+        instaMonkeysMissingContainer.innerHTML = "";
+        collectionMissingToggle = mapsProgressCoopToggleInput.checked;
+        onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, tower, chances);
+    })
+    if(collectionMissingToggle && tower != "All") {
+        instaMonkeysMissingContainer.style.display = "flex";
+        onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, tower, chances);
+    }
+}
+
+function onSelectCollectionEventChest(type) {
+    currentCollectionChest = type;
+    for (let element of document.getElementsByClassName('collection-event-chest-selector')) {
+        element.classList.remove('chest-selected');
+        element.classList.add('chest-unselected');
+    }
+    document.getElementById(`collection-event-chest-selector-${type}`).classList.add('chest-selected');
+    generateCollectionEventTowerInfo(currentCollectionTower);
+}
+
+function onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, tower, chances) {
+    function addInstaMonkeyIcon(towerType, tiers) {
+        let instaMonkeyTierContainer = document.createElement('div');
+        instaMonkeyTierContainer.classList.add('insta-monkey-tier-container','insta-monkey-unobtained');
+        instaMonkeysMissingContainer.appendChild(instaMonkeyTierContainer);
+
+        let instaMonkeyTierImg = document.createElement('img');
+        instaMonkeyTierImg.classList.add('insta-monkey-tier-img');
+        instaMonkeyTierImg.src = getInstaMonkeyIcon(towerType,tiers);
+        instaMonkeyTierContainer.appendChild(instaMonkeyTierImg);
+        
+        instaMonkeyTierImg.classList.add('upgrade-after-locked');
+
+        let instaMonkeyTierText = document.createElement('p');
+        instaMonkeyTierText.classList.add('insta-monkey-tier-text','black-outline');
+        instaMonkeyTierText.innerHTML = `${tiers[0]}-${tiers[1]}-${tiers[2]}`;
+        instaMonkeyTierContainer.appendChild(instaMonkeyTierText);
+    }
+
+    if (tower == "All") {
+        Object.entries(processedInstaData.TowerMissingByTier).forEach(([tower, instas]) => {
+            Object.entries(instas).forEach(([tier, missing]) => {
+                if(chances[tier - 1] > 0) {
+                    for(let value of missing) {
+                        addInstaMonkeyIcon(tower, value);
+                    }
+                }
+            })
+        })
+    } else {
+        let missingInstas = Object.entries(processedInstaData.TowerMissingByTier[tower])
+        .map(([key, insta]) => ({tier: key, insta}))
+        .filter(({tier, insta}) => chances[tier - 1] > 0)
+        .map(({insta}) => insta)
+        .flat();
+
+        missingInstas.forEach(tiers => {
+            addInstaMonkeyIcon(tower, tiers);
+        })
+
+        if (missingInstas.length == 0) {
+            let noneMissing = document.createElement('p');
+            noneMissing.classList.add('no-data-found','none-collection','black-outline');
+            noneMissing.innerHTML = "None in this Chest Type!";
+            instaMonkeysMissingContainer.appendChild(noneMissing);
+        }
+    }
 }
 
 function generateAchievementsProgress() {
@@ -4422,7 +4796,7 @@ async function generateChallenges(type) {
         challengeSelectorIDInput.type = "number";
         challengeSelectorIDInput.min = 1000;
         challengeSelectorIDInput.max = latestChallenge;
-        challengeSelectorIDInput.value = latestChallenge;
+        challengeSelectorIDInput.value = latestChallenge - 1;
         challengeSelectorIDInput.addEventListener('change', () => {
             if (challengeSelectorIDInput.value < 1000) { challengeSelectorIDInput.value = 1000; }
             if (challengeSelectorIDInput.value > latestChallenge) { challengeSelectorIDInput.value = latestChallenge; }
@@ -4505,7 +4879,7 @@ async function generateChallenges(type) {
 
         let challengeDate = document.createElement('p');
         challengeDate.classList.add("challenge-date", "black-outline");
-        challengeDate.innerHTML = `${new Date(challenge.createdAt).toLocaleDateString()}`;
+        challengeDate.innerHTML = `${new Date(challengeIdToDate(challenge.id)).toLocaleDateString()}`;
         challengeInfoMiddleDiv.appendChild(challengeDate);
 
         let challengeTypeText = document.createElement('p');
@@ -6600,7 +6974,7 @@ function generateBrowser(type){
     browserContent.appendChild(browserDiv);
 
     let mapsProgressHeaderBar = document.createElement('div');
-    mapsProgressHeaderBar.classList.add('maps-progress-header-bar', 'browser-header-bar');
+    mapsProgressHeaderBar.classList.add('maps-progress-header-bar', 'browser-header-bar', 'border-top-only');
     browserDiv.appendChild(mapsProgressHeaderBar);
 
     let mapProgressHeaderTop = document.createElement('div');
@@ -8898,7 +9272,7 @@ function updateTimer(targetTime, elementId) {
 
     if (remainingTime > 48 * 3600) {
         const days = Math.ceil(remainingTime / (24 * 3600));
-        timerElement.textContent = `${days} days`;
+        timerElement.textContent = `${days} days left`;
     } else {
         timerElement.textContent = formatTime(remainingTime);
     }

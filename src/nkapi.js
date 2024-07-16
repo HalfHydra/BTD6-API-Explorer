@@ -274,6 +274,20 @@ function writeLocalStorage(){
     localStorage.setItem("BTD6OAKStorage", JSON.stringify(localStorageOAK))
 }
 
+function challengeIdToDate(challengeId) {
+    //sample input: rot216320240713
+    //extract first 3 chars
+    let advanced = challengeId.substring(0, 3) == "adv";
+    //extract 4 digit numeric Id
+    let rawId = parseInt(challengeId.substring(3, 7));
+    //extract date
+    let date = challengeId.substring(7);
+    let year = parseInt(date.substring(0, 4));
+    let month = parseInt(date.substring(4, 6));
+    let day = parseInt(date.substring(6, 8));
+    return [year, month, day]
+}
+
 function getChallengeIdFromInt(rawId, advanced) {
     let baseDate = new Date(2024, 4, 25); //0 indexed month
     let diff = (advanced ? 2101 : 2114) - parseInt(rawId);

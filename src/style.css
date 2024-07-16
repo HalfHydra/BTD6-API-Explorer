@@ -771,7 +771,7 @@
     width: 190px;
 }
 .tower-progress-div {
-    height: calc(100vh - 200px);
+    height: calc(100vh - 140px);
     display: flex;
     flex-direction: column;
     /* background-color: #9F7843; */
@@ -1169,7 +1169,7 @@
     flex-wrap: wrap;
 }
 .hero-progress-div {
-    height: calc(100vh - 200px);
+    /* height: calc(100vh - 140px); */
     display: flex;
     flex-direction: column;
     border-radius: 10px;
@@ -1300,9 +1300,9 @@
 }
 
 .hero-progress-bottom {
-    min-height: 100px;
-    height: calc(100vh - 730px);
-    overflow-y: scroll;
+    /* min-height: 100px;
+    height: calc(100vh - 730px); */
+    /* overflow-y: scroll; */
     scrollbar-color: #ffffff3d #0000;
 }
 .hero-progress-bottom::-webkit-scrollbar {
@@ -1507,7 +1507,7 @@
 }
 .maps-progress-header-bar {
     background-color: var(--profile-primary);
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px;
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -2082,7 +2082,7 @@
     padding: 5px;
     background-color: var(--profile-secondary);
     border-radius: 10px;
-    border: 5px solid var(--profile-primary);
+    border: 5px solid white;
 }
 .insta-monkey-progress-label-text {
     font-size: 24px;
@@ -2145,6 +2145,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 .insta-monkey-top-bottom {
     display: flex;
@@ -4009,6 +4010,135 @@
     justify-content: center;
 }
 
+.collection-header-title-text {
+    font-size: 32px;
+    text-align: center;
+    margin: 5px;
+}
+.insta-monkey-collection-container {
+    width: 100%;
+    background-color: var(--profile-secondary);
+    border-radius: 0px 0px 10px 10px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+.collection-event-chest-selectors {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.collection-event-chest-selector {
+    width: 150px;
+}
+.insta-monkeys-progress-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.collection-event-tower-selectors {
+    display: flex;
+    flex-wrap: wrap;
+}
+.collection-tower-icon {
+    width: 100px;
+    height: 100px;
+}
+.insta-monkey-chance-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.insta-monkey-chance-div {
+    width: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.insta-monkey-chance-text-list {
+    font-size: 24px;
+    padding-left: 4px;
+}
+.tower-container-collection {
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    position: relative;
+    margin: 5px 10px;
+}
+.insta-collection-missing-label {
+    font-size: 17px;
+}
+.insta-missing-toggle-div {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    justify-content: flex-end;
+}
+.chest-unselected {
+    filter: brightness(0.36);
+}
+.chest-selected {
+    filter: drop-shadow(0px 0px 15px gold);
+}
+.insta-tower-and-missing-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.insta-monkey-tier-fraction-bar {
+    width: 50px;
+    border-top: 3px solid;
+    /* outline: black 1px solid; */
+    border-radius: 10px;
+    margin: 2px 0;
+}
+.insta-monkey-total-chance-text {
+    font-size: 32px;
+    /* color: cyan; */
+    text-align: center;
+}
+.border-top-only {
+    border-radius: 10px 10px 0px 0px;
+}
+.collection-event-tower-selector-active {
+    filter: drop-shadow(0px 0px 5px lime) drop-shadow(0px 0px 5px lime);
+}
+.insta-monkey-chance-zero {
+    filter: brightness(0.5);
+}
+.insta-monkey-collection-div {
+    margin: 0 auto;
+    flex-direction: column;
+}
+.collection-desc-text {
+    font-family: GardeniaBold;
+    font-size: 18px;
+    line-height: 24px;
+    padding: 10px 20px;
+}
+.insta-monkey-collection-main-div {
+    display: flex;
+    height: 215px;
+}
+.insta-monkeys-missing-container {
+    flex-wrap: wrap;
+    display: flex;
+    background-color: var(--profile-tertiary);
+    border-radius: 10px;
+    padding: 20px;
+    min-height: 130px;
+}
+.none-collection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+}
+
 .boss-text {
     background: linear-gradient(180deg, #DA3A00 0%, #FA8500 100%);
     background-clip: text;
@@ -4270,6 +4400,12 @@ option {
 }
 
 @media (max-width: 850px) {
+    .collection-desc-text {
+        font-family: GardeniaBold;
+        font-size: 12px;
+        line-height: 18px;
+    }    
+
     .leaderboard-footer-right, .leaderboard-footer-left {
         width: 160px;
     }
