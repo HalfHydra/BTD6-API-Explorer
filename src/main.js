@@ -1515,6 +1515,8 @@ function generateProgress(){
     selectorsDiv.classList.add('selectors-div');
     progressPage.appendChild(selectorsDiv);
 
+    currentInstaView = "game";
+
     let selectors = ['Towers', 'Heroes', 'Knowledge', 'MapProgress', 'Powers', 'InstaMonkeys', 'Achievements', 'Extras'];
 
     selectors.forEach((selector) => {
@@ -3138,8 +3140,8 @@ function generateInstaMonkeysProgress() {
     instaMonkeysGameView.classList.add('maps-progress-view','black-outline');
     instaMonkeysGameView.innerHTML = "Game";
     instaMonkeysGameView.addEventListener('click', () => {
-        instaMonkeysHeaderBar.classList.remove('border-top-only');
-        onChangeInstaMonkeysView("game");
+        currentInstaView = "game";
+        onChangeInstaMonkeysView(instaMonkeysHeaderBar, currentInstaView);
     })
     instaMonkeysViews.appendChild(instaMonkeysGameView);
 
@@ -3148,8 +3150,8 @@ function generateInstaMonkeysProgress() {
     instaMonkeysListView.classList.add('maps-progress-view','black-outline');
     instaMonkeysListView.innerHTML = "List";
     instaMonkeysListView.addEventListener('click', () => {
-        instaMonkeysHeaderBar.classList.remove('border-top-only');
-        onChangeInstaMonkeysView("list");
+        currentInstaView = "list";
+        onChangeInstaMonkeysView(instaMonkeysHeaderBar, currentInstaView);
     })
     instaMonkeysViews.appendChild(instaMonkeysListView);
 
@@ -3163,8 +3165,8 @@ function generateInstaMonkeysProgress() {
     // instaMonkeysObtainView.innerHTML = "Where To Get";
     instaMonkeysObtainView.innerHTML = "Get More";
     instaMonkeysObtainView.addEventListener('click', () => {
-        instaMonkeysHeaderBar.classList.add('border-top-only');
-        onChangeInstaMonkeysView("obtain");
+        currentInstaView = "obtain";
+        onChangeInstaMonkeysView(instaMonkeysHeaderBar, currentInstaView);
     })
     instaMonkeysExtras.appendChild(instaMonkeysObtainView);
 
@@ -3173,8 +3175,8 @@ function generateInstaMonkeysProgress() {
     instaMonkeysCollectionView.classList.add('maps-progress-view','black-outline');
     instaMonkeysCollectionView.innerHTML = "Collection Event";
     instaMonkeysCollectionView.addEventListener('click', () => {
-        instaMonkeysHeaderBar.classList.add('border-top-only');
-        onChangeInstaMonkeysView("collection");
+        currentInstaView = "collection";
+        onChangeInstaMonkeysView(instaMonkeysHeaderBar, currentInstaView);
     })
     instaMonkeysExtras.appendChild(instaMonkeysCollectionView);
 
@@ -3189,11 +3191,10 @@ function generateInstaMonkeysProgress() {
     instaMonkeyProgressContainer.style.display = "none";
     progressContent.appendChild(instaMonkeyProgressContainer);
 
-    onChangeInstaMonkeysView("game");
+    onChangeInstaMonkeysView(instaMonkeysHeaderBar, currentInstaView);
 }
 
-function onChangeInstaMonkeysView(view) {
-    currentInstaView = view;
+function onChangeInstaMonkeysView(instaMonkeysHeaderBar, view) {
     document.getElementById('insta-monkeys-progress-container').style.removeProperty('display');
     document.getElementById('insta-monkey-progress-container').style.display = "none";
     let instaTabs = ['game','list','obtain','collection'];
@@ -3203,15 +3204,19 @@ function onChangeInstaMonkeysView(view) {
     document.getElementById(`insta-monkeys-${view}-view`).classList.add('stats-tab-yellow');
     switch (view) {
         case "game":
+            instaMonkeysHeaderBar.classList.remove('border-top-only');
             generateInstaGameView();
             break;
         case "list":
+            instaMonkeysHeaderBar.classList.remove('border-top-only');
             generateInstaListView();
             break;
         case "obtain":
+            instaMonkeysHeaderBar.classList.add('border-top-only');
             generateInstaObtainGuide();
             break;
         case "collection":
+            instaMonkeysHeaderBar.classList.add('border-top-only');
             generateInstaCollectionEventHelper();
             break;
     }
@@ -8110,6 +8115,7 @@ function generateExtrasPage() {
 
     let selectors = [
         'Custom Round Sets', 
+        'Collection Event Odds',
         // 'Monkey Money Helper', 
         // 'Export Data', 
         'Send Feedback'
@@ -8133,6 +8139,9 @@ function generateExtrasPage() {
         switch(selector){
             case 'Custom Round Sets':
                 selectorImg.src = '../Assets/ChallengeRulesIcon/CustomRoundIcon.png';
+                break;
+            case 'Collection Event Odds':
+                selectorImg.src = '../Assets/UI/CollectingEventTotemBtn.png';
                 break;
             case 'Monkey Money Helper':
                 selectorImg.src = '../Assets/UI/WoodenRoundButton.png';
@@ -8165,6 +8174,11 @@ function changeExtrasTab(selected){
     switch(selected){
         case 'Custom Round Sets':
             generateRoundsets();
+            break;
+        case "Collection Event Odds": 
+            changeTab('progress');
+            currentInstaView = "collection";
+            changeProgressTab('InstaMonkeys');
             break;
         case 'Send Feedback':
             window.open('https://forms.gle/Tg1PuRNj2ftojMde6', '_blank');
