@@ -4590,7 +4590,7 @@ function generateBosses(elite){
         raceInfoRules.classList.add("race-info-rules", "start-button", 'hero-selector-div-disabled', elite ? "btn-rotate-boss-elite" : "btn-rotate-boss", "black-outline");
         raceInfoRules.innerHTML = "Details"
         raceInfoRules.addEventListener('click', () => {
-            if (typeof bossesData[index]["metadata"] == 'string') { return; }
+            if (typeof bossesData[index][elite ? "metadataElite" : "metadataStandard"] == 'string') { return; }
             showLoading();
             showChallengeModel('events', (elite ? race.metadataElite : race.metadataStandard),"Boss", eventData);
         })
@@ -4608,8 +4608,8 @@ function generateBosses(elite){
             entries.forEach(async entry => {
                 if (entry.isIntersecting) {
                     await getBossMetadata(index, elite);
-                    raceInfoRules.classList.remove('hero-selector-div-disabled');
                     if (typeof bossesData[index][elite ? "metadataElite" : "metadataStandard"] != 'string') {
+                        raceInfoRules.classList.remove('hero-selector-div-disabled');
                         let challengeScoreTypeIcon = document.createElement('img');
                         challengeScoreTypeIcon.classList.add('challenge-modifier-icon-event');
                         switch(race.scoringType){
@@ -4823,7 +4823,8 @@ async function generateChallenges(type) {
         let challengeSelectorDateInput = document.createElement('input');
         challengeSelectorDateInput.classList.add("challenge-selector-date-input");
         challengeSelectorDateInput.type = "date";
-        challengeSelectorDateInput.value =  new Date(challengeIdToDate(getChallengeIdFromInt(latestChallenge, type == "AdvancedDailyChallenges"))).toISOString().split('T')[0];
+        let dateForSelect = challengeIdToDate(getChallengeIdFromInt(latestChallenge, type == "AdvancedDailyChallenges"));
+        challengeSelectorDateInput.value =  new Date(dateForSelect[0], dateForSelect[1] - 1, dateForSelect[2]).toISOString().split('T')[0];
         challengeSelectorDateInput.addEventListener('change', () => {
             if (new Date(challengeSelectorDateInput.value) > new Date()) { challengeSelectorDateInput.value = new Date().toISOString().split('T')[0] }
             if (new Date(challengeSelectorDateInput.value) < new Date(type == "DailyChallenges" ? "2021-05-07" : "2021-05-20")) { challengeSelectorDateInput.value = type == "DailyChallenges" ? "2021-05-07" : "2021-05-20"; }
