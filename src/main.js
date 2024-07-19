@@ -4942,7 +4942,8 @@ async function generateChallenges(type) {
 
         let challengeDate = document.createElement('p');
         challengeDate.classList.add("challenge-date", "black-outline");
-        challengeDate.innerHTML = `${type == "CoopDailyChallenges" ? new Date(challenge.createdAt).toLocaleDateString() : new Date(challengeIdToDate(challenge.id)).toLocaleDateString()}`;
+        let dateForSelect = type == "CoopDailyChallenges" ? false : challengeIdToDate(getChallengeIdFromInt(challengeNumber, type == "AdvancedDailyChallenges"));
+        challengeDate.innerHTML = `${type == "CoopDailyChallenges" ? new Date(challenge.createdAt).toLocaleDateString() : new Date(dateForSelect[0], dateForSelect[1] - 1, dateForSelect[2]).toLocaleDateString()}`;
         challengeInfoMiddleDiv.appendChild(challengeDate);
 
         let challengeTypeText = document.createElement('p');
