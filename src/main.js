@@ -4261,7 +4261,7 @@ function generateEvents(){
         'Bosses': {
             'img': 'BossesBtn',
             'text': "Boss Events",
-            'bgimg': 'EventBannerSmallNoBoss'
+            'bgimg': 'EventBannerSmallBossChallenge'
         },
         'Odyssey': {
             'img': 'OdysseyEventBtn',
