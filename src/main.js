@@ -92,6 +92,8 @@ let currentCollectionChest = "None";
 let currentCollectionTower = "All";
 let collectionMissingToggle = false;
 
+let loggedIn = false;
+
 fetch('./data/Constants.json')
     .then(response => response.json())
     .then(data => {
@@ -138,9 +140,18 @@ function generateIfReady(){
         generateInstaData()
         generateMapData()
         generateProgressSubText()
-        generateOverview()
+        changeTab('overview');
+    } else if(!loggedIn && readyFlags.slice(2).every(flag => flag === 1)){
+        console.log('ignored login');
+        document.getElementById("front-page").style.display = "none";
+        document.body.classList.add('transition-bg')
+        generateHeaderTabs();
         changeTab('overview');
     }
+}
+
+function previewSite(){
+   fetchDependencies(true); 
 }
 
 function generateRankInfo(){
@@ -590,7 +601,7 @@ function generateFrontPage(){
 
     let frontPageText = document.createElement('p');
     frontPageText.classList.add('front-page-text');
-    frontPageText.innerHTML = 'Enter your Open Access Key (OAK) to get started: ';
+    frontPageText.innerHTML = 'Access your profile using an OAK token for the best experience!';
     frontPage.appendChild(frontPageText);
 
     let previousOAK = document.createElement('div');
@@ -617,6 +628,7 @@ function generateFrontPage(){
             if (!pressedStart){
                 pressedStart = true;
                 document.getElementById("loading").style.removeProperty("transform");
+                loggedIn = true;
                 oak_token = oak;
                 getSaveData(oak);
             }
@@ -634,9 +646,41 @@ function generateFrontPage(){
         previousOAKEntry.appendChild(deleteButton);
     })
 
+    //two buttons
+    //use without oak
+    let siteAccessDiv = document.createElement('div');
+    siteAccessDiv.classList.add('site-access-div');
+    frontPage.appendChild(siteAccessDiv);
+
+    let siteLoginButtons = document.createElement('div');
+    siteLoginButtons.classList.add('site-login-buttons');
+    siteAccessDiv.appendChild(siteLoginButtons);
+
+    let previewButton = document.createElement('p');
+    previewButton.classList.add('site-access-button','black-outline');
+    previewButton.innerHTML = 'Preview Site';
+    previewButton.addEventListener('click', () => {
+        previewSite();
+    })
+    siteLoginButtons.appendChild(previewButton);
+
+    let challengeSelectorOR = document.createElement('p');
+    challengeSelectorOR.classList.add("challenge-selector-or", "black-outline");
+    challengeSelectorOR.innerHTML = "OR";
+    siteLoginButtons.appendChild(challengeSelectorOR);
+
+    let loginButton = document.createElement('p');
+    loginButton.classList.add('site-access-button','black-outline');
+    loginButton.innerHTML = 'Login With OAK';
+    loginButton.addEventListener('click', () => {
+        document.querySelector('.oak-entry-div').style.display = 'flex';
+        siteLoginButtons.style.display = 'none';
+    })
+    siteLoginButtons.appendChild(loginButton);
 
     let oakEntryDiv = document.createElement('div');
     oakEntryDiv.classList.add('oak-entry-div');
+    oakEntryDiv.style.display = 'none';
     frontPage.appendChild(oakEntryDiv);
     
     let keyEntry = document.createElement('input');
@@ -656,6 +700,7 @@ function generateFrontPage(){
         if (!pressedStart){
             document.getElementById("loading").style.removeProperty("transform");
             pressedStart = true;
+            loggedIn = true;
             oak_token = keyEntry.value;
             getSaveData(oak_token);
         }
@@ -668,7 +713,7 @@ function generateFrontPage(){
 
     let whereText = document.createElement('p');
     whereText.classList.add('where-text');
-    whereText.innerHTML = 'Don\'t have one? Read here:';
+    whereText.innerHTML = 'Don\'t have an OAK token? Read here:';
     getOakDiv.appendChild(whereText);
 
     let whereButton = document.createElement('p');
@@ -801,7 +846,7 @@ function generateFrontPage(){
 
     let OAKInstructionsText = document.createElement('p');
     OAKInstructionsText.classList.add('oak-instructions-text');
-    OAKInstructionsText.innerHTML = 'An Open Access Key (OAK) is a unique key that allows you to access your Bloons TD 6 data from Ninja Kiwi\'s Open Data API. The site will use this to fetch your information from the API.';
+    OAKInstructionsText.innerHTML = 'An Open Access Key (OAK) is a unique key that allows you to access your Bloons TD 6 data from Ninja Kiwi\'s Open Data API. The site will use this to fetch your information from the API. <br><br>NOTE: Progress tracking is not available for BTD6+ on Apple Arcade and BTD6 Netflix as OAK tokens are unavailable. Alternatively, you can <p onclick="previewSite()" style="font-family:GardeniaBold;color: white;cursor: pointer;text-decoration: underline;display: inline-block;">Preview The Site</p>';
     OAKInstructionsDiv.appendChild(OAKInstructionsText);
 
     let OAKInstructionsHeader2 = document.createElement('p');
@@ -811,7 +856,7 @@ function generateFrontPage(){
 
     let OAKInstructionsText2 = document.createElement('p');
     OAKInstructionsText2.classList.add('oak-instructions-text');
-    OAKInstructionsText2.innerHTML = 'Step 1: Login and Backup your progress with a Ninja Kiwi Account in BTD6. You can do this by going to settings from the main menu and clicking on the Account button. NOTE: This site is not available for BTD6+ on Apple Arcade and BTD6 Netflix. ';
+    OAKInstructionsText2.innerHTML = 'Step 1: Login and Backup your progress with a Ninja Kiwi Account in BTD6. You can do this by going to settings from the main menu and clicking on the Account button.';
     OAKInstructionsDiv.appendChild(OAKInstructionsText2);
 
     let OAKInstuctionImg = document.createElement('img');
@@ -902,7 +947,7 @@ function generateFrontPage(){
 
     let privacyText = document.createElement('p');
     privacyText.classList.add('oak-instructions-text');
-    privacyText.innerHTML = 'This app does not store any data being sent to or retrieved from Ninja Kiwi\'s Open Data API outside of your browser/device. The localStorage browser feature is used to prevent users from having to re-enter their OAK every time they visit the site. If you would like to delete this stored data, you can do so by clicking the "X" on the profile you would like to delete on this homepage.';
+    privacyText.innerHTML = 'This app does not store any data being sent to or retrieved from Ninja Kiwi\'s Open Data API outside of your browser/device. The localStorage browser feature is used to prevent users from having to re-enter their OAK token every time they visit the site. If you would like to delete this stored data, you can do so by clicking the "X" on the profile you would like to delete on this homepage or clearing your browsing data.';
     privacyDiv.appendChild(privacyText);
 
     let knownIsseusHeader = document.createElement('p');
@@ -1053,7 +1098,8 @@ let tempXP = 0;
 function generateOverview(){
     let overviewContent = document.getElementById('overview-content');
     overviewContent.innerHTML = '';
-
+    
+    if(loggedIn){
     let profileHeader = document.createElement('div');
     profileHeader.classList.add('profile-header');
     profileHeader.classList.add('profile-banner');
@@ -1435,6 +1481,56 @@ function generateOverview(){
     if(parseInt(btd6usersave.latestGameVersion.split(".")[0]) > constants.projectContentVersion) {
         errorModal(`The content of this site (v${constants.projectContentVersion}.0) is out of date with the current version (v${btd6usersave.latestGameVersion.split(".")[0]}.0). New content might be missing, but everything else should remain functional.`, "api", true)
     }
+    } else {
+        let notLoggedInText = document.createElement('p');
+        notLoggedInText.classList.add('not-logged-in-text');
+        notLoggedInText.innerHTML = "You're in preview mode.<br>The Events, Explore, and Extras tabs can be used without an OAK token.";
+        overviewContent.appendChild(notLoggedInText);
+
+        let OtherInfoHeader = document.createElement('p');
+        OtherInfoHeader.classList.add('site-info-header','black-outline');
+        OtherInfoHeader.innerHTML = 'When an OAK token is entered:';
+        overviewContent.appendChild(OtherInfoHeader);
+
+        let panels = {
+            "Profile": {
+                "name": "View Your Profile!",
+                "desc": "You can see anything you can see on your in-game profile plus some extra Quick Stats"},
+            "FullMonkeyUses": {
+                "name": "Full Top Heroes and Top Monkeys List!",
+                "desc": "The in-game profiles only show the top 3 heroes and towers, but here you can see the full list"
+            },
+            "ExtraStats": {
+                "name": "View Extra Stats!",
+                "desc": "In addition to the in-game profile stats, you can view extra stats such as Total Race Attempts, Total Challenges Played, and even Continues Used"
+            }
+        }
+
+        let instaMonkeyGuideContainer = document.createElement('div');
+        instaMonkeyGuideContainer.classList.add('insta-monkey-guide-container');
+        overviewContent.appendChild(instaMonkeyGuideContainer);
+
+        Object.keys(panels).forEach(method => {
+            let instaMonkeyGuideMethod = document.createElement('div');
+            instaMonkeyGuideMethod.classList.add('insta-monkey-guide-method');
+            instaMonkeyGuideContainer.appendChild(instaMonkeyGuideMethod);
+
+            let instaMonkeyGuideMethodText = document.createElement('p');
+            instaMonkeyGuideMethodText.classList.add('insta-monkey-guide-method-text','black-outline');
+            instaMonkeyGuideMethodText.innerHTML = panels[method].name;
+            instaMonkeyGuideMethod.appendChild(instaMonkeyGuideMethodText);
+
+            let instaMonkeyGuideMethodDesc = document.createElement('p');
+            instaMonkeyGuideMethodDesc.classList.add('insta-monkey-guide-method-desc');
+            instaMonkeyGuideMethodDesc.innerHTML = panels[method].desc;
+            instaMonkeyGuideMethod.appendChild(instaMonkeyGuideMethodDesc);
+
+            let instaMonkeyImage = document.createElement('img');
+            instaMonkeyImage.classList.add('insta-monkey-guide-method-img');
+            instaMonkeyImage.src = `./Assets/UI/Overview${method}.png`;
+            instaMonkeyGuideMethod.appendChild(instaMonkeyImage);
+        })
+    }
 }
 
 function generateAvatar(size, src){
@@ -1507,6 +1603,7 @@ function generateProgress(){
     let progressContent = document.getElementById('progress-content');
     progressContent.innerHTML = "";
 
+    if(loggedIn){
     let progressPage = document.createElement('div');
     progressPage.classList.add('progress-page');
     progressContent.appendChild(progressPage);
@@ -1543,6 +1640,78 @@ function generateProgress(){
         selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
         selectorDiv.appendChild(selectorGoImg);
     })
+    } else {
+        let notLoggedInText = document.createElement('p');
+        notLoggedInText.classList.add('not-logged-in-text');
+        notLoggedInText.innerHTML = "You're in preview mode.<br>The Events, Explore, and Extras tabs can be used without an OAK token.";
+        progressContent.appendChild(notLoggedInText);
+
+        progressContent.classList.add("overview")
+
+        let OtherInfoHeader = document.createElement('p');
+        OtherInfoHeader.classList.add('site-info-header','black-outline');
+        OtherInfoHeader.innerHTML = 'When an OAK token is entered:';
+        progressContent.appendChild(OtherInfoHeader);
+
+        let panels = {
+            "Towers": {
+                "name": "View Your Towers!",
+                "desc": "You can view portait art and total xp for every tower here."},
+            "Heroes": {
+                "name": "View Your Heroes!",
+                "desc": "You can view all portrait art for all skins and hero level information here."
+            },
+            "Maps": {
+                "name": "View Extra Map Stats!",
+                "desc": "You can view your highest round and times completed count for every map on every mode!"
+            },
+            "Powers": {
+                "name": "View Your Powers!",
+                "desc": "You can view how many of each power you've accumulated here."
+            },
+            "InstaMonkeys": {
+                "name": "View Your Insta Monkeys Collection!",
+                "desc": "You can view how many of each insta monkey you've accumulated here as well as track your collection."
+            },
+            "CollectionEvent": {
+                "name": "Collection Event Helper!",
+                "desc": "Using your current inventory, you can view the odds of getting a new insta monkey for each chest type in general and when selecting a featured tower."
+            },
+            "Knowledge": {
+                "name": "View Your Knowledge!",
+                "desc": "You can view your Monkey Knowledge point unlock progress here."
+            },
+            "Achievements": {
+                "name": "View Achievements!",
+                "desc": "You can view your achievement progress here as well as use a few useful filters such as finding Monkey Knowledge points as rewards."
+            }
+        }
+
+        let instaMonkeyGuideContainer = document.createElement('div');
+        instaMonkeyGuideContainer.classList.add('insta-monkey-guide-container');
+        progressContent.appendChild(instaMonkeyGuideContainer);
+
+        Object.keys(panels).forEach(method => {
+            let instaMonkeyGuideMethod = document.createElement('div');
+            instaMonkeyGuideMethod.classList.add('insta-monkey-guide-method');
+            instaMonkeyGuideContainer.appendChild(instaMonkeyGuideMethod);
+
+            let instaMonkeyGuideMethodText = document.createElement('p');
+            instaMonkeyGuideMethodText.classList.add('insta-monkey-guide-method-text','black-outline');
+            instaMonkeyGuideMethodText.innerHTML = panels[method].name;
+            instaMonkeyGuideMethod.appendChild(instaMonkeyGuideMethodText);
+
+            let instaMonkeyGuideMethodDesc = document.createElement('p');
+            instaMonkeyGuideMethodDesc.classList.add('insta-monkey-guide-method-desc');
+            instaMonkeyGuideMethodDesc.innerHTML = panels[method].desc;
+            instaMonkeyGuideMethod.appendChild(instaMonkeyGuideMethodDesc);
+
+            let instaMonkeyImage = document.createElement('img');
+            instaMonkeyImage.classList.add('insta-monkey-guide-method-img');
+            instaMonkeyImage.src = `./Assets/UI/Progress${method}.png`;
+            instaMonkeyGuideMethod.appendChild(instaMonkeyImage);
+        })
+    }
 }
 
 function changeProgressTab(selector){
@@ -8179,6 +8348,10 @@ function generateExtrasPage() {
         'Send Feedback'
         // 'Settings'
     ];
+
+    if (!loggedIn) {
+        selectors = selectors.filter(selector => selector != 'Collection Event Odds');
+    }
 
     selectors.forEach((selector) => {
         let selectorDiv = document.createElement('div');
