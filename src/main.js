@@ -1654,6 +1654,22 @@ function generateProgress(){
         progressContent.appendChild(OtherInfoHeader);
 
         let panels = {
+            "Maps": {
+                "name": "View Extra Map Stats!",
+                "desc": "You can view your highest round and times completed count for every map on every mode!"
+            },
+            "InstaMonkeys": {
+                "name": "View Your Insta Monkeys Collection!",
+                "desc": "You can view how many of each Insta Monkey you've accumulated here as well as track your collection."
+            },
+            "CollectionEvent": {
+                "name": "Collection Event Helper!",
+                "desc": "Using your current inventory, you can view the odds of getting a new Insta Monkey for each chest type in general and when selecting a featured tower."
+            },
+            "Achievements": {
+                "name": "View Achievements!",
+                "desc": "You can view your achievement progress here as well as use a few useful filters such as finding Monkey Knowledge points as rewards."
+            },
             "Towers": {
                 "name": "View Your Towers!",
                 "desc": "You can view portait art and total xp for every tower here."},
@@ -1661,29 +1677,13 @@ function generateProgress(){
                 "name": "View Your Heroes!",
                 "desc": "You can view all portrait art for all skins and hero level information here."
             },
-            "Maps": {
-                "name": "View Extra Map Stats!",
-                "desc": "You can view your highest round and times completed count for every map on every mode!"
-            },
             "Powers": {
                 "name": "View Your Powers!",
                 "desc": "You can view how many of each power you've accumulated here."
             },
-            "InstaMonkeys": {
-                "name": "View Your Insta Monkeys Collection!",
-                "desc": "You can view how many of each insta monkey you've accumulated here as well as track your collection."
-            },
-            "CollectionEvent": {
-                "name": "Collection Event Helper!",
-                "desc": "Using your current inventory, you can view the odds of getting a new insta monkey for each chest type in general and when selecting a featured tower."
-            },
             "Knowledge": {
                 "name": "View Your Knowledge!",
                 "desc": "You can view your Monkey Knowledge point unlock progress here."
-            },
-            "Achievements": {
-                "name": "View Achievements!",
-                "desc": "You can view your achievement progress here as well as use a few useful filters such as finding Monkey Knowledge points as rewards."
             }
         }
 
@@ -6566,19 +6566,21 @@ async function openProfile(source, profile){
     rankText.innerHTML = profile.rank;
     rankStar.appendChild(rankText);
 
-    let rankStarVeteran = document.createElement('div');
-    rankStarVeteran.classList.add('rank-star-public');
-    profileTop.appendChild(rankStarVeteran);
+    if (profile.veteranRank > 0) {
+        let rankStarVeteran = document.createElement('div');
+        rankStarVeteran.classList.add('rank-star-public');
+        profileTop.appendChild(rankStarVeteran);
 
-    let rankImgVeteran = document.createElement('img');
-    rankImgVeteran.classList.add('rank-img');
-    rankImgVeteran.src = '../Assets/UI/LvlHolderVeteran.png';
-    rankStarVeteran.appendChild(rankImgVeteran);
+        let rankImgVeteran = document.createElement('img');
+        rankImgVeteran.classList.add('rank-img');
+        rankImgVeteran.src = '../Assets/UI/LvlHolderVeteran.png';
+        rankStarVeteran.appendChild(rankImgVeteran);
 
-    let rankTextVeteran = document.createElement('p');
-    rankTextVeteran.classList.add('rank-text','black-outline');
-    rankTextVeteran.innerHTML = profile.veteranRank;
-    rankStarVeteran.appendChild(rankTextVeteran);
+        let rankTextVeteran = document.createElement('p');
+        rankTextVeteran.classList.add('rank-text','black-outline');
+        rankTextVeteran.innerHTML = profile.veteranRank;
+        rankStarVeteran.appendChild(rankTextVeteran);
+    }
 
     let profileFollowers = document.createElement('div')
     profileFollowers.classList.add('profile-followers');
