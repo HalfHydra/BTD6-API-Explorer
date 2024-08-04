@@ -111,6 +111,13 @@
             "startingCash": 50000,
             "endRound": 5
         },
+        "QuestMermonkeyStage1RoundSet": {
+            "name": "Mermonkeys. No Mere Monkeys Stage 1 Rounds",
+            "icon": "QuestIconMermonkeys",
+            "type": "quest",
+            "startingCash": 650,
+            "endRound": 7
+        },
         "QuestBrickellTrialRoundSet": {
             "name": "Brickell Bootcamp Rounds",
             "icon": "QuestIconBrickell",
@@ -329,6 +336,7 @@
         "NinjaMonkey": "Magic",
         "Alchemist": "Magic",
         "Druid": "Magic",
+        "Mermonkey": "Magic",
         "BananaFarm": "Support",
         "SpikeFactory": "Support",
         "MonkeyVillage": "Support",
@@ -360,6 +368,7 @@
         "Hedge": "Beginner",
         "EndOfTheRoad": "Beginner",
         "Logs": "Beginner",
+        "LuminousCove": "Intermediate",
         "SulfurSprings": "Intermediate",
         "WaterPark": "Intermediate",
         "Polyphemus": "Intermediate",
@@ -703,7 +712,8 @@
         "Geraldo": [1,3,7,10,20],
         "GeraldoGentlemanGadgeteer": [1,3,7,10,20],
         "Corvus": [1,3,7,10,15,20],
-        "Rosalia": [1,2,5,7,13,20]
+        "Rosalia": [1,2,5,7,13,20],
+        "DreamstatePsi": [1,3,8,10,20]
     },
     "heroSkins": {
         "Quincy": ["Quincy", "CyberQuincy", "WolfpackQuincy"],
@@ -717,7 +727,7 @@
         "Adora": ["Adora", "JoanOfArcAdora", "Voidora"],
         "AdmiralBrickell": ["AdmiralBrickell", "DreadPirateBrickell", "LifeguardBrickell"],
         "Etienne": ["Etienne", "ETnEtienne", "BookWyrmEtienne"],
-        "Psi": ["Psi", "Psimbals"],
+        "Psi": ["Psi", "Psimbals", "DreamstatePsi"],
         "Geraldo": ["Geraldo", "GeraldoGentlemanGadgeteer"],
         "Sauda": ["Sauda", "JiangshiSauda", "VikingSauda"],
         "Corvus": ["Corvus"],
@@ -1796,6 +1806,29 @@
                 "Druid of Wrath": 1700,
                 "Poplust": 14000,
                 "Avatar of Wrath": 33000
+            }
+        },
+        "Mermonkey": {
+            "path1": {
+                "Trident Efficiency": 250,
+                "Trident Swiftness": 300,
+                "Abyss Dweller": 2100,
+                "Abyssal Warrior": 3600,
+                "Lord of the Abyss": 29000
+            },
+            "path2": {
+                "Sharper Prongs": 300,
+                "Tidal Chill": 400,
+                "Riptide Champion": 2800,
+                "Arctic Knight": 8000,
+                "Popseidon": 52000
+            },
+            "path3": {
+                "Echosense Precision": 200,
+                "Echosense Network": 380,
+                "Alluring Melody": 2800,
+                "Symphonic Resonance": 4600,
+                "The Final Harmonic": 25000
             }
         },
         "BananaFarm": {

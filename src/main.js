@@ -141,6 +141,9 @@ function generateIfReady(){
         generateMapData()
         generateProgressSubText()
         changeTab('overview');
+        if(parseInt(btd6usersave.latestGameVersion.split(".")[0]) > constants.projectContentVersion) {
+            errorModal(`The content of this site (v${constants.projectContentVersion}.0) is out of date with the current version (v${btd6usersave.latestGameVersion.split(".")[0]}.0). New content might be missing, but everything else should remain functional.`, "api", true)
+        }
     } else if(!loggedIn && readyFlags.slice(2).every(flag => flag === 1)){
         console.log('ignored login');
         document.getElementById("front-page").style.display = "none";
@@ -1477,10 +1480,6 @@ function generateOverview(){
         statValue.innerHTML = value.toLocaleString();
         stat.appendChild(statValue);
     }
-
-    if(parseInt(btd6usersave.latestGameVersion.split(".")[0]) > constants.projectContentVersion) {
-        errorModal(`The content of this site (v${constants.projectContentVersion}.0) is out of date with the current version (v${btd6usersave.latestGameVersion.split(".")[0]}.0). New content might be missing, but everything else should remain functional.`, "api", true)
-    }
     } else {
         let notLoggedInText = document.createElement('p');
         notLoggedInText.classList.add('not-logged-in-text');
@@ -1780,7 +1779,9 @@ function generateTowerProgress(){
     towerSelectorHeader.classList.add('tower-selector-header');
     towerProgressDiv.appendChild(towerSelectorHeader);
 
+    let towersInSave = btd6usersave.unlockedTowers;
     for (let [tower, category] of Object.entries(constants.towersInOrder)) {
+        if(!Object.keys(btd6usersave.unlockedTowers).includes(tower)) {continue}
         let towerSelector = document.createElement('div');
         towerSelector.id = tower + '-selector';
         towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
@@ -3406,6 +3407,7 @@ function generateInstaGameView(){
 
     let firstInstas = [], grayInstas = [];
     Object.keys(constants.towersInOrder).forEach(key => {
+        if(!Object.keys(btd6usersave.unlockedTowers).includes(key)) {return}
         if (processedInstaData.TowerTotal[key] !== undefined) {
             firstInstas.push(key);
         } else {
@@ -3846,6 +3848,7 @@ function generateInstaCollectionEventHelper(){
     instaMonkeyCollectionContainer.appendChild(collectionEventTowerSelectors);
 
     Object.keys(constants.towersInOrder).forEach(tower => {
+        if(!Object.keys(btd6usersave.unlockedTowers).includes(tower)) {return}
         let collectionEventTowerSelector = document.createElement('div');
         collectionEventTowerSelector.classList.add('collection-event-tower-selector');
         collectionEventTowerSelector.addEventListener('click', () => {
@@ -3882,9 +3885,10 @@ function generateCollectionEventTowerInfo(tower) {
         for(let i = 1; i<6; i++) {
             let value = 0;
             Object.keys(constants.towersInOrder).forEach(tower => {
+                if(!Object.keys(btd6usersave.unlockedTowers).includes(tower)) {return}
                 value += processedInstaData.TowerMissingByTier[tower][i].length || 0;
             })
-            chances.push(value > 0 ? value / (constants.instaTiers[i].length * Object.keys(constants.towersInOrder).length) : 0);
+            chances.push(value > 0 ? value / (constants.instaTiers[i].length * Object.keys(btd6usersave.unlockedTowers).length) : 0);
         }
     } else {
         for(let i = 1; i<6; i++) {
@@ -5652,7 +5656,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     if (challengeModifiersDiv.children.length == 0) {
         let none = document.createElement('p');
         none.classList.add('challenge-modifier-none');
-        none.innerHTML = "None";
+        none.innerHTML = "Default";
         challengeModifiersDiv.appendChild(none);
     }
 
@@ -5743,7 +5747,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     if (challengeRulesDiv.children.length == 0) {
         let none = document.createElement('p');
         none.classList.add('challenge-modifier-none');
-        none.innerHTML = "None";
+        none.innerHTML = "Default";
         challengeRulesDiv.appendChild(none);
     }
 
