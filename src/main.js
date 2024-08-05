@@ -982,7 +982,7 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = 'v1.1.0: Insta Monkey Collection Features<br>- Added Insta Monkey Collection Event Helper. This displays the odds of getting a new Insta Monkey for each chest type and when selecting a featured tower.<br>- Also added a page documentating all of the continuous sources of Insta Monkeys<br>- UI fixes and improvements<br><br>v1.0.1: Bug Fixes<br>- Daily challenges now show the correct associated date<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes<br><br>v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.';
+    changelogText.innerHTML = 'v1.2.0: Preview Mode and UI Improvements <br>- Added a way to use the site without an OAK token. Useful when you don\'t have it accessible or can\'t make one<br>- The site now prompts when your data has new content that the site doesn\'t have updated yet<br>- Challenge details now correctly shows the max amount of specific monkeys if limited<br>- Other UI fixes<br><br> v1.1.0: Insta Monkey Collection Features<br>- Added Insta Monkey Collection Event Helper. This displays the odds of getting a new Insta Monkey for each chest type and when selecting a featured tower.<br>- Also added a page documentating all of the continuous sources of Insta Monkeys<br>- UI fixes and improvements<br><br>v1.0.1: Bug Fixes<br>- Daily challenges now show the correct associated date<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes<br><br>v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.';
     changelogDiv.appendChild(changelogText);
 
     let feedbackHeader = document.createElement('p');
@@ -5602,6 +5602,17 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             towerSelectorTiers.classList.add('tower-selector-tiers', 'black-outline');
             towerSelectorTiers.innerHTML = "5-5-5";
             towerSelector.appendChild(towerSelectorTiers);
+        }
+
+        if(towersToDisplay[tower].max != -1) {
+            let maxCount = document.createElement('div');
+            maxCount.classList.add('max-count');
+            towerSelector.appendChild(maxCount);
+
+            let maxCountText = document.createElement('p');
+            maxCountText.classList.add('power-progress-text','black-outline');
+            maxCountText.innerHTML = `${towersToDisplay[tower].max}`;
+            maxCount.appendChild(maxCountText);
         }
     }
 

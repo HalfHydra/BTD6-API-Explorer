@@ -1144,7 +1144,7 @@
     border-image-slice: 110;
     position: absolute;
     width: 32px;
-    height: 54px;
+    height: 58px;
     display: none;
     margin-top: -133px;
     margin-left: -6px;
@@ -4232,6 +4232,19 @@
     margin: 10px auto;
 }
 
+.max-count {
+    position: absolute;
+    background-image: url(../Assets/UI/BlueBtnCircleSmall.png);
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -5%;
+    left: -5%;
+}
+
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */
     -webkit-text-stroke: 0.03em black;
@@ -4345,7 +4358,7 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-.upgrade-div, .tower-selector-primary, .tower-selector-military, .tower-selector-magic, .tower-selector-support, .hero-selector-div, .hero-level-select-btn, .hero-skin, .hero-level-select-text, .maps-progress-view, .map-div-ingame, .map-arrow-img, .map-page-dot, .modal-close, .tower-container, .tower-container-collection, .collection-event-chest-selector, .collection-event-tower-selector, .knowledge-icon-div, .selector-div, .events-selector-div, .switch-banner, .start-button, .leaderboard-entry-div, .leaderboard-footer-refresh, .leaderboard-go-img, .leaderboard-footer-page-left, .leaderboard-footer-page-right, .challenge-selector-date-img, .challenge-selector-id-img, .challenge-stats-btn, .browser-copy-img, .challenge-id, .race-map-div, .challenge-entry, .challenge-creator, .error-modal-close, .roundset-selector-div, .other-roundset-selector-div, .sku-roundset-selector-text {
+.upgrade-div, .tower-selector-primary, .tower-selector-military, .tower-selector-magic, .tower-selector-support, .hero-selector-div, .hero-level-select-btn, .hero-skin, .hero-level-select-text, .maps-progress-view, .map-div-ingame, .map-arrow-img, .map-page-dot, .modal-close, .tower-container, .tower-container-collection, .collection-event-chest-selector, .collection-event-tower-selector, .knowledge-icon-div, .selector-div, .events-selector-div, .switch-banner, .start-button, .leaderboard-entry-div, .leaderboard-footer-refresh, .leaderboard-go-img, .leaderboard-footer-page-left, .leaderboard-footer-page-right, .challenge-selector-date-img, .challenge-selector-id-img, .challenge-stats-btn, .browser-copy-img, .challenge-id, .race-map-div, .challenge-entry, .challenge-creator, .error-modal-close, .roundset-selector-div, .other-roundset-selector-div, .sku-roundset-selector-text, .challenge-stats-x {
     cursor: pointer;
 }
 
