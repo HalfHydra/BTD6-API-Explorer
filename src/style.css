@@ -3461,12 +3461,11 @@
 }
 .browser-go-img {
     width: 50px;
-    display: none;
+    display: flex;
 }
 .browser-copy-img {
     width: 50px;
-    display: block;
-
+    display: none;
 }
 .browser-footer {
     height: 70px;
@@ -4358,7 +4357,7 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-.upgrade-div, .tower-selector-primary, .tower-selector-military, .tower-selector-magic, .tower-selector-support, .hero-selector-div, .hero-level-select-btn, .hero-skin, .hero-level-select-text, .maps-progress-view, .map-div-ingame, .map-arrow-img, .map-page-dot, .modal-close, .tower-container, .tower-container-collection, .collection-event-chest-selector, .collection-event-tower-selector, .knowledge-icon-div, .selector-div, .events-selector-div, .switch-banner, .start-button, .leaderboard-entry-div, .leaderboard-footer-refresh, .leaderboard-go-img, .leaderboard-footer-page-left, .leaderboard-footer-page-right, .challenge-selector-date-img, .challenge-selector-id-img, .challenge-stats-btn, .browser-copy-img, .challenge-id, .race-map-div, .challenge-entry, .challenge-creator, .error-modal-close, .roundset-selector-div, .other-roundset-selector-div, .sku-roundset-selector-text, .challenge-stats-x {
+.upgrade-div, .tower-selector-primary, .tower-selector-military, .tower-selector-magic, .tower-selector-support, .hero-selector-div, .hero-level-select-btn, .hero-skin, .hero-level-select-text, .maps-progress-view, .map-div-ingame, .map-arrow-img, .map-page-dot, .modal-close, .tower-container, .tower-container-collection, .collection-event-chest-selector, .collection-event-tower-selector, .knowledge-icon-div, .selector-div, .events-selector-div, .switch-banner, .start-button, .leaderboard-entry-div, .leaderboard-footer-refresh, .leaderboard-go-img, .leaderboard-footer-page-left, .leaderboard-footer-page-right, .challenge-selector-date-img, .challenge-selector-id-img, .challenge-stats-btn, .browser-go-img, .challenge-id, .race-map-div, .challenge-entry, .challenge-creator, .error-modal-close, .roundset-selector-div, .other-roundset-selector-div, .sku-roundset-selector-text, .challenge-stats-x {
     cursor: pointer;
 }
 
@@ -4531,13 +4530,13 @@ input[type="checkbox"] {
         height: calc(calc(var(--vh, 1vh) * 100) - 160px);
     }
 
-    .browser-go-img {
+    /* .browser-go-img {
         display: flex;
     }
 
     .browser-copy-img {
         display: none;
-    }
+    } */
 
     .towers-container {
         justify-content: center;

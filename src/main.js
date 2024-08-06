@@ -145,7 +145,6 @@ function generateIfReady(){
             errorModal(`The content of this site (v${constants.projectContentVersion}.0) is out of date with the current version (v${btd6usersave.latestGameVersion.split(".")[0]}.0). New content might be missing, but everything else should remain functional.`, "api", true)
         }
     } else if(!loggedIn && readyFlags.slice(2).every(flag => flag === 1)){
-        console.log('ignored login');
         document.getElementById("front-page").style.display = "none";
         document.body.classList.add('transition-bg')
         generateHeaderTabs();
@@ -960,7 +959,7 @@ function generateFrontPage(){
 
     let knownIssuesText = document.createElement('p');
     knownIssuesText.classList.add('oak-instructions-text');
-    knownIssuesText.innerHTML = '- Rosalia is missing from the Top Heroes sections on profiles.<br>- Tinkerton is missing from the maps section.<br>- Insta Monkeys that are collected but used do not show up.';
+    knownIssuesText.innerHTML = '- Insta Monkeys that are collected but used do not show up<br>- Mermonkey does not show up in the Top Towers section of profiles';
     knownIssuesDiv.appendChild(knownIssuesText);
     
     let trailerVideo = document.createElement('video');
@@ -5480,7 +5479,8 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             selectorGoImg.addEventListener('click', (event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                openBTD6Link(`btd6://Challenge/${metadata.id}`);
+                // openBTD6Link(`btd6://Challenge/${metadata.id}`);
+                openBTD6Site(`https://join.btd6.com/Challenge/${metadata.id}`);
             });
             challengeHeaderRightBottom.appendChild(selectorGoImg);
             break;
@@ -7635,7 +7635,8 @@ function generateChallengeEntries(destination) {
                 selectorGoImg.addEventListener('click', (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    openBTD6Link(`btd6://Challenge/${entry.id}`)
+                    // openBTD6Link(`btd6://Challenge/${entry.id}`)
+                    openBTD6Site(`https://join.btd6.com/Challenge/${entry.id}`);
                 });
                 challengeIDandPlay.appendChild(selectorGoImg);
 
@@ -7819,7 +7820,8 @@ function generateChallengeEntries(destination) {
                 selectorGoImg2.addEventListener('click', (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    openBTD6Link(`btd6://Challenge/${entry.id}`)
+                    // openBTD6Link(`btd6://Challenge/${entry.id}`)
+                    openBTD6Site(`https://join.btd6.com/Challenge/${entry.id}`);
                 });
                 challengeIDandPlay2.appendChild(selectorGoImg2);
 
@@ -8026,7 +8028,8 @@ function generateMapGameEntries(destination) {
                 selectorGoImg.addEventListener('click', (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    openBTD6Link(`btd6://Map/${entry.id}`)
+                    // openBTD6Link(`btd6://Map/${entry.id}`)
+                    openBTD6Site(`https://join.btd6.com/Map/${entry.id}`);
                 });
                 challengeIDandPlay.appendChild(selectorGoImg);
 
@@ -8183,7 +8186,8 @@ async function showMapModel(source, metadata) {
     selectorGoImg.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        openBTD6Link(`btd6://Map/${metadata.id}`);
+        // openBTD6Link(`btd6://Map/${metadata.id}`);
+        openBTD6Site(`https://join.btd6.com/Map/${metadata.id}`);
     });
     challengeHeaderRightBottom.appendChild(selectorGoImg);
 
@@ -9485,6 +9489,10 @@ function processRewardsString(input){
 
 function openBTD6Link(link){
     window.location.href = link;
+}
+
+function openBTD6Site(link) {
+    window.open(link, "_blank");
 }
 
 function copyLoadingIcon(destination){
