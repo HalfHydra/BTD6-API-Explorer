@@ -3638,6 +3638,7 @@
 .roundset-header-title {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .roundset-header-left, .roundset-header-right {
     width: 60px;

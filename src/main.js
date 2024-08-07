@@ -1496,7 +1496,7 @@ function generateOverview(){
                 "desc": "You can see anything you can see on your in-game profile plus some extra Quick Stats"},
             "FullMonkeyUses": {
                 "name": "Full Top Heroes and Top Monkeys List!",
-                "desc": "The in-game profiles only show the top 3 heroes and towers, but here you can see the full list"
+                "desc": "The in-game profiles only show the top 3 heroes and towers, but here you can see the full list!"
             },
             "ExtraStats": {
                 "name": "View Extra Stats!",
@@ -1670,10 +1670,10 @@ function generateProgress(){
             },
             "Towers": {
                 "name": "View Your Towers!",
-                "desc": "You can view portait art and total xp for every tower here."},
+                "desc": "You can view portait art and total xp for every tower you've unlocked here."},
             "Heroes": {
                 "name": "View Your Heroes!",
-                "desc": "You can view all portrait art for all skins and hero level information here."
+                "desc": "You can view all portrait art for all heroes and skins you've unlocked as well as hero level information here."
             },
             "Powers": {
                 "name": "View Your Powers!",
@@ -9252,6 +9252,7 @@ function onChangeReverse() {
                 timelineDiv.classList.toggle('flip-horizontal');
             }
     }
+    clearPreview();
 }
 
 function updatePreviewRoundTimeline() {
