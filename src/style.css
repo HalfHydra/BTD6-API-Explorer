@@ -4245,6 +4245,57 @@
     left: -5%;
 }
 
+.insta-monkey-small-name-text {
+    position: absolute;
+    font-size: 18px;
+    margin-top: -10px;
+    width: 100px;
+    text-align: center;
+    bottom: 0;
+}
+.insta-monkey-list-img {
+    width: 100px;
+    display: flex;
+    align-content: center;
+    height: 100px;
+    object-fit: contain;
+}
+.insta-monkey-list-container {
+    padding: 10px;
+    position: relative;
+    height: 110px;
+    display: flex;
+    width: 100%;
+}
+.insta-monkey-list-chance-container {
+    display: flex;
+}
+
+.insta-monkey-header-container {
+    padding: 20px 10px 0px 10px;
+    position: relative;
+    display: flex;
+    width: 96%;
+    justify-content: center;
+}
+.insta-monkey-sort-label {
+    width: 70px;
+}
+.insta-monkey-sort-container {
+    display: flex;
+    align-items: center;
+}
+.insta-monkey-title-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.collection-header-list-text {
+    font-size: 26px;
+    text-align: center;
+    margin: 10px;
+}
+
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */
     -webkit-text-stroke: 0.03em black;

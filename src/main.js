@@ -91,6 +91,7 @@ let currentRoundsetEndRound = 140;
 let currentCollectionChest = "None";
 let currentCollectionTower = "All";
 let collectionMissingToggle = false;
+let collectionListSortType = "Highest Total Chance";
 
 let loggedIn = false;
 
@@ -627,6 +628,7 @@ function generateFrontPage(){
         useButton.classList.add('use-button');
         useButton.src = './Assets/UI/ContinueBtn.png';
         useButton.addEventListener('click', () => {
+            trailerVideo.pause();
             if (!pressedStart){
                 pressedStart = true;
                 document.getElementById("loading").style.removeProperty("transform");
@@ -648,6 +650,12 @@ function generateFrontPage(){
         previousOAKEntry.appendChild(deleteButton);
     })
 
+    let trailerVideo = document.createElement('video');
+    trailerVideo.preload = 'none';
+    trailerVideo.classList.add('trailer-video');
+    trailerVideo.src = './Assets/Trailer/Trailer.mp4';
+    trailerVideo.controls = true;
+
     //two buttons
     //use without oak
     let siteAccessDiv = document.createElement('div');
@@ -662,6 +670,7 @@ function generateFrontPage(){
     previewButton.classList.add('site-access-button','black-outline');
     previewButton.innerHTML = 'Preview Site';
     previewButton.addEventListener('click', () => {
+        trailerVideo.pause();
         previewSite();
     })
     siteLoginButtons.appendChild(previewButton);
@@ -694,6 +703,7 @@ function generateFrontPage(){
     startButton.classList.add('start-button','black-outline');
     startButton.innerHTML = 'Start';
     startButton.addEventListener('click', () => {
+        trailerVideo.pause();
         let key = keyEntry.value;
         if (key.length < 5 || key.length > 30 || !key.startsWith('oak_')){
             errorModal('Please enter a valid OAK! This will start with "oak_".');
@@ -959,14 +969,9 @@ function generateFrontPage(){
 
     let knownIssuesText = document.createElement('p');
     knownIssuesText.classList.add('oak-instructions-text');
-    knownIssuesText.innerHTML = '- Insta Monkeys that are collected but used do not show up<br>- Mermonkey does not show up in the Top Towers section of profiles';
+    knownIssuesText.innerHTML = '- None currently!';
     knownIssuesDiv.appendChild(knownIssuesText);
     
-    let trailerVideo = document.createElement('video');
-    trailerVideo.preload = 'none';
-    trailerVideo.classList.add('trailer-video');
-    trailerVideo.src = './Assets/Trailer/Trailer.mp4';
-    trailerVideo.controls = true;
     trailerDiv.appendChild(trailerVideo);
 
     trailerButton.addEventListener('click', () => {
@@ -981,7 +986,7 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = 'v1.2.0: Preview Mode and UI Improvements <br>- Added a way to use the site without an OAK token. Useful when you don\'t have it accessible or can\'t make one<br>- The site now prompts when your data has new content that the site doesn\'t have updated yet<br>- Challenge details now correctly shows the max amount of specific monkeys if limited<br>- Other UI fixes<br><br> v1.1.0: Insta Monkey Collection Features<br>- Added Insta Monkey Collection Event Helper. This displays the odds of getting a new Insta Monkey for each chest type and when selecting a featured tower.<br>- Also added a page documentating all of the continuous sources of Insta Monkeys<br>- UI fixes and improvements<br><br>v1.0.1: Bug Fixes<br>- Daily challenges now show the correct associated date<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes<br><br>v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.';
+    changelogText.innerHTML = 'v1.2.1: Insta Monkey Collection Improvements<br>- Resolved an issue preventing the collected but used Insta Monkeys from being displayed.<br>- Add a new list of all the Insta Monkey tower chances in the Collection Event Helper for efficient checking of what the best Featured Insta Monkey to choose is.<br>- The trailer video no longer plays in the background after previewing the site or logging in! Thanks for the feedback.<br><br>v1.2.0: Preview Mode and UI Improvements <br>- Added a way to use the site without an OAK token. Useful when you don\'t have it accessible or can\'t make one<br>- The site now prompts when your data has new content that the site doesn\'t have updated yet<br>- Challenge details now correctly shows the max amount of specific monkeys if limited<br>- Other UI fixes<br><br> v1.1.0: Insta Monkey Collection Features<br>- Added Insta Monkey Collection Event Helper. This displays the odds of getting a new Insta Monkey for each chest type and when selecting a featured tower.<br>- Also added a page documentating all of the continuous sources of Insta Monkeys<br>- UI fixes and improvements<br><br>v1.0.1: Bug Fixes<br>- Daily challenges now show the correct associated date<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes<br><br>v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.';
     changelogDiv.appendChild(changelogText);
 
     let feedbackHeader = document.createElement('p');
@@ -3300,7 +3305,7 @@ function generateInstaMonkeysProgress() {
     let mapsProgressViewsText = document.createElement('p');
     mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text','black-outline');
     mapsProgressViewsText.classList.add('black-outline');
-    mapsProgressViewsText.innerHTML = "Display Type:";
+    mapsProgressViewsText.innerHTML = "View Inventory:";
     instaMonkeysViews.appendChild(mapsProgressViewsText);
 
 
@@ -3534,11 +3539,6 @@ function generateSingleInstaTower(tower) {
     instaMonkeyProgressText.innerHTML = `${processedInstaData.TowerTierTotals[tower] ? Object.values(processedInstaData.TowerTierTotals[tower]).reduce((a, b) => a + b, 0) : 0}/64`;
     instaMonkeyProgress.appendChild(instaMonkeyProgressText);
 
-    let instaBugDisclaimer = document.createElement('p');
-    instaBugDisclaimer.classList.add('insta-disclaimer','insta-monkey-unobtained','black-outline');
-    instaBugDisclaimer.innerHTML = "Note: Some Insta Monkeys that are obtained and then used will not accurately count or display as previously collected. This will be fixed in the future.";
-    instaMonkeyDiv.appendChild(instaBugDisclaimer);
-
     let instaMonkeyMainContainer = document.createElement('div');
     instaMonkeyMainContainer.id = `${tower}-main-container`;
     instaMonkeyMainContainer.classList.add('insta-monkey-main-container');
@@ -3625,11 +3625,6 @@ function generateInstaListView(){
     instaMonkeysList.classList.add('insta-monkeys-list');
     instaMonkeysListContainer.appendChild(instaMonkeysList);
 
-    let instaBugDisclaimer = document.createElement('p');
-    instaBugDisclaimer.classList.add('insta-disclaimer','black-outline');
-    instaBugDisclaimer.innerHTML = "Note: Some Insta Monkeys that are obtained and then used will not accurately count or display as previously collected. This will be fixed in the future.";
-    instaMonkeysList.appendChild(instaBugDisclaimer);
-
     Object.keys(constants.towersInOrder).forEach(tower => {
         if(processedInstaData.TowerTierTotals[tower] == null) { return; }
         let instaMonkeyDiv = document.createElement('div');
@@ -3677,7 +3672,7 @@ function generateInstaListView(){
 
         let instaMonkeysTotalLabelText = document.createElement('p');
         instaMonkeysTotalLabelText.classList.add('insta-monkey-progress-label-text','black-outline');
-        instaMonkeysTotalLabelText.innerHTML = "Total Instas:";
+        instaMonkeysTotalLabelText.innerHTML = "Usable Instas:";
         instaMonkeyTotal.appendChild(instaMonkeysTotalLabelText);
 
         let instaMonkeysTotalText = document.createElement('p');
@@ -3811,12 +3806,12 @@ function generateInstaCollectionEventHelper(){
     
     let collectionHeaderTitleText = document.createElement('p');
     collectionHeaderTitleText.classList.add('collection-header-title-text', 'black-outline');
-    collectionHeaderTitleText.innerHTML = "Collection Event Odds";
+    collectionHeaderTitleText.innerHTML = "New Insta Monkey Chances";
     instaMonkeyCollectionContainer.appendChild(collectionHeaderTitleText); 
 
     let instaMonkeyCollectionDescText = document.createElement('p');
     instaMonkeyCollectionDescText.classList.add('collection-desc-text');
-    instaMonkeyCollectionDescText.innerHTML = "Select a chest to view the chances of getting a new Insta Monkey from it based on your collection. You can also select a tower from below to see the odds of when you select that Featured Insta in the event. The chances list are for each individual Insta Monkey received, so if a chest gives 2 Insta Monkeys, that is the odds for each individual Insta Monkey acquired.";
+    instaMonkeyCollectionDescText.innerHTML = "Select a chest to see the chances of obtaining a new Insta Monkey based on your current collection. You can also view the Featured list or select a Featured Insta below to check the odds for selecting them in the event. The percentages represent the odds for each Insta Monkey received, so if a chest yields 2 Insta Monkeys, the odds are for 1 Insta Monkey roll.";
     instaMonkeyCollectionContainer.appendChild(instaMonkeyCollectionDescText);
 
     let collectionEventChestSelectors = document.createElement('div');
@@ -3874,11 +3869,7 @@ function generateInstaCollectionEventHelper(){
     generateCollectionEventTowerInfo(currentCollectionTower);
 }
 
-function generateCollectionEventTowerInfo(tower) {
-    if(currentCollectionChest == "None") {
-        onSelectCollectionEventChest("wood");
-    }
-
+function generateChances(tower){
     let chances = [];
     if(tower == "All") {
         for(let i = 1; i<6; i++) {
@@ -3895,12 +3886,20 @@ function generateCollectionEventTowerInfo(tower) {
             chances.push(value > 0 ? value / constants.instaTiers[i].length : 0);
         }
     }
-
     let tierChances = constants.collection.crateRewards.instaMonkey[currentCollectionChest].tierChance;
     chances.forEach((chance, index) => {
         let chestTierChance = tierChances[index + 1] || 0;
         chances[index] = chance * chestTierChance;
     })
+    return chances;
+}
+
+function generateCollectionEventTowerInfo(tower) {
+    if(currentCollectionChest == "None") {
+        onSelectCollectionEventChest("wood");
+    }
+
+    let chances = generateChances(tower);
 
     let collectionEventTowerInfo = document.getElementById('collection-event-tower-info');
     collectionEventTowerInfo.innerHTML = "";
@@ -3980,7 +3979,7 @@ function generateCollectionEventTowerInfo(tower) {
 
     let instaMonkeysTotalLabelText = document.createElement('p');
     instaMonkeysTotalLabelText.classList.add('insta-monkey-progress-label-text','black-outline');
-    instaMonkeysTotalLabelText.innerHTML = "Total Instas:";
+    instaMonkeysTotalLabelText.innerHTML = "Usable Instas:";
     instaMonkeyTotal.appendChild(instaMonkeysTotalLabelText);
 
     let instaMonkeysTotalText = document.createElement('p');
@@ -4086,12 +4085,24 @@ function generateCollectionEventTowerInfo(tower) {
     instaMonkeysMissingContainer.classList.add('insta-monkeys-missing-container');
     instaMonkeyAndMissingDiv.appendChild(instaMonkeysMissingContainer);
 
-    mapsProgressCoopToggleInput.addEventListener('change', () => {
-        instaMonkeysMissingContainer.style.display = mapsProgressCoopToggleInput.checked ? "flex" : "none";
-        instaMonkeysMissingContainer.innerHTML = "";
-        collectionMissingToggle = mapsProgressCoopToggleInput.checked;
-        onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, tower, chances);
-    })
+    if(tower != "All") {
+        mapsProgressCoopToggleInput.addEventListener('change', () => {
+            instaMonkeysMissingContainer.style.display = mapsProgressCoopToggleInput.checked ? "flex" : "none";
+            instaMonkeysMissingContainer.innerHTML = "";
+            collectionMissingToggle = mapsProgressCoopToggleInput.checked;
+            onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, tower, chances);
+        })
+    } else {
+        // mapsProgressCoopToggleText.innerHTML = "Show Full List: ";
+        // mapsProgressCoopToggleInput.addEventListener('change', () => {
+        //     instaMonkeysMissingContainer.style.display = mapsProgressCoopToggleInput.checked ? "flex" : "none";
+        //     collectionMissingToggle = mapsProgressCoopToggleInput.checked;
+        //     openAllTowersList(instaMonkeysMissingContainer);
+        // })
+        instaMonkeysMissingContainer.style.display = "flex";
+        openAllTowersList(instaMonkeysMissingContainer);
+    }
+
     if(collectionMissingToggle && tower != "All") {
         instaMonkeysMissingContainer.style.display = "flex";
         onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, tower, chances);
@@ -4151,10 +4162,147 @@ function onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, towe
         if (missingInstas.length == 0) {
             let noneMissing = document.createElement('p');
             noneMissing.classList.add('no-data-found','none-collection','black-outline');
-            noneMissing.innerHTML = "None in this Chest Type!";
+            noneMissing.innerHTML = "None Missing in this Chest Type!";
             instaMonkeysMissingContainer.appendChild(noneMissing);
         }
     }
+}
+
+function openAllTowersList(instaMonkeysMissingContainer){
+    instaMonkeysMissingContainer.innerHTML = "";
+
+    let chancesDict = {};
+    chancesDict["NoFeatured"] = generateChances("All");
+    Object.keys(constants.towersInOrder).forEach(tower => {
+        chancesDict[tower] = generateChances(tower);
+    })
+
+    let sortedTowers = Object.keys(constants.towersInOrder);
+    switch(collectionListSortType) {
+        case "Highest Total Chance":
+            sortedTowers = Object.keys(chancesDict).sort((a, b) => {
+                let sumA = chancesDict[a].reduce((a, b) => a + b, 0);
+                let sumB = chancesDict[b].reduce((a, b) => a + b, 0);
+                return sumB - sumA;
+            })
+            break;
+        case "In-Game Tower Order":
+            break;
+        case "Alphabetical Towers":
+            sortedTowers = Object.keys(constants.towersInOrder).sort();
+            break;
+    }
+
+    let titleAndSortDiv = document.createElement('div');
+    titleAndSortDiv.classList.add('insta-monkey-title-container');
+    instaMonkeysMissingContainer.appendChild(titleAndSortDiv);
+
+    let titleText = document.createElement('p');
+    titleText.classList.add('collection-header-list-text','black-outline');
+    titleText.innerHTML = `Featured Insta Odds (${currentCollectionChest.toLocaleUpperCase()} ${currentCollectionChest == "wood" ? "Crate" : "Chest"})`;
+    titleAndSortDiv.appendChild(titleText);
+
+    let sortFilterDiv = document.createElement('div');
+    sortFilterDiv.classList.add('insta-monkey-sort-container');
+    titleAndSortDiv.appendChild(sortFilterDiv);
+
+    let sortFilterText = document.createElement('p');
+    sortFilterText.classList.add('insta-monkey-sort-label','black-outline');
+    sortFilterText.innerHTML = "Sort By:";
+    sortFilterDiv.appendChild(sortFilterText);
+
+    let sortFilterSelect = document.createElement('select');
+    sortFilterSelect.classList.add('map-progress-filter-difficulty-select');
+    sortFilterSelect.addEventListener('change', () => {
+    })
+    sortFilterDiv.appendChild(sortFilterSelect);
+
+    let sortOptions = ["Highest Total Chance", "In-Game Tower Order", "Alphabetical Towers"];
+    sortOptions.forEach(option => {
+        let sortOption = document.createElement('option');
+        sortOption.value = option;
+        sortOption.innerHTML = option;
+        sortFilterSelect.appendChild(sortOption); 
+    })
+
+    sortFilterSelect.value = collectionListSortType;
+    sortFilterSelect.addEventListener('change', () => {
+        collectionListSortType = sortFilterSelect.value;
+        openAllTowersList(instaMonkeysMissingContainer);
+    })
+
+    let headerRow = {
+        "Tower Type": "white",
+        "Tier 1 Chance": "insta-tier-text-1",
+        "Tier 2 Chance": "insta-tier-text-2",
+        "Tier 3 Chance": "insta-tier-text-3",
+        "Tier 4 Chance": "insta-tier-text-4",
+        "Tier 5 Chance": "insta-tier-text-5",
+        "Total Chance": "white"
+    }
+
+    let instaMonkeyHeaderRow = document.createElement('div');
+    instaMonkeyHeaderRow.classList.add('insta-monkey-header-container','insta-monkey-unobtained');
+    instaMonkeysMissingContainer.appendChild(instaMonkeyHeaderRow);
+
+    Object.entries(headerRow).forEach(([key, value]) => {
+        let instaMonkeyTierContainer = document.createElement('div');
+        instaMonkeyTierContainer.classList.add('insta-monkey-header-container','insta-monkey-unobtained');
+        instaMonkeyHeaderRow.appendChild(instaMonkeyTierContainer);
+
+        let instaMonkeyTierText = document.createElement('p');
+        instaMonkeyTierText.classList.add('insta-monkey-small-name-text','black-outline', value);
+        instaMonkeyTierText.innerHTML = key;
+        instaMonkeyTierContainer.appendChild(instaMonkeyTierText);
+    })
+
+    sortedTowers.forEach(tower => {
+        let instaMonkeyTierContainer = document.createElement('div');
+        instaMonkeyTierContainer.classList.add('insta-monkey-list-container','insta-monkey-unobtained');
+        instaMonkeysMissingContainer.appendChild(instaMonkeyTierContainer);
+
+        let instaMonkeyTierImg = document.createElement('img');
+        instaMonkeyTierImg.classList.add('insta-monkey-list-img');
+        instaMonkeyTierImg.src = tower == "NoFeatured" ? "./Assets/UI/InstaRandomTier1.png" : getInstaMonkeyIcon(tower,'000');
+        instaMonkeyTierContainer.appendChild(instaMonkeyTierImg);
+
+        let instaMonkeyTierText = document.createElement('p');
+        instaMonkeyTierText.classList.add('insta-monkey-small-name-text','black-outline');
+        instaMonkeyTierText.innerHTML = tower == "NoFeatured" ? "No Featured Selected" : getLocValue(tower);
+        instaMonkeyTierContainer.appendChild(instaMonkeyTierText);
+
+        let instaMonkeyTierChanceContainer = document.createElement('div');
+        instaMonkeyTierChanceContainer.classList.add('insta-monkey-list-chance-container');
+        instaMonkeyTierContainer.appendChild(instaMonkeyTierChanceContainer);
+
+        chancesDict[tower].forEach((chance, index) => {
+            let instaMonkeyChance = document.createElement('div');
+            instaMonkeyChance.classList.add('insta-monkey-chance-div');
+            instaMonkeyTierChanceContainer.appendChild(instaMonkeyChance);
+
+            let instaMonkeyChanceTier = document.createElement('p');
+            instaMonkeyChanceTier.classList.add('insta-monkey-chance-text-list','black-outline');
+            instaMonkeyChanceTier.innerHTML = (chance * 100).toFixed(2) + "%";
+            if(chance == 0) {
+                instaMonkeyChanceTier.classList.add('insta-monkey-chance-zero');
+            }
+            instaMonkeyChance.appendChild(instaMonkeyChanceTier);
+        })
+
+        let instaMonkeyTotalChance = document.createElement('div');
+        instaMonkeyTotalChance.classList.add('insta-monkey-chance-div');
+        instaMonkeyTierChanceContainer.appendChild(instaMonkeyTotalChance);
+
+        let sumOfChances = chancesDict[tower].reduce((a, b) => a + b, 0);
+
+        let instaMonkeyTotalChanceTier = document.createElement('p');
+        instaMonkeyTotalChanceTier.classList.add('insta-monkey-chance-text-list','black-outline');
+        instaMonkeyTotalChanceTier.innerHTML = (sumOfChances * 100).toFixed(2) + "%";
+        if(sumOfChances == 0) {
+            instaMonkeyTotalChanceTier.classList.add('insta-monkey-chance-zero');
+        }
+        instaMonkeyTotalChance.appendChild(instaMonkeyTotalChanceTier);
+    })
 }
 
 function generateAchievementsProgress() {

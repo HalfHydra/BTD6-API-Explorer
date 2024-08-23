@@ -90,12 +90,6 @@ function generateRoundsets() {
     roundsetPage.classList.add('progress-page', 'page-extra');
     roundsetsContent.appendChild(roundsetPage);
 
-    let roundsetDescriptionText = document.createElement('p');
-    roundsetDescriptionText.classList.add('sku-roundset-selector-desc');
-    roundsetDescriptionText.style.textAlign = "center";
-    roundsetDescriptionText.innerHTML = `This is a standalone form of the roundset viewer from a project called Bloons TD 6 API Explorer which allows you to view current and previous event data available on the API as well as track your progress. You can view it here: <a href="https://BTD6APIExplorer.github.io">Bloons TD 6 API Explorer</a>`;
-    roundsetPage.appendChild(roundsetDescriptionText);
-
     let roundsetHeadertext = document.createElement('p');
     roundsetHeadertext.classList.add('roundset-header-text', 'black-outline');
     roundsetHeadertext.innerHTML = "Select a roundset to view:";
@@ -103,7 +97,7 @@ function generateRoundsets() {
 
     let selectorsDiv = document.createElement('div');
     selectorsDiv.classList.add('selectors-div');
-    roundsetPage.appendChild(selectorsDiv);;
+    roundsetPage.appendChild(selectorsDiv);
     
     let normalRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type != "quest"));
     let otherRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "quest"));
@@ -197,6 +191,13 @@ function generateRoundsets() {
         roundsetText.innerHTML = roundset;
         roundsetDiv.appendChild(roundsetText);
     });
+
+    let roundsetDescriptionText = document.createElement('p');
+    roundsetDescriptionText.classList.add('sku-roundset-selector-desc');
+    roundsetDescriptionText.style.textAlign = "center";
+    roundsetDescriptionText.innerHTML = `This is a standalone form of the roundset viewer from a project called Bloons TD 6 API Explorer which allows you to view current and previous event data available on the API as well as track your progress. You can view it here: <a href="https://BTD6APIExplorer.github.io">Bloons TD 6 API Explorer</a>`;
+    roundsetPage.appendChild(roundsetDescriptionText);
+
 }
 
 async function showRoundsetModel(source, roundset) {
