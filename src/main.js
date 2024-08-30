@@ -282,6 +282,7 @@ function generateMedals(){
     medalsInOrder["MedalEventGoldSilverMedal"] = btd6publicprofile["_medalsRace"]["GoldSilver"] || 0;
     medalsInOrder["MedalEventDoubleGoldMedal"] = btd6publicprofile["_medalsRace"]["DoubleGold"] || 0;
     medalsInOrder["MedalEventGoldDiamondMedal"] = btd6publicprofile["_medalsRace"]["GoldDiamond"] || 0;
+    medalsInOrder["MedalEventDiamondMedal"] = btd6publicprofile["_medalsRace"]["Diamond"] || 0;
     medalsInOrder["MedalEventRedDiamondMedal"] = btd6publicprofile["_medalsRace"]["RedDiamond"] || 0;
     medalsInOrder["MedalEventBlackDiamondMedal"] = btd6publicprofile["_medalsRace"]["BlackDiamond"] || 0;
     medalsInOrder["OdysseyStarIcon"] = btd6publicprofile.gameplay["totalOdysseyStars"] || 0;
@@ -306,6 +307,7 @@ function generateMedals(){
     medalsInOrder["CtLocalPlayerBronzeMedal"] = btd6publicprofile["_medalsCTLocal"]["Bronze"] || 0;
     medalsInOrder["CtLocalPlayerSilverMedal"] = btd6publicprofile["_medalsCTLocal"]["Silver"] || 0;
     medalsInOrder["CtLocalPlayerDoubleGoldMedal"] = btd6publicprofile["_medalsCTLocal"]["DoubleGold"] || 0;
+    medalsInOrder["CtLocalPlayerGoldDiamondMedal"] = btd6publicprofile["_medalsCTLocal"]["GoldDiamond"] || 0;
     medalsInOrder["CtLocalPlayerDiamondMedal"] = btd6publicprofile["_medalsCTLocal"]["Diamond"] || 0;
     medalsInOrder["CtLocalPlayerRedDiamondMedal"] = btd6publicprofile["_medalsCTLocal"]["RedDiamond"] || 0;
     medalsInOrder["CtLocalPlayerBlackDiamondMedal"] = btd6publicprofile["_medalsCTLocal"]["BlackDiamond"] || 0;
@@ -316,6 +318,8 @@ function generateMedals(){
     medalsInOrder["CtGlobalPlayerDoubleGoldMedal"] = btd6publicprofile["_medalsCTGlobal"]["DoubleGold"] || 0;
     medalsInOrder["CtGlobalPlayerGoldDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["GoldDiamond"] || 0;
     medalsInOrder["CtGlobalPlayerDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["Diamond"] || 0;
+    medalsInOrder["CtGlobalPlayerRedDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["RedDiamond"] || 0;
+    medalsInOrder["CtGlobalPlayerBlackDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["BlackDiamond"] || 0;
 }
 
 function generateExtras(){
@@ -1277,6 +1281,7 @@ function generateOverview(){
         if(num === 0) { continue; }
         let medalDiv = document.createElement('div');
         medalDiv.classList.add('medal-div');
+        medalDiv.title = constants.medalLabels[medal];
         medalsDiv.appendChild(medalDiv);
 
         let medalImg = document.createElement('img');
@@ -1359,6 +1364,7 @@ function generateOverview(){
         if(!heroesList.includes(hero)) { continue; }
         let heroDiv = document.createElement('div');
         heroDiv.classList.add('hero-div');
+        heroDiv.title = getLocValue(hero);
         counter < 3 ? top3HeroesDiv.appendChild(heroDiv) : otherHeroesDiv.appendChild(heroDiv);
 
         let heroImg = document.createElement('img');
@@ -1438,6 +1444,7 @@ function generateOverview(){
         if(!towersList.includes(tower)) { continue; }
         let towerDiv = document.createElement('div');
         towerDiv.classList.add('hero-div');
+        towerDiv.title = getLocValue(tower);
         counter < 3 ? top3TowersDiv.appendChild(towerDiv) : otherTowersDiv.appendChild(towerDiv);
 
         let towerImg = document.createElement('img');
@@ -6799,6 +6806,7 @@ async function openProfile(source, profile){
     publicMedals["MedalEventGoldSilverMedal"] = profile["_medalsRace"]["GoldSilver"] || 0;
     publicMedals["MedalEventDoubleGoldMedal"] = profile["_medalsRace"]["DoubleGold"] || 0;
     publicMedals["MedalEventGoldDiamondMedal"] = profile["_medalsRace"]["GoldDiamond"] || 0;
+    publicMedals["MedalEventDiamondMedal"] = profile["_medalsRace"]["Diamond"] || 0;
     publicMedals["MedalEventRedDiamondMedal"] = profile["_medalsRace"]["RedDiamond"] || 0;
     publicMedals["MedalEventBlackDiamondMedal"] = profile["_medalsRace"]["BlackDiamond"] || 0;
     publicMedals["OdysseyStarIcon"] = profile.gameplay["totalOdysseyStars"] || 0;
@@ -6823,6 +6831,7 @@ async function openProfile(source, profile){
     publicMedals["CtLocalPlayerBronzeMedal"] = profile["_medalsCTLocal"]["Bronze"] || 0;
     publicMedals["CtLocalPlayerSilverMedal"] = profile["_medalsCTLocal"]["Silver"] || 0;
     publicMedals["CtLocalPlayerDoubleGoldMedal"] = profile["_medalsCTLocal"]["DoubleGold"] || 0;
+    publicMedals["CtLocalPlayerGoldDiamondMedal"] = profile["_medalsCTLocal"]["GoldDiamond"] || 0;
     publicMedals["CtLocalPlayerDiamondMedal"] = profile["_medalsCTLocal"]["Diamond"] || 0;
     publicMedals["CtLocalPlayerRedDiamondMedal"] = profile["_medalsCTLocal"]["RedDiamond"] || 0;
     publicMedals["CtLocalPlayerBlackDiamondMedal"] = profile["_medalsCTLocal"]["BlackDiamond"] || 0;
@@ -6833,6 +6842,8 @@ async function openProfile(source, profile){
     publicMedals["CtGlobalPlayerDoubleGoldMedal"] = profile["_medalsCTGlobal"]["DoubleGold"] || 0;
     publicMedals["CtGlobalPlayerGoldDiamondMedal"] = profile["_medalsCTGlobal"]["GoldDiamond"] || 0;
     publicMedals["CtGlobalPlayerDiamondMedal"] = profile["_medalsCTGlobal"]["Diamond"] || 0;
+    publicMedals["CtGlobalPlayerRedDiamondMedal"] = profile["_medalsCTGlobal"]["RedDiamond"] || 0;
+    publicMedals["CtGlobalPlayerBlackDiamondMedal"] = profile["_medalsCTGlobal"]["BlackDiamond"] || 0;
 
     let currencyAndMedalsDiv = document.createElement('div');
     currencyAndMedalsDiv.classList.add('currency-medals-div');
@@ -6846,6 +6857,7 @@ async function openProfile(source, profile){
         if(num === 0) { continue; }
         let medalDiv = document.createElement('div');
         medalDiv.classList.add('medal-div');
+        medalDiv.title = constants.medalLabels[medal];
         medalsDiv.appendChild(medalDiv);
 
         let medalImg = document.createElement('img');
