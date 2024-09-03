@@ -4295,6 +4295,99 @@
     text-align: center;
     margin: 10px;
 }
+.insta-monkey-tier-obtained {
+    position: absolute;
+    width: 75px;
+    left: 20px;
+    top: 25px;
+}
+
+.insta-monkey-collection-top-btns {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 600px;
+    margin: 0 auto;
+}
+.collection-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    /* max-height: 80vh; */
+    background-color: var(--profile-secondary);
+    border-radius: 10px;
+    /* overflow-y: auto; */
+}
+.chest-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+.chest-tier-div {
+    display: flex;
+    justify-content: flex-start;
+    width: 310px;
+}
+.collection-modal-header-text {
+    font-size: 32px;
+    text-align: center;
+    margin: 5px;
+    padding: 20px;
+} 
+.collection-modal-close {
+    width: 50px;
+    top: 5px;
+    right: 5px;
+}
+.collection-modal-header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--profile-primary);
+    padding: 0 10px;
+    z-index: 10;
+    border-radius: 10px 10px 0 0;
+}
+.collection-header-modal-left {
+    width: 50px;
+}
+.tier-text {
+    font-size: 20px;
+    text-align: center;
+}
+.quantity-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.insta-quantity-icon {
+    width: 60px;
+}
+.insta-icon-div {
+    position: relative;
+}
+.chest-quantity-div {
+    width: 120px;
+}
+.quantity-text {
+    text-align: center;
+    font-size: 24px;
+    padding-left: 10px;
+    width: 70px;
+}
+.collection-help-img {
+    width: 100%;
+    padding-bottom: 20px;
+}
+.modal-help-divs {
+    overflow-y: auto;
+    max-height: 80vh;
+}
 
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */

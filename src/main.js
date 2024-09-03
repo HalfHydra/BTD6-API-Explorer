@@ -55,7 +55,8 @@ let processedInstaData = {
     "TowerTotal": {},
     "TowerTierTotals": {},
     "TowerMissingByTier": {},
-    "TowerBorders": {}
+    "TowerBorders": {},
+    "TowerObtained": {}
 }
 
 let timerInterval = null;
@@ -90,8 +91,16 @@ let currentRoundsetEndRound = 140;
 
 let currentCollectionChest = "None";
 let currentCollectionTower = "All";
-let collectionMissingToggle = false;
+let collectionMissingToggle = true;
 let collectionListSortType = "Highest Total Chance";
+
+let chestSelectorMap = {
+    "wood": "Wooden",
+    "bronze": "Bronze",
+    "silver": "Silver",
+    "gold": "Gold",
+    "diamond": "Diamond"
+}
 
 let loggedIn = false;
 
@@ -466,7 +475,9 @@ function generateInstaData(){
     let towerTierTotals = {};
     let towerMissingByTier = {};
     let towerBorders = {};
+    let towerObtained = {};
     for (let [tower, data] of Object.entries(btd6usersave.instaTowers)){
+        towerObtained[tower] = [],
         towerTotal[tower] = 0;
         let towerTiersTemplate = {
             "1": 0,
@@ -537,8 +548,20 @@ function generateInstaData(){
     processedInstaData["TowerTierTotals"] = towerTierTotals;
     processedInstaData["TowerMissingByTier"] = towerMissingByTier;
     processedInstaData["TowerBorders"] = towerBorders;
+    processedInstaData["TowerObtained"] = towerObtained;
 }
 
+function calculateInstaBorder(tower) {
+    if (processedInstaData.TowerTierTotals[tower]["4"] == constants.instaTiers["4"].length && processedInstaData.TowerTierTotals[tower]["3"] == constants.instaTiers["3"].length && processedInstaData.TowerTierTotals[tower]["2"] == constants.instaTiers["2"].length && processedInstaData.TowerTierTotals[tower]["1"] == constants.instaTiers["1"].length){
+        if (processedInstaData.TowerTierTotals[tower]["5"] == constants.instaTiers["5"].length) {
+            processedInstaData.TowerBorders[tower] = "Black";
+        } else {
+            processedInstaData.TowerBorders[tower] = "Gold";
+        }
+    } else {
+        processedInstaData.TowerBorders[tower] = "";
+    }
+}
 function showLoading(){
     let imagesToLoad = 0;
     function imageLoaded() {
@@ -990,7 +1013,7 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = 'v1.2.2: Missing Medals<br>- Added a few missing medals from the overview/leaderboard profile pages<br>- Added mouse hover tooltips to various elements<br><br>v1.2.1: Insta Monkey Collection Improvements<br>- Resolved an issue preventing the collected but used Insta Monkeys from being displayed.<br>- Add a new list of all the Insta Monkey tower chances in the Collection Event Helper for efficient checking of what the best Featured Insta Monkey to choose is.<br>- The trailer video no longer plays in the background after previewing the site or logging in! Thanks for the feedback.<br><br>v1.2.0: Preview Mode and UI Improvements <br>- Added a way to use the site without an OAK token. Useful when you don\'t have it accessible or can\'t make one<br>- The site now prompts when your data has new content that the site doesn\'t have updated yet<br>- Challenge details now correctly shows the max amount of specific monkeys if limited<br>- Other UI fixes<br><br> v1.1.0: Insta Monkey Collection Features<br>- Added Insta Monkey Collection Event Helper. This displays the odds of getting a new Insta Monkey for each chest type and when selecting a featured tower.<br>- Also added a page documentating all of the continuous sources of Insta Monkeys<br>- UI fixes and improvements<br><br>v1.0.1: Bug Fixes<br>- Daily challenges now show the correct associated date<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes<br><br>v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.';
+    changelogText.innerHTML = 'v1.2.3: Collection Event Menu Upgrade<br>- Added a how to use guide at the top of the Collection Event Menu<br>- Added the Insta Chest odds to the Collection Event Menu<br>- Clicking on a missing Insta will now temporarily mark it as obtained<br><br>v1.2.2: Missing Medals<br>- Added a few missing medals from the overview/leaderboard profile pages<br>- Added mouse hover tooltips to various elements<br><br>v1.2.1: Insta Monkey Collection Improvements<br>- Resolved an issue preventing the collected but used Insta Monkeys from being displayed.<br>- Add a new list of all the Insta Monkey tower chances in the Collection Event Helper for efficient checking of what the best Featured Insta Monkey to choose is.<br>- The trailer video no longer plays in the background after previewing the site or logging in! Thanks for the feedback.<br><br>v1.2.0: Preview Mode and UI Improvements <br>- Added a way to use the site without an OAK token. Useful when you don\'t have it accessible or can\'t make one<br>- The site now prompts when your data has new content that the site doesn\'t have updated yet<br>- Challenge details now correctly shows the max amount of specific monkeys if limited<br>- Other UI fixes<br><br> v1.1.0: Insta Monkey Collection Features<br>- Added Insta Monkey Collection Event Helper. This displays the odds of getting a new Insta Monkey for each chest type and when selecting a featured tower.<br>- Also added a page documentating all of the continuous sources of Insta Monkeys<br>- UI fixes and improvements<br><br>v1.0.1: Bug Fixes<br>- Daily challenges now show the correct associated date<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes<br><br>v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.';
     changelogDiv.appendChild(changelogText);
 
     let feedbackHeader = document.createElement('p');
@@ -3801,6 +3824,175 @@ function generateInstaObtainGuide() {
     })
 }
 
+function generateChestOddsModal() {
+    let modal = document.createElement('div');
+    modal.classList.add('error-modal-overlay');
+    document.body.appendChild(modal);
+
+    let modalContent = document.createElement('div');
+    modalContent.classList.add('collection-modal');
+    modal.appendChild(modalContent);
+
+    let modalHeaderDiv = document.createElement('div');
+    modalHeaderDiv.classList.add('collection-modal-header');
+    modalContent.appendChild(modalHeaderDiv);
+
+    let collectionHeaderModalLeft = document.createElement('div');
+    collectionHeaderModalLeft.classList.add('collection-header-modal-left');
+    modalHeaderDiv.appendChild(collectionHeaderModalLeft);
+
+    let modalTitle = document.createElement('p');
+    modalTitle.classList.add('collection-modal-header-text','black-outline');
+    modalTitle.innerHTML = "Standard Chest Base Odds";
+    modalHeaderDiv.appendChild(modalTitle);
+
+    let modalClose = document.createElement('img');
+    modalClose.classList.add('collection-modal-close');
+    modalClose.src = "./Assets/UI/CloseBtn.png";
+    modalClose.addEventListener('click', () => {
+        modal.remove();
+    })
+    modalHeaderDiv.appendChild(modalClose);
+
+    let modalChestDesc = document.createElement('p');
+    modalChestDesc.classList.add('collection-desc-text');
+    modalChestDesc.innerHTML = "These are the standard odds. Certain events may change these, but they will be updated to be accurate when I update the site. Accurate as of 8/30/2024";
+    modalContent.appendChild(modalChestDesc);
+
+    let modalChestDivs = document.createElement('div');
+    modalChestDivs.classList.add('modal-help-divs');
+    modalContent.appendChild(modalChestDivs);
+
+    Object.entries(constants.collection.crateRewards.instaMonkey).forEach(([chest,data]) => {
+        let chestContainer = document.createElement('div');
+        chestContainer.classList.add('chest-container');
+        modalChestDivs.appendChild(chestContainer);
+
+        let chestImg = document.createElement('img');
+        chestImg.classList.add('collection-event-chest-selector');
+        chestImg.src = `./Assets/UI/EventMysteryBox${chestSelectorMap[chest]}Icon.png`;
+        chestContainer.appendChild(chestImg);
+        
+        let chestTierDiv = document.createElement('div');
+        chestTierDiv.classList.add('chest-tier-div');
+        chestContainer.appendChild(chestTierDiv);
+
+        Object.entries(data.tierChance).forEach(([tier, chance]) => {
+            let tierContainer = document.createElement('div');
+            tierContainer.classList.add('tier-container');
+            chestTierDiv.appendChild(tierContainer);
+
+            let tierImg = document.createElement('img');
+            tierImg.classList.add('insta-monkey-tier-img');
+            tierImg.src = `./Assets/UI/InstaRandomTier${tier}.png`;
+            tierContainer.appendChild(tierImg);
+
+            let tierText = document.createElement('p');
+            tierText.classList.add('tier-text','black-outline');
+            tierText.innerHTML = `${(chance * 100).toFixed(2)}%`;
+            tierContainer.appendChild(tierText);
+        })
+
+        let chestQuantityDiv = document.createElement('div');
+        chestQuantityDiv.classList.add('chest-quantity-div');
+        chestContainer.appendChild(chestQuantityDiv);
+
+        Object.entries(data.quantityChance).forEach(([quantity, chance]) => {
+            let quantityContainer = document.createElement('div');
+            quantityContainer.classList.add('quantity-container');
+            chestQuantityDiv.appendChild(quantityContainer);
+
+            let instaIconDiv = document.createElement('div');
+            instaIconDiv.classList.add('insta-icon-div');
+            quantityContainer.appendChild(instaIconDiv);
+
+            let instaIcon = document.createElement('img');
+            instaIcon.classList.add('insta-quantity-icon');
+            instaIcon.src = `./Assets/UI/InstaIcon.png`;
+            instaIconDiv.appendChild(instaIcon);
+
+            let quantityLabel = document.createElement('p');
+            quantityLabel.classList.add('bloon-group-number','black-outline');
+            quantityLabel.innerHTML = `X${quantity}`;
+            instaIconDiv.appendChild(quantityLabel);
+
+            let quantityText = document.createElement('p');
+            quantityText.classList.add('quantity-text','black-outline');
+            quantityText.innerHTML = `${(chance * 100)}%`;
+            quantityContainer.appendChild(quantityText);
+        })
+    })
+
+}
+
+function generateHowToUseModal() {
+    let modal = document.createElement('div');
+    modal.classList.add('error-modal-overlay');
+    document.body.appendChild(modal);
+
+    let modalContent = document.createElement('div');
+    modalContent.classList.add('collection-modal');
+    modal.appendChild(modalContent);
+
+    let modalHeaderDiv = document.createElement('div');
+    modalHeaderDiv.classList.add('collection-modal-header');
+    modalContent.appendChild(modalHeaderDiv);
+
+    let collectionHeaderModalLeft = document.createElement('div');
+    collectionHeaderModalLeft.classList.add('collection-header-modal-left');
+    modalHeaderDiv.appendChild(collectionHeaderModalLeft);
+
+    let modalTitle = document.createElement('p');
+    modalTitle.classList.add('collection-modal-header-text','black-outline');
+    modalTitle.innerHTML = "How to Use This Helper";
+    modalHeaderDiv.appendChild(modalTitle);
+
+    let modalClose = document.createElement('img');
+    modalClose.classList.add('collection-modal-close');
+    modalClose.src = "./Assets/UI/CloseBtn.png";
+    modalClose.addEventListener('click', () => {
+        modal.remove();
+    })
+    modalHeaderDiv.appendChild(modalClose);
+
+    let modalHelpDivs = document.createElement('div');
+    modalHelpDivs.classList.add('modal-help-divs');
+    modalContent.appendChild(modalHelpDivs);
+
+    let modelHelpText = {
+        "What is a Collection Event?": "These are events that occur approximately every other month (usually around holidays) that allow you to earn some form of currency that count towards unlocking Insta Monkey chests. This is the best way for collectors to work on their Insta Monkey collection.",
+        "What is a Featured Insta?": "Every 8 hours, a rotating select rotation of 4 Featured Insta Monkeys are available to select in collection events. Selecting a Featured Insta Monkey in-game will guarantee that Insta Monkeys recieved from the chest are of that tower type.",
+        "What does this helper do?": "When opening chests, how do you know which Featured Insta Monkey is best to pick to have the highest chance of getting a new Insta Monkey for your collection? This helps you choose what to pick, read below to learn how.",
+        "Start by Selecting a Chest": "Choose your current Collection Event chest type to set the type of chest to calculate the odds for.",
+        "Choose a Featured Insta Monkey (Optional)": "If you choose a featured Insta Monkey below the chests, you will see the odds by tier and total chance for that Insta Monkey. Select the same one again to go back to All Towers.",
+        "Entering Obtained Insta Monkeys": "At the bottom of selecting a featured Insta, you can see the missing Instas. Click on an Insta that you were missing to mark it as obtained manually until the API updates (takes at most 15 minutes).",
+        "All Towers": "All Towers displays the chances of getting a new Insta Monkey relative to your entire collection in the selected chest as well as a combined list of all the chances you will see when selecting each Featured Insta.",
+        "Featured Insta Odds List": "This is a great way to see which Featured Insta Monkey will be more likely to get a new Insta Monkey for your current chest type, including if it's better to let it go completely random with none selected!",
+        "How are the chances calculated?": "The chances are calculated by first taking how likely a specific Insta is out of random Insta Tier roll, and then multiplying it by the chest's likelihood of getting that random tier as a roll. This chance is for each individual roll of an Insta, and does not account for the varying quantities of Instas in chests. For example, using this sample Monkey Sub information, we can calculate how likely getting a missing Tier 2 is from a Silver Chest by first taking the chance of rolling that Insta Monkey when rolling a Tier 2 Insta from the chest, and then multiplying it by the chance of getting a Tier 2 Insta from the chest. In reality, this is 1/12 * 40% which is equivalent to 3.33%."
+    }
+
+    Object.entries(modelHelpText).forEach(([text, desc], index) => {
+        let modalHelpDiv = document.createElement('div');
+        modalHelpDiv.classList.add('modal-help-div');
+        modalHelpDivs.appendChild(modalHelpDiv);
+
+        let modalHelpText = document.createElement('p');
+        modalHelpText.classList.add('collection-header-title-text','black-outline');
+        modalHelpText.innerHTML = text;
+        modalHelpDiv.appendChild(modalHelpText);
+
+        let modalHelpDesc = document.createElement('p');
+        modalHelpDesc.classList.add('collection-desc-text');
+        modalHelpDesc.innerHTML = desc;
+        modalHelpDiv.appendChild(modalHelpDesc);
+
+        let modalHelpImg = document.createElement('img');
+        modalHelpImg.classList.add('collection-help-img');
+        modalHelpImg.src = `./Assets/UI/CollectionHelp${index + 1}.png`;
+        modalHelpDiv.appendChild(modalHelpImg);
+    });
+}
+
 function generateInstaCollectionEventHelper(){
     let instaMonkeysProgressContainer = document.getElementById('insta-monkeys-progress-container');
     instaMonkeysProgressContainer.innerHTML = "";
@@ -3816,28 +4008,42 @@ function generateInstaCollectionEventHelper(){
     collectionHeaderTitleText.innerHTML = "New Insta Monkey Chances";
     instaMonkeyCollectionContainer.appendChild(collectionHeaderTitleText); 
 
+    let instaMonkeyCollectionTopBtns = document.createElement('div');
+    instaMonkeyCollectionTopBtns.classList.add('insta-monkey-collection-top-btns');
+    instaMonkeyCollectionContainer.appendChild(instaMonkeyCollectionTopBtns);
+
+    let howButton = document.createElement('p');
+    howButton.classList.add('where-button','black-outline');
+    howButton.innerHTML = 'How to Use This';
+    howButton.addEventListener('click', () => {
+        generateHowToUseModal();
+    })
+    instaMonkeyCollectionTopBtns.appendChild(howButton);
+
+    let chestOddsButton = document.createElement('p');
+    chestOddsButton.classList.add('where-button','black-outline');
+    chestOddsButton.style.width = "230px";
+    chestOddsButton.innerHTML = 'View Chest Odds';
+    chestOddsButton.addEventListener('click', () => {
+        generateChestOddsModal();
+    })
+    instaMonkeyCollectionTopBtns.appendChild(chestOddsButton);
+
+
     let instaMonkeyCollectionDescText = document.createElement('p');
     instaMonkeyCollectionDescText.classList.add('collection-desc-text');
     instaMonkeyCollectionDescText.innerHTML = "Select a chest to see the chances of obtaining a new Insta Monkey based on your current collection. You can also view the Featured list or select a Featured Insta below to check the odds for selecting them in the event. The percentages represent the odds for each Insta Monkey received, so if a chest yields 2 Insta Monkeys, the odds are for 1 Insta Monkey roll.";
-    instaMonkeyCollectionContainer.appendChild(instaMonkeyCollectionDescText);
+    //instaMonkeyCollectionContainer.appendChild(instaMonkeyCollectionDescText);
 
     let collectionEventChestSelectors = document.createElement('div');
     collectionEventChestSelectors.classList.add('collection-event-chest-selectors');
     instaMonkeyCollectionContainer.appendChild(collectionEventChestSelectors);
 
-    let selectorMap = {
-        "wood": "Wooden",
-        "bronze": "Bronze",
-        "silver": "Silver",
-        "gold": "Gold",
-        "diamond": "Diamond"
-    }
-
-    Object.keys(selectorMap).forEach(chest => {
+    Object.keys(chestSelectorMap).forEach(chest => {
         let collectionEventChestSelector = document.createElement('img');
         collectionEventChestSelector.id = `collection-event-chest-selector-${chest}`;
         collectionEventChestSelector.classList.add('collection-event-chest-selector');
-        collectionEventChestSelector.src = `./Assets/UI/EventMysteryBox${selectorMap[chest]}Icon.png`;
+        collectionEventChestSelector.src = `./Assets/UI/EventMysteryBox${chestSelectorMap[chest]}Icon.png`;
         collectionEventChestSelector.addEventListener('click', () => {
             onSelectCollectionEventChest(chest);
         })
@@ -4069,13 +4275,26 @@ function generateCollectionEventTowerInfo(tower) {
     instaMonkeyChanceText.innerHTML = "New Chance:";
     instaMonkeyChanceContainer.appendChild(instaMonkeyChanceText);
 
+    let outlineColor = "black-outline";
+
+    if (tower != "All") {
+        switch(processedInstaData.TowerBorders[tower]) {
+            case "Gold":
+                outlineColor = "knowledge-outline";
+                break;
+            case "Black":
+                outlineColor = "leaderboard-outline";
+                break;
+        }
+    }
+
     for (let [tier, tierTotal] of tierCounts) {
         let instaMonkeyChance = document.createElement('div');
         instaMonkeyChance.classList.add('insta-monkey-chance-div');
         instaMonkeyChanceContainer.appendChild(instaMonkeyChance);
 
         let instaMonkeyChanceTier = document.createElement('p');
-        instaMonkeyChanceTier.classList.add('insta-monkey-chance-text-list','black-outline');
+        instaMonkeyChanceTier.classList.add('insta-monkey-chance-text-list',outlineColor);
         instaMonkeyChanceTier.innerHTML = (chances[tier - 1] * 100).toFixed(2) + "%";
         if(chances[tier - 1] == 0) {
             instaMonkeyChanceTier.classList.add('insta-monkey-chance-zero');
@@ -4127,7 +4346,7 @@ function onSelectCollectionEventChest(type) {
 }
 
 function onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, tower, chances) {
-    function addInstaMonkeyIcon(towerType, tiers) {
+    function addInstaMonkeyIcon(towerType, tiers, obtained) {
         let instaMonkeyTierContainer = document.createElement('div');
         instaMonkeyTierContainer.classList.add('insta-monkey-tier-container','insta-monkey-unobtained');
         instaMonkeysMissingContainer.appendChild(instaMonkeyTierContainer);
@@ -4143,6 +4362,33 @@ function onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, towe
         instaMonkeyTierText.classList.add('insta-monkey-tier-text','black-outline');
         instaMonkeyTierText.innerHTML = `${tiers[0]}-${tiers[1]}-${tiers[2]}`;
         instaMonkeyTierContainer.appendChild(instaMonkeyTierText);
+
+        if (obtained) {
+            let instaMonkeyTierObtained = document.createElement('img');
+            instaMonkeyTierObtained.classList.add('insta-monkey-tier-obtained');
+            instaMonkeyTierObtained.src = "./Assets/UI/TickGreenIcon.png";
+            instaMonkeyTierContainer.appendChild(instaMonkeyTierObtained);
+
+            instaMonkeyTierContainer.addEventListener('click', () => {
+                processedInstaData.TowerObtained[towerType] = processedInstaData.TowerObtained[towerType].filter(value => value != tiers);
+                let key = Object.keys(constants.instaTiers).find(key => constants.instaTiers[key].includes(tiers));
+                processedInstaData.TowerMissingByTier[towerType][key].push(tiers);
+                delete btd6usersave.instaTowers[towerType][tiers];
+                processedInstaData.TowerTierTotals[towerType][key] -= 1;
+                calculateInstaBorder(towerType);
+                generateCollectionEventTowerInfo(towerType);
+            });
+        } else {
+            instaMonkeyTierContainer.addEventListener('click', () => {
+                processedInstaData.TowerObtained[towerType].push(tiers);
+                let key = Object.keys(constants.instaTiers).find(key => constants.instaTiers[key].includes(tiers));
+                processedInstaData.TowerMissingByTier[towerType][key] = processedInstaData.TowerMissingByTier[towerType][key].filter(value => value != tiers);
+                btd6usersave.instaTowers[towerType][tiers] = 0;
+                processedInstaData.TowerTierTotals[towerType][key] += 1;
+                calculateInstaBorder(towerType);
+                generateCollectionEventTowerInfo(towerType);
+            })
+        }
     }
 
     if (tower == "All") {
@@ -4163,10 +4409,16 @@ function onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, towe
         .flat();
 
         missingInstas.forEach(tiers => {
-            addInstaMonkeyIcon(tower, tiers);
+            addInstaMonkeyIcon(tower, tiers, false);
         })
 
-        if (missingInstas.length == 0) {
+        let manualEntry = processedInstaData.TowerObtained[tower];
+
+        manualEntry.forEach(tiers => {
+            addInstaMonkeyIcon(tower, tiers, true);
+        });
+
+        if (missingInstas.length == 0 && manualEntry.length == 0) {
             let noneMissing = document.createElement('p');
             noneMissing.classList.add('no-data-found','none-collection','black-outline');
             noneMissing.innerHTML = "None Missing in this Chest Type!";
