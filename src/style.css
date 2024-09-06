@@ -730,6 +730,7 @@
     font-family: 'Luckiest Guy';
     font-size: 24px;
     color: white;
+    text-align: center;
 }
 .event-selector-text {
     font-family: 'Luckiest Guy';
@@ -4387,6 +4388,11 @@
 .modal-help-divs {
     overflow-y: auto;
     max-height: 80vh;
+}
+.race-roundset {
+    background-image: url(../Assets/EventBanner/EventBannerSmallRaces.png);
+    padding: 12px;
+    border: 8px solid #91c1ff;
 }
 
 .black-outline {

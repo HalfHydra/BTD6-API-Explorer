@@ -98,6 +98,60 @@ function generateRoundsets() {
     let selectorsDiv = document.createElement('div');
     selectorsDiv.classList.add('selectors-div');
     roundsetPage.appendChild(selectorsDiv);
+
+    let limitedRoundsets = {};
+    Object.entries(constants.limitedTimeEvents).forEach(([roundset, data]) => {
+        if (data.start < Date.now() && data.end > Date.now()) {
+            limitedRoundsets[roundset] = data;
+        }
+    })
+
+    Object.entries(limitedRoundsets).forEach(([event, data]) => {
+        let roundsetDiv = document.createElement('div');
+        roundsetDiv.classList.add('roundset-selector-div');
+        roundsetDiv.addEventListener('click', () => {
+            showLoading();
+            showRoundsetModel('extras', data.roundset);
+        })
+        selectorsDiv.appendChild(roundsetDiv);
+
+        let roundsetIcon = document.createElement('img');
+        roundsetIcon.classList.add('roundset-selector-img');
+        roundsetDiv.appendChild(roundsetIcon);
+
+        switch(data.type) {
+            case "Race":
+                roundsetIcon.src = `../Assets/UI/EventRaceBtn.png`;
+                roundsetDiv.classList.add("race-roundset")
+                break;
+        }
+
+        let roundsetTextDiv = document.createElement('div');
+        roundsetTextDiv.classList.add('roundset-selector-text-div');
+        roundsetDiv.appendChild(roundsetTextDiv);
+    
+        let roundsetText = document.createElement('p');
+        roundsetText.classList.add('selector-text', 'black-outline');
+        roundsetText.innerHTML = `${data.type} Event - ${event}`;
+        roundsetTextDiv.appendChild(roundsetText);
+
+        let roundsetText2 = document.createElement('p');
+        roundsetText2.id = "time-left-" + event;
+        roundsetText2.classList.add('selector-text', 'black-outline');
+        roundsetTextDiv.appendChild(roundsetText2);
+
+        if(new Date() < new Date(data.start)) {
+            raceTimeLeft.innerHTML = "Coming Soon!";
+        } else if (new Date(data.end) > new Date()) {
+            updateTimer(new Date(data.end), roundsetText2.id);
+            timerInterval = setInterval(() => updateTimer(new Date(data.end), roundsetText2.id), 1000)
+        }
+
+        let roundsetGoImg = document.createElement('img');
+        roundsetGoImg.classList.add('selector-go-img');
+        roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
+        roundsetDiv.appendChild(roundsetGoImg);
+    })
     
     let normalRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type != "quest"));
     let otherRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "quest"));
@@ -641,7 +695,7 @@ async function generateRounds(type, reverse, modified) {
             let roundNumber = document.createElement('p');
             roundNumber.id = 'round-number-preview';
             roundNumber.classList.add('round-number', 'round-number-preview', 'black-outline');
-            roundNumber.innerHTML = `Round ${currentPreviewRound + 1}`;
+            roundNumber.innerHTML = `Round ${roundsetProcessed.rounds[currentPreviewRound].roundNumber}`;
             previewHeader.appendChild(roundNumber);
 
             let selectRoundNum = document.createElement('input');
@@ -654,7 +708,7 @@ async function generateRounds(type, reverse, modified) {
             selectRoundNum.addEventListener('change', () => {
                 if (selectRoundNum.value < 1) { selectRoundNum.value = 1 }
                 if (selectRoundNum.value > roundsetProcessed.rounds.length) { selectRoundNum.value = roundsetProcessed.rounds.length }
-                roundNumber.innerHTML = `Round ${selectRoundNum.value}`;
+                roundNumber.innerHTML = `Round ${roundsetProcessed.rounds[currentPreviewRound].roundNumber}`;
                 currentPreviewRound = selectRoundNum.value - 1;
                 updatePreviewRoundTimeline()
             })
@@ -677,7 +731,7 @@ async function generateRounds(type, reverse, modified) {
             playNormalButton.src = "../Assets/UI/GoBtnSmall.png";
             playNormalButton.addEventListener('click', () => {
                 speedMultiplier = 1;
-                roundNumber.innerHTML = `Round ${currentPreviewRound + 1}`;
+                roundNumber.innerHTML = `Round ${roundsetProcessed.rounds[currentPreviewRound].roundNumber}`;
                 clearPreview()
                 startRound(roundsetProcessed.rounds[currentPreviewRound])
             })
@@ -688,7 +742,7 @@ async function generateRounds(type, reverse, modified) {
             playFastButton.src = "../Assets/UI/FastForwardBtn.png";
             playFastButton.addEventListener('click', () => {
                 speedMultiplier = 3;
-                roundNumber.innerHTML = `Round ${currentPreviewRound + 1}`;
+                roundNumber.innerHTML = `Round ${roundsetProcessed.rounds[currentPreviewRound].roundNumber}`;
                 clearPreview()
                 startRound(roundsetProcessed.rounds[currentPreviewRound])
             })
@@ -1077,6 +1131,32 @@ function changeHexBGColor(color){
     }
     document.body.style.backgroundColor = `rgb(${color[0] * 255},${color[1] * 255},${color[2] * 255})`;
 }
+
+function formatTime(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = Math.floor(seconds % 60);
+    return [hours, minutes, secs].map(v => v < 10 ? "0" + v : v).join(":");
+}
+
+function getRemainingTime(targetTime) {
+    const now = new Date();
+    const remainingTime = (targetTime - now) / 1000;
+    return remainingTime;
+}
+
+function updateTimer(targetTime, elementId) {
+    const remainingTime = getRemainingTime(targetTime);
+    const timerElement = document.getElementById(elementId);
+
+    if (remainingTime > 48 * 3600) {
+        const days = Math.ceil(remainingTime / (24 * 3600));
+        timerElement.textContent = `${days} days left`;
+    } else {
+        timerElement.textContent = formatTime(remainingTime);
+    }
+}
+
 
 function ratioCalc(unknown, x1, x2, y1, y2){
     switch(unknown){

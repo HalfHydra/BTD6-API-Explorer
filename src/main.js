@@ -8863,7 +8863,62 @@ function generateRoundsets() {
 
     let selectorsDiv = document.createElement('div');
     selectorsDiv.classList.add('selectors-div');
-    roundsetPage.appendChild(selectorsDiv);;
+    roundsetPage.appendChild(selectorsDiv);
+
+    let limitedRoundsets = {};
+    Object.entries(constants.limitedTimeEvents).forEach(([roundset, data]) => {
+        if (data.start < Date.now() && data.end > Date.now()) {
+            limitedRoundsets[roundset] = data;
+        }
+    })
+
+    Object.entries(limitedRoundsets).forEach(([event, data]) => {
+        let roundsetDiv = document.createElement('div');
+        roundsetDiv.classList.add('roundset-selector-div');
+        roundsetDiv.addEventListener('click', () => {
+            showLoading();
+            showRoundsetModel('extras', data.roundset);
+        })
+        selectorsDiv.appendChild(roundsetDiv);
+
+        let roundsetIcon = document.createElement('img');
+        roundsetIcon.classList.add('roundset-selector-img');
+        roundsetDiv.appendChild(roundsetIcon);
+
+        switch(data.type) {
+            case "Race":
+                roundsetIcon.src = `../Assets/UI/EventRaceBtn.png`;
+                roundsetDiv.classList.add("race-roundset")
+                break;
+        }
+
+        let roundsetTextDiv = document.createElement('div');
+        roundsetTextDiv.classList.add('roundset-selector-text-div');
+        roundsetDiv.appendChild(roundsetTextDiv);
+    
+        let roundsetText = document.createElement('p');
+        roundsetText.classList.add('selector-text', 'black-outline');
+        roundsetText.innerHTML = `${data.type} Event - ${event}`;
+        roundsetTextDiv.appendChild(roundsetText);
+
+        let roundsetText2 = document.createElement('p');
+        roundsetText2.id = "time-left-" + event;
+        roundsetText2.classList.add('selector-text', 'black-outline');
+        roundsetTextDiv.appendChild(roundsetText2);
+
+        if(new Date() < new Date(data.start)) {
+            raceTimeLeft.innerHTML = "Coming Soon!";
+        } else if (new Date(data.end) > new Date()) {
+            updateTimer(new Date(data.end), roundsetText2.id);
+            timerInterval = setInterval(() => updateTimer(new Date(data.end), roundsetText2.id), 1000)
+        }
+
+        let roundsetGoImg = document.createElement('img');
+        roundsetGoImg.classList.add('selector-go-img');
+        roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
+        roundsetDiv.appendChild(roundsetGoImg);
+    })
+    
     
     let normalRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type != "quest"));
     let otherRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "quest"));
