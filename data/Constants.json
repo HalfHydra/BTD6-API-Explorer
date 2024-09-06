@@ -39,7 +39,15 @@
         "Impoppable": 100,
         "Clicks": 100
     },
-    "skuRoundsets": ["1roundEarly","2roundEarly","3roundEarly","4roundEarly","5roundEarly","DDTbadness","countdownGroupOf5","monkeyVSmachines","rabbitYear","valentinesCF","TheFinalGambit","eggs","BeastHandlerjourney","Apocrypha3","31Plus","allOrNothingEnd60","allOrNothingEnd80","alternateRound140","raceExperiment"],
+    "limitedTimeEvents": {
+        "Ceramic Flood": {
+            "type": "Race",
+            "roundset": "CeramicFlood",
+            "start": 1725609600000,
+            "end": 1725937200000
+        }
+    },
+    "skuRoundsets": ["1roundEarly","2roundEarly","3roundEarly","4roundEarly","5roundEarly","DDTbadness","countdownGroupOf5","monkeyVSmachines","rabbitYear","valentinesCF","TheFinalGambit","eggs","BeastHandlerjourney","Apocrypha3","31Plus","allOrNothingEnd60","allOrNothingEnd80","alternateRound140","raceExperiment","CeramicFlood"],
     "roundSets": {
         "DefaultRoundSet": {
             "name": "Standard Rounds",
