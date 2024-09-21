@@ -4395,6 +4395,32 @@
     border: 8px solid #91c1ff;
 }
 
+.challenge-tower-selector-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--profile-primary);
+}
+.challenge-tower-selector-checkboxes {
+    display: flex;
+}
+.challenge-tower-selector-title {
+    font-size: 24px;
+    padding-left: 10px;
+}
+
+.towerTopLeft {
+    width: 45px;
+    height: 45px;
+}
+.towerTopLeftText {
+    font-size: 26px;
+}
+
+.towerExcluded {
+    background-image: url(../Assets/UI/StrikethroughRound.png);
+}
+
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */
     -webkit-text-stroke: 0.03em black;

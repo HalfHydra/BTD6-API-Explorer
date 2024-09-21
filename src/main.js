@@ -5952,35 +5952,92 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     let towersToDisplay = {};
     let shouldUseHeroList = false;
 
+    let towersExcluded = {};
+    let heroesExcluded = {};
+    let towersLimited = {};
+
     Object.entries(metadata._towers).forEach(([tower, data]) => {
-        if (data.max == 0) { return; }
+        if (data.max == 0) { 
+            data.isHero ? heroesExcluded[data.tower] = data : towersExcluded[data.tower] = data;
+            return; 
+        }
         if (data.tower === "ChosenPrimaryHero" && data.max != 0) { shouldUseHeroList = true; }
         data.isHero ? heroesToDisplay[data.tower] = data : towersToDisplay[data.tower] = data;
     })
-
-    // if (shouldUseHeroList) {
-    //     let heroSelectorHeader = document.createElement('div');
-    //     heroSelectorHeader.classList.add('challenge-tower-selector');
-    //     challengeModel.appendChild(heroSelectorHeader);
-    // }
 
     let towerSelector = document.createElement('div');
     towerSelector.classList.add('challenge-towers-list');
     challengeModel.appendChild(towerSelector);
 
-    let towerSelectorHeader = document.createElement('div');
-    towerSelectorHeader.classList.add('challenge-tower-selector');
-    towerSelector.appendChild(towerSelectorHeader);
+    let towerSelectorTop = document.createElement('div');
+    towerSelectorTop.classList.add('challenge-tower-selector-top');
+    towerSelector.appendChild(towerSelectorTop);
 
-    // let towerSelectorExcluded = document.createElement('div');
-    // towerSelectorExcluded.style.display = "none";
-    // towerSelectorExcluded.classList.add('challenge-tower-selector');
-    // towerSelector.appendChild(towerSelectorExcluded);
+    let towerSelectorTitle = document.createElement('p');
+    towerSelectorTitle.classList.add('challenge-tower-selector-title', 'black-outline');
+    towerSelectorTitle.innerHTML = "Monkeys Available:";
+    towerSelectorTop.appendChild(towerSelectorTitle);
+
+    let towerSelectorCheckboxes = document.createElement('div');
+    towerSelectorCheckboxes.classList.add('challenge-tower-selector-checkboxes');
+    towerSelectorTop.appendChild(towerSelectorCheckboxes);
+
+    let mapsProgressCoopToggle = document.createElement('div');
+    mapsProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
+    towerSelectorCheckboxes.appendChild(mapsProgressCoopToggle);
+
+    let mapsProgressCoopToggleText = document.createElement('p');
+    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
+    mapsProgressCoopToggleText.innerHTML = "Only Excluded & Limited: ";
+    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
+
+    let mapsProgressCoopToggleInput = document.createElement('input');
+    mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
+    mapsProgressCoopToggleInput.type = 'checkbox';
+    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
+
+    mapsProgressCoopToggleInput.addEventListener('change', () => {
+        towerSelectorExcluded.style.display = towerSelectorExcluded.style.display == "none" ? "flex" : "none";
+        towerSelectorAvailable.style.display = towerSelectorAvailable.style.display == "none" ? "flex" : "none";
+        if (mapsProgressCoopToggleInput.checked) { towerSelectorTitle.innerHTML = "Monkeys Limited:" } else { towerSelectorTitle.innerHTML = "Monkeys Available:" }
+    })
+
+    let towerSelectorShowHeroesToggle = document.createElement('div');
+    towerSelectorShowHeroesToggle.classList.add('maps-progress-coop-toggle');  
+    towerSelectorCheckboxes.appendChild(towerSelectorShowHeroesToggle);
+
+    let towerSelectorShowHeroesToggleText = document.createElement('p');
+    towerSelectorShowHeroesToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
+    towerSelectorShowHeroesToggleText.innerHTML = "Hide Heroes: ";
+    towerSelectorShowHeroesToggle.appendChild(towerSelectorShowHeroesToggleText);
+
+    let towerSelectorShowHeroesInput = document.createElement('input');
+    towerSelectorShowHeroesInput.classList.add('maps-progress-coop-toggle-input');
+    towerSelectorShowHeroesInput.type = 'checkbox';
+    towerSelectorShowHeroesToggle.appendChild(towerSelectorShowHeroesInput);
+
+    towerSelectorShowHeroesInput.addEventListener('change', () => {
+        let heroSelectors = document.getElementsByClassName('tower-selector-hero');
+        for (let heroSelector of heroSelectors) {
+            heroSelector.style.display = heroSelector.style.display == "none" ? "flex" : "none";
+        }
+    })
+
+
+
+    let towerSelectorAvailable = document.createElement('div');
+    towerSelectorAvailable.classList.add('challenge-tower-selector');
+    towerSelector.appendChild(towerSelectorAvailable);
+
+    let towerSelectorExcluded = document.createElement('div');
+    towerSelectorExcluded.style.display = "none";
+    towerSelectorExcluded.classList.add('challenge-tower-selector');
+    towerSelector.appendChild(towerSelectorExcluded);
 
     if (shouldUseHeroList) {
         let towerSelector = document.createElement('div');
         towerSelector.classList.add(`tower-selector-hero`);
-        towerSelectorHeader.appendChild(towerSelector)
+        towerSelectorAvailable.appendChild(towerSelector)
 
         let towerSelectorImg = document.createElement('img');
         towerSelectorImg.classList.add('hero-selector-img');
@@ -5997,24 +6054,42 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             towerSelectorImg.src = getInstaContainerIcon(tower,"000");
             towerSelector.appendChild(towerSelectorImg);
 
-            towerSelectorHeader.appendChild(towerSelector)
-            // heroesToDisplay[tower] ? towerSelectorHeader.appendChild(towerSelector) : towerSelectorExcluded.appendChild(towerSelector);
+            towerSelectorAvailable.appendChild(towerSelector)
         }
     }
 
     for (let [tower, category] of Object.entries(constants.towersInOrder)) {
-        if (!towersToDisplay[tower]) { continue; }
+        if (!towersExcluded[tower]) { continue; }
         let towerSelector = document.createElement('div');
         towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
-        towerSelectorHeader.appendChild(towerSelector)
-        // towersToDisplay[tower] ? towerSelectorHeader.appendChild(towerSelector) : towerSelectorExcluded.appendChild(towerSelector);
+        towerSelectorExcluded.appendChild(towerSelector)
 
         let towerSelectorImg = document.createElement('img');
         towerSelectorImg.classList.add('tower-selector-img');
         towerSelectorImg.src = getInstaContainerIcon(tower,"000");
         towerSelector.appendChild(towerSelectorImg);
 
+        let maxCount = document.createElement('div');
+        maxCount.classList.add('max-count','towerTopLeft','towerExcluded');
+        towerSelector.appendChild(maxCount);
+    }
+
+    for (let [tower, category] of Object.entries(constants.towersInOrder)) {
+        if (!towersToDisplay[tower]) { continue; }
+        let towerSelector = document.createElement('div');
+        towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
+        towerSelectorAvailable.appendChild(towerSelector)
+
+        let towerSelectorImg = document.createElement('img');
+        towerSelectorImg.classList.add('tower-selector-img');
+        towerSelectorImg.src = getInstaContainerIcon(tower,"000");
+        towerSelector.appendChild(towerSelectorImg);
+
+        let isLimited = false;
+
         if (towersToDisplay[tower].path1NumBlockedTiers != 0 || towersToDisplay[tower].path2NumBlockedTiers != 0  || towersToDisplay[tower].path3NumBlockedTiers != 0 ) {
+            isLimited = true;
+
             let towerSelectorTiers = document.createElement('p');
             towerSelectorTiers.classList.add('tower-selector-tiers', 'black-outline');
             towerSelectorTiers.innerHTML = `${towersToDisplay[tower].path1NumBlockedTiers == -1 ? "0" : 5 - towersToDisplay[tower].path1NumBlockedTiers}-${towersToDisplay[tower].path2NumBlockedTiers == -1 ? "0" : 5- towersToDisplay[tower].path2NumBlockedTiers}-${towersToDisplay[tower].path3NumBlockedTiers == -1 ? "0" : 5 - towersToDisplay[tower].path3NumBlockedTiers}`;
@@ -6027,16 +6102,47 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         }
 
         if(towersToDisplay[tower].max != -1) {
+            isLimited = true;
+
             let maxCount = document.createElement('div');
-            maxCount.classList.add('max-count');
+            maxCount.classList.add('max-count','towerTopLeft');
             towerSelector.appendChild(maxCount);
 
             let maxCountText = document.createElement('p');
-            maxCountText.classList.add('power-progress-text','black-outline');
+            maxCountText.classList.add('towerTopLeftText','black-outline');
             maxCountText.innerHTML = `${towersToDisplay[tower].max}`;
             maxCount.appendChild(maxCountText);
         }
+
+        if (isLimited) {
+            towerSelectorExcluded.appendChild(towerSelector.cloneNode(true));
+        }
     }
+
+    for (let [tower, nameColor] of Object.entries(constants.heroesInOrder)) {
+        if (!heroesExcluded[tower]) { continue; }
+        let towerSelector = document.createElement('div');
+        towerSelector.classList.add(`tower-selector-hero`);
+
+        let towerSelectorImg = document.createElement('img');
+        towerSelectorImg.classList.add('hero-selector-img');
+        towerSelectorImg.src = getInstaContainerIcon(tower,"000");
+        towerSelector.appendChild(towerSelectorImg);
+
+        let maxCount = document.createElement('div');
+        maxCount.classList.add('max-count','towerTopLeft','towerExcluded');
+        towerSelector.appendChild(maxCount);
+
+        towerSelectorExcluded.appendChild(towerSelector)
+    }
+
+    if (challengeType == "Boss") {
+        mapsProgressCoopToggleInput.checked = true;
+        towerSelectorExcluded.style.display = towerSelectorExcluded.style.display == "none" ? "flex" : "none";
+        towerSelectorAvailable.style.display = towerSelectorAvailable.style.display == "none" ? "flex" : "none";
+        if (mapsProgressCoopToggleInput.checked) { towerSelectorTitle.innerHTML = "Monkeys Limited:" } else { towerSelectorTitle.innerHTML = "Monkeys Available:" }
+    }
+
 
     let challengeModelColumns = document.createElement('div');
     challengeModelColumns.classList.add('challenge-model-columns');
