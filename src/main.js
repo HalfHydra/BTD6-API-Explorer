@@ -8003,6 +8003,8 @@ function changeBrowserFilter(type, filter){
             break;
     }
     browserPage = 1;
+    showLoading();
+    document.getElementById('browser-entries').innerHTML = "";
     generateBrowserEntries(type);
 }
 
