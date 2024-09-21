@@ -5092,7 +5092,8 @@ function generateBosses(elite){
             'name': titleCaseBoss,
             'elite': elite,
             'eventNumber': bossNumber,
-            'scoringType': race.scoringType
+            'scoringType': race.scoringType,
+            'index': index
         }
 
         let raceDiv = document.createElement('div');
@@ -5830,6 +5831,20 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             challengeSettingIcon.src = `./Assets/BossIcon/${eventData.name}Portrait${eventData.elite ? "Elite" : ""}.png`;
             challengeModelHeaderName.innerHTML = `${eventData.elite ? "Elite " : ""}${eventData.name} ${eventData.eventNumber}`;
             challengeModelHeader.style.background = eventData.elite ? "linear-gradient(180deg, #401DB4, #A144E2)" : "linear-gradient(180deg, #1882A5, #07A4CB)";
+
+            let bossTypeSwapButton = document.createElement('div');
+            bossTypeSwapButton.classList.add('start-button', 'black-outline', eventData.elite ? "btn-rotate-boss" : "btn-rotate-boss-elite");
+            bossTypeSwapButton.innerHTML = "Swap";
+            bossTypeSwapButton.addEventListener('click', async () => {
+                eventData.elite = !eventData.elite;
+                showLoading();
+                if (typeof bossesData[eventData.index][eventData.elite ? "metadataElite" : "metadataStandard"] == 'string') {
+                    await getBossMetadata(eventData.index, eventData.elite)
+                }
+                showChallengeModel('events', bossesData[eventData.index][eventData.elite ? "metadataElite" : "metadataStandard"], challengeType, eventData);
+                hideLoading();
+            })
+            challengeHeaderRightContainer.appendChild(bossTypeSwapButton);
             break;
         case "Odyssey":
             challengeModelHeaderIcon.src = "./Assets/UI/OdysseyEventBtn.png";
