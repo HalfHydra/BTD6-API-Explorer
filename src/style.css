@@ -1506,6 +1506,7 @@
     image-rendering: -moz-crisp-edges;
     image-rendering: -o-crisp-edges;
     image-rendering: -webkit-optimize-contrast;
+    border-radius: 5px;
 }
 .maps-progress-header-bar {
     background-color: var(--profile-primary);
@@ -1771,6 +1772,8 @@
     image-rendering: -moz-crisp-edges;
     image-rendering: -o-crisp-edges;
     image-rendering: -webkit-optimize-contrast;
+    border-radius: 5px;
+    border-radius: 5px;
 }
 .map-div-ingame {
     display: flex;
@@ -2387,6 +2390,7 @@
     image-rendering: -moz-crisp-edges;
     image-rendering: -o-crisp-edges;
     image-rendering: -webkit-optimize-contrast;
+    border-radius: 5px;
 }
 
 .challenge-model-header {
@@ -3520,6 +3524,7 @@
     image-rendering: -moz-crisp-edges;
     image-rendering: -o-crisp-edges;
     image-rendering: -webkit-optimize-contrast;
+    border-radius: 5px;
 }
 .browser-challenge-creator {
     width: 220px;
@@ -4705,6 +4710,10 @@ input[type="checkbox"] {
 
     .leaderboard-div {
         height: calc(calc(var(--vh, 1vh) * 100) - 160px);
+    }
+
+    .modal-help-divs {
+        max-height: calc(var(--vh, 1vh) * 80);
     }
 
     /* .browser-go-img {

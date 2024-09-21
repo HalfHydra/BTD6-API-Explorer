@@ -7854,19 +7854,37 @@ function generateBrowser(type){
     leaderboardFooterPageRight.src = "./Assets/UI/NextArrowSmallYellow.png";
     leaderboardFooterPageLeft.addEventListener('click', () => {
         if (browserPage <= 1) { return; }
+        if(refreshRateLimited) { return }
         browserPage--;
         leaderboardFooterPageNumber.innerHTML = `Page ${browserPage} of 4`;
         leaderboardEntries.innerHTML = "";
         copyLoadingIcon(leaderboardEntries)
         generateBrowserEntries(type)
+        leaderboardFooterPageRight.style.filter = "grayscale(1) brightness(0.5)";
+        leaderboardFooterPageLeft.style.filter = "grayscale(1) brightness(0.5)";
+        setTimeout(() => {
+            leaderboardFooterPageRight.style.filter = "none";
+            leaderboardFooterPageLeft.style.filter = "none";
+            refreshRateLimited = false;
+        }, 5000)
+        refreshRateLimited = true;
     })
     leaderboardFooterPageRight.addEventListener('click', () => {
         if (browserPage >= 4) { return; }
+        if(refreshRateLimited) { return }
         browserPage++;
         leaderboardFooterPageNumber.innerHTML = `Page ${browserPage} of 4`;
         leaderboardEntries.innerHTML = "";
         copyLoadingIcon(leaderboardEntries)
         generateBrowserEntries(type)
+        leaderboardFooterPageRight.style.filter = "grayscale(1) brightness(0.5)";
+        leaderboardFooterPageLeft.style.filter = "grayscale(1) brightness(0.5)";
+        setTimeout(() => {
+            leaderboardFooterPageRight.style.filter = "none";
+            leaderboardFooterPageLeft.style.filter = "none";
+            refreshRateLimited = false;
+        }, 5000)
+        refreshRateLimited = true;
     })
     leaderboardFooterMiddle.appendChild(leaderboardFooterPageRight);
 
