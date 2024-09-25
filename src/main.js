@@ -4288,6 +4288,8 @@ function generateCollectionEventTowerInfo(tower) {
         }
     }
 
+    let chestTierChances = constants.collection.crateRewards.instaMonkey[currentCollectionChest].tierChance;
+
     for (let [tier, tierTotal] of tierCounts) {
         let instaMonkeyChance = document.createElement('div');
         instaMonkeyChance.classList.add('insta-monkey-chance-div');
@@ -4296,10 +4298,15 @@ function generateCollectionEventTowerInfo(tower) {
         let instaMonkeyChanceTier = document.createElement('p');
         instaMonkeyChanceTier.classList.add('insta-monkey-chance-text-list',outlineColor);
         instaMonkeyChanceTier.innerHTML = (chances[tier - 1] * 100).toFixed(2) + "%";
-        if(chances[tier - 1] == 0) {
+        instaMonkeyChance.appendChild(instaMonkeyChanceTier);
+        if (chestTierChances.hasOwnProperty(tier) && chances[tier - 1] == 0) {
+            let instaMonkeyImpossibleSlash = document.createElement('img');
+            instaMonkeyImpossibleSlash.classList.add('insta-monkey-completed-tick');
+            instaMonkeyImpossibleSlash.src = "./Assets/UI/TickGreenIcon.png";
+            instaMonkeyChance.appendChild(instaMonkeyImpossibleSlash);
+        } else if (chances[tier - 1] == 0) {
             instaMonkeyChanceTier.classList.add('insta-monkey-chance-zero');
         }
-        instaMonkeyChance.appendChild(instaMonkeyChanceTier);
     }
     instaMonkeyNewChanceValue.innerHTML = `${(chances.reduce((a, b) => a + b, 0) * 100).toFixed(2)}%`;
     if (chances.reduce((a, b) => a + b, 0) == 0) {
@@ -4515,6 +4522,8 @@ function openAllTowersList(instaMonkeysMissingContainer){
         instaMonkeyTierContainer.appendChild(instaMonkeyTierText);
     })
 
+    let chestTierChances = constants.collection.crateRewards.instaMonkey[currentCollectionChest].tierChance;
+
     sortedTowers.forEach(tower => {
         let instaMonkeyTierContainer = document.createElement('div');
         instaMonkeyTierContainer.classList.add('insta-monkey-list-container','insta-monkey-unobtained');
@@ -4542,7 +4551,12 @@ function openAllTowersList(instaMonkeysMissingContainer){
             let instaMonkeyChanceTier = document.createElement('p');
             instaMonkeyChanceTier.classList.add('insta-monkey-chance-text-list','black-outline');
             instaMonkeyChanceTier.innerHTML = (chance * 100).toFixed(2) + "%";
-            if(chance == 0) {
+            if (chestTierChances.hasOwnProperty(index + 1) && chance == 0) {
+                let instaMonkeyImpossibleSlash = document.createElement('img');
+                instaMonkeyImpossibleSlash.classList.add('insta-monkey-completed-tick');
+                instaMonkeyImpossibleSlash.src = "./Assets/UI/TickGreenIcon.png";
+                instaMonkeyChance.appendChild(instaMonkeyImpossibleSlash);
+            } else if (chance == 0) {
                 instaMonkeyChanceTier.classList.add('insta-monkey-chance-zero');
             }
             instaMonkeyChance.appendChild(instaMonkeyChanceTier);

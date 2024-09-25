@@ -4426,6 +4426,12 @@
     background-image: url(../Assets/UI/StrikethroughRound.png);
 }
 
+.insta-monkey-completed-tick {
+    position: absolute;
+    width: 50px;
+    filter: drop-shadow(1px 1px 1px black);
+}
+
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */
     -webkit-text-stroke: 0.03em black;
