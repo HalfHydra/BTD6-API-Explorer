@@ -557,12 +557,13 @@ let bloonImageMap = {
 }
 
 class Bloon {
-    constructor(type) {
+    constructor(type, groupIndex) {
         this.speed = bloonsData[type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].speed;
         this.scale = bloonsData[type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].scale;
         this.x = -(ratioCalc(1, 0, 100, bloonImageMap[type].width, bloonImageMap[type].height));
         this.y = 100 + ((100 - this.scale * 100) / 2);
         this.type = type;
+        this.groupIndex = groupIndex;
         this.width = ratioCalc(1, 0, 100, bloonImageMap[type].width, bloonImageMap[type].height);
     }
     move(deltaTime) {
@@ -573,16 +574,18 @@ class Bloon {
         return this.x >= certainValue;
     }
     render(ctx) {
+        if (hiddenGroups.includes(this.groupIndex)) return;
         let spriteData = bloonImageMap[this.type];
         ctx.drawImage(bloons_spritesheet, spriteData.x, spriteData.y, spriteData.width, spriteData.height, this.x, this.y, this.scale * this.width, this.scale * 100);
     }
 }
 
 class Blimp {
-    constructor(type) {
+    constructor(type, groupIndex) {
         this.speed = bloonsData[type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].speed;
         this.x = -(bloonImageMap[type].width * 1.62);
         this.type = type;
+        this.groupIndex = groupIndex;
     }
     move(deltaTime) {
         this.x += this.speed * deltaTime * 6.86 * speedMultiplier * roundSpeedModifier * difficultySpeedModifier;
@@ -592,6 +595,7 @@ class Blimp {
         return this.x >= certainValue;
     }
     render(ctx) {
+        if (hiddenGroups.includes(this.groupIndex)) return;
         let spriteData = bloonImageMap[this.type];
         ctx.drawImage(bloons_spritesheet, spriteData.x, spriteData.y, spriteData.width, spriteData.height, this.x, 150 - ((spriteData.height * 1.62) / 2), spriteData.width * 1.62, spriteData.height * 1.62);
     }
@@ -661,7 +665,7 @@ function startRound(round) {
         }
     }
     addTimelinePlayhead((Math.max(...currentRoundGroups.bloonGroups.map(group => group.end)))/speedMultiplier);
-    for (let bloonGroup of currentRoundGroups.bloonGroups) {
+    currentRoundGroups.bloonGroups.forEach((bloonGroup, index) => {
         bloonGroup.startTime = performance.now() + (bloonGroup.start * 1000) / speedMultiplier;
         bloonGroup.activeTime = 0;
         bloonGroup.spawnAccumulator = 0;
@@ -669,14 +673,14 @@ function startRound(round) {
         if (!isFinite(bloonGroup.spawnInterval)) {
             bloonGroup.spawnInterval = 0;
         }
-        bloonGroup.spawnBloon = spawnBloon(bloonGroup);
-    }
+        bloonGroup.spawnBloon = spawnBloon(bloonGroup, index);
+    });
 }
 
-function spawnBloon(bloonGroup) {
+function spawnBloon(bloonGroup, groupIndex) {
     return function() {
         let bloonType = bloonGroup.bloon;
-        let bloon = ["Moab", "MoabFortified", "Bfb", "BfbFortified", "Zomg", "ZomgFortified", "DdtCamo", "DdtFortifiedCamo", "Bad", "BadFortified"].includes(bloonType) ? new Blimp(bloonType) : new Bloon(bloonType);
+        let bloon = ["Moab", "MoabFortified", "Bfb", "BfbFortified", "Zomg", "ZomgFortified", "DdtCamo", "DdtFortifiedCamo", "Bad", "BadFortified"].includes(bloonType) ? new Blimp(bloonType, groupIndex) : new Bloon(bloonType, groupIndex);
         let layer = bloonsData[bloonType.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].layer;
         let index = bloons.findIndex(b => bloonsData[b.type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].layer > layer);
         if (index === -1) {

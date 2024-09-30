@@ -9,6 +9,7 @@ let previewModified = null;
 let currentModifiedRounds = []
 let roundPreviewFilterType;
 let currentRoundsetEndRound = 140;
+let hiddenGroups = [];
 
 fetch('./data/Constants.json')
     .then(response => response.json())
@@ -813,6 +814,7 @@ async function generateRounds(type, reverse, modified) {
                     if (currentPreviewRound < 0) { currentPreviewRound = roundsetProcessed.rounds.length - 1 }
                 }
                 selectRoundNum.value = currentPreviewRound + 1;
+                clearPreview();
                 updatePreviewRoundTimeline()
             })
             nextPrevDiv.appendChild(prevRound);
@@ -830,6 +832,7 @@ async function generateRounds(type, reverse, modified) {
                     if (currentPreviewRound >= roundsetProcessed.rounds.length) { currentPreviewRound = 0 }
                 }
                 selectRoundNum.value = currentPreviewRound + 1;
+                clearPreview();
                 updatePreviewRoundTimeline()
             })
             nextPrevDiv.appendChild(nextRound);
@@ -967,6 +970,7 @@ function updatePreviewRoundTimeline() {
     contentDiv.innerHTML = "";
 
     let round = roundsetProcessed.rounds[currentPreviewRound];
+    hiddenGroups = []
 
     let roundDiv = document.createElement('div');
     roundDiv.classList.add('round-div-detailed');
@@ -1044,6 +1048,15 @@ function updatePreviewRoundTimeline() {
     round.bloonGroups.forEach((bloonGroup, index) => {
         let bloonGroupDiv = document.createElement('div');
         bloonGroupDiv.classList.add('bloon-group-div-detailed');
+        bloonGroupDiv.addEventListener('click', () => {
+            if (hiddenGroups.includes(index)) {
+                bloonGroupDiv.style.filter = "";
+                hiddenGroups.splice(hiddenGroups.indexOf(index), 1);
+            } else {
+                hiddenGroups.push(index);
+                bloonGroupDiv.style.filter = "brightness(0.5)";
+            }
+        })
         timelineDiv.appendChild(bloonGroupDiv);
 
         let leftDiv = document.createElement('div');
