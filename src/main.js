@@ -6133,21 +6133,23 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         }
     }
 
-    for (let [tower, nameColor] of Object.entries(constants.heroesInOrder)) {
-        if (!heroesExcluded[tower]) { continue; }
-        let towerSelector = document.createElement('div');
-        towerSelector.classList.add(`tower-selector-hero`);
+    if (!shouldUseHeroList) {
+        for (let [tower, nameColor] of Object.entries(constants.heroesInOrder)) {
+            if (!heroesExcluded[tower]) { continue; }
+            let towerSelector = document.createElement('div');
+            towerSelector.classList.add(`tower-selector-hero`);
 
-        let towerSelectorImg = document.createElement('img');
-        towerSelectorImg.classList.add('hero-selector-img');
-        towerSelectorImg.src = getInstaContainerIcon(tower,"000");
-        towerSelector.appendChild(towerSelectorImg);
+            let towerSelectorImg = document.createElement('img');
+            towerSelectorImg.classList.add('hero-selector-img');
+            towerSelectorImg.src = getInstaContainerIcon(tower,"000");
+            towerSelector.appendChild(towerSelectorImg);
 
-        let maxCount = document.createElement('div');
-        maxCount.classList.add('max-count','towerTopLeft','towerExcluded');
-        towerSelector.appendChild(maxCount);
+            let maxCount = document.createElement('div');
+            maxCount.classList.add('max-count','towerTopLeft','towerExcluded');
+            towerSelector.appendChild(maxCount);
 
-        towerSelectorExcluded.appendChild(towerSelector)
+            towerSelectorExcluded.appendChild(towerSelector)
+        }
     }
 
     if (challengeType == "Boss") {
