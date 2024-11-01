@@ -5077,7 +5077,7 @@ function generateBosses(elite){
     switchBossDiv.classList.add("switch-boss-div");
     switchBanner.appendChild(switchBossDiv);
 
-    let bosses = ["Bloonarius", "Lych", "Vortex", "Dreadbloon", "Phayze"]
+    let bosses = ["Bloonarius", "Lych", "Vortex", "Dreadbloon", "Phayze", "Blastapopoulos"]
 
     for (let boss of bosses) {
         let bossIcon = document.createElement('img')

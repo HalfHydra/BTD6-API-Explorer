@@ -1,12 +1,12 @@
 {
     "version": "1.2.3",
-    "projectContentVersion": 44,
+    "projectContentVersion": 45,
     "totalInstaMonkeys": 1536,
     "achievements": 138,
     "hiddenAchievements": 12,
-    "totalMaps": 74,
-    "profileBanners": 39,
-    "profileAvatars": 96,
+    "totalMaps": 75,
+    "profileBanners": 44,
+    "profileAvatars": 102,
     "startRound": {
         "Easy": 1,
         "PrimaryOnly": 1,
@@ -88,6 +88,12 @@
         "PhayzeRoundSet": {
             "name": "Phayze Custom Rounds",
             "icon": "PhayzeRoundSetIcon",
+            "type": "boss",
+            "startingCash": 650
+        },
+        "BlastapopoulosRoundSet": {
+            "name": "Blastapopoulos Custom Rounds",
+            "icon": "BlastapopoulosRoundSetIcon",
             "type": "boss",
             "startingCash": 650
         },
@@ -323,6 +329,28 @@
                 "threshold": 5,
                 "multiplier": 0.10000000149011612
             }
+        ],
+        "EnduranceIncomeSet": [
+            {
+                "threshold": 40,
+                "multiplier": 1.0
+                },
+                {
+                "threshold": 50,
+                "multiplier": 0.5
+                },
+                {
+                "threshold": 60,
+                "multiplier": 0.2
+                },
+                {
+                "threshold": 80,
+                "multiplier": 0.1
+                },
+                {
+                "threshold": 100,
+                "multiplier": 0.05
+                }
         ]
     },
     "towersInOrder": {
@@ -399,6 +427,7 @@
         "Chutes": "Intermediate",
         "Rake": "Intermediate",
         "SpiceIslands": "Intermediate",
+        "AncientPortal": "Advanced",
         "CastleRevenge": "Advanced",
         "DarkPath": "Advanced",
         "Erosion": "Advanced",
