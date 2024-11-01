@@ -6267,6 +6267,9 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             if (metadata.roundSets.includes("phayze")) {
                 roundset = "PhayzeRoundSet";
             }
+            if(metadata.roundSets.includes("blastapopoulos")) {
+                roundset = "BlastapopoulosRoundSet";
+            }
 
             if(roundset != null) {
                 let challengeRuleValue = document.createElement('div');
