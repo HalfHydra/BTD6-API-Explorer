@@ -88,6 +88,7 @@ let previewModified = null;
 let currentModifiedRounds = []
 let roundPreviewFilterType;
 let currentRoundsetEndRound = 140;
+let hiddenGroups = [];
 
 let currentCollectionChest = "None";
 let currentCollectionTower = "All";
@@ -996,7 +997,7 @@ function generateFrontPage(){
 
     let knownIssuesText = document.createElement('p');
     knownIssuesText.classList.add('oak-instructions-text');
-    knownIssuesText.innerHTML = 'None currently!';
+    knownIssuesText.innerHTML = '- Ancient Portal does not show up in the maps list<br>- Both Blastapopoulos badges do not show up in the list';
     knownIssuesDiv.appendChild(knownIssuesText);
     
     trailerDiv.appendChild(trailerVideo);
@@ -1013,7 +1014,7 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = 'v1.2.3: Collection Event Menu Upgrade<br>- Added a how to use guide at the top of the Collection Event Menu<br>- Added the Insta Chest odds to the Collection Event Menu<br>- Clicking on a missing Insta will now temporarily mark it as obtained<br><br>v1.2.2: Missing Medals<br>- Added a few missing medals from the overview/leaderboard profile pages<br>- Added mouse hover tooltips to various elements<br><br>v1.2.1: Insta Monkey Collection Improvements<br>- Resolved an issue preventing the collected but used Insta Monkeys from being displayed.<br>- Add a new list of all the Insta Monkey tower chances in the Collection Event Helper for efficient checking of what the best Featured Insta Monkey to choose is.<br>- The trailer video no longer plays in the background after previewing the site or logging in! Thanks for the feedback.<br><br>v1.2.0: Preview Mode and UI Improvements <br>- Added a way to use the site without an OAK token. Useful when you don\'t have it accessible or can\'t make one<br>- The site now prompts when your data has new content that the site doesn\'t have updated yet<br>- Challenge details now correctly shows the max amount of specific monkeys if limited<br>- Other UI fixes<br><br> v1.1.0: Insta Monkey Collection Features<br>- Added Insta Monkey Collection Event Helper. This displays the odds of getting a new Insta Monkey for each chest type and when selecting a featured tower.<br>- Also added a page documentating all of the continuous sources of Insta Monkeys<br>- UI fixes and improvements<br><br>v1.0.1: Bug Fixes<br>- Daily challenges now show the correct associated date<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes<br><br>v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.';
+    changelogText.innerHTML = 'v1.3.0: QoL Changes<br>- Added Update 45 images and content<br>- You can now toggle to see just the excluded towers and heroes of a challenge or event<br>- You can now swap between Normal/Elite on the details for a boss<br>- Bloon groups can now be hidden in the round previewer by clicking on them<br>- Added a checkmark in the Collection Event list to categories that were completely collected<br>- Resolved an issue when applying a filter to content browser content and not refreshing<br>- Added Ceramic Flood Roundset (very late)<br><br>v1.2.3: Collection Event Menu Upgrade<br>- Added a how to use guide at the top of the Collection Event Menu<br>- Added the Insta Chest odds to the Collection Event Menu<br>- Clicking on a missing Insta will now temporarily mark it as obtained<br><br>v1.2.2: Missing Medals<br>- Added a few missing medals from the overview/leaderboard profile pages<br>- Added mouse hover tooltips to various elements<br><br>v1.2.1: Insta Monkey Collection Improvements<br>- Resolved an issue preventing the collected but used Insta Monkeys from being displayed.<br>- Add a new list of all the Insta Monkey tower chances in the Collection Event Helper for efficient checking of what the best Featured Insta Monkey to choose is.<br>- The trailer video no longer plays in the background after previewing the site or logging in! Thanks for the feedback.<br><br>v1.2.0: Preview Mode and UI Improvements <br>- Added a way to use the site without an OAK token. Useful when you don\'t have it accessible or can\'t make one<br>- The site now prompts when your data has new content that the site doesn\'t have updated yet<br>- Challenge details now correctly shows the max amount of specific monkeys if limited<br>- Other UI fixes<br><br> v1.1.0: Insta Monkey Collection Features<br>- Added Insta Monkey Collection Event Helper. This displays the odds of getting a new Insta Monkey for each chest type and when selecting a featured tower.<br>- Also added a page documentating all of the continuous sources of Insta Monkeys<br>- UI fixes and improvements<br><br>v1.0.1: Bug Fixes<br>- Daily challenges now show the correct associated date<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes<br><br>v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.';
     changelogDiv.appendChild(changelogText);
 
     let feedbackHeader = document.createElement('p');
@@ -9612,7 +9613,7 @@ async function generateRounds(type, reverse, modified) {
             let roundNumber = document.createElement('p');
             roundNumber.id = 'round-number-preview';
             roundNumber.classList.add('round-number', 'round-number-preview', 'black-outline');
-            roundNumber.innerHTML = `Round ${currentPreviewRound + 1}`;
+            roundNumber.innerHTML = `Round ${roundsetProcessed.rounds[currentPreviewRound].roundNumber}`;
             previewHeader.appendChild(roundNumber);
 
             let selectRoundNum = document.createElement('input');
@@ -9625,7 +9626,7 @@ async function generateRounds(type, reverse, modified) {
             selectRoundNum.addEventListener('change', () => {
                 if (selectRoundNum.value < 1) { selectRoundNum.value = 1 }
                 if (selectRoundNum.value > roundsetProcessed.rounds.length) { selectRoundNum.value = roundsetProcessed.rounds.length }
-                roundNumber.innerHTML = `Round ${selectRoundNum.value}`;
+                roundNumber.innerHTML = `Round ${roundsetProcessed.rounds[currentPreviewRound].roundNumber}`;
                 currentPreviewRound = selectRoundNum.value - 1;
                 updatePreviewRoundTimeline()
             })
@@ -9648,7 +9649,7 @@ async function generateRounds(type, reverse, modified) {
             playNormalButton.src = "../Assets/UI/GoBtnSmall.png";
             playNormalButton.addEventListener('click', () => {
                 speedMultiplier = 1;
-                roundNumber.innerHTML = `Round ${currentPreviewRound + 1}`;
+                roundNumber.innerHTML = `Round ${roundsetProcessed.rounds[currentPreviewRound].roundNumber}`;
                 clearPreview()
                 startRound(roundsetProcessed.rounds[currentPreviewRound])
             })
@@ -9659,7 +9660,7 @@ async function generateRounds(type, reverse, modified) {
             playFastButton.src = "../Assets/UI/FastForwardBtn.png";
             playFastButton.addEventListener('click', () => {
                 speedMultiplier = 3;
-                roundNumber.innerHTML = `Round ${currentPreviewRound + 1}`;
+                roundNumber.innerHTML = `Round ${roundsetProcessed.rounds[currentPreviewRound].roundNumber}`;
                 clearPreview()
                 startRound(roundsetProcessed.rounds[currentPreviewRound])
             })
@@ -9730,6 +9731,7 @@ async function generateRounds(type, reverse, modified) {
                     if (currentPreviewRound < 0) { currentPreviewRound = roundsetProcessed.rounds.length - 1 }
                 }
                 selectRoundNum.value = currentPreviewRound + 1;
+                clearPreview();
                 updatePreviewRoundTimeline()
             })
             nextPrevDiv.appendChild(prevRound);
@@ -9747,6 +9749,7 @@ async function generateRounds(type, reverse, modified) {
                     if (currentPreviewRound >= roundsetProcessed.rounds.length) { currentPreviewRound = 0 }
                 }
                 selectRoundNum.value = currentPreviewRound + 1;
+                clearPreview();
                 updatePreviewRoundTimeline()
             })
             nextPrevDiv.appendChild(nextRound);
@@ -9884,6 +9887,7 @@ function updatePreviewRoundTimeline() {
     contentDiv.innerHTML = "";
 
     let round = roundsetProcessed.rounds[currentPreviewRound];
+    hiddenGroups = []
 
     let roundDiv = document.createElement('div');
     roundDiv.classList.add('round-div-detailed');
@@ -9961,6 +9965,15 @@ function updatePreviewRoundTimeline() {
     round.bloonGroups.forEach((bloonGroup, index) => {
         let bloonGroupDiv = document.createElement('div');
         bloonGroupDiv.classList.add('bloon-group-div-detailed');
+        bloonGroupDiv.addEventListener('click', () => {
+            if (hiddenGroups.includes(index)) {
+                bloonGroupDiv.style.filter = "";
+                hiddenGroups.splice(hiddenGroups.indexOf(index), 1);
+            } else {
+                hiddenGroups.push(index);
+                bloonGroupDiv.style.filter = "brightness(0.5)";
+            }
+        })
         timelineDiv.appendChild(bloonGroupDiv);
 
         let leftDiv = document.createElement('div');
