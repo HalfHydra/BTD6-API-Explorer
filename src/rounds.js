@@ -125,6 +125,14 @@ function generateRoundsets() {
                 roundsetIcon.src = `../Assets/UI/EventRaceBtn.png`;
                 roundsetDiv.classList.add("race-roundset")
                 break;
+            case "Odyssey":
+                roundsetIcon.src = `../Assets/UI/OdysseyEventBtn.png`;
+                roundsetDiv.classList.add("odyssey-roundset")
+                break;
+            case "Boss":
+                roundsetIcon.src = `../Assets/UI/BossesBtn.png`;
+                roundsetDiv.classList.add("boss-roundset")
+                break;
         }
 
         let roundsetTextDiv = document.createElement('div');

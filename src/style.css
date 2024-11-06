@@ -4399,6 +4399,17 @@
     padding: 12px;
     border: 8px solid #91c1ff;
 }
+.odyssey-roundset {
+    background-image: url(../Assets/EventBanner/EventBannerSmallOdyssey.png);
+    padding: 12px;
+    border: 8px solid #91c1ff;
+}
+.boss-roundset {
+    background-image: url(../Assets/EventBanner/EventBannerSmallBossChallenge.png);
+    padding: 12px;
+    border: 8px solid #91c1ff;
+}
+
 
 .challenge-tower-selector-top {
     display: flex;
