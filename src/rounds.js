@@ -102,7 +102,7 @@ function generateRoundsets() {
 
     let limitedRoundsets = {};
     Object.entries(constants.limitedTimeEvents).forEach(([roundset, data]) => {
-        if (data.start < Date.now() && data.end > Date.now()) {
+        if (data.end > Date.now()) {
             limitedRoundsets[roundset] = data;
         }
     })
@@ -130,7 +130,7 @@ function generateRoundsets() {
                 roundsetDiv.classList.add("odyssey-roundset")
                 break;
             case "Boss":
-                roundsetIcon.src = `../Assets/UI/BossesBtn.png`;
+                roundsetIcon.src = `../Assets/BossIcon/${data.boss[0].toUpperCase() + data.boss.slice(1)}EventIcon.png`;
                 roundsetDiv.classList.add("boss-roundset")
                 break;
         }
@@ -150,7 +150,7 @@ function generateRoundsets() {
         roundsetTextDiv.appendChild(roundsetText2);
 
         if(new Date() < new Date(data.start)) {
-            raceTimeLeft.innerHTML = "Coming Soon!";
+            roundsetText2.innerHTML = "Coming Soon!";
         } else if (new Date(data.end) > new Date()) {
             updateTimer(new Date(data.end), roundsetText2.id);
             timerInterval = setInterval(() => updateTimer(new Date(data.end), roundsetText2.id), 1000)

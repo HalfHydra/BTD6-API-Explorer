@@ -3579,6 +3579,8 @@
     align-items: center;
     border-radius: 20px;
     margin: 10px 0px;
+    background-size: cover;
+    background-position: center;
 }
 .roundset-selector-img {
     width: 75px;

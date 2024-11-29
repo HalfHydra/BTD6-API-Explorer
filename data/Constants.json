@@ -40,7 +40,7 @@
         "Clicks": 100
     },
     "limitedTimeEvents": {
-        "Bloonarius55": {"type": "Boss", "roundset": "chimpsbloonarius", "start": 1732953600000, "end": 1733367600000}, "Bloonarius55Elite": {"type": "Boss", "roundset": "chimpsbloonarius", "start": 1732953600000, "end": 1733367600000},
+        "Bloonarius55": {"type": "Boss", "roundset": "chimpsbloonarius", "boss": "bloonarius", "start": 1732953600000, "end": 1733367600000}, 
         "Mastery(ish) Mode!": {
             "type": "Odyssey",
             "roundset": "masterymode",
