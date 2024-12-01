@@ -6976,26 +6976,39 @@ async function generateLeaderboardEntries(metadata, type){
                 leaderboardEntryPlayer.classList.add('leaderboard-entry-team');
             }
 
-            let observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(async observerentry => {
-                    if (observerentry.isIntersecting) {
-                        let userProfile = await getUserProfile(entry.profile);
-                        if (userProfile != null) {
-                            if(userProfile.hasOwnProperty('owner')) {
-                                leaderboardEntryFrame.src = userProfile.frameURL;
-                                leaderboardEntryEmblem.src = userProfile.iconURL;
-                                leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                                observer.unobserve(observerentry.target);
-                            } else {
-                                leaderboardEntryIcon.src = getProfileAvatar(userProfile);
-                                leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                                observer.unobserve(observerentry.target);
+            if(!preventRateLimiting){
+                let observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(async observerentry => {
+                        if (observerentry.isIntersecting) {
+                            let userProfile = await getUserProfile(entry.profile);
+                            if (userProfile != null) {
+                                if(userProfile.hasOwnProperty('owner')) {
+                                    leaderboardEntryFrame.src = userProfile.frameURL;
+                                    leaderboardEntryEmblem.src = userProfile.iconURL;
+                                    leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
+                                    observer.unobserve(observerentry.target);
+                                } else {
+                                    leaderboardEntryIcon.src = getProfileAvatar(userProfile);
+                                    leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
+                                    observer.unobserve(observerentry.target);
+                                }
                             }
                         }
-                    }
+                    });
                 });
-            });
-            observer.observe(leaderboardEntryIcon);
+                observer.observe(leaderboardEntryIcon);
+            }
+            if(profileCache[(entry.profile).split("/").pop()] != null) {
+                let userProfile = profileCache[(entry.profile).split("/").pop()];
+                if(userProfile.hasOwnProperty('owner')) {
+                    leaderboardEntryFrame.src = userProfile.frameURL;
+                    leaderboardEntryEmblem.src = userProfile.iconURL;
+                    leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
+                } else {
+                    leaderboardEntryIcon.src = getProfileAvatar(userProfile);
+                    leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
+                }
+            }
         })
     } else {
         let noDataFound = document.createElement('p');

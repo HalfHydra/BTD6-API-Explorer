@@ -41,7 +41,7 @@ let isErrorModalOpen = false;
 let customMapsCache = {}
 
 let rateLimited = false;
-let preventRateLimiting = false;
+let preventRateLimiting = true;
 
 async function fetchData(url, onSuccess) {
     let res = null;
