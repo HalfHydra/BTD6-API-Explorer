@@ -461,6 +461,14 @@
     padding: 25px 0px;
 }
 
+.article-page {
+    background-color: var(--profile-primary);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    /* padding: 25px 0px; */
+}
+
 .below-profile-header {
     display: flex;
     flex-direction: row;

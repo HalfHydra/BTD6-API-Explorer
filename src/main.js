@@ -8952,8 +8952,9 @@ function generateExtrasPage() {
         'Collection Event Odds',
         // 'Monkey Money Helper', 
         // 'Export Data', 
-        'Send Feedback'
-        // 'Settings'
+        'Send Feedback',
+        'Settings',
+        "Use Code 'HalfHydra' <br>in the BTD6 Shop!"
     ];
 
     if (!loggedIn) {
@@ -8990,6 +8991,9 @@ function generateExtrasPage() {
             case "Settings":
                 selectorImg.src = '../Assets/UI/OptionsBtn.png';
                 break;
+            case "Use Code 'HalfHydra' <br>in the BTD6 Shop!":
+                selectorImg.src = '../Assets/UI/CreatorSupportBtn.png';
+                break;
             default: 
                 selectorImg.src = '../Assets/UI/WoodenRoundButton.png';
                 break;
@@ -9021,10 +9025,73 @@ function changeExtrasTab(selected){
         case 'Send Feedback':
             window.open('https://forms.gle/Tg1PuRNj2ftojMde6', '_blank');
             break;
+        case "Use Code 'HalfHydra' <br>in the BTD6 Shop!":
+            generateArticle("CreatorSupport")
+            break;
         case 'Settings':
             generateSettings();
             break;
     }
+}
+
+function generateArticle(content){
+    let articleContent = document.getElementById('extras-content');
+    articleContent.innerHTML = "";
+
+    let articlePage = document.createElement('div');
+    articlePage.classList.add('article-page');
+    articleContent.appendChild(articlePage);
+
+    let articleContentDiv = document.createElement('div');
+    // articleContentDiv.classList.add('selectors-div');
+    articlePage.appendChild(articleContentDiv);
+
+    let articles = {"CreatorSupport":[{"type":"text","class":"site-info-header black-outline","content":"How to enter a creator code:"},{"type":"panels","content":{"1":{"name":"Step 1","desc":"On the main menu after pressing start, navigate to the shop","img":"CS1"},"2":{"name":"Step 2","desc":"Press the creator support button on the bottom left","img":"CS2"},"3":{"name":"Step 3","desc":"Enter code \"HalfHydra\" (or any other creators code) and press submit. When purchasing anything in the store, a cut will go to the creator chosen.","img":"CS3"}}},{"type":"text","class":"oak-instructions-text","content":"Creator support is a program offered by Ninja Kiwi that allows players to give a cut of the purchases you make in game to the creator who's code you've entered in the Bloons TD 6 shop. You can support me and my site by using the code \"HalfHydra\""}]}
+
+    articles[content].forEach((section) => {
+        switch(section.type){
+            case "text":
+                let articleText = document.createElement('p');
+                if (section.class) { articleText.className = section.class };
+                articleText.innerHTML = section.content;
+                articleContentDiv.appendChild(articleText);
+                break;
+            case "img":
+                let articleImg = document.createElement('img');
+                if (section.class) { articleImg.className = section.class };
+                articleImg.src = `../Assets/UI/${section.content}`;
+                articleContentDiv.appendChild(articleImg);
+                break;
+            case "panels":
+                let panels = section.content;
+
+                let panelContainer = document.createElement('div');
+                panelContainer.classList.add('insta-monkey-guide-container');
+                articleContentDiv.appendChild(panelContainer);
+
+                Object.keys(panels).forEach(method => {
+                    let panel = document.createElement('div');
+                    panel.classList.add('insta-monkey-guide-method');
+                    panelContainer.appendChild(panel);
+
+                    let panelName = document.createElement('p');
+                    panelName.classList.add('insta-monkey-guide-method-text','black-outline');
+                    panelName.innerHTML = panels[method].name;
+                    panel.appendChild(panelName);
+
+                    let panelDesc = document.createElement('p');
+                    panelDesc.classList.add('insta-monkey-guide-method-desc');
+                    panelDesc.innerHTML = panels[method].desc;
+                    panel.appendChild(panelDesc);
+
+                    let panelImg = document.createElement('img');
+                    panelImg.classList.add('insta-monkey-guide-method-img');
+                    panelImg.src = `./Assets/UI/${panels[method].img}.png`;
+                    panel.appendChild(panelImg);
+                })
+        }
+    })
+
 }
 
 function generateRoundsets() {
