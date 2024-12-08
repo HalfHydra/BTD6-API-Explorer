@@ -485,6 +485,8 @@
 
 .setting-desc {
     margin: 0 10px;
+    display: flex;
+    align-items: center;
 }
 
 .setting-info-div {
