@@ -9107,9 +9107,12 @@ function generateRoundsets() {
     roundsetPage.appendChild(selectorsDiv);
 
     let limitedRoundsets = {};
+    let expiredRoundsets = {};
     Object.entries(constants.limitedTimeEvents).forEach(([roundset, data]) => {
         if (data.end > Date.now()) {
             limitedRoundsets[roundset] = data;
+        } else {
+            expiredRoundsets[roundset] = data;
         }
     })
 
@@ -9228,6 +9231,73 @@ function generateRoundsets() {
         roundsetIcon.classList.add('other-roundset-selector-img');
         roundsetIcon.src = `../Assets/QuestIcon/${data.icon}.png`;
         roundsetDiv.appendChild(roundsetIcon);
+    })
+
+    let knownPreviousEventsDiv = document.createElement('div');
+    knownPreviousEventsDiv.classList.add('known-previous-events-div');
+    selectorsDiv.appendChild(knownPreviousEventsDiv);
+
+    let knownPreviousEventsText = document.createElement('p');
+    knownPreviousEventsText.classList.add('other-roundsets-selector-text', 'black-outline');
+    knownPreviousEventsText.innerHTML = "Known Previous Events";
+    knownPreviousEventsDiv.appendChild(knownPreviousEventsText);
+
+    Object.entries(expiredRoundsets).forEach(([event, data]) => {
+        let roundsetDiv = document.createElement('div');
+        roundsetDiv.classList.add('roundset-selector-div');
+        roundsetDiv.addEventListener('click', () => {
+            showLoading();
+            showRoundsetModel('extras', data.roundset);
+        })
+        selectorsDiv.appendChild(roundsetDiv);
+
+        let roundsetIcon = document.createElement('img');
+        roundsetIcon.classList.add('roundset-selector-img');
+        roundsetDiv.appendChild(roundsetIcon);
+
+        switch(data.type) {
+            case "Race":
+                roundsetIcon.src = `../Assets/UI/EventRaceBtn.png`;
+                roundsetDiv.classList.add("race-roundset")
+                break;
+            case "Odyssey":
+                roundsetIcon.src = `../Assets/UI/OdysseyEventBtn.png`;
+                roundsetDiv.classList.add("odyssey-roundset")
+                break;
+            case "Boss":
+                roundsetIcon.src = `../Assets/BossIcon/${data.boss[0].toUpperCase() + data.boss.slice(1)}EventIcon.png`;
+                roundsetDiv.style.backgroundImage = `url(../Assets/EventBanner/EventBannerSmall${data.boss[0].toUpperCase() + data.boss.slice(1)}.png)`
+                roundsetDiv.classList.add("boss-roundset")
+                break;
+        }
+
+        let roundsetTextDiv = document.createElement('div');
+        roundsetTextDiv.classList.add('roundset-selector-text-div');
+        roundsetDiv.appendChild(roundsetTextDiv);
+    
+        let roundsetText = document.createElement('p');
+        roundsetText.classList.add('selector-text', 'black-outline');
+        roundsetText.innerHTML = `${data.type} Event - ${event}`;
+        roundsetTextDiv.appendChild(roundsetText);
+
+        let roundsetText2 = document.createElement('p');
+        roundsetText2.id = "time-left-" + event;
+        roundsetText2.classList.add('selector-text', 'black-outline');
+        roundsetTextDiv.appendChild(roundsetText2);
+
+        if(new Date() < new Date(data.start)) {
+            roundsetText2.innerHTML = "Coming Soon!";
+        } else if (new Date(data.end) > new Date()) {
+            updateTimer(new Date(data.end), roundsetText2.id);
+            timerInterval = setInterval(() => updateTimer(new Date(data.end), roundsetText2.id), 1000)
+        } else {
+            roundsetText2.innerHTML = `${new Date(data.start).toLocaleDateString()} - ${new Date(data.end).toLocaleDateString()}`
+        }
+
+        let roundsetGoImg = document.createElement('img');
+        roundsetGoImg.classList.add('selector-go-img');
+        roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
+        roundsetDiv.appendChild(roundsetGoImg);
     })
 
     let skuRoundsetDiv = document.createElement('div');
