@@ -10160,8 +10160,8 @@ function generateSettings(){
 
     let settings = {
         "ProfileLoading": {
-            "name": "Toggle Profile Loading",
-            "description": "Toggle user profiles from loading automatically. When switched on, user profiles will need to be clicked to be loaded. Turning this off will load profiles automatically. This option may cause you to be rate limited much faster (you will need to wait a few minutes before loading any other content from the Ninja Kiwi API on the site if you reach a threshold).",
+            "name": "Load Profiles Automatically",
+            "description": "When switched on, user profiles on leaderboards and the content browser will load and display user cosmetics. Otherwise user profiles will need to be clicked to be loaded. This option may cause you to be rate limited much faster (you will need to wait a few minutes before loading any new content from the Ninja Kiwi API on the site if you reach a threshold).",
             "input": "toggle"
         }
     }
@@ -10222,9 +10222,9 @@ function generateSettings(){
 
         switch (setting){
             case "ProfileLoading":
-                settingInput.checked = preventRateLimiting;
+                settingInput.checked = !preventRateLimiting;
                 settingInput.addEventListener('change', () => { 
-                    preventRateLimiting = settingInput.checked;
+                    preventRateLimiting = !settingInput.checked;
                 })
                 break;
         }
