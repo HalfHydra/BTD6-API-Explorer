@@ -489,6 +489,7 @@
 
 .setting-info-div {
     display: flex;
+    justify-content: space-between;
 }
 
 .below-profile-header {

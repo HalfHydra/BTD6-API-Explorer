@@ -35,6 +35,8 @@ let processedMapData = {
     }
 }
 
+let useNamedMonkeys = false;
+
 let currentlySelectedHero = "";
 
 let allHeroesShown = false;
@@ -1912,7 +1914,7 @@ function generateTowerProgressTower(tower){
 
     let towerProgressContentText = document.createElement('p');
     towerProgressContentText.classList.add('tower-progress-content-text', paragonUnlocked ? 'knowledge-outline' : 'black-outline');
-    towerProgressContentText.innerHTML = getLocValue(tower);
+    towerProgressContentText.innerHTML = (useNamedMonkeys && btd6usersave.namedMonkeys[tower]) ? btd6usersave.namedMonkeys[tower] : getLocValue(tower);
     towerProgressInfoContainer.appendChild(towerProgressContentText);
 
     let towerProgressContentXP = document.createElement('p');
@@ -10265,6 +10267,11 @@ function generateSettings(){
             "name": "Load Profiles Automatically",
             "description": "When switched on, user profiles on leaderboards and the content browser will load and display user cosmetics. Otherwise user profiles will need to be clicked to be loaded. This option may cause you to be rate limited much faster (you will need to wait a few minutes before loading any new content from the Ninja Kiwi API on the site if you reach a threshold).",
             "input": "toggle"
+        },
+        "UseNamedMonkeys": {
+            "name": "Use Named Monkeys Nicknames",
+            "description": "When switched on, the site will use the nicknames you've set for towers instead of the tower names.",
+            "input": "toggle"
         }
     }
 
@@ -10329,6 +10336,11 @@ function generateSettings(){
                     preventRateLimiting = !settingInput.checked;
                 })
                 break;
+            case "UseNamedMonkeys":
+                settingInput.checked = useNamedMonkeys;
+                settingInput.addEventListener('change', () => {
+                    useNamedMonkeys = !useNamedMonkeys;
+                });
         }
     }
     // let whereButton = document.createElement('p');
