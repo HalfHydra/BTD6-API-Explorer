@@ -8952,8 +8952,8 @@ function generateExtrasPage() {
         'Collection Event Odds',
         // 'Monkey Money Helper', 
         // 'Export Data', 
-        'Send Feedback',
         'Settings',
+        'Send Feedback',
         "Use Code 'HalfHydra' <br>in the BTD6 Shop!"
     ];
 
@@ -10138,32 +10138,105 @@ function resetPreview() {
     clearPreview();
 }
 
+function generateToggle(){
+    let toggle = document.createElement('div');
+    toggle.classList.add('switch');
+    
+    let input = document.createElement('input');
+    input.type = "checkbox";
+    input.checked = true;
+    toggle.appendChild(input);
+
+    let span = document.createElement('span');
+    span.classList.add('slider', 'round');
+    toggle.appendChild(span);
+
+    return toggle;
+}
+
 function generateSettings(){
     let settingsContent = document.getElementById('extras-content');
     settingsContent.innerHTML = "";
 
-    let noDataFound = document.createElement('p');
-    noDataFound.classList.add('no-data-found','black-outline');
-    noDataFound.innerHTML = "Coming Soon";
-    settingsContent.appendChild(noDataFound);
+    let settings = {
+        "ProfileLoading": {
+            "name": "Toggle Profile Loading",
+            "description": "Toggle user profiles from loading automatically. When switched on, user profiles will need to be clicked to be loaded. Turning this off will load profiles automatically. This option may cause you to be rate limited much faster (you will need to wait a few minutes before loading any other content from the Ninja Kiwi API on the site if you reach a threshold).",
+            "input": "toggle"
+        }
+    }
 
     let settingsContainer = document.createElement('div');
-    settingsContainer.classList.add('settings-container');
+    settingsContainer.classList.add('article-page');
     settingsContent.appendChild(settingsContainer);
+
+    let settingsTitle = document.createElement('p');
+    settingsTitle.classList.add('hero-progress-header-text', 'settings-text');
+    settingsTitle.innerHTML = "Settings";
+    settingsContainer.appendChild(settingsTitle);
 
     let settingsOptionsContainer = document.createElement('div');
     settingsOptionsContainer.classList.add('settings-options-container');
     settingsContainer.appendChild(settingsOptionsContainer);
 
-    let whereButton = document.createElement('p');
-    whereButton.classList.add('where-button','return-entry-button','black-outline');
-    whereButton.innerHTML = 'Clear Local Storage';
-    whereButton.addEventListener('click', () => {
-        localStorage.clear();
-        location.reload();
-    })
-    settingsOptionsContainer.appendChild(whereButton);
+    for (let setting in settings) {
+        let settingDiv = document.createElement('div');
+        settingDiv.classList.add('setting-div');
+        settingsOptionsContainer.appendChild(settingDiv);
 
+        let settingName = document.createElement('p');
+        settingName.classList.add('insta-monkey-guide-method-text', 'black-outline');
+        settingName.innerHTML = settings[setting].name;
+        settingDiv.appendChild(settingName);
+
+        let settingInfoDiv = document.createElement('div');
+        settingInfoDiv.classList.add('setting-info-div');
+        settingDiv.appendChild(settingInfoDiv);
+
+        let settingDescription = document.createElement('p');
+        settingDescription.classList.add('insta-monkey-guide-method-desc', 'setting-desc');
+        settingDescription.innerHTML = settings[setting].description;
+        settingInfoDiv.appendChild(settingDescription);
+
+        let settingInputDiv = document.createElement('label');
+        settingInputDiv.classList.add('setting-input-label');
+        settingInfoDiv.appendChild(settingInputDiv);
+
+        let settingInput = document.createElement('input');
+        settingInput.classList.add('setting-input');
+        settingInputDiv.appendChild(settingInput);
+
+        switch (settings[setting].input){
+            case "toggle":
+                let toggleImg = document.createElement('span');
+                toggleImg.classList.add('toggle-img', 'slider');
+                toggleImg.src = "../Assets/UI/BlueBtnCircleSmall.png";
+                settingInputDiv.appendChild(toggleImg);
+
+                settingInput.type = "checkbox";
+
+                settingInputDiv.classList.add('switch');
+                break;
+        }
+        
+
+        switch (setting){
+            case "ProfileLoading":
+                settingInput.checked = preventRateLimiting;
+                settingInput.addEventListener('change', () => { 
+                    preventRateLimiting = settingInput.checked;
+                })
+                break;
+        }
+    }
+    // let whereButton = document.createElement('p');
+    // whereButton.classList.add('where-button','return-entry-button','black-outline');
+    // whereButton.innerHTML = 'Clear Local Storage';
+    // whereButton.addEventListener('click', () => {
+    //     localStorage.clear();
+    //     location.reload();
+    // })
+    // settingsOptionsContainer.appendChild(whereButton);
 }
 
 function processRewardsString(input){

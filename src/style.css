@@ -466,7 +466,29 @@
     border-radius: 20px;
     display: flex;
     justify-content: center;
-    /* padding: 25px 0px; */
+    flex-direction: column;
+}
+
+.setting-input-label {
+    min-width: 60px;
+    margin: auto 10px;
+}
+
+.setting-div {
+    display:flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    padding: 10px;
+    margin:20px;
+}
+
+.setting-desc {
+    margin: 0 10px;
+}
+
+.setting-info-div {
+    display: flex;
 }
 
 .below-profile-header {
@@ -4622,6 +4644,70 @@ input[type="checkbox"] {
     justify-content: center;
     padding: 20px;
 }
+
+.settings-text {
+    text-align: center;
+    background-image: url('../Assets/UI/GreyTxtTextureMain.png');
+    padding: 10px;
+}
+
+.switch {
+    position: relative;
+    width: 60px;
+    height: 70px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 25px;
+    left: 0;
+    right: 20px;
+    bottom: 25px;
+    background-color: #341E0E;
+    -webkit-transition: .1s;
+    transition: .1s;
+    transition-timing-function: ease-in-out;
+    border-radius: 5px;
+  }
+  
+  .switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    -webkit-transition: .1s;
+    transition: .1s;
+    transition-timing-function: ease-in-out;
+    background-image: url(../Assets/UI/BlueBtnCircleSmall.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    -webkit-transform: translate(-15px, 8px);
+    -ms-transform: translate(-15px, 8px);
+    transform: translate(-15px, 8px);
+  }
+  
+  .switch input:checked + .slider {
+    background-color: #79F000;
+  }
+  
+  .switch input:focus + .slider {
+    box-shadow: 0 0 1px #79F000;
+  }
+  
+  .switch input:checked + .slider:before {
+    -webkit-transform: translate(20px, 8px);
+    -ms-transform: translate(20px, 8px);
+    transform: translate(20px, 8px);
+  }
 
 /* * {
     outline: 1px solid red;
