@@ -1,5 +1,5 @@
 {
-    "version": "1.2.3",
+    "version": "1.4.0",
     "projectContentVersion": 45,
     "totalInstaMonkeys": 1536,
     "achievements": 138,
@@ -40,7 +40,7 @@
         "Clicks": 100
     },
     "limitedTimeEvents": {
-        "Bloonarius55": {"type": "Boss", "roundset": "chimpsbloonarius", "boss": "bloonarius", "start": 1732953600000, "end": 1733367600000}, 
+        "Bloonarius 55": {"type": "Boss", "roundset": "chimpsbloonarius", "boss": "bloonarius", "start": 1732953600000, "end": 1733367600000}, 
         "Mastery(ish) Mode!": {
             "type": "Odyssey",
             "roundset": "masterymode",

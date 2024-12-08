@@ -1243,6 +1243,8 @@ function updateTimer(targetTime, elementId) {
     if (remainingTime > 48 * 3600) {
         const days = Math.ceil(remainingTime / (24 * 3600));
         timerElement.textContent = `${days} days left`;
+    } else if (remainingTime < 0) {
+        timerElement.textContent = "Finished";
     } else {
         timerElement.textContent = formatTime(remainingTime);
     }
