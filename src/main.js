@@ -684,8 +684,6 @@ function generateFrontPage(){
     trailerVideo.src = './Assets/Trailer/Trailer.mp4';
     trailerVideo.controls = true;
 
-    //two buttons
-    //use without oak
     let siteAccessDiv = document.createElement('div');
     siteAccessDiv.classList.add('site-access-div');
     frontPage.appendChild(siteAccessDiv);
@@ -841,6 +839,40 @@ function generateFrontPage(){
     feedbackDiv.classList.add('feedback-div');
     feedbackDiv.style.display = 'none';
     frontPage.appendChild(feedbackDiv);
+
+    let StandaloneSiteText = document.createElement('p');
+    StandaloneSiteText.classList.add('site-info-header', 'sites-text', 'black-outline');
+    StandaloneSiteText.innerHTML = 'Standalone Sites';
+    frontPage.appendChild(StandaloneSiteText);
+
+    let sitesText = document.createElement('p');
+    sitesText.classList.add('where-text');
+    sitesText.innerHTML = 'Separate sites with just one module of this site:';
+    frontPage.appendChild(sitesText);
+
+    let StandaloneSiteDiv = document.createElement('div');
+    StandaloneSiteDiv.classList.add('site-access-div');
+    frontPage.appendChild(StandaloneSiteDiv);
+
+    let siteButtons = document.createElement('div');
+    siteButtons.classList.add('site-login-buttons');
+    StandaloneSiteDiv.appendChild(siteButtons);
+
+    let trackerSite = document.createElement('p');
+    trackerSite.classList.add('where-button','black-outline');
+    trackerSite.innerHTML = 'Insta Tracker';
+    trackerSite.addEventListener('click', () => {
+        openBTD6Link('https://btd6apiexplorer.github.io/insta');
+    })
+    siteButtons.appendChild(trackerSite);
+
+    let roundsSite = document.createElement('p');
+    roundsSite.classList.add('where-button','black-outline');
+    roundsSite.innerHTML = 'Roundsets';
+    roundsSite.addEventListener('click', () => {
+        openBTD6Link('https://btd6apiexplorer.github.io/rounds');
+    })
+    siteButtons.appendChild(roundsSite);
 
     let versionDiv = document.createElement('div');
     versionDiv.id = 'version-div';
