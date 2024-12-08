@@ -4479,6 +4479,14 @@
     padding-bottom: 10px;
 }
 
+.underline-text {
+    font-family:GardeniaBold;
+    color: white;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline-block;
+}
+
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */
     -webkit-text-stroke: 0.03em black;
