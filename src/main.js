@@ -3,6 +3,8 @@ let pressedStart = false;
 let locJSON = {}
 let achievementsJSON = {}
 let achievementsHelper = {}
+let trophyStoreItemsJSON = {}
+let teamsStoreItemsJSON = {}
 let constants = {}
 
 let rankInfo = {
@@ -122,11 +124,15 @@ fetch('./data/Constants.json')
 function fetchDependencies() {
     Promise.all([
         fetch('./data/English.json').then(response => response.json()),
-        fetch('./data/Achievements150.json').then(response => response.json())
+        fetch('./data/Achievements150.json').then(response => response.json()),
+        fetch('./data/trophyStoreItems.json').then(response => response.json()),
+        fetch('./data/teamsStoreItems.json').then(response => response.json())
     ])
-    .then(([englishData, achievementsData]) => {
+    .then(([englishData, achievementsData, trophyStoreItems, teamsStoreItems]) => {
         locJSON = englishData;
         achievementsJSON = achievementsData;
+        trophyStoreItemsJSON = trophyStoreItems;
+        teamsStoreItemsJSON = teamsStoreItems;
         readyFlags[2] = 1;
         readyFlags[3] = 1;
         generateIfReady();

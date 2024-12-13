@@ -1,12 +1,12 @@
 {
     "version": "1.4.0",
-    "projectContentVersion": 45,
+    "projectContentVersion": 46,
     "totalInstaMonkeys": 1536,
     "achievements": 138,
     "hiddenAchievements": 12,
     "totalMaps": 75,
-    "profileBanners": 44,
-    "profileAvatars": 102,
+    "profileBanners": 48,
+    "profileAvatars": 107,
     "startRound": {
         "Easy": 1,
         "PrimaryOnly": 1,
@@ -446,6 +446,7 @@
         "Chutes": "Intermediate",
         "Rake": "Intermediate",
         "SpiceIslands": "Intermediate",
+        "LastResort": "Advanced",
         "AncientPortal": "Advanced",
         "CastleRevenge": "Advanced",
         "DarkPath": "Advanced",
@@ -508,6 +509,8 @@
         "MedalCoopImpoppable": "Co-op - Hard - Impoppable",
         "MedalCoopImpoppableRuby": "Co-op - Hard - CHIMPS",
         "MedalCoopImpoppableHematite": "Co-op - Hard - CHIMPS",
+        "BlastapopoulosEliteBadge": "Boss Event - Blastapopoulos - Elite",
+        "BlastapopouloseBadge": "Boss Event - Blastapopoulos",
         "PhayzeEliteBadge": "Boss Event - Phayze - Elite",
         "PhayzeBadge": "Boss Event - Phayze",
         "DreadbloonEliteBadge": "Boss Event - Dreadbloon - Elite",
@@ -562,7 +565,7 @@
         "CtGlobalPlayerRedDiamondMedal": "CT Global - 2nd",
         "CtGlobalPlayerBlackDiamondMedal": "CT Global - 1st"
     },
-    "paragonsAvailable": ["DartMonkey", "BoomerangMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "WizardMonkey", "NinjaMonkey", "EngineerMonkey"],
+    "paragonsAvailable": ["DartMonkey", "BoomerangMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "WizardMonkey", "NinjaMonkey", "EngineerMonkey", "TackShooter"],
     "instaTiers": {
         "5": ["520", "502", "510", "501", "500", "250", "052", "150", "051", "050", "205", "025", "105", "015", "005"],
         "4": ["420", "402", "410", "401", "400", "240", "042", "140", "041", "040", "204", "024", "104", "014", "004"],

@@ -92,7 +92,8 @@ const upgradeNameFixMap = {
     "MonkeyAceParagon": "GoliathDoomship",
     "MonkeyBuccaneerParagon": "NavarchOfTheSeas",
     "MonkeySubParagon": "NauticSiegeCore",
-    "SmartSpikes": "DirectedSpikes"
+    "SmartSpikes": "DirectedSpikes",
+    "TackShooterParagon": "CycloneOfFireAndMetal"
 }
 
 let locJSONOverrides = {
