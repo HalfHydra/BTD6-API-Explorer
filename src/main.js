@@ -285,6 +285,8 @@ function generateMedals(){
         tempCoop["MedalCoop" + value] = btd6publicprofile["_medalsMultiplayer"][key] || 0;
     }
     medalsInOrder = {...medalsInOrder, ...tempCoop};
+    medalsInOrder["BlastapopoulosEliteBadge"] = btd6publicprofile["bossBadgesElite"]["Blastapopoulos"] || 0;
+    medalsInOrder["BlastapopoulosBadge"] = btd6publicprofile["bossBadgesNormal"]["Blastapopoulos"] || 0;
     medalsInOrder["PhayzeEliteBadge"] = btd6publicprofile["bossBadgesElite"]["Phayze"] || 0;
     medalsInOrder["PhayzeBadge"] = btd6publicprofile["bossBadgesNormal"]["Phayze"] || 0;
     medalsInOrder["DreadbloonEliteBadge"] = btd6publicprofile["bossBadgesElite"]["Dreadbloon"] || 0;
@@ -297,6 +299,7 @@ function generateMedals(){
     medalsInOrder["BloonariusBadge"] = btd6publicprofile["bossBadgesNormal"]["Bloonarius"] || 0;
     medalsInOrder["MedalEventBronzeMedal"] = btd6publicprofile["_medalsRace"]["Bronze"] || 0;
     medalsInOrder["MedalEventSilverMedal"] = btd6publicprofile["_medalsRace"]["Silver"] || 0;
+    medalsInOrder["MedalEventDoubleSilverMedal"] = btd6publicprofile["_medalsRace"]["DoubleSilver"] || 0;
     medalsInOrder["MedalEventGoldSilverMedal"] = btd6publicprofile["_medalsRace"]["GoldSilver"] || 0;
     medalsInOrder["MedalEventDoubleGoldMedal"] = btd6publicprofile["_medalsRace"]["DoubleGold"] || 0;
     medalsInOrder["MedalEventGoldDiamondMedal"] = btd6publicprofile["_medalsRace"]["GoldDiamond"] || 0;

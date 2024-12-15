@@ -523,6 +523,7 @@
         "BloonariusBadge": "Boss Event - Bloonarius",
         "MedalEventBronzeMedal": "Race Event - Top 75%",
         "MedalEventSilverMedal": "Race Event - Top 50%",
+        "MedalEventDoubleSilverMedal": "Race Event - Top 25%",
         "MedalEventGoldSilverMedal": "Race Event - Top 10%",
         "MedalEventDoubleGoldMedal": "Race Event - Top 1%",
         "MedalEventGoldDiamondMedal": "Race Event - Top 50",
