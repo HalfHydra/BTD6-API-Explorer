@@ -1,1071 +1,1071 @@
 {
-  "BasePropBattleMonkey": {
-    "id": "BasePropBattleMonkey",
-    "isDefault": "true",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "BattleMonkeyPropIcon.png",
-    "flairTypes": []
-  },
-  "BasePropCakeMonkey": {
-    "id": "BasePropCakeMonkey",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "CakeMonkeyPropIcon.png",
-    "flairTypes": []
-  },
-  "BasePropCampfire": {
-    "id": "BasePropCampfire",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "CampfirePropIcon.png",
-    "flairTypes": []
-  },
-  "BasePropCosyBeanbagMonkey": {
-    "id": "BasePropCosyBeanbagMonkey",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "CTCosyMonkeyIcon.png",
-    "flairTypes": []
-  },
-  "BasePropCrashedMoab": {
-    "id": "BasePropCrashedMoab",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "CrashedMoabPropIcon.png",
-    "flairTypes": []
-  },
-  "BasePropDinoSpringEgg": {
-    "id": "BasePropDinoSpringEgg",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "DinoSpringEggIcon.png",
-    "flairTypes": []
-  },
-  "BasePropKing": {
-    "id": "BasePropKing",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "KingPropIcon.png",
-    "flairTypes": []
-  },
-  "BasePropLighthouseKeeper": {
-    "id": "BasePropLighthouseKeeper",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "LighthouseKeeperPropIcon.png",
-    "flairTypes": []
-  },
-  "BasePropMonkeyJackOLantern": {
-    "id": "BasePropMonkeyJackOLantern",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "JackOLanternIcon.png",
-    "flairTypes": []
-  },
-  "BasePropPirateCrewMonkey": {
-    "id": "BasePropPirateCrewMonkey",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "PirateCrewMonkeyPropIcon.png",
-    "flairTypes": []
-  },
-  "BasePropSatellite": {
-    "id": "BasePropSatellite",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "SatellitePropIcon.png",
-    "flairTypes": []
-  },
-  "BasePropTelescope": {
-    "id": "BasePropTelescope",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "TelescopePropIcon.png",
-    "flairTypes": []
-  },
-  "BasePropTortoise": {
-    "id": "BasePropTortoise",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "TortoisePropIcon.png",
-    "flairTypes": []
-  },
-  "BasePropTotem": {
-    "id": "BasePropTotem",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "TotemPropIcon.png",
-    "flairTypes": []
-  },
-  "BasePropTrainingDummy": {
-    "id": "BasePropTrainingDummy",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "TrainingDummyPropIcon.png",
-    "flairTypes": []
-  },
-  "BasePropTreasureChest": {
-    "id": "BasePropTreasureChest",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "TreasureChestPropIcon.png",
-    "flairTypes": []
-  },
-  "BasePropWizardApprentice": {
-    "id": "BasePropWizardApprentice",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Base",
-    "icon": "WizardApprenticePropIcon.png",
-    "flairTypes": []
-  },
-  "BuildingPropBattleTower": {
-    "id": "BuildingPropBattleTower",
-    "isDefault": "true",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Building",
-    "icon": "BattleTowerPropIcon.png",
-    "flairTypes": [
-      "BuildingMaterialSwap",
-      "BuildingMaterialSwap"
-    ]
-  },
-  "BuildingPropCastle": {
-    "id": "BuildingPropCastle",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Building",
-    "icon": "CastlePropIcon.png",
-    "flairTypes": [
-      "BuildingMaterialSwap"
-    ]
-  },
-  "BuildingPropChristmasTree": {
-    "id": "BuildingPropChristmasTree",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Building",
-    "icon": "ChristmasTreePropIcon.png",
-    "flairTypes": [
-      "BuildingMaterialSwap"
-    ]
-  },
-  "BuildingPropJunkerTower": {
-    "id": "BuildingPropJunkerTower",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Building",
-    "icon": "JunkerTowerPropIcon.png",
-    "flairTypes": [
-      "BuildingMaterialSwap"
-    ]
-  },
-  "BuildingPropLighthouse": {
-    "id": "BuildingPropLighthouse",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Building",
-    "icon": "LighthousePropIcon.png",
-    "flairTypes": [
-      "BuildingMaterialSwap"
-    ]
-  },
-  "BuildingPropWizardTower": {
-    "id": "BuildingPropWizardTower",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Building",
-    "icon": "WizardTowerPropIcon.png",
-    "flairTypes": [
-      "BuildingMaterialSwap"
-    ]
-  },
-  "FlyingPropCardinal": {
-    "id": "FlyingPropCardinal",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Flying",
-    "icon": "CardinalPropIcon.png",
-    "flairTypes": []
-  },
-  "FlyingPropGhoul": {
-    "id": "FlyingPropGhoul",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Flying",
-    "icon": "GhoulPropIcon.png",
-    "flairTypes": []
-  },
-  "FlyingPropMiniAce": {
-    "id": "FlyingPropMiniAce",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Flying",
-    "icon": "MiniAcePropIcon.png",
-    "flairTypes": []
-  },
-  "FlyingPropMoonRabbit": {
-    "id": "FlyingPropMoonRabbit",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Flying",
-    "icon": "MoonRabbitPropIcon.png",
-    "flairTypes": []
-  },
-  "FlyingPropPhoenix": {
-    "id": "FlyingPropPhoenix",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Flying",
-    "icon": "PhoenixPropIcon.png",
-    "flairTypes": []
-  },
-  "TeamsBanner1": {
-    "id": "TeamsBanner1",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner1Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsBanner10": {
-    "id": "TeamsBanner10",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner10Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsBanner11": {
-    "id": "TeamsBanner11",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner11Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsBanner12": {
-    "id": "TeamsBanner12",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner12Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsBanner13": {
-    "id": "TeamsBanner13",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner13Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsBanner14": {
-    "id": "TeamsBanner14",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner14Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsBanner15": {
-    "id": "TeamsBanner15",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner15Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsBanner2": {
-    "id": "TeamsBanner2",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner2Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsBanner3": {
-    "id": "TeamsBanner3",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner3Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsBanner4": {
-    "id": "TeamsBanner4",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner4Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsBanner5": {
-    "id": "TeamsBanner5",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner5Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsBanner6": {
-    "id": "TeamsBanner6",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner6Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsBanner7": {
-    "id": "TeamsBanner7",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner7Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsBanner8": {
-    "id": "TeamsBanner8",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner8Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsBanner9": {
-    "id": "TeamsBanner9",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamsBanner9Icon.png",
-    "flairTypes": [
-      "Banner"
-    ]
-  },
-  "TeamsEmblemFrame1": {
-    "id": "TeamsEmblemFrame1",
-    "isDefault": "true",
-    "isDisabled": "false",
-    "isHiddenInStore": "true",
-    "worldSlot": "None",
-    "icon": "TeamFrame1.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame10": {
-    "id": "TeamsEmblemFrame10",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame10.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame11": {
-    "id": "TeamsEmblemFrame11",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame11.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame12": {
-    "id": "TeamsEmblemFrame12",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame12.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame13": {
-    "id": "TeamsEmblemFrame13",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame13.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame14": {
-    "id": "TeamsEmblemFrame14",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame14.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame15": {
-    "id": "TeamsEmblemFrame15",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame15.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame16": {
-    "id": "TeamsEmblemFrame16",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame16.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame17": {
-    "id": "TeamsEmblemFrame17",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame17.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame18": {
-    "id": "TeamsEmblemFrame18",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame18.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame19": {
-    "id": "TeamsEmblemFrame19",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame19.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame2": {
-    "id": "TeamsEmblemFrame2",
-    "isDefault": "true",
-    "isDisabled": "false",
-    "isHiddenInStore": "true",
-    "worldSlot": "None",
-    "icon": "TeamFrame2.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame20": {
-    "id": "TeamsEmblemFrame20",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame20.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame21": {
-    "id": "TeamsEmblemFrame21",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame21.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame22": {
-    "id": "TeamsEmblemFrame22",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame22.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame23": {
-    "id": "TeamsEmblemFrame23",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame23.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame24": {
-    "id": "TeamsEmblemFrame24",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame24.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame25": {
-    "id": "TeamsEmblemFrame25",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame25.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame3": {
-    "id": "TeamsEmblemFrame3",
-    "isDefault": "true",
-    "isDisabled": "false",
-    "isHiddenInStore": "true",
-    "worldSlot": "None",
-    "icon": "TeamFrame3.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame4": {
-    "id": "TeamsEmblemFrame4",
-    "isDefault": "true",
-    "isDisabled": "false",
-    "isHiddenInStore": "true",
-    "worldSlot": "None",
-    "icon": "TeamFrame4.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame5": {
-    "id": "TeamsEmblemFrame5",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame5.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame6": {
-    "id": "TeamsEmblemFrame6",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame6.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame7": {
-    "id": "TeamsEmblemFrame7",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame7.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame8": {
-    "id": "TeamsEmblemFrame8",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame8.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemFrame9": {
-    "id": "TeamsEmblemFrame9",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamFrame9.png",
-    "flairTypes": [
-      "EmblemFrame"
-    ]
-  },
-  "TeamsEmblemIcon1": {
-    "id": "TeamsEmblemIcon1",
-    "isDefault": "true",
-    "isDisabled": "false",
-    "isHiddenInStore": "true",
-    "worldSlot": "None",
-    "icon": "TeamIcon1.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon10": {
-    "id": "TeamsEmblemIcon10",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon10.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon11": {
-    "id": "TeamsEmblemIcon11",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon11.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon12": {
-    "id": "TeamsEmblemIcon12",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon12.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon13": {
-    "id": "TeamsEmblemIcon13",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon13.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon14": {
-    "id": "TeamsEmblemIcon14",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon14.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon15": {
-    "id": "TeamsEmblemIcon15",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon15.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon16": {
-    "id": "TeamsEmblemIcon16",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon16.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon17": {
-    "id": "TeamsEmblemIcon17",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon17.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon18": {
-    "id": "TeamsEmblemIcon18",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon18.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon19": {
-    "id": "TeamsEmblemIcon19",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon19.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon2": {
-    "id": "TeamsEmblemIcon2",
-    "isDefault": "true",
-    "isDisabled": "false",
-    "isHiddenInStore": "true",
-    "worldSlot": "None",
-    "icon": "TeamIcon2.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon20": {
-    "id": "TeamsEmblemIcon20",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon20.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon21": {
-    "id": "TeamsEmblemIcon21",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon21.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon22": {
-    "id": "TeamsEmblemIcon22",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon22.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon23": {
-    "id": "TeamsEmblemIcon23",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon23.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon24": {
-    "id": "TeamsEmblemIcon24",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon24.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon25": {
-    "id": "TeamsEmblemIcon25",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon25.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon26": {
-    "id": "TeamsEmblemIcon26",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon26.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon27": {
-    "id": "TeamsEmblemIcon27",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon27.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon28": {
-    "id": "TeamsEmblemIcon28",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon28.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon29": {
-    "id": "TeamsEmblemIcon29",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon29.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon3": {
-    "id": "TeamsEmblemIcon3",
-    "isDefault": "true",
-    "isDisabled": "false",
-    "isHiddenInStore": "true",
-    "worldSlot": "None",
-    "icon": "TeamIcon3.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon4": {
-    "id": "TeamsEmblemIcon4",
-    "isDefault": "true",
-    "isDisabled": "false",
-    "isHiddenInStore": "true",
-    "worldSlot": "None",
-    "icon": "TeamIcon4.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon5": {
-    "id": "TeamsEmblemIcon5",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon5.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon6": {
-    "id": "TeamsEmblemIcon6",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon6.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon7": {
-    "id": "TeamsEmblemIcon7",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon7.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon8": {
-    "id": "TeamsEmblemIcon8",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon8.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "TeamsEmblemIcon9": {
-    "id": "TeamsEmblemIcon9",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "None",
-    "icon": "TeamIcon9.png",
-    "flairTypes": [
-      "EmblemLogo"
-    ]
-  },
-  "BasePropBananaPoolFloat": {
-    "id": "BasePropBananaPoolFloat",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Water",
-    "icon": "BananaPoolFloatPropIcon.png",
-    "flairTypes": []
-  },
-  "WaterPropKraken": {
-    "id": "WaterPropKraken",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Water",
-    "icon": "KrakenPropIcon.png",
-    "flairTypes": []
-  },
-  "WaterPropMiniPirateBoat": {
-    "id": "WaterPropMiniPirateBoat",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Water",
-    "icon": "MiniPirateBoatPropIcon.png",
-    "flairTypes": []
-  },
-  "WaterPropMiniSub": {
-    "id": "WaterPropMiniSub",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Water",
-    "icon": "MiniSubPropIcon.png",
-    "flairTypes": []
-  },
-  "WaterPropWhale": {
-    "id": "WaterPropWhale",
-    "isDefault": "false",
-    "isDisabled": "false",
-    "isHiddenInStore": "false",
-    "worldSlot": "Water",
-    "icon": "WhalePropIcon.png",
-    "flairTypes": []
-  }
+    "BasePropBattleMonkey": {
+        "id": "BasePropBattleMonkey",
+        "isDefault": "true",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "BattleMonkeyPropIcon.png",
+        "flairTypes": []
+    },
+    "BasePropCakeMonkey": {
+        "id": "BasePropCakeMonkey",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "CakeMonkeyPropIcon.png",
+        "flairTypes": []
+    },
+    "BasePropCampfire": {
+        "id": "BasePropCampfire",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "CampfirePropIcon.png",
+        "flairTypes": []
+    },
+    "BasePropCosyBeanbagMonkey": {
+        "id": "BasePropCosyBeanbagMonkey",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "CTCosyMonkeyIcon.png",
+        "flairTypes": []
+    },
+    "BasePropCrashedMoab": {
+        "id": "BasePropCrashedMoab",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "CrashedMoabPropIcon.png",
+        "flairTypes": []
+    },
+    "BasePropDinoSpringEgg": {
+        "id": "BasePropDinoSpringEgg",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "DinoSpringEggIcon.png",
+        "flairTypes": []
+    },
+    "BasePropKing": {
+        "id": "BasePropKing",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "KingPropIcon.png",
+        "flairTypes": []
+    },
+    "BasePropLighthouseKeeper": {
+        "id": "BasePropLighthouseKeeper",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "LighthouseKeeperPropIcon.png",
+        "flairTypes": []
+    },
+    "BasePropMonkeyJackOLantern": {
+        "id": "BasePropMonkeyJackOLantern",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "JackOLanternIcon.png",
+        "flairTypes": []
+    },
+    "BasePropPirateCrewMonkey": {
+        "id": "BasePropPirateCrewMonkey",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "PirateCrewMonkeyPropIcon.png",
+        "flairTypes": []
+    },
+    "BasePropSatellite": {
+        "id": "BasePropSatellite",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "SatellitePropIcon.png",
+        "flairTypes": []
+    },
+    "BasePropTelescope": {
+        "id": "BasePropTelescope",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "TelescopePropIcon.png",
+        "flairTypes": []
+    },
+    "BasePropTortoise": {
+        "id": "BasePropTortoise",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "TortoisePropIcon.png",
+        "flairTypes": []
+    },
+    "BasePropTotem": {
+        "id": "BasePropTotem",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "TotemPropIcon.png",
+        "flairTypes": []
+    },
+    "BasePropTrainingDummy": {
+        "id": "BasePropTrainingDummy",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "TrainingDummyPropIcon.png",
+        "flairTypes": []
+    },
+    "BasePropTreasureChest": {
+        "id": "BasePropTreasureChest",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "TreasureChestPropIcon.png",
+        "flairTypes": []
+    },
+    "BasePropWizardApprentice": {
+        "id": "BasePropWizardApprentice",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Base",
+        "icon": "WizardApprenticePropIcon.png",
+        "flairTypes": []
+    },
+    "BuildingPropBattleTower": {
+        "id": "BuildingPropBattleTower",
+        "isDefault": "true",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Building",
+        "icon": "BattleTowerPropIcon.png",
+        "flairTypes": [
+            "BuildingMaterialSwap",
+            "BuildingMaterialSwap"
+        ]
+    },
+    "BuildingPropCastle": {
+        "id": "BuildingPropCastle",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Building",
+        "icon": "CastlePropIcon.png",
+        "flairTypes": [
+            "BuildingMaterialSwap"
+        ]
+    },
+    "BuildingPropChristmasTree": {
+        "id": "BuildingPropChristmasTree",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Building",
+        "icon": "ChristmasTreePropIcon.png",
+        "flairTypes": [
+            "BuildingMaterialSwap"
+        ]
+    },
+    "BuildingPropJunkerTower": {
+        "id": "BuildingPropJunkerTower",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Building",
+        "icon": "JunkerTowerPropIcon.png",
+        "flairTypes": [
+            "BuildingMaterialSwap"
+        ]
+    },
+    "BuildingPropLighthouse": {
+        "id": "BuildingPropLighthouse",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Building",
+        "icon": "LighthousePropIcon.png",
+        "flairTypes": [
+            "BuildingMaterialSwap"
+        ]
+    },
+    "BuildingPropWizardTower": {
+        "id": "BuildingPropWizardTower",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Building",
+        "icon": "WizardTowerPropIcon.png",
+        "flairTypes": [
+            "BuildingMaterialSwap"
+        ]
+    },
+    "FlyingPropCardinal": {
+        "id": "FlyingPropCardinal",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Flying",
+        "icon": "CardinalPropIcon.png",
+        "flairTypes": []
+    },
+    "FlyingPropGhoul": {
+        "id": "FlyingPropGhoul",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Flying",
+        "icon": "GhoulPropIcon.png",
+        "flairTypes": []
+    },
+    "FlyingPropMiniAce": {
+        "id": "FlyingPropMiniAce",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Flying",
+        "icon": "MiniAcePropIcon.png",
+        "flairTypes": []
+    },
+    "FlyingPropMoonRabbit": {
+        "id": "FlyingPropMoonRabbit",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Flying",
+        "icon": "MoonRabbitPropIcon.png",
+        "flairTypes": []
+    },
+    "FlyingPropPhoenix": {
+        "id": "FlyingPropPhoenix",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Flying",
+        "icon": "PhoenixPropIcon.png",
+        "flairTypes": []
+    },
+    "TeamsBanner1": {
+        "id": "TeamsBanner1",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner1Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsBanner10": {
+        "id": "TeamsBanner10",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner10Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsBanner11": {
+        "id": "TeamsBanner11",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner11Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsBanner12": {
+        "id": "TeamsBanner12",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner12Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsBanner13": {
+        "id": "TeamsBanner13",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner13Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsBanner14": {
+        "id": "TeamsBanner14",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner14Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsBanner15": {
+        "id": "TeamsBanner15",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner15Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsBanner2": {
+        "id": "TeamsBanner2",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner2Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsBanner3": {
+        "id": "TeamsBanner3",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner3Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsBanner4": {
+        "id": "TeamsBanner4",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner4Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsBanner5": {
+        "id": "TeamsBanner5",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner5Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsBanner6": {
+        "id": "TeamsBanner6",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner6Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsBanner7": {
+        "id": "TeamsBanner7",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner7Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsBanner8": {
+        "id": "TeamsBanner8",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner8Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsBanner9": {
+        "id": "TeamsBanner9",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamsBanner9Icon.png",
+        "flairTypes": [
+            "Banner"
+        ]
+    },
+    "TeamsEmblemFrame1": {
+        "id": "TeamsEmblemFrame1",
+        "isDefault": "true",
+        "isDisabled": "false",
+        "isHiddenInStore": "true",
+        "worldSlot": "None",
+        "icon": "TeamFrame1.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame10": {
+        "id": "TeamsEmblemFrame10",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame10.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame11": {
+        "id": "TeamsEmblemFrame11",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame11.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame12": {
+        "id": "TeamsEmblemFrame12",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame12.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame13": {
+        "id": "TeamsEmblemFrame13",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame13.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame14": {
+        "id": "TeamsEmblemFrame14",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame14.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame15": {
+        "id": "TeamsEmblemFrame15",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame15.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame16": {
+        "id": "TeamsEmblemFrame16",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame16.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame17": {
+        "id": "TeamsEmblemFrame17",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame17.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame18": {
+        "id": "TeamsEmblemFrame18",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame18.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame19": {
+        "id": "TeamsEmblemFrame19",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame19.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame2": {
+        "id": "TeamsEmblemFrame2",
+        "isDefault": "true",
+        "isDisabled": "false",
+        "isHiddenInStore": "true",
+        "worldSlot": "None",
+        "icon": "TeamFrame2.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame20": {
+        "id": "TeamsEmblemFrame20",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame20.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame21": {
+        "id": "TeamsEmblemFrame21",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame21.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame22": {
+        "id": "TeamsEmblemFrame22",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame22.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame23": {
+        "id": "TeamsEmblemFrame23",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame23.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame24": {
+        "id": "TeamsEmblemFrame24",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame24.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame25": {
+        "id": "TeamsEmblemFrame25",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame25.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame3": {
+        "id": "TeamsEmblemFrame3",
+        "isDefault": "true",
+        "isDisabled": "false",
+        "isHiddenInStore": "true",
+        "worldSlot": "None",
+        "icon": "TeamFrame3.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame4": {
+        "id": "TeamsEmblemFrame4",
+        "isDefault": "true",
+        "isDisabled": "false",
+        "isHiddenInStore": "true",
+        "worldSlot": "None",
+        "icon": "TeamFrame4.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame5": {
+        "id": "TeamsEmblemFrame5",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame5.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame6": {
+        "id": "TeamsEmblemFrame6",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame6.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame7": {
+        "id": "TeamsEmblemFrame7",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame7.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame8": {
+        "id": "TeamsEmblemFrame8",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame8.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemFrame9": {
+        "id": "TeamsEmblemFrame9",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamFrame9.png",
+        "flairTypes": [
+            "EmblemFrame"
+        ]
+    },
+    "TeamsEmblemIcon1": {
+        "id": "TeamsEmblemIcon1",
+        "isDefault": "true",
+        "isDisabled": "false",
+        "isHiddenInStore": "true",
+        "worldSlot": "None",
+        "icon": "TeamIcon1.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon10": {
+        "id": "TeamsEmblemIcon10",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon10.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon11": {
+        "id": "TeamsEmblemIcon11",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon11.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon12": {
+        "id": "TeamsEmblemIcon12",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon12.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon13": {
+        "id": "TeamsEmblemIcon13",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon14.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon14": {
+        "id": "TeamsEmblemIcon14",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon13.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon15": {
+        "id": "TeamsEmblemIcon15",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon15.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon16": {
+        "id": "TeamsEmblemIcon16",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon16.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon17": {
+        "id": "TeamsEmblemIcon17",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon17.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon18": {
+        "id": "TeamsEmblemIcon18",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon18.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon19": {
+        "id": "TeamsEmblemIcon19",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon19.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon2": {
+        "id": "TeamsEmblemIcon2",
+        "isDefault": "true",
+        "isDisabled": "false",
+        "isHiddenInStore": "true",
+        "worldSlot": "None",
+        "icon": "TeamIcon2.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon20": {
+        "id": "TeamsEmblemIcon20",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon20.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon21": {
+        "id": "TeamsEmblemIcon21",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon21.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon22": {
+        "id": "TeamsEmblemIcon22",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon22.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon23": {
+        "id": "TeamsEmblemIcon23",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon23.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon24": {
+        "id": "TeamsEmblemIcon24",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon24.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon25": {
+        "id": "TeamsEmblemIcon25",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon25.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon26": {
+        "id": "TeamsEmblemIcon26",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon26.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon27": {
+        "id": "TeamsEmblemIcon27",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon27.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon28": {
+        "id": "TeamsEmblemIcon28",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon28.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon29": {
+        "id": "TeamsEmblemIcon29",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon29.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon3": {
+        "id": "TeamsEmblemIcon3",
+        "isDefault": "true",
+        "isDisabled": "false",
+        "isHiddenInStore": "true",
+        "worldSlot": "None",
+        "icon": "TeamIcon3.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon4": {
+        "id": "TeamsEmblemIcon4",
+        "isDefault": "true",
+        "isDisabled": "false",
+        "isHiddenInStore": "true",
+        "worldSlot": "None",
+        "icon": "TeamIcon4.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon5": {
+        "id": "TeamsEmblemIcon5",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon5.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon6": {
+        "id": "TeamsEmblemIcon6",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon6.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon7": {
+        "id": "TeamsEmblemIcon7",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon7.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon8": {
+        "id": "TeamsEmblemIcon8",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon8.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "TeamsEmblemIcon9": {
+        "id": "TeamsEmblemIcon9",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "None",
+        "icon": "TeamIcon9.png",
+        "flairTypes": [
+            "EmblemLogo"
+        ]
+    },
+    "BasePropBananaPoolFloat": {
+        "id": "BasePropBananaPoolFloat",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Water",
+        "icon": "BananaPoolFloatPropIcon.png",
+        "flairTypes": []
+    },
+    "WaterPropKraken": {
+        "id": "WaterPropKraken",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Water",
+        "icon": "KrakenPropIcon.png",
+        "flairTypes": []
+    },
+    "WaterPropMiniPirateBoat": {
+        "id": "WaterPropMiniPirateBoat",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Water",
+        "icon": "MiniPirateBoatPropIcon.png",
+        "flairTypes": []
+    },
+    "WaterPropMiniSub": {
+        "id": "WaterPropMiniSub",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Water",
+        "icon": "MiniSubPropIcon.png",
+        "flairTypes": []
+    },
+    "WaterPropWhale": {
+        "id": "WaterPropWhale",
+        "isDefault": "false",
+        "isDisabled": "false",
+        "isHiddenInStore": "false",
+        "worldSlot": "Water",
+        "icon": "WhalePropIcon.png",
+        "flairTypes": []
+    }
 }

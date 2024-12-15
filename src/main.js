@@ -377,6 +377,7 @@ function generateProgressSubText(){
     progressSubText["Achievements"] = `${btd6publicprofile.achievements}/${constants.achievements + constants.hiddenAchievements} Achievement${btd6publicprofile.achievements != 1 ? "s" : ""} Earned`;
     let extrasTotal = Object.keys(extrasUnlocked).length;
     progressSubText["Extras"] = `${extrasTotal} Extra${extrasTotal != 1 ? "s" : ""} Unlocked`;
+    progressSubText["TrophyStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k]).length} Trophy Store Items Unlocked`
 }
 
 function generateMapData() {
@@ -1260,7 +1261,8 @@ function generateOverview(){
         "Powers": "../Assets/UI/PowerContainer.png",
         "Skins": "../Assets/UI/TopHatSprite.png",
         "Upgrades": "../Assets/UI/UpgradeIcon.png",
-        "Knowledge": "../Assets/UI/KnowledgeIcon.png"
+        "Knowledge": "../Assets/UI/KnowledgeIcon.png",
+        "TrophyStore": "../Assets/UI/TrophyIcon.png",
     }
 
     Object.entries(progressSubText).forEach(([stat,text]) => {
@@ -1691,7 +1693,7 @@ function generateProgress(){
 
     currentInstaView = "game";
 
-    let selectors = ['Towers', 'Heroes', 'MapProgress', 'Powers', 'InstaMonkeys', 'Knowledge', 'Achievements', 'Extras'];
+    let selectors = ['Towers', 'Heroes', 'MapProgress', 'Powers', 'InstaMonkeys', 'Knowledge', 'Achievements', 'TrophyStore', 'Extras'];
 
     selectors.forEach((selector) => {
         if(progressSubText[selector].includes("0 Extras")) { return; }
@@ -1823,6 +1825,9 @@ function changeProgressTab(selector){
             break;
         case "Extras":
             generateExtrasProgress();
+            break;
+        case "TrophyStore":
+            generateTrophyStoreProgress();
             break;
     }
 }
@@ -10359,6 +10364,38 @@ function generateSettings(){
     //     location.reload();
     // })
     // settingsOptionsContainer.appendChild(whereButton);
+}
+
+function generateTrophyStoreProgress() {
+    let progressContent = document.getElementById('progress-content');
+    progressContent.innerHTML = "";
+
+    let progressContainer = document.createElement('div');
+    progressContainer.classList.add('powers-progress-container');
+    progressContent.appendChild(progressContainer);
+
+    for (let [key, data] of Object.entries(trophyStoreItemsJSON)) {
+        let itemDiv = document.createElement('div');
+        itemDiv.classList.add('trophy-store-item-div');
+        progressContainer.appendChild(itemDiv);
+
+        let itemImg = document.createElement('img');
+        itemImg.classList.add('trophy-store-item-img', 'trophy-store-item-div');
+        itemImg.src = data.itemType === "Avatar"?  `../Assets/ProfileAvatar/${data.icon}.png` : `../Assets/TrophyStoreIcon/${data.icon}.png`;
+        itemDiv.appendChild(itemImg);
+
+        let itemText = document.createElement('p');
+        itemText.classList.add('trophy-store-item-text');
+        itemText.innerHTML = getLocValue(`${key}ShortName`);
+        itemDiv.appendChild(itemText);
+
+        if (btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key]) {
+            let collectedTick = document.createElement('img');
+            collectedTick.classList.add('trophy-store-collected');
+            collectedTick.src = "../Assets/UI/SelectedTick.png";
+            itemDiv.appendChild(collectedTick);
+        }
+    }
 }
 
 function processRewardsString(input){

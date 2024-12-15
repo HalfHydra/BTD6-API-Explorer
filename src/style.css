@@ -1945,7 +1945,7 @@
 }
 .power-div {
     background-image: url(../Assets/UI/PowerContainer.png);
-    width: 150px;
+    width: 200px;
     height: 150px;
     background-size: contain;
     background-repeat: no-repeat;
@@ -1979,7 +1979,7 @@
     justify-content: center;
     align-items: center;
     top: 10%;
-    right: 0%;
+    right: 10%;
 }
 .power-progress-text {
     font-size: 28px;
@@ -4489,6 +4489,48 @@
     text-decoration: underline;
     display: inline-block;
 }
+
+.trophy-store-item-div {
+    width: 170px;
+    height: 200px;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.trophy-store-item-img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border: 20px solid transparent;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-source: url(../Assets/UI/BarfillTrophyContainer.png);
+    border-image-slice: 25;
+    background-color: #314683;
+    border-radius: 30px;
+    margin: 10px;
+    display: inline-block;
+    background: linear-gradient(180deg, rgb(86, 3, 188) 0%, rgb(149, 64, 253) 100%);
+}
+
+.trophy-store-item-text {
+    font-family: GardeniaBold;
+    font-size: 18px;
+    text-align: center;
+}
+
+.trophy-store-collected {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 5%;
+    left: 0%;
+}
+
 
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */
