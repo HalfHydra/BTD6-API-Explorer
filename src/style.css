@@ -4559,12 +4559,61 @@
 .trophy-store-item-text-emote {
     position: absolute;
     height: 70px;
-    width: 90px;
+    width: 88px;
     text-align: center;
     display: flex;
     align-items: center;
     margin-bottom: 50px;
     justify-content: center;
+}
+
+.item-img-and-details {
+    display: flex;
+    background-image: url(../Assets/UI/TeamStoreTiledBg.png);
+    background-size: 100px;
+}
+.modal-trophy-item {
+    width: 300px;
+    height: 300px;
+    margin: 30px;
+}
+
+.trophy-store-item-full-name {
+    font-size: 32px;
+    margin-bottom: 22px;
+}
+.trophy-store-item-description {
+    font-size: 18px;
+    line-height: 24px;
+    font-family: GardeniaBold;
+    margin-bottom: 22px;
+}
+.trophy-store-item-obtain-method {
+    font-size: 18px;
+    line-height: 24px;
+    font-family: GardeniaBold;
+}
+
+.trophy-store-item-text-emote-popout {
+    position: absolute;
+    height: 180px;
+    font-size: 50px;
+    width: 275px;
+    text-align: center;
+    display: flex;
+    bottom: 135px;
+    left: 60px;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-details-div {
+    display: flex;
+    flex-direction: column;
+    margin: 50px 10px;
+    padding: 10px 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
 }
 
 .teams-store-unowned {

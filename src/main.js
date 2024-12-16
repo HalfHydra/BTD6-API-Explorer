@@ -10587,6 +10587,9 @@ function generateTrophyStoreContainer(filter, display, counter) {
         itemImg.src = data.itemType === "Avatar"?  `../Assets/ProfileAvatar/${data.icon}.png` : `../Assets/TrophyStoreIcon/${data.icon}.png`;
         itemDiv.appendChild(itemImg);
         itemImg.loading = "lazy";
+        itemDiv.addEventListener('click', () => {
+            generateTrophyStorePopout(key);
+        })
 
         let itemText = document.createElement('p');
         itemText.classList.add('trophy-store-item-text');
@@ -10621,6 +10624,109 @@ function generateTrophyStoreContainer(filter, display, counter) {
     }
 }
 
+function generateTrophyStorePopout(key) {
+    let data = trophyStoreItemsJSON[key];
+
+    let modal = document.createElement('div');
+    modal.classList.add('error-modal-overlay');
+    document.body.appendChild(modal);
+
+    let modalContent = document.createElement('div');
+    modalContent.classList.add('collection-modal');
+    modal.appendChild(modalContent);
+
+    let modalHeaderDiv = document.createElement('div');
+    modalHeaderDiv.classList.add('collection-modal-header');
+    modalContent.appendChild(modalHeaderDiv);
+
+    let collectionHeaderModalLeft = document.createElement('div');
+    collectionHeaderModalLeft.classList.add('collection-header-modal-left');
+    modalHeaderDiv.appendChild(collectionHeaderModalLeft);
+
+    let modalTitle = document.createElement('p');
+    modalTitle.classList.add('collection-modal-header-text','black-outline');
+    modalTitle.innerHTML = getLocValue(`${key}ShortName`);
+    modalHeaderDiv.appendChild(modalTitle);
+
+    let modalClose = document.createElement('img');
+    modalClose.classList.add('collection-modal-close');
+    modalClose.src = "./Assets/UI/CloseBtn.png";
+    modalClose.addEventListener('click', () => {
+        modal.remove();
+    })
+    modalHeaderDiv.appendChild(modalClose);
+
+    let imgAndDetails = document.createElement('div');
+    imgAndDetails.classList.add('item-img-and-details');
+    modalContent.appendChild(imgAndDetails);
+
+    let itemDiv = document.createElement('div');
+    itemDiv.classList.add('modal-trophy-div');
+    imgAndDetails.appendChild(itemDiv);
+
+    let itemImg = document.createElement('img');
+    itemImg.classList.add('trophy-store-item-img', 'trophy-store-item-div', 'modal-trophy-item');
+    itemImg.src = data.itemType === "Avatar"?  `../Assets/ProfileAvatar/${data.icon}.png` : `../Assets/TrophyStoreIcon/${data.icon}.png`;
+    itemDiv.appendChild(itemImg);
+
+    if (data.subFilter === "TextEmotes") {
+        let itemTextEmote = document.createElement('p');
+        itemTextEmote.classList.add('trophy-store-item-text-emote-popout', 'black-outline');
+        itemTextEmote.innerHTML = key === "CoopEmoteAnimationHappyHolidays" ? getLocValue(`${key}ShortName`) : getLocValue(`${key}Word`);
+        itemDiv.appendChild(itemTextEmote);
+    }
+
+    if (btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key]) {
+        itemImg.style.borderImageSource = "url(../Assets/UI/TrophyBGPanelBlue.png)";
+    }
+
+    let itemDetailsDiv = document.createElement('div');
+    itemDetailsDiv.classList.add('item-details-div');
+    imgAndDetails.appendChild(itemDetailsDiv);
+
+    let itemTypeIcon = document.createElement('img');
+    itemTypeIcon.classList.add('trophy-store-item-type-icon');
+    itemTypeIcon.src = `../Assets/UI/Trophy${data.storeFilter}Icon.png`;
+    itemDetailsDiv.appendChild(itemTypeIcon);
+
+    let itemFullName = document.createElement('p');
+    itemFullName.classList.add('trophy-store-item-full-name', 'black-outline');
+    itemFullName.innerHTML = getLocValue(`${key}Name`);
+    itemDetailsDiv.appendChild(itemFullName);
+
+    let itemDescription = document.createElement('p');
+    itemDescription.classList.add('trophy-store-item-description');
+    itemDescription.innerHTML = getLocValue(`${key}Description`);
+    itemDetailsDiv.appendChild(itemDescription);
+
+    let itemObtainMethod = document.createElement('p');
+    itemObtainMethod.classList.add('trophy-store-item-obtain-method');
+    itemDetailsDiv.appendChild(itemObtainMethod);
+
+    if (data.hasOwnProperty("obtainMethod")) {
+        switch(data.obtainMethod) {
+            case "Quest":
+                itemObtainMethod.innerHTML = "Obtained by completing a quest";
+                break;
+            case "Limited":
+                itemObtainMethod.innerHTML = "Obtained during a limited time event";
+                break;
+            case "Rogue":
+                itemObtainMethod.innerHTML = "Obtained by unlocking a feat in Rogue Legends";
+                break;
+            case "Nexus":
+                itemObtainMethod.innerHTML = "Obtained by purchasing anything in the store with a Nexus Creator Code applied";
+                break;
+            case "Purchase":
+                itemObtainMethod.innerHTML = "Obtained by purchasing the associated bundle in the store";
+                break;
+        }
+    }
+    if (data.hidden && !data.hasOwnProperty("obtainMethod")) {
+        itemObtainMethod.innerHTML = "This item is hidden and may show up in the featured tab during the related seasonal rotation.";
+    }
+
+}
 
 function generateTeamsStoreProgress() {
     let progressContent = document.getElementById('progress-content');

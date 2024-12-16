@@ -2175,7 +2175,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "obtainMethod": "Nexus"
     },
     "GameUIProfileAvatar78": {
         "storeFilter": "GameUI",
@@ -2197,7 +2198,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Limited"
     },
     "GameUIProfileAvatar80": {
         "storeFilter": "GameUI",
@@ -2351,7 +2353,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Limited"
     },
     "GameUIProfileAvatar94": {
         "storeFilter": "GameUI",
@@ -2362,7 +2365,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Limited"
     },
     "GameUIProfileAvatar95": {
         "storeFilter": "GameUI",
@@ -2406,7 +2410,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileAvatar99": {
         "storeFilter": "GameUI",
@@ -2417,7 +2422,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileAvatar100": {
         "storeFilter": "GameUI",
@@ -2428,7 +2434,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileAvatar101": {
         "storeFilter": "GameUI",
@@ -2450,7 +2457,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileAvatar103": {
         "storeFilter": "GameUI",
@@ -2472,7 +2480,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileAvatar105": {
         "storeFilter": "GameUI",
@@ -2483,7 +2492,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Rogue"
     },
     "GameUIProfileAvatar106": {
         "storeFilter": "GameUI",
@@ -2494,7 +2504,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Rogue"
     },
     "GameUIProfileAvatar107": {
         "storeFilter": "GameUI",
@@ -2505,7 +2516,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Limited"
     },
     "GameUIProfileBanner1": {
         "storeFilter": "GameUI",
@@ -2513,6 +2525,94 @@
         "lootSetFilter": "None",
         "questId": "",
         "icon": "ProfileBanner1Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": false
+    },
+    "GameUIProfileBanner2": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner2Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": false
+    },
+    "GameUIProfileBanner3": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner3Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": false
+    },
+    "GameUIProfileBanner4": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner4Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": false
+    },
+    "GameUIProfileBanner5": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner5Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": false
+    },
+    "GameUIProfileBanner6": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner6Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": false
+    },
+    "GameUIProfileBanner7": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner7Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": false
+    },
+    "GameUIProfileBanner8": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner8Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": false
+    },
+    "GameUIProfileBanner9": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner9Icon",
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
@@ -2628,17 +2728,6 @@
         "itemType": "Banner",
         "hidden": false
     },
-    "GameUIProfileBanner2": {
-        "storeFilter": "GameUI",
-        "subFilter": "ProfileBanners",
-        "lootSetFilter": "None",
-        "questId": "",
-        "icon": "ProfileBanner2Icon",
-        "cosmeticPriority": "0",
-        "exclusivity": "",
-        "itemType": "Banner",
-        "hidden": false
-    },
     "GameUIProfileBanner20": {
         "storeFilter": "GameUI",
         "subFilter": "ProfileBanners",
@@ -2749,17 +2838,6 @@
         "itemType": "Banner",
         "hidden": false
     },
-    "GameUIProfileBanner3": {
-        "storeFilter": "GameUI",
-        "subFilter": "ProfileBanners",
-        "lootSetFilter": "None",
-        "questId": "",
-        "icon": "ProfileBanner3Icon",
-        "cosmeticPriority": "0",
-        "exclusivity": "",
-        "itemType": "Banner",
-        "hidden": false
-    },
     "GameUIProfileBanner30": {
         "storeFilter": "GameUI",
         "subFilter": "ProfileBanners",
@@ -2791,7 +2869,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "obtainMethod": "Quest"
     },
     "GameUIProfileBanner33": {
         "storeFilter": "GameUI",
@@ -2857,7 +2936,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Limited"
     },
     "GameUIProfileBanner39": {
         "storeFilter": "GameUI",
@@ -2865,17 +2945,6 @@
         "lootSetFilter": "None",
         "questId": "",
         "icon": "ProfileBanner39Icon",
-        "cosmeticPriority": "0",
-        "exclusivity": "",
-        "itemType": "Banner",
-        "hidden": false
-    },
-    "GameUIProfileBanner4": {
-        "storeFilter": "GameUI",
-        "subFilter": "ProfileBanners",
-        "lootSetFilter": "None",
-        "questId": "",
-        "icon": "ProfileBanner4Icon",
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
@@ -2890,7 +2959,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileBanner41": {
         "storeFilter": "GameUI",
@@ -2901,7 +2971,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileBanner42": {
         "storeFilter": "GameUI",
@@ -2912,7 +2983,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileBanner43": {
         "storeFilter": "GameUI",
@@ -2934,7 +3006,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileBanner45": {
         "storeFilter": "GameUI",
@@ -2956,7 +3029,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileBanner47": {
         "storeFilter": "GameUI",
@@ -2967,7 +3041,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Rogue"
     },
     "GameUIProfileBanner48": {
         "storeFilter": "GameUI",
@@ -2978,62 +3053,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
-    },
-    "GameUIProfileBanner5": {
-        "storeFilter": "GameUI",
-        "subFilter": "ProfileBanners",
-        "lootSetFilter": "None",
-        "questId": "",
-        "icon": "ProfileBanner5Icon",
-        "cosmeticPriority": "0",
-        "exclusivity": "",
-        "itemType": "Banner",
-        "hidden": false
-    },
-    "GameUIProfileBanner6": {
-        "storeFilter": "GameUI",
-        "subFilter": "ProfileBanners",
-        "lootSetFilter": "None",
-        "questId": "",
-        "icon": "ProfileBanner6Icon",
-        "cosmeticPriority": "0",
-        "exclusivity": "",
-        "itemType": "Banner",
-        "hidden": false
-    },
-    "GameUIProfileBanner7": {
-        "storeFilter": "GameUI",
-        "subFilter": "ProfileBanners",
-        "lootSetFilter": "None",
-        "questId": "",
-        "icon": "ProfileBanner7Icon",
-        "cosmeticPriority": "0",
-        "exclusivity": "",
-        "itemType": "Banner",
-        "hidden": false
-    },
-    "GameUIProfileBanner8": {
-        "storeFilter": "GameUI",
-        "subFilter": "ProfileBanners",
-        "lootSetFilter": "None",
-        "questId": "",
-        "icon": "ProfileBanner8Icon",
-        "cosmeticPriority": "0",
-        "exclusivity": "",
-        "itemType": "Banner",
-        "hidden": false
-    },
-    "GameUIProfileBanner9": {
-        "storeFilter": "GameUI",
-        "subFilter": "ProfileBanners",
-        "lootSetFilter": "None",
-        "questId": "",
-        "icon": "ProfileBanner9Icon",
-        "cosmeticPriority": "0",
-        "exclusivity": "",
-        "itemType": "Banner",
-        "hidden": false
+        "hidden": true,
+        "obtainMethod": "Rogue"
     },
     "GameUIUpgradesDisplayNamedMonkeys": {
         "storeFilter": "GameUI",
