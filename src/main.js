@@ -1054,7 +1054,7 @@ function generateFrontPage(){
 
     let knownIssuesText = document.createElement('p');
     knownIssuesText.classList.add('oak-instructions-text');
-    knownIssuesText.innerHTML = '- Ancient Portal does not show up in the maps list<br>- Both Blastapopoulos badges do not show up in the list';
+    knownIssuesText.innerHTML = 'None Currently!';
     knownIssuesDiv.appendChild(knownIssuesText);
     
     trailerDiv.appendChild(trailerVideo);
@@ -1071,7 +1071,14 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = 'v1.4.0: Extras and Events in Roundsets<br>- User profiles on the leaderboards and content browser no longer load by default. This caused too many rate limiting issues.<br>- Added a setting in Settings to toggle automatic profile loading back on if you wanted to see the profile avatar and banner of users on the leaderboard.<br>- Added known previous events with custom roundsets to the Roundsets section.<br>- Fixed a bug involving timers going weirdly negative<br>- Added Creator Support instructions<br><br>v1.3.0: QoL Changes<br>- Added Update 45 images and content<br>- You can now toggle to see just the excluded towers and heroes of a challenge or event<br>- You can now swap between Normal/Elite on the details for a boss<br>- Bloon groups can now be hidden in the round previewer by clicking on them<br>- Added a checkmark in the Collection Event list to categories that were completely collected<br>- Updated Endurance Rounds to use updated round thresholds<br>- Resolved an issue when applying a filter to content browser content and not refreshing<br>- Added Ceramic Flood Roundset (very late)<br><br>v1.2.3: Collection Event Menu Upgrade<br>- Added a how to use guide at the top of the Collection Event Menu<br>- Added the Insta Chest odds to the Collection Event Menu<br>- Clicking on a missing Insta will now temporarily mark it as obtained<br><br>v1.2.2: Missing Medals<br>- Added a few missing medals from the overview/leaderboard profile pages<br>- Added mouse hover tooltips to various elements<br><br>v1.2.1: Insta Monkey Collection Improvements<br>- Resolved an issue preventing the collected but used Insta Monkeys from being displayed.<br>- Add a new list of all the Insta Monkey tower chances in the Collection Event Helper for efficient checking of what the best Featured Insta Monkey to choose is.<br>- The trailer video no longer plays in the background after previewing the site or logging in! Thanks for the feedback.<br><br>v1.2.0: Preview Mode and UI Improvements <br>- Added a way to use the site without an OAK token. Useful when you don\'t have it accessible or can\'t make one<br>- The site now prompts when your data has new content that the site doesn\'t have updated yet<br>- Challenge details now correctly shows the max amount of specific monkeys if limited<br>- Other UI fixes<br><br> v1.1.0: Insta Monkey Collection Features<br>- Added Insta Monkey Collection Event Helper. This displays the odds of getting a new Insta Monkey for each chest type and when selecting a featured tower.<br>- Also added a page documentating all of the continuous sources of Insta Monkeys<br>- UI fixes and improvements<br><br>v1.0.1: Bug Fixes<br>- Daily challenges now show the correct associated date<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes<br><br>v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.';
+    changelogText.innerHTML = `v1.5.0: Trophy Store Items and Update 46!<br>- Added Update 46 content<br>- Added the Trophy Store Items menu for those who want to see all that exist and your collection.<br>- Team Store items have also been added, but since I am unable to test how that works, it is hidden in settings by default.<br>- Settings should now save when reloading the page using the same system that saves the OAK tokens you've used.<br>- Fixed a bug that prevented newer maps from showing up<br>- Added missing badges<br><br>
+    v1.4.0: Extras and Events in Roundsets<br>- User profiles on the leaderboards and content browser no longer load by default. This caused too many rate limiting issues.<br>- Added a setting in Settings to toggle automatic profile loading back on if you wanted to see the profile avatar and banner of users on the leaderboard.<br>- Added known previous events with custom roundsets to the Roundsets section.<br>- Fixed a bug involving timers going weirdly negative<br>- Added Creator Support instructions<br><br>
+    v1.3.0: QoL Changes<br>- Added Update 45 images and content<br>- You can now toggle to see just the excluded towers and heroes of a challenge or event<br>- You can now swap between Normal/Elite on the details for a boss<br>- Bloon groups can now be hidden in the round previewer by clicking on them<br>- Added a checkmark in the Collection Event list to categories that were completely collected<br>- Updated Endurance Rounds to use updated round thresholds<br>- Resolved an issue when applying a filter to content browser content and not refreshing<br>- Added Ceramic Flood Roundset (very late)<br><br>
+    v1.2.3: Collection Event Menu Upgrade<br>- Added a how to use guide at the top of the Collection Event Menu<br>- Added the Insta Chest odds to the Collection Event Menu<br>- Clicking on a missing Insta will now temporarily mark it as obtained<br><br>
+    v1.2.2: Missing Medals<br>- Added a few missing medals from the overview/leaderboard profile pages<br>- Added mouse hover tooltips to various elements<br><br>
+    v1.2.1: Insta Monkey Collection Improvements<br>- Resolved an issue preventing the collected but used Insta Monkeys from being displayed.<br>- Add a new list of all the Insta Monkey tower chances in the Collection Event Helper for efficient checking of what the best Featured Insta Monkey to choose is.<br>- The trailer video no longer plays in the background after previewing the site or logging in! Thanks for the feedback.<br><br>v1.2.0: Preview Mode and UI Improvements <br>- Added a way to use the site without an OAK token. Useful when you don\'t have it accessible or can\'t make one<br>- The site now prompts when your data has new content that the site doesn\'t have updated yet<br>- Challenge details now correctly shows the max amount of specific monkeys if limited<br>- Other UI fixes<br><br>
+    v1.1.0: Insta Monkey Collection Features<br>- Added Insta Monkey Collection Event Helper. This displays the odds of getting a new Insta Monkey for each chest type and when selecting a featured tower.<br>- Also added a page documentating all of the continuous sources of Insta Monkeys<br>- UI fixes and improvements<br><br>v1.0.1: Bug Fixes<br>- Daily challenges now show the correct associated date<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes<br><br>
+    v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.`;
     changelogDiv.appendChild(changelogText);
 
     let feedbackHeader = document.createElement('p');
@@ -10684,10 +10691,10 @@ function generateTrophyStorePopout(key) {
     itemDetailsDiv.classList.add('item-details-div');
     imgAndDetails.appendChild(itemDetailsDiv);
 
-    let itemTypeIcon = document.createElement('img');
-    itemTypeIcon.classList.add('trophy-store-item-type-icon');
-    itemTypeIcon.src = `../Assets/UI/Trophy${data.storeFilter}Icon.png`;
-    itemDetailsDiv.appendChild(itemTypeIcon);
+    // let itemTypeIcon = document.createElement('img');
+    // itemTypeIcon.classList.add('trophy-store-item-type-icon');
+    // itemTypeIcon.src = `../Assets/UI/Trophy${data.storeFilter}Icon.png`;
+    // itemDetailsDiv.appendChild(itemTypeIcon);
 
     let itemFullName = document.createElement('p');
     itemFullName.classList.add('trophy-store-item-full-name', 'black-outline');
@@ -10747,6 +10754,9 @@ function generateTeamsStoreProgress() {
         let itemDiv = document.createElement('div');
         itemDiv.classList.add('trophy-store-item-div');
         progressContainer.appendChild(itemDiv);
+        itemDiv.addEventListener('click', () => {
+            generateTeamsStorePopout(key);
+        })
 
         let itemImg = document.createElement('img');
         itemImg.classList.add('trophy-store-item-img', 'trophy-store-item-div', 'teams-store-unowned');
@@ -10768,7 +10778,98 @@ function generateTeamsStoreProgress() {
         }
     }
 }
+function generateTeamsStorePopout(key) {
+    let data = teamsStoreItemsJSON[key];
 
+    let modal = document.createElement('div');
+    modal.classList.add('error-modal-overlay');
+    document.body.appendChild(modal);
+
+    let modalContent = document.createElement('div');
+    modalContent.classList.add('collection-modal');
+    modal.appendChild(modalContent);
+
+    let modalHeaderDiv = document.createElement('div');
+    modalHeaderDiv.classList.add('collection-modal-header');
+    modalContent.appendChild(modalHeaderDiv);
+
+    let collectionHeaderModalLeft = document.createElement('div');
+    collectionHeaderModalLeft.classList.add('collection-header-modal-left');
+    modalHeaderDiv.appendChild(collectionHeaderModalLeft);
+
+    let modalTitle = document.createElement('p');
+    modalTitle.classList.add('collection-modal-header-text','black-outline');
+    modalTitle.innerHTML = getLocValue(`${key}ShortName`);
+    modalHeaderDiv.appendChild(modalTitle);
+
+    let modalClose = document.createElement('img');
+    modalClose.classList.add('collection-modal-close');
+    modalClose.src = "./Assets/UI/CloseBtn.png";
+    modalClose.addEventListener('click', () => {
+        modal.remove();
+    })
+    modalHeaderDiv.appendChild(modalClose);
+
+    let imgAndDetails = document.createElement('div');
+    imgAndDetails.classList.add('item-img-and-details');
+    imgAndDetails.style.backgroundImage = `url(../Assets/UI/TeamStoreTiledBg.png)`;
+    modalContent.appendChild(imgAndDetails);
+
+    let itemDiv = document.createElement('div');
+    itemDiv.classList.add('modal-trophy-div');
+    imgAndDetails.appendChild(itemDiv);
+
+    let itemImg = document.createElement('img');
+    itemImg.classList.add('trophy-store-item-img', 'trophy-store-item-div', 'modal-trophy-item', 'teams-store-unowned');
+    itemImg.src = `../Assets/TeamsStoreIcon/${data.icon}.png`;
+    itemDiv.appendChild(itemImg);
+
+    if (btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key]) {
+        itemImg.classList.add('teams-store-owned');
+    }
+
+    let itemDetailsDiv = document.createElement('div');
+    itemDetailsDiv.classList.add('item-details-div');
+    imgAndDetails.appendChild(itemDetailsDiv);
+
+    let itemFullName = document.createElement('p');
+    itemFullName.classList.add('trophy-store-item-full-name', 'black-outline');
+    itemFullName.innerHTML = getLocValue(`${key}Name`);
+    itemDetailsDiv.appendChild(itemFullName);
+
+    let itemDescription = document.createElement('p');
+    itemDescription.classList.add('trophy-store-item-description');
+    itemDescription.innerHTML = getLocValue(`${key}Description`);
+    itemDetailsDiv.appendChild(itemDescription);
+
+    let itemObtainMethod = document.createElement('p');
+    itemObtainMethod.classList.add('trophy-store-item-obtain-method');
+    itemDetailsDiv.appendChild(itemObtainMethod);
+
+    if (data.hasOwnProperty("obtainMethod")) {
+        switch(data.obtainMethod) {
+            case "Quest":
+                itemObtainMethod.innerHTML = "Obtained by completing a quest";
+                break;
+            case "Limited":
+                itemObtainMethod.innerHTML = "Obtained during a limited time event";
+                break;
+            case "Rogue":
+                itemObtainMethod.innerHTML = "Obtained by unlocking a feat in Rogue Legends";
+                break;
+            case "Nexus":
+                itemObtainMethod.innerHTML = "Obtained by purchasing anything in the store with a Nexus Creator Code applied";
+                break;
+            case "Purchase":
+                itemObtainMethod.innerHTML = "Obtained by purchasing the associated bundle in the store";
+                break;
+        }
+    }
+    if (data.hidden && !data.hasOwnProperty("obtainMethod")) {
+        itemObtainMethod.innerHTML = "This item is hidden and may show up in the featured tab during the related seasonal rotation.";
+    }
+
+}
 
 function processRewardsString(input){
     let result = {};
