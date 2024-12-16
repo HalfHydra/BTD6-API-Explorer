@@ -858,7 +858,8 @@
         "GeraldoGentlemanGadgeteer": [1,3,7,10,20],
         "Corvus": [1,3,7,10,15,20],
         "Rosalia": [1,2,5,7,13,20],
-        "DreamstatePsi": [1,3,8,10,20]
+        "DreamstatePsi": [1,3,8,10,20],
+        "RedSauda": [1,3,10,20]
     },
     "heroSkins": {
         "Quincy": ["Quincy", "CyberQuincy", "WolfpackQuincy"],
@@ -874,7 +875,7 @@
         "Etienne": ["Etienne", "ETnEtienne", "BookWyrmEtienne"],
         "Psi": ["Psi", "Psimbals", "DreamstatePsi"],
         "Geraldo": ["Geraldo", "GeraldoGentlemanGadgeteer"],
-        "Sauda": ["Sauda", "JiangshiSauda", "VikingSauda"],
+        "Sauda": ["Sauda", "JiangshiSauda", "VikingSauda", "RedSauda"],
         "Corvus": ["Corvus"],
         "Rosalia": ["Rosalia"]
     },
@@ -2091,5 +2092,9 @@
                 "Pouakai": 110000
             }
         }
+    },
+    "unreleasedContent": {
+        "trophyStoreItems": ["GameUIProfileAvatar105", "GameUIProfileAvatar106", "GameUIProfileAvatar107", "GameUIProfileBanner47", "GameUIProfileBanner48"],
+        "teamsStoreItems": ["TeamsBanner15"]
     }
 }

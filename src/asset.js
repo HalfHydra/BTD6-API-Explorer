@@ -288,5 +288,5 @@ function getCustomMapIcon(id) {
 
 function getLocValue(key){
     if(locJSONOverrides[key]) return locJSON[locJSONOverrides[key]];
-    return locJSON[key];
+    return locJSON[key] ? locJSON[key] : key;
 }

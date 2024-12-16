@@ -4505,21 +4505,27 @@
     width: 100px;
     height: 100px;
     object-fit: contain;
-    border: 20px solid transparent;
+    border-radius: 30px;
+    margin: 10px;
+    /* border: 20px solid transparent;
     border-image-slice: 100%;
     border-image-source: none;
     border-image-source: url(../Assets/UI/BarfillTrophyContainer.png);
     border-image-slice: 25;
     background-color: #314683;
-    border-radius: 30px;
-    margin: 10px;
-    display: inline-block;
-    background: linear-gradient(180deg, rgb(86, 3, 188) 0%, rgb(149, 64, 253) 100%);
+    background: linear-gradient(180deg, rgb(86, 3, 188) 0%, rgb(149, 64, 253) 100%); */
+    border: 20px solid transparent;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-source: url(../Assets/UI/TrophyBGPanelGold.png);
+    border-image-slice: 50;
+    background-color: #2d2154;
 }
 
 .trophy-store-item-text {
     font-family: GardeniaBold;
     font-size: 18px;
+    height: 36px;
     text-align: center;
 }
 
@@ -4531,6 +4537,84 @@
     left: 0%;
 }
 
+.trophy-store-item-type-icon {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 5%;
+    right: 0%;
+}
+
+.trophy-store-collected-text {
+    position: absolute;
+    bottom: 58px;
+    width: 80px;
+    font-size: 18px;
+    background: rgba(0,0,0,0.4);
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.trophy-store-item-text-emote {
+    position: absolute;
+    height: 70px;
+    width: 90px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    justify-content: center;
+}
+
+.teams-store-unowned {
+    border-image-source: url(../Assets/UI/TeamStorePanelGold.png);
+    background: linear-gradient(180deg, rgb(83, 62, 45) 0%, rgb(121, 79, 25) 100%);
+}
+
+.teams-store-owned {
+    border-image-source: url(../Assets/UI/TeamStorePanelBlue.png);
+    background: linear-gradient(180deg, rgb(102, 82, 65) 0%, rgb(78, 60, 45) 100%);
+}
+
+.trophy-store-progress-container {
+    width: 100%;
+}
+
+.trophy-store-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.trophy-store-item-counter {
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.trophy-store-header-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: var(--profile-primary);
+    border-radius: 10px;
+    flex-direction: column;
+}
+
+.sub-filter-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.sub-filter {
+    width: 160px;
+    text-align: center;
+    font-size: 16px;
+}
 
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */

@@ -107,6 +107,17 @@ let chestSelectorMap = {
     "diamond": "Diamond"
 }
 
+let trophyStoreSubFilter = "All";
+let subFiltersMap = {
+    "Heroes": ["All", "HeroPlacementUpgrades", "HeroPets"],
+    "Monkeys": ["All", "TowerPlacementUpgrades", "TowerPets", "Projectiles", "Flags"],
+    "Bloons": ["All", "PopFX", "AllBloonSkins", "RegularSkins", "MoabSkins"],
+    "Coop": ["All", "StandardEmotes", "TextEmotes", "SoundEmotes", "FullScreenEmotes"],
+    "GameUI": ["All", "MusicTracks","Avatars", "ProfileBanners", "PowerSkins", "Misc"]
+}
+
+let showTeamsItems = false;
+
 let loggedIn = false;
 
 fetch('./data/Constants.json')
@@ -135,6 +146,7 @@ function fetchDependencies() {
         teamsStoreItemsJSON = teamsStoreItems;
         readyFlags[2] = 1;
         readyFlags[3] = 1;
+        loadSettings();
         generateIfReady();
     })
     .catch(error => {
@@ -364,7 +376,7 @@ function generateProgressSubText(){
     progressSubText["Heroes"] = `${heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeros).length} Hero${heroesUnlocked != 1 ? "es" : ""} Unlocked`;
     let skinsUnlocked = Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).filter(k => btd6usersave.unlockedSkins[k]).length
     progressSubText["Skins"] = `${skinsUnlocked}/${Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).length} Hero Skin${skinsUnlocked != 1 ? "s" : ""} Unlocked`;
-    progressSubText["Knowledge"] = `${Object.keys(btd6usersave.acquiredKnowledge).filter(k => btd6usersave.acquiredKnowledge[k]).length}/${Object.keys(btd6usersave.acquiredKnowledge).length} Knowledge Unlocked`;
+    progressSubText["Knowledge"] = `${Object.keys(btd6usersave.acquiredKnowledge).filter(k => btd6usersave.acquiredKnowledge[k]).length}/${Object.keys(btd6usersave.acquiredKnowledge).length} Knowledge Points Unlocked`;
     let mapsPlayed = Object.keys(btd6usersave.mapProgress).filter(k => btd6usersave.mapProgress[k]).length
     progressSubText["MapProgress"] = `${mapsPlayed} Map${mapsPlayed != 1 ? "s" : ""} Played`;
     let chimpsTotal = Object.values(processedMapData.Medals.single).map(map => map["Clicks"]).filter(medal => medal).length;
@@ -376,8 +388,9 @@ function generateProgressSubText(){
     progressSubText["InstaMonkeys"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Collected`;
     progressSubText["Achievements"] = `${btd6publicprofile.achievements}/${constants.achievements + constants.hiddenAchievements} Achievement${btd6publicprofile.achievements != 1 ? "s" : ""} Earned`;
     let extrasTotal = Object.keys(extrasUnlocked).length;
+    progressSubText["TrophyStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k] && trophyStoreItemsJSON[k]).length} Trophy Store Items Collected`
+    progressSubText["TeamsStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k] && teamsStoreItemsJSON[k]).length} Team Store Items Unlocked`
     progressSubText["Extras"] = `${extrasTotal} Extra${extrasTotal != 1 ? "s" : ""} Unlocked`;
-    progressSubText["TrophyStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k]).length} Trophy Store Items Unlocked`
 }
 
 function generateMapData() {
@@ -1262,11 +1275,12 @@ function generateOverview(){
         "Skins": "../Assets/UI/TopHatSprite.png",
         "Upgrades": "../Assets/UI/UpgradeIcon.png",
         "Knowledge": "../Assets/UI/KnowledgeIcon.png",
-        "TrophyStore": "../Assets/UI/TrophyIcon.png",
+        "TrophyStore": "../Assets/UI/LimitedRunIcon.png",
+        'TeamsStore': "../Assets/UI/TeamTrophyIconSmall.png",
     }
 
     Object.entries(progressSubText).forEach(([stat,text]) => {
-        if(text.includes("0 Extras") || text.includes("0 CHIMPS")) { return }
+        if(text.includes("0 Extras") || text.includes("0 CHIMPS") || text.includes("Team Store")) { return }
         if(text.match(/0\/[0-9]+ Paragons/)) { return }
         let quickStat = document.createElement('div');
         quickStat.classList.add('quick-stat');
@@ -1693,10 +1707,11 @@ function generateProgress(){
 
     currentInstaView = "game";
 
-    let selectors = ['Towers', 'Heroes', 'MapProgress', 'Powers', 'InstaMonkeys', 'Knowledge', 'Achievements', 'TrophyStore', 'Extras'];
+    let selectors = ['Towers', 'Heroes', 'MapProgress', 'Powers', 'InstaMonkeys', 'Knowledge', 'Achievements', 'TrophyStore', 'TeamsStore', 'Extras'];
 
     selectors.forEach((selector) => {
         if(progressSubText[selector].includes("0 Extras")) { return; }
+        if(progressSubText[selector].includes("Team Store") && !showTeamsItems) { return; }
         let selectorDiv = document.createElement('div');
         selectorDiv.classList.add('selector-div');
         selectorDiv.addEventListener('click', () => {
@@ -1828,6 +1843,9 @@ function changeProgressTab(selector){
             break;
         case "TrophyStore":
             generateTrophyStoreProgress();
+            break;
+        case "TeamsStore":
+            generateTeamsStoreProgress();
             break;
     }
 }
@@ -10285,6 +10303,11 @@ function generateSettings(){
             "name": "Use Named Monkeys Nicknames",
             "description": "When switched on, the site will use the nicknames you've set for towers instead of the tower names.",
             "input": "toggle"
+        },
+        "TeamsStoreItems": {
+            "name": "Show Teams Store Items in Progress Tab",
+            "description": "When switched on, the progress tab will show collected team store items. I don't have a way to test this so it may not work.",
+            "input": "toggle"
         }
     }
 
@@ -10347,12 +10370,21 @@ function generateSettings(){
                 settingInput.checked = !preventRateLimiting;
                 settingInput.addEventListener('change', () => { 
                     preventRateLimiting = !settingInput.checked;
+                    saveSettings();
                 })
                 break;
             case "UseNamedMonkeys":
                 settingInput.checked = useNamedMonkeys;
                 settingInput.addEventListener('change', () => {
                     useNamedMonkeys = !useNamedMonkeys;
+                    saveSettings();
+                });
+                break;
+            case "TeamsStoreItems":
+                settingInput.checked = showTeamsItems;
+                settingInput.addEventListener('change', () => {
+                    showTeamsItems = !showTeamsItems;
+                    saveSettings();
                 });
         }
     }
@@ -10371,17 +10403,248 @@ function generateTrophyStoreProgress() {
     progressContent.innerHTML = "";
 
     let progressContainer = document.createElement('div');
+    progressContainer.classList.add('trophy-store-progress-container');
+    progressContent.appendChild(progressContainer);
+
+    let achievementsHeaderBar = document.createElement('div');
+    achievementsHeaderBar.classList.add('trophy-store-header-bar');
+    progressContainer.appendChild(achievementsHeaderBar);
+
+    let headerTop = document.createElement('div');
+    headerTop.classList.add('achievements-header-bar');
+    achievementsHeaderBar.appendChild(headerTop);
+    
+    let headerBottom = document.createElement('div');
+    achievementsHeaderBar.appendChild(headerBottom);
+
+    let subFilterContainer = document.createElement('div');
+    subFilterContainer.classList.add('sub-filter-container');
+    subFilterContainer.style.display = "none";
+    headerBottom.appendChild(subFilterContainer);
+
+    let achievementsViews = document.createElement('div');
+    achievementsViews.classList.add('maps-progress-views');
+    headerTop.appendChild(achievementsViews);
+
+    let mapProgressFilterDifficulty2 = document.createElement('div');
+    mapProgressFilterDifficulty2.classList.add('map-progress-filter-difficulty');
+    achievementsViews.appendChild(mapProgressFilterDifficulty2);
+
+    let mapsProgressFilterDifficultyText2 = document.createElement('p');
+    mapsProgressFilterDifficultyText2.classList.add('maps-progress-coop-toggle-text','black-outline');
+    mapsProgressFilterDifficultyText2.innerHTML = "Filter:";
+    mapProgressFilterDifficulty2.appendChild(mapsProgressFilterDifficultyText2);
+
+    let mapProgressFilterDifficultySelect2 = document.createElement('select');
+    mapProgressFilterDifficultySelect2.classList.add('map-progress-filter-difficulty-select');
+
+    let options2 = ["All", "Heroes","Monkeys","Bloons","Coop","Game & UI"]
+    options2.forEach((option) => {
+        let difficultyOption = document.createElement('option');
+        difficultyOption.value = option === "Game & UI" ? "GameUI" : option;
+        difficultyOption.innerHTML = option;
+        mapProgressFilterDifficultySelect2.appendChild(difficultyOption);
+    })
+    mapProgressFilterDifficulty2.appendChild(mapProgressFilterDifficultySelect2);
+
+
+    let trophyStoreItemCounter = document.createElement('p');
+    trophyStoreItemCounter.classList.add('trophy-store-item-counter', 'black-outline');
+    trophyStoreItemCounter.innerHTML = "0/0";
+    headerTop.appendChild(trophyStoreItemCounter);
+
+    mapProgressFilterDifficultySelect2.addEventListener('change', () => {
+        trophyStoreSubFilter = "All"
+        if (mapProgressFilterDifficultySelect2.value !== "All") {
+            generateSubFilterButtons(mapProgressFilterDifficultySelect2.value);
+        } else {
+            subFilterContainer.style.display = "none";
+        }
+        generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter);
+    })
+
+    let mapsProgressFilter = document.createElement('div');
+    mapsProgressFilter.classList.add('maps-progress-filter');
+    headerTop.appendChild(mapsProgressFilter);
+
+    let displayFilterToggles = document.createElement('div');
+    displayFilterToggles.classList.add('map-progress-filter-difficulty');
+    mapsProgressFilter.appendChild(displayFilterToggles);
+
+    let displayFiltersText = document.createElement('p');
+    displayFiltersText.classList.add('maps-progress-coop-toggle-text','black-outline');
+    displayFiltersText.innerHTML = "Display:";
+    displayFilterToggles.appendChild(displayFiltersText);
+
+    let mapProgressFilterDifficultySelect = document.createElement('select');
+    mapProgressFilterDifficultySelect.classList.add('map-progress-filter-difficulty-select');
+    mapProgressFilterDifficultySelect.addEventListener('change', () => {
+        generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter);
+    })
+    let options = ["All","Owned","Unowned","Hidden"]
+    options.forEach((option) => {
+        let difficultyOption = document.createElement('option');
+        difficultyOption.value = option;
+        difficultyOption.innerHTML = option;
+        mapProgressFilterDifficultySelect.appendChild(difficultyOption);
+    })
+    displayFilterToggles.appendChild(mapProgressFilterDifficultySelect);
+
+    let itemsContainer = document.createElement('div');
+    itemsContainer.id = 'trophy-store-items-container';
+    itemsContainer.classList.add('trophy-store-items-container');
+    progressContainer.appendChild(itemsContainer);
+
+    function generateSubFilterButtons(subFilter) {
+        subFilterContainer.innerHTML = "";
+        subFilterContainer.style.display = "flex";
+        subFiltersMap[subFilter].forEach((subFilterOption) => {
+            let subFilterButton = document.createElement('div');
+            subFilterButton.classList.add('maps-progress-view', 'sub-filter', 'black-outline');
+            if (subFilterOption === "All") {
+                subFilterButton.classList.add('stats-tab-yellow');
+            }
+            subFilterButton.innerHTML = getLocValue(`Filter${subFilterOption}`);
+            subFilterButton.addEventListener('click', () => {
+                trophyStoreSubFilter = subFilterOption;
+                //add "stats-tab-yellow" to the selected button and remove it from all others
+                Array.from(subFilterContainer.children).forEach((button) => {
+                    if (button === subFilterButton) {
+                        button.classList.add('stats-tab-yellow');
+                    } else {
+                        button.classList.remove('stats-tab-yellow');
+                    }
+                })
+                generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter);
+            })
+            subFilterContainer.appendChild(subFilterButton);
+        })
+    
+    }
+
+    generateTrophyStoreContainer("All", "All", trophyStoreItemCounter);
+}
+
+function generateTrophyStoreContainer(filter, display, counter) {
+    let itemsContainer = document.getElementById('trophy-store-items-container');
+    itemsContainer.innerHTML = "";
+
+    let trophyStoreItemsToDisplay = JSON.parse(JSON.stringify(trophyStoreItemsJSON));
+    
+    for (let key of constants.unreleasedContent.trophyStoreItems) {
+        delete trophyStoreItemsToDisplay[key];
+    }
+    if (filter !== "All") {
+        trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.storeFilter === filter));
+    }
+    if (trophyStoreSubFilter !== "All") {
+        trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.subFilter === trophyStoreSubFilter));
+    }
+
+    switch(display) {
+        case "All":
+            break;
+        case "Unowned":
+            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => !btd6usersave.trophyStoreItems.hasOwnProperty(key) || !btd6usersave.trophyStoreItems[key]));
+            break;
+        case "Owned":
+            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key]));
+            break;
+        case "Hidden":
+            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.hidden));
+            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).sort(([key1, data1], [key2, data2]) => {
+                if (btd6usersave.trophyStoreItems.hasOwnProperty(key1) && btd6usersave.trophyStoreItems[key1] && (!btd6usersave.trophyStoreItems.hasOwnProperty(key2) || !btd6usersave.trophyStoreItems[key2])) {
+                    return 1;
+                } else if ((!btd6usersave.trophyStoreItems.hasOwnProperty(key1) || !btd6usersave.trophyStoreItems[key1]) && btd6usersave.trophyStoreItems.hasOwnProperty(key2) && btd6usersave.trophyStoreItems[key2]) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }));
+            break;
+    }
+
+    switch(display){
+        case "Unowned":
+        case "Owned":
+            counter.innerHTML = `${Object.keys(trophyStoreItemsToDisplay).length} Items`;
+            break;
+        default:
+            counter.innerHTML = `${Object.keys(trophyStoreItemsToDisplay).filter(key => btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key]).length}/${Object.keys(trophyStoreItemsToDisplay).length} Owned`;
+    }
+
+    if (Object.keys(trophyStoreItemsToDisplay).length == 0) {
+        counter.innerHTML = "No Items Match";
+    }
+
+    for (let [key, data] of Object.entries(trophyStoreItemsToDisplay)) {
+        let itemDiv = document.createElement('div');
+        itemDiv.classList.add('trophy-store-item-div');
+        itemsContainer.appendChild(itemDiv);
+
+        let itemImg = document.createElement('img');
+        itemImg.classList.add('trophy-store-item-img', 'trophy-store-item-div');
+        itemImg.src = data.itemType === "Avatar"?  `../Assets/ProfileAvatar/${data.icon}.png` : `../Assets/TrophyStoreIcon/${data.icon}.png`;
+        itemDiv.appendChild(itemImg);
+        itemImg.loading = "lazy";
+
+        let itemText = document.createElement('p');
+        itemText.classList.add('trophy-store-item-text');
+        itemText.innerHTML = getLocValue(`${key}ShortName`);
+        itemDiv.appendChild(itemText);
+
+        if (data.subFilter === "TextEmotes") {
+            let itemTextEmote = document.createElement('p');
+            itemTextEmote.classList.add('trophy-store-item-text-emote', 'black-outline');
+            itemTextEmote.innerHTML = key === "CoopEmoteAnimationHappyHolidays" ? getLocValue(`${key}ShortName`) : getLocValue(`${key}Word`);
+            itemDiv.appendChild(itemTextEmote);
+        }
+
+        if (btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key]) {
+            // let collectedTick = document.createElement('img');
+            // collectedTick.classList.add('trophy-store-collected');
+            // collectedTick.src = "../Assets/UI/SelectedTick.png";
+            // itemDiv.appendChild(collectedTick);
+
+            let collectedText = document.createElement('p');
+            collectedText.classList.add('trophy-store-collected-text', 'black-outline');
+            collectedText.innerHTML = "Owned";
+            itemDiv.appendChild(collectedText);
+
+            itemImg.style.borderImageSource = "url(../Assets/UI/TrophyBGPanelBlue.png)";
+        }
+
+        let itemTypeIcon = document.createElement('img');
+        itemTypeIcon.classList.add('trophy-store-item-type-icon');
+        itemTypeIcon.src = `../Assets/UI/Trophy${data.storeFilter}Icon.png`;
+        itemDiv.appendChild(itemTypeIcon);
+    }
+}
+
+
+function generateTeamsStoreProgress() {
+    let progressContent = document.getElementById('progress-content');
+    progressContent.innerHTML = "";
+
+    let progressContainer = document.createElement('div');
     progressContainer.classList.add('powers-progress-container');
     progressContent.appendChild(progressContainer);
 
-    for (let [key, data] of Object.entries(trophyStoreItemsJSON)) {
+    let teamsStoreItemsToDisplay = JSON.parse(JSON.stringify(teamsStoreItemsJSON));
+
+    for (let key of constants.unreleasedContent.teamsStoreItems) {
+        delete teamsStoreItemsToDisplay[key];
+    }
+
+    for (let [key, data] of Object.entries(teamsStoreItemsToDisplay)) {
+        if (data.isDefault) { continue; }
         let itemDiv = document.createElement('div');
         itemDiv.classList.add('trophy-store-item-div');
         progressContainer.appendChild(itemDiv);
 
         let itemImg = document.createElement('img');
-        itemImg.classList.add('trophy-store-item-img', 'trophy-store-item-div');
-        itemImg.src = data.itemType === "Avatar"?  `../Assets/ProfileAvatar/${data.icon}.png` : `../Assets/TrophyStoreIcon/${data.icon}.png`;
+        itemImg.classList.add('trophy-store-item-img', 'trophy-store-item-div', 'teams-store-unowned');
+        itemImg.src = data.itemType === "Avatar"?  `../Assets/ProfileAvatar/${data.icon}.png` : `../Assets/TeamsStoreIcon/${data.icon}.png`;
         itemDiv.appendChild(itemImg);
 
         let itemText = document.createElement('p');
@@ -10390,13 +10653,16 @@ function generateTrophyStoreProgress() {
         itemDiv.appendChild(itemText);
 
         if (btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key]) {
-            let collectedTick = document.createElement('img');
-            collectedTick.classList.add('trophy-store-collected');
-            collectedTick.src = "../Assets/UI/SelectedTick.png";
-            itemDiv.appendChild(collectedTick);
+            let collectedText = document.createElement('p');
+            collectedText.classList.add('trophy-store-collected-text', 'black-outline');
+            collectedText.innerHTML = "Owned";
+            itemDiv.appendChild(collectedText);
+
+            itemImg.classList.add('teams-store-owned');
         }
     }
 }
+
 
 function processRewardsString(input){
     let result = {};
@@ -10558,6 +10824,24 @@ function ratioCalc(unknown, x1, x2, y1, y2){
 function resetScroll() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+}
+
+function loadSettings() {
+    let settings = JSON.parse(localStorage.getItem("BTD6OAKSettings"));
+    if (settings) {
+        preventRateLimiting = settings.ProfileLoading;
+        useNamedMonkeys = settings.UseNamedMonkeys;
+        showTeamsItems = settings.TeamsStoreItems;
+    }
+}
+
+function saveSettings() {
+    let settings = {
+        "ProfileLoading": preventRateLimiting,
+        "UseNamedMonkeys": useNamedMonkeys,
+        "TeamsStoreItems": showTeamsItems
+    }
+    localStorage.setItem("BTD6OAKSettings", JSON.stringify(settings));
 }
 
 function errorModal(body, source, force) {
