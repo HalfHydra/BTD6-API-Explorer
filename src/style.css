@@ -5042,6 +5042,10 @@ input[type="checkbox"] {
         height: calc(calc(var(--vh, 1vh) * 100) - 160px);
     }
 
+    .full-leaderboard-div {
+        height: calc(calc(var(--vh, 1vh) * 100) - 70px);
+    }
+
     .modal-help-divs {
         max-height: calc(var(--vh, 1vh) * 80);
     }

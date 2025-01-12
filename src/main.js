@@ -883,14 +883,6 @@ function generateFrontPage(){
     siteButtons.classList.add('site-login-buttons');
     StandaloneSiteDiv.appendChild(siteButtons);
 
-    let trackerSite = document.createElement('p');
-    trackerSite.classList.add('where-text', 'underline-text');
-    trackerSite.innerHTML = `Insta Tracker`;
-    trackerSite.addEventListener('click', () => {
-        openBTD6Link('https://btd6apiexplorer.github.io/insta');
-    })
-    siteButtons.appendChild(trackerSite);
-
     let roundsSite = document.createElement('p');
     roundsSite.classList.add('where-text', 'underline-text');
     roundsSite.innerHTML = `Roundsets`;
@@ -898,6 +890,22 @@ function generateFrontPage(){
         openBTD6Link('https://btd6apiexplorer.github.io/rounds');
     })
     siteButtons.appendChild(roundsSite);
+
+    let leaderboardSite = document.createElement('p');
+    leaderboardSite.classList.add('where-text', 'underline-text');
+    leaderboardSite.innerHTML = `Leaderboards`;
+    leaderboardSite.addEventListener('click', () => {
+        openBTD6Link('https://btd6apiexplorer.github.io/leaderboards');
+    })
+    siteButtons.appendChild(leaderboardSite);
+
+    let trackerSite = document.createElement('p');
+    trackerSite.classList.add('where-text', 'underline-text');
+    trackerSite.innerHTML = `Insta Tracker`;
+    trackerSite.addEventListener('click', () => {
+        openBTD6Link('https://btd6apiexplorer.github.io/insta');
+    })
+    siteButtons.appendChild(trackerSite);
 
     let versionDiv = document.createElement('div');
     versionDiv.id = 'version-div';
@@ -1071,7 +1079,8 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = `v.1.5.1: Bug fixes! <br>- Zero limited or excluded towers/heroes like the upcoming Bloonarius 56 will no longer show an empty box<br>- The timer no longer jumps to the first event of the list assuming there is only one active at a time.<br><br>
+    changelogText.innerHTML = `v1.6.0 Leaderboards improvements and page!<br>- There is now a <a href="./leaderboards" target="_blank" style="color: white;">Leaderboards Page</a> made specifically for viewing them all in one place.<br>- Loading profiles automatically has been turned back on because...<br>- Improved the handling of automatically loading leaderboard profiles to not be rate limited as quickly. This system should hopefully prevent any rate limiting at all.<br><br>
+    v1.5.1: Bug fixes! <br>- Zero limited or excluded towers/heroes like the upcoming Bloonarius 56 will no longer show an empty box<br>- The timer no longer jumps to the first event of the list assuming there is only one active at a time.<br><br>
     v1.5.0: Trophy Store Items and Update 46!<br>- Added Update 46 content<br>- Added the Trophy Store Items menu for those who want to see all that exist and your collection.<br>- Team Store items have also been added, but since I am unable to test how that works, it is hidden in settings by default.<br>- Settings should now save when reloading the page using the same system that saves the OAK tokens you've used.<br>- Fixed a bug that prevented newer maps from showing up<br>- Added missing badges<br><br>
     v1.4.0: Extras and Events in Roundsets<br>- User profiles on the leaderboards and content browser no longer load by default. This caused too many rate limiting issues.<br>- Added a setting in Settings to toggle automatic profile loading back on if you wanted to see the profile avatar and banner of users on the leaderboard.<br>- Added known previous events with custom roundsets to the Roundsets section.<br>- Fixed a bug involving timers going weirdly negative<br>- Added Creator Support instructions<br><br>
     v1.3.0: QoL Changes<br>- Added Update 45 images and content<br>- You can now toggle to see just the excluded towers and heroes of a challenge or event<br>- You can now swap between Normal/Elite on the details for a boss<br>- Bloon groups can now be hidden in the round previewer by clicking on them<br>- Added a checkmark in the Collection Event list to categories that were completely collected<br>- Updated Endurance Rounds to use updated round thresholds<br>- Resolved an issue when applying a filter to content browser content and not refreshing<br>- Added Ceramic Flood Roundset (very late)<br><br>
