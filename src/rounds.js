@@ -72,11 +72,11 @@ const content = document.createElement('div');
 content.classList.add('content');
 container.appendChild(content);
 
-const roundsets = document.createElement('div');
-roundsets.id = "extras-content"
-roundsets.classList.add('extras', 'content-div');
-roundsets.style.display = "flex";
-content.appendChild(roundsets);
+const leaderboards = document.createElement('div');
+leaderboards.id = "extras-content"
+leaderboards.classList.add('extras', 'content-div');
+leaderboards.style.display = "flex";
+content.appendChild(leaderboards);
 
 const roundsetsContent = document.createElement('div');
 roundsetsContent.id = "roundset-content"

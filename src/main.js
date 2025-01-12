@@ -7063,19 +7063,24 @@ async function generateLeaderboardEntries(metadata, type){
                 let observer = new IntersectionObserver((entries, observer) => {
                     entries.forEach(async observerentry => {
                         if (observerentry.isIntersecting) {
-                            let userProfile = await getUserProfile(entry.profile);
-                            if (userProfile != null) {
-                                if(userProfile.hasOwnProperty('owner')) {
-                                    leaderboardEntryFrame.src = userProfile.frameURL;
-                                    leaderboardEntryEmblem.src = userProfile.iconURL;
-                                    leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                                    observer.unobserve(observerentry.target);
-                                } else {
-                                    leaderboardEntryIcon.src = getProfileAvatar(userProfile);
-                                    leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                                    observer.unobserve(observerentry.target);
+                            addRequestToQueue(async () => {
+                                try {
+                                    let userProfile = await getUserProfile(entry.profile);
+                                    if (userProfile != null) {
+                                        if(userProfile.hasOwnProperty('owner')) {
+                                            leaderboardEntryFrame.src = userProfile.frameURL;
+                                            leaderboardEntryEmblem.src = userProfile.iconURL;
+                                            leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
+                                        } else {
+                                            leaderboardEntryIcon.src = getProfileAvatar(userProfile);
+                                            leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
+                                        }
+                                        observer.unobserve(observerentry.target);
+                                    }
+                                } catch (error) {
+                                    console.error("Error fetching user profile:", error);
                                 }
-                            }
+                            });
                         }
                     });
                 });

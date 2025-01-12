@@ -41,7 +41,58 @@ let isErrorModalOpen = false;
 let customMapsCache = {}
 
 let rateLimited = false;
-let preventRateLimiting = true;
+let preventRateLimiting = false;
+
+let maxRequests = 100;
+let baseInterval = 200;
+let requestCount = 0;
+let completedRequests = 0;
+let lastResetTime = Date.now();
+
+let requestQueue = [];
+let isProcessing = false;
+
+let leaderboardCache = {};
+let leaderboardNext;
+let leaderboardMetadata = {};
+let leaderboardType;
+
+function addRequestToQueue(request) {
+    requestQueue.push(request);
+    if (!isProcessing) {
+        processRequestQueue();
+    }
+}
+
+function calculateDelay() {
+    const ratio = requestCount / (maxRequests / 2);
+    return baseInterval + (baseInterval * Math.pow(ratio, 2));
+}
+
+async function processRequestQueue() {
+    if (isProcessing) return;
+    isProcessing = true;
+    function process() {
+        if (requestQueue.length === 0) {
+            isProcessing = false;
+            return;
+        }
+        const now = Date.now();
+        if (now - lastResetTime >= 180000) {
+            requestCount = 0;
+            lastResetTime = now;
+        }
+        if (requestCount < maxRequests) {
+            const request = requestQueue.shift();
+            requestCount++;
+            request();
+        }
+        const delay = calculateDelay();
+        setTimeout(process, delay);
+    }
+    process();
+}
+processRequestQueue();
 
 async function fetchData(url, onSuccess) {
     let res = null;
@@ -59,7 +110,8 @@ async function fetchData(url, onSuccess) {
             errorModal(`You are currently offline. Please check your internet connection.`, "api");
             return `You are currently offline. [${e}]`;
         }
-        rateLimited = true;        
+        rateLimited = true;
+        requestQueue = [];        
         errorModal(`You have hit the rate limit.<br>If you are browsing the leaderboards or content browsers, please slow down!<br><br>The rate limit will clear after a short time. You can also help prevent rate limiting by toggling the setting below which stops player profiles from loading automatically.`, "ratelimit")
         hideLoading();
         pressedStart = false;
@@ -160,6 +212,28 @@ async function getLeaderboardData() {
     } else {
         return errorModal("Leaderboard Fetch Error: No leaderboard data found");
     }
+}
+
+async function getAllLeaderboardData(link) {
+    if (link == null) { link = leaderboardLink };
+    requestQueue = [];
+    if (leaderboardCache[leaderboardLink] == null) {
+        leaderboardCache[leaderboardLink] = {
+            "entries": []
+        };
+        getLeaderboardPage(link);
+    }
+    return leaderboardCache[leaderboardLink];
+}
+
+async function getLeaderboardPage(link) {
+    if (link == null) return;
+    requestCount++;
+    await fetchData(link, (json) => {
+        leaderboardCache[leaderboardLink].entries = leaderboardCache[leaderboardLink].entries.concat(json["body"]);
+        addLeaderboardEntries(json["body"], isNaN(link.split("=")[1]) ? 1 : parseInt(link.split("=")[1]), json["body"].length);
+        leaderboardCache[leaderboardLink]["next"] = json["next"];
+    });
 }
 
 async function getBossesData() {
