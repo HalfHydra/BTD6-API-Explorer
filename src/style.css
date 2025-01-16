@@ -2926,6 +2926,7 @@
 .leaderboard-entry-time-submit-div {
     text-align: center;
 }
+
 .publicprofile-div {
     background-color: var(--profile-primary);
     border-radius: 10px;
@@ -4686,10 +4687,13 @@
 
 .leaderboards-header-text {
     font-family: 'Luckiest Guy';
-    font-size: 32px;
     color: white;
     margin: 10px 0;
     text-align: center;
+    background-image: url('../Assets/UI/GreyTxtTextureMain.png');
+    padding: 0px;
+    height:auto;
+    font-size: 42px;
 }
 
 .black-outline {

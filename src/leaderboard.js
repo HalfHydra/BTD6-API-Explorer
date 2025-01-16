@@ -100,7 +100,7 @@ async function generateLeaderboards() {
             CTData = json["body"];
         });
     }
-
+    hideLoading(); 
     let leaderboardsContent = document.getElementById('leaderboards-content');
     leaderboardsContent.innerHTML = "";
 
@@ -109,7 +109,7 @@ async function generateLeaderboards() {
     leaderboardsContent.appendChild(leaderboardPage);
 
     let currentText = document.createElement('p');
-    currentText.classList.add('leaderboards-header-text', 'black-outline');
+    currentText.classList.add('hero-progress-header-text', 'leaderboards-header-text');
     currentText.innerHTML = "Active Events";
     leaderboardPage.appendChild(currentText);
 
@@ -118,7 +118,7 @@ async function generateLeaderboards() {
     leaderboardPage.appendChild(currentSelectorsDiv);
 
     let selectorsText = document.createElement('p');
-    selectorsText.classList.add('leaderboards-header-text', 'black-outline');
+    selectorsText.classList.add('hero-progress-header-text', 'leaderboards-header-text');
     selectorsText.innerHTML = "Finished Events";
     leaderboardPage.appendChild(selectorsText);
 
@@ -187,16 +187,16 @@ async function generateLeaderboards() {
     leaderboardPage.appendChild(selectorsDiv);
 
     let pastEvents = [];
+    let now = new Date();
 
     racesData.forEach((data) => {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('roundset-selector-div');
+        (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores]);
         roundsetDiv.addEventListener('click', () => {
-            showLoading();
             showLeaderboard('leaderboards', data, "Race");
+            showLoading();
         })
-        let now = new Date();
-        (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv]);
 
         let roundsetIcon = document.createElement('img');
         roundsetIcon.classList.add('roundset-selector-img');
@@ -246,12 +246,11 @@ async function generateLeaderboards() {
 
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('roundset-selector-div');
+        (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_standard]);
         roundsetDiv.addEventListener('click', () => {
-            showLoading();
             showLeaderboard('leaderboards', data, "Boss");
+            showLoading();
         })
-        let now = new Date();
-        (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv]);
 
         let roundsetIcon = document.createElement('img');
         roundsetIcon.classList.add('roundset-selector-img');
@@ -302,12 +301,11 @@ async function generateLeaderboards() {
 
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('roundset-selector-div');
+        (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_elite]);
         roundsetDiv.addEventListener('click', () => {
-            showLoading();
             showLeaderboard('leaderboards', data, "BossElite");
+            showLoading();
         })
-        let now = new Date();
-        (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv]);
 
         let roundsetIcon = document.createElement('img');
         roundsetIcon.classList.add('roundset-selector-img');
@@ -354,12 +352,11 @@ async function generateLeaderboards() {
     CTData.forEach((data) => {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('roundset-selector-div');
+        (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_team]);
         roundsetDiv.addEventListener('click', () => {
-            showLoading();
             showLeaderboard('leaderboards', data, "CTTeam");
+            showLoading();
         })
-        let now = new Date();
-        (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv]);
 
         let roundsetIcon = document.createElement('img');
         roundsetIcon.classList.add('roundset-selector-img');
@@ -405,12 +402,11 @@ async function generateLeaderboards() {
     CTData.forEach((data) => {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('roundset-selector-div');
+        (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_player]);
         roundsetDiv.addEventListener('click', () => {
-            showLoading();
             showLeaderboard('leaderboards', data, "CTPlayer");
+            showLoading()
         })
-        let now = new Date();
-        (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv]);
 
         let roundsetIcon = document.createElement('img');
         roundsetIcon.classList.add('roundset-selector-img');
@@ -453,12 +449,18 @@ async function generateLeaderboards() {
         roundsetDiv.appendChild(roundsetGoImg);
     })
 
-    //sort past events by end date
     pastEvents.sort((a, b) => new Date(b[0].end) - new Date(a[0].end))
 
-    pastEvents.forEach(([data, roundsetDiv]) => {
+    pastEvents.forEach(([data, roundsetDiv, totalScores]) => {
+        if (now < new Date(data.start)) { return }
+        if (totalScores == 0) { return }
         selectorsDiv.appendChild(roundsetDiv);
     })
+
+    if (currentSelectorsDiv.childNodes.length == 0) {
+        currentText.style.display = "none";
+        currentSelectorsDiv.style.display = "none";
+    }
 }
 
 function onChangeEventFilter(type) {
