@@ -5204,3 +5204,40 @@ input[type="checkbox"] {
         touch-action: manipulation;
     }
 }
+
+.tippy-box[data-theme~='speech_bubble'] {
+    border-radius: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 20px solid transparent;
+    border-image-slice: 50;
+    border-image-source: url(../Assets/UI/SpeechBubbleSquare.png);
+}
+
+.tippy-box[data-theme~='speech_bubble'] > .tippy-arrow {
+    /* content: "";
+    border-width: 15px;
+    border-style: solid;
+    border-image-source: url(../Assets/UI/SpeechBubblePoint2.png);
+    border-image-slice: 35;
+    height: unset;
+    top: 44px; */
+}
+
+.tippy-box[data-theme~='speech_bubble'] > .tippy-arrow:before {
+    content: "";
+    border-width: 15px;
+    border-style: solid;
+    border-image-source: url(../Assets/UI/SpeechBubblePoint2.png);
+    border-image-slice: 35;
+    height: unset;
+    top: 28px; 
+}
+
+.tippy-box[data-theme~='speech_bubble'] > .tippy-content {
+    background-color: #F4F3E2;
+    color: black;
+    font-family: "GardeniaBold";
+    line-height: 22px;
+}

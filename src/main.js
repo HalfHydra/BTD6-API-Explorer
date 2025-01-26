@@ -1382,8 +1382,16 @@ function generateOverview(){
         if(num === 0) { continue; }
         let medalDiv = document.createElement('div');
         medalDiv.classList.add('medal-div');
-        medalDiv.title = constants.medalLabels[medal];
+        // medalDiv.title = constants.medalLabels[medal];
         medalsDiv.appendChild(medalDiv);
+
+        tippy(medalDiv, {
+            content: constants.medalLabels[medal],
+            placement: 'top',
+            theme: 'speech_bubble',
+            // hideOnClick: false,
+            // trigger: 'click'
+        })
 
         let medalImg = document.createElement('img');
         medalImg.classList.add('medal-img');

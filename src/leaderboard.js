@@ -90,6 +90,7 @@ async function generateLeaderboards() {
 
     let currentText = document.createElement('p');
     currentText.classList.add('hero-progress-header-text', 'leaderboards-header-text');
+    currentText.style.backgroundImage = "url('../Assets/UI/BlueTxtTextureMain.png')"
     currentText.innerHTML = "Active Events";
     leaderboardPage.appendChild(currentText);
 
