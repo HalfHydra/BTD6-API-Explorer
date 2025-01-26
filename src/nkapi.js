@@ -228,6 +228,7 @@ async function getAllLeaderboardData(link) {
 
 async function getLeaderboardPage(link) {
     if (link == null) return;
+    if(leaderboardCache[leaderboardLink].nextRequested){ return };
     requestCount++;
     await fetchData(link, (json) => {
         leaderboardCache[leaderboardLink].entries = leaderboardCache[leaderboardLink].entries.concat(json["body"]);
@@ -236,6 +237,7 @@ async function getLeaderboardPage(link) {
         }
         addLeaderboardEntries(json["body"], isNaN(link.split("=")[1]) ? 1 : parseInt(link.split("=")[1]), leaderboardCache[leaderboardLink]["entryPerPage"] ? leaderboardCache[leaderboardLink]["entryPerPage"] : json["body"].length);
         leaderboardCache[leaderboardLink]["next"] = json["next"];
+        leaderboardCache[leaderboardLink].nextRequested = false;
     });
 }
 

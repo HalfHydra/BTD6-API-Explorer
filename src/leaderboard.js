@@ -825,6 +825,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         if (observerentry.isIntersecting) {
                             if (leaderboardData.length == index + 1) {
                                 getLeaderboardPage(leaderboardCache[leaderboardLink].next);
+                                leaderboardCache[leaderboardLink].nextRequested = true;
                             }
 
                             if (page == 1 && ((index + ((page - 1) * count) + 1) < 50)) {
