@@ -231,7 +231,10 @@ async function getLeaderboardPage(link) {
     requestCount++;
     await fetchData(link, (json) => {
         leaderboardCache[leaderboardLink].entries = leaderboardCache[leaderboardLink].entries.concat(json["body"]);
-        addLeaderboardEntries(json["body"], isNaN(link.split("=")[1]) ? 1 : parseInt(link.split("=")[1]), json["body"].length);
+        if(!leaderboardCache[leaderboardLink].hasOwnProperty("entryPerPage")){
+            leaderboardCache[leaderboardLink]["entryPerPage"] = json["body"].length;
+        }
+        addLeaderboardEntries(json["body"], isNaN(link.split("=")[1]) ? 1 : parseInt(link.split("=")[1]), leaderboardCache[leaderboardLink]["entryPerPage"] ? leaderboardCache[leaderboardLink]["entryPerPage"] : json["body"].length);
         leaderboardCache[leaderboardLink]["next"] = json["next"];
     });
 }
