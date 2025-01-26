@@ -57,11 +57,15 @@ let leaderboardNext;
 let leaderboardMetadata = {};
 let leaderboardType;
 
-function addRequestToQueue(request) {
-    requestQueue.push(request);
+function addRequestToQueue(profile, request) {
+    requestQueue.push({id: profile, request: request});
     if (!isProcessing) {
         processRequestQueue();
     }
+}
+
+function removeRequestFromQueue(profile) {
+    requestQueue = requestQueue.filter(request => request.id !== profile);
 }
 
 function calculateDelay() {
@@ -85,7 +89,7 @@ async function processRequestQueue() {
         if (requestCount < maxRequests) {
             const request = requestQueue.shift();
             requestCount++;
-            request();
+            request.request();
         }
         const delay = calculateDelay();
         setTimeout(process, delay);

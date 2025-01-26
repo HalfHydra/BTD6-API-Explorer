@@ -828,8 +828,8 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                                 leaderboardCache[leaderboardLink].nextRequested = true;
                             }
 
-                            if (page == 1 && ((index + ((page - 1) * count) + 1) < 50)) {
-                                addRequestToQueue(async () => {
+                            if (page == 1 && ((index + ((page - 1) * count) + 1) <= 50)) {
+                                addRequestToQueue(entry.profile, async () => {
                                     try {
                                         let userProfile = await getUserProfile(entry.profile);
                                         if (userProfile != null) {
@@ -848,6 +848,8 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                                     }
                                 });
                             }
+                        } else {
+                            removeRequestFromQueue(entry.profile);
                         }
                     });
                 });
