@@ -17,26 +17,6 @@ Promise.all([
     });
 
 function showLoading() {
-    let imagesToLoad = 0;
-    function imageLoaded() {
-        imagesToLoad--;
-        if (imagesToLoad === 0) {
-            document.getElementById("loading").style.transform = "scale(0)";
-        }
-    }
-    let observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'childList') {
-                mutation.addedNodes.forEach((node) => {
-                    if (node.nodeName === 'IMG') {
-                        imagesToLoad++;
-                        node.addEventListener('load', imageLoaded);
-                    }
-                });
-            }
-        });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
     document.getElementById("loading").style.removeProperty("transform")
 }
 
@@ -610,7 +590,6 @@ function showLeaderboard(source, metadata, type) {
     leaderboardEntries.classList.add('leaderboard-entries');
     leaderboardDiv.appendChild(leaderboardEntries);
 
-    copyLoadingIcon(leaderboardEntries)
     generateLeaderboardEntries(metadata, type);
 }
 
@@ -658,6 +637,10 @@ function addLeaderboardEntries(leaderboardData, page, count) {
     let leaderboardEntries = document.getElementById('leaderboard-entries');
     let metadata = leaderboardMetadata;
     let type = leaderboardType;
+
+    if (leaderboardData.length > 0) {
+        hideLoading();
+    }
 
     if (leaderboardData != null) {
         leaderboardData.forEach((entry, index) => {
