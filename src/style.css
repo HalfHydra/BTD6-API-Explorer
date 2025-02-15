@@ -5213,6 +5213,7 @@ input[type="checkbox"] {
     border: 20px solid transparent;
     border-image-slice: 50;
     border-image-source: url(../Assets/UI/SpeechBubbleSquare.png);
+    background-color: #F4F3E2;
 }
 
 .tippy-box[data-theme~='speech_bubble'] > .tippy-arrow {
@@ -5236,7 +5237,6 @@ input[type="checkbox"] {
 }
 
 .tippy-box[data-theme~='speech_bubble'] > .tippy-content {
-    background-color: #F4F3E2;
     color: black;
     font-family: "GardeniaBold";
     line-height: 22px;
