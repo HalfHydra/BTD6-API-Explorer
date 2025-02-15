@@ -1600,6 +1600,50 @@ function generateOverview(){
         statValue.innerHTML = value.toLocaleString();
         stat.appendChild(statValue);
     }
+
+    let rogueDiv = document.createElement('div');
+    rogueDiv.classList.add('profile-stats');
+    rightColumnDiv.appendChild(rogueDiv);
+
+    let rogueColumnHeader = document.createElement('div');
+    rogueColumnHeader.classList.add('overview-right-column-header');
+    rogueDiv.appendChild(rogueColumnHeader);
+
+    let rogueColumnHeaderText = document.createElement('p');
+    rogueColumnHeaderText.classList.add('column-header-text','black-outline');
+    rogueColumnHeaderText.innerHTML = 'Rogue Legend Stats';
+    rogueColumnHeader.appendChild(rogueColumnHeaderText);
+
+    let rogueStats = {};
+    rogueStats["Tiles Captured"] = btd6usersave["rogueLegends"].tilesCaptured;
+    rogueStats["Campaign Maps Won"] = btd6usersave["rogueLegends"].bossesDefeated;
+    rogueStats["Common Artifacts Collected"] = btd6usersave["rogueLegends"].commonArtifactsCollected;
+    rogueStats["Rare Artifacts Collected"] = btd6usersave["rogueLegends"].rareArtifactsCollected;
+    rogueStats["Legendary Artifacts Collected"] = btd6usersave["rogueLegends"].legendaryArtifactsCollected;
+    // rogueStats["Extracted Artifacts"] = btd6usersave["rogueLegends"];
+    // rogueStats["Bloon Encounters Won"] = btd6usersave["rogueLegends"];
+    // rogueStats["Mini Games Won"] = btd6usersave["rogueLegends"];
+    // rogueStats["Mini Bosses Won"] = btd6usersave["rogueLegends"];
+    rogueStats["Common Boosts Collected"] = btd6usersave["rogueLegends"].commonBoostsCollected;
+    rogueStats["Rare Boosts Collected"] = btd6usersave["rogueLegends"].rareBoostsCollected;
+    rogueStats["Legendary Boosts Collected"] = btd6usersave["rogueLegends"].legendaryBoostsCollected;
+
+    for (let [key, value] of Object.entries(rogueStats)){
+        let stat = document.createElement('div');
+        stat.classList.add('stat');
+        rogueDiv.appendChild(stat);
+
+        let statName = document.createElement('p');
+        statName.classList.add('stat-name');
+        statName.innerHTML = key;
+        stat.appendChild(statName);
+
+        let statValue = document.createElement('p');
+        statValue.classList.add('stat-value');
+        statValue.innerHTML = value.toLocaleString();
+        stat.appendChild(statValue);
+    }
+
     } else {
         let notLoggedInText = document.createElement('p');
         notLoggedInText.classList.add('not-logged-in-text');
