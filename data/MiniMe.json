@@ -1,0 +1,70 @@
+{
+    "rounds": [
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bad",
+                    "count": 1,
+                    "start": 0,
+                    "end": 1
+                }
+            ],
+            "roundNumber": 40,
+            "rbe": 55760,
+            "income": 13486,
+            "rbeSum": 55760,
+            "incomeSum": 13486
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bad",
+                    "count": 2,
+                    "start": 0,
+                    "end": 1
+                }
+            ],
+            "roundNumber": 60,
+            "rbe": 111520,
+            "income": 13506.0,
+            "rbeSum": 167280,
+            "incomeSum": 26992.0
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "Bad",
+                    "count": 5,
+                    "start": 0,
+                    "end": 10
+                }
+            ],
+            "roundNumber": 80,
+            "rbe": 278800,
+            "income": 13526.000198870897,
+            "rbeSum": 446080,
+            "incomeSum": 40518.0001988709
+        },
+        {
+            "bloonGroups": [
+                {
+                    "bloon": "BadFortified",
+                    "count": 2,
+                    "start": 0,
+                    "end": 0.10000000149011612
+                },
+                {
+                    "bloon": "DdtFortifiedCamo",
+                    "count": 50,
+                    "start": 0,
+                    "end": 25
+                }
+            ],
+            "roundNumber": 100,
+            "rbe": 348160.0,
+            "income": 4774.2000681608915,
+            "rbeSum": 794240.0,
+            "incomeSum": 45292.20026703179
+        }
+    ]
+}

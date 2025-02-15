@@ -165,10 +165,42 @@ function generateRoundsets() {
         roundsetDiv.appendChild(roundsetGoImg);
     })
     
-    let normalRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type != "quest"));
+    let normalRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type != "quest" && value.type != "legends"));
+    let legendsRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "legends"));
     let otherRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "quest"));
 
     Object.entries(normalRoundsets).forEach(([roundset, data]) => {
+        let roundsetDiv = document.createElement('div');
+        roundsetDiv.classList.add('roundset-selector-div');
+        data.type == "boss" ? roundsetDiv.classList.add('veteran-container') : roundsetDiv.classList.add('wood-container');
+        roundsetDiv.addEventListener('click', () => {
+            showLoading();
+            showRoundsetModel('extras', roundset);
+        })
+        selectorsDiv.appendChild(roundsetDiv);
+
+        let roundsetIcon = document.createElement('img');
+        roundsetIcon.classList.add('roundset-selector-img');
+        roundsetIcon.src = `../Assets/UI/${data.icon}.png`;
+        roundsetDiv.appendChild(roundsetIcon);
+
+        let roundsetText = document.createElement('p');
+        roundsetText.classList.add('selector-text', 'black-outline');
+        roundsetText.innerHTML = data.name;
+        roundsetDiv.appendChild(roundsetText);
+
+        let roundsetGoImg = document.createElement('img');
+        roundsetGoImg.classList.add('selector-go-img');
+        roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
+        roundsetDiv.appendChild(roundsetGoImg);
+    })
+
+    let legendsRoundsetText = document.createElement('p');
+    legendsRoundsetText.classList.add('other-roundsets-selector-text', 'black-outline');
+    legendsRoundsetText.innerHTML = "Legends Custom Rounds";
+    selectorsDiv.appendChild(legendsRoundsetText);
+
+    Object.entries(legendsRoundsets).forEach(([roundset, data]) => {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('roundset-selector-div');
         data.type == "boss" ? roundsetDiv.classList.add('veteran-container') : roundsetDiv.classList.add('wood-container');

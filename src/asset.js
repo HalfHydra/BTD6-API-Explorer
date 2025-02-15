@@ -50,7 +50,8 @@ const skinNameFixMap = {
     "CyberQuincy": "QuincyCyber",
     "ETnEtienne": "ETn",
     "SentaiCaptainChurchill": "SentaiChurchill",
-    "SleighCaptainChurchill": "SleighChurchill"
+    "SleighCaptainChurchill": "SleighChurchill",
+    "TinkerfairyRosalia": "RosaliaTinkerfairy"
 }
 
 const upgradeNameFixMap = {
@@ -129,7 +130,9 @@ let locJSONOverrides = {
     "Mode Medium": "Medium",
     "Mode Hard": "Hard",
     "Mode Impoppable": "Impoppable",
-    "Mode Sandbox": "Sandbox"
+    "Mode Sandbox": "Sandbox",
+    "RosaliaTinkerfairySkinName": "TinkerfairyRosaliaSkinName",
+    "RosaliaTinkerfairySkinDescription": "TinkerfairyRosaliaSkinDescription"
 }
 
 let medalMap = {

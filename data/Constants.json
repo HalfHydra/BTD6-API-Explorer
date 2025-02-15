@@ -1,12 +1,12 @@
 {
-    "version": "1.6.1",
-    "projectContentVersion": 46,
+    "version": "1.7.0",
+    "projectContentVersion": 47,
     "totalInstaMonkeys": 1536,
     "achievements": 138,
     "hiddenAchievements": 12,
-    "totalMaps": 75,
-    "profileBanners": 48,
-    "profileAvatars": 107,
+    "totalMaps": 78,
+    "profileBanners": 49,
+    "profileAvatars": 109,
     "startRound": {
         "Easy": 1,
         "PrimaryOnly": 1,
@@ -66,7 +66,7 @@
             "end": 1725937200000
         }
     },
-    "skuRoundsets": ["1roundEarly","2roundEarly","3roundEarly","4roundEarly","5roundEarly","DDTbadness","countdownGroupOf5","monkeyVSmachines","rabbitYear","valentinesCF","TheFinalGambit","eggs","BeastHandlerjourney","Apocrypha3","31Plus","allOrNothingEnd60","allOrNothingEnd80","alternateRound140","raceExperiment","SinkingFeeling","CeramicFlood","Doubleupody","Jumpscare","masterymode","chimpsbloonarius"],
+    "skuRoundsets": ["1roundEarly","2roundEarly","3roundEarly","4roundEarly","5roundEarly","DDTbadness","countdownGroupOf5","monkeyVSmachines","rabbitYear","valentinesCF","TheFinalGambit","eggs","BeastHandlerjourney","Apocrypha3","31Plus","allOrNothingEnd60","allOrNothingEnd80","Sauda63","MiniMe","BlimpMyCrib","alternateRound140","raceExperiment","SinkingFeeling","CeramicFlood","Doubleupody","Jumpscare","masterymode","chimpsbloonarius"],
     "roundSets": {
         "DefaultRoundSet": {
             "name": "Standard Rounds",
@@ -116,6 +116,12 @@
             "type": "boss",
             "startingCash": 650
         },
+        "RogueRoundSet": {
+            "name": "Rogue Legends Custom Rounds",
+            "icon": "QuestIconRogueLegend",
+            "type": "legends",
+            "startingCash": 0
+        },
         "AcceleratedRoundSet": {
             "name": "Accelerated Rounds",
             "icon": "QuestIconAcceleratedRoundSet",
@@ -150,6 +156,13 @@
             "type": "quest",
             "startingCash": 650,
             "endRound": 7
+        },
+        "QuestAdoraTrialRoundSet": {
+            "name": "Adora Explorer! Rounds",
+            "icon": "QuestIconAdora",
+            "type": "quest",
+            "startingCash": 650,
+            "endRound": 15
         },
         "QuestBrickellTrialRoundSet": {
             "name": "Brickell Bootcamp Rounds",
@@ -243,39 +256,46 @@
             "endRound": 15
         },
         "BouncyDartsTaleStage1RoundSet": {
-            "name": "New Dart Just Dropped Stage 1",
+            "name": "New Dart Just Dropped Stage 1 Rounds",
             "icon": "QuestIconBouncyDarts",
             "type": "quest",
             "startingCash": 10,
             "endRound": 137
         },
         "BouncyDartsTaleStage2RoundSet": {
-            "name": "New Dart Just Dropped Stage 2",
+            "name": "New Dart Just Dropped Stage 2 Rounds",
             "icon": "QuestIconBouncyDarts",
             "type": "quest",
             "startingCash": 1000,
             "endRound": 140
         },
         "ScoopsTaleIPart1RoundSet": {
-            "name": "Scoop's Tall Tale Part 1",
+            "name": "Scoop's Tall Tale Part 1 Rounds",
             "icon": "QuestIconScoopsTale1",
             "type": "quest",
             "startingCash": 250,
             "endRound": 13
         },
         "ScoopsTaleIPart2RoundSet": {
-            "name": "Scoop's Tall Tale Part 2",
+            "name": "Scoop's Tall Tale Part 2 Rounds",
             "icon": "QuestIconScoopsTale1",
             "type": "quest",
             "startingCash": 500,
             "endRound": 15
         },
         "ScoopsTaleIPart3RoundSet": {
-            "name": "Scoop's Tall Tale Part 3",
+            "name": "Scoop's Tall Tale Part 3 Rounds",
             "icon": "QuestIconScoopsTale1",
             "type": "quest",
             "startingCash": 5000,
             "endRound": 23
+        },
+        "BattleCatQuestRoundSet": {
+            "name": "By the Power of Battle Cat! Rounds",
+            "icon": "QuestIconBattleCat",
+            "type": "quest",
+            "startingCash": 2200,
+            "endRound": 22
         }
     },
     "incomeSets": {
@@ -446,6 +466,7 @@
         "Chutes": "Intermediate",
         "Rake": "Intermediate",
         "SpiceIslands": "Intermediate",
+        "EnchantedGlade": "Advanced",
         "LastResort": "Advanced",
         "AncientPortal": "Advanced",
         "CastleRevenge": "Advanced",
@@ -564,7 +585,8 @@
         "CtGlobalPlayerGoldDiamondMedal": "CT Global - Top 50",
         "CtGlobalPlayerDiamondMedal": "CT Global - 3rd",
         "CtGlobalPlayerRedDiamondMedal": "CT Global - 2nd",
-        "CtGlobalPlayerBlackDiamondMedal": "CT Global - 1st"
+        "CtGlobalPlayerBlackDiamondMedal": "CT Global - 1st",
+        "Legends1": "Legends - Rogue Legends Feats"
     },
     "paragonsAvailable": ["DartMonkey", "BoomerangMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "WizardMonkey", "NinjaMonkey", "EngineerMonkey", "TackShooter"],
     "instaTiers": {
@@ -859,7 +881,8 @@
         "Corvus": [1,3,7,10,15,20],
         "Rosalia": [1,2,5,7,13,20],
         "DreamstatePsi": [1,3,8,10,20],
-        "RedSauda": [1,3,10,20]
+        "RedSauda": [1,3,10,20],
+        "RosaliaTinkerfairy": [1,2,5,7,13,20]
     },
     "heroSkins": {
         "Quincy": ["Quincy", "CyberQuincy", "WolfpackQuincy"],
@@ -877,7 +900,7 @@
         "Geraldo": ["Geraldo", "GeraldoGentlemanGadgeteer"],
         "Sauda": ["Sauda", "JiangshiSauda", "VikingSauda", "RedSauda"],
         "Corvus": ["Corvus"],
-        "Rosalia": ["Rosalia"]
+        "Rosalia": ["Rosalia", "RosaliaTinkerfairy"]
     },
     "heroLevelIcons": {
         "Quincy": [3,10],
@@ -2094,7 +2117,7 @@
         }
     },
     "unreleasedContent": {
-        "trophyStoreItems": ["GameUIProfileAvatar105", "GameUIProfileAvatar106", "GameUIProfileAvatar107", "GameUIProfileBanner47", "GameUIProfileBanner48"],
-        "teamsStoreItems": ["TeamsBanner15"]
+        "trophyStoreItems": ["GameUIProfileAvatar107"],
+        "teamsStoreItems": []
     }
 }

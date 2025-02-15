@@ -109,6 +109,16 @@
         "itemType": "BloonDecal",
         "hidden": true
     },
+    "BloonsAllBloonsHeartGlasses": {
+        "storeFilter": "Bloons",
+        "subFilter": "AllBloonSkins",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "HeartGlassesBloonsIcon",
+        "cosmeticPriority": "3",
+        "exclusivity": "AllBloonsDecal",
+        "itemType": "BloonDecal"
+    },
     "BloonsAllBloonsNightcap": {
         "storeFilter": "Bloons",
         "subFilter": "AllBloonSkins",
@@ -174,6 +184,16 @@
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
         "hidden": false
+    },
+    "BloonsAllBloonsPopsHearts": {
+        "storeFilter": "Bloons",
+        "subFilter": "PopFX",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "HeartPopIcon",
+        "cosmeticPriority": "3",
+        "exclusivity": "AllBloonsPopFX",
+        "itemType": "BloonPopEffect"
     },
     "BloonsAllBloonsPopsPewpew": {
         "storeFilter": "Bloons",
@@ -2519,6 +2539,26 @@
         "hidden": true,
         "obtainMethod": "Limited"
     },
+    "GameUIProfileAvatar108": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar108",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar"
+    },
+    "GameUIProfileAvatar109": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar109",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar"
+    },
     "GameUIProfileBanner1": {
         "storeFilter": "GameUI",
         "subFilter": "ProfileBanners",
@@ -3055,6 +3095,16 @@
         "itemType": "Banner",
         "hidden": true,
         "obtainMethod": "Rogue"
+    },
+    "GameUIProfileBanner49": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner49Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner"
     },
     "GameUIUpgradesDisplayNamedMonkeys": {
         "storeFilter": "GameUI",
