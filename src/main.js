@@ -425,6 +425,9 @@ function generateMapData() {
         mapData["coop"]["Impoppable"] = data.difficulty?.Hard?.coop?.["Impoppable"];
         mapData["coop"]["Clicks"] = data.difficulty?.Hard?.coop?.["Clicks"];
 
+        mapData["highestRound"] = Math.max(...Object.values(mapData["single"]).map(diffData => diffData ? diffData["bestRound"] : 0), ...Object.values(mapData["coop"]).map(diffData => diffData ? diffData["bestRound"] : 0));
+        mapData["totalWins"] = Object.values(mapData["single"]).map(diffData => diffData ? diffData["timesCompleted"] : 0).reduce((acc, amount) => acc + amount) + Object.values(mapData["coop"]).map(diffData => diffData ? diffData["timesCompleted"] : 0).reduce((acc, amount) => acc + amount);
+
         //this is necessary because sometimes maps will randomly show up as incomplete despite having parameters such as a completed best round number or "completedWithoutLoadSave" is true.
         //this is a workaround to ensure that the map is marked as completed if it meets the requirements for a bronze/silver/gold/black border
         for (let [difficulty, diffData] of Object.entries(mapData["single"])) {
@@ -2954,6 +2957,16 @@ function generateMapDetails(map){
     mapProgressCoop.innerHTML = `${Object.values(processedMapData.Medals.coop[map]).filter(a=>a==true).length}/15 Coop Medals`;
     mapNameAndMedals.appendChild(mapProgressCoop);
 
+    let overallHighestRound = document.createElement('div');
+    overallHighestRound.classList.add('map-progress-subtext');
+    overallHighestRound.innerHTML = `Overall Highest Round: ${processedMapData.Maps[map].highestRound}`;
+    mapNameAndMedals.appendChild(overallHighestRound);
+
+    let totalWins = document.createElement('div');
+    totalWins.classList.add('map-progress-subtext');
+    totalWins.innerHTML = `Total Wins: ${processedMapData.Maps[map].totalWins}`;
+    mapNameAndMedals.appendChild(totalWins);
+
     let mapIcon = document.createElement('img');
     mapIcon.classList.add('map-icon');
     mapIcon.src = getMapIcon(map);
@@ -3003,6 +3016,11 @@ function generateMapDetails(map){
             medalImg.style.removeProperty('display');
         })
         medalDiv.appendChild(medalImg);
+        tippy(medalDiv, {
+            content: constants.medalLabels[`Medal${medalMap[difficulty]}`],
+            placement: 'top',
+            theme: 'speech_bubble'
+        })
     }
 
     let mapProgressCoopMedals = document.createElement('div');
@@ -3031,6 +3049,11 @@ function generateMapDetails(map){
             medalImg.style.removeProperty('display');
         })
         medalDiv.appendChild(medalImg);
+        tippy(medalDiv, {
+            content: constants.medalLabels[`MedalCoop${medalMap[difficulty]}`],
+            placement: 'top',
+            theme: 'speech_bubble'
+        })
     }
 
     switch(processedMapData.Borders["coop"][map]) {
@@ -3290,6 +3313,12 @@ function generateMapsListView(){
                 mapSectionMedalImg.style.removeProperty('display');
             })
             mapSectionMedal.appendChild(mapSectionMedalImg);
+
+            tippy(mapSectionMedal, {
+                content: constants.medalLabels[`Medal${coopEnabled ? "Coop" : ""}${medalMap[difficulty]}`],
+                placement: 'top',
+                theme: 'speech_bubble'
+            })
 
             let mapSectionBestRound = document.createElement('p');
             mapSectionBestRound.classList.add(`map-section-text`,'black-outline');
