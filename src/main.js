@@ -3536,6 +3536,12 @@ function generateInstaMonkeysProgress() {
     })
     instaMonkeysViews.appendChild(instaMonkeysListView);
 
+    let instaMonkeyProgressText = document.createElement('p');
+    instaMonkeyProgressText.id = "insta-total-counter";
+    instaMonkeyProgressText.classList.add('insta-monkey-progress-text','insta-total-counter','black-outline');
+    instaMonkeyProgressText.innerHTML = `${btd6publicprofile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}`;
+    instaMonkeysHeaderBar.appendChild(instaMonkeyProgressText);
+
     let instaMonkeysExtras = document.createElement('div');
     instaMonkeysExtras.classList.add('maps-progress-views');
     instaMonkeysHeaderBar.appendChild(instaMonkeysExtras);
@@ -4559,6 +4565,8 @@ function onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, towe
                 processedInstaData.TowerMissingByTier[towerType][key].push(tiers);
                 delete btd6usersave.instaTowers[towerType][tiers];
                 processedInstaData.TowerTierTotals[towerType][key] -= 1;
+                btd6publicprofile.gameplay["instaMonkeyCollection"] -= 1;
+                document.getElementById('insta-total-counter').innerHTML = `${btd6publicprofile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}`;
                 calculateInstaBorder(towerType);
                 generateCollectionEventTowerInfo(towerType);
             });
@@ -4569,6 +4577,8 @@ function onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, towe
                 processedInstaData.TowerMissingByTier[towerType][key] = processedInstaData.TowerMissingByTier[towerType][key].filter(value => value != tiers);
                 btd6usersave.instaTowers[towerType][tiers] = 0;
                 processedInstaData.TowerTierTotals[towerType][key] += 1;
+                btd6publicprofile.gameplay["instaMonkeyCollection"] += 1;
+                document.getElementById('insta-total-counter').innerHTML = `${btd6publicprofile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}`;
                 calculateInstaBorder(towerType);
                 generateCollectionEventTowerInfo(towerType);
             })
