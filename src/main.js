@@ -2231,7 +2231,8 @@ function generateUpgradeIcon(tower, upgrade, status, row, tier, paragon, grayOut
         content: getLocValue(`${upgrade} Description`),
         placement: 'top',
         theme: 'speech_bubble',
-        hideOnClick: false
+        hideOnClick: false,
+        allowHTML: true
     })
 
     return upgradeDiv;
