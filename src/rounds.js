@@ -2,6 +2,7 @@ let constants = {}
 
 let currentRoundsetView = "Simple";
 let roundsetProcessed = null;
+let selectedRoundset = null;
 let currentPreviewRound = 0;
 let currentIndexInModifiedRounds = 0;
 let previewActive = false;
@@ -406,7 +407,8 @@ async function showRoundsetModel(source, roundset) {
     // } else {
     //     roundsetProcessed =  processRoundset(roundsetData);
     // }
-    roundsetProcessed =  processRoundset(roundsetData);
+    roundsetProcessed = addRoundHints(roundset, roundsetData);
+    selectedRoundset = roundset;
 
     let headerBar = document.createElement('div');
     headerBar.classList.add('roundset-header-bar');
@@ -589,6 +591,31 @@ function processRoundset(data, defaultAppend){
     return data;
 }
 
+function addRoundHints(roundset, data) {
+    if(["DefaultRoundSet", "AlternateRoundSet", "RogueRoundSet"].includes(roundset)) {
+        data.rounds.forEach((round, index) => {
+            switch(roundset) {
+                case "DefaultRoundSet":
+                    if(constants.roundHints.hasOwnProperty("Hint " + (round.roundNumber - 1))) {
+                        round.hint = constants.roundHints["Hint " + (round.roundNumber - 1)];
+                    }
+                    break;
+                case "AlternateRoundSet":
+                    if (constants.roundHints.hasOwnProperty("Alternate Hint " + (round.roundNumber - 1))) {
+                        round.hint = constants.roundHints["Alternate Hint " + (round.roundNumber - 1)];
+                    }
+                    break;
+                case "RogueRoundSet":
+                    if (constants.roundHints.hasOwnProperty("Rogue Hint " + (round.roundNumber - 1))) {
+                        round.hint = constants.roundHints["Rogue Hint " + (round.roundNumber - 1)];
+                    }
+                    break;
+            }
+        })
+    }
+    return data;
+}
+
 async function generateRounds(type, reverse, modified) {
     let roundsContent = document.getElementById('rounds-content');
     roundsContent.innerHTML = "";
@@ -749,6 +776,25 @@ async function generateRounds(type, reverse, modified) {
                 roundDurationText.classList.add('round-duration', 'black-outline');
                 roundDurationText.innerHTML = `Duration: ${roundDuration.toFixed(2)}s`;
                 roundsDivHeader.appendChild(roundDurationText);
+
+                if(round.hint) {
+                    let roundHintDiv = document.createElement('div');
+                    roundHintDiv.classList.add('round-hint-div','coop-border');
+                    roundDiv.appendChild(roundHintDiv);
+
+                    let roundHintX = document.createElement('p');
+                    roundHintX.classList.add('round-hint-x');
+                    roundHintX.innerHTML = "X";
+                    roundHintX.addEventListener('click', () => {
+                        roundHintDiv.style.display = "none";
+                    })
+                    roundHintDiv.appendChild(roundHintX);
+
+                    let roundHint = document.createElement('p');
+                    roundHint.classList.add('round-hint');
+                    roundHint.innerHTML = round.hint;
+                    roundHintDiv.appendChild(roundHint);
+                }
 
                 let timelineDiv = document.createElement('div');
                 timelineDiv.classList.add('timeline-div');
@@ -928,6 +974,19 @@ async function generateRounds(type, reverse, modified) {
                 difficultyMedium.classList.remove('stats-tab-yellow');
                 difficultyHard.classList.add('stats-tab-yellow');
             })
+
+            switch(selectedRoundset) {
+                case "AlternateRoundSet":
+                    difficultyHard.click();
+                    break;
+                case "AcceleratedRoundSet":
+                case "EnduranceRoundSet":
+                case "FastUpgradesRoundSet":
+                case "MOABMadnessRoundSet":
+                case "RogueRoundSet":
+                    difficultyMedium.click();
+                    break;
+            }
 
             let nextPrevDiv = document.createElement('div');
             nextPrevDiv.classList.add('next-prev-div');
@@ -1170,6 +1229,25 @@ function updatePreviewRoundTimeline() {
     roundDurationText.classList.add('round-duration', 'black-outline');
     roundDurationText.innerHTML = `Duration: ${roundDuration.toFixed(2)}s`;
     roundsDivHeader.appendChild(roundDurationText);
+
+    if(round.hint) {
+        let roundHintDiv = document.createElement('div');
+        roundHintDiv.classList.add('round-hint-div','coop-border');
+        roundDiv.appendChild(roundHintDiv);
+
+        let roundHintX = document.createElement('p');
+        roundHintX.classList.add('round-hint-x');
+        roundHintX.innerHTML = "X";
+        roundHintX.addEventListener('click', () => {
+            roundHintDiv.style.display = "none";
+        })
+        roundHintDiv.appendChild(roundHintX);
+
+        let roundHint = document.createElement('p');
+        roundHint.classList.add('round-hint');
+        roundHint.innerHTML = round.hint;
+        roundHintDiv.appendChild(roundHint);
+    }
 
     let timelineDiv = document.createElement('div');
     timelineDiv.id = "preview-timeline-div"

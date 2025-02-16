@@ -4729,6 +4729,27 @@
     border-radius: 10px;
 }
 
+.round-hint-div {
+    margin: 10px;
+    position: relative;
+}
+.round-hint {
+    font-family: 'GardeniaBold';
+    font-size: 1em;
+    padding: 10px;
+    padding-right: 24px;
+    display: flex;
+    align-items: center;
+    line-height: 20px;
+    min-height: 40px;
+}
+.round-hint-x {
+    position: absolute;
+    font-size: 24px;
+    color: var(--profile-secondary);
+    right: 5px;
+}
+
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */
     -webkit-text-stroke: 0.03em black;
@@ -4842,7 +4863,7 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-.upgrade-div, .tower-selector-primary, .tower-selector-military, .tower-selector-magic, .tower-selector-support, .hero-selector-div, .hero-level-select-btn, .hero-skin, .hero-level-select-text, .maps-progress-view, .map-div-ingame, .map-arrow-img, .map-page-dot, .modal-close, .tower-container, .tower-container-collection, .collection-event-chest-selector, .collection-event-tower-selector, .knowledge-icon-div, .selector-div, .events-selector-div, .switch-banner, .start-button, .leaderboard-entry-div, .leaderboard-footer-refresh, .leaderboard-go-img, .leaderboard-footer-page-left, .leaderboard-footer-page-right, .challenge-selector-date-img, .challenge-selector-id-img, .challenge-stats-btn, .browser-go-img, .challenge-id, .race-map-div, .challenge-entry, .challenge-creator, .error-modal-close, .roundset-selector-div, .other-roundset-selector-div, .sku-roundset-selector-text, .challenge-stats-x, .site-access-button, .use-button, .delete-button, .oak-instructions-button, .where-button, .site-go-button   {
+.upgrade-div, .tower-selector-primary, .tower-selector-military, .tower-selector-magic, .tower-selector-support, .hero-selector-div, .hero-level-select-btn, .hero-skin, .hero-level-select-text, .maps-progress-view, .map-div-ingame, .map-arrow-img, .map-page-dot, .modal-close, .tower-container, .tower-container-collection, .collection-event-chest-selector, .collection-event-tower-selector, .knowledge-icon-div, .selector-div, .events-selector-div, .switch-banner, .start-button, .leaderboard-entry-div, .leaderboard-footer-refresh, .leaderboard-go-img, .leaderboard-footer-page-left, .leaderboard-footer-page-right, .challenge-selector-date-img, .challenge-selector-id-img, .challenge-stats-btn, .browser-go-img, .challenge-id, .race-map-div, .challenge-entry, .challenge-creator, .error-modal-close, .roundset-selector-div, .other-roundset-selector-div, .sku-roundset-selector-text, .challenge-stats-x, .site-access-button, .use-button, .delete-button, .oak-instructions-button, .where-button, .site-go-button, .round-hint-x   {
     cursor: pointer;
 }
 
