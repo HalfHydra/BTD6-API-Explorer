@@ -1520,6 +1520,12 @@ function generateOverview(){
         heroText.innerHTML = xp.toLocaleString();
         heroDiv.appendChild(heroText);
         counter++;
+
+        tippy(heroDiv, {
+            content: `${getLocValue(hero)} Placed ${xp.toLocaleString()} Times`,
+            placement: 'top',
+            theme: 'speech_bubble'
+        })
     }
 
     let topTowersDiv = document.createElement('div');
@@ -1591,6 +1597,12 @@ function generateOverview(){
         towerText.innerHTML = xp.toLocaleString();
         towerDiv.appendChild(towerText);
         counter++;
+
+        tippy(towerDiv, {
+            content: `${getLocValue(tower)} Placed ${xp.toLocaleString()} Times`,
+            placement: 'top',
+            theme: 'speech_bubble'
+        })
     }
 
     let rightColumnDiv = document.createElement('div');
@@ -7507,6 +7519,12 @@ async function openProfile(source, profile){
         medalText.classList.add('medal-text','black-outline');
         medalText.innerHTML = num.toLocaleString();
         medalDiv.appendChild(medalText);
+
+        tippy(medalDiv, {
+            content: constants.medalLabels[medal],
+            placement: 'top',
+            theme: 'speech_bubble'
+        })
     }
 
     let topHeroesMonkesyDiv = document.createElement('div');
@@ -7591,6 +7609,12 @@ async function openProfile(source, profile){
         heroText.innerHTML = xp.toLocaleString();
         heroDiv.appendChild(heroText);
         counter++;
+
+        tippy(heroDiv, {
+            content: `${getLocValue(hero)} Placed ${xp.toLocaleString()} Times`,
+            placement: 'top',
+            theme: 'speech_bubble'
+        })
     }
 
     let topTowersDiv = document.createElement('div');
@@ -7661,6 +7685,12 @@ async function openProfile(source, profile){
         towerText.innerHTML = xp.toLocaleString();
         towerDiv.appendChild(towerText);
         counter++;
+
+        tippy(towerDiv, {
+            content: `${getLocValue(tower)} Placed ${xp.toLocaleString()} Times`,
+            placement: 'top',
+            theme: 'speech_bubble'
+        })
     }
 
 
