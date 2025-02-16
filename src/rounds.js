@@ -165,14 +165,14 @@ function generateRoundsets() {
         roundsetDiv.appendChild(roundsetGoImg);
     })
     
-    let normalRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type != "quest" && value.type != "legends"));
+    let normalRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "normal"));
+    let bossRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "boss"));
     let legendsRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "legends"));
     let otherRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "quest"));
 
     Object.entries(normalRoundsets).forEach(([roundset, data]) => {
         let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('roundset-selector-div');
-        data.type == "boss" ? roundsetDiv.classList.add('veteran-container') : roundsetDiv.classList.add('wood-container');
+        roundsetDiv.classList.add('roundset-selector-div', 'wood-container');
         roundsetDiv.addEventListener('click', () => {
             showLoading();
             showRoundsetModel('extras', roundset);
@@ -195,15 +195,14 @@ function generateRoundsets() {
         roundsetDiv.appendChild(roundsetGoImg);
     })
 
-    let legendsRoundsetText = document.createElement('p');
-    legendsRoundsetText.classList.add('other-roundsets-selector-text', 'black-outline');
-    legendsRoundsetText.innerHTML = "Legends Custom Rounds";
-    selectorsDiv.appendChild(legendsRoundsetText);
+    // let legendsRoundsetText = document.createElement('p');
+    // legendsRoundsetText.classList.add('other-roundsets-selector-text', 'black-outline');
+    // legendsRoundsetText.innerHTML = "Legends Custom Rounds";
+    // selectorsDiv.appendChild(legendsRoundsetText);
 
     Object.entries(legendsRoundsets).forEach(([roundset, data]) => {
         let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('roundset-selector-div');
-        data.type == "boss" ? roundsetDiv.classList.add('veteran-container') : roundsetDiv.classList.add('wood-container');
+        roundsetDiv.classList.add('roundset-selector-div','veteran-container'); 
         roundsetDiv.addEventListener('click', () => {
             showLoading();
             showRoundsetModel('extras', roundset);
@@ -224,6 +223,29 @@ function generateRoundsets() {
         roundsetGoImg.classList.add('selector-go-img');
         roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
         roundsetDiv.appendChild(roundsetGoImg);
+    })
+
+    let bossRoundsetText = document.createElement('p');
+    bossRoundsetText.classList.add('other-roundsets-selector-text', 'black-outline');
+    bossRoundsetText.innerHTML = "Boss Custom Rounds";
+    selectorsDiv.appendChild(bossRoundsetText);
+
+    let bossRoundsetDiv = document.createElement('div');
+    bossRoundsetDiv.classList.add('other-roundsets-selector-div');
+    selectorsDiv.appendChild(bossRoundsetDiv);
+
+    Object.entries(bossRoundsets).forEach(([roundset, data]) => {
+        let roundsetDiv = document.createElement('div');
+        roundsetDiv.classList.add('other-roundset-selector-div');
+        roundsetDiv.addEventListener('click', () => {
+            showRoundsetModel('extras', roundset);
+        })
+        bossRoundsetDiv.appendChild(roundsetDiv);
+
+        let roundsetIcon = document.createElement('img');
+        roundsetIcon.classList.add('other-roundset-selector-img');
+        roundsetIcon.src = `../Assets/UI/${data.icon}.png`;
+        roundsetDiv.appendChild(roundsetIcon);
     })
 
     let otherRoundsetText = document.createElement('p');
