@@ -1088,7 +1088,7 @@ function generateFrontPage(){
 
     let knownIssuesText = document.createElement('p');
     knownIssuesText.classList.add('oak-instructions-text');
-    knownIssuesText.innerHTML = 'None Currently!';
+    knownIssuesText.innerHTML = '- There are some cases where the leaderboard scoring type is different for Normal vs Elite boss events, but this is not reflected on the API right now. This will be fixed when it is corrected on the Open Data API.<br>- Legends Feats badge is missing from the currency and medals section<br>';
     knownIssuesDiv.appendChild(knownIssuesText);
     
     trailerDiv.appendChild(trailerVideo);
@@ -1105,7 +1105,8 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = `v1.6.1: Inevitable Leaderboard Fixes<br>- The site no longer infinite loads when there are no active events<br>- The site no longer has any leaderboards with 0 scores shown (some older events get their leaderboards wiped early)<br>- Events that aren't started won't show up until they are active<br>- The initial load was improved, and the loading icon now shows correctly when clicking a leaderboard for the first time<br><br>
+    changelogText.innerHTML = `v.1.7.0: Update 47 and Tooltips!<br>- Added Update 47.1 content including the new Rogue Legends roundset<br>- Added proper tooltips to medals and a few other places like the Towers section.<br>- Added Rogue Legends stats to the overview page<br>- Added Round Hints to the roundset viewer<br>- Added Overall Highest Round and Total Games Won on the map specific details menu<br>- Added missing Adora + Battle Cat Roundsets, and a few older Odysseys courtesy of @jessiepatch<br>- The standalone site buttons got a glow up.<br>- The roundset selection screen has been condensed and cleaned up.<br>- Fixed a bug involving leaderboard requests that result in incorrect placements and duplicated entries<br>- Leaderboard entries should only have the profiles loaded if they are currently rendered on screen.<br><br>
+    v1.6.1: Inevitable Leaderboard Fixes<br>- The site no longer infinite loads when there are no active events<br>- The site no longer has any leaderboards with 0 scores shown (some older events get their leaderboards wiped early)<br>- Events that aren't started won't show up until they are active<br>- The initial load was improved, and the loading icon now shows correctly when clicking a leaderboard for the first time<br><br>
     v1.6.0: Leaderboards improvements and page!<br>- There is now a <a href="./leaderboards" target="_blank" style="color: white;">Leaderboards Page</a> made specifically for viewing them all in one place.<br>- Loading profiles automatically has been turned back on because...<br>- Improved the handling of automatically loading leaderboard profiles to not be rate limited as quickly. This system should hopefully prevent any rate limiting at all.<br><br>
     v1.5.1: Bug fixes! <br>- Zero limited or excluded towers/heroes like the upcoming Bloonarius 56 will no longer show an empty box<br>- The timer no longer jumps to the first event of the list assuming there is only one active at a time.<br><br>
     v1.5.0: Trophy Store Items and Update 46!<br>- Added Update 46 content<br>- Added the Trophy Store Items menu for those who want to see all that exist and your collection.<br>- Team Store items have also been added, but since I am unable to test how that works, it is hidden in settings by default.<br>- Settings should now save when reloading the page using the same system that saves the OAK tokens you've used.<br>- Fixed a bug that prevented newer maps from showing up<br>- Added missing badges<br><br>
