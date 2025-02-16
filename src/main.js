@@ -922,7 +922,7 @@ function generateFrontPage(){
         siteButtonDiv.appendChild(siteButtonIcon);
     
         let profileName = document.createElement('p');
-        profileName.classList.add('profile-name','black-outline');
+        profileName.classList.add('profile-name','readability-bg','black-outline');
         profileName.innerHTML = data.text;
         siteButtonDiv.appendChild(profileName);
     
@@ -1601,7 +1601,7 @@ function generateOverview(){
         tippy(towerDiv, {
             content: `${getLocValue(tower)} Placed ${xp.toLocaleString()} Times`,
             placement: 'top',
-            theme: 'speech_bubble'
+            theme: 'speech_bubble',
         })
     }
 
@@ -2229,6 +2229,7 @@ function generateUpgradeIcon(tower, upgrade, status, row, tier, paragon, grayOut
         content: getLocValue(`${upgrade} Description`),
         placement: 'top',
         theme: 'speech_bubble',
+        hideOnClick: false
     })
 
     return upgradeDiv;
@@ -2273,6 +2274,7 @@ function generateParagonIcon(tower, upgrade, status){
         content: getLocValue(`${upgrade} Description`),
         placement: 'top',
         theme: 'speech_bubble',
+        hideOnClick: false
     })
 
     return paragonDiv;

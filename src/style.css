@@ -398,15 +398,13 @@
     color: white;
     margin-left: 14px;
     padding: 10px;
-    background: rgba(0,0,0,0.36);
-    border-radius: 10px;
     /* width: 300px; */
 }
 
 .profile-banner {
     background-repeat: no-repeat;
     margin-top: 0px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     background-size: cover;
     border-radius: 10px;
     width: 100%;
@@ -4724,6 +4722,11 @@
     margin: 10px;
     background-position: center;
     background-size: contain;
+}
+
+.readability-bg {
+    background: rgba(0,0,0,0.36);
+    border-radius: 10px;
 }
 
 .black-outline {
