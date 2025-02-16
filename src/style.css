@@ -398,6 +398,8 @@
     color: white;
     margin-left: 14px;
     padding: 10px;
+    background: rgba(0,0,0,0.36);
+    border-radius: 10px;
     /* width: 300px; */
 }
 
@@ -4696,6 +4698,34 @@
     font-size: 42px;
 }
 
+.site-button-icon {
+    width: 100px;
+    height: 100px;
+}
+.site-go-button {
+    width: 60px;
+    position: absolute;
+    right: 20px;
+}
+.standalone-site-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 70px;
+}
+.site-button-div {
+    width: 500px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-radius: 20px 0 0 20px;
+    margin: 10px;
+    background-position: center;
+    background-size: contain;
+}
+
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */
     -webkit-text-stroke: 0.03em black;
@@ -4809,7 +4839,7 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-.upgrade-div, .tower-selector-primary, .tower-selector-military, .tower-selector-magic, .tower-selector-support, .hero-selector-div, .hero-level-select-btn, .hero-skin, .hero-level-select-text, .maps-progress-view, .map-div-ingame, .map-arrow-img, .map-page-dot, .modal-close, .tower-container, .tower-container-collection, .collection-event-chest-selector, .collection-event-tower-selector, .knowledge-icon-div, .selector-div, .events-selector-div, .switch-banner, .start-button, .leaderboard-entry-div, .leaderboard-footer-refresh, .leaderboard-go-img, .leaderboard-footer-page-left, .leaderboard-footer-page-right, .challenge-selector-date-img, .challenge-selector-id-img, .challenge-stats-btn, .browser-go-img, .challenge-id, .race-map-div, .challenge-entry, .challenge-creator, .error-modal-close, .roundset-selector-div, .other-roundset-selector-div, .sku-roundset-selector-text, .challenge-stats-x {
+.upgrade-div, .tower-selector-primary, .tower-selector-military, .tower-selector-magic, .tower-selector-support, .hero-selector-div, .hero-level-select-btn, .hero-skin, .hero-level-select-text, .maps-progress-view, .map-div-ingame, .map-arrow-img, .map-page-dot, .modal-close, .tower-container, .tower-container-collection, .collection-event-chest-selector, .collection-event-tower-selector, .knowledge-icon-div, .selector-div, .events-selector-div, .switch-banner, .start-button, .leaderboard-entry-div, .leaderboard-footer-refresh, .leaderboard-go-img, .leaderboard-footer-page-left, .leaderboard-footer-page-right, .challenge-selector-date-img, .challenge-selector-id-img, .challenge-stats-btn, .browser-go-img, .challenge-id, .race-map-div, .challenge-entry, .challenge-creator, .error-modal-close, .roundset-selector-div, .other-roundset-selector-div, .sku-roundset-selector-text, .challenge-stats-x, .site-access-button, .use-button, .delete-button, .oak-instructions-button, .where-button, .site-go-button   {
     cursor: pointer;
 }
 

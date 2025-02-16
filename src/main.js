@@ -883,32 +883,54 @@ function generateFrontPage(){
     frontPage.appendChild(StandaloneSiteDiv);
 
     let siteButtons = document.createElement('div');
-    siteButtons.classList.add('site-login-buttons');
+    siteButtons.classList.add('standalone-site-buttons');
     StandaloneSiteDiv.appendChild(siteButtons);
 
-    let roundsSite = document.createElement('p');
-    roundsSite.classList.add('where-text', 'underline-text');
-    roundsSite.innerHTML = `Roundsets`;
-    roundsSite.addEventListener('click', () => {
-        openBTD6Link('https://btd6apiexplorer.github.io/rounds');
-    })
-    siteButtons.appendChild(roundsSite);
+    let standaloneSites = {
+        "Roundsets": {
+            "link": "https://btd6apiexplorer.github.io/rounds",
+            "text": "Roundsets",
+            "icon": "DefaultRoundSetIcon",
+            "background": "BloonsBGBanner"
+        },
+        "Leaderboards": {
+            "link": "https://btd6apiexplorer.github.io/leaderboards",
+            "text": "Leaderboards",
+            "icon": "LeaderboardSiteBtn",
+            "background": "TrophyStoreTiledBG"
+        },
+        "Insta Tracker": {
+            "link": "https://btd6apiexplorer.github.io/insta",
+            "text": "Insta Tracker",
+            "icon": "InstaSiteBtn",
+            "background": "CollectionHelp2"
+        }
+    }
 
-    let leaderboardSite = document.createElement('p');
-    leaderboardSite.classList.add('where-text', 'underline-text');
-    leaderboardSite.innerHTML = `Leaderboards`;
-    leaderboardSite.addEventListener('click', () => {
-        openBTD6Link('https://btd6apiexplorer.github.io/leaderboards');
+    Object.entries(standaloneSites).forEach(([site, data]) => {
+        let siteButtonDiv = document.createElement('div');
+        siteButtonDiv.classList.add('site-button-div');
+        siteButtonDiv.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(Assets/UI/${data.background}.png)`;
+        siteButtons.appendChild(siteButtonDiv);
+        siteButtonDiv.addEventListener('click', () => {
+            openBTD6Link(data.link);
+        })
+    
+        let siteButtonIcon = document.createElement('img');
+        siteButtonIcon.classList.add('site-button-icon');
+        siteButtonIcon.src = `./Assets/UI/${data.icon}.png`;
+        siteButtonDiv.appendChild(siteButtonIcon);
+    
+        let profileName = document.createElement('p');
+        profileName.classList.add('profile-name','black-outline');
+        profileName.innerHTML = data.text;
+        siteButtonDiv.appendChild(profileName);
+    
+        let useButton = document.createElement('img');
+        useButton.classList.add('site-go-button');
+        useButton.src = './Assets/UI/ContinueBtn.png';
+        siteButtonDiv.appendChild(useButton);
     })
-    siteButtons.appendChild(leaderboardSite);
-
-    let trackerSite = document.createElement('p');
-    trackerSite.classList.add('where-text', 'underline-text');
-    trackerSite.innerHTML = `Insta Tracker`;
-    trackerSite.addEventListener('click', () => {
-        openBTD6Link('https://btd6apiexplorer.github.io/insta');
-    })
-    siteButtons.appendChild(trackerSite);
 
     let versionDiv = document.createElement('div');
     versionDiv.id = 'version-div';
@@ -1614,7 +1636,7 @@ function generateOverview(){
 
     let rogueColumnHeaderText = document.createElement('p');
     rogueColumnHeaderText.classList.add('column-header-text','black-outline');
-    rogueColumnHeaderText.innerHTML = 'Rogue Legend Stats';
+    rogueColumnHeaderText.innerHTML = 'Rogue Legends Stats';
     rogueColumnHeader.appendChild(rogueColumnHeaderText);
 
     let rogueStats = {};
