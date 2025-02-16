@@ -5293,10 +5293,12 @@ input[type="checkbox"] {
     border-image-slice: 35;
     height: unset;
     top: 28px; 
+    left: -8px;
 }
 
 .tippy-box[data-theme~='speech_bubble'] > .tippy-content {
     color: black;
     font-family: "GardeniaBold";
+    font-size: 16px;
     line-height: 22px;
 }

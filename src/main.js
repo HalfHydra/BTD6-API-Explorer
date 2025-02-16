@@ -1640,47 +1640,50 @@ function generateOverview(){
         stat.appendChild(statValue);
     }
 
-    let rogueDiv = document.createElement('div');
-    rogueDiv.classList.add('profile-stats');
-    rightColumnDiv.appendChild(rogueDiv);
+    if (btd6usersave.hasOwnProperty("rogueLegends")) {
 
-    let rogueColumnHeader = document.createElement('div');
-    rogueColumnHeader.classList.add('overview-right-column-header');
-    rogueDiv.appendChild(rogueColumnHeader);
+        let rogueDiv = document.createElement('div');
+        rogueDiv.classList.add('profile-stats');
+        rightColumnDiv.appendChild(rogueDiv);
 
-    let rogueColumnHeaderText = document.createElement('p');
-    rogueColumnHeaderText.classList.add('column-header-text','black-outline');
-    rogueColumnHeaderText.innerHTML = 'Rogue Legends Stats';
-    rogueColumnHeader.appendChild(rogueColumnHeaderText);
+        let rogueColumnHeader = document.createElement('div');
+        rogueColumnHeader.classList.add('overview-right-column-header');
+        rogueDiv.appendChild(rogueColumnHeader);
 
-    let rogueStats = {};
-    rogueStats["Tiles Captured"] = btd6usersave["rogueLegends"].tilesCaptured;
-    rogueStats["Campaign Maps Won"] = btd6usersave["rogueLegends"].bossesDefeated;
-    rogueStats["Common Artifacts Collected"] = btd6usersave["rogueLegends"].commonArtifactsCollected;
-    rogueStats["Rare Artifacts Collected"] = btd6usersave["rogueLegends"].rareArtifactsCollected;
-    rogueStats["Legendary Artifacts Collected"] = btd6usersave["rogueLegends"].legendaryArtifactsCollected;
-    // rogueStats["Extracted Artifacts"] = btd6usersave["rogueLegends"];
-    // rogueStats["Bloon Encounters Won"] = btd6usersave["rogueLegends"];
-    // rogueStats["Mini Games Won"] = btd6usersave["rogueLegends"];
-    // rogueStats["Mini Bosses Won"] = btd6usersave["rogueLegends"];
-    rogueStats["Common Boosts Collected"] = btd6usersave["rogueLegends"].commonBoostsCollected;
-    rogueStats["Rare Boosts Collected"] = btd6usersave["rogueLegends"].rareBoostsCollected;
-    rogueStats["Legendary Boosts Collected"] = btd6usersave["rogueLegends"].legendaryBoostsCollected;
+        let rogueColumnHeaderText = document.createElement('p');
+        rogueColumnHeaderText.classList.add('column-header-text','black-outline');
+        rogueColumnHeaderText.innerHTML = 'Rogue Legends Stats';
+        rogueColumnHeader.appendChild(rogueColumnHeaderText);
 
-    for (let [key, value] of Object.entries(rogueStats)){
-        let stat = document.createElement('div');
-        stat.classList.add('stat');
-        rogueDiv.appendChild(stat);
+        let rogueStats = {};
+        rogueStats["Tiles Captured"] = btd6usersave["rogueLegends"].tilesCaptured;
+        rogueStats["Campaign Maps Won"] = btd6usersave["rogueLegends"].bossesDefeated;
+        rogueStats["Common Artifacts Collected"] = btd6usersave["rogueLegends"].commonArtifactsCollected;
+        rogueStats["Rare Artifacts Collected"] = btd6usersave["rogueLegends"].rareArtifactsCollected;
+        rogueStats["Legendary Artifacts Collected"] = btd6usersave["rogueLegends"].legendaryArtifactsCollected;
+        // rogueStats["Extracted Artifacts"] = btd6usersave["rogueLegends"];
+        // rogueStats["Bloon Encounters Won"] = btd6usersave["rogueLegends"];
+        // rogueStats["Mini Games Won"] = btd6usersave["rogueLegends"];
+        // rogueStats["Mini Bosses Won"] = btd6usersave["rogueLegends"];
+        rogueStats["Common Boosts Collected"] = btd6usersave["rogueLegends"].commonBoostsCollected;
+        rogueStats["Rare Boosts Collected"] = btd6usersave["rogueLegends"].rareBoostsCollected;
+        rogueStats["Legendary Boosts Collected"] = btd6usersave["rogueLegends"].legendaryBoostsCollected;
 
-        let statName = document.createElement('p');
-        statName.classList.add('stat-name');
-        statName.innerHTML = key;
-        stat.appendChild(statName);
+        for (let [key, value] of Object.entries(rogueStats)){
+            let stat = document.createElement('div');
+            stat.classList.add('stat');
+            rogueDiv.appendChild(stat);
 
-        let statValue = document.createElement('p');
-        statValue.classList.add('stat-value');
-        statValue.innerHTML = value.toLocaleString();
-        stat.appendChild(statValue);
+            let statName = document.createElement('p');
+            statName.classList.add('stat-name');
+            statName.innerHTML = key;
+            stat.appendChild(statName);
+
+            let statValue = document.createElement('p');
+            statValue.classList.add('stat-value');
+            statValue.innerHTML = value.toLocaleString();
+            stat.appendChild(statValue);
+        }
     }
 
     } else {
