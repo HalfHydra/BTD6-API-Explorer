@@ -1,0 +1,3515 @@
+{
+    "artifacts": {
+        "AbilityStacking1": {
+            "tier": 0,
+            "baseId": "AbilityStacking",
+            "nameLocKey": "AbilityStacking1",
+            "descriptionLocKey": "AbilityStacking1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactAbilityStacking.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Ability Stacking Common",
+            "description": "Ability cooldowns loop to gain 1 extra charge. Ability cooldowns are 20% slower for all Monkeys except Psi"
+        },
+        "AbilityStacking2": {
+            "tier": 1,
+            "baseId": "AbilityStacking",
+            "nameLocKey": "AbilityStacking2",
+            "descriptionLocKey": "AbilityStacking2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactAbilityStacking.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Ability Stacking Rare",
+            "description": "Ability cooldowns loop to gain 2 extra charges. Ability cooldowns are 20% slower for all Monkeys except Psi"
+        },
+        "AbilityStacking3": {
+            "tier": 2,
+            "baseId": "AbilityStacking",
+            "nameLocKey": "AbilityStacking3",
+            "descriptionLocKey": "AbilityStacking3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactAbilityStacking.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Ability Stacking Legendary",
+            "description": "Ability cooldowns loop to gain 3 extra charges. Ability cooldowns are 20% slower for all Monkeys except Psi"
+        },
+        "AbsoluteAbility1": {
+            "tier": 0,
+            "baseId": "AbsoluteAbility",
+            "nameLocKey": "AbsoluteAbility1",
+            "descriptionLocKey": "AbsoluteAbility1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactAbsoluteAbility.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Absolute Ability Common",
+            "description": "Monkeys attack 10% slower, but ability cooldowns are 25% faster"
+        },
+        "AbsoluteAbility2": {
+            "tier": 1,
+            "baseId": "AbsoluteAbility",
+            "nameLocKey": "AbsoluteAbility2",
+            "descriptionLocKey": "AbsoluteAbility2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactAbsoluteAbility.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Absolute Ability Rare",
+            "description": "Monkeys attack 10% slower, but ability cooldowns are 30% faster"
+        },
+        "AbsoluteAbility3": {
+            "tier": 2,
+            "baseId": "AbsoluteAbility",
+            "nameLocKey": "AbsoluteAbility3",
+            "descriptionLocKey": "AbsoluteAbility3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactAbsoluteAbility.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Absolute Ability Legendary",
+            "description": "Monkeys attack 10% slower, but ability cooldowns are 40% faster"
+        },
+        "AlchemicEngineering1": {
+            "tier": 0,
+            "baseId": "AlchemicEngineering",
+            "nameLocKey": "AlchemicEngineering1",
+            "descriptionLocKey": "AlchemicEngineering1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactAlchemicEngineering.png",
+            "rarityFrameType": "Support",
+            "title": "Alchemic Engineering Common",
+            "description": "Tier 3 and higher Engineers have pierce reduced 60%, but convert Bloons to Gold. Adds a 0-1-1 Engineer to your Party"
+        },
+        "AlchemicEngineering2": {
+            "tier": 1,
+            "baseId": "AlchemicEngineering",
+            "nameLocKey": "AlchemicEngineering2",
+            "descriptionLocKey": "AlchemicEngineering2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactAlchemicEngineering.png",
+            "rarityFrameType": "Support",
+            "title": "Alchemic Engineering Rare",
+            "description": "Tier 3 and higher Engineers have pierce reduced 45%, but convert Bloons to Gold. Adds a 0-1-2 Engineer to your Party"
+        },
+        "AlchemicEngineering3": {
+            "tier": 2,
+            "baseId": "AlchemicEngineering",
+            "nameLocKey": "AlchemicEngineering3",
+            "descriptionLocKey": "AlchemicEngineering3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactAlchemicEngineering.png",
+            "rarityFrameType": "Support",
+            "title": "Alchemic Engineering Legendary",
+            "description": "Tier 3 and higher Engineers convert Bloons to Gold. Adds a 0-0-2 Engineer to your Party"
+        },
+        "BattlefieldCommission1": {
+            "tier": 1,
+            "baseId": "BattlefieldCommission",
+            "nameLocKey": "BattlefieldCommission1",
+            "descriptionLocKey": "BattlefieldCommission1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactBattlefieldCommision.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Battlefield Commission Rare",
+            "description": "Heroes don't gain XP for each round, but gain 1 XP for each Bloon they pop"
+        },
+        "BattlefieldCommission2": {
+            "tier": 2,
+            "baseId": "BattlefieldCommission",
+            "nameLocKey": "BattlefieldCommission2",
+            "descriptionLocKey": "BattlefieldCommission2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactBattlefieldCommision.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Battlefield Commission Legendary",
+            "description": "Heroes don't gain XP for each round, but gain 2 XP for each Bloon they pop"
+        },
+        "BBGatlingGun1": {
+            "tier": 0,
+            "baseId": "BBGatlingGun",
+            "nameLocKey": "BBGatlingGun1",
+            "descriptionLocKey": "BBGatlingGun1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactBBGattlingGun.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "BB Gatling Gun Common",
+            "description": "Main attack damage of Monkeys is reduced to 85%, but attack reload time is reduced 15%"
+        },
+        "BBGatlingGun2": {
+            "tier": 1,
+            "baseId": "BBGatlingGun",
+            "nameLocKey": "BBGatlingGun2",
+            "descriptionLocKey": "BBGatlingGun2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactBBGattlingGun.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "BB Gatling Gun Rare",
+            "description": "Main attack damage of Monkeys is reduced to 75%, but attack reload time is reduced 25%"
+        },
+        "BBGatlingGun3": {
+            "tier": 2,
+            "baseId": "BBGatlingGun",
+            "nameLocKey": "BBGatlingGun3",
+            "descriptionLocKey": "BBGatlingGun3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactBBGattlingGun.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "BB Gatling Gun Legendary",
+            "description": "Main attack damage of Monkeys is reduced to 60%, but attack reload time is reduced 40%"
+        },
+        "BiggestBeacon1": {
+            "tier": 2,
+            "baseId": "BiggestBeacon",
+            "nameLocKey": "BiggestBeacon1",
+            "descriptionLocKey": "BiggestBeacon1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactBiggestBeacon.png",
+            "rarityFrameType": "Support",
+            "title": "Biggest Beacon Legendary",
+            "description": "Villages have 2.5x influence radius and other support towers have 20% extra range. Adds a 0-1-0 Village to your Party"
+        },
+        "BoostArtifactAllTowerInspiration1": {
+            "tier": 0,
+            "baseId": "AllTowerVelocity",
+            "nameLocKey": "BoostArtifactAllTowerInspiration1",
+            "descriptionLocKey": "BoostArtifactAllTowerInspiration1Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "All Tower Inspiration Common",
+            "description": "All Monkeys have 5% more pierce, and have increased attack range"
+        },
+        "BoostArtifactAllTowerInspiration2": {
+            "tier": 1,
+            "baseId": "AllTowerVelocity",
+            "nameLocKey": "BoostArtifactAllTowerInspiration2",
+            "descriptionLocKey": "BoostArtifactAllTowerInspiration2Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "All Tower Inspiration Rare",
+            "description": "All Monkeys have 7% more pierce, and have increased attack range"
+        },
+        "BoostArtifactAllTowerInspiration3": {
+            "tier": 2,
+            "baseId": "AllTowerVelocity",
+            "nameLocKey": "BoostArtifactAllTowerInspiration3",
+            "descriptionLocKey": "BoostArtifactAllTowerInspiration3Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "All Tower Inspiration Legendary",
+            "description": "All Monkeys have 9% more pierce, and have increased attack range"
+        },
+        "BoostArtifactAllTowerPrecision1": {
+            "tier": 0,
+            "baseId": "AllTowerToughness",
+            "nameLocKey": "BoostArtifactAllTowerPrecision1",
+            "descriptionLocKey": "BoostArtifactAllTowerPrecision1Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "All Tower Precision Common",
+            "description": "Increases all Monkeys damage 8%, and shot spread reduced 5%"
+        },
+        "BoostArtifactAllTowerPrecision2": {
+            "tier": 1,
+            "baseId": "AllTowerToughness",
+            "nameLocKey": "BoostArtifactAllTowerPrecision2",
+            "descriptionLocKey": "BoostArtifactAllTowerPrecision2Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "All Tower Precision Rare",
+            "description": "Increases all Monkeys damage 10%, and shot spread reduced 7%"
+        },
+        "BoostArtifactAllTowerPrecision3": {
+            "tier": 2,
+            "baseId": "AllTowerToughness",
+            "nameLocKey": "BoostArtifactAllTowerPrecision3",
+            "descriptionLocKey": "BoostArtifactAllTowerPrecision3Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "All Tower Precision Legendary",
+            "description": "Increases all Monkeys damage 15%, and shot spread reduced 12%"
+        },
+        "BoostArtifactAllTowerQuickening1": {
+            "tier": 0,
+            "baseId": "AllTowerQuickening",
+            "nameLocKey": "BoostArtifactAllTowerQuickening1",
+            "descriptionLocKey": "BoostArtifactAllTowerQuickening1Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "All Tower Quickening Common",
+            "description": "Reduces all Monkeys attack reload and ability cooldown time 5%, and projectiles travel 10% faster"
+        },
+        "BoostArtifactAllTowerQuickening2": {
+            "tier": 1,
+            "baseId": "AllTowerQuickening",
+            "nameLocKey": "BoostArtifactAllTowerQuickening2",
+            "descriptionLocKey": "BoostArtifactAllTowerQuickening2Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "All Tower Quickening Rare",
+            "description": "Reduces all Monkeys attack reload and ability cooldown time 7%, and projectiles travel 13% faster"
+        },
+        "BoostArtifactAllTowerQuickening3": {
+            "tier": 2,
+            "baseId": "AllTowerQuickening",
+            "nameLocKey": "BoostArtifactAllTowerQuickening3",
+            "descriptionLocKey": "BoostArtifactAllTowerQuickening3Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "All Tower Quickening  Legendary",
+            "description": "Reduces all Monkeys attack reload and ability cooldown time 12%, and projectiles travel 18% faster"
+        },
+        "BoostArtifactMagicInspiration1": {
+            "tier": 0,
+            "baseId": "MagicVelocity",
+            "nameLocKey": "BoostArtifactMagicInspiration1",
+            "descriptionLocKey": "BoostArtifactMagicInspiration1Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "Magic",
+            "title": "Magic Inspiration Common",
+            "description": "Magic Monkeys have 10% more pierce, and have increased attack range"
+        },
+        "BoostArtifactMagicInspiration2": {
+            "tier": 1,
+            "baseId": "MagicVelocity",
+            "nameLocKey": "BoostArtifactMagicInspiration2",
+            "descriptionLocKey": "BoostArtifactMagicInspiration2Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "Magic",
+            "title": "Magic Inspiration Rare",
+            "description": "Magic Monkeys have 14% more pierce, and have increased attack range"
+        },
+        "BoostArtifactMagicInspiration3": {
+            "tier": 2,
+            "baseId": "MagicVelocity",
+            "nameLocKey": "BoostArtifactMagicInspiration3",
+            "descriptionLocKey": "BoostArtifactMagicInspiration3Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "Magic",
+            "title": "Magic Inspiration Legendary",
+            "description": "Magic Monkeys have 18% more pierce, and have increased attack range"
+        },
+        "BoostArtifactMagicPrecision1": {
+            "tier": 0,
+            "baseId": "MagicToughness",
+            "nameLocKey": "BoostArtifactMagicPrecision1",
+            "descriptionLocKey": "BoostArtifactMagicPrecision1Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "Magic",
+            "title": "Magic Precision Common",
+            "description": "Increases Magic Monkey damage by 15%, and reduces shot spread 10%"
+        },
+        "BoostArtifactMagicPrecision2": {
+            "tier": 1,
+            "baseId": "MagicToughness",
+            "nameLocKey": "BoostArtifactMagicPrecision2",
+            "descriptionLocKey": "BoostArtifactMagicPrecision2Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "Magic",
+            "title": "Magic Precision Rare",
+            "description": "Increases Magic Monkey damage by 20%, and reduces shot spread 15%"
+        },
+        "BoostArtifactMagicPrecision3": {
+            "tier": 2,
+            "baseId": "MagicToughness",
+            "nameLocKey": "BoostArtifactMagicPrecision3",
+            "descriptionLocKey": "BoostArtifactMagicPrecision3Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "Magic",
+            "title": "Magic Precision Legendary",
+            "description": "Increases Magic Monkey damage by 30%, and reduces shot spread 25%"
+        },
+        "BoostArtifactMagicQuickening1": {
+            "tier": 0,
+            "baseId": "MagicQuickening",
+            "nameLocKey": "BoostArtifactMagicQuickening1",
+            "descriptionLocKey": "BoostArtifactMagicQuickening1Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "Magic",
+            "title": "Magic Quickening Common",
+            "description": "Reduces Magic Monkeys attack reload and ability cooldown time 10%, and projectiles travel 20% faster"
+        },
+        "BoostArtifactMagicQuickening2": {
+            "tier": 1,
+            "baseId": "MagicQuickening",
+            "nameLocKey": "BoostArtifactMagicQuickening2",
+            "descriptionLocKey": "BoostArtifactMagicQuickening2Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "Magic",
+            "title": "Magic Quickening Rare",
+            "description": "Reduces Magic Monkeys attack reload and ability cooldown time 15%, and projectiles travel 25% faster"
+        },
+        "BoostArtifactMagicQuickening3": {
+            "tier": 2,
+            "baseId": "MagicQuickening",
+            "nameLocKey": "BoostArtifactMagicQuickening3",
+            "descriptionLocKey": "BoostArtifactMagicQuickening3Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "Magic",
+            "title": "Magic Quickening Legendary",
+            "description": "Reduces Magic Monkeys attack reload and ability cooldown time 25%, and projectiles travel 35% faster"
+        },
+        "BoostArtifactMilitaryInspiration1": {
+            "tier": 0,
+            "baseId": "MilitaryVelocity",
+            "nameLocKey": "BoostArtifactMilitaryInspiration1",
+            "descriptionLocKey": "BoostArtifactMilitaryInspiration1Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "Military",
+            "title": "Military Inspiration Common",
+            "description": "Military Monkeys have 10% more pierce, and have increased attack range"
+        },
+        "BoostArtifactMilitaryInspiration2": {
+            "tier": 1,
+            "baseId": "MilitaryVelocity",
+            "nameLocKey": "BoostArtifactMilitaryInspiration2",
+            "descriptionLocKey": "BoostArtifactMilitaryInspiration2Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "Military",
+            "title": "Military Inspiration Rare",
+            "description": "Military Monkeys have 14% more pierce, and have increased attack range"
+        },
+        "BoostArtifactMilitaryInspiration3": {
+            "tier": 2,
+            "baseId": "MilitaryVelocity",
+            "nameLocKey": "BoostArtifactMilitaryInspiration3",
+            "descriptionLocKey": "BoostArtifactMilitaryInspiration3Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "Military",
+            "title": "Military Inspiration Legendary",
+            "description": "Military Monkeys have 18% more pierce, and have increased attack range"
+        },
+        "BoostArtifactMilitaryPrecision1": {
+            "tier": 0,
+            "baseId": "MilitaryToughness",
+            "nameLocKey": "BoostArtifactMilitaryPrecision1",
+            "descriptionLocKey": "BoostArtifactMilitaryPrecision1Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "Military",
+            "title": "Military Precision Common",
+            "description": "Increases Military Monkey damage by 15%, and reduces shot spread 10%"
+        },
+        "BoostArtifactMilitaryPrecision2": {
+            "tier": 1,
+            "baseId": "MilitaryToughness",
+            "nameLocKey": "BoostArtifactMilitaryPrecision2",
+            "descriptionLocKey": "BoostArtifactMilitaryPrecision2Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "Military",
+            "title": "Military Precision Rare",
+            "description": "Increases Military Monkey damage by 20%, and reduces shot spread 15%"
+        },
+        "BoostArtifactMilitaryPrecision3": {
+            "tier": 2,
+            "baseId": "MilitaryToughness",
+            "nameLocKey": "BoostArtifactMilitaryPrecision3",
+            "descriptionLocKey": "BoostArtifactMilitaryPrecision3Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "Military",
+            "title": "Military Precision Legendary",
+            "description": "Increases Military Monkey damage by 30%, and reduces shot spread 25%"
+        },
+        "BoostArtifactMilitaryQuickening1": {
+            "tier": 0,
+            "baseId": "MilitaryQuickening",
+            "nameLocKey": "BoostArtifactMilitaryQuickening1",
+            "descriptionLocKey": "BoostArtifactMilitaryQuickening1Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "Military",
+            "title": "Military Quickening Common",
+            "description": "Reduces Military Monkeys attack reload and ability cooldown time 10%, and projectiles travel 20% faster"
+        },
+        "BoostArtifactMilitaryQuickening2": {
+            "tier": 1,
+            "baseId": "MilitaryQuickening",
+            "nameLocKey": "BoostArtifactMilitaryQuickening2",
+            "descriptionLocKey": "BoostArtifactMilitaryQuickening2Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "Military",
+            "title": "Military Quickening Rare",
+            "description": "Reduces Military Monkeys attack reload and ability cooldown time 15%, and projectiles travel 25% faster"
+        },
+        "BoostArtifactMilitaryQuickening3": {
+            "tier": 2,
+            "baseId": "MilitaryQuickening",
+            "nameLocKey": "BoostArtifactMilitaryQuickening3",
+            "descriptionLocKey": "BoostArtifactMilitaryQuickening3Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "Military",
+            "title": "Military Quickening Legendary",
+            "description": "Reduces Military Monkeys attack reload and ability cooldown time 25%, and projectiles travel 35% faster"
+        },
+        "BoostArtifactPrimaryInspiration1": {
+            "tier": 0,
+            "baseId": "PrimaryVelocity",
+            "nameLocKey": "BoostArtifactPrimaryInspiration1",
+            "descriptionLocKey": "BoostArtifactPrimaryInspiration1Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "Primary",
+            "title": "Primary Inspiration Common",
+            "description": "Primary Monkeys have 10% more pierce, and have increased attack range"
+        },
+        "BoostArtifactPrimaryInspiration2": {
+            "tier": 1,
+            "baseId": "PrimaryVelocity",
+            "nameLocKey": "BoostArtifactPrimaryInspiration2",
+            "descriptionLocKey": "BoostArtifactPrimaryInspiration2Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "Primary",
+            "title": "Primary Inspiration Rare",
+            "description": "Primary Monkeys have 14% more pierce, and have increased attack range"
+        },
+        "BoostArtifactPrimaryInspiration3": {
+            "tier": 2,
+            "baseId": "PrimaryVelocity",
+            "nameLocKey": "BoostArtifactPrimaryInspiration3",
+            "descriptionLocKey": "BoostArtifactPrimaryInspiration3Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "Primary",
+            "title": "Primary Inspiration Legendary",
+            "description": "Primary Monkeys have 18% more pierce, and have increased attack range"
+        },
+        "BoostArtifactPrimaryPrecision1": {
+            "tier": 0,
+            "baseId": "PrimaryToughness",
+            "nameLocKey": "BoostArtifactPrimaryPrecision1",
+            "descriptionLocKey": "BoostArtifactPrimaryPrecision1Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "Primary",
+            "title": "Primary Precision Common",
+            "description": "Increases Primary Monkey damage by 15%, and reduces shot spread 10%"
+        },
+        "BoostArtifactPrimaryPrecision2": {
+            "tier": 1,
+            "baseId": "PrimaryToughness",
+            "nameLocKey": "BoostArtifactPrimaryPrecision2",
+            "descriptionLocKey": "BoostArtifactPrimaryPrecision2Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "Primary",
+            "title": "Primary Precision Rare",
+            "description": "Increases Primary Monkey damage by 20%, and reduces shot spread 15%"
+        },
+        "BoostArtifactPrimaryPrecision3": {
+            "tier": 2,
+            "baseId": "PrimaryToughness",
+            "nameLocKey": "BoostArtifactPrimaryPrecision3",
+            "descriptionLocKey": "BoostArtifactPrimaryPrecision3Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "Primary",
+            "title": "Primary Precision Legendary",
+            "description": "Increases Primary Monkey damage by 30%, and reduces shot spread 25%"
+        },
+        "BoostArtifactPrimaryQuickening1": {
+            "tier": 0,
+            "baseId": "PrimaryQuickening",
+            "nameLocKey": "BoostArtifactPrimaryQuickening1",
+            "descriptionLocKey": "BoostArtifactPrimaryQuickening1Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "Primary",
+            "title": "Primary Quickening Common",
+            "description": "Reduces Primary Monkeys attack reload and ability cooldown time 10%, and projectiles travel 20% faster"
+        },
+        "BoostArtifactPrimaryQuickening2": {
+            "tier": 1,
+            "baseId": "PrimaryQuickening",
+            "nameLocKey": "BoostArtifactPrimaryQuickening2",
+            "descriptionLocKey": "BoostArtifactPrimaryQuickening2Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "Primary",
+            "title": "Primary Quickening Rare",
+            "description": "Reduces Primary Monkeys attack reload and ability cooldown time 15%, and projectiles travel 25% faster"
+        },
+        "BoostArtifactPrimaryQuickening3": {
+            "tier": 2,
+            "baseId": "PrimaryQuickening",
+            "nameLocKey": "BoostArtifactPrimaryQuickening3",
+            "descriptionLocKey": "BoostArtifactPrimaryQuickening3Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "Primary",
+            "title": "Primary Quickening Legendary",
+            "description": "Reduces Primary Monkeys attack reload and ability cooldown time 25%, and projectiles travel 35% faster"
+        },
+        "BoostArtifactSupportInspiration1": {
+            "tier": 0,
+            "baseId": "SupportVelocity",
+            "nameLocKey": "BoostArtifactSupportInspiration1",
+            "descriptionLocKey": "BoostArtifactSupportInspiration1Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "Support",
+            "title": "Support Inspiration Common",
+            "description": "Support Monkeys have 10% more pierce, and have increased attack range"
+        },
+        "BoostArtifactSupportInspiration2": {
+            "tier": 1,
+            "baseId": "SupportVelocity",
+            "nameLocKey": "BoostArtifactSupportInspiration2",
+            "descriptionLocKey": "BoostArtifactSupportInspiration2Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "Support",
+            "title": "Support Inspiration Rare",
+            "description": "Support Monkeys have 14% more pierce, and have increased attack range"
+        },
+        "BoostArtifactSupportInspiration3": {
+            "tier": 2,
+            "baseId": "SupportVelocity",
+            "nameLocKey": "BoostArtifactSupportInspiration3",
+            "descriptionLocKey": "BoostArtifactSupportInspiration3Description",
+            "isBossArtifact": false,
+            "icon": "BoostVelocity.png",
+            "rarityFrameType": "Support",
+            "title": "Support Inspiration Legendary",
+            "description": "Support Monkeys have 18% more pierce, and have increased attack range"
+        },
+        "BoostArtifactSupportPrecision1": {
+            "tier": 0,
+            "baseId": "SupportToughness",
+            "nameLocKey": "BoostArtifactSupportPrecision1",
+            "descriptionLocKey": "BoostArtifactSupportPrecision1Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "Support",
+            "title": "Support Precision Common",
+            "description": "Increases Support Monkey damage by 15%, and reduces shot spread 10%"
+        },
+        "BoostArtifactSupportPrecision2": {
+            "tier": 1,
+            "baseId": "SupportToughness",
+            "nameLocKey": "BoostArtifactSupportPrecision2",
+            "descriptionLocKey": "BoostArtifactSupportPrecision2Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "Support",
+            "title": "Support Precision Rare",
+            "description": "Increases Support Monkey damage by 20%, and reduces shot spread 15%"
+        },
+        "BoostArtifactSupportPrecision3": {
+            "tier": 2,
+            "baseId": "SupportToughness",
+            "nameLocKey": "BoostArtifactSupportPrecision3",
+            "descriptionLocKey": "BoostArtifactSupportPrecision3Description",
+            "isBossArtifact": false,
+            "icon": "BoostToughness.png",
+            "rarityFrameType": "Support",
+            "title": "Support Precision Legendary",
+            "description": "Increases Support Monkey damage by 30%, and reduces shot spread 25%"
+        },
+        "BoostArtifactSupportQuickening1": {
+            "tier": 0,
+            "baseId": "SupportQuickening",
+            "nameLocKey": "BoostArtifactSupportQuickening1",
+            "descriptionLocKey": "BoostArtifactSupportQuickening1Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "Support",
+            "title": "Support Quickening Common",
+            "description": "Reduces Support Monkeys attack reload and ability cooldown time 10%, and projectiles travel 20% faster"
+        },
+        "BoostArtifactSupportQuickening2": {
+            "tier": 1,
+            "baseId": "SupportQuickening",
+            "nameLocKey": "BoostArtifactSupportQuickening2",
+            "descriptionLocKey": "BoostArtifactSupportQuickening2Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "Support",
+            "title": "Support Quickening Rare",
+            "description": "Reduces Support Monkeys attack reload and ability cooldown time 15%, and projectiles travel 25% faster"
+        },
+        "BoostArtifactSupportQuickening3": {
+            "tier": 2,
+            "baseId": "SupportQuickening",
+            "nameLocKey": "BoostArtifactSupportQuickening3",
+            "descriptionLocKey": "BoostArtifactSupportQuickening3Description",
+            "isBossArtifact": false,
+            "icon": "BoostQuickening.png",
+            "rarityFrameType": "Support",
+            "title": "Support Quickening Legendary",
+            "description": "Reduces Support Monkeys attack reload and ability cooldown time 25%, and projectiles travel 35% faster"
+        },
+        "BouncingProjectiles1": {
+            "tier": 0,
+            "baseId": "BouncingProjectiles",
+            "nameLocKey": "BouncingProjectiles1",
+            "descriptionLocKey": "BouncingProjectiles1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactBouncingProjectiles.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Bouncing Projectiles Common",
+            "description": "All projectiles will bounce off blocking objects and projectiles travel 10% further"
+        },
+        "BouncingProjectiles2": {
+            "tier": 1,
+            "baseId": "BouncingProjectiles",
+            "nameLocKey": "BouncingProjectiles2",
+            "descriptionLocKey": "BouncingProjectiles2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactBouncingProjectiles.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Bouncing Projectiles Rare",
+            "description": "All projectiles will bounce off blocking objects and projectiles travel 20% further"
+        },
+        "BouncingProjectiles3": {
+            "tier": 2,
+            "baseId": "BouncingProjectiles",
+            "nameLocKey": "BouncingProjectiles3",
+            "descriptionLocKey": "BouncingProjectiles3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactBouncingProjectiles.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Bouncing Projectiles Legendary",
+            "description": "All projectiles will bounce off blocking objects and projectiles travel 40% further"
+        },
+        "CatsMeow1": {
+            "tier": 1,
+            "baseId": "CatsMeow",
+            "nameLocKey": "CatsMeow1",
+            "descriptionLocKey": "CatsMeow1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCatsMeow.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Cats Meow Rare",
+            "description": "Maximum lives is set to 9, but any Bloon leaked only counts as 1 life regardless of RBE. Regenerate 3 lives at the end of each round. Adds a 0-0-3 Bomb Shooter to your Party"
+        },
+        "CatsMeow2": {
+            "tier": 2,
+            "baseId": "CatsMeow",
+            "nameLocKey": "CatsMeow2",
+            "descriptionLocKey": "CatsMeow2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCatsMeow.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Cats Meow Legendary",
+            "description": "Maximum lives is set to 9, but any Bloon leaked only counts as 1 life regardless of RBE. Regenerate 9 lives at the end of each round.  Adds a 0-0-4 Bomb Shooter to your Party"
+        },
+        "CeramicChunker1": {
+            "tier": 0,
+            "baseId": "CeramicChunker",
+            "nameLocKey": "CeramicChunker1",
+            "descriptionLocKey": "CeramicChunker1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCeramicChunker.png",
+            "rarityFrameType": "Primary",
+            "title": "Ceramic Chunker Common",
+            "description": "Primary Monkeys deal 3 bonus damage to Ceramic Bloons"
+        },
+        "CeramicChunker2": {
+            "tier": 1,
+            "baseId": "CeramicChunker",
+            "nameLocKey": "CeramicChunker2",
+            "descriptionLocKey": "CeramicChunker2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCeramicChunker.png",
+            "rarityFrameType": "Primary",
+            "title": "Ceramic Chunker Rare",
+            "description": "Primary Monkeys deal 6 bonus damage to Ceramic Bloons"
+        },
+        "CeramicChunker3": {
+            "tier": 2,
+            "baseId": "CeramicChunker",
+            "nameLocKey": "CeramicChunker3",
+            "descriptionLocKey": "CeramicChunker3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCeramicChunker.png",
+            "rarityFrameType": "Primary",
+            "title": "Ceramic Chunker Legendary",
+            "description": "Primary Monkeys deal 9 bonus damage to Ceramic Bloons"
+        },
+        "ColdSteel1": {
+            "tier": 0,
+            "baseId": "ColdSteel",
+            "nameLocKey": "ColdSteel1",
+            "descriptionLocKey": "ColdSteel1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactColdSteel.png",
+            "rarityFrameType": "Military",
+            "title": "Cold Steel Common",
+            "description": "Military Monkeys tier 3 or higher have a 5% chance to freeze Bloons they hit"
+        },
+        "ColdSteel2": {
+            "tier": 1,
+            "baseId": "ColdSteel",
+            "nameLocKey": "ColdSteel2",
+            "descriptionLocKey": "ColdSteel2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactColdSteel.png",
+            "rarityFrameType": "Military",
+            "title": "Cold Steel Rare",
+            "description": "Military Monkeys tier 3 or higher have a 10% chance to freeze Bloons they hit"
+        },
+        "ColdSteel3": {
+            "tier": 2,
+            "baseId": "ColdSteel",
+            "nameLocKey": "ColdSteel3",
+            "descriptionLocKey": "ColdSteel3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactColdSteel.png",
+            "rarityFrameType": "Military",
+            "title": "Cold Steel Legendary",
+            "description": "Military Monkeys tier 3 or higher have a 15% chance to freeze Bloons they hit"
+        },
+        "ConfuddlingSpelling1": {
+            "tier": 0,
+            "baseId": "ConfuddlingSpelling",
+            "nameLocKey": "ConfuddlingSpelling1",
+            "descriptionLocKey": "ConfuddlingSpelling1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactConfuddlingSpelling.png",
+            "rarityFrameType": "Magic",
+            "title": "Confuddling Spelling Common",
+            "description": "Magic Monkeys deal 2 times damage to tranced and stunned Bloons"
+        },
+        "ConfuddlingSpelling2": {
+            "tier": 1,
+            "baseId": "ConfuddlingSpelling",
+            "nameLocKey": "ConfuddlingSpelling2",
+            "descriptionLocKey": "ConfuddlingSpelling2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactConfuddlingSpelling.png",
+            "rarityFrameType": "Magic",
+            "title": "Confuddling Spelling Rare",
+            "description": "Magic Monkeys deal 2.5 times damage to tranced and stunned Bloons"
+        },
+        "ConfuddlingSpelling3": {
+            "tier": 2,
+            "baseId": "ConfuddlingSpelling",
+            "nameLocKey": "ConfuddlingSpelling3",
+            "descriptionLocKey": "ConfuddlingSpelling3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactConfuddlingSpelling.png",
+            "rarityFrameType": "Magic",
+            "title": "Confuddling Spelling Legendary",
+            "description": "Magic Monkeys deal 3 times damage to tranced and stunned Bloons"
+        },
+        "CorneredBeasts1": {
+            "tier": 0,
+            "baseId": "CorneredBeasts",
+            "nameLocKey": "CorneredBeasts1",
+            "descriptionLocKey": "CorneredBeasts1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCorneredBeasts.png",
+            "rarityFrameType": "Magic",
+            "title": "Cornered Beasts Common",
+            "description": "Beast Handlers tier 3 and higher have 20% more range, and attack faster the more Bloons in radius (up to 25%). Adds a 0-1-1 Beast Handler to your Party"
+        },
+        "CorneredBeasts2": {
+            "tier": 1,
+            "baseId": "CorneredBeasts",
+            "nameLocKey": "CorneredBeasts2",
+            "descriptionLocKey": "CorneredBeasts2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCorneredBeasts.png",
+            "rarityFrameType": "Magic",
+            "title": "Cornered Beasts Rare",
+            "description": "Beast Handlers tier 3 and higher have 20% more range, and attack faster the more Bloons in radius (up to 35%). Adds a 0-2-1 Beast Handler to your Party"
+        },
+        "CorneredBeasts3": {
+            "tier": 2,
+            "baseId": "CorneredBeasts",
+            "nameLocKey": "CorneredBeasts3",
+            "descriptionLocKey": "CorneredBeasts3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCorneredBeasts.png",
+            "rarityFrameType": "Magic",
+            "title": "Cornered Beasts Legendary",
+            "description": "Beast Handlers tier 3 and higher have 20% more range, and attack faster the more Bloons in radius (up to 50%). Adds a 0-2-0 Beast Handler to your Party"
+        },
+        "CorrosiveTorpEDarts1": {
+            "tier": 0,
+            "baseId": "CorrosiveTorpEDarts",
+            "nameLocKey": "CorrosiveTorpEDarts1",
+            "descriptionLocKey": "CorrosiveTorpEDarts1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCorrosiveTorpEDarts.png",
+            "rarityFrameType": "Military",
+            "title": "Corrosive Torp-E-Darts Common",
+            "description": "Tier 3 and higher Monkey Subs glue Bloons with Bloon Dissolver acid for a short time. Adds a 0-1-1 Monkey Sub to your Party"
+        },
+        "CorrosiveTorpEDarts2": {
+            "tier": 1,
+            "baseId": "CorrosiveTorpEDarts",
+            "nameLocKey": "CorrosiveTorpEDarts2",
+            "descriptionLocKey": "CorrosiveTorpEDarts2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCorrosiveTorpEDarts.png",
+            "rarityFrameType": "Military",
+            "title": "Corrosive Torp-E-Darts Rare",
+            "description": "Tier 3 and higher Monkey Subs glue Bloons with Bloon Liquifier acid for a short time. Adds a 0-2-1 Monkey Sub to your Party"
+        },
+        "CorrosiveTorpEDarts3": {
+            "tier": 2,
+            "baseId": "CorrosiveTorpEDarts",
+            "nameLocKey": "CorrosiveTorpEDarts3",
+            "descriptionLocKey": "CorrosiveTorpEDarts3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCorrosiveTorpEDarts.png",
+            "rarityFrameType": "Military",
+            "title": "Corrosive Torp-E-Darts Legendary",
+            "description": "Tier 3 and higher Monkey Subs glue Bloons with Bloon Solver acid for a short time. Adds a 0-2-0 Monkey Sub to your Party"
+        },
+        "CriticalImpact1": {
+            "tier": 0,
+            "baseId": "CriticalImpact",
+            "nameLocKey": "CriticalImpact1",
+            "descriptionLocKey": "CriticalImpact1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCriticalImpact.png",
+            "rarityFrameType": "Military",
+            "title": "Critical Impact Common",
+            "description": "Tier 3 and higher Mortars have a 1 in 8 chance to Crit for 250% damage. Adds a 1-1-0 Mortar to your Party"
+        },
+        "CriticalImpact2": {
+            "tier": 1,
+            "baseId": "CriticalImpact",
+            "nameLocKey": "CriticalImpact2",
+            "descriptionLocKey": "CriticalImpact2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCriticalImpact.png",
+            "rarityFrameType": "Military",
+            "title": "Critical Impact Rare",
+            "description": "Tier 3 and higher Mortars have a 1 in 8 chance to Crit for 350% damage. Adds a 2-1-0 Mortar to your Party"
+        },
+        "CriticalImpact3": {
+            "tier": 2,
+            "baseId": "CriticalImpact",
+            "nameLocKey": "CriticalImpact3",
+            "descriptionLocKey": "CriticalImpact3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCriticalImpact.png",
+            "rarityFrameType": "Military",
+            "title": "Critical Impact Legendary",
+            "description": "Tier 3 and higher Mortars have a 1 in 8 chance to Crit for 500% damage. Adds a 2-0-0 Mortar to your Party"
+        },
+        "CriticalSuccess1": {
+            "tier": 1,
+            "baseId": "CriticalSuccess",
+            "nameLocKey": "CriticalSuccess1",
+            "descriptionLocKey": "CriticalSuccess1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCriticalSuccess.png",
+            "rarityFrameType": "Primary",
+            "title": "Critical Success Rare",
+            "description": "Primary Monkeys attack reload time increased 75%, but gain a 1 in 10 chance to Crit for 900% damage"
+        },
+        "CriticalSuccess2": {
+            "tier": 2,
+            "baseId": "CriticalSuccess",
+            "nameLocKey": "CriticalSuccess2",
+            "descriptionLocKey": "CriticalSuccess2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCriticalSuccess.png",
+            "rarityFrameType": "Primary",
+            "title": "Critical Success Legendary",
+            "description": "Primary Monkeys attack reload time increased 75%, but gain a 1 in 10 chance to Crit for 1100% damage"
+        },
+        "CrystalCrash1": {
+            "tier": 0,
+            "baseId": "CrystalCrash",
+            "nameLocKey": "CrystalCrash1",
+            "descriptionLocKey": "CrystalCrash1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCrystalCrash.png",
+            "rarityFrameType": "Support",
+            "title": "Crystal Crash Common",
+            "description": "Support Monkeys deal 2 times damage to frozen Bloons"
+        },
+        "CrystalCrash2": {
+            "tier": 1,
+            "baseId": "CrystalCrash",
+            "nameLocKey": "CrystalCrash2",
+            "descriptionLocKey": "CrystalCrash2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCrystalCrash.png",
+            "rarityFrameType": "Support",
+            "title": "Crystal Crash Rare",
+            "description": "Support Monkeys deal 2.5 times damage to frozen Bloons"
+        },
+        "CrystalCrash3": {
+            "tier": 2,
+            "baseId": "CrystalCrash",
+            "nameLocKey": "CrystalCrash3",
+            "descriptionLocKey": "CrystalCrash3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactCrystalCrash.png",
+            "rarityFrameType": "Support",
+            "title": "Crystal Crash Legendary",
+            "description": "Support Monkeys deal 3 times damage to frozen Bloons"
+        },
+        "DazingFrostburn1": {
+            "tier": 0,
+            "baseId": "DazingFrostburn",
+            "nameLocKey": "DazingFrostburn1",
+            "descriptionLocKey": "DazingFrostburn1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactDazingFrostburn.png",
+            "rarityFrameType": "Primary",
+            "title": "Dazing Frostburn Common",
+            "description": "Ice Monkeys attack 50% slower, but also stun non-MOAB Bloons and burn 4 damage a second for 10 seconds. Adds a 1-0-1 Ice Monkey to your Party"
+        },
+        "DazingFrostburn2": {
+            "tier": 1,
+            "baseId": "DazingFrostburn",
+            "nameLocKey": "DazingFrostburn2",
+            "descriptionLocKey": "DazingFrostburn2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactDazingFrostburn.png",
+            "rarityFrameType": "Primary",
+            "title": "Dazing Frostburn Rare",
+            "description": "Ice Monkeys attack 50% slower, but also stun non-MOAB Bloons and burn 8 damage a second for 10 seconds. Adds a 1-0-2 Ice Monkey to your Party"
+        },
+        "DazingFrostburn3": {
+            "tier": 2,
+            "baseId": "DazingFrostburn",
+            "nameLocKey": "DazingFrostburn3",
+            "descriptionLocKey": "DazingFrostburn3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactDazingFrostburn.png",
+            "rarityFrameType": "Primary",
+            "title": "Dazing Frostburn Legendary",
+            "description": "Ice Monkeys attack 50% slower, but also stun non-MOAB Bloons and burn 16 damage a second for 10 seconds. Adds a 0-0-2 Ice Monkey to your Party"
+        },
+        "DivineIntervention1": {
+            "tier": 0,
+            "baseId": "DivineIntervention",
+            "nameLocKey": "DivineIntervention1",
+            "descriptionLocKey": "DivineIntervention1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactDivineIntervention.png",
+            "rarityFrameType": "Magic",
+            "title": "Divine Intervention Common",
+            "description": "Super Monkeys and Adora have a 1 in 1800 chance when hitting Bloons for the Sun God to smite them with 1500x damage. Adds a 0-0-0 Super Monkey to your Party"
+        },
+        "DivineIntervention2": {
+            "tier": 1,
+            "baseId": "DivineIntervention",
+            "nameLocKey": "DivineIntervention2",
+            "descriptionLocKey": "DivineIntervention2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactDivineIntervention.png",
+            "rarityFrameType": "Magic",
+            "title": "Divine Intervention Rare",
+            "description": "Super Monkeys and Adora have a 1 in 1200 chance when hitting Bloons for the Sun God to smite them with 1500x damage. Adds a 0-0-0 Super Monkey to your Party"
+        },
+        "DivineIntervention3": {
+            "tier": 2,
+            "baseId": "DivineIntervention",
+            "nameLocKey": "DivineIntervention3",
+            "descriptionLocKey": "DivineIntervention3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactDivineIntervention.png",
+            "rarityFrameType": "Magic",
+            "title": "Divine Intervention Legendary",
+            "description": "Super Monkeys and Adora have a 1 in 600 chance when hitting Bloons for the Sun God to smite them with 1500x damage. Adds a 0-0-0 Super Monkey to your Party"
+        },
+        "DreamTeams1": {
+            "tier": 0,
+            "baseId": "DreamTeams",
+            "nameLocKey": "DreamTeams1",
+            "descriptionLocKey": "DreamTeams1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactDreamTeams.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Dream Teams Common",
+            "description": "Monkey Subs, Ninja Monkeys, Druids, Wizards, and Beast Handlers have faster attack speed and ability cooldowns, and 25% more range."
+        },
+        "DreamTeams2": {
+            "tier": 1,
+            "baseId": "DreamTeams",
+            "nameLocKey": "DreamTeams2",
+            "descriptionLocKey": "DreamTeams2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactDreamTeams.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Dream Teams Rare",
+            "description": "Monkey Subs, Ninja Monkeys, Druids, Wizards, and Beast Handlers have faster attack speed and ability cooldowns, and 35% more range."
+        },
+        "DreamTeams3": {
+            "tier": 2,
+            "baseId": "DreamTeams",
+            "nameLocKey": "DreamTeams3",
+            "descriptionLocKey": "DreamTeams3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactDreamTeams.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Dream Teams Legendary",
+            "description": "Monkey Subs, Ninja Monkeys, Druids, Wizards, and Beast Handlers have faster attack speed and ability cooldowns, and 50% more range."
+        },
+        "EnchantedRebuttal1": {
+            "tier": 0,
+            "baseId": "EnchantedRebuttal",
+            "nameLocKey": "EnchantedRebuttal1",
+            "descriptionLocKey": "EnchantedRebuttal1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactEnchantedRebuttal.png",
+            "rarityFrameType": "Magic",
+            "title": "Enchanted Rebuttal Common",
+            "description": "Magic Monkeys push Bloons back on hit"
+        },
+        "EnchantedRebuttal2": {
+            "tier": 1,
+            "baseId": "EnchantedRebuttal",
+            "nameLocKey": "EnchantedRebuttal2",
+            "descriptionLocKey": "EnchantedRebuttal2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactEnchantedRebuttal.png",
+            "rarityFrameType": "Magic",
+            "title": "Enchanted Rebuttal Rare",
+            "description": "Magic Monkeys push Bloons back even more on hit"
+        },
+        "EnchantedRebuttal3": {
+            "tier": 2,
+            "baseId": "EnchantedRebuttal",
+            "nameLocKey": "EnchantedRebuttal3",
+            "descriptionLocKey": "EnchantedRebuttal3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactEnchantedRebuttal.png",
+            "rarityFrameType": "Magic",
+            "title": "Enchanted Rebuttal Legendary",
+            "description": "Magic Monkeys push Bloons and small MOAB-class back on hit"
+        },
+        "EsotericElementalist1": {
+            "tier": 0,
+            "baseId": "EsotericElementalist",
+            "nameLocKey": "EsotericElementalist1",
+            "descriptionLocKey": "EsotericElementalist1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactEsotericElementalist.png",
+            "rarityFrameType": "Magic",
+            "title": "Esoteric Elementalist Common",
+            "description": "Wizard Monkeys have a 20% chance to freeze or blow back, and set Bloons on fire for 1 damage/s over 4.5s. Adds a 1-0-1 Wizard to your Party"
+        },
+        "EsotericElementalist2": {
+            "tier": 1,
+            "baseId": "EsotericElementalist",
+            "nameLocKey": "EsotericElementalist2",
+            "descriptionLocKey": "EsotericElementalist2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactEsotericElementalist.png",
+            "rarityFrameType": "Magic",
+            "title": "Esoteric Elementalist Rare",
+            "description": "Wizard Monkeys have a 30% chance to freeze or blow back, and set Bloons on fire for 3 damage/s over 4.5s. Adds a 2-0-1 Wizard to your Party"
+        },
+        "EsotericElementalist3": {
+            "tier": 2,
+            "baseId": "EsotericElementalist",
+            "nameLocKey": "EsotericElementalist3",
+            "descriptionLocKey": "EsotericElementalist3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactEsotericElementalist.png",
+            "rarityFrameType": "Magic",
+            "title": "Esoteric Elementalist Legendary",
+            "description": "Wizard Monkeys have a 60% chance to freeze or blow back, and set Bloons on fire for 9 damage/s over 4.5s. Adds a 2-0-0 Wizard to your Party"
+        },
+        "EssenceOfBlastapopoulos1": {
+            "tier": 2,
+            "baseId": "EssenceOfBlastapopoulos",
+            "nameLocKey": "EssenceOfBlastapopoulos1",
+            "descriptionLocKey": "EssenceOfBlastapopoulos1Description",
+            "isBossArtifact": true,
+            "icon": "ArtifactEssenceOfBlastapopoulos.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Essence Of Blastapopoulos",
+            "description": "Tier 5 Monkeys and level 20 Heroes burn Bloons, and affected Bloons take an extra +4 damage from all sources"
+        },
+        "EssenceOfBloonarius1": {
+            "tier": 2,
+            "baseId": "EssenceOfBloonarius",
+            "nameLocKey": "EssenceOfBloonarius1",
+            "descriptionLocKey": "EssenceOfBloonarius1Description",
+            "isBossArtifact": true,
+            "icon": "ArtifactEssenceOfBloonarius.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Essence Of Bloonarius",
+            "description": "All Monkeys tier 3 and lower deal 1.5x damage to Bloons and MOAB-Class Bloons and have 100% more pierce"
+        },
+        "EssenceOfDreadbloon1": {
+            "tier": 2,
+            "baseId": "EssenceOfDreadbloon",
+            "nameLocKey": "EssenceOfDreadbloon1",
+            "descriptionLocKey": "EssenceOfDreadbloon1Description",
+            "isBossArtifact": true,
+            "icon": "ArtifactEssenceOfDreadbloon.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Essence Of Dreadbloon",
+            "description": "All Monkeys count as all categories. Tier 5 Monkeys and level 20 Heroes deal 1.5x damage to Fortified and Ceramic Bloons"
+        },
+        "EssenceOfLych1": {
+            "tier": 2,
+            "baseId": "EssenceOfLych",
+            "nameLocKey": "EssenceOfLych1",
+            "descriptionLocKey": "EssenceOfLych1Description",
+            "isBossArtifact": true,
+            "icon": "ArtifactEssenceOfLych.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Essence Of Lych",
+            "description": "Tier 5 Monkeys and level 20 Heroes projectiles create clouds that trojan regular Bloons, stopping them from spawning children. Recover 10 lives each round for every tier 3 or higher Monkey on the field. Recover 5 lives for every ability used"
+        },
+        "EssenceOfPhayze1": {
+            "tier": 2,
+            "baseId": "EssenceOfPhayze",
+            "nameLocKey": "EssenceOfPhayze1",
+            "descriptionLocKey": "EssenceOfPhayze1Description",
+            "isBossArtifact": true,
+            "icon": "ArtifactEssenceOfPhayze.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Essence Of Phayze",
+            "description": "All Monkeys can see Camo, and deal triple damage to Camo Bloons. Heroes slow Bloons in their radius by 30%"
+        },
+        "EssenceOfVortex1": {
+            "tier": 2,
+            "baseId": "EssenceOfVortex",
+            "nameLocKey": "EssenceOfVortex1",
+            "descriptionLocKey": "EssenceOfVortex1Description",
+            "isBossArtifact": true,
+            "icon": "ArtifactEssenceOfVortex.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Essence Of Vortex",
+            "description": "Tier 5 Monkeys and level 20 Heroes knock back MOAB-Class Bloons on hit, and 10% chance to blow back regular Bloons"
+        },
+        "ExplosiveEconomics1": {
+            "tier": 0,
+            "baseId": "ExplosiveEconomics",
+            "nameLocKey": "ExplosiveEconomics1",
+            "descriptionLocKey": "ExplosiveEconomics1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactExplosiveEconomics.png",
+            "rarityFrameType": "Support",
+            "title": "Explosive Economics Common",
+            "description": "When Support Monkeys are sold, an Area of Effect explosion deals 100 damage to all nearby Bloons. Bloons in range of Support Monkeys give 5% less cash"
+        },
+        "ExplosiveEconomics2": {
+            "tier": 1,
+            "baseId": "ExplosiveEconomics",
+            "nameLocKey": "ExplosiveEconomics2",
+            "descriptionLocKey": "ExplosiveEconomics2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactExplosiveEconomics.png",
+            "rarityFrameType": "Support",
+            "title": "Explosive Economics Rare",
+            "description": "When Support Monkeys are sold, an Area of Effect explosion deals 300 damage to all nearby Bloons. Bloons in range of Support Monkeys give 5% less cash"
+        },
+        "ExplosiveEconomics3": {
+            "tier": 2,
+            "baseId": "ExplosiveEconomics",
+            "nameLocKey": "ExplosiveEconomics3",
+            "descriptionLocKey": "ExplosiveEconomics3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactExplosiveEconomics.png",
+            "rarityFrameType": "Support",
+            "title": "Explosive Economics Legendary",
+            "description": "When Support Monkeys are sold, an Area of Effect explosion deals 900 damage to all nearby Bloons. Bloons in range of Support Monkeys give 5% less cash"
+        },
+        "FataMorgana1": {
+            "tier": 0,
+            "baseId": "FataMorgana",
+            "nameLocKey": "FataMorgana1",
+            "descriptionLocKey": "FataMorgana1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFataMorgana.png",
+            "rarityFrameType": "Magic",
+            "title": "Fata Morgana Common",
+            "description": "Mermonkey range, pierce, projectile lifespan, and ability cooldown speed increased 25%. Mermonkey projectiles reflect off map borders. Adds a 0-1-1 Mermonkey to your Party"
+        },
+        "FataMorgana2": {
+            "tier": 1,
+            "baseId": "FataMorgana",
+            "nameLocKey": "FataMorgana2",
+            "descriptionLocKey": "FataMorgana2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFataMorgana.png",
+            "rarityFrameType": "Magic",
+            "title": "Fata Morgana Rare",
+            "description": "Mermonkey range, pierce, projectile lifespan, and ability cooldown speed increased 35%. Mermonkey projectiles reflect off map borders. Adds a 0-2-1 Mermonkey to your Party"
+        },
+        "FataMorgana3": {
+            "tier": 2,
+            "baseId": "FataMorgana",
+            "nameLocKey": "FataMorgana3",
+            "descriptionLocKey": "FataMorgana3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFataMorgana.png",
+            "rarityFrameType": "Magic",
+            "title": "Fata Morgana Legendary",
+            "description": "Mermonkey range, pierce, projectile lifespan, and ability cooldown speed increased 50%. Mermonkey projectiles reflect off map borders. Adds a 0-2-0 Mermonkey to your Party"
+        },
+        "FlamingHotPunchARang1": {
+            "tier": 0,
+            "baseId": "FlamingHotPunchARang",
+            "nameLocKey": "FlamingHotPunchARang1",
+            "descriptionLocKey": "FlamingHotPunchARang1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFlamingHotPuncharang.png",
+            "rarityFrameType": "Primary",
+            "title": "Flaming Hot Punch-A-Rang Common",
+            "description": "Red Hot Rangs have reduced pierce, but knock back Bloons and have a 30% chance to set them on fire for 3 damage per 1.5s over 4.5s. Adds a 0-1-1 Boomerang Monkey to your Party"
+        },
+        "FlamingHotPunchARang2": {
+            "tier": 1,
+            "baseId": "FlamingHotPunchARang",
+            "nameLocKey": "FlamingHotPunchARang2",
+            "descriptionLocKey": "FlamingHotPunchARang2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFlamingHotPuncharang.png",
+            "rarityFrameType": "Primary",
+            "title": "Flaming Hot Punch-A-Rang Rare",
+            "description": "Red Hot Rangs have reduced pierce, but knock back Bloons and have a 30% chance to set them on fire for 6 damage per 1.5s over 4.5s. Adds a 0-1-2 Boomerang Monkey to your Party"
+        },
+        "FlamingHotPunchARang3": {
+            "tier": 2,
+            "baseId": "FlamingHotPunchARang",
+            "nameLocKey": "FlamingHotPunchARang3",
+            "descriptionLocKey": "FlamingHotPunchARang3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFlamingHotPuncharang.png",
+            "rarityFrameType": "Primary",
+            "title": "Flaming Hot Punch-A-Rang Legendary",
+            "description": "Red Hot Rangs have reduced pierce, but knock back Bloons and have a 30% chance to set them on fire for 12 damage per 1.5s over 4.5s. Adds a 0-0-2 Boomerang Monkey to your Party"
+        },
+        "FollowMe1": {
+            "tier": 0,
+            "baseId": "FollowMe",
+            "nameLocKey": "FollowMe1",
+            "descriptionLocKey": "FollowMe1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFollowMe.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Follow Me Common",
+            "description": "Dart Monkeys, Boomerang Monkeys, Bomb Shooters, Tack Shooters, Super Monkeys, Druids, and Mermonkeys follow cursor like a Dartling Gunner with a turn rate of 180, and constantly fire as long as Bloons are on screen. Attack speed reduced by 20%"
+        },
+        "FollowMe2": {
+            "tier": 1,
+            "baseId": "FollowMe",
+            "nameLocKey": "FollowMe2",
+            "descriptionLocKey": "FollowMe2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFollowMe.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Follow Me Rare",
+            "description": "Dart Monkeys, Boomerang Monkeys, Bomb Shooters, Tack Shooters, Super Monkeys, Druids, and Mermonkeys follow cursor like a Dartling Gunner with a turn rate of 300, and constantly fire as long as Bloons are on screen. Attack speed reduced by 10%"
+        },
+        "FollowMe3": {
+            "tier": 2,
+            "baseId": "FollowMe",
+            "nameLocKey": "FollowMe3",
+            "descriptionLocKey": "FollowMe3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFollowMe.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Follow Me Legendary",
+            "description": "Dart Monkeys, Boomerang Monkeys, Bomb Shooters, Tack Shooters, Super Monkeys, Druids, and Mermonkeys follow cursor like a Dartling Gunner with a turn rate of 500, and constantly fire as long as Bloons are on screen. Attack speed reduced by 5%"
+        },
+        "FrostedTips1": {
+            "tier": 0,
+            "baseId": "FrostedTips",
+            "nameLocKey": "FrostedTips1",
+            "descriptionLocKey": "FrostedTips1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFrostedTips.png",
+            "rarityFrameType": "Primary",
+            "title": "Frosted Tips Common",
+            "description": "Dart Monkey pierce and range increased 15%, and projectiles apply permafrost, slowing Bloons by 50%. Adds a 1-1-0 Dart Monkey to your Party"
+        },
+        "FrostedTips2": {
+            "tier": 1,
+            "baseId": "FrostedTips",
+            "nameLocKey": "FrostedTips2",
+            "descriptionLocKey": "FrostedTips2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFrostedTips.png",
+            "rarityFrameType": "Primary",
+            "title": "Frosted Tips Rare",
+            "description": "Dart Monkey pierce and range increased 20%, and projectiles apply permafrost, slowing Bloons by 50%. Adds a 2-1-0 Dart Monkey to your Party"
+        },
+        "FrostedTips3": {
+            "tier": 2,
+            "baseId": "FrostedTips",
+            "nameLocKey": "FrostedTips3",
+            "descriptionLocKey": "FrostedTips3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFrostedTips.png",
+            "rarityFrameType": "Primary",
+            "title": "Frosted Tips Legendary",
+            "description": "Dart Monkey pierce and range increased 35%, and projectiles apply permafrost, slowing Bloons by 50%. Adds a 2-0-0 Dart Monkey to your Party"
+        },
+        "FullBroadside1": {
+            "tier": 0,
+            "baseId": "FullBroadside",
+            "nameLocKey": "FullBroadside1",
+            "descriptionLocKey": "FullBroadside1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFullBroadside.png",
+            "rarityFrameType": "Military",
+            "title": "Full Broadside Common",
+            "description": "Monkey Buccaneers can store up to 3 ability charges, and pierce and ability cooldown speed increased 35%. Adds a 1-1-0 Buccaneer to your Party"
+        },
+        "FullBroadside2": {
+            "tier": 1,
+            "baseId": "FullBroadside",
+            "nameLocKey": "FullBroadside2",
+            "descriptionLocKey": "FullBroadside2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFullBroadside.png",
+            "rarityFrameType": "Military",
+            "title": "Full Broadside Rare",
+            "description": "Monkey Buccaneers can store up to 3 ability charges, and pierce and ability cooldown speed increased 50%. Adds a 1-2-0 Buccaneer to your Party"
+        },
+        "FullBroadside3": {
+            "tier": 2,
+            "baseId": "FullBroadside",
+            "nameLocKey": "FullBroadside3",
+            "descriptionLocKey": "FullBroadside3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactFullBroadside.png",
+            "rarityFrameType": "Military",
+            "title": "Full Broadside Legendary",
+            "description": "Monkey Buccaneers can store up to 3 ability charges, and pierce and ability cooldown speed increased 70%. Adds a 0-2-0 Buccaneer to your Party"
+        },
+        "GrowingSteady1": {
+            "tier": 0,
+            "baseId": "GrowingSteady",
+            "nameLocKey": "GrowingSteady1",
+            "descriptionLocKey": "GrowingSteady1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactGrowingSteady.png",
+            "rarityFrameType": "Magic",
+            "title": "Growing Steady Common",
+            "description": "Druids attack reload time is increased 20%, but every round, Druid damage is increased by 0.15, even Druids placed later! Adds a 1-0-1 Druid to your Party"
+        },
+        "GrowingSteady2": {
+            "tier": 1,
+            "baseId": "GrowingSteady",
+            "nameLocKey": "GrowingSteady2",
+            "descriptionLocKey": "GrowingSteady2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactGrowingSteady.png",
+            "rarityFrameType": "Magic",
+            "title": "Growing Steady Rare",
+            "description": "Druids attack reload time is increased 20%, but every round, Druid damage is increased by 0.20, even Druids placed later! Adds a 1-0-2 Druid to your Party"
+        },
+        "GrowingSteady3": {
+            "tier": 2,
+            "baseId": "GrowingSteady",
+            "nameLocKey": "GrowingSteady3",
+            "descriptionLocKey": "GrowingSteady3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactGrowingSteady.png",
+            "rarityFrameType": "Magic",
+            "title": "Growing Steady Legendary",
+            "description": "Druids attack reload time is increased 20%, but every round, Druid damage is increased by 0.35, even Druids placed later! Adds a 0-0-2 Druid to your Party"
+        },
+        "HeightenedPerception1": {
+            "tier": 0,
+            "baseId": "HeightenedPerception",
+            "nameLocKey": "HeightenedPerception1",
+            "descriptionLocKey": "HeightenedPerception1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactHeightenedPerception.png",
+            "rarityFrameType": "Primary",
+            "title": "Heightened Perception Common",
+            "description": "Primary Monkeys attack range increased 40%. Projectile speed reduced 50%"
+        },
+        "HeightenedPerception2": {
+            "tier": 1,
+            "baseId": "HeightenedPerception",
+            "nameLocKey": "HeightenedPerception2",
+            "descriptionLocKey": "HeightenedPerception2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactHeightenedPerception.png",
+            "rarityFrameType": "Primary",
+            "title": "Heightened Perception Rare",
+            "description": "Primary Monkeys attack range increased 55%. Projectile speed reduced 50%"
+        },
+        "HeightenedPerception3": {
+            "tier": 2,
+            "baseId": "HeightenedPerception",
+            "nameLocKey": "HeightenedPerception3",
+            "descriptionLocKey": "HeightenedPerception3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactHeightenedPerception.png",
+            "rarityFrameType": "Primary",
+            "title": "Heightened Perception Legendary",
+            "description": "Primary Monkeys attack range increased 75%. Projectile speed reduced 50%"
+        },
+        "HighImpactGlue1": {
+            "tier": 0,
+            "baseId": "HighImpactGlue",
+            "nameLocKey": "HighImpactGlue1",
+            "descriptionLocKey": "HighImpactGlue1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactHighImpactGlue.png",
+            "rarityFrameType": "Primary",
+            "title": "High Impact Glue Common",
+            "description": "Glue Gunner projectiles move twice as fast and deal 2 damage on impact. Impact damage scales up to 10x with the amount of Bloons on screen. Adds a 1-0-1 Glue Gunner to your Party"
+        },
+        "HighImpactGlue2": {
+            "tier": 1,
+            "baseId": "HighImpactGlue",
+            "nameLocKey": "HighImpactGlue2",
+            "descriptionLocKey": "HighImpactGlue2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactHighImpactGlue.png",
+            "rarityFrameType": "Primary",
+            "title": "High Impact Glue Rare",
+            "description": "Glue Gunner projectiles move twice as fast and deal 3 damage on impact. Impact damage scales up to 10x with the amount of Bloons on screen. Adds a 2-0-1 Glue Gunner to your Party"
+        },
+        "HighImpactGlue3": {
+            "tier": 2,
+            "baseId": "HighImpactGlue",
+            "nameLocKey": "HighImpactGlue3",
+            "descriptionLocKey": "HighImpactGlue3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactHighImpactGlue.png",
+            "rarityFrameType": "Primary",
+            "title": "High Impact Glue Legendary",
+            "description": "Glue Gunner projectiles move twice as fast and deal 6 damage on impact. Impact damage scales up to 10x with the amount of Bloons on screen. Adds a 2-0-0 Glue Gunner to your Party"
+        },
+        "HomeBrewAlchemy1": {
+            "tier": 0,
+            "baseId": "HomeBrewAlchemy",
+            "nameLocKey": "HomeBrewAlchemy1",
+            "descriptionLocKey": "HomeBrewAlchemy1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactHomeBrewAlchemy.png",
+            "rarityFrameType": "Magic",
+            "title": "Home Brew Alchemy Common",
+            "description": "Alchemist attack reload time and ability cooldowns are reduced 20% with a 1 in 20 chance to Crit for 50x damage. Adds a 1-0-1 Alchemist to your Party"
+        },
+        "HomeBrewAlchemy2": {
+            "tier": 1,
+            "baseId": "HomeBrewAlchemy",
+            "nameLocKey": "HomeBrewAlchemy2",
+            "descriptionLocKey": "HomeBrewAlchemy2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactHomeBrewAlchemy.png",
+            "rarityFrameType": "Magic",
+            "title": "Home Brew Alchemy Rare",
+            "description": "Alchemist attack reload time and ability cooldowns are reduced 30% with a 1 in 20 chance to Crit for 50x damage. Adds a 1-0-2 Alchemist to your Party"
+        },
+        "HomeBrewAlchemy3": {
+            "tier": 2,
+            "baseId": "HomeBrewAlchemy",
+            "nameLocKey": "HomeBrewAlchemy3",
+            "descriptionLocKey": "HomeBrewAlchemy3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactHomeBrewAlchemy.png",
+            "rarityFrameType": "Magic",
+            "title": "Home Brew Alchemy Legendary",
+            "description": "Alchemist attack reload time and ability cooldowns are reduced 50% with a 1 in 20 chance to Crit for 50x damage. Adds a 0-0-2 Alchemist to your Party"
+        },
+        "HomingProjectiles1": {
+            "tier": 2,
+            "baseId": "HomingProjectiles",
+            "nameLocKey": "HomingProjectiles1",
+            "descriptionLocKey": "HomingProjectiles1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactHomingProjectiles.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Homing Projectiles Legendary",
+            "description": "Grants homing projectiles for Dart Monkey, Bomb Shooter, Tack Shooter, Super Monkey, Druid, Engineer & Dartling Gunner"
+        },
+        "IntelligenceAgent1": {
+            "tier": 0,
+            "baseId": "IntelligenceAgent",
+            "nameLocKey": "IntelligenceAgent1",
+            "descriptionLocKey": "IntelligenceAgent1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactIntelligenceAgent.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Intelligence Agent Common",
+            "description": "Heroes give Monkey Intelligence Bureau buff to nearby Monkeys (can hit all Bloon types) but those monkeys attack reload time is increased 50%"
+        },
+        "IntelligenceAgent2": {
+            "tier": 1,
+            "baseId": "IntelligenceAgent",
+            "nameLocKey": "IntelligenceAgent2",
+            "descriptionLocKey": "IntelligenceAgent2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactIntelligenceAgent.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Intelligence Agent Rare",
+            "description": "Heroes give Monkey Intelligence Bureau buff to nearby Monkeys (can hit all Bloon types) but those monkeys attack reload time is increased 40%"
+        },
+        "IntelligenceAgent3": {
+            "tier": 2,
+            "baseId": "IntelligenceAgent",
+            "nameLocKey": "IntelligenceAgent3",
+            "descriptionLocKey": "IntelligenceAgent3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactIntelligenceAgent.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Intelligence Agent Legendary",
+            "description": "Heroes give Monkey Intelligence Bureau buff to nearby Monkeys (can hit all Bloon types) but those monkeys attack reload time is increased 25%"
+        },
+        "JustLikeMagic1": {
+            "tier": 0,
+            "baseId": "JustLikeMagic",
+            "nameLocKey": "JustLikeMagic1",
+            "descriptionLocKey": "JustLikeMagic1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactJustLikeMagic.png",
+            "rarityFrameType": "Magic",
+            "title": "Just Like Magic Common",
+            "description": "Tier 5 Magic Monkeys' attack speed is halved, but all Monkeys in their radius deal 25% more damage to MOAB-Class Bloons"
+        },
+        "JustLikeMagic2": {
+            "tier": 1,
+            "baseId": "JustLikeMagic",
+            "nameLocKey": "JustLikeMagic2",
+            "descriptionLocKey": "JustLikeMagic2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactJustLikeMagic.png",
+            "rarityFrameType": "Magic",
+            "title": "Just Like Magic Rare",
+            "description": "Tier 5 Magic Monkeys' attack speed is halved, but all Monkeys in their radius deal 30% more damage to MOAB-Class Bloons"
+        },
+        "JustLikeMagic3": {
+            "tier": 2,
+            "baseId": "JustLikeMagic",
+            "nameLocKey": "JustLikeMagic3",
+            "descriptionLocKey": "JustLikeMagic3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactJustLikeMagic.png",
+            "rarityFrameType": "Magic",
+            "title": "Just Like Magic Legendary",
+            "description": "Tier 5 Magic Monkeys' attack speed is halved, but all Monkeys in their radius deal 50% more damage to MOAB-Class Bloons"
+        },
+        "MaliciousMauling1": {
+            "tier": 0,
+            "baseId": "MaliciousMauling",
+            "nameLocKey": "MaliciousMauling1",
+            "descriptionLocKey": "MaliciousMauling1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactMaliciousMauling.png",
+            "rarityFrameType": "Primary",
+            "title": "Malicious Mauling Common",
+            "description": "Bomb Shooters and Striker Jones deal 3x damage to MOAB-Class Bloons. Bomb Shooters attack speed and projectile speed is halved. Adds a 0-1-1 Bomb Shooter to your Party"
+        },
+        "MaliciousMauling2": {
+            "tier": 1,
+            "baseId": "MaliciousMauling",
+            "nameLocKey": "MaliciousMauling2",
+            "descriptionLocKey": "MaliciousMauling2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactMaliciousMauling.png",
+            "rarityFrameType": "Primary",
+            "title": "Malicious Mauling Rare",
+            "description": "Bomb Shooters and Striker Jones deal 4x damage to MOAB-Class Bloons. Bomb Shooters attack speed and projectile speed is halved. Adds a 0-2-1 Bomb Shooter to your Party"
+        },
+        "MaliciousMauling3": {
+            "tier": 2,
+            "baseId": "MaliciousMauling",
+            "nameLocKey": "MaliciousMauling3",
+            "descriptionLocKey": "MaliciousMauling3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactMaliciousMauling.png",
+            "rarityFrameType": "Primary",
+            "title": "Malicious Mauling Legendary",
+            "description": "Bomb Shooters and Striker Jones deal 6x damage to MOAB-Class Bloons. Bomb Shooters attack speed and projectile speed is halved. Adds a 0-2-0 Bomb Shooter to your Party"
+        },
+        "AbundantChoices1": {
+            "tier": 1,
+            "baseId": "AbundantChoices",
+            "nameLocKey": "AbundantChoices1",
+            "descriptionLocKey": "AbundantChoices1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactAbundantChoices.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Abundant Choices Rare",
+            "description": "Get 1 extra choice when picking a Boost, Artifact, or new Monkey"
+        },
+        "AbundantChoices2": {
+            "tier": 2,
+            "baseId": "AbundantChoices",
+            "nameLocKey": "AbundantChoices2",
+            "descriptionLocKey": "AbundantChoices2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactAbundantChoices.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Abundant Choices Legendary",
+            "description": "Get 2 extra choices when picking a Boost, Artifact, or new Monkey"
+        },
+        "MightyMulligan1": {
+            "tier": 0,
+            "baseId": "MightyMulligan",
+            "nameLocKey": "MightyMulligan1",
+            "descriptionLocKey": "MightyMulligan1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactMightyMulligan.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Mighty Mulligan Common",
+            "description": "Provides 1 Artifact Selection reroll opportunity after beating a reward tile"
+        },
+        "MightyMulligan2": {
+            "tier": 1,
+            "baseId": "MightyMulligan",
+            "nameLocKey": "MightyMulligan2",
+            "descriptionLocKey": "MightyMulligan2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactMightyMulligan.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Mighty Mulligan Rare",
+            "description": "Provides 2 Artifact Selection reroll opportunity after beating a reward tile"
+        },
+        "MightyMulligan3": {
+            "tier": 2,
+            "baseId": "MightyMulligan",
+            "nameLocKey": "MightyMulligan3",
+            "descriptionLocKey": "MightyMulligan3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactMightyMulligan.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Mighty Mulligan Legendary",
+            "description": "Provides 3 Artifact Selection reroll opportunity after beating a reward tile"
+        },
+        "NoMorePlease1": {
+            "tier": 1,
+            "baseId": "NoMorePlease",
+            "nameLocKey": "NoMorePlease1",
+            "descriptionLocKey": "NoMorePlease1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactNoMorePlease.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "No More Please Rare",
+            "description": "Ban a Monkey from being offered as an Insta Monkey choice for the rest of the campaign. Option to Ban appears when next offered a choice of Insta Monkey. This Artifact has only 2 charges & is Banished after use"
+        },
+        "NoMorePlease2": {
+            "tier": 2,
+            "baseId": "NoMorePlease",
+            "nameLocKey": "NoMorePlease2",
+            "descriptionLocKey": "NoMorePlease2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactNoMorePlease.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "No More Please Legendary",
+            "description": "Ban a Monkey from being offered as an Insta Monkey choice for the rest of the campaign. Option to Ban appears when next offered a choice of Insta Monkey. This Artifact has only 4 charges & is Banished after use"
+        },
+        "Portability1": {
+            "tier": 0,
+            "baseId": "Portability",
+            "nameLocKey": "Portability1",
+            "descriptionLocKey": "Portability1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactPortability.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Portability Common",
+            "description": "Grants 1 Portable Lake and Pontoon per tile"
+        },
+        "Portability2": {
+            "tier": 1,
+            "baseId": "Portability",
+            "nameLocKey": "Portability2",
+            "descriptionLocKey": "Portability2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactPortability.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Portability Rare",
+            "description": "Grants 2 Portable Lake and Pontoon per tile"
+        },
+        "Portability3": {
+            "tier": 2,
+            "baseId": "Portability",
+            "nameLocKey": "Portability3",
+            "descriptionLocKey": "Portability3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactPortability.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Portability Legendary",
+            "description": "Grants 3 Portable Lake and Pontoon per tile"
+        },
+        "Token": {
+            "tier": 0,
+            "baseId": "Token",
+            "nameLocKey": "TokenArtifact",
+            "descriptionLocKey": "TokenArtifactDescription",
+            "isBossArtifact": false,
+            "icon": "ArtifactMerchantToken.png",
+            "rarityFrameType": "Token",
+            "title": "Token",
+            "description": "Tokens are accepted by all Merchants"
+        },
+        "OneShot1": {
+            "tier": 0,
+            "baseId": "OneShot",
+            "nameLocKey": "OneShot1",
+            "descriptionLocKey": "OneShot1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactOneShot.png",
+            "rarityFrameType": "Military",
+            "title": "One Shot Common",
+            "description": "Sniper Monkeys attack 2x slower, but have a 1 in 5 chance to Crit for 10x damage. Adds a 1-1-0 Sniper Monkey to your Party"
+        },
+        "OneShot2": {
+            "tier": 1,
+            "baseId": "OneShot",
+            "nameLocKey": "OneShot2",
+            "descriptionLocKey": "OneShot2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactOneShot.png",
+            "rarityFrameType": "Military",
+            "title": "One Shot Rare",
+            "description": "Sniper Monkeys attack 2x slower, but have a 1 in 5 chance to Crit for 14x damage. Adds a 2-1-0 Sniper Monkey to your Party"
+        },
+        "OneShot3": {
+            "tier": 2,
+            "baseId": "OneShot",
+            "nameLocKey": "OneShot3",
+            "descriptionLocKey": "OneShot3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactOneShot.png",
+            "rarityFrameType": "Military",
+            "title": "One Shot Legendary",
+            "description": "Sniper Monkeys attack 2x slower, but have a 1 in 5 chance to Crit for 20x damage. Adds a 2-0-0 Sniper Monkey to your Party"
+        },
+        "OverwhelmingSynergy1": {
+            "tier": 0,
+            "baseId": "OverwhelmingSynergy",
+            "nameLocKey": "OverwhelmingSynergy1",
+            "descriptionLocKey": "OverwhelmingSynergy1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactOverwhelmingSynergy.png",
+            "rarityFrameType": "Magic",
+            "title": "Overwhelming Synergy Common",
+            "description": "Magic Monkeys get +15% attack speed. Upgrades for other Monkeys are 20% more expensive"
+        },
+        "OverwhelmingSynergy2": {
+            "tier": 1,
+            "baseId": "OverwhelmingSynergy",
+            "nameLocKey": "OverwhelmingSynergy2",
+            "descriptionLocKey": "OverwhelmingSynergy2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactOverwhelmingSynergy.png",
+            "rarityFrameType": "Magic",
+            "title": "Overwhelming Synergy Rare",
+            "description": "Magic Monkeys get +25% attack speed. Upgrades for other Monkeys are 20% more expensive"
+        },
+        "OverwhelmingSynergy3": {
+            "tier": 2,
+            "baseId": "OverwhelmingSynergy",
+            "nameLocKey": "OverwhelmingSynergy3",
+            "descriptionLocKey": "OverwhelmingSynergy3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactOverwhelmingSynergy.png",
+            "rarityFrameType": "Magic",
+            "title": "Overwhelming Synergy Legendary",
+            "description": "Magic Monkeys get +40% attack speed. Upgrades for other Monkeys are 20% more expensive"
+        },
+        "PincushionFlyby1": {
+            "tier": 0,
+            "baseId": "PincushionFlyby",
+            "nameLocKey": "PincushionFlyby1",
+            "descriptionLocKey": "PincushionFlyby1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactPincushionFlyby.png",
+            "rarityFrameType": "Military",
+            "title": "Pincushion Flyby Common",
+            "description": "Monkey Ace pin Bloons for 1s on pop, and have +10% pierce. Adds a 0-1-1 Monkey Ace to your Party"
+        },
+        "PincushionFlyby2": {
+            "tier": 1,
+            "baseId": "PincushionFlyby",
+            "nameLocKey": "PincushionFlyby2",
+            "descriptionLocKey": "PincushionFlyby2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactPincushionFlyby.png",
+            "rarityFrameType": "Military",
+            "title": "Pincushion Flyby Rare",
+            "description": "Monkey Ace pin Bloons for 1s on pop, and have +15% pierce. Adds a 0-1-2 Monkey Ace to your Party"
+        },
+        "PincushionFlyby3": {
+            "tier": 2,
+            "baseId": "PincushionFlyby",
+            "nameLocKey": "PincushionFlyby3",
+            "descriptionLocKey": "PincushionFlyby3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactPincushionFlyby.png",
+            "rarityFrameType": "Military",
+            "title": "Pincushion Flyby Legendary",
+            "description": "Monkey Ace pin Bloons for 1s on pop, and have +25% pierce. Adds a 0-0-2 Monkey Ace to your Party"
+        },
+        "PopsFired1": {
+            "tier": 0,
+            "baseId": "PopsFired",
+            "nameLocKey": "PopsFired1",
+            "descriptionLocKey": "PopsFired1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactPopsFired.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Pops Fired Common",
+            "description": "When a Bloon on fire is popped, it explodes. Hits up to 2 nearby Bloons"
+        },
+        "PopsFired2": {
+            "tier": 1,
+            "baseId": "PopsFired",
+            "nameLocKey": "PopsFired2",
+            "descriptionLocKey": "PopsFired2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactPopsFired.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Pops Fired Rare",
+            "description": "When a Bloon on fire is popped, it explodes. Hits up to 3 nearby Bloons"
+        },
+        "PopsFired3": {
+            "tier": 2,
+            "baseId": "PopsFired",
+            "nameLocKey": "PopsFired3",
+            "descriptionLocKey": "PopsFired3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactPopsFired.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Pops Fired Legendary",
+            "description": "When a Bloon on fire is popped, it explodes. Hits up to 5 nearby Bloons"
+        },
+        "PrimarySpecialist1": {
+            "tier": 1,
+            "baseId": "PrimarySpecialist",
+            "nameLocKey": "PrimarySpecialist1",
+            "descriptionLocKey": "PrimarySpecialist1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactPrimarySpecialist.png",
+            "rarityFrameType": "Primary",
+            "title": "Primary Specialist Rare",
+            "description": "Primary Monkey attack reload time and ability cooldowns are reduced 20%. All other Monkey categories have pierce and ability cooldown speed reduced 15%"
+        },
+        "PrimarySpecialist2": {
+            "tier": 2,
+            "baseId": "PrimarySpecialist",
+            "nameLocKey": "PrimarySpecialist2",
+            "descriptionLocKey": "PrimarySpecialist2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactPrimarySpecialist.png",
+            "rarityFrameType": "Primary",
+            "title": "Primary Specialist Legendary",
+            "description": "Primary Monkey attack reload time and ability cooldowns are reduced 35%. All other Monkey categories have pierce and ability cooldown speed reduced 15%"
+        },
+        "PureDamage1": {
+            "tier": 0,
+            "baseId": "PureDamage",
+            "nameLocKey": "PureDamage1",
+            "descriptionLocKey": "PureDamage1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactPureDamage.png",
+            "rarityFrameType": "Magic",
+            "title": "Pure Damage Common",
+            "description": "Magic Monkeys attack speed and ability cooldowns are 2x slower, but damage is increased by 230% against Ceramic and MOAB-Class Bloons"
+        },
+        "PureDamage2": {
+            "tier": 1,
+            "baseId": "PureDamage",
+            "nameLocKey": "PureDamage2",
+            "descriptionLocKey": "PureDamage2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactPureDamage.png",
+            "rarityFrameType": "Magic",
+            "title": "Pure Damage Rare",
+            "description": "Magic Monkeys attack speed and ability cooldowns are 2x slower, but damage is increased by 250% against Ceramic and MOAB-Class Bloons"
+        },
+        "PureDamage3": {
+            "tier": 2,
+            "baseId": "PureDamage",
+            "nameLocKey": "PureDamage3",
+            "descriptionLocKey": "PureDamage3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactPureDamage.png",
+            "rarityFrameType": "Magic",
+            "title": "Pure Damage Legendary",
+            "description": "Magic Monkeys attack speed and ability cooldowns are 2x slower, but damage is increased by 300% against Ceramic and MOAB-Class Bloons"
+        },
+        "RubberBullets1": {
+            "tier": 1,
+            "baseId": "RubberBullets",
+            "nameLocKey": "RubberBullets1",
+            "descriptionLocKey": "RubberBullets1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactRubberBullets.png",
+            "rarityFrameType": "Military",
+            "title": "Rubber Bullets Rare",
+            "description": "Tier 4 and higher Sniper Monkeys only deal 1 damage per shot, but immobilize MOAB-Class Bloons briefly with each hit. Adds a 0-0-0 Sniper Monkey to your Party"
+        },
+        "SlippedOnThePeel1": {
+            "tier": 0,
+            "baseId": "SlippedOnThePeel",
+            "nameLocKey": "SlippedOnThePeel1",
+            "descriptionLocKey": "SlippedOnThePeel1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSlippedOnThePeel.png",
+            "rarityFrameType": "Support",
+            "title": "Slipped on the Peel Common",
+            "description": "Benjamin and the Banana Farms slow Bloons in radius by 15%. Benjamin's range is doubled. Adds a 1-0-1 Banana Farm to your Party"
+        },
+        "SlippedOnThePeel2": {
+            "tier": 1,
+            "baseId": "SlippedOnThePeel",
+            "nameLocKey": "SlippedOnThePeel2",
+            "descriptionLocKey": "SlippedOnThePeel2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSlippedOnThePeel.png",
+            "rarityFrameType": "Support",
+            "title": "Slipped on the Peel Rare",
+            "description": "Benjamin and the Banana Farms slow Bloons in radius by 20%. Benjamin's range is doubled. Adds a 2-0-1 Banana Farm to your Party"
+        },
+        "SlippedOnThePeel3": {
+            "tier": 2,
+            "baseId": "SlippedOnThePeel",
+            "nameLocKey": "SlippedOnThePeel3",
+            "descriptionLocKey": "SlippedOnThePeel3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSlippedOnThePeel.png",
+            "rarityFrameType": "Support",
+            "title": "Slipped on the Peel Legendary",
+            "description": "Benjamin and the Banana Farms slow Bloons in radius by 30%. Benjamin's range is doubled. Adds a 2-0-0 Banana Farm to your Party"
+        },
+        "SlowAndSteady1": {
+            "tier": 0,
+            "baseId": "SlowAndSteady",
+            "nameLocKey": "SlowAndSteady1",
+            "descriptionLocKey": "SlowAndSteady1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSlowAndSteady.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Slow And Steady Common",
+            "description": "Monkey damage increased 100%. For the first 20s of each round, all Monkeys attack 2x slower"
+        },
+        "SlowAndSteady2": {
+            "tier": 1,
+            "baseId": "SlowAndSteady",
+            "nameLocKey": "SlowAndSteady2",
+            "descriptionLocKey": "SlowAndSteady2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSlowAndSteady.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Slow And Steady Rare",
+            "description": "Monkey damage increased 100%. For the first 20s of each round, all Monkeys attack 1.8x slower"
+        },
+        "SlowAndSteady3": {
+            "tier": 2,
+            "baseId": "SlowAndSteady",
+            "nameLocKey": "SlowAndSteady3",
+            "descriptionLocKey": "SlowAndSteady3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSlowAndSteady.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Slow And Steady Legendary",
+            "description": "Monkey damage increased 100%. For the first 20s of each round, all Monkeys attack 1.5x slower"
+        },
+        "SlowerIsHarder1": {
+            "tier": 0,
+            "baseId": "SlowerIsHarder",
+            "nameLocKey": "SlowerIsHarder1",
+            "descriptionLocKey": "SlowerIsHarder1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSlowerisHarder.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Slower Is Harder Common",
+            "description": "All projectile speed is reduced 35%, but damage increased by 15%"
+        },
+        "SlowerIsHarder2": {
+            "tier": 1,
+            "baseId": "SlowerIsHarder",
+            "nameLocKey": "SlowerIsHarder2",
+            "descriptionLocKey": "SlowerIsHarder2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSlowerisHarder.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Slower Is Harder Rare",
+            "description": "All projectile speed is reduced 35%, but damage increased by 20%"
+        },
+        "SlowerIsHarder3": {
+            "tier": 2,
+            "baseId": "SlowerIsHarder",
+            "nameLocKey": "SlowerIsHarder3",
+            "descriptionLocKey": "SlowerIsHarder3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSlowerisHarder.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Slower Is Harder Legendary",
+            "description": "All projectile speed is reduced 35%, but damage increased by 30%"
+        },
+        "SpiritOfAdventure1": {
+            "tier": 0,
+            "baseId": "SpiritOfAdventure",
+            "nameLocKey": "SpiritOfAdventure1",
+            "descriptionLocKey": "SpiritOfAdventure1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSpiritOfAdventure.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Spirit of Adventure Common",
+            "description": "Hero end of round XP increased 45% and Hero attack speed increased 10%. Non-Hero Monkeys attack speed reduced 10%"
+        },
+        "SpiritOfAdventure2": {
+            "tier": 1,
+            "baseId": "SpiritOfAdventure",
+            "nameLocKey": "SpiritOfAdventure2",
+            "descriptionLocKey": "SpiritOfAdventure2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSpiritOfAdventure.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Spirit of Adventure Rare",
+            "description": "Hero end of round XP increased 60% and Hero attack speed increased 10%. Non-Hero Monkeys attack speed reduced 10%"
+        },
+        "SpiritOfAdventure3": {
+            "tier": 2,
+            "baseId": "SpiritOfAdventure",
+            "nameLocKey": "SpiritOfAdventure3",
+            "descriptionLocKey": "SpiritOfAdventure3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSpiritOfAdventure.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Spirit of Adventure Legendary",
+            "description": "Hero end of round XP increased 80% and Hero attack speed increased 10%. Non-Hero Monkeys attack speed reduced 10%"
+        },
+        "SplodeyDarts1": {
+            "tier": 0,
+            "baseId": "SplodeyDarts",
+            "nameLocKey": "SplodeyDarts1",
+            "descriptionLocKey": "SplodeyDarts1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSplodyDarts.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Splody Darts Common",
+            "description": "Dart based Monkeys' projectiles have a 20% chance to explode when they expire, dealing 1 damage to nearby Bloons"
+        },
+        "SplodeyDarts2": {
+            "tier": 1,
+            "baseId": "SplodeyDarts",
+            "nameLocKey": "SplodeyDarts2",
+            "descriptionLocKey": "SplodeyDarts2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSplodyDarts.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Splody Darts Rare",
+            "description": "Dart based Monkeys' projectiles have a 20% chance to explode when they expire, dealing 3 damage to nearby Bloons"
+        },
+        "SplodeyDarts3": {
+            "tier": 2,
+            "baseId": "SplodeyDarts",
+            "nameLocKey": "SplodeyDarts3",
+            "descriptionLocKey": "SplodeyDarts3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSplodyDarts.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Splody Darts Legendary",
+            "description": "Dart based Monkeys' projectiles have a 20% chance to explode when they expire, dealing 9 damage to nearby Bloons"
+        },
+        "SquadronTogether1": {
+            "tier": 0,
+            "baseId": "SquadronTogether",
+            "nameLocKey": "SquadronTogether1",
+            "descriptionLocKey": "SquadronTogether1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSquadronTogetherStrong.png",
+            "rarityFrameType": "Military",
+            "title": "Squadron Together Strong Common",
+            "description": "Military Monkeys get +15% attack speed. Upgrades for other Monkeys are 20% more expensive"
+        },
+        "SquadronTogether2": {
+            "tier": 1,
+            "baseId": "SquadronTogether",
+            "nameLocKey": "SquadronTogether2",
+            "descriptionLocKey": "SquadronTogether2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSquadronTogetherStrong.png",
+            "rarityFrameType": "Military",
+            "title": "Squadron Together Strong Rare",
+            "description": "Military Monkeys get +25% attack speed. Upgrades for other Monkeys are 20% more expensive"
+        },
+        "SquadronTogether3": {
+            "tier": 2,
+            "baseId": "SquadronTogether",
+            "nameLocKey": "SquadronTogether3",
+            "descriptionLocKey": "SquadronTogether3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSquadronTogetherStrong.png",
+            "rarityFrameType": "Military",
+            "title": "Squadron Together Strong Legendary",
+            "description": "Military Monkeys get +40% attack speed. Upgrades for other Monkeys are 20% more expensive"
+        },
+        "StartingStrong1": {
+            "tier": 0,
+            "baseId": "StartingStong",
+            "nameLocKey": "StartingStrong1",
+            "descriptionLocKey": "StartingStrong1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactStartingStrong.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Starting Strong Common",
+            "description": "For the first 20s of each round, Monkeys attack 15% faster"
+        },
+        "StartingStrong2": {
+            "tier": 1,
+            "baseId": "StartingStong",
+            "nameLocKey": "StartingStrong2",
+            "descriptionLocKey": "StartingSrtong2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactStartingStrong.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Starting Strong Rare",
+            "description": "For the first 20s of each round, Monkeys attack 20% faster"
+        },
+        "StartingStrong3": {
+            "tier": 2,
+            "baseId": "StartingStong",
+            "nameLocKey": "StartingStrong3",
+            "descriptionLocKey": "StartingStrong3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactStartingStrong.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Starting Strong Legendary",
+            "description": "For the first 20s of each round, Monkeys attack 35% faster"
+        },
+        "StickySituation1": {
+            "tier": 0,
+            "baseId": "StickySituation",
+            "nameLocKey": "StickySituation1",
+            "descriptionLocKey": "StickySituation1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactStickySituation.png",
+            "rarityFrameType": "Primary",
+            "title": "Sticky Situation Common",
+            "description": "Primary Monkeys deal 1.5x damage to glued Bloons"
+        },
+        "StickySituation2": {
+            "tier": 1,
+            "baseId": "StickySituation",
+            "nameLocKey": "StickySituation2",
+            "descriptionLocKey": "StickySituation2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactStickySituation.png",
+            "rarityFrameType": "Primary",
+            "title": "Sticky Situation Rare",
+            "description": "Primary Monkeys deal 1.75x damage to glued Bloons"
+        },
+        "StickySituation3": {
+            "tier": 2,
+            "baseId": "StickySituation",
+            "nameLocKey": "StickySituation3",
+            "descriptionLocKey": "StickySituation3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactStickySituation.png",
+            "rarityFrameType": "Primary",
+            "title": "Sticky Situation Legendary",
+            "description": "Primary Monkeys deal 2x damage to glued Bloons"
+        },
+        "SupportSpecialist1": {
+            "tier": 1,
+            "baseId": "SupportSpecialist",
+            "nameLocKey": "SupportSpecialist1",
+            "descriptionLocKey": "SupportSpecialist1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSupportSpecialist.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Support Specialist Rare",
+            "description": "Support Monkeys attack reload time and ability cooldowns are reduced 20%. All other Monkey categories have pierce and ability cooldown speed reduced 15%"
+        },
+        "SupportSpecialist2": {
+            "tier": 2,
+            "baseId": "SupportSpecialist",
+            "nameLocKey": "SupportSpecialist2",
+            "descriptionLocKey": "SupportSpecialist2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSupportSpecialist.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Support Specialist Legendary",
+            "description": "Support Monkeys attack reload time and ability cooldowns are reduced 35%. All other Monkey categories have pierce and ability cooldown speed reduced 15%"
+        },
+        "SwellingSpikes1": {
+            "tier": 0,
+            "baseId": "SwellingSpikes",
+            "nameLocKey": "SwellingSpikes1",
+            "descriptionLocKey": "SwellingSpikes1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSwellingSpikes.png",
+            "rarityFrameType": "Support",
+            "title": "Swelling Spikes Common",
+            "description": "Spike Factories attack half as fast, but have 115% more pierce. Adds a 1-0-1 Spike Factory to your Party"
+        },
+        "SwellingSpikes2": {
+            "tier": 1,
+            "baseId": "SwellingSpikes",
+            "nameLocKey": "SwellingSpikes2",
+            "descriptionLocKey": "SwellingSpikes2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSwellingSpikes.png",
+            "rarityFrameType": "Support",
+            "title": "Swelling Spikes Rare",
+            "description": "Spike Factories attack half as fast, but have 120% more pierce. Adds a 2-0-1 Spike Factory to your Party"
+        },
+        "SwellingSpikes3": {
+            "tier": 2,
+            "baseId": "SwellingSpikes",
+            "nameLocKey": "SwellingSpikes3",
+            "descriptionLocKey": "SwellingSpikes3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSwellingSpikes.png",
+            "rarityFrameType": "Support",
+            "title": "Swelling Spikes Legendary",
+            "description": "Spike Factories attack half as fast, but have 135% more pierce. Adds a 2-0-0 Spike Factory to your Party"
+        },
+        "SwiftestToBusiness1": {
+            "tier": 0,
+            "baseId": "SwiftestToBusiness",
+            "nameLocKey": "SwiftestToBusiness1",
+            "descriptionLocKey": "SwiftestToBusiness1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSwiftesttoBuisness.png",
+            "rarityFrameType": "Magic",
+            "title": "Swiftest To Business Common",
+            "description": "Ninja Monkeys tier 3 or higher have 20% faster projectile speed, and attack reload and ability cooldown time reduced 20%. Adds a 1-0-1 Ninja Monkey to your Party"
+        },
+        "SwiftestToBusiness2": {
+            "tier": 1,
+            "baseId": "SwiftestToBusiness",
+            "nameLocKey": "SwiftestToBusiness2",
+            "descriptionLocKey": "SwiftestToBusiness2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSwiftesttoBuisness.png",
+            "rarityFrameType": "Magic",
+            "title": "Swiftest To Business Rare",
+            "description": "Ninja Monkeys tier 3 or higher have 25% faster projectile speed, and attack reload and ability cooldown time reduced 25%. Adds a 2-0-1 Ninja Monkey to your Party"
+        },
+        "SwiftestToBusiness3": {
+            "tier": 2,
+            "baseId": "SwiftestToBusiness",
+            "nameLocKey": "SwiftestToBusiness3",
+            "descriptionLocKey": "SwiftestToBusiness3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactSwiftesttoBuisness.png",
+            "rarityFrameType": "Magic",
+            "title": "Swiftest To Business Legendary",
+            "description": "Ninja Monkeys tier 3 or higher have 40% faster projectile speed, and attack reload and ability cooldown time reduced 40%. Adds a 2-0-0 Ninja Monkey to your Party"
+        },
+        "TheUnspokenHeroes1": {
+            "tier": 0,
+            "baseId": "TheUnspokenHeroes",
+            "nameLocKey": "TheUnspokenHeroes1",
+            "descriptionLocKey": "TheUnspokenHeroes1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactTheUnspokenHeroes.png",
+            "rarityFrameType": "Support",
+            "title": "The Unspoken Heroes Common",
+            "description": "Support Monkeys have a 1 in 10 chance to Crit for 250% damage. Heroes attack speed and end of round experience is reduced 15%"
+        },
+        "TheUnspokenHeroes2": {
+            "tier": 1,
+            "baseId": "TheUnspokenHeroes",
+            "nameLocKey": "TheUnspokenHeroes2",
+            "descriptionLocKey": "TheUnspokenHeroes2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactTheUnspokenHeroes.png",
+            "rarityFrameType": "Support",
+            "title": "The Unspoken Heroes Rare",
+            "description": "Support Monkeys have a 1 in 10 chance to Crit for 350% damage. Heroes attack speed and end of round experience is reduced 15%"
+        },
+        "TheUnspokenHeroes3": {
+            "tier": 2,
+            "baseId": "TheUnspokenHeroes",
+            "nameLocKey": "TheUnspokenHeroes3",
+            "descriptionLocKey": "TheUnspokenHeroes3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactTheUnspokenHeroes.png",
+            "rarityFrameType": "Support",
+            "title": "The Unspoken Heroes Legendary",
+            "description": "Support Monkeys have a 1 in 10 chance to Crit for 500% damage. Heroes attack speed and end of round experience is reduced 15%"
+        },
+        "TitForTat1": {
+            "tier": 0,
+            "baseId": "TitForTat",
+            "nameLocKey": "TitForTat1",
+            "descriptionLocKey": "TitForTat1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactTitForTat.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Tit For Tat Common",
+            "description": "All Monkeys attack 15% faster. Bloons move 25% faster when in range of Monkeys"
+        },
+        "TitForTat2": {
+            "tier": 1,
+            "baseId": "TitForTat",
+            "nameLocKey": "TitForTat2",
+            "descriptionLocKey": "TitForTat2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactTitForTat.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Tit For Tat Rare",
+            "description": "All Monkeys attack 20% faster. Bloons move 25% faster when in range of Monkeys"
+        },
+        "TitForTat3": {
+            "tier": 2,
+            "baseId": "TitForTat",
+            "nameLocKey": "TitForTat3",
+            "descriptionLocKey": "TitForTat3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactTitForTat.png",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Tit For Tat Legendary",
+            "description": "All Monkeys attack 40% faster. Bloons move 25% faster when in range of Monkeys"
+        },
+        "TooManyCooks1": {
+            "tier": 0,
+            "baseId": "TooManyCooks",
+            "nameLocKey": "TooManyCooks1",
+            "descriptionLocKey": "TooManyCooks1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactTooManyCooks.png",
+            "rarityFrameType": "Military",
+            "title": "Too Many Cooks Common",
+            "description": "Military Monkeys attack reload time is reduced 25%. Attack reload time increased by 5% for each Military Monkey placed"
+        },
+        "TooManyCooks2": {
+            "tier": 1,
+            "baseId": "TooManyCooks",
+            "nameLocKey": "TooManyCooks2",
+            "descriptionLocKey": "TooManyCooks2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactTooManyCooks.png",
+            "rarityFrameType": "Military",
+            "title": "Too Many Cooks Rare",
+            "description": "Military Monkeys attack reload time is reduced 30%. Attack reload time increased by 5% for each Military Monkey placed"
+        },
+        "TooManyCooks3": {
+            "tier": 2,
+            "baseId": "TooManyCooks",
+            "nameLocKey": "TooManyCooks3",
+            "descriptionLocKey": "TooManyCooks3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactTooManyCooks.png",
+            "rarityFrameType": "Military",
+            "title": "Too Many Cooks Legendary",
+            "description": "Military Monkeys attack reload time is reduced 45%. Attack reload time increased by 5% for each Military Monkey placed"
+        },
+        "TrickShotATacks1": {
+            "tier": 0,
+            "baseId": "TrickShotATacks",
+            "nameLocKey": "TrickShotATacks1",
+            "descriptionLocKey": "TrickShotATacks1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactTrickShotATacks.png",
+            "rarityFrameType": "Primary",
+            "title": "Trick Shot A-Tacks Common",
+            "description": "Tack Shooter projectiles rebound off obstacles. Range and projectile lifespan increased 50%. Adds a 1-1-0 Tack Shooter to your Party"
+        },
+        "TrickShotATacks2": {
+            "tier": 1,
+            "baseId": "TrickShotATacks",
+            "nameLocKey": "TrickShotATacks2",
+            "descriptionLocKey": "TrickShotATacks2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactTrickShotATacks.png",
+            "rarityFrameType": "Primary",
+            "title": "Trick Shot A-Tacks Rare",
+            "description": "Tack Shooter projectiles rebound off obstacles. Range and projectile lifespan increased 100%. Adds a 1-2-0 Tack Shooter to your Party"
+        },
+        "TrickShotATacks3": {
+            "tier": 2,
+            "baseId": "TrickShotATacks",
+            "nameLocKey": "TrickShotATacks3",
+            "descriptionLocKey": "TrickShotATacks3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactTrickShotATacks.png",
+            "rarityFrameType": "Primary",
+            "title": "Trick Shot A-Tacks Legendary",
+            "description": "Tack Shooter projectiles rebound off obstacles. Range and projectile lifespan increased 200%. Adds a 0-2-0 Tack Shooter to your Party"
+        },
+        "Unification1": {
+            "tier": 0,
+            "baseId": "Unification",
+            "nameLocKey": "Unification1",
+            "descriptionLocKey": "Unification1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactUnification.png",
+            "rarityFrameType": "Primary",
+            "title": "Unification Common",
+            "description": "Primary Monkeys now count as all Monkey categories. Primary Monkey attack range reduced 20%"
+        },
+        "Unification2": {
+            "tier": 1,
+            "baseId": "Unification",
+            "nameLocKey": "Unification2",
+            "descriptionLocKey": "Unification2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactUnification.png",
+            "rarityFrameType": "Primary",
+            "title": "Unification Rare",
+            "description": "Primary Monkeys now count as all Monkey categories. Primary Monkey attack range reduced 10%"
+        },
+        "Unification3": {
+            "tier": 2,
+            "baseId": "Unification",
+            "nameLocKey": "Unification3",
+            "descriptionLocKey": "Unification3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactUnification.png",
+            "rarityFrameType": "Primary",
+            "title": "Unification Legendary",
+            "description": "Primary Monkeys now count as all Monkey categories."
+        },
+        "Wackywibblywavey1": {
+            "tier": 0,
+            "baseId": "Wackywibblywavey",
+            "nameLocKey": "Wackywibblywavey1",
+            "descriptionLocKey": "Wackywibblywavey1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactWackywibblywavey.png",
+            "rarityFrameType": "Military",
+            "title": "Wacky Wibbly Wavey Common",
+            "description": "Heli Pilot attack reload time is reduced 20% and fire in a wacky wiggly pattern. Adds a 1-1-0 Heli Pilot to your Party"
+        },
+        "Wackywibblywavey2": {
+            "tier": 1,
+            "baseId": "Wackywibblywavey",
+            "nameLocKey": "Wackywibblywavey2",
+            "descriptionLocKey": "Wackywibblywavey2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactWackywibblywavey.png",
+            "rarityFrameType": "Military",
+            "title": "Wacky Wibbly Wavey Rare",
+            "description": "Heli Pilot attack reload time is reduced 25% and fire in a wacky wiggly pattern. Adds a 2-1-0 Heli Pilot to your Party"
+        },
+        "Wackywibblywavey3": {
+            "tier": 2,
+            "baseId": "Wackywibblywavey",
+            "nameLocKey": "Wackywibblywavey3",
+            "descriptionLocKey": "Wackywibblywavey3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactWackywibblywavey.png",
+            "rarityFrameType": "Military",
+            "title": "Wacky Wibbly Wavey Legendary",
+            "description": "Heli Pilot attack reload time is reduced 40% and fire in a wacky wiggly pattern. Adds a 2-0-0 Heli Pilot to your Party"
+        },
+        "ZigThenZag1": {
+            "tier": 0,
+            "baseId": "ZigThenZag",
+            "nameLocKey": "ZigThenZag1",
+            "descriptionLocKey": "ZigThenZag1Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactZigThenZag.png",
+            "rarityFrameType": "Military",
+            "title": "Zig Then Zag Common",
+            "description": "All Military Monkeys shoot in a Zig Zag pattern. Projectiles move 20% slower, but attack speed is 20% faster"
+        },
+        "ZigThenZag2": {
+            "tier": 1,
+            "baseId": "ZigThenZag",
+            "nameLocKey": "ZigThenZag2",
+            "descriptionLocKey": "ZigThenZag2Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactZigThenZag.png",
+            "rarityFrameType": "Military",
+            "title": "Zig Then Zag Rare",
+            "description": "All Military Monkeys shoot in a Zig Zag pattern. Projectiles move 20% slower, but attack speed is 25% faster"
+        },
+        "ZigThenZag3": {
+            "tier": 2,
+            "baseId": "ZigThenZag",
+            "nameLocKey": "ZigThenZag3",
+            "descriptionLocKey": "ZigThenZag3Description",
+            "isBossArtifact": false,
+            "icon": "ArtifactZigThenZag.png",
+            "rarityFrameType": "Military",
+            "title": "Zig Then Zag Legendary",
+            "description": "All Military Monkeys shoot in a Zig Zag pattern. Projectiles move 20% slower, but attack speed is 40% faster"
+        }
+    },
+    "heroStarterKits": {
+        "Quincy": {
+            "heroID": "Quincy",
+            "artifact": "SplodeyDarts1",
+            "startingInstas": [
+                {
+                    "baseId": "DartMonkey",
+                    "tiers": "[0,0,3]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "BoomerangMonkey",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Cyber Quincy": {
+            "heroID": "Cyber Quincy",
+            "artifact": "ColdSteel1",
+            "startingInstas": [
+                {
+                    "baseId": "DartlingGunner",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "SniperMonkey",
+                    "tiers": "[1,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Wolfpack Quincy": {
+            "heroID": "Wolfpack Quincy",
+            "artifact": "CorneredBeasts1",
+            "startingInstas": [
+                {
+                    "baseId": "BeastHandler",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "Druid",
+                    "tiers": "[0,0,1]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Gwendolin": {
+            "heroID": "Gwendolin",
+            "artifact": "FlamingHotPunchARang1",
+            "startingInstas": [
+                {
+                    "baseId": "TackShooter",
+                    "tiers": "[1,1,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "WizardMonkey",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "CircusGwendolin": {
+            "heroID": "CircusGwendolin",
+            "artifact": "BouncingProjectiles2",
+            "startingInstas": [
+                {
+                    "baseId": "HeliPilot",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "DartlingGunner",
+                    "tiers": "[0,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Scientist Gwendolin": {
+            "heroID": "Scientist Gwendolin",
+            "artifact": "FrostedTips1",
+            "startingInstas": [
+                {
+                    "baseId": "Alchemist",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "EngineerMonkey",
+                    "tiers": "[0,1,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "StrikerJones": {
+            "heroID": "StrikerJones",
+            "artifact": "MaliciousMauling1",
+            "startingInstas": [
+                {
+                    "baseId": "NinjaMonkey",
+                    "tiers": "[0,1,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "MortarMonkey",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Biker Bones": {
+            "heroID": "Biker Bones",
+            "artifact": "OneShot1",
+            "startingInstas": [
+                {
+                    "baseId": "WizardMonkey",
+                    "tiers": "[0,1,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "MortarMonkey",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Octo Jones": {
+            "heroID": "Octo Jones",
+            "artifact": "CorrosiveTorpEDarts1",
+            "startingInstas": [
+                {
+                    "baseId": "BombShooter",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "MonkeyBuccaneer",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "ObynGreenfoot": {
+            "heroID": "ObynGreenfoot",
+            "artifact": "EnchantedRebuttal1",
+            "startingInstas": [
+                {
+                    "baseId": "Druid",
+                    "tiers": "[0,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "Druid",
+                    "tiers": "[0,0,3]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "ObynOceanGuardian": {
+            "heroID": "ObynOceanGuardian",
+            "artifact": "Portability1",
+            "startingInstas": [
+                {
+                    "baseId": "Mermonkey",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "BeastHandler",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "MoltenObyn": {
+            "heroID": "MoltenObyn",
+            "artifact": "PureDamage1",
+            "startingInstas": [
+                {
+                    "baseId": "NinjaMonkey",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "Druid",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "CaptainChurchill": {
+            "heroID": "CaptainChurchill",
+            "artifact": "BattlefieldCommission1",
+            "startingInstas": [
+                {
+                    "baseId": "DartMonkey",
+                    "tiers": "[0,0,1]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "DartlingGunner",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Sentai Captain Churchill": {
+            "heroID": "Sentai Captain Churchill",
+            "artifact": "SquadronTogether1",
+            "startingInstas": [
+                {
+                    "baseId": "MonkeyAce",
+                    "tiers": "[1,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "MortarMonkey",
+                    "tiers": "[1,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Sleigh Captain Churchill": {
+            "heroID": "Sleigh Captain Churchill",
+            "artifact": "AbundantChoices1",
+            "startingInstas": [
+                {
+                    "baseId": "IceMonkey",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "EngineerMonkey",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Benjamin": {
+            "heroID": "Benjamin",
+            "artifact": "SlippedOnThePeel1",
+            "startingInstas": [
+                {
+                    "baseId": "SniperMonkey",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "SpikeFactory",
+                    "tiers": "[1,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "BenJammin": {
+            "heroID": "BenJammin",
+            "artifact": "StartingStrong1",
+            "startingInstas": [
+                {
+                    "baseId": "MonkeyAce",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "Druid",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "SushiBento": {
+            "heroID": "SushiBento",
+            "artifact": "MightyMulligan2",
+            "startingInstas": [
+                {
+                    "baseId": "BananaFarm",
+                    "tiers": "[0,0,3]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "DartMonkey",
+                    "tiers": "[0,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "PatFusty": {
+            "heroID": "PatFusty",
+            "artifact": "HeightenedPerception1",
+            "startingInstas": [
+                {
+                    "baseId": "TackShooter",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "SpikeFactory",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "FustyTheSnowman": {
+            "heroID": "FustyTheSnowman",
+            "artifact": "EsotericElementalist1",
+            "startingInstas": [
+                {
+                    "baseId": "IceMonkey",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "Mermonkey",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "KaijuPat": {
+            "heroID": "KaijuPat",
+            "artifact": "SwiftestToBusiness1",
+            "startingInstas": [
+                {
+                    "baseId": "BeastHandler",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "NinjaMonkey",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Ezili": {
+            "heroID": "Ezili",
+            "artifact": "SpiritOfAdventure2",
+            "startingInstas": [
+                {
+                    "baseId": "DartMonkey",
+                    "tiers": "[0,1,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "WizardMonkey",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "SmudgeCatt": {
+            "heroID": "SmudgeCatt",
+            "artifact": "CatsMeow2",
+            "startingInstas": [
+                {
+                    "baseId": "Alchemist",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "SpikeFactory",
+                    "tiers": "[0,1,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Galaxili": {
+            "heroID": "Galaxili",
+            "artifact": "SlowerIsHarder1",
+            "startingInstas": [
+                {
+                    "baseId": "BoomerangMonkey",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "MortarMonkey",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Adora": {
+            "heroID": "Adora",
+            "artifact": "DivineIntervention1",
+            "startingInstas": [
+                {
+                    "baseId": "Alchemist",
+                    "tiers": "[0,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "EngineerMonkey",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "JoanOfArcAdora": {
+            "heroID": "JoanOfArcAdora",
+            "artifact": "CriticalImpact1",
+            "startingInstas": [
+                {
+                    "baseId": "NinjaMonkey",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "BoomerangMonkey",
+                    "tiers": "[0,0,1]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Voidora": {
+            "heroID": "Voidora",
+            "artifact": "Unification1",
+            "startingInstas": [
+                {
+                    "baseId": "GlueGunner",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "DartMonkey",
+                    "tiers": "[0,3,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Etienne": {
+            "heroID": "Etienne",
+            "artifact": "AbsoluteAbility2",
+            "startingInstas": [
+                {
+                    "baseId": "EngineerMonkey",
+                    "tiers": "[1,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "HeliPilot",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "ETnEtienne": {
+            "heroID": "ETnEtienne",
+            "artifact": "Wackywibblywavey1",
+            "startingInstas": [
+                {
+                    "baseId": "MonkeyAce",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "DartlingGunner",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "BookWyrmEtienne": {
+            "heroID": "BookWyrmEtienne",
+            "artifact": "OverwhelmingSynergy1",
+            "startingInstas": [
+                {
+                    "baseId": "SuperMonkey",
+                    "tiers": "[1,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "WizardMonkey",
+                    "tiers": "[0,0,1]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Sauda": {
+            "heroID": "Sauda",
+            "artifact": "StickySituation1",
+            "startingInstas": [
+                {
+                    "baseId": "TackShooter",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "GlueGunner",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "VikingSauda": {
+            "heroID": "VikingSauda",
+            "artifact": "CeramicChunker1",
+            "startingInstas": [
+                {
+                    "baseId": "BombShooter",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "TackShooter",
+                    "tiers": "[0,3,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "JiangshiSauda": {
+            "heroID": "JiangshiSauda",
+            "artifact": "HomeBrewAlchemy1",
+            "startingInstas": [
+                {
+                    "baseId": "WizardMonkey",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "IceMonkey",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "AdmiralBrickell": {
+            "heroID": "AdmiralBrickell",
+            "artifact": "Portability2",
+            "startingInstas": [
+                {
+                    "baseId": "MonkeySub",
+                    "tiers": "[1,0,1]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "MonkeyBuccaneer",
+                    "tiers": "[0,3,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "DreadPirateBrickell": {
+            "heroID": "DreadPirateBrickell",
+            "artifact": "FullBroadside2",
+            "startingInstas": [
+                {
+                    "baseId": "BeastHandler",
+                    "tiers": "[0,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "Mermonkey",
+                    "tiers": "[3,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "LifeguardBrickell": {
+            "heroID": "LifeguardBrickell",
+            "artifact": "Portability2",
+            "startingInstas": [
+                {
+                    "baseId": "IceMonkey",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "HeliPilot",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Psi": {
+            "heroID": "Psi",
+            "artifact": "AbilityStacking1",
+            "startingInstas": [
+                {
+                    "baseId": "NinjaMonkey",
+                    "tiers": "[1,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "Mermonkey",
+                    "tiers": "[0,1,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Psimbals": {
+            "heroID": "Psimbals",
+            "artifact": "BiggestBeacon1",
+            "startingInstas": [
+                {
+                    "baseId": "Mermonkey",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "DartMonkey",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "DreamstatePsi": {
+            "heroID": "DreamstatePsi",
+            "artifact": "DreamTeams1",
+            "startingInstas": [
+                {
+                    "baseId": "NinjaMonkey",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "Druid",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Geraldo": {
+            "heroID": "Geraldo",
+            "artifact": "TheUnspokenHeroes1",
+            "startingInstas": [
+                {
+                    "baseId": "BeastHandler",
+                    "tiers": "[0,1,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "TackShooter",
+                    "tiers": "[0,1,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "GeraldoGentlemanGadgeteer": {
+            "heroID": "GeraldoGentlemanGadgeteer",
+            "artifact": "TrickShotATacks1",
+            "startingInstas": [
+                {
+                    "baseId": "SniperMonkey",
+                    "tiers": "[0,2,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "GlueGunner",
+                    "tiers": "[0,1,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Corvus": {
+            "heroID": "Corvus",
+            "artifact": "ConfuddlingSpelling1",
+            "startingInstas": [
+                {
+                    "baseId": "BombShooter",
+                    "tiers": "[2,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "WizardMonkey",
+                    "tiers": "[0,0,2]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "Rosalia": {
+            "heroID": "Rosalia",
+            "artifact": "PincushionFlyby1",
+            "startingInstas": [
+                {
+                    "baseId": "SniperMonkey",
+                    "tiers": "[1,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "SuperMonkey",
+                    "tiers": "[0,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        },
+        "RosaliaTinkerfairy": {
+            "heroID": "RosaliaTinkerfairy",
+            "artifact": "FataMorgana1",
+            "startingInstas": [
+                {
+                    "baseId": "Druid",
+                    "tiers": "[1,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                },
+                {
+                    "baseId": "HeliPilot",
+                    "tiers": "[0,0,0]",
+                    "currentCooldown": "0",
+                    "lootType": "permanent",
+                    "uniqueId": "0",
+                    "isFree": "false"
+                }
+            ]
+        }
+    }
+}

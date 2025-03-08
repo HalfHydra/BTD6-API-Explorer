@@ -1,5 +1,5 @@
 {
-    "version": "1.7.0",
+    "version": "1.8.0",
     "projectContentVersion": 47,
     "totalInstaMonkeys": 1536,
     "achievements": 138,
@@ -7,6 +7,7 @@
     "totalMaps": 78,
     "profileBanners": 49,
     "profileAvatars": 109,
+    "teamsBanners": 15,
     "startRound": {
         "Easy": 1,
         "PrimaryOnly": 1,

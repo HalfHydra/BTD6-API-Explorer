@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rogue Legends Artifacts</title>
+    <meta name="viewport" content="width=800">
+    <link rel="apple-touch-icon" href="./Assets/UI/RogueSiteBtn.png">
+    <link rel="stylesheet" href="./src/reset.css">
+    <link rel="stylesheet" href="./src/style.css">
+    <style>
+        .loading-div {
+            position: fixed;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .loading-icon {
+            width: 10vh;
+            height: 10vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .loading-glow {
+            background-image: url(../Assets/UI/GlowLoadCircle.png);
+            background-size: contain;
+            position: absolute;
+            width: 10vh;
+            height: 10vh;
+            z-index: -1;
+            transform: scale(1.40);
+            margin-left: 1px;
+            animation: loadglow 0.35s cubic-bezier(0.4, 0, 1, 1) infinite alternate;
+            filter: contrast(1) brightness(11.5) hue-rotate(-30deg);
+        }
+
+        .loading-container {
+            background-image: url(../Assets/UI/UpgradeContainerTier5.png);
+            background-size: contain;
+            position: absolute;
+            width: 10vh;
+            height: 10vh;
+            z-index: 0;
+            /* animation: rotate360 8s cubic-bezier(0.7, 0, 0.7, 1.5) infinite; */
+            animation: rotate360 8s cubic-bezier(0.7, 0, 0.56, 1.38) infinite;
+        }
+
+        .loading-head {
+            position: absolute;
+            width: 10vh;
+            height: 8vh;
+            z-index: 1;
+            transform: scale(0.78);
+        }
+
+        .loading-text {
+            position: absolute;
+            width: 10vh;
+            height: 10vh;
+            z-index: 2;
+            font-size: 3vh;
+            text-align: center;
+            color: gold;
+            font-family: 'Luckiest Guy';
+            text-shadow: 0 0 5px black;
+            margin-top: 24vh;
+            margin-left: -1.5vh;
+        }
+
+        .page-extra {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 10px;
+        }
+
+        .rounds-site-desc {
+            font-family: GardeniaBold;
+            color: white;
+            font-size: 18px;
+            line-height: 20px;
+            margin: 5px;
+        }
+
+        @keyframes loadglow {
+            0% {
+                -webkit-transform: scale(1.4);
+                transform: scale(1.4);
+            }
+
+            100% {
+                -webkit-transform: scale(1.45);
+                transform: scale(1.45);
+            }
+        }
+
+        @keyframes rotate45 {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            40% {
+                -webkit-transform: rotate(60deg);
+                transform: rotate(60deg);
+            }
+
+            50% {
+                -webkit-transform: rotate(60deg);
+                transform: rotate(60deg);
+            }
+
+            70% {
+                -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+        }
+
+        @keyframes rotate360 {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            10% {
+                -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+
+            12.5% {
+                -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+
+            22.5% {
+                -webkit-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+
+            25% {
+                -webkit-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+
+            35% {
+                -webkit-transform: rotate(135deg);
+                transform: rotate(135deg);
+            }
+
+            37.5% {
+                -webkit-transform: rotate(135deg);
+                transform: rotate(135deg);
+            }
+
+            47.5% {
+                -webkit-transform: rotate(180deg);
+                transform: rotate(180deg);
+            }
+
+            50% {
+                -webkit-transform: rotate(180deg);
+                transform: rotate(180deg);
+            }
+
+            60% {
+                -webkit-transform: rotate(225deg);
+                transform: rotate(225deg);
+            }
+
+            62.5% {
+                -webkit-transform: rotate(225deg);
+                transform: rotate(225deg);
+            }
+
+            72.5% {
+                -webkit-transform: rotate(270deg);
+                transform: rotate(270deg);
+            }
+
+            75% {
+                -webkit-transform: rotate(270deg);
+                transform: rotate(270deg);
+            }
+
+            85% {
+                -webkit-transform: rotate(315deg);
+                transform: rotate(315deg);
+            }
+
+            87.5% {
+                -webkit-transform: rotate(315deg);
+                transform: rotate(315deg);
+            }
+
+            97.5% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+
+        @media (max-width: 850px) {
+            .loading-div {
+                height: calc(var(--vh, 1vh) * 100);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" class="loading-div">
+        <div class="loading-icon">
+            <!-- <div class="loading-glow"></div> -->
+            <div class="loading-container"></div>
+            <img class="loading-head" src="../Assets/UI/UpgradeContainerTier5LockedHead.png">
+            <p class="loading-text">LOADING...</p>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById("loading").style.transform = "scale(0)";
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+</script>
+<script src="./src/popper.min.js"></script>
+<script src="./src/tippy-bundle.umd.min.js"></script>
+<script src="./src/html-to-image.min.js"></script>
+<script src="./src/nkapi.js"></script>
+<script src="./src/rogue.js"></script>
+<script src="./src/asset.js"></script>
+</html>

@@ -761,7 +761,9 @@
     margin: 10px 0px;
 }
 .selector-img {
-    width:100px;
+    height: 100px;
+    width: 100px;
+    object-fit: contain;
 }
 .selector-go-img {
     width: 75px;
@@ -4879,7 +4881,8 @@ input[type="checkbox"] {
 }
 
 .maps-progress-coop-toggle-input:checked {
-    background: url('../Assets/UI/Checked.png');
+    background-image: url('../Assets/UI/TickGreenIcon.png');
+    background-color: #34547F;
     background-size: 25px 25px;
 }
 
@@ -4984,10 +4987,8 @@ input[type="checkbox"] {
     transform: translate(20px, 8px);
   }
 
-/* * {
-    outline: 1px solid red;
-  } */
 
+/* Animations */
 @keyframes glow{
     to {
       box-shadow: 0px 0px 5px 5px #ffdf98;
@@ -5053,6 +5054,8 @@ input[type="checkbox"] {
     }
 }
 
+
+/* Viewport Size Adjustments */
 @media (max-width: 1199px) {
     .tower-progress-div {
         width: 105px;
@@ -5264,6 +5267,225 @@ input[type="checkbox"] {
     }
 }
 
+/* Rogue Classes */
+.artifacts-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 10px;
+}
+.artifact-container {
+    width: 101px;
+    height: 115px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 6px 4px;
+    position: relative;
+}
+.artifact-frame {
+    width: 100px;
+}
+.artifact-img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    position: absolute;
+}
+
+.artifact-title {
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    font-family: GardeniaBold;
+    padding: 5px;
+}
+
+.artifact-unextracted {
+    filter: brightness(0.5);
+}
+
+.starter-kit-div {
+    display: flex;
+    height: 130px;
+    margin: 10px 0;
+    width: 500px;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, 0.36);
+    border-radius: 20px;
+}
+
+.hero-starter-kits {
+    justify-content: space-evenly;
+}
+
+.rogue-image-content {
+    width: 1800px;
+}
+
+.rogue-profile-div {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 5px;
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 1.0) 75%, transparent 100%);
+    background-position: center;
+    background-size: cover;
+}
+
+.rogue-progress-text {
+    font-size: 32px;
+    text-align: right;
+    padding-right: 10px;
+    width: 110px;
+}
+.rogue-progress-text-export {
+    font-size: 64px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.rogue-image-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+}
+
+.rogue-header-sides {
+    width: 550px;
+}
+
+.rogue-title {
+    font-size: 64px;
+    padding: 0px 12px;
+}
+
+.rogue-bg {
+    border: 35px solid transparent;
+    border-image-source: url(../Assets/UI/RogueBgPanelSml.png);
+    border-image-slice: 80;
+    border-radius: 20px !important;
+    background: linear-gradient(180deg, rgb(228 196 149) 0%, rgb(214 180 131) 100%);   
+}
+
+.rogue-profile-name {
+    font-size: 40px;
+    width: 400px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.rogue-image-header-top-layer {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: 10px;
+}
+
+.artifact-bag {
+    width: 30px;
+}
+
+.artifact-bag-export {
+    width: 60px;
+}
+
+.rogue-right-div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 30px;
+}
+
+.totem-bg {
+    background-image: url(../Assets/UI/EventTotemPatternBg.png);
+    background-size: 150px;
+}
+
+.rogue-artifact-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background-color: var(--profile-secondary);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.rogue-starter-kit-desc {
+    padding: 10px 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin: 0;
+}
+
+.rogue-popout-starter-icon {
+    width: 100px;
+    padding: 5px;
+    filter: drop-shadow(0px 0px 2px black);
+}
+
+.back-button {
+    position: fixed;
+    width: 50px;
+    left: -150px;
+    opacity: 0;
+    transition: left 0.3s ease, opacity 0.3s ease;
+    z-index: 999999999;
+}
+.back-button.visible {
+    left: 10px;
+    opacity: 1;
+}
+
+.rogue-modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 80vh;
+    position: relative;
+}
+
+.rogue-modal-top {
+    display: flex;
+    flex-direction: column;
+}
+
+.rogue-modal-category {
+    width: 50px;
+}
+
+.rogue-sort-preview-text {
+    font-size: 24px;
+}
+
+.preview-artifacts-div {
+    width: 330px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.rogue-banner-div {
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.profile-banner-img {
+    height: 96px;
+}
+
+/* Tippy Styles */
 .tippy-box[data-theme~='speech_bubble'] {
     border-radius: 26px;
     display: flex;
@@ -5301,4 +5523,61 @@ input[type="checkbox"] {
     font-family: "GardeniaBold";
     font-size: 16px;
     line-height: 22px;
+}
+
+.tippy-box[data-placement^='bottom'] > .tippy-arrow::before {
+    top: -75px;
+    transform: rotate(180deg);
+}
+
+[data-tippy-root] {
+    max-width: calc(100vw - 410px);
+}
+
+/* Tailwind Styles */
+.d-flex {
+    display: flex;
+}
+
+.ai-center {
+    align-items: center;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+.jc-center {
+    justify-content: center;
+}
+
+.jc-between {
+    justify-content: space-between;
+}
+
+.jc-around {
+    justify-content: space-around;
+}
+
+.jc-evenly {
+    justify-content: space-evenly;
+}
+
+.fd-column {
+    flex-direction: column;
+}
+
+.fg-1 {
+    flex-grow: 1;
+}
+
+.f-wrap {
+    flex-wrap: wrap;
+}
+.pointer {
+    cursor: pointer;
+}
+
+.font-gardenia {
+    font-family: GardeniaBold;
 }
