@@ -586,7 +586,7 @@ function generateArtifactContainer(artifact, type) {
     }
 
     let artifactImg = document.createElement('img');
-    artifactImg.src = `../Assets/RogueArtifacts/${artifact.icon}`;
+    artifactImg.src = `../Assets/RogueArtifacts/${artifact.icon}.png`;
     artifactImg.classList.add('artifact-img');
     artifactDiv.appendChild(artifactImg);
 

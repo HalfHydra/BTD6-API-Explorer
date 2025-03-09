@@ -5369,7 +5369,7 @@ input[type="checkbox"] {
     border-image-source: url(../Assets/UI/RogueBgPanelSml.png);
     border-image-slice: 80;
     border-radius: 20px !important;
-    background: linear-gradient(180deg, rgb(228 196 149) 0%, rgb(214 180 131) 100%);   
+    background: linear-gradient(180deg, #e4c495 0%, #d6b483 100%);   
 }
 
 .rogue-profile-name {

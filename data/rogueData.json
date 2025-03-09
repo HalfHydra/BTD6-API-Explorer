@@ -6,7 +6,7 @@
             "nameLocKey": "AbilityStacking1",
             "descriptionLocKey": "AbilityStacking1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactAbilityStacking.png",
+            "icon": "ArtifactAbilityStacking",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Ability Stacking Common",
             "description": "Ability cooldowns loop to gain 1 extra charge. Ability cooldowns are 20% slower for all Monkeys except Psi"
@@ -17,7 +17,7 @@
             "nameLocKey": "AbilityStacking2",
             "descriptionLocKey": "AbilityStacking2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactAbilityStacking.png",
+            "icon": "ArtifactAbilityStacking",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Ability Stacking Rare",
             "description": "Ability cooldowns loop to gain 2 extra charges. Ability cooldowns are 20% slower for all Monkeys except Psi"
@@ -28,7 +28,7 @@
             "nameLocKey": "AbilityStacking3",
             "descriptionLocKey": "AbilityStacking3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactAbilityStacking.png",
+            "icon": "ArtifactAbilityStacking",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Ability Stacking Legendary",
             "description": "Ability cooldowns loop to gain 3 extra charges. Ability cooldowns are 20% slower for all Monkeys except Psi"
@@ -39,7 +39,7 @@
             "nameLocKey": "AbsoluteAbility1",
             "descriptionLocKey": "AbsoluteAbility1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactAbsoluteAbility.png",
+            "icon": "ArtifactAbsoluteAbility",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Absolute Ability Common",
             "description": "Monkeys attack 10% slower, but ability cooldowns are 25% faster"
@@ -50,7 +50,7 @@
             "nameLocKey": "AbsoluteAbility2",
             "descriptionLocKey": "AbsoluteAbility2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactAbsoluteAbility.png",
+            "icon": "ArtifactAbsoluteAbility",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Absolute Ability Rare",
             "description": "Monkeys attack 10% slower, but ability cooldowns are 30% faster"
@@ -61,7 +61,7 @@
             "nameLocKey": "AbsoluteAbility3",
             "descriptionLocKey": "AbsoluteAbility3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactAbsoluteAbility.png",
+            "icon": "ArtifactAbsoluteAbility",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Absolute Ability Legendary",
             "description": "Monkeys attack 10% slower, but ability cooldowns are 40% faster"
@@ -72,7 +72,7 @@
             "nameLocKey": "AlchemicEngineering1",
             "descriptionLocKey": "AlchemicEngineering1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactAlchemicEngineering.png",
+            "icon": "ArtifactAlchemicEngineering",
             "rarityFrameType": "Support",
             "title": "Alchemic Engineering Common",
             "description": "Tier 3 and higher Engineers have pierce reduced 60%, but convert Bloons to Gold. Adds a 0-1-1 Engineer to your Party"
@@ -83,7 +83,7 @@
             "nameLocKey": "AlchemicEngineering2",
             "descriptionLocKey": "AlchemicEngineering2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactAlchemicEngineering.png",
+            "icon": "ArtifactAlchemicEngineering",
             "rarityFrameType": "Support",
             "title": "Alchemic Engineering Rare",
             "description": "Tier 3 and higher Engineers have pierce reduced 45%, but convert Bloons to Gold. Adds a 0-1-2 Engineer to your Party"
@@ -94,7 +94,7 @@
             "nameLocKey": "AlchemicEngineering3",
             "descriptionLocKey": "AlchemicEngineering3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactAlchemicEngineering.png",
+            "icon": "ArtifactAlchemicEngineering",
             "rarityFrameType": "Support",
             "title": "Alchemic Engineering Legendary",
             "description": "Tier 3 and higher Engineers convert Bloons to Gold. Adds a 0-0-2 Engineer to your Party"
@@ -105,7 +105,7 @@
             "nameLocKey": "BattlefieldCommission1",
             "descriptionLocKey": "BattlefieldCommission1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactBattlefieldCommision.png",
+            "icon": "ArtifactBattlefieldCommision",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Battlefield Commission Rare",
             "description": "Heroes don't gain XP for each round, but gain 1 XP for each Bloon they pop"
@@ -116,7 +116,7 @@
             "nameLocKey": "BattlefieldCommission2",
             "descriptionLocKey": "BattlefieldCommission2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactBattlefieldCommision.png",
+            "icon": "ArtifactBattlefieldCommision",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Battlefield Commission Legendary",
             "description": "Heroes don't gain XP for each round, but gain 2 XP for each Bloon they pop"
@@ -127,7 +127,7 @@
             "nameLocKey": "BBGatlingGun1",
             "descriptionLocKey": "BBGatlingGun1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactBBGattlingGun.png",
+            "icon": "ArtifactBBGattlingGun",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "BB Gatling Gun Common",
             "description": "Main attack damage of Monkeys is reduced to 85%, but attack reload time is reduced 15%"
@@ -138,7 +138,7 @@
             "nameLocKey": "BBGatlingGun2",
             "descriptionLocKey": "BBGatlingGun2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactBBGattlingGun.png",
+            "icon": "ArtifactBBGattlingGun",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "BB Gatling Gun Rare",
             "description": "Main attack damage of Monkeys is reduced to 75%, but attack reload time is reduced 25%"
@@ -149,7 +149,7 @@
             "nameLocKey": "BBGatlingGun3",
             "descriptionLocKey": "BBGatlingGun3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactBBGattlingGun.png",
+            "icon": "ArtifactBBGattlingGun",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "BB Gatling Gun Legendary",
             "description": "Main attack damage of Monkeys is reduced to 60%, but attack reload time is reduced 40%"
@@ -160,7 +160,7 @@
             "nameLocKey": "BiggestBeacon1",
             "descriptionLocKey": "BiggestBeacon1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactBiggestBeacon.png",
+            "icon": "ArtifactBiggestBeacon",
             "rarityFrameType": "Support",
             "title": "Biggest Beacon Legendary",
             "description": "Villages have 2.5x influence radius and other support towers have 20% extra range. Adds a 0-1-0 Village to your Party"
@@ -171,7 +171,7 @@
             "nameLocKey": "BoostArtifactAllTowerInspiration1",
             "descriptionLocKey": "BoostArtifactAllTowerInspiration1Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "All Tower Inspiration Common",
             "description": "All Monkeys have 5% more pierce, and have increased attack range"
@@ -182,7 +182,7 @@
             "nameLocKey": "BoostArtifactAllTowerInspiration2",
             "descriptionLocKey": "BoostArtifactAllTowerInspiration2Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "All Tower Inspiration Rare",
             "description": "All Monkeys have 7% more pierce, and have increased attack range"
@@ -193,7 +193,7 @@
             "nameLocKey": "BoostArtifactAllTowerInspiration3",
             "descriptionLocKey": "BoostArtifactAllTowerInspiration3Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "All Tower Inspiration Legendary",
             "description": "All Monkeys have 9% more pierce, and have increased attack range"
@@ -204,7 +204,7 @@
             "nameLocKey": "BoostArtifactAllTowerPrecision1",
             "descriptionLocKey": "BoostArtifactAllTowerPrecision1Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "All Tower Precision Common",
             "description": "Increases all Monkeys damage 8%, and shot spread reduced 5%"
@@ -215,7 +215,7 @@
             "nameLocKey": "BoostArtifactAllTowerPrecision2",
             "descriptionLocKey": "BoostArtifactAllTowerPrecision2Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "All Tower Precision Rare",
             "description": "Increases all Monkeys damage 10%, and shot spread reduced 7%"
@@ -226,7 +226,7 @@
             "nameLocKey": "BoostArtifactAllTowerPrecision3",
             "descriptionLocKey": "BoostArtifactAllTowerPrecision3Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "All Tower Precision Legendary",
             "description": "Increases all Monkeys damage 15%, and shot spread reduced 12%"
@@ -237,7 +237,7 @@
             "nameLocKey": "BoostArtifactAllTowerQuickening1",
             "descriptionLocKey": "BoostArtifactAllTowerQuickening1Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "All Tower Quickening Common",
             "description": "Reduces all Monkeys attack reload and ability cooldown time 5%, and projectiles travel 10% faster"
@@ -248,7 +248,7 @@
             "nameLocKey": "BoostArtifactAllTowerQuickening2",
             "descriptionLocKey": "BoostArtifactAllTowerQuickening2Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "All Tower Quickening Rare",
             "description": "Reduces all Monkeys attack reload and ability cooldown time 7%, and projectiles travel 13% faster"
@@ -259,7 +259,7 @@
             "nameLocKey": "BoostArtifactAllTowerQuickening3",
             "descriptionLocKey": "BoostArtifactAllTowerQuickening3Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "All Tower Quickening  Legendary",
             "description": "Reduces all Monkeys attack reload and ability cooldown time 12%, and projectiles travel 18% faster"
@@ -270,7 +270,7 @@
             "nameLocKey": "BoostArtifactMagicInspiration1",
             "descriptionLocKey": "BoostArtifactMagicInspiration1Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "Magic",
             "title": "Magic Inspiration Common",
             "description": "Magic Monkeys have 10% more pierce, and have increased attack range"
@@ -281,7 +281,7 @@
             "nameLocKey": "BoostArtifactMagicInspiration2",
             "descriptionLocKey": "BoostArtifactMagicInspiration2Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "Magic",
             "title": "Magic Inspiration Rare",
             "description": "Magic Monkeys have 14% more pierce, and have increased attack range"
@@ -292,7 +292,7 @@
             "nameLocKey": "BoostArtifactMagicInspiration3",
             "descriptionLocKey": "BoostArtifactMagicInspiration3Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "Magic",
             "title": "Magic Inspiration Legendary",
             "description": "Magic Monkeys have 18% more pierce, and have increased attack range"
@@ -303,7 +303,7 @@
             "nameLocKey": "BoostArtifactMagicPrecision1",
             "descriptionLocKey": "BoostArtifactMagicPrecision1Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "Magic",
             "title": "Magic Precision Common",
             "description": "Increases Magic Monkey damage by 15%, and reduces shot spread 10%"
@@ -314,7 +314,7 @@
             "nameLocKey": "BoostArtifactMagicPrecision2",
             "descriptionLocKey": "BoostArtifactMagicPrecision2Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "Magic",
             "title": "Magic Precision Rare",
             "description": "Increases Magic Monkey damage by 20%, and reduces shot spread 15%"
@@ -325,7 +325,7 @@
             "nameLocKey": "BoostArtifactMagicPrecision3",
             "descriptionLocKey": "BoostArtifactMagicPrecision3Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "Magic",
             "title": "Magic Precision Legendary",
             "description": "Increases Magic Monkey damage by 30%, and reduces shot spread 25%"
@@ -336,7 +336,7 @@
             "nameLocKey": "BoostArtifactMagicQuickening1",
             "descriptionLocKey": "BoostArtifactMagicQuickening1Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "Magic",
             "title": "Magic Quickening Common",
             "description": "Reduces Magic Monkeys attack reload and ability cooldown time 10%, and projectiles travel 20% faster"
@@ -347,7 +347,7 @@
             "nameLocKey": "BoostArtifactMagicQuickening2",
             "descriptionLocKey": "BoostArtifactMagicQuickening2Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "Magic",
             "title": "Magic Quickening Rare",
             "description": "Reduces Magic Monkeys attack reload and ability cooldown time 15%, and projectiles travel 25% faster"
@@ -358,7 +358,7 @@
             "nameLocKey": "BoostArtifactMagicQuickening3",
             "descriptionLocKey": "BoostArtifactMagicQuickening3Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "Magic",
             "title": "Magic Quickening Legendary",
             "description": "Reduces Magic Monkeys attack reload and ability cooldown time 25%, and projectiles travel 35% faster"
@@ -369,7 +369,7 @@
             "nameLocKey": "BoostArtifactMilitaryInspiration1",
             "descriptionLocKey": "BoostArtifactMilitaryInspiration1Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "Military",
             "title": "Military Inspiration Common",
             "description": "Military Monkeys have 10% more pierce, and have increased attack range"
@@ -380,7 +380,7 @@
             "nameLocKey": "BoostArtifactMilitaryInspiration2",
             "descriptionLocKey": "BoostArtifactMilitaryInspiration2Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "Military",
             "title": "Military Inspiration Rare",
             "description": "Military Monkeys have 14% more pierce, and have increased attack range"
@@ -391,7 +391,7 @@
             "nameLocKey": "BoostArtifactMilitaryInspiration3",
             "descriptionLocKey": "BoostArtifactMilitaryInspiration3Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "Military",
             "title": "Military Inspiration Legendary",
             "description": "Military Monkeys have 18% more pierce, and have increased attack range"
@@ -402,7 +402,7 @@
             "nameLocKey": "BoostArtifactMilitaryPrecision1",
             "descriptionLocKey": "BoostArtifactMilitaryPrecision1Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "Military",
             "title": "Military Precision Common",
             "description": "Increases Military Monkey damage by 15%, and reduces shot spread 10%"
@@ -413,7 +413,7 @@
             "nameLocKey": "BoostArtifactMilitaryPrecision2",
             "descriptionLocKey": "BoostArtifactMilitaryPrecision2Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "Military",
             "title": "Military Precision Rare",
             "description": "Increases Military Monkey damage by 20%, and reduces shot spread 15%"
@@ -424,7 +424,7 @@
             "nameLocKey": "BoostArtifactMilitaryPrecision3",
             "descriptionLocKey": "BoostArtifactMilitaryPrecision3Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "Military",
             "title": "Military Precision Legendary",
             "description": "Increases Military Monkey damage by 30%, and reduces shot spread 25%"
@@ -435,7 +435,7 @@
             "nameLocKey": "BoostArtifactMilitaryQuickening1",
             "descriptionLocKey": "BoostArtifactMilitaryQuickening1Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "Military",
             "title": "Military Quickening Common",
             "description": "Reduces Military Monkeys attack reload and ability cooldown time 10%, and projectiles travel 20% faster"
@@ -446,7 +446,7 @@
             "nameLocKey": "BoostArtifactMilitaryQuickening2",
             "descriptionLocKey": "BoostArtifactMilitaryQuickening2Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "Military",
             "title": "Military Quickening Rare",
             "description": "Reduces Military Monkeys attack reload and ability cooldown time 15%, and projectiles travel 25% faster"
@@ -457,7 +457,7 @@
             "nameLocKey": "BoostArtifactMilitaryQuickening3",
             "descriptionLocKey": "BoostArtifactMilitaryQuickening3Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "Military",
             "title": "Military Quickening Legendary",
             "description": "Reduces Military Monkeys attack reload and ability cooldown time 25%, and projectiles travel 35% faster"
@@ -468,7 +468,7 @@
             "nameLocKey": "BoostArtifactPrimaryInspiration1",
             "descriptionLocKey": "BoostArtifactPrimaryInspiration1Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "Primary",
             "title": "Primary Inspiration Common",
             "description": "Primary Monkeys have 10% more pierce, and have increased attack range"
@@ -479,7 +479,7 @@
             "nameLocKey": "BoostArtifactPrimaryInspiration2",
             "descriptionLocKey": "BoostArtifactPrimaryInspiration2Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "Primary",
             "title": "Primary Inspiration Rare",
             "description": "Primary Monkeys have 14% more pierce, and have increased attack range"
@@ -490,7 +490,7 @@
             "nameLocKey": "BoostArtifactPrimaryInspiration3",
             "descriptionLocKey": "BoostArtifactPrimaryInspiration3Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "Primary",
             "title": "Primary Inspiration Legendary",
             "description": "Primary Monkeys have 18% more pierce, and have increased attack range"
@@ -501,7 +501,7 @@
             "nameLocKey": "BoostArtifactPrimaryPrecision1",
             "descriptionLocKey": "BoostArtifactPrimaryPrecision1Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "Primary",
             "title": "Primary Precision Common",
             "description": "Increases Primary Monkey damage by 15%, and reduces shot spread 10%"
@@ -512,7 +512,7 @@
             "nameLocKey": "BoostArtifactPrimaryPrecision2",
             "descriptionLocKey": "BoostArtifactPrimaryPrecision2Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "Primary",
             "title": "Primary Precision Rare",
             "description": "Increases Primary Monkey damage by 20%, and reduces shot spread 15%"
@@ -523,7 +523,7 @@
             "nameLocKey": "BoostArtifactPrimaryPrecision3",
             "descriptionLocKey": "BoostArtifactPrimaryPrecision3Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "Primary",
             "title": "Primary Precision Legendary",
             "description": "Increases Primary Monkey damage by 30%, and reduces shot spread 25%"
@@ -534,7 +534,7 @@
             "nameLocKey": "BoostArtifactPrimaryQuickening1",
             "descriptionLocKey": "BoostArtifactPrimaryQuickening1Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "Primary",
             "title": "Primary Quickening Common",
             "description": "Reduces Primary Monkeys attack reload and ability cooldown time 10%, and projectiles travel 20% faster"
@@ -545,7 +545,7 @@
             "nameLocKey": "BoostArtifactPrimaryQuickening2",
             "descriptionLocKey": "BoostArtifactPrimaryQuickening2Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "Primary",
             "title": "Primary Quickening Rare",
             "description": "Reduces Primary Monkeys attack reload and ability cooldown time 15%, and projectiles travel 25% faster"
@@ -556,7 +556,7 @@
             "nameLocKey": "BoostArtifactPrimaryQuickening3",
             "descriptionLocKey": "BoostArtifactPrimaryQuickening3Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "Primary",
             "title": "Primary Quickening Legendary",
             "description": "Reduces Primary Monkeys attack reload and ability cooldown time 25%, and projectiles travel 35% faster"
@@ -567,7 +567,7 @@
             "nameLocKey": "BoostArtifactSupportInspiration1",
             "descriptionLocKey": "BoostArtifactSupportInspiration1Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "Support",
             "title": "Support Inspiration Common",
             "description": "Support Monkeys have 10% more pierce, and have increased attack range"
@@ -578,7 +578,7 @@
             "nameLocKey": "BoostArtifactSupportInspiration2",
             "descriptionLocKey": "BoostArtifactSupportInspiration2Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "Support",
             "title": "Support Inspiration Rare",
             "description": "Support Monkeys have 14% more pierce, and have increased attack range"
@@ -589,7 +589,7 @@
             "nameLocKey": "BoostArtifactSupportInspiration3",
             "descriptionLocKey": "BoostArtifactSupportInspiration3Description",
             "isBossArtifact": false,
-            "icon": "BoostVelocity.png",
+            "icon": "BoostVelocity",
             "rarityFrameType": "Support",
             "title": "Support Inspiration Legendary",
             "description": "Support Monkeys have 18% more pierce, and have increased attack range"
@@ -600,7 +600,7 @@
             "nameLocKey": "BoostArtifactSupportPrecision1",
             "descriptionLocKey": "BoostArtifactSupportPrecision1Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "Support",
             "title": "Support Precision Common",
             "description": "Increases Support Monkey damage by 15%, and reduces shot spread 10%"
@@ -611,7 +611,7 @@
             "nameLocKey": "BoostArtifactSupportPrecision2",
             "descriptionLocKey": "BoostArtifactSupportPrecision2Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "Support",
             "title": "Support Precision Rare",
             "description": "Increases Support Monkey damage by 20%, and reduces shot spread 15%"
@@ -622,7 +622,7 @@
             "nameLocKey": "BoostArtifactSupportPrecision3",
             "descriptionLocKey": "BoostArtifactSupportPrecision3Description",
             "isBossArtifact": false,
-            "icon": "BoostToughness.png",
+            "icon": "BoostToughness",
             "rarityFrameType": "Support",
             "title": "Support Precision Legendary",
             "description": "Increases Support Monkey damage by 30%, and reduces shot spread 25%"
@@ -633,7 +633,7 @@
             "nameLocKey": "BoostArtifactSupportQuickening1",
             "descriptionLocKey": "BoostArtifactSupportQuickening1Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "Support",
             "title": "Support Quickening Common",
             "description": "Reduces Support Monkeys attack reload and ability cooldown time 10%, and projectiles travel 20% faster"
@@ -644,7 +644,7 @@
             "nameLocKey": "BoostArtifactSupportQuickening2",
             "descriptionLocKey": "BoostArtifactSupportQuickening2Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "Support",
             "title": "Support Quickening Rare",
             "description": "Reduces Support Monkeys attack reload and ability cooldown time 15%, and projectiles travel 25% faster"
@@ -655,7 +655,7 @@
             "nameLocKey": "BoostArtifactSupportQuickening3",
             "descriptionLocKey": "BoostArtifactSupportQuickening3Description",
             "isBossArtifact": false,
-            "icon": "BoostQuickening.png",
+            "icon": "BoostQuickening",
             "rarityFrameType": "Support",
             "title": "Support Quickening Legendary",
             "description": "Reduces Support Monkeys attack reload and ability cooldown time 25%, and projectiles travel 35% faster"
@@ -666,7 +666,7 @@
             "nameLocKey": "BouncingProjectiles1",
             "descriptionLocKey": "BouncingProjectiles1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactBouncingProjectiles.png",
+            "icon": "ArtifactBouncingProjectiles",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Bouncing Projectiles Common",
             "description": "All projectiles will bounce off blocking objects and projectiles travel 10% further"
@@ -677,7 +677,7 @@
             "nameLocKey": "BouncingProjectiles2",
             "descriptionLocKey": "BouncingProjectiles2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactBouncingProjectiles.png",
+            "icon": "ArtifactBouncingProjectiles",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Bouncing Projectiles Rare",
             "description": "All projectiles will bounce off blocking objects and projectiles travel 20% further"
@@ -688,7 +688,7 @@
             "nameLocKey": "BouncingProjectiles3",
             "descriptionLocKey": "BouncingProjectiles3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactBouncingProjectiles.png",
+            "icon": "ArtifactBouncingProjectiles",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Bouncing Projectiles Legendary",
             "description": "All projectiles will bounce off blocking objects and projectiles travel 40% further"
@@ -699,7 +699,7 @@
             "nameLocKey": "CatsMeow1",
             "descriptionLocKey": "CatsMeow1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCatsMeow.png",
+            "icon": "ArtifactCatsMeow",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Cats Meow Rare",
             "description": "Maximum lives is set to 9, but any Bloon leaked only counts as 1 life regardless of RBE. Regenerate 3 lives at the end of each round. Adds a 0-0-3 Bomb Shooter to your Party"
@@ -710,7 +710,7 @@
             "nameLocKey": "CatsMeow2",
             "descriptionLocKey": "CatsMeow2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCatsMeow.png",
+            "icon": "ArtifactCatsMeow",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Cats Meow Legendary",
             "description": "Maximum lives is set to 9, but any Bloon leaked only counts as 1 life regardless of RBE. Regenerate 9 lives at the end of each round.  Adds a 0-0-4 Bomb Shooter to your Party"
@@ -721,7 +721,7 @@
             "nameLocKey": "CeramicChunker1",
             "descriptionLocKey": "CeramicChunker1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCeramicChunker.png",
+            "icon": "ArtifactCeramicChunker",
             "rarityFrameType": "Primary",
             "title": "Ceramic Chunker Common",
             "description": "Primary Monkeys deal 3 bonus damage to Ceramic Bloons"
@@ -732,7 +732,7 @@
             "nameLocKey": "CeramicChunker2",
             "descriptionLocKey": "CeramicChunker2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCeramicChunker.png",
+            "icon": "ArtifactCeramicChunker",
             "rarityFrameType": "Primary",
             "title": "Ceramic Chunker Rare",
             "description": "Primary Monkeys deal 6 bonus damage to Ceramic Bloons"
@@ -743,7 +743,7 @@
             "nameLocKey": "CeramicChunker3",
             "descriptionLocKey": "CeramicChunker3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCeramicChunker.png",
+            "icon": "ArtifactCeramicChunker",
             "rarityFrameType": "Primary",
             "title": "Ceramic Chunker Legendary",
             "description": "Primary Monkeys deal 9 bonus damage to Ceramic Bloons"
@@ -754,7 +754,7 @@
             "nameLocKey": "ColdSteel1",
             "descriptionLocKey": "ColdSteel1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactColdSteel.png",
+            "icon": "ArtifactColdSteel",
             "rarityFrameType": "Military",
             "title": "Cold Steel Common",
             "description": "Military Monkeys tier 3 or higher have a 5% chance to freeze Bloons they hit"
@@ -765,7 +765,7 @@
             "nameLocKey": "ColdSteel2",
             "descriptionLocKey": "ColdSteel2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactColdSteel.png",
+            "icon": "ArtifactColdSteel",
             "rarityFrameType": "Military",
             "title": "Cold Steel Rare",
             "description": "Military Monkeys tier 3 or higher have a 10% chance to freeze Bloons they hit"
@@ -776,7 +776,7 @@
             "nameLocKey": "ColdSteel3",
             "descriptionLocKey": "ColdSteel3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactColdSteel.png",
+            "icon": "ArtifactColdSteel",
             "rarityFrameType": "Military",
             "title": "Cold Steel Legendary",
             "description": "Military Monkeys tier 3 or higher have a 15% chance to freeze Bloons they hit"
@@ -787,7 +787,7 @@
             "nameLocKey": "ConfuddlingSpelling1",
             "descriptionLocKey": "ConfuddlingSpelling1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactConfuddlingSpelling.png",
+            "icon": "ArtifactConfuddlingSpelling",
             "rarityFrameType": "Magic",
             "title": "Confuddling Spelling Common",
             "description": "Magic Monkeys deal 2 times damage to tranced and stunned Bloons"
@@ -798,7 +798,7 @@
             "nameLocKey": "ConfuddlingSpelling2",
             "descriptionLocKey": "ConfuddlingSpelling2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactConfuddlingSpelling.png",
+            "icon": "ArtifactConfuddlingSpelling",
             "rarityFrameType": "Magic",
             "title": "Confuddling Spelling Rare",
             "description": "Magic Monkeys deal 2.5 times damage to tranced and stunned Bloons"
@@ -809,7 +809,7 @@
             "nameLocKey": "ConfuddlingSpelling3",
             "descriptionLocKey": "ConfuddlingSpelling3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactConfuddlingSpelling.png",
+            "icon": "ArtifactConfuddlingSpelling",
             "rarityFrameType": "Magic",
             "title": "Confuddling Spelling Legendary",
             "description": "Magic Monkeys deal 3 times damage to tranced and stunned Bloons"
@@ -820,7 +820,7 @@
             "nameLocKey": "CorneredBeasts1",
             "descriptionLocKey": "CorneredBeasts1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCorneredBeasts.png",
+            "icon": "ArtifactCorneredBeasts",
             "rarityFrameType": "Magic",
             "title": "Cornered Beasts Common",
             "description": "Beast Handlers tier 3 and higher have 20% more range, and attack faster the more Bloons in radius (up to 25%). Adds a 0-1-1 Beast Handler to your Party"
@@ -831,7 +831,7 @@
             "nameLocKey": "CorneredBeasts2",
             "descriptionLocKey": "CorneredBeasts2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCorneredBeasts.png",
+            "icon": "ArtifactCorneredBeasts",
             "rarityFrameType": "Magic",
             "title": "Cornered Beasts Rare",
             "description": "Beast Handlers tier 3 and higher have 20% more range, and attack faster the more Bloons in radius (up to 35%). Adds a 0-2-1 Beast Handler to your Party"
@@ -842,7 +842,7 @@
             "nameLocKey": "CorneredBeasts3",
             "descriptionLocKey": "CorneredBeasts3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCorneredBeasts.png",
+            "icon": "ArtifactCorneredBeasts",
             "rarityFrameType": "Magic",
             "title": "Cornered Beasts Legendary",
             "description": "Beast Handlers tier 3 and higher have 20% more range, and attack faster the more Bloons in radius (up to 50%). Adds a 0-2-0 Beast Handler to your Party"
@@ -853,7 +853,7 @@
             "nameLocKey": "CorrosiveTorpEDarts1",
             "descriptionLocKey": "CorrosiveTorpEDarts1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCorrosiveTorpEDarts.png",
+            "icon": "ArtifactCorrosiveTorpEDarts",
             "rarityFrameType": "Military",
             "title": "Corrosive Torp-E-Darts Common",
             "description": "Tier 3 and higher Monkey Subs glue Bloons with Bloon Dissolver acid for a short time. Adds a 0-1-1 Monkey Sub to your Party"
@@ -864,7 +864,7 @@
             "nameLocKey": "CorrosiveTorpEDarts2",
             "descriptionLocKey": "CorrosiveTorpEDarts2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCorrosiveTorpEDarts.png",
+            "icon": "ArtifactCorrosiveTorpEDarts",
             "rarityFrameType": "Military",
             "title": "Corrosive Torp-E-Darts Rare",
             "description": "Tier 3 and higher Monkey Subs glue Bloons with Bloon Liquifier acid for a short time. Adds a 0-2-1 Monkey Sub to your Party"
@@ -875,7 +875,7 @@
             "nameLocKey": "CorrosiveTorpEDarts3",
             "descriptionLocKey": "CorrosiveTorpEDarts3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCorrosiveTorpEDarts.png",
+            "icon": "ArtifactCorrosiveTorpEDarts",
             "rarityFrameType": "Military",
             "title": "Corrosive Torp-E-Darts Legendary",
             "description": "Tier 3 and higher Monkey Subs glue Bloons with Bloon Solver acid for a short time. Adds a 0-2-0 Monkey Sub to your Party"
@@ -886,7 +886,7 @@
             "nameLocKey": "CriticalImpact1",
             "descriptionLocKey": "CriticalImpact1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCriticalImpact.png",
+            "icon": "ArtifactCriticalImpact",
             "rarityFrameType": "Military",
             "title": "Critical Impact Common",
             "description": "Tier 3 and higher Mortars have a 1 in 8 chance to Crit for 250% damage. Adds a 1-1-0 Mortar to your Party"
@@ -897,7 +897,7 @@
             "nameLocKey": "CriticalImpact2",
             "descriptionLocKey": "CriticalImpact2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCriticalImpact.png",
+            "icon": "ArtifactCriticalImpact",
             "rarityFrameType": "Military",
             "title": "Critical Impact Rare",
             "description": "Tier 3 and higher Mortars have a 1 in 8 chance to Crit for 350% damage. Adds a 2-1-0 Mortar to your Party"
@@ -908,7 +908,7 @@
             "nameLocKey": "CriticalImpact3",
             "descriptionLocKey": "CriticalImpact3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCriticalImpact.png",
+            "icon": "ArtifactCriticalImpact",
             "rarityFrameType": "Military",
             "title": "Critical Impact Legendary",
             "description": "Tier 3 and higher Mortars have a 1 in 8 chance to Crit for 500% damage. Adds a 2-0-0 Mortar to your Party"
@@ -919,7 +919,7 @@
             "nameLocKey": "CriticalSuccess1",
             "descriptionLocKey": "CriticalSuccess1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCriticalSuccess.png",
+            "icon": "ArtifactCriticalSuccess",
             "rarityFrameType": "Primary",
             "title": "Critical Success Rare",
             "description": "Primary Monkeys attack reload time increased 75%, but gain a 1 in 10 chance to Crit for 900% damage"
@@ -930,7 +930,7 @@
             "nameLocKey": "CriticalSuccess2",
             "descriptionLocKey": "CriticalSuccess2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCriticalSuccess.png",
+            "icon": "ArtifactCriticalSuccess",
             "rarityFrameType": "Primary",
             "title": "Critical Success Legendary",
             "description": "Primary Monkeys attack reload time increased 75%, but gain a 1 in 10 chance to Crit for 1100% damage"
@@ -941,7 +941,7 @@
             "nameLocKey": "CrystalCrash1",
             "descriptionLocKey": "CrystalCrash1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCrystalCrash.png",
+            "icon": "ArtifactCrystalCrash",
             "rarityFrameType": "Support",
             "title": "Crystal Crash Common",
             "description": "Support Monkeys deal 2 times damage to frozen Bloons"
@@ -952,7 +952,7 @@
             "nameLocKey": "CrystalCrash2",
             "descriptionLocKey": "CrystalCrash2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCrystalCrash.png",
+            "icon": "ArtifactCrystalCrash",
             "rarityFrameType": "Support",
             "title": "Crystal Crash Rare",
             "description": "Support Monkeys deal 2.5 times damage to frozen Bloons"
@@ -963,7 +963,7 @@
             "nameLocKey": "CrystalCrash3",
             "descriptionLocKey": "CrystalCrash3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactCrystalCrash.png",
+            "icon": "ArtifactCrystalCrash",
             "rarityFrameType": "Support",
             "title": "Crystal Crash Legendary",
             "description": "Support Monkeys deal 3 times damage to frozen Bloons"
@@ -974,7 +974,7 @@
             "nameLocKey": "DazingFrostburn1",
             "descriptionLocKey": "DazingFrostburn1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactDazingFrostburn.png",
+            "icon": "ArtifactDazingFrostburn",
             "rarityFrameType": "Primary",
             "title": "Dazing Frostburn Common",
             "description": "Ice Monkeys attack 50% slower, but also stun non-MOAB Bloons and burn 4 damage a second for 10 seconds. Adds a 1-0-1 Ice Monkey to your Party"
@@ -985,7 +985,7 @@
             "nameLocKey": "DazingFrostburn2",
             "descriptionLocKey": "DazingFrostburn2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactDazingFrostburn.png",
+            "icon": "ArtifactDazingFrostburn",
             "rarityFrameType": "Primary",
             "title": "Dazing Frostburn Rare",
             "description": "Ice Monkeys attack 50% slower, but also stun non-MOAB Bloons and burn 8 damage a second for 10 seconds. Adds a 1-0-2 Ice Monkey to your Party"
@@ -996,7 +996,7 @@
             "nameLocKey": "DazingFrostburn3",
             "descriptionLocKey": "DazingFrostburn3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactDazingFrostburn.png",
+            "icon": "ArtifactDazingFrostburn",
             "rarityFrameType": "Primary",
             "title": "Dazing Frostburn Legendary",
             "description": "Ice Monkeys attack 50% slower, but also stun non-MOAB Bloons and burn 16 damage a second for 10 seconds. Adds a 0-0-2 Ice Monkey to your Party"
@@ -1007,7 +1007,7 @@
             "nameLocKey": "DivineIntervention1",
             "descriptionLocKey": "DivineIntervention1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactDivineIntervention.png",
+            "icon": "ArtifactDivineIntervention",
             "rarityFrameType": "Magic",
             "title": "Divine Intervention Common",
             "description": "Super Monkeys and Adora have a 1 in 1800 chance when hitting Bloons for the Sun God to smite them with 1500x damage. Adds a 0-0-0 Super Monkey to your Party"
@@ -1018,7 +1018,7 @@
             "nameLocKey": "DivineIntervention2",
             "descriptionLocKey": "DivineIntervention2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactDivineIntervention.png",
+            "icon": "ArtifactDivineIntervention",
             "rarityFrameType": "Magic",
             "title": "Divine Intervention Rare",
             "description": "Super Monkeys and Adora have a 1 in 1200 chance when hitting Bloons for the Sun God to smite them with 1500x damage. Adds a 0-0-0 Super Monkey to your Party"
@@ -1029,7 +1029,7 @@
             "nameLocKey": "DivineIntervention3",
             "descriptionLocKey": "DivineIntervention3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactDivineIntervention.png",
+            "icon": "ArtifactDivineIntervention",
             "rarityFrameType": "Magic",
             "title": "Divine Intervention Legendary",
             "description": "Super Monkeys and Adora have a 1 in 600 chance when hitting Bloons for the Sun God to smite them with 1500x damage. Adds a 0-0-0 Super Monkey to your Party"
@@ -1040,7 +1040,7 @@
             "nameLocKey": "DreamTeams1",
             "descriptionLocKey": "DreamTeams1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactDreamTeams.png",
+            "icon": "ArtifactDreamTeams",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Dream Teams Common",
             "description": "Monkey Subs, Ninja Monkeys, Druids, Wizards, and Beast Handlers have faster attack speed and ability cooldowns, and 25% more range."
@@ -1051,7 +1051,7 @@
             "nameLocKey": "DreamTeams2",
             "descriptionLocKey": "DreamTeams2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactDreamTeams.png",
+            "icon": "ArtifactDreamTeams",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Dream Teams Rare",
             "description": "Monkey Subs, Ninja Monkeys, Druids, Wizards, and Beast Handlers have faster attack speed and ability cooldowns, and 35% more range."
@@ -1062,7 +1062,7 @@
             "nameLocKey": "DreamTeams3",
             "descriptionLocKey": "DreamTeams3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactDreamTeams.png",
+            "icon": "ArtifactDreamTeams",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Dream Teams Legendary",
             "description": "Monkey Subs, Ninja Monkeys, Druids, Wizards, and Beast Handlers have faster attack speed and ability cooldowns, and 50% more range."
@@ -1073,7 +1073,7 @@
             "nameLocKey": "EnchantedRebuttal1",
             "descriptionLocKey": "EnchantedRebuttal1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactEnchantedRebuttal.png",
+            "icon": "ArtifactEnchantedRebuttal",
             "rarityFrameType": "Magic",
             "title": "Enchanted Rebuttal Common",
             "description": "Magic Monkeys push Bloons back on hit"
@@ -1084,7 +1084,7 @@
             "nameLocKey": "EnchantedRebuttal2",
             "descriptionLocKey": "EnchantedRebuttal2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactEnchantedRebuttal.png",
+            "icon": "ArtifactEnchantedRebuttal",
             "rarityFrameType": "Magic",
             "title": "Enchanted Rebuttal Rare",
             "description": "Magic Monkeys push Bloons back even more on hit"
@@ -1095,7 +1095,7 @@
             "nameLocKey": "EnchantedRebuttal3",
             "descriptionLocKey": "EnchantedRebuttal3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactEnchantedRebuttal.png",
+            "icon": "ArtifactEnchantedRebuttal",
             "rarityFrameType": "Magic",
             "title": "Enchanted Rebuttal Legendary",
             "description": "Magic Monkeys push Bloons and small MOAB-class back on hit"
@@ -1106,7 +1106,7 @@
             "nameLocKey": "EsotericElementalist1",
             "descriptionLocKey": "EsotericElementalist1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactEsotericElementalist.png",
+            "icon": "ArtifactEsotericElementalist",
             "rarityFrameType": "Magic",
             "title": "Esoteric Elementalist Common",
             "description": "Wizard Monkeys have a 20% chance to freeze or blow back, and set Bloons on fire for 1 damage/s over 4.5s. Adds a 1-0-1 Wizard to your Party"
@@ -1117,7 +1117,7 @@
             "nameLocKey": "EsotericElementalist2",
             "descriptionLocKey": "EsotericElementalist2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactEsotericElementalist.png",
+            "icon": "ArtifactEsotericElementalist",
             "rarityFrameType": "Magic",
             "title": "Esoteric Elementalist Rare",
             "description": "Wizard Monkeys have a 30% chance to freeze or blow back, and set Bloons on fire for 3 damage/s over 4.5s. Adds a 2-0-1 Wizard to your Party"
@@ -1128,7 +1128,7 @@
             "nameLocKey": "EsotericElementalist3",
             "descriptionLocKey": "EsotericElementalist3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactEsotericElementalist.png",
+            "icon": "ArtifactEsotericElementalist",
             "rarityFrameType": "Magic",
             "title": "Esoteric Elementalist Legendary",
             "description": "Wizard Monkeys have a 60% chance to freeze or blow back, and set Bloons on fire for 9 damage/s over 4.5s. Adds a 2-0-0 Wizard to your Party"
@@ -1139,7 +1139,7 @@
             "nameLocKey": "EssenceOfBlastapopoulos1",
             "descriptionLocKey": "EssenceOfBlastapopoulos1Description",
             "isBossArtifact": true,
-            "icon": "ArtifactEssenceOfBlastapopoulos.png",
+            "icon": "ArtifactEssenceOfBlastapopoulos",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Essence Of Blastapopoulos",
             "description": "Tier 5 Monkeys and level 20 Heroes burn Bloons, and affected Bloons take an extra +4 damage from all sources"
@@ -1150,7 +1150,7 @@
             "nameLocKey": "EssenceOfBloonarius1",
             "descriptionLocKey": "EssenceOfBloonarius1Description",
             "isBossArtifact": true,
-            "icon": "ArtifactEssenceOfBloonarius.png",
+            "icon": "ArtifactEssenceOfBloonarius",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Essence Of Bloonarius",
             "description": "All Monkeys tier 3 and lower deal 1.5x damage to Bloons and MOAB-Class Bloons and have 100% more pierce"
@@ -1161,7 +1161,7 @@
             "nameLocKey": "EssenceOfDreadbloon1",
             "descriptionLocKey": "EssenceOfDreadbloon1Description",
             "isBossArtifact": true,
-            "icon": "ArtifactEssenceOfDreadbloon.png",
+            "icon": "ArtifactEssenceOfDreadbloon",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Essence Of Dreadbloon",
             "description": "All Monkeys count as all categories. Tier 5 Monkeys and level 20 Heroes deal 1.5x damage to Fortified and Ceramic Bloons"
@@ -1172,7 +1172,7 @@
             "nameLocKey": "EssenceOfLych1",
             "descriptionLocKey": "EssenceOfLych1Description",
             "isBossArtifact": true,
-            "icon": "ArtifactEssenceOfLych.png",
+            "icon": "ArtifactEssenceOfLych",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Essence Of Lych",
             "description": "Tier 5 Monkeys and level 20 Heroes projectiles create clouds that trojan regular Bloons, stopping them from spawning children. Recover 10 lives each round for every tier 3 or higher Monkey on the field. Recover 5 lives for every ability used"
@@ -1183,7 +1183,7 @@
             "nameLocKey": "EssenceOfPhayze1",
             "descriptionLocKey": "EssenceOfPhayze1Description",
             "isBossArtifact": true,
-            "icon": "ArtifactEssenceOfPhayze.png",
+            "icon": "ArtifactEssenceOfPhayze",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Essence Of Phayze",
             "description": "All Monkeys can see Camo, and deal triple damage to Camo Bloons. Heroes slow Bloons in their radius by 30%"
@@ -1194,7 +1194,7 @@
             "nameLocKey": "EssenceOfVortex1",
             "descriptionLocKey": "EssenceOfVortex1Description",
             "isBossArtifact": true,
-            "icon": "ArtifactEssenceOfVortex.png",
+            "icon": "ArtifactEssenceOfVortex",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Essence Of Vortex",
             "description": "Tier 5 Monkeys and level 20 Heroes knock back MOAB-Class Bloons on hit, and 10% chance to blow back regular Bloons"
@@ -1205,7 +1205,7 @@
             "nameLocKey": "ExplosiveEconomics1",
             "descriptionLocKey": "ExplosiveEconomics1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactExplosiveEconomics.png",
+            "icon": "ArtifactExplosiveEconomics",
             "rarityFrameType": "Support",
             "title": "Explosive Economics Common",
             "description": "When Support Monkeys are sold, an Area of Effect explosion deals 100 damage to all nearby Bloons. Bloons in range of Support Monkeys give 5% less cash"
@@ -1216,7 +1216,7 @@
             "nameLocKey": "ExplosiveEconomics2",
             "descriptionLocKey": "ExplosiveEconomics2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactExplosiveEconomics.png",
+            "icon": "ArtifactExplosiveEconomics",
             "rarityFrameType": "Support",
             "title": "Explosive Economics Rare",
             "description": "When Support Monkeys are sold, an Area of Effect explosion deals 300 damage to all nearby Bloons. Bloons in range of Support Monkeys give 5% less cash"
@@ -1227,7 +1227,7 @@
             "nameLocKey": "ExplosiveEconomics3",
             "descriptionLocKey": "ExplosiveEconomics3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactExplosiveEconomics.png",
+            "icon": "ArtifactExplosiveEconomics",
             "rarityFrameType": "Support",
             "title": "Explosive Economics Legendary",
             "description": "When Support Monkeys are sold, an Area of Effect explosion deals 900 damage to all nearby Bloons. Bloons in range of Support Monkeys give 5% less cash"
@@ -1238,7 +1238,7 @@
             "nameLocKey": "FataMorgana1",
             "descriptionLocKey": "FataMorgana1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFataMorgana.png",
+            "icon": "ArtifactFataMorgana",
             "rarityFrameType": "Magic",
             "title": "Fata Morgana Common",
             "description": "Mermonkey range, pierce, projectile lifespan, and ability cooldown speed increased 25%. Mermonkey projectiles reflect off map borders. Adds a 0-1-1 Mermonkey to your Party"
@@ -1249,7 +1249,7 @@
             "nameLocKey": "FataMorgana2",
             "descriptionLocKey": "FataMorgana2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFataMorgana.png",
+            "icon": "ArtifactFataMorgana",
             "rarityFrameType": "Magic",
             "title": "Fata Morgana Rare",
             "description": "Mermonkey range, pierce, projectile lifespan, and ability cooldown speed increased 35%. Mermonkey projectiles reflect off map borders. Adds a 0-2-1 Mermonkey to your Party"
@@ -1260,7 +1260,7 @@
             "nameLocKey": "FataMorgana3",
             "descriptionLocKey": "FataMorgana3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFataMorgana.png",
+            "icon": "ArtifactFataMorgana",
             "rarityFrameType": "Magic",
             "title": "Fata Morgana Legendary",
             "description": "Mermonkey range, pierce, projectile lifespan, and ability cooldown speed increased 50%. Mermonkey projectiles reflect off map borders. Adds a 0-2-0 Mermonkey to your Party"
@@ -1271,7 +1271,7 @@
             "nameLocKey": "FlamingHotPunchARang1",
             "descriptionLocKey": "FlamingHotPunchARang1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFlamingHotPuncharang.png",
+            "icon": "ArtifactFlamingHotPuncharang",
             "rarityFrameType": "Primary",
             "title": "Flaming Hot Punch-A-Rang Common",
             "description": "Red Hot Rangs have reduced pierce, but knock back Bloons and have a 30% chance to set them on fire for 3 damage per 1.5s over 4.5s. Adds a 0-1-1 Boomerang Monkey to your Party"
@@ -1282,7 +1282,7 @@
             "nameLocKey": "FlamingHotPunchARang2",
             "descriptionLocKey": "FlamingHotPunchARang2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFlamingHotPuncharang.png",
+            "icon": "ArtifactFlamingHotPuncharang",
             "rarityFrameType": "Primary",
             "title": "Flaming Hot Punch-A-Rang Rare",
             "description": "Red Hot Rangs have reduced pierce, but knock back Bloons and have a 30% chance to set them on fire for 6 damage per 1.5s over 4.5s. Adds a 0-1-2 Boomerang Monkey to your Party"
@@ -1293,7 +1293,7 @@
             "nameLocKey": "FlamingHotPunchARang3",
             "descriptionLocKey": "FlamingHotPunchARang3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFlamingHotPuncharang.png",
+            "icon": "ArtifactFlamingHotPuncharang",
             "rarityFrameType": "Primary",
             "title": "Flaming Hot Punch-A-Rang Legendary",
             "description": "Red Hot Rangs have reduced pierce, but knock back Bloons and have a 30% chance to set them on fire for 12 damage per 1.5s over 4.5s. Adds a 0-0-2 Boomerang Monkey to your Party"
@@ -1304,7 +1304,7 @@
             "nameLocKey": "FollowMe1",
             "descriptionLocKey": "FollowMe1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFollowMe.png",
+            "icon": "ArtifactFollowMe",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Follow Me Common",
             "description": "Dart Monkeys, Boomerang Monkeys, Bomb Shooters, Tack Shooters, Super Monkeys, Druids, and Mermonkeys follow cursor like a Dartling Gunner with a turn rate of 180, and constantly fire as long as Bloons are on screen. Attack speed reduced by 20%"
@@ -1315,7 +1315,7 @@
             "nameLocKey": "FollowMe2",
             "descriptionLocKey": "FollowMe2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFollowMe.png",
+            "icon": "ArtifactFollowMe",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Follow Me Rare",
             "description": "Dart Monkeys, Boomerang Monkeys, Bomb Shooters, Tack Shooters, Super Monkeys, Druids, and Mermonkeys follow cursor like a Dartling Gunner with a turn rate of 300, and constantly fire as long as Bloons are on screen. Attack speed reduced by 10%"
@@ -1326,7 +1326,7 @@
             "nameLocKey": "FollowMe3",
             "descriptionLocKey": "FollowMe3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFollowMe.png",
+            "icon": "ArtifactFollowMe",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Follow Me Legendary",
             "description": "Dart Monkeys, Boomerang Monkeys, Bomb Shooters, Tack Shooters, Super Monkeys, Druids, and Mermonkeys follow cursor like a Dartling Gunner with a turn rate of 500, and constantly fire as long as Bloons are on screen. Attack speed reduced by 5%"
@@ -1337,7 +1337,7 @@
             "nameLocKey": "FrostedTips1",
             "descriptionLocKey": "FrostedTips1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFrostedTips.png",
+            "icon": "ArtifactFrostedTips",
             "rarityFrameType": "Primary",
             "title": "Frosted Tips Common",
             "description": "Dart Monkey pierce and range increased 15%, and projectiles apply permafrost, slowing Bloons by 50%. Adds a 1-1-0 Dart Monkey to your Party"
@@ -1348,7 +1348,7 @@
             "nameLocKey": "FrostedTips2",
             "descriptionLocKey": "FrostedTips2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFrostedTips.png",
+            "icon": "ArtifactFrostedTips",
             "rarityFrameType": "Primary",
             "title": "Frosted Tips Rare",
             "description": "Dart Monkey pierce and range increased 20%, and projectiles apply permafrost, slowing Bloons by 50%. Adds a 2-1-0 Dart Monkey to your Party"
@@ -1359,7 +1359,7 @@
             "nameLocKey": "FrostedTips3",
             "descriptionLocKey": "FrostedTips3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFrostedTips.png",
+            "icon": "ArtifactFrostedTips",
             "rarityFrameType": "Primary",
             "title": "Frosted Tips Legendary",
             "description": "Dart Monkey pierce and range increased 35%, and projectiles apply permafrost, slowing Bloons by 50%. Adds a 2-0-0 Dart Monkey to your Party"
@@ -1370,7 +1370,7 @@
             "nameLocKey": "FullBroadside1",
             "descriptionLocKey": "FullBroadside1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFullBroadside.png",
+            "icon": "ArtifactFullBroadside",
             "rarityFrameType": "Military",
             "title": "Full Broadside Common",
             "description": "Monkey Buccaneers can store up to 3 ability charges, and pierce and ability cooldown speed increased 35%. Adds a 1-1-0 Buccaneer to your Party"
@@ -1381,7 +1381,7 @@
             "nameLocKey": "FullBroadside2",
             "descriptionLocKey": "FullBroadside2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFullBroadside.png",
+            "icon": "ArtifactFullBroadside",
             "rarityFrameType": "Military",
             "title": "Full Broadside Rare",
             "description": "Monkey Buccaneers can store up to 3 ability charges, and pierce and ability cooldown speed increased 50%. Adds a 1-2-0 Buccaneer to your Party"
@@ -1392,7 +1392,7 @@
             "nameLocKey": "FullBroadside3",
             "descriptionLocKey": "FullBroadside3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactFullBroadside.png",
+            "icon": "ArtifactFullBroadside",
             "rarityFrameType": "Military",
             "title": "Full Broadside Legendary",
             "description": "Monkey Buccaneers can store up to 3 ability charges, and pierce and ability cooldown speed increased 70%. Adds a 0-2-0 Buccaneer to your Party"
@@ -1403,7 +1403,7 @@
             "nameLocKey": "GrowingSteady1",
             "descriptionLocKey": "GrowingSteady1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactGrowingSteady.png",
+            "icon": "ArtifactGrowingSteady",
             "rarityFrameType": "Magic",
             "title": "Growing Steady Common",
             "description": "Druids attack reload time is increased 20%, but every round, Druid damage is increased by 0.15, even Druids placed later! Adds a 1-0-1 Druid to your Party"
@@ -1414,7 +1414,7 @@
             "nameLocKey": "GrowingSteady2",
             "descriptionLocKey": "GrowingSteady2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactGrowingSteady.png",
+            "icon": "ArtifactGrowingSteady",
             "rarityFrameType": "Magic",
             "title": "Growing Steady Rare",
             "description": "Druids attack reload time is increased 20%, but every round, Druid damage is increased by 0.20, even Druids placed later! Adds a 1-0-2 Druid to your Party"
@@ -1425,7 +1425,7 @@
             "nameLocKey": "GrowingSteady3",
             "descriptionLocKey": "GrowingSteady3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactGrowingSteady.png",
+            "icon": "ArtifactGrowingSteady",
             "rarityFrameType": "Magic",
             "title": "Growing Steady Legendary",
             "description": "Druids attack reload time is increased 20%, but every round, Druid damage is increased by 0.35, even Druids placed later! Adds a 0-0-2 Druid to your Party"
@@ -1436,7 +1436,7 @@
             "nameLocKey": "HeightenedPerception1",
             "descriptionLocKey": "HeightenedPerception1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactHeightenedPerception.png",
+            "icon": "ArtifactHeightenedPerception",
             "rarityFrameType": "Primary",
             "title": "Heightened Perception Common",
             "description": "Primary Monkeys attack range increased 40%. Projectile speed reduced 50%"
@@ -1447,7 +1447,7 @@
             "nameLocKey": "HeightenedPerception2",
             "descriptionLocKey": "HeightenedPerception2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactHeightenedPerception.png",
+            "icon": "ArtifactHeightenedPerception",
             "rarityFrameType": "Primary",
             "title": "Heightened Perception Rare",
             "description": "Primary Monkeys attack range increased 55%. Projectile speed reduced 50%"
@@ -1458,7 +1458,7 @@
             "nameLocKey": "HeightenedPerception3",
             "descriptionLocKey": "HeightenedPerception3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactHeightenedPerception.png",
+            "icon": "ArtifactHeightenedPerception",
             "rarityFrameType": "Primary",
             "title": "Heightened Perception Legendary",
             "description": "Primary Monkeys attack range increased 75%. Projectile speed reduced 50%"
@@ -1469,7 +1469,7 @@
             "nameLocKey": "HighImpactGlue1",
             "descriptionLocKey": "HighImpactGlue1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactHighImpactGlue.png",
+            "icon": "ArtifactHighImpactGlue",
             "rarityFrameType": "Primary",
             "title": "High Impact Glue Common",
             "description": "Glue Gunner projectiles move twice as fast and deal 2 damage on impact. Impact damage scales up to 10x with the amount of Bloons on screen. Adds a 1-0-1 Glue Gunner to your Party"
@@ -1480,7 +1480,7 @@
             "nameLocKey": "HighImpactGlue2",
             "descriptionLocKey": "HighImpactGlue2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactHighImpactGlue.png",
+            "icon": "ArtifactHighImpactGlue",
             "rarityFrameType": "Primary",
             "title": "High Impact Glue Rare",
             "description": "Glue Gunner projectiles move twice as fast and deal 3 damage on impact. Impact damage scales up to 10x with the amount of Bloons on screen. Adds a 2-0-1 Glue Gunner to your Party"
@@ -1491,7 +1491,7 @@
             "nameLocKey": "HighImpactGlue3",
             "descriptionLocKey": "HighImpactGlue3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactHighImpactGlue.png",
+            "icon": "ArtifactHighImpactGlue",
             "rarityFrameType": "Primary",
             "title": "High Impact Glue Legendary",
             "description": "Glue Gunner projectiles move twice as fast and deal 6 damage on impact. Impact damage scales up to 10x with the amount of Bloons on screen. Adds a 2-0-0 Glue Gunner to your Party"
@@ -1502,7 +1502,7 @@
             "nameLocKey": "HomeBrewAlchemy1",
             "descriptionLocKey": "HomeBrewAlchemy1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactHomeBrewAlchemy.png",
+            "icon": "ArtifactHomeBrewAlchemy",
             "rarityFrameType": "Magic",
             "title": "Home Brew Alchemy Common",
             "description": "Alchemist attack reload time and ability cooldowns are reduced 20% with a 1 in 20 chance to Crit for 50x damage. Adds a 1-0-1 Alchemist to your Party"
@@ -1513,7 +1513,7 @@
             "nameLocKey": "HomeBrewAlchemy2",
             "descriptionLocKey": "HomeBrewAlchemy2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactHomeBrewAlchemy.png",
+            "icon": "ArtifactHomeBrewAlchemy",
             "rarityFrameType": "Magic",
             "title": "Home Brew Alchemy Rare",
             "description": "Alchemist attack reload time and ability cooldowns are reduced 30% with a 1 in 20 chance to Crit for 50x damage. Adds a 1-0-2 Alchemist to your Party"
@@ -1524,7 +1524,7 @@
             "nameLocKey": "HomeBrewAlchemy3",
             "descriptionLocKey": "HomeBrewAlchemy3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactHomeBrewAlchemy.png",
+            "icon": "ArtifactHomeBrewAlchemy",
             "rarityFrameType": "Magic",
             "title": "Home Brew Alchemy Legendary",
             "description": "Alchemist attack reload time and ability cooldowns are reduced 50% with a 1 in 20 chance to Crit for 50x damage. Adds a 0-0-2 Alchemist to your Party"
@@ -1535,7 +1535,7 @@
             "nameLocKey": "HomingProjectiles1",
             "descriptionLocKey": "HomingProjectiles1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactHomingProjectiles.png",
+            "icon": "ArtifactHomingProjectiles",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Homing Projectiles Legendary",
             "description": "Grants homing projectiles for Dart Monkey, Bomb Shooter, Tack Shooter, Super Monkey, Druid, Engineer & Dartling Gunner"
@@ -1546,7 +1546,7 @@
             "nameLocKey": "IntelligenceAgent1",
             "descriptionLocKey": "IntelligenceAgent1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactIntelligenceAgent.png",
+            "icon": "ArtifactIntelligenceAgent",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Intelligence Agent Common",
             "description": "Heroes give Monkey Intelligence Bureau buff to nearby Monkeys (can hit all Bloon types) but those monkeys attack reload time is increased 50%"
@@ -1557,7 +1557,7 @@
             "nameLocKey": "IntelligenceAgent2",
             "descriptionLocKey": "IntelligenceAgent2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactIntelligenceAgent.png",
+            "icon": "ArtifactIntelligenceAgent",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Intelligence Agent Rare",
             "description": "Heroes give Monkey Intelligence Bureau buff to nearby Monkeys (can hit all Bloon types) but those monkeys attack reload time is increased 40%"
@@ -1568,7 +1568,7 @@
             "nameLocKey": "IntelligenceAgent3",
             "descriptionLocKey": "IntelligenceAgent3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactIntelligenceAgent.png",
+            "icon": "ArtifactIntelligenceAgent",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Intelligence Agent Legendary",
             "description": "Heroes give Monkey Intelligence Bureau buff to nearby Monkeys (can hit all Bloon types) but those monkeys attack reload time is increased 25%"
@@ -1579,7 +1579,7 @@
             "nameLocKey": "JustLikeMagic1",
             "descriptionLocKey": "JustLikeMagic1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactJustLikeMagic.png",
+            "icon": "ArtifactJustLikeMagic",
             "rarityFrameType": "Magic",
             "title": "Just Like Magic Common",
             "description": "Tier 5 Magic Monkeys' attack speed is halved, but all Monkeys in their radius deal 25% more damage to MOAB-Class Bloons"
@@ -1590,7 +1590,7 @@
             "nameLocKey": "JustLikeMagic2",
             "descriptionLocKey": "JustLikeMagic2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactJustLikeMagic.png",
+            "icon": "ArtifactJustLikeMagic",
             "rarityFrameType": "Magic",
             "title": "Just Like Magic Rare",
             "description": "Tier 5 Magic Monkeys' attack speed is halved, but all Monkeys in their radius deal 30% more damage to MOAB-Class Bloons"
@@ -1601,7 +1601,7 @@
             "nameLocKey": "JustLikeMagic3",
             "descriptionLocKey": "JustLikeMagic3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactJustLikeMagic.png",
+            "icon": "ArtifactJustLikeMagic",
             "rarityFrameType": "Magic",
             "title": "Just Like Magic Legendary",
             "description": "Tier 5 Magic Monkeys' attack speed is halved, but all Monkeys in their radius deal 50% more damage to MOAB-Class Bloons"
@@ -1612,7 +1612,7 @@
             "nameLocKey": "MaliciousMauling1",
             "descriptionLocKey": "MaliciousMauling1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactMaliciousMauling.png",
+            "icon": "ArtifactMaliciousMauling",
             "rarityFrameType": "Primary",
             "title": "Malicious Mauling Common",
             "description": "Bomb Shooters and Striker Jones deal 3x damage to MOAB-Class Bloons. Bomb Shooters attack speed and projectile speed is halved. Adds a 0-1-1 Bomb Shooter to your Party"
@@ -1623,7 +1623,7 @@
             "nameLocKey": "MaliciousMauling2",
             "descriptionLocKey": "MaliciousMauling2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactMaliciousMauling.png",
+            "icon": "ArtifactMaliciousMauling",
             "rarityFrameType": "Primary",
             "title": "Malicious Mauling Rare",
             "description": "Bomb Shooters and Striker Jones deal 4x damage to MOAB-Class Bloons. Bomb Shooters attack speed and projectile speed is halved. Adds a 0-2-1 Bomb Shooter to your Party"
@@ -1634,7 +1634,7 @@
             "nameLocKey": "MaliciousMauling3",
             "descriptionLocKey": "MaliciousMauling3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactMaliciousMauling.png",
+            "icon": "ArtifactMaliciousMauling",
             "rarityFrameType": "Primary",
             "title": "Malicious Mauling Legendary",
             "description": "Bomb Shooters and Striker Jones deal 6x damage to MOAB-Class Bloons. Bomb Shooters attack speed and projectile speed is halved. Adds a 0-2-0 Bomb Shooter to your Party"
@@ -1645,7 +1645,7 @@
             "nameLocKey": "AbundantChoices1",
             "descriptionLocKey": "AbundantChoices1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactAbundantChoices.png",
+            "icon": "ArtifactAbundantChoices",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Abundant Choices Rare",
             "description": "Get 1 extra choice when picking a Boost, Artifact, or new Monkey"
@@ -1656,7 +1656,7 @@
             "nameLocKey": "AbundantChoices2",
             "descriptionLocKey": "AbundantChoices2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactAbundantChoices.png",
+            "icon": "ArtifactAbundantChoices",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Abundant Choices Legendary",
             "description": "Get 2 extra choices when picking a Boost, Artifact, or new Monkey"
@@ -1667,7 +1667,7 @@
             "nameLocKey": "MightyMulligan1",
             "descriptionLocKey": "MightyMulligan1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactMightyMulligan.png",
+            "icon": "ArtifactMightyMulligan",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Mighty Mulligan Common",
             "description": "Provides 1 Artifact Selection reroll opportunity after beating a reward tile"
@@ -1678,7 +1678,7 @@
             "nameLocKey": "MightyMulligan2",
             "descriptionLocKey": "MightyMulligan2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactMightyMulligan.png",
+            "icon": "ArtifactMightyMulligan",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Mighty Mulligan Rare",
             "description": "Provides 2 Artifact Selection reroll opportunity after beating a reward tile"
@@ -1689,7 +1689,7 @@
             "nameLocKey": "MightyMulligan3",
             "descriptionLocKey": "MightyMulligan3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactMightyMulligan.png",
+            "icon": "ArtifactMightyMulligan",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Mighty Mulligan Legendary",
             "description": "Provides 3 Artifact Selection reroll opportunity after beating a reward tile"
@@ -1700,7 +1700,7 @@
             "nameLocKey": "NoMorePlease1",
             "descriptionLocKey": "NoMorePlease1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactNoMorePlease.png",
+            "icon": "ArtifactNoMorePlease",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "No More Please Rare",
             "description": "Ban a Monkey from being offered as an Insta Monkey choice for the rest of the campaign. Option to Ban appears when next offered a choice of Insta Monkey. This Artifact has only 2 charges & is Banished after use"
@@ -1711,7 +1711,7 @@
             "nameLocKey": "NoMorePlease2",
             "descriptionLocKey": "NoMorePlease2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactNoMorePlease.png",
+            "icon": "ArtifactNoMorePlease",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "No More Please Legendary",
             "description": "Ban a Monkey from being offered as an Insta Monkey choice for the rest of the campaign. Option to Ban appears when next offered a choice of Insta Monkey. This Artifact has only 4 charges & is Banished after use"
@@ -1722,7 +1722,7 @@
             "nameLocKey": "Portability1",
             "descriptionLocKey": "Portability1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactPortability.png",
+            "icon": "ArtifactPortability",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Portability Common",
             "description": "Grants 1 Portable Lake and Pontoon per tile"
@@ -1733,7 +1733,7 @@
             "nameLocKey": "Portability2",
             "descriptionLocKey": "Portability2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactPortability.png",
+            "icon": "ArtifactPortability",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Portability Rare",
             "description": "Grants 2 Portable Lake and Pontoon per tile"
@@ -1744,7 +1744,7 @@
             "nameLocKey": "Portability3",
             "descriptionLocKey": "Portability3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactPortability.png",
+            "icon": "ArtifactPortability",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Portability Legendary",
             "description": "Grants 3 Portable Lake and Pontoon per tile"
@@ -1755,7 +1755,7 @@
             "nameLocKey": "TokenArtifact",
             "descriptionLocKey": "TokenArtifactDescription",
             "isBossArtifact": false,
-            "icon": "ArtifactMerchantToken.png",
+            "icon": "ArtifactMerchantToken",
             "rarityFrameType": "Token",
             "title": "Token",
             "description": "Tokens are accepted by all Merchants"
@@ -1766,7 +1766,7 @@
             "nameLocKey": "OneShot1",
             "descriptionLocKey": "OneShot1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactOneShot.png",
+            "icon": "ArtifactOneShot",
             "rarityFrameType": "Military",
             "title": "One Shot Common",
             "description": "Sniper Monkeys attack 2x slower, but have a 1 in 5 chance to Crit for 10x damage. Adds a 1-1-0 Sniper Monkey to your Party"
@@ -1777,7 +1777,7 @@
             "nameLocKey": "OneShot2",
             "descriptionLocKey": "OneShot2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactOneShot.png",
+            "icon": "ArtifactOneShot",
             "rarityFrameType": "Military",
             "title": "One Shot Rare",
             "description": "Sniper Monkeys attack 2x slower, but have a 1 in 5 chance to Crit for 14x damage. Adds a 2-1-0 Sniper Monkey to your Party"
@@ -1788,7 +1788,7 @@
             "nameLocKey": "OneShot3",
             "descriptionLocKey": "OneShot3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactOneShot.png",
+            "icon": "ArtifactOneShot",
             "rarityFrameType": "Military",
             "title": "One Shot Legendary",
             "description": "Sniper Monkeys attack 2x slower, but have a 1 in 5 chance to Crit for 20x damage. Adds a 2-0-0 Sniper Monkey to your Party"
@@ -1799,7 +1799,7 @@
             "nameLocKey": "OverwhelmingSynergy1",
             "descriptionLocKey": "OverwhelmingSynergy1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactOverwhelmingSynergy.png",
+            "icon": "ArtifactOverwhelmingSynergy",
             "rarityFrameType": "Magic",
             "title": "Overwhelming Synergy Common",
             "description": "Magic Monkeys get +15% attack speed. Upgrades for other Monkeys are 20% more expensive"
@@ -1810,7 +1810,7 @@
             "nameLocKey": "OverwhelmingSynergy2",
             "descriptionLocKey": "OverwhelmingSynergy2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactOverwhelmingSynergy.png",
+            "icon": "ArtifactOverwhelmingSynergy",
             "rarityFrameType": "Magic",
             "title": "Overwhelming Synergy Rare",
             "description": "Magic Monkeys get +25% attack speed. Upgrades for other Monkeys are 20% more expensive"
@@ -1821,7 +1821,7 @@
             "nameLocKey": "OverwhelmingSynergy3",
             "descriptionLocKey": "OverwhelmingSynergy3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactOverwhelmingSynergy.png",
+            "icon": "ArtifactOverwhelmingSynergy",
             "rarityFrameType": "Magic",
             "title": "Overwhelming Synergy Legendary",
             "description": "Magic Monkeys get +40% attack speed. Upgrades for other Monkeys are 20% more expensive"
@@ -1832,7 +1832,7 @@
             "nameLocKey": "PincushionFlyby1",
             "descriptionLocKey": "PincushionFlyby1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactPincushionFlyby.png",
+            "icon": "ArtifactPincushionFlyby",
             "rarityFrameType": "Military",
             "title": "Pincushion Flyby Common",
             "description": "Monkey Ace pin Bloons for 1s on pop, and have +10% pierce. Adds a 0-1-1 Monkey Ace to your Party"
@@ -1843,7 +1843,7 @@
             "nameLocKey": "PincushionFlyby2",
             "descriptionLocKey": "PincushionFlyby2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactPincushionFlyby.png",
+            "icon": "ArtifactPincushionFlyby",
             "rarityFrameType": "Military",
             "title": "Pincushion Flyby Rare",
             "description": "Monkey Ace pin Bloons for 1s on pop, and have +15% pierce. Adds a 0-1-2 Monkey Ace to your Party"
@@ -1854,7 +1854,7 @@
             "nameLocKey": "PincushionFlyby3",
             "descriptionLocKey": "PincushionFlyby3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactPincushionFlyby.png",
+            "icon": "ArtifactPincushionFlyby",
             "rarityFrameType": "Military",
             "title": "Pincushion Flyby Legendary",
             "description": "Monkey Ace pin Bloons for 1s on pop, and have +25% pierce. Adds a 0-0-2 Monkey Ace to your Party"
@@ -1865,7 +1865,7 @@
             "nameLocKey": "PopsFired1",
             "descriptionLocKey": "PopsFired1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactPopsFired.png",
+            "icon": "ArtifactPopsFired",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Pops Fired Common",
             "description": "When a Bloon on fire is popped, it explodes. Hits up to 2 nearby Bloons"
@@ -1876,7 +1876,7 @@
             "nameLocKey": "PopsFired2",
             "descriptionLocKey": "PopsFired2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactPopsFired.png",
+            "icon": "ArtifactPopsFired",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Pops Fired Rare",
             "description": "When a Bloon on fire is popped, it explodes. Hits up to 3 nearby Bloons"
@@ -1887,7 +1887,7 @@
             "nameLocKey": "PopsFired3",
             "descriptionLocKey": "PopsFired3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactPopsFired.png",
+            "icon": "ArtifactPopsFired",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Pops Fired Legendary",
             "description": "When a Bloon on fire is popped, it explodes. Hits up to 5 nearby Bloons"
@@ -1898,7 +1898,7 @@
             "nameLocKey": "PrimarySpecialist1",
             "descriptionLocKey": "PrimarySpecialist1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactPrimarySpecialist.png",
+            "icon": "ArtifactPrimarySpecialist",
             "rarityFrameType": "Primary",
             "title": "Primary Specialist Rare",
             "description": "Primary Monkey attack reload time and ability cooldowns are reduced 20%. All other Monkey categories have pierce and ability cooldown speed reduced 15%"
@@ -1909,7 +1909,7 @@
             "nameLocKey": "PrimarySpecialist2",
             "descriptionLocKey": "PrimarySpecialist2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactPrimarySpecialist.png",
+            "icon": "ArtifactPrimarySpecialist",
             "rarityFrameType": "Primary",
             "title": "Primary Specialist Legendary",
             "description": "Primary Monkey attack reload time and ability cooldowns are reduced 35%. All other Monkey categories have pierce and ability cooldown speed reduced 15%"
@@ -1920,7 +1920,7 @@
             "nameLocKey": "PureDamage1",
             "descriptionLocKey": "PureDamage1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactPureDamage.png",
+            "icon": "ArtifactPureDamage",
             "rarityFrameType": "Magic",
             "title": "Pure Damage Common",
             "description": "Magic Monkeys attack speed and ability cooldowns are 2x slower, but damage is increased by 230% against Ceramic and MOAB-Class Bloons"
@@ -1931,7 +1931,7 @@
             "nameLocKey": "PureDamage2",
             "descriptionLocKey": "PureDamage2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactPureDamage.png",
+            "icon": "ArtifactPureDamage",
             "rarityFrameType": "Magic",
             "title": "Pure Damage Rare",
             "description": "Magic Monkeys attack speed and ability cooldowns are 2x slower, but damage is increased by 250% against Ceramic and MOAB-Class Bloons"
@@ -1942,7 +1942,7 @@
             "nameLocKey": "PureDamage3",
             "descriptionLocKey": "PureDamage3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactPureDamage.png",
+            "icon": "ArtifactPureDamage",
             "rarityFrameType": "Magic",
             "title": "Pure Damage Legendary",
             "description": "Magic Monkeys attack speed and ability cooldowns are 2x slower, but damage is increased by 300% against Ceramic and MOAB-Class Bloons"
@@ -1953,7 +1953,7 @@
             "nameLocKey": "RubberBullets1",
             "descriptionLocKey": "RubberBullets1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactRubberBullets.png",
+            "icon": "ArtifactRubberBullets",
             "rarityFrameType": "Military",
             "title": "Rubber Bullets Rare",
             "description": "Tier 4 and higher Sniper Monkeys only deal 1 damage per shot, but immobilize MOAB-Class Bloons briefly with each hit. Adds a 0-0-0 Sniper Monkey to your Party"
@@ -1964,7 +1964,7 @@
             "nameLocKey": "SlippedOnThePeel1",
             "descriptionLocKey": "SlippedOnThePeel1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSlippedOnThePeel.png",
+            "icon": "ArtifactSlippedOnThePeel",
             "rarityFrameType": "Support",
             "title": "Slipped on the Peel Common",
             "description": "Benjamin and the Banana Farms slow Bloons in radius by 15%. Benjamin's range is doubled. Adds a 1-0-1 Banana Farm to your Party"
@@ -1975,7 +1975,7 @@
             "nameLocKey": "SlippedOnThePeel2",
             "descriptionLocKey": "SlippedOnThePeel2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSlippedOnThePeel.png",
+            "icon": "ArtifactSlippedOnThePeel",
             "rarityFrameType": "Support",
             "title": "Slipped on the Peel Rare",
             "description": "Benjamin and the Banana Farms slow Bloons in radius by 20%. Benjamin's range is doubled. Adds a 2-0-1 Banana Farm to your Party"
@@ -1986,7 +1986,7 @@
             "nameLocKey": "SlippedOnThePeel3",
             "descriptionLocKey": "SlippedOnThePeel3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSlippedOnThePeel.png",
+            "icon": "ArtifactSlippedOnThePeel",
             "rarityFrameType": "Support",
             "title": "Slipped on the Peel Legendary",
             "description": "Benjamin and the Banana Farms slow Bloons in radius by 30%. Benjamin's range is doubled. Adds a 2-0-0 Banana Farm to your Party"
@@ -1997,7 +1997,7 @@
             "nameLocKey": "SlowAndSteady1",
             "descriptionLocKey": "SlowAndSteady1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSlowAndSteady.png",
+            "icon": "ArtifactSlowAndSteady",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Slow And Steady Common",
             "description": "Monkey damage increased 100%. For the first 20s of each round, all Monkeys attack 2x slower"
@@ -2008,7 +2008,7 @@
             "nameLocKey": "SlowAndSteady2",
             "descriptionLocKey": "SlowAndSteady2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSlowAndSteady.png",
+            "icon": "ArtifactSlowAndSteady",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Slow And Steady Rare",
             "description": "Monkey damage increased 100%. For the first 20s of each round, all Monkeys attack 1.8x slower"
@@ -2019,7 +2019,7 @@
             "nameLocKey": "SlowAndSteady3",
             "descriptionLocKey": "SlowAndSteady3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSlowAndSteady.png",
+            "icon": "ArtifactSlowAndSteady",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Slow And Steady Legendary",
             "description": "Monkey damage increased 100%. For the first 20s of each round, all Monkeys attack 1.5x slower"
@@ -2030,7 +2030,7 @@
             "nameLocKey": "SlowerIsHarder1",
             "descriptionLocKey": "SlowerIsHarder1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSlowerisHarder.png",
+            "icon": "ArtifactSlowerisHarder",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Slower Is Harder Common",
             "description": "All projectile speed is reduced 35%, but damage increased by 15%"
@@ -2041,7 +2041,7 @@
             "nameLocKey": "SlowerIsHarder2",
             "descriptionLocKey": "SlowerIsHarder2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSlowerisHarder.png",
+            "icon": "ArtifactSlowerisHarder",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Slower Is Harder Rare",
             "description": "All projectile speed is reduced 35%, but damage increased by 20%"
@@ -2052,7 +2052,7 @@
             "nameLocKey": "SlowerIsHarder3",
             "descriptionLocKey": "SlowerIsHarder3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSlowerisHarder.png",
+            "icon": "ArtifactSlowerisHarder",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Slower Is Harder Legendary",
             "description": "All projectile speed is reduced 35%, but damage increased by 30%"
@@ -2063,7 +2063,7 @@
             "nameLocKey": "SpiritOfAdventure1",
             "descriptionLocKey": "SpiritOfAdventure1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSpiritOfAdventure.png",
+            "icon": "ArtifactSpiritOfAdventure",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Spirit of Adventure Common",
             "description": "Hero end of round XP increased 45% and Hero attack speed increased 10%. Non-Hero Monkeys attack speed reduced 10%"
@@ -2074,7 +2074,7 @@
             "nameLocKey": "SpiritOfAdventure2",
             "descriptionLocKey": "SpiritOfAdventure2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSpiritOfAdventure.png",
+            "icon": "ArtifactSpiritOfAdventure",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Spirit of Adventure Rare",
             "description": "Hero end of round XP increased 60% and Hero attack speed increased 10%. Non-Hero Monkeys attack speed reduced 10%"
@@ -2085,7 +2085,7 @@
             "nameLocKey": "SpiritOfAdventure3",
             "descriptionLocKey": "SpiritOfAdventure3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSpiritOfAdventure.png",
+            "icon": "ArtifactSpiritOfAdventure",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Spirit of Adventure Legendary",
             "description": "Hero end of round XP increased 80% and Hero attack speed increased 10%. Non-Hero Monkeys attack speed reduced 10%"
@@ -2096,7 +2096,7 @@
             "nameLocKey": "SplodeyDarts1",
             "descriptionLocKey": "SplodeyDarts1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSplodyDarts.png",
+            "icon": "ArtifactSplodyDarts",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Splody Darts Common",
             "description": "Dart based Monkeys' projectiles have a 20% chance to explode when they expire, dealing 1 damage to nearby Bloons"
@@ -2107,7 +2107,7 @@
             "nameLocKey": "SplodeyDarts2",
             "descriptionLocKey": "SplodeyDarts2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSplodyDarts.png",
+            "icon": "ArtifactSplodyDarts",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Splody Darts Rare",
             "description": "Dart based Monkeys' projectiles have a 20% chance to explode when they expire, dealing 3 damage to nearby Bloons"
@@ -2118,7 +2118,7 @@
             "nameLocKey": "SplodeyDarts3",
             "descriptionLocKey": "SplodeyDarts3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSplodyDarts.png",
+            "icon": "ArtifactSplodyDarts",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Splody Darts Legendary",
             "description": "Dart based Monkeys' projectiles have a 20% chance to explode when they expire, dealing 9 damage to nearby Bloons"
@@ -2129,7 +2129,7 @@
             "nameLocKey": "SquadronTogether1",
             "descriptionLocKey": "SquadronTogether1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSquadronTogetherStrong.png",
+            "icon": "ArtifactSquadronTogetherStrong",
             "rarityFrameType": "Military",
             "title": "Squadron Together Strong Common",
             "description": "Military Monkeys get +15% attack speed. Upgrades for other Monkeys are 20% more expensive"
@@ -2140,7 +2140,7 @@
             "nameLocKey": "SquadronTogether2",
             "descriptionLocKey": "SquadronTogether2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSquadronTogetherStrong.png",
+            "icon": "ArtifactSquadronTogetherStrong",
             "rarityFrameType": "Military",
             "title": "Squadron Together Strong Rare",
             "description": "Military Monkeys get +25% attack speed. Upgrades for other Monkeys are 20% more expensive"
@@ -2151,7 +2151,7 @@
             "nameLocKey": "SquadronTogether3",
             "descriptionLocKey": "SquadronTogether3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSquadronTogetherStrong.png",
+            "icon": "ArtifactSquadronTogetherStrong",
             "rarityFrameType": "Military",
             "title": "Squadron Together Strong Legendary",
             "description": "Military Monkeys get +40% attack speed. Upgrades for other Monkeys are 20% more expensive"
@@ -2162,7 +2162,7 @@
             "nameLocKey": "StartingStrong1",
             "descriptionLocKey": "StartingStrong1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactStartingStrong.png",
+            "icon": "ArtifactStartingStrong",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Starting Strong Common",
             "description": "For the first 20s of each round, Monkeys attack 15% faster"
@@ -2173,7 +2173,7 @@
             "nameLocKey": "StartingStrong2",
             "descriptionLocKey": "StartingSrtong2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactStartingStrong.png",
+            "icon": "ArtifactStartingStrong",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Starting Strong Rare",
             "description": "For the first 20s of each round, Monkeys attack 20% faster"
@@ -2184,7 +2184,7 @@
             "nameLocKey": "StartingStrong3",
             "descriptionLocKey": "StartingStrong3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactStartingStrong.png",
+            "icon": "ArtifactStartingStrong",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Starting Strong Legendary",
             "description": "For the first 20s of each round, Monkeys attack 35% faster"
@@ -2195,7 +2195,7 @@
             "nameLocKey": "StickySituation1",
             "descriptionLocKey": "StickySituation1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactStickySituation.png",
+            "icon": "ArtifactStickySituation",
             "rarityFrameType": "Primary",
             "title": "Sticky Situation Common",
             "description": "Primary Monkeys deal 1.5x damage to glued Bloons"
@@ -2206,7 +2206,7 @@
             "nameLocKey": "StickySituation2",
             "descriptionLocKey": "StickySituation2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactStickySituation.png",
+            "icon": "ArtifactStickySituation",
             "rarityFrameType": "Primary",
             "title": "Sticky Situation Rare",
             "description": "Primary Monkeys deal 1.75x damage to glued Bloons"
@@ -2217,7 +2217,7 @@
             "nameLocKey": "StickySituation3",
             "descriptionLocKey": "StickySituation3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactStickySituation.png",
+            "icon": "ArtifactStickySituation",
             "rarityFrameType": "Primary",
             "title": "Sticky Situation Legendary",
             "description": "Primary Monkeys deal 2x damage to glued Bloons"
@@ -2228,7 +2228,7 @@
             "nameLocKey": "SupportSpecialist1",
             "descriptionLocKey": "SupportSpecialist1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSupportSpecialist.png",
+            "icon": "ArtifactSupportSpecialist",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Support Specialist Rare",
             "description": "Support Monkeys attack reload time and ability cooldowns are reduced 20%. All other Monkey categories have pierce and ability cooldown speed reduced 15%"
@@ -2239,7 +2239,7 @@
             "nameLocKey": "SupportSpecialist2",
             "descriptionLocKey": "SupportSpecialist2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSupportSpecialist.png",
+            "icon": "ArtifactSupportSpecialist",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Support Specialist Legendary",
             "description": "Support Monkeys attack reload time and ability cooldowns are reduced 35%. All other Monkey categories have pierce and ability cooldown speed reduced 15%"
@@ -2250,7 +2250,7 @@
             "nameLocKey": "SwellingSpikes1",
             "descriptionLocKey": "SwellingSpikes1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSwellingSpikes.png",
+            "icon": "ArtifactSwellingSpikes",
             "rarityFrameType": "Support",
             "title": "Swelling Spikes Common",
             "description": "Spike Factories attack half as fast, but have 115% more pierce. Adds a 1-0-1 Spike Factory to your Party"
@@ -2261,7 +2261,7 @@
             "nameLocKey": "SwellingSpikes2",
             "descriptionLocKey": "SwellingSpikes2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSwellingSpikes.png",
+            "icon": "ArtifactSwellingSpikes",
             "rarityFrameType": "Support",
             "title": "Swelling Spikes Rare",
             "description": "Spike Factories attack half as fast, but have 120% more pierce. Adds a 2-0-1 Spike Factory to your Party"
@@ -2272,7 +2272,7 @@
             "nameLocKey": "SwellingSpikes3",
             "descriptionLocKey": "SwellingSpikes3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSwellingSpikes.png",
+            "icon": "ArtifactSwellingSpikes",
             "rarityFrameType": "Support",
             "title": "Swelling Spikes Legendary",
             "description": "Spike Factories attack half as fast, but have 135% more pierce. Adds a 2-0-0 Spike Factory to your Party"
@@ -2283,7 +2283,7 @@
             "nameLocKey": "SwiftestToBusiness1",
             "descriptionLocKey": "SwiftestToBusiness1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSwiftesttoBuisness.png",
+            "icon": "ArtifactSwiftesttoBuisness",
             "rarityFrameType": "Magic",
             "title": "Swiftest To Business Common",
             "description": "Ninja Monkeys tier 3 or higher have 20% faster projectile speed, and attack reload and ability cooldown time reduced 20%. Adds a 1-0-1 Ninja Monkey to your Party"
@@ -2294,7 +2294,7 @@
             "nameLocKey": "SwiftestToBusiness2",
             "descriptionLocKey": "SwiftestToBusiness2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSwiftesttoBuisness.png",
+            "icon": "ArtifactSwiftesttoBuisness",
             "rarityFrameType": "Magic",
             "title": "Swiftest To Business Rare",
             "description": "Ninja Monkeys tier 3 or higher have 25% faster projectile speed, and attack reload and ability cooldown time reduced 25%. Adds a 2-0-1 Ninja Monkey to your Party"
@@ -2305,7 +2305,7 @@
             "nameLocKey": "SwiftestToBusiness3",
             "descriptionLocKey": "SwiftestToBusiness3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactSwiftesttoBuisness.png",
+            "icon": "ArtifactSwiftesttoBuisness",
             "rarityFrameType": "Magic",
             "title": "Swiftest To Business Legendary",
             "description": "Ninja Monkeys tier 3 or higher have 40% faster projectile speed, and attack reload and ability cooldown time reduced 40%. Adds a 2-0-0 Ninja Monkey to your Party"
@@ -2316,7 +2316,7 @@
             "nameLocKey": "TheUnspokenHeroes1",
             "descriptionLocKey": "TheUnspokenHeroes1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactTheUnspokenHeroes.png",
+            "icon": "ArtifactTheUnspokenHeroes",
             "rarityFrameType": "Support",
             "title": "The Unspoken Heroes Common",
             "description": "Support Monkeys have a 1 in 10 chance to Crit for 250% damage. Heroes attack speed and end of round experience is reduced 15%"
@@ -2327,7 +2327,7 @@
             "nameLocKey": "TheUnspokenHeroes2",
             "descriptionLocKey": "TheUnspokenHeroes2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactTheUnspokenHeroes.png",
+            "icon": "ArtifactTheUnspokenHeroes",
             "rarityFrameType": "Support",
             "title": "The Unspoken Heroes Rare",
             "description": "Support Monkeys have a 1 in 10 chance to Crit for 350% damage. Heroes attack speed and end of round experience is reduced 15%"
@@ -2338,7 +2338,7 @@
             "nameLocKey": "TheUnspokenHeroes3",
             "descriptionLocKey": "TheUnspokenHeroes3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactTheUnspokenHeroes.png",
+            "icon": "ArtifactTheUnspokenHeroes",
             "rarityFrameType": "Support",
             "title": "The Unspoken Heroes Legendary",
             "description": "Support Monkeys have a 1 in 10 chance to Crit for 500% damage. Heroes attack speed and end of round experience is reduced 15%"
@@ -2349,7 +2349,7 @@
             "nameLocKey": "TitForTat1",
             "descriptionLocKey": "TitForTat1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactTitForTat.png",
+            "icon": "ArtifactTitForTat",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Tit For Tat Common",
             "description": "All Monkeys attack 15% faster. Bloons move 25% faster when in range of Monkeys"
@@ -2360,7 +2360,7 @@
             "nameLocKey": "TitForTat2",
             "descriptionLocKey": "TitForTat2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactTitForTat.png",
+            "icon": "ArtifactTitForTat",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Tit For Tat Rare",
             "description": "All Monkeys attack 20% faster. Bloons move 25% faster when in range of Monkeys"
@@ -2371,7 +2371,7 @@
             "nameLocKey": "TitForTat3",
             "descriptionLocKey": "TitForTat3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactTitForTat.png",
+            "icon": "ArtifactTitForTat",
             "rarityFrameType": "AllMonkeyTowerSets",
             "title": "Tit For Tat Legendary",
             "description": "All Monkeys attack 40% faster. Bloons move 25% faster when in range of Monkeys"
@@ -2382,7 +2382,7 @@
             "nameLocKey": "TooManyCooks1",
             "descriptionLocKey": "TooManyCooks1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactTooManyCooks.png",
+            "icon": "ArtifactTooManyCooks",
             "rarityFrameType": "Military",
             "title": "Too Many Cooks Common",
             "description": "Military Monkeys attack reload time is reduced 25%. Attack reload time increased by 5% for each Military Monkey placed"
@@ -2393,7 +2393,7 @@
             "nameLocKey": "TooManyCooks2",
             "descriptionLocKey": "TooManyCooks2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactTooManyCooks.png",
+            "icon": "ArtifactTooManyCooks",
             "rarityFrameType": "Military",
             "title": "Too Many Cooks Rare",
             "description": "Military Monkeys attack reload time is reduced 30%. Attack reload time increased by 5% for each Military Monkey placed"
@@ -2404,7 +2404,7 @@
             "nameLocKey": "TooManyCooks3",
             "descriptionLocKey": "TooManyCooks3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactTooManyCooks.png",
+            "icon": "ArtifactTooManyCooks",
             "rarityFrameType": "Military",
             "title": "Too Many Cooks Legendary",
             "description": "Military Monkeys attack reload time is reduced 45%. Attack reload time increased by 5% for each Military Monkey placed"
@@ -2415,7 +2415,7 @@
             "nameLocKey": "TrickShotATacks1",
             "descriptionLocKey": "TrickShotATacks1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactTrickShotATacks.png",
+            "icon": "ArtifactTrickShotATacks",
             "rarityFrameType": "Primary",
             "title": "Trick Shot A-Tacks Common",
             "description": "Tack Shooter projectiles rebound off obstacles. Range and projectile lifespan increased 50%. Adds a 1-1-0 Tack Shooter to your Party"
@@ -2426,7 +2426,7 @@
             "nameLocKey": "TrickShotATacks2",
             "descriptionLocKey": "TrickShotATacks2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactTrickShotATacks.png",
+            "icon": "ArtifactTrickShotATacks",
             "rarityFrameType": "Primary",
             "title": "Trick Shot A-Tacks Rare",
             "description": "Tack Shooter projectiles rebound off obstacles. Range and projectile lifespan increased 100%. Adds a 1-2-0 Tack Shooter to your Party"
@@ -2437,7 +2437,7 @@
             "nameLocKey": "TrickShotATacks3",
             "descriptionLocKey": "TrickShotATacks3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactTrickShotATacks.png",
+            "icon": "ArtifactTrickShotATacks",
             "rarityFrameType": "Primary",
             "title": "Trick Shot A-Tacks Legendary",
             "description": "Tack Shooter projectiles rebound off obstacles. Range and projectile lifespan increased 200%. Adds a 0-2-0 Tack Shooter to your Party"
@@ -2448,7 +2448,7 @@
             "nameLocKey": "Unification1",
             "descriptionLocKey": "Unification1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactUnification.png",
+            "icon": "ArtifactUnification",
             "rarityFrameType": "Primary",
             "title": "Unification Common",
             "description": "Primary Monkeys now count as all Monkey categories. Primary Monkey attack range reduced 20%"
@@ -2459,7 +2459,7 @@
             "nameLocKey": "Unification2",
             "descriptionLocKey": "Unification2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactUnification.png",
+            "icon": "ArtifactUnification",
             "rarityFrameType": "Primary",
             "title": "Unification Rare",
             "description": "Primary Monkeys now count as all Monkey categories. Primary Monkey attack range reduced 10%"
@@ -2470,7 +2470,7 @@
             "nameLocKey": "Unification3",
             "descriptionLocKey": "Unification3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactUnification.png",
+            "icon": "ArtifactUnification",
             "rarityFrameType": "Primary",
             "title": "Unification Legendary",
             "description": "Primary Monkeys now count as all Monkey categories."
@@ -2481,7 +2481,7 @@
             "nameLocKey": "Wackywibblywavey1",
             "descriptionLocKey": "Wackywibblywavey1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactWackywibblywavey.png",
+            "icon": "ArtifactWackywibblywavey",
             "rarityFrameType": "Military",
             "title": "Wacky Wibbly Wavey Common",
             "description": "Heli Pilot attack reload time is reduced 20% and fire in a wacky wiggly pattern. Adds a 1-1-0 Heli Pilot to your Party"
@@ -2492,7 +2492,7 @@
             "nameLocKey": "Wackywibblywavey2",
             "descriptionLocKey": "Wackywibblywavey2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactWackywibblywavey.png",
+            "icon": "ArtifactWackywibblywavey",
             "rarityFrameType": "Military",
             "title": "Wacky Wibbly Wavey Rare",
             "description": "Heli Pilot attack reload time is reduced 25% and fire in a wacky wiggly pattern. Adds a 2-1-0 Heli Pilot to your Party"
@@ -2503,7 +2503,7 @@
             "nameLocKey": "Wackywibblywavey3",
             "descriptionLocKey": "Wackywibblywavey3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactWackywibblywavey.png",
+            "icon": "ArtifactWackywibblywavey",
             "rarityFrameType": "Military",
             "title": "Wacky Wibbly Wavey Legendary",
             "description": "Heli Pilot attack reload time is reduced 40% and fire in a wacky wiggly pattern. Adds a 2-0-0 Heli Pilot to your Party"
@@ -2514,7 +2514,7 @@
             "nameLocKey": "ZigThenZag1",
             "descriptionLocKey": "ZigThenZag1Description",
             "isBossArtifact": false,
-            "icon": "ArtifactZigThenZag.png",
+            "icon": "ArtifactZigThenZag",
             "rarityFrameType": "Military",
             "title": "Zig Then Zag Common",
             "description": "All Military Monkeys shoot in a Zig Zag pattern. Projectiles move 20% slower, but attack speed is 20% faster"
@@ -2525,7 +2525,7 @@
             "nameLocKey": "ZigThenZag2",
             "descriptionLocKey": "ZigThenZag2Description",
             "isBossArtifact": false,
-            "icon": "ArtifactZigThenZag.png",
+            "icon": "ArtifactZigThenZag",
             "rarityFrameType": "Military",
             "title": "Zig Then Zag Rare",
             "description": "All Military Monkeys shoot in a Zig Zag pattern. Projectiles move 20% slower, but attack speed is 25% faster"
@@ -2536,7 +2536,7 @@
             "nameLocKey": "ZigThenZag3",
             "descriptionLocKey": "ZigThenZag3Description",
             "isBossArtifact": false,
-            "icon": "ArtifactZigThenZag.png",
+            "icon": "ArtifactZigThenZag",
             "rarityFrameType": "Military",
             "title": "Zig Then Zag Legendary",
             "description": "All Military Monkeys shoot in a Zig Zag pattern. Projectiles move 20% slower, but attack speed is 40% faster"
