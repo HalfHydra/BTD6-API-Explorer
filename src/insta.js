@@ -639,6 +639,67 @@ function generateFrontPage(){
             }
         });
     }
+
+    let StandaloneSiteDiv = document.createElement('div');
+    StandaloneSiteDiv.classList.add('site-access-div');
+    frontPage.appendChild(StandaloneSiteDiv);
+
+    let StandaloneSiteText = document.createElement('p');
+    StandaloneSiteText.classList.add('site-info-header', 'sites-text', 'black-outline');
+    StandaloneSiteText.innerHTML = 'Other Sites';
+    StandaloneSiteDiv.appendChild(StandaloneSiteText);
+
+    let siteButtons = document.createElement('div');
+    siteButtons.classList.add('standalone-site-buttons');
+    StandaloneSiteDiv.appendChild(siteButtons);
+
+    let standaloneSites = {
+        "Main Site": {
+            "link": "https://btd6apiexplorer.github.io/",
+            "text": "Main Site",
+            "icon": "SiteBtn",
+            "background": "OverviewProfile"
+        },
+        "Roundsets": {
+            "link": "https://btd6apiexplorer.github.io/rounds",
+            "text": "Roundsets",
+            "icon": "DefaultRoundSetIcon",
+            "background": "BloonsBG"
+        },
+        "Rogue Artifacts": {
+            "link": "https://btd6apiexplorer.github.io/rogue",
+            "text": "Rogue Artifacts",
+            "icon": "RogueSiteBtn",
+            "background": "RogueBG"
+        },
+        "Leaderboards": {
+            "link": "https://btd6apiexplorer.github.io/leaderboards",
+            "text": "Leaderboards",
+            "icon": "LeaderboardSiteBtn",
+            "background": "TrophyStoreTiledBG"
+        }
+    }
+
+    Object.entries(standaloneSites).forEach(([site, data]) => {
+        let siteButtonDiv = document.createElement('div');
+        siteButtonDiv.classList.add('site-button-div', 'pointer');
+        siteButtonDiv.style.backgroundImage = `url(Assets/UI/${data.background}.png)`;
+        siteButtons.appendChild(siteButtonDiv);
+        siteButtonDiv.addEventListener('click', () => {
+            window.location.href = data.link;
+        })
+    
+        let siteButtonIcon = document.createElement('img');
+        siteButtonIcon.classList.add('site-button-icon');
+        siteButtonIcon.src = `./Assets/UI/${data.icon}.png`;
+        siteButtonDiv.appendChild(siteButtonIcon);
+    
+        let profileName = document.createElement('p');
+        profileName.classList.add('profile-name','readability-bg','black-outline');
+        profileName.style.marginLeft = '0';
+        profileName.innerHTML = data.text;
+        siteButtonDiv.appendChild(profileName);
+    })
 }
 
 function generateInstaMonkeysProgress() {

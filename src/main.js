@@ -876,7 +876,7 @@ function generateFrontPage(){
 
     let sitesText = document.createElement('p');
     sitesText.classList.add('where-text');
-    sitesText.innerHTML = 'Separate sites with just one module of this site:';
+    sitesText.innerHTML = 'Separate sites with just one specialized module of this site:';
     frontPage.appendChild(sitesText);
 
     let StandaloneSiteDiv = document.createElement('div');
@@ -892,13 +892,19 @@ function generateFrontPage(){
             "link": "https://btd6apiexplorer.github.io/rounds",
             "text": "Roundsets",
             "icon": "DefaultRoundSetIcon",
-            "background": "BloonsBGBanner"
+            "background": "BloonsBG"
         },
         "Leaderboards": {
             "link": "https://btd6apiexplorer.github.io/leaderboards",
             "text": "Leaderboards",
             "icon": "LeaderboardSiteBtn",
             "background": "TrophyStoreTiledBG"
+        },
+        "Rogue Artifacts": {
+            "link": "https://btd6apiexplorer.github.io/rogue",
+            "text": "Rogue Artifacts",
+            "icon": "RogueSiteBtn",
+            "background": "RogueBG"
         },
         "Insta Tracker": {
             "link": "https://btd6apiexplorer.github.io/insta",
@@ -910,11 +916,11 @@ function generateFrontPage(){
 
     Object.entries(standaloneSites).forEach(([site, data]) => {
         let siteButtonDiv = document.createElement('div');
-        siteButtonDiv.classList.add('site-button-div');
-        siteButtonDiv.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(Assets/UI/${data.background}.png)`;
+        siteButtonDiv.classList.add('site-button-div', 'pointer');
+        siteButtonDiv.style.backgroundImage = `url(Assets/UI/${data.background}.png)`;
         siteButtons.appendChild(siteButtonDiv);
         siteButtonDiv.addEventListener('click', () => {
-            openBTD6Link(data.link);
+            window.location.href = data.link;
         })
     
         let siteButtonIcon = document.createElement('img');
@@ -924,13 +930,9 @@ function generateFrontPage(){
     
         let profileName = document.createElement('p');
         profileName.classList.add('profile-name','readability-bg','black-outline');
+        profileName.style.marginLeft = '0';
         profileName.innerHTML = data.text;
         siteButtonDiv.appendChild(profileName);
-    
-        let useButton = document.createElement('img');
-        useButton.classList.add('site-go-button');
-        useButton.src = './Assets/UI/ContinueBtn.png';
-        siteButtonDiv.appendChild(useButton);
     })
 
     let versionDiv = document.createElement('div');
@@ -9213,6 +9215,7 @@ function generateExtrasPage() {
         'Collection Event Odds',
         // 'Monkey Money Helper', 
         // 'Export Data', 
+        'Rogue Legends Artifacts',
         'Settings',
         'Send Feedback',
         "Use Code 'HalfHydra' <br>in the BTD6 Shop!"
@@ -9255,6 +9258,9 @@ function generateExtrasPage() {
             case "Use Code 'HalfHydra' <br>in the BTD6 Shop!":
                 selectorImg.src = '../Assets/UI/CreatorSupportBtn.png';
                 break;
+            case "Rogue Legends Artifacts":
+                selectorImg.src = '../Assets/UI/RogueSiteBtn.png';
+                break;
             default: 
                 selectorImg.src = '../Assets/UI/WoodenRoundButton.png';
                 break;
@@ -9291,6 +9297,9 @@ function changeExtrasTab(selected){
             break;
         case 'Settings':
             generateSettings();
+            break;
+        case "Rogue Legends Artifacts":
+            window.location.href = "https://btd6apiexplorer.github.io/rogue";
             break;
     }
 }

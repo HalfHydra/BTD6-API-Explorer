@@ -204,7 +204,7 @@ function generateRogueSelectors() {
     hideLoading();
 
     let rogueSelectorsPage = document.createElement('div');
-    rogueSelectorsPage.classList.add('progress-page');
+    rogueSelectorsPage.classList.add('progress-page','f-wrap');
     rogue.appendChild(rogueSelectorsPage);
 
     let rogueSelectors = document.createElement('div');
@@ -290,6 +290,67 @@ function generateRogueSelectors() {
     importDataGoImg.addEventListener('click', () => {
         importArtifactsSave();
     });
+
+    let StandaloneSiteDiv = document.createElement('div');
+    StandaloneSiteDiv.classList.add('site-access-div');
+    rogueSelectorsPage.appendChild(StandaloneSiteDiv);
+
+    let StandaloneSiteText = document.createElement('p');
+    StandaloneSiteText.classList.add('site-info-header', 'sites-text', 'black-outline');
+    StandaloneSiteText.innerHTML = 'Other Sites';
+    StandaloneSiteDiv.appendChild(StandaloneSiteText);
+
+    let siteButtons = document.createElement('div');
+    siteButtons.classList.add('standalone-site-buttons');
+    StandaloneSiteDiv.appendChild(siteButtons);
+
+    let standaloneSites = {
+        "Roundsets": {
+            "link": "https://btd6apiexplorer.github.io/rounds",
+            "text": "Roundsets",
+            "icon": "DefaultRoundSetIcon",
+            "background": "BloonsBG"
+        },
+        "Leaderboards": {
+            "link": "https://btd6apiexplorer.github.io/leaderboards",
+            "text": "Leaderboards",
+            "icon": "LeaderboardSiteBtn",
+            "background": "TrophyStoreTiledBG"
+        },
+        "Insta Tracker": {
+            "link": "https://btd6apiexplorer.github.io/insta",
+            "text": "Insta Tracker",
+            "icon": "InstaSiteBtn",
+            "background": "CollectionHelp2"
+        },
+        "Main Site": {
+            "link": "https://btd6apiexplorer.github.io/",
+            "text": "Main Site",
+            "icon": "SiteBtn",
+            "background": "OverviewProfile"
+        }
+    }
+
+    Object.entries(standaloneSites).forEach(([site, data]) => {
+        let siteButtonDiv = document.createElement('div');
+        siteButtonDiv.classList.add('site-button-div', 'pointer');
+        siteButtonDiv.style.backgroundImage = `url(Assets/UI/${data.background}.png)`;
+        siteButtons.appendChild(siteButtonDiv);
+        siteButtonDiv.addEventListener('click', () => {
+            window.location.href = data.link;
+        })
+    
+        let siteButtonIcon = document.createElement('img');
+        siteButtonIcon.classList.add('site-button-icon');
+        siteButtonIcon.src = `./Assets/UI/${data.icon}.png`;
+        siteButtonDiv.appendChild(siteButtonIcon);
+    
+        let profileName = document.createElement('p');
+        profileName.classList.add('profile-name','readability-bg','black-outline');
+        profileName.style.marginLeft = '0';
+        profileName.innerHTML = data.text;
+        siteButtonDiv.appendChild(profileName);
+    })
 }
 
 function generateRogueArtifacts() { 

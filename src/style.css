@@ -4709,21 +4709,22 @@
 }
 .standalone-site-buttons {
     display: flex;
-    flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     margin: 0 70px;
+    flex-wrap: wrap;
 }
 .site-button-div {
-    width: 500px;
-    height: 96px;
+    width: 250px;
     display: flex;
     align-items: center;
     position: relative;
-    border-radius: 20px 0 0 20px;
+    border-radius: 20px;
     margin: 10px;
+    padding: 10px;
     background-position: center;
-    background-size: contain;
+    background-size: cover;
+    flex-direction: column;
 }
 
 .readability-bg {
