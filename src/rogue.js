@@ -970,8 +970,8 @@ function generateImageBuilder() {
     rogueHeaderBar.appendChild(headerText);
 
     let rogueHeaderMessage = document.createElement('p');
-    rogueHeaderMessage.classList.add('sku-roundset-selector-desc');
-    rogueHeaderMessage.innerHTML = "This will generate a nice image to share with others of your progress in collecting the artifacts.";
+    rogueHeaderMessage.classList.add('sku-roundset-selector-desc','ta-center');
+    rogueHeaderMessage.innerHTML = "This will generate a nice image to share with others of your progress in collecting the artifacts.<br>This may not work as intended on mobile.";
     rogueHeaderBar.appendChild(rogueHeaderMessage);
 
     let oakDiv = document.createElement('div');
@@ -1342,7 +1342,7 @@ function downloadImage() {
         }).then(function (toDataURL) {
             var a = document.createElement('a');
             a.href = toDataURL;
-            a.download = `RogueLegendsArtifacts_${new Date().toLocaleDateString()}.jpg`;
+            a.download = `RogueLegendsArtifacts_${new Date().toLocaleDateString()}.jpeg`;
             a.click();
             hideLoading();
         }).then(function () {
