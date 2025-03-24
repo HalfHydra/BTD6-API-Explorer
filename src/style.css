@@ -5487,6 +5487,44 @@ input[type="checkbox"] {
     height: 96px;
 }
 
+.settings-box {
+    width: 400px;
+    margin: 20px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.rogue-search {
+    height: 36px;
+    width: 300px;
+    font-size: 18px;
+    border-radius: 10px;
+    padding: 0px 10px;
+}
+
+.rogue-no-results {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    line-height: 1.5;
+    margin: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.search-icon {
+    position: absolute;
+    right: 8px;
+    pointer-events: none;
+    height: 40px;
+    width: 30px;
+    object-fit: contain;
+    /* filter: drop-shadow(0px 0px 3px black); */
+    filter: invert(0.5);
+}
+
 /* Tippy Styles */
 .tippy-box[data-theme~='speech_bubble'] {
     border-radius: 26px;
@@ -5536,6 +5574,61 @@ input[type="checkbox"] {
     max-width: calc(100vw - 410px);
 }
 
+/* BTD6 Style Classes */
+.checkbox-div {
+    display: flex;
+    align-items: center;
+    justify-content: inherit;
+    margin-right: 10px;
+}
+
+.checkbox-label {
+    font-size: 24px;
+    padding: 5px;
+}
+
+.checkbox-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    background: #34547F;
+    border-radius: 5px;
+    border: 2px solid #2B466A;
+}
+
+.checkbox-input:checked {
+    background-image: url(../Assets/UI/TickGreenIcon.png);
+    background-color: #34547F;
+    background-size: 25px 25px;
+}
+
+.dropdown-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dropdown-label {
+    font-size: 24px;
+    padding: 5px;
+}
+
+.dropdown-select {
+    height: 30px;
+    min-width: 100px;
+    margin-right: 10px;
+    font-family: 'GardeniaBold';
+    background-color: #34547F;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.search-box::placeholder {
+    font-style: italic;
+}
+
 /* Tailwind Styles */
 .d-flex {
     display: flex;
@@ -5565,12 +5658,20 @@ input[type="checkbox"] {
     justify-content: space-evenly;
 }
 
+.jc-end {
+    justify-content: flex-end;
+}
+
 .fd-column {
     flex-direction: column;
 }
 
 .fg-1 {
     flex-grow: 1;
+}
+
+.w-100 {
+    width: 100%;
 }
 
 .f-wrap {
@@ -5580,6 +5681,22 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
+.pos-rel {
+    position: relative;
+}
+
 .font-gardenia {
     font-family: GardeniaBold;
+}
+
+.bg-color-primary {
+    background-color: var(--profile-primary);
+}
+
+.bg-color-secondary {
+    background-color: var(--profile-secondary);
+}
+
+.bg-color-tertiary {
+    background-color: var(--profile-tertiary);
 }

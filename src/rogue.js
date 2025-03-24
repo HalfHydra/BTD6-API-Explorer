@@ -13,7 +13,12 @@ let rogueSaveData = {
     selectedOAK: false,
     clickToCollect: false,
     artifactFilter: "All",
-    artifactSort: "Name"
+    artifactSort: "Name",
+    highlightExtracted: false,
+    extractionFilter: "All",
+    showStarterArtifacts: true,
+    showBossArtifacts: true,
+    categoryFilter: ["Common", "Rare", "Legendary"]
 }
 
 let starterArtifacts = ['BouncingProjectiles3', 'CeramicChunker2', 'FrostedTips1', 'OneShot2', 'SlowerIsHarder1', 'SpiritOfAdventure2', 'SwellingSpikes1', 'Wackywibblywavey1']
@@ -68,6 +73,11 @@ let starterKitNames = {
 
 let artifactDivMap = {};
 let totalArtifactsTxt;
+let noArtifactsMessage;
+
+let currentArtifacts = {};
+
+let backState = "home";
 
 showLoading();
 Promise.all([
@@ -126,9 +136,9 @@ header.appendChild(headerDiv);
 
 let backButton = document.createElement('img');
 backButton.src = '../Assets/UI/BackBtn.png';
-backButton.classList.add('back-button');
+backButton.classList.add('back-button', 'pointer');
 backButton.addEventListener('click', () => {
-    changeRogueTab('home');
+    handleBackBtn();
 })
 headerDiv.appendChild(backButton);
 
@@ -170,6 +180,23 @@ rogueImageContent.classList.add('rogue-image-content');
 rogueImageContent.style.display = "none";
 rogueImageContent.style.opacity = "0";
 rogueImageWrapper.appendChild(rogueImageContent);
+
+function handleBackBtn() {
+    switch(backState){
+        case "home":
+            changeRogueTab();
+            break;
+        case "artifactInfoModal":
+        case "imageBuilderModal":
+            document.querySelector('.error-modal-overlay').remove();
+            backState = "home";
+            break;
+        case "artifactSettings":
+            generateRogueArtifacts();
+            backState = "home";
+            break;
+    }
+}
 
 function changeRogueTab(selector){
     resetScroll();
@@ -357,111 +384,69 @@ function generateRogueArtifacts() {
     let artifactsContent = document.getElementById('artifacts-content');
     artifactsContent.innerHTML = "";
 
-    let artifactPage = document.createElement('div');
-    artifactPage.classList.add('content-div', 'progress');
-    artifactsContent.appendChild(artifactPage);
-
     let rogueHeaderBar = document.createElement('div');
-    rogueHeaderBar.classList.add('insta-monkeys-header-bar');
+    rogueHeaderBar.classList.add('rogue-bg', 'd-flex', 'jc-between', 'ai-center');
+    rogueHeaderBar.style.height = "20px";
     artifactsContent.appendChild(rogueHeaderBar);
 
-    let rogueViews = document.createElement('div');
-    rogueViews.classList.add('maps-progress-views');
-    rogueHeaderBar.appendChild(rogueViews);
+    let rogueHeaderLeft = document.createElement('div');
+    rogueHeaderLeft.style.width = "200px";
+    rogueHeaderBar.appendChild(rogueHeaderLeft);
 
-    let rogueFiltersLabel = document.createElement('p');
-    rogueFiltersLabel.classList.add('maps-progress-coop-toggle-text','black-outline');
-    rogueFiltersLabel.classList.add('black-outline');
-    rogueFiltersLabel.innerHTML = "Filter:";
-    rogueViews.appendChild(rogueFiltersLabel);
-
-    let mapProgressFilterDifficulty = document.createElement('div');
-    mapProgressFilterDifficulty.classList.add('map-progress-filter-difficulty');
-    rogueViews.appendChild(mapProgressFilterDifficulty);
-
-    let mapProgressFilterDifficultySelect = document.createElement('select');
-    mapProgressFilterDifficultySelect.classList.add('map-progress-filter-difficulty-select');
-
-    let options = ["All","Extracted","Unextracted","Starter Kit","Non Starter Kit"]
-    options.forEach((option) => {
-        let difficultyOption = document.createElement('option');
-        difficultyOption.value = option;
-        difficultyOption.innerHTML = option;
-        mapProgressFilterDifficultySelect.appendChild(difficultyOption);
+    let rogueSettingsBtn = document.createElement('img');
+    rogueSettingsBtn.src = `../Assets/UI/SettingsBtn.png`;
+    rogueSettingsBtn.style.width = "50px";
+    rogueSettingsBtn.style.height = "50px";
+    rogueSettingsBtn.classList.add('artifact-bag', 'pointer');
+    rogueSettingsBtn.addEventListener('click', () => {
+        backState = "artifactSettings";
+        generateArtifactSettings();
     })
-    mapProgressFilterDifficulty.appendChild(mapProgressFilterDifficultySelect);
+    rogueHeaderLeft.appendChild(rogueSettingsBtn);
 
-    let rogueSortDiv = document.createElement('div');
-    rogueSortDiv.classList.add('d-flex');
-    rogueHeaderBar.appendChild(rogueSortDiv);
+    let rogueHeaderCenter = document.createElement('div');
+    rogueHeaderCenter.classList.add('pos-rel');
+    rogueHeaderBar.appendChild(rogueHeaderCenter);
 
-    let rogueFiltersLabel2 = document.createElement('p');
-    rogueFiltersLabel2.classList.add('maps-progress-coop-toggle-text','black-outline');
-    rogueFiltersLabel2.classList.add('black-outline');
-    rogueFiltersLabel2.innerHTML = "Sort:";
-    rogueSortDiv.appendChild(rogueFiltersLabel2);
-
-    let mapProgressFilterDifficulty2 = document.createElement('div');
-    mapProgressFilterDifficulty2.classList.add('map-progress-filter-difficulty');
-    rogueSortDiv.appendChild(mapProgressFilterDifficulty2);
-
-    let mapProgressFilterDifficultySelect2 = document.createElement('select');
-    mapProgressFilterDifficultySelect2.classList.add('map-progress-filter-difficulty-select');
-
-    let options2 = ["Name","Rarity (Ascending)","Rarity (Descending)","Category"]
-    options2.forEach((option) => {
-        let difficultyOption = document.createElement('option');
-        difficultyOption.value = option;
-        difficultyOption.innerHTML = option;
-        mapProgressFilterDifficultySelect2.appendChild(difficultyOption);
-    })
-    mapProgressFilterDifficulty2.appendChild(mapProgressFilterDifficultySelect2);
-    mapProgressFilterDifficultySelect.addEventListener('change', () => {
-        rogueSaveData.artifactFilter = mapProgressFilterDifficultySelect.value;
-        generateArtifacts();
-        saveDataToLocalStorage();
-    });
-    mapProgressFilterDifficultySelect2.addEventListener('change', () => {
-        rogueSaveData.artifactSort = mapProgressFilterDifficultySelect2.value;
-        generateArtifacts();
-        saveDataToLocalStorage();
-    });
-
-    let rogueclickToCollect = document.createElement('div');
-    rogueclickToCollect.classList.add('maps-progress-coop-toggle');  
-    rogueHeaderBar.appendChild(rogueclickToCollect);
-
-    let mapsProgressCoopToggleText = document.createElement('p');
-    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
-    mapsProgressCoopToggleText.innerHTML = "Easy Extract:";
-    rogueclickToCollect.appendChild(mapsProgressCoopToggleText);
-
-    let mapsProgressCoopToggleInput = document.createElement('input');
-    mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
-    mapsProgressCoopToggleInput.type = 'checkbox';
-    mapsProgressCoopToggleInput.checked = rogueSaveData.clickToCollect;
-    rogueclickToCollect.appendChild(mapsProgressCoopToggleInput);
-
-    mapsProgressCoopToggleInput.addEventListener('change', () => {
-        rogueSaveData.clickToCollect = mapsProgressCoopToggleInput.checked;
-        saveDataToLocalStorage();
+    let rogueArtifactSearch = document.createElement('input');
+    rogueArtifactSearch.classList.add('search-box', 'font-gardenia', 'rogue-search');
+    rogueArtifactSearch.placeholder = "Search";
+    rogueArtifactSearch.style.paddingRight = '40px';
+    rogueArtifactSearch.addEventListener('input', () => {
+        let searchValue = rogueArtifactSearch.value.toLowerCase().replace(/[^a-z0-9]/g, '');
+        Object.values(artifactDivMap).forEach(artifactDiv => {
+            if (artifactDiv.alt.toLowerCase().replace(/[^a-z0-9]/g, '').includes(searchValue)) {
+                artifactDiv.style.display = "flex";
+            } else {
+                artifactDiv.style.display = "none";
+            }
+        })
+        noArtifactsMessage.style.display = Object.values(artifactDivMap).every(artifactDiv => artifactDiv.style.display == "none") ? "block" : "none";
     })
 
-    let instaMonkeysExtras = document.createElement('div');
-    instaMonkeysExtras.classList.add('maps-progress-views', 'ai-center');
-    rogueHeaderBar.appendChild(instaMonkeysExtras);
+    let searchIcon = document.createElement('img');
+    searchIcon.src = `../Assets/UI/SearchIcon.png`;
+    searchIcon.classList.add('search-icon');
+    rogueHeaderCenter.appendChild(searchIcon);
+
+    rogueHeaderCenter.appendChild(rogueArtifactSearch);
+
+    let rogueHeaderRight = document.createElement('div');
+    rogueHeaderRight.style.width = "200px";
+    rogueHeaderRight.classList.add('d-flex', 'jc-end', 'ai-center');
+    rogueHeaderBar.appendChild(rogueHeaderRight);
 
     let progressText = document.createElement('p');
     progressText.classList.add('rogue-progress-text','black-outline');
     progressText.innerHTML = `${rogueSaveData.extractedArtifacts.length}/${Object.keys(rogueJSON.artifacts).length}`;
-    instaMonkeysExtras.appendChild(progressText);
+    rogueHeaderRight.appendChild(progressText);
 
     totalArtifactsTxt = progressText;
     
     let artifactBag = document.createElement('img');
     artifactBag.src = `../Assets/UI/ArtifactBag.png`;
     artifactBag.classList.add('artifact-bag');
-    instaMonkeysExtras.appendChild(artifactBag);
+    rogueHeaderRight.appendChild(artifactBag);
 
     let artifactsContainer = document.createElement('div');
     artifactsContainer.id = 'artifacts-container';
@@ -469,6 +454,258 @@ function generateRogueArtifacts() {
     artifactsContent.appendChild(artifactsContainer);
 
     generateArtifacts();
+
+    noArtifactsMessage = document.createElement('p');
+    noArtifactsMessage.classList.add('rogue-no-results', 'font-gardenia');
+    noArtifactsMessage.innerHTML = "No artifacts to display. Check your search term, or change your filter settings.";
+    noArtifactsMessage.style.display = Object.values(artifactDivMap).every(artifactDiv => artifactDiv.style.display == "none") ? "block" : "none";
+    artifactsContent.appendChild(noArtifactsMessage);
+}
+
+function generateArtifactSettings() {
+    let artifactsContent = document.getElementById('artifacts-content');
+    artifactsContent.innerHTML = "";
+
+    let settingsDiv = document.createElement('div');
+    settingsDiv.classList.add('content-div', 'rogue-bg');
+    artifactsContent.appendChild(settingsDiv);
+
+    let settingsHeaderBar = document.createElement('div');
+    settingsDiv.appendChild(settingsHeaderBar);
+
+    let settingsHeaderViews = document.createElement('div');
+    settingsHeaderViews.classList.add('maps-progress-views');
+    settingsHeaderBar.appendChild(settingsHeaderViews);
+
+
+    let settingsHeader = document.createElement('p');
+    settingsHeader.classList.add('settings-header','black-outline');
+    settingsHeader.style.fontSize = "32px";
+    settingsHeader.innerHTML = "Artifact View Settings";
+    settingsHeaderViews.appendChild(settingsHeader);
+
+    let settingsContent = document.createElement('div');
+    settingsContent.classList.add('settings-content', 'd-flex', 'jc-evenly', 'f-wrap');
+    settingsDiv.appendChild(settingsContent);
+
+    let settingsExtraction = document.createElement('div');
+    settingsExtraction.classList.add('settings-box', 'd-flex', 'fd-column', 'jc-between', 'fg-1');
+    settingsExtraction.style.gap = "10px";
+    settingsContent.appendChild(settingsExtraction);
+
+    let settingsExtractHighlight = generateCheckbox("Highlight Extracted", rogueSaveData.highlightExtracted, (checked) => {
+        rogueSaveData.highlightExtracted = checked;
+        saveDataToLocalStorage();
+    });
+    settingsExtractHighlight.classList.add('jc-between');
+    settingsExtraction.appendChild(settingsExtractHighlight);
+
+    let settingsExtractDescription = document.createElement('p');
+    settingsExtractDescription.style.margin = "20px";
+    settingsExtractDescription.style.lineHeight = "1.5";
+    settingsExtractDescription.classList.add('font-gardenia');
+
+    let updateExtractDescription = () => {
+        switch (rogueSaveData.extractionFilter) {
+            case "All":
+                settingsExtractDescription.innerHTML = "Showing all artifacts extracted and not extracted.";
+                break;
+            case "Only Extracted":
+                settingsExtractDescription.innerHTML = "Only extracted artifacts will be shown.";
+                break;
+            case "Only Unextracted":
+                settingsExtractDescription.innerHTML = "Extracted artifacts will be hidden.";
+                break;  
+        }
+    }
+    updateExtractDescription();
+
+    let settingsExtractionDropdown = generateDropdown("Extracted Filter:", ["All","Only Extracted","Only Unextracted"], rogueSaveData.extractionFilter, (value) => {
+        rogueSaveData.extractionFilter = value;
+        updateExtractDescription();
+        saveDataToLocalStorage();
+    });
+    settingsExtractionDropdown.classList.add('jc-between');
+
+    let settingsClickToCollect = generateCheckbox("One Click Extract", rogueSaveData.clickToCollect, (checked) => {
+        rogueSaveData.clickToCollect = checked;
+        saveDataToLocalStorage();
+    });
+
+    settingsExtraction.appendChild(settingsClickToCollect);
+    
+    let settingsOther = document.createElement('div');
+    settingsOther.classList.add('settings-box', 'd-flex', 'fd-column', 'fg-1');
+    settingsOther.style.gap = "10px";
+    settingsContent.appendChild(settingsOther);
+
+
+    let settingsShowStarterArtifacts = generateCheckbox("Show Starter Artifacts", rogueSaveData.showStarterArtifacts, (checked) => {
+        rogueSaveData.showStarterArtifacts = checked;
+        saveDataToLocalStorage();
+    });
+    settingsShowStarterArtifacts.classList.add('jc-between');
+
+    let settingsShowBossArtifacts = generateCheckbox("Show Boss Artifacts", rogueSaveData.showBossArtifacts, (checked) => {
+        rogueSaveData.showBossArtifacts = checked;
+        saveDataToLocalStorage();
+    });
+    settingsShowBossArtifacts.classList.add('jc-between');
+
+    settingsOther.appendChild(settingsShowStarterArtifacts);
+    settingsOther.appendChild(settingsShowBossArtifacts);
+
+    let settingsFilter = document.createElement('div');
+    settingsFilter.classList.add('settings-box', 'd-flex', 'ai-center', 'fd-column', 'fg-1');
+    settingsContent.appendChild(settingsFilter);
+
+    let settingsFilterDescription = document.createElement('p');
+    settingsFilterDescription.classList.add('font-gardenia');
+    settingsFilterDescription.style.margin = "20px";
+    settingsFilterDescription.style.lineHeight = "1.5";
+    settingsFilterDescription.innerHTML = "All Artifacts will be included to start.";
+
+    function updateDescription() {
+        switch (rogueSaveData.artifactFilter) {
+            case "All":
+                settingsFilterDescription.innerHTML = "All Artifacts will be included to start.";
+                break;
+            case "Extracted":
+                settingsFilterDescription.innerHTML = "Only Artifacts that have been extracted will be included to start.";
+                break;
+            case "Unextracted":
+                settingsFilterDescription.innerHTML = "Only Artifacts that have not been extracted will be included to start.";
+                break;
+            case "Starter Kit":
+                settingsFilterDescription.innerHTML = "Only Artifacts that are available in Hero Starter Kits will be included to start.";
+                break;
+            case "Non Starter Kit":
+                settingsFilterDescription.innerHTML = "Only Artifacts that are not available in Hero Starter Kits will be included to start.";
+                break;
+            case "One Variant":
+                settingsFilterDescription.innerHTML = "Only Artifacts that have only one tier will be included to start.";
+                break;
+            case "Two Variants":
+                settingsFilterDescription.innerHTML = "Only Artifacts that have only have two tiers will be included to start.";
+                break;
+        }
+    }
+
+    let settingsFilterDropdown = generateDropdown("Artifact Filter:", ["All", "Starter Kit", "Non Starter Kit", "One Variant", "Two Variants"], rogueSaveData.artifactFilter, (value) => {
+        rogueSaveData.artifactFilter = value;
+        updateDescription();
+        saveDataToLocalStorage();
+    });
+
+    updateDescription();
+    
+    settingsFilter.appendChild(settingsFilterDropdown);
+    settingsFilter.appendChild(settingsFilterDescription);
+    settingsFilter.appendChild(settingsExtractionDropdown);
+    settingsFilter.appendChild(settingsExtractDescription);
+
+    let rarityTitle = document.createElement('p');
+    rarityTitle.innerHTML = "Rarity Filter:";
+    rarityTitle.style.fontSize = "24px";
+    rarityTitle.style.padding = "5px";
+    rarityTitle.classList.add('black-outline');
+    settingsFilter.appendChild(rarityTitle);
+
+    let settingsRarity = document.createElement('div');
+    settingsRarity.classList.add('d-flex', 'ai-center', 'fd-column');
+    settingsFilter.appendChild(settingsRarity);
+
+    let rarityDivs = {"Common": "RarityNormalArtifactAllTowers", "Rare": "RarityRareArtifactAllTowers", "Legendary": "RarityLegendaryArtifactAllTowers"};
+
+    Object.entries(rarityDivs).forEach(([rarity, icon]) => {
+        let rarityDiv = document.createElement('div');
+        rarityDiv.classList.add('d-flex', 'ai-center', 'jc-between');
+        rarityDiv.style.width = "250px";
+        settingsRarity.appendChild(rarityDiv);
+
+        let rarityImg = document.createElement('img');
+        rarityImg.src = `../Assets/RogueFrames/${icon}.png`;
+        rarityImg.style.width = "50px";
+        rarityDiv.appendChild(rarityImg);
+
+        let rarityCheckbox = generateCheckbox(rarity, rogueSaveData.categoryFilter.includes(rarity), (checked) => {
+            if (rogueSaveData.categoryFilter.includes(rarity)) {
+                rogueSaveData.categoryFilter = rogueSaveData.categoryFilter.filter(e => e !== rarity);
+            } else {
+                rogueSaveData.categoryFilter.push(rarity);
+            }
+            saveDataToLocalStorage();
+        });
+        rarityDiv.appendChild(rarityCheckbox);
+    });
+    
+    // let categoryDivs = {"Primary": "PrimaryIcon", "Military": "MilitaryIcon", "Magic": "MagicIcon", "Support": "SupportIcon"};
+
+    // let categoryTitle = document.createElement('p');
+    // categoryTitle.innerHTML = "Category Filter:";
+    // categoryTitle.style.fontSize = "24px";
+    // categoryTitle.style.padding = "5px";
+    // categoryTitle.classList.add('black-outline');
+    // settingsFilter.appendChild(categoryTitle);
+
+    // let settingsCategory = document.createElement('div');
+    // settingsCategory.classList.add('d-flex', 'ai-center');
+    // settingsCategory.style.gap = "10px";
+    // settingsFilter.appendChild(settingsCategory);
+
+    // Object.entries(categoryDivs).forEach(([category, icon]) => {
+    //     let categoryDiv = document.createElement('div');
+    //     categoryDiv.classList.add('d-flex', 'ai-center', 'jc-between');
+    //     settingsCategory.appendChild(categoryDiv);
+
+    //     let categoryImg = document.createElement('img');
+    //     categoryImg.src = `../Assets/UI/${icon}.png`;
+    //     categoryImg.style.width = "50px";
+    //     categoryDiv.appendChild(categoryImg);
+    // });
+
+    let settingsSort = document.createElement('div');
+    settingsSort.classList.add('settings-box', 'd-flex', 'ai-center', 'fd-column', 'fg-1');
+    settingsContent.appendChild(settingsSort);
+
+    let sortPreviewArtifactsDiv = document.createElement('div');
+    sortPreviewArtifactsDiv.classList.add('preview-artifacts-div');
+
+    let updatePreviewArtifacts = () => {
+        sortPreviewArtifactsDiv.innerHTML = "";
+        let previewArtifacts = [];
+        let sampleArtifacts = ['SplodeyDarts', 'SquadronTogether', 'DivineIntervention'];
+
+        sampleArtifacts.forEach(artifact => {
+            previewArtifacts.push(rogueJSON.artifacts[artifact + "1"]);
+            previewArtifacts.push(rogueJSON.artifacts[artifact + "2"]);
+            previewArtifacts.push(rogueJSON.artifacts[artifact + "3"]);
+        });
+
+        switch (rogueSaveData.artifactSort) {
+            case "Rarity (Ascending)":
+                previewArtifacts = previewArtifacts.sort((a, b) => a.tier - b.tier)
+                break;
+            case "Rarity (Descending)":
+                previewArtifacts = previewArtifacts.sort((a, b) => b.tier - a.tier)
+                break;
+            case "Category":
+                previewArtifacts = previewArtifacts.sort((a, b) => a.rarityFrameType.localeCompare(b.rarityFrameType))
+                break;
+        }
+
+        previewArtifacts.forEach(artifact => {
+            sortPreviewArtifactsDiv.appendChild(generateArtifactContainer(artifact, 'preview'));
+        });
+    }
+    updatePreviewArtifacts();
+    let settingsSortDropdown = generateDropdown("Sort:", ["Name","Rarity (Ascending)","Rarity (Descending)"], rogueSaveData.artifactSort, (value) => {
+        rogueSaveData.artifactSort = value;
+        saveDataToLocalStorage();
+        updatePreviewArtifacts();
+    });
+    settingsSort.appendChild(settingsSortDropdown);
+    settingsSort.appendChild(sortPreviewArtifactsDiv);
 }
 
 function generateArtifacts() {
@@ -484,73 +721,116 @@ function generateArtifacts() {
     mainArtifactsDiv.classList.add('artifacts-div');
     artifactsDiv.appendChild(mainArtifactsDiv);
 
-    // let bossArtifactsDiv = document.createElement('div');
-    // bossArtifactsDiv.classList.add('artifacts-div');
-    // artifactsDiv.appendChild(bossArtifactsDiv);
-
-    // bossArtifacts.forEach(artifact => {
-    //     bossArtifactsDiv.appendChild(generateArtifactContainer(rogueJSON.artifacts[artifact]));
-    // });
-
-    let artifacts = {...rogueJSON.artifacts}
+    currentArtifacts = {...rogueJSON.artifacts}
 
     switch (rogueSaveData.artifactFilter) {
         case "Extracted":
-            // artifacts = Object.fromEntries(Object.entries(artifacts).filter(([key, value]) => value.starterKitHero != null))
-            artifacts = Object.fromEntries(Object.entries(artifacts).filter(([key, value]) => rogueSaveData.extractedArtifacts.includes(value.nameLocKey)))
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => rogueSaveData.extractedArtifacts.includes(value.nameLocKey)))
             break;
         case "Unextracted":
-            // artifacts = Object.fromEntries(Object.entries(artifacts).filter(([key, value]) => value.starterKitHero == null))
-            artifacts = Object.fromEntries(Object.entries(artifacts).filter(([key, value]) => !rogueSaveData.extractedArtifacts.includes(value.nameLocKey)))
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !rogueSaveData.extractedArtifacts.includes(value.nameLocKey)))
             break;
         case "Starter Kit":
-            artifacts = Object.fromEntries(Object.entries(artifacts).filter(([key, value]) => value.hasOwnProperty('starterKitHero')))
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => value.hasOwnProperty('starterKitHero')))
             break;
         case "Non Starter Kit":
-            artifacts = Object.fromEntries(Object.entries(artifacts).filter(([key, value]) => !value.hasOwnProperty('starterKitHero')))
+            let excludeArtifacts = []
+            Object.values(rogueJSON.heroStarterKits).map(kit => kit.artifact).concat(starterArtifacts).forEach(artifact => {
+                let artifactData = rogueJSON.artifacts[artifact]
+                let lastDigit = artifact.slice(-1)
+                switch(lastDigit){
+                    case "1":
+                        excludeArtifacts.push(artifactData.baseId + "1")
+                        excludeArtifacts.push(artifactData.baseId + "2")
+                        excludeArtifacts.push(artifactData.baseId + "3")
+                        break;
+                    case "2":
+                        excludeArtifacts.push(artifactData.baseId + "2")
+                        excludeArtifacts.push(artifactData.baseId + "3")
+                        break;
+                    case "3":
+                        excludeArtifacts.push(artifactData.baseId + "3")
+                        break;
+                }
+            })
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !excludeArtifacts.includes(value.nameLocKey)))
+            break;
+
+        case "Two Variants":
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => (rogueJSON.artifacts.hasOwnProperty(value.baseId + "1") && rogueJSON.artifacts.hasOwnProperty(value.baseId + "2") && !rogueJSON.artifacts.hasOwnProperty(value.baseId + "3"))))
+            break;
+        case "One Variant":
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => (rogueJSON.artifacts.hasOwnProperty(value.baseId + "1") && !rogueJSON.artifacts.hasOwnProperty(value.baseId + "2") && !rogueJSON.artifacts.hasOwnProperty(value.baseId + "3"))))
+            break;
+    }
+
+    if (!rogueSaveData.showStarterArtifacts) {
+        currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !starterArtifacts.includes(value.nameLocKey)))
+    }
+
+    if (!rogueSaveData.showBossArtifacts) {
+        currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !bossArtifacts.includes(value.nameLocKey)))
+    }
+
+    //Category filters: If no common, remove all tier 1s. If no rare, remove all tiers 2s. if no legendary, remove all tier 3s.
+    const tierMap = {
+        "Common": 0,
+        "Rare": 1,
+        "Legendary": 2
+    };
+    
+    currentArtifacts = Object.fromEntries(
+        Object.entries(currentArtifacts).filter(([key, value]) => 
+            rogueSaveData.categoryFilter.includes(
+                Object.keys(tierMap).find(name => tierMap[name] === value.tier)
+            )
+        )
+    );
+
+    switch (rogueSaveData.extractionFilter) {
+        case "Only Extracted":
+            let extractedArtifacts = rogueSaveData.extractedArtifacts.concat(starterArtifacts)
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => extractedArtifacts.includes(value.nameLocKey)))
+            break;
+        case "Only Unextracted":
+            let unextractedArtifacts = rogueSaveData.extractedArtifacts.concat(starterArtifacts)
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !unextractedArtifacts.includes(value.nameLocKey)))
             break;
     }
 
     switch (rogueSaveData.artifactSort) {
-        case "Name":
-            // artifacts = Object.fromEntries(Object.entries(artifacts).sort((a, b) => a[1].title.localeCompare(b[1].title)))
+        case "Name (Descending)":
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => b[1].title.localeCompare(a[1].title)))
             break;
         case "Rarity (Ascending)":
-            artifacts = Object.fromEntries(Object.entries(artifacts).sort((a, b) => a[1].tier - b[1].tier))
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => a[1].tier - b[1].tier))
             break;
         case "Rarity (Descending)":
-            artifacts = Object.fromEntries(Object.entries(artifacts).sort((a, b) => b[1].tier - a[1].tier))
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => b[1].tier - a[1].tier))
             break;
         case "Category":
-            artifacts = Object.fromEntries(Object.entries(artifacts).sort((a, b) => a[1].rarityFrameType.localeCompare(b[1].rarityFrameType)))
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => a[1].rarityFrameType.localeCompare(b[1].rarityFrameType)))
             break;
     }
 
-    // bossArtifacts.forEach(artifact => {
-    //     mainArtifactsDiv.appendChild(generateArtifactContainer(rogueJSON.artifacts[artifact]));
-    // });
-
-    Object.values(artifacts).forEach(artifact => {
-        // if (starterArtifacts.includes(artifact.nameLocKey)) { return; }
-        // if (bossArtifacts.includes(artifact.nameLocKey)) { return; }
+    Object.values(currentArtifacts).forEach(artifact => {
+        if (!rogueSaveData.showStarterArtifacts && starterArtifacts.includes(artifact.nameLocKey)) { return; }
+        if (!rogueSaveData.showBossArtifacts && bossArtifacts.includes(artifact.nameLocKey)) { return; }
 
         let artifactDiv = generateArtifactContainer(artifact);
+        artifactDiv.alt = artifact.title;
         artifactDivMap[artifact.nameLocKey] = artifactDiv;
         artifactDiv.addEventListener('click', () => {
-            if (rogueSaveData.clickToCollect && !starterArtifacts.includes(artifact.nameLocKey)) {
+            if (rogueSaveData.clickToCollect && rogueSaveData.highlightExtracted && !starterArtifacts.includes(artifact.nameLocKey)) {
                 if (rogueSaveData.extractedArtifacts.includes(artifact.nameLocKey)) {
                     rogueSaveData.extractedArtifacts = rogueSaveData.extractedArtifacts.filter(e => e !== artifact.nameLocKey);
                     artifactDiv.classList.add('artifact-unextracted');
-                    if(totalArtifactsTxt){
-                        totalArtifactsTxt.innerHTML = `${rogueSaveData.extractedArtifacts.length}/${Object.keys(rogueJSON.artifacts).length}`;
-                    }
+                    updateArtifactCount();
                     saveDataToLocalStorage();
                 } else {
                     rogueSaveData.extractedArtifacts.push(artifact.nameLocKey);
                     artifactDiv.classList.remove('artifact-unextracted');
-                    if(totalArtifactsTxt){
-                        totalArtifactsTxt.innerHTML = `${rogueSaveData.extractedArtifacts.length}/${Object.keys(rogueJSON.artifacts).length}`;
-                    }
+                    updateArtifactCount();
                     saveDataToLocalStorage();
                 }
             } else {
@@ -560,20 +840,7 @@ function generateArtifacts() {
         mainArtifactsDiv.appendChild(artifactDiv);
     });
 
-    // let starterArtifactsDiv = document.createElement('div');
-    // starterArtifactsDiv.classList.add('artifacts-div');
-    // artifactsDiv.appendChild(starterArtifactsDiv);
-
-    // if (rogueSaveData.artifactFilter != "Unextracted") {
-    //     starterArtifacts.forEach(artifact => {
-
-    //         let starterArtifactDiv = generateArtifactContainer(rogueJSON.artifacts[artifact]);
-    //         starterArtifactDiv.addEventListener('click', () => {
-    //             generateArtifactPopout(artifact);
-    //         })
-    //         starterArtifactsDiv.appendChild(starterArtifactDiv);
-    //     });
-    // }
+    updateArtifactCount();
 
     return artifactsDiv;
 }
@@ -581,9 +848,9 @@ function generateArtifacts() {
 function generateArtifactContainer(artifact, type) {
     let artifactDiv = document.createElement('div');
     artifactDiv.classList.add('artifact-container');
-    if (!rogueSaveData.extractedArtifacts.includes(artifact.nameLocKey) && !starterArtifacts.includes(artifact.nameLocKey) && type != "preview") {
-        artifactDiv.classList.add('artifact-unextracted');
-    }
+    if ((rogueSaveData.highlightExtracted || type == "force") && !rogueSaveData.extractedArtifacts.includes(artifact.nameLocKey) && !starterArtifacts.includes(artifact.nameLocKey) && type != "preview") {
+    artifactDiv.classList.add('artifact-unextracted');
+}
 
     let artifactImg = document.createElement('img');
     artifactImg.src = `../Assets/RogueArtifacts/${artifact.icon}.png`;
@@ -685,10 +952,11 @@ function generateArtifactPopout(key) {
     modalHeaderDiv.appendChild(modalTitle);
 
     let modalClose = document.createElement('img');
-    modalClose.classList.add('collection-modal-close');
+    modalClose.classList.add('collection-modal-close', 'pointer');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
         modal.remove();
+        backState = "home";
     })
     modalHeaderDiv.appendChild(modalClose);
 
@@ -827,7 +1095,7 @@ function generateArtifactPopout(key) {
         otherVariants.appendChild(otherVariantsTitle);
 
         let otherVariantsDiv = document.createElement('div');
-        otherVariantsDiv.classList.add('other-variants-div', 'd-flex', 'jc-center');
+        otherVariantsDiv.classList.add('other-variants-div', 'd-flex', 'jc-center','pointer');
         otherVariants.appendChild(otherVariantsDiv);
 
         variants.forEach(variant => {
@@ -845,30 +1113,30 @@ function generateArtifactPopout(key) {
     let updateArtifactStatus = () => {
         if (rogueSaveData.extractedArtifacts.includes(data.nameLocKey)) {
             rogueSaveData.extractedArtifacts = rogueSaveData.extractedArtifacts.filter(e => e !== data.nameLocKey);
-            artifactDiv.classList.add('artifact-unextracted');
-            if(currentVariant){
-                currentVariant.classList.add('artifact-unextracted');
+            if(rogueSaveData.highlightExtracted){
+                artifactDiv.classList.add('artifact-unextracted');
+                if(currentVariant){
+                    currentVariant.classList.add('artifact-unextracted');
+                }
+                if(artifactDivMap[data.nameLocKey]){
+                    artifactDivMap[data.nameLocKey].classList.add('artifact-unextracted');
+                }
             }
-            if(artifactDivMap[data.nameLocKey]){
-                artifactDivMap[data.nameLocKey].classList.add('artifact-unextracted');
-            }
-            if(totalArtifactsTxt){
-                totalArtifactsTxt.innerHTML = `${rogueSaveData.extractedArtifacts.length}/${Object.keys(rogueJSON.artifacts).length}`;
-            }
+            updateArtifactCount();
             mapsProgressCoopToggleInput.checked = false;
             saveDataToLocalStorage();
         } else {
             rogueSaveData.extractedArtifacts.push(data.nameLocKey);
-            artifactDiv.classList.remove('artifact-unextracted');
-            if(currentVariant){
-                currentVariant.classList.remove('artifact-unextracted');
+            if(rogueSaveData.highlightExtracted){
+                artifactDiv.classList.remove('artifact-unextracted');
+                if(currentVariant){
+                    currentVariant.classList.remove('artifact-unextracted');
+                }
+                if(artifactDivMap[data.nameLocKey]){
+                    artifactDivMap[data.nameLocKey].classList.remove('artifact-unextracted');
+                }
             }
-            if(artifactDivMap[data.nameLocKey]){
-                artifactDivMap[data.nameLocKey].classList.remove('artifact-unextracted');
-            }
-            if(totalArtifactsTxt){
-                totalArtifactsTxt.innerHTML = `${rogueSaveData.extractedArtifacts.length}/${Object.keys(rogueJSON.artifacts).length}`;
-            }
+            updateArtifactCount();
             mapsProgressCoopToggleInput.checked = true;
             saveDataToLocalStorage();
         }
@@ -876,6 +1144,25 @@ function generateArtifactPopout(key) {
     if(!starterArtifacts.includes(key)){
         extractedCheckDiv.addEventListener('click', updateArtifactStatus)
         artifactDiv.addEventListener('click', updateArtifactStatus)
+    }
+
+    backState = "artifactInfoModal";
+}
+
+function updateArtifactCount() {
+    let totalArtifacts = Object.keys(currentArtifacts).length;
+    if (Object.keys(currentArtifacts).length === 0) {
+        totalArtifacts = Object.keys(rogueJSON.artifacts).length;
+    }
+    let extractedCount = rogueSaveData.extractedArtifacts.concat(starterArtifacts).reduce((acc, artifact) => {
+        if (currentArtifacts.hasOwnProperty(artifact)) {
+            return acc + 1;
+        }
+        return acc;
+    }, 0);
+
+    if (totalArtifactsTxt) {
+        totalArtifactsTxt.innerHTML = `${extractedCount}/${totalArtifacts}`;
     }
 }
 
@@ -966,12 +1253,12 @@ function generateImageBuilder() {
     let headerText = document.createElement('p');
     headerText.classList.add('black-outline');
     headerText.style.fontSize = "32px";
-    headerText.innerHTML = "Export Image Options";
+    headerText.innerHTML = "Extracted Artifacts Image";
     rogueHeaderBar.appendChild(headerText);
 
     let rogueHeaderMessage = document.createElement('p');
     rogueHeaderMessage.classList.add('sku-roundset-selector-desc','ta-center');
-    rogueHeaderMessage.innerHTML = "This will generate a nice image to share with others of your progress in collecting the artifacts.<br>This may not work as intended on mobile.";
+    rogueHeaderMessage.innerHTML = "This will generate a nice image to share with others of your progress in extracting the artifacts.<br>This may not work as intended on mobile.";
     rogueHeaderBar.appendChild(rogueHeaderMessage);
 
     let oakDiv = document.createElement('div');
@@ -1012,6 +1299,7 @@ function generateImageBuilder() {
     changeAvatarButton.innerHTML = 'Change Avatar';
     changeAvatarButton.style.width = "auto";
     changeAvatarButton.addEventListener('click', () => {
+        backState = "imageBuilderModal";
         generateAvatarSelector(rogueSaveData.imageOptions.avatar);
     })
     changeProfileButtons.appendChild(changeAvatarButton);
@@ -1021,6 +1309,7 @@ function generateImageBuilder() {
     changeBannerButton.innerHTML = 'Change Banner';
     changeBannerButton.style.width = "auto";
     changeBannerButton.addEventListener('click', () => {
+        backState = "imageBuilderModal";
         generateBannerSelector(rogueSaveData.imageOptions.banner);
     })
     changeProfileButtons.appendChild(changeBannerButton);
@@ -1073,9 +1362,6 @@ function generateImageBuilder() {
         });
 
         switch (rogueSaveData.imageOptions.sort) {
-            case "Name":
-                // artifacts = Object.fromEntries(Object.entries(artifacts).sort((a, b) => a[1].title.localeCompare(b[1].title)))
-                break;
             case "Rarity (Ascending)":
                 previewArtifacts = previewArtifacts.sort((a, b) => a.tier - b.tier)
                 break;
@@ -1171,6 +1457,7 @@ function generateAvatarSelector() {
             rogueSaveData.imageOptions.avatar = `ProfileAvatar${i < 10 ? "0" + i : i}.png`;
             saveDataToLocalStorage();
             modal.remove();
+            backState = "home";
         })
         modalAvatars.appendChild(avatar);
     }
@@ -1207,6 +1494,7 @@ function generateBannerSelector() {
             rogueSaveData.imageOptions.banner = `ProfileBanner${i}.png`;
             saveDataToLocalStorage();
             modal.remove();
+            backState = "home";
         })
         modalBanners.appendChild(bannerImg);
     }
@@ -1224,7 +1512,6 @@ function generateBannerSelector() {
         modalBanners.appendChild(bannerImg);
     }
 }
-
 
 function downloadImage() {
     let rogueImageContent = document.getElementById('rogue-image-content');
@@ -1294,23 +1581,17 @@ function downloadImage() {
     let artifacts = {...rogueJSON.artifacts}
 
     switch (rogueSaveData.imageOptions.sort) {
-        case "Name":
-            // artifacts = Object.fromEntries(Object.entries(artifacts).sort((a, b) => a[1].title.localeCompare(b[1].title)))
-            break;
         case "Rarity (Ascending)":
             artifacts = Object.fromEntries(Object.entries(artifacts).sort((a, b) => a[1].tier - b[1].tier))
             break;
         case "Rarity (Descending)":
             artifacts = Object.fromEntries(Object.entries(artifacts).sort((a, b) => b[1].tier - a[1].tier))
             break;
-        case "Category":
-            artifacts = Object.fromEntries(Object.entries(artifacts).sort((a, b) => a[1].rarityFrameType.localeCompare(b[1].rarityFrameType)))
-            break;
     }
 
     Object.values(artifacts).forEach(artifact => {
         if (starterArtifacts.includes(artifact.nameLocKey)) { return; }
-        mainArtifactsDiv.appendChild(generateArtifactContainer(artifact,'modal'));
+        mainArtifactsDiv.appendChild(generateArtifactContainer(artifact,'force'));
     });
 
     let bottomTextDiv = document.createElement('div');
@@ -1514,4 +1795,56 @@ function loadDataFromLocalStorage() {
         rogueSaveData = JSON.parse(data);
     }
     readLocalStorage();
+}
+
+function generateCheckbox(label, value, callback) {
+    let checkboxDiv = document.createElement('div');
+    checkboxDiv.classList.add('checkbox-div');
+
+    let labelText = document.createElement('p');
+    labelText.classList.add('checkbox-label', 'black-outline');
+    labelText.innerHTML = label;
+    checkboxDiv.appendChild(labelText);
+
+    let input = document.createElement('input');
+    input.classList.add('checkbox-input');
+    input.type = 'checkbox';
+    input.checked = value;
+    if(callback) {
+        input.addEventListener('change', () => {
+            callback(input.checked)
+        })
+    }
+    checkboxDiv.appendChild(input);
+
+    return checkboxDiv
+}
+
+function generateDropdown(label, options, value, callback) {
+    let dropdownDiv = document.createElement('div');
+    dropdownDiv.classList.add('d-flex', 'ai-center');
+
+    let labelText = document.createElement('p');
+    labelText.classList.add('dropdown-label', 'black-outline');
+    labelText.innerHTML = label;
+    dropdownDiv.appendChild(labelText);
+
+    let select = document.createElement('select');
+    select.classList.add('dropdown-select');
+    options.forEach((option) => {
+        let selectOption = document.createElement('option');
+        selectOption.value = option;
+        selectOption.innerHTML = option;
+        select.appendChild(selectOption);
+    })
+    dropdownDiv.appendChild(select);
+
+    select.value = value;
+
+    select.addEventListener('change', () => {
+        callback(select.value)
+    })
+
+    dropdownDiv.appendChild(select);
+    return dropdownDiv
 }

@@ -2158,7 +2158,7 @@
         },
         "StartingStrong1": {
             "tier": 0,
-            "baseId": "StartingStong",
+            "baseId": "StartingStrong",
             "nameLocKey": "StartingStrong1",
             "descriptionLocKey": "StartingStrong1Description",
             "isBossArtifact": false,
@@ -2169,7 +2169,7 @@
         },
         "StartingStrong2": {
             "tier": 1,
-            "baseId": "StartingStong",
+            "baseId": "StartingStrong",
             "nameLocKey": "StartingStrong2",
             "descriptionLocKey": "StartingSrtong2Description",
             "isBossArtifact": false,
@@ -2180,7 +2180,7 @@
         },
         "StartingStrong3": {
             "tier": 2,
-            "baseId": "StartingStong",
+            "baseId": "StartingStrong",
             "nameLocKey": "StartingStrong3",
             "descriptionLocKey": "StartingStrong3Description",
             "isBossArtifact": false,
