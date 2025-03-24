@@ -467,7 +467,7 @@ function generateArtifactSettings() {
     artifactsContent.innerHTML = "";
 
     let settingsDiv = document.createElement('div');
-    settingsDiv.classList.add('content-div', 'rogue-bg');
+    settingsDiv.classList.add('content-div', 'rogue-bg', 'd-flex', 'ai-center');
     artifactsContent.appendChild(settingsDiv);
 
     let settingsHeaderBar = document.createElement('div');
@@ -706,6 +706,14 @@ function generateArtifactSettings() {
     });
     settingsSort.appendChild(settingsSortDropdown);
     settingsSort.appendChild(sortPreviewArtifactsDiv);
+
+    let rogueDownloadButton = document.createElement('div');
+    rogueDownloadButton.classList.add('start-button', 'black-outline');
+    rogueDownloadButton.innerHTML = 'Apply';
+    rogueDownloadButton.addEventListener('click', () => {
+        handleBackBtn();
+    })
+    settingsDiv.appendChild(rogueDownloadButton);
 }
 
 function generateArtifacts() {
