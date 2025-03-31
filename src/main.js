@@ -21,6 +21,7 @@ let rankInfoVeteran = {
 };
 
 let profileStats = {}
+let exclusiveStats = {}
 let medalsInOrder = {}
 let extrasUnlocked = {}
 
@@ -268,12 +269,19 @@ function generateStats(){
     profileStats["Damage Done To Bosses"] = btd6publicprofile.gameplay["damageDoneToBosses"];
 
     //stats not in game
-    profileStats["Daily Challenges Completed"] = btd6usersave["totalDailyChallengesCompleted"];
-    profileStats["Consecutive DCs Completed"] = btd6usersave["consecutiveDailyChallengesCompleted"];
-    profileStats["Race Attempts"] = btd6usersave["totalRacesEntered"];
-    profileStats["Challenges Played"] = btd6usersave["challengesPlayed"];
-    profileStats["Challenges Shared"] = btd6usersave["challengesShared"];
-    profileStats["Continues Used"] = btd6usersave["continuesUsed"];
+    exclusiveStats["Daily Challenges Completed"] = btd6usersave["totalDailyChallengesCompleted"];
+    exclusiveStats["Consecutive DCs Completed"] = btd6usersave["consecutiveDailyChallengesCompleted"];
+    exclusiveStats["Race Attempts"] = btd6usersave["totalRacesEntered"];
+    exclusiveStats["Contested Territory Tiles Captured"] = btd6publicprofile.stats["ctCapturedTiles"];
+    exclusiveStats["Challenges Played"] = btd6usersave["challengesPlayed"];
+    exclusiveStats["Challenges Shared"] = btd6usersave["challengesShared"];
+    exclusiveStats["Continues Used"] = btd6usersave["continuesUsed"];
+    exclusiveStats["Towers Sold"] = btd6publicprofile.stats["totalTowersSold"];
+    exclusiveStats["Total Tier 1 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["1"];
+    exclusiveStats["Total Tier 2 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["2"];
+    exclusiveStats["Total Tier 3 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["3"];
+    exclusiveStats["Total Tier 4 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["4"];
+    exclusiveStats["Total Tier 5 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["5"];
 
     //Calculate the hidden and normal achievements
     let hiddenAchievements = 0;
@@ -1612,6 +1620,84 @@ function generateOverview(){
         })
     }
 
+    let topParagonsDiv = document.createElement('div');
+    topParagonsDiv.classList.add('top-heroes-div');
+    topHeroesMonkesyDiv.appendChild(topParagonsDiv);
+
+    let topParagonsTopDiv = document.createElement('div');
+    topParagonsTopDiv.classList.add('top-heroes-top-div');
+    topParagonsDiv.appendChild(topParagonsTopDiv);
+
+    let topParagonsTopRibbonDiv = document.createElement('div');
+    topParagonsTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
+    topParagonsTopRibbonDiv.style.filter = 'hue-rotate(250deg)';
+    topParagonsTopDiv.appendChild(topParagonsTopRibbonDiv);
+
+    let topParagonsText = document.createElement('p');
+    topParagonsText.classList.add('top-heroes-text','black-outline');
+    topParagonsText.innerHTML = 'Top Paragons';
+    topParagonsTopRibbonDiv.appendChild(topParagonsText);
+
+    let mapsProgressCoopToggle3 = document.createElement('div');
+    mapsProgressCoopToggle3.classList.add('maps-progress-coop-toggle');
+    topParagonsTopDiv.appendChild(mapsProgressCoopToggle3);
+
+    let mapsProgressCoopToggleText3 = document.createElement('p');
+    mapsProgressCoopToggleText3.classList.add('maps-progress-coop-toggle-text','black-outline');
+    mapsProgressCoopToggleText3.innerHTML = "Show All: ";
+    mapsProgressCoopToggle3.appendChild(mapsProgressCoopToggleText3);
+
+    let mapsProgressCoopToggleInput3 = document.createElement('input');
+    mapsProgressCoopToggleInput3.classList.add('maps-progress-coop-toggle-input');
+    mapsProgressCoopToggleInput3.type = 'checkbox';
+    mapsProgressCoopToggle3.appendChild(mapsProgressCoopToggleInput3);
+    
+    let topParagonsList = document.createElement('div');
+    topParagonsList.classList.add('top-heroes-list');
+    topParagonsDiv.appendChild(topParagonsList);
+
+    let top3ParagonsDiv = document.createElement('div');
+    top3ParagonsDiv.classList.add('top-3-heroes-div');
+    topParagonsList.appendChild(top3ParagonsDiv);
+
+    let otherParagonsDiv = document.createElement('div');
+    otherParagonsDiv.classList.add('other-heroes-div');
+    otherParagonsDiv.style.display = 'none';
+    topParagonsList.appendChild(otherParagonsDiv);
+
+    mapsProgressCoopToggleInput3.addEventListener('change', () => {
+        mapsProgressCoopToggleInput3.checked ? otherParagonsDiv.style.display = 'flex' : otherParagonsDiv.style.display = 'none';
+    })
+
+    counter = 0;
+
+    for (let [tower, xp] of Object.entries(btd6publicprofile.stats["paragonsPurchasedByName"]).sort((a, b) => b[1] - a[1])){
+        
+        if(xp === 0) { continue; }
+        // if(!paragonList.includes(tower)) { continue; }
+        let towerDiv = document.createElement('div');
+        towerDiv.classList.add('hero-div');
+        towerDiv.style.backgroundImage = "url(../Assets/UI/ParagonContainer.png)";
+        counter < 3 ? top3ParagonsDiv.appendChild(towerDiv) : otherParagonsDiv.appendChild(towerDiv);
+
+        let towerImg = document.createElement('img');
+        towerImg.classList.add('hero-img');
+        towerImg.src = getTowerAssetPath(tower,"Paragon");
+        towerDiv.appendChild(towerImg);
+
+        let towerText = document.createElement('p');
+        towerText.classList.add('hero-text','black-outline');
+        towerText.innerHTML = xp.toLocaleString();
+        towerDiv.appendChild(towerText);
+        counter++;
+
+        tippy(towerDiv, {
+            content: `${getLocValue(tower + " Paragon")} Placed ${xp.toLocaleString()} Times`,
+            placement: 'top',
+            theme: 'speech_bubble'
+        })
+    }
+
     let rightColumnDiv = document.createElement('div');
     rightColumnDiv.classList.add('right-column-div');
     belowProfileHeader.appendChild(rightColumnDiv);
@@ -1626,7 +1712,7 @@ function generateOverview(){
 
     let rightColumnHeaderText = document.createElement('p');
     rightColumnHeaderText.classList.add('column-header-text','black-outline');
-    rightColumnHeaderText.innerHTML = 'Overall Stats';
+    rightColumnHeaderText.innerHTML = 'Profile Stats';
     rightColumnHeader.appendChild(rightColumnHeaderText);
 
     for (let [key, value] of Object.entries(profileStats)){
@@ -1644,6 +1730,49 @@ function generateOverview(){
         statValue.innerHTML = value.toLocaleString();
         stat.appendChild(statValue);
     }
+
+    let exclusiveStatDiv = document.createElement('div');
+    exclusiveStatDiv.classList.add('profile-stats');
+    rightColumnDiv.appendChild(exclusiveStatDiv);
+
+        let exclusiveStatColumnHeader = document.createElement('div');
+        exclusiveStatColumnHeader.classList.add('overview-right-column-header');
+        exclusiveStatDiv.appendChild(exclusiveStatColumnHeader);
+
+        let exclusiveColumnHeaderText = document.createElement('p');
+        exclusiveColumnHeaderText.classList.add('column-header-text','black-outline');
+        exclusiveColumnHeaderText.innerHTML = 'API Exclusive Stats';
+        exclusiveStatColumnHeader.appendChild(exclusiveColumnHeaderText);
+
+        let rogueStats = {};
+        rogueStats["Tiles Captured"] = btd6usersave["rogueLegends"].tilesCaptured;
+        rogueStats["Campaign Maps Won"] = btd6usersave["rogueLegends"].bossesDefeated;
+        rogueStats["Common Artifacts Collected"] = btd6usersave["rogueLegends"].commonArtifactsCollected;
+        rogueStats["Rare Artifacts Collected"] = btd6usersave["rogueLegends"].rareArtifactsCollected;
+        rogueStats["Legendary Artifacts Collected"] = btd6usersave["rogueLegends"].legendaryArtifactsCollected;
+        // rogueStats["Extracted Artifacts"] = btd6usersave["rogueLegends"];
+        // rogueStats["Bloon Encounters Won"] = btd6usersave["rogueLegends"];
+        // rogueStats["Mini Games Won"] = btd6usersave["rogueLegends"];
+        // rogueStats["Mini Bosses Won"] = btd6usersave["rogueLegends"];
+        rogueStats["Common Boosts Collected"] = btd6usersave["rogueLegends"].commonBoostsCollected;
+        rogueStats["Rare Boosts Collected"] = btd6usersave["rogueLegends"].rareBoostsCollected;
+        rogueStats["Legendary Boosts Collected"] = btd6usersave["rogueLegends"].legendaryBoostsCollected;
+
+        for (let [key, value] of Object.entries(exclusiveStats)){
+            let stat = document.createElement('div');
+            stat.classList.add('stat');
+            exclusiveStatDiv.appendChild(stat);
+
+            let statName = document.createElement('p');
+            statName.classList.add('stat-name');
+            statName.innerHTML = key;
+            stat.appendChild(statName);
+
+            let statValue = document.createElement('p');
+            statValue.classList.add('stat-value');
+            statValue.innerHTML = value.toLocaleString();
+            stat.appendChild(statValue);
+        }
 
     if (btd6usersave.hasOwnProperty("rogueLegends")) {
 
@@ -7705,6 +7834,81 @@ async function openProfile(source, profile){
         })
     }
 
+    let topParagonsDiv = document.createElement('div');
+    topParagonsDiv.classList.add('top-heroes-div');
+    topHeroesMonkesyDiv.appendChild(topParagonsDiv);
+
+    let topParagonsTopDiv = document.createElement('div');
+    topParagonsTopDiv.classList.add('top-heroes-top-div');
+    topParagonsDiv.appendChild(topParagonsTopDiv);
+
+    let topParagonsTopRibbonDiv = document.createElement('div');
+    topParagonsTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
+    topParagonsTopDiv.appendChild(topParagonsTopRibbonDiv);
+
+    let topParagonsText = document.createElement('p');
+    topParagonsText.classList.add('top-heroes-text','black-outline');
+    topParagonsText.innerHTML = 'Top Towers';
+    topParagonsTopRibbonDiv.appendChild(topParagonsText);
+
+    let mapsProgressCoopToggle3 = document.createElement('div');
+    mapsProgressCoopToggle3.classList.add('maps-progress-coop-toggle');
+    topParagonsTopDiv.appendChild(mapsProgressCoopToggle3);
+
+    let mapsProgressCoopToggleText3 = document.createElement('p');
+    mapsProgressCoopToggleText3.classList.add('maps-progress-coop-toggle-text','black-outline');
+    mapsProgressCoopToggleText3.innerHTML = "Show All: ";
+    mapsProgressCoopToggle3.appendChild(mapsProgressCoopToggleText3);
+
+    let mapsProgressCoopToggleInput3 = document.createElement('input');
+    mapsProgressCoopToggleInput3.classList.add('maps-progress-coop-toggle-input');
+    mapsProgressCoopToggleInput3.type = 'checkbox';
+    mapsProgressCoopToggle3.appendChild(mapsProgressCoopToggleInput3);
+    
+    let topParagonsList = document.createElement('div');
+    topParagonsList.classList.add('top-heroes-list');
+    topParagonsDiv.appendChild(topParagonsList);
+
+    let top3ParagonsDiv = document.createElement('div');
+    top3ParagonsDiv.classList.add('top-3-heroes-div');
+    topParagonsList.appendChild(top3ParagonsDiv);
+
+    let otherParagonsDiv = document.createElement('div');
+    otherParagonsDiv.classList.add('other-heroes-div');
+    otherParagonsDiv.style.display = 'none';
+    topParagonsList.appendChild(otherParagonsDiv);
+
+    mapsProgressCoopToggleInput2.addEventListener('change', () => {
+        mapsProgressCoopToggleInput2.checked ? otherTowersDiv.style.display = 'flex' : otherTowersDiv.style.display = 'none';
+    })
+
+    counter = 0;
+    let paragonList = Object.keys(constants.towersInOrder);
+
+    for (let [tower, xp] of Object.entries(profile.stats["paragonsPurchasedByName"]).sort((a, b) => b[1] - a[1])){
+        if(xp === 0) { continue; }
+        if(!towersList.includes(tower)) { continue; }
+        let towerDiv = document.createElement('div');
+        towerDiv.classList.add('hero-div');
+        counter < 3 ? top3ParagonsDiv.appendChild(towerDiv) : otherParagonsDiv.appendChild(towerDiv);
+
+        let towerImg = document.createElement('img');
+        towerImg.classList.add('hero-img');
+        towerImg.src = getInstaContainerIcon(tower,"000");
+        towerDiv.appendChild(towerImg);
+
+        let towerText = document.createElement('p');
+        towerText.classList.add('hero-text','black-outline');
+        towerText.innerHTML = xp.toLocaleString();
+        towerDiv.appendChild(towerText);
+        counter++;
+
+        tippy(towerDiv, {
+            content: `${getLocValue(tower)} Placed ${xp.toLocaleString()} Times`,
+            placement: 'top',
+            theme: 'speech_bubble'
+        })
+    }
 
     let rightColumnDiv = document.createElement('div');
     rightColumnDiv.classList.add('right-column-div');
