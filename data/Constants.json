@@ -2167,6 +2167,518 @@
         "Rogue Hint 45": "What is that large purple thing in the distance?",
         "Rogue Hint 46": "That is one BAD looking Bloon..."
     },
+    "abilities": {
+        "Door Gunner": {
+            "displayName": "Door Gunner",
+            "description": "Pick up a tower and allow it to shoot while mid-air.",
+            "icon": "DoorGunnerUpgradeIconAA"
+        },
+        "Deploy": {
+            "displayName": "Deploy",
+            "description": "Place the carried tower.",
+            "icon": "DeployUpgradeIconAA"
+        },
+        "Emergency Unlock": {
+            "displayName": "Emergency Unlock",
+            "description": "Unlocks locked Dartling Gunners and boosts their swivel speed for a short time.",
+            "icon": "EmergencyUnlockMkAA"
+        },
+        "Vine Rupture": {
+            "displayName": "Vine Rupture",
+            "description": "Burst all track vines, doing big damage to all non-Lead Bloons. New vines will regrow after each Rupture.",
+            "icon": "VineRuptureUpgradeIconAA"
+        },
+        "Battle Cat Transform": {
+            "displayName": "Battle Cat Transform",
+            "description": "Fully powered Battle Cat hits Bloons hard, also tearing away Camo property and Bloon immunities.",
+            "icon": "BattleCatIcon"
+        },
+        "Link": {
+            "displayName": "Link",
+            "description": "Activate a tower's abilities as soon as they are ready.",
+            "icon": "TechbotLinkAA"
+        },
+        "Unlink": {
+            "displayName": "Unlink",
+            "description": "Disconnects from the currently-linked tower",
+            "icon": "TechbotUnlinkAA"
+        },
+        "Ambush Tech": {
+            "displayName": "Ambush Tech",
+            "description": "Select an area. The Techbot will only activate if Bloons are inside.",
+            "icon": "TechbotLinkAA"
+        },
+        "Naval Tactics": {
+            "displayName": "Naval Tactics",
+            "description": "Greatly increases attack speed of Brickell and nearby water-based Monkeys for a short time",
+            "icon": "NavalTacticsAA"
+        },
+        "Mega Mine": {
+            "displayName": "Mega Mine",
+            "description": "Deploys to any water area a devastating Mine that triggers on MOABs and stuns nearby Bloons",
+            "icon": "MegamineAA"
+        },
+        "Blast Chain Ability": {
+            "displayName": "Blast Chain Ability",
+            "description": "Sea mines fire off quicker for a short time",
+            "icon": "BlastChainAA"
+        },
+        "The Long Arm of Light": {
+            "displayName": "The Long Arm of Light",
+            "description": "Greatly increases attack range and power for a short time & damages all Bloon Types",
+            "icon": "TheLongArmofLightAA"
+        },
+        "Blood Sacrifice": {
+            "displayName": "Blood Sacrifice",
+            "description": "Sacrifice a targeted Tower to grant Adora large amounts of XP and boost her attack range and rate of fire for a short time",
+            "icon": "BloodSacrificeAA"
+        },
+        "Ball of Light": {
+            "displayName": "Ball of Light",
+            "description": "Brings forth a powerful ball of energy to strike down the Bloons.",
+            "icon": "BallofLightAA"
+        },
+        "Transforming Tonic": {
+            "displayName": "Transforming Tonic",
+            "description": "Turns Alchemist into powerful attack Monster for 20 seconds.",
+            "icon": "TransformingTonicUpgradeIcon"
+        },
+        "Total Transforming Tonic": {
+            "displayName": "Total Transforming Tonic",
+            "description": "Transforms five Monkeys nearby into crazy attack monsters for 20 seconds.",
+            "icon": "TotalTransformationUpgradeIconAA"
+        },
+        "IMF loan": {
+            "displayName": "IMF loan",
+            "description": "Gives you $9,000 but you have to pay it back over time.",
+            "icon": "IMFLoanUpgradeIcon"
+        },
+        "Monkey-Nomics": {
+            "displayName": "Monkey-Nomics",
+            "description": "Generates $10000 instantly.",
+            "icon": "MonkeyNomicsUpgradeIcon"
+        },
+        "T Rex STOMP": {
+            "displayName": "T Rex STOMP",
+            "description": "Stuns up to ZOMG Bloons in a wide area.",
+            "icon": "TRexStompAA"
+        },
+        "Giga STOMP ": {
+            "displayName": "Giga STOMP",
+            "description": "STOMP hits the whole map and lasts longer.",
+            "icon": "GiganotosaurusStompAA"
+        },
+        "Biohack": {
+            "displayName": "Biohack",
+            "description": "4 closest Monkeys pop an extra layer per attack for 6 seconds. Affected Monkeys can't attack for 2 seconds after effect ends.",
+            "icon": "BiohackIconAA"
+        },
+        "Bomb Blitz": {
+            "displayName": "Bomb Blitz",
+            "description": "When a Bloon escapes, a Bomb Storm will destroy every Bloon on the screen below a BFB.",
+            "icon": "BombBlitzUpgradeIcon"
+        },
+        "Assassinate MOAB": {
+            "displayName": "Assassinate MOAB",
+            "description": "Special missile flies out and does massive damage to MOAB class Bloons.",
+            "icon": "MoabAssassinUpgradeIcon"
+        },
+        "Moab Eliminator": {
+            "displayName": "Moab Eliminator",
+            "description": "Assassinate ability deals 6x damage with a short cooldown.",
+            "icon": "MoabEliminatorUpgradeIcon"
+        },
+        "Turbo Charge": {
+            "displayName": "Turbo Charge",
+            "description": "Makes this Monkey attack incredibly fast for 10 seconds.",
+            "icon": "TurbochargeUpgradeIcon"
+        },
+        "Perma Charge": {
+            "displayName": "Perma Charge",
+            "description": "Makes this Monkey deal additional damage for 15 seconds.",
+            "icon": "PermaChargeUpgradeIcon"
+        },
+        "Armor Piercing Shells": {
+            "displayName": "Armor Piercing Shells",
+            "description": "Shots can pop Black Bloons and do extra damage to Ceramic Bloons.",
+            "icon": "ArmorPiercingShellsAA"
+        },
+        "MOAB Barrage": {
+            "displayName": "MOAB Barrage",
+            "description": "Launches a barrage of shells at up to 10 MOAB-Class Bloons on screen, dealing massive damage each time.",
+            "icon": "MOABBarrageAA"
+        },
+        "Soul Harvest": {
+            "displayName": "Soul Harvest",
+            "description": "Harvests a small number of Bloons near Corvus",
+            "icon": "SoulHarvestAA"
+        },
+        "Spirit Walk": {
+            "displayName": "Spirit Walk",
+            "description": "Corvus can shift to any valid location",
+            "icon": "SpiritWalkAA"
+        },
+        "Dark Ritual": {
+            "displayName": "Dark Ritual",
+            "description": "Harvests a huge number of Bloons near Corvus",
+            "icon": "DarkRitualAA"
+        },
+        "RocketStorm": {
+            "displayName": "Rocket Storm",
+            "description": "Launches a powerful storm of rockets in a wide cone.",
+            "icon": "RocketStormUpgradeIconAA"
+        },
+        "RocketStormMAD": {
+            "displayName": "Mauler Storm",
+            "description": "Each missile does extreme damage to MOAB-Class Bloons.",
+            "icon": "MADUpgradeIconAA"
+        },
+        "Super Monkey Fan Club": {
+            "displayName": "Super Monkey Fan Club",
+            "description": "Converts up to 10 nearby Dart Monkeys including itself into Super Monkeys for 15 seconds.",
+            "icon": "SuperMonkeyFanClubUpgradeIcon"
+        },
+        "Plasma Monkey Fan Club": {
+            "displayName": "Plasma Monkey Fan Club",
+            "description": "Converts up to 20 nearby Dart Monkeys including itself into Plasma Monkeys for 15 seconds.",
+            "icon": "PlasmaMonkeyFanClubUpgradeIcon"
+        },
+        "Jungle's Bounty": {
+            "displayName": "Jungle's Bounty",
+            "description": "Generates cash and 1 life each use, plus extra cash per Banana Farm near the Druid",
+            "icon": "JunglesBountyUpgradeIconAA"
+        },
+        "Overclock": {
+            "displayName": "Overclock",
+            "description": "Target another tower to supercharge its attack speed for a short time.",
+            "icon": "OverclockUpgradeIcon"
+        },
+        "Ultraboost": {
+            "displayName": "Ultraboost",
+            "description": "Ultra-Overclocked Monkeys gain a small but permanent boost every time they are overclocked.",
+            "icon": "UltraboostUpgradeIcon"
+        },
+        "SentryParagonSpawner": {
+            "displayName": "Sentry Paragon Spawner",
+            "description": "Spawns a Mega Sentry.",
+            "icon": "SentryGreenAAIcon"
+        },
+        "Drone Swarm": {
+            "displayName": "Drone Swarm",
+            "description": "Etienne launches 4 more temporary drones to wreak some Bloon popping havoc",
+            "icon": "DroneSwarmAA"
+        },
+        "UCAV": {
+            "displayName": "UCAV",
+            "description": "High altitude surveillance drone becomes devastating combat drone for a short time.",
+            "icon": "UcavAA"
+        },
+        "Heartstopper": {
+            "displayName": "Heartstopper",
+            "description": "Allows Purple popping and prevents any regrow from happening for 10 seconds.",
+            "icon": "HeartstopperAA"
+        },
+        "Sacrificial Totem": {
+            "displayName": "Sacrificial Totem",
+            "description": "A totem that gives Camo detection, extra pierce, attack range, attack speed, and projectile speed to nearby Monkeys, especially Wizard Monkeys. Drains 10 lives.",
+            "icon": "SacrificialTotemAA"
+        },
+        "MOAB Hex": {
+            "displayName": "MOAB Hex",
+            "description": "Places a curse on a MOAB-class bloon, it takes damage every second until annihilated.",
+            "icon": "MoabHexAA"
+        },
+        "Glue Strike": {
+            "displayName": "Glue Strike",
+            "description": "Glues all Bloons on screen, causing them to take more damage from all sources while it lasts.",
+            "icon": "GlueStrikeUpgradeIcon"
+        },
+        "Glue Storm": {
+            "displayName": "Glue Storm",
+            "description": "Pelts the whole screen with glue for 20 seconds.",
+            "icon": "GlueStormUpgradeIcon"
+        },
+        "Cocktail of Fire": {
+            "displayName": "Cocktail of Fire",
+            "description": "Hurls a flask of flammable liquid, burning Bloons that pass through the fire.",
+            "icon": "CocktailOfFireAA"
+        },
+        "Firestorm": {
+            "displayName": "Firestorm",
+            "description": "Sets the whole screen alight, burning all Bloons and granting the Heat It Up buff to all Monkeys.",
+            "icon": "FirestormAA"
+        },
+        "Redeploy": {
+            "displayName": "Redeploy",
+            "description": "Pick up and redeploy most Monkey types.",
+            "icon": "SupportChinookUpgradeIcon"
+        },
+        "Support Drop": {
+            "displayName": "Supplies",
+            "description": "Drops lives and cash crates.",
+            "icon": "SupportChinookUpgradeIconAA"
+        },
+        "Special Poperations": {
+            "displayName": "Special Poperations",
+            "description": "Deploys a powerful special Monkey Marine with a machine gun.",
+            "icon": "SpecialPoperationsUpgradeIcon"
+        },
+        "Snowstorm": {
+            "displayName": "Snowstorm",
+            "description": "Freezes all regular Bloons on screen, briefly freezes White, Zebra, and Camo, and slows MOAB-class.",
+            "icon": "SnowstormUpgradeIcon"
+        },
+        "Absolute Zero": {
+            "displayName": "Absolute Zero",
+            "description": "Ability is so cold it freezes all regular Bloons for longer, including White, Zebra, and Camo, slows MOAB-class longer, and greatly increases the attack speed of all Ice Monkeys for the duration.",
+            "icon": "AbsoluteZeroUpgradeIcon"
+        },
+        "MermonkyAbility": {
+            "displayName": "Ice Jet",
+            "description": "Launches a barrage of bouncing ice balls following target priority, or targeted point",
+            "icon": "RogueWaveAAIcon"
+        },
+        "MermonkyAbilityBig": {
+            "displayName": "Popseidon's Ice Jet",
+            "description": "Popseidon draws such power that a rogue wave floods the map with supercooled water, freezing all Bloons and reclaiming the weak for the sea",
+            "icon": "RogueWaveUpgradedAAIcon"
+        },
+        "Ground Zero": {
+            "displayName": "Ground Zero",
+            "description": "Drops a huge bomb that destroys most things on screen.",
+            "icon": "GroundZeroUpgradeIconAA"
+        },
+        "Tsar Bomba": {
+            "displayName": "Tsar Bomba",
+            "description": "A very, very large bomb. Someone put a stop to this craziness!",
+            "icon": "TsarBombaUpgradeIconAA"
+        },
+        "Carpet Bomb": {
+            "displayName": "Carpet Bomb",
+            "description": "(Unofficial Description) Deploys 8 bombs in a designated path.",
+            "icon": "CarpetBombIconAA"
+        },
+        "MOAB Takedown": {
+            "displayName": "MOAB Takedown",
+            "description": "Harpoons a MOAB class Bloon and brings it down.",
+            "icon": "MonkeyPiratesUpgradeIconAA"
+        },
+        "ZOMG Takedown": {
+            "displayName": "ZOMG Takedown",
+            "description": "Plunders extra cash from each MOAB-class Bloon taken down.",
+            "icon": "PirateLordUpgradeIconAA"
+        },
+        "Large BAD Harpoon": {
+            "displayName": "Large BAD Harpoon",
+            "description": "(Unofficial Description) Harpoons the largest Bloon on screen including BADs, destroying it instantly.",
+            "icon": "NavarchOfTheSeasAAIcon"
+        },
+        "First Strike Capability": {
+            "displayName": "First Strike Capability",
+            "description": "A devastating missile strike targeting the largest Bloon on screen, plus splash damage.",
+            "icon": "FirstStrikeCapabilityUpgradeIconAA"
+        },
+        "Final Strike": {
+            "displayName": "Final Strike",
+            "description": "(Unofficial Description) The Nautic Siege Core disables itself for 15 seconds before launching three massive nuclear missiles, leaving bloontonium pools",
+            "icon": "FinalStrikeIconAA"
+        },
+        "Call to Arms": {
+            "displayName": "Call to Arms",
+            "description": "Gives all Monkeys +50% attack speed and pops for a short time.",
+            "icon": "CallToArmsUpgradeIcon"
+        },
+        "Homeland Defense": {
+            "displayName": "Homeland Defense",
+            "description": "Ability now increases attack speed and pops by 100% for all Monkeys for 20 seconds.",
+            "icon": "HomelandDefenseUpgradeIcon"
+        },
+        "Bombardment": {
+            "displayName": "Bombardment",
+            "description": "Unleashes a rapid fire attack in a slightly wider area",
+            "icon": "BombardmentUpgradeIconAA"
+        },
+        "Pop And Awe": {
+            "displayName": "Pop And Awe",
+            "description": "Rains explosions over the whole screen, damaging Bloons and stunning them periodically",
+            "icon": "PopandAweUpgradeIconAA"
+        },
+        "Sabotage": {
+            "displayName": "Sabotage",
+            "description": "Lasts 15 seconds. During the sabotage, all Bloons move at half speed.",
+            "icon": "BloonSabotageUpgradeIcon"
+        },
+        "Grand Sabotage": {
+            "displayName": "Grand Sabotage",
+            "description": "Ability duration is longer and buffs Shinobi while active, and MOAB-Class Bloons spawn with less health during the sabotage.",
+            "icon": "GrandSaboteurUpgradeIcon"
+        },
+        "Brambles": {
+            "displayName": "Brambles",
+            "description": "Creates a spiked bush on the track that can pop 50 Bloons. Lasts multiple rounds if not destroyed",
+            "icon": "BramblesAA"
+        },
+        "Wall of Trees": {
+            "displayName": "Wall of Trees",
+            "description": "Summons a wall of trees across the track that destroy all Bloons that enter. When full, the trees burst into money.",
+            "icon": "WallOfTreesAA"
+        },
+        "Rallying Roar": {
+            "displayName": "Rallying Roar",
+            "description": "All nearby Monkeys can pop +1 layer for a short time.",
+            "icon": "RallyingRoarAA"
+        },
+        "Big Squeeze": {
+            "displayName": "Big Squeeze",
+            "description": "Grabs a MOAB, BFB, DDT (if visible), or ZOMG and crushes it to bits over 5 seconds.",
+            "icon": "BigSqueezeAA"
+        },
+        "Psychic Blast": {
+            "displayName": "Psychic Blast",
+            "description": "Psi unleashes a wave of power that stuns nearby Bloons for a long time.",
+            "icon": "PsychicBlastAA"
+        },
+        "Psionic Scream": {
+            "displayName": "Psionic Scream",
+            "description": "Psi unleashes a silent scream that throws the Bloons into utter chaos.",
+            "icon": "PsionicScreamAA"
+        },
+        "Rapid Shot": {
+            "displayName": "Rapid Shot",
+            "description": "Triple attack speed for a short time.",
+            "icon": "RapidShotAA"
+        },
+        "Storm of Arrows": {
+            "displayName": "Storm of Arrows",
+            "description": "Covers a large area in a deadly rain of arrows.",
+            "icon": "StormOfArrowsAA"
+        },
+        "Scatter Missile": {
+            "displayName": "Scatter Missile",
+            "description": "Rosalia's Workshop launches a missile that rains destruction from above.",
+            "icon": "ScatterMissileAA"
+        },
+        "Flight Boost": {
+            "displayName": "Flight Boost",
+            "description": "For a short time all nearby aircraft fly faster &amp; Rosalia pursues Bloons over the whole map, using both weapons!",
+            "icon": "FlightBoostAA"
+        },
+        "Kinetic Charge": {
+            "displayName": "Kinetic Charge",
+            "description": "Charge attaches to a Bloon, harnessing energy when the target takes damage. Then releases accumulated energy in a huge detonation.",
+            "icon": "KineticChargeAA"
+        },
+        "Leaping Sword Attack": {
+            "displayName": "Leaping Sword Attack",
+            "description": "Sauda's dramatic Lead popping leap attack slams down on her targeted Bloons.",
+            "icon": "LeapingSwordAA"
+        },
+        "Sword Charge": {
+            "displayName": "Sword Charge",
+            "description": "Sauda slides along the whole track, devastating Bloons as she goes.",
+            "icon": "SwordChargeAA"
+        },
+        "Retaliation": {
+            "displayName": "Retaliation",
+            "description": "A lost life gives the Sniper 4x attack speed for a short time in retaliation.",
+            "icon": "EliteDefenderUpgradeIcon"
+        },
+        "Supply Drop": {
+            "displayName": "Supply Drop",
+            "description": "Drops a crate full of cash and will trigger Supply Drop for other Snipers if they're ready",
+            "icon": "CashDropUpgradeIcon"
+        },
+        "Elite Supply Drop": {
+            "displayName": "Elite Supply Drop",
+            "description": "Supply drop gives much more cash.",
+            "icon": "EliteSniperUpgradeIcon"
+        },
+        "Spike Storm": {
+            "displayName": "Spike Storm",
+            "description": "Shoots out a thick layer of spikes over the entire track.",
+            "icon": "SpikeStormUpgradeIcon"
+        },
+        "Concussive Shell": {
+            "displayName": "Concussive Shell",
+            "description": "Shoots a guided shell to the largest Bloon on screen, stunning it.",
+            "icon": "ConcussiveShellAA"
+        },
+        "Target Focus": {
+            "displayName": "Target Focus",
+            "description": "For 15 seconds Mortar Monkeys target touch/cursor with increased accuracy",
+            "icon": "TargetFocusAA"
+        },
+        "Artillery Command": {
+            "displayName": "Artillery Command",
+            "description": "Resets cooldown on all Bomb Shooters and Mortar Monkeys.",
+            "icon": "ArtilleryCommandAA"
+        },
+        "Darkshift": {
+            "displayName": "Darkshift",
+            "description": "Shift to a valid location in range",
+            "icon": "DarkKnightUpgradeIconAA"
+        },
+        "ChampionDarkshift": {
+            "displayName": "ChampionDarkshift",
+            "description": "Shift to a valid location anywhere on the map",
+            "icon": "DarkChampionUpgradeIconAA"
+        },
+        "Legend of the Night": {
+            "displayName": "Legend of the Night",
+            "description": "When a bloon exits, spawn a portal that destroys all bloons that exit for a short time",
+            "icon": "LegendOfTheNightUpgradeIcon"
+        },
+        "Tech Terror": {
+            "displayName": "Tech Terror",
+            "description": "Destroys most Bloons completely and utterly within blast radius. Every third usage of the ability will deal +50% damage",
+            "icon": "TechTerrorUpgradeIconAA"
+        },
+        "The Anti-Bloon": {
+            "displayName": "The Anti-Bloon",
+            "description": "Increased range, decreased cooldown, and does 5x damage",
+            "icon": "TheAntiBloonUpgradeIconAA"
+        },
+        "Blade Maelstrom": {
+            "displayName": "Blade Maelstrom",
+            "description": "Covers the area in a storm of blades.",
+            "icon": "BladeMaelstromUpgradeIconAA"
+        },
+        "Super Maelstrom": {
+            "displayName": "Super Maelstrom",
+            "description": "Even more powerful Maelstrom ability that lasts longer.",
+            "icon": "SuperMaelstromUpgradeIconAA"
+        },
+        "Eruption": {
+            "displayName": "Eruption",
+            "description": "Temporarily increases projectile lifespan and adds a flame jet attack around the Crucible.",
+            "icon": "TackShooterParagonEruptionAA"
+        },
+        "Meteor Impact": {
+            "displayName": "Meteor Impact",
+            "description": "Targets a Bloon and strikes it with a meteor, dealing heavy damage in a large area around the target and spawns homing fireball",
+            "icon": "TackShooterParagonMeteorAA"
+        },
+        "Summon Pheonix": {
+            "displayName": "Summon Pheonix",
+            "description": "Powerful phoenix wreaks Bloon havoc for 20 seconds.",
+            "icon": "SummonPhoenixUpgradeIcon"
+        },
+        "Summon Lord Phoenix": {
+            "displayName": "Summon Lord Phoenix",
+            "description": "Wizard Lord becomes a master of the flame, turning into a super powerful Lava Phoenix for a short time.",
+            "icon": "WizardLordPhoenixUpgradeIcon"
+        },
+        "Arcane Metamorphosis": {
+            "displayName": "Arcane Metamorphosis",
+            "description": "Magus Perfectus merges with the Phoenix and gains a powerful flame cascade attack for a short time.",
+            "icon": "ArcaneMetamorphosisIconAA"
+        },
+        "Phoenix Rebirth": {
+            "displayName": "Phoenix Rebirth",
+            "description": "Consumes all mana to detonate the Phoenix making bloons in range take damage over time and spawn Zombie MOABs.",
+            "icon": "PhoenixRebirthIconAA"
+        }
+    },
     "unreleasedContent": {
         "trophyStoreItems": ["GameUIProfileAvatar107"],
         "teamsStoreItems": []

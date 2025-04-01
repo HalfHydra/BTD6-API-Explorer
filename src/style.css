@@ -4753,6 +4753,14 @@
     right: 5px;
 }
 
+.ability-container {
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */
     -webkit-text-stroke: 0.03em black;
@@ -5683,6 +5691,10 @@ input[type="checkbox"] {
 
 .pos-rel {
     position: relative;
+}
+
+.of-contain {
+    object-fit: contain;
 }
 
 .font-gardenia {

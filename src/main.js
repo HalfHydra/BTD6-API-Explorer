@@ -385,6 +385,7 @@ function generateProgressSubText(){
     progressSubText["Heroes"] = `${heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeros).length} Hero${heroesUnlocked != 1 ? "es" : ""} Unlocked`;
     let skinsUnlocked = Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).filter(k => btd6usersave.unlockedSkins[k]).length
     progressSubText["Skins"] = `${skinsUnlocked}/${Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).length} Hero Skin${skinsUnlocked != 1 ? "s" : ""} Unlocked`;
+    progressSubText["ActivatedAbilities"] = `${Object.keys(btd6publicprofile.stats["abilitiesActivatedByName"]).length} Unique Abilities Used`;
     progressSubText["Knowledge"] = `${Object.keys(btd6usersave.acquiredKnowledge).filter(k => btd6usersave.acquiredKnowledge[k]).length}/${Object.keys(btd6usersave.acquiredKnowledge).length} Knowledge Points Unlocked`;
     let mapsPlayed = Object.keys(btd6usersave.mapProgress).filter(k => btd6usersave.mapProgress[k]).length
     progressSubText["MapProgress"] = `${mapsPlayed} Map${mapsPlayed != 1 ? "s" : ""} Played`;
@@ -1335,6 +1336,7 @@ function generateOverview(){
         "Knowledge": "../Assets/UI/KnowledgeIcon.png",
         "TrophyStore": "../Assets/UI/LimitedRunIcon.png",
         'TeamsStore': "../Assets/UI/TeamTrophyIconSmall.png",
+        "ActivatedAbilities": "../Assets/UI/RapidShotIcon.png",
     }
 
     Object.entries(progressSubText).forEach(([stat,text]) => {
@@ -1744,21 +1746,8 @@ function generateOverview(){
         exclusiveColumnHeaderText.innerHTML = 'API Exclusive Stats';
         exclusiveStatColumnHeader.appendChild(exclusiveColumnHeaderText);
 
-        let rogueStats = {};
-        rogueStats["Tiles Captured"] = btd6usersave["rogueLegends"].tilesCaptured;
-        rogueStats["Campaign Maps Won"] = btd6usersave["rogueLegends"].bossesDefeated;
-        rogueStats["Common Artifacts Collected"] = btd6usersave["rogueLegends"].commonArtifactsCollected;
-        rogueStats["Rare Artifacts Collected"] = btd6usersave["rogueLegends"].rareArtifactsCollected;
-        rogueStats["Legendary Artifacts Collected"] = btd6usersave["rogueLegends"].legendaryArtifactsCollected;
-        // rogueStats["Extracted Artifacts"] = btd6usersave["rogueLegends"];
-        // rogueStats["Bloon Encounters Won"] = btd6usersave["rogueLegends"];
-        // rogueStats["Mini Games Won"] = btd6usersave["rogueLegends"];
-        // rogueStats["Mini Bosses Won"] = btd6usersave["rogueLegends"];
-        rogueStats["Common Boosts Collected"] = btd6usersave["rogueLegends"].commonBoostsCollected;
-        rogueStats["Rare Boosts Collected"] = btd6usersave["rogueLegends"].rareBoostsCollected;
-        rogueStats["Legendary Boosts Collected"] = btd6usersave["rogueLegends"].legendaryBoostsCollected;
-
         for (let [key, value] of Object.entries(exclusiveStats)){
+            if (value == null) { continue; }
             let stat = document.createElement('div');
             stat.classList.add('stat');
             exclusiveStatDiv.appendChild(stat);
@@ -1953,7 +1942,7 @@ function generateProgress(){
 
     currentInstaView = "game";
 
-    let selectors = ['Towers', 'Heroes', 'MapProgress', 'Powers', 'InstaMonkeys', 'Knowledge', 'Achievements', 'TrophyStore', 'TeamsStore', 'Extras'];
+    let selectors = ['Towers', 'Heroes', 'ActivatedAbilities', 'MapProgress', 'Powers', 'InstaMonkeys', 'Knowledge', 'Achievements', 'TrophyStore', 'TeamsStore', 'Extras'];
 
     selectors.forEach((selector) => {
         if(progressSubText[selector].includes("0 Extras")) { return; }
@@ -2063,6 +2052,9 @@ function changeProgressTab(selector){
             break;
         case 'Heroes':
             generateHeroesProgress();
+            break;
+        case "ActivatedAbilities":
+            generateAbilities();
             break;
         case "Knowledge":
             changeHexBGColor(constants.ParagonBGColor)
@@ -4938,6 +4930,65 @@ function openAllTowersList(instaMonkeysMissingContainer){
         }
         instaMonkeyTotalChance.appendChild(instaMonkeyTotalChanceTier);
     })
+}
+
+function generateAbilities() {
+    let abilitiesContent = document.getElementById('progress-content');
+    abilitiesContent.innerHTML = "";
+
+    let abilitiesHeaderBar = document.createElement('div');
+    abilitiesHeaderBar.classList.add('abilities-header-bar');
+    abilitiesContent.appendChild(abilitiesHeaderBar);
+
+    let abilitiesDiv = document.createElement('div');
+    abilitiesDiv.classList.add('d-flex', 'f-wrap', 'ai-center', 'jc-center');
+    abilitiesContent.appendChild(abilitiesDiv);
+
+    Object.entries(btd6publicprofile.stats.abilitiesActivatedByName).sort((a, b) => b[1] - a[1]).forEach(([ability, uses]) => {
+        if(constants.abilities[ability] == undefined) {return}
+        let abilityData = constants.abilities[ability];
+
+        let abilityContainer = document.createElement('div');
+        // abilityContainer.style.width = '150px';
+        // abilityContainer.style.height = '150px';
+        abilityContainer.classList.add('ability-container');
+        abilitiesDiv.appendChild(abilityContainer);
+
+        let abilityImg = document.createElement('img');
+        abilityImg.classList.add('ability-img','of-contain');
+        abilityImg.style.width = "100px";
+        abilityImg.style.height = "100px";
+        abilityImg.src = `./Assets/AbilityIcon/${abilityData.icon}.png`;
+        abilityContainer.appendChild(abilityImg);
+
+        let abilityText = document.createElement('p');
+        abilityText.classList.add('ability-text','black-outline');
+        abilityText.style.width = "100px";
+        abilityText.innerHTML = abilityData.displayName;
+        abilityContainer.appendChild(abilityText);
+
+        let usesCounter = document.createElement('p');
+        usesCounter.classList.add('ability-uses-counter','black-outline');
+        usesCounter.innerHTML = `${uses} uses`;
+        abilityContainer.appendChild(usesCounter);
+
+        tippy(abilityContainer, {
+            content: abilityData.description,
+            placement: 'top',
+            theme: 'speech_bubble',
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            },
+        })
+    });
 }
 
 function generateAchievementsProgress() {
