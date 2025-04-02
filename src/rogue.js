@@ -68,7 +68,8 @@ let starterKitNames = {
     "GeraldoGentlemanGadgeteer": "Gentleman Gadgeteer Geraldo",
     "Corvus": "Corvus",
     "Rosalia": "Rosalia",
-    "RosaliaTinkerfairy": "Rosalia Tinkerfairy"
+    "RosaliaTinkerfairy": "Rosalia Tinkerfairy",
+    "SheRa": "She-Ra Adora"
 }
 
 let artifactDivMap = {};
@@ -99,7 +100,7 @@ Promise.all([
 });
 
 function postProcessRogueData(){
-    let unusedArtifacts = ['EssenceOfLych1', 'Token']
+    let unusedArtifacts = ['EssenceOfLych1', 'Token', 'ProjectileCarousel1']
     for (let [hero, starterKit] of Object.entries(rogueJSON.heroStarterKits)){
         rogueJSON.artifacts[starterKit.artifact].starterKitHero = hero;
     }
@@ -807,8 +808,8 @@ function generateArtifacts() {
     }
 
     switch (rogueSaveData.artifactSort) {
-        case "Name (Descending)":
-            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => b[1].title.localeCompare(a[1].title)))
+        case "Name":
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => a[1].nameLocKey.localeCompare(b[1].nameLocKey)))
             break;
         case "Rarity (Ascending)":
             currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => a[1].tier - b[1].tier))
@@ -944,7 +945,7 @@ function generateArtifactPopout(key) {
     let collectionHeaderModalLeft = document.createElement('div');
     collectionHeaderModalLeft.classList.add('collection-header-modal-left');
     modalHeaderDiv.appendChild(collectionHeaderModalLeft);
-
+    console.log(key);
     if(data.rarityFrameType !== "AllMonkeyTowerSets"){
         let modalCategory = document.createElement('img');
         modalCategory.src = `../Assets/UI/${data.rarityFrameType}Icon.png`;
