@@ -2619,7 +2619,7 @@
             "icon": "DarkKnightUpgradeIconAA"
         },
         "ChampionDarkshift": {
-            "displayName": "ChampionDarkshift",
+            "displayName": "Champion Darkshift",
             "description": "Shift to a valid location anywhere on the map",
             "icon": "DarkChampionUpgradeIconAA"
         },
@@ -2655,7 +2655,7 @@
         },
         "Meteor Impact": {
             "displayName": "Meteor Impact",
-            "description": "Targets a Bloon and strikes it with a meteor, dealing heavy damage in a large area around the target and spawns homing fireball",
+            "description": "Targets a Bloon and strikes it with a meteor, dealing heavy damage in a large area around the target and spawns homing fireballs.",
             "icon": "TackShooterParagonMeteorAA"
         },
         "Summon Pheonix": {

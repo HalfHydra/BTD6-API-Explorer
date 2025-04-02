@@ -4759,6 +4759,10 @@
     text-align: center;
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
+    height: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .black-outline {

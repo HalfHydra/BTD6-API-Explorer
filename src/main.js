@@ -120,6 +120,8 @@ let subFiltersMap = {
 
 let showTeamsItems = false;
 
+let abilitiesFilter = "Most Used";
+
 let loggedIn = false;
 
 fetch('./data/Constants.json')
@@ -4937,14 +4939,38 @@ function generateAbilities() {
     abilitiesContent.innerHTML = "";
 
     let abilitiesHeaderBar = document.createElement('div');
-    abilitiesHeaderBar.classList.add('abilities-header-bar');
+    abilitiesHeaderBar.classList.add('insta-monkeys-header-bar', 'd-flex', 'jc-between', 'ai-center', 'w-100');
     abilitiesContent.appendChild(abilitiesHeaderBar);
+
+    let abilities = {...btd6publicprofile.stats.abilitiesActivatedByName};
+    switch(abilitiesFilter) {
+        case "Most Used":
+            abilities = Object.fromEntries(Object.entries(abilities).sort((a, b) => b[1] - a[1]));
+            break;
+        case "Least Used":
+            abilities = Object.fromEntries(Object.entries(abilities).sort((a, b) => a[1] - b[1]));
+            break;
+    }
+
+    let dropdownSort = generateDropdown("Sort By:", ["Most Used", "Least Used"], abilitiesFilter, (value) => {
+        abilitiesFilter = value;
+        generateAbilities();
+    })
+    dropdownSort.style.padding = "10px";
+    abilitiesHeaderBar.appendChild(dropdownSort);
+
+    let abilitiesTotalText = document.createElement('p');
+    abilitiesTotalText.classList.add('abilities-total-text','black-outline');
+    abilitiesTotalText.style.padding = "10px";
+    abilitiesTotalText.style.fontSize = "22px";
+    abilitiesTotalText.innerHTML = `Total Abilities Used: ${profileStats["Abilities Used"].toLocaleString()}`;
+    abilitiesHeaderBar.appendChild(abilitiesTotalText);
 
     let abilitiesDiv = document.createElement('div');
     abilitiesDiv.classList.add('d-flex', 'f-wrap', 'ai-center', 'jc-center');
     abilitiesContent.appendChild(abilitiesDiv);
 
-    Object.entries(btd6publicprofile.stats.abilitiesActivatedByName).sort((a, b) => b[1] - a[1]).forEach(([ability, uses]) => {
+    Object.entries(abilities).forEach(([ability, uses]) => {
         if(constants.abilities[ability] == undefined) {return}
         let abilityData = constants.abilities[ability];
 
@@ -4969,7 +4995,7 @@ function generateAbilities() {
 
         let usesCounter = document.createElement('p');
         usesCounter.classList.add('ability-uses-counter','black-outline');
-        usesCounter.innerHTML = `${uses} uses`;
+        usesCounter.innerHTML = `${uses.toLocaleString()} uses`;
         abilityContainer.appendChild(usesCounter);
 
         tippy(abilityContainer, {
