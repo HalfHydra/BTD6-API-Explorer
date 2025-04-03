@@ -2289,7 +2289,7 @@
         "IMF loan": {
             "displayName": "IMF loan",
             "description": "Gives you $9,000 but you have to pay it back over time.",
-            "icon": "IMFLoanUpgradeIcon"
+            "icon": "IMFloanUpgradeIcon"
         },
         "Monkey-Nomics": {
             "displayName": "Monkey-Nomics",

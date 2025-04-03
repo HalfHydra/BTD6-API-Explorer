@@ -440,6 +440,35 @@ async function showRoundsetModel(source, roundset) {
     })
     rightDiv.appendChild(modalClose);
 
+    if(roundset.startsWith("Rogue")) {
+        let rogueHeaderBar = document.createElement('div');
+        rogueHeaderBar.classList.add('d-flex', 'jc-evenly');
+        headerBar.appendChild(rogueHeaderBar);
+
+        let rogueRoundsets = ["RogueRoundSet", "RogueBloonierSet", "RogueDenseSet",  "RoguePinkSet", "RoguePurpleSet", "RogueImmuneSet", "RogueLeadSet"]
+
+        rogueRoundsets.forEach(rs => {
+            let roundsetDiv = document.createElement('div');
+            roundsetDiv.classList.add('pointer');
+            roundsetDiv.addEventListener('click', () => {
+                showLoading();
+                showRoundsetModel(source, rs);
+            })
+            rogueHeaderBar.appendChild(roundsetDiv);
+
+            if (rs == roundset) {
+                roundsetDiv.style.border = "5px #00ff00 solid";
+                roundsetDiv.style.borderRadius = "20px";
+            }
+
+            let roundsetIcon = document.createElement('img');
+            roundsetIcon.classList.add('roundset-header-rogue-img');
+            roundsetIcon.style.width = "100px";
+            roundsetIcon.src = `../Assets/UI/${rs}.png`;
+            roundsetDiv.appendChild(roundsetIcon);
+        });
+    }
+
     let mapsProgressHeaderBar = document.createElement('div');
     mapsProgressHeaderBar.classList.add('roundset-header-bar-bottom');
     headerBar.appendChild(mapsProgressHeaderBar);
@@ -984,6 +1013,12 @@ async function generateRounds(type, reverse, modified) {
                 case "FastUpgradesRoundSet":
                 case "MOABMadnessRoundSet":
                 case "RogueRoundSet":
+                case "RogueBloonierSet":
+                case "RogueDenseSet":
+                case "RoguePinkSet":
+                case "RoguePurpleSet":
+                case "RogueImmuneSet":
+                case "RogueLeadSet":
                     difficultyMedium.click();
                     break;
             }
