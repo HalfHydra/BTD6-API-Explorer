@@ -382,21 +382,22 @@ function generateProgressSubText(){
     let paragons = upgrades.filter(k => k.includes("Paragon") && k != "Sentry Paragon");
     let paragonsUnlocked = paragons.filter(k => btd6usersave.acquiredUpgrades[k]);
     progressSubText["Upgrades"] = `${upgradesUnlocked.length - paragonsUnlocked.length}/${upgrades.length - paragons.length} Upgrades Unlocked`;
+    console.log(paragonsUnlocked)
     if (paragonsUnlocked.length > 0) { progressSubText["Paragons"] = `${paragonsUnlocked.length}/${paragons.length} Paragon${paragonsUnlocked.length != 1 ? "s" : ""} Unlocked` }
     let heroesUnlocked = Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length;
     progressSubText["Heroes"] = `${heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeros).length} Hero${heroesUnlocked != 1 ? "es" : ""} Unlocked`;
     let skinsUnlocked = Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).filter(k => btd6usersave.unlockedSkins[k]).length
     progressSubText["Skins"] = `${skinsUnlocked}/${Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).length} Hero Skin${skinsUnlocked != 1 ? "s" : ""} Unlocked`;
-    progressSubText["ActivatedAbilities"] = `${Object.keys(btd6publicprofile.stats["abilitiesActivatedByName"]).length} Unique Abilities Used`;
+    progressSubText["ActivatedAbilities"] = `${Object.keys(btd6publicprofile.stats["abilitiesActivatedByName"]).filter(key => key in constants.abilities).length} Unique Abilities Used`;
     progressSubText["Knowledge"] = `${Object.keys(btd6usersave.acquiredKnowledge).filter(k => btd6usersave.acquiredKnowledge[k]).length}/${Object.keys(btd6usersave.acquiredKnowledge).length} Knowledge Points Unlocked`;
     let mapsPlayed = Object.keys(btd6usersave.mapProgress).filter(k => btd6usersave.mapProgress[k]).length
     progressSubText["MapProgress"] = `${mapsPlayed} Map${mapsPlayed != 1 ? "s" : ""} Played`;
     let chimpsTotal = Object.values(processedMapData.Medals.single).map(map => map["Clicks"]).filter(medal => medal).length;
     let chimpsTotalCoop = Object.values(processedMapData.Medals.coop).map(map => map["Clicks"]).filter(medal => medal).length;
     if (chimpsTotal + chimpsTotalCoop > 0) { progressSubText["CHIMPS"] = `${chimpsTotal + chimpsTotalCoop} CHIMPS Medal${chimpsTotal + chimpsTotalCoop != 1 ? "s" : ""} Earned` }
-    let powersTotal = Object.values(btd6usersave.powers).map(power => (typeof power === 'object' && power.quantity) ? power.quantity : 0).reduce((acc, amount) => acc + amount);
+    let powersTotal = Object.values(btd6usersave.powers).map(power => (typeof power === 'object' && power.quantity) ? power.quantity : 0).reduce((acc, amount) => acc + amount) + btd6publicprofile.gameplay.powersUsed;
     progressSubText["Powers"] = `${powersTotal} Power${powersTotal != 1 ? "s" : ""} Collected`
-    let instaTotal = Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount)
+    let instaTotal = Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount) + btd6publicprofile.gameplay.instaMonkeysUsed;
     progressSubText["InstaMonkeys"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Collected`;
     progressSubText["Achievements"] = `${btd6publicprofile.achievements}/${constants.achievements + constants.hiddenAchievements} Achievement${btd6publicprofile.achievements != 1 ? "s" : ""} Earned`;
     let extrasTotal = Object.keys(extrasUnlocked).length;
@@ -1118,7 +1119,8 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = `v1.8.1: Rogue Artifacts Updates<br>- Filter & Sort has been reworked into a new settings menu that adds lots of new filtering options<br>- A search bar has been added to find artifacts quickly<br>- The total count of artifacts should now always be accurate<br>- The back button now correctly returns you to where you were prior<br><br>
+    changelogText.innerHTML = `v.1.9.0: Update 48 Content, Abilites Used Section, Top Paragons<br>- Added all content from Update 48 (there was a lot)<br>- You are now able to view how many times you've used each ability. You can find this under Progress -> Unqiue Abilities Used<br>- Top Paragons will now appear under Top Towers and Top Heroes on the overview<br>- Rogue Legends received an update with 6 new roundset variations, those have been added as a top bar with an icon of what bloons on the tile the roundset correlates to.<br>- Rogue Legends Artifacts has been updated to include all the artifacts added, as well as be able to sort for only Update 48 artifacts.<br><br>
+    v1.8.1: Rogue Artifacts Updates<br>- Filter & Sort has been reworked into a new settings menu that adds lots of new filtering options<br>- A search bar has been added to find artifacts quickly<br>- The total count of artifacts should now always be accurate<br>- The back button now correctly returns you to where you were prior<br><br>
     v1.8.0: Rogue Legends Artifacts<br>- Added Rogue Legends Artifacts standalone site. Allows you to track and share your artifacts collection with others, as well as reference Hero Starter Kits for each artifact<br>- Unfortunately the Open Data API does not have the extracted artifacts available for your profile, so all entry will be manual<br>- Updated the standalone site buttons to be simpler<br><br>
     v.1.7.1: Inevitable bug fixes<br>- Rogue Legends Stats will no longer show up if you don't own it<br>- Tooltips now render HTML entities, have larger text, and have the arrow centered<br>- Added missing tooltips from leaderboards site<br><br>
     v.1.7.0: Update 47 and Tooltips!<br>- Added Update 47.1 content including the new Rogue Legends roundset<br>- Added proper tooltips to medals and a few other places like the Towers section.<br>- Added Rogue Legends stats to the overview page<br>- Added Round Hints to the roundset viewer<br>- Added Overall Highest Round and Total Games Won on the map specific details menu<br>- Added missing Adora + Battle Cat Roundsets, and a few older Odysseys courtesy of @jessiepatch<br>- The standalone site buttons got a glow up.<br>- The roundset selection screen has been condensed and cleaned up.<br>- Fixed a bug involving leaderboard requests that result in incorrect placements and duplicated entries<br>- Leaderboard entries should only have the profiles loaded if they are currently rendered on screen.<br><br>
@@ -1343,7 +1345,7 @@ function generateOverview(){
 
     Object.entries(progressSubText).forEach(([stat,text]) => {
         if(text.includes("0 Extras") || text.includes("0 CHIMPS") || text.includes("Team Store")) { return }
-        if(text.match(/0\/[0-9]+ Paragons/)) { return }
+        if(text.match(/(^|[^0-9])0\/\d{1,2}(?!\d)/)) { return }
         let quickStat = document.createElement('div');
         quickStat.classList.add('quick-stat');
         quickStatsContent.appendChild(quickStat);
@@ -2679,6 +2681,7 @@ function changeHeroSkin(skin, isOriginal){
     heroProgressHeaderSubtitle.innerHTML = isOriginal ? getLocValue(`${skin} Short Description`) : getLocValue(`${skin}SkinName`);
     let heroProgressDesc = document.getElementById('hero-progress-desc');
     heroProgressDesc.innerHTML = isOriginal ? getLocValue(`${skin} Description`) : getLocValue(`${skin}SkinDescription`);
+    if(skin == "SheRa") { heroProgressDesc.innerHTML = getLocValue(`SheRaAdoraSkinDescription`) }
     changeHeroLevelPortrait(1);
     //stupid hack to fix ios redraw
     document.body.style.display = "none"
@@ -9993,6 +9996,37 @@ async function showRoundsetModel(source, roundset) {
     })
     rightDiv.appendChild(modalClose);
 
+    if(roundset.startsWith("Rogue")) {
+        let rogueHeaderBar = document.createElement('div');
+        rogueHeaderBar.classList.add('d-flex', 'jc-evenly');
+        headerBar.appendChild(rogueHeaderBar);
+
+        let rogueRoundsets = ["RogueRoundSet", "RogueBloonierSet", "RogueDenseSet",  "RoguePinkSet", "RoguePurpleSet", "RogueImmuneSet", "RogueLeadSet"]
+
+        rogueRoundsets.forEach(rs => {
+            let roundsetDiv = document.createElement('div');
+            roundsetDiv.classList.add('pointer');
+            roundsetDiv.addEventListener('click', () => {
+                showLoading();
+                showRoundsetModel(source, rs);
+            })
+            rogueHeaderBar.appendChild(roundsetDiv);
+
+            if (rs == roundset) {
+                roundsetDiv.style.border = "5px #00ff00 solid";
+                roundsetDiv.style.borderRadius = "20px";
+            }
+
+            let roundsetIcon = document.createElement('img');
+            roundsetIcon.classList.add('roundset-header-rogue-img');
+            roundsetIcon.style.width = "100px";
+            roundsetIcon.src = `../Assets/UI/${rs}.png`;
+            roundsetDiv.appendChild(roundsetIcon);
+        });
+    }
+
+    
+
     let mapsProgressHeaderBar = document.createElement('div');
     mapsProgressHeaderBar.classList.add('roundset-header-bar-bottom');
     headerBar.appendChild(mapsProgressHeaderBar);
@@ -10537,6 +10571,12 @@ async function generateRounds(type, reverse, modified) {
                 case "FastUpgradesRoundSet":
                 case "MOABMadnessRoundSet":
                 case "RogueRoundSet":
+                case "RogueBloonierSet":
+                case "RogueDenseSet":
+                case "RoguePinkSet":
+                case "RoguePurpleSet":
+                case "RogueImmuneSet":
+                case "RogueLeadSet":
                     difficultyMedium.click();
                     break;
             }

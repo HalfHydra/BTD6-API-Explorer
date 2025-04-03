@@ -589,10 +589,13 @@ function generateArtifactSettings() {
             case "Two Variants":
                 settingsFilterDescription.innerHTML = "Only Artifacts that have only have two tiers will be included to start.";
                 break;
+            case "Update 48":
+                settingsFilterDescription.innerHTML = "Only Artifacts that were added in Update 48 will be included to start.";
+                break;
         }
     }
 
-    let settingsFilterDropdown = generateDropdown("Artifact Filter:", ["All", "Starter Kit", "Non Starter Kit", "One Variant", "Two Variants"], rogueSaveData.artifactFilter, (value) => {
+    let settingsFilterDropdown = generateDropdown("Artifact Filter:", ["All", "Starter Kit", "Non Starter Kit", "One Variant", "Two Variants", "Update 48"], rogueSaveData.artifactFilter, (value) => {
         rogueSaveData.artifactFilter = value;
         updateDescription();
         saveDataToLocalStorage();
@@ -771,6 +774,9 @@ function generateArtifacts() {
         case "One Variant":
             currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => (rogueJSON.artifacts.hasOwnProperty(value.baseId + "1") && !rogueJSON.artifacts.hasOwnProperty(value.baseId + "2") && !rogueJSON.artifacts.hasOwnProperty(value.baseId + "3"))))
             break;
+        case "Update 48":
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => value.added == 48))
+            break;
     }
 
     if (!rogueSaveData.showStarterArtifacts) {
@@ -945,7 +951,7 @@ function generateArtifactPopout(key) {
     let collectionHeaderModalLeft = document.createElement('div');
     collectionHeaderModalLeft.classList.add('collection-header-modal-left');
     modalHeaderDiv.appendChild(collectionHeaderModalLeft);
-    console.log(key);
+    
     if(data.rarityFrameType !== "AllMonkeyTowerSets"){
         let modalCategory = document.createElement('img');
         modalCategory.src = `../Assets/UI/${data.rarityFrameType}Icon.png`;
