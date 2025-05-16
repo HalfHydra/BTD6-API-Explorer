@@ -382,7 +382,6 @@ function generateProgressSubText(){
     let paragons = upgrades.filter(k => k.includes("Paragon") && k != "Sentry Paragon");
     let paragonsUnlocked = paragons.filter(k => btd6usersave.acquiredUpgrades[k]);
     progressSubText["Upgrades"] = `${upgradesUnlocked.length - paragonsUnlocked.length}/${upgrades.length - paragons.length} Upgrades Unlocked`;
-    console.log(paragonsUnlocked)
     if (paragonsUnlocked.length > 0) { progressSubText["Paragons"] = `${paragonsUnlocked.length}/${paragons.length} Paragon${paragonsUnlocked.length != 1 ? "s" : ""} Unlocked` }
     let heroesUnlocked = Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length;
     progressSubText["Heroes"] = `${heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeros).length} Hero${heroesUnlocked != 1 ? "es" : ""} Unlocked`;
@@ -1681,6 +1680,7 @@ function generateOverview(){
     for (let [tower, xp] of Object.entries(btd6publicprofile.stats["paragonsPurchasedByName"]).sort((a, b) => b[1] - a[1])){
         
         if(xp === 0) { continue; }
+        if(!constants.paragonsAvailable.includes(tower)) { continue; }
         // if(!paragonList.includes(tower)) { continue; }
         let towerDiv = document.createElement('div');
         towerDiv.classList.add('hero-div');
