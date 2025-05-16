@@ -619,6 +619,7 @@ function showLoading(){
                     if (node.nodeName === 'IMG') {
                         imagesToLoad++;
                         node.addEventListener('load', imageLoaded);
+                        node.addEventListener('error', imageLoaded);
                     }
                 });
             }
