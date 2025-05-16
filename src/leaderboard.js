@@ -88,6 +88,11 @@ async function generateLeaderboards() {
     leaderboardPage.classList.add('leaderboard-page', 'page-extra');
     leaderboardsContent.appendChild(leaderboardPage);
 
+    let workInProgressText = document.createElement('p');
+    workInProgressText.classList.add('site-info-header', 'sites-text', 'black-outline');
+    workInProgressText.innerHTML = 'Note: Update 48 changed leaderboards and broke the site. It will be fixed sometime soon.';
+    leaderboardPage.appendChild(workInProgressText);
+
     let currentText = document.createElement('p');
     currentText.classList.add('hero-progress-header-text', 'leaderboards-header-text');
     currentText.style.backgroundImage = "url('../Assets/UI/BlueTxtTextureMain.png')"
