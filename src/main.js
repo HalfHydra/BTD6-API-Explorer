@@ -352,7 +352,7 @@ function generateMedals(){
     medalsInOrder["CtLocalPlayerSilverMedal"] = btd6publicprofile["_medalsCTLocal"]["Silver"] || 0;
     medalsInOrder["CtLocalPlayerDoubleGoldMedal"] = btd6publicprofile["_medalsCTLocal"]["DoubleGold"] || 0;
     medalsInOrder["CtLocalPlayerGoldDiamondMedal"] = btd6publicprofile["_medalsCTLocal"]["GoldDiamond"] || 0;
-    medalsInOrder["CtLocalPlayerDiamondMedal"] = btd6publicprofile["_medalsCTLocal"]["Diamond"] || 0;
+    medalsInOrder["CtLocalPlayerBlueDiamondMedal"] = btd6publicprofile["_medalsCTLocal"]["BlueDiamond"] || 0;
     medalsInOrder["CtLocalPlayerRedDiamondMedal"] = btd6publicprofile["_medalsCTLocal"]["RedDiamond"] || 0;
     medalsInOrder["CtLocalPlayerBlackDiamondMedal"] = btd6publicprofile["_medalsCTLocal"]["BlackDiamond"] || 0;
     medalsInOrder["CtGlobalPlayerBronzeMedal"] = btd6publicprofile["_medalsCTGlobal"]["Bronze"] || 0;
@@ -1681,7 +1681,6 @@ function generateOverview(){
         
         if(xp === 0) { continue; }
         if(!constants.paragonsAvailable.includes(tower)) { continue; }
-        // if(!paragonList.includes(tower)) { continue; }
         let towerDiv = document.createElement('div');
         towerDiv.classList.add('hero-div');
         towerDiv.style.backgroundImage = "url(../Assets/UI/ParagonContainer.png)";
@@ -7695,7 +7694,7 @@ async function openProfile(source, profile){
     publicMedals["CtLocalPlayerSilverMedal"] = profile["_medalsCTLocal"]["Silver"] || 0;
     publicMedals["CtLocalPlayerDoubleGoldMedal"] = profile["_medalsCTLocal"]["DoubleGold"] || 0;
     publicMedals["CtLocalPlayerGoldDiamondMedal"] = profile["_medalsCTLocal"]["GoldDiamond"] || 0;
-    publicMedals["CtLocalPlayerDiamondMedal"] = profile["_medalsCTLocal"]["Diamond"] || 0;
+    publicMedals["CtLocalPlayerBlueDiamondMedal"] = profile["_medalsCTLocal"]["BlueDiamond"] || 0;
     publicMedals["CtLocalPlayerRedDiamondMedal"] = profile["_medalsCTLocal"]["RedDiamond"] || 0;
     publicMedals["CtLocalPlayerBlackDiamondMedal"] = profile["_medalsCTLocal"]["BlackDiamond"] || 0;
     publicMedals["CtGlobalPlayerBronzeMedal"] = profile["_medalsCTGlobal"]["Bronze"] || 0;
