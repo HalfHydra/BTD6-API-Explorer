@@ -8,3 +8,5 @@ BTD6AssetStaging.html
 BTD6InstaMonkeysStaging.html
 data/PreventAPISpam_UserSave.json
 .vscode/settings.json
+*.bat
+*.py
