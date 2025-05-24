@@ -207,7 +207,7 @@
     </style>
 </head>
 
-<body>
+<body class="hex-bg">
     <div id="loading" class="loading-div">
         <div class="loading-icon">
             <!-- <div class="loading-glow"></div> -->
@@ -216,17 +216,54 @@
             <p class="loading-text">LOADING...</p>
         </div>
     </div>
+    <div class="header">
+        <div class="header-div">
+            <h1 class="title">Bloons TD 6 API Explorer</h1>
+        </div>
+        <div class="header-container">
+            <!-- <p class="header-label black-outline selected" id="overview">overview</p>
+            <p class="header-label black-outline" id="progress">progress</p>
+            <p class="header-label black-outline" id="events">events</p>
+            <p class="header-label black-outline" id="explore">explore</p>
+            <p class="header-label black-outline" id="extras">extras</p> -->
+        </div>
+    </div>
+    <div class="content">
+        <div id="home-content" class="front-page" style="display: none;"></div>
+        <div id="overview-content" class="content-div overview" style="display: none;"></div>
+        <div id="profile-content" class="content-div progress" style="display: none;"></div>
+        <div id="events-content" class="content-div events" style="display: none;"></div>
+        <div id="explore-content" class="content-div explore" style="display: none;"></div>
+        <div id="extras-content" class="content-div extras" style="display: none;"></div>
+        <div id="challenge-content" class="sub-content-div challenge" style="display: none;"></div>
+        <div id="map-content" class="sub-content-div map" style="display: none;"></div>
+        <div id="publicprofile-content" class="sub-content-div publicprofile" style="display: none;"></div>
+        <div id="leaderboard-content" class="sub-content-div leaderboard" style="display: none;"></div>
+        <div id="browser-content" class="sub-content-div browser" style="display: none;"></div>
+        <div id="relics-content" class="sub-content-div relics" style="display: none;"></div>
+        <div id="rounds-content" class="sub-content-div roundset" style="display: none;"></div>
+        <div id="roundset-content" class="rounds-content roundset" style="display: none;"></div>
+    </div>
 </body>
-<script>
+<!-- <script>
     document.getElementById("loading").style.transform = "scale(0)";
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
-</script>
+    generateHeaderTabs();
+</script> -->
 <script src="./src/popper.min.js"></script>
 <script src="./src/tippy-bundle.umd.min.js"></script>
+<script src="./src/evergreen.js"></script>
 <script src="./src/nkapi.js"></script>
 <script src="./src/btd6-ui.js"></script>
 <script src="./src/main.js"></script>
 <script src="./src/asset.js"></script>
 <script src="./src/roundpreview.js"></script>
+<script>
+    document.getElementById("loading").style.transform = "scale(0)";
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    generateHeaderTabs();
+    changeTab("home");
+</script>
 </html>

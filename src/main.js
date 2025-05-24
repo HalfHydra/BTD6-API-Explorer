@@ -124,48 +124,38 @@ let abilitiesFilter = "Most Used";
 
 let loggedIn = false;
 
-fetch('./data/Constants.json')
-    .then(response => response.json())
-    .then(data => {
-        constants = data;
-        readyFlags[4] = 1
-        generateVersionInfo()
-    })
-    .catch(error => {
-        console.error('Error:', error)
-        errorModal(error, "js")
+let imageScroll = [
+    {
+        "title": "View Your Profile!",
+        "text": "- View extra stats!<br>- Full Top Heroes/Towers list!<br>- Top Paragons Counts!<br>- Ability Usage Counts!<br>- Detailed Map Statistics!",
+        "image": "OverviewProfile"
+    },
+    {
+        "title": "View Events!",
+        "text": "- View recent events<br>- Race event details<br>- Boss event details<br>- Odyssey event details<br>- Contested Territory details<br>- Daily Challenge details<br>- Advanced Challenge details<br>- Coop Challenge details",
+        "image": "/LandingScroll/Events"
+    },
+    {
+        "title": "View Leaderboards!",
+        "text": "- View active event leaderboards!<br>- View user profiles!<br>- View extra score information",
+        "image": "/LandingScroll/Leaderboards"
+    },
+    {
+        "title": "View Roundsets!",
+        "text": "- View all roundsets!<br>- Simple round information<br>- Detailed round information<br>- Preview rounds visually<br>- Boss custom rounds<br>- Custom event rounds<br>- Rogue Legends special rounds included",
+        "image": "/LandingScroll/Roundsets"
+    }
+]
+let imageScrollIndex = 0;
+
+fetchConstants().then(() => {
+    generateVersionInfo();
 });
-
-function fetchDependencies() {
-    Promise.all([
-        fetch('./data/English.json').then(response => response.json()),
-        fetch('./data/Achievements150.json').then(response => response.json()),
-        fetch('./data/trophyStoreItems.json').then(response => response.json()),
-        fetch('./data/teamsStoreItems.json').then(response => response.json())
-    ])
-    .then(([englishData, achievementsData, trophyStoreItems, teamsStoreItems]) => {
-        locJSON = englishData;
-        achievementsJSON = achievementsData;
-        trophyStoreItemsJSON = trophyStoreItems;
-        teamsStoreItemsJSON = teamsStoreItems;
-        readyFlags[2] = 1;
-        readyFlags[3] = 1;
-        loadSettings();
-        generateIfReady();
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        errorModal(error, "js");
-    });
-
-    showLoading();
-}
 
 function generateIfReady(){
     if (readyFlags.every(flag => flag === 1)){
-        document.getElementById("front-page").style.display = "none";
+        document.getElementById("home-content").style.display = "none";
         document.body.classList.add('transition-bg')
-        generateHeaderTabs();
         generateRankInfo()
         generateVeteranRankInfo()
         generateAchievementsHelper()
@@ -175,20 +165,20 @@ function generateIfReady(){
         generateInstaData()
         generateMapData()
         generateProgressSubText()
-        changeTab('overview');
+        changeTab('profile');
         if(parseInt(btd6usersave.latestGameVersion.split(".")[0]) > constants.projectContentVersion) {
             errorModal(`The content of this site (v${constants.projectContentVersion}.0) is out of date with the current version (v${btd6usersave.latestGameVersion.split(".")[0]}.0). New content might be missing, but everything else should remain functional.`, "api", true)
         }
     } else if(!loggedIn && readyFlags.slice(2).every(flag => flag === 1)){
-        document.getElementById("front-page").style.display = "none";
+        document.getElementById("home-content").style.display = "none";
         document.body.classList.add('transition-bg')
         generateHeaderTabs();
-        changeTab('overview');
+        changeTab('profile');
     }
 }
 
 function previewSite(){
-   fetchDependencies(true); 
+   fetchMainDependencies(true); 
 }
 
 function generateRankInfo(){
@@ -603,208 +593,73 @@ function calculateInstaBorder(tower) {
         processedInstaData.TowerBorders[tower] = "";
     }
 }
-function showLoading(){
-    let imagesToLoad = 0;
-    function imageLoaded() {
-        imagesToLoad--;
-        if (imagesToLoad === 0) {
-            document.getElementById("loading").style.transform = "scale(0)";
-        }
-    }
-    let observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'childList') {
-                mutation.addedNodes.forEach((node) => {
-                    if (node.nodeName === 'IMG') {
-                        imagesToLoad++;
-                        node.addEventListener('load', imageLoaded);
-                        node.addEventListener('error', imageLoaded);
-                    }
-                });
-            }
-        });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-    document.getElementById("loading").style.removeProperty("transform")
-}
 
-function hideLoading(){
-    document.getElementById("loading").style.transform = "scale(0)";
-}
-
-const container = document.createElement('div');
-document.body.appendChild(container);
-
-document.body.classList.add('hex-bg');
-
-const header = document.createElement('div');
-header.classList.add('header');
-container.appendChild(header);
-
-const headerDiv = document.createElement('div');
-headerDiv.classList.add('header-div');
-header.appendChild(headerDiv);
-
-const title = document.createElement('h1');
-title.classList.add('title');
-title.innerHTML = 'Bloons TD 6 API Explorer';
-headerDiv.appendChild(title);
-
-const content = document.createElement('div');
-content.classList.add('content');
-container.appendChild(content);
+const header = document.querySelector('.header');
+const headerDiv = document.querySelector('.header-div');
+const title = document.querySelector('.title');
+const content = document.querySelector('.content');
 
 readLocalStorage()
 generateFrontPage()
 function generateFrontPage(){
-    if(document.getElementById('front-page') != null){
-        document.getElementById('front-page').remove();
-    }
+    const frontPage = document.getElementById('home-content');
 
-    const frontPage = document.createElement('div');
-    frontPage.id = 'front-page';
-    frontPage.classList.add('front-page');
-    content.appendChild(frontPage);
+    frontPage.appendChild(createEl('p', { classList: ['disclaimer-text', 'font-gardenia'], innerHTML: 'This site is not affiliated with Ninja Kiwi. All game assets belong to Ninja Kiwi.' }));
+    // frontPage.appendChild(createEl('p', { classList: ['front-page-text', 'font-gardenia', 'ta-center'], innerHTML: 'Access your profile using an OAK token for the best experience!' }));
+    // frontPage.appendChild(generateLoginDiv());
 
-    let disclaimerText = document.createElement('p');
-    disclaimerText.classList.add('disclaimer-text');
-    disclaimerText.innerHTML = 'This site is not affiliated with Ninja Kiwi. All game assets belong to Ninja Kiwi.';
-    frontPage.appendChild(disclaimerText);
+    let siteImageScroll = createEl('div', { classList: ['d-flex', 'jc-between'], style: {width: "700px", height: "400px", paddingTop: "20px"}});
+    frontPage.appendChild(siteImageScroll);
 
-    let frontPageText = document.createElement('p');
-    frontPageText.classList.add('front-page-text');
-    frontPageText.innerHTML = 'Access your profile using an OAK token for the best experience!';
-    frontPage.appendChild(frontPageText);
+    let siteImageScrollLeft = createEl('div', { classList: ['d-flex', 'fd-column'], style: {width: "300px", background: "rgba(0,0,0,0.36)", padding: "10px", borderRadius: "10px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", gap: "1rem"}});
+    siteImageScroll.appendChild(siteImageScrollLeft);
 
-    let previousOAK = document.createElement('div');
-    previousOAK.classList.add('previous-oak');
-    frontPage.appendChild(previousOAK);
+    let siteImageScrollTitle = createEl('p', { classList: ['font-luckiest', 'black-outline'], style: {fontSize: "28px"}, innerHTML: 'BTD6 API Explorer' });
+    siteImageScrollLeft.appendChild(siteImageScrollTitle);
 
-    Object.entries(localStorageOAK).forEach(([oak, oakdata]) => {
-        let previousOAKEntry = document.createElement('div');
-        previousOAKEntry.classList.add('previous-oak-entry');
-        previousOAKEntry.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(${oakdata.banner})`;
-        previousOAK.appendChild(previousOAKEntry);
+    let siteImageScrollOverlayText = createEl('p', { classList: ['font-gardenia'], style: {fontSize: "20px", lineHeight: "1.5"}, innerHTML: 'Click on the images to access the sites!' });
+    siteImageScrollLeft.appendChild(siteImageScrollOverlayText);
 
-        previousOAKEntry.appendChild(generateAvatar(100, oakdata.avatar));
+    let siteImageScrollImage = createEl('img', { classList: ['site-image-scroll'], style: { borderRadius: "10px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", transition: "background-image 0.5s ease-in-out"}});
+    siteImageScroll.appendChild(siteImageScrollImage);
 
-        let profileName = document.createElement('p');
-        profileName.classList.add('profile-name','black-outline');
-        profileName.innerHTML = oakdata.displayName;
-        previousOAKEntry.appendChild(profileName);
+    let sitePageDots = createEl('div', { classList: ['d-flex', 'jc-center'], style: {paddingTop: "20px"}});
+    frontPage.appendChild(sitePageDots);
 
-        let useButton = document.createElement('img');
-        useButton.classList.add('use-button');
-        useButton.src = './Assets/UI/ContinueBtn.png';
-        useButton.addEventListener('click', () => {
-            trailerVideo.pause();
-            if (!pressedStart){
-                pressedStart = true;
-                document.getElementById("loading").style.removeProperty("transform");
-                loggedIn = true;
-                oak_token = oak;
-                getSaveData(oak);
-            }
-        })
-        previousOAKEntry.appendChild(useButton);
+    function updateSiteImageScroll(index) {
+        let data = imageScroll[index]
 
-        let deleteButton = document.createElement('img');
-        deleteButton.classList.add('delete-button');
-        deleteButton.src = './Assets/UI/CloseBtn.png'
-        deleteButton.addEventListener('click', () => {
-            delete localStorageOAK[oak];
-            writeLocalStorage();
-            previousOAK.removeChild(previousOAKEntry);
-        })
-        previousOAKEntry.appendChild(deleteButton);
-    })
+        // siteImageScroll.style.backgroundImage = `url(Assets/UI/${data.image}.png)`;
+        // siteImageScroll.style.backgroundSize = "cover";
+        // siteImageScroll.style.backgroundPosition = "center";
+        // siteImageScroll.style.backgroundRepeat = "no-repeat";
+        // siteImageScroll.style.backgroundColor = "black";
+        // siteImageScroll.style.borderRadius = "10px";
+        // siteImageScroll.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+        // siteImageScroll.style.transition = "background-image 0.5s ease-in-out";
 
-    let trailerVideo = document.createElement('video');
-    trailerVideo.preload = 'none';
-    trailerVideo.classList.add('trailer-video');
-    trailerVideo.src = './Assets/Trailer/Trailer.mp4';
-    trailerVideo.controls = true;
+        siteImageScrollImage.src = `Assets/UI/${data.image}.png`;
+        siteImageScrollTitle.innerHTML = data.title;
+        siteImageScrollOverlayText.innerHTML = data.text;
 
-    let siteAccessDiv = document.createElement('div');
-    siteAccessDiv.classList.add('site-access-div');
-    frontPage.appendChild(siteAccessDiv);
+        sitePageDots.innerHTML = '';
+        for (let i = 0; i <= imageScroll.length - 1; i++) {
+            let sitePageDot = document.createElement('div');
+            sitePageDot.classList.add('map-page-dot');
+            if (index == i) { sitePageDot.classList.add('map-page-dot-active'); }
+            sitePageDots.appendChild(sitePageDot);
 
-    let siteLoginButtons = document.createElement('div');
-    siteLoginButtons.classList.add('site-login-buttons');
-    siteAccessDiv.appendChild(siteLoginButtons);
-
-    let previewButton = document.createElement('p');
-    previewButton.classList.add('site-access-button','black-outline');
-    previewButton.innerHTML = 'Preview Site';
-    previewButton.addEventListener('click', () => {
-        trailerVideo.pause();
-        previewSite();
-    })
-    siteLoginButtons.appendChild(previewButton);
-
-    let challengeSelectorOR = document.createElement('p');
-    challengeSelectorOR.classList.add("challenge-selector-or", "black-outline");
-    challengeSelectorOR.innerHTML = "OR";
-    siteLoginButtons.appendChild(challengeSelectorOR);
-
-    let loginButton = document.createElement('p');
-    loginButton.classList.add('site-access-button','black-outline');
-    loginButton.innerHTML = 'Login With OAK';
-    loginButton.addEventListener('click', () => {
-        document.querySelector('.oak-entry-div').style.display = 'flex';
-        siteLoginButtons.style.display = 'none';
-    })
-    siteLoginButtons.appendChild(loginButton);
-
-    let oakEntryDiv = document.createElement('div');
-    oakEntryDiv.classList.add('oak-entry-div');
-    oakEntryDiv.style.display = 'none';
-    frontPage.appendChild(oakEntryDiv);
-    
-    let keyEntry = document.createElement('input');
-    keyEntry.classList.add('key-entry');
-    keyEntry.placeholder = 'Enter your OAK here';
-    oakEntryDiv.appendChild(keyEntry);
-    
-    let startButton = document.createElement('div');
-    startButton.classList.add('start-button','black-outline');
-    startButton.innerHTML = 'Start';
-    startButton.addEventListener('click', () => {
-        trailerVideo.pause();
-        let key = keyEntry.value;
-        if (key.length < 5 || key.length > 30 || !key.startsWith('oak_')){
-            errorModal('Please enter a valid OAK! This will start with "oak_".');
-            return;
+            sitePageDot.addEventListener('click', () => {
+                imageScrollIndex = i;
+                updateSiteImageScroll(i);
+            })
         }
-        if (!pressedStart){
-            document.getElementById("loading").style.removeProperty("transform");
-            pressedStart = true;
-            loggedIn = true;
-            oak_token = keyEntry.value;
-            getSaveData(oak_token);
-        }
-    })
-    oakEntryDiv.appendChild(startButton);
+    } 
+    updateSiteImageScroll(0);
 
-    let getOakDiv = document.createElement('div');
-    getOakDiv.classList.add('get-oak-div');
-    frontPage.appendChild(getOakDiv);
-
-    let whereText = document.createElement('p');
-    whereText.classList.add('where-text');
-    whereText.innerHTML = 'Don\'t have an OAK token? Read here:';
-    getOakDiv.appendChild(whereText);
-
-    let whereButton = document.createElement('p');
-    whereButton.classList.add('where-button','black-outline');
-    whereButton.innerHTML = 'View OAK Guide';
-    getOakDiv.appendChild(whereButton);
-
-    let OAKInstructionsDiv = document.createElement('div');
-    OAKInstructionsDiv.id = 'oak-instructions-div';
-    OAKInstructionsDiv.classList.add('oak-instructions-div');
-    OAKInstructionsDiv.style.display = 'none';
-    frontPage.appendChild(OAKInstructionsDiv);
+    // let sitePageDots = document.createElement('div');
+    // sitePageDots.classList.add('map-page-dots');
+    // frontPage.appendChild(sitePageDots);
 
     let OtherInfoHeader = document.createElement('p');
     OtherInfoHeader.classList.add('site-info-header','black-outline');
@@ -812,13 +667,9 @@ function generateFrontPage(){
     frontPage.appendChild(OtherInfoHeader);
 
     let infoButtons = document.createElement('div');
-    infoButtons.classList.add('info-buttons');
+    infoButtons.classList.add('d-flex', 'jc-evenly', 'w-100');
+    infoButtons.style.margin = "10px"
     frontPage.appendChild(infoButtons);
-
-    let trailerButton = document.createElement('p');
-    trailerButton.classList.add('where-button','black-outline');
-    trailerButton.innerHTML = 'Watch Trailer';
-    infoButtons.appendChild(trailerButton);
 
     let faqButton = document.createElement('p');
     faqButton.classList.add('where-button','black-outline')
@@ -835,27 +686,11 @@ function generateFrontPage(){
     changelogButton.innerHTML = 'Changelog';
     infoButtons.appendChild(changelogButton);
 
-    let privacyButton = document.createElement('p');
-    privacyButton.classList.add('where-button', 'black-outline');
-    privacyButton.innerHTML = 'Privacy Policy';
-    infoButtons.appendChild(privacyButton);
-
-    let feedbackButton = document.createElement('p');
-    feedbackButton.classList.add('where-button','black-outline');
-    feedbackButton.innerHTML = 'Send Feedback';
-    infoButtons.appendChild(feedbackButton);
-
     let FAQDiv = document.createElement('div');
     FAQDiv.id = 'faq-div';
     FAQDiv.classList.add('faq-div');
     FAQDiv.style.display = 'none';
     frontPage.appendChild(FAQDiv);
-
-    let privacyDiv = document.createElement('div');
-    privacyDiv.id = 'privacy-div';
-    privacyDiv.classList.add('privacy-div');
-    privacyDiv.style.display = 'none';
-    frontPage.appendChild(privacyDiv);
 
     let knownIssuesDiv = document.createElement('div');
     knownIssuesDiv.id = 'known-issues-div';
@@ -869,18 +704,6 @@ function generateFrontPage(){
     changelogDiv.style.display = 'none';
     frontPage.appendChild(changelogDiv);
 
-    let trailerDiv = document.createElement('div');
-    trailerDiv.id = 'trailer-div';
-    trailerDiv.classList.add('trailer-div');
-    trailerDiv.style.display = 'none';
-    frontPage.appendChild(trailerDiv);
-
-    let feedbackDiv = document.createElement('div');
-    feedbackDiv.id = 'feedback-div';
-    feedbackDiv.classList.add('feedback-div');
-    feedbackDiv.style.display = 'none';
-    frontPage.appendChild(feedbackDiv);
-
     let StandaloneSiteText = document.createElement('p');
     StandaloneSiteText.classList.add('site-info-header', 'sites-text', 'black-outline');
     StandaloneSiteText.innerHTML = 'Standalone Sites';
@@ -888,7 +711,7 @@ function generateFrontPage(){
 
     let sitesText = document.createElement('p');
     sitesText.classList.add('where-text');
-    sitesText.innerHTML = 'Separate sites with just one specialized module of this site:';
+    sitesText.innerHTML = 'Separate pages with just one module of this site:';
     frontPage.appendChild(sitesText);
 
     let StandaloneSiteDiv = document.createElement('div');
@@ -952,19 +775,9 @@ function generateFrontPage(){
     versionDiv.classList.add('version-div');
     frontPage.appendChild(versionDiv);
 
-    whereButton.id = 'oak-instructions-button';
-    whereButton.addEventListener('click', () => {
-        hideAllButOne('oak-instructions')
-    })
-
     faqButton.id = 'faq-button';
     faqButton.addEventListener('click', () => {
         hideAllButOne('faq')
-    })
-
-    privacyButton.id = 'privacy-button';
-    privacyButton.addEventListener('click', () => {
-        hideAllButOne('privacy')
     })
 
     knownIssuesButton.id = 'known-issues-button';
@@ -977,72 +790,16 @@ function generateFrontPage(){
         hideAllButOne('changelog')
     })
 
-    trailerButton.id = 'trailer-button';
-
-    feedbackButton.id = 'feedback-button';
-    feedbackButton.addEventListener('click', () => {
-        hideAllButOne('feedback')
-    })
-
-    let OAKInstructionsHeader = document.createElement('p');
-    OAKInstructionsHeader.classList.add('oak-instructions-header','black-outline');
-    OAKInstructionsHeader.innerHTML = 'What is an Open Access Key?';
-    OAKInstructionsDiv.appendChild(OAKInstructionsHeader);
-
-    let OAKInstructionsText = document.createElement('p');
-    OAKInstructionsText.classList.add('oak-instructions-text');
-    OAKInstructionsText.innerHTML = 'An Open Access Key (OAK) is a unique key that allows you to access your Bloons TD 6 data from Ninja Kiwi\'s Open Data API. The site will use this to fetch your information from the API. <br><br>NOTE: Progress tracking is not available for BTD6+ on Apple Arcade and BTD6 Netflix as OAK tokens are unavailable. Alternatively, you can <p onclick="previewSite()" style="font-family:GardeniaBold;color: white;cursor: pointer;text-decoration: underline;display: inline-block;">Preview The Site</p>';
-    OAKInstructionsDiv.appendChild(OAKInstructionsText);
-
-    let OAKInstructionsHeader2 = document.createElement('p');
-    OAKInstructionsHeader2.classList.add('oak-instructions-header','black-outline');
-    OAKInstructionsHeader2.innerHTML = 'How do I get one?';
-    OAKInstructionsDiv.appendChild(OAKInstructionsHeader2);
-
-    let OAKInstructionsText2 = document.createElement('p');
-    OAKInstructionsText2.classList.add('oak-instructions-text');
-    OAKInstructionsText2.innerHTML = 'Step 1: Login and Backup your progress with a Ninja Kiwi Account in BTD6. You can do this by going to settings from the main menu and clicking on the Account button.';
-    OAKInstructionsDiv.appendChild(OAKInstructionsText2);
-
-    let OAKInstuctionImg = document.createElement('img');
-    OAKInstuctionImg.classList.add('oak-instruction-img');
-    OAKInstuctionImg.src = './Assets/UI/OAKTutorial1.jpg';
-    OAKInstructionsDiv.appendChild(OAKInstuctionImg);
-
-    let OAKInstructionsText3 = document.createElement('p');
-    OAKInstructionsText3.classList.add('oak-instructions-text');
-    OAKInstructionsText3.innerHTML = 'Step 2: Select "Open Data API" at the bottom right of the account screen.';
-    OAKInstructionsDiv.appendChild(OAKInstructionsText3);
-
-    let OAKInstuctionImg2 = document.createElement('img');
-    OAKInstuctionImg2.classList.add('oak-instruction-img');
-    OAKInstuctionImg2.src = './Assets/UI/OAKTutorial2.jpg';
-    OAKInstructionsDiv.appendChild(OAKInstuctionImg2);
-
-    let OAKInstructionsText4 = document.createElement('p');
-    OAKInstructionsText4.classList.add('oak-instructions-text');
-    OAKInstructionsText4.innerHTML = 'Step 3: Generate a key and copy that in to the above text field. It should start with "oak_". Then click "Start" to begin!';
-    OAKInstructionsDiv.appendChild(OAKInstructionsText4);
-
-    let OAKInstuctionImg3 = document.createElement('img');
-    OAKInstuctionImg3.classList.add('oak-instruction-img');
-    OAKInstuctionImg3.src = './Assets/UI/OAKTutorial3.jpg';
-    OAKInstructionsDiv.appendChild(OAKInstuctionImg3);
-
-    let oakInstructionFooter = document.createElement('p');
-    oakInstructionFooter.classList.add('oak-instructions-text');
-    oakInstructionFooter.innerHTML = 'You can read more about the Open Data API here: <a href="https://ninja.kiwi/opendatafaq" target="_blank", style="color:white";>Open Data API Article</a>';
-    OAKInstructionsDiv.appendChild(oakInstructionFooter);
-
     let faqHeader = document.createElement('p');
     faqHeader.classList.add('oak-instructions-header','black-outline');
     faqHeader.innerHTML = 'Frequently Asked Questions';
     FAQDiv.appendChild(faqHeader);
 
     let FAQ = {
-        "What can I do with this?": "Some primary uses are tracking your progress automatically, viewing events and leaderboards up to two months in the past, browsing user generated content, and as a bonus feature: viewing round information. You can also view more detailed stats and progress than you can see in the game such as your highest round for every mode on every map you've played. Those who are working on their Insta Monkey collection can use this as a tracker as the data pulled is always up to date!",
+        // "What can I do with this?": "Some primary uses are tracking your progress automatically, viewing events and leaderboards up to two months in the past, browsing user generated content, and as a bonus feature: viewing round information. You can also view more detailed stats and progress than you can see in the game such as your highest round for every mode on every map you've played. Those who are working on their Insta Monkey collection can use this as a tracker as the data pulled is always up to date!",
         "How long does the API take to update after I do something in the game?": "15 minutes is the most I've seen. Be sure to press the save button in settings if you want to minimize the time it takes to update! It should not take more than 24 hours to update in any circumstance (browser caching, etc).",
-        "Why is this not available for BTD6+ and Netflix?": "This is because the data is stored differently for these versions such as using iCloud for BTD6+. This is not compatible with the Open Data API."
+        "Why is this not available for BTD6+ and Netflix?": "This is because the data is stored differently for these versions such as using iCloud for BTD6+. This is not compatible with the Open Data API.",
+        "How do I leave feedback?": 'If you have any feedback, things to add or change on the site, or most importantly bug reports, please fill out this anonymous form: <a href="https://forms.gle/Tg1PuRNj2ftojMde6" target="_blank" style="color: white;">Feedback Form</a>'
     }
 
     for (let [question, answer] of Object.entries(FAQ)){
@@ -1085,16 +842,6 @@ function generateFrontPage(){
         })
     }
 
-    let privacyHeader = document.createElement('p');
-    privacyHeader.classList.add('oak-instructions-header','black-outline');
-    privacyHeader.innerHTML = 'Privacy Policy';
-    privacyDiv.appendChild(privacyHeader);
-
-    let privacyText = document.createElement('p');
-    privacyText.classList.add('oak-instructions-text');
-    privacyText.innerHTML = 'This app does not store any data being sent to or retrieved from Ninja Kiwi\'s Open Data API outside of your browser/device. The localStorage browser feature is used to prevent users from having to re-enter their OAK token every time they visit the site. If you would like to delete this stored data, you can do so by clicking the "X" on the profile you would like to delete on this homepage or clearing your browsing data.';
-    privacyDiv.appendChild(privacyText);
-
     let knownIsseusHeader = document.createElement('p');
     knownIsseusHeader.classList.add('oak-instructions-header','black-outline');
     knownIsseusHeader.innerHTML = 'Known Issues';
@@ -1105,13 +852,6 @@ function generateFrontPage(){
     knownIssuesText.innerHTML = '- There are some cases where the leaderboard scoring type is different for Normal vs Elite boss events, but this is not reflected on the API right now. This will be fixed when it is corrected on the Open Data API.<br>- Legends Feats badge is missing from the currency and medals section<br>- The leaderboards site and leaderboards on the events are currently broken. This is being worked on to reflect changes to the system made in Update 48.';
     knownIssuesDiv.appendChild(knownIssuesText);
     
-    trailerDiv.appendChild(trailerVideo);
-
-    trailerButton.addEventListener('click', () => {
-        hideAllButOne('trailer')
-        trailerVideo.play();
-    })
-
     let changelogHeader = document.createElement('p');
     changelogHeader.classList.add('oak-instructions-header','black-outline');
     changelogHeader.innerHTML = 'Changelog';
@@ -1138,25 +878,32 @@ function generateFrontPage(){
     v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.`;
     changelogDiv.appendChild(changelogText);
 
-    let feedbackHeader = document.createElement('p');
-    feedbackHeader.classList.add('oak-instructions-header','black-outline');
-    feedbackHeader.innerHTML = 'Send Feedback';
-    feedbackDiv.appendChild(feedbackHeader);
+    // let feedbackHeader = document.createElement('p');
+    // feedbackHeader.classList.add('oak-instructions-header','black-outline');
+    // feedbackHeader.innerHTML = 'Send Feedback';
+    // frontPage.appendChild(feedbackHeader);
 
-    let feedbackText = document.createElement('p');
-    feedbackText.classList.add('oak-instructions-text');
-    feedbackText.innerHTML = 'If you have any feedback, things to add or change on the site, or most importantly bug reports, please fill out this anonymous form: <a href="https://forms.gle/Tg1PuRNj2ftojMde6" target="_blank" style="color: white;">Feedback Form</a>';
-    feedbackDiv.appendChild(feedbackText);
+    // let feedbackText = document.createElement('p');
+    // feedbackText.classList.add('tool-version-text');
+    // feedbackText.innerHTML = 'If you have any feedback, things to add or change on the site, or most importantly bug reports, please fill out this anonymous form: <a href="https://forms.gle/Tg1PuRNj2ftojMde6" target="_blank" style="color: white;">Feedback Form</a>';
+    // frontPage.appendChild(feedbackText);
 
-    function hideAllButOne(tab){
-        ["oak-instructions", "faq", "privacy", "known-issues","changelog","trailer", "feedback"].forEach((tabName) => {
-            trailerVideo.pause();
-            let contentDiv = document.getElementById(tabName + '-div');
-            let tabButton = document.getElementById(tabName + '-button');
-            if (tabName === tab && contentDiv.style.display == 'none') {
-                tabButton.classList.add('square-btn-yellow');
-                contentDiv.style.display = 'block';
-                activeTab = tab;
+    function hideAllButOne(selectedTab){
+        const tabs = ['faq', 'known-issues', 'changelog'];
+        
+        tabs.forEach((tabName) => {
+            const contentDiv = document.getElementById(tabName + '-div');
+            const tabButton = document.getElementById(tabName + '-button');
+            
+            if (tabName === selectedTab) {
+                const isCurrentlyHidden = contentDiv.style.display === 'none';
+                if (isCurrentlyHidden) {
+                    tabButton.classList.add('square-btn-yellow');
+                    contentDiv.style.display = 'block';
+                } else {
+                    tabButton.classList.remove('square-btn-yellow');
+                    contentDiv.style.display = 'none';
+                }
             } else {
                 tabButton.classList.remove('square-btn-yellow');
                 contentDiv.style.display = 'none';
@@ -1174,14 +921,11 @@ function generateVersionInfo(){
     versionDiv.appendChild(toolVersionText);
 }
 
+let headerTabs = ['home', 'profile', 'events', 'leaderboards', 'rounds', 'extras'];
 function generateHeaderTabs(){
-    const headerContainer = document.createElement('div');
-    headerContainer.classList.add('header-container');
-    header.appendChild(headerContainer);
+    const headerContainer = document.querySelector('.header-container');
 
-    let headers = ['Overview', 'Progress', 'Events', 'Explore', 'Extras'];
-
-    headers.forEach((headerName) => {
+    headerTabs.forEach((headerName) => {
         headerName = headerName.toLowerCase();
         let headerElement = document.createElement('p');
         headerElement.classList.add('header-label','black-outline');
@@ -1192,49 +936,31 @@ function generateHeaderTabs(){
         })
         headerContainer.appendChild(headerElement);
     })
-
-    headers.forEach((headerName) => {
-        headerName = headerName.toLowerCase();
-        let contentElement = document.createElement('div');
-        contentElement.id = headerName + '-content';
-        contentElement.classList.add(`content-div`);
-        contentElement.classList.add(headerName)
-        contentElement.style.display = 'none';
-        content.appendChild(contentElement);
-    })
-
-    let extraContent = ['Challenge', "Map", 'PublicProfile', 'Leaderboard', "Browser", 'Relics', 'Roundset'];
-    extraContent.forEach((headerName) => {
-        headerName = headerName.toLowerCase();
-        let contentElement = document.createElement('div');
-        contentElement.id = headerName + '-content';
-        contentElement.classList.add(`sub-content-div`);
-        contentElement.classList.add(headerName)
-        contentElement.style.display = 'none';
-        content.appendChild(contentElement);
-    })
-
 }
 
 function changeTab(tab) {
     resetScroll();
     if(timerInterval) { clearInterval(timerInterval); }
     changeHexBGColor(constants.BGColor)
-    let tabs = document.getElementsByClassName('content-div');
-    for (let tab of tabs){
-        tab.style.display = 'none';
-        document.getElementById(tab.id.replace('-content', '')).classList.remove('selected');
+
+    for (let tabDiv of document.querySelector('.content').children) {
+        console.log(tabDiv);
+        tabDiv.id === (tab + "-content") ? tabDiv.style.display = "flex" : tabDiv.style.display = 'none';
+        
     }
+    for(let tab of headerTabs){
+        document.getElementById(tab).classList.remove('selected');
+    }
+    document.getElementById(tab).classList.add('selected');
+
     for (let subtab of document.getElementsByClassName('sub-content-div')){
         subtab.style.display = 'none';
     }
-    document.getElementById(tab + '-content').style.display = 'flex';
-    document.getElementById(tab).classList.add('selected');
     switch(tab){
         case 'overview':
             generateOverview();
             break;
-        case 'progress':
+        case 'profile':
             generateProgress();
             break;
         case 'events':
@@ -1252,15 +978,19 @@ function changeTab(tab) {
 let tempXP = 0;
 
 function generateOverview(){
-    let overviewContent = document.getElementById('overview-content');
+    let overviewContent = document.getElementById('profile-content');
     overviewContent.innerHTML = '';
     
     if(loggedIn){
+    let profileContainer = document.createElement('div');
+    profileContainer.classList.add('profile-container', 'bg-color-primary', 'w-100', 'content-div', 'overview');
+    overviewContent.appendChild(profileContainer);
+
     let profileHeader = document.createElement('div');
     profileHeader.classList.add('profile-header');
     profileHeader.classList.add('profile-banner');
     profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${getProfileBanner(btd6publicprofile)}')`;
-    overviewContent.appendChild(profileHeader);
+    profileContainer.appendChild(profileHeader);
     profileHeader.appendChild(generateAvatar(100, btd6publicprofile["avatarURL"]));
 
     let profileTopBottom = document.createElement('div');
@@ -1303,7 +1033,7 @@ function generateOverview(){
 
     let belowProfileHeader = document.createElement('div');
     belowProfileHeader.classList.add('below-profile-header');
-    overviewContent.appendChild(belowProfileHeader);
+    profileContainer.appendChild(belowProfileHeader);
 
     let leftColumnDiv = document.createElement('div');
     leftColumnDiv.classList.add('left-column-div');
@@ -1933,59 +1663,89 @@ function generateRank(veteran){
 }
 
 function generateProgress(){
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     if(loggedIn){
-    let progressPage = document.createElement('div');
-    progressPage.classList.add('progress-page');
-    progressContent.appendChild(progressPage);
+        let progressPage = document.createElement('div');
+        progressPage.classList.add('progress-page');
+        progressContent.appendChild(progressPage);
 
-    let selectorsDiv = document.createElement('div');
-    selectorsDiv.classList.add('selectors-div');
-    progressPage.appendChild(selectorsDiv);
+        let selectorsDiv = document.createElement('div');
+        selectorsDiv.classList.add('selectors-div');
+        progressPage.appendChild(selectorsDiv);
 
-    currentInstaView = "game";
+        currentInstaView = "game";
 
-    let selectors = ['Towers', 'Heroes', 'ActivatedAbilities', 'MapProgress', 'Powers', 'InstaMonkeys', 'Knowledge', 'Achievements', 'TrophyStore', 'TeamsStore', 'Extras'];
-
-    selectors.forEach((selector) => {
-        if(progressSubText[selector].includes("0 Extras")) { return; }
-        if(progressSubText[selector].includes("Team Store") && !showTeamsItems) { return; }
-        let selectorDiv = document.createElement('div');
-        selectorDiv.classList.add('selector-div');
-        selectorDiv.addEventListener('click', () => {
-            changeProgressTab(selector);
+        let profileSelectorDiv = document.createElement('div');
+        profileSelectorDiv.classList.add('d-flex', 'jc-between', 'ai-center', 'view-profile');
+        profileSelectorDiv.style.backgroundImage = `url(${getProfileBanner(btd6publicprofile)})`;
+        profileSelectorDiv.addEventListener('click', () => {
+            generateOverview();
         })
-        selectorsDiv.appendChild(selectorDiv);
+        selectorsDiv.appendChild(profileSelectorDiv);
 
-        let selectorImg = document.createElement('img');
-        selectorImg.classList.add('selector-img');
-        selectorImg.src = selector == "Heroes" ? `../Assets/HeroIconCircle/HeroIcon${btd6usersave.primaryHero}.png` : '../Assets/UI/' + selector.replace(" ","") + 'Btn.png';
-        selectorDiv.appendChild(selectorImg);
+        let profileSelectorImg = document.createElement('img');
+        profileSelectorImg.classList.add('selector-img');
+        profileSelectorImg.src = getProfileAvatar(btd6publicprofile);
+        profileSelectorDiv.appendChild(profileSelectorImg);
 
-        let selectorText = document.createElement('p');
-        selectorText.classList.add('selector-text','black-outline');
-        selectorText.innerHTML = progressSubText[selector];
-        selectorDiv.appendChild(selectorText);
+        let profileSelectorText = document.createElement('p');
+        profileSelectorText.classList.add('selector-text','black-outline');
+        profileSelectorText.innerHTML = "View Your Profile Stats";
+        profileSelectorDiv.appendChild(profileSelectorText);
 
-        let selectorGoImg = document.createElement('img');
-        selectorGoImg.classList.add('selector-go-img');
-        selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
-        selectorDiv.appendChild(selectorGoImg);
-    })
+        let profileSelectorGoImg = document.createElement('img');
+        profileSelectorGoImg.classList.add('selector-go-img');
+        profileSelectorGoImg.src = '../Assets/UI/ContinueBtn.png';
+        profileSelectorDiv.appendChild(profileSelectorGoImg);
+
+        let selectors = ['Towers', 'Heroes', 'ActivatedAbilities', 'MapProgress', 'Powers', 'InstaMonkeys', 'Knowledge', 'Achievements', 'TrophyStore', 'TeamsStore', 'Extras'];
+
+        selectors.forEach((selector) => {
+            if(progressSubText[selector].includes("0 Extras")) { return; }
+            if(progressSubText[selector].includes("Team Store") && !showTeamsItems) { return; }
+            let selectorDiv = document.createElement('div');
+            selectorDiv.classList.add('selector-div');
+            selectorDiv.addEventListener('click', () => {
+                changeProgressTab(selector);
+            })
+            selectorsDiv.appendChild(selectorDiv);
+
+            let selectorImg = document.createElement('img');
+            selectorImg.classList.add('selector-img');
+            selectorImg.src = selector == "Heroes" ? `../Assets/HeroIconCircle/HeroIcon${btd6usersave.primaryHero}.png` : '../Assets/UI/' + selector.replace(" ","") + 'Btn.png';
+            selectorDiv.appendChild(selectorImg);
+
+            let selectorText = document.createElement('p');
+            selectorText.classList.add('selector-text','black-outline');
+            selectorText.innerHTML = progressSubText[selector];
+            selectorDiv.appendChild(selectorText);
+
+            let selectorGoImg = document.createElement('img');
+            selectorGoImg.classList.add('selector-go-img');
+            selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
+            selectorDiv.appendChild(selectorGoImg);
+        })
     } else {
-        let notLoggedInText = document.createElement('p');
-        notLoggedInText.classList.add('not-logged-in-text');
-        notLoggedInText.innerHTML = "You're in preview mode.<br>The Events, Explore, and Extras tabs can be used without an OAK token.";
-        progressContent.appendChild(notLoggedInText);
+        let notLoggedInContent = document.createElement('div');
+        notLoggedInContent.classList.add('bg-color-primary', 'content-div', 'progress', 'd-flex');
+        progressContent.appendChild(notLoggedInContent);
 
-        progressContent.classList.add("overview")
+        let loginDiv = generateLoginDiv();
+        notLoggedInContent.appendChild(loginDiv)
+
+        // let notLoggedInText = document.createElement('p');
+        // notLoggedInText.classList.add('not-logged-in-text');
+        // notLoggedInText.innerHTML = "You're in preview mode.<br>The Events, Explore, and Extras tabs can be used without an OAK token.";
+        // notLoggedInContent.appendChild(notLoggedInText);
+
+        // progressContent.classList.add("overview")
 
         let OtherInfoHeader = document.createElement('p');
         OtherInfoHeader.classList.add('site-info-header','black-outline');
         OtherInfoHeader.innerHTML = 'When an OAK token is entered:';
-        progressContent.appendChild(OtherInfoHeader);
+        notLoggedInContent.appendChild(OtherInfoHeader);
 
         let panels = {
             "Maps": {
@@ -2023,7 +1783,7 @@ function generateProgress(){
 
         let instaMonkeyGuideContainer = document.createElement('div');
         instaMonkeyGuideContainer.classList.add('insta-monkey-guide-container');
-        progressContent.appendChild(instaMonkeyGuideContainer);
+        notLoggedInContent.appendChild(instaMonkeyGuideContainer);
 
         Object.keys(panels).forEach(method => {
             let instaMonkeyGuideMethod = document.createElement('div');
@@ -2094,7 +1854,7 @@ function changeProgressTab(selector){
 }
 
 function generateTowerProgress(){
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let towerProgressContainer = document.createElement('div');
@@ -2479,7 +2239,7 @@ function onSelectTowerUpgradeParagon(tower, upgrade, tiers){
 }
 
 function generateHeroesProgress(){
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let heroProgressContainer = document.createElement('div');
@@ -2738,7 +2498,7 @@ function updatePortraitLevelButtons(hero){
 }
 
 function generateKnowledgeProgress(){
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let totals = [0,0,0]
@@ -2864,7 +2624,7 @@ function onSelectKnowledgePoint(knowledge){
 }
 
 function generateMapsProgress(){
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let mapsProgressHeaderBar = document.createElement('div');
@@ -3637,7 +3397,7 @@ function generateMapsGameView() {
 }
 
 function generatePowersProgress() {
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let powersProgressContainer = document.createElement('div');
@@ -3671,7 +3431,7 @@ function generatePowersProgress() {
 }
 
 function generateInstaMonkeysProgress() {
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let instaMonkeysHeaderBar = document.createElement('div');
@@ -4181,34 +3941,7 @@ function generateInstaObtainGuide() {
 }
 
 function generateChestOddsModal() {
-    let modal = document.createElement('div');
-    modal.classList.add('error-modal-overlay');
-    document.body.appendChild(modal);
-
     let modalContent = document.createElement('div');
-    modalContent.classList.add('collection-modal');
-    modal.appendChild(modalContent);
-
-    let modalHeaderDiv = document.createElement('div');
-    modalHeaderDiv.classList.add('collection-modal-header');
-    modalContent.appendChild(modalHeaderDiv);
-
-    let collectionHeaderModalLeft = document.createElement('div');
-    collectionHeaderModalLeft.classList.add('collection-header-modal-left');
-    modalHeaderDiv.appendChild(collectionHeaderModalLeft);
-
-    let modalTitle = document.createElement('p');
-    modalTitle.classList.add('collection-modal-header-text','black-outline');
-    modalTitle.innerHTML = "Standard Chest Base Odds";
-    modalHeaderDiv.appendChild(modalTitle);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('collection-modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        modal.remove();
-    })
-    modalHeaderDiv.appendChild(modalClose);
 
     let modalChestDesc = document.createElement('p');
     modalChestDesc.classList.add('collection-desc-text');
@@ -4278,7 +4011,11 @@ function generateChestOddsModal() {
             quantityContainer.appendChild(quantityText);
         })
     })
-
+    createModal({
+        header: "Chest Base Odds",
+        content: modalContent,
+        classList: ['error-modal-overlay']
+    });
 }
 
 function generateHowToUseModal() {
@@ -4939,7 +4676,7 @@ function openAllTowersList(instaMonkeysMissingContainer){
 }
 
 function generateAbilities() {
-    let abilitiesContent = document.getElementById('progress-content');
+    let abilitiesContent = document.getElementById('profile-content');
     abilitiesContent.innerHTML = "";
 
     let abilitiesHeaderBar = document.createElement('div');
@@ -5022,7 +4759,7 @@ function generateAbilities() {
 }
 
 function generateAchievementsProgress() {
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let achievementsProgressContainer = document.createElement('div');
@@ -5231,7 +4968,7 @@ function generateAchievementsGameView(){
 }
 
 function generateExtrasProgress() {
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let extrasProgressContainer = document.createElement('div');
@@ -5444,6 +5181,9 @@ function generateRaces(){
         } else if (new Date(race.end) > new Date()) {
             updateTimer(new Date(race.end), raceTimeLeft.id);
             timerInterval = setInterval(() => updateTimer(new Date(race.end), raceTimeLeft.id), 1000)
+        } else if (new Date() > new Date(race.end)) {
+            raceTimeLeft.innerHTML = "Finished";
+            raceTimeLeft.style.textAlign = "right";
         }
 
         let raceInfoDates = document.createElement('p');
@@ -5611,6 +5351,9 @@ function generateBosses(elite){
         } else if (new Date(race.end) > new Date()) {
             updateTimer(new Date(race.end), bossTimeLeft.id);
             timerInterval = setInterval(() => updateTimer(new Date(race.end), bossTimeLeft.id), 1000)
+        } else if (new Date() > new Date(race.end)) {
+            bossTimeLeft.innerHTML = "Finished";
+            bossTimeLeft.style.textAlign = "right";
         }
 
         let raceInfoDates = document.createElement('p');
@@ -5723,6 +5466,9 @@ function generateCTs(){
         } else if (new Date(race.end) > new Date()) {
             updateTimer(new Date(race.end), raceTimeLeft.id);
             timerInterval = setInterval(() => updateTimer(new Date(race.end), raceTimeLeft.id), 1000)
+        } else if (new Date() > new Date(race.end)) {
+            raceTimeLeft.innerHTML = "Finished";
+            raceTimeLeft.style.textAlign = "right";
         }
 
         let ctInfoLeftDiv = document.createElement('div');
@@ -9946,7 +9692,7 @@ function generateRoundsets() {
 }
 
 async function showRoundsetModel(source, roundset) {
-    let roundsetContent = document.getElementById('roundset-content');
+    let roundsetContent = document.getElementById('rounds-content');
     roundsetContent.style.display = "flex";
     roundsetContent.innerHTML = "";
     document.getElementById(`${source}-content`).style.display = "none";
@@ -10121,7 +9867,7 @@ async function showRoundsetModel(source, roundset) {
 
 
     let roundsContent = document.createElement('div');
-    roundsContent.id = 'rounds-content';
+    roundsContent.id = 'roundset-content';
     roundsContent.classList.add('rounds-content');
     roundsetContent.appendChild(roundsContent);
 
@@ -10205,7 +9951,7 @@ function addRoundHints(roundset, data) {
 }
 
 async function generateRounds(type, reverse, modified) {
-    let roundsContent = document.getElementById('rounds-content');
+    let roundsContent = document.getElementById('roundset-content');
     roundsContent.innerHTML = "";
 
     //get if all the round numbers don't have any gaps between them
@@ -11060,7 +10806,7 @@ function generateSettings(){
 }
 
 function generateTrophyStoreProgress() {
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let progressContainer = document.createElement('div');
@@ -11390,7 +11136,7 @@ function generateTrophyStorePopout(key) {
 }
 
 function generateTeamsStoreProgress() {
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let progressContainer = document.createElement('div');
@@ -11523,186 +11269,6 @@ function generateTeamsStorePopout(key) {
         itemObtainMethod.innerHTML = "This item is hidden and may show up in the featured tab during the related seasonal rotation.";
     }
 
-}
-
-function processRewardsString(input){
-    let result = {};
-    let rewards = input.split("#");
-    let counter = 0;
-    for (let reward of rewards) {
-        result[counter] = {};
-        let rewardData = reward.split(":");
-        let rewardType = rewardData[0];
-        if (!["MonkeyMoney","Power","InstaMonkey","KnowledgePoints","RandomInstaMonkey","Trophy"].includes(rewardType)) {
-            result[counter].type = "Other";
-            result[counter].value = rewardType;
-            counter++;
-            continue;
-        }
-        let params = rewardData[1].split(",");
-        switch (rewardType) {
-            case "MonkeyMoney":
-                result[counter].type = "MonkeyMoney";
-                result[counter].amount = parseInt(params[0]);
-                break;
-            case "Power":
-                result[counter].type = "Power";
-                result[counter].power = params[0];
-                result[counter].amount = parseInt(params[1]);
-                if(params[1] == null) { result[counter].amount = 1;}
-                break;
-            case "InstaMonkey":
-                result[counter].type = "InstaMonkey";
-                result[counter].tower = params[0];
-                result[counter].tiers = params[1];
-                break;
-            case "KnowledgePoints":
-                result[counter].type = "KnowledgePoints";
-                result[counter].amount = parseInt(params[0]);
-                break;
-            case "RandomInstaMonkey":
-                result[counter].type = "RandomInstaMonkey";
-                result[counter].tier = params[0];
-                result[counter].amount = parseInt(params[1]);
-                break;
-            case "Trophy":
-                result[counter].type = "Trophy";
-                result[counter].trophy = params[0];
-                break;
-        }
-        counter++;
-    }
-    return result;
-}
-
-function openBTD6Link(link){
-    window.location.href = link;
-}
-
-function openBTD6Site(link) {
-    window.open(link, "_blank");
-}
-
-function copyLoadingIcon(destination){
-    let clone = document.getElementsByClassName('loading-icon')[0].cloneNode(true)
-    clone.classList.add('loading-icon-leaderboard');
-    clone.style.height = "unset"
-    destination.appendChild(clone)
-}
-
-function formatTime(seconds) {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = Math.floor(seconds % 60);
-    return [hours, minutes, secs].map(v => v < 10 ? "0" + v : v).join(":");
-}
-
-function formatScoreTime(milliseconds) {
-    let totalSeconds = Math.floor(milliseconds / 1000);
-    let remainingMilliseconds = milliseconds % 1000;
-    let hours = Math.floor(totalSeconds / 3600);
-    totalSeconds = totalSeconds % 3600;
-    let minutes = Math.floor(totalSeconds / 60);
-    let seconds = totalSeconds % 60;
-
-    minutes = minutes.toString().padStart(2, '0');
-    seconds = seconds.toString().padStart(2, '0');
-    remainingMilliseconds = remainingMilliseconds.toString().padStart(3, '0');
-
-    let timeString = `${minutes}:${seconds}.${remainingMilliseconds}`;
-    if (hours > 0) {
-        hours = hours.toString().padStart(2, '0');
-        timeString = `${hours}:${timeString}`;
-    }
-
-    return timeString;
-}
-
-function getRemainingTime(targetTime) {
-    const now = new Date();
-    const remainingTime = (targetTime - now) / 1000;
-    return remainingTime;
-}
-
-function updateTimer(targetTime, elementId) {
-    const remainingTime = getRemainingTime(targetTime);
-    const timerElement = document.getElementById(elementId);
-
-    if (remainingTime > 48 * 3600) {
-        const days = Math.ceil(remainingTime / (24 * 3600));
-        timerElement.textContent = `${days} days left`;
-    } else if (remainingTime < 0) {
-        timerElement.textContent = "Finished";
-    } else {
-        timerElement.textContent = formatTime(remainingTime);
-    }
-}
-
-function relativeTime(current, previous) {
-    const units = [
-        { name: "year", ms: 365 * 24 * 60 * 60 * 1000 },
-        { name: "month", ms: 30 * 24 * 60 * 60 * 1000 },
-        { name: "day", ms: 24 * 60 * 60 * 1000 },
-        { name: "hour", ms: 60 * 60 * 1000 },
-        { name: "minute", ms: 60 * 1000 },
-        { name: "second", ms: 1000 }
-    ];
-
-    const elapsed = current - previous;
-
-    for (const unit of units) {
-        if (elapsed < unit.ms) continue;
-        let time = Math.round(elapsed / unit.ms);
-        return `${time} ${unit.name}${time > 1 ? 's' : ''} ago`;
-    }
-}
-
-function changeHexBGColor(color){
-    if (color == null) { 
-        document.body.style.removeProperty("background-color")
-        return; 
-    }
-    document.body.style.backgroundColor = `rgb(${color[0] * 255},${color[1] * 255},${color[2] * 255})`;
-}
-
-function ratioCalc(unknown, x1, x2, y1, y2){
-    switch(unknown){
-        case 1:
-            // x1/x2 == y1/y2
-            return x2 * (y1/y2)
-        case 2:
-            // x1/x2 == y1/y2
-            return x1 * (y2/y1)
-        case 3:
-            // x1/x2 == y1/y2
-            return y2 * (x1/x2)
-        case 4:
-            // x1/x2 == y1/y2
-            return y1 * (x2/x1)
-    }
-}
-
-function resetScroll() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
-
-function loadSettings() {
-    let settings = JSON.parse(localStorage.getItem("BTD6OAKSettings"));
-    if (settings) {
-        preventRateLimiting = settings.ProfileLoading;
-        useNamedMonkeys = settings.UseNamedMonkeys;
-        showTeamsItems = settings.TeamsStoreItems;
-    }
-}
-
-function saveSettings() {
-    let settings = {
-        "ProfileLoading": preventRateLimiting,
-        "UseNamedMonkeys": useNamedMonkeys,
-        "TeamsStoreItems": showTeamsItems
-    }
-    localStorage.setItem("BTD6OAKSettings", JSON.stringify(settings));
 }
 
 function errorModal(body, source, force) {

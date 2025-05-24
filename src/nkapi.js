@@ -144,15 +144,17 @@ async function fetchData(url, onSuccess) {
 
 async function getSaveData(oak_token) {
     cacheBust = true;
-    // fetchData(`./data/PreventAPISpam_UserSave.json`, (json) => {
     let expiryCheck = true;
-    await fetchData(`https://data.ninjakiwi.com/btd6/save/${oak_token}`, (json) => {
-        btd6usersave = json["body"]
-        _btd6usersave = json["model"]
-        readyFlags[0] = 1
-        expiryCheck = false;
-        getPublicProfileData(oak_token)
+    let savePromise = new Promise(async (resolve, reject) => {
+        await fetchData(`https://data.ninjakiwi.com/btd6/save/${oak_token}`, (json) => {
+            btd6usersave = json["body"]
+            _btd6usersave = json["model"]
+            readyFlags[0] = 1
+            expiryCheck = false;
+            resolve();
+        });
     });
+    await savePromise;
     if(expiryCheck && !rateLimited){
         let elements = document.getElementsByClassName("error-modal-overlay");
         for(element of elements){
@@ -160,25 +162,28 @@ async function getSaveData(oak_token) {
         } 
         delete localStorageOAK[oak_token];
         writeLocalStorage();
-        generateFrontPage();
+        // generateFrontPage();
         errorModal("Your Open Access Key has expired. Please make a new one and try again.", "expire", true)
+        return;
     }
+    await getPublicProfileData(oak_token);
 }
 
 async function getPublicProfileData(oak_token) {
     cacheBust = true;
-    // fetchData(`./data/PreventAPISpam_UserID.json`, (json) => {
-    fetchData(`https://data.ninjakiwi.com/btd6/users/${oak_token}`, (json) => {
-        btd6publicprofile = json["body"]
-        _btd6publicprofile = json["model"]
-        localStorageOAK[oak_token] = {
-            "displayName": btd6publicprofile["displayName"],
-            "avatar": getProfileAvatar(btd6publicprofile),
-            "banner": getProfileBanner(btd6publicprofile)
-        }
-        writeLocalStorage()
-        readyFlags[1] = 1
-        fetchDependencies();
+    return new Promise((resolve, reject) => {
+        fetchData(`https://data.ninjakiwi.com/btd6/users/${oak_token}`, (json) => {
+            btd6publicprofile = json["body"]
+            _btd6publicprofile = json["model"]
+            localStorageOAK[oak_token] = {
+                "displayName": btd6publicprofile["displayName"],
+                "avatar": getProfileAvatar(btd6publicprofile),
+                "banner": getProfileBanner(btd6publicprofile)
+            }
+            writeLocalStorage()
+            readyFlags[1] = 1
+            resolve();
+        });
     });
 }
 
