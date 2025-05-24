@@ -127,7 +127,7 @@ let loggedIn = false;
 let imageScroll = [
     {
         "title": "View Your Profile!",
-        "text": "- View extra stats!<br>- Full Top Heroes/Towers list!<br>- Top Paragons Counts!<br>- Ability Usage Counts!<br>- Detailed Map Statistics!",
+        "text": "- View API exclusive stats<br>- Full Top Heroes/Towers list<br>- Top Paragons counts<br>- Ability usage counts<br>- Detailed map statistics<br>- Track your insta monkey collection",
         "image": "OverviewProfile"
     },
     {
@@ -137,13 +137,18 @@ let imageScroll = [
     },
     {
         "title": "View Leaderboards!",
-        "text": "- View active event leaderboards!<br>- View user profiles!<br>- View extra score information",
+        "text": "- View event leaderboards<br>- View user profiles<br>- View extra score information",
         "image": "/LandingScroll/Leaderboards"
     },
     {
         "title": "View Roundsets!",
-        "text": "- View all roundsets!<br>- Simple round information<br>- Detailed round information<br>- Preview rounds visually<br>- Boss custom rounds<br>- Custom event rounds<br>- Rogue Legends special rounds included",
+        "text": "- View all roundsets<br>- Simple round information<br>- Detailed round information<br>- Preview rounds visually<br>- Boss custom rounds<br>- Custom event rounds<br>- Rogue Legends special rounds included",
         "image": "/LandingScroll/Roundsets"
+    },
+    {
+        "title": "Rogue Legends Helper!",
+        "text": "- View all artifacts<br>- Search, sort, and filtering<br>- Hero Starter Kits reference<br>- Track extracted artifacts<br>- Export progress image (desktop only)",
+        "image": "/LandingScroll/RogueLegends"
     }
 ]
 let imageScrollIndex = 0;
@@ -614,7 +619,7 @@ function generateFrontPage(){
     let siteImageScrollLeft = createEl('div', { classList: ['d-flex', 'fd-column'], style: {width: "300px", background: "rgba(0,0,0,0.36)", padding: "10px", borderRadius: "10px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", gap: "1rem"}});
     siteImageScroll.appendChild(siteImageScrollLeft);
 
-    let siteImageScrollTitle = createEl('p', { classList: ['font-luckiest', 'black-outline'], style: {fontSize: "28px"}, innerHTML: 'BTD6 API Explorer' });
+    let siteImageScrollTitle = createEl('p', { classList: ['font-luckiest', 'black-outline'], style: {fontSize: "28px", textAlign: "center"}, innerHTML: 'BTD6 API Explorer' });
     siteImageScrollLeft.appendChild(siteImageScrollTitle);
 
     let siteImageScrollOverlayText = createEl('p', { classList: ['font-gardenia'], style: {fontSize: "20px", lineHeight: "1.5"}, innerHTML: 'Click on the images to access the sites!' });
@@ -628,15 +633,6 @@ function generateFrontPage(){
 
     function updateSiteImageScroll(index) {
         let data = imageScroll[index]
-
-        // siteImageScroll.style.backgroundImage = `url(Assets/UI/${data.image}.png)`;
-        // siteImageScroll.style.backgroundSize = "cover";
-        // siteImageScroll.style.backgroundPosition = "center";
-        // siteImageScroll.style.backgroundRepeat = "no-repeat";
-        // siteImageScroll.style.backgroundColor = "black";
-        // siteImageScroll.style.borderRadius = "10px";
-        // siteImageScroll.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
-        // siteImageScroll.style.transition = "background-image 0.5s ease-in-out";
 
         siteImageScrollImage.src = `Assets/UI/${data.image}.png`;
         siteImageScrollTitle.innerHTML = data.title;
@@ -656,10 +652,10 @@ function generateFrontPage(){
         }
     } 
     updateSiteImageScroll(0);
-
-    // let sitePageDots = document.createElement('div');
-    // sitePageDots.classList.add('map-page-dots');
-    // frontPage.appendChild(sitePageDots);
+    siteImageScroll.addEventListener('click', () => {
+        imageScrollIndex = (imageScrollIndex + 1) % imageScroll.length;
+        updateSiteImageScroll(imageScrollIndex);
+    });
 
     let OtherInfoHeader = document.createElement('p');
     OtherInfoHeader.classList.add('site-info-header','black-outline');
