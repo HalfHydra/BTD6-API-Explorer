@@ -153,7 +153,9 @@ fetchConstants().then(() => {
 
 function generateIfReady(){
     if (readyFlags.every(flag => flag === 1)){
-        document.getElementById("home-content").style.display = "none";
+        if(document.getElementById("home-content")){
+            document.getElementById("home-content").style.display = "none";
+        }
         document.body.classList.add('transition-bg')
         generateRankInfo()
         generateVeteranRankInfo()
@@ -599,7 +601,6 @@ const title = document.querySelector('.title');
 const content = document.querySelector('.content');
 
 readLocalStorage()
-generateFrontPage()
 function generateFrontPage(){
     const frontPage = document.getElementById('home-content');
 
@@ -910,7 +911,7 @@ function generateVersionInfo(){
     let toolVersionText = document.createElement('p');
     toolVersionText.classList.add('tool-version-text');
     toolVersionText.innerHTML = `App Version: ${constants.version} / Game Content Version: v${constants.projectContentVersion}`;
-    versionDiv.appendChild(toolVersionText);
+    versionDiv?.appendChild(toolVersionText);
 }
 
 let headerTabs = ['home', 'profile', 'events', 'leaderboards', 'rounds', 'extras'];
@@ -940,10 +941,13 @@ function changeTab(tab) {
         tabDiv.id === (tab + "-content") ? tabDiv.style.display = "flex" : tabDiv.style.display = 'none';
     }
     for(let tab of headerTabs){
-        document.getElementById(tab).classList.remove('selected');
+        if(document.getElementById(tab)){
+            document.getElementById(tab).classList.remove('selected');
+        }
     }
-    document.getElementById(tab).classList.add('selected');
-
+    if(document.getElementById(tab)){
+        document.getElementById(tab).classList.add('selected');
+    }
     for (let subtab of document.getElementsByClassName('sub-content-div')){
         subtab.style.display = 'none';
     }

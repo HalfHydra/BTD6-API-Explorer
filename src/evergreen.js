@@ -184,6 +184,15 @@ async function fetchRogueDependencies() {
         });
 }
 
+async function fetchInstaDependencies() {
+    await fetchLocKeys();
+    generateStats();
+    generateInstaData();
+    changeProgressTab('InstaMonkeys')
+    clearBackQueue();
+    hideLoading();
+}
+
 async function fetchMainDependencies() {
     await fetchLocKeys();
     await fetchRogueDependencies();
@@ -412,7 +421,7 @@ function processRewardsString(input){
     return result;
 }
 
-function generateLoginDiv() {
+function generateLoginDiv(callback) {
     let loginDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-center', 'fd-column', 'bg-color-primary'] });
     
     let loginTitle = createEl('p', { classList: ['site-info-header', 'black-outline'], innerHTML: 'Login with your OAK Token!' });
@@ -435,7 +444,11 @@ function generateLoginDiv() {
                 oak_token = oak;
                 await getSaveData(oak);
                 loggedIn = true;
-                fetchMainDependencies();
+                if(callback) {
+                    callback(oak_token);
+                } else {
+                    fetchMainDependencies();
+                }
                 // changeTab('profile')
             }
         });
