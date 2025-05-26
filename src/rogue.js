@@ -92,7 +92,6 @@ let currentArtifacts = {};
 //     errorModal(error, "js");
 // });
 fetchRogueDependencies().then(() => {
-    console.log("Rogue dependencies loaded successfully.");
     postProcessRogueData();
 });
 loadRogueDataFromLocalStorage();

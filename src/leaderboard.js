@@ -112,7 +112,6 @@ async function generateLeaderboards() {
         }));
     }
     await Promise.all(promises).then(() => {
-        console.log(racesData, bossesData, CTData);
         hideLoading(); 
     });
 

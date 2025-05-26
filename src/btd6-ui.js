@@ -49,3 +49,19 @@ function generateDropdown(label, options, value, callback) {
     dropdownDiv.appendChild(select);
     return dropdownDiv
 }
+
+function generateToggle(){
+    let toggle = document.createElement('div');
+    toggle.classList.add('switch');
+    
+    let input = document.createElement('input');
+    input.type = "checkbox";
+    input.checked = true;
+    toggle.appendChild(input);
+
+    let span = document.createElement('span');
+    span.classList.add('slider', 'round');
+    toggle.appendChild(span);
+
+    return toggle;
+}

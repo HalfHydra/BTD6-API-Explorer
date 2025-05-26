@@ -1,3 +1,7 @@
+let readyFlags = [0,0,0,0,0]
+let pressedStart = false;
+let timerInterval = null;
+
 let constants = {}
 let locJSON = {}
 let achievementsJSON = {}
@@ -14,7 +18,6 @@ backButton.addEventListener('click', () => {
 document.querySelector('.header').prepend(backButton);
 
 function goBack(){
-    console.log(backQueue);
     let currentState = backQueue.pop();
     if (currentState.source) {
         document.getElementById(currentState.destination + "-content").style.display = 'none';
