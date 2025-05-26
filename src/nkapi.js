@@ -116,7 +116,7 @@ async function fetchData(url, onSuccess) {
         }
         rateLimited = true;
         requestQueue = [];        
-        errorModal(`You have hit the rate limit.<br>If you are browsing the leaderboards or content browsers, please slow down!<br><br>The rate limit will clear after a short time. You can also help prevent rate limiting by toggling the setting below which stops player profiles from loading automatically.`, "ratelimit")
+        // errorModal(`You have hit the rate limit.<br>If you are browsing the leaderboards or content browsers, please slow down!<br><br>The rate limit will clear after a short time. You can also help prevent rate limiting by toggling the setting below which stops player profiles from loading automatically.`, "ratelimit")
         hideLoading();
         pressedStart = false;
         return `You have hit the rate limit. [${e}]`;
