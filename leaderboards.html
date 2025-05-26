@@ -4,7 +4,7 @@
 <head>
     <title>BTD6 Leaderboards</title>
     <meta name="viewport" content="width=800">
-    <link rel="apple-touch-icon" href="./Assets/UI/LeaderboardSiteBtn.png">
+    <link rel="apple-touch-icon" href="./Assets/UI/SiteBtn.png">
     <link rel="stylesheet" href="./src/reset.css">
     <link rel="stylesheet" href="./src/style.css">
     <style>
@@ -70,21 +70,6 @@
             text-shadow: 0 0 5px black;
             margin-top: 24vh;
             margin-left: -1.5vh;
-        }
-
-        .page-extra {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 15px 10px;
-        }
-
-        .rounds-site-desc {
-            font-family: GardeniaBold;
-            color: white;
-            font-size: 18px;
-            line-height: 20px;
-            margin: 5px;
         }
 
         @keyframes loadglow {
@@ -222,7 +207,7 @@
     </style>
 </head>
 
-<body>
+<body class="hex-bg">
     <div id="loading" class="loading-div">
         <div class="loading-icon">
             <!-- <div class="loading-glow"></div> -->
@@ -231,15 +216,33 @@
             <p class="loading-text">LOADING...</p>
         </div>
     </div>
+    <div class="header">
+        <div class="header-div">
+            <h1 class="title">Bloons TD 6 Leaderboards</h1>
+        </div>
+        <div class="header-container"></div>
+    </div>
+    <div class="content">
+        <div id="publicprofile-content" class="sub-content-div publicprofile" style="display: none;"></div>
+        <div id="leaderboards-content" class="content-div extras" style="display: flex;"></div>
+        <div id="leaderboard-content" class="sub-content-div leaderboard" style="display: none;"></div>
+    </div>
 </body>
+<script src="./src/popper.min.js"></script>
+<script src="./src/tippy-bundle.umd.min.js"></script>
+<script src="./src/evergreen.js"></script>
+<script src="./src/nkapi.js"></script>
+<script src="./src/btd6-ui.js"></script>
+<script src="./src/publicprofile.js"></script>
+<script src="./src/leaderboard.js"></script>
+<script src="./src/asset.js"></script>
 <script>
     document.getElementById("loading").style.transform = "scale(0)";
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
+    fetchConstants().then(() => {
+        fetchLocKeys();
+        generateLeaderboards();
+    });
 </script>
-<script src="./src/popper.min.js"></script>
-<script src="./src/tippy-bundle.umd.min.js"></script>
-<script src="./src/nkapi.js"></script>
-<script src="./src/leaderboard.js"></script>
-<script src="./src/asset.js"></script>
 </html>
