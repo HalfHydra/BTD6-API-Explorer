@@ -732,7 +732,7 @@ function generateArtifacts() {
 
     switch (rogueSaveData.artifactSort) {
         case "Name":
-            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => a[1].nameLocKey.localeCompare(b[1].nameLocKey)))
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => (a[1].title.replace("Legendary", "3").replace("Rare", "2").replace("Common", "1")).localeCompare(b[1].title.replace("Legendary", "3").replace("Rare", "2").replace("Common", "1"))))
             break;
         case "Rarity (Ascending)":
             currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => a[1].tier - b[1].tier))
