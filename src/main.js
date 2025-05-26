@@ -1469,31 +1469,31 @@ function generateOverview(){
     exclusiveStatDiv.classList.add('profile-stats');
     rightColumnDiv.appendChild(exclusiveStatDiv);
 
-        let exclusiveStatColumnHeader = document.createElement('div');
-        exclusiveStatColumnHeader.classList.add('overview-right-column-header');
-        exclusiveStatDiv.appendChild(exclusiveStatColumnHeader);
+    let exclusiveStatColumnHeader = document.createElement('div');
+    exclusiveStatColumnHeader.classList.add('overview-right-column-header');
+    exclusiveStatDiv.appendChild(exclusiveStatColumnHeader);
 
-        let exclusiveColumnHeaderText = document.createElement('p');
-        exclusiveColumnHeaderText.classList.add('column-header-text','black-outline');
-        exclusiveColumnHeaderText.innerHTML = 'API Exclusive Stats';
-        exclusiveStatColumnHeader.appendChild(exclusiveColumnHeaderText);
+    let exclusiveColumnHeaderText = document.createElement('p');
+    exclusiveColumnHeaderText.classList.add('column-header-text','black-outline');
+    exclusiveColumnHeaderText.innerHTML = 'API Exclusive Stats';
+    exclusiveStatColumnHeader.appendChild(exclusiveColumnHeaderText);
 
-        for (let [key, value] of Object.entries(exclusiveStats)){
-            if (value == null) { continue; }
-            let stat = document.createElement('div');
-            stat.classList.add('stat');
-            exclusiveStatDiv.appendChild(stat);
+    for (let [key, value] of Object.entries(exclusiveStats)){
+        if (value == null) { continue; }
+        let stat = document.createElement('div');
+        stat.classList.add('stat');
+        exclusiveStatDiv.appendChild(stat);
 
-            let statName = document.createElement('p');
-            statName.classList.add('stat-name');
-            statName.innerHTML = key;
-            stat.appendChild(statName);
+        let statName = document.createElement('p');
+        statName.classList.add('stat-name');
+        statName.innerHTML = key;
+        stat.appendChild(statName);
 
-            let statValue = document.createElement('p');
-            statValue.classList.add('stat-value');
-            statValue.innerHTML = value.toLocaleString();
-            stat.appendChild(statValue);
-        }
+        let statValue = document.createElement('p');
+        statValue.classList.add('stat-value');
+        statValue.innerHTML = value.toLocaleString();
+        stat.appendChild(statValue);
+    }
 
     if (btd6usersave.hasOwnProperty("rogueLegends")) {
 

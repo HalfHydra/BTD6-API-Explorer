@@ -378,11 +378,12 @@ async function openProfile(source, profile){
 
     let topParagonsTopRibbonDiv = document.createElement('div');
     topParagonsTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
+    topParagonsTopRibbonDiv.style.filter = 'hue-rotate(250deg)';
     topParagonsTopDiv.appendChild(topParagonsTopRibbonDiv);
 
     let topParagonsText = document.createElement('p');
     topParagonsText.classList.add('top-heroes-text','black-outline');
-    topParagonsText.innerHTML = 'Top Towers';
+    topParagonsText.innerHTML = 'Top Paragons';
     topParagonsTopRibbonDiv.appendChild(topParagonsText);
 
     let mapsProgressCoopToggle3 = document.createElement('div');
@@ -412,23 +413,24 @@ async function openProfile(source, profile){
     otherParagonsDiv.style.display = 'none';
     topParagonsList.appendChild(otherParagonsDiv);
 
-    mapsProgressCoopToggleInput2.addEventListener('change', () => {
-        mapsProgressCoopToggleInput2.checked ? otherTowersDiv.style.display = 'flex' : otherTowersDiv.style.display = 'none';
+    mapsProgressCoopToggleInput3.addEventListener('change', () => {
+        mapsProgressCoopToggleInput3.checked ? otherParagonsDiv.style.display = 'flex' : otherParagonsDiv.style.display = 'none';
     })
 
     counter = 0;
-    let paragonList = Object.keys(constants.towersInOrder);
 
     for (let [tower, xp] of Object.entries(profile.stats["paragonsPurchasedByName"]).sort((a, b) => b[1] - a[1])){
+        
         if(xp === 0) { continue; }
-        if(!towersList.includes(tower)) { continue; }
+        if(!constants.paragonsAvailable.includes(tower)) { continue; }
         let towerDiv = document.createElement('div');
         towerDiv.classList.add('hero-div');
+        towerDiv.style.backgroundImage = "url(../Assets/UI/ParagonContainer.png)";
         counter < 3 ? top3ParagonsDiv.appendChild(towerDiv) : otherParagonsDiv.appendChild(towerDiv);
 
         let towerImg = document.createElement('img');
         towerImg.classList.add('hero-img');
-        towerImg.src = getInstaContainerIcon(tower,"000");
+        towerImg.src = getTowerAssetPath(tower,"Paragon");
         towerDiv.appendChild(towerImg);
 
         let towerText = document.createElement('p');
@@ -438,7 +440,7 @@ async function openProfile(source, profile){
         counter++;
 
         tippy(towerDiv, {
-            content: `${getLocValue(tower)} Placed ${xp.toLocaleString()} Times`,
+            content: `${getLocValue(tower + " Paragon")} Placed ${xp.toLocaleString()} Times`,
             placement: 'top',
             theme: 'speech_bubble'
         })
@@ -505,6 +507,45 @@ async function openProfile(source, profile){
         let stat = document.createElement('div');
         stat.classList.add('stat');
         profileStatsDiv.appendChild(stat);
+
+        let statName = document.createElement('p');
+        statName.classList.add('stat-name');
+        statName.innerHTML = key;
+        stat.appendChild(statName);
+
+        let statValue = document.createElement('p');
+        statValue.classList.add('stat-value');
+        statValue.innerHTML = value.toLocaleString();
+        stat.appendChild(statValue);
+    }
+
+    let exclusiveStatsPublic = {}
+    exclusiveStatsPublic["Contested Territory Tiles Captured"] = profile.stats["ctCapturedTiles"];
+    exclusiveStatsPublic["Towers Sold"] = profile.stats["totalTowersSold"];
+    exclusiveStatsPublic["Total Tier 1 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["1"];
+    exclusiveStatsPublic["Total Tier 2 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["2"];
+    exclusiveStatsPublic["Total Tier 3 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["3"];
+    exclusiveStatsPublic["Total Tier 4 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["4"];
+    exclusiveStatsPublic["Total Tier 5 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["5"];
+
+    let exclusiveStatDiv = document.createElement('div');
+    exclusiveStatDiv.classList.add('profile-stats');
+    rightColumnDiv.appendChild(exclusiveStatDiv);
+
+    let exclusiveStatColumnHeader = document.createElement('div');
+    exclusiveStatColumnHeader.classList.add('overview-right-column-header');
+    exclusiveStatDiv.appendChild(exclusiveStatColumnHeader);
+
+    let exclusiveColumnHeaderText = document.createElement('p');
+    exclusiveColumnHeaderText.classList.add('column-header-text','black-outline');
+    exclusiveColumnHeaderText.innerHTML = 'API Exclusive Stats';
+    exclusiveStatColumnHeader.appendChild(exclusiveColumnHeaderText);
+
+    for (let [key, value] of Object.entries(exclusiveStatsPublic)){
+        if (value == null) { continue; }
+        let stat = document.createElement('div');
+        stat.classList.add('stat');
+        exclusiveStatDiv.appendChild(stat);
 
         let statName = document.createElement('p');
         statName.classList.add('stat-name');
