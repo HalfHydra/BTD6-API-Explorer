@@ -632,7 +632,7 @@ function generateArtifactSettings() {
     rogueDownloadButton.classList.add('start-button', 'black-outline');
     rogueDownloadButton.innerHTML = 'Apply';
     rogueDownloadButton.addEventListener('click', () => {
-        generateRogueArtifacts();
+        goBack();
     })
     settingsDiv.appendChild(rogueDownloadButton);
 }
