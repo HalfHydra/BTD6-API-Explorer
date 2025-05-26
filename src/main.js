@@ -8706,6 +8706,7 @@ async function showRoundsetModel(source, roundset) {
             roundsetDiv.classList.add('pointer');
             roundsetDiv.addEventListener('click', () => {
                 showLoading();
+                goBack();
                 showRoundsetModel(source, rs);
             })
             rogueHeaderBar.appendChild(roundsetDiv);
