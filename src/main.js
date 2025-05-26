@@ -1,11 +1,5 @@
 let readyFlags = [0,0,0,0,0]
 let pressedStart = false;
-let locJSON = {}
-let achievementsJSON = {}
-let achievementsHelper = {}
-let trophyStoreItemsJSON = {}
-let teamsStoreItemsJSON = {}
-let constants = {}
 
 let rankInfo = {
     "rank": 1,
@@ -613,6 +607,8 @@ function generateFrontPage(){
     // frontPage.appendChild(createEl('p', { classList: ['front-page-text', 'font-gardenia', 'ta-center'], innerHTML: 'Access your profile using an OAK token for the best experience!' }));
     // frontPage.appendChild(generateLoginDiv());
 
+    frontPage.appendChild(createEl('p', { classList: ['site-info-header', 'black-outline'], innerHTML: 'Site Features and Information' }));
+
     let siteImageScroll = createEl('div', { classList: ['d-flex', 'jc-between'], style: {width: "700px", height: "400px", paddingTop: "20px"}});
     frontPage.appendChild(siteImageScroll);
 
@@ -657,10 +653,10 @@ function generateFrontPage(){
         updateSiteImageScroll(imageScrollIndex);
     });
 
-    let OtherInfoHeader = document.createElement('p');
-    OtherInfoHeader.classList.add('site-info-header','black-outline');
-    OtherInfoHeader.innerHTML = 'Site Information';
-    frontPage.appendChild(OtherInfoHeader);
+    // let OtherInfoHeader = document.createElement('p');
+    // OtherInfoHeader.classList.add('site-info-header','black-outline');
+    // OtherInfoHeader.innerHTML = 'Site Information';
+    // frontPage.appendChild(OtherInfoHeader);
 
     let infoButtons = document.createElement('div');
     infoButtons.classList.add('d-flex', 'jc-evenly', 'w-100');
@@ -935,14 +931,13 @@ function generateHeaderTabs(){
 }
 
 function changeTab(tab) {
+    clearBackQueue();
     resetScroll();
     if(timerInterval) { clearInterval(timerInterval); }
     changeHexBGColor(constants.BGColor)
 
     for (let tabDiv of document.querySelector('.content').children) {
-        console.log(tabDiv);
         tabDiv.id === (tab + "-content") ? tabDiv.style.display = "flex" : tabDiv.style.display = 'none';
-        
     }
     for(let tab of headerTabs){
         document.getElementById(tab).classList.remove('selected');
@@ -965,6 +960,10 @@ function changeTab(tab) {
         case "explore":
             generateExplore();
             break;
+        case "leaderboards":
+            generateLeaderboards();
+        case "rounds":
+            generateRoundsets();
         case 'extras':
             generateExtrasPage();
             break;
@@ -976,6 +975,8 @@ let tempXP = 0;
 function generateOverview(){
     let overviewContent = document.getElementById('profile-content');
     overviewContent.innerHTML = '';
+
+    addToBackQueue({source: 'profile', destination: 'profile', callback: generateProgress});
     
     if(loggedIn){
     let profileContainer = document.createElement('div');
@@ -1592,26 +1593,6 @@ function generateOverview(){
     }
 }
 
-function generateAvatar(size, src){
-    let avatar = document.createElement('div');
-    avatar.style.width = `${size}px`;
-    avatar.style.height = `${size}px`;
-    avatar.classList.add('avatar');
-
-    let avatarFrame = document.createElement('img');
-    avatarFrame.classList.add('avatar-frame','noSelect');
-    avatarFrame.style.width = `${size}px`;
-    avatarFrame.src = '../Assets/UI/InstaTowersContainer.png';
-    avatar.appendChild(avatarFrame);
-
-    let avatarImg = document.createElement('img');
-    avatarImg.classList.add('avatar-img','noSelect');
-    avatarImg.style.width = `${size}px`;
-    avatarImg.src = src;
-    avatar.appendChild(avatarImg);
-    return avatar;
-}
-
 function generateRank(veteran){
     let rank = document.createElement('div');
     rank.classList.add('rank');
@@ -1807,6 +1788,7 @@ function generateProgress(){
 function changeProgressTab(selector){
     resetScroll();
     if(timerInterval) { clearInterval(timerInterval); }
+    addToBackQueue({source: 'profile', destination: 'profile', callback: generateProgress});
     switch(selector){
         case 'Towers':
             generateTowerProgress();
@@ -2842,7 +2824,8 @@ function generateMapDetails(map){
     modalClose.classList.add('modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
-        onExitMap();
+        // onExitMap();
+        goBack();
     })
     mapProgressHeaderBar.appendChild(modalClose);
 
@@ -3137,6 +3120,7 @@ function generateMapsGridView(){
 
         mapDiv.addEventListener('click', () => {
             onSelectMap(map);
+            addToBackQueue({callback: onExitMap});
         })
     }
 }
@@ -3262,6 +3246,7 @@ function generateMapsListView(){
 
         mapDiv.addEventListener('click', () => {
             onSelectMap(map);
+            addToBackQueue({callback: onExitMap});
         })
     }
     mapsListContainer.appendChild(fragment);
@@ -3353,6 +3338,7 @@ function generateMapsGameView() {
 
         mapDiv.addEventListener('click', () => {
             onSelectMap(map);
+            addToBackQueue({callback: onExitMap});
         })
     }
 
@@ -4015,34 +4001,7 @@ function generateChestOddsModal() {
 }
 
 function generateHowToUseModal() {
-    let modal = document.createElement('div');
-    modal.classList.add('error-modal-overlay');
-    document.body.appendChild(modal);
-
     let modalContent = document.createElement('div');
-    modalContent.classList.add('collection-modal');
-    modal.appendChild(modalContent);
-
-    let modalHeaderDiv = document.createElement('div');
-    modalHeaderDiv.classList.add('collection-modal-header');
-    modalContent.appendChild(modalHeaderDiv);
-
-    let collectionHeaderModalLeft = document.createElement('div');
-    collectionHeaderModalLeft.classList.add('collection-header-modal-left');
-    modalHeaderDiv.appendChild(collectionHeaderModalLeft);
-
-    let modalTitle = document.createElement('p');
-    modalTitle.classList.add('collection-modal-header-text','black-outline');
-    modalTitle.innerHTML = "How to Use This Helper";
-    modalHeaderDiv.appendChild(modalTitle);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('collection-modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        modal.remove();
-    })
-    modalHeaderDiv.appendChild(modalClose);
 
     let modalHelpDivs = document.createElement('div');
     modalHelpDivs.classList.add('modal-help-divs');
@@ -4080,6 +4039,11 @@ function generateHowToUseModal() {
         modalHelpImg.src = `./Assets/UI/CollectionHelp${index + 1}.png`;
         modalHelpDiv.appendChild(modalHelpImg);
     });
+    
+    createModal({
+        header: 'How to Use This Helper',
+        content: modalContent,
+    })
 }
 
 function generateInstaCollectionEventHelper(){
@@ -4103,6 +4067,7 @@ function generateInstaCollectionEventHelper(){
 
     let howButton = document.createElement('p');
     howButton.classList.add('where-button','black-outline');
+    howButton.style.width = "230px";
     howButton.innerHTML = 'How to Use This';
     howButton.addEventListener('click', () => {
         generateHowToUseModal();
@@ -5118,6 +5083,7 @@ function changeEventTab(selector){
             generateChallenges("CoopDailyChallenges");
             break;
     }
+    // addToBackQueue({callback: generateEvents})
 }
 
 function generateRaces(){
@@ -5179,7 +5145,6 @@ function generateRaces(){
             timerInterval = setInterval(() => updateTimer(new Date(race.end), raceTimeLeft.id), 1000)
         } else if (new Date() > new Date(race.end)) {
             raceTimeLeft.innerHTML = "Finished";
-            raceTimeLeft.style.textAlign = "right";
         }
 
         let raceInfoDates = document.createElement('p');
@@ -5349,7 +5314,6 @@ function generateBosses(elite){
             timerInterval = setInterval(() => updateTimer(new Date(race.end), bossTimeLeft.id), 1000)
         } else if (new Date() > new Date(race.end)) {
             bossTimeLeft.innerHTML = "Finished";
-            bossTimeLeft.style.textAlign = "right";
         }
 
         let raceInfoDates = document.createElement('p');
@@ -5464,7 +5428,6 @@ function generateCTs(){
             timerInterval = setInterval(() => updateTimer(new Date(race.end), raceTimeLeft.id), 1000)
         } else if (new Date() > new Date(race.end)) {
             raceTimeLeft.innerHTML = "Finished";
-            raceTimeLeft.style.textAlign = "right";
         }
 
         let ctInfoLeftDiv = document.createElement('div');
@@ -5850,6 +5813,8 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     document.getElementById(`${source}-content`).style.display = "none";
     resetScroll();
 
+    addToBackQueue({"source": source, "destination": "challenge"});
+
     let challengeExtraData = processChallenge(metadata);
     if (challengeType == "Boss" && eventData.scoringType != "GameTime") {
         switch(eventData.scoringType){
@@ -5916,7 +5881,8 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     modalClose.classList.add('modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
-        exitChallengeModel(source);
+        // exitChallengeModel(source);
+        goBack();
     })
     challengeHeaderRightTop.appendChild(modalClose);
 
@@ -6040,6 +6006,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
                 if (typeof bossesData[eventData.index][eventData.elite ? "metadataElite" : "metadataStandard"] == 'string') {
                     await getBossMetadata(eventData.index, eventData.elite)
                 }
+                goBack();
                 showChallengeModel('events', bossesData[eventData.index][eventData.elite ? "metadataElite" : "metadataStandard"], challengeType, eventData);
                 hideLoading();
             })
@@ -6768,515 +6735,6 @@ function challengeRules(metadata){
     return result;
 }
 
-function showLeaderboard(source, metadata, type) {
-    switch(type){
-        case "Boss":
-            if (leaderboardLink != metadata.leaderboard_standard_players_1) { leaderboardPage = 1 }
-            leaderboardLink = metadata.leaderboard_standard_players_1;
-            break;
-        case "BossElite":
-            if (leaderboardLink != metadata.leaderboard_elite_players_1) { leaderboardPage = 1 }
-            leaderboardLink = metadata.leaderboard_elite_players_1;
-            break
-        case "CTPlayer":
-            if (leaderboardLink != metadata.leaderboard_player) { leaderboardPage = 1 }
-            leaderboardLink = metadata.leaderboard_player;
-            break;
-        case "CTTeam":
-            if (leaderboardLink != metadata.leaderboard_team) { leaderboardPage = 1 }
-            leaderboardLink = metadata.leaderboard_team;
-            break;
-        default:
-            if (leaderboardLink != metadata.leaderboard) { leaderboardPage = 1 }
-            leaderboardLink = metadata.leaderboard;
-    }
-
-    let leaderboardContent = document.getElementById('leaderboard-content');
-    leaderboardContent.style.display = "flex";
-    leaderboardContent.innerHTML = "";
-    document.getElementById(`${source}-content`).style.display = "none";
-
-    let leaderboardDiv = document.createElement('div');
-    leaderboardDiv.classList.add('leaderboard-div');
-    leaderboardContent.appendChild(leaderboardDiv);
-
-    let leaderboardTop = document.createElement('div');
-    leaderboardTop.classList.add('leaderboard-top');
-    leaderboardDiv.appendChild(leaderboardTop);
-
-    let leaderboardHeader = document.createElement('div');
-    leaderboardHeader.classList.add('leaderboard-header');
-    leaderboardTop.appendChild(leaderboardHeader);
-
-    let leaderboardHeaderLeft = document.createElement('div');
-    leaderboardHeaderLeft.classList.add('leaderboard-header-left');
-    leaderboardHeader.appendChild(leaderboardHeaderLeft);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        leaderboardContent.style.display = "none";
-        document.getElementById(`${source}-content`).style.display = "flex";
-    })
-    leaderboardHeaderLeft.appendChild(modalClose);
-
-    let leaderboardHeaderMiddle = document.createElement('div');
-    leaderboardHeaderMiddle.classList.add(`leaderboard-header-middle-${type.toLowerCase()}`);
-    leaderboardHeader.appendChild(leaderboardHeaderMiddle);
-
-    let leaderboardHeaderTitle = document.createElement('div');
-    leaderboardHeaderTitle.classList.add(`leaderboard-header-${type.toLowerCase()}`);
-    leaderboardHeaderMiddle.appendChild(leaderboardHeaderTitle);
-
-    let leaderboardHeaderTitleText = document.createElement('p');
-    leaderboardHeaderTitleText.classList.add('leaderboard-header-title-text');
-    leaderboardHeaderTitle.appendChild(leaderboardHeaderTitleText); 
-
-    switch(type) {
-        case "Race":
-            leaderboardHeaderTitleText.classList.add("black-outline");
-            leaderboardHeaderTitleText.innerHTML = "Race Leaderboard"
-            break;
-        case "Boss":
-            leaderboardHeaderTitleText.classList.add("black-outline");
-            leaderboardHeaderTitleText.innerHTML = "Boss Leaderboard"
-            break;
-        case "BossElite":
-            leaderboardHeaderTitleText.classList.add("black-outline");
-            leaderboardHeaderTitleText.innerHTML = "Elite Boss Leaderboard"
-            break;
-        case "CTPlayer":
-            leaderboardHeaderTitleText.classList.add("ct-text");
-            leaderboardHeaderTitleText.innerHTML = "Contested Territory <br> Player Leaderboard"
-            break;
-        case "CTTeam":
-            leaderboardHeaderTitleText.classList.add("ct-text");
-            leaderboardHeaderTitleText.innerHTML = "Contested Territory <br> Team Leaderboard"
-            break;
-    }
-
-
-    let leaderboardHeaderRight = document.createElement('div');
-    leaderboardHeaderRight.classList.add('leaderboard-header-right');
-    leaderboardHeader.appendChild(leaderboardHeaderRight);
-
-    if(type == "Boss" || type == "BossElite") {
-        let leaderboardDisclaimer = document.createElement('p');
-        leaderboardDisclaimer.classList.add('leaderboard-disclaimer','black-outline');
-        leaderboardDisclaimer.innerHTML = "Note: Only singleplayer boss leaderboards are available on the API currently.";
-        leaderboardTop.appendChild(leaderboardDisclaimer);
-    }
-
-    let leaderboardColumnLabels = document.createElement('div');
-    leaderboardColumnLabels.id = 'leaderboard-column-labels';
-    leaderboardColumnLabels.classList.add('leaderboard-column-labels');
-    leaderboardTop.appendChild(leaderboardColumnLabels);
-
-    let leaderboardEntries = document.createElement('div');
-    leaderboardEntries.id = 'leaderboard-entries';
-    leaderboardEntries.classList.add('leaderboard-entries');
-    leaderboardDiv.appendChild(leaderboardEntries);
-
-    let leaderboardFooter = document.createElement('div');
-    leaderboardFooter.classList.add('leaderboard-footer');
-    leaderboardDiv.appendChild(leaderboardFooter);
-
-    let leaderboardFooterLeft = document.createElement('div');
-    leaderboardFooterLeft.classList.add('leaderboard-footer-left');
-    leaderboardFooter.appendChild(leaderboardFooterLeft);
-    
-    let leaderboardFooterRefresh = document.createElement('img');
-    leaderboardFooterRefresh.classList.add('leaderboard-footer-refresh');
-    leaderboardFooterRefresh.src = "./Assets/UI/RefreshBtn.png";
-    leaderboardFooterRefresh.addEventListener('click', () => {
-        if(!refreshRateLimited) {
-        generateLeaderboardEntries(metadata)
-        leaderboardFooterRefresh.style.filter = "grayscale(1) brightness(0.5)"
-        setTimeout(() => {
-            leaderboardFooterRefresh.style.filter = "none";
-            refreshRateLimited = false;
-        }, 10000)
-        refreshRateLimited = true;
-        }
-    })
-    leaderboardFooterLeft.appendChild(leaderboardFooterRefresh);
-
-    let leaderboardFooterMiddle = document.createElement('div');
-    leaderboardFooterMiddle.classList.add('leaderboard-footer-middle');
-    leaderboardFooter.appendChild(leaderboardFooterMiddle);
-
-    let leaderboardFooterPageLeft = document.createElement('img');
-    leaderboardFooterPageLeft.classList.add('leaderboard-footer-page-left','black-outline');
-    leaderboardFooterPageLeft.src = "./Assets/UI/NextArrowSmallYellow.png";
-    leaderboardFooterMiddle.appendChild(leaderboardFooterPageLeft);
-    
-    let leaderboardFooterPageNumber = document.createElement('div');
-    leaderboardFooterPageNumber.id = 'leaderboard-footer-page-number';
-    leaderboardFooterPageNumber.classList.add('leaderboard-footer-page-number','black-outline');
-    leaderboardFooterPageNumber.innerHTML = `Loading...`;
-    leaderboardFooterMiddle.appendChild(leaderboardFooterPageNumber);
-    
-    let leaderboardFooterPageRight = document.createElement('img');
-    leaderboardFooterPageRight.classList.add('leaderboard-footer-page-right','black-outline');
-    leaderboardFooterPageRight.src = "./Assets/UI/NextArrowSmallYellow.png";
-    leaderboardFooterPageLeft.addEventListener('click', () => {
-        leaderboardPage--;
-        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (#${(leaderboardPage * leaderboardPageEntryCount) - (leaderboardPageEntryCount - 1)} - ${leaderboardPage * leaderboardPageEntryCount})`;
-        leaderboardEntries.innerHTML = "";
-        copyLoadingIcon(leaderboardEntries)
-
-        generateLeaderboardEntries(metadata)
-    })
-    leaderboardFooterPageRight.addEventListener('click', () => {
-        leaderboardPage++;
-        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (#${(leaderboardPage * leaderboardPageEntryCount) - (leaderboardPageEntryCount - 1)} - ${leaderboardPage * leaderboardPageEntryCount})`;
-        leaderboardEntries.innerHTML = "";
-        copyLoadingIcon(leaderboardEntries)
-
-        generateLeaderboardEntries(metadata)
-    })
-    leaderboardFooterMiddle.appendChild(leaderboardFooterPageRight);
-
-    let leaderboardFooterRight = document.createElement('div');
-    leaderboardFooterRight.classList.add('leaderboard-footer-right');
-    leaderboardFooter.appendChild(leaderboardFooterRight);
-
-    // let leaderboardFooterGoto = document.createElement('p');
-    // leaderboardFooterGoto.classList.add('leaderboard-footer-goto','black-outline');
-    // leaderboardFooterGoto.innerHTML = "Go to:";
-    // leaderboardFooterRight.appendChild(leaderboardFooterGoto);
-
-    let leaderboardFooterPageInput = document.createElement('input');
-    leaderboardFooterPageInput.classList.add('leaderboard-footer-page-input');
-    leaderboardFooterPageInput.type = "number";
-    leaderboardFooterPageInput.min = "1";
-    leaderboardFooterPageInput.max = 1000 / leaderboardPageEntryCount;
-    leaderboardFooterPageInput.value = `${leaderboardPage}`;
-    leaderboardFooterPageInput.addEventListener('change', () => {
-        if (leaderboardFooterPageInput.value < 1) { leaderboardFooterPageInput.value = 1; }
-        if (leaderboardFooterPageInput.value > (1000 / leaderboardPageEntryCount)) { leaderboardFooterPageInput.value = (1000 / leaderboardPageEntryCount) }
-    })
-    leaderboardFooterRight.appendChild(leaderboardFooterPageInput);
-
-    let selectorGoImg = document.createElement('img');
-    selectorGoImg.classList.add('leaderboard-go-img');
-    selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
-    selectorGoImg.addEventListener('click', () => {
-        leaderboardPage = leaderboardFooterPageInput.value;
-        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (#${(leaderboardPage * leaderboardPageEntryCount) - (leaderboardPageEntryCount - 1)} - ${leaderboardPage * leaderboardPageEntryCount})`;
-        leaderboardEntries.innerHTML = "";
-        copyLoadingIcon(leaderboardEntries)
-        generateLeaderboardEntries(metadata)
-    })
-    leaderboardFooterRight.appendChild(selectorGoImg);
-
-    copyLoadingIcon(leaderboardEntries)
-    generateLeaderboardEntries(metadata, type);
-}
-
-async function generateLeaderboardEntries(metadata, type){
-    await getLeaderboardData();
-
-    let columnsType = null;
-    switch(type) {
-        case "CTTeam":
-            columnsType = "CTTeam";
-            break;
-        case "CTPlayer":
-            columnsType = "CTPlayer";
-            break;
-    }
-    if(metadata.hasOwnProperty('leaderboard') && metadata.leaderboard.includes('races')) {
-        columnsType = "GameTime";
-    }
-    if(metadata.hasOwnProperty('bossType')) {
-        switch(metadata.scoringType) {
-            case "GameTime":
-                columnsType = "GameTime";
-                break;
-            case "LeastCash":
-                columnsType = "LeastCash";
-                break;
-            case "LeastTiers":
-                columnsType = "LeastTiers";
-                break;
-        }
-    }
-
-    generateLeaderboardHeader(columnsType);
-
-
-    let leaderboardEntries = document.getElementById('leaderboard-entries');
-    leaderboardEntries.innerHTML = "";
-
-    if(leaderboardData != null) {
-        leaderboardData.forEach((entry, index) => {
-            let scorePartsObj = {}
-            
-            if(entry.hasOwnProperty("scoreParts")) {
-                entry.scoreParts.forEach((part, index) => {
-                    scorePartsObj[part.name] = part;
-                })
-            }
-
-            let leaderboardEntry = document.createElement('div');
-            leaderboardEntry.classList.add('leaderboard-entry');
-            if(type != "CTTeam") {
-            leaderboardEntry.addEventListener('click', () => {
-                openProfile('leaderboard', entry.profile);
-            })
-        }
-            leaderboardEntries.appendChild(leaderboardEntry);
-
-            let leaderboardEntryDiv = document.createElement('div');
-            leaderboardEntryDiv.classList.add('leaderboard-entry-div');
-            leaderboardEntry.appendChild(leaderboardEntryDiv);
-
-            let leaderboardEntryRank = document.createElement('p');
-            leaderboardEntryRank.classList.add('leaderboard-entry-rank','black-outline');
-            leaderboardEntryRank.innerHTML = index + ((leaderboardPage - 1)  * leaderboardPageEntryCount) + 1;
-            leaderboardEntryDiv.appendChild(leaderboardEntryRank);
-
-            let leaderboardEntryPlayer = document.createElement('div');
-            leaderboardEntryPlayer.classList.add('leaderboard-entry-player');
-            leaderboardEntryDiv.appendChild(leaderboardEntryPlayer);
-
-            let leaderboardEntryIcon = null;
-            let leaderboardEntryFrame = null;
-            let leaderboardEntryEmblem = null;
-
-            if(type == "CTTeam") {
-                leaderboardEntryIcon = document.createElement('div');
-                leaderboardEntryIcon.classList.add('leaderboard-entry-icon-ct');
-                leaderboardEntryPlayer.appendChild(leaderboardEntryIcon);
-
-                leaderboardEntryFrame = document.createElement('img');
-                leaderboardEntryFrame.classList.add('leaderboard-entry-frame');
-                leaderboardEntryFrame.src = `./Assets/UI/TeamFrame1.png`;
-                leaderboardEntryIcon.appendChild(leaderboardEntryFrame);
-
-                leaderboardEntryEmblem = document.createElement('img');
-                leaderboardEntryEmblem.classList.add('leaderboard-entry-emblem');
-                leaderboardEntryEmblem.src = `./Assets/UI/TeamIcon1.png`;
-                leaderboardEntryIcon.appendChild(leaderboardEntryEmblem);
-            } else {
-                leaderboardEntryIcon = document.createElement('img');
-                leaderboardEntryIcon.classList.add('leaderboard-entry-icon');
-                leaderboardEntryIcon.src = `./Assets/ProfileAvatar/ProfileAvatar01.png`;
-                leaderboardEntryPlayer.appendChild(leaderboardEntryIcon);
-            }
-
-            let leaderboardEntryName = document.createElement('p');
-            leaderboardEntryName.classList.add('leaderboard-entry-name','leaderboard-outline');
-            leaderboardEntryName.innerHTML = entry.displayName;
-            leaderboardEntryPlayer.appendChild(leaderboardEntryName);
-
-            let leaderboardEntryTimeSubmitDiv = document.createElement('div');
-            leaderboardEntryTimeSubmitDiv.classList.add('leaderboard-entry-time-submit-div');
-            leaderboardEntryDiv.appendChild(leaderboardEntryTimeSubmitDiv);
-
-            let leaderboardEntryScore = document.createElement('div')
-            leaderboardEntryScore.classList.add('leaderboard-entry-score');
-            leaderboardEntryDiv.appendChild(leaderboardEntryScore);
-
-            let leaderboardEntryScoreIcon = document.createElement('img');
-            leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon');
-            leaderboardEntryScoreIcon.src = "./Assets/UI/StopWatch.png";
-            leaderboardEntryScore.appendChild(leaderboardEntryScoreIcon);
-            
-            let leaderboardEntryMainScore = document.createElement('p');
-            leaderboardEntryMainScore.classList.add('leaderboard-entry-main-score','leaderboard-outline');
-            leaderboardEntryScore.appendChild(leaderboardEntryMainScore);
-
-            if(metadata.hasOwnProperty('leaderboard') && metadata.leaderboard.includes('races')) {
-                let submittedDate = new Date(metadata.start + scorePartsObj["Time after event start"].score)
-
-                let leaderboardEntryTimeSubmitted = document.createElement('p');
-                leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted','leaderboard-outline');
-                leaderboardEntryTimeSubmitted.innerHTML = submittedDate.toLocaleString();
-                leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmitted);
-
-                let leaderboardEntryTimeSubmittedRelative = document.createElement('p');
-                leaderboardEntryTimeSubmittedRelative.classList.add('leaderboard-entry-time-submitted-relative','leaderboard-outline');
-                leaderboardEntryTimeSubmittedRelative.innerHTML = relativeTime(new Date(), submittedDate);
-                leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
-
-                leaderboardEntryMainScore.innerHTML = formatScoreTime(entry.score);
-            }
-            if(metadata.hasOwnProperty('bossType')) {
-                switch(metadata.scoringType) {
-                    case "GameTime":
-                        let submittedDate = new Date(metadata.start + scorePartsObj["Time after event start"].score)
-
-                        let leaderboardEntryTimeSubmitted = document.createElement('p');
-                        leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted','leaderboard-outline');
-                        leaderboardEntryTimeSubmitted.innerHTML = submittedDate.toLocaleString();
-                        leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmitted);
-
-                        let leaderboardEntryTimeSubmittedRelative = document.createElement('p');
-                        leaderboardEntryTimeSubmittedRelative.classList.add('leaderboard-entry-time-submitted-relative','leaderboard-outline');
-                        leaderboardEntryTimeSubmittedRelative.innerHTML = relativeTime(new Date(), submittedDate);
-                        leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
-
-                        leaderboardEntryMainScore.innerHTML = formatScoreTime(entry.score);
-                        break;
-                    case "LeastCash":
-                        leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
-                        leaderboardEntryScoreIcon.src = `./Assets/UI/LeastCashIconSmall.png`;
-                        leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
-
-                        let leaderboardEntryGameTime = document.createElement('div');
-                        leaderboardEntryGameTime.classList.add('leaderboard-entry-game-time');
-                        leaderboardEntryDiv.appendChild(leaderboardEntryGameTime);
-
-                        let leaderboardEntryGameTimeIcon = document.createElement('img');
-                        leaderboardEntryGameTimeIcon.classList.add('leaderboard-entry-score-icon');
-                        leaderboardEntryGameTimeIcon.src = "./Assets/UI/StopWatch.png";
-                        leaderboardEntryGameTime.appendChild(leaderboardEntryGameTimeIcon);
-
-                        let leaderboardEntryGameTimeValue = document.createElement('p');
-                        leaderboardEntryGameTimeValue.classList.add('leaderboard-entry-game-time-value','leaderboard-outline');
-                        leaderboardEntryGameTimeValue.innerHTML = formatScoreTime(scorePartsObj["Game Time"].score);
-                        leaderboardEntryGameTime.appendChild(leaderboardEntryGameTimeValue);
-                        break;
-                    case "LeastTiers":
-                        leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
-                        leaderboardEntryScoreIcon.src = `./Assets/UI/LeastTiersIconSmall.png`;
-                        leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
-
-                        let leaderboardEntryGameTimeTiers = document.createElement('div');
-                        leaderboardEntryGameTimeTiers.classList.add('leaderboard-entry-game-time');
-                        leaderboardEntryDiv.appendChild(leaderboardEntryGameTimeTiers);
-
-                        let leaderboardEntryGameTimeTiersIcon = document.createElement('img');
-                        leaderboardEntryGameTimeTiersIcon.classList.add('leaderboard-entry-score-icon');
-                        leaderboardEntryGameTimeTiersIcon.src = "./Assets/UI/StopWatch.png";
-                        leaderboardEntryGameTimeTiers.appendChild(leaderboardEntryGameTimeTiersIcon);
-
-                        let leaderboardEntryGameTimeTiersValue = document.createElement('p');
-                        leaderboardEntryGameTimeTiersValue.classList.add('leaderboard-entry-game-time-value','leaderboard-outline');
-                        leaderboardEntryGameTimeTiersValue.innerHTML = formatScoreTime(scorePartsObj["Game Time"].score);
-                        leaderboardEntryGameTimeTiers.appendChild(leaderboardEntryGameTimeTiersValue);
-
-                        leaderboardEntryScore.classList.add('leaderboard-entry-score-tiers')
-                        break;
-                }
-            }
-            if(metadata.hasOwnProperty('tiles')) {
-                leaderboardEntryScoreIcon.src = `./Assets/UI/CtPointsIconSmall.png`;
-                leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
-                leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
-                leaderboardEntryPlayer.classList.add('leaderboard-entry-team');
-            }
-
-            if(!preventRateLimiting){
-                let observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(async observerentry => {
-                        if (observerentry.isIntersecting) {
-                            addRequestToQueue(async () => {
-                                try {
-                                    let userProfile = await getUserProfile(entry.profile);
-                                    if (userProfile != null) {
-                                        if(userProfile.hasOwnProperty('owner')) {
-                                            leaderboardEntryFrame.src = userProfile.frameURL;
-                                            leaderboardEntryEmblem.src = userProfile.iconURL;
-                                            leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                                        } else {
-                                            leaderboardEntryIcon.src = getProfileAvatar(userProfile);
-                                            leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                                        }
-                                        observer.unobserve(observerentry.target);
-                                    }
-                                } catch (error) {
-                                    console.error("Error fetching user profile:", error);
-                                }
-                            });
-                        }
-                    });
-                });
-                observer.observe(leaderboardEntryIcon);
-            }
-            if(profileCache[(entry.profile).split("/").pop()] != null) {
-                let userProfile = profileCache[(entry.profile).split("/").pop()];
-                if(userProfile.hasOwnProperty('owner')) {
-                    leaderboardEntryFrame.src = userProfile.frameURL;
-                    leaderboardEntryEmblem.src = userProfile.iconURL;
-                    leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                } else {
-                    leaderboardEntryIcon.src = getProfileAvatar(userProfile);
-                    leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                }
-            }
-        })
-    } else {
-        let noDataFound = document.createElement('p');
-        noDataFound.classList.add('no-data-found','black-outline');
-        noDataFound.style.width = "250px";
-        noDataFound.innerHTML = "No Data Found";
-        leaderboardEntries.appendChild(noDataFound);
-    }
-}
-
-function generateLeaderboardHeader(columnsType){
-    let leaderboardColumnLabels = document.getElementById('leaderboard-column-labels');
-    leaderboardColumnLabels.innerHTML = "";
-
-    let leaderboardColumnRank = document.createElement('p');
-    leaderboardColumnRank.classList.add('leaderboard-column-rank', 'black-outline');
-    leaderboardColumnRank.innerHTML = "Rank";
-    leaderboardColumnLabels.appendChild(leaderboardColumnRank);
-
-    let leaderboardColumnName = document.createElement('p');
-    leaderboardColumnName.classList.add('leaderboard-column-name', 'black-outline');
-    leaderboardColumnName.innerHTML = "Player";
-    leaderboardColumnLabels.appendChild(leaderboardColumnName);
-
-    switch (columnsType) {
-        case "GameTime":
-            let leaderboardColumnTimeSubmitted = document.createElement('p');
-            leaderboardColumnTimeSubmitted.classList.add('leaderboard-column-time-submitted','black-outline');
-            leaderboardColumnTimeSubmitted.innerHTML = "Time Submitted";
-            leaderboardColumnLabels.appendChild(leaderboardColumnTimeSubmitted);
-
-            let leaderboardColumnTimeScore = document.createElement('p');
-            leaderboardColumnTimeScore.classList.add('leaderboard-column-time-score','black-outline');
-            leaderboardColumnTimeScore.innerHTML = "Game Time";
-            leaderboardColumnLabels.appendChild(leaderboardColumnTimeScore);
-            break;
-        case "LeastCash":
-            let leaderboardColumnCashSpent = document.createElement('p');
-            leaderboardColumnCashSpent.classList.add('leaderboard-column-cash-spent','black-outline');
-            leaderboardColumnCashSpent.innerHTML = "Cash Spent";
-            leaderboardColumnLabels.appendChild(leaderboardColumnCashSpent);
-
-            let leaderboardColumnLCTimeScore = document.createElement('p');
-            leaderboardColumnLCTimeScore.classList.add('leaderboard-column-time-score','black-outline');
-            leaderboardColumnLCTimeScore.innerHTML = "Game Time";
-            leaderboardColumnLabels.appendChild(leaderboardColumnLCTimeScore);
-            break;
-        case "LeastTiers":
-            let leaderboardColumnTiersUsed = document.createElement('p');
-            leaderboardColumnTiersUsed.classList.add('leaderboard-column-tiers-used','black-outline');
-            leaderboardColumnTiersUsed.innerHTML = "Tiers Used";
-            leaderboardColumnLabels.appendChild(leaderboardColumnTiersUsed);
-
-            let leaderboardColumnLTTimeScore = document.createElement('p');
-            leaderboardColumnLTTimeScore.classList.add('leaderboard-column-time-score','black-outline');
-            leaderboardColumnLTTimeScore.innerHTML = "Game Time";
-            leaderboardColumnLabels.appendChild(leaderboardColumnLTTimeScore);
-            break;
-        case "CTTeam":
-            leaderboardColumnName.innerHTML = "Team";
-        case "CTPlayer":
-            let leaderboardColumnCTPoints = document.createElement('p');
-            leaderboardColumnCTPoints.classList.add('leaderboard-column-ct-points','black-outline');
-            leaderboardColumnCTPoints.innerHTML = "CT Points";
-            leaderboardColumnLabels.appendChild(leaderboardColumnCTPoints);
-            break;
-    }
-}
-
 function exitChallengeModel(source){
     document.getElementById('challenge-content').style.display = "none";
     document.getElementById(`${source}-content`).style.display = "flex";
@@ -7287,531 +6745,6 @@ function exitMapModel(source){
     document.getElementById(`${source}-content`).style.display = "flex";
 }
 
-async function openProfile(source, profile){
-    profile = await getUserProfile(profile)
-    if (profile == null) { return; }
-    resetScroll();
-    document.getElementById(`${source}-content`).style.display = "none";
-    let publicProfileContent = document.getElementById('publicprofile-content');
-    publicProfileContent.style.display = "flex";
-    publicProfileContent.innerHTML = "";
-    
-    let publicProfileDiv = document.createElement('div');
-    publicProfileDiv.classList.add('publicprofile-div');
-    publicProfileContent.appendChild(publicProfileDiv);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('error-modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        exitProfile(source);
-    })
-    publicProfileDiv.appendChild(modalClose);
-
-    let profileHeader = document.createElement('div');
-    profileHeader.classList.add('profile-header','profile-banner');
-    profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${getProfileBanner(profile)}')`;
-    publicProfileDiv.appendChild(profileHeader);
-    profileHeader.appendChild(generateAvatar(100, getProfileAvatar(profile)));
-
-    let profileTopBottom = document.createElement('div');
-    profileTopBottom.classList.add('profile-top-bottom');
-    profileHeader.appendChild(profileTopBottom);
-
-    let profileTop = document.createElement('div');
-    profileTop.classList.add('profile-top-public');
-    profileTopBottom.appendChild(profileTop);
-
-    let profileName = document.createElement('p');
-    profileName.classList.add('profile-name','black-outline');
-    profileName.innerHTML = profile["displayName"];
-    profileTop.appendChild(profileName);
-
-    let rankStar = document.createElement('div');
-    rankStar.classList.add('rank-star-public');
-    profileTop.appendChild(rankStar);
-
-    let rankImg = document.createElement('img');
-    rankImg.classList.add('rank-img');
-    rankImg.src = '../Assets/UI/LvlHolder.png';
-    rankStar.appendChild(rankImg);
-
-    let rankText = document.createElement('p');
-    rankText.classList.add('rank-text','black-outline');
-    rankText.innerHTML = profile.rank;
-    rankStar.appendChild(rankText);
-
-    if (profile.veteranRank > 0) {
-        let rankStarVeteran = document.createElement('div');
-        rankStarVeteran.classList.add('rank-star-public');
-        profileTop.appendChild(rankStarVeteran);
-
-        let rankImgVeteran = document.createElement('img');
-        rankImgVeteran.classList.add('rank-img');
-        rankImgVeteran.src = '../Assets/UI/LvlHolderVeteran.png';
-        rankStarVeteran.appendChild(rankImgVeteran);
-
-        let rankTextVeteran = document.createElement('p');
-        rankTextVeteran.classList.add('rank-text','black-outline');
-        rankTextVeteran.innerHTML = profile.veteranRank;
-        rankStarVeteran.appendChild(rankTextVeteran);
-    }
-
-    let profileFollowers = document.createElement('div')
-    profileFollowers.classList.add('profile-followers');
-    profileTop.appendChild(profileFollowers);
-
-    let followersLabel = document.createElement('p');
-    followersLabel.classList.add('followers-label','black-outline');
-    followersLabel.innerHTML = 'Followers';
-    profileFollowers.appendChild(followersLabel);
-
-    let followersCount = document.createElement('p');
-    followersCount.classList.add('followers-count');
-    followersCount.innerHTML = profile["followers"].toLocaleString();
-    profileFollowers.appendChild(followersCount);
-
-
-    let belowProfileHeader = document.createElement('div');
-    belowProfileHeader.classList.add('below-profile-header');
-    publicProfileDiv.appendChild(belowProfileHeader);
-
-    let leftColumnDiv = document.createElement('div');
-    leftColumnDiv.classList.add('left-column-div');
-    belowProfileHeader.appendChild(leftColumnDiv);
-
-    let leftColumnHeader = document.createElement('div');
-    leftColumnHeader.classList.add('left-column-header');
-    leftColumnDiv.appendChild(leftColumnHeader);
-
-    let leftColumnHeaderText = document.createElement('p');
-    leftColumnHeaderText.classList.add('column-header-text','black-outline');
-    leftColumnHeaderText.innerHTML = 'Medals';
-    leftColumnHeader.appendChild(leftColumnHeaderText);
-
-    let publicMedals = {};
-    let tempCoop = {};
-    for (let [key, value] of Object.entries(medalMap)){
-        publicMedals["Medal" + value] = profile["_medalsSinglePlayer"][key] || 0;
-        tempCoop["MedalCoop" + value] = profile["_medalsMultiplayer"][key] || 0;
-    }
-    publicMedals = {...publicMedals, ...tempCoop};
-    publicMedals["PhayzeEliteBadge"] = profile["bossBadgesElite"]["Phayze"] || 0;
-    publicMedals["PhayzeBadge"] = profile["bossBadgesNormal"]["Phayze"] || 0;
-    publicMedals["DreadbloonEliteBadge"] = profile["bossBadgesElite"]["Dreadbloon"] || 0;
-    publicMedals["DreadbloonBadge"] = profile["bossBadgesNormal"]["Dreadbloon"] || 0;
-    publicMedals["VortexEliteBadge"] = profile["bossBadgesElite"]["Vortex"] || 0;
-    publicMedals["VortexBadge"] = profile["bossBadgesNormal"]["Vortex"] || 0;
-    publicMedals["LychEliteBadge"] = profile["bossBadgesElite"]["Lych"] || 0;
-    publicMedals["LychBadge"] = profile["bossBadgesNormal"]["Lych"] || 0;
-    publicMedals["BloonariusEliteBadge"] = profile["bossBadgesElite"]["Bloonarius"] || 0;
-    publicMedals["BloonariusBadge"] = profile["bossBadgesNormal"]["Bloonarius"] || 0;
-    publicMedals["MedalEventBronzeMedal"] = profile["_medalsRace"]["Bronze"] || 0;
-    publicMedals["MedalEventSilverMedal"] = profile["_medalsRace"]["Silver"] || 0;
-    publicMedals["MedalEventGoldSilverMedal"] = profile["_medalsRace"]["GoldSilver"] || 0;
-    publicMedals["MedalEventDoubleGoldMedal"] = profile["_medalsRace"]["DoubleGold"] || 0;
-    publicMedals["MedalEventGoldDiamondMedal"] = profile["_medalsRace"]["GoldDiamond"] || 0;
-    publicMedals["MedalEventDiamondMedal"] = profile["_medalsRace"]["Diamond"] || 0;
-    publicMedals["MedalEventRedDiamondMedal"] = profile["_medalsRace"]["RedDiamond"] || 0;
-    publicMedals["MedalEventBlackDiamondMedal"] = profile["_medalsRace"]["BlackDiamond"] || 0;
-    publicMedals["OdysseyStarIcon"] = profile.gameplay["totalOdysseyStars"] || 0;
-    publicMedals["BossMedalEventBronzeMedal"] = profile["_medalsBoss"]["Bronze"] || 0;
-    publicMedals["BossMedalEventSilverMedal"] = profile["_medalsBoss"]["Silver"] || 0;
-    publicMedals["BossMedalEventDoubleSilverMedal"] = profile["_medalsBoss"]["DoubleSilver"] || 0;
-    publicMedals["BossMedalEventGoldSilverMedal"] = profile["_medalsBoss"]["GoldSilver"] || 0;
-    publicMedals["BossMedalEventDoubleGoldMedal"] = profile["_medalsBoss"]["DoubleGold"] || 0;
-    publicMedals["BossMedalEventGoldDiamondMedal"] = profile["_medalsBoss"]["GoldDiamond"] || 0;
-    publicMedals["BossMedalEventDiamondMedal"] = profile["_medalsBoss"]["Diamond"] || 0;
-    publicMedals["BossMedalEventRedDiamondMedal"] = profile["_medalsBoss"]["RedDiamond"] || 0;
-    publicMedals["BossMedalEventBlackDiamondMedal"] = profile["_medalsBoss"]["BlackDiamond"] || 0;
-    publicMedals["EliteBossMedalEventBronzeMedal"] = profile["_medalsBossElite"]["Bronze"] || 0;
-    publicMedals["EliteBossMedalEventSilverMedal"] = profile["_medalsBossElite"]["Silver"] || 0;
-    publicMedals["EliteBossMedalEventDoubleSilverMedal"] = profile["_medalsBossElite"]["DoubleSilver"] || 0;
-    publicMedals["EliteBossMedalEventGoldSilverMedal"] = profile["_medalsBossElite"]["GoldSilver"] || 0;
-    publicMedals["EliteBossMedalEventDoubleGoldMedal"] = profile["_medalsBossElite"]["DoubleGold"] || 0;
-    publicMedals["EliteBossMedalEventGoldDiamondMedal"] = profile["_medalsBossElite"]["GoldDiamond"] || 0;
-    publicMedals["EliteBossMedalEventDiamondMedal"] = profile["_medalsBossElite"]["Diamond"] || 0;
-    publicMedals["EliteBossMedalEventRedDiamondMedal"] = profile["_medalsBossElite"]["RedDiamond"] || 0;
-    publicMedals["EliteBossMedalEventBlackDiamondMedal"] = profile["_medalsBossElite"]["BlackDiamond"] || 0;
-    publicMedals["CtLocalPlayerBronzeMedal"] = profile["_medalsCTLocal"]["Bronze"] || 0;
-    publicMedals["CtLocalPlayerSilverMedal"] = profile["_medalsCTLocal"]["Silver"] || 0;
-    publicMedals["CtLocalPlayerDoubleGoldMedal"] = profile["_medalsCTLocal"]["DoubleGold"] || 0;
-    publicMedals["CtLocalPlayerGoldDiamondMedal"] = profile["_medalsCTLocal"]["GoldDiamond"] || 0;
-    publicMedals["CtLocalPlayerBlueDiamondMedal"] = profile["_medalsCTLocal"]["BlueDiamond"] || 0;
-    publicMedals["CtLocalPlayerRedDiamondMedal"] = profile["_medalsCTLocal"]["RedDiamond"] || 0;
-    publicMedals["CtLocalPlayerBlackDiamondMedal"] = profile["_medalsCTLocal"]["BlackDiamond"] || 0;
-    publicMedals["CtGlobalPlayerBronzeMedal"] = profile["_medalsCTGlobal"]["Bronze"] || 0;
-    publicMedals["CtGlobalPlayerSilverMedal"] = profile["_medalsCTGlobal"]["Silver"] || 0;
-    publicMedals["CtGlobalPlayerDoubleSilverMedal"] = profile["_medalsCTGlobal"]["DoubleSilver"] || 0;
-    publicMedals["CtGlobalPlayerGoldSilverMedal"] = profile["_medalsCTGlobal"]["GoldSilver"] || 0;
-    publicMedals["CtGlobalPlayerDoubleGoldMedal"] = profile["_medalsCTGlobal"]["DoubleGold"] || 0;
-    publicMedals["CtGlobalPlayerGoldDiamondMedal"] = profile["_medalsCTGlobal"]["GoldDiamond"] || 0;
-    publicMedals["CtGlobalPlayerDiamondMedal"] = profile["_medalsCTGlobal"]["Diamond"] || 0;
-    publicMedals["CtGlobalPlayerRedDiamondMedal"] = profile["_medalsCTGlobal"]["RedDiamond"] || 0;
-    publicMedals["CtGlobalPlayerBlackDiamondMedal"] = profile["_medalsCTGlobal"]["BlackDiamond"] || 0;
-
-    let currencyAndMedalsDiv = document.createElement('div');
-    currencyAndMedalsDiv.classList.add('currency-medals-div');
-    leftColumnDiv.appendChild(currencyAndMedalsDiv);
-
-    let medalsDiv = document.createElement('div');
-    medalsDiv.classList.add('medals-div');
-    currencyAndMedalsDiv.appendChild(medalsDiv);
-
-    for (let [medal, num] of Object.entries(publicMedals)){
-        if(num === 0) { continue; }
-        let medalDiv = document.createElement('div');
-        medalDiv.classList.add('medal-div');
-        medalDiv.title = constants.medalLabels[medal];
-        medalsDiv.appendChild(medalDiv);
-
-        let medalImg = document.createElement('img');
-        medalImg.classList.add('medal-img');
-        medalImg.src = getMedalIcon(medal);
-        medalImg.style.display = "none";
-        medalImg.addEventListener('load', () => {
-            if(medalImg.width < medalImg.height){
-                medalImg.style.width = `${ratioCalc(3,70,256,0,medalImg.width)}px`
-            } else {
-                medalImg.style.height = `${ratioCalc(3,70,256,0,medalImg.height)}px`
-            }
-            medalImg.style.removeProperty('display');
-        })
-        medalDiv.appendChild(medalImg);
-
-        let medalText = document.createElement('p');
-        medalText.classList.add('medal-text','black-outline');
-        medalText.innerHTML = num.toLocaleString();
-        medalDiv.appendChild(medalText);
-
-        tippy(medalDiv, {
-            content: constants.medalLabels[medal],
-            placement: 'top',
-            theme: 'speech_bubble'
-        })
-    }
-
-    let topHeroesMonkesyDiv = document.createElement('div');
-    topHeroesMonkesyDiv.classList.add('top-heroes-monkeys-div');
-    leftColumnDiv.appendChild(topHeroesMonkesyDiv);
-
-    let topHeroesDiv = document.createElement('div');
-    topHeroesDiv.classList.add('top-heroes-div');
-    topHeroesMonkesyDiv.appendChild(topHeroesDiv);
-
-    let topHeroesTopDiv = document.createElement('div');
-    topHeroesTopDiv.classList.add('top-heroes-top-div');
-    topHeroesDiv.appendChild(topHeroesTopDiv);
-
-    let topHeroesTopRibbonDiv = document.createElement('div');
-    topHeroesTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
-    topHeroesTopDiv.appendChild(topHeroesTopRibbonDiv);
-
-    let topHeroesText = document.createElement('p');
-    topHeroesText.classList.add('top-heroes-text','black-outline');
-    topHeroesText.innerHTML = 'Top Heroes';
-    topHeroesTopRibbonDiv.appendChild(topHeroesText);
-
-    let mapsProgressCoopToggle = document.createElement('div');
-    mapsProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
-    topHeroesTopDiv.appendChild(mapsProgressCoopToggle);
-
-    let mapsProgressCoopToggleText = document.createElement('p');
-    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
-    mapsProgressCoopToggleText.innerHTML = "Show All: ";
-    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
-
-    let mapsProgressCoopToggleInput = document.createElement('input');
-    mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
-    mapsProgressCoopToggleInput.type = 'checkbox';
-    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
-
-    let topHeroesList = document.createElement('div');
-    topHeroesList.classList.add('top-heroes-list');
-    topHeroesDiv.appendChild(topHeroesList);
-
-    let top3HeroesDiv = document.createElement('div');
-    top3HeroesDiv.classList.add('top-3-heroes-div');
-    topHeroesList.appendChild(top3HeroesDiv);
-
-    let otherHeroesDiv = document.createElement('div');
-    otherHeroesDiv.classList.add('other-heroes-div');
-    otherHeroesDiv.style.display = 'none';
-    topHeroesList.appendChild(otherHeroesDiv);
-
-    mapsProgressCoopToggleInput.addEventListener('change', () => {
-        mapsProgressCoopToggleInput.checked ? otherHeroesDiv.style.display = 'flex' : otherHeroesDiv.style.display = 'none';
-    })
-
-    let counter = 0;
-
-    let heroesList = Object.keys(constants.heroesInOrder);
-
-    for (let [hero, xp] of Object.entries(profile["heroesPlaced"]).sort((a, b) => b[1] - a[1])){
-        if(xp === 0) { continue; }
-        if(!heroesList.includes(hero)) { continue; }
-        let heroDiv = document.createElement('div');
-        heroDiv.classList.add('hero-div');
-        counter < 3 ? top3HeroesDiv.appendChild(heroDiv) : otherHeroesDiv.appendChild(heroDiv);
-
-        let heroImg = document.createElement('img');
-        heroImg.classList.add('hero-img');
-        heroImg.src = getHeroPortrait(hero,1);
-        heroImg.style.display = "none";
-        heroImg.addEventListener('load', () => {
-            if(heroImg.width < heroImg.height){
-                heroImg.style.width = `${ratioCalc(3,150,1920,0,heroImg.width)}px`
-            } else {
-                heroImg.style.height = `${ratioCalc(3,150,1920,0,heroImg.height)}px`
-            }
-            heroImg.style.removeProperty('display');
-        })
-        heroDiv.appendChild(heroImg);
-
-        let heroText = document.createElement('p');
-        heroText.classList.add('hero-text','black-outline');
-        heroText.innerHTML = xp.toLocaleString();
-        heroDiv.appendChild(heroText);
-        counter++;
-
-        tippy(heroDiv, {
-            content: `${getLocValue(hero)} Placed ${xp.toLocaleString()} Times`,
-            placement: 'top',
-            theme: 'speech_bubble'
-        })
-    }
-
-    let topTowersDiv = document.createElement('div');
-    topTowersDiv.classList.add('top-heroes-div');
-    topHeroesMonkesyDiv.appendChild(topTowersDiv);
-
-    let topTowersTopDiv = document.createElement('div');
-    topTowersTopDiv.classList.add('top-heroes-top-div');
-    topTowersDiv.appendChild(topTowersTopDiv);
-
-    let topTowersTopRibbonDiv = document.createElement('div');
-    topTowersTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
-    topTowersTopDiv.appendChild(topTowersTopRibbonDiv);
-
-    let topTowersText = document.createElement('p');
-    topTowersText.classList.add('top-heroes-text','black-outline');
-    topTowersText.innerHTML = 'Top Towers';
-    topTowersTopRibbonDiv.appendChild(topTowersText);
-
-    let mapsProgressCoopToggle2 = document.createElement('div');
-    mapsProgressCoopToggle2.classList.add('maps-progress-coop-toggle');
-    topTowersTopDiv.appendChild(mapsProgressCoopToggle2);
-
-    let mapsProgressCoopToggleText2 = document.createElement('p');
-    mapsProgressCoopToggleText2.classList.add('maps-progress-coop-toggle-text','black-outline');
-    mapsProgressCoopToggleText2.innerHTML = "Show All: ";
-    mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleText2);
-
-    let mapsProgressCoopToggleInput2 = document.createElement('input');
-    mapsProgressCoopToggleInput2.classList.add('maps-progress-coop-toggle-input');
-    mapsProgressCoopToggleInput2.type = 'checkbox';
-    mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleInput2);
-    
-    let topTowersList = document.createElement('div');
-    topTowersList.classList.add('top-heroes-list');
-    topTowersDiv.appendChild(topTowersList);
-
-    let top3TowersDiv = document.createElement('div');
-    top3TowersDiv.classList.add('top-3-heroes-div');
-    topTowersList.appendChild(top3TowersDiv);
-
-    let otherTowersDiv = document.createElement('div');
-    otherTowersDiv.classList.add('other-heroes-div');
-    otherTowersDiv.style.display = 'none';
-    topTowersList.appendChild(otherTowersDiv);
-
-    mapsProgressCoopToggleInput2.addEventListener('change', () => {
-        mapsProgressCoopToggleInput2.checked ? otherTowersDiv.style.display = 'flex' : otherTowersDiv.style.display = 'none';
-    })
-
-    counter = 0;
-    let towersList = Object.keys(constants.towersInOrder);
-
-    for (let [tower, xp] of Object.entries(profile["towersPlaced"]).sort((a, b) => b[1] - a[1])){
-        if(xp === 0) { continue; }
-        if(!towersList.includes(tower)) { continue; }
-        let towerDiv = document.createElement('div');
-        towerDiv.classList.add('hero-div');
-        counter < 3 ? top3TowersDiv.appendChild(towerDiv) : otherTowersDiv.appendChild(towerDiv);
-
-        let towerImg = document.createElement('img');
-        towerImg.classList.add('hero-img');
-        towerImg.src = getInstaContainerIcon(tower,"000");
-        towerDiv.appendChild(towerImg);
-
-        let towerText = document.createElement('p');
-        towerText.classList.add('hero-text','black-outline');
-        towerText.innerHTML = xp.toLocaleString();
-        towerDiv.appendChild(towerText);
-        counter++;
-
-        tippy(towerDiv, {
-            content: `${getLocValue(tower)} Placed ${xp.toLocaleString()} Times`,
-            placement: 'top',
-            theme: 'speech_bubble'
-        })
-    }
-
-    let topParagonsDiv = document.createElement('div');
-    topParagonsDiv.classList.add('top-heroes-div');
-    topHeroesMonkesyDiv.appendChild(topParagonsDiv);
-
-    let topParagonsTopDiv = document.createElement('div');
-    topParagonsTopDiv.classList.add('top-heroes-top-div');
-    topParagonsDiv.appendChild(topParagonsTopDiv);
-
-    let topParagonsTopRibbonDiv = document.createElement('div');
-    topParagonsTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
-    topParagonsTopDiv.appendChild(topParagonsTopRibbonDiv);
-
-    let topParagonsText = document.createElement('p');
-    topParagonsText.classList.add('top-heroes-text','black-outline');
-    topParagonsText.innerHTML = 'Top Towers';
-    topParagonsTopRibbonDiv.appendChild(topParagonsText);
-
-    let mapsProgressCoopToggle3 = document.createElement('div');
-    mapsProgressCoopToggle3.classList.add('maps-progress-coop-toggle');
-    topParagonsTopDiv.appendChild(mapsProgressCoopToggle3);
-
-    let mapsProgressCoopToggleText3 = document.createElement('p');
-    mapsProgressCoopToggleText3.classList.add('maps-progress-coop-toggle-text','black-outline');
-    mapsProgressCoopToggleText3.innerHTML = "Show All: ";
-    mapsProgressCoopToggle3.appendChild(mapsProgressCoopToggleText3);
-
-    let mapsProgressCoopToggleInput3 = document.createElement('input');
-    mapsProgressCoopToggleInput3.classList.add('maps-progress-coop-toggle-input');
-    mapsProgressCoopToggleInput3.type = 'checkbox';
-    mapsProgressCoopToggle3.appendChild(mapsProgressCoopToggleInput3);
-    
-    let topParagonsList = document.createElement('div');
-    topParagonsList.classList.add('top-heroes-list');
-    topParagonsDiv.appendChild(topParagonsList);
-
-    let top3ParagonsDiv = document.createElement('div');
-    top3ParagonsDiv.classList.add('top-3-heroes-div');
-    topParagonsList.appendChild(top3ParagonsDiv);
-
-    let otherParagonsDiv = document.createElement('div');
-    otherParagonsDiv.classList.add('other-heroes-div');
-    otherParagonsDiv.style.display = 'none';
-    topParagonsList.appendChild(otherParagonsDiv);
-
-    mapsProgressCoopToggleInput2.addEventListener('change', () => {
-        mapsProgressCoopToggleInput2.checked ? otherTowersDiv.style.display = 'flex' : otherTowersDiv.style.display = 'none';
-    })
-
-    counter = 0;
-    let paragonList = Object.keys(constants.towersInOrder);
-
-    for (let [tower, xp] of Object.entries(profile.stats["paragonsPurchasedByName"]).sort((a, b) => b[1] - a[1])){
-        if(xp === 0) { continue; }
-        if(!towersList.includes(tower)) { continue; }
-        let towerDiv = document.createElement('div');
-        towerDiv.classList.add('hero-div');
-        counter < 3 ? top3ParagonsDiv.appendChild(towerDiv) : otherParagonsDiv.appendChild(towerDiv);
-
-        let towerImg = document.createElement('img');
-        towerImg.classList.add('hero-img');
-        towerImg.src = getInstaContainerIcon(tower,"000");
-        towerDiv.appendChild(towerImg);
-
-        let towerText = document.createElement('p');
-        towerText.classList.add('hero-text','black-outline');
-        towerText.innerHTML = xp.toLocaleString();
-        towerDiv.appendChild(towerText);
-        counter++;
-
-        tippy(towerDiv, {
-            content: `${getLocValue(tower)} Placed ${xp.toLocaleString()} Times`,
-            placement: 'top',
-            theme: 'speech_bubble'
-        })
-    }
-
-    let rightColumnDiv = document.createElement('div');
-    rightColumnDiv.classList.add('right-column-div');
-    belowProfileHeader.appendChild(rightColumnDiv);
-
-    let rightColumnHeader = document.createElement('div');
-    rightColumnHeader.classList.add('overview-right-column-header');
-    rightColumnDiv.appendChild(rightColumnHeader);
-
-    let rightColumnHeaderText = document.createElement('p');
-    rightColumnHeaderText.classList.add('column-header-text','black-outline');
-    rightColumnHeaderText.innerHTML = 'Overall Stats';
-    rightColumnHeader.appendChild(rightColumnHeaderText);
-
-    let statsPublic = {};
-    statsPublic["Games Played"] = profile.gameplay["gameCount"];
-    statsPublic["Games Won"] = profile.gameplay["gamesWon"];
-    statsPublic["Highest Round (All Time)"] = profile.gameplay["highestRound"];
-    statsPublic["Highest Round (CHIMPS)"] = profile.gameplay["highestRoundCHIMPS"];
-    statsPublic["Highest Round (Deflation)"] = profile.gameplay["highestRoundDeflation"];
-    statsPublic["Monkeys Placed"] = profile.gameplay["monkeysPlaced"];
-    statsPublic["Total Pop Count"] = profile.bloonsPopped["bloonsPopped"];
-    statsPublic["Total Co-Op Pop Count"] = profile.bloonsPopped["coopBloonsPopped"];
-    statsPublic["Camo Bloons Popped"] = profile.bloonsPopped["camosPopped"];
-    statsPublic["Lead Bloons Popped"] = profile.bloonsPopped["leadsPopped"];
-    statsPublic["Purple Bloons Popped"] = profile.bloonsPopped["purplesPopped"];
-    statsPublic["Regrow Bloons Popped"] = profile.bloonsPopped["regrowsPopped"];
-    statsPublic["Ceramic Bloons Popped"] = profile.bloonsPopped["ceramicsPopped"];
-    statsPublic["MOABs Popped"] = profile.bloonsPopped["moabsPopped"];
-    statsPublic["BFBs Popped"] = profile.bloonsPopped["bfbsPopped"];
-    statsPublic["ZOMGs Popped"] = profile.bloonsPopped["zomgsPopped"];
-    statsPublic["DDTs Popped"] = profile.bloonsPopped["ddtsPopped"];
-    statsPublic["BADs Popped"] = profile.bloonsPopped["badsPopped"];
-    statsPublic["Bloons Leaked"] = profile.bloonsPopped["bloonsLeaked"];
-    statsPublic["Cash Generated"] = profile.gameplay["cashEarned"];
-    statsPublic["Cash Gifted"] = profile.gameplay["coopCashGiven"];
-    statsPublic["Abilities Used"] = profile.gameplay["abilitiesUsed"];
-    statsPublic["Powers Used"] = profile.gameplay["powersUsed"];
-    statsPublic["Insta Monkeys Used"] = profile.gameplay["instaMonkeysUsed"];
-    statsPublic["Daily Reward Chests Opened"] = profile.gameplay["dailyRewards"];
-    statsPublic["Challenges Completed"] = profile.gameplay["challengesCompleted"];
-    statsPublic["Achievements"] = `${profile["achievements"]}/150`;
-    statsPublic["Odysseys Completed"] = profile.gameplay["totalOdysseysCompleted"];
-    statsPublic["Lifetime Trophies"] = profile.gameplay["totalTrophiesEarned"];
-    statsPublic["Necro Bloons Reanimated"] = profile.bloonsPopped["necroBloonsReanimated"];
-    statsPublic["Transforming Tonics Used"] = profile.bloonsPopped["transformingTonicsUsed"];
-    statsPublic["Most Experienced Monkey"] = getLocValue(profile["mostExperiencedMonkey"]);
-    statsPublic["Insta Monkey Collection"] = `${profile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}`;
-    statsPublic["Collection Chests Opened"] = profile.gameplay["collectionChestsOpened"];
-    statsPublic["Golden Bloons Popped"] = profile.bloonsPopped["goldenBloonsPopped"];
-    statsPublic["Monkey Teams Wins"] = profile.gameplay["monkeyTeamsWins"];
-    statsPublic["Bosses Popped"] = profile.bloonsPopped["bossesPopped"];
-    statsPublic["Damage Done To Bosses"] = profile.gameplay["damageDoneToBosses"];
-
-    let profileStatsDiv = document.createElement('div');
-    profileStatsDiv.classList.add('profile-stats');
-    rightColumnDiv.appendChild(profileStatsDiv);
-
-    for (let [key, value] of Object.entries(statsPublic)){
-        let stat = document.createElement('div');
-        stat.classList.add('stat');
-        profileStatsDiv.appendChild(stat);
-
-        let statName = document.createElement('p');
-        statName.classList.add('stat-name');
-        statName.innerHTML = key;
-        stat.appendChild(statName);
-
-        let statValue = document.createElement('p');
-        statValue.classList.add('stat-value');
-        statValue.innerHTML = value.toLocaleString();
-        stat.appendChild(statValue);
-    }
-}
-
-function exitProfile(source){
-    document.getElementById('publicprofile-content').style.display = "none";
-    document.getElementById(`${source}-content`).style.display = "flex";
-}
-
 async function openRelics(source, tilesLink, eventDates) {
     let data = await getCTTiles(tilesLink)
     if (data == null) { return; }
@@ -7819,6 +6752,8 @@ async function openRelics(source, tilesLink, eventDates) {
     let relicsContent = document.getElementById('relics-content');
     relicsContent.style.display = "flex";
     relicsContent.innerHTML = "";
+
+    addToBackQueue({"source": source, "destination": "relics"});
 
     let relicContainer = document.createElement('div');
     relicContainer.classList.add('relic-container');
@@ -8069,6 +7004,7 @@ function changeBrowserTab(selected){
             break;
     }
     generateBrowser(selected);
+    addToBackQueue({"source": "explore", "destination": 'browser'});
 }
 
 function generateBrowser(type){
@@ -8990,6 +7926,8 @@ async function showMapModel(source, metadata) {
     mapContent.innerHTML = "";
     document.getElementById(`${source}-content`).style.display = "none";
 
+    addToBackQueue({ source: source, destination: 'map' })
+
     let challengeExtraData = processChallenge(metadata);
 
     let challengeModel = document.createElement('div');
@@ -9030,7 +7968,8 @@ async function showMapModel(source, metadata) {
     modalClose.classList.add('modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
-        exitMapModel(source);
+        // exitMapModel(source);
+        goBack();
     })
     challengeHeaderRightTop.appendChild(modalClose);
 
@@ -9240,11 +8179,12 @@ function generateExtrasPage() {
     explorePage.appendChild(selectorsDiv);
 
     let selectors = [
-        'Custom Round Sets', 
+        // 'Custom Round Sets', 
         'Collection Event Odds',
         // 'Monkey Money Helper', 
         // 'Export Data', 
         'Rogue Legends Artifacts',
+        'Challenge & Map Browser',
         'Settings',
         'Send Feedback',
         "Use Code 'HalfHydra' <br>in the BTD6 Shop!"
@@ -9290,6 +8230,9 @@ function generateExtrasPage() {
             case "Rogue Legends Artifacts":
                 selectorImg.src = '../Assets/UI/RogueSiteBtn.png';
                 break;
+            case "Challenge & Map Browser":
+                selectorImg.src = '../Assets/UI/PatchNotesMonkeyIcon.png';
+                break;
             default: 
                 selectorImg.src = '../Assets/UI/WoodenRoundButton.png';
                 break;
@@ -9314,7 +8257,7 @@ function changeExtrasTab(selected){
             generateRoundsets();
             break;
         case "Collection Event Odds": 
-            changeTab('progress');
+            changeTab('profile');
             currentInstaView = "collection";
             changeProgressTab('InstaMonkeys');
             break;
@@ -9322,13 +8265,23 @@ function changeExtrasTab(selected){
             window.open('https://forms.gle/Tg1PuRNj2ftojMde6', '_blank');
             break;
         case "Use Code 'HalfHydra' <br>in the BTD6 Shop!":
+            addToBackQueue({ callback: generateExtrasPage });
             generateArticle("CreatorSupport")
             break;
         case 'Settings':
+            addToBackQueue({ callback: generateExtrasPage });
             generateSettings();
             break;
         case "Rogue Legends Artifacts":
-            window.location.href = "https://btd6apiexplorer.github.io/rogue";
+            // window.location.href = "https://btd6apiexplorer.github.io/rogue";
+            generateRogueSelectors();
+            document.getElementById('extras-content').style.display = "none";
+            document.getElementById('rogue-content').style.display = "flex";
+            break;
+        case "Challenge & Map Browser":
+            generateExplore();
+            document.getElementById('extras-content').style.display = "none";
+            document.getElementById('explore-content').style.display = "flex";
             break;
     }
 }
@@ -9394,7 +8347,7 @@ function generateArticle(content){
 }
 
 function generateRoundsets() {
-    let roundsetsContent = document.getElementById('extras-content');
+    let roundsetsContent = document.getElementById('rounds-content');
     roundsetsContent.innerHTML = "";
 
     let roundsetPage = document.createElement('div');
@@ -9420,7 +8373,7 @@ function generateRoundsets() {
         roundsetDiv.classList.add('roundset-selector-div');
         roundsetDiv.addEventListener('click', () => {
             showLoading();
-            showRoundsetModel('extras', data.roundset);
+            showRoundsetModel('rounds', data.roundset);
         })
         selectorsDiv.appendChild(roundsetDiv);
 
@@ -9481,7 +8434,7 @@ function generateRoundsets() {
         roundsetDiv.classList.add('roundset-selector-div', 'wood-container');
         roundsetDiv.addEventListener('click', () => {
             showLoading();
-            showRoundsetModel('extras', roundset);
+            showRoundsetModel('rounds', roundset);
         })
         selectorsDiv.appendChild(roundsetDiv);
 
@@ -9511,7 +8464,7 @@ function generateRoundsets() {
         roundsetDiv.classList.add('roundset-selector-div','veteran-container'); 
         roundsetDiv.addEventListener('click', () => {
             showLoading();
-            showRoundsetModel('extras', roundset);
+            showRoundsetModel('rounds', roundset);
         })
         selectorsDiv.appendChild(roundsetDiv);
 
@@ -9545,7 +8498,7 @@ function generateRoundsets() {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('other-roundset-selector-div');
         roundsetDiv.addEventListener('click', () => {
-            showRoundsetModel('extras', roundset);
+            showRoundsetModel('rounds', roundset);
         })
         bossRoundsetDiv.appendChild(roundsetDiv);
 
@@ -9568,7 +8521,7 @@ function generateRoundsets() {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('other-roundset-selector-div');
         roundsetDiv.addEventListener('click', () => {
-            showRoundsetModel('extras', roundset);
+            showRoundsetModel('rounds', roundset);
         })
         otherRoundsetDiv.appendChild(roundsetDiv);
 
@@ -9601,7 +8554,7 @@ function generateRoundsets() {
         roundsetDiv.classList.add('roundset-selector-div');
         roundsetDiv.addEventListener('click', () => {
             showLoading();
-            showRoundsetModel('extras', data.roundset);
+            showRoundsetModel('rounds', data.roundset);
         })
         selectorsDiv.appendChild(roundsetDiv);
 
@@ -9676,7 +8629,7 @@ function generateRoundsets() {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('sku-roundset-selector-div');
         roundsetDiv.addEventListener('click', () => {
-            showRoundsetModel('extras', roundset);
+            showRoundsetModel('rounds', roundset);
         })
         skuRoundsetsDiv.appendChild(roundsetDiv);
 
@@ -9688,10 +8641,11 @@ function generateRoundsets() {
 }
 
 async function showRoundsetModel(source, roundset) {
-    let roundsetContent = document.getElementById('rounds-content');
+    let roundsetContent = document.getElementById('roundsets-content');
     roundsetContent.style.display = "flex";
     roundsetContent.innerHTML = "";
     document.getElementById(`${source}-content`).style.display = "none";
+    addToBackQueue({"source": source, "destination": "roundsets"});
     resetScroll();
 
     let roundsetData = await fetch(`./data/${roundset}.json`).then(response => response.json());
@@ -9734,8 +8688,9 @@ async function showRoundsetModel(source, roundset) {
     modalClose.classList.add('modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
-        roundsetContent.style.display = "none";
-        document.getElementById(`${source}-content`).style.display = "flex";
+        // roundsetContent.style.display = "none";
+        // document.getElementById(`${source}-content`).style.display = "flex";
+        goBack()
     })
     rightDiv.appendChild(modalClose);
 
@@ -11030,34 +9985,11 @@ function generateTrophyStoreContainer(filter, display, counter) {
 function generateTrophyStorePopout(key) {
     let data = trophyStoreItemsJSON[key];
 
-    let modal = document.createElement('div');
-    modal.classList.add('error-modal-overlay');
-    document.body.appendChild(modal);
-
     let modalContent = document.createElement('div');
-    modalContent.classList.add('collection-modal');
-    modal.appendChild(modalContent);
+    // modalContent.classList.add('collection-modal');
+    // modal.appendChild(modalContent);
 
-    let modalHeaderDiv = document.createElement('div');
-    modalHeaderDiv.classList.add('collection-modal-header');
-    modalContent.appendChild(modalHeaderDiv);
-
-    let collectionHeaderModalLeft = document.createElement('div');
-    collectionHeaderModalLeft.classList.add('collection-header-modal-left');
-    modalHeaderDiv.appendChild(collectionHeaderModalLeft);
-
-    let modalTitle = document.createElement('p');
-    modalTitle.classList.add('collection-modal-header-text','black-outline');
-    modalTitle.innerHTML = getLocValue(`${key}ShortName`);
-    modalHeaderDiv.appendChild(modalTitle);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('collection-modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        modal.remove();
-    })
-    modalHeaderDiv.appendChild(modalClose);
+    //getLocValue(`${key}ShortName`);
 
     let imgAndDetails = document.createElement('div');
     imgAndDetails.classList.add('item-img-and-details');
@@ -11129,6 +10061,10 @@ function generateTrophyStorePopout(key) {
         itemObtainMethod.innerHTML = "This item is hidden and may show up in the featured tab during the related seasonal rotation.";
     }
 
+    createModal({
+        content: modalContent,
+        header: getLocValue(`${key}ShortName`),
+    })
 }
 
 function generateTeamsStoreProgress() {
@@ -11177,34 +10113,7 @@ function generateTeamsStoreProgress() {
 function generateTeamsStorePopout(key) {
     let data = teamsStoreItemsJSON[key];
 
-    let modal = document.createElement('div');
-    modal.classList.add('error-modal-overlay');
-    document.body.appendChild(modal);
-
     let modalContent = document.createElement('div');
-    modalContent.classList.add('collection-modal');
-    modal.appendChild(modalContent);
-
-    let modalHeaderDiv = document.createElement('div');
-    modalHeaderDiv.classList.add('collection-modal-header');
-    modalContent.appendChild(modalHeaderDiv);
-
-    let collectionHeaderModalLeft = document.createElement('div');
-    collectionHeaderModalLeft.classList.add('collection-header-modal-left');
-    modalHeaderDiv.appendChild(collectionHeaderModalLeft);
-
-    let modalTitle = document.createElement('p');
-    modalTitle.classList.add('collection-modal-header-text','black-outline');
-    modalTitle.innerHTML = getLocValue(`${key}ShortName`);
-    modalHeaderDiv.appendChild(modalTitle);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('collection-modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        modal.remove();
-    })
-    modalHeaderDiv.appendChild(modalClose);
 
     let imgAndDetails = document.createElement('div');
     imgAndDetails.classList.add('item-img-and-details');
@@ -11265,94 +10174,9 @@ function generateTeamsStorePopout(key) {
         itemObtainMethod.innerHTML = "This item is hidden and may show up in the featured tab during the related seasonal rotation.";
     }
 
-}
+    createModal({
+        content: modalContent,
+        header: getLocValue(`${key}ShortName`),
+    });
 
-function errorModal(body, source, force) {
-    if (isErrorModalOpen && !force) { return; }
-    let modalOverlay = document.createElement('div');
-    modalOverlay.classList.add('error-modal-overlay');
-    document.body.appendChild(modalOverlay);
-
-    let modal = document.createElement('div');
-    modal.id = 'error-modal';
-    modal.classList.add('error-modal');
-    modalOverlay.appendChild(modal);
-
-    let modalHeader = document.createElement('div');
-    modalHeader.id = 'error-modal-header';
-    modalHeader.classList.add('error-modal-header');
-    modal.appendChild(modalHeader);
-
-    let modalHeaderImg = document.createElement('img');
-    modalHeaderImg.id = 'error-modal-header-img';
-    modalHeaderImg.classList.add('error-modal-header-img');
-    modalHeaderImg.src = "./Assets/UI/BadConnectionBtn.png";
-    modalHeader.appendChild(modalHeaderImg);
-
-    let modalHeaderText = document.createElement('p');
-    modalHeaderText.classList.add('error-modal-header-text','black-outline');
-    modalHeaderText.innerHTML = "Error";
-    modalHeader.appendChild(modalHeaderText);
-
-    let dummyElmnt = document.createElement('div');
-    dummyElmnt.classList.add('error-modal-dummy');
-    modalHeader.appendChild(dummyElmnt);
-
-    let modalContent = document.createElement('div');
-    modalContent.id = 'error-modal-content';
-    modalContent.classList.add('error-modal-content');
-    modalContent.innerHTML = (source == "api" ? "" : "") + body;
-    modal.appendChild(modalContent);
-
-    let modalContent2  = document.createElement('div');
-    modalContent2.classList.add('error-modal-content');
-    switch(body) {
-        case "Invalid user ID / Player Does not play this game":
-            modalContent2.innerHTML = "Please try again or create a new Open Access Key.";
-            modal.appendChild(modalContent2);
-            break;
-    }
-
-    if(source == "ratelimit") {
-        let mapsProgressCoopToggle = document.createElement('div');
-        mapsProgressCoopToggle.classList.add('error-toggle-div');  
-        modal.appendChild(mapsProgressCoopToggle);
-
-        let mapsProgressCoopToggleText = document.createElement('p');
-        mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
-        mapsProgressCoopToggleText.innerHTML = "Manually Load Profiles: ";
-        mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
-
-        let mapsProgressCoopToggleInput = document.createElement('input');
-        mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
-        mapsProgressCoopToggleInput.type = 'checkbox';
-        mapsProgressCoopToggleInput.checked = preventRateLimiting;
-        mapsProgressCoopToggleInput.addEventListener('change', () => {
-            mapsProgressCoopToggleInput.checked ? preventRateLimiting = true : preventRateLimiting = false;
-        })
-        mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
-    }
-
-    let okButtonDiv = document.createElement('div');
-    okButtonDiv.classList.add('error-modal-ok-button-div');
-    modal.appendChild(okButtonDiv);
-
-    let okButton = document.createElement('div');
-    okButton.classList.add('start-button', 'modal-ok-button', 'black-outline');
-    okButton.innerHTML = 'OK';
-    okButton.addEventListener('click', () => {
-        isErrorModalOpen = false;
-        document.body.removeChild(modalOverlay);
-    })
-    okButtonDiv.appendChild(okButton);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('error-modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        isErrorModalOpen = false;
-        document.body.removeChild(modalOverlay);
-    })
-    modalContent.appendChild(modalClose);
-    isErrorModalOpen = true;
 }

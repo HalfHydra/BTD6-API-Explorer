@@ -1,3 +1,48 @@
+let constants = {}
+let locJSON = {}
+let achievementsJSON = {}
+let achievementsHelper = {}
+let trophyStoreItemsJSON = {}
+let teamsStoreItemsJSON = {}
+let rogueJSON = {}
+
+let backQueue = [];
+let backButton = createEl('img', { src: '../Assets/UI/BackBtn.png', classList: ['back-button', 'pointer'] });
+backButton.addEventListener('click', () => {
+    goBack();
+})
+document.querySelector('.header').prepend(backButton);
+
+function goBack(){
+    console.log(backQueue);
+    let currentState = backQueue.pop();
+    if (currentState.source) {
+        document.getElementById(currentState.destination + "-content").style.display = 'none';
+        document.getElementById(currentState.source + "-content").style.display = 'flex';
+    }
+
+    if (currentState.callback) {
+        currentState.callback();
+    }
+    if(timerInterval) { clearInterval(timerInterval); }
+    changeHexBGColor(constants.BGColor)
+
+    if (backQueue.length === 0) {
+        backButton.classList.remove('visible');
+    }
+    resetScroll();
+}
+
+function addToBackQueue(object) {
+    backQueue.push(object);
+    backButton.classList.add('visible');
+}
+
+function clearBackQueue() {
+    backQueue = [];
+    backButton.classList.remove('visible');
+}
+
 function createEl(tag, options = {}) {
     const el = document.createElement(tag);
     if (options.classList) el.classList.add(...options.classList);
@@ -27,7 +72,10 @@ function createModal({ header = '', content = '', footer = '', classList = [] } 
     const modalBox = createEl('div', { classList: ['modal-box'] });
 
     const modalHeader = createEl('div', { classList: ['modal-header'] });
-    modalBox.appendChild(modalHeader);
+    if(header != '') {
+        modalBox.appendChild(modalHeader);
+    }
+
 
     const collectionHeaderModalLeft = createEl('div', { classList: ['collection-header-modal-left'] });
     modalHeader.appendChild(collectionHeaderModalLeft);
@@ -39,11 +87,11 @@ function createModal({ header = '', content = '', footer = '', classList = [] } 
     modalHeader.appendChild(modalTitle);
 
     const modalClose = createEl('img', {
-        classList: ['collection-modal-close'],
+        classList: ['collection-modal-close', 'pointer'],
         src: "./Assets/UI/CloseBtn.png"
     });
     modalClose.addEventListener('click', () => {
-        document.querySelector('.modal-overlay')?.remove();
+        goBack();
     });
     modalHeader.appendChild(modalClose);
 
@@ -68,6 +116,11 @@ function createModal({ header = '', content = '', footer = '', classList = [] } 
 
     modalOverlay.appendChild(modalBox);
     document.body.appendChild(modalOverlay);
+    addToBackQueue({callback: closeModal});
+}
+
+function closeModal() {
+    document.querySelector('.modal-overlay')?.remove();
 }
 
 function showLoading(){
@@ -112,15 +165,34 @@ function fetchConstants() {
     });
 }
 
-function fetchMainDependencies() {
+function fetchLocKeys() {
+    return fetch('./data/English.json').then(response => response.json()).then(data => {
+        locJSON = data;
+    })
+}
+
+async function fetchRogueDependencies() {
+    await fetchLocKeys();
+    return fetch('./data/rogueData.json')
+        .then(response => response.json())
+        .then(data => {
+            rogueJSON = data;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            errorModal(error, "js");
+        });
+}
+
+async function fetchMainDependencies() {
+    await fetchLocKeys();
+    await fetchRogueDependencies();
     Promise.all([
-        fetch('./data/English.json').then(response => response.json()),
         fetch('./data/Achievements150.json').then(response => response.json()),
         fetch('./data/trophyStoreItems.json').then(response => response.json()),
         fetch('./data/teamsStoreItems.json').then(response => response.json())
     ])
-    .then(([englishData, achievementsData, trophyStoreItems, teamsStoreItems]) => {
-        locJSON = englishData;
+    .then(([achievementsData, trophyStoreItems, teamsStoreItems]) => {
         achievementsJSON = achievementsData;
         trophyStoreItemsJSON = trophyStoreItems;
         teamsStoreItemsJSON = teamsStoreItems;
@@ -158,6 +230,26 @@ function saveSettings() {
         "TeamsStoreItems": showTeamsItems
     }
     localStorage.setItem("BTD6OAKSettings", JSON.stringify(settings));
+}
+
+function generateAvatar(size, src) {
+    let avatar = document.createElement('div');
+    avatar.style.width = `${size}px`;
+    avatar.style.height = `${size}px`;
+    avatar.classList.add('avatar');
+
+    let avatarFrame = document.createElement('img');
+    avatarFrame.classList.add('avatar-frame', 'noSelect');
+    avatarFrame.style.width = `${size}px`;
+    avatarFrame.src = '../Assets/UI/InstaTowersContainer.png';
+    avatar.appendChild(avatarFrame);
+
+    let avatarImg = document.createElement('img');
+    avatarImg.classList.add('avatar-img', 'noSelect');
+    avatarImg.style.width = `${size}px`;
+    avatarImg.src = src;
+    avatar.appendChild(avatarImg);
+    return avatar;
 }
 
 function openBTD6Link(link){
@@ -216,9 +308,12 @@ function updateTimer(targetTime, elementId) {
     if (remainingTime > 48 * 3600) {
         const days = Math.ceil(remainingTime / (24 * 3600));
         timerElement.textContent = `${days} days left`;
+        timerElement.style.width = "130px";
     } else if (remainingTime < 0) {
         timerElement.textContent = "Finished";
+        timerElement.style.textAlign = "right";
     } else {
+        timerElement.style.width = "100px";
         timerElement.textContent = formatTime(remainingTime);
     }
 }
@@ -505,4 +600,94 @@ function openOAKInstructionsModal(){
     });
     return OAKInstructionsDiv;
     
+}
+
+function errorModal(body, source, force) {
+    if (isErrorModalOpen && !force) { return; }
+    let modalOverlay = document.createElement('div');
+    modalOverlay.classList.add('error-modal-overlay');
+    document.body.appendChild(modalOverlay);
+
+    let modal = document.createElement('div');
+    modal.id = 'error-modal';
+    modal.classList.add('error-modal');
+    modalOverlay.appendChild(modal);
+
+    let modalHeader = document.createElement('div');
+    modalHeader.id = 'error-modal-header';
+    modalHeader.classList.add('error-modal-header');
+    modal.appendChild(modalHeader);
+
+    let modalHeaderImg = document.createElement('img');
+    modalHeaderImg.id = 'error-modal-header-img';
+    modalHeaderImg.classList.add('error-modal-header-img');
+    modalHeaderImg.src = "./Assets/UI/BadConnectionBtn.png";
+    modalHeader.appendChild(modalHeaderImg);
+
+    let modalHeaderText = document.createElement('p');
+    modalHeaderText.classList.add('error-modal-header-text','black-outline');
+    modalHeaderText.innerHTML = "Error";
+    modalHeader.appendChild(modalHeaderText);
+
+    let dummyElmnt = document.createElement('div');
+    dummyElmnt.classList.add('error-modal-dummy');
+    modalHeader.appendChild(dummyElmnt);
+
+    let modalContent = document.createElement('div');
+    modalContent.id = 'error-modal-content';
+    modalContent.classList.add('error-modal-content');
+    modalContent.innerHTML = (source == "api" ? "" : "") + body;
+    modal.appendChild(modalContent);
+
+    let modalContent2  = document.createElement('div');
+    modalContent2.classList.add('error-modal-content');
+    switch(body) {
+        case "Invalid user ID / Player Does not play this game":
+            modalContent2.innerHTML = "Please try again or create a new Open Access Key.";
+            modal.appendChild(modalContent2);
+            break;
+    }
+
+    if(source == "ratelimit") {
+        let mapsProgressCoopToggle = document.createElement('div');
+        mapsProgressCoopToggle.classList.add('error-toggle-div');  
+        modal.appendChild(mapsProgressCoopToggle);
+
+        let mapsProgressCoopToggleText = document.createElement('p');
+        mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
+        mapsProgressCoopToggleText.innerHTML = "Manually Load Profiles: ";
+        mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
+
+        let mapsProgressCoopToggleInput = document.createElement('input');
+        mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
+        mapsProgressCoopToggleInput.type = 'checkbox';
+        mapsProgressCoopToggleInput.checked = preventRateLimiting;
+        mapsProgressCoopToggleInput.addEventListener('change', () => {
+            mapsProgressCoopToggleInput.checked ? preventRateLimiting = true : preventRateLimiting = false;
+        })
+        mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
+    }
+
+    let okButtonDiv = document.createElement('div');
+    okButtonDiv.classList.add('error-modal-ok-button-div');
+    modal.appendChild(okButtonDiv);
+
+    let okButton = document.createElement('div');
+    okButton.classList.add('start-button', 'modal-ok-button', 'black-outline');
+    okButton.innerHTML = 'OK';
+    okButton.addEventListener('click', () => {
+        isErrorModalOpen = false;
+        document.body.removeChild(modalOverlay);
+    })
+    okButtonDiv.appendChild(okButton);
+
+    let modalClose = document.createElement('img');
+    modalClose.classList.add('error-modal-close');
+    modalClose.src = "./Assets/UI/CloseBtn.png";
+    modalClose.addEventListener('click', () => {
+        isErrorModalOpen = false;
+        document.body.removeChild(modalOverlay);
+    })
+    modalContent.appendChild(modalClose);
+    isErrorModalOpen = true;
 }

@@ -189,13 +189,14 @@ async function getPublicProfileData(oak_token) {
 
 async function getRacesData() {
     if (racesData == null) {
-        fetchData(`https://data.ninjakiwi.com/btd6/races`, (json) => {
+        await fetchData(`https://data.ninjakiwi.com/btd6/races`, (json) => {
             racesData = json["body"];
             generateRaces();
         });
     } else {
         generateRaces();
     }
+    addToBackQueue({callback: generateEvents})
 }
 
 async function getRaceMetadata(key) {
@@ -252,13 +253,14 @@ async function getLeaderboardPage(link) {
 
 async function getBossesData() {
     if (bossesData == null) {
-        fetchData(`https://data.ninjakiwi.com/btd6/bosses`, (json) => {
+        await fetchData(`https://data.ninjakiwi.com/btd6/bosses`, (json) => {
             bossesData = json["body"];
             generateBosses(showElite);
         });
     } else {
         generateBosses(showElite);
     }
+    addToBackQueue({callback: generateEvents})
 }
 
 async function getBossMetadata(key, elite) {
@@ -274,13 +276,14 @@ async function getBossMetadata(key, elite) {
 
 async function getCTData() {
     if (CTData == null) {
-        fetchData(`https://data.ninjakiwi.com/btd6/ct`, (json) => {
+        await fetchData(`https://data.ninjakiwi.com/btd6/ct`, (json) => {
             CTData = json["body"];
             generateCTs();
         });
     } else {
         generateCTs();
     }
+    addToBackQueue({callback: generateEvents})
 }
 
 async function getCTTiles(key) {
@@ -296,9 +299,11 @@ async function getDailyChallengesData() {
     if (DCData == null) {
         await fetchData(`https://data.ninjakiwi.com/btd6/challenges/filter/daily`, (json) => {
             DCData = json["body"];
+            addToBackQueue({callback: generateEvents})
             return DCData;
         });
     } else {
+        addToBackQueue({callback: generateEvents})
         return DCData;
     }
 }

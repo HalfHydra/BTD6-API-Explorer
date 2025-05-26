@@ -238,11 +238,18 @@
         <div id="challenge-content" class="sub-content-div challenge" style="display: none;"></div>
         <div id="map-content" class="sub-content-div map" style="display: none;"></div>
         <div id="publicprofile-content" class="sub-content-div publicprofile" style="display: none;"></div>
+        <div id="leaderboards-content" class="content-div extras" style="display: none;"></div>
         <div id="leaderboard-content" class="sub-content-div leaderboard" style="display: none;"></div>
         <div id="browser-content" class="sub-content-div browser" style="display: none;"></div>
         <div id="relics-content" class="sub-content-div relics" style="display: none;"></div>
-        <div id="rounds-content" class="sub-content-div roundset" style="display: none;"></div>
-        <div id="roundset-content" class="rounds-content roundset" style="display: none;"></div>
+        <div id="rounds-content" class="content-div roundset ai-center" style="display: none;"></div>
+        <div id="roundsets-content" class="rounds-content roundset" style="display: none;"></div>
+        <div id="rogue-content" class="content-div extras" style="display: none;"></div>
+        <div id="artifacts-content" class="content-div extras" style="display: none;"></div>
+        <div id="starter-kits-content" class="content-div extras" style="display: none;"></div>
+    </div>
+    <div id="rogue-image-wrapper" class="rogue-image-wrapper" style="overflow: hidden;">
+        <div id="rogue-image-content" class="rogue-image-content" style="display: none; opacity: 0;"></div>
     </div>
 </body>
 <!-- <script>
@@ -251,11 +258,15 @@
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     generateHeaderTabs();
 </script> -->
+<script src="./src/html-to-image.min.js"></script>
 <script src="./src/popper.min.js"></script>
 <script src="./src/tippy-bundle.umd.min.js"></script>
 <script src="./src/evergreen.js"></script>
 <script src="./src/nkapi.js"></script>
 <script src="./src/btd6-ui.js"></script>
+<script src="./src/publicprofile.js"></script>
+<script src="./src/leaderboard.js"></script>
+<script src="./src/rogue.js"></script>
 <script src="./src/main.js"></script>
 <script src="./src/asset.js"></script>
 <script src="./src/roundpreview.js"></script>
