@@ -1,7 +1,3 @@
-let constants = {}
-let locJSON = {}
-let rogueJSON = {}
-
 let rogueSaveData = {
     extractedArtifacts: [],
     imageOptions: {
@@ -78,26 +74,25 @@ let noArtifactsMessage;
 
 let currentArtifacts = {};
 
-let backState = "home";
-
-showLoading();
-Promise.all([
-    fetch('./data/Constants.json').then(response => response.json()),
-    fetch('./data/English.json').then(response => response.json()),
-    fetch('./data/rogueData.json').then(response => response.json()),
-])
-.then(([constantsJSON, englishData, rogueData]) => {
-    constants = constantsJSON;
-    locJSON = englishData;
-    rogueJSON = rogueData;
-    loadDataFromLocalStorage();
-    postProcessRogueData();
-    generateRogueSelectors();
-})
-.catch(error => {
-    console.error('Error:', error);
-    errorModal(error, "js");
-});
+// Promise.all([
+//     fetch('./data/Constants.json').then(response => response.json()),
+//     fetch('./data/English.json').then(response => response.json()),
+//     fetch('./data/rogueData.json').then(response => response.json()),
+// ])
+// .then(([constantsJSON, englishData, rogueData]) => {
+//     constants = constantsJSON;
+//     locJSON = englishData;
+//     rogueJSON = rogueData;
+//     loadRogueDataFromLocalStorage();
+//     postProcessRogueData();
+//     generateRogueSelectors();
+// })
+// .catch(error => {
+//     console.error('Error:', error);
+//     errorModal(error, "js");
+// });
+fetchRogueDependencies();
+loadRogueDataFromLocalStorage();
 
 function postProcessRogueData(){
     let unusedArtifacts = ['EssenceOfLych1', 'Token', 'ProjectileCarousel1']
@@ -114,126 +109,42 @@ function postProcessRogueData(){
     }
 }
 
-function showLoading() {
-    document.getElementById("loading").style.removeProperty("transform")
-}
-
-function hideLoading() {
-    document.getElementById("loading").style.transform = "scale(0)";
-}
-
-const container = document.createElement('div');
-document.body.appendChild(container);
-
-document.body.classList.add('hex-bg');
-
-const header = document.createElement('div');
-header.classList.add('header');
-container.appendChild(header);
-
-const headerDiv = document.createElement('div');
-headerDiv.classList.add('header-div');
-header.appendChild(headerDiv);
-
-let backButton = document.createElement('img');
-backButton.src = '../Assets/UI/BackBtn.png';
-backButton.classList.add('back-button', 'pointer');
-backButton.addEventListener('click', () => {
-    handleBackBtn();
-})
-headerDiv.appendChild(backButton);
-
-const title = document.createElement('h1');
-title.classList.add('title');
-title.innerHTML = 'Rogue Legends Artifacts';
-headerDiv.appendChild(title);
-
-const content = document.createElement('div');
-content.classList.add('content');
-container.appendChild(content);
-
-const rogue = document.createElement('div');
-rogue.id = "rogue-content"
-rogue.classList.add('content-div', 'extras');
-rogue.style.display = "flex";
-content.appendChild(rogue);
-
-const artifacts = document.createElement('div');
-artifacts.id = "artifacts-content"
-artifacts.classList.add('extras', 'content-div');
-artifacts.style.display = "none";
-content.appendChild(artifacts);
-
-const starterKits = document.createElement('div');
-starterKits.id = "starter-kits-content"
-starterKits.classList.add('extras', 'content-div');
-starterKits.style.display = "none";
-content.appendChild(starterKits);
-
-let rogueImageWrapper = document.createElement('div');
-rogueImageWrapper.classList.add('rogue-image-wrapper');
-rogueImageWrapper.style.overflow = "hidden";
-container.appendChild(rogueImageWrapper);
-
-const rogueImageContent = document.createElement('div');
-rogueImageContent.id = "rogue-image-content";
-rogueImageContent.classList.add('rogue-image-content');
-rogueImageContent.style.display = "none";
-rogueImageContent.style.opacity = "0";
-rogueImageWrapper.appendChild(rogueImageContent);
-
-function handleBackBtn() {
-    switch(backState){
-        case "home":
-            changeRogueTab();
-            break;
-        case "artifactInfoModal":
-        case "imageBuilderModal":
-            document.querySelector('.error-modal-overlay').remove();
-            backState = "home";
-            break;
-        case "artifactSettings":
-            generateRogueArtifacts();
-            backState = "home";
-            break;
-    }
-}
-
 function changeRogueTab(selector){
     resetScroll();
-    backButton.classList.add('visible');
     switch(selector){
         case 'Artifacts':
-            rogue.style.display = 'none';
-            artifacts.style.display = 'flex';
+            document.getElementById('rogue-content').style.display = 'none';
+            document.getElementById('artifacts-content').style.display = 'flex';
             generateRogueArtifacts();
+            addToBackQueue({source: 'rogue', destination: 'artifacts'})
             break;
         case 'Hero Starter Kits':
-            rogue.style.display = 'none';
-            starterKits.style.display = 'flex';
+            document.getElementById('rogue-content').style.display = 'none';
+            document.getElementById('starter-kits-content').style.display = 'flex';
             generateRogueHeroStarterKits();
+            addToBackQueue({source: 'rogue', destination: 'starter-kits'})
             break;
         case 'Export Image':
-            rogue.style.display = 'none';
-            artifacts.style.display = 'flex';
+            document.getElementById('rogue-content').style.display = 'none';
+            document.getElementById('artifacts-content').style.display = 'flex';
             generateImageBuilder();
+            addToBackQueue({source: 'rogue', destination: 'artifacts'})
             break;
         default: 
-            rogue.style.display = 'flex';
-            artifacts.style.display = 'none';
-            starterKits.style.display = 'none';
-            rogueImageContent.style.display = 'none';
-            backButton.classList.remove('visible');
+            document.getElementById('rogue-content').style.display = 'flex';
+            document.getElementById('artifacts-content').style.display = 'none';
+            document.getElementById('starter-kits-content').style.display = 'none';
+            document.getElementById('starter-kits-content').style.display = 'none';
             break;
     }
 }
 
 function generateRogueSelectors() {
     hideLoading();
-
+    document.getElementById('rogue-content').innerHTML = "";
     let rogueSelectorsPage = document.createElement('div');
     rogueSelectorsPage.classList.add('progress-page','f-wrap');
-    rogue.appendChild(rogueSelectorsPage);
+    document.getElementById('rogue-content').appendChild(rogueSelectorsPage);
 
     let rogueSelectors = document.createElement('div');
     rogueSelectors.classList.add('selectors-div');
@@ -318,67 +229,6 @@ function generateRogueSelectors() {
     importDataGoImg.addEventListener('click', () => {
         importArtifactsSave();
     });
-
-    let StandaloneSiteDiv = document.createElement('div');
-    StandaloneSiteDiv.classList.add('site-access-div');
-    rogueSelectorsPage.appendChild(StandaloneSiteDiv);
-
-    let StandaloneSiteText = document.createElement('p');
-    StandaloneSiteText.classList.add('site-info-header', 'sites-text', 'black-outline');
-    StandaloneSiteText.innerHTML = 'Other Sites';
-    StandaloneSiteDiv.appendChild(StandaloneSiteText);
-
-    let siteButtons = document.createElement('div');
-    siteButtons.classList.add('standalone-site-buttons');
-    StandaloneSiteDiv.appendChild(siteButtons);
-
-    let standaloneSites = {
-        "Roundsets": {
-            "link": "https://btd6apiexplorer.github.io/rounds",
-            "text": "Roundsets",
-            "icon": "DefaultRoundSetIcon",
-            "background": "BloonsBG"
-        },
-        "Leaderboards": {
-            "link": "https://btd6apiexplorer.github.io/leaderboards",
-            "text": "Leaderboards",
-            "icon": "LeaderboardSiteBtn",
-            "background": "TrophyStoreTiledBG"
-        },
-        "Insta Tracker": {
-            "link": "https://btd6apiexplorer.github.io/insta",
-            "text": "Insta Tracker",
-            "icon": "InstaSiteBtn",
-            "background": "CollectionHelp2"
-        },
-        "Main Site": {
-            "link": "https://btd6apiexplorer.github.io/",
-            "text": "Main Site",
-            "icon": "SiteBtn",
-            "background": "OverviewProfile"
-        }
-    }
-
-    Object.entries(standaloneSites).forEach(([site, data]) => {
-        let siteButtonDiv = document.createElement('div');
-        siteButtonDiv.classList.add('site-button-div', 'pointer');
-        siteButtonDiv.style.backgroundImage = `url(Assets/UI/${data.background}.png)`;
-        siteButtons.appendChild(siteButtonDiv);
-        siteButtonDiv.addEventListener('click', () => {
-            window.location.href = data.link;
-        })
-    
-        let siteButtonIcon = document.createElement('img');
-        siteButtonIcon.classList.add('site-button-icon');
-        siteButtonIcon.src = `./Assets/UI/${data.icon}.png`;
-        siteButtonDiv.appendChild(siteButtonIcon);
-    
-        let profileName = document.createElement('p');
-        profileName.classList.add('profile-name','readability-bg','black-outline');
-        profileName.style.marginLeft = '0';
-        profileName.innerHTML = data.text;
-        siteButtonDiv.appendChild(profileName);
-    })
 }
 
 function generateRogueArtifacts() { 
@@ -467,6 +317,8 @@ function generateArtifactSettings() {
     let artifactsContent = document.getElementById('artifacts-content');
     artifactsContent.innerHTML = "";
 
+    addToBackQueue({callback: generateRogueArtifacts});
+
     let settingsDiv = document.createElement('div');
     settingsDiv.classList.add('content-div', 'rogue-bg', 'd-flex', 'ai-center');
     artifactsContent.appendChild(settingsDiv);
@@ -496,7 +348,7 @@ function generateArtifactSettings() {
 
     let settingsExtractHighlight = generateCheckbox("Highlight Extracted", rogueSaveData.highlightExtracted, (checked) => {
         rogueSaveData.highlightExtracted = checked;
-        saveDataToLocalStorage();
+        saveRogueDataToLocalStorage();
     });
     settingsExtractHighlight.classList.add('jc-between');
     settingsExtraction.appendChild(settingsExtractHighlight);
@@ -524,13 +376,13 @@ function generateArtifactSettings() {
     let settingsExtractionDropdown = generateDropdown("Extracted Filter:", ["All","Only Extracted","Only Unextracted"], rogueSaveData.extractionFilter, (value) => {
         rogueSaveData.extractionFilter = value;
         updateExtractDescription();
-        saveDataToLocalStorage();
+        saveRogueDataToLocalStorage();
     });
     settingsExtractionDropdown.classList.add('jc-between');
 
     let settingsClickToCollect = generateCheckbox("One Click Extract", rogueSaveData.clickToCollect, (checked) => {
         rogueSaveData.clickToCollect = checked;
-        saveDataToLocalStorage();
+        saveRogueDataToLocalStorage();
     });
 
     settingsExtraction.appendChild(settingsClickToCollect);
@@ -543,13 +395,13 @@ function generateArtifactSettings() {
 
     let settingsShowStarterArtifacts = generateCheckbox("Show Starter Artifacts", rogueSaveData.showStarterArtifacts, (checked) => {
         rogueSaveData.showStarterArtifacts = checked;
-        saveDataToLocalStorage();
+        saveRogueDataToLocalStorage();
     });
     settingsShowStarterArtifacts.classList.add('jc-between');
 
     let settingsShowBossArtifacts = generateCheckbox("Show Boss Artifacts", rogueSaveData.showBossArtifacts, (checked) => {
         rogueSaveData.showBossArtifacts = checked;
-        saveDataToLocalStorage();
+        saveRogueDataToLocalStorage();
     });
     settingsShowBossArtifacts.classList.add('jc-between');
 
@@ -598,7 +450,7 @@ function generateArtifactSettings() {
     let settingsFilterDropdown = generateDropdown("Artifact Filter:", ["All", "Starter Kit", "Non Starter Kit", "One Variant", "Two Variants", "Update 48"], rogueSaveData.artifactFilter, (value) => {
         rogueSaveData.artifactFilter = value;
         updateDescription();
-        saveDataToLocalStorage();
+        saveRogueDataToLocalStorage();
     });
 
     updateDescription();
@@ -638,7 +490,7 @@ function generateArtifactSettings() {
             } else {
                 rogueSaveData.categoryFilter.push(rarity);
             }
-            saveDataToLocalStorage();
+            saveRogueDataToLocalStorage();
         });
         rarityDiv.appendChild(rarityCheckbox);
     });
@@ -705,7 +557,7 @@ function generateArtifactSettings() {
     updatePreviewArtifacts();
     let settingsSortDropdown = generateDropdown("Sort:", ["Name","Rarity (Ascending)","Rarity (Descending)"], rogueSaveData.artifactSort, (value) => {
         rogueSaveData.artifactSort = value;
-        saveDataToLocalStorage();
+        saveRogueDataToLocalStorage();
         updatePreviewArtifacts();
     });
     settingsSort.appendChild(settingsSortDropdown);
@@ -715,7 +567,7 @@ function generateArtifactSettings() {
     rogueDownloadButton.classList.add('start-button', 'black-outline');
     rogueDownloadButton.innerHTML = 'Apply';
     rogueDownloadButton.addEventListener('click', () => {
-        handleBackBtn();
+        goBack();
     })
     settingsDiv.appendChild(rogueDownloadButton);
 }
@@ -815,7 +667,7 @@ function generateArtifacts() {
 
     switch (rogueSaveData.artifactSort) {
         case "Name":
-            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => a[1].nameLocKey.localeCompare(b[1].nameLocKey)))
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => (a[1].title.replace("Legendary", "3").replace("Rare", "2").replace("Common", "1")).localeCompare(b[1].title.replace("Legendary", "3").replace("Rare", "2").replace("Common", "1"))))
             break;
         case "Rarity (Ascending)":
             currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => a[1].tier - b[1].tier))
@@ -841,12 +693,12 @@ function generateArtifacts() {
                     rogueSaveData.extractedArtifacts = rogueSaveData.extractedArtifacts.filter(e => e !== artifact.nameLocKey);
                     artifactDiv.classList.add('artifact-unextracted');
                     updateArtifactCount();
-                    saveDataToLocalStorage();
+                    saveRogueDataToLocalStorage();
                 } else {
                     rogueSaveData.extractedArtifacts.push(artifact.nameLocKey);
                     artifactDiv.classList.remove('artifact-unextracted');
                     updateArtifactCount();
-                    saveDataToLocalStorage();
+                    saveRogueDataToLocalStorage();
                 }
             } else {
                 generateArtifactPopout(artifact.nameLocKey);
@@ -924,23 +776,25 @@ function getFrameIconName(artifact) {
 function generateArtifactPopout(key) {
     let data = rogueJSON.artifacts[key];
 
-    let modal;
-    if(!document.getElementById('artifact-popout')){
-        modal = document.createElement('div');
-        modal.id = 'artifact-popout';
-        modal.classList.add('error-modal-overlay');
-        document.body.appendChild(modal);
-    } else {
-        modal = document.getElementById('artifact-popout');
-        modal.innerHTML = "";
-    }
+    // let modal;
+    // if(!document.getElementById('artifact-popout')){
+    //     modal = document.createElement('div');
+    //     modal.id = 'artifact-popout';
+    //     modal.classList.add('error-modal-overlay');
+    //     document.body.appendChild(modal);
+    // } else {
+    //     modal = document.getElementById('artifact-popout');
+    //     modal.innerHTML = "";
+    // }
+
+    document.querySelector('.modal-overlay')?.remove();
 
     let modalContent = document.createElement('div');
     modalContent.classList.add('rogue-artifact-modal', 'rogue-bg');
-    modal.appendChild(modalContent);
+    // modal.appendChild(modalContent);
 
     let modalHeaderDiv = document.createElement('div');
-    modalHeaderDiv.classList.add('collection-modal-header');
+    modalHeaderDiv.classList.add('modal-header');
     modalHeaderDiv.style.backgroundColor = 'unset';
     modalContent.appendChild(modalHeaderDiv);
 
@@ -970,8 +824,7 @@ function generateArtifactPopout(key) {
     modalClose.classList.add('collection-modal-close', 'pointer');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
-        modal.remove();
-        backState = "home";
+        goBack();
     })
     modalHeaderDiv.appendChild(modalClose);
 
@@ -1139,7 +992,7 @@ function generateArtifactPopout(key) {
             }
             updateArtifactCount();
             mapsProgressCoopToggleInput.checked = false;
-            saveDataToLocalStorage();
+            saveRogueDataToLocalStorage();
         } else {
             rogueSaveData.extractedArtifacts.push(data.nameLocKey);
             if(rogueSaveData.highlightExtracted){
@@ -1153,7 +1006,7 @@ function generateArtifactPopout(key) {
             }
             updateArtifactCount();
             mapsProgressCoopToggleInput.checked = true;
-            saveDataToLocalStorage();
+            saveRogueDataToLocalStorage();
         }
     }
     if(!starterArtifacts.includes(key)){
@@ -1161,7 +1014,10 @@ function generateArtifactPopout(key) {
         artifactDiv.addEventListener('click', updateArtifactStatus)
     }
 
-    backState = "artifactInfoModal";
+    createModal({
+        content: modalContent,
+        // header: modalHeaderDiv,
+    })
 }
 
 function updateArtifactCount() {
@@ -1234,26 +1090,6 @@ function generateInstaMonkeyContainer(instaMonkey) {
     return instaMonkeyTierContainer;
 }
 
-function generateAvatar(size, src) {
-    let avatar = document.createElement('div');
-    avatar.style.width = `${size}px`;
-    avatar.style.height = `${size}px`;
-    avatar.classList.add('avatar');
-
-    let avatarFrame = document.createElement('img');
-    avatarFrame.classList.add('avatar-frame', 'noSelect');
-    avatarFrame.style.width = `${size}px`;
-    avatarFrame.src = '../Assets/UI/InstaTowersContainer.png';
-    avatar.appendChild(avatarFrame);
-
-    let avatarImg = document.createElement('img');
-    avatarImg.classList.add('avatar-img', 'noSelect');
-    avatarImg.style.width = `${size}px`;
-    avatarImg.src = src;
-    avatar.appendChild(avatarImg);
-    return avatar;
-}
-
 function generateImageBuilder() {
     let artifactsContent = document.getElementById('artifacts-content');
     artifactsContent.innerHTML = "";
@@ -1273,7 +1109,7 @@ function generateImageBuilder() {
 
     let rogueHeaderMessage = document.createElement('p');
     rogueHeaderMessage.classList.add('sku-roundset-selector-desc','ta-center');
-    rogueHeaderMessage.innerHTML = "This will generate a nice image to share with others of your progress in extracting the artifacts.<br>This may not work as intended on mobile.";
+    rogueHeaderMessage.innerHTML = "This will generate a nice image to share with others of your progress in extracting the artifacts.<br>This may not work as intended on mobile, and is currently broken on Firefox due to a bug with fonts.";
     rogueHeaderBar.appendChild(rogueHeaderMessage);
 
     let oakDiv = document.createElement('div');
@@ -1300,7 +1136,7 @@ function generateImageBuilder() {
     (rogueSaveData.imageOptions.name != null) ? rogueProfileNameInput.value = rogueSaveData.imageOptions.name : rogueProfileNameInput.placeholder = "Enter Name";
     rogueProfileNameInput.addEventListener('input', () => {
         rogueSaveData.imageOptions.name = rogueProfileNameInput.value;
-        saveDataToLocalStorage();
+        saveRogueDataToLocalStorage();
     });
     rogueBannerDiv.appendChild(rogueProfileNameInput);
 
@@ -1314,7 +1150,6 @@ function generateImageBuilder() {
     changeAvatarButton.innerHTML = 'Change Avatar';
     changeAvatarButton.style.width = "auto";
     changeAvatarButton.addEventListener('click', () => {
-        backState = "imageBuilderModal";
         generateAvatarSelector(rogueSaveData.imageOptions.avatar);
     })
     changeProfileButtons.appendChild(changeAvatarButton);
@@ -1395,7 +1230,7 @@ function generateImageBuilder() {
     updatePreviewArtifacts();
     mapProgressFilterDifficultySelect2.addEventListener('change', () => {
         rogueSaveData.imageOptions.sort = mapProgressFilterDifficultySelect2.value;
-        saveDataToLocalStorage();
+        saveRogueDataToLocalStorage();
         updatePreviewArtifacts();
     });
 
@@ -1411,7 +1246,7 @@ function generateImageBuilder() {
     if (!rogueSaveData.selectedOAK) {
         Object.entries(localStorageOAK).forEach(([oak, oakdata]) => {
             let previousOAKEntry = document.createElement('div');
-            previousOAKEntry.classList.add('previous-oak-entry');
+            previousOAKEntry.classList.add('previous-oak-entry', 'd-flex', 'jc-between', 'ai-center');
             previousOAKEntry.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(${oakdata.banner})`;
             oakDiv.appendChild(previousOAKEntry);
 
@@ -1435,7 +1270,7 @@ function generateImageBuilder() {
                 rogueProfileNameInput.value = rogueSaveData.imageOptions.name;
                 oakDiv.innerHTML = "";
                 rogueSaveData.selectedOAK = true;
-                saveDataToLocalStorage();
+                saveRogueDataToLocalStorage();
             })
             previousOAKEntry.appendChild(useButton);
         })
@@ -1446,6 +1281,8 @@ function generateAvatarSelector() {
     let modal = document.createElement('div');
     modal.classList.add('error-modal-overlay');
     document.body.appendChild(modal);
+
+    addToBackQueue({callback: () => {modal.remove()}})
 
     let modalContent = document.createElement('div');
     modalContent.classList.add('collection-modal', 'rogue-bg');
@@ -1470,7 +1307,7 @@ function generateAvatarSelector() {
         avatar.addEventListener('click', () => {
             document.querySelector('.rogue-profile-div .avatar-img').src = `Assets/ProfileAvatar/ProfileAvatar${i < 10 ? "0" + i : i}.png`;
             rogueSaveData.imageOptions.avatar = `ProfileAvatar${i < 10 ? "0" + i : i}.png`;
-            saveDataToLocalStorage();
+            saveRogueDataToLocalStorage();
             modal.remove();
             backState = "home";
         })
@@ -1482,6 +1319,8 @@ function generateBannerSelector() {
     let modal = document.createElement('div');
     modal.classList.add('error-modal-overlay');
     document.body.appendChild(modal);
+
+    addToBackQueue({callback: () => {modal.remove()}})
 
     let modalContent = document.createElement('div');
     modalContent.classList.add('collection-modal', 'rogue-bg');
@@ -1507,7 +1346,7 @@ function generateBannerSelector() {
         bannerImg.addEventListener('click', () => {
             document.querySelector('.rogue-banner-div').style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(../Assets/ProfileBanner/ProfileBanner${i}.png)`;
             rogueSaveData.imageOptions.banner = `ProfileBanner${i}.png`;
-            saveDataToLocalStorage();
+            saveRogueDataToLocalStorage();
             modal.remove();
             backState = "home";
         })
@@ -1521,7 +1360,7 @@ function generateBannerSelector() {
         bannerImg.addEventListener('click', () => {
             document.querySelector('.rogue-banner-div').style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(../Assets/ProfileBanner/TeamsBanner${i}.png)`;
             rogueSaveData.imageOptions.banner = `TeamsBanner${i}.png`;
-            saveDataToLocalStorage();
+            saveRogueDataToLocalStorage();
             modal.remove();
         })
         modalBanners.appendChild(bannerImg);
@@ -1635,6 +1474,7 @@ function downloadImage() {
                 opacity: 1,
             },
             pixelRatio: 2,
+            // skipFonts: true
         }).then(function (toDataURL) {
             var a = document.createElement('a');
             a.href = toDataURL;
@@ -1667,144 +1507,17 @@ function importArtifactsSave() {
             let contents = e.target.result;
             localStorage.setItem('rogueSaveData', contents);
             console.log('Imported Save Data');
-            loadDataFromLocalStorage();
+            loadRogueDataFromLocalStorage();
         }
         reader.readAsText(file);
     })
 }
 
-function copyLoadingIcon(destination) {
-    let clone = document.getElementsByClassName('loading-icon')[0].cloneNode(true)
-    clone.classList.add('loading-icon-leaderboard');
-    clone.style.height = "unset"
-    destination.appendChild(clone)
-}
-
-function changeHexBGColor(color) {
-    if (color == null) {
-        document.body.style.removeProperty("background-color")
-        return;
-    }
-    document.body.style.backgroundColor = `rgb(${color[0] * 255},${color[1] * 255},${color[2] * 255})`;
-}
-
-function ratioCalc(unknown, x1, x2, y1, y2) {
-    switch (unknown) {
-        case 1:
-            // x1/x2 == y1/y2
-            return x2 * (y1 / y2)
-        case 2:
-            // x1/x2 == y1/y2
-            return x1 * (y2 / y1)
-        case 3:
-            // x1/x2 == y1/y2
-            return y2 * (x1 / x2)
-        case 4:
-            // x1/x2 == y1/y2
-            return y1 * (x2 / x1)
-    }
-}
-
-function resetScroll() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
-
-function errorModal(body, source, force) {
-    if (isErrorModalOpen && !force) { return; }
-    let modalOverlay = document.createElement('div');
-    modalOverlay.classList.add('error-modal-overlay');
-    document.body.appendChild(modalOverlay);
-
-    let modal = document.createElement('div');
-    modal.id = 'error-modal';
-    modal.classList.add('error-modal');
-    modalOverlay.appendChild(modal);
-
-    let modalHeader = document.createElement('div');
-    modalHeader.id = 'error-modal-header';
-    modalHeader.classList.add('error-modal-header');
-    modal.appendChild(modalHeader);
-
-    let modalHeaderImg = document.createElement('img');
-    modalHeaderImg.id = 'error-modal-header-img';
-    modalHeaderImg.classList.add('error-modal-header-img');
-    modalHeaderImg.src = "./Assets/UI/BadConnectionBtn.png";
-    modalHeader.appendChild(modalHeaderImg);
-
-    let modalHeaderText = document.createElement('p');
-    modalHeaderText.classList.add('error-modal-header-text', 'black-outline');
-    modalHeaderText.innerHTML = "Error";
-    modalHeader.appendChild(modalHeaderText);
-
-    let dummyElmnt = document.createElement('div');
-    dummyElmnt.classList.add('error-modal-dummy');
-    modalHeader.appendChild(dummyElmnt);
-
-    let modalContent = document.createElement('div');
-    modalContent.id = 'error-modal-content';
-    modalContent.classList.add('error-modal-content');
-    modalContent.innerHTML = (source == "api" ? "" : "") + body;
-    modal.appendChild(modalContent);
-
-    let modalContent2 = document.createElement('div');
-    modalContent2.classList.add('error-modal-content');
-    switch (body) {
-        case "Invalid user ID / Player Does not play this game":
-            modalContent2.innerHTML = "Please try again or create a new Open Access Key.";
-            modal.appendChild(modalContent2);
-            break;
-    }
-
-    if (source == "ratelimit") {
-        let mapsProgressCoopToggle = document.createElement('div');
-        mapsProgressCoopToggle.classList.add('error-toggle-div');
-        modal.appendChild(mapsProgressCoopToggle);
-
-        let mapsProgressCoopToggleText = document.createElement('p');
-        mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text', 'black-outline');
-        mapsProgressCoopToggleText.innerHTML = "Manually Load Profiles: ";
-        mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
-
-        let mapsProgressCoopToggleInput = document.createElement('input');
-        mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
-        mapsProgressCoopToggleInput.type = 'checkbox';
-        mapsProgressCoopToggleInput.checked = preventRateLimiting;
-        mapsProgressCoopToggleInput.addEventListener('change', () => {
-            mapsProgressCoopToggleInput.checked ? preventRateLimiting = true : preventRateLimiting = false;
-        })
-        mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
-    }
-
-    let okButtonDiv = document.createElement('div');
-    okButtonDiv.classList.add('error-modal-ok-button-div');
-    modal.appendChild(okButtonDiv);
-
-    let okButton = document.createElement('div');
-    okButton.classList.add('start-button', 'modal-ok-button', 'black-outline');
-    okButton.innerHTML = 'OK';
-    okButton.addEventListener('click', () => {
-        isErrorModalOpen = false;
-        document.body.removeChild(modalOverlay);
-    })
-    okButtonDiv.appendChild(okButton);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('error-modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        isErrorModalOpen = false;
-        document.body.removeChild(modalOverlay);
-    })
-    modalContent.appendChild(modalClose);
-    isErrorModalOpen = true;
-}
-
-function saveDataToLocalStorage() {
+function saveRogueDataToLocalStorage() {
     localStorage.setItem('rogueSaveData', JSON.stringify(rogueSaveData));
 }
 
-function loadDataFromLocalStorage() {
+function loadRogueDataFromLocalStorage() {
     let data = localStorage.getItem('rogueSaveData');
     if (data) {
         rogueSaveData = JSON.parse(data);

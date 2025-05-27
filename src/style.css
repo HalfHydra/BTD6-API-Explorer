@@ -65,7 +65,7 @@
 }
 
 .header-label {
-    font-size: 1.5em;
+    font-size: 1.35rem;
     /* font-weight: bold; */
     font-family: 'Luckiest Guy';
     color: white;
@@ -96,10 +96,8 @@
 }
 .front-page-text {
     font-size: 24px;
-    font-family: 'GardeniaBold';
     color: white;
     padding: 10px;
-    text-align: center;
 }
 .key-entry {
     height: 40px;
@@ -127,7 +125,7 @@
     border-image-source: url(../Assets/UI/BlueBtnSquare.png);
     border-image-slice: 40;
     border-radius: 20px;
-    width: 220px;
+    width: 200px;
     font-family: 'Luckiest Guy';
     color: white;
     text-align: center;
@@ -234,7 +232,7 @@
     width: 100px;
     padding: 10px;
 }
-.error-modal-overlay {
+.modal-overlay {
     position: fixed; /* Positioning and size */
     top: 0;
     left: 0;
@@ -251,24 +249,33 @@
     color: white;
     text-align: center;
 }
+.modal-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    /* max-height: 80vh; */
+    background-color: var(--profile-secondary);
+    border-radius: 10px;
+}
+.modal-content {
+    max-height: calc(var(--vh, 1vh) * 80);
+    overflow-y: auto;
+}
 
 .previous-oak-entry {
     width: 500px;
     height: 96px;
-    display: flex;
-    align-items: center;
-    position: relative;
     border-radius: 20px 0 0 20px;
     margin: 10px;
 }
 .delete-button {
     width: 60px;
-    position: absolute;
     right: 10px;
 }
 .use-button {
     width: 60px;
-    position: absolute;
     right: 80px;
 }
 .return-entry-button {
@@ -394,11 +401,8 @@
 
 .profile-name {
     font-size: 28px;
-    font-family: 'Luckiest Guy';
-    color: white;
     margin-left: 14px;
     padding: 10px;
-    /* width: 300px; */
 }
 
 .profile-banner {
@@ -2411,7 +2415,6 @@
 }
 .race-time-left {
     font-size: 24px;
-    min-width: 130px;
 }
 .race-info-div {
     display: flex;
@@ -2819,7 +2822,7 @@
     height:50px;
 }
 .leaderboard-footer-page-number {
-    color:white;
+    color: white;
     font-size: 32px;
     font-family: 'Luckiest Guy';
 }
@@ -3990,7 +3993,6 @@
     align-items: center;
 }
 .disclaimer-text {
-    font-family: GardeniaBold;
     margin-top: 10px;
 }
 .get-oak-div {
@@ -4400,7 +4402,7 @@
     top: 5px;
     right: 5px;
 }
-.collection-modal-header {
+.modal-header {
     position: sticky;
     top: 0;
     display: flex;
@@ -4763,6 +4765,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+.view-profile {
+    padding: 20px;
+    border-radius: 20px;
+    border: 5px solid rgba(255,255,255,0.25);
 }
 
 .black-outline {
@@ -5705,6 +5713,10 @@ input[type="checkbox"] {
     font-family: GardeniaBold;
 }
 
+.font-luckiest {
+    font-family: 'Luckiest Guy';
+}
+
 .bg-color-primary {
     background-color: var(--profile-primary);
 }
@@ -5715,4 +5727,16 @@ input[type="checkbox"] {
 
 .bg-color-tertiary {
     background-color: var(--profile-tertiary);
+}
+
+.tc-white {
+    color: white;
+}
+
+.ps-absolute {
+    position: absolute;
+}
+
+.ps-relative {
+    position: relative;
 }

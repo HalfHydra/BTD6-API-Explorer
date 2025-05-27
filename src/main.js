@@ -1,12 +1,3 @@
-let readyFlags = [0,0,0,0,0]
-let pressedStart = false;
-let locJSON = {}
-let achievementsJSON = {}
-let achievementsHelper = {}
-let trophyStoreItemsJSON = {}
-let teamsStoreItemsJSON = {}
-let constants = {}
-
 let rankInfo = {
     "rank": 1,
     "xp": null,
@@ -63,8 +54,6 @@ let processedInstaData = {
     "TowerBorders": {},
     "TowerObtained": {}
 }
-
-let timerInterval = null;
 
 let rulesMap = {
     "Monkey Knowledge Disabled": "NoKnowledgeIcon",
@@ -124,48 +113,45 @@ let abilitiesFilter = "Most Used";
 
 let loggedIn = false;
 
-fetch('./data/Constants.json')
-    .then(response => response.json())
-    .then(data => {
-        constants = data;
-        readyFlags[4] = 1
-        generateVersionInfo()
-    })
-    .catch(error => {
-        console.error('Error:', error)
-        errorModal(error, "js")
+let imageScroll = [
+    {
+        "title": "View Your Profile!",
+        "text": "- View API exclusive stats<br>- Full Top Heroes/Towers list<br>- Top Paragons counts<br>- Ability usage counts<br>- Detailed map statistics<br>- Track your insta monkey collection",
+        "image": "OverviewProfile"
+    },
+    {
+        "title": "View Events!",
+        "text": "- View recent events<br>- Race event details<br>- Boss event details<br>- Odyssey event details<br>- Contested Territory details<br>- Daily Challenge details<br>- Advanced Challenge details<br>- Coop Challenge details",
+        "image": "/LandingScroll/Events"
+    },
+    {
+        "title": "View Leaderboards!",
+        "text": "- View event leaderboards<br>- View user profiles<br>- View extra score information",
+        "image": "/LandingScroll/Leaderboards"
+    },
+    {
+        "title": "View Roundsets!",
+        "text": "- View all roundsets<br>- Simple round information<br>- Detailed round information<br>- Preview rounds visually<br>- Boss custom rounds<br>- Custom event rounds<br>- Rogue Legends special rounds included",
+        "image": "/LandingScroll/Roundsets"
+    },
+    {
+        "title": "Rogue Legends Helper!",
+        "text": "- View all artifacts<br>- Search, sort, and filtering<br>- Hero Starter Kits reference<br>- Track extracted artifacts<br>- Export progress image (desktop only)",
+        "image": "/LandingScroll/RogueLegends"
+    }
+]
+let imageScrollIndex = 0;
+
+fetchConstants().then(() => {
+    generateVersionInfo();
 });
-
-function fetchDependencies() {
-    Promise.all([
-        fetch('./data/English.json').then(response => response.json()),
-        fetch('./data/Achievements150.json').then(response => response.json()),
-        fetch('./data/trophyStoreItems.json').then(response => response.json()),
-        fetch('./data/teamsStoreItems.json').then(response => response.json())
-    ])
-    .then(([englishData, achievementsData, trophyStoreItems, teamsStoreItems]) => {
-        locJSON = englishData;
-        achievementsJSON = achievementsData;
-        trophyStoreItemsJSON = trophyStoreItems;
-        teamsStoreItemsJSON = teamsStoreItems;
-        readyFlags[2] = 1;
-        readyFlags[3] = 1;
-        loadSettings();
-        generateIfReady();
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        errorModal(error, "js");
-    });
-
-    showLoading();
-}
 
 function generateIfReady(){
     if (readyFlags.every(flag => flag === 1)){
-        document.getElementById("front-page").style.display = "none";
+        if(document.getElementById("home-content")){
+            document.getElementById("home-content").style.display = "none";
+        }
         document.body.classList.add('transition-bg')
-        generateHeaderTabs();
         generateRankInfo()
         generateVeteranRankInfo()
         generateAchievementsHelper()
@@ -175,20 +161,20 @@ function generateIfReady(){
         generateInstaData()
         generateMapData()
         generateProgressSubText()
-        changeTab('overview');
+        changeTab('profile');
         if(parseInt(btd6usersave.latestGameVersion.split(".")[0]) > constants.projectContentVersion) {
             errorModal(`The content of this site (v${constants.projectContentVersion}.0) is out of date with the current version (v${btd6usersave.latestGameVersion.split(".")[0]}.0). New content might be missing, but everything else should remain functional.`, "api", true)
         }
     } else if(!loggedIn && readyFlags.slice(2).every(flag => flag === 1)){
-        document.getElementById("front-page").style.display = "none";
+        document.getElementById("home-content").style.display = "none";
         document.body.classList.add('transition-bg')
         generateHeaderTabs();
-        changeTab('overview');
+        changeTab('profile');
     }
 }
 
 function previewSite(){
-   fetchDependencies(true); 
+   fetchMainDependencies(true); 
 }
 
 function generateRankInfo(){
@@ -326,7 +312,7 @@ function generateMedals(){
     medalsInOrder["MedalEventGoldSilverMedal"] = btd6publicprofile["_medalsRace"]["GoldSilver"] || 0;
     medalsInOrder["MedalEventDoubleGoldMedal"] = btd6publicprofile["_medalsRace"]["DoubleGold"] || 0;
     medalsInOrder["MedalEventGoldDiamondMedal"] = btd6publicprofile["_medalsRace"]["GoldDiamond"] || 0;
-    medalsInOrder["MedalEventDiamondMedal"] = btd6publicprofile["_medalsRace"]["Diamond"] || 0;
+    medalsInOrder["MedalEventBlueDiamondMedal"] = btd6publicprofile["_medalsRace"]["BlueDiamond"] || 0;
     medalsInOrder["MedalEventRedDiamondMedal"] = btd6publicprofile["_medalsRace"]["RedDiamond"] || 0;
     medalsInOrder["MedalEventBlackDiamondMedal"] = btd6publicprofile["_medalsRace"]["BlackDiamond"] || 0;
     medalsInOrder["OdysseyStarIcon"] = btd6publicprofile.gameplay["totalOdysseyStars"] || 0;
@@ -336,7 +322,7 @@ function generateMedals(){
     medalsInOrder["BossMedalEventGoldSilverMedal"] = btd6publicprofile["_medalsBoss"]["GoldSilver"] || 0;
     medalsInOrder["BossMedalEventDoubleGoldMedal"] = btd6publicprofile["_medalsBoss"]["DoubleGold"] || 0;
     medalsInOrder["BossMedalEventGoldDiamondMedal"] = btd6publicprofile["_medalsBoss"]["GoldDiamond"] || 0;
-    medalsInOrder["BossMedalEventDiamondMedal"] = btd6publicprofile["_medalsBoss"]["Diamond"] || 0;
+    medalsInOrder["BossMedalEventBlueDiamondMedal"] = btd6publicprofile["_medalsBoss"]["BlueDiamond"] || 0;
     medalsInOrder["BossMedalEventRedDiamondMedal"] = btd6publicprofile["_medalsBoss"]["RedDiamond"] || 0;
     medalsInOrder["BossMedalEventBlackDiamondMedal"] = btd6publicprofile["_medalsBoss"]["BlackDiamond"] || 0;
     medalsInOrder["EliteBossMedalEventBronzeMedal"] = btd6publicprofile["_medalsBossElite"]["Bronze"] || 0;
@@ -345,7 +331,7 @@ function generateMedals(){
     medalsInOrder["EliteBossMedalEventGoldSilverMedal"] = btd6publicprofile["_medalsBossElite"]["GoldSilver"] || 0;
     medalsInOrder["EliteBossMedalEventDoubleGoldMedal"] = btd6publicprofile["_medalsBossElite"]["DoubleGold"] || 0;
     medalsInOrder["EliteBossMedalEventGoldDiamondMedal"] = btd6publicprofile["_medalsBossElite"]["GoldDiamond"] || 0;
-    medalsInOrder["EliteBossMedalEventDiamondMedal"] = btd6publicprofile["_medalsBossElite"]["Diamond"] || 0;
+    medalsInOrder["EliteBossMedalEventBlueDiamondMedal"] = btd6publicprofile["_medalsBossElite"]["BlueDiamond"] || 0;
     medalsInOrder["EliteBossMedalEventRedDiamondMedal"] = btd6publicprofile["_medalsBossElite"]["RedDiamond"] || 0;
     medalsInOrder["EliteBossMedalEventBlackDiamondMedal"] = btd6publicprofile["_medalsBossElite"]["BlackDiamond"] || 0;
     medalsInOrder["CtLocalPlayerBronzeMedal"] = btd6publicprofile["_medalsCTLocal"]["Bronze"] || 0;
@@ -362,8 +348,6 @@ function generateMedals(){
     medalsInOrder["CtGlobalPlayerDoubleGoldMedal"] = btd6publicprofile["_medalsCTGlobal"]["DoubleGold"] || 0;
     medalsInOrder["CtGlobalPlayerGoldDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["GoldDiamond"] || 0;
     medalsInOrder["CtGlobalPlayerDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["Diamond"] || 0;
-    medalsInOrder["CtGlobalPlayerRedDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["RedDiamond"] || 0;
-    medalsInOrder["CtGlobalPlayerBlackDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["BlackDiamond"] || 0;
 }
 
 function generateExtras(){
@@ -603,222 +587,75 @@ function calculateInstaBorder(tower) {
         processedInstaData.TowerBorders[tower] = "";
     }
 }
-function showLoading(){
-    let imagesToLoad = 0;
-    function imageLoaded() {
-        imagesToLoad--;
-        if (imagesToLoad === 0) {
-            document.getElementById("loading").style.transform = "scale(0)";
-        }
-    }
-    let observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'childList') {
-                mutation.addedNodes.forEach((node) => {
-                    if (node.nodeName === 'IMG') {
-                        imagesToLoad++;
-                        node.addEventListener('load', imageLoaded);
-                        node.addEventListener('error', imageLoaded);
-                    }
-                });
-            }
-        });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-    document.getElementById("loading").style.removeProperty("transform")
-}
 
-function hideLoading(){
-    document.getElementById("loading").style.transform = "scale(0)";
-}
-
-const container = document.createElement('div');
-document.body.appendChild(container);
-
-document.body.classList.add('hex-bg');
-
-const header = document.createElement('div');
-header.classList.add('header');
-container.appendChild(header);
-
-const headerDiv = document.createElement('div');
-headerDiv.classList.add('header-div');
-header.appendChild(headerDiv);
-
-const title = document.createElement('h1');
-title.classList.add('title');
-title.innerHTML = 'Bloons TD 6 API Explorer';
-headerDiv.appendChild(title);
-
-const content = document.createElement('div');
-content.classList.add('content');
-container.appendChild(content);
+const header = document.querySelector('.header');
+const headerDiv = document.querySelector('.header-div');
+const title = document.querySelector('.title');
+const content = document.querySelector('.content');
 
 readLocalStorage()
-generateFrontPage()
 function generateFrontPage(){
-    if(document.getElementById('front-page') != null){
-        document.getElementById('front-page').remove();
-    }
+    const frontPage = document.getElementById('home-content');
 
-    const frontPage = document.createElement('div');
-    frontPage.id = 'front-page';
-    frontPage.classList.add('front-page');
-    content.appendChild(frontPage);
+    frontPage.appendChild(createEl('p', { classList: ['disclaimer-text', 'font-gardenia'], innerHTML: 'This site is not affiliated with Ninja Kiwi. All game assets belong to Ninja Kiwi.' }));
+    // frontPage.appendChild(createEl('p', { classList: ['front-page-text', 'font-gardenia', 'ta-center'], innerHTML: 'Access your profile using an OAK token for the best experience!' }));
+    // frontPage.appendChild(generateLoginDiv());
 
-    let disclaimerText = document.createElement('p');
-    disclaimerText.classList.add('disclaimer-text');
-    disclaimerText.innerHTML = 'This site is not affiliated with Ninja Kiwi. All game assets belong to Ninja Kiwi.';
-    frontPage.appendChild(disclaimerText);
+    frontPage.appendChild(createEl('p', { classList: ['site-info-header', 'black-outline'], innerHTML: 'Site Features and Information' }));
 
-    let frontPageText = document.createElement('p');
-    frontPageText.classList.add('front-page-text');
-    frontPageText.innerHTML = 'Access your profile using an OAK token for the best experience!';
-    frontPage.appendChild(frontPageText);
+    let siteImageScroll = createEl('div', { classList: ['d-flex', 'jc-between'], style: {width: "700px", height: "400px", paddingTop: "20px"}});
+    frontPage.appendChild(siteImageScroll);
 
-    let previousOAK = document.createElement('div');
-    previousOAK.classList.add('previous-oak');
-    frontPage.appendChild(previousOAK);
+    let siteImageScrollLeft = createEl('div', { classList: ['d-flex', 'fd-column'], style: {width: "300px", background: "rgba(0,0,0,0.36)", padding: "10px", borderRadius: "10px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", gap: "1rem"}});
+    siteImageScroll.appendChild(siteImageScrollLeft);
 
-    Object.entries(localStorageOAK).forEach(([oak, oakdata]) => {
-        let previousOAKEntry = document.createElement('div');
-        previousOAKEntry.classList.add('previous-oak-entry');
-        previousOAKEntry.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(${oakdata.banner})`;
-        previousOAK.appendChild(previousOAKEntry);
+    let siteImageScrollTitle = createEl('p', { classList: ['font-luckiest', 'black-outline'], style: {fontSize: "28px", textAlign: "center"}, innerHTML: 'BTD6 API Explorer' });
+    siteImageScrollLeft.appendChild(siteImageScrollTitle);
 
-        previousOAKEntry.appendChild(generateAvatar(100, oakdata.avatar));
+    let siteImageScrollOverlayText = createEl('p', { classList: ['font-gardenia'], style: {fontSize: "20px", lineHeight: "1.5"}, innerHTML: 'Click on the images to access the sites!' });
+    siteImageScrollLeft.appendChild(siteImageScrollOverlayText);
 
-        let profileName = document.createElement('p');
-        profileName.classList.add('profile-name','black-outline');
-        profileName.innerHTML = oakdata.displayName;
-        previousOAKEntry.appendChild(profileName);
+    let siteImageScrollImage = createEl('img', { classList: ['site-image-scroll'], style: { borderRadius: "10px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", transition: "background-image 0.5s ease-in-out"}});
+    siteImageScroll.appendChild(siteImageScrollImage);
 
-        let useButton = document.createElement('img');
-        useButton.classList.add('use-button');
-        useButton.src = './Assets/UI/ContinueBtn.png';
-        useButton.addEventListener('click', () => {
-            trailerVideo.pause();
-            if (!pressedStart){
-                pressedStart = true;
-                document.getElementById("loading").style.removeProperty("transform");
-                loggedIn = true;
-                oak_token = oak;
-                getSaveData(oak);
-            }
-        })
-        previousOAKEntry.appendChild(useButton);
+    let sitePageDots = createEl('div', { classList: ['d-flex', 'jc-center'], style: {paddingTop: "20px"}});
+    frontPage.appendChild(sitePageDots);
 
-        let deleteButton = document.createElement('img');
-        deleteButton.classList.add('delete-button');
-        deleteButton.src = './Assets/UI/CloseBtn.png'
-        deleteButton.addEventListener('click', () => {
-            delete localStorageOAK[oak];
-            writeLocalStorage();
-            previousOAK.removeChild(previousOAKEntry);
-        })
-        previousOAKEntry.appendChild(deleteButton);
-    })
+    function updateSiteImageScroll(index) {
+        let data = imageScroll[index]
 
-    let trailerVideo = document.createElement('video');
-    trailerVideo.preload = 'none';
-    trailerVideo.classList.add('trailer-video');
-    trailerVideo.src = './Assets/Trailer/Trailer.mp4';
-    trailerVideo.controls = true;
+        siteImageScrollImage.src = `Assets/UI/${data.image}.png`;
+        siteImageScrollTitle.innerHTML = data.title;
+        siteImageScrollOverlayText.innerHTML = data.text;
 
-    let siteAccessDiv = document.createElement('div');
-    siteAccessDiv.classList.add('site-access-div');
-    frontPage.appendChild(siteAccessDiv);
+        sitePageDots.innerHTML = '';
+        for (let i = 0; i <= imageScroll.length - 1; i++) {
+            let sitePageDot = document.createElement('div');
+            sitePageDot.classList.add('map-page-dot');
+            if (index == i) { sitePageDot.classList.add('map-page-dot-active'); }
+            sitePageDots.appendChild(sitePageDot);
 
-    let siteLoginButtons = document.createElement('div');
-    siteLoginButtons.classList.add('site-login-buttons');
-    siteAccessDiv.appendChild(siteLoginButtons);
-
-    let previewButton = document.createElement('p');
-    previewButton.classList.add('site-access-button','black-outline');
-    previewButton.innerHTML = 'Preview Site';
-    previewButton.addEventListener('click', () => {
-        trailerVideo.pause();
-        previewSite();
-    })
-    siteLoginButtons.appendChild(previewButton);
-
-    let challengeSelectorOR = document.createElement('p');
-    challengeSelectorOR.classList.add("challenge-selector-or", "black-outline");
-    challengeSelectorOR.innerHTML = "OR";
-    siteLoginButtons.appendChild(challengeSelectorOR);
-
-    let loginButton = document.createElement('p');
-    loginButton.classList.add('site-access-button','black-outline');
-    loginButton.innerHTML = 'Login With OAK';
-    loginButton.addEventListener('click', () => {
-        document.querySelector('.oak-entry-div').style.display = 'flex';
-        siteLoginButtons.style.display = 'none';
-    })
-    siteLoginButtons.appendChild(loginButton);
-
-    let oakEntryDiv = document.createElement('div');
-    oakEntryDiv.classList.add('oak-entry-div');
-    oakEntryDiv.style.display = 'none';
-    frontPage.appendChild(oakEntryDiv);
-    
-    let keyEntry = document.createElement('input');
-    keyEntry.classList.add('key-entry');
-    keyEntry.placeholder = 'Enter your OAK here';
-    oakEntryDiv.appendChild(keyEntry);
-    
-    let startButton = document.createElement('div');
-    startButton.classList.add('start-button','black-outline');
-    startButton.innerHTML = 'Start';
-    startButton.addEventListener('click', () => {
-        trailerVideo.pause();
-        let key = keyEntry.value;
-        if (key.length < 5 || key.length > 30 || !key.startsWith('oak_')){
-            errorModal('Please enter a valid OAK! This will start with "oak_".');
-            return;
+            sitePageDot.addEventListener('click', () => {
+                imageScrollIndex = i;
+                updateSiteImageScroll(i);
+            })
         }
-        if (!pressedStart){
-            document.getElementById("loading").style.removeProperty("transform");
-            pressedStart = true;
-            loggedIn = true;
-            oak_token = keyEntry.value;
-            getSaveData(oak_token);
-        }
-    })
-    oakEntryDiv.appendChild(startButton);
+    } 
+    updateSiteImageScroll(0);
+    siteImageScroll.addEventListener('click', () => {
+        imageScrollIndex = (imageScrollIndex + 1) % imageScroll.length;
+        updateSiteImageScroll(imageScrollIndex);
+    });
 
-    let getOakDiv = document.createElement('div');
-    getOakDiv.classList.add('get-oak-div');
-    frontPage.appendChild(getOakDiv);
-
-    let whereText = document.createElement('p');
-    whereText.classList.add('where-text');
-    whereText.innerHTML = 'Don\'t have an OAK token? Read here:';
-    getOakDiv.appendChild(whereText);
-
-    let whereButton = document.createElement('p');
-    whereButton.classList.add('where-button','black-outline');
-    whereButton.innerHTML = 'View OAK Guide';
-    getOakDiv.appendChild(whereButton);
-
-    let OAKInstructionsDiv = document.createElement('div');
-    OAKInstructionsDiv.id = 'oak-instructions-div';
-    OAKInstructionsDiv.classList.add('oak-instructions-div');
-    OAKInstructionsDiv.style.display = 'none';
-    frontPage.appendChild(OAKInstructionsDiv);
-
-    let OtherInfoHeader = document.createElement('p');
-    OtherInfoHeader.classList.add('site-info-header','black-outline');
-    OtherInfoHeader.innerHTML = 'Site Information';
-    frontPage.appendChild(OtherInfoHeader);
+    // let OtherInfoHeader = document.createElement('p');
+    // OtherInfoHeader.classList.add('site-info-header','black-outline');
+    // OtherInfoHeader.innerHTML = 'Site Information';
+    // frontPage.appendChild(OtherInfoHeader);
 
     let infoButtons = document.createElement('div');
-    infoButtons.classList.add('info-buttons');
+    infoButtons.classList.add('d-flex', 'jc-evenly', 'w-100');
+    infoButtons.style.margin = "10px"
     frontPage.appendChild(infoButtons);
-
-    let trailerButton = document.createElement('p');
-    trailerButton.classList.add('where-button','black-outline');
-    trailerButton.innerHTML = 'Watch Trailer';
-    infoButtons.appendChild(trailerButton);
 
     let faqButton = document.createElement('p');
     faqButton.classList.add('where-button','black-outline')
@@ -835,27 +672,11 @@ function generateFrontPage(){
     changelogButton.innerHTML = 'Changelog';
     infoButtons.appendChild(changelogButton);
 
-    let privacyButton = document.createElement('p');
-    privacyButton.classList.add('where-button', 'black-outline');
-    privacyButton.innerHTML = 'Privacy Policy';
-    infoButtons.appendChild(privacyButton);
-
-    let feedbackButton = document.createElement('p');
-    feedbackButton.classList.add('where-button','black-outline');
-    feedbackButton.innerHTML = 'Send Feedback';
-    infoButtons.appendChild(feedbackButton);
-
     let FAQDiv = document.createElement('div');
     FAQDiv.id = 'faq-div';
     FAQDiv.classList.add('faq-div');
     FAQDiv.style.display = 'none';
     frontPage.appendChild(FAQDiv);
-
-    let privacyDiv = document.createElement('div');
-    privacyDiv.id = 'privacy-div';
-    privacyDiv.classList.add('privacy-div');
-    privacyDiv.style.display = 'none';
-    frontPage.appendChild(privacyDiv);
 
     let knownIssuesDiv = document.createElement('div');
     knownIssuesDiv.id = 'known-issues-div';
@@ -869,18 +690,6 @@ function generateFrontPage(){
     changelogDiv.style.display = 'none';
     frontPage.appendChild(changelogDiv);
 
-    let trailerDiv = document.createElement('div');
-    trailerDiv.id = 'trailer-div';
-    trailerDiv.classList.add('trailer-div');
-    trailerDiv.style.display = 'none';
-    frontPage.appendChild(trailerDiv);
-
-    let feedbackDiv = document.createElement('div');
-    feedbackDiv.id = 'feedback-div';
-    feedbackDiv.classList.add('feedback-div');
-    feedbackDiv.style.display = 'none';
-    frontPage.appendChild(feedbackDiv);
-
     let StandaloneSiteText = document.createElement('p');
     StandaloneSiteText.classList.add('site-info-header', 'sites-text', 'black-outline');
     StandaloneSiteText.innerHTML = 'Standalone Sites';
@@ -888,7 +697,7 @@ function generateFrontPage(){
 
     let sitesText = document.createElement('p');
     sitesText.classList.add('where-text');
-    sitesText.innerHTML = 'Separate sites with just one specialized module of this site:';
+    sitesText.innerHTML = 'Separate pages with just one module of this site:';
     frontPage.appendChild(sitesText);
 
     let StandaloneSiteDiv = document.createElement('div');
@@ -952,19 +761,9 @@ function generateFrontPage(){
     versionDiv.classList.add('version-div');
     frontPage.appendChild(versionDiv);
 
-    whereButton.id = 'oak-instructions-button';
-    whereButton.addEventListener('click', () => {
-        hideAllButOne('oak-instructions')
-    })
-
     faqButton.id = 'faq-button';
     faqButton.addEventListener('click', () => {
         hideAllButOne('faq')
-    })
-
-    privacyButton.id = 'privacy-button';
-    privacyButton.addEventListener('click', () => {
-        hideAllButOne('privacy')
     })
 
     knownIssuesButton.id = 'known-issues-button';
@@ -977,72 +776,16 @@ function generateFrontPage(){
         hideAllButOne('changelog')
     })
 
-    trailerButton.id = 'trailer-button';
-
-    feedbackButton.id = 'feedback-button';
-    feedbackButton.addEventListener('click', () => {
-        hideAllButOne('feedback')
-    })
-
-    let OAKInstructionsHeader = document.createElement('p');
-    OAKInstructionsHeader.classList.add('oak-instructions-header','black-outline');
-    OAKInstructionsHeader.innerHTML = 'What is an Open Access Key?';
-    OAKInstructionsDiv.appendChild(OAKInstructionsHeader);
-
-    let OAKInstructionsText = document.createElement('p');
-    OAKInstructionsText.classList.add('oak-instructions-text');
-    OAKInstructionsText.innerHTML = 'An Open Access Key (OAK) is a unique key that allows you to access your Bloons TD 6 data from Ninja Kiwi\'s Open Data API. The site will use this to fetch your information from the API. <br><br>NOTE: Progress tracking is not available for BTD6+ on Apple Arcade and BTD6 Netflix as OAK tokens are unavailable. Alternatively, you can <p onclick="previewSite()" style="font-family:GardeniaBold;color: white;cursor: pointer;text-decoration: underline;display: inline-block;">Preview The Site</p>';
-    OAKInstructionsDiv.appendChild(OAKInstructionsText);
-
-    let OAKInstructionsHeader2 = document.createElement('p');
-    OAKInstructionsHeader2.classList.add('oak-instructions-header','black-outline');
-    OAKInstructionsHeader2.innerHTML = 'How do I get one?';
-    OAKInstructionsDiv.appendChild(OAKInstructionsHeader2);
-
-    let OAKInstructionsText2 = document.createElement('p');
-    OAKInstructionsText2.classList.add('oak-instructions-text');
-    OAKInstructionsText2.innerHTML = 'Step 1: Login and Backup your progress with a Ninja Kiwi Account in BTD6. You can do this by going to settings from the main menu and clicking on the Account button.';
-    OAKInstructionsDiv.appendChild(OAKInstructionsText2);
-
-    let OAKInstuctionImg = document.createElement('img');
-    OAKInstuctionImg.classList.add('oak-instruction-img');
-    OAKInstuctionImg.src = './Assets/UI/OAKTutorial1.jpg';
-    OAKInstructionsDiv.appendChild(OAKInstuctionImg);
-
-    let OAKInstructionsText3 = document.createElement('p');
-    OAKInstructionsText3.classList.add('oak-instructions-text');
-    OAKInstructionsText3.innerHTML = 'Step 2: Select "Open Data API" at the bottom right of the account screen.';
-    OAKInstructionsDiv.appendChild(OAKInstructionsText3);
-
-    let OAKInstuctionImg2 = document.createElement('img');
-    OAKInstuctionImg2.classList.add('oak-instruction-img');
-    OAKInstuctionImg2.src = './Assets/UI/OAKTutorial2.jpg';
-    OAKInstructionsDiv.appendChild(OAKInstuctionImg2);
-
-    let OAKInstructionsText4 = document.createElement('p');
-    OAKInstructionsText4.classList.add('oak-instructions-text');
-    OAKInstructionsText4.innerHTML = 'Step 3: Generate a key and copy that in to the above text field. It should start with "oak_". Then click "Start" to begin!';
-    OAKInstructionsDiv.appendChild(OAKInstructionsText4);
-
-    let OAKInstuctionImg3 = document.createElement('img');
-    OAKInstuctionImg3.classList.add('oak-instruction-img');
-    OAKInstuctionImg3.src = './Assets/UI/OAKTutorial3.jpg';
-    OAKInstructionsDiv.appendChild(OAKInstuctionImg3);
-
-    let oakInstructionFooter = document.createElement('p');
-    oakInstructionFooter.classList.add('oak-instructions-text');
-    oakInstructionFooter.innerHTML = 'You can read more about the Open Data API here: <a href="https://ninja.kiwi/opendatafaq" target="_blank", style="color:white";>Open Data API Article</a>';
-    OAKInstructionsDiv.appendChild(oakInstructionFooter);
-
     let faqHeader = document.createElement('p');
     faqHeader.classList.add('oak-instructions-header','black-outline');
     faqHeader.innerHTML = 'Frequently Asked Questions';
     FAQDiv.appendChild(faqHeader);
 
     let FAQ = {
-        "What can I do with this?": "Some primary uses are tracking your progress automatically, viewing events and leaderboards up to two months in the past, browsing user generated content, and as a bonus feature: viewing round information. You can also view more detailed stats and progress than you can see in the game such as your highest round for every mode on every map you've played. Those who are working on their Insta Monkey collection can use this as a tracker as the data pulled is always up to date!",
+        // "What can I do with this?": "Some primary uses are tracking your progress automatically, viewing events and leaderboards up to two months in the past, browsing user generated content, and as a bonus feature: viewing round information. You can also view more detailed stats and progress than you can see in the game such as your highest round for every mode on every map you've played. Those who are working on their Insta Monkey collection can use this as a tracker as the data pulled is always up to date!",
         "How long does the API take to update after I do something in the game?": "15 minutes is the most I've seen. Be sure to press the save button in settings if you want to minimize the time it takes to update! It should not take more than 24 hours to update in any circumstance (browser caching, etc).",
-        "Why is this not available for BTD6+ and Netflix?": "This is because the data is stored differently for these versions such as using iCloud for BTD6+. This is not compatible with the Open Data API."
+        "Why is this not available for BTD6+ and Netflix?": "This is because the data is stored differently for these versions such as using iCloud for BTD6+. This is not compatible with the Open Data API.",
+        "How do I leave feedback?": 'If you have any feedback, things to add or change on the site, or most importantly bug reports, please fill out this anonymous form: <a href="https://forms.gle/Tg1PuRNj2ftojMde6" target="_blank" style="color: white;">Feedback Form</a>'
     }
 
     for (let [question, answer] of Object.entries(FAQ)){
@@ -1085,16 +828,6 @@ function generateFrontPage(){
         })
     }
 
-    let privacyHeader = document.createElement('p');
-    privacyHeader.classList.add('oak-instructions-header','black-outline');
-    privacyHeader.innerHTML = 'Privacy Policy';
-    privacyDiv.appendChild(privacyHeader);
-
-    let privacyText = document.createElement('p');
-    privacyText.classList.add('oak-instructions-text');
-    privacyText.innerHTML = 'This app does not store any data being sent to or retrieved from Ninja Kiwi\'s Open Data API outside of your browser/device. The localStorage browser feature is used to prevent users from having to re-enter their OAK token every time they visit the site. If you would like to delete this stored data, you can do so by clicking the "X" on the profile you would like to delete on this homepage or clearing your browsing data.';
-    privacyDiv.appendChild(privacyText);
-
     let knownIsseusHeader = document.createElement('p');
     knownIsseusHeader.classList.add('oak-instructions-header','black-outline');
     knownIsseusHeader.innerHTML = 'Known Issues';
@@ -1102,16 +835,14 @@ function generateFrontPage(){
 
     let knownIssuesText = document.createElement('p');
     knownIssuesText.classList.add('oak-instructions-text');
-    knownIssuesText.innerHTML = '- There are some cases where the leaderboard scoring type is different for Normal vs Elite boss events, but this is not reflected on the API right now. This will be fixed when it is corrected on the Open Data API.<br>- Legends Feats badge is missing from the currency and medals section<br>- The leaderboards site and leaderboards on the events are currently broken. This is being worked on to reflect changes to the system made in Update 48.';
+    knownIssuesText.innerHTML = `
+    - There are some cases where the leaderboard scoring type is different for Normal vs Elite boss events, but this is not reflected on the API right now. This will be fixed when it is corrected on the Open Data API.<br>
+    - Legends Feats badge is missing from the currency and medals section<br>
+    - The leaderboards site and leaderboards on the events are currently broken. This is being worked on to reflect changes to the system made in Update 48.<br>
+    - The new hidden achievement added in Update 48 is currently missing from the API.
+    `;
     knownIssuesDiv.appendChild(knownIssuesText);
     
-    trailerDiv.appendChild(trailerVideo);
-
-    trailerButton.addEventListener('click', () => {
-        hideAllButOne('trailer')
-        trailerVideo.play();
-    })
-
     let changelogHeader = document.createElement('p');
     changelogHeader.classList.add('oak-instructions-header','black-outline');
     changelogHeader.innerHTML = 'Changelog';
@@ -1138,25 +869,32 @@ function generateFrontPage(){
     v1.0.0: Initial Release<br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.`;
     changelogDiv.appendChild(changelogText);
 
-    let feedbackHeader = document.createElement('p');
-    feedbackHeader.classList.add('oak-instructions-header','black-outline');
-    feedbackHeader.innerHTML = 'Send Feedback';
-    feedbackDiv.appendChild(feedbackHeader);
+    // let feedbackHeader = document.createElement('p');
+    // feedbackHeader.classList.add('oak-instructions-header','black-outline');
+    // feedbackHeader.innerHTML = 'Send Feedback';
+    // frontPage.appendChild(feedbackHeader);
 
-    let feedbackText = document.createElement('p');
-    feedbackText.classList.add('oak-instructions-text');
-    feedbackText.innerHTML = 'If you have any feedback, things to add or change on the site, or most importantly bug reports, please fill out this anonymous form: <a href="https://forms.gle/Tg1PuRNj2ftojMde6" target="_blank" style="color: white;">Feedback Form</a>';
-    feedbackDiv.appendChild(feedbackText);
+    // let feedbackText = document.createElement('p');
+    // feedbackText.classList.add('tool-version-text');
+    // feedbackText.innerHTML = 'If you have any feedback, things to add or change on the site, or most importantly bug reports, please fill out this anonymous form: <a href="https://forms.gle/Tg1PuRNj2ftojMde6" target="_blank" style="color: white;">Feedback Form</a>';
+    // frontPage.appendChild(feedbackText);
 
-    function hideAllButOne(tab){
-        ["oak-instructions", "faq", "privacy", "known-issues","changelog","trailer", "feedback"].forEach((tabName) => {
-            trailerVideo.pause();
-            let contentDiv = document.getElementById(tabName + '-div');
-            let tabButton = document.getElementById(tabName + '-button');
-            if (tabName === tab && contentDiv.style.display == 'none') {
-                tabButton.classList.add('square-btn-yellow');
-                contentDiv.style.display = 'block';
-                activeTab = tab;
+    function hideAllButOne(selectedTab){
+        const tabs = ['faq', 'known-issues', 'changelog'];
+        
+        tabs.forEach((tabName) => {
+            const contentDiv = document.getElementById(tabName + '-div');
+            const tabButton = document.getElementById(tabName + '-button');
+            
+            if (tabName === selectedTab) {
+                const isCurrentlyHidden = contentDiv.style.display === 'none';
+                if (isCurrentlyHidden) {
+                    tabButton.classList.add('square-btn-yellow');
+                    contentDiv.style.display = 'block';
+                } else {
+                    tabButton.classList.remove('square-btn-yellow');
+                    contentDiv.style.display = 'none';
+                }
             } else {
                 tabButton.classList.remove('square-btn-yellow');
                 contentDiv.style.display = 'none';
@@ -1171,17 +909,14 @@ function generateVersionInfo(){
     let toolVersionText = document.createElement('p');
     toolVersionText.classList.add('tool-version-text');
     toolVersionText.innerHTML = `App Version: ${constants.version} / Game Content Version: v${constants.projectContentVersion}`;
-    versionDiv.appendChild(toolVersionText);
+    versionDiv?.appendChild(toolVersionText);
 }
 
+let headerTabs = ['home', 'profile', 'events', 'leaderboards', 'rounds', 'extras'];
 function generateHeaderTabs(){
-    const headerContainer = document.createElement('div');
-    headerContainer.classList.add('header-container');
-    header.appendChild(headerContainer);
+    const headerContainer = document.querySelector('.header-container');
 
-    let headers = ['Overview', 'Progress', 'Events', 'Explore', 'Extras'];
-
-    headers.forEach((headerName) => {
+    headerTabs.forEach((headerName) => {
         headerName = headerName.toLowerCase();
         let headerElement = document.createElement('p');
         headerElement.classList.add('header-label','black-outline');
@@ -1192,49 +927,38 @@ function generateHeaderTabs(){
         })
         headerContainer.appendChild(headerElement);
     })
+}
 
-    headers.forEach((headerName) => {
-        headerName = headerName.toLowerCase();
-        let contentElement = document.createElement('div');
-        contentElement.id = headerName + '-content';
-        contentElement.classList.add(`content-div`);
-        contentElement.classList.add(headerName)
-        contentElement.style.display = 'none';
-        content.appendChild(contentElement);
-    })
-
-    let extraContent = ['Challenge', "Map", 'PublicProfile', 'Leaderboard', "Browser", 'Relics', 'Roundset'];
-    extraContent.forEach((headerName) => {
-        headerName = headerName.toLowerCase();
-        let contentElement = document.createElement('div');
-        contentElement.id = headerName + '-content';
-        contentElement.classList.add(`sub-content-div`);
-        contentElement.classList.add(headerName)
-        contentElement.style.display = 'none';
-        content.appendChild(contentElement);
-    })
-
+function changeTitle(newTitle) {
+    document.querySelector('.title').innerHTML = newTitle;
 }
 
 function changeTab(tab) {
+    clearBackQueue();
     resetScroll();
     if(timerInterval) { clearInterval(timerInterval); }
     changeHexBGColor(constants.BGColor)
-    let tabs = document.getElementsByClassName('content-div');
-    for (let tab of tabs){
-        tab.style.display = 'none';
-        document.getElementById(tab.id.replace('-content', '')).classList.remove('selected');
+
+    for (let tabDiv of document.querySelector('.content').children) {
+        tabDiv.id === (tab + "-content") ? tabDiv.style.display = "flex" : tabDiv.style.display = 'none';
+    }
+    for(let tab of headerTabs){
+        if(document.getElementById(tab)){
+            document.getElementById(tab).classList.remove('selected');
+        }
+    }
+    if(document.getElementById(tab)){
+        document.getElementById(tab).classList.add('selected');
     }
     for (let subtab of document.getElementsByClassName('sub-content-div')){
         subtab.style.display = 'none';
     }
-    document.getElementById(tab + '-content').style.display = 'flex';
-    document.getElementById(tab).classList.add('selected');
+    changeTitle("Bloons TD 6 API Explorer")
     switch(tab){
         case 'overview':
             generateOverview();
             break;
-        case 'progress':
+        case 'profile':
             generateProgress();
             break;
         case 'events':
@@ -1243,6 +967,12 @@ function changeTab(tab) {
         case "explore":
             generateExplore();
             break;
+        case "leaderboards":
+            changeTitle("Bloons TD 6 Leaderboards")
+            generateLeaderboards();
+        case "rounds":
+            changeTitle("Bloons TD 6 Roundsets")
+            generateRoundsets();
         case 'extras':
             generateExtrasPage();
             break;
@@ -1252,15 +982,21 @@ function changeTab(tab) {
 let tempXP = 0;
 
 function generateOverview(){
-    let overviewContent = document.getElementById('overview-content');
+    let overviewContent = document.getElementById('profile-content');
     overviewContent.innerHTML = '';
+
+    addToBackQueue({source: 'profile', destination: 'profile', callback: generateProgress});
     
     if(loggedIn){
+    let profileContainer = document.createElement('div');
+    profileContainer.classList.add('profile-container', 'bg-color-primary', 'w-100', 'content-div', 'overview');
+    overviewContent.appendChild(profileContainer);
+
     let profileHeader = document.createElement('div');
     profileHeader.classList.add('profile-header');
     profileHeader.classList.add('profile-banner');
     profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${getProfileBanner(btd6publicprofile)}')`;
-    overviewContent.appendChild(profileHeader);
+    profileContainer.appendChild(profileHeader);
     profileHeader.appendChild(generateAvatar(100, btd6publicprofile["avatarURL"]));
 
     let profileTopBottom = document.createElement('div');
@@ -1303,7 +1039,7 @@ function generateOverview(){
 
     let belowProfileHeader = document.createElement('div');
     belowProfileHeader.classList.add('below-profile-header');
-    overviewContent.appendChild(belowProfileHeader);
+    profileContainer.appendChild(belowProfileHeader);
 
     let leftColumnDiv = document.createElement('div');
     leftColumnDiv.classList.add('left-column-div');
@@ -1742,31 +1478,31 @@ function generateOverview(){
     exclusiveStatDiv.classList.add('profile-stats');
     rightColumnDiv.appendChild(exclusiveStatDiv);
 
-        let exclusiveStatColumnHeader = document.createElement('div');
-        exclusiveStatColumnHeader.classList.add('overview-right-column-header');
-        exclusiveStatDiv.appendChild(exclusiveStatColumnHeader);
+    let exclusiveStatColumnHeader = document.createElement('div');
+    exclusiveStatColumnHeader.classList.add('overview-right-column-header');
+    exclusiveStatDiv.appendChild(exclusiveStatColumnHeader);
 
-        let exclusiveColumnHeaderText = document.createElement('p');
-        exclusiveColumnHeaderText.classList.add('column-header-text','black-outline');
-        exclusiveColumnHeaderText.innerHTML = 'API Exclusive Stats';
-        exclusiveStatColumnHeader.appendChild(exclusiveColumnHeaderText);
+    let exclusiveColumnHeaderText = document.createElement('p');
+    exclusiveColumnHeaderText.classList.add('column-header-text','black-outline');
+    exclusiveColumnHeaderText.innerHTML = 'API Exclusive Stats';
+    exclusiveStatColumnHeader.appendChild(exclusiveColumnHeaderText);
 
-        for (let [key, value] of Object.entries(exclusiveStats)){
-            if (value == null) { continue; }
-            let stat = document.createElement('div');
-            stat.classList.add('stat');
-            exclusiveStatDiv.appendChild(stat);
+    for (let [key, value] of Object.entries(exclusiveStats)){
+        if (value == null) { continue; }
+        let stat = document.createElement('div');
+        stat.classList.add('stat');
+        exclusiveStatDiv.appendChild(stat);
 
-            let statName = document.createElement('p');
-            statName.classList.add('stat-name');
-            statName.innerHTML = key;
-            stat.appendChild(statName);
+        let statName = document.createElement('p');
+        statName.classList.add('stat-name');
+        statName.innerHTML = key;
+        stat.appendChild(statName);
 
-            let statValue = document.createElement('p');
-            statValue.classList.add('stat-value');
-            statValue.innerHTML = value.toLocaleString();
-            stat.appendChild(statValue);
-        }
+        let statValue = document.createElement('p');
+        statValue.classList.add('stat-value');
+        statValue.innerHTML = value.toLocaleString();
+        stat.appendChild(statValue);
+    }
 
     if (btd6usersave.hasOwnProperty("rogueLegends")) {
 
@@ -1866,26 +1602,6 @@ function generateOverview(){
     }
 }
 
-function generateAvatar(size, src){
-    let avatar = document.createElement('div');
-    avatar.style.width = `${size}px`;
-    avatar.style.height = `${size}px`;
-    avatar.classList.add('avatar');
-
-    let avatarFrame = document.createElement('img');
-    avatarFrame.classList.add('avatar-frame','noSelect');
-    avatarFrame.style.width = `${size}px`;
-    avatarFrame.src = '../Assets/UI/InstaTowersContainer.png';
-    avatar.appendChild(avatarFrame);
-
-    let avatarImg = document.createElement('img');
-    avatarImg.classList.add('avatar-img','noSelect');
-    avatarImg.style.width = `${size}px`;
-    avatarImg.src = src;
-    avatar.appendChild(avatarImg);
-    return avatar;
-}
-
 function generateRank(veteran){
     let rank = document.createElement('div');
     rank.classList.add('rank');
@@ -1933,59 +1649,98 @@ function generateRank(veteran){
 }
 
 function generateProgress(){
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     if(loggedIn){
-    let progressPage = document.createElement('div');
-    progressPage.classList.add('progress-page');
-    progressContent.appendChild(progressPage);
+        let progressPage = document.createElement('div');
+        progressPage.classList.add('progress-page');
+        progressContent.appendChild(progressPage);
 
-    let selectorsDiv = document.createElement('div');
-    selectorsDiv.classList.add('selectors-div');
-    progressPage.appendChild(selectorsDiv);
+        let selectorsDiv = document.createElement('div');
+        selectorsDiv.classList.add('selectors-div');
+        progressPage.appendChild(selectorsDiv);
 
-    currentInstaView = "game";
+        currentInstaView = "game";
 
-    let selectors = ['Towers', 'Heroes', 'ActivatedAbilities', 'MapProgress', 'Powers', 'InstaMonkeys', 'Knowledge', 'Achievements', 'TrophyStore', 'TeamsStore', 'Extras'];
-
-    selectors.forEach((selector) => {
-        if(progressSubText[selector].includes("0 Extras")) { return; }
-        if(progressSubText[selector].includes("Team Store") && !showTeamsItems) { return; }
-        let selectorDiv = document.createElement('div');
-        selectorDiv.classList.add('selector-div');
-        selectorDiv.addEventListener('click', () => {
-            changeProgressTab(selector);
+        let logoutDiv = createEl('div', { classList: ['d-flex', 'jc-between', 'ai-center', 'bg-color-tertiary', 'pointer'], style: {padding: "10px", margin: "10px", borderRadius: "10px"} });
+        logoutDiv.addEventListener('click', () => {
+            logoutProgress();
         })
-        selectorsDiv.appendChild(selectorDiv);
+        logoutDiv.appendChild(createEl('p', { classList: ['profile-name', 'tc-white', 'font-luckiest', 'black-outline'], innerHTML: 'Logged in as: ' + btd6publicprofile.displayName }));
+        const logoutBtn = createEl('img', { style:{height: "50px"}, src: './Assets/UI/BackBtn.png' });
+        logoutDiv.appendChild(logoutBtn);
+        selectorsDiv.appendChild(logoutDiv);
 
-        let selectorImg = document.createElement('img');
-        selectorImg.classList.add('selector-img');
-        selectorImg.src = selector == "Heroes" ? `../Assets/HeroIconCircle/HeroIcon${btd6usersave.primaryHero}.png` : '../Assets/UI/' + selector.replace(" ","") + 'Btn.png';
-        selectorDiv.appendChild(selectorImg);
+        let profileSelectorDiv = document.createElement('div');
+        profileSelectorDiv.classList.add('d-flex', 'jc-between', 'ai-center', 'view-profile');
+        profileSelectorDiv.style.backgroundImage = `url(${getProfileBanner(btd6publicprofile)})`;
+        profileSelectorDiv.addEventListener('click', () => {
+            generateOverview();
+        })
+        selectorsDiv.appendChild(profileSelectorDiv);
 
-        let selectorText = document.createElement('p');
-        selectorText.classList.add('selector-text','black-outline');
-        selectorText.innerHTML = progressSubText[selector];
-        selectorDiv.appendChild(selectorText);
+        let profileSelectorImg = document.createElement('img');
+        profileSelectorImg.classList.add('selector-img');
+        profileSelectorImg.src = getProfileAvatar(btd6publicprofile);
+        profileSelectorDiv.appendChild(profileSelectorImg);
 
-        let selectorGoImg = document.createElement('img');
-        selectorGoImg.classList.add('selector-go-img');
-        selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
-        selectorDiv.appendChild(selectorGoImg);
-    })
+        let profileSelectorText = document.createElement('p');
+        profileSelectorText.classList.add('selector-text','black-outline');
+        profileSelectorText.innerHTML = "View Your Profile Stats";
+        profileSelectorDiv.appendChild(profileSelectorText);
+
+        let profileSelectorGoImg = document.createElement('img');
+        profileSelectorGoImg.classList.add('selector-go-img');
+        profileSelectorGoImg.src = '../Assets/UI/ContinueBtn.png';
+        profileSelectorDiv.appendChild(profileSelectorGoImg);
+
+        let selectors = ['Towers', 'Heroes', 'ActivatedAbilities', 'MapProgress', 'Powers', 'InstaMonkeys', 'Knowledge', 'Achievements', 'TrophyStore', 'TeamsStore', 'Extras'];
+
+        selectors.forEach((selector) => {
+            if(progressSubText[selector].includes("0 Extras")) { return; }
+            if(progressSubText[selector].includes("Team Store") && !showTeamsItems) { return; }
+            let selectorDiv = document.createElement('div');
+            selectorDiv.classList.add('selector-div');
+            selectorDiv.addEventListener('click', () => {
+                changeProgressTab(selector);
+            })
+            selectorsDiv.appendChild(selectorDiv);
+
+            let selectorImg = document.createElement('img');
+            selectorImg.classList.add('selector-img');
+            selectorImg.src = selector == "Heroes" ? `../Assets/HeroIconCircle/HeroIcon${btd6usersave.primaryHero}.png` : '../Assets/UI/' + selector.replace(" ","") + 'Btn.png';
+            selectorDiv.appendChild(selectorImg);
+
+            let selectorText = document.createElement('p');
+            selectorText.classList.add('selector-text','black-outline');
+            selectorText.innerHTML = progressSubText[selector];
+            selectorDiv.appendChild(selectorText);
+
+            let selectorGoImg = document.createElement('img');
+            selectorGoImg.classList.add('selector-go-img');
+            selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
+            selectorDiv.appendChild(selectorGoImg);
+        })
     } else {
-        let notLoggedInText = document.createElement('p');
-        notLoggedInText.classList.add('not-logged-in-text');
-        notLoggedInText.innerHTML = "You're in preview mode.<br>The Events, Explore, and Extras tabs can be used without an OAK token.";
-        progressContent.appendChild(notLoggedInText);
+        let notLoggedInContent = document.createElement('div');
+        notLoggedInContent.classList.add('bg-color-primary', 'content-div', 'progress', 'd-flex');
+        progressContent.appendChild(notLoggedInContent);
 
-        progressContent.classList.add("overview")
+        let loginDiv = generateLoginDiv();
+        notLoggedInContent.appendChild(loginDiv)
+
+        // let notLoggedInText = document.createElement('p');
+        // notLoggedInText.classList.add('not-logged-in-text');
+        // notLoggedInText.innerHTML = "You're in preview mode.<br>The Events, Explore, and Extras tabs can be used without an OAK token.";
+        // notLoggedInContent.appendChild(notLoggedInText);
+
+        // progressContent.classList.add("overview")
 
         let OtherInfoHeader = document.createElement('p');
         OtherInfoHeader.classList.add('site-info-header','black-outline');
         OtherInfoHeader.innerHTML = 'When an OAK token is entered:';
-        progressContent.appendChild(OtherInfoHeader);
+        notLoggedInContent.appendChild(OtherInfoHeader);
 
         let panels = {
             "Maps": {
@@ -2023,7 +1778,7 @@ function generateProgress(){
 
         let instaMonkeyGuideContainer = document.createElement('div');
         instaMonkeyGuideContainer.classList.add('insta-monkey-guide-container');
-        progressContent.appendChild(instaMonkeyGuideContainer);
+        notLoggedInContent.appendChild(instaMonkeyGuideContainer);
 
         Object.keys(panels).forEach(method => {
             let instaMonkeyGuideMethod = document.createElement('div');
@@ -2048,9 +1803,16 @@ function generateProgress(){
     }
 }
 
+function logoutProgress() {
+    loggedIn = false;
+    pressedStart = false;
+    generateProgress();
+}
+
 function changeProgressTab(selector){
     resetScroll();
     if(timerInterval) { clearInterval(timerInterval); }
+    addToBackQueue({source: 'profile', destination: 'profile', callback: generateProgress});
     switch(selector){
         case 'Towers':
             generateTowerProgress();
@@ -2090,11 +1852,14 @@ function changeProgressTab(selector){
         case "TeamsStore":
             generateTeamsStoreProgress();
             break;
+        case "Logout":
+            logoutProgress();
+            break;
     }
 }
 
 function generateTowerProgress(){
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let towerProgressContainer = document.createElement('div');
@@ -2479,7 +2244,7 @@ function onSelectTowerUpgradeParagon(tower, upgrade, tiers){
 }
 
 function generateHeroesProgress(){
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let heroProgressContainer = document.createElement('div');
@@ -2494,6 +2259,8 @@ function generateHeroesProgress(){
     heroSelectorHeaderTop.classList.add('hero-selector-header-top');
     heroProgressDiv.appendChild(heroSelectorHeaderTop);
 
+    let correctedHeroesList = Object.keys(btd6usersave.unlockedSkins).filter(k => !constants.heroesInOrder[k]);
+
     let heroSelectorHeaderText = document.createElement('p');
     heroSelectorHeaderText.classList.add('hero-selector-header-text','black-outline');
     heroSelectorHeaderText.innerHTML = `Heroes - ${Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length}/${Object.keys(btd6usersave.unlockedHeros).length}`;
@@ -2501,7 +2268,7 @@ function generateHeroesProgress(){
 
     let heroSelectorHeaderText2 = document.createElement('p');
     heroSelectorHeaderText2.classList.add('hero-selector-header-text','black-outline');
-    heroSelectorHeaderText2.innerHTML = `Skins - ${Object.keys(btd6usersave.unlockedSkins).filter(k => btd6usersave.unlockedSkins[k]).length}/${Object.keys(btd6usersave.unlockedSkins).length}`;
+    heroSelectorHeaderText2.innerHTML = `Skins - ${Object.keys(btd6usersave.unlockedSkins).filter(k => btd6usersave.unlockedSkins[k] && correctedHeroesList.includes(k)).length}/${correctedHeroesList.length}`;
     heroSelectorHeaderTop.appendChild(heroSelectorHeaderText2);
 
     let heroSelectorHeader = document.createElement('div');
@@ -2738,7 +2505,7 @@ function updatePortraitLevelButtons(hero){
 }
 
 function generateKnowledgeProgress(){
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let totals = [0,0,0]
@@ -2864,7 +2631,7 @@ function onSelectKnowledgePoint(knowledge){
 }
 
 function generateMapsProgress(){
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let mapsProgressHeaderBar = document.createElement('div');
@@ -3086,7 +2853,8 @@ function generateMapDetails(map){
     modalClose.classList.add('modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
-        onExitMap();
+        // onExitMap();
+        goBack();
     })
     mapProgressHeaderBar.appendChild(modalClose);
 
@@ -3381,6 +3149,7 @@ function generateMapsGridView(){
 
         mapDiv.addEventListener('click', () => {
             onSelectMap(map);
+            addToBackQueue({callback: onExitMap});
         })
     }
 }
@@ -3506,6 +3275,7 @@ function generateMapsListView(){
 
         mapDiv.addEventListener('click', () => {
             onSelectMap(map);
+            addToBackQueue({callback: onExitMap});
         })
     }
     mapsListContainer.appendChild(fragment);
@@ -3597,6 +3367,7 @@ function generateMapsGameView() {
 
         mapDiv.addEventListener('click', () => {
             onSelectMap(map);
+            addToBackQueue({callback: onExitMap});
         })
     }
 
@@ -3637,7 +3408,7 @@ function generateMapsGameView() {
 }
 
 function generatePowersProgress() {
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let powersProgressContainer = document.createElement('div');
@@ -3671,7 +3442,7 @@ function generatePowersProgress() {
 }
 
 function generateInstaMonkeysProgress() {
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let instaMonkeysHeaderBar = document.createElement('div');
@@ -4181,34 +3952,7 @@ function generateInstaObtainGuide() {
 }
 
 function generateChestOddsModal() {
-    let modal = document.createElement('div');
-    modal.classList.add('error-modal-overlay');
-    document.body.appendChild(modal);
-
     let modalContent = document.createElement('div');
-    modalContent.classList.add('collection-modal');
-    modal.appendChild(modalContent);
-
-    let modalHeaderDiv = document.createElement('div');
-    modalHeaderDiv.classList.add('collection-modal-header');
-    modalContent.appendChild(modalHeaderDiv);
-
-    let collectionHeaderModalLeft = document.createElement('div');
-    collectionHeaderModalLeft.classList.add('collection-header-modal-left');
-    modalHeaderDiv.appendChild(collectionHeaderModalLeft);
-
-    let modalTitle = document.createElement('p');
-    modalTitle.classList.add('collection-modal-header-text','black-outline');
-    modalTitle.innerHTML = "Standard Chest Base Odds";
-    modalHeaderDiv.appendChild(modalTitle);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('collection-modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        modal.remove();
-    })
-    modalHeaderDiv.appendChild(modalClose);
 
     let modalChestDesc = document.createElement('p');
     modalChestDesc.classList.add('collection-desc-text');
@@ -4278,38 +4022,15 @@ function generateChestOddsModal() {
             quantityContainer.appendChild(quantityText);
         })
     })
-
+    createModal({
+        header: "Chest Base Odds",
+        content: modalContent,
+        classList: ['error-modal-overlay']
+    });
 }
 
 function generateHowToUseModal() {
-    let modal = document.createElement('div');
-    modal.classList.add('error-modal-overlay');
-    document.body.appendChild(modal);
-
     let modalContent = document.createElement('div');
-    modalContent.classList.add('collection-modal');
-    modal.appendChild(modalContent);
-
-    let modalHeaderDiv = document.createElement('div');
-    modalHeaderDiv.classList.add('collection-modal-header');
-    modalContent.appendChild(modalHeaderDiv);
-
-    let collectionHeaderModalLeft = document.createElement('div');
-    collectionHeaderModalLeft.classList.add('collection-header-modal-left');
-    modalHeaderDiv.appendChild(collectionHeaderModalLeft);
-
-    let modalTitle = document.createElement('p');
-    modalTitle.classList.add('collection-modal-header-text','black-outline');
-    modalTitle.innerHTML = "How to Use This Helper";
-    modalHeaderDiv.appendChild(modalTitle);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('collection-modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        modal.remove();
-    })
-    modalHeaderDiv.appendChild(modalClose);
 
     let modalHelpDivs = document.createElement('div');
     modalHelpDivs.classList.add('modal-help-divs');
@@ -4347,6 +4068,11 @@ function generateHowToUseModal() {
         modalHelpImg.src = `./Assets/UI/CollectionHelp${index + 1}.png`;
         modalHelpDiv.appendChild(modalHelpImg);
     });
+    
+    createModal({
+        header: 'How to Use This Helper',
+        content: modalContent,
+    })
 }
 
 function generateInstaCollectionEventHelper(){
@@ -4370,6 +4096,7 @@ function generateInstaCollectionEventHelper(){
 
     let howButton = document.createElement('p');
     howButton.classList.add('where-button','black-outline');
+    howButton.style.width = "230px";
     howButton.innerHTML = 'How to Use This';
     howButton.addEventListener('click', () => {
         generateHowToUseModal();
@@ -4939,7 +4666,7 @@ function openAllTowersList(instaMonkeysMissingContainer){
 }
 
 function generateAbilities() {
-    let abilitiesContent = document.getElementById('progress-content');
+    let abilitiesContent = document.getElementById('profile-content');
     abilitiesContent.innerHTML = "";
 
     let abilitiesHeaderBar = document.createElement('div');
@@ -5022,7 +4749,7 @@ function generateAbilities() {
 }
 
 function generateAchievementsProgress() {
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let achievementsProgressContainer = document.createElement('div');
@@ -5231,7 +4958,7 @@ function generateAchievementsGameView(){
 }
 
 function generateExtrasProgress() {
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let extrasProgressContainer = document.createElement('div');
@@ -5385,6 +5112,7 @@ function changeEventTab(selector){
             generateChallenges("CoopDailyChallenges");
             break;
     }
+    // addToBackQueue({callback: generateEvents})
 }
 
 function generateRaces(){
@@ -5444,6 +5172,8 @@ function generateRaces(){
         } else if (new Date(race.end) > new Date()) {
             updateTimer(new Date(race.end), raceTimeLeft.id);
             timerInterval = setInterval(() => updateTimer(new Date(race.end), raceTimeLeft.id), 1000)
+        } else if (new Date() > new Date(race.end)) {
+            raceTimeLeft.innerHTML = "Finished";
         }
 
         let raceInfoDates = document.createElement('p');
@@ -5611,6 +5341,8 @@ function generateBosses(elite){
         } else if (new Date(race.end) > new Date()) {
             updateTimer(new Date(race.end), bossTimeLeft.id);
             timerInterval = setInterval(() => updateTimer(new Date(race.end), bossTimeLeft.id), 1000)
+        } else if (new Date() > new Date(race.end)) {
+            bossTimeLeft.innerHTML = "Finished";
         }
 
         let raceInfoDates = document.createElement('p');
@@ -5723,6 +5455,8 @@ function generateCTs(){
         } else if (new Date(race.end) > new Date()) {
             updateTimer(new Date(race.end), raceTimeLeft.id);
             timerInterval = setInterval(() => updateTimer(new Date(race.end), raceTimeLeft.id), 1000)
+        } else if (new Date() > new Date(race.end)) {
+            raceTimeLeft.innerHTML = "Finished";
         }
 
         let ctInfoLeftDiv = document.createElement('div');
@@ -6108,6 +5842,8 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     document.getElementById(`${source}-content`).style.display = "none";
     resetScroll();
 
+    addToBackQueue({"source": source, "destination": "challenge"});
+
     let challengeExtraData = processChallenge(metadata);
     if (challengeType == "Boss" && eventData.scoringType != "GameTime") {
         switch(eventData.scoringType){
@@ -6174,7 +5910,8 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     modalClose.classList.add('modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
-        exitChallengeModel(source);
+        // exitChallengeModel(source);
+        goBack();
     })
     challengeHeaderRightTop.appendChild(modalClose);
 
@@ -6298,6 +6035,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
                 if (typeof bossesData[eventData.index][eventData.elite ? "metadataElite" : "metadataStandard"] == 'string') {
                     await getBossMetadata(eventData.index, eventData.elite)
                 }
+                goBack();
                 showChallengeModel('events', bossesData[eventData.index][eventData.elite ? "metadataElite" : "metadataStandard"], challengeType, eventData);
                 hideLoading();
             })
@@ -7026,515 +6764,6 @@ function challengeRules(metadata){
     return result;
 }
 
-function showLeaderboard(source, metadata, type) {
-    switch(type){
-        case "Boss":
-            if (leaderboardLink != metadata.leaderboard_standard_players_1) { leaderboardPage = 1 }
-            leaderboardLink = metadata.leaderboard_standard_players_1;
-            break;
-        case "BossElite":
-            if (leaderboardLink != metadata.leaderboard_elite_players_1) { leaderboardPage = 1 }
-            leaderboardLink = metadata.leaderboard_elite_players_1;
-            break
-        case "CTPlayer":
-            if (leaderboardLink != metadata.leaderboard_player) { leaderboardPage = 1 }
-            leaderboardLink = metadata.leaderboard_player;
-            break;
-        case "CTTeam":
-            if (leaderboardLink != metadata.leaderboard_team) { leaderboardPage = 1 }
-            leaderboardLink = metadata.leaderboard_team;
-            break;
-        default:
-            if (leaderboardLink != metadata.leaderboard) { leaderboardPage = 1 }
-            leaderboardLink = metadata.leaderboard;
-    }
-
-    let leaderboardContent = document.getElementById('leaderboard-content');
-    leaderboardContent.style.display = "flex";
-    leaderboardContent.innerHTML = "";
-    document.getElementById(`${source}-content`).style.display = "none";
-
-    let leaderboardDiv = document.createElement('div');
-    leaderboardDiv.classList.add('leaderboard-div');
-    leaderboardContent.appendChild(leaderboardDiv);
-
-    let leaderboardTop = document.createElement('div');
-    leaderboardTop.classList.add('leaderboard-top');
-    leaderboardDiv.appendChild(leaderboardTop);
-
-    let leaderboardHeader = document.createElement('div');
-    leaderboardHeader.classList.add('leaderboard-header');
-    leaderboardTop.appendChild(leaderboardHeader);
-
-    let leaderboardHeaderLeft = document.createElement('div');
-    leaderboardHeaderLeft.classList.add('leaderboard-header-left');
-    leaderboardHeader.appendChild(leaderboardHeaderLeft);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        leaderboardContent.style.display = "none";
-        document.getElementById(`${source}-content`).style.display = "flex";
-    })
-    leaderboardHeaderLeft.appendChild(modalClose);
-
-    let leaderboardHeaderMiddle = document.createElement('div');
-    leaderboardHeaderMiddle.classList.add(`leaderboard-header-middle-${type.toLowerCase()}`);
-    leaderboardHeader.appendChild(leaderboardHeaderMiddle);
-
-    let leaderboardHeaderTitle = document.createElement('div');
-    leaderboardHeaderTitle.classList.add(`leaderboard-header-${type.toLowerCase()}`);
-    leaderboardHeaderMiddle.appendChild(leaderboardHeaderTitle);
-
-    let leaderboardHeaderTitleText = document.createElement('p');
-    leaderboardHeaderTitleText.classList.add('leaderboard-header-title-text');
-    leaderboardHeaderTitle.appendChild(leaderboardHeaderTitleText); 
-
-    switch(type) {
-        case "Race":
-            leaderboardHeaderTitleText.classList.add("black-outline");
-            leaderboardHeaderTitleText.innerHTML = "Race Leaderboard"
-            break;
-        case "Boss":
-            leaderboardHeaderTitleText.classList.add("black-outline");
-            leaderboardHeaderTitleText.innerHTML = "Boss Leaderboard"
-            break;
-        case "BossElite":
-            leaderboardHeaderTitleText.classList.add("black-outline");
-            leaderboardHeaderTitleText.innerHTML = "Elite Boss Leaderboard"
-            break;
-        case "CTPlayer":
-            leaderboardHeaderTitleText.classList.add("ct-text");
-            leaderboardHeaderTitleText.innerHTML = "Contested Territory <br> Player Leaderboard"
-            break;
-        case "CTTeam":
-            leaderboardHeaderTitleText.classList.add("ct-text");
-            leaderboardHeaderTitleText.innerHTML = "Contested Territory <br> Team Leaderboard"
-            break;
-    }
-
-
-    let leaderboardHeaderRight = document.createElement('div');
-    leaderboardHeaderRight.classList.add('leaderboard-header-right');
-    leaderboardHeader.appendChild(leaderboardHeaderRight);
-
-    if(type == "Boss" || type == "BossElite") {
-        let leaderboardDisclaimer = document.createElement('p');
-        leaderboardDisclaimer.classList.add('leaderboard-disclaimer','black-outline');
-        leaderboardDisclaimer.innerHTML = "Note: Only singleplayer boss leaderboards are available on the API currently.";
-        leaderboardTop.appendChild(leaderboardDisclaimer);
-    }
-
-    let leaderboardColumnLabels = document.createElement('div');
-    leaderboardColumnLabels.id = 'leaderboard-column-labels';
-    leaderboardColumnLabels.classList.add('leaderboard-column-labels');
-    leaderboardTop.appendChild(leaderboardColumnLabels);
-
-    let leaderboardEntries = document.createElement('div');
-    leaderboardEntries.id = 'leaderboard-entries';
-    leaderboardEntries.classList.add('leaderboard-entries');
-    leaderboardDiv.appendChild(leaderboardEntries);
-
-    let leaderboardFooter = document.createElement('div');
-    leaderboardFooter.classList.add('leaderboard-footer');
-    leaderboardDiv.appendChild(leaderboardFooter);
-
-    let leaderboardFooterLeft = document.createElement('div');
-    leaderboardFooterLeft.classList.add('leaderboard-footer-left');
-    leaderboardFooter.appendChild(leaderboardFooterLeft);
-    
-    let leaderboardFooterRefresh = document.createElement('img');
-    leaderboardFooterRefresh.classList.add('leaderboard-footer-refresh');
-    leaderboardFooterRefresh.src = "./Assets/UI/RefreshBtn.png";
-    leaderboardFooterRefresh.addEventListener('click', () => {
-        if(!refreshRateLimited) {
-        generateLeaderboardEntries(metadata)
-        leaderboardFooterRefresh.style.filter = "grayscale(1) brightness(0.5)"
-        setTimeout(() => {
-            leaderboardFooterRefresh.style.filter = "none";
-            refreshRateLimited = false;
-        }, 10000)
-        refreshRateLimited = true;
-        }
-    })
-    leaderboardFooterLeft.appendChild(leaderboardFooterRefresh);
-
-    let leaderboardFooterMiddle = document.createElement('div');
-    leaderboardFooterMiddle.classList.add('leaderboard-footer-middle');
-    leaderboardFooter.appendChild(leaderboardFooterMiddle);
-
-    let leaderboardFooterPageLeft = document.createElement('img');
-    leaderboardFooterPageLeft.classList.add('leaderboard-footer-page-left','black-outline');
-    leaderboardFooterPageLeft.src = "./Assets/UI/NextArrowSmallYellow.png";
-    leaderboardFooterMiddle.appendChild(leaderboardFooterPageLeft);
-    
-    let leaderboardFooterPageNumber = document.createElement('div');
-    leaderboardFooterPageNumber.id = 'leaderboard-footer-page-number';
-    leaderboardFooterPageNumber.classList.add('leaderboard-footer-page-number','black-outline');
-    leaderboardFooterPageNumber.innerHTML = `Loading...`;
-    leaderboardFooterMiddle.appendChild(leaderboardFooterPageNumber);
-    
-    let leaderboardFooterPageRight = document.createElement('img');
-    leaderboardFooterPageRight.classList.add('leaderboard-footer-page-right','black-outline');
-    leaderboardFooterPageRight.src = "./Assets/UI/NextArrowSmallYellow.png";
-    leaderboardFooterPageLeft.addEventListener('click', () => {
-        leaderboardPage--;
-        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (#${(leaderboardPage * leaderboardPageEntryCount) - (leaderboardPageEntryCount - 1)} - ${leaderboardPage * leaderboardPageEntryCount})`;
-        leaderboardEntries.innerHTML = "";
-        copyLoadingIcon(leaderboardEntries)
-
-        generateLeaderboardEntries(metadata)
-    })
-    leaderboardFooterPageRight.addEventListener('click', () => {
-        leaderboardPage++;
-        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (#${(leaderboardPage * leaderboardPageEntryCount) - (leaderboardPageEntryCount - 1)} - ${leaderboardPage * leaderboardPageEntryCount})`;
-        leaderboardEntries.innerHTML = "";
-        copyLoadingIcon(leaderboardEntries)
-
-        generateLeaderboardEntries(metadata)
-    })
-    leaderboardFooterMiddle.appendChild(leaderboardFooterPageRight);
-
-    let leaderboardFooterRight = document.createElement('div');
-    leaderboardFooterRight.classList.add('leaderboard-footer-right');
-    leaderboardFooter.appendChild(leaderboardFooterRight);
-
-    // let leaderboardFooterGoto = document.createElement('p');
-    // leaderboardFooterGoto.classList.add('leaderboard-footer-goto','black-outline');
-    // leaderboardFooterGoto.innerHTML = "Go to:";
-    // leaderboardFooterRight.appendChild(leaderboardFooterGoto);
-
-    let leaderboardFooterPageInput = document.createElement('input');
-    leaderboardFooterPageInput.classList.add('leaderboard-footer-page-input');
-    leaderboardFooterPageInput.type = "number";
-    leaderboardFooterPageInput.min = "1";
-    leaderboardFooterPageInput.max = 1000 / leaderboardPageEntryCount;
-    leaderboardFooterPageInput.value = `${leaderboardPage}`;
-    leaderboardFooterPageInput.addEventListener('change', () => {
-        if (leaderboardFooterPageInput.value < 1) { leaderboardFooterPageInput.value = 1; }
-        if (leaderboardFooterPageInput.value > (1000 / leaderboardPageEntryCount)) { leaderboardFooterPageInput.value = (1000 / leaderboardPageEntryCount) }
-    })
-    leaderboardFooterRight.appendChild(leaderboardFooterPageInput);
-
-    let selectorGoImg = document.createElement('img');
-    selectorGoImg.classList.add('leaderboard-go-img');
-    selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
-    selectorGoImg.addEventListener('click', () => {
-        leaderboardPage = leaderboardFooterPageInput.value;
-        leaderboardFooterPageNumber.innerHTML = `Page ${leaderboardPage} (#${(leaderboardPage * leaderboardPageEntryCount) - (leaderboardPageEntryCount - 1)} - ${leaderboardPage * leaderboardPageEntryCount})`;
-        leaderboardEntries.innerHTML = "";
-        copyLoadingIcon(leaderboardEntries)
-        generateLeaderboardEntries(metadata)
-    })
-    leaderboardFooterRight.appendChild(selectorGoImg);
-
-    copyLoadingIcon(leaderboardEntries)
-    generateLeaderboardEntries(metadata, type);
-}
-
-async function generateLeaderboardEntries(metadata, type){
-    await getLeaderboardData();
-
-    let columnsType = null;
-    switch(type) {
-        case "CTTeam":
-            columnsType = "CTTeam";
-            break;
-        case "CTPlayer":
-            columnsType = "CTPlayer";
-            break;
-    }
-    if(metadata.hasOwnProperty('leaderboard') && metadata.leaderboard.includes('races')) {
-        columnsType = "GameTime";
-    }
-    if(metadata.hasOwnProperty('bossType')) {
-        switch(metadata.scoringType) {
-            case "GameTime":
-                columnsType = "GameTime";
-                break;
-            case "LeastCash":
-                columnsType = "LeastCash";
-                break;
-            case "LeastTiers":
-                columnsType = "LeastTiers";
-                break;
-        }
-    }
-
-    generateLeaderboardHeader(columnsType);
-
-
-    let leaderboardEntries = document.getElementById('leaderboard-entries');
-    leaderboardEntries.innerHTML = "";
-
-    if(leaderboardData != null) {
-        leaderboardData.forEach((entry, index) => {
-            let scorePartsObj = {}
-            
-            if(entry.hasOwnProperty("scoreParts")) {
-                entry.scoreParts.forEach((part, index) => {
-                    scorePartsObj[part.name] = part;
-                })
-            }
-
-            let leaderboardEntry = document.createElement('div');
-            leaderboardEntry.classList.add('leaderboard-entry');
-            if(type != "CTTeam") {
-            leaderboardEntry.addEventListener('click', () => {
-                openProfile('leaderboard', entry.profile);
-            })
-        }
-            leaderboardEntries.appendChild(leaderboardEntry);
-
-            let leaderboardEntryDiv = document.createElement('div');
-            leaderboardEntryDiv.classList.add('leaderboard-entry-div');
-            leaderboardEntry.appendChild(leaderboardEntryDiv);
-
-            let leaderboardEntryRank = document.createElement('p');
-            leaderboardEntryRank.classList.add('leaderboard-entry-rank','black-outline');
-            leaderboardEntryRank.innerHTML = index + ((leaderboardPage - 1)  * leaderboardPageEntryCount) + 1;
-            leaderboardEntryDiv.appendChild(leaderboardEntryRank);
-
-            let leaderboardEntryPlayer = document.createElement('div');
-            leaderboardEntryPlayer.classList.add('leaderboard-entry-player');
-            leaderboardEntryDiv.appendChild(leaderboardEntryPlayer);
-
-            let leaderboardEntryIcon = null;
-            let leaderboardEntryFrame = null;
-            let leaderboardEntryEmblem = null;
-
-            if(type == "CTTeam") {
-                leaderboardEntryIcon = document.createElement('div');
-                leaderboardEntryIcon.classList.add('leaderboard-entry-icon-ct');
-                leaderboardEntryPlayer.appendChild(leaderboardEntryIcon);
-
-                leaderboardEntryFrame = document.createElement('img');
-                leaderboardEntryFrame.classList.add('leaderboard-entry-frame');
-                leaderboardEntryFrame.src = `./Assets/UI/TeamFrame1.png`;
-                leaderboardEntryIcon.appendChild(leaderboardEntryFrame);
-
-                leaderboardEntryEmblem = document.createElement('img');
-                leaderboardEntryEmblem.classList.add('leaderboard-entry-emblem');
-                leaderboardEntryEmblem.src = `./Assets/UI/TeamIcon1.png`;
-                leaderboardEntryIcon.appendChild(leaderboardEntryEmblem);
-            } else {
-                leaderboardEntryIcon = document.createElement('img');
-                leaderboardEntryIcon.classList.add('leaderboard-entry-icon');
-                leaderboardEntryIcon.src = `./Assets/ProfileAvatar/ProfileAvatar01.png`;
-                leaderboardEntryPlayer.appendChild(leaderboardEntryIcon);
-            }
-
-            let leaderboardEntryName = document.createElement('p');
-            leaderboardEntryName.classList.add('leaderboard-entry-name','leaderboard-outline');
-            leaderboardEntryName.innerHTML = entry.displayName;
-            leaderboardEntryPlayer.appendChild(leaderboardEntryName);
-
-            let leaderboardEntryTimeSubmitDiv = document.createElement('div');
-            leaderboardEntryTimeSubmitDiv.classList.add('leaderboard-entry-time-submit-div');
-            leaderboardEntryDiv.appendChild(leaderboardEntryTimeSubmitDiv);
-
-            let leaderboardEntryScore = document.createElement('div')
-            leaderboardEntryScore.classList.add('leaderboard-entry-score');
-            leaderboardEntryDiv.appendChild(leaderboardEntryScore);
-
-            let leaderboardEntryScoreIcon = document.createElement('img');
-            leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon');
-            leaderboardEntryScoreIcon.src = "./Assets/UI/StopWatch.png";
-            leaderboardEntryScore.appendChild(leaderboardEntryScoreIcon);
-            
-            let leaderboardEntryMainScore = document.createElement('p');
-            leaderboardEntryMainScore.classList.add('leaderboard-entry-main-score','leaderboard-outline');
-            leaderboardEntryScore.appendChild(leaderboardEntryMainScore);
-
-            if(metadata.hasOwnProperty('leaderboard') && metadata.leaderboard.includes('races')) {
-                let submittedDate = new Date(metadata.start + scorePartsObj["Time after event start"].score)
-
-                let leaderboardEntryTimeSubmitted = document.createElement('p');
-                leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted','leaderboard-outline');
-                leaderboardEntryTimeSubmitted.innerHTML = submittedDate.toLocaleString();
-                leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmitted);
-
-                let leaderboardEntryTimeSubmittedRelative = document.createElement('p');
-                leaderboardEntryTimeSubmittedRelative.classList.add('leaderboard-entry-time-submitted-relative','leaderboard-outline');
-                leaderboardEntryTimeSubmittedRelative.innerHTML = relativeTime(new Date(), submittedDate);
-                leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
-
-                leaderboardEntryMainScore.innerHTML = formatScoreTime(entry.score);
-            }
-            if(metadata.hasOwnProperty('bossType')) {
-                switch(metadata.scoringType) {
-                    case "GameTime":
-                        let submittedDate = new Date(metadata.start + scorePartsObj["Time after event start"].score)
-
-                        let leaderboardEntryTimeSubmitted = document.createElement('p');
-                        leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted','leaderboard-outline');
-                        leaderboardEntryTimeSubmitted.innerHTML = submittedDate.toLocaleString();
-                        leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmitted);
-
-                        let leaderboardEntryTimeSubmittedRelative = document.createElement('p');
-                        leaderboardEntryTimeSubmittedRelative.classList.add('leaderboard-entry-time-submitted-relative','leaderboard-outline');
-                        leaderboardEntryTimeSubmittedRelative.innerHTML = relativeTime(new Date(), submittedDate);
-                        leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
-
-                        leaderboardEntryMainScore.innerHTML = formatScoreTime(entry.score);
-                        break;
-                    case "LeastCash":
-                        leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
-                        leaderboardEntryScoreIcon.src = `./Assets/UI/LeastCashIconSmall.png`;
-                        leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
-
-                        let leaderboardEntryGameTime = document.createElement('div');
-                        leaderboardEntryGameTime.classList.add('leaderboard-entry-game-time');
-                        leaderboardEntryDiv.appendChild(leaderboardEntryGameTime);
-
-                        let leaderboardEntryGameTimeIcon = document.createElement('img');
-                        leaderboardEntryGameTimeIcon.classList.add('leaderboard-entry-score-icon');
-                        leaderboardEntryGameTimeIcon.src = "./Assets/UI/StopWatch.png";
-                        leaderboardEntryGameTime.appendChild(leaderboardEntryGameTimeIcon);
-
-                        let leaderboardEntryGameTimeValue = document.createElement('p');
-                        leaderboardEntryGameTimeValue.classList.add('leaderboard-entry-game-time-value','leaderboard-outline');
-                        leaderboardEntryGameTimeValue.innerHTML = formatScoreTime(scorePartsObj["Game Time"].score);
-                        leaderboardEntryGameTime.appendChild(leaderboardEntryGameTimeValue);
-                        break;
-                    case "LeastTiers":
-                        leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
-                        leaderboardEntryScoreIcon.src = `./Assets/UI/LeastTiersIconSmall.png`;
-                        leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
-
-                        let leaderboardEntryGameTimeTiers = document.createElement('div');
-                        leaderboardEntryGameTimeTiers.classList.add('leaderboard-entry-game-time');
-                        leaderboardEntryDiv.appendChild(leaderboardEntryGameTimeTiers);
-
-                        let leaderboardEntryGameTimeTiersIcon = document.createElement('img');
-                        leaderboardEntryGameTimeTiersIcon.classList.add('leaderboard-entry-score-icon');
-                        leaderboardEntryGameTimeTiersIcon.src = "./Assets/UI/StopWatch.png";
-                        leaderboardEntryGameTimeTiers.appendChild(leaderboardEntryGameTimeTiersIcon);
-
-                        let leaderboardEntryGameTimeTiersValue = document.createElement('p');
-                        leaderboardEntryGameTimeTiersValue.classList.add('leaderboard-entry-game-time-value','leaderboard-outline');
-                        leaderboardEntryGameTimeTiersValue.innerHTML = formatScoreTime(scorePartsObj["Game Time"].score);
-                        leaderboardEntryGameTimeTiers.appendChild(leaderboardEntryGameTimeTiersValue);
-
-                        leaderboardEntryScore.classList.add('leaderboard-entry-score-tiers')
-                        break;
-                }
-            }
-            if(metadata.hasOwnProperty('tiles')) {
-                leaderboardEntryScoreIcon.src = `./Assets/UI/CtPointsIconSmall.png`;
-                leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
-                leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
-                leaderboardEntryPlayer.classList.add('leaderboard-entry-team');
-            }
-
-            if(!preventRateLimiting){
-                let observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(async observerentry => {
-                        if (observerentry.isIntersecting) {
-                            addRequestToQueue(async () => {
-                                try {
-                                    let userProfile = await getUserProfile(entry.profile);
-                                    if (userProfile != null) {
-                                        if(userProfile.hasOwnProperty('owner')) {
-                                            leaderboardEntryFrame.src = userProfile.frameURL;
-                                            leaderboardEntryEmblem.src = userProfile.iconURL;
-                                            leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                                        } else {
-                                            leaderboardEntryIcon.src = getProfileAvatar(userProfile);
-                                            leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                                        }
-                                        observer.unobserve(observerentry.target);
-                                    }
-                                } catch (error) {
-                                    console.error("Error fetching user profile:", error);
-                                }
-                            });
-                        }
-                    });
-                });
-                observer.observe(leaderboardEntryIcon);
-            }
-            if(profileCache[(entry.profile).split("/").pop()] != null) {
-                let userProfile = profileCache[(entry.profile).split("/").pop()];
-                if(userProfile.hasOwnProperty('owner')) {
-                    leaderboardEntryFrame.src = userProfile.frameURL;
-                    leaderboardEntryEmblem.src = userProfile.iconURL;
-                    leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                } else {
-                    leaderboardEntryIcon.src = getProfileAvatar(userProfile);
-                    leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                }
-            }
-        })
-    } else {
-        let noDataFound = document.createElement('p');
-        noDataFound.classList.add('no-data-found','black-outline');
-        noDataFound.style.width = "250px";
-        noDataFound.innerHTML = "No Data Found";
-        leaderboardEntries.appendChild(noDataFound);
-    }
-}
-
-function generateLeaderboardHeader(columnsType){
-    let leaderboardColumnLabels = document.getElementById('leaderboard-column-labels');
-    leaderboardColumnLabels.innerHTML = "";
-
-    let leaderboardColumnRank = document.createElement('p');
-    leaderboardColumnRank.classList.add('leaderboard-column-rank', 'black-outline');
-    leaderboardColumnRank.innerHTML = "Rank";
-    leaderboardColumnLabels.appendChild(leaderboardColumnRank);
-
-    let leaderboardColumnName = document.createElement('p');
-    leaderboardColumnName.classList.add('leaderboard-column-name', 'black-outline');
-    leaderboardColumnName.innerHTML = "Player";
-    leaderboardColumnLabels.appendChild(leaderboardColumnName);
-
-    switch (columnsType) {
-        case "GameTime":
-            let leaderboardColumnTimeSubmitted = document.createElement('p');
-            leaderboardColumnTimeSubmitted.classList.add('leaderboard-column-time-submitted','black-outline');
-            leaderboardColumnTimeSubmitted.innerHTML = "Time Submitted";
-            leaderboardColumnLabels.appendChild(leaderboardColumnTimeSubmitted);
-
-            let leaderboardColumnTimeScore = document.createElement('p');
-            leaderboardColumnTimeScore.classList.add('leaderboard-column-time-score','black-outline');
-            leaderboardColumnTimeScore.innerHTML = "Game Time";
-            leaderboardColumnLabels.appendChild(leaderboardColumnTimeScore);
-            break;
-        case "LeastCash":
-            let leaderboardColumnCashSpent = document.createElement('p');
-            leaderboardColumnCashSpent.classList.add('leaderboard-column-cash-spent','black-outline');
-            leaderboardColumnCashSpent.innerHTML = "Cash Spent";
-            leaderboardColumnLabels.appendChild(leaderboardColumnCashSpent);
-
-            let leaderboardColumnLCTimeScore = document.createElement('p');
-            leaderboardColumnLCTimeScore.classList.add('leaderboard-column-time-score','black-outline');
-            leaderboardColumnLCTimeScore.innerHTML = "Game Time";
-            leaderboardColumnLabels.appendChild(leaderboardColumnLCTimeScore);
-            break;
-        case "LeastTiers":
-            let leaderboardColumnTiersUsed = document.createElement('p');
-            leaderboardColumnTiersUsed.classList.add('leaderboard-column-tiers-used','black-outline');
-            leaderboardColumnTiersUsed.innerHTML = "Tiers Used";
-            leaderboardColumnLabels.appendChild(leaderboardColumnTiersUsed);
-
-            let leaderboardColumnLTTimeScore = document.createElement('p');
-            leaderboardColumnLTTimeScore.classList.add('leaderboard-column-time-score','black-outline');
-            leaderboardColumnLTTimeScore.innerHTML = "Game Time";
-            leaderboardColumnLabels.appendChild(leaderboardColumnLTTimeScore);
-            break;
-        case "CTTeam":
-            leaderboardColumnName.innerHTML = "Team";
-        case "CTPlayer":
-            let leaderboardColumnCTPoints = document.createElement('p');
-            leaderboardColumnCTPoints.classList.add('leaderboard-column-ct-points','black-outline');
-            leaderboardColumnCTPoints.innerHTML = "CT Points";
-            leaderboardColumnLabels.appendChild(leaderboardColumnCTPoints);
-            break;
-    }
-}
-
 function exitChallengeModel(source){
     document.getElementById('challenge-content').style.display = "none";
     document.getElementById(`${source}-content`).style.display = "flex";
@@ -7545,531 +6774,6 @@ function exitMapModel(source){
     document.getElementById(`${source}-content`).style.display = "flex";
 }
 
-async function openProfile(source, profile){
-    profile = await getUserProfile(profile)
-    if (profile == null) { return; }
-    resetScroll();
-    document.getElementById(`${source}-content`).style.display = "none";
-    let publicProfileContent = document.getElementById('publicprofile-content');
-    publicProfileContent.style.display = "flex";
-    publicProfileContent.innerHTML = "";
-    
-    let publicProfileDiv = document.createElement('div');
-    publicProfileDiv.classList.add('publicprofile-div');
-    publicProfileContent.appendChild(publicProfileDiv);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('error-modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        exitProfile(source);
-    })
-    publicProfileDiv.appendChild(modalClose);
-
-    let profileHeader = document.createElement('div');
-    profileHeader.classList.add('profile-header','profile-banner');
-    profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${getProfileBanner(profile)}')`;
-    publicProfileDiv.appendChild(profileHeader);
-    profileHeader.appendChild(generateAvatar(100, getProfileAvatar(profile)));
-
-    let profileTopBottom = document.createElement('div');
-    profileTopBottom.classList.add('profile-top-bottom');
-    profileHeader.appendChild(profileTopBottom);
-
-    let profileTop = document.createElement('div');
-    profileTop.classList.add('profile-top-public');
-    profileTopBottom.appendChild(profileTop);
-
-    let profileName = document.createElement('p');
-    profileName.classList.add('profile-name','black-outline');
-    profileName.innerHTML = profile["displayName"];
-    profileTop.appendChild(profileName);
-
-    let rankStar = document.createElement('div');
-    rankStar.classList.add('rank-star-public');
-    profileTop.appendChild(rankStar);
-
-    let rankImg = document.createElement('img');
-    rankImg.classList.add('rank-img');
-    rankImg.src = '../Assets/UI/LvlHolder.png';
-    rankStar.appendChild(rankImg);
-
-    let rankText = document.createElement('p');
-    rankText.classList.add('rank-text','black-outline');
-    rankText.innerHTML = profile.rank;
-    rankStar.appendChild(rankText);
-
-    if (profile.veteranRank > 0) {
-        let rankStarVeteran = document.createElement('div');
-        rankStarVeteran.classList.add('rank-star-public');
-        profileTop.appendChild(rankStarVeteran);
-
-        let rankImgVeteran = document.createElement('img');
-        rankImgVeteran.classList.add('rank-img');
-        rankImgVeteran.src = '../Assets/UI/LvlHolderVeteran.png';
-        rankStarVeteran.appendChild(rankImgVeteran);
-
-        let rankTextVeteran = document.createElement('p');
-        rankTextVeteran.classList.add('rank-text','black-outline');
-        rankTextVeteran.innerHTML = profile.veteranRank;
-        rankStarVeteran.appendChild(rankTextVeteran);
-    }
-
-    let profileFollowers = document.createElement('div')
-    profileFollowers.classList.add('profile-followers');
-    profileTop.appendChild(profileFollowers);
-
-    let followersLabel = document.createElement('p');
-    followersLabel.classList.add('followers-label','black-outline');
-    followersLabel.innerHTML = 'Followers';
-    profileFollowers.appendChild(followersLabel);
-
-    let followersCount = document.createElement('p');
-    followersCount.classList.add('followers-count');
-    followersCount.innerHTML = profile["followers"].toLocaleString();
-    profileFollowers.appendChild(followersCount);
-
-
-    let belowProfileHeader = document.createElement('div');
-    belowProfileHeader.classList.add('below-profile-header');
-    publicProfileDiv.appendChild(belowProfileHeader);
-
-    let leftColumnDiv = document.createElement('div');
-    leftColumnDiv.classList.add('left-column-div');
-    belowProfileHeader.appendChild(leftColumnDiv);
-
-    let leftColumnHeader = document.createElement('div');
-    leftColumnHeader.classList.add('left-column-header');
-    leftColumnDiv.appendChild(leftColumnHeader);
-
-    let leftColumnHeaderText = document.createElement('p');
-    leftColumnHeaderText.classList.add('column-header-text','black-outline');
-    leftColumnHeaderText.innerHTML = 'Medals';
-    leftColumnHeader.appendChild(leftColumnHeaderText);
-
-    let publicMedals = {};
-    let tempCoop = {};
-    for (let [key, value] of Object.entries(medalMap)){
-        publicMedals["Medal" + value] = profile["_medalsSinglePlayer"][key] || 0;
-        tempCoop["MedalCoop" + value] = profile["_medalsMultiplayer"][key] || 0;
-    }
-    publicMedals = {...publicMedals, ...tempCoop};
-    publicMedals["PhayzeEliteBadge"] = profile["bossBadgesElite"]["Phayze"] || 0;
-    publicMedals["PhayzeBadge"] = profile["bossBadgesNormal"]["Phayze"] || 0;
-    publicMedals["DreadbloonEliteBadge"] = profile["bossBadgesElite"]["Dreadbloon"] || 0;
-    publicMedals["DreadbloonBadge"] = profile["bossBadgesNormal"]["Dreadbloon"] || 0;
-    publicMedals["VortexEliteBadge"] = profile["bossBadgesElite"]["Vortex"] || 0;
-    publicMedals["VortexBadge"] = profile["bossBadgesNormal"]["Vortex"] || 0;
-    publicMedals["LychEliteBadge"] = profile["bossBadgesElite"]["Lych"] || 0;
-    publicMedals["LychBadge"] = profile["bossBadgesNormal"]["Lych"] || 0;
-    publicMedals["BloonariusEliteBadge"] = profile["bossBadgesElite"]["Bloonarius"] || 0;
-    publicMedals["BloonariusBadge"] = profile["bossBadgesNormal"]["Bloonarius"] || 0;
-    publicMedals["MedalEventBronzeMedal"] = profile["_medalsRace"]["Bronze"] || 0;
-    publicMedals["MedalEventSilverMedal"] = profile["_medalsRace"]["Silver"] || 0;
-    publicMedals["MedalEventGoldSilverMedal"] = profile["_medalsRace"]["GoldSilver"] || 0;
-    publicMedals["MedalEventDoubleGoldMedal"] = profile["_medalsRace"]["DoubleGold"] || 0;
-    publicMedals["MedalEventGoldDiamondMedal"] = profile["_medalsRace"]["GoldDiamond"] || 0;
-    publicMedals["MedalEventDiamondMedal"] = profile["_medalsRace"]["Diamond"] || 0;
-    publicMedals["MedalEventRedDiamondMedal"] = profile["_medalsRace"]["RedDiamond"] || 0;
-    publicMedals["MedalEventBlackDiamondMedal"] = profile["_medalsRace"]["BlackDiamond"] || 0;
-    publicMedals["OdysseyStarIcon"] = profile.gameplay["totalOdysseyStars"] || 0;
-    publicMedals["BossMedalEventBronzeMedal"] = profile["_medalsBoss"]["Bronze"] || 0;
-    publicMedals["BossMedalEventSilverMedal"] = profile["_medalsBoss"]["Silver"] || 0;
-    publicMedals["BossMedalEventDoubleSilverMedal"] = profile["_medalsBoss"]["DoubleSilver"] || 0;
-    publicMedals["BossMedalEventGoldSilverMedal"] = profile["_medalsBoss"]["GoldSilver"] || 0;
-    publicMedals["BossMedalEventDoubleGoldMedal"] = profile["_medalsBoss"]["DoubleGold"] || 0;
-    publicMedals["BossMedalEventGoldDiamondMedal"] = profile["_medalsBoss"]["GoldDiamond"] || 0;
-    publicMedals["BossMedalEventDiamondMedal"] = profile["_medalsBoss"]["Diamond"] || 0;
-    publicMedals["BossMedalEventRedDiamondMedal"] = profile["_medalsBoss"]["RedDiamond"] || 0;
-    publicMedals["BossMedalEventBlackDiamondMedal"] = profile["_medalsBoss"]["BlackDiamond"] || 0;
-    publicMedals["EliteBossMedalEventBronzeMedal"] = profile["_medalsBossElite"]["Bronze"] || 0;
-    publicMedals["EliteBossMedalEventSilverMedal"] = profile["_medalsBossElite"]["Silver"] || 0;
-    publicMedals["EliteBossMedalEventDoubleSilverMedal"] = profile["_medalsBossElite"]["DoubleSilver"] || 0;
-    publicMedals["EliteBossMedalEventGoldSilverMedal"] = profile["_medalsBossElite"]["GoldSilver"] || 0;
-    publicMedals["EliteBossMedalEventDoubleGoldMedal"] = profile["_medalsBossElite"]["DoubleGold"] || 0;
-    publicMedals["EliteBossMedalEventGoldDiamondMedal"] = profile["_medalsBossElite"]["GoldDiamond"] || 0;
-    publicMedals["EliteBossMedalEventDiamondMedal"] = profile["_medalsBossElite"]["Diamond"] || 0;
-    publicMedals["EliteBossMedalEventRedDiamondMedal"] = profile["_medalsBossElite"]["RedDiamond"] || 0;
-    publicMedals["EliteBossMedalEventBlackDiamondMedal"] = profile["_medalsBossElite"]["BlackDiamond"] || 0;
-    publicMedals["CtLocalPlayerBronzeMedal"] = profile["_medalsCTLocal"]["Bronze"] || 0;
-    publicMedals["CtLocalPlayerSilverMedal"] = profile["_medalsCTLocal"]["Silver"] || 0;
-    publicMedals["CtLocalPlayerDoubleGoldMedal"] = profile["_medalsCTLocal"]["DoubleGold"] || 0;
-    publicMedals["CtLocalPlayerGoldDiamondMedal"] = profile["_medalsCTLocal"]["GoldDiamond"] || 0;
-    publicMedals["CtLocalPlayerBlueDiamondMedal"] = profile["_medalsCTLocal"]["BlueDiamond"] || 0;
-    publicMedals["CtLocalPlayerRedDiamondMedal"] = profile["_medalsCTLocal"]["RedDiamond"] || 0;
-    publicMedals["CtLocalPlayerBlackDiamondMedal"] = profile["_medalsCTLocal"]["BlackDiamond"] || 0;
-    publicMedals["CtGlobalPlayerBronzeMedal"] = profile["_medalsCTGlobal"]["Bronze"] || 0;
-    publicMedals["CtGlobalPlayerSilverMedal"] = profile["_medalsCTGlobal"]["Silver"] || 0;
-    publicMedals["CtGlobalPlayerDoubleSilverMedal"] = profile["_medalsCTGlobal"]["DoubleSilver"] || 0;
-    publicMedals["CtGlobalPlayerGoldSilverMedal"] = profile["_medalsCTGlobal"]["GoldSilver"] || 0;
-    publicMedals["CtGlobalPlayerDoubleGoldMedal"] = profile["_medalsCTGlobal"]["DoubleGold"] || 0;
-    publicMedals["CtGlobalPlayerGoldDiamondMedal"] = profile["_medalsCTGlobal"]["GoldDiamond"] || 0;
-    publicMedals["CtGlobalPlayerDiamondMedal"] = profile["_medalsCTGlobal"]["Diamond"] || 0;
-    publicMedals["CtGlobalPlayerRedDiamondMedal"] = profile["_medalsCTGlobal"]["RedDiamond"] || 0;
-    publicMedals["CtGlobalPlayerBlackDiamondMedal"] = profile["_medalsCTGlobal"]["BlackDiamond"] || 0;
-
-    let currencyAndMedalsDiv = document.createElement('div');
-    currencyAndMedalsDiv.classList.add('currency-medals-div');
-    leftColumnDiv.appendChild(currencyAndMedalsDiv);
-
-    let medalsDiv = document.createElement('div');
-    medalsDiv.classList.add('medals-div');
-    currencyAndMedalsDiv.appendChild(medalsDiv);
-
-    for (let [medal, num] of Object.entries(publicMedals)){
-        if(num === 0) { continue; }
-        let medalDiv = document.createElement('div');
-        medalDiv.classList.add('medal-div');
-        medalDiv.title = constants.medalLabels[medal];
-        medalsDiv.appendChild(medalDiv);
-
-        let medalImg = document.createElement('img');
-        medalImg.classList.add('medal-img');
-        medalImg.src = getMedalIcon(medal);
-        medalImg.style.display = "none";
-        medalImg.addEventListener('load', () => {
-            if(medalImg.width < medalImg.height){
-                medalImg.style.width = `${ratioCalc(3,70,256,0,medalImg.width)}px`
-            } else {
-                medalImg.style.height = `${ratioCalc(3,70,256,0,medalImg.height)}px`
-            }
-            medalImg.style.removeProperty('display');
-        })
-        medalDiv.appendChild(medalImg);
-
-        let medalText = document.createElement('p');
-        medalText.classList.add('medal-text','black-outline');
-        medalText.innerHTML = num.toLocaleString();
-        medalDiv.appendChild(medalText);
-
-        tippy(medalDiv, {
-            content: constants.medalLabels[medal],
-            placement: 'top',
-            theme: 'speech_bubble'
-        })
-    }
-
-    let topHeroesMonkesyDiv = document.createElement('div');
-    topHeroesMonkesyDiv.classList.add('top-heroes-monkeys-div');
-    leftColumnDiv.appendChild(topHeroesMonkesyDiv);
-
-    let topHeroesDiv = document.createElement('div');
-    topHeroesDiv.classList.add('top-heroes-div');
-    topHeroesMonkesyDiv.appendChild(topHeroesDiv);
-
-    let topHeroesTopDiv = document.createElement('div');
-    topHeroesTopDiv.classList.add('top-heroes-top-div');
-    topHeroesDiv.appendChild(topHeroesTopDiv);
-
-    let topHeroesTopRibbonDiv = document.createElement('div');
-    topHeroesTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
-    topHeroesTopDiv.appendChild(topHeroesTopRibbonDiv);
-
-    let topHeroesText = document.createElement('p');
-    topHeroesText.classList.add('top-heroes-text','black-outline');
-    topHeroesText.innerHTML = 'Top Heroes';
-    topHeroesTopRibbonDiv.appendChild(topHeroesText);
-
-    let mapsProgressCoopToggle = document.createElement('div');
-    mapsProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
-    topHeroesTopDiv.appendChild(mapsProgressCoopToggle);
-
-    let mapsProgressCoopToggleText = document.createElement('p');
-    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
-    mapsProgressCoopToggleText.innerHTML = "Show All: ";
-    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
-
-    let mapsProgressCoopToggleInput = document.createElement('input');
-    mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
-    mapsProgressCoopToggleInput.type = 'checkbox';
-    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
-
-    let topHeroesList = document.createElement('div');
-    topHeroesList.classList.add('top-heroes-list');
-    topHeroesDiv.appendChild(topHeroesList);
-
-    let top3HeroesDiv = document.createElement('div');
-    top3HeroesDiv.classList.add('top-3-heroes-div');
-    topHeroesList.appendChild(top3HeroesDiv);
-
-    let otherHeroesDiv = document.createElement('div');
-    otherHeroesDiv.classList.add('other-heroes-div');
-    otherHeroesDiv.style.display = 'none';
-    topHeroesList.appendChild(otherHeroesDiv);
-
-    mapsProgressCoopToggleInput.addEventListener('change', () => {
-        mapsProgressCoopToggleInput.checked ? otherHeroesDiv.style.display = 'flex' : otherHeroesDiv.style.display = 'none';
-    })
-
-    let counter = 0;
-
-    let heroesList = Object.keys(constants.heroesInOrder);
-
-    for (let [hero, xp] of Object.entries(profile["heroesPlaced"]).sort((a, b) => b[1] - a[1])){
-        if(xp === 0) { continue; }
-        if(!heroesList.includes(hero)) { continue; }
-        let heroDiv = document.createElement('div');
-        heroDiv.classList.add('hero-div');
-        counter < 3 ? top3HeroesDiv.appendChild(heroDiv) : otherHeroesDiv.appendChild(heroDiv);
-
-        let heroImg = document.createElement('img');
-        heroImg.classList.add('hero-img');
-        heroImg.src = getHeroPortrait(hero,1);
-        heroImg.style.display = "none";
-        heroImg.addEventListener('load', () => {
-            if(heroImg.width < heroImg.height){
-                heroImg.style.width = `${ratioCalc(3,150,1920,0,heroImg.width)}px`
-            } else {
-                heroImg.style.height = `${ratioCalc(3,150,1920,0,heroImg.height)}px`
-            }
-            heroImg.style.removeProperty('display');
-        })
-        heroDiv.appendChild(heroImg);
-
-        let heroText = document.createElement('p');
-        heroText.classList.add('hero-text','black-outline');
-        heroText.innerHTML = xp.toLocaleString();
-        heroDiv.appendChild(heroText);
-        counter++;
-
-        tippy(heroDiv, {
-            content: `${getLocValue(hero)} Placed ${xp.toLocaleString()} Times`,
-            placement: 'top',
-            theme: 'speech_bubble'
-        })
-    }
-
-    let topTowersDiv = document.createElement('div');
-    topTowersDiv.classList.add('top-heroes-div');
-    topHeroesMonkesyDiv.appendChild(topTowersDiv);
-
-    let topTowersTopDiv = document.createElement('div');
-    topTowersTopDiv.classList.add('top-heroes-top-div');
-    topTowersDiv.appendChild(topTowersTopDiv);
-
-    let topTowersTopRibbonDiv = document.createElement('div');
-    topTowersTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
-    topTowersTopDiv.appendChild(topTowersTopRibbonDiv);
-
-    let topTowersText = document.createElement('p');
-    topTowersText.classList.add('top-heroes-text','black-outline');
-    topTowersText.innerHTML = 'Top Towers';
-    topTowersTopRibbonDiv.appendChild(topTowersText);
-
-    let mapsProgressCoopToggle2 = document.createElement('div');
-    mapsProgressCoopToggle2.classList.add('maps-progress-coop-toggle');
-    topTowersTopDiv.appendChild(mapsProgressCoopToggle2);
-
-    let mapsProgressCoopToggleText2 = document.createElement('p');
-    mapsProgressCoopToggleText2.classList.add('maps-progress-coop-toggle-text','black-outline');
-    mapsProgressCoopToggleText2.innerHTML = "Show All: ";
-    mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleText2);
-
-    let mapsProgressCoopToggleInput2 = document.createElement('input');
-    mapsProgressCoopToggleInput2.classList.add('maps-progress-coop-toggle-input');
-    mapsProgressCoopToggleInput2.type = 'checkbox';
-    mapsProgressCoopToggle2.appendChild(mapsProgressCoopToggleInput2);
-    
-    let topTowersList = document.createElement('div');
-    topTowersList.classList.add('top-heroes-list');
-    topTowersDiv.appendChild(topTowersList);
-
-    let top3TowersDiv = document.createElement('div');
-    top3TowersDiv.classList.add('top-3-heroes-div');
-    topTowersList.appendChild(top3TowersDiv);
-
-    let otherTowersDiv = document.createElement('div');
-    otherTowersDiv.classList.add('other-heroes-div');
-    otherTowersDiv.style.display = 'none';
-    topTowersList.appendChild(otherTowersDiv);
-
-    mapsProgressCoopToggleInput2.addEventListener('change', () => {
-        mapsProgressCoopToggleInput2.checked ? otherTowersDiv.style.display = 'flex' : otherTowersDiv.style.display = 'none';
-    })
-
-    counter = 0;
-    let towersList = Object.keys(constants.towersInOrder);
-
-    for (let [tower, xp] of Object.entries(profile["towersPlaced"]).sort((a, b) => b[1] - a[1])){
-        if(xp === 0) { continue; }
-        if(!towersList.includes(tower)) { continue; }
-        let towerDiv = document.createElement('div');
-        towerDiv.classList.add('hero-div');
-        counter < 3 ? top3TowersDiv.appendChild(towerDiv) : otherTowersDiv.appendChild(towerDiv);
-
-        let towerImg = document.createElement('img');
-        towerImg.classList.add('hero-img');
-        towerImg.src = getInstaContainerIcon(tower,"000");
-        towerDiv.appendChild(towerImg);
-
-        let towerText = document.createElement('p');
-        towerText.classList.add('hero-text','black-outline');
-        towerText.innerHTML = xp.toLocaleString();
-        towerDiv.appendChild(towerText);
-        counter++;
-
-        tippy(towerDiv, {
-            content: `${getLocValue(tower)} Placed ${xp.toLocaleString()} Times`,
-            placement: 'top',
-            theme: 'speech_bubble'
-        })
-    }
-
-    let topParagonsDiv = document.createElement('div');
-    topParagonsDiv.classList.add('top-heroes-div');
-    topHeroesMonkesyDiv.appendChild(topParagonsDiv);
-
-    let topParagonsTopDiv = document.createElement('div');
-    topParagonsTopDiv.classList.add('top-heroes-top-div');
-    topParagonsDiv.appendChild(topParagonsTopDiv);
-
-    let topParagonsTopRibbonDiv = document.createElement('div');
-    topParagonsTopRibbonDiv.classList.add('top-heroes-top-ribbon-div');
-    topParagonsTopDiv.appendChild(topParagonsTopRibbonDiv);
-
-    let topParagonsText = document.createElement('p');
-    topParagonsText.classList.add('top-heroes-text','black-outline');
-    topParagonsText.innerHTML = 'Top Towers';
-    topParagonsTopRibbonDiv.appendChild(topParagonsText);
-
-    let mapsProgressCoopToggle3 = document.createElement('div');
-    mapsProgressCoopToggle3.classList.add('maps-progress-coop-toggle');
-    topParagonsTopDiv.appendChild(mapsProgressCoopToggle3);
-
-    let mapsProgressCoopToggleText3 = document.createElement('p');
-    mapsProgressCoopToggleText3.classList.add('maps-progress-coop-toggle-text','black-outline');
-    mapsProgressCoopToggleText3.innerHTML = "Show All: ";
-    mapsProgressCoopToggle3.appendChild(mapsProgressCoopToggleText3);
-
-    let mapsProgressCoopToggleInput3 = document.createElement('input');
-    mapsProgressCoopToggleInput3.classList.add('maps-progress-coop-toggle-input');
-    mapsProgressCoopToggleInput3.type = 'checkbox';
-    mapsProgressCoopToggle3.appendChild(mapsProgressCoopToggleInput3);
-    
-    let topParagonsList = document.createElement('div');
-    topParagonsList.classList.add('top-heroes-list');
-    topParagonsDiv.appendChild(topParagonsList);
-
-    let top3ParagonsDiv = document.createElement('div');
-    top3ParagonsDiv.classList.add('top-3-heroes-div');
-    topParagonsList.appendChild(top3ParagonsDiv);
-
-    let otherParagonsDiv = document.createElement('div');
-    otherParagonsDiv.classList.add('other-heroes-div');
-    otherParagonsDiv.style.display = 'none';
-    topParagonsList.appendChild(otherParagonsDiv);
-
-    mapsProgressCoopToggleInput2.addEventListener('change', () => {
-        mapsProgressCoopToggleInput2.checked ? otherTowersDiv.style.display = 'flex' : otherTowersDiv.style.display = 'none';
-    })
-
-    counter = 0;
-    let paragonList = Object.keys(constants.towersInOrder);
-
-    for (let [tower, xp] of Object.entries(profile.stats["paragonsPurchasedByName"]).sort((a, b) => b[1] - a[1])){
-        if(xp === 0) { continue; }
-        if(!towersList.includes(tower)) { continue; }
-        let towerDiv = document.createElement('div');
-        towerDiv.classList.add('hero-div');
-        counter < 3 ? top3ParagonsDiv.appendChild(towerDiv) : otherParagonsDiv.appendChild(towerDiv);
-
-        let towerImg = document.createElement('img');
-        towerImg.classList.add('hero-img');
-        towerImg.src = getInstaContainerIcon(tower,"000");
-        towerDiv.appendChild(towerImg);
-
-        let towerText = document.createElement('p');
-        towerText.classList.add('hero-text','black-outline');
-        towerText.innerHTML = xp.toLocaleString();
-        towerDiv.appendChild(towerText);
-        counter++;
-
-        tippy(towerDiv, {
-            content: `${getLocValue(tower)} Placed ${xp.toLocaleString()} Times`,
-            placement: 'top',
-            theme: 'speech_bubble'
-        })
-    }
-
-    let rightColumnDiv = document.createElement('div');
-    rightColumnDiv.classList.add('right-column-div');
-    belowProfileHeader.appendChild(rightColumnDiv);
-
-    let rightColumnHeader = document.createElement('div');
-    rightColumnHeader.classList.add('overview-right-column-header');
-    rightColumnDiv.appendChild(rightColumnHeader);
-
-    let rightColumnHeaderText = document.createElement('p');
-    rightColumnHeaderText.classList.add('column-header-text','black-outline');
-    rightColumnHeaderText.innerHTML = 'Overall Stats';
-    rightColumnHeader.appendChild(rightColumnHeaderText);
-
-    let statsPublic = {};
-    statsPublic["Games Played"] = profile.gameplay["gameCount"];
-    statsPublic["Games Won"] = profile.gameplay["gamesWon"];
-    statsPublic["Highest Round (All Time)"] = profile.gameplay["highestRound"];
-    statsPublic["Highest Round (CHIMPS)"] = profile.gameplay["highestRoundCHIMPS"];
-    statsPublic["Highest Round (Deflation)"] = profile.gameplay["highestRoundDeflation"];
-    statsPublic["Monkeys Placed"] = profile.gameplay["monkeysPlaced"];
-    statsPublic["Total Pop Count"] = profile.bloonsPopped["bloonsPopped"];
-    statsPublic["Total Co-Op Pop Count"] = profile.bloonsPopped["coopBloonsPopped"];
-    statsPublic["Camo Bloons Popped"] = profile.bloonsPopped["camosPopped"];
-    statsPublic["Lead Bloons Popped"] = profile.bloonsPopped["leadsPopped"];
-    statsPublic["Purple Bloons Popped"] = profile.bloonsPopped["purplesPopped"];
-    statsPublic["Regrow Bloons Popped"] = profile.bloonsPopped["regrowsPopped"];
-    statsPublic["Ceramic Bloons Popped"] = profile.bloonsPopped["ceramicsPopped"];
-    statsPublic["MOABs Popped"] = profile.bloonsPopped["moabsPopped"];
-    statsPublic["BFBs Popped"] = profile.bloonsPopped["bfbsPopped"];
-    statsPublic["ZOMGs Popped"] = profile.bloonsPopped["zomgsPopped"];
-    statsPublic["DDTs Popped"] = profile.bloonsPopped["ddtsPopped"];
-    statsPublic["BADs Popped"] = profile.bloonsPopped["badsPopped"];
-    statsPublic["Bloons Leaked"] = profile.bloonsPopped["bloonsLeaked"];
-    statsPublic["Cash Generated"] = profile.gameplay["cashEarned"];
-    statsPublic["Cash Gifted"] = profile.gameplay["coopCashGiven"];
-    statsPublic["Abilities Used"] = profile.gameplay["abilitiesUsed"];
-    statsPublic["Powers Used"] = profile.gameplay["powersUsed"];
-    statsPublic["Insta Monkeys Used"] = profile.gameplay["instaMonkeysUsed"];
-    statsPublic["Daily Reward Chests Opened"] = profile.gameplay["dailyRewards"];
-    statsPublic["Challenges Completed"] = profile.gameplay["challengesCompleted"];
-    statsPublic["Achievements"] = `${profile["achievements"]}/150`;
-    statsPublic["Odysseys Completed"] = profile.gameplay["totalOdysseysCompleted"];
-    statsPublic["Lifetime Trophies"] = profile.gameplay["totalTrophiesEarned"];
-    statsPublic["Necro Bloons Reanimated"] = profile.bloonsPopped["necroBloonsReanimated"];
-    statsPublic["Transforming Tonics Used"] = profile.bloonsPopped["transformingTonicsUsed"];
-    statsPublic["Most Experienced Monkey"] = getLocValue(profile["mostExperiencedMonkey"]);
-    statsPublic["Insta Monkey Collection"] = `${profile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}`;
-    statsPublic["Collection Chests Opened"] = profile.gameplay["collectionChestsOpened"];
-    statsPublic["Golden Bloons Popped"] = profile.bloonsPopped["goldenBloonsPopped"];
-    statsPublic["Monkey Teams Wins"] = profile.gameplay["monkeyTeamsWins"];
-    statsPublic["Bosses Popped"] = profile.bloonsPopped["bossesPopped"];
-    statsPublic["Damage Done To Bosses"] = profile.gameplay["damageDoneToBosses"];
-
-    let profileStatsDiv = document.createElement('div');
-    profileStatsDiv.classList.add('profile-stats');
-    rightColumnDiv.appendChild(profileStatsDiv);
-
-    for (let [key, value] of Object.entries(statsPublic)){
-        let stat = document.createElement('div');
-        stat.classList.add('stat');
-        profileStatsDiv.appendChild(stat);
-
-        let statName = document.createElement('p');
-        statName.classList.add('stat-name');
-        statName.innerHTML = key;
-        stat.appendChild(statName);
-
-        let statValue = document.createElement('p');
-        statValue.classList.add('stat-value');
-        statValue.innerHTML = value.toLocaleString();
-        stat.appendChild(statValue);
-    }
-}
-
-function exitProfile(source){
-    document.getElementById('publicprofile-content').style.display = "none";
-    document.getElementById(`${source}-content`).style.display = "flex";
-}
-
 async function openRelics(source, tilesLink, eventDates) {
     let data = await getCTTiles(tilesLink)
     if (data == null) { return; }
@@ -8077,6 +6781,8 @@ async function openRelics(source, tilesLink, eventDates) {
     let relicsContent = document.getElementById('relics-content');
     relicsContent.style.display = "flex";
     relicsContent.innerHTML = "";
+
+    addToBackQueue({"source": source, "destination": "relics"});
 
     let relicContainer = document.createElement('div');
     relicContainer.classList.add('relic-container');
@@ -8327,6 +7033,7 @@ function changeBrowserTab(selected){
             break;
     }
     generateBrowser(selected);
+    addToBackQueue({"source": "explore", "destination": 'browser'});
 }
 
 function generateBrowser(type){
@@ -9248,6 +7955,8 @@ async function showMapModel(source, metadata) {
     mapContent.innerHTML = "";
     document.getElementById(`${source}-content`).style.display = "none";
 
+    addToBackQueue({ source: source, destination: 'map' })
+
     let challengeExtraData = processChallenge(metadata);
 
     let challengeModel = document.createElement('div');
@@ -9288,7 +7997,8 @@ async function showMapModel(source, metadata) {
     modalClose.classList.add('modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
-        exitMapModel(source);
+        // exitMapModel(source);
+        goBack();
     })
     challengeHeaderRightTop.appendChild(modalClose);
 
@@ -9489,6 +8199,8 @@ function generateExtrasPage() {
     let extrasContent = document.getElementById('extras-content');
     extrasContent.innerHTML = "";
 
+    changeTitle("Bloons TD 6 API Explorer")
+
     let explorePage = document.createElement('div');
     explorePage.classList.add('progress-page');
     extrasContent.appendChild(explorePage);
@@ -9498,11 +8210,12 @@ function generateExtrasPage() {
     explorePage.appendChild(selectorsDiv);
 
     let selectors = [
-        'Custom Round Sets', 
+        // 'Custom Round Sets', 
         'Collection Event Odds',
         // 'Monkey Money Helper', 
         // 'Export Data', 
         'Rogue Legends Artifacts',
+        'Challenge & Map Browser',
         'Settings',
         'Send Feedback',
         "Use Code 'HalfHydra' <br>in the BTD6 Shop!"
@@ -9546,7 +8259,10 @@ function generateExtrasPage() {
                 selectorImg.src = '../Assets/UI/CreatorSupportBtn.png';
                 break;
             case "Rogue Legends Artifacts":
-                selectorImg.src = '../Assets/UI/RogueSiteBtn.png';
+                selectorImg.src = '../Assets/UI/RogueBtn.png';
+                break;
+            case "Challenge & Map Browser":
+                selectorImg.src = '../Assets/UI/PatchNotesMonkeyIcon.png';
                 break;
             default: 
                 selectorImg.src = '../Assets/UI/WoodenRoundButton.png';
@@ -9572,7 +8288,7 @@ function changeExtrasTab(selected){
             generateRoundsets();
             break;
         case "Collection Event Odds": 
-            changeTab('progress');
+            changeTab('profile');
             currentInstaView = "collection";
             changeProgressTab('InstaMonkeys');
             break;
@@ -9580,13 +8296,25 @@ function changeExtrasTab(selected){
             window.open('https://forms.gle/Tg1PuRNj2ftojMde6', '_blank');
             break;
         case "Use Code 'HalfHydra' <br>in the BTD6 Shop!":
+            addToBackQueue({ callback: generateExtrasPage });
             generateArticle("CreatorSupport")
             break;
         case 'Settings':
+            addToBackQueue({ callback: generateExtrasPage });
             generateSettings();
             break;
         case "Rogue Legends Artifacts":
-            window.location.href = "https://btd6apiexplorer.github.io/rogue";
+            changeTitle("Rogue Legends Artifacts")
+            addToBackQueue({source: "extras", destination: "rogue", callback: generateExtrasPage });
+            generateRogueSelectors();
+            document.getElementById('extras-content').style.display = "none";
+            document.getElementById('rogue-content').style.display = "flex";
+            break;
+        case "Challenge & Map Browser":
+            addToBackQueue({source: "extras", destination: "explore", callback: generateExtrasPage });
+            generateExplore();
+            document.getElementById('extras-content').style.display = "none";
+            document.getElementById('explore-content').style.display = "flex";
             break;
     }
 }
@@ -9649,1305 +8377,6 @@ function generateArticle(content){
         }
     })
 
-}
-
-function generateRoundsets() {
-    let roundsetsContent = document.getElementById('extras-content');
-    roundsetsContent.innerHTML = "";
-
-    let roundsetPage = document.createElement('div');
-    roundsetPage.classList.add('progress-page');
-    roundsetsContent.appendChild(roundsetPage);
-
-    let selectorsDiv = document.createElement('div');
-    selectorsDiv.classList.add('selectors-div');
-    roundsetPage.appendChild(selectorsDiv);
-
-    let limitedRoundsets = {};
-    let expiredRoundsets = {};
-    Object.entries(constants.limitedTimeEvents).forEach(([roundset, data]) => {
-        if (data.end > Date.now()) {
-            limitedRoundsets[roundset] = data;
-        } else {
-            expiredRoundsets[roundset] = data;
-        }
-    })
-
-    Object.entries(limitedRoundsets).forEach(([event, data]) => {
-        let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('roundset-selector-div');
-        roundsetDiv.addEventListener('click', () => {
-            showLoading();
-            showRoundsetModel('extras', data.roundset);
-        })
-        selectorsDiv.appendChild(roundsetDiv);
-
-        let roundsetIcon = document.createElement('img');
-        roundsetIcon.classList.add('roundset-selector-img');
-        roundsetDiv.appendChild(roundsetIcon);
-
-        switch(data.type) {
-            case "Race":
-                roundsetIcon.src = `../Assets/UI/EventRaceBtn.png`;
-                roundsetDiv.classList.add("race-roundset")
-                break;
-            case "Odyssey":
-                roundsetIcon.src = `../Assets/UI/OdysseyEventBtn.png`;
-                roundsetDiv.classList.add("odyssey-roundset")
-                break;
-            case "Boss":
-                roundsetIcon.src = `../Assets/BossIcon/${data.boss[0].toUpperCase() + data.boss.slice(1)}EventIcon.png`;
-                roundsetDiv.classList.add("boss-roundset")
-                break;
-        }
-
-        let roundsetTextDiv = document.createElement('div');
-        roundsetTextDiv.classList.add('roundset-selector-text-div');
-        roundsetDiv.appendChild(roundsetTextDiv);
-    
-        let roundsetText = document.createElement('p');
-        roundsetText.classList.add('selector-text', 'black-outline');
-        roundsetText.innerHTML = `${data.type} Event - ${event}`;
-        roundsetTextDiv.appendChild(roundsetText);
-
-        let roundsetText2 = document.createElement('p');
-        roundsetText2.id = "time-left-" + event;
-        roundsetText2.classList.add('selector-text', 'black-outline');
-        roundsetTextDiv.appendChild(roundsetText2);
-
-        if(new Date() < new Date(data.start)) {
-            roundsetText2.innerHTML = "Coming Soon!";
-        } else if (new Date(data.end) > new Date()) {
-            updateTimer(new Date(data.end), roundsetText2.id);
-            timerInterval = setInterval(() => updateTimer(new Date(data.end), roundsetText2.id), 1000)
-        }
-
-        let roundsetGoImg = document.createElement('img');
-        roundsetGoImg.classList.add('selector-go-img');
-        roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
-        roundsetDiv.appendChild(roundsetGoImg);
-    })
-    
-    
-    let normalRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "normal"));
-    let bossRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "boss"));
-    let legendsRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "legends"));
-    let otherRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "quest"));
-
-    Object.entries(normalRoundsets).forEach(([roundset, data]) => {
-        let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('roundset-selector-div', 'wood-container');
-        roundsetDiv.addEventListener('click', () => {
-            showLoading();
-            showRoundsetModel('extras', roundset);
-        })
-        selectorsDiv.appendChild(roundsetDiv);
-
-        let roundsetIcon = document.createElement('img');
-        roundsetIcon.classList.add('roundset-selector-img');
-        roundsetIcon.src = `../Assets/UI/${data.icon}.png`;
-        roundsetDiv.appendChild(roundsetIcon);
-
-        let roundsetText = document.createElement('p');
-        roundsetText.classList.add('selector-text', 'black-outline');
-        roundsetText.innerHTML = data.name;
-        roundsetDiv.appendChild(roundsetText);
-
-        let roundsetGoImg = document.createElement('img');
-        roundsetGoImg.classList.add('selector-go-img');
-        roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
-        roundsetDiv.appendChild(roundsetGoImg);
-    })
-
-    // let legendsRoundsetText = document.createElement('p');
-    // legendsRoundsetText.classList.add('other-roundsets-selector-text', 'black-outline');
-    // legendsRoundsetText.innerHTML = "Legends Custom Rounds";
-    // selectorsDiv.appendChild(legendsRoundsetText);
-
-    Object.entries(legendsRoundsets).forEach(([roundset, data]) => {
-        let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('roundset-selector-div','veteran-container'); 
-        roundsetDiv.addEventListener('click', () => {
-            showLoading();
-            showRoundsetModel('extras', roundset);
-        })
-        selectorsDiv.appendChild(roundsetDiv);
-
-        let roundsetIcon = document.createElement('img');
-        roundsetIcon.classList.add('roundset-selector-img');
-        roundsetIcon.src = `../Assets/UI/${data.icon}.png`;
-        roundsetDiv.appendChild(roundsetIcon);
-
-        let roundsetText = document.createElement('p');
-        roundsetText.classList.add('selector-text', 'black-outline');
-        roundsetText.innerHTML = data.name;
-        roundsetDiv.appendChild(roundsetText);
-
-        let roundsetGoImg = document.createElement('img');
-        roundsetGoImg.classList.add('selector-go-img');
-        roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
-        roundsetDiv.appendChild(roundsetGoImg);
-    })
-
-
-    let bossRoundsetText = document.createElement('p');
-    bossRoundsetText.classList.add('other-roundsets-selector-text', 'black-outline');
-    bossRoundsetText.innerHTML = "Boss Custom Rounds";
-    selectorsDiv.appendChild(bossRoundsetText);
-
-    let bossRoundsetDiv = document.createElement('div');
-    bossRoundsetDiv.classList.add('other-roundsets-selector-div');
-    selectorsDiv.appendChild(bossRoundsetDiv);
-
-    Object.entries(bossRoundsets).forEach(([roundset, data]) => {
-        let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('other-roundset-selector-div');
-        roundsetDiv.addEventListener('click', () => {
-            showRoundsetModel('extras', roundset);
-        })
-        bossRoundsetDiv.appendChild(roundsetDiv);
-
-        let roundsetIcon = document.createElement('img');
-        roundsetIcon.classList.add('other-roundset-selector-img');
-        roundsetIcon.src = `../Assets/UI/${data.icon}.png`;
-        roundsetDiv.appendChild(roundsetIcon);
-    })
-
-    let otherRoundsetText = document.createElement('p');
-    otherRoundsetText.classList.add('other-roundsets-selector-text', 'black-outline');
-    otherRoundsetText.innerHTML = "Quest Custom Rounds";
-    selectorsDiv.appendChild(otherRoundsetText);
-
-    let otherRoundsetDiv = document.createElement('div');
-    otherRoundsetDiv.classList.add('other-roundsets-selector-div');
-    selectorsDiv.appendChild(otherRoundsetDiv);
-
-    Object.entries(otherRoundsets).forEach(([roundset, data]) => {
-        let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('other-roundset-selector-div');
-        roundsetDiv.addEventListener('click', () => {
-            showRoundsetModel('extras', roundset);
-        })
-        otherRoundsetDiv.appendChild(roundsetDiv);
-
-        let roundsetText = document.createElement('p');
-        roundsetText.classList.add('other-roundset-selector-text', 'black-outline');
-
-        let stage = roundset.match(/(Part|Stage)(\d+)/i);
-        if (stage != null) {
-            roundsetText.innerHTML = `${stage[1]} ${stage[2]}`;
-            roundsetDiv.appendChild(roundsetText);
-        }
-
-        let roundsetIcon = document.createElement('img');
-        roundsetIcon.classList.add('other-roundset-selector-img');
-        roundsetIcon.src = `../Assets/QuestIcon/${data.icon}.png`;
-        roundsetDiv.appendChild(roundsetIcon);
-    })
-
-    let knownPreviousEventsDiv = document.createElement('div');
-    knownPreviousEventsDiv.classList.add('known-previous-events-div');
-    selectorsDiv.appendChild(knownPreviousEventsDiv);
-
-    let knownPreviousEventsText = document.createElement('p');
-    knownPreviousEventsText.classList.add('other-roundsets-selector-text', 'black-outline');
-    knownPreviousEventsText.innerHTML = "Known Previous Events";
-    knownPreviousEventsDiv.appendChild(knownPreviousEventsText);
-
-    Object.entries(expiredRoundsets).forEach(([event, data]) => {
-        let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('roundset-selector-div');
-        roundsetDiv.addEventListener('click', () => {
-            showLoading();
-            showRoundsetModel('extras', data.roundset);
-        })
-        selectorsDiv.appendChild(roundsetDiv);
-
-        let roundsetIcon = document.createElement('img');
-        roundsetIcon.classList.add('roundset-selector-img');
-        roundsetDiv.appendChild(roundsetIcon);
-
-        switch(data.type) {
-            case "Race":
-                roundsetIcon.src = `../Assets/UI/EventRaceBtn.png`;
-                roundsetDiv.classList.add("race-roundset")
-                break;
-            case "Odyssey":
-                roundsetIcon.src = `../Assets/UI/OdysseyEventBtn.png`;
-                roundsetDiv.classList.add("odyssey-roundset")
-                break;
-            case "Boss":
-                roundsetIcon.src = `../Assets/BossIcon/${data.boss[0].toUpperCase() + data.boss.slice(1)}EventIcon.png`;
-                roundsetDiv.style.backgroundImage = `url(../Assets/EventBanner/EventBannerSmall${data.boss[0].toUpperCase() + data.boss.slice(1)}.png)`
-                roundsetDiv.classList.add("boss-roundset")
-                break;
-        }
-
-        let roundsetTextDiv = document.createElement('div');
-        roundsetTextDiv.classList.add('roundset-selector-text-div');
-        roundsetDiv.appendChild(roundsetTextDiv);
-    
-        let roundsetText = document.createElement('p');
-        roundsetText.classList.add('selector-text', 'black-outline');
-        roundsetText.innerHTML = `${data.type} Event - ${event}`;
-        roundsetTextDiv.appendChild(roundsetText);
-
-        let roundsetText2 = document.createElement('p');
-        roundsetText2.id = "time-left-" + event;
-        roundsetText2.classList.add('selector-text', 'black-outline');
-        roundsetTextDiv.appendChild(roundsetText2);
-
-        if(new Date() < new Date(data.start)) {
-            roundsetText2.innerHTML = "Coming Soon!";
-        } else if (new Date(data.end) > new Date()) {
-            updateTimer(new Date(data.end), roundsetText2.id);
-            timerInterval = setInterval(() => updateTimer(new Date(data.end), roundsetText2.id), 1000)
-        } else {
-            roundsetText2.innerHTML = `${new Date(data.start).toLocaleDateString()} - ${new Date(data.end).toLocaleDateString()}`
-        }
-
-        let roundsetGoImg = document.createElement('img');
-        roundsetGoImg.classList.add('selector-go-img');
-        roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
-        roundsetDiv.appendChild(roundsetGoImg);
-    })
-
-    let skuRoundsetDiv = document.createElement('div');
-    skuRoundsetDiv.classList.add('sku-roundset-selector-div');
-    selectorsDiv.appendChild(skuRoundsetDiv);
-
-    let skuRoundsetText = document.createElement('p');
-    skuRoundsetText.classList.add('other-roundsets-selector-text', 'black-outline');
-    skuRoundsetText.innerHTML = "Other Custom Rounds";
-    skuRoundsetDiv.appendChild(skuRoundsetText);
-
-    let skuRoundsetDesc = document.createElement('p');
-    skuRoundsetDesc.classList.add('sku-roundset-selector-desc');
-    skuRoundsetDesc.innerHTML = "These mostly old roundsets will have only been used in one-off events such as Odysseys, Races, or Bosses and may not have ended up being used for their intended purpose despite their name. Take these roundsets with a grain of salt. I'm including them on the viewer for completeness sake.";
-    skuRoundsetDiv.appendChild(skuRoundsetDesc);
-
-    let skuRoundsetsDiv = document.createElement('div');
-    skuRoundsetsDiv.classList.add('sku-roundsets-selector-div');
-    skuRoundsetDiv.appendChild(skuRoundsetsDiv);
-
-    constants.skuRoundsets.forEach(roundset => {
-        let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('sku-roundset-selector-div');
-        roundsetDiv.addEventListener('click', () => {
-            showRoundsetModel('extras', roundset);
-        })
-        skuRoundsetsDiv.appendChild(roundsetDiv);
-
-        let roundsetText = document.createElement('p');
-        roundsetText.classList.add('sku-roundset-selector-text', 'black-outline');
-        roundsetText.innerHTML = roundset;
-        roundsetDiv.appendChild(roundsetText);
-    });
-}
-
-async function showRoundsetModel(source, roundset) {
-    let roundsetContent = document.getElementById('roundset-content');
-    roundsetContent.style.display = "flex";
-    roundsetContent.innerHTML = "";
-    document.getElementById(`${source}-content`).style.display = "none";
-    resetScroll();
-
-    let roundsetData = await fetch(`./data/${roundset}.json`).then(response => response.json());
-    let roundsetType = "unknown";
-    if(constants.roundSets[roundset]) {
-        roundsetType = constants.roundSets[roundset].type;
-    }
-    // Might be used later for other roundsets that use the addToRound feature, but for now obsolete.
-    // if (roundsetType == "boss") {
-    //     let defaultRoundsetData = await fetch(`./data/DefaultRoundSet.json`).then(response => response.json());
-    //     roundsetProcessed =  processRoundset(defaultRoundsetData, roundsetData);
-    // } else {
-    //     roundsetProcessed =  processRoundset(roundsetData);
-    // }
-    roundsetProcessed = addRoundHints(roundset, roundsetData);
-    selectedRoundset = roundset;
-
-    let headerBar = document.createElement('div');
-    headerBar.classList.add('roundset-header-bar');
-    roundsetContent.appendChild(headerBar);
-
-    let roundsetHeaderTitle = document.createElement('div');
-    roundsetHeaderTitle.classList.add('roundset-header-title');
-    headerBar.appendChild(roundsetHeaderTitle);
-
-    let leftDiv = document.createElement('div');
-    leftDiv.classList.add('roundset-header-left');
-    roundsetHeaderTitle.appendChild(leftDiv);
-
-    let roundsetHeaderText = document.createElement('p');
-    roundsetHeaderText.classList.add('roundset-header-text', 'black-outline');
-    roundsetHeaderText.innerHTML = constants.roundSets[roundset] ? constants.roundSets[roundset].name : roundset;
-    roundsetHeaderTitle.appendChild(roundsetHeaderText);
-
-    let rightDiv = document.createElement('div');
-    rightDiv.classList.add('roundset-header-right');
-    roundsetHeaderTitle.appendChild(rightDiv);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        roundsetContent.style.display = "none";
-        document.getElementById(`${source}-content`).style.display = "flex";
-    })
-    rightDiv.appendChild(modalClose);
-
-    if(roundset.startsWith("Rogue")) {
-        let rogueHeaderBar = document.createElement('div');
-        rogueHeaderBar.classList.add('d-flex', 'jc-evenly');
-        headerBar.appendChild(rogueHeaderBar);
-
-        let rogueRoundsets = ["RogueRoundSet", "RogueBloonierSet", "RogueDenseSet",  "RoguePinkSet", "RoguePurpleSet", "RogueImmuneSet", "RogueLeadSet"]
-
-        rogueRoundsets.forEach(rs => {
-            let roundsetDiv = document.createElement('div');
-            roundsetDiv.classList.add('pointer');
-            roundsetDiv.addEventListener('click', () => {
-                showLoading();
-                showRoundsetModel(source, rs);
-            })
-            rogueHeaderBar.appendChild(roundsetDiv);
-
-            if (rs == roundset) {
-                roundsetDiv.style.border = "5px #00ff00 solid";
-                roundsetDiv.style.borderRadius = "20px";
-            }
-
-            let roundsetIcon = document.createElement('img');
-            roundsetIcon.classList.add('roundset-header-rogue-img');
-            roundsetIcon.style.width = "100px";
-            roundsetIcon.src = `../Assets/UI/${rs}.png`;
-            roundsetDiv.appendChild(roundsetIcon);
-        });
-    }
-
-    
-
-    let mapsProgressHeaderBar = document.createElement('div');
-    mapsProgressHeaderBar.classList.add('roundset-header-bar-bottom');
-    headerBar.appendChild(mapsProgressHeaderBar);
-
-    let mapsProgressViews = document.createElement('div');
-    mapsProgressViews.classList.add('maps-progress-views');
-    mapsProgressHeaderBar.appendChild(mapsProgressViews);
-
-    let mapsProgressViewsText = document.createElement('p');
-    mapsProgressViewsText.classList.add('maps-progress-coop-toggle-text','maps-progress-view-list','black-outline');
-    mapsProgressViewsText.innerHTML = "Display Type:";
-    mapsProgressViews.appendChild(mapsProgressViewsText);
-
-    let mapsProgressGrid = document.createElement('div');
-    mapsProgressGrid.classList.add('maps-progress-view', 'stats-tab-yellow', 'black-outline');
-    mapsProgressGrid.innerHTML = "Simple";
-    mapsProgressViews.appendChild(mapsProgressGrid);
-
-    let mapsProgressList = document.createElement('div');
-    mapsProgressList.classList.add('maps-progress-view','black-outline');
-    mapsProgressList.innerHTML = "Detailed";
-    mapsProgressViews.appendChild(mapsProgressList);
-
-    let mapsProgressGame = document.createElement('div');
-    mapsProgressGame.classList.add('maps-progress-view','black-outline');
-    mapsProgressGame.innerHTML = "Preview";
-    mapsProgressViews.appendChild(mapsProgressGame);
-
-    let mapsProgressFilter = document.createElement('div');
-    mapsProgressFilter.classList.add('maps-progress-filter');
-    mapsProgressHeaderBar.appendChild(mapsProgressFilter);
-
-    let mapProgressFilterDifficulty = document.createElement('div');
-    mapProgressFilterDifficulty.classList.add('map-progress-filter-difficulty');
-
-    let mapsProgressFilterDifficultyText = document.createElement('p');
-    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text','black-outline');
-    mapProgressFilterDifficulty.appendChild(mapsProgressFilterDifficultyText);
-
-    let onlyModifiedToggleInput = document.createElement('input');
-    onlyModifiedToggleInput.id = "roundset-modified-checkbox"
-    onlyModifiedToggleInput.classList.add('maps-progress-coop-toggle-input');
-    onlyModifiedToggleInput.type = 'checkbox';
-    mapProgressFilterDifficulty.appendChild(onlyModifiedToggleInput);
-
-    if (roundsetType == "boss") {
-        currentModifiedRounds = [];
-        roundsetProcessed.rounds.forEach((round, index) => {
-            if (round.hasOwnProperty("modified")) {
-                currentModifiedRounds.push(round.roundNumber);
-            }
-        });
-        onlyModifiedToggleInput.checked = true;
-        mapsProgressFilter.appendChild(mapProgressFilterDifficulty);
-
-        mapsProgressFilterDifficultyText.innerHTML = "Only Modified:";
-        roundPreviewFilterType = "modified";
-
-        previewModified = onlyModifiedToggleInput;
-    } else if (roundsetType == "quest") {
-        currentModifiedRounds = [];
-        roundsetProcessed.rounds.forEach((round, index) => {
-            if(round.roundNumber > constants.roundSets[roundset].endRound) { return; }
-            currentModifiedRounds.push(round.roundNumber);
-        });
-        mapsProgressFilterDifficultyText.innerHTML = "Hide Unused:";
-        roundPreviewFilterType = "unused";
-        currentRoundsetEndRound = constants.roundSets[roundset].endRound;
-        mapsProgressFilter.appendChild(mapProgressFilterDifficulty);
-        onlyModifiedToggleInput.checked = true;
-
-        previewModified = onlyModifiedToggleInput;
-    } else  {
-        previewModified = null;
-    }
-
-    let mapsProgressCoopToggle = document.createElement('div');
-    mapsProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
-    mapsProgressFilter.appendChild(mapsProgressCoopToggle);
-
-    let mapsProgressCoopToggleText = document.createElement('p');
-    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
-    mapsProgressCoopToggleText.innerHTML = "Reverse:";
-    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
-
-    let mapsProgressCoopToggleInput = document.createElement('input');
-    mapsProgressCoopToggleInput.id = "roundset-reverse-checkbox"
-    mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
-    mapsProgressCoopToggleInput.type = 'checkbox';
-    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
-
-
-    let roundsContent = document.createElement('div');
-    roundsContent.id = 'rounds-content';
-    roundsContent.classList.add('rounds-content');
-    roundsetContent.appendChild(roundsContent);
-
-    mapsProgressGrid.addEventListener('click', () => {
-        mapsProgressGrid.classList.add('stats-tab-yellow');
-        mapsProgressList.classList.remove('stats-tab-yellow');
-        mapsProgressGame.classList.remove('stats-tab-yellow');
-        currentRoundsetView = "Simple";
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
-    })
-    mapsProgressList.addEventListener('click', () => {
-        mapsProgressList.classList.add('stats-tab-yellow');
-        mapsProgressGrid.classList.remove('stats-tab-yellow');
-        mapsProgressGame.classList.remove('stats-tab-yellow');
-        currentRoundsetView = "Topper";
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
-    })
-    mapsProgressGame.addEventListener('click', () => {
-        mapsProgressGame.classList.add('stats-tab-yellow');
-        mapsProgressGrid.classList.remove('stats-tab-yellow');
-        mapsProgressList.classList.remove('stats-tab-yellow');
-        currentRoundsetView = "Preview";
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
-    })
-
-
-    mapsProgressCoopToggleInput.addEventListener('change', () => {
-        onChangeReverse(mapsProgressCoopToggleInput.checked)
-    })
-    onlyModifiedToggleInput.addEventListener('change', () => {
-        onChangeModified(onlyModifiedToggleInput.checked)
-    })
-    currentPreviewRound = 0;
-    currentRoundsetView = "Simple";
-    generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked)
-    onChangeModified(onlyModifiedToggleInput.checked)
-}
-
-function processRoundset(data, defaultAppend){
-    if(defaultAppend != null) {
-        defaultAppend.rounds.forEach((round, index) => {
-            let roundIndex = data.rounds.findIndex(round_b => round_b.roundNumber == round.roundNumber);
-            if(round.addToRound) {
-                if (roundIndex != -1) {
-                    data.rounds[roundIndex].bloonGroups = data.rounds[roundIndex].bloonGroups.concat(round.bloonGroups);
-                    data.rounds[roundIndex].addToRound = true;
-                }
-            } else {
-                if (roundIndex != -1) {
-                    data.rounds[roundIndex] = round;
-                }
-            }
-        })
-    }
-    return data;
-}
-
-function addRoundHints(roundset, data) {
-    if(["DefaultRoundSet", "AlternateRoundSet", "RogueRoundSet"].includes(roundset)) {
-        data.rounds.forEach((round, index) => {
-            switch(roundset) {
-                case "DefaultRoundSet":
-                    if(constants.roundHints.hasOwnProperty("Hint " + (round.roundNumber - 1))) {
-                        round.hint = constants.roundHints["Hint " + (round.roundNumber - 1)];
-                    }
-                    break;
-                case "AlternateRoundSet":
-                    if (constants.roundHints.hasOwnProperty("Alternate Hint " + (round.roundNumber - 1))) {
-                        round.hint = constants.roundHints["Alternate Hint " + (round.roundNumber - 1)];
-                    }
-                    break;
-                case "RogueRoundSet":
-                    if (constants.roundHints.hasOwnProperty("Rogue Hint " + (round.roundNumber - 1))) {
-                        round.hint = constants.roundHints["Rogue Hint " + (round.roundNumber - 1)];
-                    }
-                    break;
-            }
-        })
-    }
-    return data;
-}
-
-async function generateRounds(type, reverse, modified) {
-    let roundsContent = document.getElementById('rounds-content');
-    roundsContent.innerHTML = "";
-
-    //get if all the round numbers don't have any gaps between them
-    let roundsetHasNoGaps = true;
-    let roundsetHasNoGapsArray = [];
-    roundsetProcessed.rounds.forEach((round, index) => {
-        roundsetHasNoGapsArray.push(round.roundNumber);
-    });
-    for (let i = 0; i < roundsetHasNoGapsArray.length; i++) {
-        if (roundsetHasNoGapsArray[i] != i + 1) {
-            roundsetHasNoGaps = false;
-            break;
-        }
-    }
-
-    switch(type) {
-        case "Simple":
-            resetPreview();
-            let alternate = false;
-            roundsetProcessed.rounds.forEach(async (round, index) => {
-                // if (modified && !round.hasOwnProperty("addToRound")) { return; }
-                let roundDiv = document.createElement('div');
-                roundDiv.id = `round-${round.roundNumber}`;
-                roundDiv.classList.add('round-div');
-                if (alternate) { roundDiv.classList.add('round-div-alt') }
-            
-                let roundNumber = document.createElement('p');
-                roundNumber.classList.add('round-number', 'black-outline');
-                roundNumber.innerHTML = round.roundNumber;
-                roundDiv.appendChild(roundNumber);
-            
-                let roundBloonGroups = document.createElement('div');
-                roundBloonGroups.id = `round-${round.roundNumber}-groups`;
-                roundBloonGroups.classList.add('round-bloon-groups');
-                roundDiv.appendChild(roundBloonGroups);
-
-                let fragment = document.createDocumentFragment();
-                round.bloonGroups.sort((a, b) => a.start - b.start).forEach((bloonGroup, index) => {
-                    let bloonGroupDiv = document.createElement('div');
-                    bloonGroupDiv.classList.add('bloon-group-div');
-            
-                    let bloonGroupNumber = document.createElement('p');
-                    bloonGroupNumber.classList.add('bloon-group-number', 'black-outline');
-                    bloonGroupNumber.innerHTML = "x" + bloonGroup.count;
-                    bloonGroupDiv.appendChild(bloonGroupNumber);
-            
-                    let bloonGroupBloon = document.createElement('img');
-                    bloonGroupBloon.classList.add('bloon-group-bloon');
-                    bloonGroupBloon.src = `../Assets/BloonIcon/${bloonGroup.bloon}.png`;
-                    bloonGroupBloon.loading = 'lazy';
-                    bloonGroupDiv.appendChild(bloonGroupBloon);
-            
-                    fragment.appendChild(bloonGroupDiv);
-                })
-            
-                roundBloonGroups.appendChild(fragment);
-                roundsContent.appendChild(roundDiv);
-                alternate = !alternate;
-            })
-            if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
-            if (previewModified != null && previewModified.checked) { onChangeModified(true) }
-            break;
-        case "Topper":
-            resetPreview();
-            let roundsDetailedDiv = document.createElement('div');
-            roundsDetailedDiv.classList.add('rounds-detailed-div');
-            roundsContent.appendChild(roundsDetailedDiv);
-
-            copyLoadingIcon(roundsDetailedDiv);
-
-            setTimeout(() => {
-            let fragment = document.createDocumentFragment();
-
-            let disclaimerDiv = document.createElement('div');
-            disclaimerDiv.classList.add('disclaimer-div');
-            fragment.appendChild(disclaimerDiv);
-
-            let disclaimer = document.createElement('p');
-            disclaimer.classList.add('disclaimer');
-            disclaimer.innerHTML = "This layout is based on Topper's website:";
-            disclaimerDiv.appendChild(disclaimer);
-
-            let disclaimerLink = document.createElement('a');
-            disclaimerLink.classList.add('disclaimer-link');
-            disclaimerLink.href = "https://topper64.co.uk/nk/btd6/rounds/";
-            disclaimerLink.target = "_blank";
-            disclaimerLink.innerHTML = "Topper's Round Information";
-            disclaimerDiv.appendChild(disclaimerLink);
-
-            let minWidthPercentage = (30 / 600) * 100;
-
-            roundsetProcessed.rounds.forEach(async (round, index) => {
-                let roundDiv = document.createElement('div');
-                roundDiv.id = `round-${round.roundNumber}`;
-                roundDiv.classList.add('round-div-detailed');
-                if (reverse) { roundDiv.classList.add('round-div-reverse') }
-
-                let roundsDivHeader = document.createElement('div');
-                roundsDivHeader.classList.add('rounds-div-header');
-                roundDiv.appendChild(roundsDivHeader);
-
-                let roundNumber = document.createElement('p');
-                roundNumber.classList.add('round-number', 'round-number-detailed', 'black-outline');
-                roundNumber.innerHTML = `Round ${round.roundNumber}`;
-                roundsDivHeader.appendChild(roundNumber);
-
-                let incomeDiv = document.createElement('div');
-                incomeDiv.classList.add('income-div');
-                roundsDivHeader.appendChild(incomeDiv);
-
-                let incomeImg = document.createElement('img');
-                incomeImg.classList.add('income-img');
-                incomeImg.src = "../Assets/UI/CoinIcon.png";
-                incomeDiv.appendChild(incomeImg);
-
-                let incomeTextDiv = document.createElement('div');
-                incomeTextDiv.classList.add('income-text-div');
-                incomeDiv.appendChild(incomeTextDiv);
-                
-                let roundIncome = document.createElement('p');
-                roundIncome.classList.add('round-income', 'black-outline');
-                roundIncome.innerHTML = `Income: ${round.income.toLocaleString()}`;
-                incomeTextDiv.appendChild(roundIncome);
-                
-                let roundIncomeTotal = document.createElement('p');
-                roundIncomeTotal.classList.add('round-income-total', 'black-outline');
-                roundIncomeTotal.innerHTML = `Total: ${round.incomeSum.toLocaleString()}`;
-                if (roundsetHasNoGaps){ incomeTextDiv.appendChild(roundIncomeTotal); }
-
-                let rbeDiv = document.createElement('div');
-                rbeDiv.classList.add('rbe-div');
-                roundsDivHeader.appendChild(rbeDiv);
-
-                let rbeImg = document.createElement('img');
-                rbeImg.classList.add('rbe-img');
-                rbeImg.src = "../Assets/BloonIcon/Red.png";
-                rbeDiv.appendChild(rbeImg);
-
-                let rbeTextDiv = document.createElement('div');
-                rbeTextDiv.classList.add('rbe-text-div');
-                rbeDiv.appendChild(rbeTextDiv);
-
-                let roundRBE = document.createElement('p');
-                roundRBE.classList.add('round-rbe', 'black-outline');
-                roundRBE.innerHTML = `RBE: ${round.rbe.toLocaleString()}`;
-                rbeTextDiv.appendChild(roundRBE);
-                
-                let roundRBETotal = document.createElement('p');
-                roundRBETotal.classList.add('round-rbe-total', 'black-outline');
-                roundRBETotal.innerHTML = `Total: ${round.rbeSum.toLocaleString()}`;
-                if (roundsetHasNoGaps){ rbeTextDiv.appendChild(roundRBETotal); }
-
-                let roundDuration = round.bloonGroups.length ? Math.max(...round.bloonGroups.map(group => group.end)) : 0;
-
-                let roundDurationText = document.createElement('p');
-                roundDurationText.classList.add('round-duration', 'black-outline');
-                roundDurationText.innerHTML = `Duration: ${roundDuration.toFixed(2)}s`;
-                roundsDivHeader.appendChild(roundDurationText);
-
-                if(round.hint) {
-                    let roundHintDiv = document.createElement('div');
-                    roundHintDiv.classList.add('round-hint-div','coop-border');
-                    roundDiv.appendChild(roundHintDiv);
-
-                    let roundHintX = document.createElement('p');
-                    roundHintX.classList.add('round-hint-x');
-                    roundHintX.innerHTML = "X";
-                    roundHintX.addEventListener('click', () => {
-                        roundHintDiv.style.display = "none";
-                    })
-                    roundHintDiv.appendChild(roundHintX);
-
-                    let roundHint = document.createElement('p');
-                    roundHint.classList.add('round-hint');
-                    roundHint.innerHTML = round.hint;
-                    roundHintDiv.appendChild(roundHint);
-                }
-
-                let timelineDiv = document.createElement('div');
-                timelineDiv.classList.add('timeline-div');
-                roundDiv.appendChild(timelineDiv);
-                round.bloonGroups.forEach((bloonGroup, index) => {
-                    let bloonGroupDiv = document.createElement('div');
-                    bloonGroupDiv.classList.add('bloon-group-div-detailed');
-                    timelineDiv.appendChild(bloonGroupDiv);
-
-                    let leftDiv = document.createElement('div');
-                    leftDiv.classList.add('left-div');
-                    bloonGroupDiv.appendChild(leftDiv);
-
-                    let bloonImage = document.createElement('img');
-                    bloonImage.classList.add('bloon-image');
-                    bloonImage.src = `../Assets/BloonIcon/${bloonGroup.bloon}.png`;
-                    leftDiv.appendChild(bloonImage);
-
-                    let bloonCount = document.createElement('p');
-                    bloonCount.classList.add('bloon-count', 'black-outline');
-                    bloonCount.innerHTML = "x" + bloonGroup.count;
-                    leftDiv.appendChild(bloonCount);
-                    
-                    let rightDiv = document.createElement('div');
-                    rightDiv.classList.add('timeline-right-div');
-                    bloonGroupDiv.appendChild(rightDiv);
-                    
-                    let bloonBar = document.createElement('div');
-                    bloonBar.classList.add('bloon-bar');
-                    rightDiv.appendChild(bloonBar);
-
-                    let bloonBarFill = document.createElement('div');
-                    bloonBarFill.classList.add('bloon-bar-fill');
-                    bloonBarFill.style.background = bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].color;
-                    if (!bloonGroup.bloon.includes("Rainbow")) {
-                        bloonBarFill.style.border = `4px solid ${bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].border}`;
-                    }
-
-                    let widthPercentage = ((bloonGroup.end - bloonGroup.start) / roundDuration) * 100;
-                    let leftPercentage = (bloonGroup.start / roundDuration) * 100;
-            
-                    if (widthPercentage < minWidthPercentage) {
-                        widthPercentage = minWidthPercentage;
-                    }
-            
-                    if (leftPercentage + widthPercentage > 100) {
-                        leftPercentage = 100 - widthPercentage;
-                    }
-            
-                    bloonBarFill.style.width = `${widthPercentage}%`;
-                    bloonBarFill.style.left = `${leftPercentage}%`;
-
-                    bloonBar.appendChild(bloonBarFill);
-                })
-                fragment.appendChild(roundDiv);
-            })
-            roundsDetailedDiv.innerHTML = "";
-            roundsDetailedDiv.appendChild(fragment);
-            if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
-            if (previewModified != null && previewModified.checked) { onChangeModified(true) }
-            }, 0)
-            break;
-        case "Preview":
-            resetPreview();
-            let previewContainerDiv = document.createElement('div');
-            previewContainerDiv.classList.add('preview-container-div');
-            roundsContent.appendChild(previewContainerDiv);
-
-            let previewDiv = document.createElement('div');
-            previewDiv.classList.add('preview-div');
-            previewContainerDiv.appendChild(previewDiv);
-
-            let previewHeader = document.createElement('div');
-            previewHeader.classList.add('preview-header');
-            previewDiv.appendChild(previewHeader);
-
-            let roundNumber = document.createElement('p');
-            roundNumber.id = 'round-number-preview';
-            roundNumber.classList.add('round-number', 'round-number-preview', 'black-outline');
-            roundNumber.innerHTML = `Round ${roundsetProcessed.rounds[currentPreviewRound].roundNumber}`;
-            previewHeader.appendChild(roundNumber);
-
-            let selectRoundNum = document.createElement('input');
-            selectRoundNum.id = 'select-round-num-preview';
-            selectRoundNum.classList.add('select-round-num');
-            selectRoundNum.type = 'number';
-            selectRoundNum.min = 1;
-            selectRoundNum.max = roundsetProcessed.rounds.length;
-            selectRoundNum.value = currentPreviewRound + 1;
-            selectRoundNum.addEventListener('change', () => {
-                if (selectRoundNum.value < 1) { selectRoundNum.value = 1 }
-                if (selectRoundNum.value > roundsetProcessed.rounds.length) { selectRoundNum.value = roundsetProcessed.rounds.length }
-                roundNumber.innerHTML = `Round ${roundsetProcessed.rounds[currentPreviewRound].roundNumber}`;
-                currentPreviewRound = selectRoundNum.value - 1;
-                updatePreviewRoundTimeline()
-            })
-            previewHeader.appendChild(selectRoundNum);
-            
-            let previewRightDiv = document.createElement('div');
-            previewRightDiv.classList.add('preview-right-div');
-            previewHeader.appendChild(previewRightDiv);
-
-            let clearButton = document.createElement('img');
-            clearButton.classList.add('clear-button');
-            clearButton.src = "../Assets/UI/DestroyBloonsBtn.png";
-            clearButton.addEventListener('click', () => {
-                clearPreview()
-            })
-            previewRightDiv.appendChild(clearButton);
-
-            let playNormalButton = document.createElement('img');
-            playNormalButton.classList.add('play-normal-button');
-            playNormalButton.src = "../Assets/UI/GoBtnSmall.png";
-            playNormalButton.addEventListener('click', () => {
-                speedMultiplier = 1;
-                roundNumber.innerHTML = `Round ${roundsetProcessed.rounds[currentPreviewRound].roundNumber}`;
-                clearPreview()
-                startRound(roundsetProcessed.rounds[currentPreviewRound])
-            })
-            previewRightDiv.appendChild(playNormalButton);
-
-            let playFastButton = document.createElement('img');
-            playFastButton.classList.add('play-fast-button');
-            playFastButton.src = "../Assets/UI/FastForwardBtn.png";
-            playFastButton.addEventListener('click', () => {
-                speedMultiplier = 3;
-                roundNumber.innerHTML = `Round ${roundsetProcessed.rounds[currentPreviewRound].roundNumber}`;
-                clearPreview()
-                startRound(roundsetProcessed.rounds[currentPreviewRound])
-            })
-            previewRightDiv.appendChild(playFastButton);
-
-            canvas = document.createElement('canvas');
-            canvas.classList.add('roundset-canvas')
-            canvas.width = 800;
-            canvas.height = 300;
-            previewDiv.appendChild(canvas);
-
-            let previewFooterDiv = document.createElement('div');
-            previewFooterDiv.classList.add('preview-footer-div');
-            previewDiv.appendChild(previewFooterDiv);
-
-            let difficultyDiv = document.createElement('div');
-            difficultyDiv.classList.add('difficulty-div');
-            previewFooterDiv.appendChild(difficultyDiv);
-
-            let difficultyEasy = document.createElement('div');
-            difficultyEasy.classList.add('maps-progress-view', 'stats-tab-yellow', 'black-outline');
-            difficultyEasy.innerHTML = "Easy";
-            difficultyDiv.appendChild(difficultyEasy);
-
-            let difficultyMedium = document.createElement('div');
-            difficultyMedium.classList.add('maps-progress-view', 'black-outline');
-            difficultyMedium.innerHTML = "Medium";
-            difficultyDiv.appendChild(difficultyMedium);
-
-            let difficultyHard = document.createElement('div');
-            difficultyHard.classList.add('maps-progress-view', 'black-outline');
-            difficultyHard.innerHTML = "Hard";
-            difficultyDiv.appendChild(difficultyHard);
-
-            difficultyEasy.addEventListener('click', () => {
-                difficultySpeedModifier = 1;
-                difficultyEasy.classList.add('stats-tab-yellow');
-                difficultyMedium.classList.remove('stats-tab-yellow');
-                difficultyHard.classList.remove('stats-tab-yellow');
-            })
-            difficultyMedium.addEventListener('click', () => {
-                difficultySpeedModifier = 1.1;
-                difficultyEasy.classList.remove('stats-tab-yellow');
-                difficultyMedium.classList.add('stats-tab-yellow');
-                difficultyHard.classList.remove('stats-tab-yellow');
-            })
-            difficultyHard.addEventListener('click', () => {
-                difficultySpeedModifier = 1.26;
-                difficultyEasy.classList.remove('stats-tab-yellow');
-                difficultyMedium.classList.remove('stats-tab-yellow');
-                difficultyHard.classList.add('stats-tab-yellow');
-            })
-
-            switch(selectedRoundset) {
-                case "AlternateRoundSet":
-                    difficultyHard.click();
-                    break;
-                case "AcceleratedRoundSet":
-                case "EnduranceRoundSet":
-                case "FastUpgradesRoundSet":
-                case "MOABMadnessRoundSet":
-                case "RogueRoundSet":
-                case "RogueBloonierSet":
-                case "RogueDenseSet":
-                case "RoguePinkSet":
-                case "RoguePurpleSet":
-                case "RogueImmuneSet":
-                case "RogueLeadSet":
-                    difficultyMedium.click();
-                    break;
-            }
-
-            let nextPrevDiv = document.createElement('div');
-            nextPrevDiv.classList.add('next-prev-div');
-            previewFooterDiv.appendChild(nextPrevDiv);
-
-            let prevRound = document.createElement('div');
-            prevRound.classList.add('maps-progress-view', 'black-outline');
-            prevRound.innerHTML = "Previous";
-            prevRound.addEventListener('click', () => {
-                if (previewModified != null && previewModified.checked) {
-                    currentIndexInModifiedRounds--;
-                    if (currentIndexInModifiedRounds < 0) { currentIndexInModifiedRounds = currentModifiedRounds.length - 1 }
-                    currentPreviewRound = currentModifiedRounds[currentIndexInModifiedRounds] - 1;
-                } else {
-                    currentPreviewRound--;
-                    if (currentPreviewRound < 0) { currentPreviewRound = roundsetProcessed.rounds.length - 1 }
-                }
-                selectRoundNum.value = currentPreviewRound + 1;
-                clearPreview();
-                updatePreviewRoundTimeline()
-            })
-            nextPrevDiv.appendChild(prevRound);
-
-            let nextRound = document.createElement('div');
-            nextRound.classList.add('maps-progress-view', 'black-outline');
-            nextRound.innerHTML = "Next";
-            nextRound.addEventListener('click', () => {
-                if (previewModified != null && previewModified.checked) {
-                    currentIndexInModifiedRounds++;
-                    if (currentIndexInModifiedRounds >= currentModifiedRounds.length) { currentIndexInModifiedRounds = 0 }
-                    currentPreviewRound = currentModifiedRounds[currentIndexInModifiedRounds] - 1;
-                } else {
-                    currentPreviewRound++;
-                    if (currentPreviewRound >= roundsetProcessed.rounds.length) { currentPreviewRound = 0 }
-                }
-                selectRoundNum.value = currentPreviewRound + 1;
-                clearPreview();
-                updatePreviewRoundTimeline()
-            })
-            nextPrevDiv.appendChild(nextRound);
-            
-            let roundInfoDiv = document.createElement('div');
-            roundInfoDiv.id = 'preview-round-info-div';
-            roundInfoDiv.classList.add('round-info-div');
-            previewDiv.appendChild(roundInfoDiv);
-
-            ctx = canvas.getContext('2d');
-
-            let lastFrameTime = performance.now();
-
-            function previewRender() {
-                if (!previewActive) {
-                    return;
-                }
-
-                const now = performance.now();
-                const deltaTime = (now - lastFrameTime) / 1000;
-                lastFrameTime = now;
-                
-                update(deltaTime);
-                render();
-                requestAnimationFrame(previewRender);
-            }
-
-            previewActive = true;
-
-            requestAnimationFrame(previewRender);
-
-            if (previewModified != null && previewModified.checked) { onChangeModified(true) }
-            updatePreviewRoundTimeline()
-            if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
-            break;
-    }
-}
-
-function onChangeModified(modified) {
-    switch(currentRoundsetView) {
-        case "Simple":
-            let alternate = false;
-            roundsetProcessed.rounds.forEach(async (round, index) => {
-                let roundDiv = document.getElementById(`round-${round.roundNumber}`);
-                if (modified && roundPreviewFilterType === "modified" && !round.hasOwnProperty("modified")) {
-                    roundDiv.style.display = "none";
-                } else if (modified && roundPreviewFilterType === "unused" && round.roundNumber > currentRoundsetEndRound) {
-                    roundDiv.style.display = "none";
-                } else {
-                    roundDiv.style.display = "flex";
-                    if (alternate) { roundDiv.classList.add('round-div-alt') } else if (Array.from(roundDiv.classList).includes('round-div-alt')) { roundDiv.classList.remove('round-div-alt') }
-                    alternate = !alternate;
-                }
-            })
-            break;
-        case "Topper":
-            roundsetProcessed.rounds.forEach(async (round, index) => {
-                let roundDiv = document.getElementById(`round-${round.roundNumber}`);
-                if (modified && roundPreviewFilterType === "modified" && !round.hasOwnProperty("modified")) {
-                    roundDiv.style.display = "none";
-                } else if (modified && roundPreviewFilterType === "unused" && round.roundNumber > currentRoundsetEndRound) {
-                    roundDiv.style.display = "none";
-                } else {
-                    roundDiv.style.display = "flex";
-                }
-            })
-            break;
-        case "Preview":
-            switch(roundPreviewFilterType){
-                case "modified":
-                    if(modified) {
-                        currentIndexInModifiedRounds = 0;
-                        currentPreviewRound = currentModifiedRounds[0] - 1;
-                        document.getElementById('round-number-preview').innerHTML = `Round ${currentModifiedRounds[0]}`;
-                        document.getElementById('select-round-num-preview').value = currentModifiedRounds[0];
-                        updatePreviewRoundTimeline()
-                    } else {
-                        currentPreviewRound = 0;
-                        document.getElementById('round-number-preview').innerHTML = `Round ${currentPreviewRound + 1}`;
-                        document.getElementById('select-round-num-preview').value = currentPreviewRound + 1;
-                        updatePreviewRoundTimeline()
-                    }
-                    break;
-                case "unused":
-                    if(modified) {
-                        if (currentRoundsetEndRound < currentPreviewRound + 1) {
-                            currentPreviewRound = 0;
-                            document.getElementById('round-number-preview').innerHTML = `Round ${currentPreviewRound + 1}`;
-                            document.getElementById('select-round-num-preview').value = currentPreviewRound + 1;
-                            updatePreviewRoundTimeline()
-                        }
-                    } else {
-                        currentPreviewRound = 0;
-                        document.getElementById('round-number-preview').innerHTML = `Round ${currentPreviewRound + 1}`;
-                        document.getElementById('select-round-num-preview').value = currentPreviewRound + 1;
-                        updatePreviewRoundTimeline()
-                    }
-                    break;
-            }
-            break;
-    }
-}
-
-function onChangeReverse() {
-    switch(currentRoundsetView) {
-        case "Simple":
-            roundsetProcessed.rounds.forEach((round, index) => {
-                let groupsDiv = document.getElementById(`round-${round.roundNumber}-groups`); 
-                let groups = Array.from(groupsDiv.children);
-                groups.reverse().forEach(group => groupsDiv.appendChild(group));
-            });
-            break;
-        case "Topper":
-            let timelineDivs = document.getElementsByClassName('timeline-div');
-            for (let timelineDiv of timelineDivs) {
-                timelineDiv.classList.toggle('timeline-div-reverse');
-            }
-            let timelineDivss = document.getElementsByClassName('timeline-right-div');
-            for (let timelineDiv of timelineDivss) {
-                timelineDiv.classList.toggle('flip-horizontal');
-            }
-            break;
-        case "Preview":
-            document.getElementById('preview-timeline-div').classList.toggle('timeline-div-reverse');
-            let timelineDivssPreview = document.getElementsByClassName('preview-timeline-right-div');
-            for (let timelineDiv of timelineDivssPreview) {
-                timelineDiv.classList.toggle('flip-horizontal');
-            }
-    }
-    clearPreview();
-}
-
-function updatePreviewRoundTimeline() {
-    let contentDiv = document.getElementById('preview-round-info-div');
-    contentDiv.innerHTML = "";
-
-    let round = roundsetProcessed.rounds[currentPreviewRound];
-    hiddenGroups = []
-
-    let roundDiv = document.createElement('div');
-    roundDiv.classList.add('round-div-detailed');
-    contentDiv.appendChild(roundDiv);
-
-    let roundsDivHeader = document.createElement('div');
-    roundsDivHeader.classList.add('rounds-div-header');
-    roundDiv.appendChild(roundsDivHeader);
-
-    
-    let roundNumber = document.createElement('p');
-    roundNumber.classList.add('round-number', 'round-number-detailed', 'black-outline');
-    roundNumber.innerHTML = `Round ${round.roundNumber}`;
-    roundsDivHeader.appendChild(roundNumber);
-
-    let incomeDiv = document.createElement('div');
-    incomeDiv.classList.add('income-div');
-    roundsDivHeader.appendChild(incomeDiv);
-
-    let incomeImg = document.createElement('img');
-    incomeImg.classList.add('income-img');
-    incomeImg.src = "../Assets/UI/CoinIcon.png";
-    incomeDiv.appendChild(incomeImg);
-
-    let incomeTextDiv = document.createElement('div');
-    incomeTextDiv.classList.add('income-text-div');
-    incomeDiv.appendChild(incomeTextDiv);
-    
-    let roundIncome = document.createElement('p');
-    roundIncome.classList.add('round-income', 'black-outline');
-    roundIncome.innerHTML = `Income: ${round.income.toLocaleString()}`;
-    incomeTextDiv.appendChild(roundIncome);
-    
-    let roundIncomeTotal = document.createElement('p');
-    roundIncomeTotal.classList.add('round-income-total', 'black-outline');
-    roundIncomeTotal.innerHTML = `Total: ${round.incomeSum.toLocaleString()}`;
-    incomeTextDiv.appendChild(roundIncomeTotal);
-
-    let rbeDiv = document.createElement('div');
-    rbeDiv.classList.add('rbe-div');
-    roundsDivHeader.appendChild(rbeDiv);
-
-    let rbeImg = document.createElement('img');
-    rbeImg.classList.add('rbe-img');
-    rbeImg.src = "../Assets/BloonIcon/Red.png";
-    rbeDiv.appendChild(rbeImg);
-
-    let rbeTextDiv = document.createElement('div');
-    rbeTextDiv.classList.add('rbe-text-div');
-    rbeDiv.appendChild(rbeTextDiv);
-    
-    let roundRBE = document.createElement('p');
-    roundRBE.classList.add('round-rbe', 'black-outline');
-    roundRBE.innerHTML = `RBE: ${round.rbe.toLocaleString()}`;
-    rbeTextDiv.appendChild(roundRBE);
-    
-    let roundRBETotal = document.createElement('p');
-    roundRBETotal.classList.add('round-rbe-total', 'black-outline');
-    roundRBETotal.innerHTML = `Total: ${round.rbeSum.toLocaleString()}`;
-    rbeTextDiv.appendChild(roundRBETotal);
-
-    let roundDuration = round.bloonGroups.length ? Math.max(...round.bloonGroups.map(group => group.end)) : 0;
-
-    let roundDurationText = document.createElement('p');
-    roundDurationText.classList.add('round-duration', 'black-outline');
-    roundDurationText.innerHTML = `Duration: ${roundDuration.toFixed(2)}s`;
-    roundsDivHeader.appendChild(roundDurationText);
-
-    if(round.hint) {
-        let roundHintDiv = document.createElement('div');
-        roundHintDiv.classList.add('round-hint-div','coop-border');
-        roundDiv.appendChild(roundHintDiv);
-
-        let roundHintX = document.createElement('p');
-        roundHintX.classList.add('round-hint-x');
-        roundHintX.innerHTML = "X";
-        roundHintX.addEventListener('click', () => {
-            roundHintDiv.style.display = "none";
-        })
-        roundHintDiv.appendChild(roundHintX);
-
-        let roundHint = document.createElement('p');
-        roundHint.classList.add('round-hint');
-        roundHint.innerHTML = round.hint;
-        roundHintDiv.appendChild(roundHint);
-    }
-
-    let timelineDiv = document.createElement('div');
-    timelineDiv.id = "preview-timeline-div"
-    timelineDiv.classList.add('timeline-div');
-    roundDiv.appendChild(timelineDiv);
-
-    let minWidthPercentage = (30 / 600) * 100; 
-    round.bloonGroups.forEach((bloonGroup, index) => {
-        let bloonGroupDiv = document.createElement('div');
-        bloonGroupDiv.classList.add('bloon-group-div-detailed');
-        bloonGroupDiv.addEventListener('click', () => {
-            if (hiddenGroups.includes(index)) {
-                bloonGroupDiv.style.filter = "";
-                hiddenGroups.splice(hiddenGroups.indexOf(index), 1);
-            } else {
-                hiddenGroups.push(index);
-                bloonGroupDiv.style.filter = "brightness(0.5)";
-            }
-        })
-        timelineDiv.appendChild(bloonGroupDiv);
-
-        let leftDiv = document.createElement('div');
-        leftDiv.classList.add('left-div');
-        bloonGroupDiv.appendChild(leftDiv);
-        
-        let bloonImage = document.createElement('img');
-        bloonImage.classList.add('bloon-image');
-        bloonImage.src = `../Assets/BloonIcon/${bloonGroup.bloon}.png`;
-        leftDiv.appendChild(bloonImage);
-        
-        let bloonCount = document.createElement('p');
-        bloonCount.classList.add('bloon-count', 'black-outline');
-        bloonCount.innerHTML = "x" + bloonGroup.count;
-        leftDiv.appendChild(bloonCount);
-        
-        let rightDiv = document.createElement('div');
-        rightDiv.classList.add('timeline-right-div','preview-timeline-right-div');
-        bloonGroupDiv.appendChild(rightDiv);
-        
-        let bloonBar = document.createElement('div');
-        bloonBar.classList.add('bloon-bar');
-        rightDiv.appendChild(bloonBar);
-
-        let bloonBarFill = document.createElement('div');
-        bloonBarFill.classList.add('bloon-bar-fill');
-        bloonBarFill.style.background = bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].color;
-        if (!bloonGroup.bloon.includes("Rainbow")) {
-            bloonBarFill.style.border = `4px solid ${bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].border}`;
-        }
-
-        let widthPercentage = ((bloonGroup.end - bloonGroup.start) / roundDuration) * 100;
-        let leftPercentage = (bloonGroup.start / roundDuration) * 100;
-
-        if (widthPercentage < minWidthPercentage) {
-            widthPercentage = minWidthPercentage;
-        }
-
-        if (leftPercentage + widthPercentage > 100) {
-            leftPercentage = 100 - widthPercentage;
-        }
-
-        bloonBarFill.style.width = `${widthPercentage}%`;
-        bloonBarFill.style.left = `${leftPercentage}%`;
-
-        bloonBar.appendChild(bloonBarFill);
-    })
-    if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
-}
-
-function addTimelinePlayhead(duration) {
-    let timelineDiv = document.getElementById('preview-timeline-div');
-    let playhead = document.createElement('div');
-    playhead.id = 'preview-playhead'
-    playhead.classList.add('playhead');
-    timelineDiv.appendChild(playhead);
-    playhead.style.animation = `playhead ${duration}s linear`;
-    playhead.addEventListener('animationend', function() {
-        playhead.remove();
-    });
-}
-
-function clearPreview(){
-    if (document.getElementById('preview-playhead')) { document.getElementById('preview-playhead').remove() }
-    currentRoundGroups = null;
-    bloons.length = 0;
-}
-
-function resetPreview() {
-    previewActive = false;
-    clearPreview();
-}
-
-function generateToggle(){
-    let toggle = document.createElement('div');
-    toggle.classList.add('switch');
-    
-    let input = document.createElement('input');
-    input.type = "checkbox";
-    input.checked = true;
-    toggle.appendChild(input);
-
-    let span = document.createElement('span');
-    span.classList.add('slider', 'round');
-    toggle.appendChild(span);
-
-    return toggle;
 }
 
 function generateSettings(){
@@ -11060,7 +8489,7 @@ function generateSettings(){
 }
 
 function generateTrophyStoreProgress() {
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let progressContainer = document.createElement('div');
@@ -11288,34 +8717,11 @@ function generateTrophyStoreContainer(filter, display, counter) {
 function generateTrophyStorePopout(key) {
     let data = trophyStoreItemsJSON[key];
 
-    let modal = document.createElement('div');
-    modal.classList.add('error-modal-overlay');
-    document.body.appendChild(modal);
-
     let modalContent = document.createElement('div');
-    modalContent.classList.add('collection-modal');
-    modal.appendChild(modalContent);
+    // modalContent.classList.add('collection-modal');
+    // modal.appendChild(modalContent);
 
-    let modalHeaderDiv = document.createElement('div');
-    modalHeaderDiv.classList.add('collection-modal-header');
-    modalContent.appendChild(modalHeaderDiv);
-
-    let collectionHeaderModalLeft = document.createElement('div');
-    collectionHeaderModalLeft.classList.add('collection-header-modal-left');
-    modalHeaderDiv.appendChild(collectionHeaderModalLeft);
-
-    let modalTitle = document.createElement('p');
-    modalTitle.classList.add('collection-modal-header-text','black-outline');
-    modalTitle.innerHTML = getLocValue(`${key}ShortName`);
-    modalHeaderDiv.appendChild(modalTitle);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('collection-modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        modal.remove();
-    })
-    modalHeaderDiv.appendChild(modalClose);
+    //getLocValue(`${key}ShortName`);
 
     let imgAndDetails = document.createElement('div');
     imgAndDetails.classList.add('item-img-and-details');
@@ -11387,10 +8793,14 @@ function generateTrophyStorePopout(key) {
         itemObtainMethod.innerHTML = "This item is hidden and may show up in the featured tab during the related seasonal rotation.";
     }
 
+    createModal({
+        content: modalContent,
+        header: getLocValue(`${key}ShortName`),
+    })
 }
 
 function generateTeamsStoreProgress() {
-    let progressContent = document.getElementById('progress-content');
+    let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
     let progressContainer = document.createElement('div');
@@ -11432,37 +8842,11 @@ function generateTeamsStoreProgress() {
         }
     }
 }
+
 function generateTeamsStorePopout(key) {
     let data = teamsStoreItemsJSON[key];
 
-    let modal = document.createElement('div');
-    modal.classList.add('error-modal-overlay');
-    document.body.appendChild(modal);
-
     let modalContent = document.createElement('div');
-    modalContent.classList.add('collection-modal');
-    modal.appendChild(modalContent);
-
-    let modalHeaderDiv = document.createElement('div');
-    modalHeaderDiv.classList.add('collection-modal-header');
-    modalContent.appendChild(modalHeaderDiv);
-
-    let collectionHeaderModalLeft = document.createElement('div');
-    collectionHeaderModalLeft.classList.add('collection-header-modal-left');
-    modalHeaderDiv.appendChild(collectionHeaderModalLeft);
-
-    let modalTitle = document.createElement('p');
-    modalTitle.classList.add('collection-modal-header-text','black-outline');
-    modalTitle.innerHTML = getLocValue(`${key}ShortName`);
-    modalHeaderDiv.appendChild(modalTitle);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('collection-modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        modal.remove();
-    })
-    modalHeaderDiv.appendChild(modalClose);
 
     let imgAndDetails = document.createElement('div');
     imgAndDetails.classList.add('item-img-and-details');
@@ -11523,274 +8907,9 @@ function generateTeamsStorePopout(key) {
         itemObtainMethod.innerHTML = "This item is hidden and may show up in the featured tab during the related seasonal rotation.";
     }
 
-}
+    createModal({
+        content: modalContent,
+        header: getLocValue(`${key}ShortName`),
+    });
 
-function processRewardsString(input){
-    let result = {};
-    let rewards = input.split("#");
-    let counter = 0;
-    for (let reward of rewards) {
-        result[counter] = {};
-        let rewardData = reward.split(":");
-        let rewardType = rewardData[0];
-        if (!["MonkeyMoney","Power","InstaMonkey","KnowledgePoints","RandomInstaMonkey","Trophy"].includes(rewardType)) {
-            result[counter].type = "Other";
-            result[counter].value = rewardType;
-            counter++;
-            continue;
-        }
-        let params = rewardData[1].split(",");
-        switch (rewardType) {
-            case "MonkeyMoney":
-                result[counter].type = "MonkeyMoney";
-                result[counter].amount = parseInt(params[0]);
-                break;
-            case "Power":
-                result[counter].type = "Power";
-                result[counter].power = params[0];
-                result[counter].amount = parseInt(params[1]);
-                if(params[1] == null) { result[counter].amount = 1;}
-                break;
-            case "InstaMonkey":
-                result[counter].type = "InstaMonkey";
-                result[counter].tower = params[0];
-                result[counter].tiers = params[1];
-                break;
-            case "KnowledgePoints":
-                result[counter].type = "KnowledgePoints";
-                result[counter].amount = parseInt(params[0]);
-                break;
-            case "RandomInstaMonkey":
-                result[counter].type = "RandomInstaMonkey";
-                result[counter].tier = params[0];
-                result[counter].amount = parseInt(params[1]);
-                break;
-            case "Trophy":
-                result[counter].type = "Trophy";
-                result[counter].trophy = params[0];
-                break;
-        }
-        counter++;
-    }
-    return result;
-}
-
-function openBTD6Link(link){
-    window.location.href = link;
-}
-
-function openBTD6Site(link) {
-    window.open(link, "_blank");
-}
-
-function copyLoadingIcon(destination){
-    let clone = document.getElementsByClassName('loading-icon')[0].cloneNode(true)
-    clone.classList.add('loading-icon-leaderboard');
-    clone.style.height = "unset"
-    destination.appendChild(clone)
-}
-
-function formatTime(seconds) {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = Math.floor(seconds % 60);
-    return [hours, minutes, secs].map(v => v < 10 ? "0" + v : v).join(":");
-}
-
-function formatScoreTime(milliseconds) {
-    let totalSeconds = Math.floor(milliseconds / 1000);
-    let remainingMilliseconds = milliseconds % 1000;
-    let hours = Math.floor(totalSeconds / 3600);
-    totalSeconds = totalSeconds % 3600;
-    let minutes = Math.floor(totalSeconds / 60);
-    let seconds = totalSeconds % 60;
-
-    minutes = minutes.toString().padStart(2, '0');
-    seconds = seconds.toString().padStart(2, '0');
-    remainingMilliseconds = remainingMilliseconds.toString().padStart(3, '0');
-
-    let timeString = `${minutes}:${seconds}.${remainingMilliseconds}`;
-    if (hours > 0) {
-        hours = hours.toString().padStart(2, '0');
-        timeString = `${hours}:${timeString}`;
-    }
-
-    return timeString;
-}
-
-function getRemainingTime(targetTime) {
-    const now = new Date();
-    const remainingTime = (targetTime - now) / 1000;
-    return remainingTime;
-}
-
-function updateTimer(targetTime, elementId) {
-    const remainingTime = getRemainingTime(targetTime);
-    const timerElement = document.getElementById(elementId);
-
-    if (remainingTime > 48 * 3600) {
-        const days = Math.ceil(remainingTime / (24 * 3600));
-        timerElement.textContent = `${days} days left`;
-    } else if (remainingTime < 0) {
-        timerElement.textContent = "Finished";
-    } else {
-        timerElement.textContent = formatTime(remainingTime);
-    }
-}
-
-function relativeTime(current, previous) {
-    const units = [
-        { name: "year", ms: 365 * 24 * 60 * 60 * 1000 },
-        { name: "month", ms: 30 * 24 * 60 * 60 * 1000 },
-        { name: "day", ms: 24 * 60 * 60 * 1000 },
-        { name: "hour", ms: 60 * 60 * 1000 },
-        { name: "minute", ms: 60 * 1000 },
-        { name: "second", ms: 1000 }
-    ];
-
-    const elapsed = current - previous;
-
-    for (const unit of units) {
-        if (elapsed < unit.ms) continue;
-        let time = Math.round(elapsed / unit.ms);
-        return `${time} ${unit.name}${time > 1 ? 's' : ''} ago`;
-    }
-}
-
-function changeHexBGColor(color){
-    if (color == null) { 
-        document.body.style.removeProperty("background-color")
-        return; 
-    }
-    document.body.style.backgroundColor = `rgb(${color[0] * 255},${color[1] * 255},${color[2] * 255})`;
-}
-
-function ratioCalc(unknown, x1, x2, y1, y2){
-    switch(unknown){
-        case 1:
-            // x1/x2 == y1/y2
-            return x2 * (y1/y2)
-        case 2:
-            // x1/x2 == y1/y2
-            return x1 * (y2/y1)
-        case 3:
-            // x1/x2 == y1/y2
-            return y2 * (x1/x2)
-        case 4:
-            // x1/x2 == y1/y2
-            return y1 * (x2/x1)
-    }
-}
-
-function resetScroll() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
-
-function loadSettings() {
-    let settings = JSON.parse(localStorage.getItem("BTD6OAKSettings"));
-    if (settings) {
-        preventRateLimiting = settings.ProfileLoading;
-        useNamedMonkeys = settings.UseNamedMonkeys;
-        showTeamsItems = settings.TeamsStoreItems;
-    }
-}
-
-function saveSettings() {
-    let settings = {
-        "ProfileLoading": preventRateLimiting,
-        "UseNamedMonkeys": useNamedMonkeys,
-        "TeamsStoreItems": showTeamsItems
-    }
-    localStorage.setItem("BTD6OAKSettings", JSON.stringify(settings));
-}
-
-function errorModal(body, source, force) {
-    if (isErrorModalOpen && !force) { return; }
-    let modalOverlay = document.createElement('div');
-    modalOverlay.classList.add('error-modal-overlay');
-    document.body.appendChild(modalOverlay);
-
-    let modal = document.createElement('div');
-    modal.id = 'error-modal';
-    modal.classList.add('error-modal');
-    modalOverlay.appendChild(modal);
-
-    let modalHeader = document.createElement('div');
-    modalHeader.id = 'error-modal-header';
-    modalHeader.classList.add('error-modal-header');
-    modal.appendChild(modalHeader);
-
-    let modalHeaderImg = document.createElement('img');
-    modalHeaderImg.id = 'error-modal-header-img';
-    modalHeaderImg.classList.add('error-modal-header-img');
-    modalHeaderImg.src = "./Assets/UI/BadConnectionBtn.png";
-    modalHeader.appendChild(modalHeaderImg);
-
-    let modalHeaderText = document.createElement('p');
-    modalHeaderText.classList.add('error-modal-header-text','black-outline');
-    modalHeaderText.innerHTML = "Error";
-    modalHeader.appendChild(modalHeaderText);
-
-    let dummyElmnt = document.createElement('div');
-    dummyElmnt.classList.add('error-modal-dummy');
-    modalHeader.appendChild(dummyElmnt);
-
-    let modalContent = document.createElement('div');
-    modalContent.id = 'error-modal-content';
-    modalContent.classList.add('error-modal-content');
-    modalContent.innerHTML = (source == "api" ? "" : "") + body;
-    modal.appendChild(modalContent);
-
-    let modalContent2  = document.createElement('div');
-    modalContent2.classList.add('error-modal-content');
-    switch(body) {
-        case "Invalid user ID / Player Does not play this game":
-            modalContent2.innerHTML = "Please try again or create a new Open Access Key.";
-            modal.appendChild(modalContent2);
-            break;
-    }
-
-    if(source == "ratelimit") {
-        let mapsProgressCoopToggle = document.createElement('div');
-        mapsProgressCoopToggle.classList.add('error-toggle-div');  
-        modal.appendChild(mapsProgressCoopToggle);
-
-        let mapsProgressCoopToggleText = document.createElement('p');
-        mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
-        mapsProgressCoopToggleText.innerHTML = "Manually Load Profiles: ";
-        mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
-
-        let mapsProgressCoopToggleInput = document.createElement('input');
-        mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
-        mapsProgressCoopToggleInput.type = 'checkbox';
-        mapsProgressCoopToggleInput.checked = preventRateLimiting;
-        mapsProgressCoopToggleInput.addEventListener('change', () => {
-            mapsProgressCoopToggleInput.checked ? preventRateLimiting = true : preventRateLimiting = false;
-        })
-        mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
-    }
-
-    let okButtonDiv = document.createElement('div');
-    okButtonDiv.classList.add('error-modal-ok-button-div');
-    modal.appendChild(okButtonDiv);
-
-    let okButton = document.createElement('div');
-    okButton.classList.add('start-button', 'modal-ok-button', 'black-outline');
-    okButton.innerHTML = 'OK';
-    okButton.addEventListener('click', () => {
-        isErrorModalOpen = false;
-        document.body.removeChild(modalOverlay);
-    })
-    okButtonDiv.appendChild(okButton);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('error-modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        isErrorModalOpen = false;
-        document.body.removeChild(modalOverlay);
-    })
-    modalContent.appendChild(modalClose);
-    isErrorModalOpen = true;
 }

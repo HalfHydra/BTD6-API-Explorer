@@ -1,101 +1,10 @@
-let constants = {}
-
-let currentRoundsetView = "Simple";
-let roundsetProcessed = null;
-let selectedRoundset = null;
-let currentPreviewRound = 0;
-let currentIndexInModifiedRounds = 0;
-let previewActive = false;
-let previewModified = null;
-let currentModifiedRounds = []
-let roundPreviewFilterType;
-let currentRoundsetEndRound = 140;
-let hiddenGroups = [];
-
-fetch('./data/Constants.json')
-    .then(response => response.json())
-    .then(data => {
-        constants = data;
-        generateRoundsets()
-    })
-    .catch(error => {
-        console.error('Error:', error)
-        errorModal(error, "js")
-});
-
-function showLoading(){
-    let imagesToLoad = 0;
-    function imageLoaded() {
-        imagesToLoad--;
-        if (imagesToLoad === 0) {
-            document.getElementById("loading").style.transform = "scale(0)";
-        }
-    }
-    let observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'childList') {
-                mutation.addedNodes.forEach((node) => {
-                    if (node.nodeName === 'IMG') {
-                        imagesToLoad++;
-                        node.addEventListener('load', imageLoaded);
-                    }
-                });
-            }
-        });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-    document.getElementById("loading").style.removeProperty("transform")
-}
-
-function hideLoading(){
-    document.getElementById("loading").style.transform = "scale(0)";
-}
-
-const container = document.createElement('div');
-document.body.appendChild(container);
-
-document.body.classList.add('hex-bg');
-
-const header = document.createElement('div');
-header.classList.add('header');
-container.appendChild(header);
-
-const headerDiv = document.createElement('div');
-headerDiv.classList.add('header-div');
-header.appendChild(headerDiv);
-
-const title = document.createElement('h1');
-title.classList.add('title');
-title.innerHTML = 'Bloons TD 6 Roundsets';
-headerDiv.appendChild(title);
-
-const content = document.createElement('div');
-content.classList.add('content');
-container.appendChild(content);
-
-const leaderboards = document.createElement('div');
-leaderboards.id = "extras-content"
-leaderboards.classList.add('extras', 'content-div');
-leaderboards.style.display = "flex";
-content.appendChild(leaderboards);
-
-const roundsetsContent = document.createElement('div');
-roundsetsContent.id = "roundset-content"
-roundsetsContent.classList.add('roundset', 'sub-content-div');
-content.appendChild(roundsetsContent);
-
 function generateRoundsets() {
-    let roundsetsContent = document.getElementById('extras-content');
+    let roundsetsContent = document.getElementById('rounds-content');
     roundsetsContent.innerHTML = "";
 
     let roundsetPage = document.createElement('div');
-    roundsetPage.classList.add('progress-page', 'page-extra');
+    roundsetPage.classList.add('progress-page');
     roundsetsContent.appendChild(roundsetPage);
-
-    let roundsetHeadertext = document.createElement('p');
-    roundsetHeadertext.classList.add('roundset-header-text', 'black-outline');
-    roundsetHeadertext.innerHTML = "Select a roundset to view:";
-    roundsetPage.appendChild(roundsetHeadertext);
 
     let selectorsDiv = document.createElement('div');
     selectorsDiv.classList.add('selectors-div');
@@ -116,7 +25,7 @@ function generateRoundsets() {
         roundsetDiv.classList.add('roundset-selector-div');
         roundsetDiv.addEventListener('click', () => {
             showLoading();
-            showRoundsetModel('extras', data.roundset);
+            showRoundsetModel('rounds', data.roundset);
         })
         selectorsDiv.appendChild(roundsetDiv);
 
@@ -166,6 +75,7 @@ function generateRoundsets() {
         roundsetDiv.appendChild(roundsetGoImg);
     })
     
+    
     let normalRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "normal"));
     let bossRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "boss"));
     let legendsRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "legends"));
@@ -176,7 +86,7 @@ function generateRoundsets() {
         roundsetDiv.classList.add('roundset-selector-div', 'wood-container');
         roundsetDiv.addEventListener('click', () => {
             showLoading();
-            showRoundsetModel('extras', roundset);
+            showRoundsetModel('rounds', roundset);
         })
         selectorsDiv.appendChild(roundsetDiv);
 
@@ -206,7 +116,7 @@ function generateRoundsets() {
         roundsetDiv.classList.add('roundset-selector-div','veteran-container'); 
         roundsetDiv.addEventListener('click', () => {
             showLoading();
-            showRoundsetModel('extras', roundset);
+            showRoundsetModel('rounds', roundset);
         })
         selectorsDiv.appendChild(roundsetDiv);
 
@@ -226,6 +136,7 @@ function generateRoundsets() {
         roundsetDiv.appendChild(roundsetGoImg);
     })
 
+
     let bossRoundsetText = document.createElement('p');
     bossRoundsetText.classList.add('other-roundsets-selector-text', 'black-outline');
     bossRoundsetText.innerHTML = "Boss Custom Rounds";
@@ -239,7 +150,7 @@ function generateRoundsets() {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('other-roundset-selector-div');
         roundsetDiv.addEventListener('click', () => {
-            showRoundsetModel('extras', roundset);
+            showRoundsetModel('rounds', roundset);
         })
         bossRoundsetDiv.appendChild(roundsetDiv);
 
@@ -262,7 +173,7 @@ function generateRoundsets() {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('other-roundset-selector-div');
         roundsetDiv.addEventListener('click', () => {
-            showRoundsetModel('extras', roundset);
+            showRoundsetModel('rounds', roundset);
         })
         otherRoundsetDiv.appendChild(roundsetDiv);
 
@@ -295,7 +206,7 @@ function generateRoundsets() {
         roundsetDiv.classList.add('roundset-selector-div');
         roundsetDiv.addEventListener('click', () => {
             showLoading();
-            showRoundsetModel('extras', data.roundset);
+            showRoundsetModel('rounds', data.roundset);
         })
         selectorsDiv.appendChild(roundsetDiv);
 
@@ -370,7 +281,7 @@ function generateRoundsets() {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('sku-roundset-selector-div');
         roundsetDiv.addEventListener('click', () => {
-            showRoundsetModel('extras', roundset);
+            showRoundsetModel('rounds', roundset);
         })
         skuRoundsetsDiv.appendChild(roundsetDiv);
 
@@ -379,20 +290,14 @@ function generateRoundsets() {
         roundsetText.innerHTML = roundset;
         roundsetDiv.appendChild(roundsetText);
     });
-
-    let roundsetDescriptionText = document.createElement('p');
-    roundsetDescriptionText.classList.add('sku-roundset-selector-desc');
-    roundsetDescriptionText.style.textAlign = "center";
-    roundsetDescriptionText.innerHTML = `This is a standalone form of the roundset viewer from a project called Bloons TD 6 API Explorer which allows you to view current and previous event data available on the API as well as track your progress. You can view it here: <a href="https://BTD6APIExplorer.github.io">Bloons TD 6 API Explorer</a>`;
-    roundsetPage.appendChild(roundsetDescriptionText);
-
 }
 
 async function showRoundsetModel(source, roundset) {
-    let roundsetContent = document.getElementById('roundset-content');
+    let roundsetContent = document.getElementById('roundsets-content');
     roundsetContent.style.display = "flex";
     roundsetContent.innerHTML = "";
     document.getElementById(`${source}-content`).style.display = "none";
+    addToBackQueue({"source": source, "destination": "roundsets"});
     resetScroll();
 
     let roundsetData = await fetch(`./data/${roundset}.json`).then(response => response.json());
@@ -435,8 +340,9 @@ async function showRoundsetModel(source, roundset) {
     modalClose.classList.add('modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
-        roundsetContent.style.display = "none";
-        document.getElementById(`${source}-content`).style.display = "flex";
+        // roundsetContent.style.display = "none";
+        // document.getElementById(`${source}-content`).style.display = "flex";
+        goBack()
     })
     rightDiv.appendChild(modalClose);
 
@@ -452,6 +358,7 @@ async function showRoundsetModel(source, roundset) {
             roundsetDiv.classList.add('pointer');
             roundsetDiv.addEventListener('click', () => {
                 showLoading();
+                goBack();
                 showRoundsetModel(source, rs);
             })
             rogueHeaderBar.appendChild(roundsetDiv);
@@ -468,6 +375,8 @@ async function showRoundsetModel(source, roundset) {
             roundsetDiv.appendChild(roundsetIcon);
         });
     }
+
+    
 
     let mapsProgressHeaderBar = document.createElement('div');
     mapsProgressHeaderBar.classList.add('roundset-header-bar-bottom');
@@ -562,7 +471,7 @@ async function showRoundsetModel(source, roundset) {
 
 
     let roundsContent = document.createElement('div');
-    roundsContent.id = 'rounds-content';
+    roundsContent.id = 'roundset-content';
     roundsContent.classList.add('rounds-content');
     roundsetContent.appendChild(roundsContent);
 
@@ -646,7 +555,7 @@ function addRoundHints(roundset, data) {
 }
 
 async function generateRounds(type, reverse, modified) {
-    let roundsContent = document.getElementById('rounds-content');
+    let roundsContent = document.getElementById('roundset-content');
     roundsContent.innerHTML = "";
 
     //get if all the round numbers don't have any gaps between them
@@ -1373,160 +1282,4 @@ function clearPreview(){
 function resetPreview() {
     previewActive = false;
     clearPreview();
-}
-
-function copyLoadingIcon(destination){
-    let clone = document.getElementsByClassName('loading-icon')[0].cloneNode(true)
-    clone.classList.add('loading-icon-leaderboard');
-    clone.style.height = "unset"
-    destination.appendChild(clone)
-}
-
-function changeHexBGColor(color){
-    if (color == null) { 
-        document.body.style.removeProperty("background-color")
-        return; 
-    }
-    document.body.style.backgroundColor = `rgb(${color[0] * 255},${color[1] * 255},${color[2] * 255})`;
-}
-
-function formatTime(seconds) {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = Math.floor(seconds % 60);
-    return [hours, minutes, secs].map(v => v < 10 ? "0" + v : v).join(":");
-}
-
-function getRemainingTime(targetTime) {
-    const now = new Date();
-    const remainingTime = (targetTime - now) / 1000;
-    return remainingTime;
-}
-
-function updateTimer(targetTime, elementId) {
-    const remainingTime = getRemainingTime(targetTime);
-    const timerElement = document.getElementById(elementId);
-
-    if (remainingTime > 48 * 3600) {
-        const days = Math.ceil(remainingTime / (24 * 3600));
-        timerElement.textContent = `${days} days left`;
-    } else if (remainingTime < 0) {
-        timerElement.textContent = "Finished";
-    } else {
-        timerElement.textContent = formatTime(remainingTime);
-    }
-}
-
-
-function ratioCalc(unknown, x1, x2, y1, y2){
-    switch(unknown){
-        case 1:
-            // x1/x2 == y1/y2
-            return x2 * (y1/y2)
-        case 2:
-            // x1/x2 == y1/y2
-            return x1 * (y2/y1)
-        case 3:
-            // x1/x2 == y1/y2
-            return y2 * (x1/x2)
-        case 4:
-            // x1/x2 == y1/y2
-            return y1 * (x2/x1)
-    }
-}
-
-
-function resetScroll() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
-
-function errorModal(body, source, force) {
-    if (isErrorModalOpen && !force) { return; }
-    let modalOverlay = document.createElement('div');
-    modalOverlay.classList.add('error-modal-overlay');
-    document.body.appendChild(modalOverlay);
-
-    let modal = document.createElement('div');
-    modal.id = 'error-modal';
-    modal.classList.add('error-modal');
-    modalOverlay.appendChild(modal);
-
-    let modalHeader = document.createElement('div');
-    modalHeader.id = 'error-modal-header';
-    modalHeader.classList.add('error-modal-header');
-    modal.appendChild(modalHeader);
-
-    let modalHeaderImg = document.createElement('img');
-    modalHeaderImg.id = 'error-modal-header-img';
-    modalHeaderImg.classList.add('error-modal-header-img');
-    modalHeaderImg.src = "./Assets/UI/BadConnectionBtn.png";
-    modalHeader.appendChild(modalHeaderImg);
-
-    let modalHeaderText = document.createElement('p');
-    modalHeaderText.classList.add('error-modal-header-text','black-outline');
-    modalHeaderText.innerHTML = "Error";
-    modalHeader.appendChild(modalHeaderText);
-
-    let dummyElmnt = document.createElement('div');
-    dummyElmnt.classList.add('error-modal-dummy');
-    modalHeader.appendChild(dummyElmnt);
-
-    let modalContent = document.createElement('div');
-    modalContent.id = 'error-modal-content';
-    modalContent.classList.add('error-modal-content');
-    modalContent.innerHTML = (source == "api" ? "" : "") + body;
-    modal.appendChild(modalContent);
-
-    let modalContent2  = document.createElement('div');
-    modalContent2.classList.add('error-modal-content');
-    switch(body) {
-        case "Invalid user ID / Player Does not play this game":
-            modalContent2.innerHTML = "Please try again or create a new Open Access Key.";
-            modal.appendChild(modalContent2);
-            break;
-    }
-
-    if(source == "ratelimit") {
-        let mapsProgressCoopToggle = document.createElement('div');
-        mapsProgressCoopToggle.classList.add('error-toggle-div');  
-        modal.appendChild(mapsProgressCoopToggle);
-
-        let mapsProgressCoopToggleText = document.createElement('p');
-        mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
-        mapsProgressCoopToggleText.innerHTML = "Manually Load Profiles: ";
-        mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
-
-        let mapsProgressCoopToggleInput = document.createElement('input');
-        mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
-        mapsProgressCoopToggleInput.type = 'checkbox';
-        mapsProgressCoopToggleInput.checked = preventRateLimiting;
-        mapsProgressCoopToggleInput.addEventListener('change', () => {
-            mapsProgressCoopToggleInput.checked ? preventRateLimiting = true : preventRateLimiting = false;
-        })
-        mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
-    }
-
-    let okButtonDiv = document.createElement('div');
-    okButtonDiv.classList.add('error-modal-ok-button-div');
-    modal.appendChild(okButtonDiv);
-
-    let okButton = document.createElement('div');
-    okButton.classList.add('start-button', 'modal-ok-button', 'black-outline');
-    okButton.innerHTML = 'OK';
-    okButton.addEventListener('click', () => {
-        isErrorModalOpen = false;
-        document.body.removeChild(modalOverlay);
-    })
-    okButtonDiv.appendChild(okButton);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('error-modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        isErrorModalOpen = false;
-        document.body.removeChild(modalOverlay);
-    })
-    modalContent.appendChild(modalClose);
-    isErrorModalOpen = true;
 }
