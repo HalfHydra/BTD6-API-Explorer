@@ -107,6 +107,8 @@ async function openProfile(source, profile){
         tempCoop["MedalCoop" + value] = profile["_medalsMultiplayer"][key] || 0;
     }
     publicMedals = {...publicMedals, ...tempCoop};
+    publicMedals["BlastapopoulosEliteBadge"] = profile["bossBadgesElite"]["Blastapopoulos"] || 0;
+    publicMedals["BlastapopoulosBadge"] = profile["bossBadgesNormal"]["Blastapopoulos"] || 0;
     publicMedals["PhayzeEliteBadge"] = profile["bossBadgesElite"]["Phayze"] || 0;
     publicMedals["PhayzeBadge"] = profile["bossBadgesNormal"]["Phayze"] || 0;
     publicMedals["DreadbloonEliteBadge"] = profile["bossBadgesElite"]["Dreadbloon"] || 0;
@@ -119,10 +121,11 @@ async function openProfile(source, profile){
     publicMedals["BloonariusBadge"] = profile["bossBadgesNormal"]["Bloonarius"] || 0;
     publicMedals["MedalEventBronzeMedal"] = profile["_medalsRace"]["Bronze"] || 0;
     publicMedals["MedalEventSilverMedal"] = profile["_medalsRace"]["Silver"] || 0;
+    publicMedals["MedalEventDoubleSilverMedal"] = profile["_medalsRace"]["DoubleSilver"] || 0;
     publicMedals["MedalEventGoldSilverMedal"] = profile["_medalsRace"]["GoldSilver"] || 0;
     publicMedals["MedalEventDoubleGoldMedal"] = profile["_medalsRace"]["DoubleGold"] || 0;
     publicMedals["MedalEventGoldDiamondMedal"] = profile["_medalsRace"]["GoldDiamond"] || 0;
-    publicMedals["MedalEventDiamondMedal"] = profile["_medalsRace"]["Diamond"] || 0;
+    publicMedals["MedalEventBlueDiamondMedal"] = profile["_medalsRace"]["BlueDiamond"] || 0;
     publicMedals["MedalEventRedDiamondMedal"] = profile["_medalsRace"]["RedDiamond"] || 0;
     publicMedals["MedalEventBlackDiamondMedal"] = profile["_medalsRace"]["BlackDiamond"] || 0;
     publicMedals["OdysseyStarIcon"] = profile.gameplay["totalOdysseyStars"] || 0;
@@ -132,7 +135,7 @@ async function openProfile(source, profile){
     publicMedals["BossMedalEventGoldSilverMedal"] = profile["_medalsBoss"]["GoldSilver"] || 0;
     publicMedals["BossMedalEventDoubleGoldMedal"] = profile["_medalsBoss"]["DoubleGold"] || 0;
     publicMedals["BossMedalEventGoldDiamondMedal"] = profile["_medalsBoss"]["GoldDiamond"] || 0;
-    publicMedals["BossMedalEventDiamondMedal"] = profile["_medalsBoss"]["Diamond"] || 0;
+    publicMedals["BossMedalEventBlueDiamondMedal"] = profile["_medalsBoss"]["BlueDiamond"] || 0;
     publicMedals["BossMedalEventRedDiamondMedal"] = profile["_medalsBoss"]["RedDiamond"] || 0;
     publicMedals["BossMedalEventBlackDiamondMedal"] = profile["_medalsBoss"]["BlackDiamond"] || 0;
     publicMedals["EliteBossMedalEventBronzeMedal"] = profile["_medalsBossElite"]["Bronze"] || 0;
@@ -141,7 +144,7 @@ async function openProfile(source, profile){
     publicMedals["EliteBossMedalEventGoldSilverMedal"] = profile["_medalsBossElite"]["GoldSilver"] || 0;
     publicMedals["EliteBossMedalEventDoubleGoldMedal"] = profile["_medalsBossElite"]["DoubleGold"] || 0;
     publicMedals["EliteBossMedalEventGoldDiamondMedal"] = profile["_medalsBossElite"]["GoldDiamond"] || 0;
-    publicMedals["EliteBossMedalEventDiamondMedal"] = profile["_medalsBossElite"]["Diamond"] || 0;
+    publicMedals["EliteBossMedalEventBlueDiamondMedal"] = profile["_medalsBossElite"]["BlueDiamond"] || 0;
     publicMedals["EliteBossMedalEventRedDiamondMedal"] = profile["_medalsBossElite"]["RedDiamond"] || 0;
     publicMedals["EliteBossMedalEventBlackDiamondMedal"] = profile["_medalsBossElite"]["BlackDiamond"] || 0;
     publicMedals["CtLocalPlayerBronzeMedal"] = profile["_medalsCTLocal"]["Bronze"] || 0;
@@ -158,8 +161,6 @@ async function openProfile(source, profile){
     publicMedals["CtGlobalPlayerDoubleGoldMedal"] = profile["_medalsCTGlobal"]["DoubleGold"] || 0;
     publicMedals["CtGlobalPlayerGoldDiamondMedal"] = profile["_medalsCTGlobal"]["GoldDiamond"] || 0;
     publicMedals["CtGlobalPlayerDiamondMedal"] = profile["_medalsCTGlobal"]["Diamond"] || 0;
-    publicMedals["CtGlobalPlayerRedDiamondMedal"] = profile["_medalsCTGlobal"]["RedDiamond"] || 0;
-    publicMedals["CtGlobalPlayerBlackDiamondMedal"] = profile["_medalsCTGlobal"]["BlackDiamond"] || 0;
 
     let currencyAndMedalsDiv = document.createElement('div');
     currencyAndMedalsDiv.classList.add('currency-medals-div');

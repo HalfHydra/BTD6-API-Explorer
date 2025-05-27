@@ -3,7 +3,7 @@
     "projectContentVersion": 48,
     "totalInstaMonkeys": 1536,
     "achievements": 138,
-    "hiddenAchievements": 12,
+    "hiddenAchievements": 13,
     "totalMaps": 79,
     "profileBanners": 51,
     "profileAvatars": 111,
@@ -586,7 +586,7 @@
         "MedalEventGoldSilverMedal": "Race Event - Top 10%",
         "MedalEventDoubleGoldMedal": "Race Event - Top 1%",
         "MedalEventGoldDiamondMedal": "Race Event - Top 50",
-        "MedalEventDiamondMedal": "Race Event - 3rd",
+        "MedalEventBlueDiamondMedal": "Race Event - 3rd",
         "MedalEventRedDiamondMedal": "Race Event - 2nd",
         "MedalEventBlackDiamondMedal": "Race Event - 1st",
         "OdysseyStarIcon": "Odyssey Event - Stars",
@@ -596,7 +596,7 @@
         "BossMedalEventGoldSilverMedal": "Boss Event - Top 10%",
         "BossMedalEventDoubleGoldMedal": "Boss Event - Top 1%",
         "BossMedalEventGoldDiamondMedal": "Boss Event - Top 50",
-        "BossMedalEventDiamondMedal": "Boss Event - 3rd",
+        "BossMedalEventBlueDiamondMedal": "Boss Event - 3rd",
         "BossMedalEventRedDiamondMedal": "Boss Event - 2nd",
         "BossMedalEventBlackDiamondMedal": "Boss Event - 1st",
         "EliteBossMedalEventBronzeMedal": "Elite Boss Event - Top 75%",
@@ -605,7 +605,7 @@
         "EliteBossMedalEventGoldSilverMedal": "Elite Boss Event - Top 10%",
         "EliteBossMedalEventDoubleGoldMedal": "Elite Boss Event - Top 1%",
         "EliteBossMedalEventGoldDiamondMedal": "Elite Boss Event - Top 50",
-        "EliteBossMedalEventDiamondMedal": "Elite Boss Event - 3rd",
+        "EliteBossMedalEventBlueDiamondMedal": "Elite Boss Event - 3rd",
         "EliteBossMedalEventRedDiamondMedal": "Elite Boss Event - 2nd",
         "EliteBossMedalEventBlackDiamondMedal": "Elite Boss Event - 1st",
         "CtLocalPlayerBronzeMedal": "CT Local - 41st-60th",
@@ -783,7 +783,8 @@
         146,
         147,
         148,
-        149
+        149,
+        150
     ],
     "dailyChallenges": {
         "standard": {
@@ -2726,7 +2727,7 @@
         }
     },
     "unreleasedContent": {
-        "trophyStoreItems": ["GameUIProfileAvatar107"],
+        "trophyStoreItems": [],
         "teamsStoreItems": []
     }
 }

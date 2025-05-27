@@ -180,6 +180,7 @@ async function fetchRogueDependencies() {
         .then(response => response.json())
         .then(data => {
             rogueJSON = data;
+            postProcessRogueData();
         })
         .catch(error => {
             console.error('Error:', error);

@@ -91,9 +91,7 @@ let currentArtifacts = {};
 //     console.error('Error:', error);
 //     errorModal(error, "js");
 // });
-fetchRogueDependencies().then(() => {
-    postProcessRogueData();
-});
+fetchRogueDependencies();
 loadRogueDataFromLocalStorage();
 
 function postProcessRogueData(){
@@ -113,7 +111,6 @@ function postProcessRogueData(){
 
 function changeRogueTab(selector){
     resetScroll();
-    // backButton.classList.add('visible');
     switch(selector){
         case 'Artifacts':
             document.getElementById('rogue-content').style.display = 'none';

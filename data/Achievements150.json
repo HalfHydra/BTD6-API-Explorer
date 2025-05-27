@@ -2548,5 +2548,21 @@
             "type": "AchievementCommunityConnoisseur",
             "googlePlayId": "CgkIipCe5swWEAIQmAE"
         }
+    },
+    "150": {
+        "name": "Nah, I'd Win",
+        "description": "Basically NAPSFRILLS'd it",
+        "model": {
+            "achievementId": 154,
+            "achievementIcon": "",
+            "hiddenAchievementIcon": "Hidden",
+            "subscript": "",
+            "achievementGoal": 1,
+            "loot": "MonkeyMoney:1200",
+            "isCoop": false,
+            "steamStatName": "",
+            "hidden": true,
+            "type": "AchievementNahIdWin"
+        }
     }
 }

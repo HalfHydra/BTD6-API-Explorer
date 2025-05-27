@@ -312,7 +312,7 @@ function generateMedals(){
     medalsInOrder["MedalEventGoldSilverMedal"] = btd6publicprofile["_medalsRace"]["GoldSilver"] || 0;
     medalsInOrder["MedalEventDoubleGoldMedal"] = btd6publicprofile["_medalsRace"]["DoubleGold"] || 0;
     medalsInOrder["MedalEventGoldDiamondMedal"] = btd6publicprofile["_medalsRace"]["GoldDiamond"] || 0;
-    medalsInOrder["MedalEventDiamondMedal"] = btd6publicprofile["_medalsRace"]["Diamond"] || 0;
+    medalsInOrder["MedalEventBlueDiamondMedal"] = btd6publicprofile["_medalsRace"]["BlueDiamond"] || 0;
     medalsInOrder["MedalEventRedDiamondMedal"] = btd6publicprofile["_medalsRace"]["RedDiamond"] || 0;
     medalsInOrder["MedalEventBlackDiamondMedal"] = btd6publicprofile["_medalsRace"]["BlackDiamond"] || 0;
     medalsInOrder["OdysseyStarIcon"] = btd6publicprofile.gameplay["totalOdysseyStars"] || 0;
@@ -322,7 +322,7 @@ function generateMedals(){
     medalsInOrder["BossMedalEventGoldSilverMedal"] = btd6publicprofile["_medalsBoss"]["GoldSilver"] || 0;
     medalsInOrder["BossMedalEventDoubleGoldMedal"] = btd6publicprofile["_medalsBoss"]["DoubleGold"] || 0;
     medalsInOrder["BossMedalEventGoldDiamondMedal"] = btd6publicprofile["_medalsBoss"]["GoldDiamond"] || 0;
-    medalsInOrder["BossMedalEventDiamondMedal"] = btd6publicprofile["_medalsBoss"]["Diamond"] || 0;
+    medalsInOrder["BossMedalEventBlueDiamondMedal"] = btd6publicprofile["_medalsBoss"]["BlueDiamond"] || 0;
     medalsInOrder["BossMedalEventRedDiamondMedal"] = btd6publicprofile["_medalsBoss"]["RedDiamond"] || 0;
     medalsInOrder["BossMedalEventBlackDiamondMedal"] = btd6publicprofile["_medalsBoss"]["BlackDiamond"] || 0;
     medalsInOrder["EliteBossMedalEventBronzeMedal"] = btd6publicprofile["_medalsBossElite"]["Bronze"] || 0;
@@ -331,7 +331,7 @@ function generateMedals(){
     medalsInOrder["EliteBossMedalEventGoldSilverMedal"] = btd6publicprofile["_medalsBossElite"]["GoldSilver"] || 0;
     medalsInOrder["EliteBossMedalEventDoubleGoldMedal"] = btd6publicprofile["_medalsBossElite"]["DoubleGold"] || 0;
     medalsInOrder["EliteBossMedalEventGoldDiamondMedal"] = btd6publicprofile["_medalsBossElite"]["GoldDiamond"] || 0;
-    medalsInOrder["EliteBossMedalEventDiamondMedal"] = btd6publicprofile["_medalsBossElite"]["Diamond"] || 0;
+    medalsInOrder["EliteBossMedalEventBlueDiamondMedal"] = btd6publicprofile["_medalsBossElite"]["BlueDiamond"] || 0;
     medalsInOrder["EliteBossMedalEventRedDiamondMedal"] = btd6publicprofile["_medalsBossElite"]["RedDiamond"] || 0;
     medalsInOrder["EliteBossMedalEventBlackDiamondMedal"] = btd6publicprofile["_medalsBossElite"]["BlackDiamond"] || 0;
     medalsInOrder["CtLocalPlayerBronzeMedal"] = btd6publicprofile["_medalsCTLocal"]["Bronze"] || 0;
@@ -348,8 +348,6 @@ function generateMedals(){
     medalsInOrder["CtGlobalPlayerDoubleGoldMedal"] = btd6publicprofile["_medalsCTGlobal"]["DoubleGold"] || 0;
     medalsInOrder["CtGlobalPlayerGoldDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["GoldDiamond"] || 0;
     medalsInOrder["CtGlobalPlayerDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["Diamond"] || 0;
-    medalsInOrder["CtGlobalPlayerRedDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["RedDiamond"] || 0;
-    medalsInOrder["CtGlobalPlayerBlackDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["BlackDiamond"] || 0;
 }
 
 function generateExtras(){
@@ -837,7 +835,12 @@ function generateFrontPage(){
 
     let knownIssuesText = document.createElement('p');
     knownIssuesText.classList.add('oak-instructions-text');
-    knownIssuesText.innerHTML = '- There are some cases where the leaderboard scoring type is different for Normal vs Elite boss events, but this is not reflected on the API right now. This will be fixed when it is corrected on the Open Data API.<br>- Legends Feats badge is missing from the currency and medals section<br>- The leaderboards site and leaderboards on the events are currently broken. This is being worked on to reflect changes to the system made in Update 48.';
+    knownIssuesText.innerHTML = `
+    - There are some cases where the leaderboard scoring type is different for Normal vs Elite boss events, but this is not reflected on the API right now. This will be fixed when it is corrected on the Open Data API.<br>
+    - Legends Feats badge is missing from the currency and medals section<br>
+    - The leaderboards site and leaderboards on the events are currently broken. This is being worked on to reflect changes to the system made in Update 48.<br>
+    - The new hidden achievement added in Update 48 is currently missing from the API.
+    `;
     knownIssuesDiv.appendChild(knownIssuesText);
     
     let changelogHeader = document.createElement('p');
@@ -926,6 +929,10 @@ function generateHeaderTabs(){
     })
 }
 
+function changeTitle(newTitle) {
+    document.querySelector('.title').innerHTML = newTitle;
+}
+
 function changeTab(tab) {
     clearBackQueue();
     resetScroll();
@@ -946,6 +953,7 @@ function changeTab(tab) {
     for (let subtab of document.getElementsByClassName('sub-content-div')){
         subtab.style.display = 'none';
     }
+    changeTitle("Bloons TD 6 API Explorer")
     switch(tab){
         case 'overview':
             generateOverview();
@@ -960,8 +968,10 @@ function changeTab(tab) {
             generateExplore();
             break;
         case "leaderboards":
+            changeTitle("Bloons TD 6 Leaderboards")
             generateLeaderboards();
         case "rounds":
+            changeTitle("Bloons TD 6 Roundsets")
             generateRoundsets();
         case 'extras':
             generateExtrasPage();
@@ -1653,6 +1663,15 @@ function generateProgress(){
 
         currentInstaView = "game";
 
+        let logoutDiv = createEl('div', { classList: ['d-flex', 'jc-between', 'ai-center', 'bg-color-tertiary', 'pointer'], style: {padding: "10px", margin: "10px", borderRadius: "10px"} });
+        logoutDiv.addEventListener('click', () => {
+            logoutProgress();
+        })
+        logoutDiv.appendChild(createEl('p', { classList: ['profile-name', 'tc-white', 'font-luckiest', 'black-outline'], innerHTML: 'Logged in as: ' + btd6publicprofile.displayName }));
+        const logoutBtn = createEl('img', { style:{height: "50px"}, src: './Assets/UI/BackBtn.png' });
+        logoutDiv.appendChild(logoutBtn);
+        selectorsDiv.appendChild(logoutDiv);
+
         let profileSelectorDiv = document.createElement('div');
         profileSelectorDiv.classList.add('d-flex', 'jc-between', 'ai-center', 'view-profile');
         profileSelectorDiv.style.backgroundImage = `url(${getProfileBanner(btd6publicprofile)})`;
@@ -1784,6 +1803,12 @@ function generateProgress(){
     }
 }
 
+function logoutProgress() {
+    loggedIn = false;
+    pressedStart = false;
+    generateProgress();
+}
+
 function changeProgressTab(selector){
     resetScroll();
     if(timerInterval) { clearInterval(timerInterval); }
@@ -1826,6 +1851,9 @@ function changeProgressTab(selector){
             break;
         case "TeamsStore":
             generateTeamsStoreProgress();
+            break;
+        case "Logout":
+            logoutProgress();
             break;
     }
 }
@@ -2231,6 +2259,8 @@ function generateHeroesProgress(){
     heroSelectorHeaderTop.classList.add('hero-selector-header-top');
     heroProgressDiv.appendChild(heroSelectorHeaderTop);
 
+    let correctedHeroesList = Object.keys(btd6usersave.unlockedSkins).filter(k => !constants.heroesInOrder[k]);
+
     let heroSelectorHeaderText = document.createElement('p');
     heroSelectorHeaderText.classList.add('hero-selector-header-text','black-outline');
     heroSelectorHeaderText.innerHTML = `Heroes - ${Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length}/${Object.keys(btd6usersave.unlockedHeros).length}`;
@@ -2238,7 +2268,7 @@ function generateHeroesProgress(){
 
     let heroSelectorHeaderText2 = document.createElement('p');
     heroSelectorHeaderText2.classList.add('hero-selector-header-text','black-outline');
-    heroSelectorHeaderText2.innerHTML = `Skins - ${Object.keys(btd6usersave.unlockedSkins).filter(k => btd6usersave.unlockedSkins[k]).length}/${Object.keys(btd6usersave.unlockedSkins).length}`;
+    heroSelectorHeaderText2.innerHTML = `Skins - ${Object.keys(btd6usersave.unlockedSkins).filter(k => btd6usersave.unlockedSkins[k] && correctedHeroesList.includes(k)).length}/${correctedHeroesList.length}`;
     heroSelectorHeaderTop.appendChild(heroSelectorHeaderText2);
 
     let heroSelectorHeader = document.createElement('div');
@@ -8169,6 +8199,8 @@ function generateExtrasPage() {
     let extrasContent = document.getElementById('extras-content');
     extrasContent.innerHTML = "";
 
+    changeTitle("Bloons TD 6 API Explorer")
+
     let explorePage = document.createElement('div');
     explorePage.classList.add('progress-page');
     extrasContent.appendChild(explorePage);
@@ -8227,7 +8259,7 @@ function generateExtrasPage() {
                 selectorImg.src = '../Assets/UI/CreatorSupportBtn.png';
                 break;
             case "Rogue Legends Artifacts":
-                selectorImg.src = '../Assets/UI/RogueSiteBtn.png';
+                selectorImg.src = '../Assets/UI/RogueBtn.png';
                 break;
             case "Challenge & Map Browser":
                 selectorImg.src = '../Assets/UI/PatchNotesMonkeyIcon.png';
@@ -8272,12 +8304,14 @@ function changeExtrasTab(selected){
             generateSettings();
             break;
         case "Rogue Legends Artifacts":
-            // window.location.href = "https://btd6apiexplorer.github.io/rogue";
+            changeTitle("Rogue Legends Artifacts")
+            addToBackQueue({source: "extras", destination: "rogue", callback: generateExtrasPage });
             generateRogueSelectors();
             document.getElementById('extras-content').style.display = "none";
             document.getElementById('rogue-content').style.display = "flex";
             break;
         case "Challenge & Map Browser":
+            addToBackQueue({source: "extras", destination: "explore", callback: generateExtrasPage });
             generateExplore();
             document.getElementById('extras-content').style.display = "none";
             document.getElementById('explore-content').style.display = "flex";
