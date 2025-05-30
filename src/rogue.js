@@ -273,6 +273,7 @@ function generateRogueArtifacts() {
             }
         })
         noArtifactsMessage.style.display = Object.values(artifactDivMap).every(artifactDiv => artifactDiv.style.display == "none") ? "block" : "none";
+        updateArtifactCount();
     })
 
     let searchIcon = document.createElement('img');
@@ -1032,8 +1033,27 @@ function updateArtifactCount() {
         return acc;
     }, 0);
 
+    let totalArtifactsContent = `${extractedCount}/${totalArtifacts}`;
+
+    let searchHidden = 0;
+    let shownObtained = 0;
+
+    let artifactsDiv = document.querySelector('.artifacts-div');
+    if (artifactsDiv) {
+        let hiddenArtifacts = artifactsDiv.querySelectorAll('.artifact-container[style*="display: none"]');
+        searchHidden = hiddenArtifacts.length;
+
+        let shownUnextracted = artifactsDiv.querySelectorAll('.artifact-unextracted[style*="display: flex"]').length;
+        shownObtained = totalArtifacts - searchHidden - shownUnextracted;
+
+        if (searchHidden > 0) {
+            totalArtifactsContent = `${shownObtained}/${totalArtifacts - searchHidden}`;
+        }
+    }
+
+
     if (totalArtifactsTxt) {
-        totalArtifactsTxt.innerHTML = `${extractedCount}/${totalArtifacts}`;
+        totalArtifactsTxt.innerHTML = totalArtifactsContent;
     }
 }
 
