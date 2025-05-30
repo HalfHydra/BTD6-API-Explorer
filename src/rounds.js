@@ -351,9 +351,18 @@ async function showRoundsetModel(source, roundset) {
         rogueHeaderBar.classList.add('d-flex', 'jc-evenly');
         headerBar.appendChild(rogueHeaderBar);
 
-        let rogueRoundsets = ["RogueRoundSet", "RogueBloonierSet", "RogueDenseSet",  "RoguePinkSet", "RoguePurpleSet", "RogueImmuneSet", "RogueLeadSet"]
+        // let rogueRoundsets = ["RogueRoundSet", "RogueBloonierSet", "RogueDenseSet",  "RoguePinkSet", "RoguePurpleSet", "RogueImmuneSet", "RogueLeadSet"]
+        let rogueRoundsets = {
+            "RogueRoundSet": "Rogue Legends Default Roundset",
+            "RogueBloonierSet": "Now with more Bloons!",
+            "RogueDenseSet": "Bloons spawn more densely",
+            "RoguePinkSet": "Bloons start fast and end slow",
+            "RoguePurpleSet": "More Purples and faster Bloons. Bloon health is reduced",
+            "RogueImmuneSet": "Alternate rounds with more Bloons with immunities",
+            "RogueLeadSet": "More Lead Bloons and DDTs"
+        }
 
-        rogueRoundsets.forEach(rs => {
+        Object.entries(rogueRoundsets).forEach(([rs, desc]) => {
             let roundsetDiv = document.createElement('div');
             roundsetDiv.classList.add('pointer');
             roundsetDiv.addEventListener('click', () => {
@@ -373,6 +382,23 @@ async function showRoundsetModel(source, roundset) {
             roundsetIcon.style.width = "100px";
             roundsetIcon.src = `../Assets/UI/${rs}.png`;
             roundsetDiv.appendChild(roundsetIcon);
+
+            tippy(roundsetDiv, {
+                content: desc,
+                placement: 'top',
+                theme: 'speech_bubble',
+                popperOptions: {
+                    modifiers: [
+                        {
+                        name: 'preventOverflow',
+                        options: {
+                            boundary: 'viewport',
+                            padding: {right: 18},
+                        },
+                        },
+                    ],
+                },
+            })
         });
     }
 
