@@ -970,9 +970,11 @@ function changeTab(tab) {
         case "leaderboards":
             changeTitle("Bloons TD 6 Leaderboards")
             generateLeaderboards();
+            break;
         case "rounds":
             changeTitle("Bloons TD 6 Roundsets")
             generateRoundsets();
+            break;
         case 'extras':
             generateExtrasPage();
             break;
@@ -2175,6 +2177,17 @@ function generateParagonIcon(tower, upgrade, status){
         content: getLocValue(`${upgrade} Description`),
         placement: 'top',
         theme: 'speech_bubble',
+        popperOptions: {
+            modifiers: [
+                {
+                name: 'preventOverflow',
+                options: {
+                    boundary: 'viewport',
+                    padding: {right: 18},
+                },
+                },
+            ],
+        },
         hideOnClick: false
     })
 
@@ -3960,7 +3973,7 @@ function generateChestOddsModal() {
     modalContent.appendChild(modalChestDesc);
 
     let modalChestDivs = document.createElement('div');
-    modalChestDivs.classList.add('modal-help-divs');
+    // modalChestDivs.classList.add('modal-help-divs');
     modalContent.appendChild(modalChestDivs);
 
     Object.entries(constants.collection.crateRewards.instaMonkey).forEach(([chest,data]) => {
@@ -5181,6 +5194,13 @@ function generateRaces(){
         raceInfoDates.innerHTML = `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`;
         raceInfoMiddleDiv.appendChild(raceInfoDates);
 
+        tippy(raceInfoDates, {
+            content: `${new Date(race.start).toLocaleString()}<br>${new Date(race.end).toLocaleString()}`,
+            placement: 'top',
+            theme: 'speech_bubble',
+            allowHTML: true,
+        })
+
         let raceInfoTotalScores = document.createElement('p');
         raceInfoTotalScores.classList.add("race-info-total-scores", "black-outline");
         raceInfoTotalScores.innerHTML = `Total Scores: ${race.totalScores == 0 ? "No Data" : race.totalScores.toLocaleString()}`
@@ -5350,6 +5370,13 @@ function generateBosses(elite){
         raceInfoDates.innerHTML = `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`;
         raceInfoMiddleDiv.appendChild(raceInfoDates);
 
+        tippy(raceInfoDates, {
+            content: `${new Date(race.start).toLocaleString()}<br>${new Date(race.end).toLocaleString()}`,
+            placement: 'top',
+            theme: 'speech_bubble',
+            allowHTML: true,
+        })
+
         let raceInfoTotalScores = document.createElement('p');
         raceInfoTotalScores.classList.add("race-info-total-scores", "black-outline");
         raceInfoTotalScores.innerHTML = `Total Scores: ${(elite ? race.totalScores_elite : race.totalScores_standard) == 0 ? "No Data" : (elite ? race.totalScores_elite : race.totalScores_standard).toLocaleString()}`
@@ -5467,6 +5494,13 @@ function generateCTs(){
         raceInfoDates.classList.add("race-info-dates", "ct-info-dates", "black-outline");
         raceInfoDates.innerHTML = `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`;
         ctInfoLeftDiv.appendChild(raceInfoDates);
+
+        tippy(raceInfoDates, {
+            content: `${new Date(race.start).toLocaleString()}<br>${new Date(race.end).toLocaleString()}`,
+            placement: 'top',
+            theme: 'speech_bubble',
+            allowHTML: true,
+        })
 
         let raceInfoRules = document.createElement('div');
         raceInfoRules.classList.add("race-info-rules", "start-button", "currency-trophies-div", "black-outline");
