@@ -605,7 +605,7 @@ async function generateRounds(type, reverse, modified) {
                 // if (modified && !round.hasOwnProperty("addToRound")) { return; }
                 let roundDiv = document.createElement('div');
                 roundDiv.id = `round-${round.roundNumber}`;
-                roundDiv.classList.add('round-div');
+                roundDiv.classList.add('round-div', 'jc-between');
                 if (alternate) { roundDiv.classList.add('round-div-alt') }
             
                 let roundNumber = document.createElement('p');
@@ -615,7 +615,7 @@ async function generateRounds(type, reverse, modified) {
             
                 let roundBloonGroups = document.createElement('div');
                 roundBloonGroups.id = `round-${round.roundNumber}-groups`;
-                roundBloonGroups.classList.add('round-bloon-groups');
+                roundBloonGroups.classList.add('round-bloon-groups', 'fg-1');
                 roundDiv.appendChild(roundBloonGroups);
 
                 let fragment = document.createDocumentFragment();
@@ -638,6 +638,23 @@ async function generateRounds(type, reverse, modified) {
                 })
             
                 roundBloonGroups.appendChild(fragment);
+
+                let roundTimeDiv = document.createElement('div');
+                roundTimeDiv.classList.add('d-flex', 'ai-center');
+                roundTimeDiv.style.minWidth = "120px";
+                roundDiv.appendChild(roundTimeDiv);
+
+                let stopwatchIcon = document.createElement('img');
+                stopwatchIcon.classList.add('leaderboard-entry-score-icon');
+                stopwatchIcon.src = "./Assets/UI/StopWatch.png";
+                roundTimeDiv.appendChild(stopwatchIcon);
+
+                let roundTime = document.createElement('p');
+                roundTime.classList.add('round-number', 'black-outline');
+                let roundDuration = round.bloonGroups.length ? Math.max(...round.bloonGroups.map(group => group.end)) : 0;
+                roundTime.innerHTML = roundDuration.toFixed(2);
+                roundTimeDiv.appendChild(roundTime);
+
                 roundsContent.appendChild(roundDiv);
                 alternate = !alternate;
             })
