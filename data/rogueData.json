@@ -3940,7 +3940,7 @@
     "heroStarterKits": {
         "Quincy": {
             "heroID": "Quincy",
-            "artifact": "SplodeyDarts1",
+            "artifact": "HeroicSpecialty2",
             "startingInstas": [
                 {
                     "baseId": "DartMonkey",
@@ -4050,7 +4050,7 @@
         },
         "Scientist Gwendolin": {
             "heroID": "Scientist Gwendolin",
-            "artifact": "FrostedTips1",
+            "artifact": "AlchemicEngineering1",
             "startingInstas": [
                 {
                     "baseId": "Alchemist",
@@ -4061,8 +4061,8 @@
                     "isFree": "false"
                 },
                 {
-                    "baseId": "EngineerMonkey",
-                    "tiers": "[0,1,0]",
+                    "baseId": "GlueGunner",
+                    "tiers": "[3,0,0]",
                     "currentCooldown": "0",
                     "lootType": "permanent",
                     "uniqueId": "0",
@@ -4138,7 +4138,7 @@
         },
         "ObynGreenfoot": {
             "heroID": "ObynGreenfoot",
-            "artifact": "EnchantedRebuttal1",
+            "artifact": "BBGatlingGun1",
             "startingInstas": [
                 {
                     "baseId": "Druid",
@@ -4358,7 +4358,7 @@
         },
         "FustyTheSnowman": {
             "heroID": "FustyTheSnowman",
-            "artifact": "EsotericElementalist1",
+            "artifact": "FrostedTips2",
             "startingInstas": [
                 {
                     "baseId": "IceMonkey",
@@ -4380,7 +4380,7 @@
         },
         "KaijuPat": {
             "heroID": "KaijuPat",
-            "artifact": "SwiftestToBusiness1",
+            "artifact": "Duckageddon3",
             "startingInstas": [
                 {
                     "baseId": "BeastHandler",
@@ -4446,11 +4446,11 @@
         },
         "Galaxili": {
             "heroID": "Galaxili",
-            "artifact": "BBGatlingGun1",
+            "artifact": "QuantumLeap1",
             "startingInstas": [
                 {
-                    "baseId": "BoomerangMonkey",
-                    "tiers": "[0,0,2]",
+                    "baseId": "TackShooter",
+                    "tiers": "[2,0,0]",
                     "currentCooldown": "0",
                     "lootType": "permanent",
                     "uniqueId": "0",
@@ -4512,10 +4512,10 @@
         },
         "Voidora": {
             "heroID": "Voidora",
-            "artifact": "Unification2",
+            "artifact": "EnchantedRebuttal1",
             "startingInstas": [
                 {
-                    "baseId": "GlueGunner",
+                    "baseId": "NinjaMonkey",
                     "tiers": "[2,0,0]",
                     "currentCooldown": "0",
                     "lootType": "permanent",
@@ -4523,8 +4523,8 @@
                     "isFree": "false"
                 },
                 {
-                    "baseId": "DartMonkey",
-                    "tiers": "[0,3,0]",
+                    "baseId": "WizardMonkey",
+                    "tiers": "[2,0,0]",
                     "currentCooldown": "0",
                     "lootType": "permanent",
                     "uniqueId": "0",
@@ -4556,11 +4556,11 @@
         },
         "Etienne": {
             "heroID": "Etienne",
-            "artifact": "AbsoluteAbility2",
+            "artifact": "SplodyDarts1",
             "startingInstas": [
                 {
-                    "baseId": "EngineerMonkey",
-                    "tiers": "[1,0,0]",
+                    "baseId": "Desperado",
+                    "tiers": "[0,0,2]",
                     "currentCooldown": "0",
                     "lootType": "permanent",
                     "uniqueId": "0",
@@ -4600,7 +4600,7 @@
         },
         "BookWyrmEtienne": {
             "heroID": "BookWyrmEtienne",
-            "artifact": "OverwhelmingSynergy1",
+            "artifact": "AbsoluteAbility2",
             "startingInstas": [
                 {
                     "baseId": "SuperMonkey",
@@ -4625,8 +4625,8 @@
             "artifact": "StickySituation1",
             "startingInstas": [
                 {
-                    "baseId": "TackShooter",
-                    "tiers": "[0,2,0]",
+                    "baseId": "MonkeyAce",
+                    "tiers": "[0,0,2]",
                     "currentCooldown": "0",
                     "lootType": "permanent",
                     "uniqueId": "0",
@@ -4700,7 +4700,7 @@
                 },
                 {
                     "baseId": "MonkeyBuccaneer",
-                    "tiers": "[0,3,0]",
+                    "tiers": "[0,2,1]",
                     "currentCooldown": "0",
                     "lootType": "permanent",
                     "uniqueId": "0",
@@ -4710,7 +4710,7 @@
         },
         "DreadPirateBrickell": {
             "heroID": "DreadPirateBrickell",
-            "artifact": "FullBroadside2",
+            "artifact": "WhatInTarnation1",
             "startingInstas": [
                 {
                     "baseId": "BeastHandler",
@@ -4732,11 +4732,11 @@
         },
         "LifeguardBrickell": {
             "heroID": "LifeguardBrickell",
-            "artifact": "Portability2",
+            "artifact": "SummerFun1",
             "startingInstas": [
                 {
-                    "baseId": "IceMonkey",
-                    "tiers": "[0,2,0]",
+                    "baseId": "Mermonkey",
+                    "tiers": "[0,1,1]",
                     "currentCooldown": "0",
                     "lootType": "permanent",
                     "uniqueId": "0",
@@ -4765,8 +4765,8 @@
                     "isFree": "false"
                 },
                 {
-                    "baseId": "Mermonkey",
-                    "tiers": "[0,1,0]",
+                    "baseId": "Desperado",
+                    "tiers": "[0,2,0]",
                     "currentCooldown": "0",
                     "lootType": "permanent",
                     "uniqueId": "0",
@@ -4820,7 +4820,7 @@
         },
         "Geraldo": {
             "heroID": "Geraldo",
-            "artifact": "TheUnspokenHeroes1",
+            "artifact": "ExtraChange1",
             "startingInstas": [
                 {
                     "baseId": "BeastHandler",
@@ -4889,8 +4889,8 @@
             "artifact": "PincushionFlyby1",
             "startingInstas": [
                 {
-                    "baseId": "SniperMonkey",
-                    "tiers": "[1,0,0]",
+                    "baseId": "Desperado",
+                    "tiers": "[2,0,0]",
                     "currentCooldown": "0",
                     "lootType": "permanent",
                     "uniqueId": "0",
