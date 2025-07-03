@@ -1,3 +1,15 @@
+let currentRoundsetView = "Simple";
+let roundsetProcessed = null;
+let selectedRoundset = null;
+let currentPreviewRound = 0;
+let currentIndexInModifiedRounds = 0;
+let previewActive = false;
+let previewModified = null;
+let currentModifiedRounds = []
+let roundPreviewFilterType;
+let currentRoundsetEndRound = 140;
+let hiddenGroups = [];
+
 function generateRoundsets() {
     let roundsetsContent = document.getElementById('rounds-content');
     roundsetsContent.innerHTML = "";

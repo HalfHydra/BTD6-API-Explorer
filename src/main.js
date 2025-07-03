@@ -73,18 +73,6 @@ let showElite = false;
 
 let currentBrowserView = "grid";
 
-let currentRoundsetView = "Simple";
-let roundsetProcessed = null;
-let selectedRoundset = null;
-let currentPreviewRound = 0;
-let currentIndexInModifiedRounds = 0;
-let previewActive = false;
-let previewModified = null;
-let currentModifiedRounds = []
-let roundPreviewFilterType;
-let currentRoundsetEndRound = 140;
-let hiddenGroups = [];
-
 let currentCollectionChest = "None";
 let currentCollectionTower = "All";
 let collectionMissingToggle = true;
@@ -4046,7 +4034,7 @@ function generateHowToUseModal() {
     let modalContent = document.createElement('div');
 
     let modalHelpDivs = document.createElement('div');
-    modalHelpDivs.classList.add('modal-help-divs');
+    // modalHelpDivs.classList.add('modal-help-divs');
     modalContent.appendChild(modalHelpDivs);
 
     let modelHelpText = {
