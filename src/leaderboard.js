@@ -688,7 +688,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
             if (metadata.hasOwnProperty('bossType')) {
                 switch (metadata.scoringType) {
                     case "GameTime":
-                        let submittedDate = new Date(metadata.start + scorePartsObj["Time after event start"].score)
+                        let submittedDate = new Date(metadata.start + scorePartsObj["Game Time"].score)
 
                         let leaderboardEntryTimeSubmitted = document.createElement('p');
                         leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted', 'leaderboard-outline');
@@ -700,7 +700,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         leaderboardEntryTimeSubmittedRelative.innerHTML = relativeTime(new Date(), submittedDate);
                         leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
 
-                        leaderboardEntryMainScore.innerHTML = formatScoreTime(entry.score);
+                        leaderboardEntryMainScore.innerHTML = formatScoreTime(scorePartsObj["Least Cash"].score); //entry.score
                         break;
                     case "LeastCash":
                         leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
@@ -722,7 +722,8 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         leaderboardEntryGameTime.appendChild(leaderboardEntryGameTimeValue);
                         break;
                     case "LeastTiers":
-                        leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
+                        //leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
+                        leaderboardEntryMainScore.innerHTML = scorePartsObj["Tier Count"].score.toLocaleString();
                         leaderboardEntryScoreIcon.src = `./Assets/UI/LeastTiersIconSmall.png`;
                         leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
 
