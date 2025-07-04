@@ -2550,11 +2550,11 @@
         }
     },
     "150": {
-        "name": "Nah, I'd Win",
+        "name": "Nah I'd win",
         "description": "Basically NAPSFRILLS'd it",
         "model": {
             "achievementId": 154,
-            "achievementIcon": "",
+            "achievementIcon": "NAPSFRILLS",
             "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 1,

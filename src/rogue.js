@@ -97,6 +97,7 @@ loadRogueDataFromLocalStorage();
 function postProcessRogueData(){
     let unusedArtifacts = ['EssenceOfLych1', 'Token', 'ProjectileCarousel1']
     for (let [hero, starterKit] of Object.entries(rogueJSON.heroStarterKits)){
+        console.log(starterKit.artifact)
         rogueJSON.artifacts[starterKit.artifact].starterKitHero = hero;
     }
     for (let artifact in rogueJSON.artifacts){
@@ -442,13 +443,16 @@ function generateArtifactSettings() {
             case "Two Variants":
                 settingsFilterDescription.innerHTML = "Only Artifacts that have only have two tiers will be included to start.";
                 break;
-            case "Update 48":
+            case "Added Update 48":
                 settingsFilterDescription.innerHTML = "Only Artifacts that were added in Update 48 will be included to start.";
+                break;
+            case "Added Update 49":
+                settingsFilterDescription.innerHTML = "Only Artifacts that were added in Update 49 will be included to start.";
                 break;
         }
     }
 
-    let settingsFilterDropdown = generateDropdown("Artifact Filter:", ["All", "Starter Kit", "Non Starter Kit", "One Variant", "Two Variants", "Update 48"], rogueSaveData.artifactFilter, (value) => {
+    let settingsFilterDropdown = generateDropdown("Artifact Filter:", ["All", "Starter Kit", "Non Starter Kit", "One Variant", "Two Variants", "Added Update 48", "Added Update 49"], rogueSaveData.artifactFilter, (value) => {
         rogueSaveData.artifactFilter = value;
         updateDescription();
         saveRogueDataToLocalStorage();
@@ -627,8 +631,11 @@ function generateArtifacts() {
         case "One Variant":
             currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => (rogueJSON.artifacts.hasOwnProperty(value.baseId + "1") && !rogueJSON.artifacts.hasOwnProperty(value.baseId + "2") && !rogueJSON.artifacts.hasOwnProperty(value.baseId + "3"))))
             break;
-        case "Update 48":
+        case "Added Update 48":
             currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => value.added == 48))
+            break;
+        case "Added Update 49":
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => value.added == 49))
             break;
     }
 

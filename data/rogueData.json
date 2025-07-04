@@ -3935,6 +3935,66 @@
             "title": "Summer Fun Legendary",
             "description": "Admiral Brickell and tier 2 or lower Buccaneers and Monkey Subs have a rare chance to attract excited summer vibes Monkeys that will push Bloons up to ZOMGs back along the track. Adds a 0-0-2 Buccaneer to your Party",
             "added": 48
+        },
+        "HeroicSpecialty2": {
+            "tier": 1,
+            "baseId": "HeroicSpecialty",
+            "nameLocKey": "HeroicSpecialty2",
+            "descriptionLocKey": "HeroicSpecialtyXDescription",
+            "isBossArtifact": false,
+            "icon": "ArtifactHeroicSpecialty",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Heroic Specialty Rare",
+            "description": "Heroes gain class category and earn 30% less XP. Primary: Quincy, Gwendolin, Pat, Sauda. Military: Striker, Churchill, Brickell. Magic: Obyn, Ezili, Adora, Psi, Corvus. Support: Benjamin, Geraldo, Etienne, Rosalia",
+            "added": 49
+        },
+        "HeroicSpecialty3": {
+            "tier": 2,
+            "baseId": "HeroicSpecialty",
+            "nameLocKey": "HeroicSpecialty3",
+            "descriptionLocKey": "HeroicSpecialtyXDescription",
+            "isBossArtifact": false,
+            "icon": "ArtifactHeroicSpecialty",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "title": "Heroic Specialty Legendary",
+            "description": "Heroes gain class category and earn 0% less XP. Primary: Quincy, Gwendolin, Pat, Sauda. Military: Striker, Churchill, Brickell. Magic: Obyn, Ezili, Adora, Psi, Corvus. Support: Benjamin, Geraldo, Etienne, Rosalia",
+            "added": 49
+        },
+        "WhatInTarnation1": {
+            "tier": 0,
+            "baseId": "WhatInTarnation",
+            "nameLocKey": "WhatInTarnation1",
+            "descriptionLocKey": "WhatInTarnationXDescription",
+            "isBossArtifact": false,
+            "icon": "ArtifactWhatInTarnation",
+            "rarityFrameType": "Primary",
+            "title": "What in Tarnation Common",
+            "description": "Desperado has 10% chance to apply an effect on Bloons depending on upgrade path from tier 2: Stun Bloons for 1 seconds at 2-x-x, Freeze Bloons for 1 seconds at x-2-x, Glue Bloons for 2 seconds at x-x-2. Adds a 1-0-1 Desperado to your Party",
+            "added": 49
+        },
+        "WhatInTarnation2": {
+            "tier": 1,
+            "baseId": "WhatInTarnation",
+            "nameLocKey": "WhatInTarnation2",
+            "descriptionLocKey": "WhatInTarnationXDescription",
+            "isBossArtifact": false,
+            "icon": "ArtifactWhatInTarnation",
+            "rarityFrameType": "Primary",
+            "title": "What in Tarnation Rare",
+            "description": "Desperado has 10% chance to apply an effect on Bloons depending on upgrade path from tier 2: Stun Bloons for 2 seconds at 2-x-x, Freeze Bloons for 2 seconds at x-2-x, Glue Bloons for 4 seconds at x-x-2. Adds a 1-0-2 Desperado to your Party",
+            "added": 49
+        },
+        "WhatInTarnation3": {
+            "tier": 2,
+            "baseId": "WhatInTarnation",
+            "nameLocKey": "WhatInTarnation3",
+            "descriptionLocKey": "WhatInTarnationXDescription",
+            "isBossArtifact": false,
+            "icon": "ArtifactWhatInTarnation",
+            "rarityFrameType": "Primary",
+            "title": "What in Tarnation Legendary",
+            "description": "Desperado has 10% chance to apply an effect on Bloons depending on upgrade path from tier 2: Stun Bloons for 4 seconds at 2-x-x, Freeze Bloons for 4 seconds at x-2-x, Glue Bloons for 8 seconds at x-x-2. Adds a 0-0-2 Desperado to your Party",
+            "added": 49
         }
     },
     "heroStarterKits": {
@@ -4556,7 +4616,7 @@
         },
         "Etienne": {
             "heroID": "Etienne",
-            "artifact": "SplodyDarts1",
+            "artifact": "SplodeyDarts1",
             "startingInstas": [
                 {
                     "baseId": "Desperado",
@@ -4732,7 +4792,7 @@
         },
         "LifeguardBrickell": {
             "heroID": "LifeguardBrickell",
-            "artifact": "SummerFun1",
+            "artifact": "SummerFun2",
             "startingInstas": [
                 {
                     "baseId": "Mermonkey",

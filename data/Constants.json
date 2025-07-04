@@ -1,12 +1,12 @@
 {
     "version": "1.9.0",
-    "projectContentVersion": 48,
-    "totalInstaMonkeys": 1536,
+    "projectContentVersion": 49,
+    "totalInstaMonkeys": 1600,
     "achievements": 138,
     "hiddenAchievements": 13,
-    "totalMaps": 79,
-    "profileBanners": 51,
-    "profileAvatars": 111,
+    "totalMaps": 80,
+    "profileBanners": 53,
+    "profileAvatars": 113,
     "teamsBanners": 15,
     "startRound": {
         "Easy": 1,
@@ -41,6 +41,18 @@
         "Clicks": 100
     },
     "limitedTimeEvents": {
+        "BAD but it gets harder": {
+            "type": "Odyssey", 
+            "roundset": "BADbutharder", 
+            "start": 1749693600000, 
+            "end": 1750212000000
+        },
+        "BAD but it gets harder (Hard)": {
+            "type": "Odyssey", 
+            "roundset": "BADbutfortharder", 
+            "start": 1749693600000, 
+            "end": 1750212000000
+        },
         "Bloonarius 55": {"type": "Boss", "roundset": "chimpsbloonarius", "boss": "bloonarius", "start": 1732953600000, "end": 1733367600000}, 
         "Mastery(ish) Mode!": {
             "type": "Odyssey",
@@ -65,12 +77,6 @@
             "roundset": "CeramicFlood",
             "start": 1725609600000,
             "end": 1725937200000
-        },
-        "BAD but it gets harder": {
-            "type": "Odyssey", 
-            "roundset": "BADbutfortharder", 
-            "start": 1749693600000, 
-            "end": 1750212000000
         }
     },
     "skuRoundsets": ["1roundEarly","2roundEarly","3roundEarly","4roundEarly","5roundEarly","DDTbadness","countdownGroupOf5","monkeyVSmachines","rabbitYear","valentinesCF","TheFinalGambit","eggs","BeastHandlerjourney","Apocrypha3","31Plus","allOrNothingEnd60","allOrNothingEnd80","Sauda63","MiniMe","BlimpMyCrib","alternateRound140","raceExperiment","SinkingFeeling","CeramicFlood","Doubleupody","Jumpscare","masterymode","chimpsbloonarius","BADbutharder","BADbutfortharder"],
@@ -231,6 +237,13 @@
         "QuestEtienneTrialRoundSet": {
             "name": "Drone Flying 101 Rounds",
             "icon": "QuestIconDroneFlying101",
+            "type": "quest",
+            "startingCash": 650,
+            "endRound": 15
+        },
+        "QuestEziliTrialRoundSet": {
+            "name": "How To Do Voodoo!",
+            "icon": "QuestIconEzili",
             "type": "quest",
             "startingCash": 650,
             "endRound": 15
@@ -442,6 +455,7 @@
         "TackShooter": "Primary",
         "IceMonkey": "Primary",
         "GlueGunner": "Primary",
+        "Desperado": "Primary",
         "SniperMonkey": "Military",
         "MonkeySub": "Military",
         "MonkeyBuccaneer": "Military",
@@ -510,6 +524,7 @@
         "Chutes": "Intermediate",
         "Rake": "Intermediate",
         "SpiceIslands": "Intermediate",
+        "SunsetGulch": "Advanced",
         "EnchantedGlade": "Advanced",
         "LastResort": "Advanced",
         "AncientPortal": "Advanced",
@@ -2158,6 +2173,29 @@
                 "Giant Condor": 5500,
                 "Pouakai": 110000
             }
+        },
+        "Desperado": {
+            "path1": {
+                "Quickdraw": 250,
+                "Standoff": 200,
+                "Big Iron": 1200,
+                "Twin Sixes": 5800,
+                "The Blazing Sun": 17500
+            },
+            "path2": {
+                "Eagle Eye": 150,
+                "Bullseye": 500,
+                "Deadeye": 3000,
+                "Bounty Hunter": 8000,
+                "Golden Justice": 42000
+            },
+            "path3": {
+                "Wanderer": 220,
+                "Nomad": 280,
+                "Enforcer": 2100,
+                "Avenger": 9500,
+                "The Desert Phantom": 31000
+            }
         }
     },
     "roundHints": {
@@ -2730,6 +2768,26 @@
             "displayName": "Controlled Burst",
             "description": "Temporarily increases attack speed.",
             "icon": "SpikeFactoryParagonControlledBurstAA"
+        },
+        "Take Aim": {
+            "displayName": "Take Aim",
+            "description": "Target monkey gains improved range, accuracy, and Camo Detection.",
+            "icon": "TakeAimAAIcon"
+        },
+        "Marked To Pop": {
+            "displayName": "Marked To Pop",
+            "description": "Marks extra bloons, then proceed to attack all Marked Bloons",
+            "icon": "MarkedToPopAAIcon"
+        },
+        "TakeAim2": {
+            "displayName": "Take Aim",
+            "description": "Target monkey gains improved range, accuracy, and Camo Detection. Also increases attack speed.",
+            "icon": "TakeAimAATier4Icon"
+        },
+        "Marked To Pop2": {
+            "displayName": "Marked To Pop",
+            "description": "Marks extra bloons, then proceed to attack all Marked Bloons. Also increases attack speed.",
+            "icon": "MarkedToPop2AATier5Icon"
         }
     },
     "unreleasedContent": {
