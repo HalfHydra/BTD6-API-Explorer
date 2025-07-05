@@ -4104,8 +4104,8 @@
     margin: 20px 0px;
 }
 .collection-tower-icon {
-    width: 100px;
-    height: 100px;
+    width: 92px;
+    height: 92px;
 }
 .insta-monkey-chance-container {
     display: flex;
@@ -4369,8 +4369,8 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 600px;
-    margin: 0 auto;
+    width: 800px;
+    margin: 10px auto;
 }
 .collection-modal {
     position: fixed;

@@ -4089,10 +4089,10 @@ function generateInstaCollectionEventHelper(){
     instaMonkeyCollectionContainer.classList.add('insta-monkey-collection-container');
     instaMonkeysProgressContainer.appendChild(instaMonkeyCollectionContainer);
     
-    let collectionHeaderTitleText = document.createElement('p');
-    collectionHeaderTitleText.classList.add('collection-header-title-text', 'black-outline');
-    collectionHeaderTitleText.innerHTML = "New Insta Monkey Chances";
-    instaMonkeyCollectionContainer.appendChild(collectionHeaderTitleText); 
+    // let collectionHeaderTitleText = document.createElement('p');
+    // collectionHeaderTitleText.classList.add('collection-header-title-text', 'black-outline');
+    // collectionHeaderTitleText.innerHTML = "New Insta Monkey Chances";
+    // instaMonkeyCollectionContainer.appendChild(collectionHeaderTitleText); 
 
     let instaMonkeyCollectionTopBtns = document.createElement('div');
     instaMonkeyCollectionTopBtns.classList.add('insta-monkey-collection-top-btns');
@@ -4115,6 +4115,21 @@ function generateInstaCollectionEventHelper(){
         generateChestOddsModal();
     })
     instaMonkeyCollectionTopBtns.appendChild(chestOddsButton);
+
+    let now = new Date();
+    if (now < new Date(constants.collection.current.end) && now > new Date(constants.collection.current.start)) {
+        let featuredInstaButton = document.createElement('p');
+        featuredInstaButton.classList.add('where-button','black-outline');
+        featuredInstaButton.style.width = "230px";
+        featuredInstaButton.innerHTML = 'Featured Instas';
+        featuredInstaButton.addEventListener('click', () => {
+            addToBackQueue({ source: "profile", destination: "featured" });
+            generateInstaSchedule();
+            document.getElementById('profile-content').style.display = "none";
+            document.getElementById('featured-content').style.display = "flex";
+        })
+        instaMonkeyCollectionTopBtns.appendChild(featuredInstaButton);
+    }
 
 
     let instaMonkeyCollectionDescText = document.createElement('p');
@@ -9054,20 +9069,19 @@ function generateInstaSchedule() {
 
 function generateRotations(scheduleContainer){
     scheduleContainer.innerHTML = "";
-    let firstRotation = true;
+    let iterate = 0;
+    let currentRotation = Math.floor((Date.now() - constants.collection.current.start) / 28800000);
+
     Object.values(constants.collection.current.rotations).forEach((rotation, index) => {
         if(!rotation.includes(currentFeaturedTower) && currentFeaturedTower !== "All") { return; }
-        if (constants.collection.current.start + (28800000 * (index + 1)) < Date.now()) { return; }
+        if (index < currentRotation) { return; }
         let rotationDiv = createEl('div', {
             classList: ['d-flex', 'jc-between', 'ai-center'],
             style: {
                 borderTop: "2px solid black"
             }
         });
-        // if (index % 6 < 3 && currentFeaturedTower === "All") {
-        //     rotationDiv.style.backgroundColor = "#00000040";
-        // }
-        if (index % 2) {
+        if (iterate % 2) {
             rotationDiv.style.backgroundColor = "#00000040";
         }
         scheduleContainer.appendChild(rotationDiv);
@@ -9080,15 +9094,9 @@ function generateRotations(scheduleContainer){
                 textAlign: "center",
                 flexGrow: "1",
             },
-            innerHTML: firstRotation ? "Active Selection" : `${date.toLocaleDateString()}<br>${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+            innerHTML: currentRotation == index ? "Active Selection" : `${date.toLocaleDateString()}<br>${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
         });
         rotationDiv.appendChild(rotationDate);
-
-        // let rotationRelativeDate = createEl('p', {
-        //     classList: ['insta-schedule-rotation-relative-date', 'black-outline'],
-        //     innerHTML: getRelativeTimeString(constants.collection.current.start + (28800000 * index))
-        // });
-        // rotationDiv.appendChild(rotationRelativeDate);
 
         let rotationContent = createEl('div', {
             classList: ['d-flex']
@@ -9129,8 +9137,8 @@ function generateRotations(scheduleContainer){
                 innerHTML: getLocValue(`${item}`)
             });
             // itemDiv.appendChild(itemName);
-
         })
         firstRotation = false;
+        iterate++;
     })
 }

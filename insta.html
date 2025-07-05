@@ -224,6 +224,7 @@
     </div>
     <div class="content">
         <div id="profile-content" class="content-div progress" style="display: flex;"></div>
+        <div id="featured-content" class="content-div extras" style="display: none;"></div>
     </div>
 </body>
 <script src="./src/html-to-image.min.js"></script>
@@ -238,11 +239,51 @@
     document.getElementById("loading").style.transform = "scale(0)";
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
-    let loginDiv = generateLoginDiv(() => {
-        fetchInstaDependencies()
+    fetchConstants().then(() => {
+        let now = new Date();
+        if (now < new Date(constants.collection.current.end) && now > new Date(constants.collection.current.start)) {
+            let featuredInstaDiv = document.createElement('div');
+            featuredInstaDiv.style.width = "500px";
+            featuredInstaDiv.style.height = "85px";
+            featuredInstaDiv.style.border = "8px solid #00000040";
+            featuredInstaDiv.style.padding = "10px";
+            featuredInstaDiv.classList.add('roundset-selector-div');
+            document.getElementById("profile-content").prepend(featuredInstaDiv);
+            featuredInstaDiv.addEventListener('click', () => {
+                addToBackQueue({ source: "profile", destination: "featured" });
+                generateInstaSchedule();
+                document.getElementById('profile-content').style.display = "none";
+                document.getElementById('featured-content').style.display = "flex";
+            })
+
+            let roundsetIcon = document.createElement('img');
+            roundsetIcon.classList.add('roundset-selector-img');
+            featuredInstaDiv.appendChild(roundsetIcon);
+
+            roundsetIcon.src = `../Assets/UI/CollectingEventTotemBtn.png`;
+            featuredInstaDiv.classList.add("totem-bg")
+
+            let roundsetTextDiv = document.createElement('div');
+            roundsetTextDiv.classList.add('roundset-selector-text-div', 'd-flex', 'fd-column', 'ai-center');
+            featuredInstaDiv.appendChild(roundsetTextDiv);
+
+            let roundsetText = document.createElement('p');
+            roundsetText.classList.add('selector-text', 'black-outline');
+            roundsetText.innerHTML = 'Featured Instas Rotation';
+            roundsetTextDiv.appendChild(roundsetText);
+
+            let roundsetGoImg = document.createElement('img');
+            roundsetGoImg.classList.add('selector-go-img');
+            roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
+            featuredInstaDiv.appendChild(roundsetGoImg);
+        }
+
+        let loginDiv = generateLoginDiv(() => {
+            fetchInstaDependencies()
+        });
+        loginDiv.style.padding = "10px";
+        loginDiv.style.borderRadius = "10px";
+        document.getElementById("profile-content").appendChild(loginDiv);
     });
-    loginDiv.style.padding = "10px";
-    loginDiv.style.borderRadius = "10px";
-    document.getElementById("profile-content").appendChild(loginDiv);
 </script>
 </html>
