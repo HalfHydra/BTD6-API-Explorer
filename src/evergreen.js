@@ -708,3 +708,29 @@ function errorModal(body, source, force) {
     modalContent.appendChild(modalClose);
     isErrorModalOpen = true;
 }
+
+const rtf = new Intl.RelativeTimeFormat("en", { style: "long" });
+function getRelativeTimeString(targetTime) {
+    const now = Date.now();
+    const diffMs = targetTime - now;
+    const absDiffMs = Math.abs(diffMs);
+
+    const minute = 60 * 1000;
+    const hour = 60 * minute;
+    const day = 24 * hour;
+
+    let value, unit;
+
+    if (absDiffMs >= day) {
+        value = Math.round(diffMs / day);
+        unit = 'day';
+    } else if (absDiffMs >= hour) {
+        value = Math.round(diffMs / hour);
+        unit = 'hour';
+    } else {
+        value = Math.round(diffMs / minute);
+        unit = 'minute';
+    }
+
+    return rtf.format(value, unit);
+}

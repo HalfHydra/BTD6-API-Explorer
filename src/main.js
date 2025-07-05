@@ -86,6 +86,9 @@ let chestSelectorMap = {
     "diamond": "Diamond"
 }
 
+let showFeaturedFilter = false;
+let currentFeaturedTower = "All";
+
 let trophyStoreSubFilter = "All";
 let subFiltersMap = {
     "Heroes": ["All", "HeroPlacementUpgrades", "HeroPets"],
@@ -8233,6 +8236,7 @@ function generateExtrasPage() {
 
     let selectors = [
         // 'Custom Round Sets', 
+        'Featured Insta Schedule',
         'Collection Event Odds',
         // 'Monkey Money Helper', 
         // 'Export Data', 
@@ -8245,6 +8249,12 @@ function generateExtrasPage() {
 
     if (!loggedIn) {
         selectors = selectors.filter(selector => selector != 'Collection Event Odds');
+    }
+
+
+    let now = new Date();
+    if (now > new Date(constants.collection.current.end) || now < new Date(constants.collection.current.start)) {
+        selectors = selectors.filter(selector => selector != 'Featured Insta Schedule');
     }
 
     selectors.forEach((selector) => {
@@ -8265,6 +8275,7 @@ function generateExtrasPage() {
             case 'Custom Round Sets':
                 selectorImg.src = '../Assets/ChallengeRulesIcon/CustomRoundIcon.png';
                 break;
+            case 'Featured Insta Schedule':
             case 'Collection Event Odds':
                 selectorImg.src = '../Assets/UI/CollectingEventTotemBtn.png';
                 break;
@@ -8308,6 +8319,12 @@ function changeExtrasTab(selected){
     switch(selected){
         case 'Custom Round Sets':
             generateRoundsets();
+            break;
+        case "Featured Insta Schedule":
+            addToBackQueue({ source: "extras", destination: "featured" });
+            generateInstaSchedule();
+            document.getElementById('extras-content').style.display = "none";
+            document.getElementById('featured-content').style.display = "flex";
             break;
         case "Collection Event Odds": 
             changeTab('profile');
@@ -8934,4 +8951,186 @@ function generateTeamsStorePopout(key) {
         header: getLocValue(`${key}ShortName`),
     });
 
+}
+
+function generateInstaSchedule() {
+    let featuredContent = document.getElementById('featured-content');
+    featuredContent.innerHTML = "";
+
+    let instaScheduleContent = createEl('div', {
+        classList: ['totem-bg'],
+        style: {
+            width: "800px",
+            borderRadius: "20px",
+        }
+    });
+    featuredContent.appendChild(instaScheduleContent);
+
+    let instaScheduleHeader = createEl('div', {
+        classList: ['d-flex', 'jc-between', 'ai-center', 'grey-border', 'fd-column'],
+    });
+    instaScheduleContent.appendChild(instaScheduleHeader);
+
+    let instaHeaderTop = createEl('div', {
+        classList: ['d-flex', 'jc-between', 'ai-center', 'w-100']
+    })
+    instaScheduleHeader.appendChild(instaHeaderTop);
+
+    // start and end time toLocaleDateString
+    let startDate = new Date(constants.collection.current.start);
+    let endDate = new Date(constants.collection.current.end);
+    let instaScheduleTitle = createEl('p', {
+        classList: ['black-outline', 'fg-1'],
+        style: {
+            fontSize: "32px",
+            padding: "10px 20px",
+        },
+        innerHTML: `Featured Insta Schedule<br>${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
+    });
+    instaHeaderTop.appendChild(instaScheduleTitle);
+
+    let instaHeaderFilterBtn = generateButton("Filter", "150px")
+    instaHeaderTop.appendChild(instaHeaderFilterBtn);
+
+    let collectionEventTowerSelectors = createEl('div', {
+        classList: ['d-flex', 'f-wrap'],
+        style: {
+            width: "800px",
+            display: "none"
+        }
+    });
+    instaScheduleHeader.appendChild(collectionEventTowerSelectors);
+
+    //header description
+    let instaHeaderDescription = createEl('p', {
+        classList: ['font-gardenia'],
+        style: {
+            fontSize: "18px",
+            padding: "10px 20px",
+            textAlign: "center",
+        },
+        innerHTML: "Times are your local timezone. Info is not from the API, and is being tested for accuracy."
+    });
+    instaScheduleHeader.appendChild(instaHeaderDescription);
+
+    let scheduleContainer = createEl('div', {
+        classList: ['insta-schedule-container'],
+        style: {
+            width: "800px"
+        }
+    });
+
+    Object.keys(constants.towersInOrder).forEach(tower => {
+        let collectionEventTowerSelector = document.createElement('div');
+        collectionEventTowerSelector.classList.add('featured-insta-filter-selector');
+        collectionEventTowerSelector.addEventListener('click', () => {
+            currentFeaturedTower === tower ? currentFeaturedTower = "All" : currentFeaturedTower = tower;
+            for (element of document.getElementsByClassName('featured-insta-filter-selector')) {
+                element.classList.remove('collection-event-tower-selector-active');
+            }
+            if (currentFeaturedTower != "All") { collectionEventTowerSelector.classList.add('collection-event-tower-selector-active') }
+            generateRotations(scheduleContainer);
+        })
+        collectionEventTowerSelectors.appendChild(collectionEventTowerSelector);
+
+        let collectionEventTowerImg = document.createElement('img');
+        collectionEventTowerImg.style.width = "88px";
+        collectionEventTowerImg.style.height = "88px";
+        collectionEventTowerImg.src = getInstaMonkeyIcon(tower,'000');
+        collectionEventTowerSelector.appendChild(collectionEventTowerImg);
+    })
+
+    instaHeaderFilterBtn.addEventListener('click', () => {
+        //use the toggle method to toggle the visibility of the collectionEventTowerSelectors div
+        showFeaturedFilter = !showFeaturedFilter;
+        collectionEventTowerSelectors.style.display = showFeaturedFilter ? "flex" : "none";
+        instaHeaderFilterBtn.classList.toggle('square-btn-yellow', showFeaturedFilter);
+    });
+
+    instaScheduleContent.appendChild(scheduleContainer);
+
+    generateRotations(scheduleContainer);
+}
+
+function generateRotations(scheduleContainer){
+    scheduleContainer.innerHTML = "";
+    let firstRotation = true;
+    Object.values(constants.collection.current.rotations).forEach((rotation, index) => {
+        if(!rotation.includes(currentFeaturedTower) && currentFeaturedTower !== "All") { return; }
+        if (constants.collection.current.start + (28800000 * (index + 1)) < Date.now()) { return; }
+        let rotationDiv = createEl('div', {
+            classList: ['d-flex', 'jc-between', 'ai-center'],
+            style: {
+                borderTop: "2px solid black"
+            }
+        });
+        // if (index % 6 < 3 && currentFeaturedTower === "All") {
+        //     rotationDiv.style.backgroundColor = "#00000040";
+        // }
+        if (index % 2) {
+            rotationDiv.style.backgroundColor = "#00000040";
+        }
+        scheduleContainer.appendChild(rotationDiv);
+
+        let date = new Date(constants.collection.current.start + (28800000 * index));
+        let rotationDate = createEl('p', {
+            classList: ['insta-schedule-rotation-date', 'black-outline'],
+            style: {
+                fontSize: "28px",
+                textAlign: "center",
+                flexGrow: "1",
+            },
+            innerHTML: firstRotation ? "Active Selection" : `${date.toLocaleDateString()}<br>${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+        });
+        rotationDiv.appendChild(rotationDate);
+
+        // let rotationRelativeDate = createEl('p', {
+        //     classList: ['insta-schedule-rotation-relative-date', 'black-outline'],
+        //     innerHTML: getRelativeTimeString(constants.collection.current.start + (28800000 * index))
+        // });
+        // rotationDiv.appendChild(rotationRelativeDate);
+
+        let rotationContent = createEl('div', {
+            classList: ['d-flex']
+        });
+        rotationDiv.appendChild(rotationContent);
+
+        rotation.forEach((item) => {
+            let itemDiv = createEl('div', {
+                classList: ['insta-schedule-item'],
+                style: {
+                    backgroundImage: `url(../Assets/UI/TowerContainer${constants.towersInOrder[item]}.png)`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center 130px",
+                    height: "75px",
+                    width: "150px",
+                    position: 'relative',
+                }
+            });
+            rotationContent.appendChild(itemDiv);
+
+            let itemImg = createEl('img', {
+                classList: ['insta-schedule-item-img'],
+                style: {
+                    width: "150px",
+                    height: "75px"
+                },
+                src: `../Assets/UI/FaceEntry/${item}.png`
+            });
+            itemDiv.appendChild(itemImg);
+
+            let itemName = createEl('p', {
+                classList: ['ta-center', 'black-outline'],
+                style: {
+                    position: "absolute",
+                    bottom: "0px",
+                    width: "150px",
+                },
+                innerHTML: getLocValue(`${item}`)
+            });
+            // itemDiv.appendChild(itemName);
+
+        })
+        firstRotation = false;
+    })
 }

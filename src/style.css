@@ -4168,7 +4168,10 @@
     border-radius: 10px 10px 0px 0px;
 }
 .collection-event-tower-selector-active {
-    filter: drop-shadow(0px 0px 5px lime) drop-shadow(0px 0px 5px lime);
+    /* filter: drop-shadow(0px 0px 5px lime) drop-shadow(0px 0px 5px lime); */
+    border-radius: 20px;
+    outline: 8px solid #00ff0080;
+    outline-offset: -10px;
 }
 .insta-monkey-chance-zero {
     filter: brightness(0.5);

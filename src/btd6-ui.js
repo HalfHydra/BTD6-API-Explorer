@@ -65,3 +65,12 @@ function generateToggle(){
 
     return toggle;
 }
+
+function generateButton(label, width, callback) {
+    let button = document.createElement('button');
+    button.classList.add('where-button', 'black-outline');
+    button.style.width = width;
+    button.innerHTML = label;
+    button.addEventListener('click', callback);
+    return button;
+}
