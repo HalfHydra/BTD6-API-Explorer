@@ -7,10 +7,10 @@ async function generateLeaderboards() {
     leaderboardPage.classList.add('leaderboard-page', 'page-extra', 'fd-column', 'ai-center');
     leaderboardsContent.appendChild(leaderboardPage);
 
-    let workInProgressText = document.createElement('p');
-    workInProgressText.classList.add('site-info-header', 'sites-text', 'black-outline');
-    workInProgressText.innerHTML = 'Note: Update 48 changed leaderboards and broke the site. It will be fixed sometime soon.';
-    leaderboardPage.appendChild(workInProgressText);
+    // let workInProgressText = document.createElement('p');
+    // workInProgressText.classList.add('site-info-header', 'sites-text', 'black-outline');
+    // workInProgressText.innerHTML = 'Note: Update 48 changed leaderboards and broke the site. It will be fixed sometime soon.';
+    // leaderboardPage.appendChild(workInProgressText);
 
     let currentText = document.createElement('p');
     currentText.classList.add('hero-progress-header-text', 'leaderboards-header-text');
@@ -703,7 +703,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         leaderboardEntryMainScore.innerHTML = formatScoreTime(scorePartsObj["Least Cash"].score); //entry.score
                         break;
                     case "LeastCash":
-                        leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
+                        leaderboardEntryMainScore.innerHTML =  scorePartsObj["Least Cash"].score.toLocaleString();
                         leaderboardEntryScoreIcon.src = `./Assets/UI/LeastCashIconSmall.png`;
                         leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
 
@@ -722,7 +722,6 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         leaderboardEntryGameTime.appendChild(leaderboardEntryGameTimeValue);
                         break;
                     case "LeastTiers":
-                        //leaderboardEntryMainScore.innerHTML = entry.score.toLocaleString();
                         leaderboardEntryMainScore.innerHTML = scorePartsObj["Tier Count"].score.toLocaleString();
                         leaderboardEntryScoreIcon.src = `./Assets/UI/LeastTiersIconSmall.png`;
                         leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
