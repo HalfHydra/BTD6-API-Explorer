@@ -606,7 +606,7 @@ function generateFrontPage(){
     let siteImageScrollOverlayText = createEl('p', { classList: ['font-gardenia'], style: {fontSize: "20px", lineHeight: "1.5"}, innerHTML: 'Click on the images to access the sites!' });
     siteImageScrollLeft.appendChild(siteImageScrollOverlayText);
 
-    let siteImageScrollImage = createEl('img', { classList: ['site-image-scroll'], style: { borderRadius: "10px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", transition: "background-image 0.5s ease-in-out"}});
+    let siteImageScrollImage = createEl('img', { classList: ['site-image-scroll'], style: { borderRadius: "10px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", transition: "background-image 0.5s ease-in-out", width: "400px"}});
     siteImageScroll.appendChild(siteImageScrollImage);
 
     let sitePageDots = createEl('div', { classList: ['d-flex', 'jc-center'], style: {paddingTop: "20px"}});
