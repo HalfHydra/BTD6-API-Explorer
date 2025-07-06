@@ -4,4 +4,4 @@ A site that can automatically track your progress and explore events + user gene
 
 ## How to Access
 
-I host a copy of this site on [BTD6APIExplorer.github.io](BTD6APIExplorer.github.io)!
+I host a copy of this site on [BTD6APIExplorer.github.io](https://btd6apiexplorer.github.io)!
