@@ -106,6 +106,18 @@ let loggedIn = false;
 
 let imageScroll = [
     {
+        "title": "New Site Update!",
+        "text": `Site Update 2.0.0<br>
+        - Featured Insta Schedule added under the Extras tab!<br>
+        - Added Update 49 content<br>
+        - Completely reworked the UI<br>
+        - Fixes for Leaderboards<br>
+        - New site <a href="https://discord.gg/wep2RDmcqZ " target="_blank" style="color: white;">Discord Server</a><br>
+        - Full Changelog below<br>
+        `,
+        "image": "/LandingScroll/Update49&Featured"
+    },
+    {
         "title": "View Your Profile!",
         "text": "- View API exclusive stats<br>- Full Top Heroes/Towers list<br>- Top Paragons counts<br>- Ability usage counts<br>- Detailed map statistics<br>- Track your insta monkey collection",
         "image": "OverviewProfile"
@@ -773,10 +785,9 @@ function generateFrontPage(){
     FAQDiv.appendChild(faqHeader);
 
     let FAQ = {
-        // "What can I do with this?": "Some primary uses are tracking your progress automatically, viewing events and leaderboards up to two months in the past, browsing user generated content, and as a bonus feature: viewing round information. You can also view more detailed stats and progress than you can see in the game such as your highest round for every mode on every map you've played. Those who are working on their Insta Monkey collection can use this as a tracker as the data pulled is always up to date!",
         "How long does the API take to update after I do something in the game?": "15 minutes is the most I've seen. Be sure to press the save button in settings if you want to minimize the time it takes to update! It should not take more than 24 hours to update in any circumstance (browser caching, etc).",
-        "Why is this not available for BTD6+ and Netflix?": "This is because the data is stored differently for these versions such as using iCloud for BTD6+. This is not compatible with the Open Data API.",
-        "How do I leave feedback?": 'If you have any feedback, things to add or change on the site, or most importantly bug reports, please fill out this anonymous form: <a href="https://forms.gle/Tg1PuRNj2ftojMde6" target="_blank" style="color: white;">Feedback Form</a>'
+        "Why is logging in not available for BTD6+ and Netflix?": "This is because the data is stored differently for these versions such as using iCloud for BTD6+. This is not compatible with the Open Data API.",
+        "How do I leave feedback?": 'If you have any feedback including features to add or change on the site or bug reports, please join the project\'s <a href="https://discord.gg/wep2RDmcqZ" target="_blank" style="color: white;">Discord Server</a>. Alternatively, you can create an issue on <a href="https://github.com/HalfHydra/BTD6-API-Explorer/issues" target="_blank" style="color: white;">GitHub</a'
     }
 
     for (let [question, answer] of Object.entries(FAQ)){
@@ -827,7 +838,7 @@ function generateFrontPage(){
     let knownIssuesText = document.createElement('p');
     knownIssuesText.classList.add('oak-instructions-text');
     knownIssuesText.innerHTML = `
-    - Legends Feats badge is missing from the currency and medals section<br>
+    None Currently!<br>
     `;
     knownIssuesDiv.appendChild(knownIssuesText);
     
@@ -8289,6 +8300,8 @@ function generateExtrasPage() {
                 selectorImg.src = '../Assets/ChallengeRulesIcon/CustomRoundIcon.png';
                 break;
             case 'Featured Insta Schedule':
+                selectorImg.src = '../Assets/UI/InstaBtn.png';
+                break;
             case 'Collection Event Odds':
                 selectorImg.src = '../Assets/UI/CollectingEventTotemBtn.png';
                 break;
@@ -8970,11 +8983,14 @@ function generateInstaSchedule() {
     let featuredContent = document.getElementById('featured-content');
     featuredContent.innerHTML = "";
 
+    currentFeaturedTower = "All";
+
     let instaScheduleContent = createEl('div', {
         classList: ['totem-bg'],
         style: {
             width: "800px",
             borderRadius: "20px",
+            backgroundColor: "#7a674b"
         }
     });
     featuredContent.appendChild(instaScheduleContent);
@@ -9092,7 +9108,7 @@ function generateRotations(scheduleContainer){
                 textAlign: "center",
                 flexGrow: "1",
             },
-            innerHTML: currentRotation == index ? "Active Selection" : `${date.toLocaleDateString()}<br>${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+            innerHTML: false /** currentRotation == index */ ? "Active Selection" : `${date.toLocaleDateString()}<br>${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
         });
         rotationDiv.appendChild(rotationDate);
 
@@ -9125,15 +9141,15 @@ function generateRotations(scheduleContainer){
             });
             itemDiv.appendChild(itemImg);
 
-            let itemName = createEl('p', {
-                classList: ['ta-center', 'black-outline'],
-                style: {
-                    position: "absolute",
-                    bottom: "0px",
-                    width: "150px",
-                },
-                innerHTML: getLocValue(`${item}`)
-            });
+            // let itemName = createEl('p', {
+            //     classList: ['ta-center', 'black-outline'],
+            //     style: {
+            //         position: "absolute",
+            //         bottom: "0px",
+            //         width: "150px",
+            //     },
+            //     innerHTML: getLocValue(`${item}`)
+            // });
             // itemDiv.appendChild(itemName);
         })
         firstRotation = false;
