@@ -9123,7 +9123,7 @@ function generateRotations(scheduleContainer){
                 textAlign: "center",
                 flexGrow: "1",
             },
-            innerHTML: false /** currentRotation == index */ ? "Active Selection" : `${date.toLocaleDateString()}<br>${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+            innerHTML: currentRotation == index ? "Active Selection" : `${date.toLocaleDateString()}<br>${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
         });
         rotationDiv.appendChild(rotationDate);
 
