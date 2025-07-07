@@ -107,8 +107,8 @@ let loggedIn = false;
 let imageScroll = [
     {
         "title": "New Site Update!",
-        "text": `Site Update 2.0.0<br>
-        - Featured Insta Schedule added under the Extras tab!<br>
+        "text": `Site Update 2.0.0:<br>
+        - Featured Insta Schedule added under the Events tab!<br>
         - Added Update 49 content<br>
         - Completely reworked the UI<br>
         - Fixes for Leaderboards<br>
@@ -5044,6 +5044,11 @@ function generateEvents(){
     eventsPage.appendChild(selectorsDiv);
 
     let selectors = {
+        'Collection': {
+            'img': 'CollectingEventTotemBtn',
+            'text': "Collection Event Rotation",
+            'bgimg': 'EventBanner/EventBannerSmallTotem'
+        },
         'Races': {
             'img': 'EventRaceBtn',
             'text': "Race Events",
@@ -5079,6 +5084,11 @@ function generateEvents(){
             'text': "Coop Challenges",
             'bgcolor': 'radial-gradient(circle, transparent 50%, rgba(0,0,0,1) 100%),linear-gradient(45deg, rgb(255,150,0), rgb(255,150,0))'
         }
+    }
+
+    let now = new Date();
+    if (now > new Date(constants.collection.current.end) /*|| now < new Date(constants.collection.current.start)*/) {
+        delete selectors['Collection'];
     }
 
     Object.entries(selectors).forEach(([selector,object]) => {
@@ -5139,6 +5149,11 @@ function changeEventTab(selector){
             showLoading();
             generateChallenges("CoopDailyChallenges");
             break;
+        case "Collection":
+            addToBackQueue({ source: "events", destination: "featured" });
+            generateInstaSchedule();
+            document.getElementById('events-content').style.display = "none";
+            document.getElementById('featured-content').style.display = "flex";
     }
     // addToBackQueue({callback: generateEvents})
 }
@@ -8260,7 +8275,7 @@ function generateExtrasPage() {
 
     let selectors = [
         // 'Custom Round Sets', 
-        'Featured Insta Schedule',
+        // 'Featured Insta Schedule',
         'Collection Event Odds',
         // 'Monkey Money Helper', 
         // 'Export Data', 
@@ -8276,10 +8291,10 @@ function generateExtrasPage() {
     }
 
 
-    let now = new Date();
-    if (now > new Date(constants.collection.current.end) || now < new Date(constants.collection.current.start)) {
-        selectors = selectors.filter(selector => selector != 'Featured Insta Schedule');
-    }
+    // let now = new Date();
+    // if (now > new Date(constants.collection.current.end) || now < new Date(constants.collection.current.start)) {
+    //     selectors = selectors.filter(selector => selector != 'Featured Insta Schedule');
+    // }
 
     selectors.forEach((selector) => {
         let selectorDiv = document.createElement('div');

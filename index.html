@@ -264,8 +264,12 @@
     document.getElementById("loading").style.transform = "scale(0)";
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
-    generateHeaderTabs();
-    changeTab("home");
-    generateFrontPage();
+    showLoading();
+    fetchConstants().then(() => {
+        hideLoading();
+        generateHeaderTabs();
+        changeTab("home");
+        generateFrontPage();
+    });
 </script>
 </html>
