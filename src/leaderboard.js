@@ -5,6 +5,7 @@ async function generateLeaderboards() {
 
     let leaderboardPage = document.createElement('div');
     leaderboardPage.classList.add('leaderboard-page', 'page-extra', 'fd-column', 'ai-center');
+    leaderboardPage.style.minHeight = "800px";
     leaderboardsContent.appendChild(leaderboardPage);
 
     // let workInProgressText = document.createElement('p');
