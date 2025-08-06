@@ -9053,7 +9053,7 @@ function generateInstaSchedule() {
             padding: "10px 20px",
             textAlign: "center",
         },
-        innerHTML: "Times are your local timezone. List is not from the API, please be patient for future events"
+        innerHTML: "Times are your local timezone. List is not from the API, special thanks to Minecool" //please be patient for future events
     });
     instaScheduleHeader.appendChild(instaHeaderDescription);
 
