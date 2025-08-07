@@ -873,8 +873,8 @@
             }
         },
         "current": {
-            "id": "mc58nt2x",
-            "start": 1754553600000,
+            "id": "mdnsu2ct",
+            "start": 1754532000000,
             "end": 1755417600000,
             "skin": "totem",
             "rotations": { 
@@ -907,7 +907,8 @@
                 "26": ["MonkeyAce", "BombShooter", "DartMonkey", "DartlingGunner"], 
                 "27": ["TackShooter", "HeliPilot", "MonkeyBuccaneer", "BoomerangMonkey"], 
                 "28": ["MonkeyVillage", "SniperMonkey", "EngineerMonkey", "BeastHandler"], 
-                "29": ["EngineerMonkey", "BeastHandler", "WizardMonkey", "NinjaMonkey"]
+                "29": ["EngineerMonkey", "BeastHandler", "WizardMonkey", "NinjaMonkey"],
+                "30":["Druid","Alchemist","GlueGunner","Desperado"]
             }
         },
         "mc58nt2x": {
