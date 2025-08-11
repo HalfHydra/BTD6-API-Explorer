@@ -663,17 +663,17 @@ function generateFrontPage(){
     let faqButton = document.createElement('p');
     faqButton.classList.add('where-button','black-outline')
     faqButton.innerHTML = 'FAQ';
-    infoButtons.appendChild(faqButton);
 
     let knownIssuesButton = document.createElement('p');
     knownIssuesButton.classList.add('where-button','black-outline');
     knownIssuesButton.innerHTML = 'Known Issues';
-    infoButtons.appendChild(knownIssuesButton);
 
     let changelogButton = document.createElement('p');
     changelogButton.classList.add('where-button','black-outline');
     changelogButton.innerHTML = 'Changelog';
     infoButtons.appendChild(changelogButton);
+    infoButtons.appendChild(faqButton);
+    infoButtons.appendChild(knownIssuesButton);
 
     let FAQDiv = document.createElement('div');
     FAQDiv.id = 'faq-div';
