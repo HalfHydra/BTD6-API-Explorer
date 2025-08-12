@@ -1551,57 +1551,57 @@ function generateOverview(){
             stat.appendChild(statValue);
         }
     }
-
-    } else {
-        let notLoggedInText = document.createElement('p');
-        notLoggedInText.classList.add('not-logged-in-text');
-        notLoggedInText.innerHTML = "You're in preview mode.<br>The Events, Explore, and Extras tabs can be used without an OAK token.";
-        overviewContent.appendChild(notLoggedInText);
-
-        let OtherInfoHeader = document.createElement('p');
-        OtherInfoHeader.classList.add('site-info-header','black-outline');
-        OtherInfoHeader.innerHTML = 'When an OAK token is entered:';
-        overviewContent.appendChild(OtherInfoHeader);
-
-        let panels = {
-            "Profile": {
-                "name": "View Your Profile!",
-                "desc": "You can see anything you can see on your in-game profile plus some extra Quick Stats"},
-            "FullMonkeyUses": {
-                "name": "Full Top Heroes and Top Monkeys List!",
-                "desc": "The in-game profiles only show the top 3 heroes and towers, but here you can see the full list!"
-            },
-            "ExtraStats": {
-                "name": "View Extra Stats!",
-                "desc": "In addition to the in-game profile stats, you can view extra stats such as Total Race Attempts, Total Challenges Played, and even Continues Used"
-            }
-        }
-
-        let instaMonkeyGuideContainer = document.createElement('div');
-        instaMonkeyGuideContainer.classList.add('insta-monkey-guide-container');
-        overviewContent.appendChild(instaMonkeyGuideContainer);
-
-        Object.keys(panels).forEach(method => {
-            let instaMonkeyGuideMethod = document.createElement('div');
-            instaMonkeyGuideMethod.classList.add('insta-monkey-guide-method');
-            instaMonkeyGuideContainer.appendChild(instaMonkeyGuideMethod);
-
-            let instaMonkeyGuideMethodText = document.createElement('p');
-            instaMonkeyGuideMethodText.classList.add('insta-monkey-guide-method-text','black-outline');
-            instaMonkeyGuideMethodText.innerHTML = panels[method].name;
-            instaMonkeyGuideMethod.appendChild(instaMonkeyGuideMethodText);
-
-            let instaMonkeyGuideMethodDesc = document.createElement('p');
-            instaMonkeyGuideMethodDesc.classList.add('insta-monkey-guide-method-desc');
-            instaMonkeyGuideMethodDesc.innerHTML = panels[method].desc;
-            instaMonkeyGuideMethod.appendChild(instaMonkeyGuideMethodDesc);
-
-            let instaMonkeyImage = document.createElement('img');
-            instaMonkeyImage.classList.add('insta-monkey-guide-method-img');
-            instaMonkeyImage.src = `./Assets/UI/Overview${method}.png`;
-            instaMonkeyGuideMethod.appendChild(instaMonkeyImage);
-        })
     }
+    // } else {
+    //     let notLoggedInText = document.createElement('p');
+    //     notLoggedInText.classList.add('not-logged-in-text');
+    //     notLoggedInText.innerHTML = "You're in preview mode.<br>The Events, Explore, and Extras tabs can be used without an OAK token.";
+    //     overviewContent.appendChild(notLoggedInText);
+
+    //     let OtherInfoHeader = document.createElement('p');
+    //     OtherInfoHeader.classList.add('site-info-header','black-outline');
+    //     OtherInfoHeader.innerHTML = 'When an OAK token is entered:';
+    //     overviewContent.appendChild(OtherInfoHeader);
+
+    //     let panels = {
+    //         "Profile": {
+    //             "name": "View Your Profile!",
+    //             "desc": "You can see anything you can see on your in-game profile plus some extra Quick Stats"},
+    //         "FullMonkeyUses": {
+    //             "name": "Full Top Heroes and Top Monkeys List!",
+    //             "desc": "The in-game profiles only show the top 3 heroes and towers, but here you can see the full list!"
+    //         },
+    //         "ExtraStats": {
+    //             "name": "View Extra Stats!",
+    //             "desc": "In addition to the in-game profile stats, you can view extra stats such as Total Race Attempts, Total Challenges Played, and even Continues Used"
+    //         }
+    //     }
+
+    //     let instaMonkeyGuideContainer = document.createElement('div');
+    //     instaMonkeyGuideContainer.classList.add('insta-monkey-guide-container');
+    //     overviewContent.appendChild(instaMonkeyGuideContainer);
+
+    //     Object.keys(panels).forEach(method => {
+    //         let instaMonkeyGuideMethod = document.createElement('div');
+    //         instaMonkeyGuideMethod.classList.add('insta-monkey-guide-method');
+    //         instaMonkeyGuideContainer.appendChild(instaMonkeyGuideMethod);
+
+    //         let instaMonkeyGuideMethodText = document.createElement('p');
+    //         instaMonkeyGuideMethodText.classList.add('insta-monkey-guide-method-text','black-outline');
+    //         instaMonkeyGuideMethodText.innerHTML = panels[method].name;
+    //         instaMonkeyGuideMethod.appendChild(instaMonkeyGuideMethodText);
+
+    //         let instaMonkeyGuideMethodDesc = document.createElement('p');
+    //         instaMonkeyGuideMethodDesc.classList.add('insta-monkey-guide-method-desc');
+    //         instaMonkeyGuideMethodDesc.innerHTML = panels[method].desc;
+    //         instaMonkeyGuideMethod.appendChild(instaMonkeyGuideMethodDesc);
+
+    //         let instaMonkeyImage = document.createElement('img');
+    //         instaMonkeyImage.classList.add('insta-monkey-guide-method-img');
+    //         instaMonkeyImage.src = `./Assets/UI/Overview${method}.png`;
+    //         instaMonkeyGuideMethod.appendChild(instaMonkeyImage);
+    //     })
+    // }
 }
 
 function generateRank(veteran){
@@ -1780,6 +1780,7 @@ function generateProgress(){
 
         let instaMonkeyGuideContainer = document.createElement('div');
         instaMonkeyGuideContainer.classList.add('insta-monkey-guide-container');
+        instaMonkeyGuideContainer.style.width = "800px";
         notLoggedInContent.appendChild(instaMonkeyGuideContainer);
 
         Object.keys(panels).forEach(method => {
