@@ -600,7 +600,11 @@ readLocalStorage()
 function generateFrontPage(){
     const frontPage = document.getElementById('home-content');
 
-    frontPage.appendChild(createEl('p', { classList: ['disclaimer-text', 'font-gardenia'], innerHTML: 'This site is not affiliated with Ninja Kiwi. All game assets belong to Ninja Kiwi.' }));
+    frontPage.appendChild(createEl('p', { classList: ['disclaimer-text', 'font-gardenia'], style: {
+        fontSize: "18px",
+        textAlign: "center",
+        lineHeight: "1.5",
+    }, innerHTML: 'A fanmade viewer for the Ninja Kiwi Open Data API plus other features.<br>This site is not affiliated with Ninja Kiwi. All game assets belong to Ninja Kiwi.' }));
     // frontPage.appendChild(createEl('p', { classList: ['front-page-text', 'font-gardenia', 'ta-center'], innerHTML: 'Access your profile using an OAK token for the best experience!' }));
     // frontPage.appendChild(generateLoginDiv());
 
