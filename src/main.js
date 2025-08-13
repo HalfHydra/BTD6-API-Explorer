@@ -5343,7 +5343,7 @@ function generateBosses(elite){
             'name': titleCaseBoss,
             'elite': elite,
             'eventNumber': bossNumber,
-            'scoringType': race.scoringType,
+            'scoringType': elite ? race.eliteScoringType : race.normalScoringType,
             'index': index
         }
 
@@ -5452,7 +5452,7 @@ function generateBosses(elite){
                         raceInfoRules.classList.remove('hero-selector-div-disabled');
                         let challengeScoreTypeIcon = document.createElement('img');
                         challengeScoreTypeIcon.classList.add('challenge-modifier-icon-event');
-                        switch(race.scoringType){
+                        switch(elite ? race.eliteScoringType : race.normalScoringType){
                             case "LeastCash":
                                 challengeScoreTypeIcon.src = `./Assets/ChallengeRulesIcon/LeastCashIcon.png`;
                                 raceChallengeIcons.appendChild(challengeScoreTypeIcon);

@@ -385,8 +385,9 @@ async function showRoundsetModel(source, roundset) {
             rogueHeaderBar.appendChild(roundsetDiv);
 
             if (rs == roundset) {
-                roundsetDiv.style.border = "5px #00ff00 solid";
-                roundsetDiv.style.borderRadius = "20px";
+                // roundsetDiv.style.border = "5px #00ff00 solid";
+                // roundsetDiv.style.borderRadius = "20px";
+                roundsetDiv.classList.add('rogue-roundset-selector-active');
             }
 
             let roundsetIcon = document.createElement('img');
