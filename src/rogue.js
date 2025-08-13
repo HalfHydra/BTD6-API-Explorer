@@ -1435,7 +1435,7 @@ function downloadImage() {
 
     let progressText = document.createElement('p');
     progressText.classList.add('rogue-progress-text-export','black-outline');
-    progressText.innerHTML = `${rogueSaveData.extractedArtifacts.length}/${Object.keys(rogueJSON.artifacts).length}`;
+    progressText.innerHTML = `${rogueSaveData.extractedArtifacts.length + 8}/${Object.keys(rogueJSON.artifacts).length}`;
     rightDiv.appendChild(progressText);
     
     let artifactBag = document.createElement('img');
@@ -1471,7 +1471,7 @@ function downloadImage() {
     }
 
     Object.values(artifacts).forEach(artifact => {
-        if (starterArtifacts.includes(artifact.nameLocKey)) { return; }
+        // if (starterArtifacts.includes(artifact.nameLocKey)) { return; }
         mainArtifactsDiv.appendChild(generateArtifactContainer(artifact,'force'));
     });
 
@@ -1495,7 +1495,7 @@ function downloadImage() {
     document.getElementById('rogue-image-content').style.display = "block";
     setTimeout(function () {
         htmlToImage.toJpeg(document.getElementById(`rogue-image-content`), {
-            width: 1800,
+            width: 2100,
             quality: 0.85,
             style: {
                 opacity: 1,
