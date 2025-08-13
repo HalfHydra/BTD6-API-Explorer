@@ -8290,7 +8290,7 @@ function generateExtrasPage() {
     let selectors = [
         // 'Custom Round Sets', 
         // 'Featured Insta Schedule',
-        'Collection Event Odds',
+        // 'Collection Event Odds',
         // 'Monkey Money Helper', 
         // 'Export Data', 
         'Rogue Legends Artifacts',
