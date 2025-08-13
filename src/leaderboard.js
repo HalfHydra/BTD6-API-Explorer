@@ -560,7 +560,7 @@ async function generateLeaderboardEntries(metadata, type) {
         columnsType = "GameTime";
     }
     if (metadata.hasOwnProperty('bossType')) {
-        switch (metadata.scoringType) {
+        switch ((type == "BossElite") ? metadata.eliteScoringType : metadata.normalScoringType) {
             case "GameTime":
                 columnsType = "GameTime";
                 break;
@@ -689,7 +689,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                 leaderboardEntryMainScore.innerHTML = formatScoreTime(entry.score);
             }
             if (metadata.hasOwnProperty('bossType')) {
-                switch (metadata.scoringType) {
+                switch ((type == "BossElite") ? metadata.eliteScoringType : metadata.normalScoringType) {
                     case "GameTime":
                         let submittedDate = new Date(metadata.start + scorePartsObj["Game Time"].score)
 
