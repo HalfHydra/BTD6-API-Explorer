@@ -4985,6 +4985,14 @@ function generateAchievementsGameView(){
             achievementCompletedCheck.classList.add('achievement-completed-check');
             achievementCompletedCheck.src = "./Assets/UI/TickGreenIcon.png";
             achievementBottomDiv.appendChild(achievementCompletedCheck);
+        } else if (achievementData.model.hidden) {
+            achievementBottomDiv.appendChild(generateButton("Reveal", "unset", function() {
+                achievementNameText.innerHTML = getLocValue(`Achievement ${achievementData.model.achievementId} Name`);
+                achievementDescText.innerHTML = getLocValue(`Achievement ${achievementData.model.achievementId} Description`);
+                achievementIconImg.src = getAchievementIcon(achievementData.model.achievementIcon, false);
+                achievementData.model.hidden = false;
+                achievementBottomDiv.removeChild(achievementBottomDiv.lastChild);
+            }))
         }
     }
 
