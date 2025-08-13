@@ -1961,7 +1961,8 @@ function generateTowerProgressTower(tower){
 
     let towerProgressContentText = document.createElement('p');
     towerProgressContentText.classList.add('tower-progress-content-text', paragonUnlocked ? 'knowledge-outline' : 'black-outline');
-    towerProgressContentText.innerHTML = (useNamedMonkeys && btd6usersave.namedMonkeys[tower]) ? btd6usersave.namedMonkeys[tower] : getLocValue(tower);
+    let towerName = (useNamedMonkeys && btd6usersave.namedMonkeys[tower]) ? btd6usersave.namedMonkeys[tower] : getLocValue(tower)
+    towerProgressContentText.appendChild(document.createTextNode(towerName));
     towerProgressInfoContainer.appendChild(towerProgressContentText);
 
     let towerProgressContentXP = document.createElement('p');
