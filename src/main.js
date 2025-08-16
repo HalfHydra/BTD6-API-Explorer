@@ -8296,7 +8296,7 @@ function generateExtrasPage() {
         'Rogue Legends Artifacts',
         'Challenge & Map Browser',
         'Settings',
-        'Send Feedback',
+        // 'Send Feedback',
         "Use Code 'HalfHydra' <br>in the BTD6 Shop!"
     ];
 
