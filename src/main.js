@@ -4864,7 +4864,7 @@ function generateAchievementsGameView(){
     let AchievementsContainer = document.getElementById('achievements-container');
     AchievementsContainer.innerHTML = "";
 
-    let achievements = constants.achievementGameOrder;
+    let achievements = Object.keys(achievementsJSON);
     switch(currentAchievementFilter){
         case "Locked":
             achievements = achievements.filter(achievement => !btd6usersave.achievementsClaimed.includes(reverseAchievementNameFixMap[achievementsJSON[achievement].name] || achievementsJSON[achievement].name));

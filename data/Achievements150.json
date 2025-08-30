@@ -2564,5 +2564,35 @@
             "hidden": true,
             "type": "AchievementNahIdWin"
         }
+    },
+    "151": {
+        "name": "They call me Cave Monkey!",
+        "description": "Rhymes with Grug",
+        "model": {
+            "achievementId": 155,
+            "achievementIcon": "CaveMonkey",
+            "hiddenAchievementIcon": "Hidden",
+            "subscript": "",
+            "achievementGoal": 50000,
+            "loot": "Power:CaveMonkey,3",
+            "isCoop": false,
+            "hidden": true,
+            "type": "AchievementTheyCallMeCaveMonkey"
+        }
+    },
+    "152": {
+        "name": "First Steps",
+        "description": "Complete the First Time Tutorial quest.",
+        "model": {
+            "achievementId": 156,
+            "achievementIcon": "FirstSteps",
+            "hiddenAchievementIcon": "",
+            "subscript": "",
+            "achievementGoal": 1,
+            "loot": "MonkeyMoney:100",
+            "isCoop": false,
+            "hidden": false,
+            "type": "AchievementFirstSteps"
+        }
     }
 }
