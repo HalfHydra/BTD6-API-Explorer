@@ -109,13 +109,12 @@ let imageScroll = [
         "title": "New Site Update!",
         "text": `Site Update 2.0.0:<br>
         - Featured Insta Schedule added under the Events tab!<br>
-        - Added Update 49 content<br>
         - Completely reworked the UI<br>
         - Fixes for Leaderboards<br>
         - New site <a href="https://discord.gg/wep2RDmcqZ " target="_blank" style="color: white;">Discord Server</a><br>
         - Full Changelog below<br>
         `,
-        "image": "/LandingScroll/Update49&Featured"
+        "image": "/LandingScroll/Update50&Featured"
     },
     {
         "title": "View Your Profile!",
@@ -604,7 +603,7 @@ function generateFrontPage(){
         fontSize: "18px",
         textAlign: "center",
         lineHeight: "1.5",
-    }, innerHTML: 'A fanmade viewer for the Ninja Kiwi Open Data API plus other features.<br>This site is not affiliated with Ninja Kiwi. All game assets belong to Ninja Kiwi.' }));
+    }, innerHTML: 'A fanmade viewer for the Ninja Kiwi <a href="https://data.ninjakiwi.com/" target="_blank" style="color: white;">Open Data API</a> plus other features.<br>This site is not affiliated with Ninja Kiwi. All game assets belong to Ninja Kiwi.' }));
     // frontPage.appendChild(createEl('p', { classList: ['front-page-text', 'font-gardenia', 'ta-center'], innerHTML: 'Access your profile using an OAK token for the best experience!' }));
     // frontPage.appendChild(generateLoginDiv());
 
