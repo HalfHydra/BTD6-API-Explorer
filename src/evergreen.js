@@ -198,6 +198,10 @@ async function fetchInstaDependencies() {
 }
 
 async function fetchMainDependencies() {
+    if (!Object.keys(constants.heroesInOrder).includes(btd6usersave.primaryHero)) {
+        btd6usersave.primaryHero = Object.keys(constants.heroesInOrder)[0];
+    }
+
     await fetchLocKeys();
     await fetchRogueDependencies();
     Promise.all([
