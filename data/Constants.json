@@ -1,12 +1,12 @@
 {
     "version": "2.0.0",
-    "projectContentVersion": 49,
+    "projectContentVersion": 50,
     "totalInstaMonkeys": 1600,
-    "achievements": 138,
-    "hiddenAchievements": 13,
-    "totalMaps": 80,
-    "profileBanners": 53,
-    "profileAvatars": 113,
+    "achievements": 139,
+    "hiddenAchievements": 14,
+    "totalMaps": 81,
+    "profileBanners": 54,
+    "profileAvatars": 114,
     "teamsBanners": 15,
     "startRound": {
         "Easy": 1,
@@ -475,7 +475,7 @@
         "EngineerMonkey": "Support",
         "BeastHandler": "Support"
     },
-    "heroesInOrder": {"Quincy": "Blue", "Gwendolin": "Yellow", "StrikerJones": "Grey", "ObynGreenfoot": "Aqua", "CaptainChurchill": "Grey", "Benjamin": "Aqua", "PatFusty": "Green", "Ezili":"Purple", "Adora":"Yellow", "Etienne":"Grey", "Sauda":"Grey", "AdmiralBrickell":"Yellow", "Psi":"Yellow", "Geraldo":"Aqua", "Corvus": "Aqua", "Rosalia": "Green"},
+    "heroesInOrder": {"Quincy": "Blue", "Gwendolin": "Yellow", "StrikerJones": "Grey", "ObynGreenfoot": "Aqua", "CaptainChurchill": "Grey", "Benjamin": "Aqua", "PatFusty": "Green", "Ezili":"Purple", "Adora":"Yellow", "Etienne":"Grey", "Sauda":"Grey", "AdmiralBrickell":"Yellow", "Psi":"Yellow", "Geraldo":"Aqua", "Corvus": "Aqua", "Rosalia": "Green", "Silas": "Blue"},
     "mapsInOrder": {
         "Tutorial": "Beginner",
         "InTheLoop": "Beginner",
@@ -501,6 +501,7 @@
         "Hedge": "Beginner",
         "EndOfTheRoad": "Beginner",
         "Logs": "Beginner",
+        "LostCrevasse": "Intermediate",
         "LuminousCove": "Intermediate",
         "SulfurSprings": "Intermediate",
         "WaterPark": "Intermediate",
@@ -1003,7 +1004,8 @@
         "Corvus": [0.122, 0.318, 0.518],
         "Voidora": [0.102, 0.145, 0.341],
         "JiangshiSauda": [0.359, 0.453, 0.547],
-        "Rosalia": [1.000, 0.297, 0.622]
+        "Rosalia": [1.000, 0.297, 0.622],
+        "Silas": [0.376, 0.459, 0.937]
     },
     "HeroPortraitLevels": {
         "AdmiralBrickell": [1,3,7,10,20],
@@ -1051,7 +1053,8 @@
         "DreamstatePsi": [1,3,8,10,20],
         "RedSauda": [1,3,10,20],
         "RosaliaTinkerfairy": [1,2,5,7,13,20],
-        "SheRa": [1,3,7,10,20,"20SunGod","20SunGodVengeful"]
+        "SheRa": [1,3,7,10,20,"20SunGod","20SunGodVengeful"],
+        "Silas": [1,3,7,10,20]
     },
     "heroSkins": {
         "Quincy": ["Quincy", "CyberQuincy", "WolfpackQuincy"],
@@ -1069,7 +1072,8 @@
         "Geraldo": ["Geraldo", "GeraldoGentlemanGadgeteer"],
         "Sauda": ["Sauda", "JiangshiSauda", "VikingSauda", "RedSauda"],
         "Corvus": ["Corvus"],
-        "Rosalia": ["Rosalia", "RosaliaTinkerfairy"]
+        "Rosalia": ["Rosalia", "RosaliaTinkerfairy"],
+        "Silas": ["Silas"]
     },
     "heroLevelIcons": {
         "Quincy": [3,10],
@@ -1087,7 +1091,8 @@
         "Geraldo": [],
         "Sauda": [3,10],
         "Corvus": [3,7,10],
-        "Rosalia": [3,7,10]
+        "Rosalia": [3,7,10],
+        "Silas": [3,7,10]
     },
     "Rank": {
         "1": {
