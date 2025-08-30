@@ -384,7 +384,7 @@ function generateProgressSubText(){
     progressSubText["Powers"] = `${powersTotal} Power${powersTotal != 1 ? "s" : ""} Collected`
     let instaTotal = Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount) + btd6publicprofile.gameplay.instaMonkeysUsed;
     progressSubText["InstaMonkeys"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Collected`;
-    progressSubText["Achievements"] = `${btd6publicprofile.achievements}/${constants.achievements + constants.hiddenAchievements} Achievement${btd6publicprofile.achievements != 1 ? "s" : ""} Earned`;
+    progressSubText["Achievements"] = `${btd6usersave.achievementsClaimed.length}/${constants.achievements + constants.hiddenAchievements} Achievement${btd6publicprofile.achievements != 1 ? "s" : ""} Earned`;
     let extrasTotal = Object.keys(extrasUnlocked).length;
     progressSubText["TrophyStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k] && trophyStoreItemsJSON[k]).length} Trophy Store Items Collected`
     progressSubText["TeamsStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k] && teamsStoreItemsJSON[k]).length} Team Store Items Unlocked`
