@@ -1172,7 +1172,7 @@
 .hero-selector-header {
     display: flex;
     max-width: 330px;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
     overflow-y: scroll;
     scrollbar-width: none;
