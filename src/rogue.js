@@ -95,15 +95,23 @@ fetchRogueDependencies();
 loadRogueDataFromLocalStorage();
 
 function postProcessRogueData(){
-    let unusedArtifacts = ['EssenceOfLych1', 'Token', 'ProjectileCarousel1']
+    let rarityTiers = ["Common", "Rare", "Legendary"]
+    function formatParams(str, params) {
+        return str.replace(/{(\d+)}/g, (match, number) =>
+            typeof params[number] !== 'undefined' ? params[number] : match
+        );
+    }
+
+    let unusedArtifacts = ['EssenceOfLych1', 'Token', 'TokenMonkeyMoney', 'TokenRogueXp', 'ProjectileCarousel1']
     for (let [hero, starterKit] of Object.entries(rogueJSON.heroStarterKits)){
-        console.log(starterKit.artifact)
         rogueJSON.artifacts[starterKit.artifact].starterKitHero = hero;
     }
-    for (let artifact in rogueJSON.artifacts){
+    for (let [artifact, data] of Object.entries(rogueJSON.artifacts)){
         if (artifact.startsWith("Boost")){
             delete rogueJSON.artifacts[artifact];
         }
+        data.title = getLocValue(data.nameLocKey).replace("{0}", rarityTiers[data.tier]);
+        data.description = formatParams(getLocValue(data.descriptionLocKey), data.descriptionParams)
     }
     for (let artifact of unusedArtifacts){
         delete rogueJSON.artifacts[artifact];
@@ -449,10 +457,13 @@ function generateArtifactSettings() {
             case "Added Update 49":
                 settingsFilterDescription.innerHTML = "Only Artifacts that were added in Update 49 will be included to start.";
                 break;
+            case "Added Update 50":
+                settingsFilterDescription.innerHTML = "Only Artifacts that were added in Update 50 will be included to start.";
+                break;
         }
     }
 
-    let settingsFilterDropdown = generateDropdown("Artifact Filter:", ["All", "Starter Kit", "Non Starter Kit", "One Variant", "Two Variants", "Added Update 48", "Added Update 49"], rogueSaveData.artifactFilter, (value) => {
+    let settingsFilterDropdown = generateDropdown("Artifact Filter:", ["All", "Starter Kit", "Non Starter Kit", "One Variant", "Two Variants", "Added Update 48", "Added Update 49", "Added Update 50"], rogueSaveData.artifactFilter, (value) => {
         rogueSaveData.artifactFilter = value;
         updateDescription();
         saveRogueDataToLocalStorage();
@@ -538,9 +549,9 @@ function generateArtifactSettings() {
         let sampleArtifacts = ['SplodeyDarts', 'SquadronTogether', 'DivineIntervention'];
 
         sampleArtifacts.forEach(artifact => {
-            previewArtifacts.push(rogueJSON.artifacts[artifact + "1"]);
-            previewArtifacts.push(rogueJSON.artifacts[artifact + "2"]);
-            previewArtifacts.push(rogueJSON.artifacts[artifact + "3"]);
+            previewArtifacts.push(artifact + "1");
+            previewArtifacts.push(artifact + "2");
+            previewArtifacts.push(artifact + "3");
         });
 
         switch (rogueSaveData.artifactSort) {
@@ -594,10 +605,10 @@ function generateArtifacts() {
 
     switch (rogueSaveData.artifactFilter) {
         case "Extracted":
-            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => rogueSaveData.extractedArtifacts.includes(value.nameLocKey)))
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => rogueSaveData.extractedArtifacts.includes(key)))
             break;
         case "Unextracted":
-            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !rogueSaveData.extractedArtifacts.includes(value.nameLocKey)))
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !rogueSaveData.extractedArtifacts.includes(key)))
             break;
         case "Starter Kit":
             currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => value.hasOwnProperty('starterKitHero')))
@@ -622,11 +633,11 @@ function generateArtifacts() {
                         break;
                 }
             })
-            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !excludeArtifacts.includes(value.nameLocKey)))
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !excludeArtifacts.includes(key)))
             break;
 
         case "Two Variants":
-            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => (rogueJSON.artifacts.hasOwnProperty(value.baseId + "1") && rogueJSON.artifacts.hasOwnProperty(value.baseId + "2") && !rogueJSON.artifacts.hasOwnProperty(value.baseId + "3"))))
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => (rogueJSON.artifacts.hasOwnProperty(value.baseId + "1") && rogueJSON.artifacts.hasOwnProperty(value.baseId + "2") && !rogueJSON.artifacts.hasOwnProperty(value.baseId + "3")) || (!rogueJSON.artifacts.hasOwnProperty(value.baseId + "1") && rogueJSON.artifacts.hasOwnProperty(value.baseId + "2") && rogueJSON.artifacts.hasOwnProperty(value.baseId + "3"))))
             break;
         case "One Variant":
             currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => (rogueJSON.artifacts.hasOwnProperty(value.baseId + "1") && !rogueJSON.artifacts.hasOwnProperty(value.baseId + "2") && !rogueJSON.artifacts.hasOwnProperty(value.baseId + "3"))))
@@ -636,6 +647,9 @@ function generateArtifacts() {
             break;
         case "Added Update 49":
             currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => value.added == 49))
+            break;
+        case "Added Update 50":
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => value.added == 50))
             break;
     }
 
@@ -688,28 +702,28 @@ function generateArtifacts() {
             break;
     }
 
-    Object.values(currentArtifacts).forEach(artifact => {
-        if (!rogueSaveData.showStarterArtifacts && starterArtifacts.includes(artifact.nameLocKey)) { return; }
-        if (!rogueSaveData.showBossArtifacts && bossArtifacts.includes(artifact.nameLocKey)) { return; }
+    Object.entries(currentArtifacts).forEach(([artifact,data]) => {
+        if (!rogueSaveData.showStarterArtifacts && starterArtifacts.includes(artifact)) { return; }
+        if (!rogueSaveData.showBossArtifacts && bossArtifacts.includes(artifact)) { return; }
 
         let artifactDiv = generateArtifactContainer(artifact);
-        artifactDiv.alt = artifact.title;
-        artifactDivMap[artifact.nameLocKey] = artifactDiv;
+        artifactDiv.alt = data.title;
+        artifactDivMap[artifact] = artifactDiv;
         artifactDiv.addEventListener('click', () => {
-            if (rogueSaveData.clickToCollect && rogueSaveData.highlightExtracted && !starterArtifacts.includes(artifact.nameLocKey)) {
-                if (rogueSaveData.extractedArtifacts.includes(artifact.nameLocKey)) {
-                    rogueSaveData.extractedArtifacts = rogueSaveData.extractedArtifacts.filter(e => e !== artifact.nameLocKey);
+            if (rogueSaveData.clickToCollect && rogueSaveData.highlightExtracted && !starterArtifacts.includes(artifact)) {
+                if (rogueSaveData.extractedArtifacts.includes(artifact)) {
+                    rogueSaveData.extractedArtifacts = rogueSaveData.extractedArtifacts.filter(e => e !== artifact);
                     artifactDiv.classList.add('artifact-unextracted');
                     updateArtifactCount();
                     saveRogueDataToLocalStorage();
                 } else {
-                    rogueSaveData.extractedArtifacts.push(artifact.nameLocKey);
+                    rogueSaveData.extractedArtifacts.push(artifact);
                     artifactDiv.classList.remove('artifact-unextracted');
                     updateArtifactCount();
                     saveRogueDataToLocalStorage();
                 }
             } else {
-                generateArtifactPopout(artifact.nameLocKey);
+                generateArtifactPopout(artifact);
             }
         })
         mainArtifactsDiv.appendChild(artifactDiv);
@@ -721,25 +735,27 @@ function generateArtifacts() {
 }
 
 function generateArtifactContainer(artifact, type) {
+    let artifactData = rogueJSON.artifacts[artifact];
+
     let artifactDiv = document.createElement('div');
     artifactDiv.classList.add('artifact-container');
-    if ((rogueSaveData.highlightExtracted || type == "force") && !rogueSaveData.extractedArtifacts.includes(artifact.nameLocKey) && !starterArtifacts.includes(artifact.nameLocKey) && type != "preview") {
-    artifactDiv.classList.add('artifact-unextracted');
-}
+    if ((rogueSaveData.highlightExtracted || type == "force") && !rogueSaveData.extractedArtifacts.includes(artifact) && !starterArtifacts.includes(artifact) && type != "preview") {
+        artifactDiv.classList.add('artifact-unextracted');
+    }
 
     let artifactImg = document.createElement('img');
-    artifactImg.src = `../Assets/RogueArtifacts/${artifact.icon}.png`;
+    artifactImg.src = `../Assets/RogueArtifacts/${artifactData.icon}.png`;
     artifactImg.classList.add('artifact-img');
     artifactDiv.appendChild(artifactImg);
 
     let artifactFrame = document.createElement('img');
-    artifactFrame.src = `../Assets/RogueFrames/${getFrameIconName(artifact)}.png`;
+    artifactFrame.src = `../Assets/RogueFrames/${getFrameIconName(artifactData)}.png`;
     artifactFrame.classList.add('artifact-frame');
     artifactDiv.appendChild(artifactFrame);
 
     if (type != "modal" && type != "preview") {
         tippy(artifactDiv, {
-            content: `<p class="artifact-title">${artifact.title}</p>${artifact.description}`,
+            content: `<p class="artifact-title">${artifactData.title}</p>${artifactData.description}`,
             allowHTML: true,
             placement: 'top',
             hideOnClick: false,
@@ -832,7 +848,7 @@ function generateArtifactPopout(key) {
     modalClose.classList.add('collection-modal-close', 'pointer');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
-        goBack();
+        goBack(true);
     })
     modalHeaderDiv.appendChild(modalClose);
 
@@ -848,7 +864,7 @@ function generateArtifactPopout(key) {
     itemDiv.classList.add('modal-trophy-div');
     imgAndDetails.appendChild(itemDiv);
 
-    let artifactDiv = generateArtifactContainer(data, 'modal');
+    let artifactDiv = generateArtifactContainer(key, 'modal');
     itemDiv.appendChild(artifactDiv);
 
     if (!starterArtifacts.includes(key)) {
@@ -948,13 +964,13 @@ function generateArtifactPopout(key) {
 
     let variants = []
     if(rogueJSON.artifacts.hasOwnProperty(data.baseId + "1")){
-        variants.push(rogueJSON.artifacts[data.baseId + "1"])
+        variants.push(data.baseId + "1")
     }
     if(rogueJSON.artifacts.hasOwnProperty(data.baseId + "2")){
-        variants.push(rogueJSON.artifacts[data.baseId + "2"])
+        variants.push(data.baseId + "2")
     }
     if(rogueJSON.artifacts.hasOwnProperty(data.baseId + "3")){
-        variants.push(rogueJSON.artifacts[data.baseId + "3"])
+        variants.push(data.baseId + "3")
     }
 
     let currentVariant;
@@ -977,11 +993,11 @@ function generateArtifactPopout(key) {
         variants.forEach(variant => {
             let variantDiv = generateArtifactContainer(variant, 'modal');
             variantDiv.addEventListener('click', () => {
-                generateArtifactPopout(variant.nameLocKey);
+                generateArtifactPopout(variant);
             })
             otherVariantsDiv.appendChild(variantDiv);
 
-            if (variant.nameLocKey === data.nameLocKey) {
+            if (variant === key) {
                 currentVariant = variantDiv;
             }
         })
@@ -1083,7 +1099,7 @@ function generateRogueHeroStarterKits() {
         starterKitDiv.appendChild(starterKitHeroSquareImg);
 
 
-        let artifactDiv = generateArtifactContainer(rogueJSON.artifacts[starterKit.artifact]);
+        let artifactDiv = generateArtifactContainer(starterKit.artifact);
         artifactDiv.addEventListener('click', () => {
             generateArtifactPopout(starterKit.artifact);
         })
@@ -1099,7 +1115,7 @@ function generateRogueHeroStarterKits() {
 
 function generateInstaMonkeyContainer(instaMonkey) {
     let tower = instaMonkey.baseId;
-    let tiers = JSON.parse(instaMonkey.tiers);
+    let tiers = instaMonkey.tiers;
 
     let instaMonkeyTierContainer = document.createElement('div');
     instaMonkeyTierContainer.classList.add('insta-monkey-tier-container');
@@ -1233,9 +1249,9 @@ function generateImageBuilder() {
         let sampleArtifacts = ['SplodeyDarts', 'SquadronTogether', 'DivineIntervention'];
 
         sampleArtifacts.forEach(artifact => {
-            previewArtifacts.push(rogueJSON.artifacts[artifact + "1"]);
-            previewArtifacts.push(rogueJSON.artifacts[artifact + "2"]);
-            previewArtifacts.push(rogueJSON.artifacts[artifact + "3"]);
+            previewArtifacts.push(artifact + "1");
+            previewArtifacts.push(artifact + "2");
+            previewArtifacts.push(artifact + "3");
         });
 
         switch (rogueSaveData.imageOptions.sort) {
@@ -1470,7 +1486,7 @@ function downloadImage() {
             break;
     }
 
-    Object.values(artifacts).forEach(artifact => {
+    Object.keys(artifacts).forEach(artifact => {
         // if (starterArtifacts.includes(artifact.nameLocKey)) { return; }
         mainArtifactsDiv.appendChild(generateArtifactContainer(artifact,'force'));
     });

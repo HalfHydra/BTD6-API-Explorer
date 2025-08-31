@@ -17,7 +17,7 @@ backButton.addEventListener('click', () => {
 })
 document.querySelector('.header').prepend(backButton);
 
-function goBack(){
+function goBack(noScroll){
     let currentState = backQueue.pop();
     if (currentState.source) {
         document.getElementById(currentState.destination + "-content").style.display = 'none';
@@ -33,7 +33,9 @@ function goBack(){
     if (backQueue.length === 0) {
         backButton.classList.remove('visible');
     }
-    resetScroll();
+    if (!noScroll) {
+        resetScroll();
+    }
 }
 
 function addToBackQueue(object) {
@@ -94,7 +96,7 @@ function createModal({ header = '', content = '', footer = '', classList = [] } 
         src: "./Assets/UI/CloseBtn.png"
     });
     modalClose.addEventListener('click', () => {
-        goBack();
+        goBack(true);
     });
     modalHeader.appendChild(modalClose);
 
