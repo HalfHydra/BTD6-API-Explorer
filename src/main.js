@@ -971,7 +971,7 @@ function changeTab(tab) {
             generateExplore();
             break;
         case "leaderboards":
-            changeTitle("Bloons TD 6 Leaderboards")
+            // changeTitle("Bloons TD 6 Leaderboards")
             generateLeaderboards();
             break;
         case "rounds":
