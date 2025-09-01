@@ -654,11 +654,11 @@ function generateArtifacts() {
     }
 
     if (!rogueSaveData.showStarterArtifacts) {
-        currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !starterArtifacts.includes(value.nameLocKey)))
+        currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !starterArtifacts.includes(key)))
     }
 
     if (!rogueSaveData.showBossArtifacts) {
-        currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !bossArtifacts.includes(value.nameLocKey)))
+        currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !bossArtifacts.includes(key)))
     }
 
     //Category filters: If no common, remove all tier 1s. If no rare, remove all tiers 2s. if no legendary, remove all tier 3s.
@@ -679,11 +679,11 @@ function generateArtifacts() {
     switch (rogueSaveData.extractionFilter) {
         case "Only Extracted":
             let extractedArtifacts = rogueSaveData.extractedArtifacts.concat(starterArtifacts)
-            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => extractedArtifacts.includes(value.nameLocKey)))
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => extractedArtifacts.includes(key)))
             break;
         case "Only Unextracted":
             let unextractedArtifacts = rogueSaveData.extractedArtifacts.concat(starterArtifacts)
-            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !unextractedArtifacts.includes(value.nameLocKey)))
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => !unextractedArtifacts.includes(key)))
             break;
     }
 
@@ -880,7 +880,7 @@ function generateArtifactPopout(key) {
         mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
         mapsProgressCoopToggleInput.style.backgroundColor = "rgba(0,0,0,0.36)";
         mapsProgressCoopToggleInput.type = 'checkbox';
-        mapsProgressCoopToggleInput.checked = rogueSaveData.extractedArtifacts.includes(data.nameLocKey);
+        mapsProgressCoopToggleInput.checked = rogueSaveData.extractedArtifacts.includes(key);
         extractedCheckDiv.appendChild(mapsProgressCoopToggleInput);
     }
 
@@ -936,7 +936,7 @@ function generateArtifactPopout(key) {
         mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
         mapsProgressCoopToggleInput.style.backgroundColor = "rgba(0,0,0,0.36)";
         mapsProgressCoopToggleInput.type = 'checkbox';
-        mapsProgressCoopToggleInput.checked = rogueSaveData.extractedArtifacts.includes(data.nameLocKey);
+        mapsProgressCoopToggleInput.checked = rogueSaveData.extractedArtifacts.includes(key);
         extractedCheckDiv.appendChild(mapsProgressCoopToggleInput);
     }
 
@@ -1003,29 +1003,29 @@ function generateArtifactPopout(key) {
         })
     }
     let updateArtifactStatus = () => {
-        if (rogueSaveData.extractedArtifacts.includes(data.nameLocKey)) {
-            rogueSaveData.extractedArtifacts = rogueSaveData.extractedArtifacts.filter(e => e !== data.nameLocKey);
+        if (rogueSaveData.extractedArtifacts.includes(key)) {
+            rogueSaveData.extractedArtifacts = rogueSaveData.extractedArtifacts.filter(e => e !== key);
             if(rogueSaveData.highlightExtracted){
                 artifactDiv.classList.add('artifact-unextracted');
                 if(currentVariant){
                     currentVariant.classList.add('artifact-unextracted');
                 }
-                if(artifactDivMap[data.nameLocKey]){
-                    artifactDivMap[data.nameLocKey].classList.add('artifact-unextracted');
+                if(artifactDivMap[key]){
+                    artifactDivMap[key].classList.add('artifact-unextracted');
                 }
             }
             updateArtifactCount();
             mapsProgressCoopToggleInput.checked = false;
             saveRogueDataToLocalStorage();
         } else {
-            rogueSaveData.extractedArtifacts.push(data.nameLocKey);
+            rogueSaveData.extractedArtifacts.push(key);
             if(rogueSaveData.highlightExtracted){
                 artifactDiv.classList.remove('artifact-unextracted');
                 if(currentVariant){
                     currentVariant.classList.remove('artifact-unextracted');
                 }
-                if(artifactDivMap[data.nameLocKey]){
-                    artifactDivMap[data.nameLocKey].classList.remove('artifact-unextracted');
+                if(artifactDivMap[key]){
+                    artifactDivMap[key].classList.remove('artifact-unextracted');
                 }
             }
             updateArtifactCount();
@@ -1487,7 +1487,6 @@ function downloadImage() {
     }
 
     Object.keys(artifacts).forEach(artifact => {
-        // if (starterArtifacts.includes(artifact.nameLocKey)) { return; }
         mainArtifactsDiv.appendChild(generateArtifactContainer(artifact,'force'));
     });
 
