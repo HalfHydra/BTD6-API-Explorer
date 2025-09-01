@@ -487,7 +487,7 @@ async function openProfile(source, profile){
     statsPublic["Insta Monkeys Used"] = profile.gameplay["instaMonkeysUsed"];
     statsPublic["Daily Reward Chests Opened"] = profile.gameplay["dailyRewards"];
     statsPublic["Challenges Completed"] = profile.gameplay["challengesCompleted"];
-    statsPublic["Achievements"] = `${profile["achievements"]}/150`;
+    statsPublic["Achievements"] = `${profile["achievements"]}/${constants.achievements + constants.hiddenAchievements}`;
     statsPublic["Odysseys Completed"] = profile.gameplay["totalOdysseysCompleted"];
     statsPublic["Lifetime Trophies"] = profile.gameplay["totalTrophiesEarned"];
     statsPublic["Necro Bloons Reanimated"] = profile.bloonsPopped["necroBloonsReanimated"];
