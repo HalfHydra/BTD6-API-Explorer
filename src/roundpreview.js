@@ -611,36 +611,36 @@ let roundSpeedModifier = 1;
 const update = (deltaTime) => {
     const now = performance.now();
 
-    bloons.forEach((bloon, i) => {
+    for (let i = bloons.length - 1; i >= 0; i--) {
+        const bloon = bloons[i];
         bloon.move(deltaTime);
         if (bloon.shouldDelete()) {
             bloons.splice(i, 1);
         }
-    });
+    }
 
-    if(currentRoundGroups != null) {
+    if (currentRoundGroups != null) {
         currentRoundGroups.bloonGroups.forEach(bloonGroup => {
-            if (now >= bloonGroup.startTime && bloonGroup.count > 0) {
-                if (bloonGroup.activeTime == 0) {
-                    bloonGroup.spawnBloon();
-                    bloonGroup.count--;
-                }
-                bloonGroup.activeTime += deltaTime;
-                bloonGroup.spawnAccumulator += deltaTime;
+            if (now >= bloonGroup.startTime && bloonGroup.spawned < bloonGroup.total) {
+                const elapsed = (now - bloonGroup.startTime) / 1000;
+
                 if (bloonGroup.spawnInterval === 0) {
-                    for (let i = 0; i < bloonGroup.count; i++) {
-                        bloonGroup.spawnBloon();
+                    const toSpawn = bloonGroup.total - bloonGroup.spawned;
+                    for (let i = 0; i < toSpawn; i++) {
+                        bloonGroup.spawnBloon(elapsed);
+                        bloonGroup.spawned++;
                     }
-                    bloonGroup.count = 0;
-                    bloonGroup.spawnAccumulator = 0;
                 } else {
-                    while (bloonGroup.spawnAccumulator >= bloonGroup.spawnInterval) {
-                        const spawnCount = Math.floor(bloonGroup.spawnAccumulator / bloonGroup.spawnInterval);
-                        for (let i = 0; i < spawnCount; i++) {
-                            bloonGroup.spawnBloon();
-                            bloonGroup.count--;
-                        }
-                        bloonGroup.spawnAccumulator -= bloonGroup.spawnInterval * spawnCount;
+                    const expected = Math.min(
+                        bloonGroup.total,
+                        Math.floor(elapsed / bloonGroup.spawnInterval) + 1
+                    );
+
+                    while (bloonGroup.spawned < expected) {
+                        const idx = bloonGroup.spawned;
+                        const age = Math.max(0, elapsed - idx * bloonGroup.spawnInterval);
+                        bloonGroup.spawnBloon(age);
+                        bloonGroup.spawned++;
                     }
                 }
             }
@@ -667,10 +667,15 @@ function startRound(round) {
     addTimelinePlayhead((Math.max(...currentRoundGroups.bloonGroups.map(group => group.end)))/speedMultiplier);
     currentRoundGroups.bloonGroups.forEach((bloonGroup, index) => {
         bloonGroup.startTime = performance.now() + (bloonGroup.start * 1000) / speedMultiplier;
+
+        bloonGroup.total = bloonGroup.count;
+        bloonGroup.spawned = 0;
+
         bloonGroup.activeTime = 0;
         bloonGroup.spawnAccumulator = 0;
+
         bloonGroup.spawnInterval = ((bloonGroup.end - bloonGroup.start) / (bloonGroup.count - 1)) / speedMultiplier;
-        if (!isFinite(bloonGroup.spawnInterval)) {
+        if (!isFinite(bloonGroup.spawnInterval) || bloonGroup.spawnInterval < 0) {
             bloonGroup.spawnInterval = 0;
         }
         bloonGroup.spawnBloon = spawnBloon(bloonGroup, index);
@@ -678,9 +683,14 @@ function startRound(round) {
 }
 
 function spawnBloon(bloonGroup, groupIndex) {
-    return function() {
+    return function(ageSeconds = 0) {
         let bloonType = bloonGroup.bloon;
         let bloon = ["Moab", "MoabFortified", "Bfb", "BfbFortified", "Zomg", "ZomgFortified", "DdtCamo", "DdtFortifiedCamo", "Bad", "BadFortified"].includes(bloonType) ? new Blimp(bloonType, groupIndex) : new Bloon(bloonType, groupIndex);
+
+        if (ageSeconds > 0) {
+            bloon.move(ageSeconds);
+        }
+
         let layer = bloonsData[bloonType.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].layer;
         let index = bloons.findIndex(b => bloonsData[b.type.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].layer > layer);
         if (index === -1) {
