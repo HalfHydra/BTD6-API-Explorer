@@ -3647,6 +3647,7 @@
     border-image-source: url(../Assets/UI/BarfillContainer.png);
     border-image-slice: 40;
     background-color: #9F7842;
+    border-radius: 20px;
 }
 .veteran-container {
     border: 20px solid transparent;

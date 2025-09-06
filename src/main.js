@@ -29,7 +29,7 @@ let processedMapData = {
     }
 }
 
-let useNamedMonkeys = false;
+let useNamedMonkeys = true;
 
 let currentlySelectedHero = "";
 
@@ -388,6 +388,7 @@ function generateProgressSubText(){
     let extrasTotal = Object.keys(extrasUnlocked).length;
     progressSubText["TrophyStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k] && trophyStoreItemsJSON[k]).length} Trophy Store Items Collected`
     progressSubText["TeamsStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k] && teamsStoreItemsJSON[k]).length} Team Store Items Unlocked`
+    progressSubText["Quests"] = `${btd6usersave.quests.filter(q => q.complete).length} Quests Complete`;
     progressSubText["Extras"] = `${extrasTotal} Extra${extrasTotal != 1 ? "s" : ""} Unlocked`;
 }
 
@@ -1083,6 +1084,7 @@ function generateOverview(){
         "TrophyStore": "../Assets/UI/LimitedRunIcon.png",
         'TeamsStore': "../Assets/UI/TeamTrophyIconSmall.png",
         "ActivatedAbilities": "../Assets/UI/RapidShotIcon.png",
+        "Quests": "../Assets/UI/QuestIcon.png",
     }
 
     Object.entries(progressSubText).forEach(([stat,text]) => {
@@ -1700,7 +1702,7 @@ function generateProgress(){
         profileSelectorGoImg.src = '../Assets/UI/ContinueBtn.png';
         profileSelectorDiv.appendChild(profileSelectorGoImg);
 
-        let selectors = ['Towers', 'Heroes', 'ActivatedAbilities', 'MapProgress', 'Powers', 'InstaMonkeys', 'Knowledge', 'Achievements', 'TrophyStore', 'TeamsStore', 'Extras'];
+        let selectors = ['Towers', 'Heroes', 'ActivatedAbilities', 'MapProgress', 'Powers', 'InstaMonkeys', 'Knowledge', 'Achievements', 'Quests', 'TrophyStore', 'TeamsStore', 'Extras'];
 
         selectors.forEach((selector) => {
             if(progressSubText[selector].includes("0 Extras")) { return; }
@@ -1860,6 +1862,9 @@ function changeProgressTab(selector){
             break;
         case "Logout":
             logoutProgress();
+            break;
+        case 'Quests':
+            generateQuestsPage();
             break;
     }
 }
@@ -9183,4 +9188,101 @@ function generateRotations(scheduleContainer){
         firstRotation = false;
         iterate++;
     })
+}
+
+function generateQuestsPage() {
+    let questsContent = document.getElementById('profile-content');
+    questsContent.innerHTML = "";
+
+    let questsContainer = createEl('div', {
+        style: {
+            width: "750px",
+        }
+    });
+    questsContent.appendChild(questsContainer);
+
+    let questsHeader = createEl('div', {
+        classList: ['d-flex', 'jc-center', 'ai-center', 'coop-border', 'fd-column'],
+        style: {
+            // borderRadius: "20px",
+            // backgroundColor: "#7a674b",
+            // padding: "10px 20px",
+            // marginBottom: "20px"
+        }
+    });
+    questsContainer.appendChild(questsHeader);
+    
+    let questsTitle = createEl('p', {
+        classList: ['black-outline'],
+        style: {
+            fontSize: "32px",
+            textAlign: "center",
+            marginBottom: "10px"
+        },
+        innerHTML: "Quests"
+    });
+    questsHeader.appendChild(questsTitle);
+
+    let questsDisclaimer = createEl('p', {
+        classList: ['font-gardenia'],
+        style: {
+            fontSize: "18px",
+            textAlign: "center",
+            marginBottom: "10px"
+        },
+        innerHTML: "Completion status will be inaccurate for quests that were completed before NK changed the quest system internally. Replaying the quests will fix the completion status. Note: If you click 'Replay' on a quest, this will make it 'incomplete' as well."
+    });
+    questsHeader.appendChild(questsDisclaimer);
+
+    btd6usersave.quests.forEach((quest) => {
+        let constantsQuest = constants.quests[quest.id];
+
+        let questDiv = createEl('div', {
+            classList: ['d-flex', 'ai-center', 'jc-between', 'wood-container'],
+            style: {
+                margin: "10px 0px"
+            }
+        });
+        questsContainer.appendChild(questDiv);
+
+        let questImg = createEl('img', {
+            classList: ['quest-img'],
+            style: {
+                width: "100px"
+            },
+            src: `../Assets/QuestIcon/${constantsQuest.icon || "QuestIconPhayzeOne"}.png`
+        });
+        questDiv.appendChild(questImg);
+
+        let questTitle = createEl('p', {
+            classList: ['quest-title', 'black-outline'],
+            style: {
+                fontSize: "28px",
+            },
+            innerHTML: getLocValue(`${constantsQuest.nameLocKey}`) || quest.id
+        });
+        questDiv.appendChild(questTitle);
+
+        if (quest.complete) {
+            let questTick = createEl('img', {
+                classList: [],
+                style: {
+                    width: "100px",
+                    height: "100px"
+                },
+                src: "../Assets/UI/TickGreenIcon.png"
+            });
+            questDiv.appendChild(questTick);
+        } else {
+            let questProgress = createEl('p', {
+                classList: ['quest-progress', 'ta-center', 'black-outline'],
+                style: {
+                    width: "100px",
+                    fontSize: "36px",
+                },
+                innerHTML: `${quest.partsComplete}/${quest.parts}`
+            });
+            questDiv.appendChild(questProgress);
+        } 
+    });
 }

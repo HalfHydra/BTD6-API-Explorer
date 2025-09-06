@@ -655,159 +655,6 @@
         "1": ["110", "101", "100", "011", "010", "001", "000"]
     },
     "collectionOrder": ["520", "502", "510", "501", "500", "250", "052", "150", "051", "050", "205", "025", "105", "015", "005", "420", "402", "410", "401", "400", "240", "042", "140", "041", "040", "204", "024", "104", "014", "004", "320", "302", "310", "301", "300", "230", "032", "130", "031", "030", "203", "023", "103", "013", "003", "220", "202", "210", "201", "200", "022", "120", "021", "020", "102", "012", "002", "110", "101", "100", "011", "010", "001", "000"],
-    "achievementGameOrder": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24,
-        25,
-        26,
-        27,
-        28,
-        29,
-        30,
-        31,
-        32,
-        33,
-        34,
-        35,
-        36,
-        37,
-        38,
-        39,
-        40,
-        41,
-        42,
-        43,
-        44,
-        45,
-        46,
-        47,
-        48,
-        49,
-        50,
-        51,
-        52,
-        53,
-        54,
-        55,
-        56,
-        57,
-        58,
-        59,
-        60,
-        61,
-        62,
-        63,
-        64,
-        65,
-        66,
-        67,
-        68,
-        69,
-        70,
-        71,
-        72,
-        73,
-        74,
-        75,
-        76,
-        77,
-        78,
-        79,
-        80,
-        81,
-        82,
-        83,
-        84,
-        85,
-        86,
-        87,
-        88,
-        89,
-        90,
-        91,
-        92,
-        93,
-        94,
-        95,
-        96,
-        97,
-        98,
-        99,
-        100,
-        101,
-        102,
-        103,
-        104,
-        105,
-        106,
-        107,
-        108,
-        109,
-        110,
-        111,
-        112,
-        113,
-        114,
-        115,
-        116,
-        117,
-        118,
-        119,
-        120,
-        121,
-        122,
-        123,
-        124,
-        125,
-        126,
-        127,
-        128,
-        129,
-        130,
-        131,
-        132,
-        133,
-        134,
-        135,
-        136,
-        137,
-        138,
-        139,
-        140,
-        141,
-        142,
-        143,
-        144,
-        145,
-        146,
-        147,
-        148,
-        149,
-        150
-    ],
     "dailyChallenges": {
         "standard": {
             "firstId": 660,
@@ -982,6 +829,196 @@
                 "61": ["BombShooter","IceMonkey","WizardMonkey","BoomerangMonkey"],
                 "62": ["GlueGunner","MonkeyBuccaneer","Druid","EngineerMonkey"]
             }
+        }
+    },
+    "quests": {
+        "BeastHandlerQuest": {
+            "nameLocKey": "BeastHandlerQuestName",
+            "icon": "QuestIconEpicBeastQuest"
+        },
+        "BikerRaceChallengeQuest": {
+            "nameLocKey": "BikerRaceChallengeQuestName",
+            "icon": "QuestIconBikerBonesRace"
+        },
+        "QuincyTest": {
+            "nameLocKey": "QuincyTestQuestName",
+            "icon": "QuestIconQuincyTestOfQuincy"
+        },
+        "AnniversaryChallengeQuest": {
+            "nameLocKey": "BTD6BirthdayQuestName",
+            "icon": "QuestIconBirthdayParty"
+        },
+        "SaudaTestQuest": {
+            "nameLocKey": "SaudaTestQuestName",
+            "icon": "QuestIconBladeSaudaNowhere"
+        },
+        "LogsCHIMPSChallengeQuest": {
+            "nameLocKey": "LogsCHIMPSChallengeQuestName",
+            "icon": "QuestIconLogsChimps"
+        },
+        "Round100FirstStrikeQuest": {
+            "nameLocKey": "Round100FirstStrikeQuestName",
+            "icon": "QuestIconStrikenBad"
+        },
+        "BrickellTestQuest": {
+            "nameLocKey": "BrickellTestQuestName",
+            "icon": "QuestIconBrickell"
+        },
+        "GwendolinTestQuest": {
+            "nameLocKey": "GwendolinTestQuestName",
+            "icon": "QuestIconGwendolin"
+        },
+        "ScoopsTaleIQuest": {
+            "nameLocKey": "ScoopsTaleIQuestName",
+            "icon": "QuestIconScoopsTale1"
+        },
+        "GearedLeastTiersChallengeQuest": {
+            "nameLocKey": "GearedLeastTiersChallengeQuestName",
+            "icon": "QuestIconGalaxiliLeastTiers"
+        },
+        "EtienneTest": {
+            "nameLocKey": "EtienneTestQuestName",
+            "icon": "QuestIconDroneFlying101"
+        },
+        "ObynTest": {
+            "nameLocKey": "ObynTestQuestName",
+            "icon": "QuestIconObynsGardeningSchool"
+        },
+        "BouncyDartsTale": {
+            "nameLocKey": "BouncyDartsTaleQuestName",
+            "icon": "QuestIconBouncyDarts"
+        },
+        "StrikerTestQuest": {
+            "nameLocKey": "StrikerTestQuestName",
+            "icon": "QuestIconStrikerJones"
+        },
+        "CorvusTestQuest": {
+            "nameLocKey": "CorvusTestQuestName",
+            "icon": "QuestIconCorvus"
+        },
+        "AcceleratedRoundSetChallengeQuest": {
+            "nameLocKey": "AcceleratedRoundSetQuestName",
+            "icon": "QuestIconAcceleratedRoundSet"
+        },
+        "FastUpgradesQuest": {
+            "nameLocKey": "FastUpgradesQuestName",
+            "icon": "QuestIconFastUpgradesRemake"
+        },
+        "ChallengeMOABMadness": {
+            "nameLocKey": "MOABMadnessQuestName",
+            "icon": "QuestIconMoabMadness"
+        },
+        "PatTestQuestName": {
+            "nameLocKey": "PatTestQuestName",
+            "icon": "QuestIconPatFusty"
+        },
+        "HeroPsiQuest": {
+            "nameLocKey": "PsiTestQuestName",
+            "icon": "QuestIconPsi"
+        },
+        "BloonariusBattleQuest": {
+            "nameLocKey": "BloonariusBattleQuestName",
+            "icon": "QuestIconBloonariusBattle"
+        },
+        "PhayzeOneQuest": {
+            "nameLocKey": "PhayzeOneQuestName",
+            "icon": "QuestIconPhayzeOne"
+        },
+        "HeroChurchillQuest": {
+            "nameLocKey": "ChurchillTestQuestName",
+            "icon": "QuestIconCaptainChurchill"
+        },
+        "HeroGeraldoQuest": {
+            "nameLocKey": "GeraldoTestQuestName",
+            "icon": "QuestIconGeraldo"
+        },
+        "ProtectTheYacht": {
+            "nameLocKey": "ProtectTheYachtQuestName",
+            "icon": "QuestIconMrBeast"
+        },
+        "RosaliaTest": {
+            "nameLocKey": "RosaliaTestQuestName",
+            "icon": "QuestIconRosalia"
+        },
+        "PhayzeBloonQuest": {
+            "nameLocKey": "PhayzeBloonQuestName",
+            "icon": "QuestIconPhayzeBloon"
+        },
+        "DartlingGunnerQuest": {
+            "nameLocKey": "DartlingGunnerQuestName",
+            "icon": "QuestIconSuperDartlingBros"
+        },
+        "MermonkeyQuest": {
+            "nameLocKey": "MermonkeyQuestName",
+            "icon": "QuestIconMermonkeys"
+        },
+        "EnduranceRaceQuest": {
+            "nameLocKey": "EnduranceRaceQuest1Name",
+            "icon": "QuestIconFrozenRace"
+        },
+        "ChallengeFastTracked": {
+            "nameLocKey": "FastTrackedQuestName",
+            "icon": "QuestIconWaterParkFastTrack"
+        },
+        "ChallengeOneSided": {
+            "nameLocKey": "OneSidedQuestName",
+            "icon": "QuestIconInfernalOneSide"
+        },
+        "BattleCatQuest": {
+            "nameLocKey": "BattleCatQuest1Name",
+            "icon": "QuestIconBattleCat"
+        },
+        "HeroAdoraQuest": {
+            "nameLocKey": "AdoraTestQuest1Name",
+            "icon": "QuestIconAdora"
+        },
+        "ChallengeABRCHIMPOPPABLE": {
+            "nameLocKey": "ABRCHIMPOPPABLEQuestName",
+            "icon": "QuestIconABRCHIMPOPPABLE"
+        },
+        "ChallengeMoonColony": {
+            "nameLocKey": "MoonColonyQuestName",
+            "icon": "QuestIconMoonColony"
+        },
+        "ChallengeRaftDefense": {
+            "nameLocKey": "RaftDefenseQuestName",
+            "icon": "QuestIconRaftDefense"
+        },
+        "RogueLegendQuest": {
+            "nameLocKey": "RogueLegendQuest1Name",
+            "icon": "QuestIconRogueLegend"
+        },
+        "ExperimentProjectileCarousel": {
+            "nameLocKey": "ProjectileCarouselQuestName",
+            "icon": "QuestIconQuantumEntanglement"
+        },
+        "SheRaQuest": {
+            "nameLocKey": "SheRaQuestName",
+            "icon": "QuestIconSheRa"
+        },
+        "ChallengeOneHero": {
+            "nameLocKey": "ChallengeOneHeroQuestName",
+            "icon": "QuestIconOneMonkeyArmy"
+        },
+        "HeroEziliQuest": {
+            "nameLocKey": "EziliTestQuestName",
+            "icon": "QuestIconEzili"
+        },
+        "DesperadoQuest": {
+            "nameLocKey": "DesperadoQuestName",
+            "icon": "QuestIconDesperado"
+        },
+        "1stTutorial": {
+            "nameLocKey": "1stTutorialName",
+            "icon": "QuestIconTutorial"
+        },
+        "ChallengeBloonHackers": {
+            "nameLocKey": "ChallengeBloonHackersName",
+            "icon": "QuestIconBloonHackers"
+        },
+        "ExperimentRegularIncome": {
+            "nameLocKey": "ExperimentRegularIncomeName",
+            "icon": "QuestIconRegularIncome"
         }
     },
     "BGColor": [0.000, 0.498, 1.000],
