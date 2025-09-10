@@ -97,37 +97,43 @@
             "name": "Bloonarius Custom Rounds",
             "icon": "BloonariusRoundSetIcon",
             "type": "boss",
-            "startingCash": 650
+            "startingCash": 650,
+            "modifiedRounds": [40, 60, 80, 100]
         },
         "LychRoundSet": {
             "name": "Lych Custom Rounds",
             "icon": "LychRoundSetIcon",
             "type": "boss",
-            "startingCash": 650
+            "startingCash": 650,
+            "modifiedRounds": [40, 41, 42, 43, 44, 45, 46, 47, 48, 60, 80, 100]
         },
         "VortexRoundSet": {
             "name": "Vortex Custom Rounds",
             "icon": "VortexRoundSetIcon",
             "type": "boss",
-            "startingCash": 650
+            "startingCash": 650,
+            "modifiedRounds": [5, 12, 24, 30, 40, 41, 60, 80, 100]
         },
         "DreadbloonRoundSet": {
             "name": "Dreadbloon Custom Rounds",
             "icon": "DreadbloonRoundSetIcon",
             "type": "boss",
-            "startingCash": 650
+            "startingCash": 650,
+            "modifiedRounds": [26,28,30,31,34,35,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,83,84,88,99,103,104,105,113,114,115,117,123,125,127,129,130,133,137,139]
         },
         "PhayzeRoundSet": {
             "name": "Phayze Custom Rounds",
             "icon": "PhayzeRoundSetIcon",
             "type": "boss",
-            "startingCash": 650
+            "startingCash": 650,
+            "modifiedRounds": [40, 60, 80, 100]
         },
         "BlastapopoulosRoundSet": {
             "name": "Blastapopoulos Custom Rounds",
             "icon": "BlastapopoulosRoundSetIcon",
             "type": "boss",
-            "startingCash": 650
+            "startingCash": 650,
+            "modifiedRounds": [40, 60, 80, 100]
         },
         "RogueRoundSet": {
             "name": "Rogue Custom Rounds",
