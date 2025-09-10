@@ -1084,6 +1084,8 @@ function generateRogueHeroStarterKits() {
     let starterKitContent = document.getElementById('starter-kits-content');
     starterKitContent.innerHTML = "";
 
+    artifactDivMap = {};
+
     let heroStarterKits = document.createElement('div');
     heroStarterKits.classList.add('artifacts-div', 'hero-starter-kits');
     starterKitContent.appendChild(heroStarterKits);
@@ -1104,6 +1106,7 @@ function generateRogueHeroStarterKits() {
             generateArtifactPopout(starterKit.artifact);
         })
         starterKitDiv.appendChild(artifactDiv);
+        artifactDivMap[starterKit.artifact] = artifactDiv;
 
         starterKit.startingInstas.forEach((instaMonkey) => {
             starterKitDiv.appendChild(generateInstaMonkeyContainer(instaMonkey));
