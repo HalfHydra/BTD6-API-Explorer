@@ -477,6 +477,27 @@ async function showRoundsetModel(source, roundset) {
     mapsProgressGame.innerHTML = "Preview";
     mapsProgressViews.appendChild(mapsProgressGame);
 
+    let headerRightControls = document.createElement('div');
+    headerRightControls.classList.add('maps-progress-views');
+    let clearFiltersBtn = document.createElement('div');
+    clearFiltersBtn.classList.add('maps-progress-view','black-outline','pointer');
+    clearFiltersBtn.innerHTML = 'Clear Filters';
+    clearFiltersBtn.id = 'clear-filters-btn';
+    clearFiltersBtn.style.display = 'none';
+    clearFiltersBtn.addEventListener('click', () => {
+        roundsetFilterSettings.roundFilterStart = 1;
+        roundsetFilterSettings.roundFilterEnd = null;
+        roundsetFilterSettings.roundFilterPreset = "All";
+        roundsetFilterSettings.roundsetBasicFilter = null;
+        roundsetFilterSettings.roundsetFilteredBloons = [];
+        roundsetFilterSettings.roundsetAdvancedFilterMode = false;
+        roundsetFilterSettings.roundsetAdvancedFilterLogic = 'ANY';
+        applyRoundFilters(roundsetType);
+        generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed, roundsetType);
+    });
+    headerRightControls.appendChild(clearFiltersBtn);
+    mapsProgressHeaderBar.appendChild(headerRightControls)
+
     let roundsContent = document.createElement('div');
     roundsContent.id = 'roundset-content';
     roundsContent.classList.add('rounds-content');
@@ -638,6 +659,9 @@ function applyRoundFilters(type){
     }
 
     roundsetProcessed = filtered;
+
+    const btn = document.getElementById('clear-filters-btn');
+    if (btn) btn.style.display = isFiltersActive() ? '' : 'none';
 }
 
 function addRoundHints(roundset, data) {
@@ -1721,4 +1745,18 @@ function indexOfRoundNumberOrNearest(target){
         const dCur = Math.abs(r.roundNumber - target);
         return (dCur < dBest || (dCur === dBest && r.roundNumber < best)) ? i : bestIdx;
     }, 0);
+}
+
+function isFiltersActive(){
+    if (!currentRoundsetData) return false;
+    const lastRound = currentRoundsetData.rounds[currentRoundsetData.rounds.length - 1]?.roundNumber ?? Infinity;
+    const endIsDefault = (roundsetFilterSettings.roundFilterEnd == null) || (roundsetFilterSettings.roundFilterEnd === lastRound);
+    return (
+        roundsetFilterSettings.roundFilterStart !== 1 ||
+        !endIsDefault ||
+        roundsetFilterSettings.roundFilterPreset !== 'All' ||
+        roundsetFilterSettings.roundsetBasicFilter !== null ||
+        roundsetFilterSettings.roundsetFilteredBloons.length > 0 ||
+        roundsetFilterSettings.roundsetAdvancedFilterMode === true
+    );
 }
