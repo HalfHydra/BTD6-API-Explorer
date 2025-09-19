@@ -955,14 +955,14 @@ async function generateRounds(type, reverse, roundsetType) {
             selectRoundNum.type = 'number';
             selectRoundNum.min = 1;
             selectRoundNum.max = roundsetFilterSettings.roundFilterEnd;
-            selectRoundNum.value = currentPreviewRound + 1;
+            selectRoundNum.value = roundsetProcessed[currentPreviewRound].roundNumber;
             selectRoundNum.addEventListener('change', () => {
                 let val = parseInt(selectRoundNum.value);
                 if (val < roundsetFilterSettings.roundFilterStart) val = roundsetFilterSettings.roundFilterStart;
                 if (val > roundsetFilterSettings.roundFilterEnd) val = roundsetFilterSettings.roundFilterEnd;
                 selectRoundNum.value = val;
-                currentPreviewRound = val - 1;
-                roundNumber.innerHTML = `Round ${val}`;
+                currentPreviewRound = indexOfRoundNumberOrNearest(val);
+                roundNumber.innerHTML = `Round ${roundsetProcessed.rounds[currentPreviewRound].roundNumber}`;
                 updatePreviewRoundTimeline()
             })
             previewHeader.appendChild(selectRoundNum);
@@ -1084,7 +1084,7 @@ async function generateRounds(type, reverse, roundsetType) {
                     currentPreviewRound--;
                     if (currentPreviewRound < 0) { currentPreviewRound = roundsetProcessed.rounds.length - 1 }
                 }
-                selectRoundNum.value = currentPreviewRound + 1;
+                selectRoundNum.value = roundsetProcessed[currentPreviewRound].roundNumber;
                 clearPreview();
                 updatePreviewRoundTimeline()
             })
@@ -1102,7 +1102,7 @@ async function generateRounds(type, reverse, roundsetType) {
                     currentPreviewRound++;
                     if (currentPreviewRound >= roundsetProcessed.rounds.length) { currentPreviewRound = 0 }
                 }
-                selectRoundNum.value = currentPreviewRound + 1;
+                selectRoundNum.value = roundsetProcessed[currentPreviewRound].roundNumber;
                 clearPreview();
                 updatePreviewRoundTimeline()
             })
@@ -1699,4 +1699,19 @@ function openRoundsetSettingsModal(type){
 
 function isRoundInFilter(roundNumber){
     return roundNumber >= roundsetFilterSettings.roundFilterStart && roundNumber <= (roundsetFilterSettings.roundFilterEnd ?? Infinity);
+}
+
+function indexOfRoundNumberOrNearest(target){
+    const rounds = roundsetProcessed?.rounds ?? [];
+    if (rounds.length === 0) return -1;
+
+    const exact = rounds.findIndex(r => r.roundNumber === target);
+    if (exact !== -1) return exact;
+
+    return rounds.reduce((bestIdx, r, i) => {
+        const best = rounds[bestIdx].roundNumber;
+        const dBest = Math.abs(best - target);
+        const dCur = Math.abs(r.roundNumber - target);
+        return (dCur < dBest || (dCur === dBest && r.roundNumber < best)) ? i : bestIdx;
+    }, 0);
 }
