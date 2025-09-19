@@ -1,5 +1,6 @@
 let canvas;
 let ctx;
+let previewFrameId = null;
 
 let speedMultiplier = 1;
 
@@ -608,6 +609,34 @@ let currentRoundGroups;
 let difficultySpeedModifier = 1;
 let roundSpeedModifier = 1;
 
+function resetPreview() {
+    previewActive = false;
+    if (previewFrameId) {
+        cancelAnimationFrame(previewFrameId);
+        previewFrameId = null;
+    }
+    clearPreview();
+}
+
+function startPreviewLoop(){
+    if (previewFrameId) {
+        cancelAnimationFrame(previewFrameId);
+        previewFrameId = null;
+    }
+    previewActive = true;
+    let lastFrameTime = performance.now();
+    function previewRender() {
+        if (!previewActive) return;
+        const now = performance.now();
+        const deltaTime = (now - lastFrameTime) / 1000;
+        lastFrameTime = now;
+        update(deltaTime);
+        render();
+        previewFrameId = requestAnimationFrame(previewRender);
+    }
+    previewFrameId = requestAnimationFrame(previewRender);
+}
+
 const update = (deltaTime) => {
     const now = performance.now();
 
@@ -656,7 +685,7 @@ const render = () => {
 function startRound(round) {
     roundSpeedModifier = calcRoundSpeed(round.roundNumber);
     currentRoundGroups = JSON.parse(JSON.stringify(round));
-    if (document.getElementById('roundset-reverse-checkbox').checked) { 
+    if (roundsetFilterSettings.roundsetReversed) { 
         let roundDuration = Math.max(...round.bloonGroups.map(group => group.end));
         for (let bloonGroup of currentRoundGroups.bloonGroups) {
             let oldDuration = bloonGroup.end - bloonGroup.start;

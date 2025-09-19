@@ -10,6 +10,21 @@ let roundPreviewFilterType;
 let currentRoundsetEndRound = 140;
 let hiddenGroups = [];
 
+let roundsetFilterSettings = {};
+
+let currentRoundsetData = null;
+let bloonToRounds = new Map();
+
+const BloonTraitBits = {
+    Camo:        1 << 0,
+    Regrow:      1 << 1,
+    Fortified:   1 << 2,
+    Lead:        1 << 3,
+    Purple:      1 << 4,
+    DDT:         1 << 5,
+    MOABClass:   1 << 6
+};
+
 function generateRoundsets() {
     let roundsetsContent = document.getElementById('rounds-content');
     roundsetsContent.innerHTML = "";
@@ -117,11 +132,6 @@ function generateRoundsets() {
         roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
         roundsetDiv.appendChild(roundsetGoImg);
     })
-
-    // let legendsRoundsetText = document.createElement('p');
-    // legendsRoundsetText.classList.add('other-roundsets-selector-text', 'black-outline');
-    // legendsRoundsetText.innerHTML = "Legends Custom Rounds";
-    // selectorsDiv.appendChild(legendsRoundsetText);
 
     Object.entries(legendsRoundsets).forEach(([roundset, data]) => {
         let roundsetDiv = document.createElement('div');
@@ -305,6 +315,23 @@ function generateRoundsets() {
 }
 
 async function showRoundsetModel(source, roundset) {
+    roundsetProcessed = null;
+    currentRoundsetData = null;
+
+    roundsetFilterSettings = {
+        roundFilterStart: 1,
+        roundFilterEnd: null,
+        roundsetStartingCash: 650,
+        roundFilterPreset: "All",
+        roundsetReversed: false,
+        roundsetHideUnused: true,
+        roundsetShowModified: true,
+        roundsetFilteredBloons: [],
+        roundsetAdvancedFilterMode: false,
+        roundsetBasicFilter: null,
+        roundsetAdvancedFilterLogic: 'ANY'
+    }
+    
     let roundsetContent = document.getElementById('roundsets-content');
     roundsetContent.style.display = "flex";
     roundsetContent.innerHTML = "";
@@ -317,14 +344,12 @@ async function showRoundsetModel(source, roundset) {
     if(constants.roundSets[roundset]) {
         roundsetType = constants.roundSets[roundset].type;
     }
-    // Might be used later for other roundsets that use the addToRound feature, but for now obsolete.
-    // if (roundsetType == "boss") {
-    //     let defaultRoundsetData = await fetch(`./data/DefaultRoundSet.json`).then(response => response.json());
-    //     roundsetProcessed =  processRoundset(defaultRoundsetData, roundsetData);
-    // } else {
-    //     roundsetProcessed =  processRoundset(roundsetData);
-    // }
-    roundsetProcessed = addRoundHints(roundset, roundsetData);
+
+    currentRoundsetData = processRoundset(roundset, roundsetData);
+    if (roundsetFilterSettings.roundFilterEnd === null) {
+        roundsetFilterSettings.roundFilterEnd = currentRoundsetData.rounds[currentRoundsetData.rounds.length - 1].roundNumber;
+    }
+
     selectedRoundset = roundset;
 
     let headerBar = document.createElement('div');
@@ -339,6 +364,19 @@ async function showRoundsetModel(source, roundset) {
     leftDiv.classList.add('roundset-header-left');
     roundsetHeaderTitle.appendChild(leftDiv);
 
+    let roundSettingsBtn = createEl('img', {
+        classList: ['roundset-settings-btn', 'pointer'],
+        style: {
+            width: '50px',
+            height: '50px',
+        },
+        src: '../Assets/UI/SettingsBtn.png',
+    });
+    roundSettingsBtn.addEventListener('click', () => {
+        openRoundsetSettingsModal(roundsetType);
+    })
+    leftDiv.appendChild(roundSettingsBtn);
+
     let roundsetHeaderText = document.createElement('p');
     roundsetHeaderText.classList.add('roundset-header-text', 'black-outline');
     roundsetHeaderText.innerHTML = constants.roundSets[roundset] ? constants.roundSets[roundset].name : roundset;
@@ -352,8 +390,6 @@ async function showRoundsetModel(source, roundset) {
     modalClose.classList.add('modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
-        // roundsetContent.style.display = "none";
-        // document.getElementById(`${source}-content`).style.display = "flex";
         goBack()
     })
     rightDiv.appendChild(modalClose);
@@ -363,7 +399,6 @@ async function showRoundsetModel(source, roundset) {
         rogueHeaderBar.classList.add('d-flex', 'jc-evenly');
         headerBar.appendChild(rogueHeaderBar);
 
-        // let rogueRoundsets = ["RogueRoundSet", "RogueBloonierSet", "RogueDenseSet",  "RoguePinkSet", "RoguePurpleSet", "RogueImmuneSet", "RogueLeadSet"]
         let rogueRoundsets = {
             "RogueRoundSet": "Rogue Legends Default Roundset",
             "RogueBloonierSet": "Now with more Bloons!",
@@ -385,8 +420,6 @@ async function showRoundsetModel(source, roundset) {
             rogueHeaderBar.appendChild(roundsetDiv);
 
             if (rs == roundset) {
-                // roundsetDiv.style.border = "5px #00ff00 solid";
-                // roundsetDiv.style.borderRadius = "20px";
                 roundsetDiv.classList.add('rogue-roundset-selector-active');
             }
 
@@ -414,8 +447,6 @@ async function showRoundsetModel(source, roundset) {
             })
         });
     }
-
-    
 
     let mapsProgressHeaderBar = document.createElement('div');
     mapsProgressHeaderBar.classList.add('roundset-header-bar-bottom');
@@ -445,70 +476,6 @@ async function showRoundsetModel(source, roundset) {
     mapsProgressGame.innerHTML = "Preview";
     mapsProgressViews.appendChild(mapsProgressGame);
 
-    let mapsProgressFilter = document.createElement('div');
-    mapsProgressFilter.classList.add('maps-progress-filter');
-    mapsProgressHeaderBar.appendChild(mapsProgressFilter);
-
-    let mapProgressFilterDifficulty = document.createElement('div');
-    mapProgressFilterDifficulty.classList.add('map-progress-filter-difficulty');
-
-    let mapsProgressFilterDifficultyText = document.createElement('p');
-    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text','black-outline');
-    mapProgressFilterDifficulty.appendChild(mapsProgressFilterDifficultyText);
-
-    let onlyModifiedToggleInput = document.createElement('input');
-    onlyModifiedToggleInput.id = "roundset-modified-checkbox"
-    onlyModifiedToggleInput.classList.add('maps-progress-coop-toggle-input');
-    onlyModifiedToggleInput.type = 'checkbox';
-    mapProgressFilterDifficulty.appendChild(onlyModifiedToggleInput);
-
-    if (roundsetType == "boss") {
-        currentModifiedRounds = [];
-        roundsetProcessed.rounds.forEach((round, index) => {
-            if (round.hasOwnProperty("modified")) {
-                currentModifiedRounds.push(round.roundNumber);
-            }
-        });
-        onlyModifiedToggleInput.checked = true;
-        mapsProgressFilter.appendChild(mapProgressFilterDifficulty);
-
-        mapsProgressFilterDifficultyText.innerHTML = "Only Modified:";
-        roundPreviewFilterType = "modified";
-
-        previewModified = onlyModifiedToggleInput;
-    } else if (roundsetType == "quest") {
-        currentModifiedRounds = [];
-        roundsetProcessed.rounds.forEach((round, index) => {
-            if(round.roundNumber > constants.roundSets[roundset].endRound) { return; }
-            currentModifiedRounds.push(round.roundNumber);
-        });
-        mapsProgressFilterDifficultyText.innerHTML = "Hide Unused:";
-        roundPreviewFilterType = "unused";
-        currentRoundsetEndRound = constants.roundSets[roundset].endRound;
-        mapsProgressFilter.appendChild(mapProgressFilterDifficulty);
-        onlyModifiedToggleInput.checked = true;
-
-        previewModified = onlyModifiedToggleInput;
-    } else  {
-        previewModified = null;
-    }
-
-    let mapsProgressCoopToggle = document.createElement('div');
-    mapsProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
-    mapsProgressFilter.appendChild(mapsProgressCoopToggle);
-
-    let mapsProgressCoopToggleText = document.createElement('p');
-    mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
-    mapsProgressCoopToggleText.innerHTML = "Reverse:";
-    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleText);
-
-    let mapsProgressCoopToggleInput = document.createElement('input');
-    mapsProgressCoopToggleInput.id = "roundset-reverse-checkbox"
-    mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
-    mapsProgressCoopToggleInput.type = 'checkbox';
-    mapsProgressCoopToggle.appendChild(mapsProgressCoopToggleInput);
-
-
     let roundsContent = document.createElement('div');
     roundsContent.id = 'roundset-content';
     roundsContent.classList.add('rounds-content');
@@ -519,53 +486,157 @@ async function showRoundsetModel(source, roundset) {
         mapsProgressList.classList.remove('stats-tab-yellow');
         mapsProgressGame.classList.remove('stats-tab-yellow');
         currentRoundsetView = "Simple";
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
+        generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed, roundsetType);
     })
     mapsProgressList.addEventListener('click', () => {
         mapsProgressList.classList.add('stats-tab-yellow');
         mapsProgressGrid.classList.remove('stats-tab-yellow');
         mapsProgressGame.classList.remove('stats-tab-yellow');
         currentRoundsetView = "Topper";
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
+        generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed, roundsetType);
     })
     mapsProgressGame.addEventListener('click', () => {
         mapsProgressGame.classList.add('stats-tab-yellow');
         mapsProgressGrid.classList.remove('stats-tab-yellow');
         mapsProgressList.classList.remove('stats-tab-yellow');
         currentRoundsetView = "Preview";
-        generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked);
+        generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed, roundsetType);
     })
 
-
-    mapsProgressCoopToggleInput.addEventListener('change', () => {
-        onChangeReverse(mapsProgressCoopToggleInput.checked)
-    })
-    onlyModifiedToggleInput.addEventListener('change', () => {
-        onChangeModified(onlyModifiedToggleInput.checked)
-    })
     currentPreviewRound = 0;
     currentRoundsetView = "Simple";
-    generateRounds(currentRoundsetView, mapsProgressCoopToggleInput.checked, onlyModifiedToggleInput.checked)
-    onChangeModified(onlyModifiedToggleInput.checked)
+    generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed, roundsetType)
 }
 
-function processRoundset(data, defaultAppend){
-    if(defaultAppend != null) {
-        defaultAppend.rounds.forEach((round, index) => {
-            let roundIndex = data.rounds.findIndex(round_b => round_b.roundNumber == round.roundNumber);
-            if(round.addToRound) {
-                if (roundIndex != -1) {
-                    data.rounds[roundIndex].bloonGroups = data.rounds[roundIndex].bloonGroups.concat(round.bloonGroups);
-                    data.rounds[roundIndex].addToRound = true;
-                }
-            } else {
-                if (roundIndex != -1) {
-                    data.rounds[roundIndex] = round;
-                }
+function processRoundset(name, data){
+    const MOAB_CLASS_PREFIXES = ["Moab","Bfb","Zomg","Ddt","Bad"];
+
+    let processed = JSON.parse(JSON.stringify(data));
+
+    processed = addRoundHints(name, processed);
+
+    let incomeRunning = 0;
+    let rbeRunning = 0;
+    processed.rounds.forEach(r => {
+        let traitMask = 0;
+        r.bloonGroups.forEach(bg => {
+            const bloon = bg.bloon.toLowerCase();
+            if (bloon.includes('camo')) traitMask |= BloonTraitBits.Camo; 
+            if (bloon.includes('regrow')) traitMask |= BloonTraitBits.Regrow;
+            if (bloon.includes('fortified')) traitMask |= BloonTraitBits.Fortified;
+            if (bloon.includes('lead')) traitMask |= BloonTraitBits.Lead;
+            if (bloon.includes('purple')) traitMask |= BloonTraitBits.Purple;
+            if (bloon.includes('ddt')) { traitMask |= (BloonTraitBits.DDT | BloonTraitBits.MOABClass); }
+            else if (MOAB_CLASS_PREFIXES.some(prefix => bg.bloon.includes(prefix))) {
+                traitMask |= BloonTraitBits.MOABClass;
             }
-        })
+
+            if (!bloonToRounds.has(bg.bloon)) bloonToRounds.set(bg.bloon, new Set());
+            bloonToRounds.get(bg.bloon).add(r.roundNumber);
+        });
+
+        r.traitMask = traitMask;
+
+        if (typeof r.income === 'number') {
+            incomeRunning += r.income;
+            r.incomeSum = incomeRunning;
+        }
+        if (typeof r.rbe === 'number') {
+            rbeRunning += r.rbe;
+            r.rbeSum = rbeRunning;
+        }
+    });
+    return processed;
+}
+
+function applyRoundFilters(type){
+    if (!currentRoundsetData) return;
+    const effectiveEnd = (roundsetFilterSettings.roundFilterEnd ?? currentRoundsetData.rounds[currentRoundsetData.rounds.length - 1].roundNumber);
+    let filtered = JSON.parse(JSON.stringify(currentRoundsetData));
+    filtered.rounds = filtered.rounds.filter(r => r.roundNumber >= roundsetFilterSettings.roundFilterStart && r.roundNumber <= effectiveEnd);
+
+    let incomeRunning = roundsetFilterSettings.roundsetStartingCash;
+    let rbeRunning = 0;
+    filtered.rounds.forEach(r => {
+        (roundsetFilterSettings.roundsetReversed) ? r.bloonGroups.sort((a, b) => a.end - b.end) : r.bloonGroups.sort((a, b) => a.start - b.start)
+        if (typeof r.income === 'number'){
+            incomeRunning += r.income;
+            r.incomeSum = incomeRunning;
+        }
+        if (typeof r.rbe === 'number'){
+            rbeRunning += r.rbe;
+            r.rbeSum = rbeRunning;
+        }
+    });
+
+    if(type != null) {
+        switch(type) {
+            case "quest":
+                if (roundsetFilterSettings.roundsetHideUnused) {
+                    let questEndRound = constants.roundSets[selectedRoundset].endRound;
+                    filtered.rounds = filtered.rounds.filter(r => r.roundNumber <= questEndRound);
+                }
+                break;
+            case "boss":
+                if (roundsetFilterSettings.roundsetShowModified) {
+                    let modifiedRounds = constants.roundSets[selectedRoundset].modifiedRounds;
+                    filtered.rounds = filtered.rounds.filter(r => modifiedRounds.includes(r.roundNumber));
+                }
+                break;
+        }
     }
-    return data;
+
+    let requiredMask = 0;
+    switch (roundsetFilterSettings.roundsetBasicFilter) {
+        case 'Any Camo':
+            requiredMask |= BloonTraitBits.Camo;
+            break;
+        case 'Any Regrow':
+            requiredMask |= BloonTraitBits.Regrow;
+            break;
+        case 'Any Fortified':
+            requiredMask |= BloonTraitBits.Fortified;
+            break;
+        case 'Lead & DDT':
+            requiredMask |= BloonTraitBits.Lead;
+            break;
+        case 'Purple':
+            requiredMask |= BloonTraitBits.Purple;
+            break;
+        case 'MOAB-Class':
+            requiredMask |= BloonTraitBits.MOABClass;
+            break;
+    }
+
+    if (requiredMask !== 0) {
+        filtered.rounds = filtered.rounds.filter(r => (r.traitMask & requiredMask) === requiredMask);
+    }
+
+    if (roundsetFilterSettings.roundsetFilteredBloons.length > 0) {
+        let sets = roundsetFilterSettings.roundsetFilteredBloons
+            .map(b => bloonToRounds.get(b))
+            .filter(s => s && s.size > 0);
+
+        if (sets.length === 0) {
+            filtered.rounds = [];
+        } else if (roundsetFilterSettings.roundsetAdvancedFilterLogic === 'COMBO') {
+            sets.sort((a,b) => a.size - b.size);
+            let intersection = new Set(sets[0]);
+            for (let i=1;i<sets.length;i++){
+                for (let val of Array.from(intersection)) {
+                    if (!sets[i].has(val)) intersection.delete(val);
+                }
+                if (intersection.size === 0) break;
+            }
+            filtered.rounds = filtered.rounds.filter(r => intersection.has(r.roundNumber));
+        } else {
+            let union = new Set();
+            sets.forEach(s => s.forEach(v => union.add(v)));
+            filtered.rounds = filtered.rounds.filter(r => union.has(r.roundNumber));
+        }
+    }
+
+    roundsetProcessed = filtered;
 }
 
 function addRoundHints(roundset, data) {
@@ -593,29 +664,21 @@ function addRoundHints(roundset, data) {
     return data;
 }
 
-async function generateRounds(type, reverse, modified) {
+async function generateRounds(type, reverse, roundsetType) {
     let roundsContent = document.getElementById('roundset-content');
     roundsContent.innerHTML = "";
 
-    //get if all the round numbers don't have any gaps between them
-    let roundsetHasNoGaps = true;
-    let roundsetHasNoGapsArray = [];
-    roundsetProcessed.rounds.forEach((round, index) => {
-        roundsetHasNoGapsArray.push(round.roundNumber);
-    });
-    for (let i = 0; i < roundsetHasNoGapsArray.length; i++) {
-        if (roundsetHasNoGapsArray[i] != i + 1) {
-            roundsetHasNoGaps = false;
-            break;
-        }
+    if (!roundsetProcessed && currentRoundsetData) {
+        applyRoundFilters(roundsetType);
     }
+
+    let roundsetHasNoGaps = roundsetProcessed.rounds.every((r,i,a) => i === 0 || r.roundNumber === a[i-1].roundNumber + 1);
 
     switch(type) {
         case "Simple":
             resetPreview();
             let alternate = false;
             roundsetProcessed.rounds.forEach(async (round, index) => {
-                // if (modified && !round.hasOwnProperty("addToRound")) { return; }
                 let roundDiv = document.createElement('div');
                 roundDiv.id = `round-${round.roundNumber}`;
                 roundDiv.classList.add('round-div', 'jc-between');
@@ -669,10 +732,15 @@ async function generateRounds(type, reverse, modified) {
                 roundTimeDiv.appendChild(roundTime);
 
                 roundsContent.appendChild(roundDiv);
-                alternate = !alternate;
+
+                if(!isRoundInFilter(round.roundNumber)){
+                    roundDiv.style.display = "none";
+                } else {
+                    if (alternate) { roundDiv.classList.add('round-div-alt') }
+                    alternate = !alternate;
+                }
             })
-            if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
-            if (previewModified != null && previewModified.checked) { onChangeModified(true) }
+            if (roundsetFilterSettings.roundsetReversed) { onChangeReverse() }
             break;
         case "Topper":
             resetPreview();
@@ -704,6 +772,9 @@ async function generateRounds(type, reverse, modified) {
             let minWidthPercentage = (30 / 600) * 100;
 
             roundsetProcessed.rounds.forEach(async (round, index) => {
+                if(!isRoundInFilter(round.roundNumber)){
+                    return;
+                }
                 let roundDiv = document.createElement('div');
                 roundDiv.id = `round-${round.roundNumber}`;
                 roundDiv.classList.add('round-div-detailed');
@@ -847,12 +918,19 @@ async function generateRounds(type, reverse, modified) {
             })
             roundsDetailedDiv.innerHTML = "";
             roundsDetailedDiv.appendChild(fragment);
-            if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
-            if (previewModified != null && previewModified.checked) { onChangeModified(true) }
+            if (roundsetFilterSettings.roundsetReversed) { onChangeReverse() }
             }, 0)
             break;
         case "Preview":
             resetPreview();
+            if (roundsetProcessed.rounds[currentPreviewRound] == null) {
+                currentPreviewRound = 0;
+            }
+            if (roundsetProcessed.rounds[currentPreviewRound].roundNumber < roundsetFilterSettings.roundFilterStart ||
+                roundsetProcessed.rounds[currentPreviewRound].roundNumber > roundsetFilterSettings.roundFilterEnd) {
+                currentPreviewRound = Math.max(0, roundsetFilterSettings.roundFilterStart - 1);
+            }
+
             let previewContainerDiv = document.createElement('div');
             previewContainerDiv.classList.add('preview-container-div');
             roundsContent.appendChild(previewContainerDiv);
@@ -876,13 +954,15 @@ async function generateRounds(type, reverse, modified) {
             selectRoundNum.classList.add('select-round-num');
             selectRoundNum.type = 'number';
             selectRoundNum.min = 1;
-            selectRoundNum.max = roundsetProcessed.rounds.length;
+            selectRoundNum.max = roundsetFilterSettings.roundFilterEnd;
             selectRoundNum.value = currentPreviewRound + 1;
             selectRoundNum.addEventListener('change', () => {
-                if (selectRoundNum.value < 1) { selectRoundNum.value = 1 }
-                if (selectRoundNum.value > roundsetProcessed.rounds.length) { selectRoundNum.value = roundsetProcessed.rounds.length }
-                roundNumber.innerHTML = `Round ${roundsetProcessed.rounds[currentPreviewRound].roundNumber}`;
-                currentPreviewRound = selectRoundNum.value - 1;
+                let val = parseInt(selectRoundNum.value);
+                if (val < roundsetFilterSettings.roundFilterStart) val = roundsetFilterSettings.roundFilterStart;
+                if (val > roundsetFilterSettings.roundFilterEnd) val = roundsetFilterSettings.roundFilterEnd;
+                selectRoundNum.value = val;
+                currentPreviewRound = val - 1;
+                roundNumber.innerHTML = `Round ${val}`;
                 updatePreviewRoundTimeline()
             })
             previewHeader.appendChild(selectRoundNum);
@@ -1035,94 +1115,8 @@ async function generateRounds(type, reverse, modified) {
 
             ctx = canvas.getContext('2d');
 
-            let lastFrameTime = performance.now();
-
-            function previewRender() {
-                if (!previewActive) {
-                    return;
-                }
-
-                const now = performance.now();
-                const deltaTime = (now - lastFrameTime) / 1000;
-                lastFrameTime = now;
-                
-                update(deltaTime);
-                render();
-                requestAnimationFrame(previewRender);
-            }
-
-            previewActive = true;
-
-            requestAnimationFrame(previewRender);
-
-            if (previewModified != null && previewModified.checked) { onChangeModified(true) }
+            startPreviewLoop();
             updatePreviewRoundTimeline()
-            if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
-            break;
-    }
-}
-
-function onChangeModified(modified) {
-    switch(currentRoundsetView) {
-        case "Simple":
-            let alternate = false;
-            roundsetProcessed.rounds.forEach(async (round, index) => {
-                let roundDiv = document.getElementById(`round-${round.roundNumber}`);
-                if (modified && roundPreviewFilterType === "modified" && !round.hasOwnProperty("modified")) {
-                    roundDiv.style.display = "none";
-                } else if (modified && roundPreviewFilterType === "unused" && round.roundNumber > currentRoundsetEndRound) {
-                    roundDiv.style.display = "none";
-                } else {
-                    roundDiv.style.display = "flex";
-                    if (alternate) { roundDiv.classList.add('round-div-alt') } else if (Array.from(roundDiv.classList).includes('round-div-alt')) { roundDiv.classList.remove('round-div-alt') }
-                    alternate = !alternate;
-                }
-            })
-            break;
-        case "Topper":
-            roundsetProcessed.rounds.forEach(async (round, index) => {
-                let roundDiv = document.getElementById(`round-${round.roundNumber}`);
-                if (modified && roundPreviewFilterType === "modified" && !round.hasOwnProperty("modified")) {
-                    roundDiv.style.display = "none";
-                } else if (modified && roundPreviewFilterType === "unused" && round.roundNumber > currentRoundsetEndRound) {
-                    roundDiv.style.display = "none";
-                } else {
-                    roundDiv.style.display = "flex";
-                }
-            })
-            break;
-        case "Preview":
-            switch(roundPreviewFilterType){
-                case "modified":
-                    if(modified) {
-                        currentIndexInModifiedRounds = 0;
-                        currentPreviewRound = currentModifiedRounds[0] - 1;
-                        document.getElementById('round-number-preview').innerHTML = `Round ${currentModifiedRounds[0]}`;
-                        document.getElementById('select-round-num-preview').value = currentModifiedRounds[0];
-                        updatePreviewRoundTimeline()
-                    } else {
-                        currentPreviewRound = 0;
-                        document.getElementById('round-number-preview').innerHTML = `Round ${currentPreviewRound + 1}`;
-                        document.getElementById('select-round-num-preview').value = currentPreviewRound + 1;
-                        updatePreviewRoundTimeline()
-                    }
-                    break;
-                case "unused":
-                    if(modified) {
-                        if (currentRoundsetEndRound < currentPreviewRound + 1) {
-                            currentPreviewRound = 0;
-                            document.getElementById('round-number-preview').innerHTML = `Round ${currentPreviewRound + 1}`;
-                            document.getElementById('select-round-num-preview').value = currentPreviewRound + 1;
-                            updatePreviewRoundTimeline()
-                        }
-                    } else {
-                        currentPreviewRound = 0;
-                        document.getElementById('round-number-preview').innerHTML = `Round ${currentPreviewRound + 1}`;
-                        document.getElementById('select-round-num-preview').value = currentPreviewRound + 1;
-                        updatePreviewRoundTimeline()
-                    }
-                    break;
-            }
             break;
     }
 }
@@ -1314,7 +1308,7 @@ function updatePreviewRoundTimeline() {
 
         bloonBar.appendChild(bloonBarFill);
     })
-    if (document.getElementById('roundset-reverse-checkbox').checked) { onChangeReverse() }
+    if (roundsetFilterSettings.roundsetReversed) { onChangeReverse() }
 }
 
 function addTimelinePlayhead(duration) {
@@ -1335,7 +1329,374 @@ function clearPreview(){
     bloons.length = 0;
 }
 
-function resetPreview() {
-    previewActive = false;
-    clearPreview();
+function openRoundsetSettingsModal(type){
+    if (!roundsetProcessed) return;
+
+    if (roundsetFilterSettings.roundFilterEnd === null) {
+        roundsetFilterSettings.roundFilterEnd = roundsetProcessed.rounds[roundsetProcessed.rounds.length - 1].roundNumber;
+    }
+
+    const container = createEl('div', {
+        style: { padding: '16px', display: 'flex', flexDirection: 'column', gap: '16px' }
+    });
+
+    // container.appendChild(createEl('p', {
+    //     classList: ['oak-instructions-header', 'black-outline'],
+    //     innerHTML: 'Roundset Settings'
+    // }));
+
+    let roundModalTopDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-between'], style: { gap: '8px' } });
+    container.appendChild(roundModalTopDiv);
+
+    let roundFiltersDiv = createEl('div', { classList: ['d-flex'], style: { gap: '8px', flexDirection: 'column' } });
+    roundModalTopDiv.appendChild(roundFiltersDiv);
+
+    let presetsDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-center'], style: { gap: '8px', flexWrap: 'wrap', width: '60%' } });
+
+    let firstRound = currentRoundsetData.rounds[0].roundNumber;
+    let lastRound = currentRoundsetData.rounds[currentRoundsetData.rounds.length - 1].roundNumber;
+
+    let startRoundDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
+    roundFiltersDiv.appendChild(startRoundDiv);
+
+    let startRoundIcon = createEl('img', {
+        classList: ['of-contain'],
+        src: './Assets/UI/StartRoundIconSmall.png',
+        style: { width: '40px', height: '40px', marginRight: '4px' }
+    });
+    startRoundDiv.appendChild(startRoundIcon);
+
+    let startRoundInput = generateNumberInput("Start Round", roundsetFilterSettings.roundFilterStart, firstRound, lastRound, 1, (val) => {
+        roundsetFilterSettings.roundFilterStart = val;
+        presetsDiv.querySelectorAll('div').forEach(d => d.classList.remove('stats-tab-yellow'));
+    });
+    startRoundDiv.appendChild(startRoundInput);
+
+    let endRoundDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
+    roundFiltersDiv.appendChild(endRoundDiv);
+
+    let endRoundIcon = createEl('img', {
+        classList: ['of-contain'],
+        src: './Assets/UI/EndRoundIconSmall.png',
+        style: { width: '40px', height: '40px', marginRight: '4px' }
+    });
+    endRoundDiv.appendChild(endRoundIcon);
+
+    let endRoundInput = generateNumberInput("End Round", roundsetFilterSettings.roundFilterEnd, firstRound, lastRound, 1, (val) => {
+        roundsetFilterSettings.roundFilterEnd = val;
+        presetsDiv.querySelectorAll('div').forEach(d => d.classList.remove('stats-tab-yellow'));
+    });
+    endRoundInput.style.flexGrow = '1';
+    endRoundDiv.appendChild(endRoundInput);
+
+    if (selectedRoundset === "DefaultRoundSet") {
+        let roundPresets = ["All", "Easy", "Medium", "Hard", "Impoppable", "CHIMPS"];
+        // if (selectedRoundset === "DefaultRoundSet") roundPresets.push("Easy", "Medium", "Hard", "Impoppable", "CHIMPS")
+        roundPresets.forEach(preset => {
+            const presetBtn = generateSelectorTab(preset, preset === roundsetFilterSettings.roundFilterPreset);
+            presetBtn.addEventListener('click', () => {
+                roundsetFilterSettings.roundFilterPreset = preset;
+                // highlight
+                Array.from(presetsDiv.children).forEach(c => c.classList.remove('stats-tab-yellow'));
+                presetBtn.classList.add('stats-tab-yellow');
+
+                switch(preset){
+                    case "All": roundsetFilterSettings.roundFilterStart = 1; roundsetFilterSettings.roundFilterEnd = lastRound; break;
+                    case "Easy": roundsetFilterSettings.roundFilterStart = 1; roundsetFilterSettings.roundFilterEnd = Math.min(40, lastRound); break;
+                    case "Medium": roundsetFilterSettings.roundFilterStart = 1; roundsetFilterSettings.roundFilterEnd = Math.min(60, lastRound); break;
+                    case "Hard": roundsetFilterSettings.roundFilterStart = 3; roundsetFilterSettings.roundFilterEnd = Math.min(80, lastRound); break;
+                    case "Impoppable":
+                    case "CHIMPS": roundsetFilterSettings.roundFilterStart = 6; roundsetFilterSettings.roundFilterEnd = Math.min(100, lastRound); break;
+                    case "Custom": break;
+                }
+                // update input UI
+                const sIn = startRoundInput.querySelector('input');
+                const eIn = endRoundInput.querySelector('input');
+                if (sIn) sIn.value = roundsetFilterSettings.roundFilterStart;
+                if (eIn && roundsetFilterSettings.roundFilterEnd) eIn.value = roundsetFilterSettings.roundFilterEnd;
+            });
+            presetsDiv.appendChild(presetBtn);
+        })
+        roundModalTopDiv.appendChild(presetsDiv);
+    } else {
+        roundFiltersDiv.style.flexDirection = 'row';
+        roundFiltersDiv.style.gap = '50px';
+    }
+
+    let otherSettingsDiv = createEl('div', { classList: ['d-flex'] });
+    container.appendChild(otherSettingsDiv);
+
+    let startingCashDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
+    otherSettingsDiv.appendChild(startingCashDiv);
+
+    let startingCashIcon = createEl('img', {
+        classList: ['of-contain'],
+        src: './Assets/UI/CoinIcon.png',
+        style: { width: '40px', height: '40px', marginRight: '4px' }
+    });
+    startingCashDiv.appendChild(startingCashIcon);
+
+    let startingCashInput = generateNumberInput("Starting Cash", roundsetFilterSettings.roundsetStartingCash, 0, 99999999, 50, (val) => {
+        roundsetFilterSettings.roundsetStartingCash = val;
+    });
+    startingCashDiv.appendChild(startingCashInput);
+
+    let reverseModeInput = generateCheckbox("Reverse Mode", roundsetFilterSettings.roundsetReversed, (checked) => {
+        roundsetFilterSettings.roundsetReversed = checked;
+    });
+    otherSettingsDiv.appendChild(reverseModeInput);
+
+    if (type === "quest") {
+        let showUnusedInput = generateCheckbox("Hide Unused", roundsetFilterSettings.roundsetHideUnused, (checked) => {
+            roundsetFilterSettings.roundsetHideUnused = checked;
+        });
+        otherSettingsDiv.appendChild(showUnusedInput);
+        otherSettingsDiv.classList.add('jc-between');
+    } else if (type === 'boss') {
+        let showBossInput = generateCheckbox("Only Modified", roundsetFilterSettings.roundsetShowModified, (checked) => {
+            roundsetFilterSettings.roundsetShowModified = checked;
+        });
+        otherSettingsDiv.appendChild(showBossInput);
+        otherSettingsDiv.classList.add('jc-between');
+    } else {
+        otherSettingsDiv.style.gap = '32px';
+    }
+
+    let bloonsFilterTitleDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-between'], style: { gap: '8px' } });
+    container.appendChild(bloonsFilterTitleDiv);
+
+    let bloonsFilterTitle = createEl('p', {
+        classList: ['dropdown-label', 'black-outline'],
+        innerHTML: 'Filter by Bloons'
+    });
+    bloonsFilterTitleDiv.appendChild(bloonsFilterTitle);
+
+    let logicSelectorDiv = createEl('div', { classList:['d-flex','ai-center'], style:{ gap:'6px', display: roundsetFilterSettings.roundsetAdvancedFilterMode ? 'flex':'none' } });
+    bloonsFilterTitleDiv.appendChild(logicSelectorDiv);
+
+    let logicLabel = createEl('p', { classList:['black-outline'], style:{ fontSize:'24px' }, innerHTML:'Logic:' });
+    logicSelectorDiv.appendChild(logicLabel);
+
+    const makeLogicBtn = (label) => {
+        let btn = createEl('div', {
+            classList:['maps-progress-view','black-outline','pointer'],
+            innerHTML: label
+        });
+        if (roundsetFilterSettings.roundsetAdvancedFilterLogic === label) {
+            btn.classList.add('stats-tab-yellow');
+        }
+        btn.addEventListener('click', () => {
+            if (roundsetFilterSettings.roundsetAdvancedFilterLogic === label) return;
+            roundsetFilterSettings.roundsetAdvancedFilterLogic = label;
+            Array.from(logicSelectorDiv.querySelectorAll('.maps-progress-view')).forEach(b => b.classList.remove('stats-tab-yellow'));
+            btn.classList.add('stats-tab-yellow');
+        });
+        return btn;
+    }
+
+    logicSelectorDiv.appendChild(makeLogicBtn('ANY'));
+    logicSelectorDiv.appendChild(makeLogicBtn('COMBO'));
+
+    let advancedToggleDiv = createEl('div', { classList: ['tooltip-container', 'd-flex', 'ai-center'], style: { gap: '8px' }});
+    bloonsFilterTitleDiv.appendChild(advancedToggleDiv);
+
+    let advancedToggleLabel = createEl('p', {
+        classList: ['black-outline'],
+        style: { fontSize: '24px' },
+        innerHTML: 'Advanced'
+    });
+    advancedToggleDiv.appendChild(advancedToggleLabel);
+
+    let advancedToggle = generateToggle(roundsetFilterSettings.roundsetAdvancedFilterMode, (checked) => {
+        roundsetFilterSettings.roundsetAdvancedFilterMode = checked;
+        roundsetFilterSettings.roundsetBasicFilter = null;
+        roundsetFilterSettings.roundsetFilteredBloons = [];
+        logicSelectorDiv.style.display = checked ? 'flex' : 'none';
+        buildBloonFilters();
+    });
+    advancedToggleDiv.appendChild(advancedToggle);
+
+    let bloonsFileredDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-start'], style: { gap: '8px' } });
+    container.appendChild(bloonsFileredDiv);
+
+    let filtersContentDiv = createEl('div', { classList: ['d-flex', 'jc-center'], style: { gap: '6px', flexWrap: 'wrap' } });
+    bloonsFileredDiv.appendChild(filtersContentDiv);
+
+    // let bloonsSelectorDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-center'], style: { gap: '6px', flexWrap: 'wrap' } });
+    // bloonsFileredDiv.appendChild(bloonsSelectorDiv);
+
+    let bloons = ["Red", "Blue", "Green", "Yellow", "Pink", "Black", "White", "Purple", "Lead", "Zebra", "Rainbow", "Ceramic"];
+    let blimps = ["Moab", "Bfb", "Zomg", "DdtCamo", "Bad"];
+
+
+    const createBloonTypeBtn = (bloonType) => {
+        let bloonDiv = createEl('div', {
+            classList: ['pointer'],
+            style: { 
+                backgroundImage: `url(../Assets/UI/StatsTabBlue.png)`,
+                backgroundSize: 'contain',
+                width: '60px', 
+                height: '60px' 
+            },
+        }) 
+        
+        let bloonImg = createEl('img', {
+            classList: ['bloon-filter-img'],
+            style: {
+                width: '50px', 
+                height: '50px',
+                padding: '5px',
+                objectFit: 'contain',
+            },
+            src: `../Assets/BloonIcon/${bloonType}.png`
+        })
+        bloonDiv.appendChild(bloonImg);
+
+        if (roundsetFilterSettings.roundsetFilteredBloons.includes(bloonType)) {
+            bloonDiv.style.backgroundImage = `url(../Assets/UI/StatsTabYellow.png)`;
+        }
+
+        bloonDiv.addEventListener('click', () => {
+            let arr = roundsetFilterSettings.roundsetFilteredBloons;
+            if (arr.includes(bloonType)) {
+                roundsetFilterSettings.roundsetFilteredBloons = arr.filter(b => b !== bloonType);
+                bloonDiv.style.backgroundImage = `url(../Assets/UI/StatsTabBlue.png)`;
+            } else {
+                arr.push(bloonType);
+                bloonDiv.style.backgroundImage = `url(../Assets/UI/StatsTabYellow.png)`;
+            }
+        });
+        return bloonDiv;
+    }
+
+    function buildBloonFilters() {
+        filtersContentDiv.innerHTML = "";
+
+        if(!roundsetFilterSettings.roundsetAdvancedFilterMode){
+            const basicFilters = {
+                "Any Camo": "GreenCamo",
+                "Any Regrow": "PinkRegrow",
+                "Any Fortified": "CeramicFortified",
+                "Purple": "Purple",
+                "Lead & DDT": "Lead",
+                "MOAB-Class": "Moab"
+            };
+            let basicFiltersDiv = createEl('div', { classList: ['d-flex','ai-center'], style: { gap:'6px', flexWrap:'wrap' } });
+            Object.keys(basicFilters).forEach(label => {
+                let wrapper = createEl('div', { classList:['d-flex','ai-center'], style:{ gap:'2px', width:'250px' } });
+                let iconHolder = createEl('div', {
+                    classList:['pointer'],
+                    style:{
+                        backgroundImage:`url(../Assets/UI/StatsTabBlue.png)`,
+                        backgroundSize:'contain',
+                        width:'60px',
+                        height:'60px'
+                    }
+                });
+                wrapper._iconHolder = iconHolder;
+                let img = createEl('img', {
+                    classList:['bloon-filter-img'],
+                    style:{ width:'50px', height:'50px', padding:'5px', objectFit:'contain' },
+                    src:`../Assets/BloonIcon/${basicFilters[label]}.png`
+                });
+                iconHolder.appendChild(img);
+                let txt = createEl('p', { classList:['black-outline'], style:{ fontSize:'20px' }, innerHTML: label });
+                wrapper.appendChild(iconHolder);
+                wrapper.appendChild(txt);
+                if (roundsetFilterSettings.roundsetBasicFilter === label) {
+                    iconHolder.style.backgroundImage = `url(../Assets/UI/StatsTabYellow.png)`;
+                }
+                basicFiltersDiv.appendChild(wrapper);
+                wrapper.addEventListener('click', () => {
+                    if (roundsetFilterSettings.roundsetBasicFilter === label) {
+                        roundsetFilterSettings.roundsetBasicFilter = null;
+                        iconHolder.style.backgroundImage = `url(../Assets/UI/StatsTabBlue.png)`;
+                    } else {
+                        Array.from(basicFiltersDiv.children).forEach(w => {
+                            if (w._iconHolder) {
+                                w._iconHolder.style.backgroundImage = `url(../Assets/UI/StatsTabBlue.png)`;
+                            }
+                        });
+                        roundsetFilterSettings.roundsetBasicFilter = label;
+                        iconHolder.style.backgroundImage = `url(../Assets/UI/StatsTabYellow.png)`;
+                    }
+                });
+            });
+            filtersContentDiv.appendChild(basicFiltersDiv);
+        } else {
+            let all = [];
+            bloons.forEach(b => {
+                all.push(b, `${b}Regrow`, `${b}Camo`, `${b}RegrowCamo`);
+            });
+            let fortifiedBlimps = blimps.map(blimp => `${blimp}Fortified`);
+            fortifiedBlimps[3] = "DDTFortifiedCamo";
+            let bottomDivTop = ["LeadFortified","LeadFortifiedCamo","CeramicFortified","CeramicFortifiedCamo", ...blimps];
+            let bottomDivBottom = ["LeadRegrowFortified","LeadRegrowFortifiedCamo","CeramicRegrowFortified","CeramicRegrowFortifiedCamo", ...fortifiedBlimps];
+
+            let allDiv = createEl('div', { classList:['d-flex','ai-center'], style:{ gap:'6px', flexWrap:'wrap', width:'530px' } });
+            all.forEach(b => allDiv.appendChild(createBloonTypeBtn(b)));
+            filtersContentDiv.appendChild(allDiv);
+
+            let bottomDiv = createEl('div', { classList:['d-flex','ai-center','jc-center'], style:{ gap:'6px', flexWrap:'wrap' } });
+            let topRow = createEl('div', { classList:['d-flex','ai-center'], style:{ gap:'6px', flexWrap:'wrap' } });
+            bottomDivTop.forEach(b => topRow.appendChild(createBloonTypeBtn(b)));
+            bottomDiv.appendChild(topRow);
+            let bottomRow = createEl('div', { classList:['d-flex','ai-center'], style:{ gap:'6px', flexWrap:'wrap' } });
+            bottomDivBottom.forEach(b => bottomRow.appendChild(createBloonTypeBtn(b)));
+            bottomDiv.appendChild(bottomRow);
+            filtersContentDiv.appendChild(bottomDiv);
+        }
+    }
+    buildBloonFilters();
+
+    const footer = createEl('div', { classList: ['d-flex', 'jc-end'], style: { marginTop: '8px', gap: '10px' } });
+    const closeBtn = createEl('div', {
+        classList: ['maps-progress-view', 'black-outline', 'pointer'],
+        innerHTML: 'Apply',
+        style: { padding: '6px 14px', filter: "hue-rotate(270deg)" }
+    });
+
+    closeBtn.addEventListener('click', () => {
+        if (!currentRoundsetData) { closeModal && closeModal(); return; }
+        if (roundsetFilterSettings.roundFilterEnd === null) {
+            roundsetFilterSettings.roundFilterEnd = roundsetProcessed.rounds[roundsetProcessed.rounds.length - 1].roundNumber;
+        }
+        if (roundsetFilterSettings.roundFilterStart > roundsetFilterSettings.roundFilterEnd){
+            const tmp = roundsetFilterSettings.roundFilterStart;
+            roundsetFilterSettings.roundFilterStart = roundsetFilterSettings.roundFilterEnd;
+            roundsetFilterSettings.roundFilterEnd = tmp;
+        }
+
+        applyRoundFilters(type);
+
+        generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed);
+
+        const previewInput = document.getElementById('select-round-num-preview');
+        if (previewInput){
+            previewInput.min = roundsetFilterSettings.roundFilterStart;
+            previewInput.max = roundsetFilterSettings.roundFilterEnd;
+            let curNum = roundsetProcessed.rounds[currentPreviewRound].roundNumber;
+            if (!isRoundInFilter(curNum)){
+                currentPreviewRound = roundsetFilterSettings.roundFilterStart - 1;
+                previewInput.value = roundsetFilterSettings.roundFilterStart;
+                updatePreviewRoundTimeline();
+            }
+        }
+        closeModal && closeModal();
+        goBack();
+    });
+    footer.appendChild(closeBtn);
+    container.appendChild(footer);
+
+    createModal({
+        header: 'Roundset Settings',
+        content: container
+    });
+
+    return container;
+}
+
+
+function isRoundInFilter(roundNumber){
+    return roundNumber >= roundsetFilterSettings.roundFilterStart && roundNumber <= (roundsetFilterSettings.roundFilterEnd ?? Infinity);
 }
