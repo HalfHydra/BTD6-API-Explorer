@@ -329,7 +329,8 @@ async function showRoundsetModel(source, roundset) {
         roundsetFilteredBloons: [],
         roundsetAdvancedFilterMode: false,
         roundsetBasicFilter: null,
-        roundsetAdvancedFilterLogic: 'ANY'
+        roundsetAdvancedFilterLogic: 'ANY',
+        roundsetShowHints: true
     }
     
     let roundsetContent = document.getElementById('roundsets-content');
@@ -842,7 +843,7 @@ async function generateRounds(type, reverse, roundsetType) {
                 roundDurationText.innerHTML = `Duration: ${roundDuration.toFixed(2)}s`;
                 roundsDivHeader.appendChild(roundDurationText);
 
-                if(round.hint) {
+                if(round.hint  && roundsetFilterSettings.roundsetShowHints) {
                     let roundHintDiv = document.createElement('div');
                     roundHintDiv.classList.add('round-hint-div','coop-border');
                     roundDiv.appendChild(roundHintDiv);
@@ -1224,7 +1225,7 @@ function updatePreviewRoundTimeline() {
     roundDurationText.innerHTML = `Duration: ${roundDuration.toFixed(2)}s`;
     roundsDivHeader.appendChild(roundDurationText);
 
-    if(round.hint) {
+    if(round.hint  && roundsetFilterSettings.roundsetShowHints) {
         let roundHintDiv = document.createElement('div');
         roundHintDiv.classList.add('round-hint-div','coop-border');
         roundDiv.appendChild(roundHintDiv);
@@ -1457,6 +1458,12 @@ function openRoundsetSettingsModal(type){
             roundsetFilterSettings.roundsetShowModified = checked;
         });
         otherSettingsDiv.appendChild(showBossInput);
+        otherSettingsDiv.classList.add('jc-between');
+    } else if (selectedRoundset === "DefaultRoundSet" || selectedRoundset.startsWith("Rogue")) {
+        let showHintsInput = generateCheckbox("Round Hints", roundsetFilterSettings.roundsetShowHints, (checked) => {
+            roundsetFilterSettings.roundsetShowHints = checked;
+        });
+        otherSettingsDiv.appendChild(showHintsInput);
         otherSettingsDiv.classList.add('jc-between');
     } else {
         otherSettingsDiv.style.gap = '32px';
