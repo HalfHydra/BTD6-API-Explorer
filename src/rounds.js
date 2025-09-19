@@ -923,6 +923,23 @@ async function generateRounds(type, reverse, roundsetType) {
                         bloonBarFill.style.border = `4px solid ${bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].border}`;
                     }
 
+                    tippy(bloonBarFill, {
+                        content: `${bloonGroup.start.toFixed(2)}s - ${bloonGroup.end.toFixed(2)}s`,
+                        placement: 'top',
+                        theme: 'speech_bubble',
+                        popperOptions: {
+                            modifiers: [
+                                {
+                                    name: 'preventOverflow',
+                                    options: {
+                                        boundary: 'viewport',
+                                        padding: { right: 18 },
+                                    },
+                                },
+                            ],
+                        },
+                    });
+
                     let widthPercentage = ((bloonGroup.end - bloonGroup.start) / roundDuration) * 100;
                     let leftPercentage = (bloonGroup.start / roundDuration) * 100;
             
@@ -980,7 +997,7 @@ async function generateRounds(type, reverse, roundsetType) {
             selectRoundNum.type = 'number';
             selectRoundNum.min = 1;
             selectRoundNum.max = roundsetFilterSettings.roundFilterEnd;
-            selectRoundNum.value = roundsetProcessed[currentPreviewRound].roundNumber;
+            selectRoundNum.value = roundsetProcessed.rounds[currentPreviewRound].roundNumber;
             selectRoundNum.addEventListener('change', () => {
                 let val = parseInt(selectRoundNum.value);
                 if (val < roundsetFilterSettings.roundFilterStart) val = roundsetFilterSettings.roundFilterStart;
@@ -1109,7 +1126,7 @@ async function generateRounds(type, reverse, roundsetType) {
                     currentPreviewRound--;
                     if (currentPreviewRound < 0) { currentPreviewRound = roundsetProcessed.rounds.length - 1 }
                 }
-                selectRoundNum.value = roundsetProcessed[currentPreviewRound].roundNumber;
+                selectRoundNum.value = roundsetProcessed.rounds[currentPreviewRound].roundNumber;
                 clearPreview();
                 updatePreviewRoundTimeline()
             })
@@ -1127,7 +1144,7 @@ async function generateRounds(type, reverse, roundsetType) {
                     currentPreviewRound++;
                     if (currentPreviewRound >= roundsetProcessed.rounds.length) { currentPreviewRound = 0 }
                 }
-                selectRoundNum.value = roundsetProcessed[currentPreviewRound].roundNumber;
+                selectRoundNum.value = roundsetProcessed.rounds[currentPreviewRound].roundNumber;
                 clearPreview();
                 updatePreviewRoundTimeline()
             })
@@ -1316,6 +1333,23 @@ function updatePreviewRoundTimeline() {
         if (!bloonGroup.bloon.includes("Rainbow")) {
             bloonBarFill.style.border = `4px solid ${bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].border}`;
         }
+
+        tippy(bloonBarFill, {
+            content: `${bloonGroup.start.toFixed(2)}s - ${bloonGroup.end.toFixed(2)}s`,
+            placement: 'top',
+            theme: 'speech_bubble',
+            popperOptions: {
+                modifiers: [
+                    {
+                        name: 'preventOverflow',
+                        options: {
+                            boundary: 'viewport',
+                            padding: { right: 18 },
+                        },
+                    },
+                ],
+            },
+        });
 
         let widthPercentage = ((bloonGroup.end - bloonGroup.start) / roundDuration) * 100;
         let leftPercentage = (bloonGroup.start / roundDuration) * 100;
