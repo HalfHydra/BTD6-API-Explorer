@@ -15,6 +15,8 @@ let roundsetFilterSettings = {};
 let currentRoundsetData = null;
 let bloonToRounds = new Map();
 
+let roundsetPreviewButton = null;
+
 const BloonTraitBits = {
     Camo:        1 << 0,
     Regrow:      1 << 1,
@@ -476,6 +478,7 @@ async function showRoundsetModel(source, roundset) {
     mapsProgressGame.classList.add('maps-progress-view','black-outline');
     mapsProgressGame.innerHTML = "Preview";
     mapsProgressViews.appendChild(mapsProgressGame);
+    roundsetPreviewButton = mapsProgressGame;
 
     let headerRightControls = document.createElement('div');
     headerRightControls.classList.add('maps-progress-views');
@@ -710,8 +713,13 @@ async function generateRounds(type, reverse, roundsetType) {
                 if (alternate) { roundDiv.classList.add('round-div-alt') }
             
                 let roundNumber = document.createElement('p');
-                roundNumber.classList.add('round-number', 'black-outline');
+                roundNumber.classList.add('round-number', 'black-outline', 'pointer');
                 roundNumber.innerHTML = round.roundNumber;
+                roundNumber.addEventListener('click', () => {
+                    currentPreviewRound = indexOfRoundNumberOrNearest(round.roundNumber);
+                    currentRoundsetView = "Preview";
+                    roundsetPreviewButton.click();
+                });
                 roundDiv.appendChild(roundNumber);
             
                 let roundBloonGroups = document.createElement('div');
@@ -810,8 +818,13 @@ async function generateRounds(type, reverse, roundsetType) {
                 roundDiv.appendChild(roundsDivHeader);
 
                 let roundNumber = document.createElement('p');
-                roundNumber.classList.add('round-number', 'round-number-detailed', 'black-outline');
+                roundNumber.classList.add('round-number', 'round-number-detailed', 'black-outline', 'pointer');
                 roundNumber.innerHTML = `Round ${round.roundNumber}`;
+                roundNumber.addEventListener('click', () => {             // open in preview
+                    currentPreviewRound = indexOfRoundNumberOrNearest(round.roundNumber);
+                    currentRoundsetView = "Preview";
+                    roundsetPreviewButton.click();
+                });
                 roundsDivHeader.appendChild(roundNumber);
 
                 let incomeDiv = document.createElement('div');
