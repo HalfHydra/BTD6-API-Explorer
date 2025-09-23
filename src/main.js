@@ -3189,7 +3189,6 @@ function generateMapsListView(){
 
     let colorToggle = false;
     for (let [map, difficulty] of Object.entries(constants.mapsInOrder)) {
-        if (!_btd6usersave.parameters.mapProgress.default.allowed.includes(map)) { continue; }
         if (processedMapData.Borders[coopEnabled ? "coop" : "single"][map] == null) { continue; }
         if (currentDifficultyFilter != "All" && difficulty != currentDifficultyFilter) { continue; }
         if (Object.entries(coopEnabled ? processedMapData.Maps[map].coop : processedMapData.Maps[map].single).every(([key, value]) => value == undefined)) { continue;}
