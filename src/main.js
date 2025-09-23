@@ -9227,12 +9227,20 @@ function generateQuestsPage() {
         classList: ['font-gardenia'],
         style: {
             fontSize: "18px",
+            lineHeight: "1.5",
             textAlign: "center",
             marginBottom: "10px"
         },
-        innerHTML: "Completion status will be inaccurate for quests that were completed before NK changed the quest system internally. Replaying the quests will fix the completion status. Note: If you click 'Replay' on a quest, this will make it 'incomplete' as well."
+        innerHTML: "Completion status will be inaccurate for quests that were completed before NK changed the quest system internally. Replaying and clearing the quests will fix the completion status. Note: If you click 'Replay' on a quest, this will make it 'incomplete' as well."
     });
     questsHeader.appendChild(questsDisclaimer);
+
+    const iconToRoundsets = {};
+    Object.entries(constants.roundSets).forEach(([key, rs]) => {
+        if (rs && rs.type === 'quest' && rs.icon) {
+            (iconToRoundsets[rs.icon] ||= []).push(key);
+        }
+    });
 
     btd6usersave.quests.forEach((quest) => {
         let constantsQuest = constants.quests[quest.id];
@@ -9254,6 +9262,12 @@ function generateQuestsPage() {
         });
         questDiv.appendChild(questImg);
 
+        let questCenterDiv = createEl('div', {
+            classList: ['d-flex', 'fd-column', 'jc-center', 'ai-center'],
+            style: { gap: "10px"}
+        });
+        questDiv.appendChild(questCenterDiv);
+
         let questTitle = createEl('p', {
             classList: ['quest-title', 'black-outline'],
             style: {
@@ -9261,14 +9275,42 @@ function generateQuestsPage() {
             },
             innerHTML: getLocValue(`${constantsQuest.nameLocKey}`) || quest.id
         });
-        questDiv.appendChild(questTitle);
+        questCenterDiv.appendChild(questTitle);
+
+        if (constantsQuest?.icon && iconToRoundsets[constantsQuest.icon]?.length) {
+            const stages = iconToRoundsets[constantsQuest.icon]
+                .slice()
+                .sort((a, b) => {
+                    const na = +(a.match(/(?:Stage|Part)(\d+)/i)?.[1] || 99);
+                    const nb = +(b.match(/(?:Stage|Part)(\d+)/i)?.[1] || 99);
+                    return na - nb;
+                })
+                .slice(0, 3);
+
+            if (stages.length) {
+                const row = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-start'], });
+                questCenterDiv.appendChild(row);
+
+                stages.forEach((key, idx) => {
+                    const n = +(key.match(/(?:Stage|Part)(\d+)/i)?.[1] || 0);
+                    const btn = createEl('div', { classList: ['maps-progress-view', 'black-outline', 'pointer'], style: {filter: 'hue-rotate(270deg)'}});
+                    btn.innerHTML = n ? `Stage ${n}` : (stages.length > 1 ? `Stage ${idx + 1}` : 'Open Rounds');
+                    btn.addEventListener('click', (e) => {
+                        showLoading();
+                        showRoundsetModel('profile', key);
+                    });
+                    row.appendChild(btn);
+                });
+            }
+        }
 
         if (quest.complete) {
             let questTick = createEl('img', {
                 classList: [],
                 style: {
                     width: "100px",
-                    height: "100px"
+                    height: "100px",
+                    transform: "scale(0.75)"
                 },
                 src: "../Assets/UI/TickGreenIcon.png"
             });
