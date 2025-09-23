@@ -1051,7 +1051,7 @@ async function generateRounds(type, reverse, roundsetType) {
             
             let previewRightDiv = document.createElement('div');
             previewRightDiv.classList.add('preview-right-div');
-            previewHeader.appendChild(previewRightDiv);
+            // previewHeader.appendChild(previewRightDiv);
 
             let clearButton = document.createElement('img');
             clearButton.classList.add('clear-button');
@@ -1090,12 +1090,18 @@ async function generateRounds(type, reverse, roundsetType) {
             previewDiv.appendChild(canvas);
 
             let previewFooterDiv = document.createElement('div');
-            previewFooterDiv.classList.add('preview-footer-div');
+            previewFooterDiv.classList.add('preview-footer-div', 'ai-center');
             previewDiv.appendChild(previewFooterDiv);
 
             let difficultyDiv = document.createElement('div');
-            difficultyDiv.classList.add('difficulty-div');
+            difficultyDiv.classList.add('d-flex', 'ai-center');
             previewFooterDiv.appendChild(difficultyDiv);
+
+            //bloon speed label
+            let difficultyLabel = createEl('p', {classList: ['black-outline'], innerHTML: "Bloon Speed:", style: {
+                fontSize: '28px',
+            }});
+            difficultyDiv.appendChild(difficultyLabel);
 
             let difficultyEasy = document.createElement('div');
             difficultyEasy.classList.add('maps-progress-view', 'stats-tab-yellow', 'black-outline');
@@ -1152,7 +1158,9 @@ async function generateRounds(type, reverse, roundsetType) {
 
             let nextPrevDiv = document.createElement('div');
             nextPrevDiv.classList.add('next-prev-div');
-            previewFooterDiv.appendChild(nextPrevDiv);
+            previewHeader.appendChild(nextPrevDiv);
+
+            previewFooterDiv.appendChild(previewRightDiv);
 
             let prevRound = document.createElement('div');
             prevRound.classList.add('maps-progress-view', 'black-outline');
