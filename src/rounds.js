@@ -495,6 +495,9 @@ async function showRoundsetModel(source, roundset) {
         roundsetFilterSettings.roundsetFilteredBloons = [];
         roundsetFilterSettings.roundsetAdvancedFilterMode = false;
         roundsetFilterSettings.roundsetAdvancedFilterLogic = 'ANY';
+        roundsetFilterSettings.roundsetReversed = false;
+        roundsetFilterSettings.roundsetHideUnused = true;
+        roundsetFilterSettings.roundsetShowModified = false;
         applyRoundFilters(roundsetType);
         generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed, roundsetType);
     });
@@ -1829,14 +1832,21 @@ function indexOfRoundNumberOrNearest(target){
 
 function isFiltersActive(){
     if (!currentRoundsetData) return false;
+
     const lastRound = currentRoundsetData.rounds[currentRoundsetData.rounds.length - 1]?.roundNumber ?? Infinity;
     const endIsDefault = (roundsetFilterSettings.roundFilterEnd == null) || (roundsetFilterSettings.roundFilterEnd === lastRound);
-    return (
-        roundsetFilterSettings.roundFilterStart !== 1 ||
-        !endIsDefault ||
-        roundsetFilterSettings.roundFilterPreset !== 'All' ||
-        roundsetFilterSettings.roundsetBasicFilter !== null ||
-        roundsetFilterSettings.roundsetFilteredBloons.length > 0 ||
-        roundsetFilterSettings.roundsetAdvancedFilterMode === true
-    );
+    const bossOnlyModifiedActive = (constants.roundSets[selectedRoundset]?.type === 'boss') && !!roundsetFilterSettings.roundsetShowModified;
+
+    const conditions = [
+        roundsetFilterSettings.roundFilterStart !== 1,
+        !endIsDefault,
+        roundsetFilterSettings.roundFilterPreset !== 'All',
+        roundsetFilterSettings.roundsetBasicFilter !== null,
+        (roundsetFilterSettings.roundsetFilteredBloons?.length ?? 0) > 0,
+        roundsetFilterSettings.roundsetAdvancedFilterMode === true,
+        bossOnlyModifiedActive,
+        roundsetFilterSettings.roundsetReversed === true,
+    ];
+
+    return conditions.some(Boolean);
 }
