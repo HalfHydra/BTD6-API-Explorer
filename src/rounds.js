@@ -1482,6 +1482,12 @@ function openRoundsetSettingsModal(type){
         roundFiltersDiv.style.gap = '50px';
     }
 
+    let rogueReverseDesc = createEl('p', {
+        classList: ['font-gardenia'],
+        style: { fontSize: '22px',  display: roundsetFilterSettings.roundsetReversed ? 'block' : 'none' },
+        innerHTML: 'In Rogue Legends, the rounds are not reversed even when the track path is.'
+    });
+
     let otherSettingsDiv = createEl('div', { classList: ['d-flex'] });
     container.appendChild(otherSettingsDiv);
 
@@ -1502,6 +1508,7 @@ function openRoundsetSettingsModal(type){
 
     let reverseModeInput = generateCheckbox("Reverse Mode", roundsetFilterSettings.roundsetReversed, (checked) => {
         roundsetFilterSettings.roundsetReversed = checked;
+        rogueReverseDesc.style.display = selectedRoundset.startsWith("Rogue") && checked ? 'block' : 'none';
     });
     otherSettingsDiv.appendChild(reverseModeInput);
 
@@ -1526,6 +1533,8 @@ function openRoundsetSettingsModal(type){
     } else {
         otherSettingsDiv.style.gap = '32px';
     }
+
+    container.appendChild(rogueReverseDesc);
 
     let bloonsFilterTitleDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-between'], style: { gap: '8px' } });
     container.appendChild(bloonsFilterTitleDiv);
