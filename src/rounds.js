@@ -705,6 +705,30 @@ async function generateRounds(type, reverse, roundsetType) {
     switch(type) {
         case "Simple":
             resetPreview();
+
+            if (roundsetType === 'boss' && roundsetFilterSettings.roundsetShowModified) {
+
+                let bossExplanations = {
+                    "BloonariusRoundSet": "Bloonarius Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+                    "LychRoundSet": "Lych Changes: Rounds 40 to 48 have extra MOABs added in for Lych to resurrect when hitting a skull. Rounds that Lych spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+                    "VortexRoundSet": "Vortex Changes: A small group of rounds have Bloons upgraded to speedier ones as well as adding some extra faster bloons. Rounds that Vortex spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+                    "DreadbloonRoundSet": "Dreadbloon Changes: In general summary, Zebra -> Lead, Lead -> Fortified Lead, Rainbow -> Ceramic, Ceramic -> Fortified Ceramic. There are some exceptions. After Round 50, every other Blue MOAB is fortified, and after round 70 all Blue MOABs are fortified. Rounds that Dreadbloon spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+                    "PhayzeRoundSet": "Phayze Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+                    "BlastapopoulosRoundSet": "Blastapopoulos Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+                }
+                
+                const infoDiv = document.createElement('div');
+                infoDiv.classList.add('disclaimer-div');
+                const infoP = document.createElement('p');
+                infoP.classList.add('disclaimer');
+                infoP.style.fontSize = "24px";
+                infoP.style.padding = "1rem";
+                infoP.style.lineHeight = "1.5";
+                infoP.innerHTML = 'Showing modified rounds. Disable "Only Modified" in Roundset Settings to show all rounds.<br>' + bossExplanations[selectedRoundset];
+                infoDiv.appendChild(infoP);
+                roundsContent.appendChild(infoDiv);
+            }
+
             let alternate = false;
             roundsetProcessed.rounds.forEach(async (round, index) => {
                 let roundDiv = document.createElement('div');
