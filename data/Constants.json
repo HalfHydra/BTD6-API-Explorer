@@ -727,6 +727,222 @@
             }
         },
         "current": {
+            "id": "merp2vnt",
+            "name": "Totem Collectables",
+            "skin": "totem",
+            "start": 1757577600000, 
+            "end": 1758441600000, 
+            "featuredInstas": [
+                "Alchemist",
+                "BananaFarm",
+                "BombShooter",
+                "BoomerangMonkey",
+                "DartMonkey",
+                "Druid",
+                "GlueGunner",
+                "HeliPilot",
+                "IceMonkey",
+                "MonkeyAce",
+                "MonkeyBuccaneer",
+                "MonkeySub",
+                "MonkeyVillage",
+                "NinjaMonkey",
+                "SniperMonkey",
+                "SpikeFactory",
+                "SuperMonkey",
+                "TackShooter",
+                "WizardMonkey",
+                "MortarMonkey",
+                "EngineerMonkey",
+                "DartlingGunner",
+                "BeastHandler",
+                "Mermonkey",
+                "Desperado"
+            ],
+            "rotations": {
+                "0": [
+                    "Mermonkey",
+                    "BoomerangMonkey",
+                    "DartMonkey",
+                    "SpikeFactory"
+                ],
+                "1": [
+                    "MonkeyVillage",
+                    "Alchemist",
+                    "BananaFarm",
+                    "TackShooter"
+                ],
+                "2": [
+                    "NinjaMonkey",
+                    "MonkeySub",
+                    "BeastHandler",
+                    "SniperMonkey"
+                ],
+                "3": [
+                    "WizardMonkey",
+                    "SuperMonkey",
+                    "EngineerMonkey",
+                    "HeliPilot"
+                ],
+                "4": [
+                    "Druid",
+                    "IceMonkey",
+                    "MonkeyBuccaneer",
+                    "BombShooter"
+                ],
+                "5": [
+                    "MortarMonkey",
+                    "Desperado",
+                    "MonkeyAce",
+                    "GlueGunner"
+                ],
+                "6": [
+                    "DartlingGunner",
+                    "Mermonkey",
+                    "BoomerangMonkey",
+                    "DartMonkey"
+                ],
+                "7": [
+                    "BoomerangMonkey",
+                    "DartMonkey",
+                    "SpikeFactory",
+                    "MonkeyVillage"
+                ],
+                "8": [
+                    "Alchemist",
+                    "BananaFarm",
+                    "TackShooter",
+                    "NinjaMonkey"
+                ],
+                "9": [
+                    "MonkeySub",
+                    "BeastHandler",
+                    "SniperMonkey",
+                    "WizardMonkey"
+                ],
+                "10": [
+                    "SuperMonkey",
+                    "EngineerMonkey",
+                    "HeliPilot",
+                    "Druid"
+                ],
+                "11": [
+                    "IceMonkey",
+                    "MonkeyBuccaneer",
+                    "BombShooter",
+                    "MortarMonkey"
+                ],
+                "12": [
+                    "Desperado",
+                    "MonkeyAce",
+                    "GlueGunner",
+                    "DartlingGunner"
+                ],
+                "13": [
+                    "Mermonkey",
+                    "BoomerangMonkey",
+                    "DartMonkey",
+                    "SpikeFactory"
+                ],
+                "14": [
+                    "DartMonkey",
+                    "SpikeFactory",
+                    "MonkeyVillage",
+                    "Alchemist"
+                ],
+                "15": [
+                    "BananaFarm",
+                    "TackShooter",
+                    "NinjaMonkey",
+                    "MonkeySub"
+                ],
+                "16": [
+                    "BeastHandler",
+                    "SniperMonkey",
+                    "WizardMonkey",
+                    "SuperMonkey"
+                ],
+                "17": [
+                    "EngineerMonkey",
+                    "HeliPilot",
+                    "Druid",
+                    "IceMonkey"
+                ],
+                "18": [
+                    "MonkeyBuccaneer",
+                    "BombShooter",
+                    "MortarMonkey",
+                    "Desperado"
+                ],
+                "19": [
+                    "MonkeyAce",
+                    "GlueGunner",
+                    "DartlingGunner",
+                    "Mermonkey"
+                ],
+                "20": [
+                    "BoomerangMonkey",
+                    "DartMonkey",
+                    "SpikeFactory",
+                    "MonkeyVillage"
+                ],
+                "21": [
+                    "SpikeFactory",
+                    "MonkeyVillage",
+                    "Alchemist",
+                    "BananaFarm"
+                ],
+                "22": [
+                    "TackShooter",
+                    "NinjaMonkey",
+                    "MonkeySub",
+                    "BeastHandler"
+                ],
+                "23": [
+                    "SniperMonkey",
+                    "WizardMonkey",
+                    "SuperMonkey",
+                    "EngineerMonkey"
+                ],
+                "24": [
+                    "HeliPilot",
+                    "Druid",
+                    "IceMonkey",
+                    "MonkeyBuccaneer"
+                ],
+                "25": [
+                    "BombShooter",
+                    "MortarMonkey",
+                    "Desperado",
+                    "MonkeyAce"
+                ],
+                "26": [
+                    "GlueGunner",
+                    "DartlingGunner",
+                    "Mermonkey",
+                    "BoomerangMonkey"
+                ],
+                "27": [
+                    "DartMonkey",
+                    "SpikeFactory",
+                    "MonkeyVillage",
+                    "Alchemist"
+                ],
+                "28": [
+                    "MonkeyVillage",
+                    "Alchemist",
+                    "BananaFarm",
+                    "TackShooter"
+                ],
+                "29": [
+                    "NinjaMonkey",
+                    "MonkeySub",
+                    "BeastHandler",
+                    "SniperMonkey"
+                ]
+            }
+        },
+        "mdnsu2ct": {
             "id": "mdnsu2ct",
             "start": 1754532000000,
             "end": 1755417600000,
