@@ -5521,7 +5521,7 @@ function generateCTs(){
 
         let raceInfoName = document.createElement('p');
         raceInfoName.classList.add("race-info-name", "black-outline");
-        raceInfoName.innerHTML = "Contested Territory";
+        raceInfoName.innerHTML = "Contested Territory / " + race.id;
         raceInfoTopDiv.appendChild(raceInfoName);
 
         let raceTimeLeft = document.createElement('p');
