@@ -4955,8 +4955,10 @@ input[type="checkbox"] {
 
 .switch {
     position: relative;
-    width: 60px;
-    height: 70px;
+    display: inline-block;
+    width: 52px;
+    height: 28px;
+    line-height: 0;
   }
   
   .switch input { 
@@ -4967,34 +4969,25 @@ input[type="checkbox"] {
   
   .switch .slider {
     position: absolute;
-    cursor: pointer;
-    top: 25px;
-    left: 0;
-    right: 20px;
-    bottom: 25px;
+    inset: 5px;
     background-color: #341E0E;
-    -webkit-transition: .1s;
-    transition: .1s;
-    transition-timing-function: ease-in-out;
     border-radius: 5px;
+    transition: background-color .15s, box-shadow .15s;
+    cursor: pointer;
   }
   
   .switch .slider:before {
-    position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    -webkit-transition: .1s;
-    transition: .1s;
-    transition-timing-function: ease-in-out;
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    left: -2px;
+    top: -12px;
     background-image: url(../Assets/UI/BlueBtnCircleSmall.png);
     background-size: contain;
     background-repeat: no-repeat;
-    -webkit-transform: translate(-15px, 8px);
-    -ms-transform: translate(-15px, 8px);
-    transform: translate(-15px, 8px);
+    transition: transform .15s;
+    transform: translate(-4px, 8px);
   }
   
   .switch input:checked + .slider {
@@ -5006,9 +4999,9 @@ input[type="checkbox"] {
   }
   
   .switch input:checked + .slider:before {
-    -webkit-transform: translate(20px, 8px);
-    -ms-transform: translate(20px, 8px);
-    transform: translate(20px, 8px);
+    -webkit-transform: translate(28px, 8px);
+    -ms-transform: translate(28px, 8px);
+    transform: translate(28px, 8px);
   }
 
 
