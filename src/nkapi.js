@@ -56,6 +56,15 @@ let leaderboardCache = {};
 let leaderboardNext;
 let leaderboardMetadata = {};
 let leaderboardType;
+let leaderboardActiveToken = 0;
+
+let racesDataCachedAt = null;
+let bossesDataCachedAt = null;
+let CTDataCachedAt = null;
+
+const LEADERBOARD_TTL = 10 * 60 * 1000;
+
+const isStale = (cachedAt) => (!cachedAt || (Date.now() - cachedAt) > LEADERBOARD_TTL);
 
 function addRequestToQueue(profile, request) {
     requestQueue.push({id: profile, request: request});
@@ -162,7 +171,6 @@ async function getSaveData(oak_token) {
         } 
         delete localStorageOAK[oak_token];
         writeLocalStorage();
-        // generateFrontPage();
         errorModal("Your Open Access Key has expired. Please make a new one and try again.", "expire", true)
         return;
     }
@@ -191,6 +199,7 @@ async function getRacesData() {
     if (racesData == null) {
         await fetchData(`https://data.ninjakiwi.com/btd6/races`, (json) => {
             racesData = json["body"];
+            racesDataCachedAt = Date.now();
             generateRaces();
         });
     } else {
@@ -227,21 +236,24 @@ async function getLeaderboardData() {
 async function getAllLeaderboardData(link) {
     if (link == null) { link = leaderboardLink };
     requestQueue = [];
-    if (leaderboardCache[leaderboardLink] == null) {
+    if (leaderboardCache[leaderboardLink] == null || (leaderboardCache[leaderboardLink]._cachedAt && Date.now() - leaderboardCache[leaderboardLink]._cachedAt > LEADERBOARD_TTL)) {
         leaderboardCache[leaderboardLink] = {
-            "entries": []
+            "entries": [],
+            _cachedAt: Date.now()
         };
         getLeaderboardPage(link);
     }
     return leaderboardCache[leaderboardLink];
 }
 
-async function getLeaderboardPage(link) {
+async function getLeaderboardPage(link, token = leaderboardActiveToken) {
     if (link == null) return;
     if(leaderboardCache[leaderboardLink].nextRequested){ return };
     requestCount++;
     await fetchData(link, (json) => {
+        if (token !== leaderboardActiveToken) return;
         leaderboardCache[leaderboardLink].entries = leaderboardCache[leaderboardLink].entries.concat(json["body"]);
+        leaderboardCache[leaderboardLink]._cachedAt = Date.now();
         if(!leaderboardCache[leaderboardLink].hasOwnProperty("entryPerPage")){
             leaderboardCache[leaderboardLink]["entryPerPage"] = json["body"].length;
         }
@@ -255,6 +267,7 @@ async function getBossesData() {
     if (bossesData == null) {
         await fetchData(`https://data.ninjakiwi.com/btd6/bosses`, (json) => {
             bossesData = json["body"];
+            bossesDataCachedAt = Date.now();
             generateBosses(showElite);
         });
     } else {
@@ -278,6 +291,7 @@ async function getCTData() {
     if (CTData == null) {
         await fetchData(`https://data.ninjakiwi.com/btd6/ct`, (json) => {
             CTData = json["body"];
+            CTDataCachedAt = Date.now();
             generateCTs();
         });
     } else {
@@ -338,7 +352,7 @@ async function getUserProfile(key) {
     let player = key.split("/").pop();
     if (profileCache[player] == null) {
         await fetchData(key, (json) => {
-            profileCache[player] = json["body"];
+            profileCache[player] = { ...json["body"], _cachedAt: Date.now() };
         });
     } else {
         // console.log(`used cache for ${player}`)
@@ -395,4 +409,9 @@ function getChallengeIDFromDate(date, advanced) {
     let diffInDays = Math.floor(diffInMs / 86400000);
     let diff = (advanced ? 2101 : 2114) - diffInDays;
     return (advanced ? 'adv': 'rot') + diff + date.replace(/-/g, '');
+}
+
+function clearProfileRequestQueue() {
+    requestQueue = [];
+    isProcessing = false;
 }

@@ -5180,6 +5180,8 @@ function generateRaces(){
     let eventsContent = document.getElementById('events-content');
     eventsContent.innerHTML = "";
 
+    clearAllTimers();
+
     Object.values(racesData).forEach((race, index) => {
         let raceDiv = document.createElement('div');
         raceDiv.classList.add("race-div");
@@ -5224,15 +5226,14 @@ function generateRaces(){
         raceInfoTopDiv.appendChild(raceInfoName);
 
         let raceTimeLeft = document.createElement('p');
-        raceTimeLeft.id = `${index}-race-time-left`;
+        raceTimeLeft.id = `Race-${race.id}-TimeLeft`;
         raceTimeLeft.classList.add("race-time-left", "black-outline");
         raceTimeLeft.innerHTML = "Finished";
         raceInfoTopDiv.appendChild(raceTimeLeft);    
         if(new Date() < new Date(race.start)) {
             raceTimeLeft.innerHTML = "Coming Soon!";
         } else if (new Date(race.end) > new Date()) {
-            updateTimer(new Date(race.end), raceTimeLeft.id);
-            timerInterval = setInterval(() => updateTimer(new Date(race.end), raceTimeLeft.id), 1000)
+            registerTimer(raceTimeLeft.id, new Date(race.end));
         } else if (new Date() > new Date(race.end)) {
             raceTimeLeft.innerHTML = "Finished";
         }
@@ -5308,6 +5309,8 @@ function generateRaces(){
 function generateBosses(elite){
     let eventsContent = document.getElementById('events-content');
     eventsContent.innerHTML = "";
+
+    clearAllTimers();
 
     let switchBanner = document.createElement('div');
     switchBanner.classList.add('switch-banner');
@@ -5400,15 +5403,14 @@ function generateBosses(elite){
         raceInfoTopDiv.appendChild(raceInfoName);
 
         let bossTimeLeft = document.createElement('p');
-        bossTimeLeft.id = `${index}-boss-time-left`;
+        bossTimeLeft.id = `Boss-${race.id}-TimeLeft`;
         bossTimeLeft.classList.add("race-time-left", "black-outline");
         bossTimeLeft.innerHTML = "Finished";
         raceInfoTopDiv.appendChild(bossTimeLeft);    
         if(new Date() < new Date(race.start)) {
             bossTimeLeft.innerHTML = "Coming Soon!";
         } else if (new Date(race.end) > new Date()) {
-            updateTimer(new Date(race.end), bossTimeLeft.id);
-            timerInterval = setInterval(() => updateTimer(new Date(race.end), bossTimeLeft.id), 1000)
+            registerTimer(bossTimeLeft.id, new Date(race.end));
         } else if (new Date() > new Date(race.end)) {
             bossTimeLeft.innerHTML = "Finished";
         }
@@ -5495,6 +5497,8 @@ function generateCTs(){
     let eventsContent = document.getElementById('events-content');
     eventsContent.innerHTML = "";
 
+    clearAllTimers();
+
     document.getElementById("loading").style.transform = "scale(0)";
 
     Object.values(CTData).forEach((race, index) => {
@@ -5521,15 +5525,14 @@ function generateCTs(){
         raceInfoTopDiv.appendChild(raceInfoName);
 
         let raceTimeLeft = document.createElement('p');
-        raceTimeLeft.id = `${index}-ct-time-left`;
+        raceTimeLeft.id = `CT-${race.id}-TimeLeft`;
         raceTimeLeft.classList.add("race-time-left", "black-outline");
         raceTimeLeft.innerHTML = "Finished";
         raceInfoTopDiv.appendChild(raceTimeLeft);    
         if(new Date() < new Date(race.start)) {
             raceTimeLeft.innerHTML = "Coming Soon!";
         } else if (new Date(race.end) > new Date()) {
-            updateTimer(new Date(race.end), raceTimeLeft.id);
-            timerInterval = setInterval(() => updateTimer(new Date(race.end), raceTimeLeft.id), 1000)
+            registerTimer(raceTimeLeft.id, new Date(race.end));
         } else if (new Date() > new Date(race.end)) {
             raceTimeLeft.innerHTML = "Finished";
         }

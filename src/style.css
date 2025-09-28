@@ -2637,7 +2637,7 @@
 }
 .full-leaderboard-div {
     display: flex;
-    height: calc(100vh - 70px);
+    height: calc(calc(var(--vh, 1vh) * 100) - 140px);
     width: 100%;
     flex-direction: column;
     /* justify-content: space-between; */
@@ -5133,7 +5133,7 @@ input[type="checkbox"] {
     }
 
     .full-leaderboard-div {
-        height: calc(calc(var(--vh, 1vh) * 100) - 70px);
+        height: calc(calc(var(--vh, 1vh) * 100) - 140px);
     }
 
     .modal-help-divs {

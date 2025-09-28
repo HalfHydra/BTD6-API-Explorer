@@ -1,6 +1,7 @@
 let readyFlags = [0,0,0,0,0]
 let pressedStart = false;
 let timerInterval = null;
+let activeTimers = new Map();
 
 let constants = {}
 let locJSON = {}
@@ -27,7 +28,7 @@ function goBack(noScroll){
     if (currentState.callback) {
         currentState.callback();
     }
-    if(timerInterval) { clearInterval(timerInterval); }
+
     changeHexBGColor(constants.BGColor)
 
     if (backQueue.length === 0) {
@@ -128,28 +129,31 @@ function closeModal() {
     document.querySelector('.modal-overlay')?.remove();
 }
 
-function showLoading(){
+function showLoading(force){
     let imagesToLoad = 0;
-    function imageLoaded() {
-        imagesToLoad--;
-        if (imagesToLoad === 0) {
-            document.getElementById("loading").style.transform = "scale(0)";
-        }
-    }
-    let observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'childList') {
-                mutation.addedNodes.forEach((node) => {
-                    if (node.nodeName === 'IMG') {
-                        imagesToLoad++;
-                        node.addEventListener('load', imageLoaded);
-                        node.addEventListener('error', imageLoaded);
-                    }
-                });
-            }
+    if (!force) {
+        let observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeName === 'IMG') {
+                            imagesToLoad++;
+                            node.addEventListener('load', imageLoaded);
+                            node.addEventListener('error', imageLoaded);
+                        }
+                    });
+                }
+            });
         });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
+        function imageLoaded() {
+            imagesToLoad--;
+            if (imagesToLoad === 0) {
+                document.getElementById("loading").style.transform = "scale(0)";
+                observer.disconnect();
+            }
+        }
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
     document.getElementById("loading").style.removeProperty("transform")
 }
 
@@ -284,6 +288,8 @@ function copyLoadingIcon(destination){
     clone.classList.add('loading-icon-leaderboard');
     clone.style.height = "unset"
     destination.appendChild(clone)
+
+    return clone;
 }
 
 function formatTime(seconds) {
@@ -321,9 +327,10 @@ function getRemainingTime(targetTime) {
 }
 
 function updateTimer(targetTime, elementId) {
-    const remainingTime = getRemainingTime(targetTime);
     const timerElement = document.getElementById(elementId);
+    if (!timerElement) return 'missing';
 
+    const remainingTime = getRemainingTime(targetTime);
     if (remainingTime > 48 * 3600) {
         const days = Math.ceil(remainingTime / (24 * 3600));
         timerElement.textContent = `${days} days left`;
@@ -331,6 +338,7 @@ function updateTimer(targetTime, elementId) {
     } else if (remainingTime < 0) {
         timerElement.textContent = "Finished";
         timerElement.style.textAlign = "right";
+        return 'finished';
     } else {
         timerElement.style.width = "100px";
         timerElement.textContent = formatTime(remainingTime);
@@ -739,4 +747,38 @@ function getRelativeTimeString(targetTime) {
     }
 
     return rtf.format(value, unit);
+}
+
+function registerTimer(elementId, targetTime){
+    if(!(targetTime instanceof Date)) {
+        targetTime = new Date(targetTime);
+    }
+    activeTimers.set(elementId, targetTime);
+    ensureTimerLoop();
+    updateTimer(targetTime, elementId);
+}
+
+function ensureTimerLoop(){
+    if (timerInterval != null) return;
+    timerInterval = setInterval(() => {
+        if (activeTimers.size === 0){
+            clearInterval(timerInterval);
+            timerInterval = null;
+            return;
+        }
+        for (let [id, target] of activeTimers){
+            const status = updateTimer(target, id);
+            if (status === 'missing' || status === 'finished'){
+                activeTimers.delete(id);
+            }
+        }
+    }, 1000);
+}
+
+function clearAllTimers(){
+    activeTimers.clear();
+    if (timerInterval){
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
 }

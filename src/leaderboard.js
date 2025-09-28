@@ -96,26 +96,31 @@ async function generateLeaderboards() {
     let pastEvents = [];
     let now = new Date();
 
+    clearAllTimers();
+
     let promises = [];
 
-    if (racesData == null) {
+    if (isStale(racesData)) {
         promises.push(fetchData(`https://data.ninjakiwi.com/btd6/races`, (json) => {
             racesData = json["body"];
-        }))
-    }
-    if (bossesData == null) {
-        promises.push(fetchData(`https://data.ninjakiwi.com/btd6/bosses`, (json) => {
-            bossesData = json["body"];
+            racesDataCachedAt = Date.now();
         }));
     }
-    if (CTData == null) {
+    if (isStale(bossesData)) {
+        promises.push(fetchData(`https://data.ninjakiwi.com/btd6/bosses`, (json) => {
+            bossesData = json["body"];
+            bossesDataCachedAt = Date.now();
+        }));
+    }
+    if (isStale(CTData)) {
         promises.push(fetchData(`https://data.ninjakiwi.com/btd6/ct`, (json) => {
             CTData = json["body"];
+            CTDataCachedAt = Date.now();
         }));
     }
     await Promise.all(promises).then(() => {
         leaderboardPage.style.display = "flex";
-        hideLoading(); 
+        hideLoading();
     });
 
     racesData.forEach((data) => {
@@ -124,7 +129,6 @@ async function generateLeaderboards() {
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "Race");
-            showLoading();
         })
 
         let roundsetIcon = document.createElement('img');
@@ -151,8 +155,7 @@ async function generateLeaderboards() {
         if (new Date() < new Date(data.start)) {
             roundsetText2.innerHTML = "Coming Soon!";
         } else if (new Date(data.end) > new Date()) {
-            updateTimer(new Date(data.end), roundsetText2.id);
-            timerInterval = setInterval(() => updateTimer(new Date(data.end), roundsetText2.id), 1000)
+            registerTimer(roundsetText2.id, new Date(data.end));
         } else {
             roundsetText2.innerHTML = `${new Date(data.start).toLocaleDateString()} - ${new Date(data.end).toLocaleDateString()}`
         }
@@ -178,7 +181,6 @@ async function generateLeaderboards() {
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_standard]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "Boss");
-            showLoading();
         })
 
         let roundsetIcon = document.createElement('img');
@@ -206,8 +208,7 @@ async function generateLeaderboards() {
         if (new Date() < new Date(data.start)) {
             roundsetText2.innerHTML = "Coming Soon!";
         } else if (new Date(data.end) > new Date()) {
-            updateTimer(new Date(data.end), roundsetText2.id);
-            timerInterval = setInterval(() => updateTimer(new Date(data.end), roundsetText2.id), 1000)
+            registerTimer(roundsetText2.id, new Date(data.end));
         } else {
             roundsetText2.innerHTML = `${new Date(data.start).toLocaleDateString()} - ${new Date(data.end).toLocaleDateString()}`
         }
@@ -233,7 +234,6 @@ async function generateLeaderboards() {
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_elite]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "BossElite");
-            showLoading();
         })
 
         let roundsetIcon = document.createElement('img');
@@ -261,8 +261,7 @@ async function generateLeaderboards() {
         if (new Date() < new Date(data.start)) {
             roundsetText2.innerHTML = "Coming Soon!";
         } else if (new Date(data.end) > new Date()) {
-            updateTimer(new Date(data.end), roundsetText2.id);
-            timerInterval = setInterval(() => updateTimer(new Date(data.end), roundsetText2.id), 1000)
+            registerTimer(roundsetText2.id, new Date(data.end));
         } else {
             roundsetText2.innerHTML = `${new Date(data.start).toLocaleDateString()} - ${new Date(data.end).toLocaleDateString()}`
         }
@@ -284,7 +283,6 @@ async function generateLeaderboards() {
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_team]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "CTTeam");
-            showLoading();
         })
 
         let roundsetIcon = document.createElement('img');
@@ -311,8 +309,7 @@ async function generateLeaderboards() {
         if (new Date() < new Date(data.start)) {
             roundsetText2.innerHTML = "Coming Soon!";
         } else if (new Date(data.end) > new Date()) {
-            updateTimer(new Date(data.end), roundsetText2.id);
-            timerInterval = setInterval(() => updateTimer(new Date(data.end), roundsetText2.id), 1000)
+            registerTimer(roundsetText2.id, new Date(data.end));
         } else {
             roundsetText2.innerHTML = `${new Date(data.start).toLocaleDateString()} - ${new Date(data.end).toLocaleDateString()}`
         }
@@ -334,7 +331,6 @@ async function generateLeaderboards() {
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_player]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "CTPlayer");
-            showLoading()
         })
 
         let roundsetIcon = document.createElement('img');
@@ -361,8 +357,7 @@ async function generateLeaderboards() {
         if (new Date() < new Date(data.start)) {
             roundsetText2.innerHTML = "Coming Soon!";
         } else if (new Date(data.end) > new Date()) {
-            updateTimer(new Date(data.end), roundsetText2.id);
-            timerInterval = setInterval(() => updateTimer(new Date(data.end), roundsetText2.id), 1000)
+            registerTimer(roundsetText2.id, new Date(data.end));
         } else {
             roundsetText2.innerHTML = `${new Date(data.start).toLocaleDateString()} - ${new Date(data.end).toLocaleDateString()}`
         }
@@ -430,6 +425,9 @@ function onChangeEventFilter(type) {
 }
 
 function showLeaderboard(source, metadata, type) {
+    showLoading(true);
+
+    leaderboardActiveToken++;
     switch (type) {
         case "Boss":
             if (leaderboardLink != metadata.leaderboard_standard_players_1) { leaderboardPage = 1 }
@@ -457,7 +455,7 @@ function showLeaderboard(source, metadata, type) {
     leaderboardContent.innerHTML = "";
     document.getElementById(`${source}-content`).style.display = "none";
 
-    addToBackQueue({ source: source, destination: 'leaderboard' })
+    addToBackQueue({ source: source, destination: 'leaderboard', callback: () => { leaderboardLink = null; leaderboardActiveToken++ } })
 
     let leaderboardDiv = document.createElement('div');
     leaderboardDiv.classList.add('full-leaderboard-div');
@@ -479,8 +477,8 @@ function showLeaderboard(source, metadata, type) {
     modalClose.classList.add('modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
-        leaderboardContent.style.display = "none";
-        document.getElementById(`${source}-content`).style.display = "flex";
+        goBack();
+        leaderboardActiveToken++;
     })
     leaderboardHeaderLeft.appendChild(modalClose);
 
@@ -520,9 +518,32 @@ function showLeaderboard(source, metadata, type) {
     }
 
 
-    let leaderboardHeaderRight = document.createElement('div');
-    leaderboardHeaderRight.classList.add('leaderboard-header-right');
+    let leaderboardHeaderRight = createEl('div', {
+        classList: ['d-flex', 'jc-end'],
+        style: {
+            width: '80px',
+        }
+    });
     leaderboardHeader.appendChild(leaderboardHeaderRight);
+
+    let leaderboardRefreshBtn = createEl('img', {
+        classList: [],
+        style: {
+            cursor: 'pointer',
+            width: '50px',
+            height: '50px',
+        },
+        src: './Assets/UI/RefreshBtn.png',
+    })
+    leaderboardRefreshBtn.addEventListener('click', () => {
+        if (leaderboardLink) {
+            delete leaderboardCache[leaderboardLink];
+        }
+        leaderboardActiveToken++;
+        showLoading();
+        generateLeaderboardEntries(metadata, type, leaderboardActiveToken);
+    });
+    leaderboardHeaderRight.appendChild(leaderboardRefreshBtn);
 
     if (type == "Boss" || type == "BossElite") {
         let leaderboardDisclaimer = document.createElement('p');
@@ -541,11 +562,11 @@ function showLeaderboard(source, metadata, type) {
     leaderboardEntries.classList.add('leaderboard-entries');
     leaderboardDiv.appendChild(leaderboardEntries);
 
-    generateLeaderboardEntries(metadata, type);
+    generateLeaderboardEntries(metadata, type, leaderboardActiveToken);
 }
 
-async function generateLeaderboardEntries(metadata, type) {
-    await getAllLeaderboardData(leaderboardLink);
+async function generateLeaderboardEntries(metadata, type, token = leaderboardActiveToken) {
+    await getAllLeaderboardData(leaderboardLink, token);
 
     let columnsType = null;
     switch (type) {
@@ -610,6 +631,10 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                     addToBackQueue({ source: 'leaderboard', destination: 'publicprofile' });
                     openProfile('leaderboard', entry.profile);
                 })
+            } else {
+                leaderboardEntry.addEventListener('click', () => {
+                    openTeamModalPopout(entry.group);
+                });
             }
             leaderboardEntries.appendChild(leaderboardEntry);
 
@@ -706,7 +731,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         leaderboardEntryMainScore.innerHTML = formatScoreTime(scorePartsObj["Least Cash"].score); //entry.score
                         break;
                     case "LeastCash":
-                        leaderboardEntryMainScore.innerHTML =  scorePartsObj["Least Cash"].score.toLocaleString();
+                        leaderboardEntryMainScore.innerHTML = scorePartsObj["Least Cash"].score.toLocaleString();
                         leaderboardEntryScoreIcon.src = `./Assets/UI/LeastCashIconSmall.png`;
                         leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
 
@@ -759,8 +784,21 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                     entries.forEach(async observerentry => {
                         if (observerentry.isIntersecting) {
                             if (leaderboardData.length == index + 1) {
-                                getLeaderboardPage(leaderboardCache[leaderboardLink].next);
-                                leaderboardCache[leaderboardLink].nextRequested = true;
+                                if (leaderboardCache[leaderboardLink].next != null) {
+                                    if (leaderboardEntries.getElementsByClassName('loading-text-leaderboard').length == 0) {
+                                        let loadingEntriesText = createEl('p', { classList: ['loading-text-leaderboard', 'black-outline'], style: { fontSize: '32px', paddingBottom: '120px' }, innerHTML: "Loading more entries..." });
+                                        leaderboardEntries.appendChild(loadingEntriesText);
+                                    }
+                                    clearProfileRequestQueue();
+                                    getLeaderboardPage(leaderboardCache[leaderboardLink].next, leaderboardActiveToken);
+                                    leaderboardCache[leaderboardLink].nextRequested = true;
+                                } else {
+                                    if (!leaderboardCache[leaderboardLink].ended) {
+                                        leaderboardCache[leaderboardLink].ended = true;
+                                        let endOfLeaderboard = createEl('p', { classList: ['black-outline'], style: { fontSize: '32px', paddingBottom: '120px' }, innerHTML: "End of Leaderboard" });
+                                        leaderboardEntries.appendChild(endOfLeaderboard);
+                                    }
+                                }
                             }
 
                             if (page == 1 && ((index + ((page - 1) * count) + 1) <= 50)) {
@@ -801,6 +839,10 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                     leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
                 }
             }
+        })
+
+        Array.from(leaderboardEntries.getElementsByClassName('loading-text-leaderboard')).forEach((icon) => {
+            icon.remove();
         })
     } else {
         let noDataFound = document.createElement('p');
@@ -867,5 +909,345 @@ function generateLeaderboardHeader(columnsType) {
             leaderboardColumnCTPoints.innerHTML = "CT Points";
             leaderboardColumnLabels.appendChild(leaderboardColumnCTPoints);
             break;
+    }
+}
+
+function openTeamModalPopout(groupUrl) {
+    const container = createEl('div', { classList: ['d-flex', 'jc-center'], style: { padding: '10px 0', minHeight: "550px" } });
+    const list = createEl('div', { classList: [] });
+    container.appendChild(list);
+
+    createModal({
+        header: 'Contested Territory - Team Group',
+        content: container
+    });
+
+    let loading = null;
+
+    (async () => {
+        try {
+            loading = copyLoadingIcon(container);
+            const res = await fetch(groupUrl);
+            if (!res.ok) throw new Error(`Failed to fetch group: ${res.status}`);
+            const json = await res.json();
+
+            let entries = [];
+            if (Array.isArray(json)) entries = json;
+            else if (Array.isArray(json.body)) entries = json.body;
+            else if (Array.isArray(json?.body?.entries)) entries = json.body.entries;
+
+            if (!entries || entries.length === 0) {
+                list.innerHTML = '';
+                list.appendChild(createEl('p', {
+                    classList: ['no-data-found', 'black-outline'],
+                    textContent: 'No teams found for this group.'
+                }));
+                return;
+            }
+
+            entries.sort((a, b) => (b.score || 0) - (a.score || 0));
+
+            const rowMap = new Map();
+
+            entries.forEach((e, idx) => {
+                const wrapper = createEl('div', { classList: ['d-flex', 'fd-column'] });
+
+                const entryOuter = createEl('div', { classList: ['leaderboard-entry', 'team-group-entry'] });
+                const entryDiv = createEl('div', { classList: ['leaderboard-entry-div'] });
+
+                const caret = createEl('img', {
+                    src: './Assets/UI/ArrowHideBtn.png',
+                    style: { width: '40px', height: '40px', cursor: 'pointer', transition: 'transform .2s' },
+                    classList: ['team-group-caret']
+                });
+
+                const rank = createEl('p', {
+                    classList: ['leaderboard-entry-rank', 'black-outline'],
+                    textContent: (idx + 1)
+                });
+
+                const leftWrap = createEl('div', { classList: ['team-group-rank-wrap'] });
+                leftWrap.appendChild(rank);
+
+                const playerDiv = createEl('div', { classList: ['leaderboard-entry-player', 'leaderboard-entry-team'] });
+                const iconWrap = createEl('div', { classList: ['leaderboard-entry-icon-ct'] });
+
+                const frame = createEl('img', {
+                    classList: ['leaderboard-entry-frame'],
+                    src: './Assets/UI/TeamFrame1.png'
+                });
+                const emblem = createEl('img', {
+                    classList: ['leaderboard-entry-emblem'],
+                    src: './Assets/UI/TeamIcon1.png'
+                });
+                iconWrap.appendChild(frame);
+                iconWrap.appendChild(emblem);
+
+                const name = createEl('p', {
+                    classList: ['leaderboard-entry-name', 'leaderboard-outline'],
+                    textContent: e.displayName || 'Unknown Team'
+                });
+
+                playerDiv.appendChild(iconWrap);
+                playerDiv.appendChild(name);
+
+                const scoreDiv = createEl('div', { classList: ['leaderboard-entry-score'] });
+                const scoreIcon = createEl('img', {
+                    classList: ['leaderboard-entry-score-icon', 'leaderboard-entry-score-icon-large'],
+                    src: './Assets/UI/CtPointsIconSmall.png'
+                });
+                const scoreVal = createEl('p', {
+                    classList: ['leaderboard-entry-main-score', 'leaderboard-outline', 'fg-1', 'ta-center'],
+                    textContent: (e.score || 0).toLocaleString()
+                });
+                scoreDiv.appendChild(scoreIcon);
+                scoreDiv.appendChild(scoreVal);
+
+                entryDiv.appendChild(leftWrap);
+                entryDiv.appendChild(playerDiv);
+                entryDiv.appendChild(scoreDiv);
+                entryOuter.appendChild(entryDiv);
+                entryOuter.appendChild(caret);
+
+                const extra = createEl('div', {
+                    classList: ['d-flex', 'ai-center', 'jc-between'],
+                    style: { display: 'none', margin: '0px 60px 0px 20px' }
+                });
+
+                const membersP = createEl('p', {
+                    classList: ['black-outline', 'team-group-members'],
+                    style: { fontSize: '22px' },
+                    innerHTML: `<span class="team-group-members-value">?</span>/15 Members`
+                });
+
+                const ownerContainer = createEl('div', { classList: ['d-flex', 'ai-center'], style: { gap: '8px' } });
+
+                const ownerLabel = createEl('p', {
+                    classList: ['black-outline'],
+                    style: { fontSize: '22px' },
+                    textContent: 'Owner:'
+                });
+                ownerContainer.appendChild(ownerLabel);
+
+                const ownerBlock = createEl('div', { classList: ['challenge-creator', 'team-owner-block', 'pointer'], style: { width: '300px' } });
+                ownerContainer.appendChild(ownerBlock);
+
+                const ownerAvatar = createEl('div', { classList: ['avatar'] });
+                ownerBlock.appendChild(ownerAvatar);
+
+                const ownerFrame = createEl('img', {
+                    classList: ['avatar-frame', 'noSelect'],
+                    style: { width: '50px' },
+                    src: '../Assets/UI/InstaTowersContainer.png'
+                });
+                ownerAvatar.appendChild(ownerFrame);
+
+                const ownerImg = createEl('img', {
+                    classList: ['avatar-img', 'noSelect'],
+                    style: { width: '50px' },
+                    src: '../Assets/ProfileAvatar/ProfileAvatar01.png'
+                });
+                ownerAvatar.appendChild(ownerImg);
+
+                const ownerName = createEl('p', {
+                    classList: ['black-outline'],
+                    textContent: preventRateLimiting ? 'Click to Load Owner' : 'Loading...'
+                });
+                ownerBlock.appendChild(ownerName);
+
+                const statusP = createEl('p', {
+                    classList: ['black-outline'],
+                    style: { fontSize: '22px' },
+                    innerHTML: '<span class="team-group-status-value">Loading...</span>'
+                });
+
+                extra.appendChild(statusP);
+                extra.appendChild(membersP);
+                extra.appendChild(ownerContainer);
+
+                caret.addEventListener('click', (ev) => {
+                    ev.stopPropagation();
+                    const open = extra.style.display === 'flex';
+                    extra.style.display = open ? 'none' : 'flex';
+                    caret.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
+                    if (!open) {
+                        const ref = rowMap.get(e.profile);
+                        if (ref && !ref.ownerLoaded && ref.teamProfile) {
+                            loadOwner(ref, groupUrl);
+                        }
+                    }
+                });
+                entryDiv.addEventListener('click', () => caret.click());
+
+                wrapper.appendChild(entryOuter);
+                wrapper.appendChild(extra);
+                list.appendChild(wrapper);
+
+                rowMap.set(e.profile, {
+                    entryDiv,
+                    frameEl: frame,
+                    emblemEl: emblem,
+                    iconWrap,
+                    membersSpan: membersP.querySelector('.team-group-members-value'),
+                    statusSpan: statusP.querySelector('.team-group-status-value'),
+                    ownerBlock,
+                    ownerImg,
+                    ownerFrame,
+                    ownerName,
+                    extra,
+                    ownerLoaded: false,
+                    teamProfile: null
+                });
+            });
+
+            if (entries.length < 6) {
+                for (let i = entries.length; i < 6; i++) {
+                    const rankNumber = i + 1;
+
+                    const wrapper = createEl('div', { classList: ['d-flex', 'fd-column'] });
+
+                    const entryOuter = createEl('div', { classList: ['leaderboard-entry', 'team-group-entry', 'placeholder-entry'] });
+                    const entryDiv = createEl('div', { classList: ['leaderboard-entry-div'], style: { marginRight: '40px' } });
+
+                    const leftWrap = createEl('div', { classList: ['team-group-rank-wrap'] });
+                    const rank = createEl('p', {
+                        classList: ['leaderboard-entry-rank', 'black-outline'],
+                        textContent: rankNumber
+                    });
+                    leftWrap.appendChild(rank);
+
+                    const playerDiv = createEl('div', { classList: ['leaderboard-entry-player', 'leaderboard-entry-team'] });
+
+                    const iconWrap = createEl('div', { classList: ['leaderboard-entry-icon-ct'] });
+                    const frame = createEl('img', {
+                        classList: ['leaderboard-entry-frame'],
+                        src: './Assets/UI/StrikethroughRound.png'
+                    });
+                    iconWrap.appendChild(frame);
+
+                    const name = createEl('p', {
+                        classList: ['leaderboard-entry-name', 'leaderboard-outline'],
+                        textContent: 'Team has no score or no longer exists'
+                    });
+
+                    playerDiv.appendChild(iconWrap);
+                    playerDiv.appendChild(name);
+
+                    const scoreDiv = createEl('div', { classList: ['leaderboard-entry-score'] });
+                    const scoreIcon = createEl('img', {
+                        classList: ['leaderboard-entry-score-icon', 'leaderboard-entry-score-icon-large'],
+                        src: './Assets/UI/CtPointsIconSmall.png'
+                    });
+                    const scoreVal = createEl('p', {
+                        classList: ['leaderboard-entry-main-score', 'leaderboard-outline', 'fg-1', 'ta-center'],
+                        textContent: '0'
+                    });
+                    scoreDiv.appendChild(scoreIcon);
+                    scoreDiv.appendChild(scoreVal);
+
+                    entryDiv.appendChild(leftWrap);
+                    entryDiv.appendChild(playerDiv);
+                    entryDiv.appendChild(scoreDiv);
+                    entryOuter.appendChild(entryDiv);
+
+                    wrapper.appendChild(entryOuter);
+                    list.appendChild(wrapper);
+                }
+            }
+
+            setTimeout(() => enrichTeams(entries, rowMap), 20);
+        } catch (err) {
+            console.error(err);
+            list.innerHTML = '';
+            list.appendChild(createEl('p', {
+                classList: ['no-data-found', 'black-outline'],
+                textContent: 'Failed to load team group.'
+            }));
+        } finally {
+            loading?.remove();
+        }
+    })();
+
+    async function enrichTeams(entries, rowMap) {
+        const concurrency = preventRateLimiting ? 1 : 4;
+        let i = 0;
+        async function worker() {
+            while (i < entries.length) {
+                const current = entries[i++];
+                const ref = rowMap.get(current.profile);
+                if (!ref) continue;
+                try {
+                    const key = current.profile.split('/').pop();
+                    const cached = profileCache[key];
+                    const profileData = cached ? cached : await getUserProfile(current.profile);
+                    if (!profileData) continue;
+
+                    ref.teamProfile = profileData;
+
+                    if (profileData.frameURL) ref.frameEl.src = profileData.frameURL;
+                    if (profileData.iconURL) ref.emblemEl.src = profileData.iconURL;
+                    if (profileData.numMembers != null) ref.membersSpan.textContent = profileData.numMembers;
+                    if (profileData.status) {
+                        switch (profileData.status) {
+                            case "OPEN":
+                                ref.statusSpan.textContent = "Public";
+                                break;
+                            case "CLOSED":
+                                ref.statusSpan.textContent = "Invite Only";
+                                break;
+                            case "FILTERED":
+                                ref.statusSpan.textContent = "Private";
+                                break;
+                            default:
+                                ref.statusSpan.textContent = profileData.status;
+                        }
+                    }
+                    if (profileData.banner || profileData.bannerURL) {
+                        ref.entryDiv.style.backgroundImage = `url(${getProfileBanner(profileData)})`;
+                    }
+                } catch {
+                    // ignore
+                }
+            }
+        }
+        await Promise.all(Array.from({ length: concurrency }, () => worker()));
+    }
+
+    function loadOwner(ref, groupUrl) {
+        if (!ref.teamProfile || !ref.teamProfile.owner) {
+            ref.ownerName.textContent = 'No Owner';
+            return;
+        }
+        const ownerURL = ref.teamProfile.owner;
+        const doLoad = async () => {
+            ref.ownerName.textContent = 'Loading...';
+            try {
+                const key = ownerURL.split('/').pop();
+                const cached = profileCache[key];
+                const ownerData = cached ? cached : await getUserProfile(ownerURL);
+                if (!ownerData) {
+                    ref.ownerName.textContent = 'Click to Load Owner';
+                    return;
+                }
+                ref.ownerName.textContent = ownerData.displayName;
+                ref.ownerImg.src = getProfileAvatar(ownerData);
+                ref.ownerBlock.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(ownerData)})`;
+                ref.ownerBlock.onclick = () => {
+                    goBack();
+                    openProfile('leaderboard', ownerURL, () => openTeamModalPopout(groupUrl));
+                }
+                ref.ownerLoaded = true;
+            } catch {
+                ref.ownerName.textContent = 'Error Loading Owner';
+            }
+        };
+        if (preventRateLimiting) {
+            ref.ownerName.textContent = 'Click to Load Owner';
+            ref.ownerBlock.onclick = () => {
+                if (!ref.ownerLoaded) doLoad();
+            };
+        } else {
+            doLoad();
+        }
     }
 }

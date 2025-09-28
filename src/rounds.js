@@ -31,6 +31,8 @@ function generateRoundsets() {
     let roundsetsContent = document.getElementById('rounds-content');
     roundsetsContent.innerHTML = "";
 
+    clearAllTimers();
+
     let roundsetPage = document.createElement('div');
     roundsetPage.classList.add('progress-page');
     roundsetsContent.appendChild(roundsetPage);
@@ -94,8 +96,7 @@ function generateRoundsets() {
         if(new Date() < new Date(data.start)) {
             roundsetText2.innerHTML = "Coming Soon!";
         } else if (new Date(data.end) > new Date()) {
-            updateTimer(new Date(data.end), roundsetText2.id);
-            timerInterval = setInterval(() => updateTimer(new Date(data.end), roundsetText2.id), 1000)
+            registerTimer(roundsetText2.id, new Date(data.end));
         }
 
         let roundsetGoImg = document.createElement('img');
@@ -271,8 +272,7 @@ function generateRoundsets() {
         if(new Date() < new Date(data.start)) {
             roundsetText2.innerHTML = "Coming Soon!";
         } else if (new Date(data.end) > new Date()) {
-            updateTimer(new Date(data.end), roundsetText2.id);
-            timerInterval = setInterval(() => updateTimer(new Date(data.end), roundsetText2.id), 1000)
+            registerTimer(roundsetText2.id, new Date(data.end));
         } else {
             roundsetText2.innerHTML = `${new Date(data.start).toLocaleDateString()} - ${new Date(data.end).toLocaleDateString()}`
         }
@@ -715,7 +715,7 @@ async function generateRounds(type, reverse, roundsetType) {
                     "BloonariusRoundSet": "Bloonarius Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
                     "LychRoundSet": "Lych Changes: Rounds 40 to 48 have extra MOABs added in for Lych to resurrect when hitting a skull. Rounds that Lych spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
                     "VortexRoundSet": "Vortex Changes: A small group of rounds have Bloons upgraded to speedier ones as well as adding some extra faster bloons. Rounds that Vortex spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
-                    "DreadbloonRoundSet": "Dreadbloon Changes: In general summary, Zebra -> Lead, Lead -> Fortified Lead, Rainbow -> Ceramic, Ceramic -> Fortified Ceramic. There are some exceptions. After Round 50, every other Blue MOAB is fortified, and after round 70 all Blue MOABs are fortified. Rounds that Dreadbloon spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+                    "DreadbloonRoundSet": "Dreadbloon Changes: In general summary, Zebra -> Lead, Lead -> Fortified Lead, Rainbow -> Ceramic, Ceramic -> Fortified Ceramic. After Round 50, every other Blue MOAB is fortified, and after round 70 all Blue MOABs are fortified. There are some exceptions. Rounds that Dreadbloon spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
                     "PhayzeRoundSet": "Phayze Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
                     "BlastapopoulosRoundSet": "Blastapopoulos Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
                 }
@@ -1097,7 +1097,6 @@ async function generateRounds(type, reverse, roundsetType) {
             difficultyDiv.classList.add('d-flex', 'ai-center');
             previewFooterDiv.appendChild(difficultyDiv);
 
-            //bloon speed label
             let difficultyLabel = createEl('p', {classList: ['black-outline'], innerHTML: "Bloon Speed:", style: {
                 fontSize: '28px',
             }});
@@ -1458,7 +1457,7 @@ function openRoundsetSettingsModal(type){
     let roundFiltersDiv = createEl('div', { classList: ['d-flex'], style: { gap: '8px', flexDirection: 'column' } });
     roundModalTopDiv.appendChild(roundFiltersDiv);
 
-    let presetsDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-center'], style: { gap: '8px', flexWrap: 'wrap', width: '60%' } });
+    let presetsDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-center'], style: { gap: '8px', flexWrap: 'wrap', width: '55%' } });
 
     let firstRound = currentRoundsetData.rounds[0].roundNumber;
     let lastRound = currentRoundsetData.rounds[currentRoundsetData.rounds.length - 1].roundNumber;
@@ -1751,7 +1750,7 @@ function openRoundsetSettingsModal(type){
                 all.push(b, `${b}Regrow`, `${b}Camo`, `${b}RegrowCamo`);
             });
             let fortifiedBlimps = blimps.map(blimp => `${blimp}Fortified`);
-            fortifiedBlimps[3] = "DDTFortifiedCamo";
+            fortifiedBlimps[3] = "DdtFortifiedCamo";
             let bottomDivTop = ["LeadFortified","LeadFortifiedCamo","CeramicFortified","CeramicFortifiedCamo", ...blimps];
             let bottomDivBottom = ["LeadRegrowFortified","LeadRegrowFortifiedCamo","CeramicRegrowFortified","CeramicRegrowFortifiedCamo", ...fortifiedBlimps];
 

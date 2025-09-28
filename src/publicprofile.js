@@ -1,8 +1,11 @@
-async function openProfile(source, profile){
+async function openProfile(source, profile, callback){
     profile = await getUserProfile(profile)
     if (profile == null) { return; }
     resetScroll();
     document.getElementById(`${source}-content`).style.display = "none";
+
+    addToBackQueue({ source: source, destination: 'publicprofile', callback: callback });
+
     let publicProfileContent = document.getElementById('publicprofile-content');
     publicProfileContent.style.display = "flex";
     publicProfileContent.innerHTML = "";
@@ -561,6 +564,7 @@ async function openProfile(source, profile){
 }
 
 function exitProfile(source){
-    document.getElementById('publicprofile-content').style.display = "none";
-    document.getElementById(`${source}-content`).style.display = "flex";
+    goBack();
+    // document.getElementById('publicprofile-content').style.display = "none";
+    // document.getElementById(`${source}-content`).style.display = "flex";
 }
