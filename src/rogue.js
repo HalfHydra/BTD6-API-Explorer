@@ -356,12 +356,25 @@ function generateArtifactSettings() {
     settingsExtraction.style.gap = "10px";
     settingsContent.appendChild(settingsExtraction);
 
-    let settingsExtractHighlight = generateCheckbox("Highlight Extracted", rogueSaveData.highlightExtracted, (checked) => {
+    let extractionHighlightToggle = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'jc-between', 'fg-1'],
+        style: {gap: "10px"}
+        
+    })
+    settingsExtraction.appendChild(extractionHighlightToggle);
+
+    let extractionHighlightLabel = createEl('p', {
+        classList: ['black-outline'],
+        style: {fontSize: "24px"},
+        innerHTML: "Extraction Tracker Mode"
+    })
+    extractionHighlightToggle.appendChild(extractionHighlightLabel);
+    
+    let extractionHighlightInput = generateToggle(rogueSaveData.highlightExtracted, (checked) => {
         rogueSaveData.highlightExtracted = checked;
         saveRogueDataToLocalStorage();
     });
-    settingsExtractHighlight.classList.add('jc-between');
-    settingsExtraction.appendChild(settingsExtractHighlight);
+    extractionHighlightToggle.appendChild(extractionHighlightInput);
 
     let settingsExtractDescription = document.createElement('p');
     settingsExtractDescription.style.margin = "20px";
@@ -390,12 +403,28 @@ function generateArtifactSettings() {
     });
     settingsExtractionDropdown.classList.add('jc-between');
 
-    let settingsClickToCollect = generateCheckbox("One Click Extract", rogueSaveData.clickToCollect, (checked) => {
+    // let settingsClickToCollect = generateCheckbox("One Click Extract", rogueSaveData.clickToCollect, (checked) => {
+    //     rogueSaveData.clickToCollect = checked;
+    //     saveRogueDataToLocalStorage();
+    // });
+    // settingsExtraction.appendChild(settingsClickToCollect);
+
+    let settingsClickToCollectToggle = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'jc-between', 'fg-1'],
+        style: {gap: "10px"}
+    })
+    settingsExtraction.appendChild(settingsClickToCollectToggle);
+    let settingsClickToCollectLabel = createEl('p', {
+        classList: ['black-outline'],
+        style: {fontSize: "24px"},
+        innerHTML: "One Click Extract"
+    })
+    settingsClickToCollectToggle.appendChild(settingsClickToCollectLabel);
+    let settingsClickToCollectInput = generateToggle(rogueSaveData.clickToCollect, (checked) => {
         rogueSaveData.clickToCollect = checked;
         saveRogueDataToLocalStorage();
     });
-
-    settingsExtraction.appendChild(settingsClickToCollect);
+    settingsClickToCollectToggle.appendChild(settingsClickToCollectInput);
     
     let settingsOther = document.createElement('div');
     settingsOther.classList.add('settings-box', 'd-flex', 'fd-column', 'fg-1');
@@ -1076,7 +1105,7 @@ function updateArtifactCount() {
 
 
     if (totalArtifactsTxt) {
-        totalArtifactsTxt.innerHTML = totalArtifactsContent;
+        totalArtifactsTxt.innerHTML = (rogueSaveData.highlightExtracted) ? totalArtifactsContent : totalArtifacts - searchHidden;
     }
 }
 
