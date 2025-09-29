@@ -293,3 +293,12 @@ function getLocValue(key){
     if(locJSONOverrides[key]) return locJSON[locJSONOverrides[key]];
     return locJSON[key] ? locJSON[key] : key;
 }
+
+function getCollectionEventSkinIcon(skin) {
+    switch(skin) {
+        case "totem":
+            return "CollectingEventTotemBtn";
+        case "fireworks":
+            return "CollectingEventFireworksBtn";
+    }
+}

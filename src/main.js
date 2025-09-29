@@ -5063,7 +5063,7 @@ function generateEvents(){
 
     let selectors = {
         'Collection': {
-            'img': 'CollectingEventTotemBtn',
+            'img': getCollectionEventSkinIcon(constants.collection.current.skin),
             'text': "Collection Event Rotation",
             'bgimg': 'EventBanner/EventBannerSmallTotem'
         },
