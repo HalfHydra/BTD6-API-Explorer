@@ -786,7 +786,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                             if (leaderboardData.length == index + 1) {
                                 if (leaderboardCache[leaderboardLink].next != null) {
                                     if (leaderboardEntries.getElementsByClassName('loading-text-leaderboard').length == 0) {
-                                        let loadingEntriesText = createEl('p', { classList: ['loading-text-leaderboard', 'black-outline'], style: { fontSize: '32px', paddingBottom: '120px' }, innerHTML: "Loading more entries..." });
+                                        let loadingEntriesText = createEl('p', { classList: ['loading-text-leaderboard', 'black-outline'], style: { fontSize: '32px', paddingBottom: '50px' }, innerHTML: "Loading more entries..." });
                                         leaderboardEntries.appendChild(loadingEntriesText);
                                     }
                                     clearProfileRequestQueue();
@@ -795,7 +795,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                                 } else {
                                     if (!leaderboardCache[leaderboardLink].ended) {
                                         leaderboardCache[leaderboardLink].ended = true;
-                                        let endOfLeaderboard = createEl('p', { classList: ['black-outline'], style: { fontSize: '32px', paddingBottom: '120px' }, innerHTML: "End of Leaderboard" });
+                                        let endOfLeaderboard = createEl('p', { classList: ['black-outline'], style: { fontSize: '32px', paddingBottom: '50px' }, innerHTML: "End of Leaderboard" });
                                         leaderboardEntries.appendChild(endOfLeaderboard);
                                     }
                                 }
