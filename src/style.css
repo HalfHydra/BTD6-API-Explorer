@@ -2103,7 +2103,7 @@
     max-width: 840px;
 }
 .insta-monkey-tier-container {
-    padding: 10px;
+    padding: 10px 0; /* 10px; */
     position: relative;
     height: 110px;
 }
@@ -4802,6 +4802,10 @@
     text-shadow: 1px 0px 0px #1D525F, -1px 0px 0 #1D525F, 0px 1px 0 #1D525F, 1px 0px 0px #1D525F, 1px 2px 0px #1D525F, -1px -1px 0 #1D525F, -1px 2px 0 #1D525F, 1px -1px 0px #1D525F;
 }
 
+.image-outline {
+    filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white);
+}
+
 .round-rbe, .round-rbe-total, .round-income, .round-income-total, .round-duration {
     font-size: 20px;
     font-family: GardeniaBold;
@@ -5327,8 +5331,9 @@ input[type="checkbox"] {
     display: flex;
     height: 130px;
     margin: 10px 0;
-    width: 500px;
-    justify-content: space-around;
+    width: 550px;
+    /* justify-content: space-around; */
+    gap: 8px;
     background: rgba(0, 0, 0, 0.36);
     border-radius: 20px;
 }

@@ -964,7 +964,7 @@ function generateArtifactPopout(key) {
     let itemAddedInText = createEl('p', {
         classList: ['font-gardenia', 'ta-center', 'lh-add-quarter'],
         style: {fontSize: "18px"},
-        innerHTML: `Added in Update ${data.added}.`
+        innerHTML: `Added in Update ${data.added}`
     })
     itemAddedInTextDiv.appendChild(itemAddedInText);
 
@@ -994,7 +994,7 @@ function generateArtifactPopout(key) {
     if (starterArtifacts.includes(key)) {
         let starterArtifactDivText = document.createElement('p');
         starterArtifactDivText.classList.add('font-gardenia', 'ta-center', 'lh-add-quarter');
-        starterArtifactDivText.innerHTML = `This artifact is a starter artifact.`;
+        starterArtifactDivText.innerHTML = `This artifact is a starter artifact`;
         starterArtifactDivText.style.fontSize = "18px";
         starterArtifactDivTextDiv.appendChild(starterArtifactDivText);
     } else {
@@ -1051,7 +1051,7 @@ function generateArtifactPopout(key) {
         let instaTowerText = createEl('p', {
             classList: ['font-gardenia', 'ta-center', 'lh-add-quarter'],
             style: {fontSize: "18px"},
-            innerHTML: `Adds ${tiers.join("-")} ${getLocValue(tower)} on obtaining.`,
+            innerHTML: `Adds ${tiers.join("-")} ${getLocValue(tower)} on obtaining`,
         })
         instaTowerTextDiv.appendChild(instaTowerText);
     }
@@ -1075,7 +1075,7 @@ function generateArtifactPopout(key) {
 
         let heroStarterKitText = document.createElement('p');
         heroStarterKitText.classList.add('font-gardenia', 'ta-center', 'lh-add-quarter');
-        heroStarterKitText.innerHTML = `${starterKitNames[data.starterKitHero]}'s starter kit has this.`;
+        heroStarterKitText.innerHTML = `${starterKitNames[data.starterKitHero]}'s starter kit has this artifact`;
         heroStarterKitText.style.fontSize = "18px";
         heroStarterKitTextDiv.appendChild(heroStarterKitText);
     }
@@ -1229,6 +1229,20 @@ function generateRogueHeroStarterKits() {
         starterKit.startingInstas.forEach((instaMonkey) => {
             starterKitDiv.appendChild(generateInstaMonkeyContainer(instaMonkey));
         });
+
+        let rogueJSONArtifact = rogueJSON.artifacts[starterKit.artifact];
+        if (rogueJSONArtifact.hasOwnProperty('instaTowerToGive')) {
+            let instaContainer = generateInstaMonkeyContainer(rogueJSONArtifact.instaTowerToGive)
+
+            let artifactBagIcon = createEl('img', {
+                src: `../Assets/UI/ArtifactBag.png`,
+                classList: ['of-contain', 'image-outline'],
+                style: {width: "35px", position: "absolute" }
+            })
+            instaContainer.prepend(artifactBagIcon);
+
+            starterKitDiv.appendChild(instaContainer);
+        }
 
         heroStarterKits.appendChild(starterKitDiv);
     });
