@@ -1119,6 +1119,13 @@ function generateArtifactPopout(key) {
                 currentVariant = variantDiv;
             }
         })
+    } else {
+        let noOtherVariants = createEl('p', {
+            classList: ['font-gardenia', 'ta-center', 'lh-add-quarter'],
+            style: {fontSize: "18px", padding: "20px", background: 'rgba(0, 0, 0, 0.3)', borderRadius: "10px"},
+            innerHTML: `This artifact has no other variants.`,
+        })
+        modalBody.appendChild(noOtherVariants);
     }
     let updateArtifactStatus = () => {
         if (rogueSaveData.extractedArtifacts.includes(key)) {
