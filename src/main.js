@@ -3449,6 +3449,8 @@ function generatePowersProgress() {
         powerDiv.classList.add('power-div');
         powersProgressContainer.appendChild(powerDiv);
 
+        if(power === "BattleCat" || power === "SheRa") { powerDiv.style.backgroundImage = "url(../Assets/UI/PowerIAPContainer.png)"}
+
         let powerImg = document.createElement('img');
         powerImg.classList.add('power-img');
         powerImg.src = getPowerIcon(power);
