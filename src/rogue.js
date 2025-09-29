@@ -250,6 +250,7 @@ function generateRogueArtifacts() {
     artifactsContent.appendChild(rogueHeaderBar);
 
     let rogueHeaderLeft = document.createElement('div');
+    rogueHeaderLeft.classList.add('d-flex', 'ai-center', 'jc-between');
     rogueHeaderLeft.style.width = "200px";
     rogueHeaderBar.appendChild(rogueHeaderLeft);
 
@@ -263,6 +264,38 @@ function generateRogueArtifacts() {
         generateArtifactSettings();
     })
     rogueHeaderLeft.appendChild(rogueSettingsBtn);
+
+    let filtersActive = !(
+        rogueSaveData.artifactFilter === "All" &&
+        rogueSaveData.extractionFilter === "All" &&
+        rogueSaveData.artifactSort === "Name" &&
+        rogueSaveData.showStarterArtifacts === true &&
+        rogueSaveData.showBossArtifacts === true &&
+        rogueSaveData.categoryFilter.length === 3 &&
+        ["Common","Rare","Legendary"].every(c => rogueSaveData.categoryFilter.includes(c))
+    );
+
+    if (filtersActive) {
+        let clearFiltersBtn = createEl('div', {
+            classList: ['maps-progress-view','black-outline','pointer', 'ta-center'],
+            style: {
+                width: "100px"
+            },
+            innerHTML: 'Clear Filters',
+        })
+        rogueHeaderLeft.appendChild(clearFiltersBtn);
+        clearFiltersBtn.addEventListener('click', () => {
+            rogueSaveData.artifactFilter = "All";
+            rogueSaveData.extractionFilter = "All";
+            // rogueSaveData.artifactSort = "Name";
+            rogueSaveData.highlightExtracted = false;
+            rogueSaveData.showStarterArtifacts = true;
+            rogueSaveData.showBossArtifacts = true;
+            rogueSaveData.categoryFilter = ["Common","Rare","Legendary"];
+            saveRogueDataToLocalStorage();
+            generateRogueArtifacts();
+        })
+    }
 
     let rogueHeaderCenter = document.createElement('div');
     rogueHeaderCenter.classList.add('pos-rel');
@@ -357,9 +390,7 @@ function generateArtifactSettings() {
     settingsContent.appendChild(settingsExtraction);
 
     let extractionHighlightToggle = createEl('div', {
-        classList: ['d-flex', 'ai-center', 'jc-between', 'fg-1'],
-        style: {gap: "10px"}
-        
+        classList: ['d-flex', 'ai-center', 'jc-between', 'fg-1']
     })
     settingsExtraction.appendChild(extractionHighlightToggle);
 
@@ -411,7 +442,6 @@ function generateArtifactSettings() {
 
     let settingsClickToCollectToggle = createEl('div', {
         classList: ['d-flex', 'ai-center', 'jc-between', 'fg-1'],
-        style: {gap: "10px"}
     })
     settingsExtraction.appendChild(settingsClickToCollectToggle);
     let settingsClickToCollectLabel = createEl('p', {
@@ -585,13 +615,13 @@ function generateArtifactSettings() {
 
         switch (rogueSaveData.artifactSort) {
             case "Rarity (Ascending)":
-                previewArtifacts = previewArtifacts.sort((a, b) => a.tier - b.tier)
+                previewArtifacts = previewArtifacts.sort((a, b) => rogueJSON.artifacts[a].tier - rogueJSON.artifacts[b].tier)
                 break;
             case "Rarity (Descending)":
-                previewArtifacts = previewArtifacts.sort((a, b) => b.tier - a.tier)
+                previewArtifacts = previewArtifacts.sort((a, b) => rogueJSON.artifacts[b].tier - rogueJSON.artifacts[a].tier)
                 break;
             case "Category":
-                previewArtifacts = previewArtifacts.sort((a, b) => a.rarityFrameType.localeCompare(b.rarityFrameType))
+                previewArtifacts = previewArtifacts.sort((a, b) => rogueJSON.artifacts[a].rarityFrameType.localeCompare(rogueJSON.artifacts[b].rarityFrameType))
                 break;
         }
 
@@ -601,6 +631,7 @@ function generateArtifactSettings() {
     }
     updatePreviewArtifacts();
     let settingsSortDropdown = generateDropdown("Sort:", ["Name","Rarity (Ascending)","Rarity (Descending)"], rogueSaveData.artifactSort, (value) => {
+        console.log(value);
         rogueSaveData.artifactSort = value;
         saveRogueDataToLocalStorage();
         updatePreviewArtifacts();
@@ -1288,13 +1319,13 @@ function generateImageBuilder() {
 
         switch (rogueSaveData.imageOptions.sort) {
             case "Rarity (Ascending)":
-                previewArtifacts = previewArtifacts.sort((a, b) => a.tier - b.tier)
+                previewArtifacts = previewArtifacts.sort((a, b) => rogueJSON.artifacts[a].tier - rogueJSON.artifacts[b].tier)
                 break;
             case "Rarity (Descending)":
-                previewArtifacts = previewArtifacts.sort((a, b) => b.tier - a.tier)
+                previewArtifacts = previewArtifacts.sort((a, b) => rogueJSON.artifacts[b].tier - rogueJSON.artifacts[a].tier)
                 break;
             case "Category":
-                previewArtifacts = previewArtifacts.sort((a, b) => a.rarityFrameType.localeCompare(b.rarityFrameType))
+                previewArtifacts = previewArtifacts.sort((a, b) => rogueJSON.artifacts[a].rarityFrameType.localeCompare(rogueJSON.artifacts[b].rarityFrameType))
                 break;
         }
 
