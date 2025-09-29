@@ -65,7 +65,8 @@ let starterKitNames = {
     "Corvus": "Corvus",
     "Rosalia": "Rosalia",
     "RosaliaTinkerfairy": "Rosalia Tinkerfairy",
-    "SheRa": "She-Ra Adora"
+    "SheRa": "She-Ra Adora",
+    "Silas": "Silas",
 }
 
 let artifactDivMap = {};
@@ -268,7 +269,7 @@ function generateRogueArtifacts() {
     let filtersActive = !(
         rogueSaveData.artifactFilter === "All" &&
         rogueSaveData.extractionFilter === "All" &&
-        rogueSaveData.artifactSort === "Name" &&
+        // rogueSaveData.artifactSort === "Name" &&
         rogueSaveData.showStarterArtifacts === true &&
         rogueSaveData.showBossArtifacts === true &&
         rogueSaveData.categoryFilter.length === 3 &&
@@ -288,7 +289,6 @@ function generateRogueArtifacts() {
             rogueSaveData.artifactFilter = "All";
             rogueSaveData.extractionFilter = "All";
             // rogueSaveData.artifactSort = "Name";
-            rogueSaveData.highlightExtracted = false;
             rogueSaveData.showStarterArtifacts = true;
             rogueSaveData.showBossArtifacts = true;
             rogueSaveData.categoryFilter = ["Common","Rare","Legendary"];
@@ -927,23 +927,6 @@ function generateArtifactPopout(key) {
     let artifactDiv = generateArtifactContainer(key, 'modal');
     itemDiv.appendChild(artifactDiv);
 
-    if (!starterArtifacts.includes(key)) {
-        let extractedCheckDiv = document.createElement('div');
-        extractedCheckDiv.classList.add('extracted-check-div', 'd-flex', 'jc-center');
-
-        let mapsProgressCoopToggleText = document.createElement('p');
-        mapsProgressCoopToggleText.classList.add('maps-progress-coop-toggle-text','black-outline');
-        mapsProgressCoopToggleText.innerHTML = "Extracted:";
-        extractedCheckDiv.appendChild(mapsProgressCoopToggleText);
-
-        let mapsProgressCoopToggleInput = document.createElement('input');
-        mapsProgressCoopToggleInput.classList.add('maps-progress-coop-toggle-input');
-        mapsProgressCoopToggleInput.style.backgroundColor = "rgba(0,0,0,0.36)";
-        mapsProgressCoopToggleInput.type = 'checkbox';
-        mapsProgressCoopToggleInput.checked = rogueSaveData.extractedArtifacts.includes(key);
-        extractedCheckDiv.appendChild(mapsProgressCoopToggleInput);
-    }
-
     let itemDetailsDiv = document.createElement('div');
     itemDetailsDiv.classList.add('item-details-div','jc-center','fg-1');
     itemDetailsDiv.style.margin = "10px"
@@ -955,6 +938,36 @@ function generateArtifactPopout(key) {
     itemDescription.innerHTML = data.description;
     itemDetailsDiv.appendChild(itemDescription);
 
+    let panels = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'gap-10', 'f-wrap'],
+    })
+    modalTop.appendChild(panels);
+
+    let itemAddedIn = createEl('div', {
+        classList: ['d-flex'],
+        style: {width: "300px"}
+    })
+    panels.appendChild(itemAddedIn);
+
+    let itemAddedInImg = createEl('img', {
+        src: `../Assets/UI/PatchNotesMonkeyIcon.png`,
+        classList: ['hero-starter-kit-img', 'rogue-popout-starter-icon', 'of-contain']
+    })
+    itemAddedIn.appendChild(itemAddedInImg);
+
+    let itemAddedInTextDiv = createEl('div', {
+        classList: ['item-details-div','jc-center','fg-1'],
+        style: {margin: "10px", minHeight: "60px"}
+    })
+    itemAddedIn.appendChild(itemAddedInTextDiv);
+
+    let itemAddedInText = createEl('p', {
+        classList: ['font-gardenia', 'ta-center', 'lh-add-quarter'],
+        style: {fontSize: "18px"},
+        innerHTML: `Added in Update ${data.added}.`
+    })
+    itemAddedInTextDiv.appendChild(itemAddedInText);
+
     let itemObtainMethod = document.createElement('p');
     itemObtainMethod.classList.add('trophy-store-item-obtain-method', 'ta-center');
     itemObtainMethod.style.marginTop = "unset";
@@ -962,7 +975,8 @@ function generateArtifactPopout(key) {
 
     let starterArtifactDiv = document.createElement('div');
     starterArtifactDiv.classList.add('d-flex');
-    modalTop.appendChild(starterArtifactDiv);
+    starterArtifactDiv.style.width = "300px";
+    panels.appendChild(starterArtifactDiv);
 
     let starterArtifactDivImg = document.createElement('img');
     starterArtifactDivImg.src = `../Assets/UI/RoguePermanantArtifactsBtn.png`;
@@ -972,13 +986,14 @@ function generateArtifactPopout(key) {
     let starterArtifactDivTextDiv = document.createElement('div');
     starterArtifactDivTextDiv.classList.add('item-details-div','jc-center','fg-1');
     starterArtifactDivTextDiv.style.margin = "10px"
+    starterArtifactDivTextDiv.style.minHeight = "60px"
     starterArtifactDiv.appendChild(starterArtifactDivTextDiv);
 
     let extractedCheckDiv;
     let mapsProgressCoopToggleInput;
     if (starterArtifacts.includes(key)) {
         let starterArtifactDivText = document.createElement('p');
-        starterArtifactDivText.classList.add('font-gardenia', 'ta-center');
+        starterArtifactDivText.classList.add('font-gardenia', 'ta-center', 'lh-add-quarter');
         starterArtifactDivText.innerHTML = `This artifact is a starter artifact.`;
         starterArtifactDivText.style.fontSize = "18px";
         starterArtifactDivTextDiv.appendChild(starterArtifactDivText);
@@ -1000,24 +1015,67 @@ function generateArtifactPopout(key) {
         extractedCheckDiv.appendChild(mapsProgressCoopToggleInput);
     }
 
+    if (data.hasOwnProperty('instaTowerToGive')) {
+        let instaTowerDiv = createEl('div', {
+            classList: ['d-flex'],
+            style: {width: "300px"}
+        })
+        panels.appendChild(instaTowerDiv);
+
+        let tower = data.instaTowerToGive.baseId;
+        let tiers = data.instaTowerToGive.tiers;
+
+        let instaMonkeyTierContainer = document.createElement('div');
+        instaMonkeyTierContainer.classList.add('insta-monkey-tier-container');
+        instaMonkeyTierContainer.style.height = "80px";
+        instaMonkeyTierContainer.style.padding = "10px 5px";
+        instaTowerDiv.appendChild(instaMonkeyTierContainer);
+
+        let instaMonkeyTierImg = document.createElement('img');
+        instaMonkeyTierImg.style.width = "80px";
+        instaMonkeyTierImg.src = getInstaMonkeyIcon(tower,tiers);
+        instaMonkeyTierContainer.appendChild(instaMonkeyTierImg);
+
+        let instaMonkeyTierText = document.createElement('p');
+        instaMonkeyTierText.classList.add('insta-monkey-tier-text','black-outline');
+        instaMonkeyTierText.style.width = "80px";
+        instaMonkeyTierText.innerHTML = `${tiers[0]}-${tiers[1]}-${tiers[2]}`;
+        instaMonkeyTierContainer.appendChild(instaMonkeyTierText);
+
+        let instaTowerTextDiv = createEl('div', {
+            classList: ['item-details-div','jc-center','fg-1'],
+            style: {margin: "10px", minHeight: "60px"}
+        })
+        instaTowerDiv.appendChild(instaTowerTextDiv);
+
+        let instaTowerText = createEl('p', {
+            classList: ['font-gardenia', 'ta-center', 'lh-add-quarter'],
+            style: {fontSize: "18px"},
+            innerHTML: `Adds ${tiers.join("-")} ${getLocValue(tower)} on obtaining.`,
+        })
+        instaTowerTextDiv.appendChild(instaTowerText);
+    }
+
     if (data.hasOwnProperty('starterKitHero')) {
         let heroStarterKit = document.createElement('div');
         heroStarterKit.classList.add('d-flex');
-        modalTop.appendChild(heroStarterKit);
+        heroStarterKit.style.width = "300px";
+        panels.appendChild(heroStarterKit);
 
         let heroStarterKitImg = document.createElement('img');
         heroStarterKitImg.src = `${getHeroIconCircle(data.starterKitHero.replace(/ /g, ''))}`;
-        heroStarterKitImg.classList.add('hero-starter-kit-img', 'rogue-popout-starter-icon');
+        heroStarterKitImg.classList.add('hero-starter-kit-img', 'rogue-popout-starter-icon', 'of-contain');
         heroStarterKit.appendChild(heroStarterKitImg);
 
         let heroStarterKitTextDiv = document.createElement('div');
         heroStarterKitTextDiv.classList.add('item-details-div','jc-center','fg-1');
         heroStarterKitTextDiv.style.margin = "10px"
+        heroStarterKitTextDiv.style.minHeight = "60px"
         heroStarterKit.appendChild(heroStarterKitTextDiv);
 
         let heroStarterKitText = document.createElement('p');
-        heroStarterKitText.classList.add('font-gardenia', 'ta-center');
-        heroStarterKitText.innerHTML = `This artifact is available in ${starterKitNames[data.starterKitHero]}'s starter kit.`;
+        heroStarterKitText.classList.add('font-gardenia', 'ta-center', 'lh-add-quarter');
+        heroStarterKitText.innerHTML = `${starterKitNames[data.starterKitHero]}'s starter kit has this.`;
         heroStarterKitText.style.fontSize = "18px";
         heroStarterKitTextDiv.appendChild(heroStarterKitText);
     }
