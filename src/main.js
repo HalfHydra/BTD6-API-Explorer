@@ -128,17 +128,17 @@ let imageScroll = [
     },
     {
         "title": "View Events!",
-        "text": "- View recent events<br>- Race event details<br>- Boss event details<br>- Odyssey event details<br>- Contested Territory details<br>- Daily Challenge details<br>- Advanced Challenge details<br>- Coop Challenge details",
+        "text": "- View recent events<br>- Race event details<br>- Boss event details<br>- Odyssey event details<br>- Contested Territory details<br>- Daily Challenge details<br>- Advanced Challenge details<br>- Coop Challenge details<br>- Collection event details",
         "image": "/LandingScroll/Events"
     },
     {
         "title": "View Leaderboards!",
-        "text": "- View event leaderboards<br>- View user profiles<br>- View extra score information",
+        "text": "- View event leaderboards<br>- Up to 1000 entries<br>- View extra score information<br>- View user profiles<br>- Contested Territory groups",
         "image": "/LandingScroll/Leaderboards"
     },
     {
         "title": "View Roundsets!",
-        "text": "- View all roundsets<br>- Simple round information<br>- Detailed round information<br>- Preview rounds visually<br>- Boss custom rounds<br>- Custom event rounds<br>- Rogue Legends special rounds included",
+        "text": "- Detailed round information<br>- Advanced round filtering<br>- Preview rounds visually<br>- Boss custom rounds<br>- Custom event rounds<br>- Rogue Legends special rounds included",
         "image": "/LandingScroll/Roundsets"
     },
     {
