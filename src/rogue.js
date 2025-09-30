@@ -1263,6 +1263,7 @@ function generateInstaMonkeyContainer(instaMonkey) {
 
     let instaMonkeyTierContainer = document.createElement('div');
     instaMonkeyTierContainer.classList.add('insta-monkey-tier-container');
+    instaMonkeyTierContainer.style.padding = "10px 0px";
 
     let instaMonkeyTierImg = document.createElement('img');
     instaMonkeyTierImg.classList.add('insta-monkey-tier-img');

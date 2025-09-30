@@ -2103,7 +2103,7 @@
     max-width: 840px;
 }
 .insta-monkey-tier-container {
-    padding: 10px 0; /* 10px; */
+    padding: 10px; /* 10px; */
     position: relative;
     height: 110px;
 }
@@ -2640,7 +2640,6 @@
     height: calc(calc(var(--vh, 1vh) * 100) - 140px);
     width: 100%;
     flex-direction: column;
-    /* justify-content: space-between; */
 }
 .leaderboard-header {
     /* height: 150px; */
