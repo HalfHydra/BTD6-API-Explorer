@@ -198,12 +198,23 @@
             }
         }
 
+        .full-leaderboard-div {
+            display: flex;
+            height: calc(calc(var(--vh, 1vh) * 100) - 90px) !important;
+            width: 100%;
+            flex-direction: column;
+        }
 
         @media (max-width: 850px) {
             .loading-div {
                 height: calc(var(--vh, 1vh) * 100);
             }
+
+            .full-leaderboard-div {
+                height: calc(calc(var(--vh, 1vh) * 100) - 90px) !important;
+            }
         }
+        
     </style>
 </head>
 
