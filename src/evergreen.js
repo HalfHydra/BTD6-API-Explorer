@@ -122,7 +122,9 @@ function createModal({ header = '', content = '', footer = '', classList = [] } 
 
     modalOverlay.appendChild(modalBox);
     document.body.appendChild(modalOverlay);
-    addToBackQueue({callback: closeModal});
+    if (backQueue[backQueue.length - 1]?.callback !== closeModal) {
+        addToBackQueue({callback: closeModal});
+    }
 }
 
 function closeModal() {
