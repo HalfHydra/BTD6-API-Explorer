@@ -8437,10 +8437,58 @@ function generateArticle(content){
     articleContent.appendChild(articlePage);
 
     let articleContentDiv = document.createElement('div');
-    // articleContentDiv.classList.add('selectors-div');
+    articleContentDiv.classList.add('d-flex', 'fd-column', 'ai-center');
     articlePage.appendChild(articleContentDiv);
 
-    let articles = {"CreatorSupport":[{"type":"text","class":"site-info-header black-outline","content":"How to enter a creator code:"},{"type":"panels","content":{"1":{"name":"Step 1","desc":"On the main menu after pressing start, navigate to the shop","img":"CS1"},"2":{"name":"Step 2","desc":"Press the creator support button on the bottom left","img":"CS2"},"3":{"name":"Step 3","desc":"Enter code \"HalfHydra\" (or any other creators code) and press submit. When purchasing anything in the store, a cut will go to the creator chosen.","img":"CS3"}}},{"type":"text","class":"oak-instructions-text","content":"Creator support is a program offered by Ninja Kiwi that allows players to give a cut of the purchases you make in game to the creator who's code you've entered in the Bloons TD 6 shop. You can support me and my site by using the code \"HalfHydra\""}]}
+    let articles = {
+    "CreatorSupport": [
+        {
+            "type": "text",
+            "class": "oak-instructions-text",
+            "content": "Creator support is a program offered by Ninja Kiwi that allows players to give a cut of the purchases you make in game to the creator who's code you've entered in the Bloons TD 6 shop. You can support me and my site by using the code \"HalfHydra\""
+        },
+        {
+            "type": "text",
+            "class": "site-info-header black-outline",
+            "content": "How to enter a creator code:"
+        },
+        {
+            "type": "panels",
+            "content": {
+                "1": {
+                    "name": "Step 1",
+                    "desc": "On the main menu after pressing start, navigate to the shop",
+                    "img": "CS1"
+                },
+                "2": {
+                    "name": "Step 2",
+                    "desc": "Press the creator support button on the bottom left",
+                    "img": "CS2"
+                },
+                "3": {
+                    "name": "Step 3",
+                    "desc": "Enter code \"HalfHydra\" (or any other creators code) and press submit. When purchasing anything in the store, a cut will go to the creator chosen.",
+                    "img": "CS3"
+                }
+            }
+        },
+        {
+            "type": "text",
+            "class": "site-info-header black-outline ta-center",
+            "content": "Try the Official Bloons TD 6 Web Store!"
+        },
+        {
+            "type": "text",
+            "class": "oak-instructions-text",
+            "content": "In addition to frequent sales exclusive to the web store, purchasing in game items on the web store will give you bonus rewards such as extra Monkey Money. You can also leave a tip if wish to support me further! <a href='https://btd6store.ninjakiwi.com/' target='_blank' rel='noopener noreferrer'>Official Bloons TD 6 Web Store</a>"
+        },
+        {
+            "type": "img",
+            "class": "insta-monkey-guide-method-img",
+            "content": "CS4.png",
+        }
+    ]
+}
 
     articles[content].forEach((section) => {
         switch(section.type){
@@ -8453,6 +8501,7 @@ function generateArticle(content){
             case "img":
                 let articleImg = document.createElement('img');
                 if (section.class) { articleImg.className = section.class };
+                articleImg.style.width = "800px";
                 articleImg.src = `../Assets/UI/${section.content}`;
                 articleContentDiv.appendChild(articleImg);
                 break;
