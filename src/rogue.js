@@ -390,7 +390,8 @@ function generateArtifactSettings() {
     settingsContent.appendChild(settingsExtraction);
 
     let extractionHighlightToggle = createEl('div', {
-        classList: ['d-flex', 'ai-center', 'jc-between', 'fg-1']
+        classList: ['d-flex', 'ai-center', 'jc-between', 'fg-1'],
+        style: {margin: "2px"}
     })
     settingsExtraction.appendChild(extractionHighlightToggle);
 
@@ -442,6 +443,7 @@ function generateArtifactSettings() {
 
     let settingsClickToCollectToggle = createEl('div', {
         classList: ['d-flex', 'ai-center', 'jc-between', 'fg-1'],
+        style: {margin: "2px"}
     })
     settingsExtraction.appendChild(settingsClickToCollectToggle);
     let settingsClickToCollectLabel = createEl('p', {
