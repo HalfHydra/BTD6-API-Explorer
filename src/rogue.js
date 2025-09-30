@@ -117,6 +117,11 @@ function postProcessRogueData(){
     for (let artifact of unusedArtifacts){
         delete rogueJSON.artifacts[artifact];
     }
+
+    Object.entries(constants.rogueStarterKitDupes).forEach(([dupe, original]) => {
+        rogueJSON.heroStarterKits[dupe] = {...rogueJSON.heroStarterKits[original]};
+        rogueJSON.heroStarterKits[dupe].heroID = dupe;
+    });
 }
 
 function changeRogueTab(selector){

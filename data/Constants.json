@@ -3167,5 +3167,9 @@
     "unreleasedContent": {
         "trophyStoreItems": [],
         "teamsStoreItems": []
+    },
+    "rogueStarterKitDupes": {
+        "RedSauda": "Sauda",
+        "SheRa": "Adora"
     }
 }
