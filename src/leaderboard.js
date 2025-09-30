@@ -100,19 +100,19 @@ async function generateLeaderboards() {
 
     let promises = [];
 
-    if (isStale(racesData)) {
+    if (isStale(racesDataCachedAt)) {
         promises.push(fetchData(`https://data.ninjakiwi.com/btd6/races`, (json) => {
             racesData = json["body"];
             racesDataCachedAt = Date.now();
         }));
     }
-    if (isStale(bossesData)) {
+    if (isStale(bossesDataCachedAt)) {
         promises.push(fetchData(`https://data.ninjakiwi.com/btd6/bosses`, (json) => {
             bossesData = json["body"];
             bossesDataCachedAt = Date.now();
         }));
     }
-    if (isStale(CTData)) {
+    if (isStale(CTDataCachedAt)) {
         promises.push(fetchData(`https://data.ninjakiwi.com/btd6/ct`, (json) => {
             CTData = json["body"];
             CTDataCachedAt = Date.now();
