@@ -1011,7 +1011,7 @@ function openTeamModalPopout(groupUrl) {
 
                 const extra = createEl('div', {
                     classList: ['d-flex', 'ai-center', 'jc-between'],
-                    style: { display: 'none', margin: '0px 60px 0px 20px' }
+                    style: { display: 'none', margin: '-10px 60px 0px 20px', border: "6px solid var(--profile-tertiary)", borderTop: 'none', borderRadius: "0 0 10px 10px", paddingLeft: "10px", backgroundColor: "var(--profile-primary)" }
                 });
 
                 const membersP = createEl('p', {
