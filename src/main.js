@@ -3444,7 +3444,7 @@ function generatePowersProgress() {
     powersProgressContainer.classList.add('powers-progress-container');
     progressContent.appendChild(powersProgressContainer);
 
-    for (let [power, value] of Object.entries(btd6usersave.powers)) {
+    for (let power of constants.powersInOrder) {
         let powerDiv = document.createElement('div');
         powerDiv.classList.add('power-div');
         powersProgressContainer.appendChild(powerDiv);
@@ -3467,7 +3467,7 @@ function generatePowersProgress() {
 
         let powerProgressText = document.createElement('p');
         powerProgressText.classList.add('power-progress-text','black-outline');
-        powerProgressText.innerHTML = `${value.quantity || 0}`;
+        powerProgressText.innerHTML = `${btd6usersave.powers[power].quantity || 0}`;
         powerProgress.appendChild(powerProgressText);
     }
 }

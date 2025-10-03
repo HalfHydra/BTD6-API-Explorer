@@ -482,6 +482,25 @@
         "BeastHandler": "Support"
     },
     "heroesInOrder": {"Quincy": "Blue", "Gwendolin": "Yellow", "StrikerJones": "Grey", "ObynGreenfoot": "Aqua", "CaptainChurchill": "Grey", "Benjamin": "Aqua", "PatFusty": "Green", "Ezili":"Purple", "Adora":"Yellow", "Etienne":"Grey", "Sauda":"Grey", "AdmiralBrickell":"Yellow", "Psi":"Yellow", "Geraldo":"Aqua", "Corvus": "Aqua", "Rosalia": "Green", "Silas": "Blue"},
+    "powersInOrder": [
+        "CashDrop",
+        "RoadSpikes",
+        "MonkeyBoost",
+        "BananaFarmer",
+        "CamoTrap",
+        "Pontoon",
+        "SuperMonkeyStorm",
+        "GlueTrap",
+        "PortableLake",
+        "MoabMine",
+        "Thrive",
+        "EnergisingTotem",
+        "DartTime",
+        "TechBot",
+        "CaveMonkey",
+        "BattleCat",
+        "SheRa"
+    ],
     "mapsInOrder": {
         "Tutorial": "Beginner",
         "InTheLoop": "Beginner",
