@@ -5563,7 +5563,8 @@ function generateCTs(){
 
         let raceInfoRules = document.createElement('div');
         raceInfoRules.classList.add("race-info-rules", "start-button", "currency-trophies-div", "black-outline");
-        raceInfoRules.innerHTML = "Relic Reveal"
+        // raceInfoRules.innerHTML = "Relic Reveal"
+        raceInfoRules.innerHTML = "Map Details"
         raceInfoRules.addEventListener('click', () => {
             showLoading();
             openRelics('events', race.tiles, `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`)
@@ -6939,14 +6940,18 @@ async function openRelics(source, tilesLink, eventDates) {
     relicHeaderRight.appendChild(modalClose);
 
     let relics =  data.tiles.filter(tile => tile.type.includes("Relic"))
-    relics.sort((a, b) => a.id.localeCompare(b.id))
+    relics = relics.sort((a, b) => a.id.localeCompare(b.id))
+    relics = relics.map(relic => {
+        relic.type = relic.type.split(" ")[2];
+        return relic
+    });
 
     let relicsDiv = document.createElement('div');
     relicsDiv.classList.add('relics-div');
     relicContainer.appendChild(relicsDiv);
 
     relics.forEach(relic => {
-        let relicTypeName = relic.type.split(" ")[2];
+        let relicTypeName = relic.type;
 
         let relicDiv = document.createElement('div');
         relicDiv.classList.add('relic-div');
@@ -7000,6 +7005,40 @@ async function openRelics(source, tilesLink, eventDates) {
         relicDescription.innerHTML = getLocValue(`Relic${relicTypeName}Description`);
         relicTextDiv.appendChild(relicDescription);
     })
+
+    let usedRelicTypes = new Set(relics.map(r => r.type));
+    let unusedRelics = constants.relicsInOrder.filter(type => !usedRelicTypes.has(type));
+
+    unusedRelics.forEach(relicTypeName => {
+        let relicDiv = document.createElement('div');
+        relicDiv.classList.add('relic-div');
+        relicDiv.style.backgroundColor = "grey"
+        relicsDiv.appendChild(relicDiv);
+
+        let relicID = document.createElement('p');
+        relicID.classList.add('relic-id');
+        relicID.innerHTML = "X";
+        relicDiv.appendChild(relicID);
+        
+        let relicIcon = document.createElement('img');
+        relicIcon.classList.add('relic-icon');
+        relicIcon.src = `./Assets/RelicIcon/${relicTypeName}.png`
+        relicDiv.appendChild(relicIcon);
+
+        let relicTextDiv = document.createElement('div');
+        relicTextDiv.classList.add('relic-text-div');
+        relicDiv.appendChild(relicTextDiv);
+        
+        let relicName = document.createElement('p');
+        relicName.classList.add('relic-name','black-outline');
+        relicName.innerHTML = getLocValue(`Relic${relicTypeName}`);
+        relicTextDiv.appendChild(relicName);
+        
+        let relicDescription = document.createElement('p');
+        relicDescription.classList.add('relic-description');
+        relicDescription.innerHTML = getLocValue(`Relic${relicTypeName}Description`);
+        relicTextDiv.appendChild(relicDescription);
+    });
 }
 
 function generateExplore() {
