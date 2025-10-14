@@ -41,6 +41,16 @@ function generateRoundsets() {
     selectorsDiv.classList.add('selectors-div');
     roundsetPage.appendChild(selectorsDiv);
 
+    // let roundsetHeaderText = createEl('p', {
+    //     classList: ['sku-roundset-selector-desc', 'ta-center'],
+    //     style: {
+    //         fontSize: "18px",
+    //         lineHeight: "1.5",
+    //     },
+    //     innerHTML: "Roundset information is not available on the Open Data API"
+    // });
+    // selectorsDiv.appendChild(roundsetHeaderText);
+
     let limitedRoundsets = {};
     let expiredRoundsets = {};
     Object.entries(constants.limitedTimeEvents).forEach(([roundset, data]) => {
@@ -489,7 +499,7 @@ async function showRoundsetModel(source, roundset) {
     clearFiltersBtn.style.display = 'none';
     clearFiltersBtn.addEventListener('click', () => {
         roundsetFilterSettings.roundFilterStart = 1;
-        roundsetFilterSettings.roundFilterEnd = null;
+        roundsetFilterSettings.roundFilterEnd = currentRoundsetData.rounds[currentRoundsetData.rounds.length - 1].roundNumber;
         roundsetFilterSettings.roundFilterPreset = "All";
         roundsetFilterSettings.roundsetBasicFilter = null;
         roundsetFilterSettings.roundsetFilteredBloons = [];
