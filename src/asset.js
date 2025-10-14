@@ -300,5 +300,7 @@ function getCollectionEventSkinIcon(skin) {
             return "CollectingEventTotemBtn";
         case "fireworks":
             return "CollectingEventFireworksBtn";
+        case "halloween":
+            return "CollectingEventHalloweenBtn";
     }
 }

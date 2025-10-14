@@ -9137,7 +9137,6 @@ function generateInstaSchedule() {
     })
     instaScheduleHeader.appendChild(instaHeaderTop);
 
-    // start and end time toLocaleDateString
     let startDate = new Date(constants.collection.current.start);
     let endDate = new Date(constants.collection.current.end);
     let instaScheduleTitle = createEl('p', {
@@ -9162,15 +9161,15 @@ function generateInstaSchedule() {
     });
     instaScheduleHeader.appendChild(collectionEventTowerSelectors);
 
-    //header description
     let instaHeaderDescription = createEl('p', {
         classList: ['font-gardenia'],
         style: {
             fontSize: "18px",
             padding: "10px 20px",
             textAlign: "center",
+            lineHeight: "1.5",
         },
-        innerHTML: "Times are your local timezone. List is not from the API, special thanks to Minecool" //please be patient for future events
+        innerHTML: "List is not from the API. Times are your local timezone. Event list and times may change. Special thanks to Minecool for helping me find what broke my pages list generator!" //please be patient for future events
     });
     instaScheduleHeader.appendChild(instaHeaderDescription);
 
@@ -9202,7 +9201,6 @@ function generateInstaSchedule() {
     })
 
     instaHeaderFilterBtn.addEventListener('click', () => {
-        //use the toggle method to toggle the visibility of the collectionEventTowerSelectors div
         showFeaturedFilter = !showFeaturedFilter;
         collectionEventTowerSelectors.style.display = showFeaturedFilter ? "flex" : "none";
         instaHeaderFilterBtn.classList.toggle('square-btn-yellow', showFeaturedFilter);
