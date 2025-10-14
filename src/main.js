@@ -1379,7 +1379,9 @@ function generateOverview(){
 
     let topParagonsDiv = document.createElement('div');
     topParagonsDiv.classList.add('top-heroes-div');
-    topHeroesMonkesyDiv.appendChild(topParagonsDiv);
+    if (Object.entries(btd6publicprofile.stats["paragonsPurchasedByName"]).length > 0) {
+        topHeroesMonkesyDiv.appendChild(topParagonsDiv);
+    }
 
     let topParagonsTopDiv = document.createElement('div');
     topParagonsTopDiv.classList.add('top-heroes-top-div');

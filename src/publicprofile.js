@@ -374,7 +374,9 @@ async function openProfile(source, profile, callback){
 
     let topParagonsDiv = document.createElement('div');
     topParagonsDiv.classList.add('top-heroes-div');
-    topHeroesMonkesyDiv.appendChild(topParagonsDiv);
+    if (Object.entries(profile.stats["paragonsPurchasedByName"]).length > 0) {
+        topHeroesMonkesyDiv.appendChild(topParagonsDiv);
+    }
 
     let topParagonsTopDiv = document.createElement('div');
     topParagonsTopDiv.classList.add('top-heroes-top-div');
