@@ -628,7 +628,6 @@ function addLeaderboardEntries(leaderboardData, page, count) {
             leaderboardEntry.classList.add('leaderboard-entry');
             if (type != "CTTeam") {
                 leaderboardEntry.addEventListener('click', () => {
-                    addToBackQueue({ source: 'leaderboard', destination: 'publicprofile' });
                     openProfile('leaderboard', entry.profile);
                 })
             } else {

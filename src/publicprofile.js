@@ -18,7 +18,8 @@ async function openProfile(source, profile, callback){
     modalClose.classList.add('error-modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
     modalClose.addEventListener('click', () => {
-        exitProfile(source);
+        // exitProfile(source);
+        goBack();
     })
     publicProfileDiv.appendChild(modalClose);
 
@@ -563,10 +564,4 @@ async function openProfile(source, profile, callback){
         statValue.innerHTML = value.toLocaleString();
         stat.appendChild(statValue);
     }
-}
-
-function exitProfile(source){
-    goBack();
-    // document.getElementById('publicprofile-content').style.display = "none";
-    // document.getElementById(`${source}-content`).style.display = "flex";
 }
