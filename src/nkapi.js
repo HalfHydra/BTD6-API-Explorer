@@ -61,10 +61,11 @@ let leaderboardActiveToken = 0;
 let racesDataCachedAt = null;
 let bossesDataCachedAt = null;
 let CTDataCachedAt = null;
+let challengesDataCachedAt = null;
 
-const LEADERBOARD_TTL = 10 * 60 * 1000;
+const TIMEOUT_TTL = 10 * 60 * 1000;
 
-const isStale = (cachedAt) => (!cachedAt || (Date.now() - cachedAt) > LEADERBOARD_TTL);
+const isStale = (cachedAt) => (!cachedAt || (Date.now() - cachedAt) > TIMEOUT_TTL);
 
 function addRequestToQueue(profile, request) {
     requestQueue.push({id: profile, request: request});
@@ -196,7 +197,7 @@ async function getPublicProfileData(oak_token) {
 }
 
 async function getRacesData() {
-    if (racesData == null) {
+    if (racesData == null || isStale(racesDataCachedAt)) {
         await fetchData(`https://data.ninjakiwi.com/btd6/races`, (json) => {
             racesData = json["body"];
             racesDataCachedAt = Date.now();
@@ -236,7 +237,7 @@ async function getLeaderboardData() {
 async function getAllLeaderboardData(link) {
     if (link == null) { link = leaderboardLink };
     requestQueue = [];
-    if (leaderboardCache[leaderboardLink] == null || (leaderboardCache[leaderboardLink]._cachedAt && Date.now() - leaderboardCache[leaderboardLink]._cachedAt > LEADERBOARD_TTL)) {
+    if (leaderboardCache[leaderboardLink] == null || (leaderboardCache[leaderboardLink]._cachedAt && Date.now() - leaderboardCache[leaderboardLink]._cachedAt > TIMEOUT_TTL)) {
         leaderboardCache[leaderboardLink] = {
             "entries": [],
             _cachedAt: Date.now()
@@ -264,7 +265,7 @@ async function getLeaderboardPage(link, token = leaderboardActiveToken) {
 }
 
 async function getBossesData() {
-    if (bossesData == null) {
+    if (bossesData == null || isStale(bossesDataCachedAt)) {
         await fetchData(`https://data.ninjakiwi.com/btd6/bosses`, (json) => {
             bossesData = json["body"];
             bossesDataCachedAt = Date.now();
@@ -288,7 +289,7 @@ async function getBossMetadata(key, elite) {
 }
 
 async function getCTData() {
-    if (CTData == null) {
+    if (CTData == null || isStale(CTDataCachedAt)) {
         await fetchData(`https://data.ninjakiwi.com/btd6/ct`, (json) => {
             CTData = json["body"];
             CTDataCachedAt = Date.now();
@@ -310,10 +311,11 @@ async function getCTTiles(key) {
 }
 
 async function getDailyChallengesData() {
-    if (DCData == null) {
+    if (DCData == null || isStale(challengesDataCachedAt)) {
         await fetchData(`https://data.ninjakiwi.com/btd6/challenges/filter/daily`, (json) => {
             DCData = json["body"];
             addToBackQueue({callback: generateEvents})
+            challengesDataCachedAt = Date.now();
             return DCData;
         });
     } else {
@@ -323,9 +325,10 @@ async function getDailyChallengesData() {
 }
 
 async function getChallengeMetadata(challengeId) {
-    if (challengesCache[challengeId] == null) {
+    if (challengesCache[challengeId] == null || isStale(challengesCache[challengeId]._cachedAt)) {
         await fetchData(`https://data.ninjakiwi.com/btd6/challenges/challenge/${challengeId}`, (json) => {
             challengesCache[challengeId] = json["body"];
+            challengesCache[challengeId]._cachedAt = Date.now();
             return challengesCache[challengeId];
         });
     } else {
