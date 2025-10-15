@@ -67,6 +67,7 @@ let starterKitNames = {
     "RosaliaTinkerfairy": "Rosalia Tinkerfairy",
     "SheRa": "She-Ra Adora",
     "Silas": "Silas",
+    "ObynSkeletor": "Skeletor Obyn"
 }
 
 let artifactDivMap = {};
@@ -526,10 +527,13 @@ function generateArtifactSettings() {
             case "Added Update 50":
                 settingsFilterDescription.innerHTML = "Only Artifacts that were added in Update 50 will be included to start.";
                 break;
+            case "Added Update 51":
+                settingsFilterDescription.innerHTML = "Only Artifacts that were added in Update 51 will be included to start.";
+                break;
         }
     }
 
-    let settingsFilterDropdown = generateDropdown("Artifact Filter:", ["All", "Starter Kit", "Non Starter Kit", "One Variant", "Two Variants", "Added Update 48", "Added Update 49", "Added Update 50"], rogueSaveData.artifactFilter, (value) => {
+    let settingsFilterDropdown = generateDropdown("Artifact Filter:", ["All", "Starter Kit", "Non Starter Kit", "One Variant", "Two Variants", "Added Update 48", "Added Update 49", "Added Update 50", "Added Update 51"], rogueSaveData.artifactFilter, (value) => {
         rogueSaveData.artifactFilter = value;
         updateDescription();
         saveRogueDataToLocalStorage();
@@ -717,6 +721,9 @@ function generateArtifacts() {
             break;
         case "Added Update 50":
             currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => value.added == 50))
+            break;
+        case "Added Update 51":
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => value.added == 51))
             break;
     }
 

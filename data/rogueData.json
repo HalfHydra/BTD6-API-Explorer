@@ -2973,7 +2973,7 @@
             "nameLocKey": "MaliciousMaulingX",
             "descriptionLocKey": "MaliciousMaulingXDescription",
             "descriptionParams": [
-                "4",
+                "3.5",
                 "0-2-1"
             ],
             "isBossArtifact": 0,
@@ -2996,7 +2996,7 @@
             "nameLocKey": "MaliciousMaulingX",
             "descriptionLocKey": "MaliciousMaulingXDescription",
             "descriptionParams": [
-                "6",
+                "5",
                 "0-2-0"
             ],
             "isBossArtifact": 0,
@@ -4265,8 +4265,8 @@
             "nameLocKey": "TheUnspokenHeroesX",
             "descriptionLocKey": "TheUnspokenHeroesXDescription",
             "descriptionParams": [
-                "20",
-                "250"
+                "1",
+                "1"
             ],
             "isBossArtifact": 0,
             "icon": "ArtifactTheUnspokenHeroes",
@@ -4280,8 +4280,8 @@
             "nameLocKey": "TheUnspokenHeroesX",
             "descriptionLocKey": "TheUnspokenHeroesXDescription",
             "descriptionParams": [
-                "20",
-                "350"
+                "2",
+                "1"
             ],
             "isBossArtifact": 0,
             "icon": "ArtifactTheUnspokenHeroes",
@@ -4295,8 +4295,8 @@
             "nameLocKey": "TheUnspokenHeroesX",
             "descriptionLocKey": "TheUnspokenHeroesXDescription",
             "descriptionParams": [
-                "20",
-                "500"
+                "3",
+                "2"
             ],
             "isBossArtifact": 0,
             "icon": "ArtifactTheUnspokenHeroes",
@@ -4801,6 +4801,34 @@
             "isQuestArtifact": 0,
             "added": 48
         },
+        "BlitzingApeBarrageEmitter2": {
+            "tier": 1,
+            "baseId": "BlitzingApeBarrageEmitter",
+            "nameLocKey": "BlitzingApeBarrageEmitterX",
+            "descriptionLocKey": "BlitzingApeBarrageEmitterXDescription",
+            "descriptionParams": [
+                "1"
+            ],
+            "isBossArtifact": 0,
+            "icon": "ArtifactBlitzingApeBarrageEmitter",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": "51"
+        },
+        "BlitzingApeBarrageEmitter3": {
+            "tier": 2,
+            "baseId": "BlitzingApeBarrageEmitter",
+            "nameLocKey": "BlitzingApeBarrageEmitterX",
+            "descriptionLocKey": "BlitzingApeBarrageEmitterXDescription",
+            "descriptionParams": [
+                "2"
+            ],
+            "isBossArtifact": 0,
+            "icon": "ArtifactBlitzingApeBarrageEmitter",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": "51"
+        },
         "CarryABigStick1": {
             "tier": 0,
             "baseId": "CarryABigStick",
@@ -5019,7 +5047,7 @@
                     ]
                 },
                 {
-                    "baseId": "BoomerangMonkey",
+                    "baseId": "SniperMonkey",
                     "tiers": [
                         0,
                         0,
@@ -5049,7 +5077,7 @@
                     ]
                 }
             ],
-            "artifact": "ColdSteel1"
+            "artifact": "ColdSteel3"
         },
         "Wolfpack Quincy": {
             "heroID": "Wolfpack Quincy",
@@ -5093,7 +5121,7 @@
                     ]
                 }
             ],
-            "artifact": "FlamingHotPunchARang1"
+            "artifact": "FlamingHotPunchARang3"
         },
         "CircusGwendolin": {
             "heroID": "CircusGwendolin",
@@ -5137,7 +5165,7 @@
                     ]
                 }
             ],
-            "artifact": "AlchemicEngineering1"
+            "artifact": "AlchemicEngineering2"
         },
         "StrikerJones": {
             "heroID": "StrikerJones",
@@ -5212,7 +5240,7 @@
                     "baseId": "Druid",
                     "tiers": [
                         0,
-                        0,
+                        2,
                         0
                     ]
                 },
@@ -5225,7 +5253,7 @@
                     ]
                 }
             ],
-            "artifact": "BBGatlingGun1"
+            "artifact": "BBGatlingGun2"
         },
         "ObynOceanGuardian": {
             "heroID": "ObynOceanGuardian",
@@ -5357,7 +5385,7 @@
                     ]
                 }
             ],
-            "artifact": "SlippedOnThePeel1"
+            "artifact": "SlippedOnThePeel3"
         },
         "BenJammin": {
             "heroID": "BenJammin",
@@ -5379,29 +5407,29 @@
                     ]
                 }
             ],
-            "artifact": "StartingStrong1"
+            "artifact": "StartingStrong3"
         },
         "SushiBento": {
             "heroID": "SushiBento",
             "startingInstas": [
                 {
-                    "baseId": "BananaFarm",
+                    "baseId": "MonkeySub",
                     "tiers": [
                         0,
                         0,
-                        3
+                        2
                     ]
                 },
                 {
                     "baseId": "DartMonkey",
                     "tiers": [
                         0,
-                        0,
+                        2,
                         0
                     ]
                 }
             ],
-            "artifact": "MightyMulligan2"
+            "artifact": "MightyMulligan3"
         },
         "PatFusty": {
             "heroID": "PatFusty",
@@ -5423,7 +5451,7 @@
                     ]
                 }
             ],
-            "artifact": "HeightenedPerception1"
+            "artifact": "HeightenedPerception3"
         },
         "FustyTheSnowman": {
             "heroID": "FustyTheSnowman",
@@ -5445,7 +5473,7 @@
                     ]
                 }
             ],
-            "artifact": "FrostedTips2"
+            "artifact": "FrostedTips3"
         },
         "KaijuPat": {
             "heroID": "KaijuPat",
@@ -5541,7 +5569,7 @@
                 {
                     "baseId": "Alchemist",
                     "tiers": [
-                        0,
+                        2,
                         0,
                         0
                     ]
@@ -5555,7 +5583,7 @@
                     ]
                 }
             ],
-            "artifact": "DivineIntervention1"
+            "artifact": "DivineIntervention2"
         },
         "JoanOfArcAdora": {
             "heroID": "JoanOfArcAdora",
@@ -5599,7 +5627,7 @@
                     ]
                 }
             ],
-            "artifact": "EnchantedRebuttal1"
+            "artifact": "EnchantedRebuttal3"
         },
         "Etienne": {
             "heroID": "Etienne",
@@ -5607,9 +5635,9 @@
                 {
                     "baseId": "Desperado",
                     "tiers": [
+                        2,
                         0,
-                        0,
-                        2
+                        0
                     ]
                 },
                 {
@@ -5621,7 +5649,7 @@
                     ]
                 }
             ],
-            "artifact": "SplodeyDarts1"
+            "artifact": "SplodeyDarts2"
         },
         "ETnEtienne": {
             "heroID": "ETnEtienne",
@@ -5660,12 +5688,12 @@
                     "baseId": "WizardMonkey",
                     "tiers": [
                         0,
-                        0,
-                        1
+                        2,
+                        0
                     ]
                 }
             ],
-            "artifact": "AbsoluteAbility2"
+            "artifact": "AbsoluteAbility3"
         },
         "Sauda": {
             "heroID": "Sauda",
@@ -5687,7 +5715,7 @@
                     ]
                 }
             ],
-            "artifact": "StickySituation1"
+            "artifact": "StickySituation3"
         },
         "VikingSauda": {
             "heroID": "VikingSauda",
@@ -5709,7 +5737,7 @@
                     ]
                 }
             ],
-            "artifact": "CeramicChunker1"
+            "artifact": "CeramicChunker3"
         },
         "JiangshiSauda": {
             "heroID": "JiangshiSauda",
@@ -5731,7 +5759,7 @@
                     ]
                 }
             ],
-            "artifact": "HomeBrewAlchemy1"
+            "artifact": "HomeBrewAlchemy2"
         },
         "AdmiralBrickell": {
             "heroID": "AdmiralBrickell",
@@ -5819,7 +5847,7 @@
                     ]
                 }
             ],
-            "artifact": "AbilityStacking1"
+            "artifact": "AbilityStacking3"
         },
         "Psimbals": {
             "heroID": "Psimbals",
@@ -5836,8 +5864,8 @@
                     "baseId": "DartMonkey",
                     "tiers": [
                         0,
-                        0,
-                        2
+                        3,
+                        0
                     ]
                 }
             ],
@@ -5885,35 +5913,35 @@
                     ]
                 }
             ],
-            "artifact": "ExtraChange1"
+            "artifact": "BargainingChip3"
         },
         "GeraldoGentlemanGadgeteer": {
             "heroID": "GeraldoGentlemanGadgeteer",
             "startingInstas": [
                 {
-                    "baseId": "SniperMonkey",
+                    "baseId": "TackShooter",
+                    "tiers": [
+                        0,
+                        3,
+                        0
+                    ]
+                },
+                {
+                    "baseId": "WizardMonkey",
                     "tiers": [
                         0,
                         2,
                         0
                     ]
-                },
-                {
-                    "baseId": "GlueGunner",
-                    "tiers": [
-                        0,
-                        1,
-                        0
-                    ]
                 }
             ],
-            "artifact": "TrickShotATacks1"
+            "artifact": "InnateAbility3"
         },
         "Corvus": {
             "heroID": "Corvus",
             "startingInstas": [
                 {
-                    "baseId": "BombShooter",
+                    "baseId": "SniperMonkey",
                     "tiers": [
                         2,
                         0,
@@ -5929,7 +5957,7 @@
                     ]
                 }
             ],
-            "artifact": "ConfuddlingSpelling1"
+            "artifact": "TitForTat3"
         },
         "Rosalia": {
             "heroID": "Rosalia",
@@ -5937,9 +5965,9 @@
                 {
                     "baseId": "Desperado",
                     "tiers": [
-                        2,
                         0,
-                        0
+                        0,
+                        2
                     ]
                 },
                 {
@@ -5951,7 +5979,7 @@
                     ]
                 }
             ],
-            "artifact": "PincushionFlyby1"
+            "artifact": "HomingProjectiles1"
         },
         "RosaliaTinkerfairy": {
             "heroID": "RosaliaTinkerfairy",
@@ -5995,7 +6023,7 @@
                     ]
                 }
             ],
-            "artifact": "EsotericElementalist1"
+            "artifact": "EsotericElementalist2"
         }
     }
 }

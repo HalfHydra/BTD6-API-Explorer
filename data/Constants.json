@@ -1,12 +1,12 @@
 {
     "version": "2.2.1",
-    "projectContentVersion": 50,
+    "projectContentVersion": 51,
     "totalInstaMonkeys": 1600,
     "achievements": 139,
     "hiddenAchievements": 14,
     "totalMaps": 81,
-    "profileBanners": 54,
-    "profileAvatars": 114,
+    "profileBanners": 56,
+    "profileAvatars": 116,
     "teamsBanners": 15,
     "startRound": {
         "Easy": 1,
@@ -310,6 +310,13 @@
             "startingCash": 650,
             "endRound": 16
         },
+        "QuestSilasTrialRoundSet": {
+            "name": "Ice to Meet You! Rounds",
+            "icon": "QuestIconSilas",
+            "type": "quest",
+            "startingCash": 650,
+            "endRound": 10
+        },
         "QuestStrikerTrialRoundSet": {
             "name": "Striker Instruction! Rounds",
             "icon": "QuestIconStrikerJones",
@@ -358,6 +365,23 @@
             "type": "quest",
             "startingCash": 2200,
             "endRound": 22
+        },
+        "SkeletorQuestRoundSet1": {
+            "name": "Oh no! Skeletor! Part 1 Rounds",
+            "icon": "QuestIconSkeletor",
+            "type": "quest",
+            "startingCash": 650,
+            "endRound": 3,
+            "part": 1
+        },
+        "SkeletorQuestRoundset3": {
+            "name": "Oh no! Skeletor! Part 1 Rounds",
+            "icon": "QuestIconSkeletor",
+            "type": "quest",
+            "startingCash": 6000,
+            "endRound": 60,
+            "part": 3,
+            "roundset": "RogueRoundSet"
         }
     },
     "incomeSets": {
@@ -499,7 +523,13 @@
         "TechBot",
         "CaveMonkey",
         "BattleCat",
-        "SheRa"
+        "SheRa",
+        "Skeletor"
+    ],
+    "powersIAP": [
+        "BattleCat",
+        "SheRa",
+        "Skeletor"
     ],
     "relicsInOrder": [
         "Abilitized",
@@ -548,11 +578,12 @@
     "mapsInOrder": {
         "Tutorial": "Beginner",
         "InTheLoop": "Beginner",
-        "MiddleOfTheRoad": "Beginner",
+        "ThreeMinesAround": "Beginner",
         "SpaPits": "Beginner",
         "Tinkerton": "Beginner",
         "TreeStump": "Beginner",
         "TownCentre": "Beginner",
+        "MiddleOfTheRoad": "Beginner",
         "OneTwoTree": "Beginner",
         "Scrapyard": "Beginner",
         "TheCabin": "Beginner",
@@ -715,7 +746,7 @@
         "CtGlobalPlayerDiamondMedal": "CT Global - Top 25",
         "Legends1": "Legends - Rogue Legends Feats"
     },
-    "paragonsAvailable": ["DartMonkey", "BoomerangMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "WizardMonkey", "NinjaMonkey", "EngineerMonkey", "TackShooter", "SpikeFactory"],
+    "paragonsAvailable": ["DartMonkey", "BoomerangMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "WizardMonkey", "NinjaMonkey", "EngineerMonkey", "TackShooter", "SpikeFactory", "BombShooter"],
     "instaTiers": {
         "5": ["520", "502", "510", "501", "500", "250", "052", "150", "051", "050", "205", "025", "105", "015", "005"],
         "4": ["420", "402", "410", "401", "400", "240", "042", "140", "041", "040", "204", "024", "104", "014", "004"],
@@ -793,7 +824,7 @@
             "id": "mglvmh3g",
             "name": "Halloween Collectables",
             "skin": "halloween",
-            "start": 1760515200000,
+            "start": 1760288400000,
             "end": 1762329600000,
             "featuredInstas": [
                 "Alchemist",
@@ -866,10 +897,10 @@
                     "DartMonkey"
                 ],
                 "7": [
-                    "MonkeyAce",
-                    "DartMonkey",
                     "Mermonkey",
-                    "MortarMonkey"
+                    "MortarMonkey",
+                    "Desperado",
+                    "MonkeyBuccaneer"
                 ],
                 "8": [
                     "Desperado",
@@ -908,10 +939,10 @@
                     "Mermonkey"
                 ],
                 "14": [
-                    "DartMonkey",
-                    "Mermonkey",
                     "MortarMonkey",
-                    "Desperado"
+                    "Desperado",
+                    "MonkeyBuccaneer",
+                    "SniperMonkey"
                 ],
                 "15": [
                     "MonkeyBuccaneer",
@@ -950,10 +981,10 @@
                     "MortarMonkey"
                 ],
                 "21": [
-                    "Mermonkey",
-                    "MortarMonkey",
                     "Desperado",
-                    "MonkeyBuccaneer"
+                    "MonkeyBuccaneer",
+                    "SniperMonkey",
+                    "NinjaMonkey"
                 ],
                 "22": [
                     "SniperMonkey",
@@ -992,10 +1023,10 @@
                     "Desperado"
                 ],
                 "28": [
-                    "MortarMonkey",
-                    "Desperado",
                     "MonkeyBuccaneer",
-                    "SniperMonkey"
+                    "SniperMonkey",
+                    "NinjaMonkey",
+                    "WizardMonkey"
                 ],
                 "29": [
                     "NinjaMonkey",
@@ -1034,10 +1065,10 @@
                     "MonkeyBuccaneer"
                 ],
                 "35": [
-                    "Desperado",
-                    "MonkeyBuccaneer",
                     "SniperMonkey",
-                    "NinjaMonkey"
+                    "NinjaMonkey",
+                    "WizardMonkey",
+                    "MonkeyVillage"
                 ],
                 "36": [
                     "WizardMonkey",
@@ -1076,10 +1107,10 @@
                     "SniperMonkey"
                 ],
                 "42": [
-                    "MonkeyBuccaneer",
-                    "SniperMonkey",
                     "NinjaMonkey",
-                    "WizardMonkey"
+                    "WizardMonkey",
+                    "MonkeyVillage",
+                    "MonkeySub"
                 ],
                 "43": [
                     "MonkeyVillage",
@@ -1118,10 +1149,10 @@
                     "NinjaMonkey"
                 ],
                 "49": [
-                    "SniperMonkey",
-                    "NinjaMonkey",
                     "WizardMonkey",
-                    "MonkeyVillage"
+                    "MonkeyVillage",
+                    "MonkeySub",
+                    "SuperMonkey"
                 ],
                 "50": [
                     "MonkeySub",
@@ -1160,10 +1191,10 @@
                     "WizardMonkey"
                 ],
                 "56": [
-                    "NinjaMonkey",
-                    "WizardMonkey",
                     "MonkeyVillage",
-                    "MonkeySub"
+                    "MonkeySub",
+                    "SuperMonkey",
+                    "Druid"
                 ],
                 "57": [
                     "SuperMonkey",
@@ -1200,6 +1231,48 @@
                     "NinjaMonkey",
                     "WizardMonkey",
                     "MonkeyVillage"
+                ],
+                "63": [
+                    "MonkeySub",
+                    "SuperMonkey",
+                    "Druid",
+                    "EngineerMonkey"
+                ],
+                "64": [
+                    "Druid",
+                    "EngineerMonkey",
+                    "HeliPilot",
+                    "BeastHandler"
+                ],
+                "65": [
+                    "Alchemist",
+                    "SpikeFactory",
+                    "IceMonkey",
+                    "BananaFarm"
+                ],
+                "66": [
+                    "BoomerangMonkey",
+                    "DartlingGunner",
+                    "BombShooter",
+                    "TackShooter"
+                ],
+                "67": [
+                    "GlueGunner",
+                    "MonkeyAce",
+                    "DartMonkey",
+                    "Mermonkey"
+                ],
+                "68": [
+                    "MortarMonkey",
+                    "Desperado",
+                    "MonkeyBuccaneer",
+                    "SniperMonkey"
+                ],
+                "69": [
+                    "NinjaMonkey",
+                    "WizardMonkey",
+                    "MonkeyVillage",
+                    "MonkeySub"
                 ]
             }
         },
@@ -1718,6 +1791,14 @@
         "ExperimentRegularIncome": {
             "nameLocKey": "ExperimentRegularIncomeName",
             "icon": "QuestIconRegularIncome"
+        },
+        "SilasTestQuest": {
+            "nameLocKey": "SilasTestQuestName",
+            "icon": "QuestIconSilas"
+        },
+        "SkeletorQuest": {
+            "nameLocKey": "SkeletorQuestName",
+            "icon": "QuestIconSkeletor"
         }
     },
     "BGColor": [0.000, 0.498, 1.000],
@@ -1790,13 +1871,14 @@
         "RedSauda": [1,3,10,20],
         "RosaliaTinkerfairy": [1,2,5,7,13,20],
         "SheRa": [1,3,7,10,20,"20SunGod","20SunGodVengeful"],
-        "Silas": [1,3,7,10,20]
+        "Silas": [1,3,7,10,20],
+        "ObynSkeletor": [1,3,10,20]
     },
     "heroSkins": {
         "Quincy": ["Quincy", "CyberQuincy", "WolfpackQuincy"],
         "Gwendolin": ["Gwendolin", "CircusGwendolin", "ScientistGwendolin"], 
         "StrikerJones": ["StrikerJones", "BikerBones", "OctoJones"],
-        "ObynGreenfoot": ["ObynGreenfoot", "MoltenObyn", "ObynOceanGuardian"],
+        "ObynGreenfoot": ["ObynGreenfoot", "MoltenObyn", "ObynOceanGuardian", "ObynSkeletor"],
         "Benjamin": ["Benjamin", "SushiBento", "BenJammin"],
         "PatFusty": ["PatFusty", "FustyTheSnowman", "KaijuPat"],
         "CaptainChurchill": ["CaptainChurchill", "SentaiCaptainChurchill", "SleighCaptainChurchill"],
@@ -3647,6 +3729,7 @@
     },
     "rogueStarterKitDupes": {
         "RedSauda": "Sauda",
-        "SheRa": "Adora"
+        "SheRa": "Adora",
+        "ObynSkeletor": "ObynGreenfoot"
     }
 }

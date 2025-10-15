@@ -208,7 +208,7 @@ function generateRoundsets() {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('other-roundset-selector-div');
         roundsetDiv.addEventListener('click', () => {
-            showRoundsetModel('rounds', roundset);
+            showRoundsetModel('rounds', data.roundset ? data.roundset : roundset);
         })
         otherRoundsetDiv.appendChild(roundsetDiv);
 
@@ -216,6 +216,7 @@ function generateRoundsets() {
         roundsetText.classList.add('other-roundset-selector-text', 'black-outline');
 
         let stage = roundset.match(/(Part|Stage)(\d+)/i);
+        if (!stage && data.part) { stage = [roundset, 'Part', data.part]}
         if (stage != null) {
             roundsetText.innerHTML = `${stage[1]} ${stage[2]}`;
             roundsetDiv.appendChild(roundsetText);
