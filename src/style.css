@@ -764,6 +764,9 @@
     border-radius: 20px;
     margin: 10px 0px;
 }
+.progress-selector-div {
+    height: 90px;
+}
 .selector-img {
     height: 100px;
     width: 100px;
@@ -2341,7 +2344,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100px;
+    height: 80px;
     border-radius: 10px;
     margin: 10px 0;
     padding: 20px;

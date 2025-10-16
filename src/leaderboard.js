@@ -526,24 +526,26 @@ function showLeaderboard(source, metadata, type) {
     });
     leaderboardHeader.appendChild(leaderboardHeaderRight);
 
-    let leaderboardRefreshBtn = createEl('img', {
-        classList: [],
-        style: {
-            cursor: 'pointer',
-            width: '50px',
-            height: '50px',
-        },
-        src: './Assets/UI/RefreshBtn.png',
-    })
-    leaderboardRefreshBtn.addEventListener('click', () => {
-        if (leaderboardLink) {
-            delete leaderboardCache[leaderboardLink];
-        }
-        leaderboardActiveToken++;
-        showLoading();
-        generateLeaderboardEntries(metadata, type, leaderboardActiveToken);
-    });
-    leaderboardHeaderRight.appendChild(leaderboardRefreshBtn);
+    if (new Date(metadata.end) > new Date()) {
+        let leaderboardRefreshBtn = createEl('img', {
+            classList: [],
+            style: {
+                cursor: 'pointer',
+                width: '50px',
+                height: '50px',
+            },
+            src: './Assets/UI/RefreshBtn.png',
+        })
+        leaderboardRefreshBtn.addEventListener('click', () => {
+            if (leaderboardLink) {
+                delete leaderboardCache[leaderboardLink];
+            }
+            leaderboardActiveToken++;
+            showLoading();
+            generateLeaderboardEntries(metadata, type, leaderboardActiveToken);
+        });
+        leaderboardHeaderRight.appendChild(leaderboardRefreshBtn);
+    }
 
     if (type == "Boss" || type == "BossElite") {
         let leaderboardDisclaimer = document.createElement('p');

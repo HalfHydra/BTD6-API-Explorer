@@ -107,19 +107,18 @@ let loggedIn = false;
 let imageScroll = [
     {
         "title": "New Site Update!",
-        "text": `Site Update 2.2.0:<br>
-        - Leaderboards Revamped<br>
-        - Contested Territory Groups<br>
-        - Rogue Artifacts Updates<br>
+        "text": `Site Update 2.3.0:<br>
+        - UI & Caching Improved<br>
         <br>
-        Site Update 2.1.0:<br>
+        Recent Updates:<br>
         - Added Roundset Filtering<br>
-        - Added Quests in Profile<br>
-        - Many fixes and UI updates<br>
-        - Report Bugs: <a href="https://discord.gg/wep2RDmcqZ " target="_blank" style="color: white;">Discord Server</a><br>
-        - Full Changelog below<br>
+        - Contested Territory Groups<br>
+        - Leaderboards Revamped<br>
+        <br>
+        5% Off in <a href="https://btd6store.ninjakiwi.com/" target="_blank" style="color: white;">Webshop</a> when using a code (HalfHydra for me, TY!)<br>
+        Report Bugs: <a href="https://discord.gg/wep2RDmcqZ" target="_blank" style="color: white;">Discord Server</a><br>
         `,
-        "image": "/LandingScroll/Update50&Filtering"
+        "image": "/LandingScroll/Update51&Upsell"
     },
     {
         "title": "View Your Profile!",
@@ -858,7 +857,8 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = `v2.2.0: Leaderboard Revamp + Rogue Improvements<br>- Leaderboards have been revamped with better loading times.<br>- Clicking a team on the Contested Territory leaderboard will now show their group of competing teams and their scores.<br>- Leaderboards will now refresh the next time you access them if it's been a while and you don't refresh the page.<br>- A manual refresh button has been added to the top of individual leaderboards.<br>- Leaderboards now show text indicating if it is loading new entries and if it has reached the end.<br>- Fixed a bug causing the timers on events to freeze after going back and forward to various menus.<br>- Rogue Artifacts now has a clear filter button.<br>- Rogue Artifacts count should now correctly display if the collection mode is turned off.<br>- Rogue Legends artifact popout updated to include the update that the artifact was added in as well as display an insta monkey that is added if it has one.<br>- Rogue legends starter kits now also show the insta monkey that is added via a starter artifact.<br>- Fixed numerous UI bugs including a missing Fortified DDT Icon, the rogue legends artifact sorting preview not working anymore.<br><br>
+    changelogText.innerHTML = `v2.3.0: Update 51 and Minor Updates<br>- Added Update 51 content including new Rogue changes <br>- You can now navigate to the more detailed menus from Quick Stats<br>- Towers menu now shows related Monkey Knowledge points (rework coming eventually)<br>- Added total of each tier to the game-like view of Insta Monkeys collection when "Missing" is toggled.<br>- Unavailable Relics will now displayed on the CT Relics page in prepration for a CT rework<br>- Duplicate (IAP/Special) Rogue starter kits will now show at the bottom<br>- The leaderboard refresh button will now only appear for currently active events<br>- Fixed a bug causing the Clear Filters button to break some roundsets functionality.<br>- Top Paragons will no longer show if there aren't any<br>- Events will now refetch their information from the API after 10 minutes.<br>- The scrollbar is no longer accidentally unstyled. Whoops<br>- Fixed numerous bugs with the back button not clearing when going back<br><br>
+    v2.2.0: Leaderboard Revamp + Rogue Improvements<br>- Leaderboards have been revamped with better loading times.<br>- Clicking a team on the Contested Territory leaderboard will now show their group of competing teams and their scores.<br>- Leaderboards will now refresh the next time you access them if it's been a while and you don't refresh the page.<br>- A manual refresh button has been added to the top of individual leaderboards.<br>- Leaderboards now show text indicating if it is loading new entries and if it has reached the end.<br>- Fixed a bug causing the timers on events to freeze after going back and forward to various menus.<br>- Rogue Artifacts now has a clear filter button.<br>- Rogue Artifacts count should now correctly display if the collection mode is turned off.<br>- Rogue Legends artifact popout updated to include the update that the artifact was added in as well as display an insta monkey that is added if it has one.<br>- Rogue legends starter kits now also show the insta monkey that is added via a starter artifact.<br>- Fixed numerous UI bugs including a missing Fortified DDT Icon, the rogue legends artifact sorting preview not working anymore.<br><br>
     v2.1.0: Roundsets Revamp + Quests!<br>- The roundset viewer now has options for filtering. This includes a round range (good for Rogue Legends), starting cash, as well as filtering by bloons. There are 6 basic filters and then a toggle for an advanced mode that allows you to filter down to specific bloons.<br>- Bloon Group timings in the detailed view of rounds now has a tooltip that will show the exact timings on hover.<br>- Clicking the round number in simple or detailed will now take you to the previewer for that round.<br>- The roundset previewer has been fixed, and the UI has been rearranged. No more lag issues causing inaccurate previews, it should always be accurate now no matter the capabilities of your device.<br>- You can now turn off round hints.<br>- A helpful message describing the boss roundset changes has been added for each boss.<br>- Quests have been added under the Profile tab. You can also view the custom roundset (if it has one) from there.<br>- Fixed boss details showing the incorrect scoring type.<br>- Fixed some UI issues in Collection Event menus.<br>- You can now reveal hidden achievement descriptions. This will be complimented later with a guide for a select few taht are tougher or less straight forward in the future.<br>- Fixed the download for Rogue artifacts on Firefox.<br>- Fixed a bug that enabled XSS with named monkeys.<br>- New heroes should no longer break the site before I add them. Oops.<br>- 2 variant artifacts filtering has been fixed to include all of them.<br>- Rogue Artifact popout should no longer make you jump to the top of the scrollbar.<br>- Fixed a bug involving reverse mode in the detailed section of roundsets.<br>- Fixed a bug where the list view on map stats would not show any maps after update 45. Whoops, thank you @200e200w for reporting this on the Discord Server.<br><br>
     v2.0.0: Major Update and Update 49!<br>- The site has been completely reworked and redesigned, allowing for less focus on logging in.<br>- A global back button has been implemented at the top left that will always immediately take you back to wherever you just were.<br>- A way of viewing and filtering the current schedule for collection event featured instas has been added.<br>- Top 1% Boss medal was renamed to Top 100.<br>- Roundsets simple view now shows the time per round on the right.<br>- The full time information for events can now be found via a tooltip on the events list.<br>- Rogue Artifacts search now correctly changes the total count for searching.<br>- Special Rogue Roundsets now show their tooltip of what you would see in game for the associated roundset.<br>- Fixed Hero Skin count. NK wasn't the only one who somehow had issues with that...<br>- Fixed ordering for artifacts using internal name instead of alphabetical name.<br>- You can now logout of your profile and use another OAK token without refreshing the page.<br>- Profiles from leaderboards should no longer be missing many medals.<br>- Standalone pages now only load what's essential for them.<br>- The new achievement was added. <br>- Leaderboards have been fixed.<br><br>
     v1.9.1: Many Bug Fixes<br>- Fixed Voidora's hero starter kit being incorrect<br>- Fixed CT Local Medals not appearing and Global medals being incorrectly labeled<br>- Fixed the normal Rogue Legends roundset not being updated with the Update 48 changes<br>- Fixed a bug causing modded paragons to show up and error out<br><br>
@@ -1095,10 +1095,10 @@ function generateOverview(){
     }
 
     Object.entries(progressSubText).forEach(([stat,text]) => {
-        if(text.includes("0 Extras") || text.includes("0 CHIMPS") || text.includes("Team Store")) { return }
+        if(text.includes("0 Extras") || text.includes("Team Store")) { return }
         if(text.match(/(^|[^0-9])0\/\d{1,2}(?!\d)/)) { return }
         let quickStat = document.createElement('div');
-        quickStat.classList.add('quick-stat');
+        quickStat.classList.add('quick-stat', 'pointer');
         quickStatsContent.appendChild(quickStat);
 
         let statIcon = document.createElement('img');
@@ -1110,6 +1110,55 @@ function generateOverview(){
         statName.classList.add('quick-stat-name');
         statName.innerHTML = text;
         quickStat.appendChild(statName);
+
+        quickStat.addEventListener('click', () => {
+            addToBackQueue({source: 'profile', destination: 'profile', callback: generateOverview});
+            switch(stat){
+                case 'Towers':
+                case "Upgrades":
+                case "Paragons":
+                    generateTowerProgress();
+                    break;
+                case 'Heroes':
+                case "Skins":
+                    generateHeroesProgress();
+                    break;
+                case "ActivatedAbilities":
+                    generateAbilities();
+                    break;
+                case "Knowledge":
+                    generateKnowledgeProgress();
+                    break;
+                case "MapProgress":
+                case "CHIMPS":
+                    generateMapsProgress();
+                    break;
+                case "Powers":
+                    generatePowersProgress();
+                    break;
+                case "InstaMonkeys":
+                    generateInstaMonkeysProgress();
+                    break;
+                case "Achievements":
+                    generateAchievementsProgress();
+                    break;
+                case "Extras":
+                    generateExtrasProgress();
+                    break;
+                case "TrophyStore":
+                    generateTrophyStoreProgress();
+                    break;
+                case "TeamsStore":
+                    generateTeamsStoreProgress();
+                    break;
+                case "Logout":
+                    logoutProgress();
+                    break;
+                case 'Quests':
+                    generateQuestsPage();
+                    break;
+            }
+        });
     })
 
     let currencyAndMedalsDiv = document.createElement('div');
@@ -1689,7 +1738,7 @@ function generateProgress(){
         selectorsDiv.appendChild(logoutDiv);
 
         let profileSelectorDiv = document.createElement('div');
-        profileSelectorDiv.classList.add('d-flex', 'jc-between', 'ai-center', 'view-profile');
+        profileSelectorDiv.classList.add('d-flex', 'jc-between', 'ai-center', 'view-profile', 'pointer');
         profileSelectorDiv.style.backgroundImage = `url(${getProfileBanner(btd6publicprofile)})`;
         profileSelectorDiv.addEventListener('click', () => {
             generateOverview();
@@ -1717,7 +1766,7 @@ function generateProgress(){
             if(progressSubText[selector].includes("0 Extras")) { return; }
             if(progressSubText[selector].includes("Team Store") && !showTeamsItems) { return; }
             let selectorDiv = document.createElement('div');
-            selectorDiv.classList.add('selector-div');
+            selectorDiv.classList.add('selector-div', 'progress-selector-div');
             selectorDiv.addEventListener('click', () => {
                 changeProgressTab(selector);
             })
@@ -1841,14 +1890,9 @@ function changeProgressTab(selector){
             generateAbilities();
             break;
         case "Knowledge":
-            changeHexBGColor(constants.ParagonBGColor)
             generateKnowledgeProgress();
             break;
         case "MapProgress":
-            currentMapView = "grid";
-            coopEnabled = false;
-            currentDifficultyFilter = "All";
-            mapPage = 0;
             generateMapsProgress();
             break;
         case "Powers":
@@ -2017,14 +2061,54 @@ function generateTowerProgressTower(tower){
     // towerProgressContent.appendChild(upgradeTooltip);
 
     let towerProgressMainDiv = document.createElement('div');
-    towerProgressMainDiv.classList.add('tower-progress-main-div');
+    towerProgressMainDiv.classList.add('tower-progress-main-div', 'fd-column');
     towerProgressContent.appendChild(towerProgressMainDiv);
 
     towerProgressMainDiv.appendChild(makeUpgradeButtons(tower, unlockedAllT5, paragonUnlocked));
 
     let towerProgressBottom = document.createElement('div');
-    towerProgressBottom.classList.add('tower-progress-bottom');
-    towerProgressContent.appendChild(towerProgressBottom);
+    // towerProgressBottom.classList.add('tower-progress-bottom');
+    towerProgressBottom.style.maxWidth = "720px";
+
+    let relatedKnowledgePointsHeader = createEl('p', { classList: ['black-outline', 'ta-center'], style:{fontSize: "28px"}, innerHTML: 'Knowledge Points:' });
+    towerProgressMainDiv.appendChild(relatedKnowledgePointsHeader);
+
+    towerProgressMainDiv.appendChild(towerProgressBottom);
+
+    let relatedKnowledgePointsDiv = createEl('div', { classList: [] });
+    towerProgressBottom.appendChild(relatedKnowledgePointsDiv);
+
+    let relatedKnowledgePoints = Object.keys(constants.knowledgeTags).filter(k => constants.knowledgeTags[k].includes(tower) || constants.knowledgeTags[k].includes("All" + constants.towersInOrder[tower]));
+
+    if (relatedKnowledgePoints.length === 0) {
+        relatedKnowledgePointsHeader.style.display = "none";
+    } else {
+        for (let knowledgePoint of relatedKnowledgePoints) {
+            let knowledgeIcon = document.createElement('img');
+            knowledgeIcon.classList.add('knowledge-icon');
+            knowledgeIcon.src = getKnowledgeAssetPath(knowledgePoint);
+            relatedKnowledgePointsDiv.appendChild(knowledgeIcon);
+
+            tippy(knowledgeIcon, {
+                content: `<p class="artifact-title">${getLocValue(knowledgePoint)}</p>${getLocValue(knowledgePoint + "Description")}`,
+                allowHTML: true,
+                placement: 'top',
+                hideOnClick: false,
+                theme: 'speech_bubble',
+                popperOptions: {
+                    modifiers: [
+                        {
+                        name: 'preventOverflow',
+                        options: {
+                            boundary: 'viewport',
+                            padding: {right: 18},
+                        },
+                        },
+                    ],
+                },
+            });
+        }
+    }
 
     for (let selector of document.getElementsByClassName('tower-selector-highlight')){
         selector.style.display = "none";
@@ -2540,6 +2624,8 @@ function generateKnowledgeProgress(){
     let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
+    changeHexBGColor(constants.ParagonBGColor)
+
     let totals = [0,0,0]
     for (let [knowledge, obtained] of Object.entries(btd6usersave.acquiredKnowledge)) {
         obtained ? totals[0] += 1 : constants.RecommendedKnowledge.includes(knowledge) ? totals[1] += 1 : totals[2] += 1;
@@ -2665,6 +2751,11 @@ function onSelectKnowledgePoint(knowledge){
 function generateMapsProgress(){
     let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
+
+    currentMapView = "grid";
+    coopEnabled = false;
+    currentDifficultyFilter = "All";
+    mapPage = 0;
 
     let mapsProgressHeaderBar = document.createElement('div');
     mapsProgressHeaderBar.id = 'maps-progress-header-bar';
@@ -3145,7 +3236,7 @@ function generateMapsGridView(){
 
 
         let mapDiv = document.createElement('div');
-        mapDiv.classList.add('map-div');
+        mapDiv.classList.add('map-div', 'pointer');
         switch(processedMapData.Borders[coopEnabled ? "coop" : "single"][map]) {
             case "None":
                 coopEnabled ? mapDiv.classList.add('coop-border') : mapDiv.classList.add('none-border');
@@ -3731,7 +3822,7 @@ function generateSingleInstaTower(tower) {
 
     let instaMonkeyMainContainer = document.createElement('div');
     instaMonkeyMainContainer.id = `${tower}-main-container`;
-    instaMonkeyMainContainer.classList.add('insta-monkey-main-container');
+    instaMonkeyMainContainer.classList.add('insta-monkey-main-container', 'fd-column');
     instaMonkeyDiv.appendChild(instaMonkeyMainContainer);
 
     generateInstaMonkeyIcons(tower);
@@ -3741,6 +3832,20 @@ function generateSingleInstaTower(tower) {
 function generateInstaMonkeyIcons(tower){
     let instaMonkeyMainContainer = document.getElementById(`${tower}-main-container`);
     instaMonkeyMainContainer.innerHTML = "";
+
+    let instaMonkeyTierTotalsTextDiv = createEl('div', {
+        id: 'main-container-tier-totals',
+        classList: ['d-flex', 'jc-evenly'],
+        style: { display: "none", margin: '10px 90px 0 90px', padding: "10px", borderRadius: "10px", backgroundColor: "rgba(0,0,0,0.25)" }
+    });
+    instaMonkeyMainContainer.appendChild(instaMonkeyTierTotalsTextDiv);
+
+    for (let [tier, tierTotal] of Object.entries(processedInstaData.TowerTierTotals[tower])) {
+        let instaMonkeyTierText = document.createElement('p');
+        instaMonkeyTierText.classList.add('insta-monkey-tier-text-list', `insta-tier-text-${tier}`, tier == "5" ? "t5-insta-outline" : "black-outline");
+        instaMonkeyTierText.innerHTML = `${tierTotal}/${constants.instaTiers[tier].length}`;
+        instaMonkeyTierTotalsTextDiv.appendChild(instaMonkeyTierText);
+    }
 
     let instaMonkeyIconsContainer = document.createElement('div');
     instaMonkeyIconsContainer.classList.add('insta-monkey-icons-container');
@@ -3787,6 +3892,7 @@ function onSelectMissingToggle(enabled){
     for (let element of document.getElementsByClassName('insta-monkey-unobtained')) {
         element.style.display = instasMissingToggle ? "block" : "none";
     }
+    document.getElementById('main-container-tier-totals').style.display = instasMissingToggle ? "flex" : "none";
 }
 
 function onSelectInstaPrevArrow(tower){
@@ -5074,7 +5180,7 @@ function generateEvents(){
     let selectors = {
         'Collection': {
             'img': getCollectionEventSkinIcon(constants.collection.current.skin),
-            'text': "Collection Event Rotation",
+            'text': "Collection Event Schedule",
             'bgimg': 'EventBanner/EventBannerSmallTotem'
         },
         'Races': {
@@ -8403,6 +8509,7 @@ function generateExtrasPage() {
                 selectorImg.src = '../Assets/UI/CreatorSupportBtn.png';
                 break;
             case "Rogue Legends Artifacts":
+                selectorDiv.classList.add("rogue-bg")
                 selectorImg.src = '../Assets/UI/RogueBtn.png';
                 break;
             case "Challenge & Map Browser":
@@ -8445,6 +8552,7 @@ function changeExtrasTab(selected){
         case 'Send Feedback':
             window.open('https://forms.gle/Tg1PuRNj2ftojMde6', '_blank');
             break;
+        case "CreatorSupport":
         case "Use Code 'HalfHydra' <br>in the BTD6 Shop!":
             addToBackQueue({ callback: generateExtrasPage });
             generateArticle("CreatorSupport")
@@ -8702,9 +8810,12 @@ function generateTrophyStoreProgress() {
     let headerTop = document.createElement('div');
     headerTop.classList.add('achievements-header-bar');
     achievementsHeaderBar.appendChild(headerTop);
-    
+
     let headerBottom = document.createElement('div');
     achievementsHeaderBar.appendChild(headerBottom);
+
+    let trophyStoreItemDisclaimer = createEl('p', {classList: ['font-gardenia', 'ta-center'], style: {marginBottom: "10px"}, innerHTML: "This is being tested, not all items may show up as collected properly."});
+    headerBottom.appendChild(trophyStoreItemDisclaimer);
 
     let subFilterContainer = document.createElement('div');
     subFilterContainer.classList.add('sub-filter-container');
@@ -9377,26 +9488,18 @@ function generateQuestsPage() {
         questCenterDiv.appendChild(questTitle);
 
         if (constantsQuest?.icon && iconToRoundsets[constantsQuest.icon]?.length) {
-            const stages = iconToRoundsets[constantsQuest.icon]
-                .slice()
-                .sort((a, b) => {
-                    const na = +(a.match(/(?:Stage|Part)(\d+)/i)?.[1] || 99);
-                    const nb = +(b.match(/(?:Stage|Part)(\d+)/i)?.[1] || 99);
-                    return na - nb;
-                })
-                .slice(0, 3);
-
+            const stages = iconToRoundsets[constantsQuest.icon];
             if (stages.length) {
                 const row = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-start'], });
                 questCenterDiv.appendChild(row);
 
                 stages.forEach((key, idx) => {
-                    const n = +(key.match(/(?:Stage|Part)(\d+)/i)?.[1] || 0);
+                    let n = constants.roundSets[key]?.part || null;
                     const btn = createEl('div', { classList: ['maps-progress-view', 'black-outline', 'pointer'], style: {filter: 'hue-rotate(270deg)'}});
                     btn.innerHTML = n ? `Stage ${n}` : (stages.length > 1 ? `Stage ${idx + 1}` : 'Open Rounds');
                     btn.addEventListener('click', (e) => {
                         showLoading();
-                        showRoundsetModel('profile', key);
+                        showRoundsetModel('profile', constants.roundSets[key]?.roundset || key);
                     });
                     row.appendChild(btn);
                 });

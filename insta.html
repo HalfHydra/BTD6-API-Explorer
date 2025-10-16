@@ -260,7 +260,7 @@
             roundsetIcon.classList.add('roundset-selector-img');
             featuredInstaDiv.appendChild(roundsetIcon);
 
-            roundsetIcon.src = `../Assets/UI/CollectingEventTotemBtn.png`;
+            roundsetIcon.src = `../Assets/UI/${getCollectionEventSkinIcon(constants.collection.current.skin)}.png`;
             featuredInstaDiv.classList.add("totem-bg")
 
             let roundsetTextDiv = document.createElement('div');
