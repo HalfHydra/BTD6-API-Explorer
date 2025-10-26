@@ -5762,3 +5762,28 @@ input[type="checkbox"] {
 .lh-add-full {
     line-height: 2.0;
 }
+
+.ct-map {
+  display: block;
+}
+
+.ct-tile polygon {
+  stroke: #3b4558;
+  stroke-width: 1.5;
+}
+
+.ct-tile:hover polygon {
+  stroke: #ffd24a;
+  stroke-width: 2;
+}
+
+.ct-team-corner polygon {
+  fill: #2f2530;
+  stroke: #6a4a8a;
+}
+
+.ct-label {
+  font: 11px/1 monospace;
+  fill: #ffffff;
+  pointer-events: none;
+}

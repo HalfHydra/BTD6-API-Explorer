@@ -582,88 +582,416 @@
         "MonkeyTycoon"
     ],
     "mapsInOrder": {
-        "Tutorial": "Beginner",
-        "InTheLoop": "Beginner",
-        "ThreeMinesAround": "Beginner",
-        "SpaPits": "Beginner",
-        "Tinkerton": "Beginner",
-        "TreeStump": "Beginner",
-        "TownCentre": "Beginner",
-        "MiddleOfTheRoad": "Beginner",
-        "OneTwoTree": "Beginner",
-        "Scrapyard": "Beginner",
-        "TheCabin": "Beginner",
-        "Resort": "Beginner",
-        "Skates": "Beginner",
-        "LotusIsland": "Beginner",
-        "CandyFalls": "Beginner",
-        "WinterPark": "Beginner",
-        "Carved": "Beginner",
-        "ParkPath": "Beginner",
-        "AlpineRun": "Beginner",
-        "FrozenOver": "Beginner",
-        "Cubism": "Beginner",
-        "FourCircles": "Beginner",
-        "Hedge": "Beginner",
-        "EndOfTheRoad": "Beginner",
-        "Logs": "Beginner",
-        "LostCrevasse": "Intermediate",
-        "LuminousCove": "Intermediate",
-        "SulfurSprings": "Intermediate",
-        "WaterPark": "Intermediate",
-        "Polyphemus": "Intermediate",
-        "CoveredGarden": "Intermediate",
-        "Quarry": "Intermediate",
-        "QuietStreet": "Intermediate",
-        "BloonariusPrime": "Intermediate",
-        "Balance": "Intermediate",
-        "Encrypted": "Intermediate",
-        "Bazaar": "Intermediate",
-        "AdorasTemple": "Intermediate",
-        "SpringSpring": "Intermediate",
-        "KartsNDarts": "Intermediate",
-        "MoonLanding": "Intermediate",
-        "Haunted": "Intermediate",
-        "Downstream": "Intermediate",
-        "FiringRange": "Intermediate",
-        "Cracked": "Intermediate",
-        "Streambed": "Intermediate",
-        "Chutes": "Intermediate",
-        "Rake": "Intermediate",
-        "SpiceIslands": "Intermediate",
-        "SunsetGulch": "Advanced",
-        "EnchantedGlade": "Advanced",
-        "LastResort": "Advanced",
-        "AncientPortal": "Advanced",
-        "CastleRevenge": "Advanced",
-        "DarkPath": "Advanced",
-        "Erosion": "Advanced",
-        "MidnightMansion": "Advanced",
-        "SunkenColumns": "Advanced",
-        "XFactor": "Advanced",
-        "Mesa": "Advanced",
-        "Geared": "Advanced",
-        "Spillway": "Advanced",
-        "Cargo": "Advanced",
-        "PatsPond": "Advanced",
-        "Peninsula": "Advanced",
-        "HighFinance": "Advanced",
-        "AnotherBrick": "Advanced",
-        "OffTheCoast": "Advanced",
-        "Cornfield": "Advanced",
-        "Underground": "Advanced",
-        "GlacialTrail": "Expert",
-        "DarkDungeons": "Expert",
-        "Sanctuary": "Expert",
-        "Ravine": "Expert",
-        "FloodedValley": "Expert",
-        "Infernal": "Expert",
-        "BloodyPuddles": "Expert",
-        "Workshop": "Expert",
-        "Quad": "Expert",
-        "DarkCastle": "Expert",
-        "MuddyPuddles": "Expert",
-        "#ouch": "Expert"
+        "Tutorial": {
+            "difficulty": "Beginner",
+            "theme": "Grass",
+            "hasWater": false
+        },
+        "InTheLoop": {
+            "difficulty": "Beginner",
+            "theme": "DarkGrass",
+            "hasWater": true
+        },
+        "ThreeMinesAround": {
+            "difficulty": "Beginner",
+            "theme": "Dirt",
+            "hasWater": true
+        },
+        "SpaPits": {
+            "difficulty": "Beginner",
+            "theme": "Grass",
+            "hasWater": true
+        },
+        "Tinkerton": {
+            "difficulty": "Beginner",
+            "theme": "City",
+            "hasWater": true
+        },
+        "TreeStump": {
+            "difficulty": "Beginner",
+            "theme": "Grass",
+            "hasWater": false
+        },
+        "TownCentre": {
+            "difficulty": "Beginner",
+            "theme": "Grass",
+            "hasWater": true
+        },
+        "MiddleOfTheRoad": {
+            "difficulty": "Beginner",
+            "theme": "Dirt",
+            "hasWater": true
+        },
+        "OneTwoTree": {
+            "difficulty": "Beginner",
+            "theme": "Snow",
+            "hasWater": true
+        },
+        "Scrapyard": {
+            "difficulty": "Beginner",
+            "theme": "Dirt",
+            "hasWater": false
+        },
+        "TheCabin": {
+            "difficulty": "Beginner",
+            "theme": "DarkGrass",
+            "hasWater": true
+        },
+        "Resort": {
+            "difficulty": "Beginner",
+            "theme": "Dirt",
+            "hasWater": true
+        },
+        "Skates": {
+            "difficulty": "Beginner",
+            "theme": "Snow",
+            "hasWater": true
+        },
+        "LotusIsland": {
+            "difficulty": "Beginner",
+            "theme": "Water",
+            "hasWater": true
+        },
+        "CandyFalls": {
+            "difficulty": "Beginner",
+            "theme": "Grass",
+            "hasWater": true
+        },
+        "WinterPark": {
+            "difficulty": "Beginner",
+            "theme": "Snow",
+            "hasWater": true
+        },
+        "Carved": {
+            "difficulty": "Beginner",
+            "theme": "DarkGrass",
+            "hasWater": true
+        },
+        "ParkPath": {
+            "difficulty": "Beginner",
+            "theme": "Grass",
+            "hasWater": true
+        },
+        "AlpineRun": {
+            "difficulty": "Beginner",
+            "theme": "Snow",
+            "hasWater": false
+        },
+        "FrozenOver": {
+            "difficulty": "Beginner",
+            "theme": "Snow",
+            "hasWater": true
+        },
+        "Cubism": {
+            "difficulty": "Beginner",
+            "theme": "City",
+            "hasWater": true
+        },
+        "FourCircles": {
+            "difficulty": "Beginner",
+            "theme": "City",
+            "hasWater": true
+        },
+        "Hedge": {
+            "difficulty": "Beginner",
+            "theme": "City",
+            "hasWater": false
+        },
+        "EndOfTheRoad": {
+            "difficulty": "Beginner",
+            "theme": "Dirt",
+            "hasWater": true
+        },
+        "Logs": {
+            "difficulty": "Beginner",
+            "theme": "Grass",
+            "hasWater": true
+        },
+        "LostCrevasse": {
+            "difficulty": "Intermediate",
+            "theme": "Snow",
+            "hasWater": true
+        },
+        "LuminousCove": {
+            "difficulty": "Intermediate",
+            "theme": "Water",
+            "hasWater": true
+        },
+        "SulfurSprings": {
+            "difficulty": "Intermediate",
+            "theme": "MountainCave",
+            "hasWater": true
+        },
+        "WaterPark": {
+            "difficulty": "Intermediate",
+            "theme": "City",
+            "hasWater": true
+        },
+        "Polyphemus": {
+            "difficulty": "Intermediate",
+            "theme": "Water",
+            "hasWater": true
+        },
+        "CoveredGarden": {
+            "difficulty": "Intermediate",
+            "theme": "City",
+            "hasWater": true
+        },
+        "Quarry": {
+            "difficulty": "Intermediate",
+            "theme": "Dirt",
+            "hasWater": true
+        },
+        "QuietStreet": {
+            "difficulty": "Intermediate",
+            "theme": "Snow",
+            "hasWater": true
+        },
+        "BloonariusPrime": {
+            "difficulty": "Intermediate",
+            "theme": "DarkGrass",
+            "hasWater": true
+        },
+        "Balance": {
+            "difficulty": "Intermediate",
+            "theme": "Grass",
+            "hasWater": true
+        },
+        "Encrypted": {
+            "difficulty": "Intermediate",
+            "theme": "DarkGrass",
+            "hasWater": true
+        },
+        "Bazaar": {
+            "difficulty": "Intermediate",
+            "theme": "Dirt",
+            "hasWater": true
+        },
+        "AdorasTemple": {
+            "difficulty": "Intermediate",
+            "theme": "Grass",
+            "hasWater": true
+        },
+        "SpringSpring": {
+            "difficulty": "Intermediate",
+            "theme": "Water",
+            "hasWater": true
+        },
+        "KartsNDarts": {
+            "difficulty": "Intermediate",
+            "theme": "City",
+            "hasWater": false
+        },
+        "MoonLanding": {
+            "difficulty": "Intermediate",
+            "theme": "MountainCave",
+            "hasWater": false
+        },
+        "Haunted": {
+            "difficulty": "Intermediate",
+            "theme": "DarkGrass",
+            "hasWater": true
+        },
+        "Downstream": {
+            "difficulty": "Intermediate",
+            "theme": "Grass",
+            "hasWater": true
+        },
+        "FiringRange": {
+            "difficulty": "Intermediate",
+            "theme": "Dirt",
+            "hasWater": true
+        },
+        "Cracked": {
+            "difficulty": "Intermediate",
+            "theme": "Dirt",
+            "hasWater": true
+        },
+        "Streambed": {
+            "difficulty": "Intermediate",
+            "theme": "Grass",
+            "hasWater": true
+        },
+        "Chutes": {
+            "difficulty": "Intermediate",
+            "theme": "Grass",
+            "hasWater": true
+        },
+        "Rake": {
+            "difficulty": "Intermediate",
+            "theme": "Grass",
+            "hasWater": true
+        },
+        "SpiceIslands": {
+            "difficulty": "Intermediate",
+            "theme": "Water",
+            "hasWater": true
+        },
+        "SunsetGulch": {
+            "difficulty": "Advanced",
+            "theme": "Dirt",
+            "hasWater": false
+        },
+        "EnchantedGlade": {
+            "difficulty": "Advanced",
+            "theme": "DarkGrass",
+            "hasWater": true
+        },
+        "LastResort": {
+            "difficulty": "Advanced",
+            "theme": "Snow",
+            "hasWater": true
+        },
+        "AncientPortal": {
+            "difficulty": "Advanced",
+            "theme": "DarkGrass",
+            "hasWater": true
+        },
+        "CastleRevenge": {
+            "difficulty": "Advanced",
+            "theme": "City",
+            "hasWater": true
+        },
+        "DarkPath": {
+            "difficulty": "Advanced",
+            "theme": "Snow",
+            "hasWater": false
+        },
+        "Erosion": {
+            "difficulty": "Advanced",
+            "theme": "Water",
+            "hasWater": true
+        },
+        "MidnightMansion": {
+            "difficulty": "Advanced",
+            "theme": "City",
+            "hasWater": false
+        },
+        "SunkenColumns": {
+            "difficulty": "Advanced",
+            "theme": "MountainCave",
+            "hasWater": true
+        },
+        "XFactor": {
+            "difficulty": "Advanced",
+            "theme": "DarkGrass",
+            "hasWater": false
+        },
+        "Mesa": {
+            "difficulty": "Advanced",
+            "theme": "MountainCave",
+            "hasWater": false
+        },
+        "Geared": {
+            "difficulty": "Advanced",
+            "theme": "City",
+            "hasWater": false
+        },
+        "Spillway": {
+            "difficulty": "Advanced",
+            "theme": "City",
+            "hasWater": true
+        },
+        "Cargo": {
+            "difficulty": "Advanced",
+            "theme": "City",
+            "hasWater": true
+        },
+        "PatsPond": {
+            "difficulty": "Advanced",
+            "theme": "Water",
+            "hasWater": true
+        },
+        "Peninsula": {
+            "difficulty": "Advanced",
+            "theme": "Water",
+            "hasWater": true
+        },
+        "HighFinance": {
+            "difficulty": "Advanced",
+            "theme": "City",
+            "hasWater": true
+        },
+        "AnotherBrick": {
+            "difficulty": "Advanced",
+            "theme": "City",
+            "hasWater": true
+        },
+        "OffTheCoast": {
+            "difficulty": "Advanced",
+            "theme": "Water",
+            "hasWater": true
+        },
+        "Cornfield": {
+            "difficulty": "Advanced",
+            "theme": "City",
+            "hasWater": false
+        },
+        "Underground": {
+            "difficulty": "Advanced",
+            "theme": "MountainCave",
+            "hasWater": false
+        },
+        "GlacialTrail": {
+            "difficulty": "Expert",
+            "theme": "Snow",
+            "hasWater": true
+        },
+        "DarkDungeons": {
+            "difficulty": "Expert",
+            "theme": "DarkGrass",
+            "hasWater": true
+        },
+        "Sanctuary": {
+            "difficulty": "Expert",
+            "theme": "MountainCave",
+            "hasWater": true
+        },
+        "Ravine": {
+            "difficulty": "Expert",
+            "theme": "DarkGrass",
+            "hasWater": true
+        },
+        "FloodedValley": {
+            "difficulty": "Expert",
+            "theme": "Water",
+            "hasWater": true
+        },
+        "Infernal": {
+            "difficulty": "Expert",
+            "theme": "MountainCave",
+            "hasWater": true
+        },
+        "BloodyPuddles": {
+            "difficulty": "Expert",
+            "theme": "DarkGrass",
+            "hasWater": true
+        },
+        "Workshop": {
+            "difficulty": "Expert",
+            "theme": "City",
+            "hasWater": false
+        },
+        "Quad": {
+            "difficulty": "Expert",
+            "theme": "City",
+            "hasWater": true
+        },
+        "DarkCastle": {
+            "difficulty": "Expert",
+            "theme": "DarkGrass",
+            "hasWater": true
+        },
+        "MuddyPuddles": {
+            "difficulty": "Expert",
+            "theme": "Dirt",
+            "hasWater": true
+        },
+        "#ouch": {
+            "difficulty": "Expert",
+            "theme": "City",
+            "hasWater": true
+        }
     },
     "medalLabels": {
         "MedalBronze": "Easy - Standard",
