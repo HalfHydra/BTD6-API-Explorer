@@ -2565,7 +2565,7 @@ function changeHeroSkin(skin, isOriginal){
     heroProgressHeaderSubtitle.innerHTML = isOriginal ? getLocValue(`${skin} Short Description`) : getLocValue(`${skin}SkinName`);
     let heroProgressDesc = document.getElementById('hero-progress-desc');
     heroProgressDesc.innerHTML = isOriginal ? getLocValue(`${skin} Description`) : getLocValue(`${skin}SkinDescription`);
-    if(skin == "SheRa") { heroProgressDesc.innerHTML = getLocValue(`SheRaAdoraSkinDescription`) }
+    // if(skin == "AdoraSheRa") { heroProgressDesc.innerHTML = getLocValue(`SheRaAdoraSkinDescription`) }
     changeHeroLevelPortrait(1);
     //stupid hack to fix ios redraw
     document.body.style.display = "none"

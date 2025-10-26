@@ -132,7 +132,9 @@ let locJSONOverrides = {
     "Mode Impoppable": "Impoppable",
     "Mode Sandbox": "Sandbox",
     "RosaliaTinkerfairySkinName": "TinkerfairyRosaliaSkinName",
-    "RosaliaTinkerfairySkinDescription": "TinkerfairyRosaliaSkinDescription"
+    "RosaliaTinkerfairySkinDescription": "TinkerfairyRosaliaSkinDescription",
+    "AdoraSheRaSkinDescription": "SheRaAdoraSkinDescription",
+    "AdoraSheRaSkinName": "SheRaSkinName"
 }
 
 let medalMap = {
@@ -168,6 +170,10 @@ let saveSkintoSkinMap = {
     "OctoJones": "Octo Jones",
     "SleighCaptainChurchill": "Sleigh Captain Churchill",
     "WolfpackQuincy": "Wolfpack Quincy"
+}
+
+let trophyStoreKeyFixes = {
+
 }
 
 let knownProblematicMaps = ["ZMYVERW", "ZMYUWTV", "ZMYUDTK", "ZMYVPGA", "ZMYVPFH", "ZMYWHPC"]
