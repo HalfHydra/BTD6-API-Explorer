@@ -220,7 +220,7 @@ function generateAchievementsHelper(){
 }
 
 function generateStats(){
-    profileStats["Games Played"] = btd6usersave["gamesPlayed"];
+    profileStats["Games Played"] = btd6publicprofile.gameplay["gamesPlayed"];
     profileStats["Games Won"] = btd6publicprofile.gameplay["gamesWon"];
     profileStats["Highest Round (All Time)"] = btd6publicprofile.gameplay["highestRound"];
     profileStats["Highest Round (CHIMPS)"] = btd6publicprofile.gameplay["highestRoundCHIMPS"];
