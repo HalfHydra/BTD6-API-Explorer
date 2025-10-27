@@ -1010,7 +1010,7 @@ function generateOverview(){
     profileHeader.classList.add('profile-banner');
     profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${getProfileBanner(btd6publicprofile)}')`;
     profileContainer.appendChild(profileHeader);
-    profileHeader.appendChild(generateAvatar(100, btd6publicprofile["avatarURL"]));
+    profileHeader.appendChild(generateAvatar(100, getProfileAvatar(btd6publicprofile)));
 
     let profileTopBottom = document.createElement('div');
     profileTopBottom.classList.add('profile-top-bottom');
