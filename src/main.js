@@ -390,7 +390,7 @@ function generateProgressSubText(){
     progressSubText["InstaMonkeys"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Collected`;
     progressSubText["Achievements"] = `${btd6usersave.achievementsClaimed.length}/${constants.achievements + constants.hiddenAchievements} Achievement${btd6publicprofile.achievements != 1 ? "s" : ""} Earned`;
     let extrasTotal = Object.keys(extrasUnlocked).length;
-    progressSubText["TrophyStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k] && trophyStoreItemsJSON[k]).length} Trophy Store Items Collected`
+    progressSubText["TrophyStore"] = `${Object.keys(trophyStoreItemsJSON).filter(k => getTrophyItemObtained(k)).length} Trophy Store Items Collected`
     progressSubText["TeamsStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k] && teamsStoreItemsJSON[k]).length} Team Store Items Unlocked`
     progressSubText["Quests"] = `${btd6usersave.quests.filter(q => q.complete).length} Quests Complete`;
     progressSubText["Extras"] = `${extrasTotal} Extra${extrasTotal != 1 ? "s" : ""} Unlocked`;
@@ -8925,6 +8925,16 @@ function generateTrophyStoreProgress() {
     generateTrophyStoreContainer("All", "All", trophyStoreItemCounter);
 }
 
+function getTrophyItemObtained(key) {
+    if (btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key] == true) {
+        return true;
+    } else if (btd6usersave.trophyStoreItems.hasOwnProperty(trophyStoreKeyFixes[key])) {
+        return btd6usersave.trophyStoreItems[trophyStoreKeyFixes[key]];
+    } else {
+        return false;
+    }
+}
+
 function generateTrophyStoreContainer(filter, display, counter) {
     let itemsContainer = document.getElementById('trophy-store-items-container');
     itemsContainer.innerHTML = "";
@@ -8945,10 +8955,10 @@ function generateTrophyStoreContainer(filter, display, counter) {
         case "All":
             break;
         case "Unowned":
-            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => !btd6usersave.trophyStoreItems.hasOwnProperty(key) || !btd6usersave.trophyStoreItems[key]));
+            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => !getTrophyItemObtained(key)));
             break;
         case "Owned":
-            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key]));
+            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => getTrophyItemObtained(key)));
             break;
         case "Hidden":
             trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.hidden));
@@ -8970,7 +8980,7 @@ function generateTrophyStoreContainer(filter, display, counter) {
             counter.innerHTML = `${Object.keys(trophyStoreItemsToDisplay).length} Items`;
             break;
         default:
-            counter.innerHTML = `${Object.keys(trophyStoreItemsToDisplay).filter(key => btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key]).length}/${Object.keys(trophyStoreItemsToDisplay).length} Owned`;
+            counter.innerHTML = `${Object.keys(trophyStoreItemsToDisplay).filter(key => getTrophyItemObtained(key)).length}/${Object.keys(trophyStoreItemsToDisplay).length} Owned`;
     }
 
     if (Object.keys(trophyStoreItemsToDisplay).length == 0) {
@@ -9003,7 +9013,7 @@ function generateTrophyStoreContainer(filter, display, counter) {
             itemDiv.appendChild(itemTextEmote);
         }
 
-        if (btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key]) {
+        if (getTrophyItemObtained(key)) {
             // let collectedTick = document.createElement('img');
             // collectedTick.classList.add('trophy-store-collected');
             // collectedTick.src = "../Assets/UI/SelectedTick.png";
