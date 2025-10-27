@@ -1738,7 +1738,7 @@ function generateProgress(){
         selectorsDiv.appendChild(logoutDiv);
 
         let profileSelectorDiv = document.createElement('div');
-        profileSelectorDiv.classList.add('d-flex', 'jc-between', 'ai-center', 'view-profile', 'pointer');
+        profileSelectorDiv.classList.add('d-flex', 'jc-between', 'ai-center', 'view-profile', 'pointer', 'transparent-border');
         profileSelectorDiv.style.backgroundImage = `url(${getProfileBanner(btd6publicprofile)})`;
         profileSelectorDiv.addEventListener('click', () => {
             generateOverview();
@@ -5226,8 +5226,7 @@ function generateEvents(){
     }
 
     Object.entries(selectors).forEach(([selector,object]) => {
-        let selectorDiv = document.createElement('div');
-        selectorDiv.classList.add('events-selector-div');
+        let selectorDiv = createEl('div', { classList: ['events-selector-div', 'transparent-border'], style: {borderWidth: "5px", borderStyle: "solid"} });
         object.bgcolor ? selectorDiv.style.background = object.bgcolor : selectorDiv.style.backgroundImage = `url(../Assets/${object.bgimg}.png)`;
         /*selectorDiv.innerHTML = progressSubText[selector];*/
         selectorDiv.addEventListener('click', () => {

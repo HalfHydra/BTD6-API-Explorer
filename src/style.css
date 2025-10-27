@@ -5555,6 +5555,10 @@ input[type="checkbox"] {
     filter: invert(0.5);
 }
 
+.transparent-border {
+    border-color: rgba(255,255,255,0.25);
+}
+
 /* Tippy Styles */
 .tippy-box[data-theme~='speech_bubble'] {
     border-radius: 26px;
