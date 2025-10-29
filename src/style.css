@@ -1749,6 +1749,20 @@
     border-image-slice: 30;
 }
 
+.ct-border {
+    border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/TeamsStoreButton.png);
+    border-image-slice: 45;
+    background: linear-gradient(#08349C 0%, #2a78d4 100%) no-repeat;
+}
+
+.ct-panel {
+    border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/MainBGPanelCT.png);
+    border-image-slice: 70;
+    background: linear-gradient(#9C8E78 0%, #6f5b4a 100%) no-repeat;
+}
+
 .no-data-found {
     text-align: center;
     font-size: 32px;
@@ -5662,6 +5676,10 @@ input[type="checkbox"] {
 /* Tailwind Styles */
 .d-flex {
     display: flex;
+}
+
+.d-grid {
+    display: grid;
 }
 
 .ai-center {

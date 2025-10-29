@@ -5106,7 +5106,7 @@ function generateAchievementsGameView(){
             achievementCompletedCheck.src = "./Assets/UI/TickGreenIcon.png";
             achievementBottomDiv.appendChild(achievementCompletedCheck);
         } else if (achievementData.model.hidden) {
-            achievementBottomDiv.appendChild(generateButton("Reveal", "unset", function() {
+            achievementBottomDiv.appendChild(generateButton("Reveal", {width: "unset"}, function() {
                 achievementNameText.innerHTML = getLocValue(`Achievement ${achievementData.model.achievementId} Name`);
                 achievementDescText.innerHTML = getLocValue(`Achievement ${achievementData.model.achievementId} Description`);
                 achievementIconImg.src = getAchievementIcon(achievementData.model.achievementIcon, false);
@@ -5669,13 +5669,10 @@ function generateCTs(){
             allowHTML: true,
         })
 
-        let raceInfoRules = document.createElement('div');
-        raceInfoRules.classList.add("race-info-rules", "start-button", "currency-trophies-div", "black-outline");
-        // raceInfoRules.innerHTML = "Relic Reveal"
-        raceInfoRules.innerHTML = "Map Details"
+        let raceInfoRules = createEl('div', { classList: ["start-button", "currency-trophies-div", "black-outline"], style: {width: "200px"}, innerHTML: "Event Details"});
         raceInfoRules.addEventListener('click', () => {
             showLoading();
-            openRelics('events', race)
+            openCTEventDetails('events', race)
         })
         ctInfoLeftDiv.appendChild(raceInfoRules);
 
@@ -9089,7 +9086,7 @@ function generateInstaSchedule() {
     });
     instaHeaderTop.appendChild(instaScheduleTitle);
 
-    let instaHeaderFilterBtn = generateButton("Filter", "150px")
+    let instaHeaderFilterBtn = generateButton("Filter", { width: "150px"})
     instaHeaderTop.appendChild(instaHeaderFilterBtn);
 
     let collectionEventTowerSelectors = createEl('div', {

@@ -71,10 +71,10 @@ function generateToggle(initial = false, onChange){
     return settingInputDiv;
 }
 
-function generateButton(label, width, callback) {
+function generateButton(label, style, callback) {
     let button = document.createElement('button');
     button.classList.add('where-button', 'black-outline');
-    button.style.width = width;
+    if (style) Object.assign(button.style, style);
     button.innerHTML = label;
     button.addEventListener('click', callback);
     return button;

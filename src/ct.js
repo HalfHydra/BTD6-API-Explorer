@@ -13,7 +13,7 @@ let renderSettings = {
     showTileLabels: false,
 }
 
-async function openRelics(source, eventData) {
+async function openCTEventDetails(source, eventData) {
     let eventDates = `${new Date(eventData.start).toLocaleDateString()} - ${new Date(eventData.end).toLocaleDateString()}`;
     let data = await getCTTiles(eventData.tiles)
     if (data == null) { return; }
@@ -24,54 +24,161 @@ async function openRelics(source, eventData) {
 
     addToBackQueue({ "source": source, "destination": "relics" });
 
-    let relicContainer = createEl('div', { classList: ['relic-container'] });
-    relicsContent.appendChild(relicContainer);
+    let relicContainer = createEl('div', { classList: ['relic-container', 'ct-panel'], style: { borderRadius: "20px 20px 10px 10px"} });
     resetScroll();
 
-    let relicHeader = createEl('div', { classList: ['relic-header'] });
-    relicContainer.appendChild(relicHeader);
+    await getExternalCTData(eventData.id);
 
-    let relicHeaderViews = createEl('div', { classList: ['relic-header-views'] });
-    relicHeader.appendChild(relicHeaderViews);
+    let isEventActive = new Date() >= new Date(eventData.start) && new Date() <= new Date(eventData.end);
 
-    let relicDetailView = createEl('div', { classList: ['maps-progress-view', 'black-outline', 'stats-tab-yellow'], innerHTML: "List" });
-    relicHeaderViews.appendChild(relicDetailView);
 
-    let relicTileView = createEl('div', { classList: ['maps-progress-view', 'black-outline'], innerHTML: "Tile" });
-    relicHeaderViews.appendChild(relicTileView);
+    let relicHeader = createEl('div', { classList: ['ct-border', 'fd-column'] });
+    relicsContent.appendChild(relicHeader);
 
-    relicDetailView.addEventListener('click', () => {
-        relicDetailView.classList.add('stats-tab-yellow');
-        relicTileView.classList.remove('stats-tab-yellow');
-        document.querySelectorAll('.relic-text-div').forEach(element => {
-            if (element.classList.contains('relic-tile-view')) {
-                element.classList.remove('relic-tile-view');
-            }
-        })
+    relicsContent.appendChild(relicContainer);
+
+    let relicHeaderTop = createEl('div', { classList: ['d-flex', 'jc-center', 'w-100'] });
+    relicHeader.appendChild(relicHeaderTop);
+
+    // let relicHeaderViews = createEl('div', { classList: ['relic-header-views'] });
+    // relicHeaderTop.appendChild(relicHeaderViews);
+
+    // let relicDetailView = createEl('div', { classList: ['maps-progress-view', 'black-outline', 'stats-tab-yellow'], innerHTML: "List" });
+    // relicHeaderViews.appendChild(relicDetailView);
+
+    // let relicTileView = createEl('div', { classList: ['maps-progress-view', 'black-outline'], innerHTML: "Tile" });
+    // relicHeaderViews.appendChild(relicTileView);
+
+    // relicDetailView.addEventListener('click', () => {
+    //     relicDetailView.classList.add('stats-tab-yellow');
+    //     relicTileView.classList.remove('stats-tab-yellow');
+    //     document.querySelectorAll('.relic-text-div').forEach(element => {
+    //         if (element.classList.contains('relic-tile-view')) {
+    //             element.classList.remove('relic-tile-view');
+    //         }
+    //     })
+    // })
+
+    // relicTileView.addEventListener('click', () => {
+    //     relicTileView.classList.add('stats-tab-yellow');
+    //     relicDetailView.classList.remove('stats-tab-yellow');
+    //     document.querySelectorAll('.relic-text-div').forEach(element => {
+    //         if (!element.classList.contains('relic-tile-view')) {
+    //             element.classList.add('relic-tile-view');
+    //         }
+    //     })
+    // })
+
+    let relicHeaderTopDiv = createEl('div', { classList: ['d-flex', 'jc-between'], style: { padding: "0px 10px", width: "800px"} });
+    relicHeaderTop.appendChild(relicHeaderTopDiv);
+
+    let relicHeaderTitle = createEl('p', { classList: ['relic-header-title', 'black-outline'], innerHTML: `Contested Territory ${CTSeedToEventNumber ? "#" + CTSeedToEventNumber[eventData.id] : ''}` });
+    relicHeaderTopDiv.appendChild(relicHeaderTitle);
+
+    let relicHeaderDates = createEl('p', { classList: ['relic-header-title', 'black-outline'], innerHTML: `${eventDates}` });
+    relicHeaderTopDiv.appendChild(relicHeaderDates);
+
+    // let relicHeaderRight = createEl('div', { classList: ['relic-header-right'] });
+    // relicHeaderTop.appendChild(relicHeaderRight);
+
+    // let modalClose = createEl('img', { classList: ['modal-close'], src: "./Assets/UI/CloseBtn.png" });
+    // modalClose.addEventListener('click', () => {
+    //     relicsContent.style.display = "none";
+    //     document.getElementById(`${source}-content`).style.display = "flex";
+    // })
+    // relicHeaderRight.appendChild(modalClose);
+
+    let topBar = createEl('div', { classList: ['d-flex', 'jc-evenly', 'w-100'], style: {marginTop: "10px"} });
+    relicHeader.appendChild(topBar);
+
+    let divStyle = { width: "260px" }
+
+    let newTicketsDiv = createEl('div', { classList: ['d-flex', 'ai-center'], style: divStyle });
+    topBar.appendChild(newTicketsDiv);
+
+    let tileSearchDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-center'], style: divStyle });
+    topBar.appendChild(tileSearchDiv);
+
+    let viewMapDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-end'], style: divStyle });
+    topBar.appendChild(viewMapDiv);
+
+    let iconStyle = { width: '50px', height: '50px', marginRight: '8px', objectFit: 'contain' };
+
+    let newTicketsIcon = createEl('img', { classList: ['d-flex'], style: iconStyle, src: "./Assets/UI/CtTicketsIcon.png" });
+    newTicketsDiv.appendChild(newTicketsIcon);
+
+    let newTicketsTextDiv = createEl('div', { classList: [] });
+    newTicketsDiv.appendChild(newTicketsTextDiv);
+
+    let nextTicketsLabel = createEl('p', { classList: ['black-outline'], innerHTML: `Next Tickets in:` });
+    newTicketsTextDiv.appendChild(nextTicketsLabel);
+
+    let ticketsTimer = createEl('p', { classList: ['black-outline'], id: 'ct-tickets-timer', innerHTML: `--:--:--`, style: {fontSize: '28px'} });
+    newTicketsTextDiv.appendChild(ticketsTimer);
+
+    if (new Date(eventData.start) < new Date() && new Date() < new Date(eventData.end)) {
+        let timeUntilNextTickets = new Date(new Date().setHours(new Date(eventData.start).getHours(), new Date(eventData.start).getMinutes(), 0, 0)) > new Date() ? new Date(new Date().setHours(new Date(eventData.start).getHours(), new Date(eventData.start).getMinutes(), 0, 0)) : new Date(new Date().setHours(new Date(eventData.start).getHours() + 24, new Date(eventData.start).getMinutes(), 0, 0));
+        registerTimer(ticketsTimer.id, timeUntilNextTickets);
+    } else if (new Date() > new Date(eventData.end)) {
+        ticketsTimer.innerHTML = "Event Ended";
+    } else {
+        ticketsTimer.innerHTML = "Not Started";
+    }
+
+    let tileSearchIcon = createEl('img', { classList: [], style: iconStyle, src: "./Assets/UI/CTRegularTileIconSmall.png" });
+    tileSearchDiv.appendChild(tileSearchIcon);
+
+    let rogueHeaderCenter = document.createElement('div');
+    rogueHeaderCenter.classList.add('pos-rel');
+    tileSearchDiv.appendChild(rogueHeaderCenter);
+
+    let rogueArtifactSearch = createEl('input', { classList: ['search-box', 'font-gardenia', 'rogue-search'], style: { width: '100px', paddingRight: '40px' }, placeholder: "Tile Search",});
+
+    let selectorGoImg = createEl('img', {classList: ['pointer'], style: { width: '38px', height: '38px', top: '2px', right: "0px", filter: "grayscale(100%)", position: 'absolute', objectFit: 'contain' }, src: '../Assets/UI/GoBtnSmall.png' });
+    selectorGoImg.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        console.log(externalCTData[eventData.id].tiles[rogueArtifactSearch.value]);
+        // if not found do errorModal
+    });
+    rogueHeaderCenter.appendChild(selectorGoImg);
+
+    rogueArtifactSearch.addEventListener('input', () => {
+        rogueArtifactSearch.value = rogueArtifactSearch.value.toUpperCase();
+        rogueArtifactSearch.value = rogueArtifactSearch.value.replace(/[^A-HMRX0-9]/g, '');
+        // if the length is greater than 3, trim it to 3
+        if (rogueArtifactSearch.value.length > 3) {
+            rogueArtifactSearch.value = rogueArtifactSearch.value.substring(0, 3);
+        } else if (rogueArtifactSearch.value.length === 3) {
+            selectorGoImg.style.filter = "none";
+        } else {
+            selectorGoImg.style.filter = "grayscale(100%)";
+        }
     })
 
-    relicTileView.addEventListener('click', () => {
-        relicTileView.classList.add('stats-tab-yellow');
-        relicDetailView.classList.remove('stats-tab-yellow');
-        document.querySelectorAll('.relic-text-div').forEach(element => {
-            if (!element.classList.contains('relic-tile-view')) {
-                element.classList.add('relic-tile-view');
-            }
-        })
-    })
+    rogueHeaderCenter.appendChild(rogueArtifactSearch);
 
-    let relicHeaderTitle = createEl('p', { classList: ['relic-header-title', 'black-outline'], innerHTML: `Contested Territory<br>${eventDates}` });
-    relicHeader.appendChild(relicHeaderTitle);
+    // let selectorGoImg = createEl('img', {classList: [], style: { width: '40px', height: '40px', objectFit: 'contain' }, src: '../Assets/UI/GoBtnSmall.png' });
+    // selectorGoImg.addEventListener('click', (event) => {
+    //     event.preventDefault();
+    //     event.stopPropagation();
+    //     console.log(externalCTData[eventData.id].tiles[rogueArtifactSearch.value]);
+    //     // if not found do errorModal
+    // });
+    // tileSearchDiv.appendChild(selectorGoImg);
 
-    let relicHeaderRight = createEl('div', { classList: ['relic-header-right'] });
-    relicHeader.appendChild(relicHeaderRight);
 
-    let modalClose = createEl('img', { classList: ['modal-close'], src: "./Assets/UI/CloseBtn.png" });
-    modalClose.addEventListener('click', () => {
-        relicsContent.style.display = "none";
-        document.getElementById(`${source}-content`).style.display = "flex";
-    })
-    relicHeaderRight.appendChild(modalClose);
+
+    let viewMapIcon = createEl('img', { classList: [], style: iconStyle, src: "./Assets/UI/CTTotalTilesIcon.png" });
+    viewMapDiv.appendChild(viewMapIcon);
+    
+    let viewMapButton = generateButton("View CT Map", {width: "180px", borderWidth: "10px", fontSize: "22px", }, () => {
+        // scrollToElementById('ct-main-div');
+    });
+    viewMapButton.classList.add("start-button")
+    viewMapButton.classList.remove("where-button")
+    viewMapDiv.appendChild(viewMapButton);
+
 
     let relics = data.tiles.filter(tile => tile.type.includes("Relic"))
     relics = relics.sort((a, b) => a.id.localeCompare(b.id))
@@ -80,8 +187,87 @@ async function openRelics(source, eventData) {
         return relic
     });
 
-    let relicsDiv = createEl('div', { classList: ['relics-div'] });
-    relicContainer.appendChild(relicsDiv);
+    let relicsOuterContainer = createEl('div', { classList: ['relics-div', 'fd-column'], style: {} });
+    relicContainer.appendChild(relicsOuterContainer);
+
+    let eventRelicsDiv = createEl('div', { classList: ['d-flex', 'jc-center'], style: { marginBottom: "10px"} });
+    relicsOuterContainer.appendChild(eventRelicsDiv);
+
+    let dailyPowersDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-evenly', 'f-wrap'], style: { padding: "5px", borderRadius: "10px", backgroundColor: "#372B23" } });
+    relicsOuterContainer.appendChild(dailyPowersDiv);
+
+    let relicsDiv = createEl('div', { classList: ['d-flex', 'jc-center', 'f-wrap'], /*style: {maxWidth: "860px"}*/ });
+    relicsOuterContainer.appendChild(relicsDiv);
+
+    let eventRelics = externalCTData[eventData.id]?.event_relics || [];
+
+    let eventRelicTimes = [
+        1, //after 1 day
+        3, //after 3 days
+        5, //after 5 days
+    ]
+
+    eventRelics.forEach((relic, index) => {
+        let relicDiv = createEl('div', { classList: ['d-flex', 'fd-column', 'ai-center'], style: { width: '180px', borderRadius: "10px", margin: "5px", padding: "5px", backgroundColor: "#372B23" } });
+        eventRelicsDiv.appendChild(relicDiv);
+
+        let eventRelicLabel = createEl('p', { classList: ['black-outline'], style: {fontSize: '24px', color: "gold"}, innerHTML: `Event Relic ${index + 1}` });
+        relicDiv.appendChild(eventRelicLabel);
+
+        let relicIcon = createEl('img', { classList: [], style: {width: '85px'}, src: `./Assets/RelicIcon/${relic}.png` });
+        relicDiv.appendChild(relicIcon);
+
+        let unlockTime = new Date(new Date(eventData.start).getTime() + eventRelicTimes[index] * 24 * 60 * 60 * 1000);
+
+        let eventRelicAvailableText = createEl('p', { id: `relic-unlock-${index}`, classList: ['black-outline'], style: {fontSize: '20px'} });
+        if (new Date() <= unlockTime && isEventActive) {
+            eventRelicAvailableText.innerHTML = `${unlockTime.toLocaleDateString()}`;
+        } else if (isEventActive) {
+            eventRelicAvailableText.innerHTML = `Unlocked`;
+        }
+        relicDiv.appendChild(eventRelicAvailableText);
+    });
+
+    let dailyPowers = externalCTData[eventData.id]?.daily_powers || [];
+    let dailyPowerCounts = {
+        "MoabMine": 1,
+        "MonkeyBoost": 2,
+        "CamoTrap": 1,
+        "Techbot": 1,
+        "RoadSpikes": 10,
+        "Thrive": 2,
+        "GlueTrap": 2,
+        "SuperMonkeyStorm": 2,
+    }
+
+    dailyPowers.forEach((power, index) => {
+        let powerDiv = createEl('div', {classList: [], style: {}});
+        dailyPowersDiv.appendChild(powerDiv);
+
+        let powerProgressDate = createEl('p', {classList: ['black-outline', 'ta-center'], style: {fontSize: '28px'}, innerHTML: `Day ${index + 1}` });
+        powerDiv.appendChild(powerProgressDate);
+
+        let powerIconDiv = createEl('div', {classList: ['power-div'], style: {width: "unset", height: "120px", margin: "unset"}});
+        powerDiv.appendChild(powerIconDiv);
+
+        let powerImg = createEl('img', {classList: ['power-img'], style: {transform: 'scale(0.75)'},src: getPowerIcon(power) });
+        powerIconDiv.appendChild(powerImg);
+
+        let powerProgressText = createEl('p', {classList: ['black-outline'], style: {position: "absolute", right: 0, bottom: '0px', fontSize: '28px'}, innerHTML: `x${dailyPowerCounts[power]}` });
+        powerIconDiv.appendChild(powerProgressText);
+
+        if (isEventActive) {
+            let powerActiveTime = new Date(new Date(eventData.start).getTime() + (index + 1) * 24 * 60 * 60 * 1000);
+            let powerDate = createEl('p', {classList: ['black-outline', 'ta-center'], style: {fontSize: '18px'}, innerHTML: `${powerActiveTime.toLocaleDateString()}` });
+            powerDiv.appendChild(powerDate);
+
+            if (new Date() < powerActiveTime) {
+                powerDiv.style.filter = "grayscale(100%)";
+            }
+        }
+
+        //drop-shadow(0px 0px 20px white);
+    });
 
     relics.forEach(relic => {
         let relicTypeName = relic.type;
@@ -95,14 +281,34 @@ async function openRelics(source, eventData) {
         let relicIcon = createEl('img', { classList: ['relic-icon'], src: `./Assets/RelicIcon/${relicTypeName}.png` });
         relicDiv.appendChild(relicIcon);
 
-        let relicTextDiv = createEl('div', { classList: ['relic-text-div'] });
-        relicDiv.appendChild(relicTextDiv);
+        // let relicTextDiv = createEl('div', { classList: ['relic-text-div'] });
+        // relicDiv.appendChild(relicTextDiv);
 
-        let relicName = createEl('p', { classList: ['relic-name', 'black-outline'], innerHTML: getLocValue(`Relic${relicTypeName}`) });
-        relicTextDiv.appendChild(relicName);
+        // let relicName = createEl('p', { classList: ['relic-name', 'black-outline'], innerHTML: getLocValue(`Relic${relicTypeName}`) });
+        // relicTextDiv.appendChild(relicName);
 
-        let relicDescription = createEl('p', { classList: ['relic-description'], innerHTML: getLocValue(`Relic${relicTypeName}Description`) });
-        relicTextDiv.appendChild(relicDescription);
+        // let relicDescription = createEl('p', { classList: ['relic-description'], innerHTML: getLocValue(`Relic${relicTypeName}Description`) });
+        // relicTextDiv.appendChild(relicDescription);
+
+        //<p class="artifact-title">${artifactData.title}</p>${artifactData.description}
+        tippy(relicDiv, {
+            content: `<p class="artifact-title">${getLocValue(`Relic${relicTypeName}`)}</p>${getLocValue(`Relic${relicTypeName}Description`)}`,
+            allowHTML: true,
+            placement: 'top',
+            hideOnClick: false,
+            theme: 'speech_bubble',
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            },
+        });
     })
 
     let usedRelicTypes = new Set(relics.map(r => r.type));
@@ -118,40 +324,59 @@ async function openRelics(source, eventData) {
         let relicIcon = createEl('img', { classList: ['relic-icon'], src: `./Assets/RelicIcon/${relicTypeName}.png` });
         relicDiv.appendChild(relicIcon);
 
-        let relicTextDiv = createEl('div', { classList: ['relic-text-div'] });
-        relicDiv.appendChild(relicTextDiv);
+        // let relicTextDiv = createEl('div', { classList: ['relic-text-div'] });
+        // relicDiv.appendChild(relicTextDiv);
 
-        let relicName = createEl('p', { classList: ['relic-name', 'black-outline'], innerHTML: getLocValue(`Relic${relicTypeName}`) });
-        relicTextDiv.appendChild(relicName);
+        // let relicName = createEl('p', { classList: ['relic-name', 'black-outline'], innerHTML: getLocValue(`Relic${relicTypeName}`) });
+        // relicTextDiv.appendChild(relicName);
 
-        let relicDescription = createEl('p', { classList: ['relic-description'], innerHTML: getLocValue(`Relic${relicTypeName}Description`) });
-        relicTextDiv.appendChild(relicDescription);
+        // let relicDescription = createEl('p', { classList: ['relic-description'], innerHTML: getLocValue(`Relic${relicTypeName}Description`) });
+        // relicTextDiv.appendChild(relicDescription);
+
+        tippy(relicDiv, {
+            content: `<p class="artifact-title">${getLocValue(`Relic${relicTypeName}`)}</p>${getLocValue(`Relic${relicTypeName}Description`)}`,
+            allowHTML: true,
+            placement: 'top',
+            hideOnClick: false,
+            theme: 'speech_bubble',
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            },
+        });
     });
 
-    relicsContent.innerHTML = "";
+    // relicsContent.innerHTML = "";
 
-    const ct = buildCTGrid();
+    // const ct = buildCTGrid();
 
-    let ctMainDiv = createEl('div', { id: 'ct-main-div', style: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' } });
-    relicsContent.appendChild(ctMainDiv);
+    // let ctMainDiv = createEl('div', { id: 'ct-main-div', style: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' } });
+    // relicsContent.appendChild(ctMainDiv);
 
-    const controls = createEl('div', { classList: ['ct-rotate-controls'], style: { display: 'flex', gap: '8px', margin: '8px 0' } });
+    // const controls = createEl('div', { classList: ['ct-rotate-controls'], style: { display: 'flex', gap: '8px', margin: '8px 0' } });
 
-    const btnLeft = createEl('button', { textContent: '⟲ 60°' });
-    const btnRight =createEl('button', { textContent: '60° ⟳' });
-    controls.appendChild(btnLeft);
-    controls.appendChild(btnRight);
-    ctMainDiv.appendChild(controls);
+    // const btnLeft = createEl('button', { textContent: '⟲ 60°' });
+    // const btnRight =createEl('button', { textContent: '60° ⟳' });
+    // controls.appendChild(btnLeft);
+    // controls.appendChild(btnRight);
+    // ctMainDiv.appendChild(controls);
 
-    let ctMapDiv = createEl('div', { id: 'ct-map-div', style: { width: '100%' } });
-    ctMainDiv.appendChild(ctMapDiv);
+    // let ctMapDiv = createEl('div', { id: 'ct-map-div', style: { width: '100%' } });
+    // ctMainDiv.appendChild(ctMapDiv);
 
-    console.log(eventData);
+    // console.log(eventData);
 
-    renderCTMap(ctMapDiv, ct, await getExternalCTData(eventData.id), { size: 28 });
+    // renderCTMap(ctMapDiv, ct, await getExternalCTData(eventData.id), { size: 28 });
 
-    btnLeft.addEventListener('click', () => rotateCT(ctMapDiv, -60));
-    btnRight.addEventListener('click', () => rotateCT(ctMapDiv, +60));
+    // btnLeft.addEventListener('click', () => rotateCT(ctMapDiv, -60));
+    // btnRight.addEventListener('click', () => rotateCT(ctMapDiv, +60));
 }
 
 function buildCTGrid() {

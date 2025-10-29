@@ -421,16 +421,21 @@ function clearProfileRequestQueue() {
 
 let externalCTData = {};
 let CTSeedToEventNumber = null;
-async function getExternalCTData(seed) {
-    if (!CTSeedToEventNumber || !CTSeedToEventNumber._reversed) {
+
+async function getCTSeedToEventNumber() {
+    if (!CTSeedToEventNumber) {
         const eventToSeed = await fetch("https://storage.googleapis.com/btd6-ct-map/event-seeds.json").then(r => r.json());
         const reversed = {};
         for (const [eventId, s] of Object.entries(eventToSeed)) {
             reversed[s] = parseInt(eventId, 10);
         }
-        reversed._reversed = true;
         CTSeedToEventNumber = reversed;
     }
+    return CTSeedToEventNumber;
+}
+
+async function getExternalCTData(seed) {
+    await getCTSeedToEventNumber();
 
     const eventId = CTSeedToEventNumber[seed];
     if (eventId == null) {
