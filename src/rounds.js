@@ -408,7 +408,7 @@ async function showRoundsetModel(source, roundset) {
 
     currentRoundsetData = processRoundset(roundset, roundsetData);
     if (roundsetFilterSettings.roundFilterEnd === null) {
-        roundsetFilterSettings.roundFilterEnd = currentRoundsetData.rounds[currentRoundsetData.rounds.length - 1].roundNumber;
+        roundsetFilterSettings.roundFilterEnd = Math.max(...currentRoundsetData.rounds.map(r => r.roundNumber));
     }
 
     selectedRoundset = roundset;
