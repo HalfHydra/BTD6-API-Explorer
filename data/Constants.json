@@ -41,15 +41,24 @@
         "Clicks": 100
     },
     "limitedTimeEvents": {
+        "Jumpscare Redux": {
+            "type": "Odyssey", 
+            "roundsets": {
+                "Jumpscare1": "Island 1",
+                "Jumpscare2": "Island 2",
+                "Jumpscare3": "Island 3",
+                "Jumpscare4": "Island 4",
+                "Jumpscare5": "Island 5"
+            },
+            "start": 1761789600000, 
+            "end": 1762308000000
+        },
         "BAD but it gets harder": {
             "type": "Odyssey", 
-            "roundset": "BADbutharder", 
-            "start": 1749693600000, 
-            "end": 1750212000000
-        },
-        "BAD but it gets harder (Hard)": {
-            "type": "Odyssey", 
-            "roundset": "BADbutfortharder", 
+            "roundsets": {
+                "BADbutharder": "Easy + Medium",
+                "BADbutfortharder": "Hard"
+            }, 
             "start": 1749693600000, 
             "end": 1750212000000
         },
@@ -79,7 +88,7 @@
             "end": 1725937200000
         }
     },
-    "skuRoundsets": ["1roundEarly","2roundEarly","3roundEarly","4roundEarly","5roundEarly","DDTbadness","countdownGroupOf5","monkeyVSmachines","rabbitYear","valentinesCF","TheFinalGambit","eggs","BeastHandlerjourney","Apocrypha3","31Plus","allOrNothingEnd60","allOrNothingEnd80","Sauda63","MiniMe","BlimpMyCrib","alternateRound140","raceExperiment","SinkingFeeling","CeramicFlood","Doubleupody","Jumpscare","masterymode","chimpsbloonarius","BADbutharder","BADbutfortharder"],
+    "skuRoundsets": ["1roundEarly","2roundEarly","3roundEarly","4roundEarly","5roundEarly","DDTbadness","countdownGroupOf5","monkeyVSmachines","rabbitYear","valentinesCF","TheFinalGambit","eggs","BeastHandlerjourney","Apocrypha3","31Plus","allOrNothingEnd60","allOrNothingEnd80","Sauda63","MiniMe","BlimpMyCrib","alternateRound140","raceExperiment","SinkingFeeling","CeramicFlood","Doubleupody","Jumpscare","masterymode","chimpsbloonarius","BADbutharder","BADbutfortharder","Jumpscare1","Jumpscare2","Jumpscare3","Jumpscare4","Jumpscare5"],
     "roundSets": {
         "DefaultRoundSet": {
             "name": "Standard Rounds",
