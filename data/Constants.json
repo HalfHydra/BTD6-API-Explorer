@@ -1288,6 +1288,12 @@
                     "WizardMonkey",
                     "MonkeyVillage",
                     "MonkeySub"
+                ],
+                "70": [
+                    "SuperMonkey",
+                    "Druid",
+                    "EngineerMonkey",
+                    "HeliPilot"
                 ]
             }
         },
