@@ -5609,9 +5609,11 @@ function generateBosses(elite){
     })
 }
 
-function generateCTs(){
+async function generateCTs(){
     let eventsContent = document.getElementById('events-content');
     eventsContent.innerHTML = "";
+
+    await getCTSeedToEventNumber();
 
     clearAllTimers();
 
@@ -5635,9 +5637,11 @@ function generateCTs(){
         raceInfoBottomDiv.classList.add("ct-info-bottom-div");
         raceInfoDiv.appendChild(raceInfoBottomDiv);
 
+        let CTEventNum = CTSeedToEventNumber[race.id] ? CTSeedToEventNumber[race.id] : Math.max(...Object.values(CTSeedToEventNumber)) + 1;
+
         let raceInfoName = document.createElement('p');
         raceInfoName.classList.add("race-info-name", "black-outline");
-        raceInfoName.innerHTML = "Contested Territory / " + race.id;
+        raceInfoName.innerHTML = "Contested Territory #" + CTEventNum;
         raceInfoTopDiv.appendChild(raceInfoName);
 
         let raceTimeLeft = document.createElement('p');

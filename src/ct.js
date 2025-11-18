@@ -17,13 +17,102 @@ let bossIDToName = {
     5: "Blastapopoulos"
 }
 
-let renderSettings = {
-    filter: "none", //banner, relic, race, leastCash, leastTiers, boss
-    showTileLabels: false,
-    backgroundType: "decor", //decor, tileType, mapIcon, nearestTeam
-    selectedTeamRotation: -90, //-90 default 
-    searchTerm: "",
+const teamAngles = {
+    "Purple": -90,
+    "Pink": -30,
+    "Green": 30,
+    "Blue": 90,
+    "Yellow": 150,
+    "Red": -150,
 }
+
+let renderSettings = {
+    advancedLayers: false,
+    filter: "none", //banner, relic, race, leastCash, leastTiers, boss
+    backgroundType: "default", //default, tileType, mapIcon, nearestTeam
+    selectedTeamRotation: -90,
+    searchTerm: "",
+    renderLayers: {
+        decor: true,
+        banner: false,
+        relic: false,
+        map: false,
+        boss: false,
+        gameMode: true,
+        ids: false,
+        hero: false,
+        rounds: false,
+    },
+    roundFilterStart: 1,
+    roundFilterEnd: 100,
+    heroFilter: "NoFilter"
+}
+
+let renderPresets = {
+    default: {
+        icon: "./Assets/CTMap/BGDefault.png",
+        label: "Default",
+        backgroundType: "default",
+        renderLayers: {
+            decor: true,
+            banner: true,
+            relic: true,
+            map: false,
+            boss: true,
+            gameMode: false,
+            hero: false,
+            rounds: false,
+        }
+    },
+    gamemode: {
+        icon: "./Assets/CTMap/BGDefault.png",
+        label: "Game Modes",
+        backgroundType: "tileType",
+        renderLayers: {
+            decor: false,
+            banner: false,
+            relic: false,
+            map: false,
+            boss: false,
+            gameMode: true,
+            hero: false,
+            rounds: true,
+        }
+    },
+    maps: {
+        icon: "./Assets/CTMap/BGDefault.png",
+        label: "Maps and Rounds",
+        backgroundType: "mapIcon",
+        renderLayers: {
+            decor: false,
+            banner: false,
+            relic: false,
+            map: true,
+            boss: false,
+            gameMode: false,
+            hero: false,
+            rounds: true,
+        }
+    },
+    heroes: {
+        icon: "./Assets/CTMap/BGDefault.png",
+        label: "Heroes",
+        backgroundType: "tileType",
+        renderLayers: {
+            decor: false,
+            banner: false,
+            relic: false,
+            map: false,
+            boss: false,
+            gameMode: false,
+            hero: true,
+            rounds: true,
+        }
+    }
+}
+
+let debugGlobalCTMap = null;
+let selectedCTData = null;
 
 async function openCTEventDetails(source, eventData) {
     let eventDates = `${new Date(eventData.start).toLocaleDateString()} - ${new Date(eventData.end).toLocaleDateString()}`;
@@ -35,13 +124,14 @@ async function openCTEventDetails(source, eventData) {
     relicsContent.innerHTML = "";
 
     let now = new Date();
+    let dayMs = 24 * 60 * 60 * 1000;
 
     addToBackQueue({ "source": source, "destination": "relics" });
 
     let relicContainer = createEl('div', { classList: ['relic-container', 'ct-panel'], style: { borderRadius: "20px 20px 10px 10px"} });
     resetScroll();
 
-    await getExternalCTData(eventData.id);
+    let extData = await getExternalCTData(eventData.id);
 
     let isEventActive = now >= new Date(eventData.start) && now <= new Date(eventData.end);
 
@@ -57,14 +147,19 @@ async function openCTEventDetails(source, eventData) {
     let relicHeaderTopDiv = createEl('div', { classList: ['d-flex', 'jc-between'], style: { padding: "0px 10px", width: "800px"} });
     relicHeaderTop.appendChild(relicHeaderTopDiv);
 
-    let relicHeaderTitle = createEl('p', { classList: ['relic-header-title', 'black-outline'], innerHTML: `Contested Territory ${CTSeedToEventNumber ? "#" + CTSeedToEventNumber[eventData.id] : ''}` });
+    let relicHeaderTitle = createEl('p', { classList: ['relic-header-title', 'black-outline'], innerHTML: `Contested Territory ${CTSeedToEventNumber[eventData.id] ? "#" + CTSeedToEventNumber[eventData.id] : ''}` });
     relicHeaderTopDiv.appendChild(relicHeaderTitle);
 
     let relicHeaderDates = createEl('p', { classList: ['relic-header-title', 'black-outline'], innerHTML: `${eventDates}` });
     relicHeaderTopDiv.appendChild(relicHeaderDates);
 
     let topBar = createEl('div', { classList: ['d-flex', 'jc-evenly', 'w-100'], style: {marginTop: "10px"} });
-    relicHeader.appendChild(topBar);
+    if (extData) relicHeader.appendChild(topBar);
+
+    if (!extData) {
+        let noDataLabel = createEl('p', { classList: ['font-gardenia', 'ta-center'], style: {fontSize: '24px', marginTop: '10px'}, innerHTML: `Additional data coming soon for this event.` });
+        relicHeader.appendChild(noDataLabel);
+    }
 
     let divStyle = { width: "260px" }
 
@@ -94,13 +189,19 @@ async function openCTEventDetails(source, eventData) {
     let ticketsTimer = createEl('p', { classList: ['black-outline'], id: 'ct-tickets-timer', innerHTML: `--:--:--`, style: {fontSize: '28px'} });
     newTicketsTextDiv.appendChild(ticketsTimer);
 
-    if (new Date(eventData.start) < now && now < new Date(eventData.end)) {
-        let timeUntilNextTickets = new Date(new Date().setHours(new Date(eventData.start).getHours(), new Date(eventData.start).getMinutes(), 0, 0)) > now ? new Date(new Date().setHours(new Date(eventData.start).getHours(), new Date(eventData.start).getMinutes(), 0, 0)) : new Date(new Date().setHours(new Date(eventData.start).getHours() + 24, new Date(eventData.start).getMinutes(), 0, 0));
+    clearAllTimers();
+    if (now >= new Date(new Date(eventData.end).getTime() - dayMs) && now < eventData.end) {
+        nextTicketsLabel.innerHTML = "Event Ends In:";
+        registerTimer(ticketsTimer.id, eventData.end);
+    } else if (new Date(eventData.start) < now && now < new Date(eventData.end)) {
+        let timeUntilNextTickets = new Date(new Date().setHours(new Date(eventData.start).getHours(), new Date(eventData.start).getMinutes(), 0, 0)) > now ? new Date(new Date().setHours(new Date(eventData.start).getHours(), new Date(eventData.start).getMinutes(), 0, 0)) : new Date(new Date().setHours(new Date(eventData.start).getHours() + 24, new Date(eventData.start).getMinutes() + 13, 0, 0));
         registerTimer(ticketsTimer.id, timeUntilNextTickets);
     } else if (now > new Date(eventData.end)) {
         ticketsTimer.innerHTML = "Event Ended";
+        nextTicketsLabel.style.display = "none";
     } else {
         ticketsTimer.innerHTML = "Not Started";
+        nextTicketsLabel.style.display = "none";
     }
 
     let tileSearchIcon = createEl('img', { classList: [], style: iconStyle, src: "./Assets/UI/CTRegularTileIconSmall.png" });
@@ -166,9 +267,9 @@ async function openCTEventDetails(source, eventData) {
     let eventRelics = externalCTData[eventData.id]?.event_relics || [];
 
     let eventRelicTimes = [
-        1, //after 1 day
-        3, //after 3 days
-        5, //after 5 days
+        1,
+        3,
+        5,
     ]
 
     eventRelics.forEach((relic, index) => {
@@ -223,7 +324,6 @@ async function openCTEventDetails(source, eventData) {
         powerIconDiv.appendChild(powerProgressText);
 
         if (isEventActive) {
-            let dayMs = 24 * 60 * 60 * 1000;
             let start = new Date(eventData.start);
 
             let powerActiveTime = new Date(start.getTime() + index * dayMs);
@@ -317,111 +417,143 @@ async function openCTEventMap(source, eventData) {
     addToBackQueue({ "source": source, "destination": "ct-map" });
 
     let tileData = await getExternalCTData(eventData.id);
+    selectedCTData = tileData;
 
     let ctMapDiv = createEl('div', { id: 'ct-map-div', style: { width: '100%' } });
 
     let topBar = createEl('div', { classList: ['d-flex', 'jc-between', 'ai-center', 'ct-border'], style: {} });
     mapContent.appendChild(topBar);
 
-    let basicFilterDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'f-wrap'] });
-    topBar.appendChild(basicFilterDiv);
+    // let basicFilterDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'f-wrap'] });
+    // topBar.appendChild(basicFilterDiv);
 
-    let filters = {
-        // "none": "StrikethroughRound",
-        "banner": "/UI/CTPointsBanner",
-        "relic": "/UI/DefaultRelicIcon",
-        "leastCash": "/UI/LeastCashIconSmall",
-        "leastTiers": "/UI/LeastTiersIconSmall",
-        "race": "/UI/StopWatch",
-        "boss": "/BossIcon/BloonariusPortrait",
-    }
+    // let filters = {
+    //     // "none": "StrikethroughRound",
+    //     "banner": "/UI/CTPointsBanner",
+    //     "relic": "/UI/DefaultRelicIcon",
+    //     "leastCash": "/UI/LeastCashIconSmall",
+    //     "leastTiers": "/UI/LeastTiersIconSmall",
+    //     "race": "/UI/StopWatch",
+    //     "boss": "/BossIcon/BloonariusPortrait",
+    // }
 
-    for (let [filterKey, filterIcon] of Object.entries(filters)) {
-        let filterBtn = createEl('img', { classList: ['pointer'], style: { width: '40px', height: '40px', objectFit: 'contain', backgroundImage: 'url("../Assets/UI/StatsTabBlue.png")', backgroundSize: 'contain', padding: '8px', filter: renderSettings.filter === filterKey ? "drop-shadow(0 0 10px #fff)" : "none" }, src: `./Assets/${filterIcon}.png` });
-        filterBtn.addEventListener('click', () => {
-            if (renderSettings.filter === filterKey) {
-                renderSettings.filter = "none";
-                filterBtn.style.backgroundImage = 'url("../Assets/UI/StatsTabBlue.png")'
-                if (ctMapDiv) applyCTFilter(ctMapDiv, tileData);
-                return;
-            }
+    // for (let [filterKey, filterIcon] of Object.entries(filters)) {
+    //     let filterBtn = createEl('img', { classList: ['pointer'], style: { width: '40px', height: '40px', objectFit: 'contain', backgroundImage: 'url("../Assets/UI/StatsTabBlue.png")', backgroundSize: 'contain', padding: '8px', filter: renderSettings.filter === filterKey ? "drop-shadow(0 0 10px #fff)" : "none" }, src: `./Assets/${filterIcon}.png` });
+    //     filterBtn.addEventListener('click', () => {
+    //         if (renderSettings.filter === filterKey) {
+    //             renderSettings.filter = "none";
+    //             filterBtn.style.backgroundImage = 'url("../Assets/UI/StatsTabBlue.png")'
+    //             if (ctMapDiv) applyCTFilter(ctMapDiv, tileData);
+    //             return;
+    //         }
 
-            renderSettings.filter = filterKey;
-            switch(filterKey) {
-                case "none":
-                    break;
-                case "banner":
-                    break;
-                case "relic":
-                    break;
-                case "race":
-                    break;
-                case "leastCash":
-                    break;
-                case "leastTiers":
-                    break;
-                case "boss":
-                    break;
-            }
-            basicFilterDiv.querySelectorAll('img').forEach(img => img.style.backgroundImage = 'url("../Assets/UI/StatsTabBlue.png")');
-            filterBtn.style.backgroundImage = 'url("../Assets/UI/StatsTabYellow.png")'
-            if (ctMapDiv) applyCTFilter(ctMapDiv, tileData);
+    //         renderSettings.filter = filterKey;
+    //         switch(filterKey) {
+    //             case "none":
+    //                 break;
+    //             case "banner":
+    //                 break;
+    //             case "relic":
+    //                 break;
+    //             case "race":
+    //                 break;
+    //             case "leastCash":
+    //                 break;
+    //             case "leastTiers":
+    //                 break;
+    //             case "boss":
+    //                 break;
+    //         }
+    //         basicFilterDiv.querySelectorAll('img').forEach(img => img.style.backgroundImage = 'url("../Assets/UI/StatsTabBlue.png")');
+    //         filterBtn.style.backgroundImage = 'url("../Assets/UI/StatsTabYellow.png")'
+    //         if (ctMapDiv) applyCTFilter(ctMapDiv, tileData);
+    //     });
+    //     basicFilterDiv.appendChild(filterBtn);
+    // }
+
+    let teamSelectDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-center', 'f-wrap'] });
+    topBar.appendChild(teamSelectDiv);
+
+    // let teamSelectLabel = createEl('p', { classList: ['black-outline'], innerHTML: 'My Team:' });
+    // teamSelectDiv.appendChild(teamSelectLabel);
+
+    let teamColors = ["Purple", "Pink", "Green", "Blue", "Yellow", "Red"];
+    for (let team of teamColors) {
+        let teamBtn = createEl('img', { classList: ['pointer'], style: { width: '40px', height: '40px', objectFit: 'contain', backgroundImage: renderSettings.selectedTeamRotation == teamAngles[team] ? 'url("../Assets/UI/StatsTabYellow.png")' :'url("../Assets/UI/StatsTabBlue.png")', backgroundSize: 'contain', padding: '8px' }, src: `./Assets/UI/TeamTileFlag${team}.png` });
+        teamBtn.addEventListener('click', () => {
+            renderSettings.selectedTeamRotation = teamAngles[team];
+            rotateCTTo(ctMapDiv, renderSettings.selectedTeamRotation);
+
+            teamSelectDiv.querySelectorAll('img').forEach(img => img.style.backgroundImage = 'url("../Assets/UI/StatsTabBlue.png")');
+            teamBtn.style.backgroundImage = 'url("../Assets/UI/StatsTabYellow.png")'
         });
-        basicFilterDiv.appendChild(filterBtn);
+        teamSelectDiv.appendChild(teamBtn);
     }
 
-    let centerDiv = createEl('div', { classList: ['pos-rel'], style: {padding: "20px"} });
+    let centerDiv = createEl('div', { classList: ['d-flex'], style: {  gap: "12px"} });
     topBar.appendChild(centerDiv);
+
+    let tileSearchContainerDiv = createEl('div', { classList: ['pos-rel'] });
+    centerDiv.appendChild(tileSearchContainerDiv);
 
     let tileSearch = createEl('input', { classList: ['search-box', 'font-gardenia', 'rogue-search'], style: { width: '100px', paddingRight: '40px' }, placeholder: "Tile Search",});
 
-    let searchIcon = createEl('img', { classList: ['search-icon'], src: '../Assets/UI/SearchIcon.png', style: {right: "28px"} });
-    centerDiv.appendChild(searchIcon);
-
-    tileSearch.addEventListener('input', () => {
-        tileSearch.value = tileSearch.value.toUpperCase();
-        tileSearch.value = tileSearch.value.replace(/[^A-HMRX0-9]/g, '');
-        if (tileSearch.value.length > 3) {
-            tileSearch.value = tileSearch.value.substring(0, 3);
-        }
-        renderSettings.searchTerm = tileSearch.value;
-        applyCTFilter(ctMapDiv, tileData);
-    })
-
-    centerDiv.appendChild(tileSearch);
+    let searchIcon = createEl('img', { classList: ['search-icon'], src: '../Assets/UI/SearchIcon.png', style: {} });
+    tileSearchContainerDiv.appendChild(searchIcon);
+    tileSearchContainerDiv.appendChild(tileSearch);
 
 
     let rightDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
     topBar.appendChild(rightDiv);
 
     let tileLabelsDiv = createEl('div', { classList: ['d-flex', 'ai-center'], style: {fontSize: '24px'}});
-    rightDiv.appendChild(tileLabelsDiv);
+    centerDiv.appendChild(tileLabelsDiv);
 
     let tileLabelsLabel = createEl('p', { classList: ['black-outline'], innerHTML: 'IDs' });
     tileLabelsDiv.appendChild(tileLabelsLabel);
 
-    let showTileLabelsBtn = generateToggle(renderSettings.showTileLabels, (checked) => {
-        renderSettings.showTileLabels = checked;
-        ctMapDiv.querySelectorAll('.ct-tile-label').forEach(t => {
-            t.style.display = renderSettings.showTileLabels ? 'block' : 'none';
-        });
+    let showTileLabelsBtn = generateToggle(renderSettings.renderLayers.ids, (checked) => {
+        renderSettings.renderLayers.ids = checked;
+        updateCTRenderLayers(ctMapDiv);
     });
     tileLabelsDiv.appendChild(showTileLabelsBtn);
 
-    let teamSelectionToggle = generateDropdown("My Team:", ["Purple", "Pink", "Green", "Blue", "Yellow", "Red"], "Purple", (selected) => {
-        const teamAngles = {
-            "Purple": -90,
-            "Pink": -30,
-            "Green": 30,
-            "Blue": 90,
-            "Yellow": 150,
-            "Red": -150,
-        }
-        renderSettings.selectedTeamRotation = teamAngles[selected];
-        rotateCTTo(ctMapDiv, renderSettings.selectedTeamRotation);
+    // let teamSelectionToggle = generateDropdown("My Team:", ["Purple", "Pink", "Green", "Blue", "Yellow", "Red"], "Purple", (selected) => {
+    //     const teamAngles = {
+    //         "Purple": -90,
+    //         "Pink": -30,
+    //         "Green": 30,
+    //         "Blue": 90,
+    //         "Yellow": 150,
+    //         "Red": -150,
+    //     }
+    //     renderSettings.selectedTeamRotation = teamAngles[selected];
+    //     rotateCTTo(ctMapDiv, renderSettings.selectedTeamRotation);
+    // });
+    // teamSelectionToggle.querySelector('.dropdown-label').style.minWidth = '110px';
+    // rightDiv.appendChild(teamSelectionToggle);
+
+    let filteredDiv = createEl('div', { id: "map-filter-active-div", classList: ['d-flex', 'ai-center'], style: { marginRight: '16px', fontSize: '24px', backgroundColor: "var(--profile-primary)", padding: "8px", gap: "8px", borderRadius: "10px" } });
+    rightDiv.appendChild(filteredDiv);
+
+    let filterIcon = createEl('img', { id: 'top-bar-filter-icon', classList: ['blue-tab-icon', 'white-outline'], style: { width: '28px', height: '28px', padding: '4px', objectFit: 'contain' }, src: './Assets/UI/StrikethroughRound.png' });
+    filteredDiv.appendChild(filterIcon);
+
+    let filteredLabel = createEl('p', { classList: ['black-outline'], innerHTML: 'Filtered' });;
+    filteredDiv.appendChild(filteredLabel);
+
+    let filteredXBtn = createEl('img', { classList: ['pointer'], style: { width: '32px', height: '32px', objectFit: 'contain' }, src: './Assets/UI/CloseBtn.png' });
+    filteredXBtn.addEventListener('click', () => {
+        renderSettings.searchTerm = "";
+        tileSearch.value = "";
+        renderSettings.filter = "none";
+        filteredDiv.style.visibility = "hidden";
+        renderSettings.heroFilter = "NoFilter";
+        renderSettings.roundFilterStart = 1;
+        renderSettings.roundFilterEnd = 100;
+        applyCTFilter(ctMapDiv, tileData);
     });
-    teamSelectionToggle.querySelector('.dropdown-label').style.minWidth = '110px';
-    rightDiv.appendChild(teamSelectionToggle);
+    filteredDiv.appendChild(filteredXBtn);
 
     let displaySettingsBtn = createEl('img', {
         classList: ['roundset-settings-btn', 'pointer'],
@@ -432,9 +564,25 @@ async function openCTEventMap(source, eventData) {
         src: '../Assets/UI/SettingsBtn.png',
     });
     displaySettingsBtn.addEventListener('click', () => {
-        
+        openCTSettingsModal();
     })
     rightDiv.appendChild(displaySettingsBtn);
+
+    tileSearch.addEventListener('input', () => {
+        tileSearch.value = tileSearch.value.toUpperCase();
+        tileSearch.value = tileSearch.value.replace(/[^A-HMRX0-9]/g, '');
+        if (tileSearch.value.length > 3) {
+            tileSearch.value = tileSearch.value.substring(0, 3);
+        }
+        if (tileSearch.value.length == 0) {
+            renderSettings.filter = "none";
+        } else {
+            renderSettings.filter = "search";
+            filterIcon.src = './Assets/UI/SearchIcon.png';
+        }
+        renderSettings.searchTerm = tileSearch.value;
+        applyCTFilter(ctMapDiv, tileData);
+    })
 
     const ct = buildCTGrid();
 
@@ -442,8 +590,11 @@ async function openCTEventMap(source, eventData) {
     mapContent.appendChild(ctMainDiv);
     ctMainDiv.appendChild(ctMapDiv);
 
+    debugGlobalCTMap = ctMapDiv;
+
     renderCTMap(ctMapDiv, ct, tileData, { size: 28 });
     applyCTFilter(ctMapDiv, tileData);
+    updateCTRenderLayers(ctMapDiv);
 }
 
 function buildCTGrid() {
@@ -598,9 +749,9 @@ function renderCTMap(container, ct, tileData, opts = {}) {
 
     const tileIndex = new Map();
     console.log(tileData);
+    let heroesSet = new Set();
     for (const t of tiles) {
         let data = tileData.tiles[t.id];
-        console.log(data);
         const hexS = size - gap;
         const pts = hexPoints(t.x, t.y, hexS);
         const ptsStr = pts.map(p => p.join(',')).join(' ');
@@ -626,9 +777,7 @@ function renderCTMap(container, ct, tileData, opts = {}) {
 
         const polygon = document.createElementNS(svg.namespaceURI, 'polygon');
         polygon.setAttribute('points', ptsStr);
-        // polygon.setAttribute('fill', teamColors[t.id.charAt(0)] ?? '#888');
         polygon.setAttribute('fill', '#B9E546');
-        // polygon.setAttribute('fill', '#444');
         polygon.setAttribute('stroke', stroke);
         polygon.setAttribute('stroke-width', '2');
         gTile.appendChild(polygon);
@@ -649,13 +798,39 @@ function renderCTMap(container, ct, tileData, opts = {}) {
         gBg.classList.add('ct-layer-bg');
         gUpright.appendChild(gBg);
 
+        const gMapFill = document.createElementNS(svg.namespaceURI, 'g');
+        gMapFill.setAttribute('clip-path', `polygon(32.28% 1.59%, 68.34% 1.27%, 86.27% 50%, 68.34% 99%, 32.35% 99%, 14.25% 50%)`);
+        gMapFill.classList.add('ct-layer-mapicon');
+        gUpright.insertBefore(gMapFill, gBg);
+
+        const hexW = hexS * 2;
+        const hexH = hexS * SQRT3;
+        const imgW = hexH * 1.56;
+        const imgH = hexH;
+        const imgX = (t.x - hexW / 1.475).toFixed(2);
+        const imgY = (t.y - hexH / 2).toFixed(2);
+
+        const gMapIcon = document.createElementNS(svg.namespaceURI, 'image');
+        gMapIcon.setAttribute('href', `./Assets/MapIcon/MapSelect${data.GameData.selectedMap}Button.png`);
+        gMapIcon.setAttribute('x', imgX);
+        gMapIcon.setAttribute('y', imgY);
+        gMapIcon.setAttribute('width', imgW.toFixed(2));
+        gMapIcon.setAttribute('height', imgH.toFixed(2));
+        gMapIcon.setAttribute('preserveAspectRatio', 'none');
+        gMapIcon.style.pointerEvents = 'none';
+        gMapFill.appendChild(gMapIcon);
+
+        const gDecor = document.createElementNS(svg.namespaceURI, 'g');
+        gDecor.classList.add('ct-layer-decor');
+        gUpright.appendChild(gDecor);
+
         let gTileDecor = document.createElementNS(svg.namespaceURI, 'image');
         gTileDecor.setAttribute('href', `./Assets/CTMap/${constants.mapsInOrder[data.GameData.selectedMap].theme}.png`);
         gTileDecor.setAttribute('x', (t.x - size).toFixed(2));
         gTileDecor.setAttribute('y', (t.y - size).toFixed(2));
         gTileDecor.setAttribute('width', (size * 2).toFixed(2));
         gTileDecor.setAttribute('height', (size * 2).toFixed(2));
-        gBg.appendChild(gTileDecor);
+        gDecor.appendChild(gTileDecor);
 
         const gRelic = document.createElementNS(svg.namespaceURI, 'g');
         gRelic.classList.add('ct-layer-relic');
@@ -691,7 +866,6 @@ function renderCTMap(container, ct, tileData, opts = {}) {
 
         const gBoss = document.createElementNS(svg.namespaceURI, 'g');
         gBoss.classList.add('ct-layer-boss');
-        gUpright.appendChild(gBoss);
 
         if (data.GameData.subGameType == 4) {
             let gBossImg = document.createElementNS(svg.namespaceURI, 'image');
@@ -725,6 +899,106 @@ function renderCTMap(container, ct, tileData, opts = {}) {
             gBoss.appendChild(gBossTierText);
         }
 
+        let gGameMode = document.createElementNS(svg.namespaceURI, 'g');
+        gGameMode.classList.add('ct-layer-gamemode');
+        gUpright.appendChild(gGameMode);
+
+        let gGameModeImg = document.createElementNS(svg.namespaceURI, 'image');
+        let image = null;
+        switch (data.GameData.subGameType) {
+            case 2:  
+                image = '/UI/EventRaceBtn'; 
+                break;
+            case 4:  
+                image = `/BossIcon/${bossIDToName[data.GameData.bossData.bossBloon]}EventIcon`;
+                break;
+            case 8:  
+                image = '/ChallengeRulesIcon/LeastCashIcon'; 
+                break;
+            case 9:  
+                image = '/ChallengeRulesIcon/LeastTiersIcon'; 
+                break;
+        }
+        gGameModeImg.setAttribute('href', `./Assets/${image}.png`);
+        gGameModeImg.setAttribute('x', (t.x - size * 0.625).toFixed(2));
+        gGameModeImg.setAttribute('y', (t.y - size * 0.625).toFixed(2));
+        gGameModeImg.setAttribute('width', (size * 1.25).toFixed(2));
+        gGameModeImg.setAttribute('height', (size * 1.25).toFixed(2));
+        gGameMode.appendChild(gGameModeImg);
+
+        
+
+        if (data.GameData.subGameType == 4) {
+            let gBossTierImg = document.createElementNS(svg.namespaceURI, 'image');
+            gBossTierImg.setAttribute('href', `./Assets/UI/BossTiersIconSmall.png`);
+            gBossTierImg.setAttribute('x', (t.x + 0).toFixed(2));
+            gBossTierImg.setAttribute('y', (t.y + 3).toFixed(2));
+            gBossTierImg.setAttribute('width', (size * 0.65).toFixed(2));
+            gBossTierImg.setAttribute('height', (size * 0.65).toFixed(2));
+            gGameMode.appendChild(gBossTierImg);
+
+            let gBossTierText = document.createElementNS(svg.namespaceURI, 'text');
+            gBossTierText.classList.add('font-gardenia');
+            gBossTierText.setAttribute('x', (t.x + 10).toFixed(2));
+            gBossTierText.setAttribute('y', (t.y + 16).toFixed(2));
+            gBossTierText.setAttribute('text-anchor', 'middle');
+            gBossTierText.setAttribute('font-size', Math.max(10, size * 0.4));
+            gBossTierText.setAttribute('fill', '#FFF');
+            gBossTierText.setAttribute('paint-order', 'stroke');
+            gBossTierText.setAttribute('stroke', '#111');
+            gBossTierText.setAttribute('stroke-width', '2');
+            gBossTierText.textContent = data.GameData.bossData.TierCount;
+            gGameMode.appendChild(gBossTierText);
+        }
+
+        let heroes = Object.keys(simplifyTowerData(data.GameData.dcModel).heroes);
+        heroesSet = new Set([...heroesSet, JSON.stringify(heroes)]);
+        if (JSON.stringify(heroes) == '["ChosenPrimaryHero"]') {
+            console.log(data);
+            console.log(simplifyTowerData(data.GameData.dcModel));
+        }
+
+        let selectedHero = (heroes && heroes.length == 1 && heroes[0] !== "ChosenPrimaryHero") ? `/HeroIconCircle/HeroIcon${heroes[0]}` : (heroes.length == 0) ? "/UI/NoHeroSelected" : "/UI/AllHeroesIcon";
+
+        let gHero = document.createElementNS(svg.namespaceURI, 'g');
+        gHero.classList.add('ct-layer-hero');
+        gUpright.appendChild(gHero);
+
+        let gHeroImg = document.createElementNS(svg.namespaceURI, 'image');
+        gHeroImg.setAttribute('href', `./Assets/${selectedHero}.png`);
+        gHeroImg.setAttribute('x', (t.x - size * 0.7).toFixed(2));
+        gHeroImg.setAttribute('y', (t.y - size * 0.7).toFixed(2));
+        gHeroImg.setAttribute('width', (size * 1.4).toFixed(2));
+        gHeroImg.setAttribute('height', (size * 1.4).toFixed(2));
+        gHero.appendChild(gHeroImg);
+
+        gUpright.appendChild(gBoss);
+
+
+        let gRoundsText = document.createElementNS(svg.namespaceURI, 'g');
+        gRoundsText.classList.add('ct-layer-rounds');
+        gUpright.appendChild(gRoundsText);
+
+        let roundsLabelText = `${data.GameData.dcModel.startRules.round}/${data.GameData.dcModel.startRules.endRound}`
+        if (data.GameData.dcModel.startRules.endRound == -1) {
+            roundsLabelText = `${data.GameData.dcModel.startRules.round}/${20 + (data.GameData.bossData.TierCount * 20)}+`
+        }
+
+        let roundsLabel = document.createElementNS(svg.namespaceURI, 'text');
+        roundsLabel.classList.add('font-gardenia', 'ct-tile-label');
+        roundsLabel.setAttribute('x', t.x.toFixed(2));
+        roundsLabel.setAttribute('y', (t.y - size * 0.3).toFixed(2)); //(t.y + size * 0.6
+        roundsLabel.setAttribute('text-anchor', 'middle');
+        roundsLabel.setAttribute('font-size', Math.max(10, size * 0.4));
+        roundsLabel.setAttribute('fill', '#FFF');
+        roundsLabel.setAttribute('paint-order', 'stroke');
+        roundsLabel.setAttribute('stroke', '#111');
+        roundsLabel.setAttribute('stroke-width', '2');
+        roundsLabel.textContent = roundsLabelText;
+        gRoundsText.appendChild(roundsLabel);
+
+
+
         const gText = document.createElementNS(svg.namespaceURI, 'g');
         gText.classList.add('ct-layer-text');
         gUpright.appendChild(gText);
@@ -741,16 +1015,18 @@ function renderCTMap(container, ct, tileData, opts = {}) {
             label.setAttribute('stroke', '#111');
             label.setAttribute('stroke-width', '2');
             label.textContent = t.id;
-            if (!renderSettings.showTileLabels) {
-                label.style.display = 'none';
-            }
             gText.appendChild(label);
 
+        // tileIndex.set(t.id, {
+        //     gTile, gUpright, gBg, gRelic, gBanner, gText,
+        //     cx: t.x, cy: t.y, clipId, hexS
+        // });
         tileIndex.set(t.id, {
             gTile, gUpright, gBg, gRelic, gBanner, gText,
-            cx: t.x, cy: t.y, clipId, hexS
+            cx: t.x, cy: t.y, clipId, hexS, polygon, gMapFill, gDecor, gBoss, gGameMode, gHero, gRoundsText
         });
     }
+    console.log(heroesSet);
 
     for (const s of spawns) {
         const hexS = size - gap;
@@ -811,16 +1087,31 @@ function applyCTFilter(container, tileData) {
     for (const entry of st.tileIndex.values()) {
         let tileId = entry.clipId.replace('tile-', '');
         const matchesSearch = term ? tileId.includes(term) : true;
+        const data = tileData.tiles[tileId];
         let isVisible = false;
         if (matchesSearch) {
             if (filterKey === 'none') {
                 isVisible = true;
             } else {
-                const data = tileData.tiles[tileId];
                 isVisible = matchesCTFilter(filterKey, data);
             }
         } else {
             isVisible = false;
+        }
+
+        if (isVisible) {
+            const { start: tStart, end: tEnd } = getTileRoundRange(data);
+            const intersects = tEnd <= renderSettings.roundFilterEnd && tStart >= renderSettings.roundFilterStart;
+            if (!intersects) isVisible = false;
+        }
+
+        if (isVisible && renderSettings.heroFilter !== 'NoFilter') {
+            const heroes = Object.keys(simplifyTowerData(data.GameData.dcModel).heroes);
+            if (renderSettings.heroFilter === 'NoHeroes') {
+                if (heroes.length !== 0) isVisible = false;
+            } else {
+                if (!heroes.filter(h => h !== 'ChosenPrimaryHero').includes(renderSettings.heroFilter)) isVisible = false;
+            }
         }
 
         if (isVisible) {
@@ -831,12 +1122,15 @@ function applyCTFilter(container, tileData) {
             entry.gTile.style.opacity = '0.6';
         }
     }
+
+    document.getElementById('map-filter-active-div').style.visibility = filterKey !== 'none' || term ? 'visible' : 'hidden';
 }
 
 function matchesCTFilter(filterKey, data) {
     if (!data) return false;
     switch (filterKey) {
         case 'none':
+        case 'search':
             return true;
         case 'banner':
             return data.TileType === 'Banner';
@@ -857,4 +1151,516 @@ function matchesCTFilter(filterKey, data) {
         default:
             return false;
     }
+}
+
+function updateCTBackground(container, tileData) {
+    const st = container?._ct;
+    if (!st) return;
+
+    const bg = renderSettings.backgroundType;
+
+    for (const [tileId, entry] of st.tileIndex.entries()) {
+        const data = tileData.tiles[tileId];
+        if (!data) continue;
+
+        let fillColor = '#444';
+        entry.gMapFill.style.display = 'none';
+        entry.gDecor.style.display = 'none';
+        switch(bg) {
+            case 'default':
+                fillColor = '#B9E546';
+                // entry.gDecor.style.display = 'block';
+                break;
+            case 'tileType': 
+                switch (data.TileType) {
+                    case 'Relic': fillColor = '#D621E7'; break;
+                    case 'Banner': fillColor = '#1855A5'; break;
+                    case 'Regular': fillColor = '#B9E546'; break;
+                    case 'TeamFirstCapture': fillColor = '#B9E546'; break;
+                    default: fillColor = '#888888'; break;
+                }
+                break;
+            case 'gameType':
+                switch (data.GameData?.subGameType) {
+                    case 2:  fillColor = '#E12900'; break;
+                    case 4:  fillColor = '#9F00FF'; break;
+                    case 8:  fillColor = '#FFCC00'; break;
+                    case 9:  fillColor = '#35DA00'; break;
+                    default: fillColor = '#5c6b73'; break;
+                }
+                break;
+            case 'mapIcon':
+                entry.gMapFill.style.display = 'block';
+                break;
+            case 'nearestTeam':
+                fillColor = teamColors[tileId.charAt(0)] ?? '#888';
+                break;
+            default:
+                continue;
+        }
+
+        entry.polygon.setAttribute('fill', fillColor);
+    }
+}
+
+function updateCTRenderLayers(container) {
+    const st = container?._ct;
+    if (!st) return;
+
+    for (const entry of st.tileIndex.values()) {
+        entry.gBg.style.display = renderSettings.renderLayers.bg ? 'block' : 'none';
+        entry.gRelic.style.display = renderSettings.renderLayers.relic ? 'block' : 'none';
+        entry.gBanner.style.display = renderSettings.renderLayers.banner ? 'block' : 'none';
+        entry.gText.style.display = renderSettings.renderLayers.ids ? 'block' : 'none';
+        entry.gDecor.style.display = renderSettings.renderLayers.decor ? 'block' : 'none';
+        entry.gMapFill.style.display = renderSettings.backgroundType == "mapIcon" ? 'block' : 'none';
+        entry.gBoss.style.display = renderSettings.renderLayers.boss ? 'block' : 'none';
+        entry.gGameMode.style.display = renderSettings.renderLayers.gameMode ? 'block' : 'none';
+        entry.gHero.style.display = renderSettings.renderLayers.hero ? 'block' : 'none';
+        entry.gRoundsText.style.display = renderSettings.renderLayers.rounds ? 'block' : 'none';
+    }
+}
+
+function openCTSettingsModal(){
+    const container = createEl('div', {
+        style: { padding: '16px', display: 'flex', flexDirection: 'column', gap: '16px' }
+    });
+
+    const modalHeader = createEl('div', { classList: ['d-flex', 'jc-between'], style: {backgroundColor: 'var(--profile-primary)', padding: '8px 16px', borderRadius: '8px'} });
+    container.appendChild(modalHeader);
+    
+    // const headerLeft = createEl('div', { classList: [''] });
+    // modalHeader.appendChild(headerLeft);
+
+    const modalTitle = createEl('p', {
+        classList: ['collection-modal-header-text', 'black-outline'],
+        innerHTML: 'CT Map Settings'
+    });
+    modalHeader.appendChild(modalTitle);
+
+
+    let presetLayersDiv = createEl('div', { classList: ['d-flex', 'jc-between', 'f-wrap', 'fd-column'], style: { gap: '12px' } });
+    let advancedLayerDiv = createEl('div', { classList: ['d-flex', 'jc-between', 'f-wrap', 'fd-column'], style: { gap: '12px', display: 'none' } });
+
+    let modalAdvancedDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'pointer'], style: {} });
+    modalHeader.appendChild(modalAdvancedDiv);
+
+    let modalAdvancedLabel = createEl('p', {
+        classList: ['black-outline'],
+        style: { fontSize: '24px' },
+        innerHTML: 'Advanced Mode'
+    })
+    modalAdvancedDiv.appendChild(modalAdvancedLabel);
+
+    let modalAdvancedToggle = generateToggle(renderSettings.advancedLayers, (checked) => {
+        renderSettings.advancedLayers = checked;
+        if (checked) {
+            presetLayersDiv.style.display = 'none';
+            advancedLayerDiv.style.display = 'flex';
+        } else {
+            presetLayersDiv.style.display = 'flex';
+            advancedLayerDiv.style.display = 'none';
+        }
+    });
+    modalAdvancedDiv.appendChild(modalAdvancedToggle);
+
+    let mainContainer = createEl('div', { classList: ['d-flex', 'jc-evenly', 'f-wrap'], style: { gap: '24px' } });
+    container.appendChild(mainContainer);
+
+    let leftDiv = createEl('div', { classList: ['d-flex', 'f-wrap', 'fd-column'], style: { gap: '12px' } });
+    mainContainer.appendChild(leftDiv);
+
+    leftDiv.appendChild(createEl('p', {
+        classList: ['oak-instructions-header', 'black-outline'],
+        innerHTML: 'Filter Tiles'
+    }));
+
+    let filterOptions = {
+        "none": {
+            label: "No Filter",
+            icon: "/UI/StrikethroughRound",
+        },
+        "banner": {
+            label: "Banner Tiles",
+            icon: "/UI/CTPointsBanner",
+        },
+        "relic": {  
+            label: "Relic Tiles",
+            icon: "/UI/DefaultRelicIcon",
+        },
+        "leastCash": {
+            label: "Least Cash Tiles",
+            icon: "/UI/LeastCashIconSmall",
+        },
+        "leastTiers": {
+            label: "Least Tiers Tiles",
+            icon: "/UI/LeastTiersIconSmall",
+        },
+        "race": {
+            label: "Race Tiles",
+            icon: "/UI/StopWatch",
+        },
+        "boss": {
+            label: "Boss Tiles",
+            icon: "/BossIcon/BloonariusPortrait",
+        }
+    }
+
+    let filterRadioButtonsDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { gap: '8px' } });
+    leftDiv.appendChild(filterRadioButtonsDiv);
+
+    for (let [key, data] of Object.entries(filterOptions)) {
+        let filterRadioButtonDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-between', 'pointer'], style: { width: '320px' } });
+        filterRadioButtonsDiv.appendChild(filterRadioButtonDiv);
+
+        let iconAndLabelDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
+        filterRadioButtonDiv.appendChild(iconAndLabelDiv);
+
+        let icon = createEl('img', {
+            classList: ['white-outline'],
+            src: `./Assets/${data.icon}.png`,
+            style: { width: '32px', height: '32px', marginRight: '8px' }
+        });
+        iconAndLabelDiv.appendChild(icon);
+
+        let label = createEl('label', {
+            classList: ['font-luckiest', 'black-outline', 'd-flex', 'ai-center', 'pointer'],
+            style: { color: "white", fontSize: '24px', gap: '8px' },
+            innerHTML: data.label
+        });
+        iconAndLabelDiv.appendChild(label);
+
+        let radioBtn = createEl('img', {
+            classList: ['pointer', 'filter-radio-button'],
+            src: (renderSettings.filter == key) ? "./Assets/UI/BlueBtnCircleSmall.png" : "./Assets/UI/PagePipOff.png",
+            style: { width: '36px', height: '36px' },
+            value: key,
+            checked: renderSettings.filter === key,
+        });
+        filterRadioButtonDiv.appendChild(radioBtn);
+
+        filterRadioButtonDiv.addEventListener('click', () => {
+            document.querySelectorAll('.filter-radio-button').forEach(rb => {
+                rb.src = "./Assets/UI/PagePipOff.png";
+            });
+            radioBtn.src = "./Assets/UI/BlueBtnCircleSmall.png";
+            renderSettings.filter = key;
+            applyCTFilter(debugGlobalCTMap, selectedCTData);
+            document.getElementById('top-bar-filter-icon').src = `./Assets/${data.icon}.png`;
+        });
+    }
+
+    let roundFiltersDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { gap: '8px', marginTop: '12px' } });
+    leftDiv.appendChild(roundFiltersDiv);
+
+    roundFiltersDiv.appendChild(createEl('p', {
+        classList: ['black-outline'],
+        style: { fontSize: '20px' },
+        innerHTML: 'Advanced Filters'
+    }));
+
+    let startRoundDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
+    roundFiltersDiv.appendChild(startRoundDiv);
+
+    let startRoundIcon = createEl('img', {
+        classList: ['of-contain'],
+        src: './Assets/UI/StartRoundIconSmall.png',
+        style: { width: '40px', height: '40px', marginRight: '4px' }
+    });
+    startRoundDiv.appendChild(startRoundIcon);
+
+    let startRoundInput = generateNumberInput("Rounds", renderSettings.roundFilterStart, 1, 100, 1, (val) => {
+        renderSettings.roundFilterStart = val;
+        if (renderSettings.roundFilterStart > renderSettings.roundFilterEnd) {
+            renderSettings.roundFilterEnd = renderSettings.roundFilterStart;
+        }
+        applyCTFilter(debugGlobalCTMap, selectedCTData);
+    });
+    startRoundInput.style.flexGrow = '1';
+    startRoundDiv.appendChild(startRoundInput);
+
+    let endRoundInput = generateNumberInput("", renderSettings.roundFilterEnd, 1, 100, 1, (val) => {
+        renderSettings.roundFilterEnd = val;
+        if (renderSettings.roundFilterEnd < renderSettings.roundFilterStart) {
+            renderSettings.roundFilterStart = renderSettings.roundFilterEnd;
+        }
+        applyCTFilter(debugGlobalCTMap, selectedCTData);
+    });
+    endRoundInput.style.flexGrow = '1';
+    startRoundDiv.appendChild(endRoundInput);
+
+    let heroFilterDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
+    leftDiv.appendChild(heroFilterDiv);
+
+    let heroFilterIcon = createEl('img', {
+        classList: ['of-contain'],
+        style: { width: '40px', height: '40px', marginRight: '4px' }
+    });
+    heroFilterDiv.appendChild(heroFilterIcon);
+
+    function updateHeroFilterIcon(selected) {
+        switch(selected) {
+            case "NoFilter":
+                heroFilterIcon.src = './Assets/UI/StrikethroughRound.png';
+                break;
+            case "NoHeroes":
+                heroFilterIcon.src = './Assets/UI/NoHeroSelected.png';
+                break;
+            default:
+                heroFilterIcon.src = `./Assets/HeroIconCircle/HeroIcon${selected}.png`;
+                break;
+        }
+    }
+    updateHeroFilterIcon(renderSettings.heroFilter);
+
+    let horriblePractice = {
+        "NoFilter": "No Filter",
+        "NoHeroes": "No Heroes",
+        "StrikerJones": "Striker Jones",
+        "AdmiralBrickell": "Admiral Brickell",
+        "CaptainChurchill": "Captain Churchill",
+        "PatFusty": "Pat Fusty",
+        "ObynGreenfoot": "Obyn Greenfoot",
+    }
+
+    let heroFilterDropdown = generateDropdown("Hero Filter:", ["No Filter", "No Heroes", ...Object.keys(constants.heroesInOrder).map((id) => { return getLocValue(id)})], horriblePractice[renderSettings.heroFilter] || renderSettings.heroFilter, (selected) => {
+        renderSettings.heroFilter = selected.replaceAll(' ', '');
+        updateHeroFilterIcon(renderSettings.heroFilter);
+        applyCTFilter(debugGlobalCTMap, selectedCTData);
+    });
+    heroFilterDropdown.querySelector('.dropdown-label').style.minWidth = '110px';
+    heroFilterDiv.appendChild(heroFilterDropdown);
+
+    let rightDiv = createEl('div', { classList: ['d-flex', 'f-wrap', 'fd-column'], style: { gap: '12px' } });
+    mainContainer.appendChild(rightDiv);
+
+    rightDiv.appendChild(createEl('p', {
+        classList: ['oak-instructions-header', 'black-outline'],
+        innerHTML: 'Display Options'
+    }));
+
+    rightDiv.appendChild(advancedLayerDiv);
+    rightDiv.appendChild(presetLayersDiv);
+
+    let layerOptions = {
+        // ids: {
+        //     label: "Tile IDs",
+        //     icon: "EnterCodeIcon"
+        // },
+        // map: {
+        //     label: "Map Icons",
+        //     icon: "RequiresTrackIcon",
+        // },
+        decor: {
+            label: "Tile Decorations",
+            icon: "CTRegularTileIconSmall"
+        },
+        banner: {
+            label: "Banner Icons",
+            icon: "CTPointsBanner",
+        },
+        relic: {
+            label: "Relic Icons",
+            icon: "DefaultRelicIcon",
+        },
+        gameMode: {
+            label: "Game Mode Icons",
+            icon: "EventRaceBtn",
+        },
+        hero: {
+            label: "Hero Icons",
+            icon: "AllHeroesIcon",
+        },
+        boss: {
+            label: "Small Boss Icons",
+            icon: "BossTiersIconSmall",
+        },
+        rounds: {
+            label: "Rounds Labels",
+            icon: "StartRoundIconSmall",
+        }
+    }
+
+    for (let [key, data] of Object.entries(layerOptions)) {
+        let toggleDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-between'] });
+
+        let toggle = generateToggle(renderSettings.renderLayers[key], (checked) => {
+            renderSettings.renderLayers[key] = checked;
+            updateCTRenderLayers(debugGlobalCTMap);
+        });
+        let iconNameDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
+        toggleDiv.appendChild(iconNameDiv);
+
+        let iconImg = createEl('img', {
+            classList: ['white-outline'],
+            src: `./Assets/UI/${layerOptions[key].icon}.png`,
+            style: { width: '32px', height: '32px', marginRight: '8px' }
+        });
+        iconNameDiv.appendChild(iconImg);
+        
+        let toggleLabel = createEl('p', {
+            classList: ['black-outline'],
+            style: { fontSize: '24px' },
+            innerHTML: data.label
+        });
+        iconNameDiv.appendChild(toggleLabel);
+        toggleDiv.appendChild(toggle);
+        advancedLayerDiv.appendChild(toggleDiv);
+    }
+
+    let bgOptions = {
+        'default': { label: 'Default', icon: 'BGDefault' },
+        'tileType': { label: 'Tile Type', icon: 'BGTileType' },
+        // 'gameType': { label: 'Game Types', icon: 'CTRegularTileIconSmall' },
+        'mapIcon': { label: 'Map Icon', icon: 'BGMapIcon' },
+        'nearestTeam': { label: 'Nearest', icon: 'BGNearestTeam' },
+    }
+
+    let bottomDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { } });
+    advancedLayerDiv.appendChild(bottomDiv);
+
+     bottomDiv.appendChild(createEl('p', {
+        classList: ['black-outline'],
+        style: { fontSize: '20px' },
+        innerHTML: 'Background Fill'
+    }));
+
+    let bgOptionsDiv = createEl('div', { classList: ['d-flex'], style: { gap: '8px', marginTop: '12px' } });
+    bottomDiv.appendChild(bgOptionsDiv);
+
+    for (let [key, data] of Object.entries(bgOptions)) {
+        let bgOptionDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'fd-column', 'pos-rel', 'pointer'], style: {  } });
+        bgOptionsDiv.appendChild(bgOptionDiv);
+
+        let bgImg = createEl('img', {
+            classList: ['white-outline'],
+            src: `./Assets/CTMap/${data.icon}.png`,
+            style: { width: '75px', height: '75px' }
+        });
+        bgOptionDiv.appendChild(bgImg);
+
+        let bgLabel = createEl('p', {
+            classList: ['font-luckiest', 'black-outline', 'd-flex', 'ai-center', 'pointer'],
+            style: {fontSize: '18px', paddingTop: "4px", color: (renderSettings.backgroundType == key) ? '#4BFF00' : 'white' },
+            innerHTML: data.label
+        });
+        bgOptionDiv.appendChild(bgLabel);
+
+        let bgSelectedImg = createEl('img', {
+            classList: ['bg-selection-checkmark'],
+            src: `./Assets/UI/SelectedTick.png`,
+            style: { width: '32px', height: '32px', position: 'absolute', top: '0px', right: '0px', display: (renderSettings.backgroundType == key) ? 'block' : 'none' }
+        });
+        bgOptionDiv.appendChild(bgSelectedImg);
+
+        bgOptionDiv.addEventListener('click', () => {
+            renderSettings.backgroundType = key;
+            updateCTBackground(debugGlobalCTMap, selectedCTData);
+            bgOptionsDiv.querySelectorAll('.bg-selection-checkmark').forEach(img => {
+                img.style.display = 'none';
+            });
+            bgOptionsDiv.querySelectorAll('p').forEach(label => {
+                label.style.color = 'white';
+            });
+            bgLabel.style.color = '#4BFF00';
+            bgSelectedImg.style.display = 'block';
+        });
+    }
+
+    let presetsDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { } });
+    presetLayersDiv.appendChild(presetsDiv);
+
+     presetsDiv.appendChild(createEl('p', {
+        classList: ['black-outline'],
+        style: { fontSize: '20px' },
+        innerHTML: 'Layout Presets'
+    }));
+
+    let presetOptionsDiv = createEl('div', { classList: ['d-flex', 'f-wrap', 'jc-between'], style: { width: '330px', gap: '8px', marginTop: '12px' } });
+    presetsDiv.appendChild(presetOptionsDiv);
+
+    for (let [key, data] of Object.entries(renderPresets)) {
+        let bgOptionDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'fd-column', 'pos-rel', 'pointer'], style: {  } });
+        presetOptionsDiv.appendChild(bgOptionDiv);
+
+        let bgImg = createEl('img', {
+            classList: ['white-outline'],
+            src: data.icon,
+            style: { width: '150px', height: '150px' }
+        });
+        bgOptionDiv.appendChild(bgImg);
+
+        let bgLabel = createEl('p', {
+            classList: ['font-luckiest', 'black-outline', 'd-flex', 'ai-center', 'pointer'],
+            style: {fontSize: '18px', paddingTop: "4px", color: (renderSettings.backgroundType == key) ? '#4BFF00' : 'white' },
+            innerHTML: data.label
+        });
+        bgOptionDiv.appendChild(bgLabel);
+
+        let bgSelectedImg = createEl('img', {
+            classList: ['bg-selection-checkmark'],
+            src: `./Assets/UI/SelectedTick.png`,
+            style: { width: '32px', height: '32px', position: 'absolute', top: '0px', right: '0px', display: (renderSettings.backgroundType == key) ? 'block' : 'none' }
+        });
+        bgOptionDiv.appendChild(bgSelectedImg);
+
+        bgOptionDiv.addEventListener('click', () => {
+            renderSettings.backgroundType = key;
+            updateCTBackground(debugGlobalCTMap, selectedCTData);
+            presetOptionsDiv.querySelectorAll('.bg-selection-checkmark').forEach(img => {
+                img.style.display = 'none';
+            });
+            presetOptionsDiv.querySelectorAll('p').forEach(label => {
+                label.style.color = 'white';
+            });
+            bgLabel.style.color = '#4BFF00';
+            bgSelectedImg.style.display = 'block';
+        });
+    }
+
+    const footer = createEl('div', { classList: ['d-flex', 'jc-end'], style: { marginTop: '8px', gap: '10px' } });
+    const closeBtn = createEl('div', {
+        classList: ['maps-progress-view', 'black-outline', 'pointer'],
+        innerHTML: 'Apply',
+        style: { padding: '6px 14px', filter: "hue-rotate(270deg)" }
+    });
+
+    closeBtn.addEventListener('click', () => {
+        closeModal && closeModal();
+        goBack();
+    });
+    footer.appendChild(closeBtn);
+    container.appendChild(footer);
+
+    createModal({
+        // header: 'Map View Settings',
+        content: container
+    });
+
+    return container;
+}
+
+function simplifyTowerData(rawTileData) {
+    let simplified = { towers: {}, heroes: {} };
+    for (let data of rawTileData.towers._items) {
+        if (data.max != 0) {
+            if(data.isHero) {
+                simplified.heroes[data.tower] = data.max;
+            } else {
+                simplified.towers[data.tower] = data.max;
+            }
+        }
+    };
+    return simplified;
+}
+
+function getTileRoundRange(data) {
+    if (!data?.GameData?.dcModel?.startRules) return { start: 0, end: 0 };
+    const start = data.GameData.dcModel.startRules.round;
+    let end = data.GameData.dcModel.startRules.endRound;
+    if (end === -1) {
+        const tierCount = data.GameData?.bossData?.TierCount ?? 0;
+        end = 20 + tierCount * 20;
+    }
+    return { start, end };
 }

@@ -439,7 +439,8 @@ async function getExternalCTData(seed) {
 
     const eventId = CTSeedToEventNumber[seed];
     if (eventId == null) {
-        return "Event seed not found.";
+        // console.log(`No event found for CT seed: ${seed}`);
+        return null;
     }
 
     if (!externalCTData[seed]) {

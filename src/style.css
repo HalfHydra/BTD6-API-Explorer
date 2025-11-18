@@ -4973,6 +4973,15 @@ input[type="checkbox"] {
     padding: 10px;
 }
 
+.white-outline {
+    filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white);
+}
+
+.blue-tab-icon {
+    background-image: url("../Assets/UI/StatsTabBlue.png");
+    background-size: contain;
+}
+
 .switch {
     position: relative;
     display: inline-block;
