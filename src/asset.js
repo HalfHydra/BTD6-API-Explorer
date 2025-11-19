@@ -368,13 +368,27 @@ function getLocValue(key){
     return locJSON[key] ? locJSON[key] : key;
 }
 
-function getCollectionEventSkinIcon(skin) {
-    switch(skin) {
-        case "totem":
-            return "CollectingEventTotemBtn";
-        case "fireworks":
-            return "CollectingEventFireworksBtn";
-        case "halloween":
-            return "CollectingEventHalloweenBtn";
+function getCollectionEventSkinIcon(eventData) {
+    if (!eventData || !eventData.start || !eventData.end) {
+        return "CollectingEventTotemBtn";
     }
+    const startDate = new Date(eventData.start);
+    const endDate = new Date(eventData.end);
+
+    const isDateInRange = (month, day) => {
+        const checkDate = new Date(startDate.getFullYear(), month - 1, day);
+        const checkDateNextYear = new Date(startDate.getFullYear() + 1, month - 1, day);
+        return (checkDate >= startDate && checkDate <= endDate) || 
+               (checkDateNextYear >= startDate && checkDateNextYear <= endDate);
+    };
+
+    if (isDateInRange(12, 25)) {
+        return "CollectingEventChristmasBtn";
+    } else if (isDateInRange(10, 31)) {
+        return "CollectingEventHalloweenBtn";
+    } else if (isDateInRange(7, 4)) {
+        return "CollectingEventFireworksBtn";
+    }
+
+    return "CollectingEventTotemBtn";
 }

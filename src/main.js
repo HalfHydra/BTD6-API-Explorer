@@ -4215,7 +4215,7 @@ function generateHowToUseModal() {
     })
 }
 
-function generateInstaCollectionEventHelper(){
+async function generateInstaCollectionEventHelper(){
     let instaMonkeysProgressContainer = document.getElementById('insta-monkeys-progress-container');
     instaMonkeysProgressContainer.innerHTML = "";
 
@@ -4252,8 +4252,10 @@ function generateInstaCollectionEventHelper(){
     })
     instaMonkeyCollectionTopBtns.appendChild(chestOddsButton);
 
+    let current = await getLatestCollectionEvent();
+
     let now = new Date();
-    if (now < new Date(constants.collection.current.end) && now > new Date(constants.collection.current.start)) {
+    if (current != null && now < new Date(current.end)) {
         let featuredInstaButton = document.createElement('p');
         featuredInstaButton.classList.add('where-button','black-outline');
         featuredInstaButton.style.width = "230px";
@@ -5166,7 +5168,7 @@ function onChangeAchievementRewardFilter(filter){
     generateAchievementsGameView();
 }
 
-function generateEvents(){
+async function generateEvents(){
     let eventsContent = document.getElementById('events-content');
     eventsContent.innerHTML = "";
 
@@ -5221,8 +5223,11 @@ function generateEvents(){
         }
     }
 
+    showLoading();
+    let current = await getLatestCollectionEvent();
+
     let now = new Date();
-    if (now > new Date(constants.collection.current.end) /*|| now < new Date(constants.collection.current.start)*/) {
+    if (current == null || now > new Date(current.end)) {
         delete selectors['Collection'];
     }
 
@@ -8450,10 +8455,7 @@ function generateExtrasPage() {
     explorePage.appendChild(selectorsDiv);
 
     let selectors = [
-        // 'Custom Round Sets', 
-        // 'Featured Insta Schedule',
         // 'Collection Event Odds',
-        // 'Monkey Money Helper', 
         // 'Export Data', 
         'Rogue Legends Artifacts',
         'Challenge & Map Browser',
@@ -8465,12 +8467,6 @@ function generateExtrasPage() {
     if (!loggedIn) {
         selectors = selectors.filter(selector => selector != 'Collection Event Odds');
     }
-
-
-    // let now = new Date();
-    // if (now > new Date(constants.collection.current.end) || now < new Date(constants.collection.current.start)) {
-    //     selectors = selectors.filter(selector => selector != 'Featured Insta Schedule');
-    // }
 
     selectors.forEach((selector) => {
         let selectorDiv = document.createElement('div');
@@ -9234,7 +9230,10 @@ function generateTeamsStorePopout(key) {
 
 }
 
-function generateInstaSchedule() {
+async function generateInstaSchedule() {
+    let current = await getLatestCollectionEvent();
+    current = processCollectionEvent(current);
+
     let featuredContent = document.getElementById('featured-content');
     featuredContent.innerHTML = "";
 
@@ -9260,8 +9259,8 @@ function generateInstaSchedule() {
     })
     instaScheduleHeader.appendChild(instaHeaderTop);
 
-    let startDate = new Date(constants.collection.current.start);
-    let endDate = new Date(constants.collection.current.end);
+    let startDate = new Date(current.start);
+    let endDate = new Date(current.end);
     let instaScheduleTitle = createEl('p', {
         classList: ['black-outline', 'fg-1'],
         style: {
@@ -9292,7 +9291,7 @@ function generateInstaSchedule() {
             textAlign: "center",
             lineHeight: "1.5",
         },
-        innerHTML: "List is not from the API. Times are your local timezone. Event list and times may change. Special thanks to Minecool for helping me find what broke my pages list generator!" //please be patient for future events
+        innerHTML: "Times are your local timezone. Event list and times may change. Special thanks to Minecool for helping me find what broke my list generator!"
     });
     instaScheduleHeader.appendChild(instaHeaderDescription);
 
@@ -9312,7 +9311,7 @@ function generateInstaSchedule() {
                 element.classList.remove('collection-event-tower-selector-active');
             }
             if (currentFeaturedTower != "All") { collectionEventTowerSelector.classList.add('collection-event-tower-selector-active') }
-            generateRotations(scheduleContainer);
+            generateRotations(scheduleContainer, current);
         })
         collectionEventTowerSelectors.appendChild(collectionEventTowerSelector);
 
@@ -9331,15 +9330,15 @@ function generateInstaSchedule() {
 
     instaScheduleContent.appendChild(scheduleContainer);
 
-    generateRotations(scheduleContainer);
+    generateRotations(scheduleContainer, current);
 }
 
-function generateRotations(scheduleContainer){
+function generateRotations(scheduleContainer, current){
     scheduleContainer.innerHTML = "";
     let iterate = 0;
-    let currentRotation = Math.floor((Date.now() - constants.collection.current.start) / 28800000);
+    let currentRotation = Math.floor((Date.now() - current.start) / 28800000);
 
-    Object.values(constants.collection.current.rotations).forEach((rotation, index) => {
+    Object.values(current.rotations).forEach((rotation, index) => {
         if(!rotation.includes(currentFeaturedTower) && currentFeaturedTower !== "All") { return; }
         if (index < currentRotation) { return; }
         let rotationDiv = createEl('div', {
@@ -9353,7 +9352,7 @@ function generateRotations(scheduleContainer){
         }
         scheduleContainer.appendChild(rotationDiv);
 
-        let date = new Date(constants.collection.current.start + (28800000 * index));
+        let date = new Date(current.start + (28800000 * index));
         let rotationDate = createEl('p', {
             classList: ['insta-schedule-rotation-date', 'black-outline'],
             style: {

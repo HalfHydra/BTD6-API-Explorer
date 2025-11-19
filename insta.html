@@ -233,16 +233,27 @@
 <script src="./src/evergreen.js"></script>
 <script src="./src/nkapi.js"></script>
 <script src="./src/btd6-ui.js"></script>
+<script src="./src/collection.js"></script>
 <script src="./src/main.js"></script>
 <script src="./src/asset.js"></script>
 <script>
     document.getElementById("loading").style.transform = "scale(0)";
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
-    fetchConstants().then(() => {
+    fetchConstants().then(async () => {
         let now = new Date();
-        if (now < new Date(constants.collection.current.end) && now > new Date(constants.collection.current.start)) {
-            let featuredInstaDiv = document.createElement('div');
+        let featuredInstaDiv = document.createElement('div');
+
+        let loginDiv = generateLoginDiv(() => {
+            fetchInstaDependencies()
+        });
+        loginDiv.style.width = "800px";
+        loginDiv.style.padding = "10px";
+        loginDiv.style.borderRadius = "10px";
+        document.getElementById("profile-content").appendChild(loginDiv);
+
+        let current = await getLatestCollectionEvent();
+        if (now < new Date(current.end)) {
             featuredInstaDiv.style.width = "780px";
             featuredInstaDiv.style.height = "85px";
             featuredInstaDiv.style.border = "8px solid #00000040";
@@ -260,7 +271,7 @@
             roundsetIcon.classList.add('roundset-selector-img');
             featuredInstaDiv.appendChild(roundsetIcon);
 
-            roundsetIcon.src = `../Assets/UI/${getCollectionEventSkinIcon(constants.collection.current.skin)}.png`;
+            roundsetIcon.src = `../Assets/UI/${getCollectionEventSkinIcon(current)}.png`;
             featuredInstaDiv.classList.add("totem-bg")
 
             let roundsetTextDiv = document.createElement('div');
@@ -269,7 +280,8 @@
 
             let roundsetText = document.createElement('p');
             roundsetText.classList.add('selector-text', 'black-outline');
-            roundsetText.innerHTML = 'Featured Instas Rotation';
+            roundsetText.style.fontSize = "28px";
+            roundsetText.innerHTML = `Featured Instas Schedule<br>${new Date(current.start).toLocaleDateString()} - ${new Date(current.end).toLocaleDateString()}`;
             roundsetTextDiv.appendChild(roundsetText);
 
             let roundsetGoImg = document.createElement('img');
@@ -277,14 +289,6 @@
             roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
             featuredInstaDiv.appendChild(roundsetGoImg);
         }
-
-        let loginDiv = generateLoginDiv(() => {
-            fetchInstaDependencies()
-        });
-        loginDiv.style.width = "800px";
-        loginDiv.style.padding = "10px";
-        loginDiv.style.borderRadius = "10px";
-        document.getElementById("profile-content").appendChild(loginDiv);
     });
 </script>
 </html>
