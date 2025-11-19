@@ -4384,7 +4384,7 @@
     /* max-height: 80vh; */
     background-color: var(--profile-secondary);
     border-radius: 10px;
-    /* overflow-y: auto; */
+    overflow-y: auto;
 }
 .chest-container {
     display: flex;
