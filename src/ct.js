@@ -303,6 +303,25 @@ async function openCTEventDetails(source, eventData) {
             eventRelicAvailableText.style.display = "none";
         }
         relicDiv.appendChild(eventRelicAvailableText);
+
+        tippy(relicDiv, {
+            content: `<p class="artifact-title">${getLocValue(`Relic${relic}`)}</p>${getLocValue(`Relic${relic}Description`)}`,
+            allowHTML: true,
+            placement: 'top',
+            hideOnClick: false,
+            theme: 'speech_bubble',
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            },
+        });
     });
 
     let dailyPowers = externalCTData[eventData.id]?.daily_powers || [];
