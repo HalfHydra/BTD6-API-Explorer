@@ -330,17 +330,17 @@ function getRemainingTime(targetTime) {
     return remainingTime;
 }
 
-function updateTimer(targetTime, elementId) {
+function updateTimer(targetTime, elementId, finishedText = "Finished") {
     const timerElement = document.getElementById(elementId);
     if (!timerElement) return 'missing';
 
     const remainingTime = getRemainingTime(targetTime);
     if (remainingTime > 48 * 3600) {
-        const days = Math.ceil(remainingTime / (24 * 3600));
+        const days = Math.floor(remainingTime / (24 * 3600));
         timerElement.textContent = `${days} days left`;
         timerElement.style.width = "130px";
     } else if (remainingTime < 0) {
-        timerElement.textContent = "Finished";
+        timerElement.textContent = finishedText;
         timerElement.style.textAlign = "right";
         return 'finished';
     } else {
