@@ -32,6 +32,7 @@ let renderSettings = {
     backgroundType: "default", //default, tileType, mapIcon, nearestTeam
     selectedTeamRotation: -90,
     searchTerm: "",
+    showIds: false,
     renderLayers: {
         decor: true,
         banner: false,
@@ -39,74 +40,82 @@ let renderSettings = {
         map: false,
         boss: false,
         gameMode: true,
-        ids: false,
         hero: false,
         rounds: false,
     },
     roundFilterStart: 1,
     roundFilterEnd: 100,
-    heroFilter: "NoFilter"
+    heroFilter: "NoFilter",
+    selectedPreset: "default",
 }
 
 let renderPresets = {
     default: {
-        icon: "./Assets/CTMap/BGDefault.png",
+        icon: "./Assets/CTMap/PresetDefault.png",
         label: "Default",
-        backgroundType: "default",
-        renderLayers: {
-            decor: true,
-            banner: true,
-            relic: true,
-            map: false,
-            boss: true,
-            gameMode: false,
-            hero: false,
-            rounds: false,
+        settings: {
+            backgroundType: "default",
+            renderLayers: {
+                decor: true,
+                banner: true,
+                relic: true,
+                map: false,
+                boss: true,
+                gameMode: false,
+                hero: false,
+                rounds: false,
+            }
         }
     },
     gamemode: {
-        icon: "./Assets/CTMap/BGDefault.png",
-        label: "Game Modes",
-        backgroundType: "tileType",
-        renderLayers: {
-            decor: false,
-            banner: false,
-            relic: false,
-            map: false,
-            boss: false,
-            gameMode: true,
-            hero: false,
-            rounds: true,
+        icon: "./Assets/CTMap/PresetGameType.png",
+        label: "Game Types",
+        settings: {
+            backgroundType: "tileType",
+            renderLayers: {
+                decor: false,
+                banner: false,
+                relic: false,
+                map: false,
+                boss: false,
+                gameMode: true,
+                hero: false,
+                rounds: false,
+            }
         }
     },
     maps: {
-        icon: "./Assets/CTMap/BGDefault.png",
-        label: "Maps and Rounds",
-        backgroundType: "mapIcon",
-        renderLayers: {
-            decor: false,
-            banner: false,
-            relic: false,
-            map: true,
-            boss: false,
-            gameMode: false,
-            hero: false,
-            rounds: true,
+        icon: "./Assets/CTMap/PresetMapIcon.png",
+        label: "Maps Background",
+        settings: {
+            backgroundType: "mapIcon",
+            renderLayers: {
+                decor: false,
+                banner: false,
+                relic: false,
+                map: true,
+                boss: false,
+                gameMode: false,
+                hero: false,
+                rounds: true,
+            }
         }
     },
     heroes: {
-        icon: "./Assets/CTMap/BGDefault.png",
+        icon: "./Assets/CTMap/PresetHeroes.png",
         label: "Heroes",
-        backgroundType: "tileType",
-        renderLayers: {
-            decor: false,
-            banner: false,
-            relic: false,
-            map: false,
-            boss: false,
-            gameMode: false,
-            hero: true,
-            rounds: true,
+        settings: {
+            backgroundType: "tileType",
+            renderLayers: {
+                decor: false,
+                banner: false,
+                relic: false,
+                map: false,
+                boss: false,
+                gameMode: false,
+                hero: true,
+                rounds: true,
+            }
         }
     }
 }
@@ -290,7 +299,8 @@ async function openCTEventDetails(source, eventData) {
         } else if (isEventActive) {
             eventRelicAvailableText.innerHTML = `Unlocked`;
         } else {
-            eventRelicAvailableText.innerHTML = `${unlockTime.toLocaleDateString()}`;
+            // eventRelicAvailableText.innerHTML = `${unlockTime.toLocaleDateString()}`;
+            eventRelicAvailableText.style.display = "none";
         }
         relicDiv.appendChild(eventRelicAvailableText);
     });
@@ -512,8 +522,8 @@ async function openCTEventMap(source, eventData) {
     let tileLabelsLabel = createEl('p', { classList: ['black-outline'], innerHTML: 'IDs' });
     tileLabelsDiv.appendChild(tileLabelsLabel);
 
-    let showTileLabelsBtn = generateToggle(renderSettings.renderLayers.ids, (checked) => {
-        renderSettings.renderLayers.ids = checked;
+    let showTileLabelsBtn = generateToggle(renderSettings.showIds, (checked) => {
+        renderSettings.showIds = checked;
         updateCTRenderLayers(ctMapDiv);
     });
     tileLabelsDiv.appendChild(showTileLabelsBtn);
@@ -1169,7 +1179,7 @@ function updateCTBackground(container, tileData) {
         switch(bg) {
             case 'default':
                 fillColor = '#B9E546';
-                // entry.gDecor.style.display = 'block';
+                entry.gDecor.style.display = 'block';
                 break;
             case 'tileType': 
                 switch (data.TileType) {
@@ -1211,7 +1221,7 @@ function updateCTRenderLayers(container) {
         entry.gBg.style.display = renderSettings.renderLayers.bg ? 'block' : 'none';
         entry.gRelic.style.display = renderSettings.renderLayers.relic ? 'block' : 'none';
         entry.gBanner.style.display = renderSettings.renderLayers.banner ? 'block' : 'none';
-        entry.gText.style.display = renderSettings.renderLayers.ids ? 'block' : 'none';
+        entry.gText.style.display = renderSettings.showIds ? 'block' : 'none';
         entry.gDecor.style.display = renderSettings.renderLayers.decor ? 'block' : 'none';
         entry.gMapFill.style.display = renderSettings.backgroundType == "mapIcon" ? 'block' : 'none';
         entry.gBoss.style.display = renderSettings.renderLayers.boss ? 'block' : 'none';
@@ -1238,9 +1248,129 @@ function openCTSettingsModal(){
     });
     modalHeader.appendChild(modalTitle);
 
+    let presetLayersDiv = createEl('div', { classList: ['d-flex', 'jc-between', 'f-wrap', 'fd-column'], style: { gap: '12px', display: !renderSettings.advancedLayers ? 'flex' : 'none' } });
+    let advancedLayerDiv = createEl('div', { classList: ['d-flex', 'jc-between', 'f-wrap', 'fd-column'], style: { gap: '12px', display: renderSettings.advancedLayers ? 'flex' : 'none' } });
+    let advancedFiltersDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { gap: '8px' } });
 
-    let presetLayersDiv = createEl('div', { classList: ['d-flex', 'jc-between', 'f-wrap', 'fd-column'], style: { gap: '12px' } });
-    let advancedLayerDiv = createEl('div', { classList: ['d-flex', 'jc-between', 'f-wrap', 'fd-column'], style: { gap: '12px', display: 'none' } });
+    function rebuildAdvancedToggles() {
+        advancedLayerDiv.innerHTML = '';
+        
+        let layerOptions = {
+            decor: {
+                label: "Tile Decorations",
+                icon: "CTRegularTileIconSmall"
+            },
+            banner: {
+                label: "Banner Icons",
+                icon: "CTPointsBanner",
+            },
+            relic: {
+                label: "Relic Icons",
+                icon: "DefaultRelicIcon",
+            },
+            gameMode: {
+                label: "Game Mode Icons",
+                icon: "EventRaceBtn",
+            },
+            hero: {
+                label: "Hero Icons",
+                icon: "AllHeroesIcon",
+            },
+            boss: {
+                label: "Small Boss Icons",
+                icon: "BossTiersIconSmall",
+            },
+            rounds: {
+                label: "Rounds Labels",
+                icon: "StartRoundIconSmall",
+            }
+        }
+
+        for (let [key, data] of Object.entries(layerOptions)) {
+            let toggleDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-between'] });
+
+            let toggle = generateToggle(renderSettings.renderLayers[key], (checked) => {
+                renderSettings.renderLayers[key] = checked;
+                updateCTRenderLayers(debugGlobalCTMap);
+            });
+            let iconNameDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
+            toggleDiv.appendChild(iconNameDiv);
+
+            let iconImg = createEl('img', {
+                classList: ['white-outline'],
+                src: `./Assets/UI/${data.icon}.png`,
+                style: { width: '32px', height: '32px', marginRight: '8px' }
+            });
+            iconNameDiv.appendChild(iconImg);
+            
+            let toggleLabel = createEl('p', {
+                classList: ['black-outline'],
+                style: { fontSize: '24px' },
+                innerHTML: data.label
+            });
+            iconNameDiv.appendChild(toggleLabel);
+            toggleDiv.appendChild(toggle);
+            advancedLayerDiv.appendChild(toggleDiv);
+        }
+
+        let bottomDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { } });
+        advancedLayerDiv.appendChild(bottomDiv);
+
+        bottomDiv.appendChild(createEl('p', {
+            classList: ['black-outline'],
+            style: { fontSize: '20px' },
+            innerHTML: 'Background Fill'
+        }));
+
+        let bgOptionsDiv = createEl('div', { classList: ['d-flex'], style: { gap: '8px', marginTop: '12px' } });
+        bottomDiv.appendChild(bgOptionsDiv);
+
+        let bgOptions = {
+            'default': { label: 'Default', icon: 'BGDefault' },
+            'tileType': { label: 'Tile Type', icon: 'BGTileType' },
+            'mapIcon': { label: 'Map Icon', icon: 'BGMapIcon' },
+            'nearestTeam': { label: 'Nearest', icon: 'BGNearestTeam' },
+        }
+
+        for (let [key, data] of Object.entries(bgOptions)) {
+            let bgOptionDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'fd-column', 'pos-rel', 'pointer'], style: {  } });
+            bgOptionsDiv.appendChild(bgOptionDiv);
+
+            let bgImg = createEl('img', {
+                classList: ['white-outline'],
+                src: `./Assets/CTMap/${data.icon}.png`,
+                style: { width: '75px', height: '75px' }
+            });
+            bgOptionDiv.appendChild(bgImg);
+
+            let bgLabel = createEl('p', {
+                classList: ['font-luckiest', 'black-outline', 'd-flex', 'ai-center', 'pointer'],
+                style: {fontSize: '18px', paddingTop: "4px", color: (renderSettings.backgroundType == key) ? '#4BFF00' : 'white' },
+                innerHTML: data.label
+            });
+            bgOptionDiv.appendChild(bgLabel);
+
+            let bgSelectedImg = createEl('img', {
+                classList: ['bg-selection-checkmark'],
+                src: `./Assets/UI/SelectedTick.png`,
+                style: { width: '32px', height: '32px', position: 'absolute', top: '0px', right: '0px', display: (renderSettings.backgroundType == key) ? 'block' : 'none' }
+            });
+            bgOptionDiv.appendChild(bgSelectedImg);
+
+            bgOptionDiv.addEventListener('click', () => {
+                renderSettings.backgroundType = key;
+                updateCTBackground(debugGlobalCTMap, selectedCTData);
+                bgOptionsDiv.querySelectorAll('.bg-selection-checkmark').forEach(img => {
+                    img.style.display = 'none';
+                });
+                bgOptionsDiv.querySelectorAll('p').forEach(label => {
+                    label.style.color = 'white';
+                });
+                bgLabel.style.color = '#4BFF00';
+                bgSelectedImg.style.display = 'block';
+            });
+        }
+    }
 
     let modalAdvancedDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'pointer'], style: {} });
     modalHeader.appendChild(modalAdvancedDiv);
@@ -1254,12 +1384,20 @@ function openCTSettingsModal(){
 
     let modalAdvancedToggle = generateToggle(renderSettings.advancedLayers, (checked) => {
         renderSettings.advancedLayers = checked;
+        renderSettings.selectedPreset = null;
         if (checked) {
             presetLayersDiv.style.display = 'none';
             advancedLayerDiv.style.display = 'flex';
+            advancedFiltersDiv.style.display = 'flex';
+            rebuildAdvancedToggles();
         } else {
             presetLayersDiv.style.display = 'flex';
             advancedLayerDiv.style.display = 'none';
+            advancedFiltersDiv.style.display = 'none';
+            renderSettings.roundFilterStart = 1;
+            renderSettings.roundFilterEnd = 100;
+            renderSettings.heroFilter = 'NoFilter';
+            applyCTFilter(debugGlobalCTMap, selectedCTData);
         }
     });
     modalAdvancedDiv.appendChild(modalAdvancedToggle);
@@ -1267,7 +1405,7 @@ function openCTSettingsModal(){
     let mainContainer = createEl('div', { classList: ['d-flex', 'jc-evenly', 'f-wrap'], style: { gap: '24px' } });
     container.appendChild(mainContainer);
 
-    let leftDiv = createEl('div', { classList: ['d-flex', 'f-wrap', 'fd-column'], style: { gap: '12px' } });
+    let leftDiv = createEl('div', { classList: ['d-flex', 'f-wrap', 'fd-column'], style: { gap: '12px', width: '350px' } });
     mainContainer.appendChild(leftDiv);
 
     leftDiv.appendChild(createEl('p', {
@@ -1306,7 +1444,7 @@ function openCTSettingsModal(){
         }
     }
 
-    let filterRadioButtonsDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { gap: '8px' } });
+    let filterRadioButtonsDiv = createEl('div', { classList: ['d-flex', 'fd-column', 'jc-evenly', 'fg-1'], style: { gap: '8px' } });
     leftDiv.appendChild(filterRadioButtonsDiv);
 
     for (let [key, data] of Object.entries(filterOptions)) {
@@ -1350,8 +1488,12 @@ function openCTSettingsModal(){
         });
     }
 
+    // let advancedFiltersDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { gap: '8px' } });
+    advancedFiltersDiv.style.display = renderSettings.advancedLayers ? 'flex' : 'none';
+    leftDiv.appendChild(advancedFiltersDiv);
+
     let roundFiltersDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { gap: '8px', marginTop: '12px' } });
-    leftDiv.appendChild(roundFiltersDiv);
+    advancedFiltersDiv.appendChild(roundFiltersDiv);
 
     roundFiltersDiv.appendChild(createEl('p', {
         classList: ['black-outline'],
@@ -1390,7 +1532,7 @@ function openCTSettingsModal(){
     startRoundDiv.appendChild(endRoundInput);
 
     let heroFilterDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
-    leftDiv.appendChild(heroFilterDiv);
+    advancedFiltersDiv.appendChild(heroFilterDiv);
 
     let heroFilterIcon = createEl('img', {
         classList: ['of-contain'],
@@ -1431,7 +1573,7 @@ function openCTSettingsModal(){
     heroFilterDropdown.querySelector('.dropdown-label').style.minWidth = '110px';
     heroFilterDiv.appendChild(heroFilterDropdown);
 
-    let rightDiv = createEl('div', { classList: ['d-flex', 'f-wrap', 'fd-column'], style: { gap: '12px' } });
+    let rightDiv = createEl('div', { classList: ['d-flex', 'f-wrap', 'fd-column'], style: { gap: '12px', width: '350px' } });
     mainContainer.appendChild(rightDiv);
 
     rightDiv.appendChild(createEl('p', {
@@ -1442,130 +1584,7 @@ function openCTSettingsModal(){
     rightDiv.appendChild(advancedLayerDiv);
     rightDiv.appendChild(presetLayersDiv);
 
-    let layerOptions = {
-        // ids: {
-        //     label: "Tile IDs",
-        //     icon: "EnterCodeIcon"
-        // },
-        // map: {
-        //     label: "Map Icons",
-        //     icon: "RequiresTrackIcon",
-        // },
-        decor: {
-            label: "Tile Decorations",
-            icon: "CTRegularTileIconSmall"
-        },
-        banner: {
-            label: "Banner Icons",
-            icon: "CTPointsBanner",
-        },
-        relic: {
-            label: "Relic Icons",
-            icon: "DefaultRelicIcon",
-        },
-        gameMode: {
-            label: "Game Mode Icons",
-            icon: "EventRaceBtn",
-        },
-        hero: {
-            label: "Hero Icons",
-            icon: "AllHeroesIcon",
-        },
-        boss: {
-            label: "Small Boss Icons",
-            icon: "BossTiersIconSmall",
-        },
-        rounds: {
-            label: "Rounds Labels",
-            icon: "StartRoundIconSmall",
-        }
-    }
-
-    for (let [key, data] of Object.entries(layerOptions)) {
-        let toggleDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-between'] });
-
-        let toggle = generateToggle(renderSettings.renderLayers[key], (checked) => {
-            renderSettings.renderLayers[key] = checked;
-            updateCTRenderLayers(debugGlobalCTMap);
-        });
-        let iconNameDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
-        toggleDiv.appendChild(iconNameDiv);
-
-        let iconImg = createEl('img', {
-            classList: ['white-outline'],
-            src: `./Assets/UI/${layerOptions[key].icon}.png`,
-            style: { width: '32px', height: '32px', marginRight: '8px' }
-        });
-        iconNameDiv.appendChild(iconImg);
-        
-        let toggleLabel = createEl('p', {
-            classList: ['black-outline'],
-            style: { fontSize: '24px' },
-            innerHTML: data.label
-        });
-        iconNameDiv.appendChild(toggleLabel);
-        toggleDiv.appendChild(toggle);
-        advancedLayerDiv.appendChild(toggleDiv);
-    }
-
-    let bgOptions = {
-        'default': { label: 'Default', icon: 'BGDefault' },
-        'tileType': { label: 'Tile Type', icon: 'BGTileType' },
-        // 'gameType': { label: 'Game Types', icon: 'CTRegularTileIconSmall' },
-        'mapIcon': { label: 'Map Icon', icon: 'BGMapIcon' },
-        'nearestTeam': { label: 'Nearest', icon: 'BGNearestTeam' },
-    }
-
-    let bottomDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { } });
-    advancedLayerDiv.appendChild(bottomDiv);
-
-     bottomDiv.appendChild(createEl('p', {
-        classList: ['black-outline'],
-        style: { fontSize: '20px' },
-        innerHTML: 'Background Fill'
-    }));
-
-    let bgOptionsDiv = createEl('div', { classList: ['d-flex'], style: { gap: '8px', marginTop: '12px' } });
-    bottomDiv.appendChild(bgOptionsDiv);
-
-    for (let [key, data] of Object.entries(bgOptions)) {
-        let bgOptionDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'fd-column', 'pos-rel', 'pointer'], style: {  } });
-        bgOptionsDiv.appendChild(bgOptionDiv);
-
-        let bgImg = createEl('img', {
-            classList: ['white-outline'],
-            src: `./Assets/CTMap/${data.icon}.png`,
-            style: { width: '75px', height: '75px' }
-        });
-        bgOptionDiv.appendChild(bgImg);
-
-        let bgLabel = createEl('p', {
-            classList: ['font-luckiest', 'black-outline', 'd-flex', 'ai-center', 'pointer'],
-            style: {fontSize: '18px', paddingTop: "4px", color: (renderSettings.backgroundType == key) ? '#4BFF00' : 'white' },
-            innerHTML: data.label
-        });
-        bgOptionDiv.appendChild(bgLabel);
-
-        let bgSelectedImg = createEl('img', {
-            classList: ['bg-selection-checkmark'],
-            src: `./Assets/UI/SelectedTick.png`,
-            style: { width: '32px', height: '32px', position: 'absolute', top: '0px', right: '0px', display: (renderSettings.backgroundType == key) ? 'block' : 'none' }
-        });
-        bgOptionDiv.appendChild(bgSelectedImg);
-
-        bgOptionDiv.addEventListener('click', () => {
-            renderSettings.backgroundType = key;
-            updateCTBackground(debugGlobalCTMap, selectedCTData);
-            bgOptionsDiv.querySelectorAll('.bg-selection-checkmark').forEach(img => {
-                img.style.display = 'none';
-            });
-            bgOptionsDiv.querySelectorAll('p').forEach(label => {
-                label.style.color = 'white';
-            });
-            bgLabel.style.color = '#4BFF00';
-            bgSelectedImg.style.display = 'block';
-        });
-    }
+    rebuildAdvancedToggles();
 
     let presetsDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { } });
     presetLayersDiv.appendChild(presetsDiv);
@@ -1592,7 +1611,7 @@ function openCTSettingsModal(){
 
         let bgLabel = createEl('p', {
             classList: ['font-luckiest', 'black-outline', 'd-flex', 'ai-center', 'pointer'],
-            style: {fontSize: '18px', paddingTop: "4px", color: (renderSettings.backgroundType == key) ? '#4BFF00' : 'white' },
+            style: {fontSize: '18px', paddingTop: "4px", color: (renderSettings.selectedPreset == key) ? '#4BFF00' : 'white' },
             innerHTML: data.label
         });
         bgOptionDiv.appendChild(bgLabel);
@@ -1600,13 +1619,20 @@ function openCTSettingsModal(){
         let bgSelectedImg = createEl('img', {
             classList: ['bg-selection-checkmark'],
             src: `./Assets/UI/SelectedTick.png`,
-            style: { width: '32px', height: '32px', position: 'absolute', top: '0px', right: '0px', display: (renderSettings.backgroundType == key) ? 'block' : 'none' }
+            style: { width: '40px', height: '40px', position: 'absolute', top: '2px', right: '4px', display: (renderSettings.selectedPreset == key) ? 'block' : 'none' }
         });
         bgOptionDiv.appendChild(bgSelectedImg);
 
         bgOptionDiv.addEventListener('click', () => {
-            renderSettings.backgroundType = key;
+            console.log(data);
+            renderSettings.backgroundType = data.settings.backgroundType;
+            renderSettings.renderLayers = { ...data.settings.renderLayers };
+
+            console.log(renderSettings)
+
             updateCTBackground(debugGlobalCTMap, selectedCTData);
+            updateCTRenderLayers(debugGlobalCTMap);
+
             presetOptionsDiv.querySelectorAll('.bg-selection-checkmark').forEach(img => {
                 img.style.display = 'none';
             });
@@ -1615,10 +1641,11 @@ function openCTSettingsModal(){
             });
             bgLabel.style.color = '#4BFF00';
             bgSelectedImg.style.display = 'block';
+            renderSettings.selectedPreset = key;
         });
     }
 
-    const footer = createEl('div', { classList: ['d-flex', 'jc-end'], style: { marginTop: '8px', gap: '10px' } });
+    const footer = createEl('div', { classList: ['d-flex', 'jc-center'], style: { marginTop: '8px', gap: '10px' } });
     const closeBtn = createEl('div', {
         classList: ['maps-progress-view', 'black-outline', 'pointer'],
         innerHTML: 'Apply',
