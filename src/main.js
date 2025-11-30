@@ -9407,6 +9407,30 @@ function generateRotations(scheduleContainer, current){
         firstRotation = false;
         iterate++;
     })
+
+    let endRotationDiv = createEl('div', {
+        classList: ['d-flex', 'jc-between', 'ai-center'],
+        style: {
+            borderTop: "2px solid black",
+            borderRadius: "0px 0px 20px 20px",
+            padding: "10px"
+        }
+    });
+    if (iterate % 2) {
+        endRotationDiv.style.backgroundColor = "#00000040";
+    }
+    scheduleContainer.appendChild(endRotationDiv);
+    let endDate = new Date(constants.collection.current.end);
+    let endRotationDate = createEl('p', {
+        classList: ['insta-schedule-rotation-date', 'black-outline'],
+        style: {
+            fontSize: "28px",
+            textAlign: "center",
+            flexGrow: "1",
+        },
+        innerHTML: `Event Ends: ${endDate.toLocaleString()}`
+    });
+    endRotationDiv.appendChild(endRotationDate);
 }
 
 function generateQuestsPage() {
