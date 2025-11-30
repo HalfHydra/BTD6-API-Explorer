@@ -8,6 +8,22 @@
     "profileBanners": 56,
     "profileAvatars": 116,
     "teamsBanners": 15,
+    "lives": {
+        "Easy": 200,
+        "PrimaryOnly": 200,
+        "Deflation": 200,
+        "Medium": 150,
+        "MilitaryOnly": 150,
+        "Apopalypse": 150,
+        "Reverse": 150,
+        "Hard": 100,
+        "MagicOnly": 100,
+        "DoubleMoabHealth": 100,
+        "HalfCash": 100,
+        "AlternateBloonsRounds": 100,
+        "Impoppable": 1,
+        "Clicks": 1
+    },
     "startRound": {
         "Easy": 1,
         "PrimaryOnly": 1,

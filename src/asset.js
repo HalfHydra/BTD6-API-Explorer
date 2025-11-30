@@ -225,6 +225,9 @@ function getSkinAssetPath(skin, level) {
 }
 
 function getMapIcon(map) {
+    if (constants.mapsInOrder[map] === undefined) {
+        return `Assets/MapIcon/MapLoadingImage.png`;
+    }
     return map == "#ouch" ? `Assets/MapIcon/MapSelectouchButton.png` : `Assets/MapIcon/MapSelect${map}Button.png`;
 }
 

@@ -256,12 +256,13 @@
     transform: translate(-50%, -50%);
     width: 800px;
     /* max-height: 80vh; */
-    background-color: var(--profile-secondary);
+    /* background-color: var(--profile-secondary); */
     border-radius: 10px;
 }
 .modal-content {
     max-height: calc(var(--vh, 1vh) * 80);
     overflow-y: auto;
+    background-color: var(--profile-secondary);
 }
 
 .previous-oak-entry {

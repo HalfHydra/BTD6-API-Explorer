@@ -72,9 +72,9 @@ function createEl(tag, options = {}) {
     return el;
 }
 
-function createModal({ header = '', content = '', footer = '', classList = [] } = {}) {
+function createModal({ header = '', content = '', footer = '', backgroundColor = "var(--profile-secondary)" } = {}) {
     const modalOverlay = createEl('div', {
-        classList: ['modal-overlay', ...classList]
+        classList: ['modal-overlay']
     });
 
     const modalBox = createEl('div', { classList: ['modal-box'] });
@@ -103,7 +103,7 @@ function createModal({ header = '', content = '', footer = '', classList = [] } 
     });
     modalHeader.appendChild(modalClose);
 
-    const modalContent = createEl('div', { classList: ['modal-content'] });
+    const modalContent = createEl('div', { classList: ['modal-content'], style: { backgroundColor: backgroundColor }});
     modalBox.appendChild(modalContent);
 
     if (typeof content === 'string') {

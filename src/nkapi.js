@@ -456,6 +456,7 @@ async function getExternalCTData(seed) {
             daily_powers,
             event_relics,
             eventId: eventId,
+            seed: seed,
             _cachedAt: Date.now()
         };
     }
