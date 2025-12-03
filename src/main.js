@@ -3000,7 +3000,7 @@ function generateMapDetails(map){
 
     let mapDifficultyIcon = document.createElement('img');
     mapDifficultyIcon.classList.add('map-difficulty-icon');
-    mapDifficultyIcon.src = `./Assets/DifficultyIcon/Map${constants.mapsInOrder[map]}Btn.png`;
+    mapDifficultyIcon.src = `./Assets/DifficultyIcon/Map${map}Btn.png`;
     mapNameTop.appendChild(mapDifficultyIcon);
 
     let mapNameAndMedals = document.createElement('div');
@@ -5109,7 +5109,7 @@ function generateAchievementsGameView(){
             achievementCompletedCheck.src = "./Assets/UI/TickGreenIcon.png";
             achievementBottomDiv.appendChild(achievementCompletedCheck);
         } else if (achievementData.model.hidden) {
-            achievementBottomDiv.appendChild(generateButton("Reveal", "unset", function() {
+            achievementBottomDiv.appendChild(generateButton("Reveal", {width: "unset"}, function() {
                 achievementNameText.innerHTML = getLocValue(`Achievement ${achievementData.model.achievementId} Name`);
                 achievementDescText.innerHTML = getLocValue(`Achievement ${achievementData.model.achievementId} Description`);
                 achievementIconImg.src = getAchievementIcon(achievementData.model.achievementIcon, false);
@@ -5611,121 +5611,6 @@ function generateBosses(elite){
             });
         });
         observer.observe(raceMapDiv);
-    })
-}
-
-function generateCTs(){
-    let eventsContent = document.getElementById('events-content');
-    eventsContent.innerHTML = "";
-
-    clearAllTimers();
-
-    document.getElementById("loading").style.transform = "scale(0)";
-
-    Object.values(CTData).forEach((race, index) => {
-        let raceDiv = document.createElement('div');
-        raceDiv.classList.add("race-div", "ct-div");
-        raceDiv.style.backgroundImage = `url(../Assets/ProfileBanner/TeamsBanner8.png)`;
-        eventsContent.appendChild(raceDiv);
-
-        let raceInfoDiv = document.createElement('div');
-        raceInfoDiv.classList.add("ct-info-div");
-        raceDiv.appendChild(raceInfoDiv);
-
-        let raceInfoTopDiv = document.createElement('div');
-        raceInfoTopDiv.classList.add("ct-info-top-div");
-        raceInfoDiv.appendChild(raceInfoTopDiv);
-
-        let raceInfoBottomDiv = document.createElement('div');
-        raceInfoBottomDiv.classList.add("ct-info-bottom-div");
-        raceInfoDiv.appendChild(raceInfoBottomDiv);
-
-        let raceInfoName = document.createElement('p');
-        raceInfoName.classList.add("race-info-name", "black-outline");
-        raceInfoName.innerHTML = "Contested Territory / " + race.id;
-        raceInfoTopDiv.appendChild(raceInfoName);
-
-        let raceTimeLeft = document.createElement('p');
-        raceTimeLeft.id = `CT-${race.id}-TimeLeft`;
-        raceTimeLeft.classList.add("race-time-left", "black-outline");
-        raceTimeLeft.innerHTML = "Finished";
-        raceInfoTopDiv.appendChild(raceTimeLeft);    
-        if(new Date() < new Date(race.start)) {
-            raceTimeLeft.innerHTML = "Coming Soon!";
-        } else if (new Date(race.end) > new Date()) {
-            registerTimer(raceTimeLeft.id, new Date(race.end));
-        } else if (new Date() > new Date(race.end)) {
-            raceTimeLeft.innerHTML = "Finished";
-        }
-
-        let ctInfoLeftDiv = document.createElement('div');
-        ctInfoLeftDiv.classList.add("ct-info-left-div");
-        raceInfoBottomDiv.appendChild(ctInfoLeftDiv);
-
-        let raceInfoDates = document.createElement('p');
-        raceInfoDates.classList.add("race-info-dates", "ct-info-dates", "black-outline");
-        raceInfoDates.innerHTML = `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`;
-        ctInfoLeftDiv.appendChild(raceInfoDates);
-
-        tippy(raceInfoDates, {
-            content: `${new Date(race.start).toLocaleString()}<br>${new Date(race.end).toLocaleString()}`,
-            placement: 'top',
-            theme: 'speech_bubble',
-            allowHTML: true,
-        })
-
-        let raceInfoRules = document.createElement('div');
-        raceInfoRules.classList.add("race-info-rules", "start-button", "currency-trophies-div", "black-outline");
-        // raceInfoRules.innerHTML = "Relic Reveal"
-        raceInfoRules.innerHTML = "Map Details"
-        raceInfoRules.addEventListener('click', () => {
-            showLoading();
-            openRelics('events', race.tiles, `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`)
-        })
-        ctInfoLeftDiv.appendChild(raceInfoRules);
-
-        let CTLeaderboardsDiv = document.createElement('div');
-        CTLeaderboardsDiv.classList.add("ct-leaderboards-div");
-        raceInfoBottomDiv.appendChild(CTLeaderboardsDiv);
-
-        let CTLeaderboardsHeader = document.createElement('p');
-        CTLeaderboardsHeader.classList.add("ct-leaderboards-header", "black-outline");
-        CTLeaderboardsHeader.innerHTML = "Leaderboards";
-        CTLeaderboardsDiv.appendChild(CTLeaderboardsHeader);
-
-        let CTLeaderboardsBtns = document.createElement('div');
-        CTLeaderboardsBtns.classList.add("ct-leaderboards-btns");
-        CTLeaderboardsDiv.appendChild(CTLeaderboardsBtns);
-
-        let ctPlayerLeaderboard = document.createElement('div');
-        ctPlayerLeaderboard.classList.add("race-info-leaderboard", "ct-info-leaderboard", "start-button", "blue-btn", "black-outline");
-        ctPlayerLeaderboard.innerHTML = "Players"
-        ctPlayerLeaderboard.addEventListener('click', () => {
-            showLeaderboard('events', race, "CTPlayer");
-        })
-        CTLeaderboardsBtns.appendChild(ctPlayerLeaderboard);
-
-        let ctTeamsLeaderboard = document.createElement('div');
-        ctTeamsLeaderboard.classList.add("race-info-leaderboard", "ct-info-leaderboard", "start-button", "blue-btn", "black-outline");
-        ctTeamsLeaderboard.innerHTML = "Teams"
-        ctTeamsLeaderboard.addEventListener('click', () => {
-            showLeaderboard('events', race, "CTTeam");
-        })
-        CTLeaderboardsBtns.appendChild(ctTeamsLeaderboard);
-
-        let raceInfoMiddleDiv = document.createElement('div');
-        raceInfoMiddleDiv.classList.add("race-info-middle-div", "ct-info-middle-div");
-        CTLeaderboardsDiv.appendChild(raceInfoMiddleDiv);
-
-        let raceInfoTotalScores = document.createElement('p');
-        raceInfoTotalScores.classList.add("race-info-total-scores", "black-outline");
-        raceInfoTotalScores.innerHTML = `Total Scores: ${race.totalScores_player == 0 ? "No Data" : race.totalScores_player.toLocaleString()}`
-        raceInfoMiddleDiv.appendChild(raceInfoTotalScores);
-
-        let raceInfoTotalScores2 = document.createElement('p');
-        raceInfoTotalScores2.classList.add("race-info-total-scores", "black-outline");
-        raceInfoTotalScores2.innerHTML = `Total Scores: ${race.totalScores_team == 0 ? "No Data" : race.totalScores_team.toLocaleString()}`
-        raceInfoMiddleDiv.appendChild(raceInfoTotalScores2);
     })
 }
 
@@ -6979,179 +6864,6 @@ function exitChallengeModel(source){
 function exitMapModel(source){
     document.getElementById('map-content').style.display = "none";
     document.getElementById(`${source}-content`).style.display = "flex";
-}
-
-async function openRelics(source, tilesLink, eventDates) {
-    let data = await getCTTiles(tilesLink)
-    if (data == null) { return; }
-    document.getElementById(`${source}-content`).style.display = "none";
-    let relicsContent = document.getElementById('relics-content');
-    relicsContent.style.display = "flex";
-    relicsContent.innerHTML = "";
-
-    addToBackQueue({"source": source, "destination": "relics"});
-
-    let relicContainer = document.createElement('div');
-    relicContainer.classList.add('relic-container');
-    relicsContent.appendChild(relicContainer);
-    resetScroll();
-
-    let relicHeader = document.createElement('div');
-    relicHeader.classList.add('relic-header');
-    relicContainer.appendChild(relicHeader);
-
-    let relicHeaderViews = document.createElement('div');
-    relicHeaderViews.classList.add('relic-header-views');
-    relicHeader.appendChild(relicHeaderViews);
-
-    let relicDetailView = document.createElement('div');
-    relicDetailView.classList.add('maps-progress-view', 'black-outline', 'stats-tab-yellow');
-    relicDetailView.innerHTML = "List";
-    relicHeaderViews.appendChild(relicDetailView);
-
-    let relicTileView = document.createElement('div');
-    relicTileView.classList.add('maps-progress-view','black-outline');
-    relicTileView.innerHTML = "Tile";
-    relicHeaderViews.appendChild(relicTileView);
-
-    relicDetailView.addEventListener('click', () => {
-        relicDetailView.classList.add('stats-tab-yellow');
-        relicTileView.classList.remove('stats-tab-yellow');
-        document.querySelectorAll('.relic-text-div').forEach(element => {
-            if (element.classList.contains('relic-tile-view')) {
-                element.classList.remove('relic-tile-view');
-            }
-        })
-    })
-
-    relicTileView.addEventListener('click', () => {
-        relicTileView.classList.add('stats-tab-yellow');
-        relicDetailView.classList.remove('stats-tab-yellow');
-        document.querySelectorAll('.relic-text-div').forEach(element => {
-            if (!element.classList.contains('relic-tile-view')) {
-                element.classList.add('relic-tile-view');
-            }
-        })
-    })
-
-    let relicHeaderTitle = document.createElement('p');
-    relicHeaderTitle.classList.add('relic-header-title','black-outline');
-    relicHeaderTitle.innerHTML = `Contested Territory<br>${eventDates}`;
-    relicHeader.appendChild(relicHeaderTitle);
-
-    let relicHeaderRight = document.createElement('div');
-    relicHeaderRight.classList.add('relic-header-right');
-    relicHeader.appendChild(relicHeaderRight);
-
-    let modalClose = document.createElement('img');
-    modalClose.classList.add('modal-close');
-    modalClose.src = "./Assets/UI/CloseBtn.png";
-    modalClose.addEventListener('click', () => {
-        relicsContent.style.display = "none";
-        document.getElementById(`${source}-content`).style.display = "flex";
-    })
-    relicHeaderRight.appendChild(modalClose);
-
-    let relics =  data.tiles.filter(tile => tile.type.includes("Relic"))
-    relics = relics.sort((a, b) => a.id.localeCompare(b.id))
-    relics = relics.map(relic => {
-        relic.type = relic.type.split(" ")[2];
-        return relic
-    });
-
-    let relicsDiv = document.createElement('div');
-    relicsDiv.classList.add('relics-div');
-    relicContainer.appendChild(relicsDiv);
-
-    relics.forEach(relic => {
-        let relicTypeName = relic.type;
-
-        let relicDiv = document.createElement('div');
-        relicDiv.classList.add('relic-div');
-        relicsDiv.appendChild(relicDiv);
-
-        switch(relic.id.charAt(0)){
-            case "A":
-                relicDiv.style.backgroundColor = "#9C55E4"
-                break;
-            case "B":
-                relicDiv.style.backgroundColor = "#E978AA"
-                break;
-            case "C":
-                relicDiv.style.backgroundColor = "#00DD6B"
-                break;
-            case "D":
-                relicDiv.style.backgroundColor = "#04A6F3"
-                break;
-            case "E":
-                relicDiv.style.backgroundColor = "#F7D302"
-                break;
-            case "F":
-                relicDiv.style.backgroundColor = "#F4413F"
-                break;
-            case "M":
-                relicDiv.style.backgroundColor = "#B9E546"
-                break;
-        }
-
-        let relicID = document.createElement('p');
-        relicID.classList.add('relic-id');
-        relicID.innerHTML = relic.id;
-        relicDiv.appendChild(relicID);
-        
-        let relicIcon = document.createElement('img');
-        relicIcon.classList.add('relic-icon');
-        relicIcon.src = `./Assets/RelicIcon/${relicTypeName}.png`
-        relicDiv.appendChild(relicIcon);
-
-        let relicTextDiv = document.createElement('div');
-        relicTextDiv.classList.add('relic-text-div');
-        relicDiv.appendChild(relicTextDiv);
-        
-        let relicName = document.createElement('p');
-        relicName.classList.add('relic-name','black-outline');
-        relicName.innerHTML = getLocValue(`Relic${relicTypeName}`);
-        relicTextDiv.appendChild(relicName);
-        
-        let relicDescription = document.createElement('p');
-        relicDescription.classList.add('relic-description');
-        relicDescription.innerHTML = getLocValue(`Relic${relicTypeName}Description`);
-        relicTextDiv.appendChild(relicDescription);
-    })
-
-    let usedRelicTypes = new Set(relics.map(r => r.type));
-    let unusedRelics = constants.relicsInOrder.filter(type => !usedRelicTypes.has(type));
-
-    unusedRelics.forEach(relicTypeName => {
-        let relicDiv = document.createElement('div');
-        relicDiv.classList.add('relic-div');
-        relicDiv.style.backgroundColor = "grey"
-        relicsDiv.appendChild(relicDiv);
-
-        let relicID = document.createElement('p');
-        relicID.classList.add('relic-id');
-        relicID.innerHTML = "X";
-        relicDiv.appendChild(relicID);
-        
-        let relicIcon = document.createElement('img');
-        relicIcon.classList.add('relic-icon');
-        relicIcon.src = `./Assets/RelicIcon/${relicTypeName}.png`
-        relicDiv.appendChild(relicIcon);
-
-        let relicTextDiv = document.createElement('div');
-        relicTextDiv.classList.add('relic-text-div');
-        relicDiv.appendChild(relicTextDiv);
-        
-        let relicName = document.createElement('p');
-        relicName.classList.add('relic-name','black-outline');
-        relicName.innerHTML = getLocValue(`Relic${relicTypeName}`);
-        relicTextDiv.appendChild(relicName);
-        
-        let relicDescription = document.createElement('p');
-        relicDescription.classList.add('relic-description');
-        relicDescription.innerHTML = getLocValue(`Relic${relicTypeName}Description`);
-        relicTextDiv.appendChild(relicDescription);
-    });
 }
 
 function generateExplore() {
@@ -9271,7 +8983,7 @@ async function generateInstaSchedule() {
     });
     instaHeaderTop.appendChild(instaScheduleTitle);
 
-    let instaHeaderFilterBtn = generateButton("Filter", "150px")
+    let instaHeaderFilterBtn = generateButton("Filter", { width: "150px"})
     instaHeaderTop.appendChild(instaHeaderFilterBtn);
 
     let collectionEventTowerSelectors = createEl('div', {

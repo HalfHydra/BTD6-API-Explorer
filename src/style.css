@@ -256,12 +256,13 @@
     transform: translate(-50%, -50%);
     width: 800px;
     /* max-height: 80vh; */
-    background-color: var(--profile-secondary);
+    /* background-color: var(--profile-secondary); */
     border-radius: 10px;
 }
 .modal-content {
     max-height: calc(var(--vh, 1vh) * 80);
     overflow-y: auto;
+    background-color: var(--profile-secondary);
 }
 
 .previous-oak-entry {
@@ -1747,6 +1748,20 @@
     border: 10px solid transparent;
     border-image-source: url(../Assets/UI/BossFrame.png);
     border-image-slice: 30;
+}
+
+.ct-border {
+    border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/TeamsStoreButton.png);
+    border-image-slice: 45;
+    background: linear-gradient(#08349C 0%, #2a78d4 100%) no-repeat;
+}
+
+.ct-panel {
+    border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/MainBGPanelCT.png);
+    border-image-slice: 70;
+    background: linear-gradient(#9C8E78 0%, #6f5b4a 100%) no-repeat;
 }
 
 .no-data-found {
@@ -4174,7 +4189,7 @@
     /* filter: drop-shadow(0px 0px 5px lime) drop-shadow(0px 0px 5px lime); */
     border-radius: 20px;
     outline: 8px solid rgba(0, 255, 0, 0.5);
-    outline-offset: -10px;
+    outline-offset: -8px;
 }
 .insta-monkey-chance-zero {
     filter: brightness(0.5);
@@ -4959,6 +4974,15 @@ input[type="checkbox"] {
     padding: 10px;
 }
 
+.white-outline {
+    filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px 1px 0 white) drop-shadow(1px -1px 0 white) drop-shadow(-1px -1px 0 white);
+}
+
+.blue-tab-icon {
+    background-image: url("../Assets/UI/StatsTabBlue.png");
+    background-size: contain;
+}
+
 .switch {
     position: relative;
     display: inline-block;
@@ -5608,6 +5632,10 @@ input[type="checkbox"] {
     max-width: calc(100vw - 410px);
 }
 
+.tippy-box[data-theme~='unset'] {
+    background-color: unset;
+}
+
 /* BTD6 Style Classes */
 .checkbox-div {
     display: flex;
@@ -5668,8 +5696,16 @@ input[type="checkbox"] {
     display: flex;
 }
 
+.d-grid {
+    display: grid;
+}
+
 .ai-center {
     align-items: center;
+}
+
+.ai-start {
+    align-items: start;
 }
 
 .ta-center {
@@ -5765,4 +5801,29 @@ input[type="checkbox"] {
 
 .lh-add-full {
     line-height: 2.0;
+}
+
+.ct-map {
+  display: block;
+}
+
+.ct-tile polygon {
+  stroke: #3b4558;
+  stroke-width: 1.5;
+}
+
+.ct-tile:hover polygon {
+  stroke: #ffd24a;
+  stroke-width: 2;
+}
+
+.ct-team-corner polygon {
+  fill: #2f2530;
+  stroke: #6a4a8a;
+}
+
+.ct-label {
+  font: 11px/1 monospace;
+  fill: #ffffff;
+  pointer-events: none;
 }

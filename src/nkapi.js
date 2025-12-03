@@ -442,3 +442,48 @@ function clearProfileRequestQueue() {
     requestQueue = [];
     isProcessing = false;
 }
+
+let externalCTData = {};
+let CTSeedToEventNumber = null;
+
+async function getCTSeedToEventNumber() {
+    if (!CTSeedToEventNumber) {
+        const eventToSeed = await fetch("https://storage.googleapis.com/btd6-ct-map/event-seeds.json").then(r => r.json());
+        const reversed = {};
+        for (const [eventId, s] of Object.entries(eventToSeed)) {
+            reversed[s] = parseInt(eventId, 10);
+        }
+        CTSeedToEventNumber = reversed;
+    }
+    return CTSeedToEventNumber;
+}
+
+async function getExternalCTData(seed) {
+    await getCTSeedToEventNumber();
+
+    const eventId = CTSeedToEventNumber[seed];
+    if (eventId == null) {
+        // console.log(`No event found for CT seed: ${seed}`);
+        return null;
+    }
+
+    if (!externalCTData[seed]) {
+        const base = `https://storage.googleapis.com/btd6-ct-map/events/${eventId}`;
+        const [tiles, daily_powers, event_relics] = await Promise.all([
+            fetch(`${base}/tiles.json`).then(r => r.json()),
+            fetch(`${base}/daily_powers.json`).then(r => r.json()),
+            fetch(`${base}/event_relics.json`).then(r => r.json()),
+        ]);
+
+        externalCTData[seed] = {
+            tiles,
+            daily_powers,
+            event_relics,
+            eventId: eventId,
+            seed: seed,
+            _cachedAt: Date.now()
+        };
+    }
+
+    return externalCTData[seed];
+}

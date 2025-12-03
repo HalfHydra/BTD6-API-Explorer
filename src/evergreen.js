@@ -59,6 +59,8 @@ function createEl(tag, options = {}) {
     if (options.placeholder) el.placeholder = options.placeholder;
     if (options.style) Object.assign(el.style, options.style);
     if (options.onclick) el.onclick = options.onclick;
+    if (options.type) el.type = options.type;
+    if (options.name) el.name = options.name;
     if (options.attributes) {
         for (const [key, value] of Object.entries(options.attributes)) {
             el.setAttribute(key, value);
@@ -70,9 +72,9 @@ function createEl(tag, options = {}) {
     return el;
 }
 
-function createModal({ header = '', content = '', footer = '', classList = [] } = {}) {
+function createModal({ header = '', content = '', footer = '', backgroundColor = "var(--profile-secondary)" } = {}) {
     const modalOverlay = createEl('div', {
-        classList: ['modal-overlay', ...classList]
+        classList: ['modal-overlay']
     });
 
     const modalBox = createEl('div', { classList: ['modal-box'] });
@@ -101,7 +103,7 @@ function createModal({ header = '', content = '', footer = '', classList = [] } 
     });
     modalHeader.appendChild(modalClose);
 
-    const modalContent = createEl('div', { classList: ['modal-content'] });
+    const modalContent = createEl('div', { classList: ['modal-content'], style: { backgroundColor: backgroundColor }});
     modalBox.appendChild(modalContent);
 
     if (typeof content === 'string') {
@@ -328,17 +330,17 @@ function getRemainingTime(targetTime) {
     return remainingTime;
 }
 
-function updateTimer(targetTime, elementId) {
+function updateTimer(targetTime, elementId, finishedText = "Finished") {
     const timerElement = document.getElementById(elementId);
     if (!timerElement) return 'missing';
 
     const remainingTime = getRemainingTime(targetTime);
     if (remainingTime > 48 * 3600) {
-        const days = Math.ceil(remainingTime / (24 * 3600));
+        const days = Math.floor(remainingTime / (24 * 3600));
         timerElement.textContent = `${days} days left`;
         timerElement.style.width = "130px";
     } else if (remainingTime < 0) {
-        timerElement.textContent = "Finished";
+        timerElement.textContent = finishedText;
         timerElement.style.textAlign = "right";
         return 'finished';
     } else {
