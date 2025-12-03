@@ -107,8 +107,8 @@ let loggedIn = false;
 let imageScroll = [
     {
         "title": "New Site Update!",
-        "text": `Site Update 2.3.0:<br>
-        - UI & Caching Improved<br>
+        "text": `Site Update 2.3.1:<br>
+        - Minor fixes + changes<br>
         <br>
         Recent Updates:<br>
         - Added Roundset Filtering<br>
@@ -220,7 +220,7 @@ function generateAchievementsHelper(){
 }
 
 function generateStats(){
-    profileStats["Games Played"] = btd6usersave["gamesPlayed"];
+    profileStats["Games Played"] = btd6publicprofile.gameplay["gameCount"];
     profileStats["Games Won"] = btd6publicprofile.gameplay["gamesWon"];
     profileStats["Highest Round (All Time)"] = btd6publicprofile.gameplay["highestRound"];
     profileStats["Highest Round (CHIMPS)"] = btd6publicprofile.gameplay["highestRoundCHIMPS"];
@@ -390,7 +390,7 @@ function generateProgressSubText(){
     progressSubText["InstaMonkeys"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Collected`;
     progressSubText["Achievements"] = `${btd6usersave.achievementsClaimed.length}/${constants.achievements + constants.hiddenAchievements} Achievement${btd6publicprofile.achievements != 1 ? "s" : ""} Earned`;
     let extrasTotal = Object.keys(extrasUnlocked).length;
-    progressSubText["TrophyStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k] && trophyStoreItemsJSON[k]).length} Trophy Store Items Collected`
+    progressSubText["TrophyStore"] = `${Object.keys(trophyStoreItemsJSON).filter(k => getTrophyItemObtained(k)).length} Trophy Store Items Collected`
     progressSubText["TeamsStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k] && teamsStoreItemsJSON[k]).length} Team Store Items Unlocked`
     progressSubText["Quests"] = `${btd6usersave.quests.filter(q => q.complete).length} Quests Complete`;
     progressSubText["Extras"] = `${extrasTotal} Extra${extrasTotal != 1 ? "s" : ""} Unlocked`;
@@ -846,7 +846,7 @@ function generateFrontPage(){
     let knownIssuesText = document.createElement('p');
     knownIssuesText.classList.add('oak-instructions-text');
     knownIssuesText.innerHTML = `
-    None Currently!<br>
+    - Trophy Store items might be incorrect for some users. Currently investigating why<br>
     `;
     knownIssuesDiv.appendChild(knownIssuesText);
     
@@ -857,7 +857,8 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = `v2.3.0: Update 51 and Minor Updates<br>- Added Update 51 content including new Rogue changes <br>- You can now navigate to the more detailed menus from Quick Stats<br>- Towers menu now shows related Monkey Knowledge points (rework coming eventually)<br>- Added total of each tier to the game-like view of Insta Monkeys collection when "Missing" is toggled.<br>- Unavailable Relics will now displayed on the CT Relics page in prepration for a CT rework<br>- Duplicate (IAP/Special) Rogue starter kits will now show at the bottom<br>- The leaderboard refresh button will now only appear for currently active events<br>- Fixed a bug causing the Clear Filters button to break some roundsets functionality.<br>- Top Paragons will no longer show if there aren't any<br>- Events will now refetch their information from the API after 10 minutes.<br>- The scrollbar is no longer accidentally unstyled. Whoops<br>- Fixed numerous bugs with the back button not clearing when going back<br><br>
+    changelogText.innerHTML = `v2.3.1: Minor fixes<br>- Updated trophy store items to use newer structure on the Open Data API, which should prevent this from being as inaccurate as before - still testing though.<br>- Games played text now shows up with the correct value<br>- SheRa Adora skin will now show up correctly.<br>- Other minor UI tweaks<br><br>
+    v2.3.0: Update 51 and Minor Updates<br>- Added Update 51 content including new Rogue changes <br>- You can now navigate to the more detailed menus from Quick Stats<br>- Towers menu now shows related Monkey Knowledge points (rework coming eventually)<br>- Added total of each tier to the game-like view of Insta Monkeys collection when "Missing" is toggled.<br>- Unavailable Relics will now displayed on the CT Relics page in prepration for a CT rework<br>- Duplicate (IAP/Special) Rogue starter kits will now show at the bottom<br>- The leaderboard refresh button will now only appear for currently active events<br>- Fixed a bug causing the Clear Filters button to break some roundsets functionality.<br>- Top Paragons will no longer show if there aren't any<br>- Events will now refetch their information from the API after 10 minutes.<br>- The scrollbar is no longer accidentally unstyled. Whoops<br>- Fixed numerous bugs with the back button not clearing when going back<br><br>
     v2.2.0: Leaderboard Revamp + Rogue Improvements<br>- Leaderboards have been revamped with better loading times.<br>- Clicking a team on the Contested Territory leaderboard will now show their group of competing teams and their scores.<br>- Leaderboards will now refresh the next time you access them if it's been a while and you don't refresh the page.<br>- A manual refresh button has been added to the top of individual leaderboards.<br>- Leaderboards now show text indicating if it is loading new entries and if it has reached the end.<br>- Fixed a bug causing the timers on events to freeze after going back and forward to various menus.<br>- Rogue Artifacts now has a clear filter button.<br>- Rogue Artifacts count should now correctly display if the collection mode is turned off.<br>- Rogue Legends artifact popout updated to include the update that the artifact was added in as well as display an insta monkey that is added if it has one.<br>- Rogue legends starter kits now also show the insta monkey that is added via a starter artifact.<br>- Fixed numerous UI bugs including a missing Fortified DDT Icon, the rogue legends artifact sorting preview not working anymore.<br><br>
     v2.1.0: Roundsets Revamp + Quests!<br>- The roundset viewer now has options for filtering. This includes a round range (good for Rogue Legends), starting cash, as well as filtering by bloons. There are 6 basic filters and then a toggle for an advanced mode that allows you to filter down to specific bloons.<br>- Bloon Group timings in the detailed view of rounds now has a tooltip that will show the exact timings on hover.<br>- Clicking the round number in simple or detailed will now take you to the previewer for that round.<br>- The roundset previewer has been fixed, and the UI has been rearranged. No more lag issues causing inaccurate previews, it should always be accurate now no matter the capabilities of your device.<br>- You can now turn off round hints.<br>- A helpful message describing the boss roundset changes has been added for each boss.<br>- Quests have been added under the Profile tab. You can also view the custom roundset (if it has one) from there.<br>- Fixed boss details showing the incorrect scoring type.<br>- Fixed some UI issues in Collection Event menus.<br>- You can now reveal hidden achievement descriptions. This will be complimented later with a guide for a select few taht are tougher or less straight forward in the future.<br>- Fixed the download for Rogue artifacts on Firefox.<br>- Fixed a bug that enabled XSS with named monkeys.<br>- New heroes should no longer break the site before I add them. Oops.<br>- 2 variant artifacts filtering has been fixed to include all of them.<br>- Rogue Artifact popout should no longer make you jump to the top of the scrollbar.<br>- Fixed a bug involving reverse mode in the detailed section of roundsets.<br>- Fixed a bug where the list view on map stats would not show any maps after update 45. Whoops, thank you @200e200w for reporting this on the Discord Server.<br><br>
     v2.0.0: Major Update and Update 49!<br>- The site has been completely reworked and redesigned, allowing for less focus on logging in.<br>- A global back button has been implemented at the top left that will always immediately take you back to wherever you just were.<br>- A way of viewing and filtering the current schedule for collection event featured instas has been added.<br>- Top 1% Boss medal was renamed to Top 100.<br>- Roundsets simple view now shows the time per round on the right.<br>- The full time information for events can now be found via a tooltip on the events list.<br>- Rogue Artifacts search now correctly changes the total count for searching.<br>- Special Rogue Roundsets now show their tooltip of what you would see in game for the associated roundset.<br>- Fixed Hero Skin count. NK wasn't the only one who somehow had issues with that...<br>- Fixed ordering for artifacts using internal name instead of alphabetical name.<br>- You can now logout of your profile and use another OAK token without refreshing the page.<br>- Profiles from leaderboards should no longer be missing many medals.<br>- Standalone pages now only load what's essential for them.<br>- The new achievement was added. <br>- Leaderboards have been fixed.<br><br>
@@ -1010,7 +1011,7 @@ function generateOverview(){
     profileHeader.classList.add('profile-banner');
     profileHeader.style.backgroundImage = `linear-gradient(to bottom, transparent 50%, var(--profile-primary) 70%),url('${getProfileBanner(btd6publicprofile)}')`;
     profileContainer.appendChild(profileHeader);
-    profileHeader.appendChild(generateAvatar(100, btd6publicprofile["avatarURL"]));
+    profileHeader.appendChild(generateAvatar(100, getProfileAvatar(btd6publicprofile)));
 
     let profileTopBottom = document.createElement('div');
     profileTopBottom.classList.add('profile-top-bottom');
@@ -1738,7 +1739,7 @@ function generateProgress(){
         selectorsDiv.appendChild(logoutDiv);
 
         let profileSelectorDiv = document.createElement('div');
-        profileSelectorDiv.classList.add('d-flex', 'jc-between', 'ai-center', 'view-profile', 'pointer');
+        profileSelectorDiv.classList.add('d-flex', 'jc-between', 'ai-center', 'view-profile', 'pointer', 'transparent-border');
         profileSelectorDiv.style.backgroundImage = `url(${getProfileBanner(btd6publicprofile)})`;
         profileSelectorDiv.addEventListener('click', () => {
             generateOverview();
@@ -2565,7 +2566,7 @@ function changeHeroSkin(skin, isOriginal){
     heroProgressHeaderSubtitle.innerHTML = isOriginal ? getLocValue(`${skin} Short Description`) : getLocValue(`${skin}SkinName`);
     let heroProgressDesc = document.getElementById('hero-progress-desc');
     heroProgressDesc.innerHTML = isOriginal ? getLocValue(`${skin} Description`) : getLocValue(`${skin}SkinDescription`);
-    if(skin == "SheRa") { heroProgressDesc.innerHTML = getLocValue(`SheRaAdoraSkinDescription`) }
+    // if(skin == "AdoraSheRa") { heroProgressDesc.innerHTML = getLocValue(`SheRaAdoraSkinDescription`) }
     changeHeroLevelPortrait(1);
     //stupid hack to fix ios redraw
     document.body.style.display = "none"
@@ -4214,7 +4215,7 @@ function generateHowToUseModal() {
     })
 }
 
-function generateInstaCollectionEventHelper(){
+async function generateInstaCollectionEventHelper(){
     let instaMonkeysProgressContainer = document.getElementById('insta-monkeys-progress-container');
     instaMonkeysProgressContainer.innerHTML = "";
 
@@ -4251,8 +4252,10 @@ function generateInstaCollectionEventHelper(){
     })
     instaMonkeyCollectionTopBtns.appendChild(chestOddsButton);
 
+    let current = await getLatestCollectionEvent();
+
     let now = new Date();
-    if (now < new Date(constants.collection.current.end) && now > new Date(constants.collection.current.start)) {
+    if (current != null && now < new Date(current.end)) {
         let featuredInstaButton = document.createElement('p');
         featuredInstaButton.classList.add('where-button','black-outline');
         featuredInstaButton.style.width = "230px";
@@ -5165,7 +5168,7 @@ function onChangeAchievementRewardFilter(filter){
     generateAchievementsGameView();
 }
 
-function generateEvents(){
+async function generateEvents(){
     let eventsContent = document.getElementById('events-content');
     eventsContent.innerHTML = "";
 
@@ -5220,14 +5223,16 @@ function generateEvents(){
         }
     }
 
+    showLoading();
+    let current = await getLatestCollectionEvent();
+
     let now = new Date();
-    if (now > new Date(constants.collection.current.end) /*|| now < new Date(constants.collection.current.start)*/) {
+    if (current == null || now > new Date(current.end)) {
         delete selectors['Collection'];
     }
 
     Object.entries(selectors).forEach(([selector,object]) => {
-        let selectorDiv = document.createElement('div');
-        selectorDiv.classList.add('events-selector-div');
+        let selectorDiv = createEl('div', { classList: ['events-selector-div', 'transparent-border'], style: {borderWidth: "5px", borderStyle: "solid"} });
         object.bgcolor ? selectorDiv.style.background = object.bgcolor : selectorDiv.style.backgroundImage = `url(../Assets/${object.bgimg}.png)`;
         /*selectorDiv.innerHTML = progressSubText[selector];*/
         selectorDiv.addEventListener('click', () => {
@@ -8162,10 +8167,7 @@ function generateExtrasPage() {
     explorePage.appendChild(selectorsDiv);
 
     let selectors = [
-        // 'Custom Round Sets', 
-        // 'Featured Insta Schedule',
         // 'Collection Event Odds',
-        // 'Monkey Money Helper', 
         // 'Export Data', 
         'Rogue Legends Artifacts',
         'Challenge & Map Browser',
@@ -8177,12 +8179,6 @@ function generateExtrasPage() {
     if (!loggedIn) {
         selectors = selectors.filter(selector => selector != 'Collection Event Odds');
     }
-
-
-    // let now = new Date();
-    // if (now > new Date(constants.collection.current.end) || now < new Date(constants.collection.current.start)) {
-    //     selectors = selectors.filter(selector => selector != 'Featured Insta Schedule');
-    // }
 
     selectors.forEach((selector) => {
         let selectorDiv = document.createElement('div');
@@ -8637,6 +8633,16 @@ function generateTrophyStoreProgress() {
     generateTrophyStoreContainer("All", "All", trophyStoreItemCounter);
 }
 
+function getTrophyItemObtained(key) {
+    if (btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key] == true) {
+        return true;
+    } else if (btd6usersave.trophyStoreItems.hasOwnProperty(trophyStoreKeyFixes[key])) {
+        return btd6usersave.trophyStoreItems[trophyStoreKeyFixes[key]];
+    } else {
+        return false;
+    }
+}
+
 function generateTrophyStoreContainer(filter, display, counter) {
     let itemsContainer = document.getElementById('trophy-store-items-container');
     itemsContainer.innerHTML = "";
@@ -8657,10 +8663,10 @@ function generateTrophyStoreContainer(filter, display, counter) {
         case "All":
             break;
         case "Unowned":
-            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => !btd6usersave.trophyStoreItems.hasOwnProperty(key) || !btd6usersave.trophyStoreItems[key]));
+            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => !getTrophyItemObtained(key)));
             break;
         case "Owned":
-            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key]));
+            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => getTrophyItemObtained(key)));
             break;
         case "Hidden":
             trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.hidden));
@@ -8682,7 +8688,7 @@ function generateTrophyStoreContainer(filter, display, counter) {
             counter.innerHTML = `${Object.keys(trophyStoreItemsToDisplay).length} Items`;
             break;
         default:
-            counter.innerHTML = `${Object.keys(trophyStoreItemsToDisplay).filter(key => btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key]).length}/${Object.keys(trophyStoreItemsToDisplay).length} Owned`;
+            counter.innerHTML = `${Object.keys(trophyStoreItemsToDisplay).filter(key => getTrophyItemObtained(key)).length}/${Object.keys(trophyStoreItemsToDisplay).length} Owned`;
     }
 
     if (Object.keys(trophyStoreItemsToDisplay).length == 0) {
@@ -8715,7 +8721,7 @@ function generateTrophyStoreContainer(filter, display, counter) {
             itemDiv.appendChild(itemTextEmote);
         }
 
-        if (btd6usersave.trophyStoreItems.hasOwnProperty(key) && btd6usersave.trophyStoreItems[key]) {
+        if (getTrophyItemObtained(key)) {
             // let collectedTick = document.createElement('img');
             // collectedTick.classList.add('trophy-store-collected');
             // collectedTick.src = "../Assets/UI/SelectedTick.png";
@@ -8936,7 +8942,10 @@ function generateTeamsStorePopout(key) {
 
 }
 
-function generateInstaSchedule() {
+async function generateInstaSchedule() {
+    let current = await getLatestCollectionEvent();
+    current = processCollectionEvent(current);
+
     let featuredContent = document.getElementById('featured-content');
     featuredContent.innerHTML = "";
 
@@ -8962,8 +8971,8 @@ function generateInstaSchedule() {
     })
     instaScheduleHeader.appendChild(instaHeaderTop);
 
-    let startDate = new Date(constants.collection.current.start);
-    let endDate = new Date(constants.collection.current.end);
+    let startDate = new Date(current.start);
+    let endDate = new Date(current.end);
     let instaScheduleTitle = createEl('p', {
         classList: ['black-outline', 'fg-1'],
         style: {
@@ -8994,7 +9003,7 @@ function generateInstaSchedule() {
             textAlign: "center",
             lineHeight: "1.5",
         },
-        innerHTML: "List is not from the API. Times are your local timezone. Event list and times may change. Special thanks to Minecool for helping me find what broke my pages list generator!" //please be patient for future events
+        innerHTML: "Times are your local timezone. Event list and times may change. Special thanks to Minecool for helping me find what broke my list generator!"
     });
     instaScheduleHeader.appendChild(instaHeaderDescription);
 
@@ -9014,7 +9023,7 @@ function generateInstaSchedule() {
                 element.classList.remove('collection-event-tower-selector-active');
             }
             if (currentFeaturedTower != "All") { collectionEventTowerSelector.classList.add('collection-event-tower-selector-active') }
-            generateRotations(scheduleContainer);
+            generateRotations(scheduleContainer, current);
         })
         collectionEventTowerSelectors.appendChild(collectionEventTowerSelector);
 
@@ -9033,15 +9042,15 @@ function generateInstaSchedule() {
 
     instaScheduleContent.appendChild(scheduleContainer);
 
-    generateRotations(scheduleContainer);
+    generateRotations(scheduleContainer, current);
 }
 
-function generateRotations(scheduleContainer){
+function generateRotations(scheduleContainer, current){
     scheduleContainer.innerHTML = "";
     let iterate = 0;
-    let currentRotation = Math.floor((Date.now() - constants.collection.current.start) / 28800000);
+    let currentRotation = Math.floor((Date.now() - current.start) / 28800000);
 
-    Object.values(constants.collection.current.rotations).forEach((rotation, index) => {
+    Object.values(current.rotations).forEach((rotation, index) => {
         if(!rotation.includes(currentFeaturedTower) && currentFeaturedTower !== "All") { return; }
         if (index < currentRotation) { return; }
         let rotationDiv = createEl('div', {
@@ -9055,7 +9064,7 @@ function generateRotations(scheduleContainer){
         }
         scheduleContainer.appendChild(rotationDiv);
 
-        let date = new Date(constants.collection.current.start + (28800000 * index));
+        let date = new Date(current.start + (28800000 * index));
         let rotationDate = createEl('p', {
             classList: ['insta-schedule-rotation-date', 'black-outline'],
             style: {
@@ -9110,6 +9119,30 @@ function generateRotations(scheduleContainer){
         firstRotation = false;
         iterate++;
     })
+
+    let endRotationDiv = createEl('div', {
+        classList: ['d-flex', 'jc-between', 'ai-center'],
+        style: {
+            borderTop: "2px solid black",
+            borderRadius: "0px 0px 20px 20px",
+            padding: "10px"
+        }
+    });
+    if (iterate % 2) {
+        endRotationDiv.style.backgroundColor = "#00000040";
+    }
+    scheduleContainer.appendChild(endRotationDiv);
+    let endDate = new Date(constants.collection.current.end);
+    let endRotationDate = createEl('p', {
+        classList: ['insta-schedule-rotation-date', 'black-outline'],
+        style: {
+            fontSize: "28px",
+            textAlign: "center",
+            flexGrow: "1",
+        },
+        innerHTML: `Event Ends: ${endDate.toLocaleString()}`
+    });
+    endRotationDiv.appendChild(endRotationDate);
 }
 
 function generateQuestsPage() {

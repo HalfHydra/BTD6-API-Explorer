@@ -65,7 +65,7 @@ let starterKitNames = {
     "Corvus": "Corvus",
     "Rosalia": "Rosalia",
     "RosaliaTinkerfairy": "Rosalia Tinkerfairy",
-    "SheRa": "She-Ra Adora",
+    "AdoraSheRa": "She-Ra Adora",
     "Silas": "Silas",
     "ObynSkeletor": "Skeletor Obyn"
 }

@@ -132,7 +132,9 @@ let locJSONOverrides = {
     "Mode Impoppable": "Impoppable",
     "Mode Sandbox": "Sandbox",
     "RosaliaTinkerfairySkinName": "TinkerfairyRosaliaSkinName",
-    "RosaliaTinkerfairySkinDescription": "TinkerfairyRosaliaSkinDescription"
+    "RosaliaTinkerfairySkinDescription": "TinkerfairyRosaliaSkinDescription",
+    "AdoraSheRaSkinDescription": "SheRaAdoraSkinDescription",
+    "AdoraSheRaSkinName": "SheRaSkinName"
 }
 
 let medalMap = {
@@ -168,6 +170,78 @@ let saveSkintoSkinMap = {
     "OctoJones": "Octo Jones",
     "SleighCaptainChurchill": "Sleigh Captain Churchill",
     "WolfpackQuincy": "Wolfpack Quincy"
+}
+
+let trophyStoreKeyFixes = {
+    "HeroesQuincyCyberQuincyPlacementFireworks": "H-CyberQuincyPlacementFireworks",
+    "HeroesChurchillPlacementTankDrop": "H-ChurchillPlacementTankDrop",
+    "HeroesBenjamminDJSkinPlacementPartyLights": "H-BenDJSkinPlacementPartyLights",
+    "HeroesStrikerJonesPlacementParadrop": "H-StrikerJonesPlacementParadrop",
+    "GameUIUpgradesDisplayNamedMonkeys": "GameUIUpgradesNamedMonkeys",
+    "GameUIMusicTrackMusicTitleFiestaMix": "UIMusic-TitleFiestaMix",
+    "GameUIMusicTrackMusicSunshineGameboyMix": "UIMusic-SunshineGameboyMix",
+    "GameUIMusicTrackMusicTropicalComplextroMix": "UIMusic-TropicalComplextroMix",
+    "BloonsAllBloonsPopsBarrelOfMonkeys": "BloonsAll-PopsBarrelOfMonkeys",
+    "CoopEmoteAnimationSparklingHearts": "CE-AnimationSparklingHearts",
+    "GameUIMusicTrackMusicSunsetSilentNightMix": "UIMusic-SunsetSilentNightMix",
+    "TowerProjectileBombshooterPumpkin": "TP-BombshooterPumpkin",
+    "TowerProjectileBananaFarmCandyCorn": "TP-BananaFarmCandyCorn",
+    "TowerEffectAllMonkeysPlacementUpgradesGhosts": "TEAMPU-Ghosts",
+    "GameUIPowerSkinSuperVampireStorm": "PSkin-SuperVampireStorm",
+    "GameUIMusicTrackMusicFiestaSynthwaveMix": "UIMusic-FiestaSynthwaveMix",
+    // Unused "CoopEmoteTextRound100": null,
+    "TowerEffectAllMonkeysPlacementUpgradesPresents": "TEAMPU-Presents",
+    "TowerProjectileBoomerangCandyCane": "TP-BoomerangCandyCane",
+    "GameUIMusicTrackMusicJingleBloons": "UIMusic-JingleBloons",
+    "TowerProjectileSpikeFactoryPineapples": "TP-SpikeFactoryPineapples",
+    "GameUIMusicTrackMusicBMCStreetParty": "UIMusic-BMCStreetParty",
+    "TowerProjectileDartlingEasterEggs": "TP-DartlingEasterEggs",
+    "CoopEmoteAnimationPixelMonkeyDance": "CE-AnimationPixelMonkeyDance",
+    "HeroesPatFustyPlacementSuperjump": "H-PatFustyPlacementSuperjump",
+    "TowerPropMonkeyVillageBrazilFlag": "TProp-VillageBrazilFlag",
+    "TowerPropMonkeyVillageScotlandFlag": "TProp-VillageScotlandFlag",
+    "TowerPropMonkeyVillageBananaFlag": "TProp-VillageBananaFlag",
+    "TowerEffectAllMonkeysPlacementUpgradesFireworks": "TEAMPU-Fireworks",
+    "TowerProjectileWizardMonkeyFireworks": "TP-WizardMonkeyFireworks",
+    "GameUIPowerSkinMonkeyBoostFireworks": "PSkin-MonkeyBoostFireworks",
+    "GameUIMusicTrackMusicTropicalOctopusMix": "UIMusic-TropicalOctopusMix",
+    "HeroesGwendolinPlacementFireball": "H-GwendolinPlacementFireball",
+    "TowerPropMonkeyVillageGermanyFlag": "TProp-VillageGermanyFlag",
+    "TowerEffectAllMonkeysPlacementUpgradesButterflies": "TEAMPU-Butterflies",
+    "HeroesChurchillSentaiSkinPetDrone": "H-ChurchillSentaiSkinPetDrone",
+    "TowerEffectAllMonkeysPlacementUpgradesBats": "TEAMPU-Bats",
+    "TowerProjectileEngineerVampireHunter": "TP-EngineerVampireHunter",
+    "TowerPropMonkeyVillageCanadianFlag": "TProp-VillageCanadianFlag",
+    "TowerPropMonkeyVillageAustralianFlag": "TProp-VillageAustralianFlag",
+    "CoopEmoteAnimationBikerBonesRage": "H-BikerBonesPlacementHellrift",
+    "GameUIPowerSkinEnergisingTotemChristmasTree": "PSkin-EnergisingTotemXmasTree",
+    "GameUIMusicTrackMusicWinterChilledMix": "UIMusic-WinterChilledMix",
+    "HeroesStrikerJonesPetGermanShepherd": "H-StrikerJonesPetGermanShepherd",
+    "CoopEmoteAnimationThinkingMonkey": "CE-AnimationThinkingMonkey",
+    "GameUIPowerSkinRoadSpikesFlowerPatch": "PSkin-RoadSpikesFlowerPatch",
+    "GameUIPowerSkinMonkeyBoostSugarRush": "PSkin-MonkeyBoostSugarRush",
+    "GameUIMusicTrackMusicSunshineFiestaMix": "UIMusic-SunshineFiestaMix",
+    "GameUIMusicTrackMusicTribesJaloonMix": "UIMusic-TribesJaloonMix",
+    "GameUIPowerSkinGlueTrapHoneyTrap": "PSkin-GlueTrapHoneyTrap",
+    "GameUIPowerSkinBananaFarmerBananaCostume": "PSkin-BananaFarmerBananaCostume",
+    "TowerProjectileBananaFarmPresents": "TP-BananaFarmPresents",
+    "TowerProjectileTackShooterIcicles": "TP-TackShooterIcicles",
+    "TowerProjectileDartMonkeySnowballs": "TP-DartMonkeySnowballs",
+    "TowerProjectileNinjaMonkeySnowflakes": "TP-NinjaMonkeySnowflakes",
+    "HeroesStrikerJonesBikerBonesPlacementHellrift": "H-BikerBonesPlacementHellrift",
+    "TowerProjectileSniperMonkeyConfetti": "BloonsAllBloonsPopsConfetti",
+    "TowerProjectileAlchemistSpringFlowers": "TP-AlchemistSpringFlowers",
+    "TowerPropMonkeyVillageSwedenFlag": "TProp-VillageSwedenFlag",
+    "HeroesQuincyPlacementSpecialForces": "H-QuincyPlacementSpecialForces",
+    "GameUIMusicTrackMusicSunset64Mix": "UIMusic-Sunset64Mix",
+    "GameUIMusicTrackMusicFiestaHeliumHeightsMix": "UIMusic-FiestaHeliumHeightsMix",
+    "GameUIPowerSkinCamoTrapSprinkler": "PSkin-CamoTrapSprinkler",
+    "GameUIMusicTrackMusicTribesFunkedMix": "UIMusic-TribesFunkedMix",
+    "GameUIMusicTrackMusicTropicalClassyBrassMix": "UIMusic-TropicalClassyBrassMix",
+    "GameUIMusicTrackMusicWinterTonkMix": "UIMusic-WinterTonkMix",
+    "HeroesAdmiralBrickellPlacementAerialDeployment": "H-BrickellPlacementAerialDep",
+    "TowerProjectileDartMonkeyPumpkins": "TP-DartMonkeyPumpkins",
+    "TowerProjectileMonkeyBuccaneerFlavouredTrades": "TP-BuccaneerFlavouredTrades"
 }
 
 let knownProblematicMaps = ["ZMYVERW", "ZMYUWTV", "ZMYUDTK", "ZMYVPGA", "ZMYVPFH", "ZMYWHPC"]
@@ -297,13 +371,27 @@ function getLocValue(key){
     return locJSON[key] ? locJSON[key] : key;
 }
 
-function getCollectionEventSkinIcon(skin) {
-    switch(skin) {
-        case "totem":
-            return "CollectingEventTotemBtn";
-        case "fireworks":
-            return "CollectingEventFireworksBtn";
-        case "halloween":
-            return "CollectingEventHalloweenBtn";
+function getCollectionEventSkinIcon(eventData) {
+    if (!eventData || !eventData.start || !eventData.end) {
+        return "CollectingEventTotemBtn";
     }
+    const startDate = new Date(eventData.start);
+    const endDate = new Date(eventData.end);
+
+    const isDateInRange = (month, day) => {
+        const checkDate = new Date(startDate.getFullYear(), month - 1, day);
+        const checkDateNextYear = new Date(startDate.getFullYear() + 1, month - 1, day);
+        return (checkDate >= startDate && checkDate <= endDate) || 
+               (checkDateNextYear >= startDate && checkDateNextYear <= endDate);
+    };
+
+    if (isDateInRange(12, 25)) {
+        return "CollectingEventChristmasBtn";
+    } else if (isDateInRange(10, 31)) {
+        return "CollectingEventHalloweenBtn";
+    } else if (isDateInRange(7, 4)) {
+        return "CollectingEventFireworksBtn";
+    }
+
+    return "CollectingEventTotemBtn";
 }

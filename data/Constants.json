@@ -1,5 +1,5 @@
 {
-    "version": "2.3.0",
+    "version": "2.3.1",
     "projectContentVersion": 51,
     "totalInstaMonkeys": 1600,
     "achievements": 139,
@@ -57,15 +57,24 @@
         "Clicks": 100
     },
     "limitedTimeEvents": {
+        "Jumpscare Redux": {
+            "type": "Odyssey", 
+            "roundsets": {
+                "Jumpscare1": "Island 1",
+                "Jumpscare2": "Island 2",
+                "Jumpscare3": "Island 3",
+                "Jumpscare4": "Island 4",
+                "Jumpscare5": "Island 5"
+            },
+            "start": 1761789600000, 
+            "end": 1762308000000
+        },
         "BAD but it gets harder": {
             "type": "Odyssey", 
-            "roundset": "BADbutharder", 
-            "start": 1749693600000, 
-            "end": 1750212000000
-        },
-        "BAD but it gets harder (Hard)": {
-            "type": "Odyssey", 
-            "roundset": "BADbutfortharder", 
+            "roundsets": {
+                "BADbutharder": "Easy + Medium",
+                "BADbutfortharder": "Hard"
+            }, 
             "start": 1749693600000, 
             "end": 1750212000000
         },
@@ -95,7 +104,7 @@
             "end": 1725937200000
         }
     },
-    "skuRoundsets": ["1roundEarly","2roundEarly","3roundEarly","4roundEarly","5roundEarly","DDTbadness","countdownGroupOf5","monkeyVSmachines","rabbitYear","valentinesCF","TheFinalGambit","eggs","BeastHandlerjourney","Apocrypha3","31Plus","allOrNothingEnd60","allOrNothingEnd80","Sauda63","MiniMe","BlimpMyCrib","alternateRound140","raceExperiment","SinkingFeeling","CeramicFlood","Doubleupody","Jumpscare","masterymode","chimpsbloonarius","BADbutharder","BADbutfortharder"],
+    "skuRoundsets": ["1roundEarly","2roundEarly","3roundEarly","4roundEarly","5roundEarly","DDTbadness","countdownGroupOf5","monkeyVSmachines","rabbitYear","valentinesCF","TheFinalGambit","eggs","BeastHandlerjourney","Apocrypha3","31Plus","allOrNothingEnd60","allOrNothingEnd80","Sauda63","MiniMe","BlimpMyCrib","alternateRound140","raceExperiment","SinkingFeeling","CeramicFlood","Doubleupody","Jumpscare","masterymode","chimpsbloonarius","BADbutharder","BADbutfortharder","Jumpscare1","Jumpscare2","Jumpscare3","Jumpscare4","Jumpscare5"],
     "roundSets": {
         "DefaultRoundSet": {
             "name": "Standard Rounds",
@@ -1623,6 +1632,12 @@
                     "WizardMonkey",
                     "MonkeyVillage",
                     "MonkeySub"
+                ],
+                "70": [
+                    "SuperMonkey",
+                    "Druid",
+                    "EngineerMonkey",
+                    "HeliPilot"
                 ]
             }
         },
@@ -2172,7 +2187,10 @@
         "Voidora": [0.102, 0.145, 0.341],
         "JiangshiSauda": [0.359, 0.453, 0.547],
         "Rosalia": [1.000, 0.297, 0.622],
-        "Silas": [0.376, 0.459, 0.937]
+        "Silas": [0.376, 0.459, 0.937],
+        "AdoraSheRa": [0.925, 0.424, 0.816],
+        "RedSauda": [0.689, 0.036, 0.016],
+        "ObynSkeletor": [0.408, 0.004, 0.576]
     },
     "HeroPortraitLevels": {
         "AdmiralBrickell": [1,3,7,10,20],
@@ -2220,7 +2238,7 @@
         "DreamstatePsi": [1,3,8,10,20],
         "RedSauda": [1,3,10,20],
         "RosaliaTinkerfairy": [1,2,5,7,13,20],
-        "SheRa": [1,3,7,10,20,"20SunGod","20SunGodVengeful"],
+        "AdoraSheRa": [1,3,7,10,20,"20SunGod","20SunGodVengeful"],
         "Silas": [1,3,7,10,20],
         "ObynSkeletor": [1,3,10,20]
     },
@@ -2233,7 +2251,7 @@
         "PatFusty": ["PatFusty", "FustyTheSnowman", "KaijuPat"],
         "CaptainChurchill": ["CaptainChurchill", "SentaiCaptainChurchill", "SleighCaptainChurchill"],
         "Ezili": ["Ezili", "Galaxili", "SmudgeCatt"],
-        "Adora": ["Adora", "JoanOfArcAdora", "Voidora", "SheRa"],
+        "Adora": ["Adora", "JoanOfArcAdora", "Voidora", "AdoraSheRa"],
         "AdmiralBrickell": ["AdmiralBrickell", "DreadPirateBrickell", "LifeguardBrickell"],
         "Etienne": ["Etienne", "ETnEtienne", "BookWyrmEtienne"],
         "Psi": ["Psi", "Psimbals", "DreamstatePsi"],
@@ -4079,7 +4097,7 @@
     },
     "rogueStarterKitDupes": {
         "RedSauda": "Sauda",
-        "SheRa": "Adora",
+        "AdoraSheRa": "Adora",
         "ObynSkeletor": "ObynGreenfoot"
     },
     "knowledgeTags": {

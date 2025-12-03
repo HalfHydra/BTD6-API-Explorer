@@ -63,6 +63,8 @@ let bossesDataCachedAt = null;
 let CTDataCachedAt = null;
 let challengesDataCachedAt = null;
 
+let latestEvents = null;
+
 const TIMEOUT_TTL = 10 * 60 * 1000;
 
 const isStale = (cachedAt) => (!cachedAt || (Date.now() - cachedAt) > TIMEOUT_TTL);
@@ -373,6 +375,28 @@ async function getCustomMapMetadata(mapId) {
         // console.log(`used cache for ${mapId}`)
     }
     return customMapsCache[mapId];
+}
+
+async function getLatestEvents() {
+    if (latestEvents == null) {
+        await fetchData(`https://data.ninjakiwi.com/btd6/events`, (json) => {
+            latestEvents = json["body"];
+        });
+    }
+    return latestEvents;
+}
+
+async function getLatestCollectionEvent() {
+    let events = await getLatestEvents();
+    console.log(events);
+    for (let event of events) {
+        if (event["type"] == "collectableEvent") {
+            console.log(event)
+            console.log(processCollectionEvent(event));
+            return event;
+        }
+    }
+    return null;
 }
 
 function readLocalStorage(){

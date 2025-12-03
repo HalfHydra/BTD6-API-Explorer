@@ -63,16 +63,18 @@ function generateRoundsets() {
 
     Object.entries(limitedRoundsets).forEach(([event, data]) => {
         let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('roundset-selector-div');
-        roundsetDiv.addEventListener('click', () => {
-            showLoading();
-            showRoundsetModel('rounds', data.roundset);
-        })
+        roundsetDiv.classList.add('roundset-selector-div', 'fd-column');
         selectorsDiv.appendChild(roundsetDiv);
+
+        let mainDiv = createEl('div', {classList: ['d-flex', 'jc-between', 'ai-center', 'w-100']});
+        roundsetDiv.appendChild(mainDiv);
+
+        let subDiv = createEl('div', {classList: ['d-flex']});
+        roundsetDiv.appendChild(subDiv);
 
         let roundsetIcon = document.createElement('img');
         roundsetIcon.classList.add('roundset-selector-img');
-        roundsetDiv.appendChild(roundsetIcon);
+        mainDiv.appendChild(roundsetIcon);
 
         switch(data.type) {
             case "Race":
@@ -85,23 +87,28 @@ function generateRoundsets() {
                 break;
             case "Boss":
                 roundsetIcon.src = `../Assets/BossIcon/${data.boss[0].toUpperCase() + data.boss.slice(1)}EventIcon.png`;
+                roundsetDiv.style.backgroundImage = `url(../Assets/EventBanner/EventBannerSmall${data.boss[0].toUpperCase() + data.boss.slice(1)}.png)`
                 roundsetDiv.classList.add("boss-roundset")
                 break;
         }
 
         let roundsetTextDiv = document.createElement('div');
-        roundsetTextDiv.classList.add('roundset-selector-text-div');
-        roundsetDiv.appendChild(roundsetTextDiv);
+        roundsetTextDiv.classList.add('roundset-selector-text-div', 'w-100');
+        mainDiv.appendChild(roundsetTextDiv);
     
         let roundsetText = document.createElement('p');
         roundsetText.classList.add('selector-text', 'black-outline');
         roundsetText.innerHTML = `${data.type} Event - ${event}`;
         roundsetTextDiv.appendChild(roundsetText);
 
+        let roundsetTimeDiv = document.createElement('div');
+        roundsetTimeDiv.classList.add('d-flex', 'jc-center', 'w-100');
+        roundsetTextDiv.appendChild(roundsetTimeDiv);
+
         let roundsetText2 = document.createElement('p');
         roundsetText2.id = "time-left-" + event;
         roundsetText2.classList.add('selector-text', 'black-outline');
-        roundsetTextDiv.appendChild(roundsetText2);
+        roundsetTimeDiv.appendChild(roundsetText2);
 
         if(new Date() < new Date(data.start)) {
             roundsetText2.innerHTML = "Coming Soon!";
@@ -109,10 +116,27 @@ function generateRoundsets() {
             registerTimer(roundsetText2.id, new Date(data.end));
         }
 
-        let roundsetGoImg = document.createElement('img');
-        roundsetGoImg.classList.add('selector-go-img');
-        roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
-        roundsetDiv.appendChild(roundsetGoImg);
+        if (data.roundsets) {
+            for (const [rs, label] of Object.entries(data.roundsets)) {
+                let roundsetButton =  createEl('div', { classList: ['maps-progress-view', 'black-outline', 'pointer'], style: {filter: 'hue-rotate(270deg)', padding: '2px 4px', margin: "0 4px"}});
+                roundsetButton.innerHTML = label;
+                subDiv.appendChild(roundsetButton);
+                roundsetButton.addEventListener('click', () => {
+                    showLoading();
+                    showRoundsetModel('rounds', rs);
+                })
+            }
+        } else {
+             let roundsetGoImg = document.createElement('img');
+            roundsetGoImg.classList.add('selector-go-img');
+            roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
+            mainDiv.appendChild(roundsetGoImg);
+
+            roundsetDiv.addEventListener('click', () => {
+                showLoading();
+                showRoundsetModel('rounds', data.roundset);
+            })
+        }
     })
     
     
@@ -239,16 +263,18 @@ function generateRoundsets() {
 
     Object.entries(expiredRoundsets).forEach(([event, data]) => {
         let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('roundset-selector-div');
-        roundsetDiv.addEventListener('click', () => {
-            showLoading();
-            showRoundsetModel('rounds', data.roundset);
-        })
+        roundsetDiv.classList.add('roundset-selector-div', 'fd-column');
         selectorsDiv.appendChild(roundsetDiv);
+
+        let mainDiv = createEl('div', {classList: ['d-flex', 'jc-between', 'ai-center', 'w-100']});
+        roundsetDiv.appendChild(mainDiv);
+
+        let subDiv = createEl('div', {classList: ['d-flex']});
+        roundsetDiv.appendChild(subDiv);
 
         let roundsetIcon = document.createElement('img');
         roundsetIcon.classList.add('roundset-selector-img');
-        roundsetDiv.appendChild(roundsetIcon);
+        mainDiv.appendChild(roundsetIcon);
 
         switch(data.type) {
             case "Race":
@@ -268,17 +294,21 @@ function generateRoundsets() {
 
         let roundsetTextDiv = document.createElement('div');
         roundsetTextDiv.classList.add('roundset-selector-text-div');
-        roundsetDiv.appendChild(roundsetTextDiv);
+        mainDiv.appendChild(roundsetTextDiv);
     
         let roundsetText = document.createElement('p');
         roundsetText.classList.add('selector-text', 'black-outline');
         roundsetText.innerHTML = `${data.type} Event - ${event}`;
         roundsetTextDiv.appendChild(roundsetText);
 
+        let roundsetTimeDiv = document.createElement('div');
+        roundsetTimeDiv.classList.add('d-flex', 'jc-center', 'w-100');
+        roundsetTextDiv.appendChild(roundsetTimeDiv);
+
         let roundsetText2 = document.createElement('p');
         roundsetText2.id = "time-left-" + event;
         roundsetText2.classList.add('selector-text', 'black-outline');
-        roundsetTextDiv.appendChild(roundsetText2);
+        roundsetTimeDiv.appendChild(roundsetText2);
 
         if(new Date() < new Date(data.start)) {
             roundsetText2.innerHTML = "Coming Soon!";
@@ -288,10 +318,27 @@ function generateRoundsets() {
             roundsetText2.innerHTML = `${new Date(data.start).toLocaleDateString()} - ${new Date(data.end).toLocaleDateString()}`
         }
 
-        let roundsetGoImg = document.createElement('img');
-        roundsetGoImg.classList.add('selector-go-img');
-        roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
-        roundsetDiv.appendChild(roundsetGoImg);
+        if (data.hasOwnProperty('roundsets')) {
+            for (const [rs, label] of Object.entries(data.roundsets)) {
+                let roundsetButton =  createEl('div', { classList: ['maps-progress-view', 'black-outline', 'pointer'], style: {filter: 'hue-rotate(270deg)', padding: '2px 4px', margin: "0 4px"}});
+                roundsetButton.innerHTML = label;
+                subDiv.appendChild(roundsetButton);
+                roundsetButton.addEventListener('click', () => {
+                    showLoading();
+                    showRoundsetModel('rounds', rs);
+                })
+            }
+        } else {
+             let roundsetGoImg = document.createElement('img');
+            roundsetGoImg.classList.add('selector-go-img');
+            roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
+            mainDiv.appendChild(roundsetGoImg);
+
+            roundsetDiv.addEventListener('click', () => {
+                showLoading();
+                showRoundsetModel('rounds', data.roundset);
+            })
+        }
     })
 
     let skuRoundsetDiv = document.createElement('div');
@@ -367,7 +414,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
 
     currentRoundsetData = processRoundset(roundset, roundsetData);
     if (roundsetFilterSettings.roundFilterEnd === null) {
-        roundsetFilterSettings.roundFilterEnd = currentRoundsetData.rounds[currentRoundsetData.rounds.length - 1].roundNumber;
+        roundsetFilterSettings.roundFilterEnd = Math.max(...currentRoundsetData.rounds.map(r => r.roundNumber));
     }
 
     selectedRoundset = roundset;
