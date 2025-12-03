@@ -124,6 +124,146 @@ let debugGlobalCTMap = null;
 let selectedCTData = null;
 let teamSelectorButtons = [];
 
+async function generateCTs(){
+    let eventsContent = document.getElementById('events-content');
+    eventsContent.innerHTML = "";
+
+    await getCTSeedToEventNumber();
+
+    clearAllTimers();
+
+    document.getElementById("loading").style.transform = "scale(0)";
+
+    Object.values(CTData).forEach((race, index) => {
+        let raceDiv = document.createElement('div');
+        raceDiv.classList.add("race-div", "ct-div");
+        raceDiv.style.backgroundImage = `url(../Assets/ProfileBanner/TeamsBanner8.png)`;
+        eventsContent.appendChild(raceDiv);
+
+        let raceInfoDiv = document.createElement('div');
+        raceInfoDiv.classList.add("ct-info-div");
+        raceDiv.appendChild(raceInfoDiv);
+
+        let raceInfoTopDiv = document.createElement('div');
+        raceInfoTopDiv.classList.add("ct-info-top-div");
+        raceInfoDiv.appendChild(raceInfoTopDiv);
+
+        let raceInfoBottomDiv = document.createElement('div');
+        raceInfoBottomDiv.classList.add("ct-info-bottom-div");
+        raceInfoDiv.appendChild(raceInfoBottomDiv);
+
+        let CTEventNum = CTSeedToEventNumber[race.id] ? CTSeedToEventNumber[race.id] : Math.max(...Object.values(CTSeedToEventNumber)) + 1;
+
+        let raceInfoName = document.createElement('p');
+        raceInfoName.classList.add("race-info-name", "black-outline");
+        raceInfoName.innerHTML = "Contested Territory #" + CTEventNum;
+        raceInfoTopDiv.appendChild(raceInfoName);
+
+        let raceTimeLeft = document.createElement('p');
+        raceTimeLeft.id = `CT-${race.id}-TimeLeft`;
+        raceTimeLeft.classList.add("race-time-left", "black-outline");
+        raceTimeLeft.innerHTML = "Finished";
+        raceInfoTopDiv.appendChild(raceTimeLeft);    
+        if(new Date() < new Date(race.start)) {
+            raceTimeLeft.innerHTML = "Coming Soon!";
+        } else if (new Date(race.end) > new Date()) {
+            registerTimer(raceTimeLeft.id, new Date(race.end));
+        } else if (new Date() > new Date(race.end)) {
+            raceTimeLeft.innerHTML = "Finished";
+        }
+
+        let ctInfoLeftDiv = document.createElement('div');
+        ctInfoLeftDiv.classList.add("ct-info-left-div");
+        raceInfoBottomDiv.appendChild(ctInfoLeftDiv);
+
+        let raceInfoDates = document.createElement('p');
+        raceInfoDates.classList.add("race-info-dates", "ct-info-dates", "black-outline");
+        raceInfoDates.innerHTML = `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`;
+        ctInfoLeftDiv.appendChild(raceInfoDates);
+
+        tippy(raceInfoDates, {
+            content: `${new Date(race.start).toLocaleString()}<br>${new Date(race.end).toLocaleString()}`,
+            placement: 'top',
+            theme: 'speech_bubble',
+            allowHTML: true,
+        })
+
+        let raceInfoRules = createEl('div', { classList: ["start-button", "currency-trophies-div", "black-outline"], style: {width: "200px"}, innerHTML: "Event Details"});
+        raceInfoRules.addEventListener('click', () => {
+            showLoading();
+            openCTEventDetails('events', race)
+        })
+        ctInfoLeftDiv.appendChild(raceInfoRules);
+
+        let CTLeaderboardsDiv = document.createElement('div');
+        CTLeaderboardsDiv.classList.add("ct-leaderboards-div");
+        raceInfoBottomDiv.appendChild(CTLeaderboardsDiv);
+
+        let CTLeaderboardsHeader = document.createElement('p');
+        CTLeaderboardsHeader.classList.add("ct-leaderboards-header", "black-outline");
+        CTLeaderboardsHeader.innerHTML = "Leaderboards";
+        CTLeaderboardsDiv.appendChild(CTLeaderboardsHeader);
+
+        let CTLeaderboardsBtns = document.createElement('div');
+        CTLeaderboardsBtns.classList.add("ct-leaderboards-btns");
+        CTLeaderboardsDiv.appendChild(CTLeaderboardsBtns);
+
+        let ctPlayerLeaderboard = document.createElement('div');
+        ctPlayerLeaderboard.classList.add("race-info-leaderboard", "ct-info-leaderboard", "start-button", "blue-btn", "black-outline");
+        ctPlayerLeaderboard.innerHTML = "Players"
+        ctPlayerLeaderboard.addEventListener('click', () => {
+            showLeaderboard('events', race, "CTPlayer");
+        })
+        CTLeaderboardsBtns.appendChild(ctPlayerLeaderboard);
+
+        let ctTeamsLeaderboard = document.createElement('div');
+        ctTeamsLeaderboard.classList.add("race-info-leaderboard", "ct-info-leaderboard", "start-button", "blue-btn", "black-outline");
+        ctTeamsLeaderboard.innerHTML = "Teams"
+        ctTeamsLeaderboard.addEventListener('click', () => {
+            showLeaderboard('events', race, "CTTeam");
+        })
+        CTLeaderboardsBtns.appendChild(ctTeamsLeaderboard);
+
+        let raceInfoMiddleDiv = document.createElement('div');
+        raceInfoMiddleDiv.classList.add("race-info-middle-div", "ct-info-middle-div");
+        CTLeaderboardsDiv.appendChild(raceInfoMiddleDiv);
+
+        let raceInfoTotalScores = document.createElement('p');
+        raceInfoTotalScores.classList.add("race-info-total-scores", "black-outline");
+        raceInfoTotalScores.innerHTML = `Total Scores: ${race.totalScores_player == 0 ? "No Data" : race.totalScores_player.toLocaleString()}`
+        raceInfoMiddleDiv.appendChild(raceInfoTotalScores);
+
+        let raceInfoTotalScores2 = document.createElement('p');
+        raceInfoTotalScores2.classList.add("race-info-total-scores", "black-outline");
+        raceInfoTotalScores2.innerHTML = `Total Scores: ${race.totalScores_team == 0 ? "No Data" : race.totalScores_team.toLocaleString()}`
+        raceInfoMiddleDiv.appendChild(raceInfoTotalScores2);
+    })
+
+    let historicCTDiv = createEl('div', { classList: [], style: { marginTop: "30px", paddingBottom: "30px" } });
+    eventsContent.appendChild(historicCTDiv);
+
+    let historicCTHeader = createEl('p', { classList: ['black-outline', 'ta-center'], innerHTML: "Historic Contested Territory Events", style: { fontSize: "32px", marginBottom: "10px" } });
+    historicCTDiv.appendChild(historicCTHeader);
+
+    let historicCTContent = createEl('div', { classList: ['d-flex', 'jc-center', 'f-wrap'] });
+    historicCTDiv.appendChild(historicCTContent);
+
+    let shownEvents = Object.values(CTData).map(e => e.id);
+    Object.entries(CTSeedToEventNumber).reverse().forEach(([seed, num]) => {
+        if (shownEvents.includes(seed) || num == 0) return;
+        let eventDiv = createEl('div', { classList: ['start-button', 'currency-trophies-div', 'black-outline'], style: {} });
+        historicCTContent.appendChild(eventDiv);
+
+        let eventName = createEl('p', { classList: ['historic-ct-event-name', 'black-outline'], innerHTML: `CT #${num}` });
+        eventDiv.appendChild(eventName);
+
+        eventDiv.addEventListener('click', () => {
+            showLoading();
+            openCTEventDetails('events', event)
+        })
+    })
+}
+
 async function openCTEventDetails(source, eventData) {
     let eventDates = `${new Date(eventData.start).toLocaleDateString()} - ${new Date(eventData.end).toLocaleDateString()}`;
     let data = await getCTTiles(eventData.tiles)
@@ -227,8 +367,11 @@ async function openCTEventDetails(source, eventData) {
     selectorGoImg.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        console.log(externalCTData[eventData.id].tiles[tileSearch.value]);
-        // if not found do errorModal
+        if (tileSearch.value.length != 3) return;
+        if (!externalCTData[eventData.id].tiles[tileSearch.value]) {
+            errorModal("Tile not found. Please check your input and try again.");
+            return;
+        }
         openTileModal(externalCTData[eventData.id].tiles[tileSearch.value]);
     });
     rogueHeaderCenter.appendChild(selectorGoImg);
@@ -267,7 +410,6 @@ async function openCTEventDetails(source, eventData) {
     relicContainer.appendChild(relicsOuterContainer);
 
     let eventRelicsDiv = createEl('div', { classList: ['d-flex', 'jc-center'], style: { marginBottom: "10px"} });
-    // relicsOuterContainer.appendChild(eventRelicsDiv);
 
     let dailyPowersDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-evenly', 'f-wrap'], style: { padding: "5px", borderRadius: "10px", backgroundColor: "#4B3B2F"/*"#372B23"**/ } });
     relicsOuterContainer.appendChild(dailyPowersDiv);
@@ -378,11 +520,15 @@ async function openCTEventDetails(source, eventData) {
     relics.forEach(relic => {
         let relicTypeName = relic.type;
 
-        let relicDiv = createEl('div', { classList: ['relic-div'], style: { backgroundColor: teamColors[relic.id.charAt(0)] } });
+        let relicDiv = createEl('div', { classList: ['relic-div'], style: { backgroundColor: teamColors[relic.id.charAt(0)], outline: "4px solid rgba(255,255,255,0.25)", outlineOffset: "-4px" } });
         relicsDiv.appendChild(relicDiv);
 
-        let relicID = createEl('p', { classList: ['relic-id'], innerHTML: relic.id });
+        let relicID = createEl('p', { classList: ['relic-id', 'pointer'], innerHTML: relic.id });
         relicDiv.appendChild(relicID);
+
+        relicID.addEventListener('click', () => {
+            openTileModal(externalCTData[eventData.id].tiles[relic.id]);
+        });
 
         let relicIcon = createEl('img', { classList: ['relic-icon'], src: `./Assets/RelicIcon/${relicTypeName}.png` });
         relicDiv.appendChild(relicIcon);
@@ -411,7 +557,7 @@ async function openCTEventDetails(source, eventData) {
     let unusedRelics = constants.relicsInOrder.filter(type => !usedRelicTypes.has(type));
 
     unusedRelics.forEach(relicTypeName => {
-        let relicDiv = createEl('div', { classList: ['relic-div'], style: { backgroundColor: "grey" } });
+        let relicDiv = createEl('div', { classList: ['relic-div'], style: { backgroundColor: "grey", outline: "4px solid rgba(255,255,255,0.25)", outlineOffset: "-4px" } });
         relicsDiv.appendChild(relicDiv);
 
         let relicID = createEl('p', { classList: ['relic-id'], innerHTML: "X" });
@@ -439,6 +585,59 @@ async function openCTEventDetails(source, eventData) {
             },
         });
     });
+
+    let bannersDiv = createEl('div', { classList: ['d-flex', 'jc-center', 'f-wrap'], style: { marginTop: "20px"} });
+    relicContainer.appendChild(bannersDiv);
+
+    let banners = data.tiles.filter(tile => tile.type.includes("Banner"))
+    banners = banners.sort((a, b) => a.id.localeCompare(b.id))
+    banners = banners.sort((a, b) => a.gameType.localeCompare(b.gameType))
+
+    for (let banner of banners) {
+        let bannerDiv = createEl('div', { classList: ['relic-div'], style: { backgroundColor: '#104c93', outline: "4px solid #febe13", outlineOffset: "-4px" } });
+        bannersDiv.appendChild(bannerDiv);
+
+        let bannerID = createEl('p', { classList: ['relic-id', 'pointer'], innerHTML: banner.id });
+        bannerDiv.appendChild(bannerID);
+        bannerID.addEventListener('click', () => {
+            openTileModal(externalCTData[eventData.id].tiles[banner.id]);
+        });
+
+        let bannerImgDiv = createEl('div', { classList: ['pos-rel'], style: {} });
+        bannerDiv.appendChild(bannerImgDiv);
+
+        let img;
+        switch(banner.gameType) {
+            case "LeastCash":
+                img = "ChallengeRulesIcon/LeastCashIcon";
+                break;
+            case "LeastTiers":
+                img = "ChallengeRulesIcon/LeastTiersIcon";
+                break;
+            case "Race":
+                img = "UI/EventRaceBtn";
+                break;
+            case "Boss":
+                img = "UI/BossesBtn";
+                break;
+            default:
+                img = "UI/CTPointsBanner";
+                break;
+        }
+
+        let bannerIcon = createEl('img', { classList: ['relic-icon', 'pos-rel'], src: `./Assets/${img}.png` });
+        bannerImgDiv.appendChild(bannerIcon);  
+
+        if (extData?.tiles[banner.id] && banner.gameType === "Boss") {
+            bannerIcon.src = `../Assets/BossIcon/${bossIDToName[extData.tiles[banner.id].GameData.bossData.bossBloon]}EventIcon.png`;
+            
+            let bossTier = extData.tiles[banner.id].GameData?.bossData?.TierCount || 0;
+            if (bossTier > 0) {
+                let bossTierDiv = createEl('div', { classList: ['pos-rel', 'd-flex', 'jc-center', 'ai-center', 'font-luckiest', 'black-outline'], innerHTML: bossTier, style: { position: 'absolute', bottom: '2px', right: '2px', width: '36px', height: '36px', backgroundImage: 'url(../Assets/UI/BossTiersIconSmall.png)', backgroundSize: 'contain', color: 'white', fontSize: "24px" } });
+                bannerImgDiv.appendChild(bossTierDiv);
+            }
+        } 
+    }
 }
 
 async function openCTEventMap(source, eventData) {
@@ -781,7 +980,7 @@ function renderCTMap(container, ct, tileData, opts = {}) {
     gRot.appendChild(gSpawns);
 
     const tileIndex = new Map();
-    console.log(tileData);
+
     let heroesSet = new Set();
     for (const t of tiles) {
         let data = tileData.tiles[t.id];
@@ -804,10 +1003,10 @@ function renderCTMap(container, ct, tileData, opts = {}) {
         gTiles.appendChild(gTile);
 
         gTile.addEventListener('click', () => {
-            console.log('Clicked tile', t.id, 'neighbors', ct.neighbors.get(t.id));
-            console.log(data);
             openTileModal(data);
         });
+
+        attachTileHoverTippy(gTile, data);
 
         const polygon = document.createElementNS(svg.namespaceURI, 'polygon');
         polygon.setAttribute('points', ptsStr);
@@ -815,11 +1014,6 @@ function renderCTMap(container, ct, tileData, opts = {}) {
         polygon.setAttribute('stroke', stroke);
         polygon.setAttribute('stroke-width', '2');
         gTile.appendChild(polygon);
-
-        const title = document.createElementNS(svg.namespaceURI, 'title');
-        const neigh = ct.neighbors.get(t.id) || [];
-        title.textContent = `${t.id}\nNeighbors: ${neigh.join(', ')}`;
-        polygon.appendChild(title);
 
         const gUpright = document.createElementNS(svg.namespaceURI, 'g');
         gUpright.classList.add('ct-upright');
@@ -975,10 +1169,6 @@ function renderCTMap(container, ct, tileData, opts = {}) {
 
         let heroes = Object.keys(simplifyTowerData(data.GameData.dcModel).heroes);
         heroesSet = new Set([...heroesSet, JSON.stringify(heroes)]);
-        if (JSON.stringify(heroes) == '["ChosenPrimaryHero"]') {
-            console.log(data);
-            console.log(simplifyTowerData(data.GameData.dcModel));
-        }
 
         let selectedHero = (heroes && heroes.length == 1 && heroes[0] !== "ChosenPrimaryHero") ? `/HeroIconCircle/HeroIcon${heroes[0]}` : (heroes.length == 0) ? "/UI/NoHeroSelected" : "/UI/AllHeroesIcon";
 
@@ -1009,7 +1199,7 @@ function renderCTMap(container, ct, tileData, opts = {}) {
         let roundsLabel = document.createElementNS(svg.namespaceURI, 'text');
         roundsLabel.classList.add('font-gardenia', 'ct-tile-label');
         roundsLabel.setAttribute('x', t.x.toFixed(2));
-        roundsLabel.setAttribute('y', (t.y - size * 0.3).toFixed(2)); //(t.y + size * 0.6
+        roundsLabel.setAttribute('y', (t.y - size * 0.3).toFixed(2));
         roundsLabel.setAttribute('text-anchor', 'middle');
         roundsLabel.setAttribute('font-size', Math.max(10, size * 0.4));
         roundsLabel.setAttribute('fill', '#FFF');
@@ -1025,30 +1215,24 @@ function renderCTMap(container, ct, tileData, opts = {}) {
         gText.classList.add('ct-layer-text');
         gUpright.appendChild(gText);
 
-            const label = document.createElementNS(svg.namespaceURI, 'text');
-            label.classList.add('font-gardenia', 'ct-tile-label');
-            label.setAttribute('x', t.x.toFixed(2));
-            label.setAttribute('y', (t.y + 20).toFixed(2));
-            // label.setAttribute('y', (t.y - 8).toFixed(2));
-            label.setAttribute('text-anchor', 'middle');
-            label.setAttribute('font-size', Math.max(10, size * 0.6));
-            label.setAttribute('fill', '#FFF');
-            label.setAttribute('paint-order', 'stroke');
-            label.setAttribute('stroke', '#111');
-            label.setAttribute('stroke-width', '2');
-            label.textContent = t.id;
-            gText.appendChild(label);
+        const label = document.createElementNS(svg.namespaceURI, 'text');
+        label.classList.add('font-gardenia', 'ct-tile-label');
+        label.setAttribute('x', t.x.toFixed(2));
+        label.setAttribute('y', (t.y + 20).toFixed(2));
+        label.setAttribute('text-anchor', 'middle');
+        label.setAttribute('font-size', Math.max(10, size * 0.6));
+        label.setAttribute('fill', '#FFF');
+        label.setAttribute('paint-order', 'stroke');
+        label.setAttribute('stroke', '#111');
+        label.setAttribute('stroke-width', '2');
+        label.textContent = t.id;
+        gText.appendChild(label);
 
-        // tileIndex.set(t.id, {
-        //     gTile, gUpright, gBg, gRelic, gBanner, gText,
-        //     cx: t.x, cy: t.y, clipId, hexS
-        // });
         tileIndex.set(t.id, {
             gTile, gUpright, gBg, gRelic, gBanner, gText,
             cx: t.x, cy: t.y, clipId, hexS, polygon, gMapFill, gDecor, gBoss, gGameMode, gHero, gRoundsText
         });
     }
-    console.log(heroesSet);
 
     for (const s of spawns) {
         const hexS = size - gap;
@@ -1068,7 +1252,6 @@ function renderCTMap(container, ct, tileData, opts = {}) {
         gSpawns.appendChild(ring);
 
         ring.addEventListener('click', () => {
-            console.log('Clicked spawn for team', s.team);
             const dx = s.x - cx;
             const dy = s.y - cy;
             const baseAngle = (Math.atan2(dy, dx) * 180 / Math.PI + 360) % 360;
@@ -1103,7 +1286,6 @@ function rotateCT(container, deltaDeg) {
     });
 }
 
-//currently unused
 function rotateCTTo(container, targetDeg) {
     const st = container?._ct;
     if (!st) return;
@@ -1260,9 +1442,6 @@ function openCTSettingsModal(){
 
     const modalHeader = createEl('div', { classList: ['d-flex', 'jc-between'], style: {backgroundColor: 'var(--profile-primary)', padding: '8px 16px', borderRadius: '8px'} });
     container.appendChild(modalHeader);
-    
-    // const headerLeft = createEl('div', { classList: [''] });
-    // modalHeader.appendChild(headerLeft);
 
     const modalTitle = createEl('p', {
         classList: ['collection-modal-header-text', 'black-outline'],
@@ -1510,7 +1689,6 @@ function openCTSettingsModal(){
         });
     }
 
-    // let advancedFiltersDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { gap: '8px' } });
     advancedFiltersDiv.style.display = renderSettings.advancedLayers ? 'flex' : 'none';
     leftDiv.appendChild(advancedFiltersDiv);
 
@@ -1646,11 +1824,8 @@ function openCTSettingsModal(){
         bgOptionDiv.appendChild(bgSelectedImg);
 
         bgOptionDiv.addEventListener('click', () => {
-            console.log(data);
             renderSettings.backgroundType = data.settings.backgroundType;
             renderSettings.renderLayers = { ...data.settings.renderLayers };
-
-            console.log(renderSettings)
 
             updateCTBackground(debugGlobalCTMap, selectedCTData);
             updateCTRenderLayers(debugGlobalCTMap);
@@ -1682,22 +1857,23 @@ function openCTSettingsModal(){
     container.appendChild(footer);
 
     createModal({
-        // header: 'Map View Settings',
         content: container
     });
 
     return container;
 }
 
-function simplifyTowerData(rawTileData) {
-    let simplified = { towers: {}, heroes: {} };
-    for (let data of rawTileData.towers._items) {
+function simplifyTowerData(dcModel) {
+    let simplified = { towers: {}, heroes: {}, bannedHeroes: [] };
+    for (let data of dcModel.towers._items) {
         if (data.max != 0) {
             if(data.isHero) {
                 simplified.heroes[data.tower] = data.max;
             } else {
                 simplified.towers[data.tower] = data.max;
             }
+        } else if (data.isHero && data.tower != 'ChosenPrimaryHero') {
+            simplified.bannedHeroes.push(data.tower);
         }
     };
     return simplified;
@@ -1728,9 +1904,9 @@ function getCTGameTypeIconPath(data) {
 }
 
 function openTileModal(tileData) {
-    let container = createEl('div', { classList: ['d-flex', 'fd-column', 'ct-panel'], style: { borderRadius: "20px 20px 10px 10px" } });
+    let container = createEl('div', { classList: ['d-flex', 'fd-column', 'ct-panel'], style: { borderRadius: "20px 20px 10px 10px", gap: '16px' } });
 
-    let topDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-between'], style: { /**gap: '12px', padding: '16px'**/ } });
+    let topDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-between'], style: {} });
     container.appendChild(topDiv);
 
     let leftDiv = createEl('div', { classList: ['d-flex'], style: {width: "140px"}  });
@@ -1816,6 +1992,27 @@ function openTileModal(tileData) {
         style: { width: '56px', height: '56px' }
     });
     tileTypeAndID.appendChild(tileIconImg);
+    if (tileData.TileType == 'Relic') {
+        tippy(tileIconImg, {
+            content: `<p class="artifact-title">${getLocValue(`Relic${tileData.RelicType}`)}</p>${getLocValue(`Relic${tileData.RelicType}Description`)}`,
+            allowHTML: true,
+            placement: 'top',
+            hideOnClick: false,
+            theme: 'speech_bubble',
+            zIndex: 10001,
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            },
+        });
+    }
 
     let tileID = createEl('p', { classList: ['font-gardenia', 'ta-center'], style: {fontSize: "28px", padding: "8px"}, innerHTML: tileData.Code });
     tileTypeAndID.appendChild(tileID);
@@ -1828,14 +2025,14 @@ function openTileModal(tileData) {
     })
     rightDiv.appendChild(modalClose);
 
-    let mainDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { marginLeft: '16px', gap: '8px' } });
+    let mainDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { } });
     container.appendChild(mainDiv);
 
-    let mapAndRulesDiv = createEl('div', { classList: ['d-flex'], style: { } });
+    let mapAndRulesDiv = createEl('div', { classList: ['d-flex'], style: { padding: '5px', borderRadius: '10px', backgroundColor: "#5C4B3E" } });
     mainDiv.appendChild(mapAndRulesDiv);
 
     let ctMapDiv = document.createElement('div');
-    ctMapDiv.classList.add("race-map-div", "silver-border");
+    ctMapDiv.classList.add("race-map-div", "silver-border", 'h-100');
     mapAndRulesDiv.appendChild(ctMapDiv);
 
     let ctMapIcon = document.createElement('img');
@@ -1889,7 +2086,7 @@ function openTileModal(tileData) {
         ruleDiv.appendChild(ruleValue);
     })
 
-    let roundsBtn = createEl('div', { classList: ['maps-progress-view', 'black-outline', 'pointer'], style: {fontSize: "18px", filter: 'hue-rotate(270deg)'}});
+    let roundsBtn = createEl('div', { classList: ['maps-progress-view', 'black-outline', 'pointer'], style: { margin: '0', fontSize: "18px", filter: 'hue-rotate(270deg)'}});
     roundsBtn.innerHTML = 'Open Rounds';
     roundsBtn.addEventListener('click', (e) => {
         closeModal();
@@ -1902,20 +2099,19 @@ function openTileModal(tileData) {
     });
     ctRulesTop.appendChild(roundsBtn);
 
-    let rulesDiv = createEl('div', { classList: ['d-flex', 'f-wrap'], style: { gap: '4px', marginTop: '8px' } });
+    let rulesDiv = createEl('div', { classList: ['d-flex', 'f-wrap', 'fg-1', 'ai-center'], style: {} });
     ctRulesDiv.appendChild(rulesDiv);
 
     let modifiers = challengeModifiersCT(tileData.GameData.dcModel);
 
     Object.entries(modifiers).forEach(([modifier, data]) => {
-        let challengeModifier = createEl('div', { classList: ['challenge-modifier'], style: { width: '220px'} });
+        let challengeModifier = createEl('div', { classList: ['challenge-modifier'], style: { margin: "4px 6px", width: '228px'} });
         rulesDiv.appendChild(challengeModifier);
 
         let challengeModifierIcon = createEl('img', { classList: ['of-contain'], src: `./Assets/ChallengeRulesIcon/${data.icon}.png`, style: { width: '60px', height: '60px' } });
         challengeModifier.appendChild(challengeModifierIcon);
 
-        let challengeModifierTexts = document.createElement('div');
-        challengeModifierTexts.classList.add('challenge-modifier-texts');
+        let challengeModifierTexts = createEl('div', { classList: ['challenge-modifier-texts'] });
         challengeModifier.appendChild(challengeModifierTexts);
 
         let challengeModifierLabel = createEl('p', { classList: ['challenge-modifier-text', 'black-outline'], style: { fontSize: '18px' }, innerHTML: `${modifier}:` });
@@ -1927,10 +2123,285 @@ function openTileModal(tileData) {
 
     let rules = challengeRulesCT(tileData.GameData);
 
+    rules.forEach(rule => {
+        let challengeRule = createEl('div', { classList: ['challenge-modifier'], style: { margin: "4px 6px", width: '228px'} });
+        rulesDiv.appendChild(challengeRule);
+
+        let challengeRuleIcon = createEl('img', { classList: ['of-contain'], src: `./Assets/ChallengeRulesIcon/${rulesMap[rule]}.png`, style: { width: '60px', height: '60px' } });
+        challengeRule.appendChild(challengeRuleIcon);
+
+        let challengeRuleTextDiv = createEl('div', { classList: ['challenge-modifier-texts'] });
+        challengeRule.appendChild(challengeRuleTextDiv);
+
+        let challengeRuleLabel = createEl('p', { classList: ['challenge-modifier-text', 'black-outline'], style: { fontSize: '18px' }, innerHTML: rule });
+        challengeRuleTextDiv.appendChild(challengeRuleLabel);
+    });
+
+    if (rulesDiv.children.length == 0) {
+        let none = createEl('p', { classList: ['challenge-modifier-none', 'w-100'], style: {}, innerHTML: "Default Rules & No Modifiers" });
+        rulesDiv.appendChild(none);
+    }
+
+    let towersDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { } });
+    mainDiv.appendChild(towersDiv);
+
+
+    let simplifiedTowerData = simplifyTowerData(tileData.GameData.dcModel);
+
+    let towersListDiv = createEl('div', { classList: ['d-flex', 'fg-1'], style: { marginTop: '12px', padding: '5px', borderRadius: '10px', backgroundColor: "#4B3B2F"  } });
+    towersDiv.appendChild(towersListDiv);
+
+    if (Object.keys(simplifiedTowerData.heroes).length > 0) {
+        if ((Object.keys(simplifiedTowerData.heroes).length == 1 && simplifiedTowerData.heroes.hasOwnProperty('ChosenPrimaryHero')) || Object.keys(simplifiedTowerData.heroes).length > 1) {
+            let heroDiv = createEl('div', { classList: ['d-flex', 'ai-center', `tower-selector-hero`], style: { width: '90px', height: '108px' } });
+            towersListDiv.appendChild(heroDiv);
+
+            let heroImg = createEl('img', { classList: ['tower-selector-img'], src: `./Assets/UI/AllHeroesIcon.png`, style: { width: '90px' /*width: '90px', maxHeight: '108px'*/ } });
+            heroDiv.appendChild(heroImg);
+        } else {
+            for (let [heroID, count] of Object.entries(simplifiedTowerData.heroes)) {
+                let heroDiv = createEl('div', { classList: ['d-flex', 'ai-center', `tower-selector-hero`], style: { width: '90px', height: '108px' } });
+                towersListDiv.appendChild(heroDiv);
+
+                let heroImg = createEl('img', { classList: ['tower-selector-img'], src: getInstaContainerIcon(heroID,"000"), style: { width: '90px' /*width: '90px', maxHeight: '108px'*/ } });
+                heroDiv.appendChild(heroImg);
+            }
+        }
+    }
+
+    for (let [towerID, count] of Object.entries(simplifiedTowerData.towers)) {
+        let towerDiv = createEl('div', { classList: ['d-flex', 'ai-center', `tower-selector-${constants.towersInOrder[towerID].toLowerCase()}`], style: { width: '90px', height: '108px' } });
+        towersListDiv.appendChild(towerDiv);
+
+        let towerImg = createEl('img', { classList: ['tower-selector-img'], src: getInstaContainerIcon(towerID,"000"), style: { width: '90px' /*width: '90px', maxHeight: '108px'*/ } });
+        towerDiv.appendChild(towerImg);
+
+        if (count != -1) {
+            let maxCount = createEl('p', { classList: ['d-flex', 'ai-start', 'max-count', 'towerTopLeft', 'towerTopLeftText', 'black-outline'], style: { width: "40px", height: "40px", fontSize: '24px', lineHeight: '1.5' }, innerHTML: count });
+            towerDiv.appendChild(maxCount);
+        }
+    }
+
+    if (Object.keys(simplifiedTowerData.heroes).length > 0 && simplifiedTowerData.bannedHeroes.length < Object.keys(simplifiedTowerData.heroes).length) {
+        let heroesListDiv = createEl('div', { classList: ['d-flex', 'fg-1', 'ml-16'], style: { marginTop: '12px', padding: '5px', borderRadius: '10px', backgroundColor: "#4B3B2F"  } });
+        towersDiv.appendChild(heroesListDiv);
+
+        for (let bannedHeroID of simplifiedTowerData.bannedHeroes) {
+            let heroDiv = createEl('div', { classList: ['d-flex', 'ai-center', `tower-selector-hero`], style: { width: '90px', height: '108px' } });
+            heroesListDiv.appendChild(heroDiv);
+
+            let heroImg = createEl('img', { classList: ['tower-selector-img'], src: getInstaContainerIcon(bannedHeroID,"000"), style: { width: '90px' /*width: '90px', maxHeight: '108px'*/ } });
+            heroDiv.appendChild(heroImg);
+
+            let maxCount = createEl('p', { classList: ['max-count', 'towerTopLeft', 'towerExcluded'], style: { width: "40px", height: "40px", }});
+            heroDiv.appendChild(maxCount);
+        }
+    }
+
     createModal({
         content: container,
         backgroundColor: 'unset'
     });
+}
+
+function generateTileHover(tileData) {
+    let container = createEl('div', { classList: ['d-flex', 'fd-column', 'ct-panel'], style: { borderRadius: "20px 20px 10px 10px", gap: '16px' } });
+
+    let topDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-between'], style: {} });
+    container.appendChild(topDiv);
+
+    let leftDiv = createEl('div', { classList: ['d-flex'], style: {width: "80px"}  });
+    topDiv.appendChild(leftDiv);
+
+    let gameTypeIconDiv = createEl('div', { classList: ['d-flex', 'pos-rel'], style: {} });
+    leftDiv.appendChild(gameTypeIconDiv);
+
+    let gameTypeIcon = createEl('img', {
+        classList: ['of-contain'],
+        src: `./Assets/${getCTGameTypeIconPath(tileData)}.png`,
+        style: { width: '75px', height: '75px' }
+    });
+    gameTypeIconDiv.appendChild(gameTypeIcon);
+
+    if (tileData.GameData.subGameType == 4) {
+        let bossTierDiv = createEl('div', { classList: [], style: {position: 'absolute', right: "0", bottom: '4px'} });
+        gameTypeIconDiv.appendChild(bossTierDiv);
+
+        let bossTierImg = createEl('img', {
+            classList: ['of-contain'],
+            src: `./Assets/UI/BossTiersIconSmall.png`,
+            style: { width: '32px', height: '32px' }
+        });
+        bossTierDiv.appendChild(bossTierImg);
+
+        let bossTierLabel = createEl('p', {
+            classList: ['black-outline'],
+            style: { position: 'absolute', top: '4px', left: '10px', fontSize: '24px' },
+            innerHTML: tileData.GameData.bossData.TierCount
+        });
+        bossTierDiv.appendChild(bossTierLabel);
+    }
+
+    let centerTextDiv = createEl('div', { classList: ['d-flex', 'fd-column', 'ai-center'], style: { marginLeft: '16px', gap: '4px' } });
+
+    let gameModeText = createEl('p', {
+        classList: ['black-outline', 'ta-center'],
+        style: { fontSize: '28px' },
+        innerHTML: `${getLocValue(tileData.GameData.selectedDifficulty)} - ${getLocValue("Mode " + tileData.GameData.selectedMode)}`
+    });
+    centerTextDiv.appendChild(gameModeText);
+
+    let rightDiv = createEl('div', { classList: ['d-flex', 'jc-end', 'ai-center'], style: {width: "80px"}  });
+    topDiv.appendChild(rightDiv);
+
+    let tileTypeAndID = createEl('div', { classList: ['d-flex', 'ai-center'], style: { backgroundColor: "rgba(0,0,0,0.2)", padding: "8px", borderRadius: "10px" } });
+    rightDiv.appendChild(tileTypeAndID);
+
+    let tileIcon = null;
+    switch (tileData.TileType) {
+        case 'Relic':
+            tileIcon = `/RelicIcon/${tileData.RelicType}`;
+            break;
+        case 'Banner':
+            tileIcon = "/UI/CTPointsBanner";
+            break;
+        case 'TeamFirstCapture':
+        case 'Regular':
+            tileIcon = "/UI/CTRegularTileIconSmall";
+            break;
+    }
+    let tileIconImg = createEl('img', {
+        classList: ['of-contain'],
+        src: `./Assets/${tileIcon}.png`,
+        style: { width: '70px', height: '70px' }
+    });
+    topDiv.appendChild(tileIconImg);
+
+    let tileID = createEl('p', { classList: ['font-gardenia', 'ta-center'], style: {fontSize: "28px", padding: "8px"}, innerHTML: tileData.Code });
+    tileTypeAndID.appendChild(tileID);
+
+    let mainDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { } });
+    container.appendChild(mainDiv);
+
+    let mapAndRulesDiv = createEl('div', { classList: ['d-flex', 'jc-center'], style: { padding: '5px', borderRadius: '10px', backgroundColor: "#5C4B3E" } });
+    mainDiv.appendChild(mapAndRulesDiv);
+
+    let ctMapDiv = document.createElement('div');
+    ctMapDiv.classList.add("race-map-div", "silver-border", 'h-100');
+    mapAndRulesDiv.appendChild(ctMapDiv);
+
+    let ctMapIcon = document.createElement('img');
+    ctMapIcon.classList.add("race-map-img");
+    ctMapIcon.src = getMapIcon(tileData.GameData.selectedMap)
+    ctMapDiv.appendChild(ctMapIcon);
+
+    let ctChallengeIcons = document.createElement('div');
+    ctChallengeIcons.classList.add("race-challenge-icons");
+    ctMapDiv.appendChild(ctChallengeIcons);
+
+    let ctMapRounds = document.createElement('p');
+    ctMapRounds.classList.add("race-map-rounds", 'black-outline');
+    let roundRange = getTileRoundRange(tileData);
+    ctMapRounds.innerHTML = `Rounds: ${roundRange.start}/${roundRange.end + ((tileData.GameData.dcModel.startRules.endRound == -1) ? "+" : "")}`;
+    ctMapDiv.appendChild(ctMapRounds);
+
+    let modifiers = challengeModifiersCT(tileData.GameData.dcModel);
+    let rules = challengeRulesCT(tileData.GameData);
+    for (let modifier of Object.values(modifiers)) {
+        let challengeModifierIcon = document.createElement('img');
+        challengeModifierIcon.style.width = "60px";
+        challengeModifierIcon.style.height = "60px";
+        challengeModifierIcon.src = `./Assets/ChallengeRulesIcon/${modifier.icon}.png`;
+        ctChallengeIcons.appendChild(challengeModifierIcon);
+    }
+    for (let rule of rules) {
+        let challengeRuleIcon = document.createElement('img');
+        challengeRuleIcon.style.width = "60px";
+        challengeRuleIcon.style.height = "60px";
+        challengeRuleIcon.src = `./Assets/ChallengeRulesIcon/${rulesMap[rule]}.png`;
+        ctChallengeIcons.appendChild(challengeRuleIcon);
+    }
+
+    mainDiv.appendChild(centerTextDiv);
+
+    let ctRulesTop = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-center'], style: { gap: '16px' } });
+    mainDiv.appendChild(ctRulesTop);
+
+    let challengeSettings = {
+        'Starting Cash': {
+            "icon": "CoinIcon",
+            "value": tileData.GameData.dcModel.startRules.cash.toLocaleString()
+        },
+        'Starting Lives': {
+            "icon": "LivesIcon",
+            "value": (tileData.GameData.dcModel.startRules.lives == -1) ? constants.lives[tileData.GameData.dcModel.difficulty] : tileData.GameData.dcModel.startRules.lives
+        },
+        'Max Monkeys': {
+            "icon": "MaxMonkeysIcon",
+            "value": (tileData.GameData.dcModel.maxTowers == -1) ? "Unlimited" : tileData.GameData.dcModel.maxTowers.toLocaleString() + " Towers"
+        }
+    }
+
+    Object.entries(challengeSettings).forEach(([setting,data], index) => {
+        let ruleDiv = createEl('div', { classList: ['d-flex', 'ai-center'], style: { gap: '4px' } });
+        ctRulesTop.appendChild(ruleDiv);
+
+        let ruleIcon = createEl('img', {
+            classList: ['of-contain'],
+            src: `./Assets/UI/${data.icon}.png`,
+            style: { width: '32px', height: '32px' }
+        });
+        ruleDiv.appendChild(ruleIcon);
+
+        let ruleValue = createEl('p', {
+            classList: ['black-outline'],
+            style: { fontSize: '20px' },
+            innerHTML: data.value
+        });
+        ruleDiv.appendChild(ruleValue);
+    })
+
+    let towersDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { } });
+    mainDiv.appendChild(towersDiv);
+
+
+    let simplifiedTowerData = simplifyTowerData(tileData.GameData.dcModel);
+
+    let towersListDiv = createEl('div', { classList: ['d-flex', 'fg-1', 'f-wrap'], style: { width: '380px', marginTop: '12px', padding: '5px', borderRadius: '10px', backgroundColor: "#4B3B2F"  } });
+    towersDiv.appendChild(towersListDiv);
+
+    if (Object.keys(simplifiedTowerData.heroes).length > 0) {
+        if ((Object.keys(simplifiedTowerData.heroes).length == 1 && simplifiedTowerData.heroes.hasOwnProperty('ChosenPrimaryHero')) || Object.keys(simplifiedTowerData.heroes).length > 1) {
+            let heroDiv = createEl('div', { classList: ['d-flex', 'ai-center', `tower-selector-hero`], style: { width: '90px', height: '108px' } });
+            towersListDiv.appendChild(heroDiv);
+
+            let heroImg = createEl('img', { classList: ['tower-selector-img'], src: `./Assets/UI/AllHeroesIcon.png`, style: { width: '90px' /*width: '90px', maxHeight: '108px'*/ } });
+            heroDiv.appendChild(heroImg);
+        } else {
+            for (let [heroID, count] of Object.entries(simplifiedTowerData.heroes)) {
+                let heroDiv = createEl('div', { classList: ['d-flex', 'ai-center', `tower-selector-hero`], style: { width: '90px', height: '108px' } });
+                towersListDiv.appendChild(heroDiv);
+
+                let heroImg = createEl('img', { classList: ['tower-selector-img'], src: getInstaContainerIcon(heroID,"000"), style: { width: '90px' /*width: '90px', maxHeight: '108px'*/ } });
+                heroDiv.appendChild(heroImg);
+            }
+        }
+    }
+
+    for (let [towerID, count] of Object.entries(simplifiedTowerData.towers)) {
+        let towerDiv = createEl('div', { classList: ['d-flex', 'ai-center', `tower-selector-${constants.towersInOrder[towerID].toLowerCase()}`], style: { width: '90px', height: '108px' } });
+        towersListDiv.appendChild(towerDiv);
+
+        let towerImg = createEl('img', { classList: ['tower-selector-img'], src: getInstaContainerIcon(towerID,"000"), style: { width: '90px' /*width: '90px', maxHeight: '108px'*/ } });
+        towerDiv.appendChild(towerImg);
+
+        if (count != -1) {
+            let maxCount = createEl('p', { classList: ['d-flex', 'ai-start', 'max-count', 'towerTopLeft', 'towerTopLeftText', 'black-outline'], style: { width: "40px", height: "40px", fontSize: '24px', lineHeight: '1.5' }, innerHTML: count });
+            towerDiv.appendChild(maxCount);
+        }
+    }
+
+    return container;
 }
 
 let once = {};
@@ -2146,3 +2617,36 @@ function challengeModifiersCT(dcModel){
     }
     return result;
 }
+
+function attachTileHoverTippy(element, tileData) {
+    tippy(element, {
+        allowHTML: true,
+        interactive: false,
+        placement: 'top',
+        maxWidth: 500,
+        theme: 'unset',
+        arrow: false,
+        onShow(instance) {
+            instance.setContent(generateTileHover(tileData))
+        },
+        popperOptions: {
+            modifiers: [
+                {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: { right: 18 },
+                    },
+                },
+                {
+                    name: 'flip',
+                    options: {
+                        fallbackPlacements: ['bottom', 'right', 'left'],
+                        padding: 10,
+                    },
+                },
+            ],
+        },
+    });
+}
+

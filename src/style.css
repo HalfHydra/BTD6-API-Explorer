@@ -4189,7 +4189,7 @@
     /* filter: drop-shadow(0px 0px 5px lime) drop-shadow(0px 0px 5px lime); */
     border-radius: 20px;
     outline: 8px solid rgba(0, 255, 0, 0.5);
-    outline-offset: -10px;
+    outline-offset: -8px;
 }
 .insta-monkey-chance-zero {
     filter: brightness(0.5);
@@ -5628,6 +5628,10 @@ input[type="checkbox"] {
     max-width: calc(100vw - 410px);
 }
 
+.tippy-box[data-theme~='unset'] {
+    background-color: unset;
+}
+
 /* BTD6 Style Classes */
 .checkbox-div {
     display: flex;
@@ -5694,6 +5698,10 @@ input[type="checkbox"] {
 
 .ai-center {
     align-items: center;
+}
+
+.ai-start {
+    align-items: start;
 }
 
 .ta-center {
