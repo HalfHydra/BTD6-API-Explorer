@@ -327,7 +327,7 @@ function generateRoundsets() {
     });
 }
 
-async function showRoundsetModel(source, roundset) {
+async function showRoundsetModel(source, roundset, presetSettings={}) {
     roundsetProcessed = null;
     currentRoundsetData = null;
 
@@ -344,6 +344,12 @@ async function showRoundsetModel(source, roundset) {
         roundsetBasicFilter: null,
         roundsetAdvancedFilterLogic: 'ANY',
         roundsetShowHints: true
+    }
+
+    if (Object.keys(presetSettings).length > 0) {
+        Object.entries(presetSettings).forEach(([key, value]) => {
+            roundsetFilterSettings[key] = value;
+        });
     }
     
     let roundsetContent = document.getElementById('roundsets-content');
@@ -706,7 +712,7 @@ function addRoundHints(roundset, data) {
     return data;
 }
 
-async function generateRounds(type, reverse, roundsetType) {
+async function generateRounds(type, reverse, roundsetType, presetSettings={}) {
     let roundsContent = document.getElementById('roundset-content');
     roundsContent.innerHTML = "";
 
@@ -1542,7 +1548,7 @@ function openRoundsetSettingsModal(type){
 
     let rogueReverseDesc = createEl('p', {
         classList: ['font-gardenia'],
-        style: { fontSize: '22px',  display: roundsetFilterSettings.roundsetReversed ? 'block' : 'none' },
+        style: { fontSize: '22px',  display: selectedRoundset.startsWith("Rogue") && roundsetFilterSettings.roundsetReversed ? 'block' : 'none'  },
         innerHTML: 'In Rogue Legends, the rounds are not reversed even when the track path is.'
     });
 

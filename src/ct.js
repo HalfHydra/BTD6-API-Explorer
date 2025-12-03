@@ -245,7 +245,7 @@ async function generateCTs(){
     let historicCTHeader = createEl('p', { classList: ['black-outline', 'ta-center'], innerHTML: "Historic Contested Territory Events", style: { fontSize: "32px", marginBottom: "10px" } });
     historicCTDiv.appendChild(historicCTHeader);
 
-    let historicCTContent = createEl('div', { classList: ['d-flex', 'jc-center', 'f-wrap'] });
+    let historicCTContent = createEl('div', { classList: ['d-flex', 'jc-center', 'f-wrap'], style: { gap: "18px"} });
     historicCTDiv.appendChild(historicCTContent);
 
     let shownEvents = Object.values(CTData).map(e => e.id);
@@ -259,15 +259,23 @@ async function generateCTs(){
 
         eventDiv.addEventListener('click', () => {
             showLoading();
-            openCTEventDetails('events', event)
+            openCTEventDetails('events', {id: seed, noODA: true})
         })
     })
 }
 
 async function openCTEventDetails(source, eventData) {
-    let eventDates = `${new Date(eventData.start).toLocaleDateString()} - ${new Date(eventData.end).toLocaleDateString()}`;
-    let data = await getCTTiles(eventData.tiles)
-    if (data == null) { return; }
+    console.log(eventData);
+    let extData = await getExternalCTData(eventData.id);
+    console.log(extData);
+
+    let data = null;
+    if (eventData.tiles) {
+        data = await getCTTiles(eventData.tiles);
+    }
+    if (data == null) { 
+        data = convertExtCTDataToODAFormat(extData.tiles); 
+    }
     document.getElementById(`${source}-content`).style.display = "none";
     let relicsContent = document.getElementById('relics-content');
     relicsContent.style.display = "flex";
@@ -280,8 +288,6 @@ async function openCTEventDetails(source, eventData) {
 
     let relicContainer = createEl('div', { classList: ['relic-container', 'ct-panel'], style: { borderRadius: "20px 20px 10px 10px"} });
     resetScroll();
-
-    let extData = await getExternalCTData(eventData.id);
 
     let isEventActive = now >= new Date(eventData.start) && now <= new Date(eventData.end);
 
@@ -300,8 +306,13 @@ async function openCTEventDetails(source, eventData) {
     let relicHeaderTitle = createEl('p', { classList: ['relic-header-title', 'black-outline'], innerHTML: `Contested Territory ${CTSeedToEventNumber[eventData.id] ? "#" + CTSeedToEventNumber[eventData.id] : ''}` });
     relicHeaderTopDiv.appendChild(relicHeaderTitle);
 
-    let relicHeaderDates = createEl('p', { classList: ['relic-header-title', 'black-outline'], innerHTML: `${eventDates}` });
-    relicHeaderTopDiv.appendChild(relicHeaderDates);
+    if (!eventData.noODA) {
+        let eventDates = `${new Date(eventData.start).toLocaleDateString()} - ${new Date(eventData.end).toLocaleDateString()}`;
+        let relicHeaderDates = createEl('p', { classList: ['relic-header-title', 'black-outline'], innerHTML: `${eventDates}` });
+        relicHeaderTopDiv.appendChild(relicHeaderDates);
+    } else {
+        relicHeaderTopDiv.style.width = "unset";
+    }
 
     let topBar = createEl('div', { classList: ['d-flex', 'jc-evenly', 'w-100'], style: {marginTop: "10px"} });
     if (extData) relicHeader.appendChild(topBar);
@@ -340,7 +351,10 @@ async function openCTEventDetails(source, eventData) {
     newTicketsTextDiv.appendChild(ticketsTimer);
 
     clearAllTimers();
-    if (now >= new Date(new Date(eventData.end).getTime() - dayMs) && now < eventData.end) {
+    if (eventData.noODA) {
+        ticketsTimer.innerHTML = "Event Ended";
+        nextTicketsLabel.style.display = "none";
+    } else if (now >= new Date(new Date(eventData.end).getTime() - dayMs) && now < eventData.end) {
         nextTicketsLabel.innerHTML = "Event Ends In:";
         registerTimer(ticketsTimer.id, eventData.end);
     } else if (new Date(eventData.start) < now && now < new Date(eventData.end)) {
@@ -372,7 +386,7 @@ async function openCTEventDetails(source, eventData) {
             errorModal("Tile not found. Please check your input and try again.");
             return;
         }
-        openTileModal(externalCTData[eventData.id].tiles[tileSearch.value]);
+        openTileModal(externalCTData[eventData.id].tiles[tileSearch.value], 'relics');
     });
     rogueHeaderCenter.appendChild(selectorGoImg);
 
@@ -527,7 +541,7 @@ async function openCTEventDetails(source, eventData) {
         relicDiv.appendChild(relicID);
 
         relicID.addEventListener('click', () => {
-            openTileModal(externalCTData[eventData.id].tiles[relic.id]);
+            openTileModal(externalCTData[eventData.id].tiles[relic.id], 'relics');
         });
 
         let relicIcon = createEl('img', { classList: ['relic-icon'], src: `./Assets/RelicIcon/${relicTypeName}.png` });
@@ -600,7 +614,7 @@ async function openCTEventDetails(source, eventData) {
         let bannerID = createEl('p', { classList: ['relic-id', 'pointer'], innerHTML: banner.id });
         bannerDiv.appendChild(bannerID);
         bannerID.addEventListener('click', () => {
-            openTileModal(externalCTData[eventData.id].tiles[banner.id]);
+            openTileModal(externalCTData[eventData.id].tiles[banner.id], 'relics');
         });
 
         let bannerImgDiv = createEl('div', { classList: ['pos-rel'], style: {} });
@@ -1003,7 +1017,7 @@ function renderCTMap(container, ct, tileData, opts = {}) {
         gTiles.appendChild(gTile);
 
         gTile.addEventListener('click', () => {
-            openTileModal(data);
+            openTileModal(data, 'ct-map');
         });
 
         attachTileHoverTippy(gTile, data);
@@ -1903,7 +1917,7 @@ function getCTGameTypeIconPath(data) {
     }
 }
 
-function openTileModal(tileData) {
+function openTileModal(tileData, source) {
     let container = createEl('div', { classList: ['d-flex', 'fd-column', 'ct-panel'], style: { borderRadius: "20px 20px 10px 10px", gap: '16px' } });
 
     let topDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-between'], style: {} });
@@ -2095,7 +2109,19 @@ function openTileModal(tileData) {
         if (tileData.GameData.subGameType == 4) {
             roundset = bossIDToName[tileData.GameData.bossData.bossBloon] + "RoundSet";
         }
-        showRoundsetModel('ct-map', roundset);
+        let endRound = tileData.GameData.dcModel.startRules.endRound;
+        if (endRound == -1) {
+            const tierCount = tileData.GameData?.bossData?.TierCount ?? 0;
+            endRound = 39 + tierCount * 20;
+        }
+        showRoundsetModel(source, roundset, {
+            roundFilterStart: tileData.GameData.dcModel.startRules.round,
+            roundFilterEnd: endRound,
+            roundsetStartingCash: tileData.GameData.dcModel.startRules.cash,
+            roundsetReversed: tileData.GameData.dcModel.mode == 'Reverse',
+            roundsetShowModified: false,
+            roundsetShowHints: false,
+        });
     });
     ctRulesTop.appendChild(roundsBtn);
 
@@ -2650,3 +2676,32 @@ function attachTileHoverTippy(element, tileData) {
     });
 }
 
+function convertExtCTDataToODAFormat(tiles) {
+    let odaTiles = [];
+    for (let tile of Object.values(tiles)) {
+        let odaTile = {
+            id: tile.Code,
+            type: tile.TileType,
+        };
+        if (tile.TileType === "Relic") {
+            odaTile.type = `Relic - ${tile.RelicType}`;
+        }
+
+        switch(tile.GameData.subGameType) {
+            case 2:
+                odaTile.gameType = "Race";
+                break;
+            case 8:
+                odaTile.gameType = "LeastCash";
+                break;
+            case 9:
+                odaTile.gameType = "LeastTiers";
+                break;
+            case 4:
+                odaTile.gameType = "Boss";
+                break;
+        }
+        odaTiles.push(odaTile);
+    }
+    return {tiles: odaTiles};
+}
