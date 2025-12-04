@@ -3539,6 +3539,7 @@ function generatePowersProgress() {
     progressContent.appendChild(powersProgressContainer);
 
     for (let power of constants.powersInOrder) {
+        if(!btd6usersave.powers.hasOwnProperty(power)) { continue; }
         let powerDiv = document.createElement('div');
         powerDiv.classList.add('power-div');
         powersProgressContainer.appendChild(powerDiv);
