@@ -1759,7 +1759,7 @@
 
 .ct-panel {
     border: 20px solid transparent;
-    border-image-source: url(../Assets/UI/MainBGPanelCT.png);
+    border-image-source: url(../Assets/UI/MainBgPanelCT.png);
     border-image-slice: 70;
     background: linear-gradient(#9C8E78 0%, #6f5b4a 100%) no-repeat;
 }

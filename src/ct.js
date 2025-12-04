@@ -245,7 +245,7 @@ async function generateCTs(){
     let historicCTHeader = createEl('p', { classList: ['black-outline', 'ta-center'], innerHTML: "Historic Contested Territory Events", style: { fontSize: "32px", marginBottom: "10px" } });
     historicCTDiv.appendChild(historicCTHeader);
 
-    let historicCTContent = createEl('div', { classList: ['d-flex', 'jc-center', 'f-wrap'], style: { gap: "18px"} });
+    let historicCTContent = createEl('div', { classList: ['d-flex', 'jc-center', 'f-wrap'], style: { width: "800px", gap: "18px"} });
     historicCTDiv.appendChild(historicCTContent);
 
     let shownEvents = Object.values(CTData).map(e => e.id);
@@ -265,9 +265,7 @@ async function generateCTs(){
 }
 
 async function openCTEventDetails(source, eventData) {
-    console.log(eventData);
     let extData = await getExternalCTData(eventData.id);
-    console.log(extData);
 
     let data = null;
     if (eventData.tiles) {
@@ -505,7 +503,7 @@ async function openCTEventDetails(source, eventData) {
         let powerIconDiv = createEl('div', {classList: ['power-div'], style: {width: "unset", height: "120px", margin: "unset"}});
         powerDiv.appendChild(powerIconDiv);
 
-        let powerImg = createEl('img', {classList: ['power-img'], style: {transform: 'scale(0.75)'},src: getPowerIcon(power) });
+        let powerImg = createEl('img', {classList: ['power-img'], style: {transform: 'scale(0.75)'},src: getPowerIcon((power === "Techbot") ? "TechBot" : power) });
         powerIconDiv.appendChild(powerImg);
 
         let powerProgressText = createEl('p', {classList: ['black-outline'], style: {position: "absolute", right: 0, bottom: '0px', fontSize: '28px'}, innerHTML: `x${dailyPowerCounts[power]}` });
@@ -1265,23 +1263,24 @@ function renderCTMap(container, ct, tileData, opts = {}) {
         ring.appendChild(title);
         gSpawns.appendChild(ring);
 
-        ring.addEventListener('click', () => {
-            const dx = s.x - cx;
-            const dy = s.y - cy;
-            const baseAngle = (Math.atan2(dy, dx) * 180 / Math.PI + 360) % 360;
-            const targetDeg = (90 - baseAngle + 360) % 360;
+        //This wasn't clear enough
+        // ring.addEventListener('click', () => {
+        //     const dx = s.x - cx;
+        //     const dy = s.y - cy;
+        //     const baseAngle = (Math.atan2(dy, dx) * 180 / Math.PI + 360) % 360;
+        //     const targetDeg = (90 - baseAngle + 360) % 360;
 
-            const teamColorMap = { 'A': 'Purple', 'B': 'Pink', 'C': 'Green', 'D': 'Blue', 'E': 'Yellow', 'F': 'Red' };
-            renderSettings.selectedTeamRotation = teamAngles[teamColorMap[s.team]];
-            rotateCTTo(container, targetDeg);
+        //     const teamColorMap = { 'A': 'Purple', 'B': 'Pink', 'C': 'Green', 'D': 'Blue', 'E': 'Yellow', 'F': 'Red' };
+        //     renderSettings.selectedTeamRotation = teamAngles[teamColorMap[s.team]];
+        //     rotateCTTo(container, targetDeg);
 
-            teamSelectorButtons.forEach(img => {
-                img.style.backgroundImage = 'url("../Assets/UI/StatsTabBlue.png")'
-                if (img.src.includes(`${teamColorMap[s.team]}`)) {
-                    img.style.backgroundImage = 'url("../Assets/UI/StatsTabYellow.png")';
-                }
-            });
-        });
+        //     teamSelectorButtons.forEach(img => {
+        //         img.style.backgroundImage = 'url("../Assets/UI/StatsTabBlue.png")'
+        //         if (img.src.includes(`${teamColorMap[s.team]}`)) {
+        //             img.style.backgroundImage = 'url("../Assets/UI/StatsTabYellow.png")';
+        //         }
+        //     });
+        // });
     }
 
     container._ct = { rotationDeg, cx, cy, gRot, size, gap, tileIndex };
@@ -1451,7 +1450,7 @@ function updateCTRenderLayers(container) {
 
 function openCTSettingsModal(){
     const container = createEl('div', {
-        style: { padding: '16px', display: 'flex', flexDirection: 'column', gap: '16px' }
+        style: { display: 'flex', flexDirection: 'column', gap: '16px' }
     });
 
     const modalHeader = createEl('div', { classList: ['d-flex', 'jc-between'], style: {backgroundColor: 'var(--profile-primary)', padding: '8px 16px', borderRadius: '8px'} });
@@ -1532,7 +1531,7 @@ function openCTSettingsModal(){
         advancedLayerDiv.appendChild(bottomDiv);
 
         bottomDiv.appendChild(createEl('p', {
-            classList: ['black-outline'],
+            classList: ['black-outline', 'ta-center'],
             style: { fontSize: '20px' },
             innerHTML: 'Background Fill'
         }));
@@ -1804,7 +1803,7 @@ function openCTSettingsModal(){
     presetLayersDiv.appendChild(presetsDiv);
 
      presetsDiv.appendChild(createEl('p', {
-        classList: ['black-outline'],
+        classList: ['black-outline', 'ta-center'],
         style: { fontSize: '20px' },
         innerHTML: 'Layout Presets'
     }));
@@ -1856,7 +1855,7 @@ function openCTSettingsModal(){
         });
     }
 
-    const footer = createEl('div', { classList: ['d-flex', 'jc-center'], style: { marginTop: '8px', gap: '10px' } });
+    const footer = createEl('div', { classList: ['d-flex', 'jc-center'], style: { marginTop: '8px', gap: '10px', padding: "20px" } });
     const closeBtn = createEl('div', {
         classList: ['maps-progress-view', 'black-outline', 'pointer'],
         innerHTML: 'Apply',
@@ -2652,6 +2651,7 @@ function attachTileHoverTippy(element, tileData) {
         maxWidth: 500,
         theme: 'unset',
         arrow: false,
+        touch: false,
         onShow(instance) {
             instance.setContent(generateTileHover(tileData))
         },
