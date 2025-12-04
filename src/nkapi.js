@@ -388,11 +388,8 @@ async function getLatestEvents() {
 
 async function getLatestCollectionEvent() {
     let events = await getLatestEvents();
-    console.log(events);
     for (let event of events) {
         if (event["type"] == "collectableEvent") {
-            console.log(event)
-            console.log(processCollectionEvent(event));
             return event;
         }
     }

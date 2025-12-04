@@ -49,6 +49,37 @@ let renderSettings = {
     selectedPreset: "default",
 }
 
+let filterOptions = {
+    "none": {
+        label: "No Filter",
+        icon: "/UI/StrikethroughRound",
+    },
+    "banner": {
+        label: "Banner Tiles",
+        icon: "/UI/CTPointsBanner",
+    },
+    "relic": {  
+        label: "Relic Tiles",
+        icon: "/UI/DefaultRelicIcon",
+    },
+    "leastCash": {
+        label: "Least Cash Tiles",
+        icon: "/UI/LeastCashIconSmall",
+    },
+    "leastTiers": {
+        label: "Least Tiers Tiles",
+        icon: "/UI/LeastTiersIconSmall",
+    },
+    "race": {
+        label: "Race Tiles",
+        icon: "/UI/StopWatch",
+    },
+    "boss": {
+        label: "Boss Tiles",
+        icon: "/BossIcon/BloonariusPortrait",
+    }
+}
+
 let renderPresets = {
     default: {
         icon: "./Assets/CTMap/PresetDefault.png",
@@ -729,6 +760,7 @@ async function openCTEventMap(source, eventData) {
 
             teamSelectDiv.querySelectorAll('img').forEach(img => img.style.backgroundImage = 'url("../Assets/UI/StatsTabBlue.png")');
             teamBtn.style.backgroundImage = 'url("../Assets/UI/StatsTabYellow.png")'
+            saveLocalStorageCTData();
         });
         teamSelectDiv.appendChild(teamBtn);
         teamSelectorButtons.push(teamBtn);
@@ -780,8 +812,9 @@ async function openCTEventMap(source, eventData) {
     let filteredDiv = createEl('div', { id: "map-filter-active-div", classList: ['d-flex', 'ai-center'], style: { marginRight: '16px', fontSize: '24px', backgroundColor: "var(--profile-primary)", padding: "8px", gap: "8px", borderRadius: "10px" } });
     rightDiv.appendChild(filteredDiv);
 
-    let filterIcon = createEl('img', { id: 'top-bar-filter-icon', classList: ['blue-tab-icon', 'white-outline'], style: { width: '28px', height: '28px', padding: '4px', objectFit: 'contain' }, src: './Assets/UI/StrikethroughRound.png' });
+    let filterIcon = createEl('img', { id: 'top-bar-filter-icon', classList: ['blue-tab-icon', 'white-outline'], style: { width: '28px', height: '28px', padding: '4px', objectFit: 'contain', display: renderSettings.filter == "none" ? 'none' : 'flex' }, src: './Assets/UI/StrikethroughRound.png' });
     filteredDiv.appendChild(filterIcon);
+    filterIcon.src = renderSettings.filter != "none" ? `./Assets/${filterOptions[renderSettings.filter].icon}.png` : './Assets/UI/StrikethroughRound.png';
 
     let filteredLabel = createEl('p', { classList: ['black-outline'], innerHTML: 'Filtered' });;
     filteredDiv.appendChild(filteredLabel);
@@ -796,6 +829,7 @@ async function openCTEventMap(source, eventData) {
         renderSettings.roundFilterStart = 1;
         renderSettings.roundFilterEnd = 100;
         applyCTFilter(ctMapDiv, tileData);
+        saveLocalStorageCTData();
     });
     filteredDiv.appendChild(filteredXBtn);
 
@@ -838,6 +872,7 @@ async function openCTEventMap(source, eventData) {
 
     renderCTMap(ctMapDiv, ct, tileData, { size: 28 });
     applyCTFilter(ctMapDiv, tileData);
+    updateCTBackground(ctMapDiv, tileData);
     updateCTRenderLayers(ctMapDiv);
 }
 
@@ -1506,6 +1541,7 @@ function openCTSettingsModal(){
             let toggle = generateToggle(renderSettings.renderLayers[key], (checked) => {
                 renderSettings.renderLayers[key] = checked;
                 updateCTRenderLayers(debugGlobalCTMap);
+                saveLocalStorageCTData();
             });
             let iconNameDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
             toggleDiv.appendChild(iconNameDiv);
@@ -1582,6 +1618,7 @@ function openCTSettingsModal(){
                 });
                 bgLabel.style.color = '#4BFF00';
                 bgSelectedImg.style.display = 'block';
+                saveLocalStorageCTData();
             });
         }
     }
@@ -1613,6 +1650,7 @@ function openCTSettingsModal(){
             renderSettings.heroFilter = 'NoFilter';
             applyCTFilter(debugGlobalCTMap, selectedCTData);
         }
+        saveLocalStorageCTData();
     });
     modalAdvancedDiv.appendChild(modalAdvancedToggle);
 
@@ -1626,37 +1664,6 @@ function openCTSettingsModal(){
         classList: ['oak-instructions-header', 'black-outline'],
         innerHTML: 'Filter Tiles'
     }));
-
-    let filterOptions = {
-        "none": {
-            label: "No Filter",
-            icon: "/UI/StrikethroughRound",
-        },
-        "banner": {
-            label: "Banner Tiles",
-            icon: "/UI/CTPointsBanner",
-        },
-        "relic": {  
-            label: "Relic Tiles",
-            icon: "/UI/DefaultRelicIcon",
-        },
-        "leastCash": {
-            label: "Least Cash Tiles",
-            icon: "/UI/LeastCashIconSmall",
-        },
-        "leastTiers": {
-            label: "Least Tiers Tiles",
-            icon: "/UI/LeastTiersIconSmall",
-        },
-        "race": {
-            label: "Race Tiles",
-            icon: "/UI/StopWatch",
-        },
-        "boss": {
-            label: "Boss Tiles",
-            icon: "/BossIcon/BloonariusPortrait",
-        }
-    }
 
     let filterRadioButtonsDiv = createEl('div', { classList: ['d-flex', 'fd-column', 'jc-evenly', 'fg-1'], style: { gap: '8px' } });
     leftDiv.appendChild(filterRadioButtonsDiv);
@@ -1699,6 +1706,7 @@ function openCTSettingsModal(){
             renderSettings.filter = key;
             applyCTFilter(debugGlobalCTMap, selectedCTData);
             document.getElementById('top-bar-filter-icon').src = `./Assets/${data.icon}.png`;
+            saveLocalStorageCTData();
         });
     }
 
@@ -1730,6 +1738,7 @@ function openCTSettingsModal(){
             renderSettings.roundFilterEnd = renderSettings.roundFilterStart;
         }
         applyCTFilter(debugGlobalCTMap, selectedCTData);
+        saveLocalStorageCTData();
     });
     startRoundInput.style.flexGrow = '1';
     startRoundDiv.appendChild(startRoundInput);
@@ -1740,6 +1749,7 @@ function openCTSettingsModal(){
             renderSettings.roundFilterStart = renderSettings.roundFilterEnd;
         }
         applyCTFilter(debugGlobalCTMap, selectedCTData);
+        saveLocalStorageCTData();
     });
     endRoundInput.style.flexGrow = '1';
     startRoundDiv.appendChild(endRoundInput);
@@ -1782,6 +1792,7 @@ function openCTSettingsModal(){
         renderSettings.heroFilter = selected.replaceAll(' ', '');
         updateHeroFilterIcon(renderSettings.heroFilter);
         applyCTFilter(debugGlobalCTMap, selectedCTData);
+        saveLocalStorageCTData();
     });
     heroFilterDropdown.querySelector('.dropdown-label').style.minWidth = '110px';
     heroFilterDiv.appendChild(heroFilterDropdown);
@@ -1852,6 +1863,7 @@ function openCTSettingsModal(){
             bgLabel.style.color = '#4BFF00';
             bgSelectedImg.style.display = 'block';
             renderSettings.selectedPreset = key;
+            saveLocalStorageCTData();
         });
     }
 
@@ -2705,3 +2717,15 @@ function convertExtCTDataToODAFormat(tiles) {
     }
     return {tiles: odaTiles};
 }
+
+function saveLocalStorageCTData() {
+    localStorage.setItem('CTSettings', JSON.stringify(renderSettings));
+}
+
+function loadLocalStorageCTData() {
+    let savedSettings = localStorage.getItem('CTSettings');
+    if (savedSettings) {
+        renderSettings = JSON.parse(savedSettings);
+    }
+}
+loadLocalStorageCTData();
