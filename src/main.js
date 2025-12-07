@@ -3000,7 +3000,7 @@ function generateMapDetails(map){
 
     let mapDifficultyIcon = document.createElement('img');
     mapDifficultyIcon.classList.add('map-difficulty-icon');
-    mapDifficultyIcon.src = `./Assets/DifficultyIcon/Map${map}Btn.png`;
+    mapDifficultyIcon.src = `./Assets/DifficultyIcon/Map${constants.mapsInOrder[map].difficulty}Btn.png`;
     mapNameTop.appendChild(mapDifficultyIcon);
 
     let mapNameAndMedals = document.createElement('div');
