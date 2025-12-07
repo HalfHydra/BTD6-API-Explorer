@@ -9133,7 +9133,7 @@ function generateRotations(scheduleContainer, current){
         endRotationDiv.style.backgroundColor = "#00000040";
     }
     scheduleContainer.appendChild(endRotationDiv);
-    let endDate = new Date(constants.collection.current.end);
+    let endDate = new Date(current.end);
     let endRotationDate = createEl('p', {
         classList: ['insta-schedule-rotation-date', 'black-outline'],
         style: {
