@@ -11,6 +11,20 @@ let trophyStoreItemsJSON = {}
 let teamsStoreItemsJSON = {}
 let rogueJSON = {}
 
+let rulesMap = {
+    "Monkey Knowledge Disabled": "NoKnowledgeIcon",
+    "No Lives Lost": "NoLivesLostIcon",
+    "Selling Disabled": "SellingDisabledIcon",
+    "Powers Disabled": "PowersDisabledIcon",
+    "No Continues": "NoContinuesIcon",
+    "All Camo": "AllCamoIcon",
+    "All Regrow": "AllRegenIcon",
+    "Double Cash Disabled": "NoDoubleCashIcon",
+    "No Round 100 Reward": "NoInstaMonkeys",
+    "Custom Rounds": "CustomRoundIcon",
+    "Paragon Limit": "ParagonLimitIcon"
+}
+
 let backQueue = [];
 let backButton = createEl('img', { src: '../Assets/UI/BackBtn.png', classList: ['back-button', 'pointer'] });
 backButton.addEventListener('click', () => {
@@ -679,6 +693,10 @@ function errorModal(body, source, force) {
     switch(body) {
         case "Invalid user ID / Player Does not play this game":
             modalContent2.innerHTML = "Please try again or create a new Open Access Key.";
+            modal.appendChild(modalContent2);
+            break;
+        case "Cannot load public profile. Player does not play this game or is running a newer version":
+            modalContent2.innerHTML = "Note: If a major update for the game just released, it is possible the Open Data API is temporarily broken until updates are made.";
             modal.appendChild(modalContent2);
             break;
     }

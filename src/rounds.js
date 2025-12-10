@@ -546,6 +546,13 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
 
     let headerRightControls = document.createElement('div');
     headerRightControls.classList.add('maps-progress-views');
+
+    let roundsShownLabel = document.createElement('p');
+    roundsShownLabel.classList.add('maps-progress-coop-toggle-text','black-outline');
+    roundsShownLabel.id = 'rounds-shown-label';
+    roundsShownLabel.innerHTML = '';
+    headerRightControls.appendChild(roundsShownLabel);
+
     let clearFiltersBtn = document.createElement('div');
     clearFiltersBtn.classList.add('maps-progress-view','black-outline','pointer');
     clearFiltersBtn.innerHTML = 'Clear Filters';
@@ -598,6 +605,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
     currentPreviewRound = 0;
     currentRoundsetView = "Simple";
     generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed, roundsetType)
+    updateRoundsShownLabel();
 }
 
 function processRoundset(name, data){
@@ -690,7 +698,7 @@ function applyRoundFilters(type){
             requiredMask |= BloonTraitBits.Fortified;
             break;
         case 'Lead & DDT':
-            requiredMask |= BloonTraitBits.Lead;
+            requiredMask |= (BloonTraitBits.Lead | BloonTraitBits.DDT);
             break;
         case 'Purple':
             requiredMask |= BloonTraitBits.Purple;
@@ -701,7 +709,7 @@ function applyRoundFilters(type){
     }
 
     if (requiredMask !== 0) {
-        filtered.rounds = filtered.rounds.filter(r => (r.traitMask & requiredMask) === requiredMask);
+        filtered.rounds = filtered.rounds.filter(r => (r.traitMask & requiredMask) != 0);
     }
 
     if (roundsetFilterSettings.roundsetFilteredBloons.length > 0) {
@@ -732,6 +740,8 @@ function applyRoundFilters(type){
 
     const btn = document.getElementById('clear-filters-btn');
     if (btn) btn.style.display = isFiltersActive() ? '' : 'none';
+
+    updateRoundsShownLabel();
 }
 
 function addRoundHints(roundset, data) {
@@ -1920,4 +1930,21 @@ function isFiltersActive(){
     ];
 
     return conditions.some(Boolean);
+}
+
+function updateRoundsShownLabel() {
+    const label = document.getElementById('rounds-shown-label');
+    if (!label || !roundsetProcessed || roundsetProcessed.rounds.length === 0) return;
+
+    const visibleRounds = roundsetProcessed.rounds.filter(r => isRoundInFilter(r.roundNumber));
+    
+    if (visibleRounds.length === 0) {
+        label.innerHTML = 'No rounds shown';
+        return;
+    }
+
+    const firstRound = visibleRounds[0].roundNumber;
+    const lastRound = visibleRounds[visibleRounds.length - 1].roundNumber;
+    
+    label.innerHTML = `Rounds ${firstRound}-${lastRound}`;
 }

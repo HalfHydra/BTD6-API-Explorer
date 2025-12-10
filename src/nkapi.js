@@ -290,7 +290,7 @@ async function getBossMetadata(key, elite) {
     }
 }
 
-async function getCTData() {
+async function getCTData(standalone) {
     if (CTData == null || isStale(CTDataCachedAt)) {
         await fetchData(`https://data.ninjakiwi.com/btd6/ct`, (json) => {
             CTData = json["body"];
@@ -300,7 +300,9 @@ async function getCTData() {
     } else {
         generateCTs();
     }
-    addToBackQueue({callback: generateEvents})
+    if (!standalone) { 
+        addToBackQueue({callback: generateEvents})
+    }
 }
 
 async function getCTTiles(key) {

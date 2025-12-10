@@ -1,12 +1,12 @@
 {
-    "version": "2.3.1",
-    "projectContentVersion": 51,
+    "version": "2.4.0",
+    "projectContentVersion": 52,
     "totalInstaMonkeys": 1600,
     "achievements": 139,
     "hiddenAchievements": 14,
     "totalMaps": 81,
-    "profileBanners": 56,
-    "profileAvatars": 116,
+    "profileBanners": 59,
+    "profileAvatars": 119,
     "teamsBanners": 15,
     "lives": {
         "Easy": 200,
@@ -57,6 +57,13 @@
         "Clicks": 100
     },
     "limitedTimeEvents": {
+        "Dreadbloon 32": {
+            "type": "Boss", 
+            "boss": "dreadbloon", 
+            "roundset": "chimpsbloonarius", 
+            "start": 1763776800000, 
+            "end": 1764212400000
+        },
         "Jumpscare Redux": {
             "type": "Odyssey", 
             "roundsets": {
@@ -957,6 +964,11 @@
             "theme": "MountainCave",
             "hasWater": false
         },
+        "TrickyTracks": {
+            "difficulty": "Expert",
+            "theme": "City",
+            "hasWater": false
+        },
         "GlacialTrail": {
             "difficulty": "Expert",
             "theme": "Snow",
@@ -1105,7 +1117,7 @@
         "CtGlobalPlayerDiamondMedal": "CT Global - Top 25",
         "Legends1": "Legends - Rogue Legends Feats"
     },
-    "paragonsAvailable": ["DartMonkey", "BoomerangMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "WizardMonkey", "NinjaMonkey", "EngineerMonkey", "TackShooter", "SpikeFactory", "BombShooter"],
+    "paragonsAvailable": ["DartMonkey", "BoomerangMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "WizardMonkey", "NinjaMonkey", "EngineerMonkey", "TackShooter", "SpikeFactory", "BombShooter", "IceMonkey"],
     "instaTiers": {
         "5": ["520", "502", "510", "501", "500", "250", "052", "150", "051", "050", "205", "025", "105", "015", "005"],
         "4": ["420", "402", "410", "401", "400", "240", "042", "140", "041", "040", "204", "024", "104", "014", "004"],
@@ -2164,6 +2176,10 @@
         "SkeletorQuest": {
             "nameLocKey": "SkeletorQuestName",
             "icon": "QuestIconSkeletor"
+        },
+        "FrontierLegendQuest": {
+            "nameLocKey": "FrontierLegendQuestName",
+            "icon": "QuestIconFrontierLegend"
         }
     },
     "BGColor": [0.000, 0.498, 1.000],

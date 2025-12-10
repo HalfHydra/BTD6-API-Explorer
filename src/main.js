@@ -55,20 +55,6 @@ let processedInstaData = {
     "TowerObtained": {}
 }
 
-let rulesMap = {
-    "Monkey Knowledge Disabled": "NoKnowledgeIcon",
-    "No Lives Lost": "NoLivesLostIcon",
-    "Selling Disabled": "SellingDisabledIcon",
-    "Powers Disabled": "PowersDisabledIcon",
-    "No Continues": "NoContinuesIcon",
-    "All Camo": "AllCamoIcon",
-    "All Regrow": "AllRegenIcon",
-    "Double Cash Disabled": "NoDoubleCashIcon",
-    "No Round 100 Reward": "NoInstaMonkeys",
-    "Custom Rounds": "CustomRoundIcon",
-    "Paragon Limit": "ParagonLimitIcon"
-}
-
 let showElite = false;
 
 let currentBrowserView = "grid";
@@ -107,18 +93,19 @@ let loggedIn = false;
 let imageScroll = [
     {
         "title": "New Site Update!",
-        "text": `Site Update 2.3.1:<br>
-        - Minor fixes + changes<br>
+        "text": `Site Update 2.4.0:<br>
+        - Contested Territory Map<br>
+        - Automatic Collection Events<br>
         <br>
         Recent Updates:<br>
         - Added Roundset Filtering<br>
         - Contested Territory Groups<br>
-        - Leaderboards Revamped<br>
         <br>
-        5% Off in <a href="https://btd6store.ninjakiwi.com/" target="_blank" style="color: white;">Webshop</a> when using a code (HalfHydra for me, TY!)<br>
+        Try the <a href="https://btd6store.ninjakiwi.com/" target="_blank" style="color: white;">Official BTD6 Webshop</a>!<br>
+        Creator Code: 'HalfHydra' - TY!<br>
         Report Bugs: <a href="https://discord.gg/wep2RDmcqZ" target="_blank" style="color: white;">Discord Server</a><br>
         `,
-        "image": "/LandingScroll/Update51&Upsell"
+        "image": "/LandingScroll/Update52&CTMap"
     },
     {
         "title": "View Your Profile!",
@@ -720,17 +707,23 @@ function generateFrontPage(){
     StandaloneSiteDiv.appendChild(siteButtons);
 
     let standaloneSites = {
-        "Roundsets": {
-            "link": "https://btd6apiexplorer.github.io/rounds",
-            "text": "Roundsets",
-            "icon": "DefaultRoundSetIcon",
-            "background": "BloonsBG"
+        "CT Map": {
+            "link": "https://btd6apiexplorer.github.io/ct",
+            "text": "Current CT Map",
+            "icon": "CTSiteBtn",
+            "background": "CTMapBG"
         },
         "Leaderboards": {
             "link": "https://btd6apiexplorer.github.io/leaderboards",
             "text": "Leaderboards",
             "icon": "LeaderboardSiteBtn",
             "background": "TrophyStoreTiledBG"
+        },
+        "Roundsets": {
+            "link": "https://btd6apiexplorer.github.io/rounds",
+            "text": "Roundsets",
+            "icon": "DefaultRoundSetIcon",
+            "background": "BloonsBG"
         },
         "Rogue Artifacts": {
             "link": "https://btd6apiexplorer.github.io/rogue",
@@ -857,7 +850,8 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = `v2.3.1: Minor fixes<br>- Updated trophy store items to use newer structure on the Open Data API, which should prevent this from being as inaccurate as before - still testing though.<br>- Games played text now shows up with the correct value<br>- SheRa Adora skin will now show up correctly.<br>- Other minor UI tweaks<br><br>
+    changelogText.innerHTML = `v2.4.0 Update 52 and Contested Territory Map!<br>- New Contested Territory Map and Event Details revamp! Big thanks to a certain dataminer for hosting the generated CT tile data as that is not available on the Open Data API currently.<br>- Added a <a href="./ct" target="_blank" style="color: white;">standalone CT site</a> that will host only the current events information<br>Collection Events will now automatically be added<br>- Collection events now display when the event ends at the bottom of the schedule<br>- Any time a new update happens, there will now be text hinting that the update is not available on the API yet.<br>- Fixed Fortified DDTs not showing up on "Lead and DDT" preset filter<br>- Events with multiple custom roundsets will now show correctly<br>- Filtering now works on the standalone rounds site<br>- Roundsets will now show the currently listed rounds at the top<br>- Added a link to the Discord server in the extras tab.<br><br>
+    v2.3.1: Minor fixes<br>- Updated trophy store items to use newer structure on the Open Data API, which should prevent this from being as inaccurate as before - still testing though.<br>- Games played text now shows up with the correct value<br>- SheRa Adora skin will now show up correctly.<br>- Other minor UI tweaks<br><br>
     v2.3.0: Update 51 and Minor Updates<br>- Added Update 51 content including new Rogue changes <br>- You can now navigate to the more detailed menus from Quick Stats<br>- Towers menu now shows related Monkey Knowledge points (rework coming eventually)<br>- Added total of each tier to the game-like view of Insta Monkeys collection when "Missing" is toggled.<br>- Unavailable Relics will now displayed on the CT Relics page in prepration for a CT rework<br>- Duplicate (IAP/Special) Rogue starter kits will now show at the bottom<br>- The leaderboard refresh button will now only appear for currently active events<br>- Fixed a bug causing the Clear Filters button to break some roundsets functionality.<br>- Top Paragons will no longer show if there aren't any<br>- Events will now refetch their information from the API after 10 minutes.<br>- The scrollbar is no longer accidentally unstyled. Whoops<br>- Fixed numerous bugs with the back button not clearing when going back<br><br>
     v2.2.0: Leaderboard Revamp + Rogue Improvements<br>- Leaderboards have been revamped with better loading times.<br>- Clicking a team on the Contested Territory leaderboard will now show their group of competing teams and their scores.<br>- Leaderboards will now refresh the next time you access them if it's been a while and you don't refresh the page.<br>- A manual refresh button has been added to the top of individual leaderboards.<br>- Leaderboards now show text indicating if it is loading new entries and if it has reached the end.<br>- Fixed a bug causing the timers on events to freeze after going back and forward to various menus.<br>- Rogue Artifacts now has a clear filter button.<br>- Rogue Artifacts count should now correctly display if the collection mode is turned off.<br>- Rogue Legends artifact popout updated to include the update that the artifact was added in as well as display an insta monkey that is added if it has one.<br>- Rogue legends starter kits now also show the insta monkey that is added via a starter artifact.<br>- Fixed numerous UI bugs including a missing Fortified DDT Icon, the rogue legends artifact sorting preview not working anymore.<br><br>
     v2.1.0: Roundsets Revamp + Quests!<br>- The roundset viewer now has options for filtering. This includes a round range (good for Rogue Legends), starting cash, as well as filtering by bloons. There are 6 basic filters and then a toggle for an advanced mode that allows you to filter down to specific bloons.<br>- Bloon Group timings in the detailed view of rounds now has a tooltip that will show the exact timings on hover.<br>- Clicking the round number in simple or detailed will now take you to the previewer for that round.<br>- The roundset previewer has been fixed, and the UI has been rearranged. No more lag issues causing inaccurate previews, it should always be accurate now no matter the capabilities of your device.<br>- You can now turn off round hints.<br>- A helpful message describing the boss roundset changes has been added for each boss.<br>- Quests have been added under the Profile tab. You can also view the custom roundset (if it has one) from there.<br>- Fixed boss details showing the incorrect scoring type.<br>- Fixed some UI issues in Collection Event menus.<br>- You can now reveal hidden achievement descriptions. This will be complimented later with a guide for a select few taht are tougher or less straight forward in the future.<br>- Fixed the download for Rogue artifacts on Firefox.<br>- Fixed a bug that enabled XSS with named monkeys.<br>- New heroes should no longer break the site before I add them. Oops.<br>- 2 variant artifacts filtering has been fixed to include all of them.<br>- Rogue Artifact popout should no longer make you jump to the top of the scrollbar.<br>- Fixed a bug involving reverse mode in the detailed section of roundsets.<br>- Fixed a bug where the list view on map stats would not show any maps after update 45. Whoops, thank you @200e200w for reporting this on the Discord Server.<br><br>
@@ -1408,6 +1402,17 @@ function generateOverview(){
         towerDiv.classList.add('hero-div');
         towerDiv.title = getLocValue(tower);
         counter < 3 ? top3TowersDiv.appendChild(towerDiv) : otherTowersDiv.appendChild(towerDiv);
+
+        switch(processedInstaData.TowerBorders[tower]){
+            case "Gold":
+                break;
+            case "Black":
+                towerDiv.style.backgroundImage = "url(../Assets/UI/InstaTowersContainerBlack.png)";
+                break;
+            case "":
+                towerDiv.style.backgroundImage = "url(../Assets/UI/InstaTowersContainer.png)";
+                break;
+        }
 
         let towerImg = document.createElement('img');
         towerImg.classList.add('hero-img');
@@ -5181,9 +5186,12 @@ async function generateEvents(){
     selectorsDiv.classList.add('selectors-div');
     eventsPage.appendChild(selectorsDiv);
 
+    showLoading();
+    let current = await getLatestCollectionEvent();
+
     let selectors = {
         'Collection': {
-            'img': getCollectionEventSkinIcon(constants.collection.current.skin),
+            'img': getCollectionEventSkinIcon(current),
             'text': "Collection Event Schedule",
             'bgimg': 'EventBanner/EventBannerSmallTotem'
         },
@@ -5223,9 +5231,6 @@ async function generateEvents(){
             'bgcolor': 'radial-gradient(circle, transparent 50%, rgba(0,0,0,1) 100%),linear-gradient(45deg, rgb(255,150,0), rgb(255,150,0))'
         }
     }
-
-    showLoading();
-    let current = await getLatestCollectionEvent();
 
     let now = new Date();
     if (current == null || now > new Date(current.end)) {
@@ -8174,7 +8179,8 @@ function generateExtrasPage() {
         'Challenge & Map Browser',
         'Settings',
         // 'Send Feedback',
-        "Use Code 'HalfHydra' <br>in the BTD6 Shop!"
+        "Use Code 'HalfHydra' <br>in the BTD6 Shop!",
+        "Discord Server"
     ];
 
     if (!loggedIn) {
@@ -8224,6 +8230,9 @@ function generateExtrasPage() {
             case "Challenge & Map Browser":
                 selectorImg.src = '../Assets/UI/PatchNotesMonkeyIcon.png';
                 break;
+            case "Discord Server":
+                selectorImg.src = '../Assets/UI/DiscordBtn.png';
+                break;
             default: 
                 selectorImg.src = '../Assets/UI/WoodenRoundButton.png';
                 break;
@@ -8258,9 +8267,6 @@ function changeExtrasTab(selected){
             currentInstaView = "collection";
             changeProgressTab('InstaMonkeys');
             break;
-        case 'Send Feedback':
-            window.open('https://forms.gle/Tg1PuRNj2ftojMde6', '_blank');
-            break;
         case "CreatorSupport":
         case "Use Code 'HalfHydra' <br>in the BTD6 Shop!":
             addToBackQueue({ callback: generateExtrasPage });
@@ -8282,6 +8288,9 @@ function changeExtrasTab(selected){
             generateExplore();
             document.getElementById('extras-content').style.display = "none";
             document.getElementById('explore-content').style.display = "flex";
+            break;
+        case "Discord Server":
+            window.open("https://discord.gg/BSpSeXrAQy", "_blank");
             break;
     }
 }

@@ -297,7 +297,6 @@ async function generateCTs(){
 
 async function openCTEventDetails(source, eventData) {
     let extData = await getExternalCTData(eventData.id);
-
     let data = null;
     if (eventData.tiles) {
         data = await getCTTiles(eventData.tiles);
@@ -305,15 +304,16 @@ async function openCTEventDetails(source, eventData) {
     if (data == null) { 
         data = convertExtCTDataToODAFormat(extData.tiles); 
     }
-    document.getElementById(`${source}-content`).style.display = "none";
+    if (source != null) {
+        document.getElementById(`${source}-content`).style.display = "none";
+        addToBackQueue({ "source": source, "destination": "relics" });
+    }
     let relicsContent = document.getElementById('relics-content');
     relicsContent.style.display = "flex";
     relicsContent.innerHTML = "";
 
     let now = new Date();
     let dayMs = 24 * 60 * 60 * 1000;
-
-    addToBackQueue({ "source": source, "destination": "relics" });
 
     let relicContainer = createEl('div', { classList: ['relic-container', 'ct-panel'], style: { borderRadius: "20px 20px 10px 10px"} });
     resetScroll();
@@ -455,8 +455,10 @@ async function openCTEventDetails(source, eventData) {
     let eventRelicsDiv = createEl('div', { classList: ['d-flex', 'jc-center'], style: { marginBottom: "10px"} });
 
     let dailyPowersDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-evenly', 'f-wrap'], style: { padding: "5px", borderRadius: "10px", backgroundColor: "#4B3B2F"/*"#372B23"**/ } });
-    relicsOuterContainer.appendChild(dailyPowersDiv);
-    relicsOuterContainer.appendChild(eventRelicsDiv);
+    if (extData != null) {
+        relicsOuterContainer.appendChild(dailyPowersDiv);
+        relicsOuterContainer.appendChild(eventRelicsDiv);
+    }
 
     let relicsDiv = createEl('div', { classList: ['d-flex', 'jc-center', 'f-wrap'], /*style: {maxWidth: "860px"}*/ });
     relicsOuterContainer.appendChild(relicsDiv);
@@ -568,10 +570,11 @@ async function openCTEventDetails(source, eventData) {
 
         let relicID = createEl('p', { classList: ['relic-id', 'pointer'], innerHTML: relic.id });
         relicDiv.appendChild(relicID);
-
-        relicID.addEventListener('click', () => {
-            openTileModal(externalCTData[eventData.id].tiles[relic.id], 'relics');
-        });
+        if (extData != null) {
+            relicID.addEventListener('click', () => {
+                openTileModal(externalCTData[eventData.id].tiles[relic.id], 'relics');
+            });
+        }
 
         let relicIcon = createEl('img', { classList: ['relic-icon'], src: `./Assets/RelicIcon/${relicTypeName}.png` });
         relicDiv.appendChild(relicIcon);
@@ -642,9 +645,11 @@ async function openCTEventDetails(source, eventData) {
 
         let bannerID = createEl('p', { classList: ['relic-id', 'pointer'], innerHTML: banner.id });
         bannerDiv.appendChild(bannerID);
-        bannerID.addEventListener('click', () => {
-            openTileModal(externalCTData[eventData.id].tiles[banner.id], 'relics');
-        });
+        if (extData != null) {
+            bannerID.addEventListener('click', () => {
+                openTileModal(externalCTData[eventData.id].tiles[banner.id], 'relics');
+            });
+        }
 
         let bannerImgDiv = createEl('div', { classList: ['pos-rel'], style: {} });
         bannerDiv.appendChild(bannerImgDiv);
@@ -809,10 +814,10 @@ async function openCTEventMap(source, eventData) {
     // teamSelectionToggle.querySelector('.dropdown-label').style.minWidth = '110px';
     // rightDiv.appendChild(teamSelectionToggle);
 
-    let filteredDiv = createEl('div', { id: "map-filter-active-div", classList: ['d-flex', 'ai-center'], style: { marginRight: '16px', fontSize: '24px', backgroundColor: "var(--profile-primary)", padding: "8px", gap: "8px", borderRadius: "10px" } });
+    let filteredDiv = createEl('div', { id: "map-filter-active-div", classList: ['d-flex', 'ai-center'], style: { marginRight: '16px', fontSize: '24px', backgroundColor: "var(--profile-primary)", padding: "8px", gap: "8px", borderRadius: "10px", visibility: renderSettings.filter == "none" ? 'hidden' : 'visible'  } });
     rightDiv.appendChild(filteredDiv);
 
-    let filterIcon = createEl('img', { id: 'top-bar-filter-icon', classList: ['blue-tab-icon', 'white-outline'], style: { width: '28px', height: '28px', padding: '4px', objectFit: 'contain', display: renderSettings.filter == "none" ? 'none' : 'flex' }, src: './Assets/UI/StrikethroughRound.png' });
+    let filterIcon = createEl('img', { id: 'top-bar-filter-icon', classList: ['blue-tab-icon', 'white-outline'], style: { width: '28px', height: '28px', padding: '4px', objectFit: 'contain' }, src: './Assets/UI/StrikethroughRound.png' });
     filteredDiv.appendChild(filterIcon);
     filterIcon.src = renderSettings.filter != "none" ? `./Assets/${filterOptions[renderSettings.filter].icon}.png` : './Assets/UI/StrikethroughRound.png';
 
@@ -1369,8 +1374,11 @@ function applyCTFilter(container, tileData) {
 
         if (isVisible && renderSettings.heroFilter !== 'NoFilter') {
             const heroes = Object.keys(simplifyTowerData(data.GameData.dcModel).heroes);
+            console.log(heroes, heroes.length, heroes.length == 0)
             if (renderSettings.heroFilter === 'NoHeroes') {
                 if (heroes.length !== 0) isVisible = false;
+            } else if (renderSettings.heroFilter === 'AnyHeroes') {
+                if (heroes.length == 0) isVisible = false;
             } else {
                 if (!heroes.filter(h => h !== 'ChosenPrimaryHero').includes(renderSettings.heroFilter)) isVisible = false;
             }
@@ -1485,7 +1493,7 @@ function updateCTRenderLayers(container) {
 
 function openCTSettingsModal(){
     const container = createEl('div', {
-        style: { display: 'flex', flexDirection: 'column', gap: '16px' }
+        style: { display: 'flex', flexDirection: 'column', gap: '16px', borderRadius: '10px' }
     });
 
     const modalHeader = createEl('div', { classList: ['d-flex', 'jc-between'], style: {backgroundColor: 'var(--profile-primary)', padding: '8px 16px', borderRadius: '8px'} });
@@ -1741,6 +1749,7 @@ function openCTSettingsModal(){
         saveLocalStorageCTData();
     });
     startRoundInput.style.flexGrow = '1';
+    startRoundInput.style.width = "80px";
     startRoundDiv.appendChild(startRoundInput);
 
     let endRoundInput = generateNumberInput("", renderSettings.roundFilterEnd, 1, 100, 1, (val) => {
@@ -1751,7 +1760,9 @@ function openCTSettingsModal(){
         applyCTFilter(debugGlobalCTMap, selectedCTData);
         saveLocalStorageCTData();
     });
-    endRoundInput.style.flexGrow = '1';
+    // endRoundInput.style.flexGrow = '1';
+    endRoundInput.style.gap = 'unset';
+    endRoundInput.style.width = "80px";
     startRoundDiv.appendChild(endRoundInput);
 
     let heroFilterDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
@@ -1771,6 +1782,9 @@ function openCTSettingsModal(){
             case "NoHeroes":
                 heroFilterIcon.src = './Assets/UI/NoHeroSelected.png';
                 break;
+            case "AnyHeroes":
+                heroFilterIcon.src = './Assets/UI/AllHeroesIcon.png';
+                break;
             default:
                 heroFilterIcon.src = `./Assets/HeroIconCircle/HeroIcon${selected}.png`;
                 break;
@@ -1781,6 +1795,7 @@ function openCTSettingsModal(){
     let horriblePractice = {
         "NoFilter": "No Filter",
         "NoHeroes": "No Heroes",
+        "AnyHeroes": "Any Heroes",
         "StrikerJones": "Striker Jones",
         "AdmiralBrickell": "Admiral Brickell",
         "CaptainChurchill": "Captain Churchill",
@@ -1788,13 +1803,14 @@ function openCTSettingsModal(){
         "ObynGreenfoot": "Obyn Greenfoot",
     }
 
-    let heroFilterDropdown = generateDropdown("Hero Filter:", ["No Filter", "No Heroes", ...Object.keys(constants.heroesInOrder).map((id) => { return getLocValue(id)})], horriblePractice[renderSettings.heroFilter] || renderSettings.heroFilter, (selected) => {
+    let heroFilterDropdown = generateDropdown("Hero Filter:", ["No Filter", "No Heroes", "Any Heroes", ...Object.keys(constants.heroesInOrder).map((id) => { return getLocValue(id)})], horriblePractice[renderSettings.heroFilter] || renderSettings.heroFilter, (selected) => {
         renderSettings.heroFilter = selected.replaceAll(' ', '');
         updateHeroFilterIcon(renderSettings.heroFilter);
         applyCTFilter(debugGlobalCTMap, selectedCTData);
         saveLocalStorageCTData();
     });
     heroFilterDropdown.querySelector('.dropdown-label').style.minWidth = '110px';
+    heroFilterDropdown.classList.add('jc-between', 'w-100');
     heroFilterDiv.appendChild(heroFilterDropdown);
 
     let rightDiv = createEl('div', { classList: ['d-flex', 'f-wrap', 'fd-column'], style: { gap: '12px', width: '350px' } });
