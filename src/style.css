@@ -2409,7 +2409,7 @@
     height: 50px;
 }
 .race-info-top-div {
-    width: 450px;
+    width: 460px;
     display: flex;
     justify-content: space-between;
 }
@@ -2430,6 +2430,7 @@
 }
 .race-info-name {
     font-size: 24px;
+    max-width: 300px;
 }
 .race-time-left {
     font-size: 24px;
