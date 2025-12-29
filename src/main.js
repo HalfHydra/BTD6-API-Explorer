@@ -5477,7 +5477,8 @@ function generateBosses(elite){
             'name': titleCaseBoss,
             'elite': elite,
             'eventNumber': bossNumber,
-            'scoringType': elite ? race.eliteScoringType : race.normalScoringType,
+            'scoringType': race.normalScoringType,
+            'eliteScoringType': race.eliteScoringType,
             'index': index
         }
 
@@ -5923,8 +5924,8 @@ function processChallenge(metadata, map){
     }
 
     result["Upvotes"] = metadata.upvotes;
-    result["Player Completion Rate"] = metadata.playsUnique == 0 ? "0%" : metadata.winsUnique - metadata.playsUnique == 0 ? "100%" : `${((metadata.winsUnique / metadata.playsUnique) * 100).toFixed(2)}%`;
-    result["Player Win Rate"] = metadata.playsUnique == 0 ? "0%" : `${((metadata.wins / (metadata.plays + metadata.restarts)) * 100).toFixed(2)}%`;
+    result["Player Completion Rate"] = metadata.playsUnique == 0 ? "0.00%" : metadata.winsUnique - metadata.playsUnique == 0 ? "100%" : `${((metadata.winsUnique / metadata.playsUnique) * 100).toFixed(2)}%`;
+    result["Player Win Rate"] = metadata.playsUnique == 0 ? "0.00%" : `${((metadata.wins / (metadata.plays + metadata.restarts)) * 100).toFixed(2)}%`;
 
     result.statsValid = false;
     if (metadata.id != "n/a") {
@@ -5943,8 +5944,9 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     addToBackQueue({"source": source, "destination": "challenge"});
 
     let challengeExtraData = processChallenge(metadata);
-    if (challengeType == "Boss" && eventData.scoringType != "GameTime") {
-        switch(eventData.scoringType){
+    if (challengeType == "Boss") {
+        let scoringType = eventData.elite ? eventData.eliteScoringType : eventData.scoringType;
+        switch(scoringType){
             case "LeastCash":
                 challengeExtraData.scoringType = "Least Cash";
                 break;
@@ -6134,6 +6136,8 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
                     await getBossMetadata(eventData.index, eventData.elite)
                 }
                 goBack();
+                console.log(bossesData[eventData.index][eventData.elite ? "metadataElite" : "metadataStandard"])
+                console.log(eventData);
                 showChallengeModel('events', bossesData[eventData.index][eventData.elite ? "metadataElite" : "metadataStandard"], challengeType, eventData);
                 hideLoading();
             })
@@ -7471,8 +7475,8 @@ function generateChallengeEntries(destination) {
                             }
                             challengeMapRounds.innerHTML = `Rounds ${challengeData.startRound == 0 ? constants.startRound[challengeData.difficulty] : challengeData.startRound}/${challengeData.endRound == 0 ? constants.endRound[challengeData.difficulty] : challengeData.endRound}`
                             challengeUpvoteValue.innerHTML = challengeData.upvotes.toLocaleString();
-                            challengeTrophyValue.innerHTML = challengeData.playsUnique == 0 ? "0%" : challengeData.winsUnique - challengeData.playsUnique == 0 ? "0%" : `${((challengeData.winsUnique / challengeData.playsUnique) * 100).toFixed(2)}%`;
-                            challengeSkullValue.innerHTML = challengeData.playsUnique == 0 ? "0%" : `${((challengeData.wins / (challengeData.plays + challengeData.restarts)) * 100).toFixed(2)}%`;
+                            challengeTrophyValue.innerHTML = challengeData.playsUnique == 0 ? "0.00%" : challengeData.winsUnique - challengeData.playsUnique == 0 ? "0.00%" : `${((challengeData.winsUnique / challengeData.playsUnique) * 100).toFixed(2)}%`;
+                            challengeSkullValue.innerHTML = challengeData.playsUnique == 0 ? "0.00%" : `${((challengeData.wins / (challengeData.plays + challengeData.restarts)) * 100).toFixed(2)}%`;
                             challengeCreator.addEventListener('click', async (event) => {
                                 event.preventDefault();
                                 event.stopPropagation();
@@ -7639,8 +7643,8 @@ function generateChallengeEntries(destination) {
                             if (challengeData == null) { return; }
                             challengeMapImg2.src = Object.keys(constants.mapsInOrder).includes(challengeData.map) ? getMapIcon(challengeData.map) : challengeData.mapURL;
                             challengeUpvoteValue2.innerHTML = challengeData.upvotes.toLocaleString();
-                            challengeTrophyValue2.innerHTML = challengeData.playsUnique == 0 ? "0%" : challengeData.winsUnique - challengeData.playsUnique == 0 ? "0%" : `${((challengeData.winsUnique / challengeData.playsUnique) * 100).toFixed(2)}%`;
-                            challengeSkullValue2.innerHTML = challengeData.playsUnique == 0 ? "0%" : `${((challengeData.wins / (challengeData.plays + challengeData.restarts)) * 100).toFixed(2)}%`;
+                            challengeTrophyValue2.innerHTML = challengeData.playsUnique == 0 ? "0.00%" : challengeData.winsUnique - challengeData.playsUnique == 0 ? "0.00%" : `${((challengeData.winsUnique / challengeData.playsUnique) * 100).toFixed(2)}%`;
+                            challengeSkullValue2.innerHTML = challengeData.playsUnique == 0 ? "0.00%" : `${((challengeData.wins / (challengeData.plays + challengeData.restarts)) * 100).toFixed(2)}%`;
                             challengeCreator2.addEventListener('click', async (event) => {
                                 event.preventDefault();
                                 event.stopPropagation();
@@ -7846,8 +7850,8 @@ function generateMapGameEntries(destination) {
                             let customMapData = await getCustomMapMetadata(entry.id);
                             if (customMapData == null) { return; }
                             challengeUpvoteValue.innerHTML = customMapData.upvotes.toLocaleString();
-                            challengeTrophyValue.innerHTML = customMapData.playsUnique == 0 ? "0%" : customMapData.winsUnique - customMapData.playsUnique == 0 ? "0%" : `${((customMapData.winsUnique / customMapData.playsUnique) * 100).toFixed(2)}%`;
-                            challengeSkullValue.innerHTML = customMapData.playsUnique == 0 ? "0%" : `${((customMapData.wins / (customMapData.plays + customMapData.restarts)) * 100).toFixed(2)}%`;
+                            challengeTrophyValue.innerHTML = customMapData.playsUnique == 0 ? "0.00%" : customMapData.winsUnique - customMapData.playsUnique == 0 ? "0.00%" : `${((customMapData.winsUnique / customMapData.playsUnique) * 100).toFixed(2)}%`;
+                            challengeSkullValue.innerHTML = customMapData.playsUnique == 0 ? "0.00%" : `${((customMapData.wins / (customMapData.plays + customMapData.restarts)) * 100).toFixed(2)}%`;
                             challengeCreator.addEventListener('click', async (event) => {
                                 event.preventDefault();
                                 event.stopPropagation();
