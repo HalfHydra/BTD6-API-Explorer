@@ -281,7 +281,7 @@ async function generateCTs(){
 
     let shownEvents = Object.values(CTData).map(e => e.id);
     Object.entries(CTSeedToEventNumber).reverse().forEach(([seed, num]) => {
-        if (shownEvents.includes(seed) || num == 0) return;
+        if (shownEvents.includes(seed) || num < 33) return;
         let eventDiv = createEl('div', { classList: ['start-button', 'currency-trophies-div', 'black-outline'], style: {} });
         historicCTContent.appendChild(eventDiv);
 
