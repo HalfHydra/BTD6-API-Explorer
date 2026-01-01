@@ -4889,6 +4889,7 @@ body {
     overflow: auto;
     height: 100%;
     position: relative;
+    scrollbar-gutter: stable;
 }
 
 div {
