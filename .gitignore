@@ -10,3 +10,4 @@ data/PreventAPISpam_UserSave.json
 .vscode/settings.json
 *.bat
 *.py
+/Output
