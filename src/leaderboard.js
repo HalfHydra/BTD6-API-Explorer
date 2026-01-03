@@ -796,7 +796,9 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                                 } else {
                                     if (!leaderboardCache[leaderboardLink].ended) {
                                         leaderboardCache[leaderboardLink].ended = true;
-                                        let endOfLeaderboard = createEl('p', { classList: ['black-outline'], style: { fontSize: '32px', paddingBottom: '50px' }, innerHTML: "End of Leaderboard" });
+                                        console.log(leaderboardCache[leaderboardLink])
+                                        let leaderboardText = (leaderboardCache[leaderboardLink].entries.length == 1000) ? `Scores after 1000th are unavailable` : "End of Leaderboard";
+                                        let endOfLeaderboard = createEl('p', { classList: ['black-outline'], style: { fontSize: '32px', paddingBottom: '50px' }, innerHTML: leaderboardText });
                                         leaderboardEntries.appendChild(endOfLeaderboard);
                                     }
                                 }
