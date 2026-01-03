@@ -9066,6 +9066,12 @@ async function generateInstaSchedule() {
 
     instaScheduleContent.appendChild(scheduleContainer);
 
+
+    let timeUntilNextRotation = (current.start + (28800000 * (Math.floor((Date.now() - current.start) / 28800000) + 1))) - Date.now();
+    setTimeout(() => {
+        generateInstaSchedule();
+    }, timeUntilNextRotation);
+
     generateRotations(scheduleContainer, current);
 }
 
