@@ -1410,6 +1410,7 @@ function generateOverview(){
         if(!towersList.includes(tower)) { continue; }
         let towerDiv = document.createElement('div');
         towerDiv.classList.add('hero-div');
+        towerDiv.style.backgroundImage = `url(../Assets/UI/InstaTowersContainer${processedInstaData.TowerBorders[tower]}.png)`;
         towerDiv.title = getLocValue(tower);
         counter < 3 ? top3TowersDiv.appendChild(towerDiv) : otherTowersDiv.appendChild(towerDiv);
 
