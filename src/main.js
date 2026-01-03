@@ -114,8 +114,18 @@ let imageScroll = [
     },
     {
         "title": "View Events!",
-        "text": "- View recent events<br>- Race event details<br>- Boss event details<br>- Odyssey event details<br>- Contested Territory details<br>- Daily Challenge details<br>- Advanced Challenge details<br>- Coop Challenge details<br>- Collection event details",
+        "text": "- Recent events details<br>- Race event details<br>- Boss event details<br>- Odyssey event details<br>- Contested Territory details<br>- Daily Challenge details<br>- Collection event details",
         "image": "/LandingScroll/Events"
+    },
+    {
+        "title": "Featured Insta Schedule!",
+        "text": "- View Collection Event's rotation and schedule<br>- View in your local timezone<br>- Filter schedule by tower type",
+        "image": "/LandingScroll/CollectionEvent"
+    },
+    {
+        "title": "Contested Territory Map!",
+        "text": "- Accurate depiction of the latest CT map<br>- Simple tile summaries<br>- Customizable map<br>- Identify relic locations relative to your team",
+        "image": "/LandingScroll/CTMap"
     },
     {
         "title": "View Leaderboards!",
