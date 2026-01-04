@@ -1628,8 +1628,7 @@ function downloadImage() {
     artifactsDiv.appendChild(starterArtifactsDiv);
 
     let mainArtifactsDiv = document.createElement('div');
-    mainArtifactsDiv.classList.add('artifacts-div');
-    mainArtifactsDiv.style.justifyContent = 'space-between';
+    mainArtifactsDiv.classList.add('artifacts-div', 'jc-center');
     artifactsDiv.appendChild(mainArtifactsDiv);
 
     let artifacts = {...rogueJSON.artifacts}
