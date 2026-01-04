@@ -266,7 +266,7 @@ async function generateCTs(){
 
         let raceInfoTotalScores2 = document.createElement('p');
         raceInfoTotalScores2.classList.add("race-info-total-scores", "black-outline");
-        raceInfoTotalScores2.innerHTML = `Total Scores: ${race.totalScores_team == 0 ? "No Data" : race.totalScores_team.toLocaleString()}`
+        raceInfoTotalScores2.innerHTML = `Total Teams: ${race.totalScores_team == 0 ? "No Data" : race.totalScores_team.toLocaleString()}`
         raceInfoMiddleDiv.appendChild(raceInfoTotalScores2);
     })
 

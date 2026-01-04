@@ -315,7 +315,7 @@ async function generateLeaderboards() {
         }
 
         let roundsetText3 = document.createElement('p');
-        roundsetText3.innerHTML = `Total Scores: ${data.totalScores_team}`;
+        roundsetText3.innerHTML = `Total Teams: ${data.totalScores_team}`;
         roundsetText3.classList.add('selector-text', 'black-outline');
         roundsetTextDiv.appendChild(roundsetText3);
 
@@ -796,7 +796,6 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                                 } else {
                                     if (!leaderboardCache[leaderboardLink].ended) {
                                         leaderboardCache[leaderboardLink].ended = true;
-                                        console.log(leaderboardCache[leaderboardLink])
                                         let leaderboardText = (leaderboardCache[leaderboardLink].entries.length == 1000) ? `Scores after 1000th are unavailable` : "End of Leaderboard";
                                         let endOfLeaderboard = createEl('p', { classList: ['black-outline'], style: { fontSize: '32px', paddingBottom: '50px' }, innerHTML: leaderboardText });
                                         leaderboardEntries.appendChild(endOfLeaderboard);
