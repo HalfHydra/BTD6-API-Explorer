@@ -2127,6 +2127,8 @@
 }
 .insta-monkey-tier-img {
     width: 100px;
+    height: 100px;
+    object-fit: cover;
 }
 .insta-monkey-tier-text {
     position: absolute;
