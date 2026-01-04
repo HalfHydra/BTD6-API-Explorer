@@ -450,7 +450,7 @@ function processRewardsString(input){
                 break;
             case "Trophy":
                 result[counter].type = "Trophy";
-                result[counter].trophy = params[0];
+                result[counter].amount = params[0];
                 break;
         }
         counter++;

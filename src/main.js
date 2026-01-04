@@ -3243,7 +3243,7 @@ function generateMapRightColStats(map,coop){
     if (mapStatsContainer.innerHTML == "") {
         let noDataFound = document.createElement('p');
         noDataFound.classList.add('no-data-found','black-outline');
-        noDataFound.innerHTML = "No Data Found.";
+        noDataFound.innerHTML = "No Data Available. Try switching the Coop Toggle";
         mapStatsContainer.appendChild(noDataFound);
     }
 }
@@ -5177,6 +5177,29 @@ function generateAchievementsGameView(){
     let AchievementsContainer = document.getElementById('achievements-container');
     AchievementsContainer.innerHTML = "";
 
+    let achievementGuides = {
+        5: "https://steamcommunity.com/sharedfiles/filedetails/?id=3601481780",
+        28: "https://www.bloonswiki.com/Inflated",
+        64: "https://www.bloonswiki.com/2TC",
+        65: "https://www.bloonswiki.com/Snap_of_your_fingers",
+        77: "https://www.bloonswiki.com/All_for_one_and_one_for_one",
+        78: "https://www.bloonswiki.com/Master_of_life",
+        80: "https://www.bloonswiki.com/Strangely_Adorable",
+        82: "https://www.bloonswiki.com/What_did_it_cost%3F_-_Everything",
+        83: "https://www.bloonswiki.com/2_MegaPops",
+        89: "https://www.bloonswiki.com/Candy_Falls#Easter_eggs",
+        99: "https://www.bloonswiki.com/Chunky_Monkeys",
+        101: "https://www.bloonswiki.com/Living_on_the_Edge",
+        113: "https://www.bloonswiki.com/Stubborn_Strategy",
+        120: "https://www.bloonswiki.com/Golden_Bloon_(BTD6)#Popping_Golden_Bloons",
+        121: "https://www.bloonswiki.com/Golden_Bloon_(BTD6)#Popping_Golden_Bloons",
+        130: "https://www.bloonswiki.com/Perfect_Paragon",
+        150: "https://www.bloonswiki.com/Nah,_I'd_Win",
+        151: "https://www.bloonswiki.com/They_call_me_Cave_Monkey!",
+        62: "https://www.bloonswiki.com/Big_Bloons",
+        63: "https://www.bloonswiki.com/Alchermistman_and_Bloonacleboy"
+    }
+
     let achievements = Object.keys(achievementsJSON);
     switch(currentAchievementFilter){
         case "Locked":
@@ -5209,7 +5232,7 @@ function generateAchievementsGameView(){
     if (achievements.length == 0) {
         let noDataFound = document.createElement('p');
         noDataFound.classList.add('no-data-found','black-outline');
-        noDataFound.innerHTML = "No Data Found.";
+        noDataFound.innerHTML = "No achievements match the filters!";
         noDataFound.style.width = "100%";
         AchievementsContainer.appendChild(noDataFound);
     }
@@ -5280,6 +5303,7 @@ function generateAchievementsGameView(){
                 case "Knowledge":
                     text = "+ " + data.amount.toLocaleString()
                     break;
+                case "Trophy":
                 case "Power":
                 case "RandomInstaMonkey":
                     text = "X " + data.amount.toLocaleString()
@@ -5297,14 +5321,31 @@ function generateAchievementsGameView(){
             achievementCompletedCheck.classList.add('achievement-completed-check');
             achievementCompletedCheck.src = "./Assets/UI/TickGreenIcon.png";
             achievementBottomDiv.appendChild(achievementCompletedCheck);
-        } else if (achievementData.model.hidden) {
-            achievementBottomDiv.appendChild(generateButton("Reveal", {width: "unset"}, function() {
-                achievementNameText.innerHTML = getLocValue(`Achievement ${achievementData.model.achievementId} Name`);
-                achievementDescText.innerHTML = getLocValue(`Achievement ${achievementData.model.achievementId} Description`);
-                achievementIconImg.src = getAchievementIcon(achievementData.model.achievementIcon, false);
-                achievementData.model.hidden = false;
-                achievementBottomDiv.removeChild(achievementBottomDiv.lastChild);
-            }))
+        } else {
+            let guideBtn;
+            if (achievementGuides.hasOwnProperty(id)) {
+                guideBtn = generateButton("Guide", {width: "unset"}, function() {
+                    openBTD6Site(achievementGuides[id])
+                })
+                achievementBottomDiv.appendChild(guideBtn);
+
+                if (achievementData.model.hidden) {
+                    guideBtn.style.display = "none";
+                }
+            }
+
+            if (achievementData.model.hidden) {
+                achievementBottomDiv.appendChild(generateButton("Reveal", {width: "unset"}, function() {
+                    achievementNameText.innerHTML = getLocValue(`Achievement ${achievementData.model.achievementId} Name`);
+                    achievementDescText.innerHTML = getLocValue(`Achievement ${achievementData.model.achievementId} Description`);
+                    achievementIconImg.src = getAchievementIcon(achievementData.model.achievementIcon, false);
+                    achievementData.model.hidden = false;
+                    achievementBottomDiv.removeChild(achievementBottomDiv.lastChild);
+                    if (achievementGuides.hasOwnProperty(id)) {
+                        guideBtn.style.display = 'unset';
+                    }
+                }))
+            }
         }
     }
 
