@@ -75,6 +75,7 @@ function createEl(tag, options = {}) {
     if (options.onclick) el.onclick = options.onclick;
     if (options.type) el.type = options.type;
     if (options.name) el.name = options.name;
+    if (options.loading) el.loading = options.loading;
     if (options.attributes) {
         for (const [key, value] of Object.entries(options.attributes)) {
             el.setAttribute(key, value);
