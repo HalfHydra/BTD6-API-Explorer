@@ -132,7 +132,7 @@ function changeRogueTab(selector){
             document.getElementById('rogue-content').style.display = 'none';
             document.getElementById('artifacts-content').style.display = 'flex';
             generateRogueArtifacts();
-            addToBackQueue({source: 'rogue', destination: 'artifacts'})
+            addToBackQueue({source: 'rogue', destination: 'artifacts', callback: generateRogueSelectors})
             break;
         case 'Hero Starter Kits':
             document.getElementById('rogue-content').style.display = 'none';
@@ -175,6 +175,10 @@ function generateRogueSelectors() {
         "Artifacts": "RoguePermanantArtifactsBtn",
         "Hero Starter Kits": "RogueStarterKitsBtn",
         "Export Image": "ArtifactShareBtn"
+    }
+
+    if (!rogueSaveData.highlightExtracted) {
+        delete selectors["Export Image"]
     }
     
     Object.entries(selectors).forEach(([selector, icon]) => {
