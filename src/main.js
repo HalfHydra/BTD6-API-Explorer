@@ -8743,6 +8743,8 @@ function generateTrophyStoreProgress() {
     let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
+    trophyStoreSubFilter = "All";
+
     let progressContainer = document.createElement('div');
     progressContainer.classList.add('trophy-store-progress-container');
     progressContent.appendChild(progressContainer);
@@ -8758,8 +8760,8 @@ function generateTrophyStoreProgress() {
     let headerBottom = document.createElement('div');
     achievementsHeaderBar.appendChild(headerBottom);
 
-    let trophyStoreItemDisclaimer = createEl('p', {classList: ['font-gardenia', 'ta-center'], style: {marginBottom: "10px"}, innerHTML: "This is being tested, not all items may show up as collected properly."});
-    headerBottom.appendChild(trophyStoreItemDisclaimer);
+    // let trophyStoreItemDisclaimer = createEl('p', {classList: ['font-gardenia', 'ta-center'], style: {marginBottom: "10px"}, innerHTML: "This is being tested, not all items may show up as collected properly."});
+    // headerBottom.appendChild(trophyStoreItemDisclaimer);
 
     let subFilterContainer = document.createElement('div');
     subFilterContainer.classList.add('sub-filter-container');
