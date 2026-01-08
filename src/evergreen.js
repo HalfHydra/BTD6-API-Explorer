@@ -328,7 +328,7 @@ function formatScoreTime(milliseconds) {
 
     minutes = minutes.toString().padStart(2, '0');
     seconds = seconds.toString().padStart(2, '0');
-    remainingMilliseconds = remainingMilliseconds.toString().padStart(3, '0');
+    remainingMilliseconds = Math.floor(remainingMilliseconds / 10).toString().padStart(2, '0');
 
     let timeString = `${minutes}:${seconds}.${remainingMilliseconds}`;
     if (hours > 0) {
