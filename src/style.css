@@ -4797,6 +4797,13 @@
     border: 5px solid rgba(255,255,255,0.25);
 }
 
+.coop-shift-lb {
+    width: 678px;
+    justify-content: start;
+    padding-left: 10px;
+    margin-left: 52px;
+}
+
 .black-outline {
     /* -webkit-text-stroke: 0.7px black; */
     -webkit-text-stroke: 0.03em black;

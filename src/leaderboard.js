@@ -1,3 +1,10 @@
+let coopBossData = {
+    currentBossPage: 1,
+    scoreCache: null,
+    groupIndex: 1,
+    leaderboardRankIndex: 1,
+}
+
 async function generateLeaderboards() {
     showLoading();
     let leaderboardsContent = document.getElementById('leaderboards-content');
@@ -426,16 +433,21 @@ function onChangeEventFilter(type) {
 
 function showLeaderboard(source, metadata, type) {
     showLoading(true);
-
     leaderboardActiveToken++;
     switch (type) {
         case "Boss":
             if (leaderboardLink != metadata.leaderboard_standard_players_1) { leaderboardPage = 1 }
             leaderboardLink = metadata.leaderboard_standard_players_1;
+            if (coopBossData.currentBossPage != 1) {
+                leaderboardLink = leaderboardLink.slice(0, -1) + coopBossData.currentBossPage;
+            }
             break;
         case "BossElite":
             if (leaderboardLink != metadata.leaderboard_elite_players_1) { leaderboardPage = 1 }
             leaderboardLink = metadata.leaderboard_elite_players_1;
+            if (coopBossData.currentBossPage != 1) {
+                leaderboardLink = leaderboardLink.slice(0, -1) + coopBossData.currentBossPage;
+            }
             break
         case "CTPlayer":
             if (leaderboardLink != metadata.leaderboard_player) { leaderboardPage = 1 }
@@ -548,10 +560,35 @@ function showLeaderboard(source, metadata, type) {
     }
 
     if (type == "Boss" || type == "BossElite") {
-        let leaderboardDisclaimer = document.createElement('p');
-        leaderboardDisclaimer.classList.add('leaderboard-disclaimer', 'black-outline');
-        leaderboardDisclaimer.innerHTML = "Note: Only singleplayer boss leaderboards are available on the API currently.";
-        leaderboardTop.appendChild(leaderboardDisclaimer);
+        // let leaderboardDisclaimer = document.createElement('p');
+        // leaderboardDisclaimer.classList.add('leaderboard-disclaimer', 'black-outline');
+        // leaderboardDisclaimer.innerHTML = "Note: Only singleplayer boss leaderboards are available on the API currently.";
+        // leaderboardTop.appendChild(leaderboardDisclaimer);
+
+        let leaderboardSubFilterDiv = createEl('div', {
+            classList: ["d-flex", 'jc-center']
+        })
+        leaderboardTop.appendChild(leaderboardSubFilterDiv)
+
+        for (let i = 1; i<5; i++) {
+            let subFilterButton = createEl('div', {
+                classList: ['maps-progress-view', 'sub-filter', 'black-outline'],
+                innerHTML: `${i} Player` 
+            });
+            if (coopBossData.currentBossPage == i) {
+                subFilterButton.classList.add('stats-tab-yellow');
+            }
+            subFilterButton.addEventListener('click', () => {
+                coopBossData = {
+                    currentBossPage: i,
+                    scoreCache: null,
+                    groupIndex: 1,
+                    leaderboardRankIndex: 1,
+                }
+                showLeaderboard(source,metadata,type)
+            })
+            leaderboardSubFilterDiv.appendChild(subFilterButton)
+        }
     }
 
     let leaderboardColumnLabels = document.createElement('div');
@@ -620,10 +657,40 @@ function addLeaderboardEntries(leaderboardData, page, count) {
         leaderboardData.forEach((entry, index) => {
             let scorePartsObj = {}
 
+            let leaderboardIndex = index + ((page - 1) * count) + 1;
             if (entry.hasOwnProperty("scoreParts")) {
                 entry.scoreParts.forEach((part, index) => {
                     scorePartsObj[part.name] = part;
                 })
+            }
+
+            let coopSameGroup = false;
+            if (type.includes("Boss") && coopBossData.currentBossPage != 1) {
+                let currentScore = null;
+                switch ((type == "BossElite") ? metadata.eliteScoringType : metadata.normalScoringType) {
+                    case "GameTime":
+                        currentScore = scorePartsObj["Least Cash"].score
+                        break;
+                    case "LeastCash":
+                        currentScore = scorePartsObj["Game Time"].score
+                        break;
+                    case "LeastTiers":
+                        currentScore = scorePartsObj["Submission Time"].score
+                        break; 
+                }
+                if (coopBossData.scoreCache == null) {
+                    coopBossData.groupIndex = 1;
+                    coopBossData.leaderboardRankIndex = 1;
+                } else if (coopBossData.groupIndex == coopBossData.currentBossPage || coopBossData.scoreCache != currentScore) {
+                    coopSameGroup = false;
+                    coopBossData.groupIndex = 1;
+                    coopBossData.leaderboardRankIndex++;
+                } else if (coopBossData.scoreCache == currentScore) {
+                    coopSameGroup = true;
+                    coopBossData.groupIndex++;
+                }
+                coopBossData.scoreCache = currentScore;
+                leaderboardIndex = coopBossData.leaderboardRankIndex;
             }
 
             let leaderboardEntry = document.createElement('div');
@@ -641,12 +708,14 @@ function addLeaderboardEntries(leaderboardData, page, count) {
 
             let leaderboardEntryDiv = document.createElement('div');
             leaderboardEntryDiv.classList.add('leaderboard-entry-div');
+            if (coopSameGroup) { leaderboardEntryDiv.classList.add('coop-shift-lb')}
             leaderboardEntry.appendChild(leaderboardEntryDiv);
 
             let leaderboardEntryRank = document.createElement('p');
             leaderboardEntryRank.classList.add('leaderboard-entry-rank', 'black-outline');
-            leaderboardEntryRank.innerHTML = index + ((page - 1) * count) + 1;
-            leaderboardEntryDiv.appendChild(leaderboardEntryRank);
+            leaderboardEntryRank.innerHTML = leaderboardIndex;
+            
+            if (!coopSameGroup) { leaderboardEntryDiv.appendChild(leaderboardEntryRank) };
 
             let leaderboardEntryPlayer = document.createElement('div');
             leaderboardEntryPlayer.classList.add('leaderboard-entry-player');
@@ -682,21 +751,21 @@ function addLeaderboardEntries(leaderboardData, page, count) {
             leaderboardEntryName.innerHTML = entry.displayName;
             leaderboardEntryPlayer.appendChild(leaderboardEntryName);
 
-            let leaderboardEntryTimeSubmitDiv = document.createElement('div');
-            leaderboardEntryTimeSubmitDiv.classList.add('leaderboard-entry-time-submit-div');
-            leaderboardEntryDiv.appendChild(leaderboardEntryTimeSubmitDiv);
+            let leaderboardEntryLeftDiv = document.createElement('div');
+            leaderboardEntryLeftDiv.classList.add('leaderboard-entry-time-submit-div');
+            if (!coopSameGroup) { leaderboardEntryDiv.appendChild(leaderboardEntryLeftDiv) }
 
-            let leaderboardEntryScore = document.createElement('div')
-            leaderboardEntryScore.classList.add('leaderboard-entry-score', 'fd-column');
-            leaderboardEntryDiv.appendChild(leaderboardEntryScore);
+            let leaderboardEntryRightDiv = document.createElement('div')
+            leaderboardEntryRightDiv.classList.add('leaderboard-entry-score', 'fd-column');
+            if (!coopSameGroup) { leaderboardEntryDiv.appendChild(leaderboardEntryRightDiv) }
 
             let mainScoreDiv = createEl('div', {
-                classList: ['d-flex', 'ai-center'],
+                classList: ['d-flex', 'ai-center', 'jc-center'],
                 style: {
                     gap: "4px"
                 }
             })
-            leaderboardEntryScore.appendChild(mainScoreDiv);
+            leaderboardEntryRightDiv.appendChild(mainScoreDiv);
 
             let leaderboardEntryScoreIcon = document.createElement('img');
             leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon');
@@ -713,16 +782,16 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                 let leaderboardEntryTimeSubmitted = document.createElement('p');
                 leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted', 'leaderboard-outline');
                 leaderboardEntryTimeSubmitted.innerHTML = submittedDate.toLocaleString();
-                leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmitted);
+                leaderboardEntryLeftDiv.appendChild(leaderboardEntryTimeSubmitted);
 
                 let leaderboardEntryTimeSubmittedRelative = document.createElement('p');
                 leaderboardEntryTimeSubmittedRelative.classList.add('leaderboard-entry-time-submitted-relative', 'leaderboard-outline');
                 leaderboardEntryTimeSubmittedRelative.innerHTML = relativeTime(new Date(), submittedDate);
-                leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
+                leaderboardEntryLeftDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
 
                 leaderboardEntryMainScore.innerHTML = formatScoreTime(entry.score);
             }
-            if (metadata.hasOwnProperty('bossType')) {
+            if (metadata.hasOwnProperty('bossType') && !coopSameGroup) {
                 switch ((type == "BossElite") ? metadata.eliteScoringType : metadata.normalScoringType) {
                     case "GameTime":
                         let submittedDate = new Date(metadata.start + scorePartsObj["Game Time"].score)
@@ -730,22 +799,22 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         let leaderboardEntryTimeSubmitted = document.createElement('p');
                         leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted', 'leaderboard-outline');
                         leaderboardEntryTimeSubmitted.innerHTML = submittedDate.toLocaleString();
-                        leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmitted);
+                        leaderboardEntryLeftDiv.appendChild(leaderboardEntryTimeSubmitted);
 
                         let leaderboardEntryTimeSubmittedRelative = document.createElement('p');
                         leaderboardEntryTimeSubmittedRelative.classList.add('leaderboard-entry-time-submitted-relative', 'leaderboard-outline');
                         leaderboardEntryTimeSubmittedRelative.innerHTML = relativeTime(new Date(), submittedDate);
-                        leaderboardEntryTimeSubmitDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
+                        leaderboardEntryLeftDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
 
                         leaderboardEntryMainScore.innerHTML = formatScoreTime(scorePartsObj["Least Cash"].score);
 
                         let subScoreDiv = createEl('div', {
-                            classList: ['d-flex', 'ai-center'],
+                            classList: ['d-flex', 'ai-center', 'jc-center'],
                             style: {
                                 gap: "8px"
                             }
                         })
-                        leaderboardEntryScore.appendChild(subScoreDiv);
+                        leaderboardEntryRightDiv.prepend(subScoreDiv);
 
                         let subScoreIcon = createEl('img', {
                             classList: [],
@@ -766,14 +835,18 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         leaderboardEntryMainScore.innerHTML = scorePartsObj["Least Cash"].score.toLocaleString();
                         leaderboardEntryScoreIcon.src = `./Assets/UI/LeastCashIconSmall.png`;
                         leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
+                        leaderboardEntryRightDiv.style.width = "220px";
 
                         let subScoreDivLC = createEl('div', {
-                            classList: ['d-flex', 'fd-column'],
+                            classList: ['d-flex', 'fd-column', 'ai-center'],
+                            style: {
+                                width: "150px"
+                            }
                         })
                         leaderboardEntryDiv.appendChild(subScoreDivLC);
 
                         let leaderboardEntryGameTime = document.createElement('div');
-                        leaderboardEntryGameTime.classList.add('leaderboard-entry-game-time');
+                        leaderboardEntryGameTime.classList.add('d-flex', 'ai-center');
                         subScoreDivLC.appendChild(leaderboardEntryGameTime);
 
                         let leaderboardEntryGameTimeIcon = document.createElement('img');
@@ -793,7 +866,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                                 gap: "8px"
                             }
                         })
-                        subScoreDivLC.appendChild(subScoreTopDiv);
+                        subScoreDivLC.prepend(subScoreTopDiv);
 
                         let subScoreIconLC = createEl('img', {
                             classList: [],
@@ -814,14 +887,18 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         leaderboardEntryMainScore.innerHTML = scorePartsObj["Tier Count"].score.toLocaleString();
                         leaderboardEntryScoreIcon.src = `./Assets/UI/LeastTiersIconSmall.png`;
                         leaderboardEntryScoreIcon.classList.add('leaderboard-entry-score-icon-large');
+                        leaderboardEntryRightDiv.style.width = "220px";
 
                         let subScoreDivLT = createEl('div', {
-                            classList: ['d-flex', 'fd-column'],
+                            classList: ['d-flex', 'fd-column', 'ai-center'],
+                            style: {
+                                width: "150px"
+                            }
                         })
                         leaderboardEntryDiv.appendChild(subScoreDivLT);
 
                         let leaderboardEntryGameTimeTiers = document.createElement('div');
-                        leaderboardEntryGameTimeTiers.classList.add('leaderboard-entry-game-time');
+                        leaderboardEntryGameTimeTiers.classList.add('d-flex', 'ai-center');
                         subScoreDivLT.appendChild(leaderboardEntryGameTimeTiers);
 
                         let leaderboardEntryGameTimeTiersIcon = document.createElement('img');
@@ -834,7 +911,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         leaderboardEntryGameTimeTiersValue.innerHTML = formatScoreTime(scorePartsObj["Game Time"].score);
                         leaderboardEntryGameTimeTiers.appendChild(leaderboardEntryGameTimeTiersValue);
 
-                        leaderboardEntryScore.classList.add('leaderboard-entry-score-tiers')
+                        leaderboardEntryRightDiv.classList.add('leaderboard-entry-score-tiers')
 
                         let subScoreTopDivLT = createEl('div', {
                             classList: ['d-flex', 'ai-center'],
@@ -842,7 +919,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                                 gap: "8px"
                             }
                         })
-                        subScoreDivLT.appendChild(subScoreTopDivLT);
+                        subScoreDivLT.prepend(subScoreTopDivLT);
 
                         let subScoreIconLT = createEl('img', {
                             classList: [],
