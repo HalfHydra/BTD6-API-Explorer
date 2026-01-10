@@ -805,3 +805,26 @@ function clearAllTimers(){
         timerInterval = null;
     }
 }
+
+function generateComment(text) {
+    let commentDiv = createEl('div', {
+        classList: ['round-hint-div','coop-border']
+    });
+
+    let closeBtn = createEl('p', {
+        classList: ['round-hint-x', 'white-outline'],
+        innerHTML: 'X'
+    });
+    closeBtn.addEventListener('click', () => {
+        commentDiv.style.display = "none";
+    })
+    commentDiv.appendChild(closeBtn);
+
+    let commentText = createEl('p', {
+        classList: ['round-hint'],
+        innerHTML: text
+    });
+    commentDiv.appendChild(commentText);
+
+    return commentDiv;
+}

@@ -784,7 +784,6 @@ async function generateRounds(type, reverse, roundsetType, presetSettings={}) {
             resetPreview();
 
             if (roundsetType === 'boss' && roundsetFilterSettings.roundsetShowModified) {
-
                 let bossExplanations = {
                     "BloonariusRoundSet": "Bloonarius Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
                     "LychRoundSet": "Lych Changes: Rounds 40 to 48 have extra MOABs added in for Lych to resurrect when hitting a skull. Rounds that Lych spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
@@ -794,16 +793,7 @@ async function generateRounds(type, reverse, roundsetType, presetSettings={}) {
                     "BlastapopoulosRoundSet": "Blastapopoulos Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
                 }
                 
-                const infoDiv = document.createElement('div');
-                infoDiv.classList.add('disclaimer-div');
-                const infoP = document.createElement('p');
-                infoP.classList.add('disclaimer');
-                infoP.style.fontSize = "24px";
-                infoP.style.padding = "1rem";
-                infoP.style.lineHeight = "1.5";
-                infoP.innerHTML = 'Showing modified rounds. Disable "Only Modified" in Roundset Settings to show all rounds.<br>' + bossExplanations[selectedRoundset];
-                infoDiv.appendChild(infoP);
-                roundsContent.appendChild(infoDiv);
+                roundsContent.appendChild(generateComment('Showing modified rounds. Disable "Only Modified" in Roundset Settings to show all rounds.<br>' + bossExplanations[selectedRoundset]));
             }
 
             let alternate = false;
@@ -982,22 +972,7 @@ async function generateRounds(type, reverse, roundsetType, presetSettings={}) {
                 roundsDivHeader.appendChild(roundDurationText);
 
                 if(round.hint  && roundsetFilterSettings.roundsetShowHints) {
-                    let roundHintDiv = document.createElement('div');
-                    roundHintDiv.classList.add('round-hint-div','coop-border');
-                    roundDiv.appendChild(roundHintDiv);
-
-                    let roundHintX = document.createElement('p');
-                    roundHintX.classList.add('round-hint-x');
-                    roundHintX.innerHTML = "X";
-                    roundHintX.addEventListener('click', () => {
-                        roundHintDiv.style.display = "none";
-                    })
-                    roundHintDiv.appendChild(roundHintX);
-
-                    let roundHint = document.createElement('p');
-                    roundHint.classList.add('round-hint');
-                    roundHint.innerHTML = round.hint;
-                    roundHintDiv.appendChild(roundHint);
+                    roundDiv.appendChild(generateComment(round.hint))
                 }
 
                 let timelineDiv = document.createElement('div');
