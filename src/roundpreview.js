@@ -152,6 +152,60 @@ let bloonsData = {
         "layer": 13,
         "color": "#AB02AC",
         "border": "#500151"
+    },
+    "RingleaderBloon": {
+        "name": "Ringleader",
+        "rbe": 171,
+        "speed": 25,
+        "layer": 9,
+        "scale": 1.25,
+        "color": "#d2af78",
+        "border": "#402510"
+    },
+    "AuraBloon": {
+        "name": "Aura",
+        "rbe": 85,
+        "speed": 25,
+        "layer": 6,
+        "scale": 1.25,
+        "color": "linear-gradient(180deg, rgb(254, 254, 135) 0%, rgb(255, 210, 88) 20%, rgb(254, 133, 57) 40%, rgb(255, 49, 74) 60%, rgb(174, 62, 125) 880%, rgb(165, 45, 114) 100%)",
+        "border": "#63245f"
+    },
+    "RetributionBloon": {
+        "name": "Retribution",
+        "rbe": 138,
+        "speed": 15,
+        "layer": 9,
+        "scale": 1.25,
+        "color": "#835eca",
+        "border": "#fff324"
+    },
+    "GlassBloon": {
+       "name": "Glass",
+        "rbe": 89,
+        "speed": 88,
+        "layer": 9,
+        "scale": 1.25,
+        "color": "#8b849c",
+        "border": "#e3e1e6"
+    },
+    "DynamiteBloon": {
+        "name": "Dynamite",
+        "rbe": 55,
+        "speed": 25,
+        "layer": 7,
+        "scale": 1.25,
+        "color": "#ca4723",
+        "border": "#e8bc02"
+    },
+    "DiamondBloon": {
+        "name": "Diamond",
+        "rbe": 214,
+        "speed": 30,
+        "layer": 10,
+        "scale": 1.25,
+        "color": "#83e0fe",
+        "border": "#e7fbff"
     }
 }
 
@@ -554,6 +608,42 @@ let bloonImageMap = {
         "y": 195,
         "width": 301,
         "height": 194
+    },
+    "RingleaderBloon": {
+        "x": 0,
+        "y": 1273,
+        "width": 158,
+        "height": 202
+    },
+    "DiamondBloon": {
+        "x": 161,
+        "y": 1273,
+        "width": 160,
+        "height": 202
+    },
+    "DynamiteBloon": {
+        "x": 325,
+        "y": 1274,
+        "width": 159,
+        "height": 201
+    },
+    "GlassBloon": {
+        "x": 488,
+        "y": 1274,
+        "width": 158,
+        "height": 201
+    },
+    "RetributionBloon": {
+        "x": 656,
+        "y": 1274,
+        "width": 159,
+        "height": 201
+    },
+    "AuraBloon": {
+        "x": 822,
+        "y": 1274,
+        "width": 159,
+        "height": 201
     }
 }
 
