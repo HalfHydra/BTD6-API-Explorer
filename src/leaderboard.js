@@ -434,6 +434,7 @@ function onChangeEventFilter(type) {
 function showLeaderboard(source, metadata, type) {
     showLoading(true);
     leaderboardActiveToken++;
+    coopBossData.leaderboardRankIndex = 0;
     switch (type) {
         case "Boss":
             if (leaderboardLink != metadata.leaderboard_standard_players_1) { leaderboardPage = 1 }
@@ -748,7 +749,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
             }
 
             let leaderboardEntryName = document.createElement('p');
-            leaderboardEntryName.classList.add('leaderboard-entry-name', 'leaderboard-outline');
+            leaderboardEntryName.classList.add('leaderboard-entry-name', 'black-outline');
             leaderboardEntryName.innerHTML = entry.displayName;
             leaderboardEntryPlayer.appendChild(leaderboardEntryName);
 
@@ -774,19 +775,19 @@ function addLeaderboardEntries(leaderboardData, page, count) {
             mainScoreDiv.appendChild(leaderboardEntryScoreIcon);
 
             let leaderboardEntryMainScore = document.createElement('p');
-            leaderboardEntryMainScore.classList.add('leaderboard-entry-main-score', 'leaderboard-outline');
+            leaderboardEntryMainScore.classList.add('leaderboard-entry-main-score', 'black-outline');
             mainScoreDiv.appendChild(leaderboardEntryMainScore);
 
             if (metadata.hasOwnProperty('leaderboard') && metadata.leaderboard.includes('races')) {
                 let submittedDate = new Date(metadata.start + scorePartsObj["Time after event start"].score)
 
                 let leaderboardEntryTimeSubmitted = document.createElement('p');
-                leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted', 'leaderboard-outline');
+                leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted', 'black-outline');
                 leaderboardEntryTimeSubmitted.innerHTML = submittedDate.toLocaleString();
                 leaderboardEntryLeftDiv.appendChild(leaderboardEntryTimeSubmitted);
 
                 let leaderboardEntryTimeSubmittedRelative = document.createElement('p');
-                leaderboardEntryTimeSubmittedRelative.classList.add('leaderboard-entry-time-submitted-relative', 'leaderboard-outline');
+                leaderboardEntryTimeSubmittedRelative.classList.add('leaderboard-entry-time-submitted-relative', 'black-outline');
                 leaderboardEntryTimeSubmittedRelative.innerHTML = relativeTime(new Date(), submittedDate);
                 leaderboardEntryLeftDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
 
@@ -798,12 +799,12 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         let submittedDate = new Date(metadata.start + scorePartsObj["Game Time"].score)
 
                         let leaderboardEntryTimeSubmitted = document.createElement('p');
-                        leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted', 'leaderboard-outline');
+                        leaderboardEntryTimeSubmitted.classList.add('leaderboard-entry-time-submitted', 'black-outline');
                         leaderboardEntryTimeSubmitted.innerHTML = submittedDate.toLocaleString();
                         leaderboardEntryLeftDiv.appendChild(leaderboardEntryTimeSubmitted);
 
                         let leaderboardEntryTimeSubmittedRelative = document.createElement('p');
-                        leaderboardEntryTimeSubmittedRelative.classList.add('leaderboard-entry-time-submitted-relative', 'leaderboard-outline');
+                        leaderboardEntryTimeSubmittedRelative.classList.add('leaderboard-entry-time-submitted-relative', 'black-outline');
                         leaderboardEntryTimeSubmittedRelative.innerHTML = relativeTime(new Date(), submittedDate);
                         leaderboardEntryLeftDiv.appendChild(leaderboardEntryTimeSubmittedRelative);
 
@@ -827,7 +828,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         subScoreDiv.appendChild(subScoreIcon);
 
                         let subScoreText = createEl('p', {
-                            classList: ['leaderboard-outline'],
+                            classList: ['black-outline'],
                             innerHTML: `${scorePartsObj["Boss Tier"].score} Tiers`
                         })
                         subScoreDiv.appendChild(subScoreText)
@@ -856,7 +857,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         leaderboardEntryGameTime.appendChild(leaderboardEntryGameTimeIcon);
 
                         let leaderboardEntryGameTimeValue = document.createElement('p');
-                        leaderboardEntryGameTimeValue.classList.add('leaderboard-entry-game-time-value', 'leaderboard-outline');
+                        leaderboardEntryGameTimeValue.classList.add('leaderboard-entry-game-time-value', 'black-outline');
                         leaderboardEntryGameTimeValue.innerHTML = formatScoreTime(scorePartsObj["Game Time"].score);
                         leaderboardEntryGameTime.appendChild(leaderboardEntryGameTimeValue);
                         
@@ -879,7 +880,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         subScoreTopDiv.appendChild(subScoreIconLC);
 
                         let subScoreTextLC = createEl('p', {
-                            classList: ['leaderboard-outline'],
+                            classList: ['black-outline'],
                             innerHTML: `${scorePartsObj["Boss Tier"].score} Tiers`
                         })
                         subScoreTopDiv.appendChild(subScoreTextLC)
@@ -908,7 +909,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         leaderboardEntryGameTimeTiers.appendChild(leaderboardEntryGameTimeTiersIcon);
 
                         let leaderboardEntryGameTimeTiersValue = document.createElement('p');
-                        leaderboardEntryGameTimeTiersValue.classList.add('leaderboard-entry-game-time-value', 'leaderboard-outline');
+                        leaderboardEntryGameTimeTiersValue.classList.add('leaderboard-entry-game-time-value', 'black-outline');
                         leaderboardEntryGameTimeTiersValue.innerHTML = formatScoreTime(scorePartsObj["Game Time"].score);
                         leaderboardEntryGameTimeTiers.appendChild(leaderboardEntryGameTimeTiersValue);
 
@@ -932,7 +933,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                         subScoreTopDivLT.appendChild(subScoreIconLT);
 
                         let subScoreTextLT = createEl('p', {
-                            classList: ['leaderboard-outline'],
+                            classList: ['black-outline'],
                             innerHTML: `${scorePartsObj["Boss Tier"].score} Tiers`
                         })
                         subScoreTopDivLT.appendChild(subScoreTextLT)
@@ -953,7 +954,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                             if (leaderboardData.length == index + 1) {
                                 if (leaderboardCache[leaderboardLink].next != null) {
                                     if (leaderboardEntries.getElementsByClassName('loading-text-leaderboard').length == 0) {
-                                        let loadingEntriesText = createEl('p', { classList: ['loading-text-leaderboard', 'black-outline'], style: { fontSize: '32px', paddingBottom: '50px' }, innerHTML: "Loading more entries..." });
+                                        let loadingEntriesText = createEl('p', { classList: ['loading-text-leaderboard', 'black-outline'], style: { fontSize: '24px', paddingBottom: '50px' }, innerHTML: "Loading more entries..." });
                                         leaderboardEntries.appendChild(loadingEntriesText);
                                     }
                                     clearProfileRequestQueue();
@@ -962,8 +963,8 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                                 } else {
                                     if (!leaderboardCache[leaderboardLink].ended) {
                                         leaderboardCache[leaderboardLink].ended = true;
-                                        let leaderboardText = (leaderboardCache[leaderboardLink].entries.length == 1000) ? `The API only hosts up to 1000th place` : "End of Leaderboard";
-                                        let endOfLeaderboard = createEl('p', { classList: ['black-outline'], style: { fontSize: '32px', paddingBottom: '50px' }, innerHTML: leaderboardText });
+                                        let leaderboardText = (leaderboardCache[leaderboardLink].entries.length == 1000) ? `The API only hosts the top 1000 players` : "End of Leaderboard";
+                                        let endOfLeaderboard = createEl('p', { classList: ['black-outline'], style: { fontSize: '24px', paddingBottom: '50px' }, innerHTML: leaderboardText });
                                         leaderboardEntries.appendChild(endOfLeaderboard);
                                     }
                                 }
@@ -1152,7 +1153,7 @@ function openTeamModalPopout(groupUrl) {
                 iconWrap.appendChild(emblem);
 
                 const name = createEl('p', {
-                    classList: ['leaderboard-entry-name', 'leaderboard-outline'],
+                    classList: ['leaderboard-entry-name', 'black-outline'],
                     textContent: e.displayName || 'Unknown Team'
                 });
 
@@ -1165,7 +1166,7 @@ function openTeamModalPopout(groupUrl) {
                     src: './Assets/UI/CtPointsIconSmall.png'
                 });
                 const scoreVal = createEl('p', {
-                    classList: ['leaderboard-entry-main-score', 'leaderboard-outline', 'fg-1', 'ta-center'],
+                    classList: ['leaderboard-entry-main-score', 'black-outline', 'fg-1', 'ta-center'],
                     textContent: (e.score || 0).toLocaleString()
                 });
                 scoreDiv.appendChild(scoreIcon);
@@ -1294,7 +1295,7 @@ function openTeamModalPopout(groupUrl) {
                     iconWrap.appendChild(frame);
 
                     const name = createEl('p', {
-                        classList: ['leaderboard-entry-name', 'leaderboard-outline'],
+                        classList: ['leaderboard-entry-name', 'black-outline'],
                         textContent: 'Team has no score or no longer exists'
                     });
 
@@ -1307,7 +1308,7 @@ function openTeamModalPopout(groupUrl) {
                         src: './Assets/UI/CtPointsIconSmall.png'
                     });
                     const scoreVal = createEl('p', {
-                        classList: ['leaderboard-entry-main-score', 'leaderboard-outline', 'fg-1', 'ta-center'],
+                        classList: ['leaderboard-entry-main-score', 'black-outline', 'fg-1', 'ta-center'],
                         textContent: '0'
                     });
                     scoreDiv.appendChild(scoreIcon);
