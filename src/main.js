@@ -9184,6 +9184,8 @@ async function generateInstaSchedule() {
     let current = await getLatestCollectionEvent();
     current = processCollectionEvent(current);
 
+    clearAllTimers();
+
     let featuredContent = document.getElementById('featured-content');
     featuredContent.innerHTML = "";
 
@@ -9316,9 +9318,31 @@ function generateRotations(scheduleContainer, current){
                 textAlign: "center",
                 flexGrow: "1",
             },
-            innerHTML: currentRotation == index ? "Active Selection" : `${date.toLocaleDateString()}<br>${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+            innerHTML: currentRotation == index ? "--:--:--" : `${date.toLocaleDateString()}<br>${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
         });
-        rotationDiv.appendChild(rotationDate);
+        if (currentRotation == index) {
+            rotationDate.id = "active-selction"
+            let rotationTextDiv = createEl('div', {
+                classList: ['d-flex', 'fd-column', 'ai-center', 'w-100']
+            })
+            rotationDiv.appendChild(rotationTextDiv)
+            let rotationDateLabel = createEl('p', {
+                classList: ['insta-schedule-rotation-date', 'black-outline'],
+                style: {
+                    fontSize: "28px",
+                    textAlign: "center",
+                    flexGrow: "1",
+                },
+                innerHTML: `Changes in:`
+            });
+            rotationTextDiv.appendChild(rotationDateLabel)
+            rotationTextDiv.appendChild(rotationDate)
+            registerTimer(rotationDate.id, new Date(current.start + (28800000 * (index + 1))))
+        } else {
+            rotationDiv.appendChild(rotationDate);
+        }
+
+        
 
         let rotationContent = createEl('div', {
             classList: ['d-flex']
