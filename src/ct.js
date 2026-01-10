@@ -484,6 +484,7 @@ async function openCTEventDetails(source, eventData) {
         let unlockTime = new Date(new Date(eventData.start).getTime() + eventRelicTimes[index] * 24 * 60 * 60 * 1000);
 
         let eventRelicAvailableText = createEl('p', { id: `relic-unlock-${index}`, classList: ['black-outline', 'ta-center'], style: {fontSize: '20px'} });
+        relicDiv.appendChild(eventRelicAvailableText);
         if (now <= unlockTime && isEventActive) {
             registerTimer(eventRelicAvailableText.id, unlockTime);
         } else if (isEventActive) {
@@ -492,7 +493,6 @@ async function openCTEventDetails(source, eventData) {
             // eventRelicAvailableText.innerHTML = `${unlockTime.toLocaleDateString()}`;
             eventRelicAvailableText.style.display = "none";
         }
-        relicDiv.appendChild(eventRelicAvailableText);
 
         tippy(relicDiv, {
             content: `<p class="artifact-title">${getLocValue(`Relic${relic}`)}</p>${getLocValue(`Relic${relic}Description`)}`,
@@ -556,8 +556,8 @@ async function openCTEventDetails(source, eventData) {
             if (now >= powerActiveTime && now < new Date(powerActiveTime.getTime() + dayMs)) {
                 powerDiv.style.filter = "drop-shadow(0 0 10px #fff)";
                 powerDate.id = "current-power-timer";
-                registerTimer(powerDate.id, new Date(powerActiveTime.getTime() + dayMs));
                 powerDiv.appendChild(powerDate);
+                registerTimer(powerDate.id, new Date(powerActiveTime.getTime() + dayMs));
             }
         }
     });
