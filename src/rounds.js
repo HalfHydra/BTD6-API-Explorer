@@ -412,7 +412,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
     roundsetFilterSettings = {
         roundFilterStart: 1,
         roundFilterEnd: null,
-        roundsetStartingCash: 650,
+        roundsetStartingCash: constants.roundSets.hasOwnProperty(roundset) ? constants.roundSets[roundset].startingCash : 650,
         roundFilterPreset: "All",
         roundsetReversed: false,
         roundsetHideUnused: true,
