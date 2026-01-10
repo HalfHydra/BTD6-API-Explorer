@@ -552,6 +552,7 @@ function showLeaderboard(source, metadata, type) {
             if (leaderboardLink) {
                 delete leaderboardCache[leaderboardLink];
             }
+            coopBossData.leaderboardRankIndex = 0;
             leaderboardActiveToken++;
             showLoading();
             generateLeaderboardEntries(metadata, type, leaderboardActiveToken);
