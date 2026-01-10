@@ -5729,6 +5729,26 @@ function generateBosses(elite){
         raceChallengeIcons.classList.add("race-challenge-icons");
         raceMapDiv.appendChild(raceChallengeIcons);
 
+        let bossScoreTypeIcon = createEl('img', {
+            classList: ['ps-absolute', 'white-outline'],
+            style: {
+                width: "50px",
+                right: "0"
+            }
+        })
+        switch(elite ? eventData.eliteScoringType : eventData.scoringType) {
+            case "GameTime":
+                bossScoreTypeIcon.src = "./Assets/UI/StopWatch.png"
+                break;
+            case "LeastCash":
+                bossScoreTypeIcon.src = "./Assets/UI/LeastCashIconSmall.png"
+                break;
+            case "LeastTiers":
+                bossScoreTypeIcon.src = "./Assets/UI/LeastTiersIconSmall.png"
+                break;
+        }
+        raceMapDiv.appendChild(bossScoreTypeIcon)
+
         let raceMapRounds = document.createElement('p');
         raceMapRounds.classList.add("race-map-rounds");
         raceMapDiv.appendChild(raceMapRounds);
@@ -6171,6 +6191,9 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     if (challengeType == "Boss") {
         let scoringType = eventData.elite ? eventData.eliteScoringType : eventData.scoringType;
         switch(scoringType){
+            case "GameTime":
+                challengeExtraData.scoringType = "Fastest Time";
+                break;
             case "LeastCash":
                 challengeExtraData.scoringType = "Least Cash";
                 break;
@@ -6454,6 +6477,10 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         }
 
         switch (challengeExtraData.scoringType) {
+            case "Fastest Time":
+                challengeSettingText.innerHTML ="Fastest Time";
+                challengeSettingIcon.src = `./Assets/UI/StopWatch.png`;
+                break;
             case "Least Cash":
                 challengeSettingText.innerHTML = hideScoringValue ? "Least Cash" :  "Least Cash:";
                 challengeSettingIcon.src = `./Assets/UI/LeastCashIconSmall.png`;
