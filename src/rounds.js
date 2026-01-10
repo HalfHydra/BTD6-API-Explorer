@@ -62,8 +62,12 @@ function generateRoundsets() {
     })
 
     Object.entries(limitedRoundsets).forEach(([event, data]) => {
-        let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('roundset-selector-div', 'fd-column');
+        let roundsetDiv = createEl('div', {
+            classList: ['roundset-selector-div', 'fd-column'],
+            style: {
+                height: "75px"
+            }
+        });
         selectorsDiv.appendChild(roundsetDiv);
 
         let mainDiv = createEl('div', {classList: ['d-flex', 'jc-between', 'ai-center', 'w-100']});
@@ -146,8 +150,12 @@ function generateRoundsets() {
     let otherRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "quest"));
 
     Object.entries(normalRoundsets).forEach(([roundset, data]) => {
-        let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('roundset-selector-div', 'wood-container');
+        let roundsetDiv = createEl('div', {
+            classList: ['roundset-selector-div', 'wood-container'],
+            style: {
+                height: "75px"
+            }
+        });
         roundsetDiv.addEventListener('click', () => {
             showLoading();
             showRoundsetModel('rounds', roundset);
@@ -170,23 +178,38 @@ function generateRoundsets() {
         roundsetDiv.appendChild(roundsetGoImg);
     })
 
-    Object.entries(legendsRoundsets).forEach(([roundset, data]) => {
-        let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('roundset-selector-div','veteran-container'); 
+    let legendsRoundsetData = {
+        "Rogue Custom Rounds": {
+            icon: "QuestIcon/QuestIconRogueLegend",
+            roundset: "RogueRoundSet"
+        },
+        "Frontier Custom Rounds": {
+            icon: "QuestIcon/QuestIconFrontierLegend",
+            roundset: "FrontierBase1"
+        }
+    }
+
+    Object.entries(legendsRoundsetData).forEach(([name, data]) => {
+        let roundsetDiv = createEl('div', {
+            classList: ['roundset-selector-div', 'veteran-container'],
+            style: {
+                height: "75px"
+            }
+        });
         roundsetDiv.addEventListener('click', () => {
             showLoading();
-            showRoundsetModel('rounds', roundset);
+            showRoundsetModel('rounds', data.roundset);
         })
         selectorsDiv.appendChild(roundsetDiv);
 
         let roundsetIcon = document.createElement('img');
         roundsetIcon.classList.add('roundset-selector-img');
-        roundsetIcon.src = `../Assets/UI/${data.icon}.png`;
+        roundsetIcon.src = `../Assets/${data.icon}.png`;
         roundsetDiv.appendChild(roundsetIcon);
 
         let roundsetText = document.createElement('p');
         roundsetText.classList.add('selector-text', 'black-outline');
-        roundsetText.innerHTML = data.name;
+        roundsetText.innerHTML = name;
         roundsetDiv.appendChild(roundsetText);
 
         let roundsetGoImg = document.createElement('img');
@@ -206,8 +229,12 @@ function generateRoundsets() {
     selectorsDiv.appendChild(bossRoundsetDiv);
 
     Object.entries(bossRoundsets).forEach(([roundset, data]) => {
-        let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('other-roundset-selector-div');
+        let roundsetDiv = createEl('div', {
+            classList: ['other-roundset-selector-div'],
+            style: {
+                height: "100px"
+            }
+        });
         roundsetDiv.addEventListener('click', () => {
             showRoundsetModel('rounds', roundset);
         })
@@ -229,8 +256,12 @@ function generateRoundsets() {
     selectorsDiv.appendChild(otherRoundsetDiv);
 
     Object.entries(otherRoundsets).forEach(([roundset, data]) => {
-        let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('other-roundset-selector-div');
+        let roundsetDiv = createEl('div', {
+            classList: ['other-roundset-selector-div'],
+            style: {
+                height: "100px"
+            }
+        });
         roundsetDiv.addEventListener('click', () => {
             showRoundsetModel('rounds', data.roundset ? data.roundset : roundset);
         })
@@ -514,6 +545,75 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
             })
         });
     }
+    if(roundset.startsWith("Frontier")) {
+        let frontierHeaderBar = document.createElement('div');
+        frontierHeaderBar.classList.add('d-flex', 'jc-center', 'ai-center');
+        headerBar.appendChild(frontierHeaderBar);
+
+        let frontierLabelTxt = createEl("p", {
+            classList: ['black-outline'],
+            style: {
+                fontSize: "24px",
+                gap: '8px',
+            },
+            innerHTML: "Roundset:"
+        })
+        frontierHeaderBar.appendChild(frontierLabelTxt)
+
+        let frontierRoundsets = {
+            "FrontierBase1": { 
+                name: "Base 1",
+                comment: `Story missions use this roundset from Sandytown until Furlong Fields. "Reinforcements" rushes are specific to each mission, and inject various rounds from the "Rush 1" roundset into the rounds`,
+            },
+            "FrontierBase2": { 
+                name: "Base 2",
+                comment: `Story missions starting from Furlong Fields until The Coast use this roundset. "Reinforcements" rushes are specific to each mission, and inject various rounds from the "Rush 2" roundset into the rounds`,
+            },
+            "FrontierBase3": { 
+                name: "Base 3",
+                comment: `All Side Missions and Story Missions starting from The Coast and beyond use this roundset. "Reinforcements" rushes are specific to each mission, and inject various rounds from the "Rush 3" roundset into the rounds`,
+            },
+            "FrontierRush1": { 
+                name: "Rush 1",
+                comment: `The "Reinforcememts" rushes used in story missions from Sandytown until The Coast. The round rushes used aren't correlated directly, the base rounds may be injected with any rush round index specificed in the mission`,
+            },
+            "FrontierRush2": { 
+                name: "Rush 2",
+                comment: `The "Reinforcememts" rushes used in story missions from Furlong Fields until The Coast. The round rushes used aren't correlated directly, the base rounds may be injected with any rush round index specificed in the mission`,
+            },
+            "FrontierRush3": { 
+                name: "Rush 3",
+                comment: `The "Reinforcememts" rushes used in story missions from Furlong Fields until The Coast. All Side MIssions and all Elite missions will use these rushes too. The round rushes used aren't correlated directly, the base rounds may
+                be injected with any rush round index specificed in the mission`,
+            }
+        }
+
+        let frontierRoundsetsDiv = createEl('div', {
+            classList: ["d-flex", 'jc-center']
+        })
+        frontierHeaderBar.appendChild(frontierRoundsetsDiv)
+
+        Object.entries(frontierRoundsets).forEach(([rs, data]) => {
+            let roundsetBtn = createEl('div', {
+                classList: ['maps-progress-view', 'black-outline'],
+                style: {
+                    fontSize: '24px'
+                },
+                innerHTML: data.name
+            });
+            if (rs == roundset) {
+                roundsetBtn.classList.add('stats-tab-yellow');
+            }
+            roundsetBtn.addEventListener('click', () => {
+                showLoading();
+                goBack();
+                showRoundsetModel(source, rs);
+            })
+            frontierRoundsetsDiv.appendChild(roundsetBtn)
+        })
+
+        headerBar.appendChild(generateComment(frontierRoundsets[roundset].comment))
+    }
 
     let mapsProgressHeaderBar = document.createElement('div');
     mapsProgressHeaderBar.classList.add('roundset-header-bar-bottom');
@@ -792,7 +892,6 @@ async function generateRounds(type, reverse, roundsetType, presetSettings={}) {
                     "PhayzeRoundSet": "Phayze Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
                     "BlastapopoulosRoundSet": "Blastapopoulos Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
                 }
-                
                 roundsContent.appendChild(generateComment('Showing modified rounds. Disable "Only Modified" in Roundset Settings to show all rounds.<br>' + bossExplanations[selectedRoundset]));
             }
 

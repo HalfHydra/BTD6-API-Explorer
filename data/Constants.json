@@ -209,6 +209,42 @@
             "type": "rogue",
             "startingCash": 0
         },
+        "FrontierBase1": {
+            "name": "Frontier Base Roundset 1",
+            "icon": "QuestIconFrontierLegend",
+            "type": "frontier",
+            "startingCash": 0
+        },
+        "FrontierBase2": {
+            "name": "Frontier Base Roundset 2",
+            "icon": "QuestIconFrontierLegend",
+            "type": "frontier",
+            "startingCash": 0
+        },
+        "FrontierBase3": {
+            "name": "Frontier Base Roundset 3",
+            "icon": "QuestIconFrontierLegend",
+            "type": "frontier",
+            "startingCash": 0
+        },
+        "FrontierRush1": {
+            "name": "Frontier Rush Roundset 1",
+            "icon": "QuestIconFrontierLegend",
+            "type": "frontier",
+            "startingCash": 0
+        },
+        "FrontierRush2": {
+            "name": "Frontier Rush Roundset 2",
+            "icon": "QuestIconFrontierLegend",
+            "type": "frontier",
+            "startingCash": 0
+        },
+        "FrontierRush3": {
+            "name": "Frontier Rush Roundset 3",
+            "icon": "QuestIconFrontierLegend",
+            "type": "frontier",
+            "startingCash": 0
+        },
         "AcceleratedRoundSet": {
             "name": "Accelerated Rounds",
             "icon": "QuestIconAcceleratedRoundSet",
