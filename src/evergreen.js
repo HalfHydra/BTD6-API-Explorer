@@ -828,3 +828,9 @@ function generateComment(text) {
 
     return commentDiv;
 }
+
+function preloadImage(url) {
+    let forceLoad = new Image();
+    forceLoad.src = url
+    return url;
+}

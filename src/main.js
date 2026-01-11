@@ -641,7 +641,7 @@ function generateFrontPage(){
     function updateSiteImageScroll(index) {
         let data = imageScroll[index]
 
-        siteImageScrollImage.src = `Assets/UI/${data.image}.png`;
+        siteImageScrollImage.src = preloadImage(`Assets/UI/${data.image}.png`);
         siteImageScrollTitle.innerHTML = data.title;
         siteImageScrollOverlayText.innerHTML = data.text;
 

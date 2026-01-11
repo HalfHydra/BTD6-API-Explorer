@@ -133,6 +133,7 @@ async function generateLeaderboards() {
     racesData.forEach((data) => {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('roundset-selector-div');
+        roundsetDiv.style.height = "75px";
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "Race");
@@ -185,6 +186,7 @@ async function generateLeaderboards() {
 
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('roundset-selector-div');
+        roundsetDiv.style.height = "75px";
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_standard]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "Boss");
@@ -238,6 +240,7 @@ async function generateLeaderboards() {
 
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('roundset-selector-div');
+        roundsetDiv.style.height = "75px";
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_elite]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "BossElite");
@@ -287,6 +290,7 @@ async function generateLeaderboards() {
     CTData.forEach((data) => {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('roundset-selector-div');
+        roundsetDiv.style.height = "75px";
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_team]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "CTTeam");
@@ -335,6 +339,7 @@ async function generateLeaderboards() {
     CTData.forEach((data) => {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('roundset-selector-div');
+        roundsetDiv.style.height = "75px";
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_player]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "CTPlayer");
