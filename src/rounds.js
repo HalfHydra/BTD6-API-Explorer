@@ -614,6 +614,17 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
 
         headerBar.appendChild(generateComment(frontierRoundsets[roundset].comment))
     }
+    if (roundsetType === 'boss' && roundsetFilterSettings.roundsetShowModified) {
+        let bossExplanations = {
+            "BloonariusRoundSet": "Bloonarius Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+            "LychRoundSet": "Lych Changes: Rounds 40 to 48 have extra MOABs added in for Lych to resurrect when hitting a skull. Rounds that Lych spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+            "VortexRoundSet": "Vortex Changes: A small group of rounds have Bloons upgraded to speedier ones as well as adding some extra faster bloons. Rounds that Vortex spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+            "DreadbloonRoundSet": "Dreadbloon Changes: In general summary, Zebra -> Lead, Lead -> Fortified Lead, Rainbow -> Ceramic, Ceramic -> Fortified Ceramic. After Round 50, every other Blue MOAB is fortified, and after round 70 all Blue MOABs are fortified. There are some exceptions. Rounds that Dreadbloon spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+            "PhayzeRoundSet": "Phayze Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+            "BlastapopoulosRoundSet": "Blastapopoulos Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+        }
+        headerBar.appendChild(generateComment('Showing modified rounds. Disable "Only Modified" in Roundset Settings to show all rounds.<br>' + bossExplanations[selectedRoundset]));
+    }
 
     let mapsProgressHeaderBar = document.createElement('div');
     mapsProgressHeaderBar.classList.add('roundset-header-bar-bottom');
@@ -882,19 +893,6 @@ async function generateRounds(type, reverse, roundsetType, presetSettings={}) {
     switch(type) {
         case "Simple":
             resetPreview();
-
-            if (roundsetType === 'boss' && roundsetFilterSettings.roundsetShowModified) {
-                let bossExplanations = {
-                    "BloonariusRoundSet": "Bloonarius Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
-                    "LychRoundSet": "Lych Changes: Rounds 40 to 48 have extra MOABs added in for Lych to resurrect when hitting a skull. Rounds that Lych spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
-                    "VortexRoundSet": "Vortex Changes: A small group of rounds have Bloons upgraded to speedier ones as well as adding some extra faster bloons. Rounds that Vortex spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
-                    "DreadbloonRoundSet": "Dreadbloon Changes: In general summary, Zebra -> Lead, Lead -> Fortified Lead, Rainbow -> Ceramic, Ceramic -> Fortified Ceramic. After Round 50, every other Blue MOAB is fortified, and after round 70 all Blue MOABs are fortified. There are some exceptions. Rounds that Dreadbloon spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
-                    "PhayzeRoundSet": "Phayze Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
-                    "BlastapopoulosRoundSet": "Blastapopoulos Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
-                }
-                roundsContent.appendChild(generateComment('Showing modified rounds. Disable "Only Modified" in Roundset Settings to show all rounds.<br>' + bossExplanations[selectedRoundset]));
-            }
-
             let alternate = false;
             roundsetProcessed.rounds.forEach(async (round, index) => {
                 let roundDiv = document.createElement('div');
