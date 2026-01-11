@@ -265,8 +265,8 @@
 <script src="./src/roundpreview.js"></script>
 <script>
     document.getElementById("loading").style.transform = "scale(0)";
-    let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    addEventListener("resize", (event) => { document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`); })
     showLoading();
     fetchConstants().then(() => {
         hideLoading();
