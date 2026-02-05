@@ -5696,7 +5696,8 @@ function generateBosses(elite){
 
     Object.values(bossesData).forEach((race, index) => {
         let titleCaseBoss = race.bossType.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
-        let bossNumber = race.name.replace(/\D/g,'');
+        let bossNumberMatch = race.name.match(/(\d+)/);
+        let bossNumber = bossNumberMatch ? bossNumberMatch[1] : '';
         let bossName = `${elite ? "Elite" : ""} ${titleCaseBoss} ${bossNumber}`;
 
         let eventData = {
