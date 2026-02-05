@@ -4140,8 +4140,34 @@
         "Marked To Pop2": {
             "displayName": "Marked To Pop",
             "description": "Marks extra bloons, then proceed to attack all Marked Bloons. Also increases attack speed.",
-            "icon": "MarkedToPop2AATier5Icon"
+            "icon": "MarkedToPopAATier5Icon"
+        },
+        "Frostbite": {
+            "displayName": "Frostbite",
+            "description": "Silas can hit all Bloons while active. When hitting frozen Bloons, target takes extra damage based on remaining freeze time.",
+            "icon": "HypothermiaAA"
+        },
+        "Frozen Cascade": {
+            "displayName": "Frozen Cascade",
+            "description": "Creates a shattering blast of ice around Silas then other Ice Monkeys spreading out from Silas. Frozen Bloons take extra damage from ability.",
+            "icon": "FrozenCascadeAA"
+        },
+        "Frozen Burial": {
+            "displayName": "Frozen Burial",
+            "description": " Immediately freezes and damages all Bloons, dealing far more damage to already frozen Bloons. Then fills the track with Ice Walls.",
+            "icon": "FrozenBurialAA"
+        },
+        "Indomitable Surface-to-Air Ballistic Missile": {
+            "displayName": "Indomitable Surface-to-Air Ballistic Missile",
+            "description": "Slowly travels through the air leaving a trail of explosions that push back any MOABs they pass over until coming into contact with its designated target in one final powerful explosion.",
+            "icon": "BombParagonOblivionMissileSiloAA"
+        },
+        "Eclipse of Fimbulwinter": {
+            "displayName": "Eclipse of Fimbulwinter",
+            "description": "Freezes EVERYTHING. Break a Boss Skull during its freeze, and the boss will thaw early, but that skull shatters, and its activation is completely nullified.",
+            "icon": "EclipseAA"
         }
+
     },
     "unreleasedContent": {
         "trophyStoreItems": [],
