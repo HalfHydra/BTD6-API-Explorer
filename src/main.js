@@ -269,11 +269,12 @@ function generateStats(){
     exclusiveStats["Challenges Shared"] = btd6usersave["challengesShared"];
     exclusiveStats["Continues Used"] = btd6usersave["continuesUsed"];
     exclusiveStats["Towers Sold"] = btd6publicprofile.stats["totalTowersSold"];
-    exclusiveStats["Total Tier 1 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["1"];
-    exclusiveStats["Total Tier 2 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["2"];
-    exclusiveStats["Total Tier 3 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["3"];
-    exclusiveStats["Total Tier 4 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["4"];
-    exclusiveStats["Total Tier 5 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["5"];
+    // Broken for now
+    // exclusiveStats["Total Tier 1 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["1"];
+    // exclusiveStats["Total Tier 2 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["2"];
+    // exclusiveStats["Total Tier 3 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["3"];
+    // exclusiveStats["Total Tier 4 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["4"];
+    // exclusiveStats["Total Tier 5 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["5"];
 
     //Calculate the hidden and normal achievements
     let hiddenAchievements = 0;
