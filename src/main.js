@@ -263,7 +263,7 @@ function generateStats(){
     //stats not in game
     exclusiveStats["Daily Challenges Completed"] = btd6usersave["totalDailyChallengesCompleted"];
     exclusiveStats["Consecutive DCs Completed"] = btd6usersave["consecutiveDailyChallengesCompleted"];
-    exclusiveStats["Race Attempts"] = btd6usersave["totalRacesEntered"];
+    exclusiveStats["Race Event Attempts"] = btd6usersave["totalRacesEntered"];
     exclusiveStats["Contested Territory Tiles Captured"] = btd6publicprofile.stats["ctCapturedTiles"];
     exclusiveStats["Challenges Played"] = btd6usersave["challengesPlayed"];
     exclusiveStats["Challenges Shared"] = btd6usersave["challengesShared"];
