@@ -177,7 +177,7 @@ function generateRogueSelectors() {
         "Export Image": "ArtifactShareBtn"
     }
 
-    if (!rogueSaveData.highlightExtracted) {
+    if (rogueSaveData.extractedArtifacts.length == 0) {
         delete selectors["Export Image"]
     }
     
@@ -1238,11 +1238,14 @@ function generateRogueHeroStarterKits() {
         starterKitDiv.classList.add('starter-kit-div');
         starterKitContent.appendChild(starterKitDiv);
 
-        let starterKitHeroSquareImg = document.createElement('img');
-        starterKitHeroSquareImg.src = `${getHeroSquareIcon(starterKit.heroID.replace(/ /g, ''))}`;
-        starterKitHeroSquareImg.classList.add('starter-kit-hero-square-img');
+        let starterKitHeroSquareImg = createEl('img', {
+            classList: ['starter-kit-hero-square-img'],
+            src: `${getHeroSquareIcon(starterKit.heroID.replace(/ /g, ''))}`,
+            style: {
+                width: "105px"
+            }
+        })
         starterKitDiv.appendChild(starterKitHeroSquareImg);
-
 
         let artifactDiv = generateArtifactContainer(starterKit.artifact);
         artifactDiv.addEventListener('click', () => {
