@@ -145,7 +145,8 @@ function createModal({ header = '', content = '', footer = '', backgroundColor =
 }
 
 function closeModal() {
-    document.querySelector('.modal-overlay')?.remove();
+    const overlays = document.querySelectorAll('.modal-overlay');
+    if (overlays.length) overlays[overlays.length - 1].remove();
 }
 
 function showLoading(force){
