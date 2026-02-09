@@ -459,7 +459,7 @@ function processRewardsString(input){
     return result;
 }
 
-function generateLoginDiv(callback) {
+function generateLoginDiv(callback, loginCallback) {
     let loginDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-center', 'fd-column', 'bg-color-primary'] });
     
     let loginTitle = createEl('p', { classList: ['site-info-header', 'black-outline'], innerHTML: 'Login with your OAK Token!' });
@@ -480,7 +480,11 @@ function generateLoginDiv(callback) {
                 pressedStart = true;
                 document.getElementById("loading").style.removeProperty("transform");
                 oak_token = oak;
-                await getSaveData(oak);
+                if (loginCallback) {
+                    await loginCallback(oak);
+                } else {
+                    await getSaveData(oak);
+                }
                 loggedIn = true;
                 if(callback) {
                     callback(oak_token);
