@@ -475,23 +475,21 @@ function generateLoginDiv(callback, loginCallback) {
         entry.appendChild(createEl('p', { classList: ['profile-name', 'tc-white', 'font-luckiest', 'black-outline'], innerHTML: oakdata.displayName }));
         const useBtn = createEl('img', { classList: ['use-button', 'ps-absolute'], src: './Assets/UI/ContinueBtn.png' });
         useBtn.addEventListener('click', async () => {
-            // trailerVideo.pause();
             if (!pressedStart) {
-                pressedStart = true;
                 document.getElementById("loading").style.removeProperty("transform");
                 oak_token = oak;
                 if (loginCallback) {
                     await loginCallback(oak);
                 } else {
                     await getSaveData(oak);
+                    loggedIn = true;
+                    pressedStart = true;
                 }
-                loggedIn = true;
                 if(callback) {
                     callback(oak_token);
                 } else {
                     fetchMainDependencies();
                 }
-                // changeTab('profile')
             }
         });
         entry.appendChild(useBtn);

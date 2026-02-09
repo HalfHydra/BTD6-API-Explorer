@@ -14,7 +14,9 @@ let rogueSaveData = {
     extractionFilter: "All",
     showStarterArtifacts: true,
     showBossArtifacts: true,
-    categoryFilter: ["Common", "Rare", "Legendary"]
+    categoryFilter: ["Common", "Rare", "Legendary"],
+    syncingWith: null,
+    lastSynced: null,
 }
 
 let starterArtifacts = ['BouncingProjectiles3', 'CeramicChunker2', 'FrostedTips1', 'OneShot2', 'SlowerIsHarder1', 'SpiritOfAdventure2', 'SwellingSpikes1', 'Wackywibblywavey1']
@@ -128,7 +130,7 @@ function postProcessRogueData(){
 function changeRogueTab(selector){
     resetScroll();
     switch(selector){
-        case 'Artifacts':
+        case 'Artifacts Tracker':
             document.getElementById('rogue-content').style.display = 'none';
             document.getElementById('artifacts-content').style.display = 'flex';
             generateRogueArtifacts();
@@ -172,7 +174,7 @@ function generateRogueSelectors() {
     rogueSelectors.appendChild(rogueHeaderMessage);
 
     let selectors = {
-        "Artifacts": "RoguePermanantArtifactsBtn",
+        "Artifacts Tracker": "RoguePermanantArtifactsBtn",
         "Hero Starter Kits": "RogueStarterKitsBtn",
         "Export Image": "ArtifactShareBtn"
     }
@@ -254,6 +256,16 @@ function generateRogueSelectors() {
 function generateRogueArtifacts() { 
     let artifactsContent = document.getElementById('artifacts-content');
     artifactsContent.innerHTML = "";
+
+    let now = new Date().valueOf();
+    if(rogueSaveData.hasOwnProperty("syncingWith") && rogueSaveData.syncingWith != null && rogueSaveData.hasOwnProperty("lastSynced") && rogueSaveData.lastSynced + 500000 > now) {
+        //when the refresh threshold isn't yet reached
+    } else {
+        getRogueSaveData(rogueSaveData.syncingWith)
+        rogueSaveData.lastSynced = now;
+        saveRogueDataToLocalStorage();
+        generateRogueArtifacts();
+    }
 
     let rogueHeaderBar = document.createElement('div');
     rogueHeaderBar.classList.add('rogue-bg', 'd-flex', 'jc-between', 'ai-center');
@@ -395,28 +407,49 @@ function generateArtifactSettings() {
     settingsDiv.appendChild(settingsContent);
 
     let settingsExtraction = document.createElement('div');
-    settingsExtraction.classList.add('settings-box', 'd-flex', 'fd-column', 'jc-between', 'fg-1');
+    settingsExtraction.classList.add('settings-box', 'd-flex', 'fd-column', 'jc-between', 'fg-1', 'ai-center');
     settingsExtraction.style.gap = "10px";
     settingsContent.appendChild(settingsExtraction);
 
-    let extractionHighlightToggle = createEl('div', {
-        classList: ['d-flex', 'ai-center', 'jc-between', 'fg-1'],
-        style: {margin: "2px"}
-    })
-    settingsExtraction.appendChild(extractionHighlightToggle);
-
-    let extractionHighlightLabel = createEl('p', {
-        classList: ['black-outline'],
-        style: {fontSize: "24px"},
-        innerHTML: "Extraction Tracker Mode"
-    })
-    extractionHighlightToggle.appendChild(extractionHighlightLabel);
-    
-    let extractionHighlightInput = generateToggle(rogueSaveData.highlightExtracted, (checked) => {
-        rogueSaveData.highlightExtracted = checked;
-        saveRogueDataToLocalStorage();
+    let trackingTitle = createEl('p', {
+        classList: ['black-outline', 'ta-center'],
+        style: {
+            fontSize: "24px",
+            padding: "5px",
+        },
+        innerHTML: rogueSaveData.syncingWith ? "Automatically Syncing With:" : "Automatic Tracking"
     });
-    extractionHighlightToggle.appendChild(extractionHighlightInput);
+    settingsExtraction.appendChild(trackingTitle);
+
+    if (rogueSaveData.syncingWith != null) {
+        const entry = createEl('div', {
+            classList: ['previous-oak-entry', 'd-flex', 'ai-center', 'ps-relative'],
+            style: { width:"480px", backgroundImage: `linear-gradient(to right, transparent 80%, #9D8665 100%),url(${rogueSaveData.imageOptions.banner})` }
+        });
+        entry.appendChild(generateAvatar(100, rogueSaveData.imageOptions.avatar));
+        entry.appendChild(createEl('p', { classList: ['profile-name', 'tc-white', 'font-luckiest', 'black-outline'], innerHTML: rogueSaveData.imageOptions.name }));
+        const delBtn = createEl('img', { classList: ['delete-button', 'ps-absolute'], src: './Assets/UI/CloseBtn.png' });
+        delBtn.addEventListener('click', () => {
+            rogueSaveData.syncingWith = null;
+            generateArtifactSettings();
+            saveRogueDataToLocalStorage();
+        });
+        entry.appendChild(delBtn);
+        settingsExtraction.appendChild(entry);
+    } else {
+        let loginBtn = generateButton("Login with OAK", { width: "280px" }, () => {
+            createModal({
+                content: generateLoginDiv((oak_token) => {
+                    closeModal();
+                    rogueSaveData.syncingWith = oak_token
+                    hideLoading();
+                    generateArtifactSettings();
+                    saveRogueDataToLocalStorage();
+                }, getRogueSaveData)
+            })
+        })
+        settingsExtraction.appendChild(loginBtn);
+    }
 
     let settingsExtractDescription = document.createElement('p');
     settingsExtractDescription.style.margin = "20px";
@@ -444,35 +477,18 @@ function generateArtifactSettings() {
         saveRogueDataToLocalStorage();
     });
     settingsExtractionDropdown.classList.add('jc-between');
-
-    // let settingsClickToCollect = generateCheckbox("One Click Extract", rogueSaveData.clickToCollect, (checked) => {
-    //     rogueSaveData.clickToCollect = checked;
-    //     saveRogueDataToLocalStorage();
-    // });
-    // settingsExtraction.appendChild(settingsClickToCollect);
-
-    let settingsClickToCollectToggle = createEl('div', {
-        classList: ['d-flex', 'ai-center', 'jc-between', 'fg-1'],
-        style: {margin: "2px"}
-    })
-    settingsExtraction.appendChild(settingsClickToCollectToggle);
-    let settingsClickToCollectLabel = createEl('p', {
-        classList: ['black-outline'],
-        style: {fontSize: "24px"},
-        innerHTML: "One Click Extract"
-    })
-    settingsClickToCollectToggle.appendChild(settingsClickToCollectLabel);
-    let settingsClickToCollectInput = generateToggle(rogueSaveData.clickToCollect, (checked) => {
-        rogueSaveData.clickToCollect = checked;
-        saveRogueDataToLocalStorage();
-    });
-    settingsClickToCollectToggle.appendChild(settingsClickToCollectInput);
     
     let settingsOther = document.createElement('div');
-    settingsOther.classList.add('settings-box', 'd-flex', 'fd-column', 'fg-1');
+    settingsOther.classList.add('settings-box', 'd-flex', 'fd-column', 'fg-1', 'jc-evenly');
     settingsOther.style.gap = "10px";
     settingsContent.appendChild(settingsOther);
 
+     let settingsClickToCollect = generateCheckbox("One Click Extract", rogueSaveData.clickToCollect, (checked) => {
+        rogueSaveData.clickToCollect = checked;
+        saveRogueDataToLocalStorage();
+    });
+    settingsClickToCollect.classList.add('jc-between');
+    settingsOther.appendChild(settingsClickToCollect);
 
     let settingsShowStarterArtifacts = generateCheckbox("Show Starter Artifacts", rogueSaveData.showStarterArtifacts, (checked) => {
         rogueSaveData.showStarterArtifacts = checked;
@@ -1192,7 +1208,15 @@ function updateArtifactCount() {
     if (Object.keys(currentArtifacts).length === 0) {
         totalArtifacts = Object.keys(rogueJSON.artifacts).length;
     }
-    let extractedCount = rogueSaveData.extractedArtifacts.concat(starterArtifacts).reduce((acc, artifact) => {
+
+    let extractedArtifacts = [...rogueSaveData.extractedArtifacts];
+    starterArtifacts.forEach((artifact) => {
+        if (!extractedArtifacts.includes(artifact)) {
+            extractedArtifacts.unshift(artifact);
+        }
+    })
+
+    let extractedCount = extractedArtifacts.reduce((acc, artifact) => {
         if (currentArtifacts.hasOwnProperty(artifact)) {
             return acc + 1;
         }
@@ -1711,7 +1735,6 @@ function importArtifactsSave() {
         reader.onload = function (e) {
             let contents = e.target.result;
             localStorage.setItem('rogueSaveData', contents);
-            console.log('Imported Save Data');
             loadRogueDataFromLocalStorage();
         }
         reader.readAsText(file);

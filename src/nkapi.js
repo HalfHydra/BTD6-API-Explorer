@@ -198,6 +198,38 @@ async function getPublicProfileData(oak_token) {
     });
 }
 
+async function getRogueSaveData(oak_token) {
+    cacheBust = true;
+    let expiryCheck = true;
+    let savePromise = new Promise(async (resolve, reject) => {
+        await fetchData(`https://data.ninjakiwi.com/btd6/save/${oak_token}`, (json) => {
+            rogueSaveData.extractedArtifacts = json["body"].hasOwnProperty("rogueUnlockedStarterArtifacts") ? Object.values(json["body"]["rogueUnlockedStarterArtifacts"]) : []
+            expiryCheck = false;
+            resolve();
+        });
+    });
+    await savePromise;
+    if(expiryCheck && !rateLimited){
+        let elements = document.getElementsByClassName("error-modal-overlay");
+        for(element of elements){
+            element.parentNode.removeChild(element);
+        } 
+        delete localStorageOAK[oak_token];
+        writeLocalStorage();
+        errorModal("Your Open Access Key has expired. Please make a new one and try again.", "expire", true)
+        return;
+    }
+    let profilePromise = new Promise(async (resolve, reject) => {
+        fetchData(`https://data.ninjakiwi.com/btd6/users/${oak_token}`, (json) => {
+            rogueSaveData.imageOptions.name = json["body"]["displayName"];
+            rogueSaveData.imageOptions.avatar = getProfileAvatar(json["body"])
+            rogueSaveData.imageOptions.banner = getProfileBanner(json["body"])
+            resolve();
+        });
+    });
+    await profilePromise;
+}
+
 async function getRacesData() {
     if (racesData == null || isStale(racesDataCachedAt)) {
         await fetchData(`https://data.ninjakiwi.com/btd6/races`, (json) => {
@@ -395,6 +427,11 @@ async function getLatestCollectionEvent() {
             return event;
         }
     }
+    // return {
+    //   "id": "testseed",
+    //   "start": 1767992460000,
+    //   "end": 1768446000000,
+    // }
     return null;
 }
 
