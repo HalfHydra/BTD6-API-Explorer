@@ -253,7 +253,7 @@
         document.getElementById("profile-content").appendChild(loginDiv);
 
         let current = await getLatestCollectionEvent();
-        if (now < new Date(current.end)) {
+        if (current != null && now < new Date(current.end)) {
             featuredInstaDiv.style.width = "780px";
             featuredInstaDiv.style.height = "85px";
             featuredInstaDiv.style.border = "8px solid #00000040";
