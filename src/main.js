@@ -9508,6 +9508,7 @@ function generateQuestsPage() {
     });
 
     btd6usersave.quests.forEach((quest) => {
+        if (!constants.quests.hasOwnProperty(quest.id)) { return }
         let constantsQuest = constants.quests[quest.id];
 
         let questDiv = createEl('div', {
