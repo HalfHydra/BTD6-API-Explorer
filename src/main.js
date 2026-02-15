@@ -3692,6 +3692,7 @@ function generateInstaMonkeysProgress() {
 function onChangeInstaMonkeysView(instaMonkeysHeaderBar, view) {
     document.getElementById('insta-monkeys-progress-container').style.removeProperty('display');
     document.getElementById('insta-monkey-progress-container').style.display = "none";
+    instaMonkeysHeaderBar = document.getElementById("profile-content").getElementsByClassName("insta-monkeys-header-bar")[0]
     let instaTabs = ['game','list','all','obtain','collection'];
     instaTabs.forEach(tab => {
         document.getElementById(`insta-monkeys-${tab}-view`).classList.remove('stats-tab-yellow');
@@ -3750,6 +3751,9 @@ function generateInstaGameView(){
         towerContainer.style.backgroundImage = `url(./Assets/UI/InstaTowersContainer${processedInstaData.TowerBorders[tower] || ""}.png)`
         towerContainer.addEventListener('click', () => {
             onSelectInstaTower(tower);
+            addToBackQueue({ callback: function () {
+                onChangeInstaMonkeysView(null, currentInstaView);
+            }})
         })
         towersContainer.appendChild(towerContainer);
 
@@ -4131,6 +4135,9 @@ function generateInstaListView(){
         instaTowerContainer.style.backgroundImage = `url(./Assets/UI/InstaTowersContainer${processedInstaData.TowerBorders[tower] || ""}.png)`
         instaTowerContainer.addEventListener('click', () => {
             onSelectInstaTower(tower);
+            addToBackQueue({ callback: function () {
+                onChangeInstaMonkeysView(null, currentInstaView);
+            }})
         })
         instaMonkeyDiv.appendChild(instaTowerContainer);
 
