@@ -2523,14 +2523,14 @@ function generateHeroProgressHero(hero, nameColor){
     heroProgressMiddle.appendChild(heroSkinsDiv);
 
     constants.heroSkins[hero].forEach((skin) => {
-        if ((btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == null) && skin != hero) { return; }
+        if ((btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == null && constants.hiddenHeroes.includes(skin)) && skin != hero) { return; }
 
         let heroSkin = document.createElement('img');
         heroSkin.id = `${hero}-${skin}-skin`;
         heroSkin.classList.add('hero-skin');
         heroSkin.src = getHeroIconCircle(skin);
 
-        if (btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == false) {
+        if (btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == false || btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == null) {
             heroSkin.classList.add('insta-tower-container-none');
         } else {
             heroSkin.addEventListener('click', () => {
