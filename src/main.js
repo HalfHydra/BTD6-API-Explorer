@@ -9075,7 +9075,10 @@ function generateTrophyStorePopout(key) {
                 itemObtainMethod.innerHTML = "Obtained during a limited time event";
                 break;
             case "Rogue":
-                itemObtainMethod.innerHTML = "Obtained by unlocking a feat in Rogue Legends";
+                itemObtainMethod.innerHTML = "Obtained by purchasing Rogue Legends or by unlocking a feat in Rogue Legends";
+                break;
+            case "Frontier":
+                itemObtainMethod.innerHTML = "Obtained by purchasing Frontier Legends or unlocking a feat in Frontier Legends";
                 break;
             case "Nexus":
                 itemObtainMethod.innerHTML = "Obtained by purchasing anything in the store with a Nexus Creator Code applied";
