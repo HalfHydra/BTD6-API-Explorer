@@ -700,7 +700,7 @@ function errorModal(body, source, force) {
             modal.appendChild(modalContent2);
             break;
         case "Cannot load public profile. Player does not play this game or is running a newer version":
-            modalContent2.innerHTML = "Note: If a major update for the game just released, it is possible the Open Data API is temporarily broken until updates are made.";
+            modalContent2.innerHTML = "Note from this Site: If a major update for the game just released, it is possible the Open Data API is temporarily broken until updates are made.";
             modal.appendChild(modalContent2);
             break;
     }
