@@ -3858,7 +3858,9 @@ function generateInstaAllView() {
     allTopBar.appendChild(dropdownSort);
 
     let allInstas = []
-    Object.entries(btd6usersave.instaTowers).forEach(([tower, data]) => {
+    Object.keys(constants.towersInOrder).forEach((tower) => {
+        let data = btd6usersave.instaTowers[tower];
+        if (!data) { return }
         constants.collectionOrder.forEach(tiers => {
             if (data.hasOwnProperty(tiers)) {
                 let count = data[tiers];
