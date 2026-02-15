@@ -8870,7 +8870,7 @@ function generateTrophyStoreProgress() {
     mapProgressFilterDifficultySelect.addEventListener('change', () => {
         generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter);
     })
-    let options = ["All","Owned","Unowned","Hidden"]
+    let options = ["All","Owned","Unowned","Hidden", "New"]
     options.forEach((option) => {
         let difficultyOption = document.createElement('option');
         difficultyOption.value = option;
@@ -8960,6 +8960,9 @@ function generateTrophyStoreContainer(filter, display, counter) {
                     return 0;
                 }
             }));
+            break;
+        case "New":
+            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.hasOwnProperty("isNew")));
             break;
     }
 
