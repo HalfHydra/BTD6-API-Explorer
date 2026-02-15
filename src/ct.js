@@ -300,6 +300,9 @@ async function openCTEventDetails(source, eventData) {
     let data = null;
     if (eventData.tiles) {
         data = await getCTTiles(eventData.tiles);
+        if (data.tiles == []) {
+            eventData.noODA = true;
+        }
     }
     if (data == null) { 
         data = convertExtCTDataToODAFormat(extData.tiles); 
