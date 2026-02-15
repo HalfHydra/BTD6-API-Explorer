@@ -260,7 +260,6 @@ function generateStats(){
     profileStats["Bosses Popped"] = btd6publicprofile.bloonsPopped["bossesPopped"];
     profileStats["Damage Done To Bosses"] = btd6publicprofile.gameplay["damageDoneToBosses"];
 
-    //stats not in game
     exclusiveStats["Daily Challenges Completed"] = btd6usersave["totalDailyChallengesCompleted"];
     exclusiveStats["Consecutive DCs Completed"] = btd6usersave["consecutiveDailyChallengesCompleted"];
     exclusiveStats["Race Event Attempts"] = btd6usersave["totalRacesEntered"];
@@ -276,7 +275,6 @@ function generateStats(){
     // exclusiveStats["Total Tier 4 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["4"];
     // exclusiveStats["Total Tier 5 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["5"];
 
-    //Calculate the hidden and normal achievements
     let hiddenAchievements = 0;
     let normalAchievements = 0;
     btd6usersave.achievementsClaimed.forEach((achievement) => {

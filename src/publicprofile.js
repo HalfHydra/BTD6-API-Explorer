@@ -529,11 +529,12 @@ async function openProfile(source, profile, callback){
     let exclusiveStatsPublic = {}
     exclusiveStatsPublic["Contested Territory Tiles Captured"] = profile.stats["ctCapturedTiles"];
     exclusiveStatsPublic["Towers Sold"] = profile.stats["totalTowersSold"];
-    exclusiveStatsPublic["Total Tier 1 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["1"];
-    exclusiveStatsPublic["Total Tier 2 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["2"];
-    exclusiveStatsPublic["Total Tier 3 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["3"];
-    exclusiveStatsPublic["Total Tier 4 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["4"];
-    exclusiveStatsPublic["Total Tier 5 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["5"];
+    // Currently broken
+    // exclusiveStatsPublic["Total Tier 1 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["1"];
+    // exclusiveStatsPublic["Total Tier 2 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["2"];
+    // exclusiveStatsPublic["Total Tier 3 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["3"];
+    // exclusiveStatsPublic["Total Tier 4 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["4"];
+    // exclusiveStatsPublic["Total Tier 5 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["5"];
 
     let exclusiveStatDiv = document.createElement('div');
     exclusiveStatDiv.classList.add('profile-stats');
