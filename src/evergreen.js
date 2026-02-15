@@ -139,9 +139,7 @@ function createModal({ header = '', content = '', footer = '', backgroundColor =
 
     modalOverlay.appendChild(modalBox);
     document.body.appendChild(modalOverlay);
-    if (backQueue[backQueue.length - 1]?.callback !== closeModal) {
-        addToBackQueue({callback: closeModal});
-    }
+    addToBackQueue({callback: closeModal});
 }
 
 function closeModal() {
@@ -557,12 +555,19 @@ function generateLoginDiv(callback, loginCallback) {
         }
         if (!pressedStart){
             document.getElementById("loading").style.removeProperty("transform");
-            pressedStart = true;
-            loggedIn = true;
             oak_token = keyEntry.value;
-            await getSaveData(oak_token);
-            fetchMainDependencies();
-            // changeTab('profile')
+            if (loginCallback) {
+                await loginCallback(oak_token);
+            } else {
+                await getSaveData(oak_token);
+                loggedIn = true;
+                pressedStart = true;
+            }
+            if(callback) {
+                callback(oak_token);
+            } else {
+                fetchMainDependencies();
+            }
         }
     })
     oakEntryDiv.appendChild(startButton);

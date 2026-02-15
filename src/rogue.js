@@ -10,13 +10,14 @@ let rogueSaveData = {
     clickToCollect: false,
     artifactFilter: "All",
     artifactSort: "Name",
-    highlightExtracted: false,
+    highlightExtracted: true,
     extractionFilter: "All",
     showStarterArtifacts: true,
     showBossArtifacts: true,
     categoryFilter: ["Common", "Rare", "Legendary"],
     syncingWith: null,
     lastSynced: null,
+    firstTimeModal: true
 }
 
 let starterArtifacts = ['BouncingProjectiles3', 'CeramicChunker2', 'FrostedTips1', 'OneShot2', 'SlowerIsHarder1', 'SpiritOfAdventure2', 'SwellingSpikes1', 'Wackywibblywavey1']
@@ -170,7 +171,7 @@ function generateRogueSelectors() {
 
     let rogueHeaderMessage = document.createElement('p');
     rogueHeaderMessage.classList.add('sku-roundset-selector-desc');
-    rogueHeaderMessage.innerHTML = "Note: At this time, the artifacts you have extracted are not available via the BTD6 Open Data API. You must manually mark them as extracted. This data will be saved in the current browsers local storage, and will not be cleared unless you clear your browsing data. If you prefer to keep a backup, use Export/Import Data.";
+    rogueHeaderMessage.innerHTML = "You can now track your extracted artifacts automatically with the API using an OAK Token! You can also track them manually, as this data will be saved in the current browsers local storage, and will not be cleared unless you clear your browsing data. If you need to switch browsers, use Export/Import Data.";
     rogueSelectors.appendChild(rogueHeaderMessage);
 
     let selectors = {
@@ -253,18 +254,27 @@ function generateRogueSelectors() {
     });
 }
 
-function generateRogueArtifacts() { 
+async function generateRogueArtifacts() { 
+    tippy.hideAll()
     let artifactsContent = document.getElementById('artifacts-content');
     artifactsContent.innerHTML = "";
+
+    if (rogueSaveData.hasOwnProperty("syncingWith") && rogueSaveData.syncingWith == null && rogueSaveData.firstTimeModal) {
+        loginModal();
+        rogueSaveData.highlightExtracted = true;
+        rogueSaveData.firstTimeModal = false;
+        saveRogueDataToLocalStorage();
+    }
 
     let now = new Date().valueOf();
     if(rogueSaveData.hasOwnProperty("syncingWith") && rogueSaveData.syncingWith != null && rogueSaveData.hasOwnProperty("lastSynced") && rogueSaveData.lastSynced + 500000 > now) {
         //when the refresh threshold isn't yet reached
-    } else {
-        getRogueSaveData(rogueSaveData.syncingWith)
+    } else if (rogueSaveData.hasOwnProperty("syncingWith") && rogueSaveData.syncingWith != null) {
         rogueSaveData.lastSynced = now;
-        saveRogueDataToLocalStorage();
-        generateRogueArtifacts();
+        getRogueSaveData(rogueSaveData.syncingWith).then(() => {
+            saveRogueDataToLocalStorage();
+            generateRogueArtifacts();
+        })
     }
 
     let rogueHeaderBar = document.createElement('div');
@@ -284,6 +294,7 @@ function generateRogueArtifacts() {
     rogueSettingsBtn.classList.add('artifact-bag', 'pointer');
     rogueSettingsBtn.addEventListener('click', () => {
         backState = "artifactSettings";
+        addToBackQueue({callback: generateRogueArtifacts});
         generateArtifactSettings();
     })
     rogueHeaderLeft.appendChild(rogueSettingsBtn);
@@ -382,8 +393,6 @@ function generateArtifactSettings() {
     let artifactsContent = document.getElementById('artifacts-content');
     artifactsContent.innerHTML = "";
 
-    addToBackQueue({callback: generateRogueArtifacts});
-
     let settingsDiv = document.createElement('div');
     settingsDiv.classList.add('content-div', 'rogue-bg', 'd-flex', 'ai-center');
     artifactsContent.appendChild(settingsDiv);
@@ -424,9 +433,9 @@ function generateArtifactSettings() {
     if (rogueSaveData.syncingWith != null) {
         const entry = createEl('div', {
             classList: ['previous-oak-entry', 'd-flex', 'ai-center', 'ps-relative'],
-            style: { width:"480px", backgroundImage: `linear-gradient(to right, transparent 80%, #9D8665 100%),url(${rogueSaveData.imageOptions.banner})` }
+            style: { width:"480px", backgroundImage: `linear-gradient(to right, transparent 80%, #9D8665 100%),url("./Assets/ProfileBanner/${rogueSaveData.imageOptions.banner}")` }
         });
-        entry.appendChild(generateAvatar(100, rogueSaveData.imageOptions.avatar));
+        entry.appendChild(generateAvatar(100, "./Assets/ProfileAvatar/" + rogueSaveData.imageOptions.avatar));
         entry.appendChild(createEl('p', { classList: ['profile-name', 'tc-white', 'font-luckiest', 'black-outline'], innerHTML: rogueSaveData.imageOptions.name }));
         const delBtn = createEl('img', { classList: ['delete-button', 'ps-absolute'], src: './Assets/UI/CloseBtn.png' });
         delBtn.addEventListener('click', () => {
@@ -438,15 +447,7 @@ function generateArtifactSettings() {
         settingsExtraction.appendChild(entry);
     } else {
         let loginBtn = generateButton("Login with OAK", { width: "280px" }, () => {
-            createModal({
-                content: generateLoginDiv((oak_token) => {
-                    closeModal();
-                    rogueSaveData.syncingWith = oak_token
-                    hideLoading();
-                    generateArtifactSettings();
-                    saveRogueDataToLocalStorage();
-                }, getRogueSaveData)
-            })
+            loginModal();
         })
         settingsExtraction.appendChild(loginBtn);
     }
@@ -654,6 +655,9 @@ function generateArtifactSettings() {
             case "Category":
                 previewArtifacts = previewArtifacts.sort((a, b) => rogueJSON.artifacts[a].rarityFrameType.localeCompare(rogueJSON.artifacts[b].rarityFrameType))
                 break;
+            case "Extracted Order":
+                previewArtifacts = previewArtifacts.sort((a, b) => rogueSaveData.extractedArtifacts.includes(b) - rogueSaveData.extractedArtifacts.includes(a))
+                break;
         }
 
         previewArtifacts.forEach(artifact => {
@@ -661,8 +665,7 @@ function generateArtifactSettings() {
         });
     }
     updatePreviewArtifacts();
-    let settingsSortDropdown = generateDropdown("Sort:", ["Name","Rarity (Ascending)","Rarity (Descending)"], rogueSaveData.artifactSort, (value) => {
-        console.log(value);
+    let settingsSortDropdown = generateDropdown("Sort:", ["Name","Rarity (Ascending)","Rarity (Descending)", "Extracted Order"], rogueSaveData.artifactSort, (value) => {
         rogueSaveData.artifactSort = value;
         saveRogueDataToLocalStorage();
         updatePreviewArtifacts();
@@ -793,6 +796,14 @@ function generateArtifacts() {
             break;
         case "Category":
             currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => a[1].rarityFrameType.localeCompare(b[1].rarityFrameType)))
+            break;
+        case "Extracted Order":
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).sort((a, b) => {
+                const aExtracted = rogueSaveData.extractedArtifacts.includes(a[0]);
+                const bExtracted = rogueSaveData.extractedArtifacts.includes(b[0]);
+                if (aExtracted !== bExtracted) return bExtracted - aExtracted;
+                return rogueSaveData.extractedArtifacts.indexOf(a[0]) - rogueSaveData.extractedArtifacts.indexOf(b[0]);
+            }))
             break;
     }
 
@@ -1417,7 +1428,7 @@ function generateImageBuilder() {
     mapProgressFilterDifficultySelect2.classList.add('map-progress-filter-difficulty-select');
     mapProgressFilterDifficultySelect2.value = rogueSaveData.artifactSort;
 
-    let options2 = ["Name","Rarity (Ascending)","Rarity (Descending)"]
+    let options2 = ["Name","Rarity (Ascending)","Rarity (Descending)","Extracted Order"]
     options2.forEach((option) => {
         let difficultyOption = document.createElement('option');
         difficultyOption.value = option;
@@ -1452,6 +1463,9 @@ function generateImageBuilder() {
             case "Category":
                 previewArtifacts = previewArtifacts.sort((a, b) => rogueJSON.artifacts[a].rarityFrameType.localeCompare(rogueJSON.artifacts[b].rarityFrameType))
                 break;
+            case "Extracted Order":
+                previewArtifacts = previewArtifacts.sort((a, b) => rogueSaveData.extractedArtifacts.includes(b) - rogueSaveData.extractedArtifacts.includes(a))
+                break;
         }
 
         previewArtifacts.forEach(artifact => {
@@ -1474,38 +1488,38 @@ function generateImageBuilder() {
     })
     rogueHeaderBar.appendChild(rogueDownloadButton);
 
-    if (!rogueSaveData.selectedOAK) {
-        Object.entries(localStorageOAK).forEach(([oak, oakdata]) => {
-            let previousOAKEntry = document.createElement('div');
-            previousOAKEntry.classList.add('previous-oak-entry', 'd-flex', 'jc-between', 'ai-center');
-            previousOAKEntry.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(${oakdata.banner})`;
-            oakDiv.appendChild(previousOAKEntry);
+    // if (!rogueSaveData.selectedOAK) {
+    //     Object.entries(localStorageOAK).forEach(([oak, oakdata]) => {
+    //         let previousOAKEntry = document.createElement('div');
+    //         previousOAKEntry.classList.add('previous-oak-entry', 'd-flex', 'jc-between', 'ai-center');
+    //         previousOAKEntry.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(${oakdata.banner})`;
+    //         oakDiv.appendChild(previousOAKEntry);
 
-            previousOAKEntry.appendChild(generateAvatar(100, oakdata.avatar));
+    //         previousOAKEntry.appendChild(generateAvatar(100, oakdata.avatar));
 
-            let profileName = document.createElement('p');
-            profileName.classList.add('profile-name','black-outline');
-            profileName.innerHTML = oakdata.displayName;
-            previousOAKEntry.appendChild(profileName);
+    //         let profileName = document.createElement('p');
+    //         profileName.classList.add('profile-name','black-outline');
+    //         profileName.innerHTML = oakdata.displayName;
+    //         previousOAKEntry.appendChild(profileName);
 
-            let useButton = document.createElement('img');
-            useButton.classList.add('delete-button');
-            useButton.src = './Assets/UI/ContinueBtn.png';
-            useButton.addEventListener('click', () => {
-                rogueSaveData.imageOptions.avatar = oakdata.avatar.split('/')[2];
-                rogueSaveData.imageOptions.banner = oakdata.banner.split('/')[2];
-                rogueSaveData.imageOptions.name = oakdata.displayName;
-                rogueProfileNameInput.value = oakdata.displayName;
-                rogueBannerDiv.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(../Assets/ProfileBanner/${rogueSaveData.imageOptions.banner})`;
-                rogueProfileAvatar.querySelector('.avatar-img').src = `Assets/ProfileAvatar/${rogueSaveData.imageOptions.avatar}`;
-                rogueProfileNameInput.value = rogueSaveData.imageOptions.name;
-                oakDiv.innerHTML = "";
-                rogueSaveData.selectedOAK = true;
-                saveRogueDataToLocalStorage();
-            })
-            previousOAKEntry.appendChild(useButton);
-        })
-    }
+    //         let useButton = document.createElement('img');
+    //         useButton.classList.add('delete-button');
+    //         useButton.src = './Assets/UI/ContinueBtn.png';
+    //         useButton.addEventListener('click', () => {
+    //             rogueSaveData.imageOptions.avatar = oakdata.avatar.split('/')[2];
+    //             rogueSaveData.imageOptions.banner = oakdata.banner.split('/')[2];
+    //             rogueSaveData.imageOptions.name = oakdata.displayName;
+    //             rogueProfileNameInput.value = oakdata.displayName;
+    //             rogueBannerDiv.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(../Assets/ProfileBanner/${rogueSaveData.imageOptions.banner})`;
+    //             rogueProfileAvatar.querySelector('.avatar-img').src = `Assets/ProfileAvatar/${rogueSaveData.imageOptions.avatar}`;
+    //             rogueProfileNameInput.value = rogueSaveData.imageOptions.name;
+    //             oakDiv.innerHTML = "";
+    //             rogueSaveData.selectedOAK = true;
+    //             saveRogueDataToLocalStorage();
+    //         })
+    //         previousOAKEntry.appendChild(useButton);
+    //     })
+    // }
 }
 
 function generateAvatarSelector() {
@@ -1671,6 +1685,14 @@ function downloadImage() {
         case "Rarity (Descending)":
             artifacts = Object.fromEntries(Object.entries(artifacts).sort((a, b) => b[1].tier - a[1].tier))
             break;
+        case "Extracted Order":
+            artifacts = Object.fromEntries(Object.entries(artifacts).sort((a, b) => {
+                const aExtracted = rogueSaveData.extractedArtifacts.includes(a[0]);
+                const bExtracted = rogueSaveData.extractedArtifacts.includes(b[0]);
+                if (aExtracted !== bExtracted) return bExtracted - aExtracted;
+                return rogueSaveData.extractedArtifacts.indexOf(a[0]) - rogueSaveData.extractedArtifacts.indexOf(b[0]);
+            }))
+            break;
     }
 
     Object.keys(artifacts).forEach(artifact => {
@@ -1685,7 +1707,7 @@ function downloadImage() {
 
     let bottomTextDate = document.createElement('p');
     bottomTextDate.classList.add('rogue-bottom-text','black-outline');
-    bottomTextDate.innerHTML = new Date().toLocaleDateString();
+    bottomTextDate.innerHTML = `${new Date().toLocaleDateString()} - Sorted by ${rogueSaveData.imageOptions.sort}`;
     bottomTextDiv.appendChild(bottomTextDate);
 
     let bottomText = document.createElement('p');
@@ -1751,4 +1773,36 @@ function loadRogueDataFromLocalStorage() {
         rogueSaveData = JSON.parse(data);
     }
     readLocalStorage();
+}
+
+function loginModal() {
+    let modalDiv = createEl('div', {
+        classList: ['ta-center']
+    })
+
+    let modalTitle = createEl('p', {
+        classList: ['collection-modal-header-text', 'black-outline'],
+        innerHTML: "Automatic Artifact Tracking"
+    });
+    modalDiv.appendChild(modalTitle);
+    
+    let loginDiv = generateLoginDiv((oak_token) => {
+        goBack();
+        rogueSaveData.syncingWith = oak_token
+        hideLoading();
+        generateArtifactSettings();
+        saveRogueDataToLocalStorage();
+    }, getRogueSaveData)
+    loginDiv.style.padding = "20px";
+    modalDiv.appendChild(loginDiv);
+
+    let manualBtn = generateButton("Track Manually Instead", { width: "400px" }, () => {
+        goBack();
+    })
+    manualBtn.style.margin = "20px";
+    modalDiv.appendChild(manualBtn);
+    
+    createModal({
+        content: modalDiv
+    })
 }

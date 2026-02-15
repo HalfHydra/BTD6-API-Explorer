@@ -222,8 +222,8 @@ async function getRogueSaveData(oak_token) {
     let profilePromise = new Promise(async (resolve, reject) => {
         fetchData(`https://data.ninjakiwi.com/btd6/users/${oak_token}`, (json) => {
             rogueSaveData.imageOptions.name = json["body"]["displayName"];
-            rogueSaveData.imageOptions.avatar = getProfileAvatar(json["body"])
-            rogueSaveData.imageOptions.banner = getProfileBanner(json["body"])
+            rogueSaveData.imageOptions.avatar = json["body"].avatar + ".png"
+            rogueSaveData.imageOptions.banner = json["body"].banner + ".png"
             resolve();
         });
     });
