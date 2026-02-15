@@ -363,19 +363,25 @@ function generateExtras(){
 
 function generateProgressSubText(){
     let towersCount = Object.keys(btd6usersave.unlockedTowers).filter(k => btd6usersave.unlockedTowers[k]).length;
-    progressSubText["Towers"] = `${towersCount}/${Object.keys(btd6usersave.unlockedTowers).length} Towers Unlocked`;
+    progressSubText["Towers"] = `${towersCount}/${Object.keys(constants.towersInOrder).length} Towers Unlocked`;
     let upgrades = Object.keys(btd6usersave.acquiredUpgrades);
     let upgradesUnlocked = upgrades.filter(k => btd6usersave.acquiredUpgrades[k]);
     let paragons = upgrades.filter(k => k.includes("Paragon") && k != "Sentry Paragon");
     let paragonsUnlocked = paragons.filter(k => btd6usersave.acquiredUpgrades[k]);
     progressSubText["Upgrades"] = `${upgradesUnlocked.length - paragonsUnlocked.length}/${upgrades.length - paragons.length} Upgrades Unlocked`;
-    if (paragonsUnlocked.length > 0) { progressSubText["Paragons"] = `${paragonsUnlocked.length}/${paragons.length} Paragon${paragonsUnlocked.length != 1 ? "s" : ""} Unlocked` }
+    if (paragonsUnlocked.length > 0) { progressSubText["Paragons"] = `${paragonsUnlocked.length}/${constants.paragonsAvailable.length} Paragon${paragonsUnlocked.length != 1 ? "s" : ""} Unlocked` }
     let heroesUnlocked = Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length;
     progressSubText["Heroes"] = `${heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeros).length} Hero${heroesUnlocked != 1 ? "es" : ""} Unlocked`;
-    let skinsUnlocked = Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).filter(k => btd6usersave.unlockedSkins[k]).length
-    progressSubText["Skins"] = `${skinsUnlocked}/${Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).length} Hero Skin${skinsUnlocked != 1 ? "s" : ""} Unlocked`;
+    let totalSkins = Object.values(constants.heroSkins).flat().filter(k => !Object.keys(constants.heroesInOrder).includes(k));
+    constants.hiddenHeroes.forEach((skin) => {
+        if (!(btd6usersave.unlockedSkins.hasOwnProperty(skin) && btd6usersave.unlockedSkins[skin])) {
+            totalSkins.splice(totalSkins.indexOf(skin), 1)
+        }
+    })
+    let skinsUnlocked = Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).filter(k => btd6usersave.unlockedSkins[k]  && k != "Sheriff").length
+    progressSubText["Skins"] = `${skinsUnlocked}/${totalSkins.length} Hero Skin${skinsUnlocked != 1 ? "s" : ""} Unlocked`;
     progressSubText["ActivatedAbilities"] = `${Object.keys(btd6publicprofile.stats["abilitiesActivatedByName"]).filter(key => key in constants.abilities).length} Unique Abilities Used`;
-    progressSubText["Knowledge"] = `${Object.keys(btd6usersave.acquiredKnowledge).filter(k => btd6usersave.acquiredKnowledge[k]).length}/${Object.keys(btd6usersave.acquiredKnowledge).length} Knowledge Points Unlocked`;
+    progressSubText["Knowledge"] = `${Object.keys(btd6usersave.acquiredKnowledge).filter(k => btd6usersave.acquiredKnowledge[k]).length}/${Object.keys(constants.knowledgeTags).length} Knowledge Points Unlocked`;
     let mapsPlayed = Object.keys(btd6usersave.mapProgress).filter(k => btd6usersave.mapProgress[k]).length
     progressSubText["MapProgress"] = `${mapsPlayed} Map${mapsPlayed != 1 ? "s" : ""} Played`;
     let chimpsTotal = Object.values(processedMapData.Medals.single).map(map => map["Clicks"]).filter(medal => medal).length;
