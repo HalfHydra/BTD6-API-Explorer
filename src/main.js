@@ -94,19 +94,19 @@ let loggedIn = false;
 let imageScroll = [
     {
         "title": "New Site Update!",
-        "text": `Site Update 2.5.0:<br>
-        - Coop Leaderboards<br>
-        - Frontier Legends Roundsets<br>
+        "text": `Site Update 2.5.1:<br>
+        - Automatic Rogue Tracking<br>
         <br>
         Recent Updates:<br>
-        - Added Roundset Filtering<br>
+        - Coop Leaderboards<br>
         - Contested Territory Map<br>
+        - Frontier Legends Roundsets<br>
         <br>
         Try the <a href="https://btd6store.ninjakiwi.com/" target="_blank" style="color: white;">Official BTD6 Webshop</a>!<br>
         Creator Code: 'HalfHydra' - TY!<br>
         Report Bugs: <a href="https://discord.gg/wep2RDmcqZ" target="_blank" style="color: white;">Discord Server</a><br>
         `,
-        "image": "/LandingScroll/Update52&CTMap"
+        "image": "/LandingScroll/Update53&CTMap"
     },
     {
         "title": "View Your Profile!",
@@ -669,6 +669,12 @@ function generateFrontPage(){
         updateSiteImageScroll(imageScrollIndex);
     });
 
+    let versionDiv = document.createElement('div');
+    versionDiv.id = 'version-div';
+    versionDiv.classList.add('version-div');
+    frontPage.appendChild(versionDiv);
+    generateVersionInfo();
+
     // let OtherInfoHeader = document.createElement('p');
     // OtherInfoHeader.classList.add('site-info-header','black-outline');
     // OtherInfoHeader.innerHTML = 'Site Information';
@@ -784,11 +790,6 @@ function generateFrontPage(){
         siteButtonDiv.appendChild(profileName);
     })
 
-    let versionDiv = document.createElement('div');
-    versionDiv.id = 'version-div';
-    versionDiv.classList.add('version-div');
-    frontPage.appendChild(versionDiv);
-
     faqButton.id = 'faq-button';
     faqButton.addEventListener('click', () => {
         hideAllButOne('faq')
@@ -872,7 +873,8 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = `v2.5.0 (1/11/26): Coop Leaderboards, Frontier Roundsets, other refinements<br>- Added coop boss leaderboards + boss tier for each score<br>- Added "All" view to Insta Monkey collection, allowing you to see which one you've collected the most of<br>- Added Frontier Legends base and rush roundsets, along with comment explanations. I may add the frontier stages data in the future but no promises<br>- Added icons for scoring type on the boss event list<br>-  Added achievement guide buttons for some less clear and difficult ones linking to relevant Bloonscyclopedia and Steam community guide pages<br>- Collection events now show when the group changes, and auto refreshes to show the latest groupings<br>- Top Towers for your individual profile now uses the Insta Monkey collection borders<br>- Fixed the Rogue Legends artifact image, and hide the option until after you enable the tracking mode in the main tab<br>- Many UI fixes such as resizing the browsing window now updating various elements correctly, overlapping text fixed, trophy store items filter no longer persists incorrectly<br>- I've hidden historic CT data before CT 33 (and this may change again later) as I cannot verify they are accurate<br>- Trophy store items should be accurate now<br><br>
+    changelogText.innerHTML = `v2.5.1 (2/15/26): Update 53 & Automatic Rogue Tracking<br>- You can now select an OAK token to sync the extracted artifacts section with. It will refresh once every few minutes of opening the artifacts menu. You can track manually until you refresh the page, and all new artifacts will be automatically pulled<br>- Rogue image export is now hidden until you extract an artifact<br>- The back button now works correctly on the insta monkeys menus<br>- Tower Type sort will no longer be out of order on Insta "All" view<br>- New quests that aren't supported yet won't show up until they are<br>- Insta borders on the stats page will no longer show nothing if you have no instas of that monkey type<br>- Removed broken API exclusive stats temporarily from profiles<br>- Total counts for various stats on Quick Stats have been fixed<br>- Added a "New" filter for Trophy Store items<br>- Fix incorrect parsing of Boss Names ex: "Blastapopolous 152" instead of "Blastapopoulos 15"<br><br>
+    v2.5.0 (1/11/26): Coop Leaderboards, Frontier Roundsets, other refinements<br>- Added coop boss leaderboards + boss tier for each score<br>- Added "All" view to Insta Monkey collection, allowing you to see which one you've collected the most of<br>- Added Frontier Legends base and rush roundsets, along with comment explanations. I may add the frontier stages data in the future but no promises<br>- Added icons for scoring type on the boss event list<br>-  Added achievement guide buttons for some less clear and difficult ones linking to relevant Bloonscyclopedia and Steam community guide pages<br>- Collection events now show when the group changes, and auto refreshes to show the latest groupings<br>- Top Towers for your individual profile now uses the Insta Monkey collection borders<br>- Fixed the Rogue Legends artifact image, and hide the option until after you enable the tracking mode in the main tab<br>- Many UI fixes such as resizing the browsing window now updating various elements correctly, overlapping text fixed, trophy store items filter no longer persists incorrectly<br>- I've hidden historic CT data before CT 33 (and this may change again later) as I cannot verify they are accurate<br>- Trophy store items should be accurate now<br><br>
     v2.4.0 (12/10/25): Update 52 and Contested Territory Map!<br>- New Contested Territory Map and Event Details revamp! Big thanks to a certain dataminer for hosting the generated CT tile data as that is not available on the Open Data API currently.<br>- Added a <a href="./ct" target="_blank" style="color: white;">standalone CT site</a> that will host only the current events information<br>Collection Events will now automatically be added<br>- Collection events now display when the event ends at the bottom of the schedule<br>- Any time a new update happens, there will now be text hinting that the update is not available on the API yet.<br>- Fixed Fortified DDTs not showing up on "Lead and DDT" preset filter<br>- Events with multiple custom roundsets will now show correctly<br>- Filtering now works on the standalone rounds site<br>- Roundsets will now show the currently listed rounds at the top<br>- Added a link to the Discord server in the extras tab.<br><br>
     v2.3.1 (10/26/25): Minor fixes<br>- Updated trophy store items to use newer structure on the Open Data API, which should prevent this from being as inaccurate as before - still testing though.<br>- Games played text now shows up with the correct value<br>- SheRa Adora skin will now show up correctly.<br>- Other minor UI tweaks<br><br>
     v2.3.0 (10/16/25): Update 51 and Minor Updates<br>- Added Update 51 content including new Rogue changes <br>- You can now navigate to the more detailed menus from Quick Stats<br>- Towers menu now shows related Monkey Knowledge points (rework coming eventually)<br>- Added total of each tier to the game-like view of Insta Monkeys collection when "Missing" is toggled.<br>- Unavailable Relics will now displayed on the CT Relics page in prepration for a CT rework<br>- Duplicate (IAP/Special) Rogue starter kits will now show at the bottom<br>- The leaderboard refresh button will now only appear for currently active events<br>- Fixed a bug causing the Clear Filters button to break some roundsets functionality.<br>- Top Paragons will no longer show if there aren't any<br>- Events will now refetch their information from the API after 10 minutes.<br>- The scrollbar is no longer accidentally unstyled. Whoops<br>- Fixed numerous bugs with the back button not clearing when going back<br><br>
