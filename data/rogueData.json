@@ -5167,6 +5167,28 @@
             ],
             "artifact": "AlchemicEngineering2"
         },
+        "FirecrackerGwendolin": {
+            "heroID": "FirecrackerGwendolin",
+            "startingInstas": [
+                {
+                    "baseId": "WizardMonkey",
+                    "tiers": [
+                        2,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "baseId": "SpikeFactory",
+                    "tiers": [
+                        2,
+                        0,
+                        0
+                    ]
+                }
+            ],
+            "artifact": "BlitzingApeBarrageEmitter3"
+        },
         "StrikerJones": {
             "heroID": "StrikerJones",
             "startingInstas": [

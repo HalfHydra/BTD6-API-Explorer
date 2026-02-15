@@ -140,8 +140,7 @@
         "cosmeticPriority": "2",
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false,
-        "isNew": true
+        "hidden": false
     },
     "BloonsAllBloonsNightcap": {
         "storeFilter": "Bloons",
@@ -264,6 +263,18 @@
         "itemType": "BloonPopEffect",
         "hidden": false
     },
+    "BloonsAllBloonsPopsWestern": {
+        "storeFilter": "Bloons",
+        "subFilter": "PopFX",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "WesternPopFxIcon",
+        "cosmeticPriority": "3",
+        "exclusivity": "AllBloonsPopFX",
+        "itemType": "BloonPopEffect",
+        "hidden": true,
+        "obtainMethod": "Frontier"
+    },
     "BloonsAllBloonsRudolphNose": {
         "storeFilter": "Bloons",
         "subFilter": "AllBloonSkins",
@@ -329,6 +340,17 @@
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": true
+    },
+    "BloonsAllBloonsWinterHat": {
+        "storeFilter": "Bloons",
+        "subFilter": "RegularSkins",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "WinterHatBloonsIcon",
+        "cosmeticPriority": "2",
+        "exclusivity": "AllSmallBloonsDecal",
+        "itemType": "BloonDecal",
+        "hidden": false
     },
     "BloonsAllMOABSepia": {
         "storeFilter": "Bloons",
@@ -957,6 +979,18 @@
         "itemType": "CoopEmote",
         "hidden": false
     },
+    "CoopEmoteAnimationYeehaw": {
+        "storeFilter": "Coop",
+        "subFilter": "TextEmotes",
+        "lootSetFilter": "Quest",
+        "questId": "",
+        "icon": "EmoteTextSpeechBubble",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "CoopEmote",
+        "hidden": true,
+        "obtainMethod": "Frontier"
+    },
     "CoopEmoteIconDanger": {
         "storeFilter": "Coop",
         "subFilter": "StandardEmotes",
@@ -1066,6 +1100,18 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false
+    },
+    "CoopEmoteTextHowdy": {
+        "storeFilter": "Coop",
+        "subFilter": "TextEmotes",
+        "lootSetFilter": "Quest",
+        "questId": "",
+        "icon": "EmoteTextSpeechBubble",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "CoopEmote",
+        "hidden": true,
+        "obtainMethod": "Frontier"
     },
     "CoopEmoteTextImTheProblem": {
         "storeFilter": "Coop",
@@ -1643,7 +1689,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Limited"
     },
     "GameUIProfileAvatar110": {
         "storeFilter": "GameUI",
@@ -1654,7 +1701,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileAvatar111": {
         "storeFilter": "GameUI",
@@ -1676,7 +1724,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileAvatar113": {
         "storeFilter": "GameUI",
@@ -1709,7 +1758,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileAvatar116": {
         "storeFilter": "GameUI",
@@ -1721,6 +1771,65 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true
+    },
+    "GameUIProfileAvatar117": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar117",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": true,
+        "obtainMethod": "Frontier"
+    },
+    "GameUIProfileAvatar118": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar118",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": true,
+        "obtainMethod": "Frontier"
+    },
+    "GameUIProfileAvatar119": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar119",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false
+    },
+    "GameUIProfileAvatar120": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar120",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "isNew": true
+    },
+    "GameUIProfileAvatar121": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar121",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "isNew": true
     },
     "GameUIProfileAvatar13": {
         "storeFilter": "GameUI",
@@ -3198,7 +3307,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileBanner51": {
         "storeFilter": "GameUI",
@@ -3220,7 +3330,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileBanner53": {
         "storeFilter": "GameUI",
@@ -3253,7 +3364,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "obtainMethod": "Purchase"
     },
     "GameUIProfileBanner56": {
         "storeFilter": "GameUI",
@@ -3264,8 +3376,42 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false,
-        "isNew": true
+        "hidden": false
+    },
+    "GameUIProfileBanner57": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner57Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": true,
+        "obtainMethod": "Frontier"
+    },
+    "GameUIProfileBanner58": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner58Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": true,
+        "obtainMethod": "Frontier"
+    },
+    "GameUIProfileBanner59": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner59Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": false
     },
     "GameUIProfileBanner6": {
         "storeFilter": "GameUI",
@@ -3277,6 +3423,30 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false
+    },
+    "GameUIProfileBanner60": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner60Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": false,
+        "isNew": true
+    },
+    "GameUIProfileBanner61": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner61Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": true,
+        "isNew": true
     },
     "GameUIProfileBanner7": {
         "storeFilter": "GameUI",
@@ -3329,7 +3499,7 @@
         "questId": "",
         "icon": "BrickellParrotPet",
         "cosmeticPriority": "0",
-        "exclusivity": "AdmiralBrickellDreadPirateBrickellPet",
+        "exclusivity": "AdmiralBrickellPet",
         "itemType": "TowerPet",
         "hidden": false
     },
@@ -3406,7 +3576,7 @@
         "questId": "",
         "icon": "ChurchillSentaiSkinPetDroneIcon",
         "cosmeticPriority": "0",
-        "exclusivity": "ChurchillSentaiSkinPet",
+        "exclusivity": "CaptainChurchillPet",
         "itemType": "TowerPet",
         "hidden": false
     },
@@ -3505,7 +3675,7 @@
         "questId": "",
         "icon": "AdoraPetDragonIcon",
         "cosmeticPriority": "0",
-        "exclusivity": "JoanOfArcAdoraPet",
+        "exclusivity": "AdoraPet",
         "itemType": "TowerPet",
         "hidden": false
     },
@@ -3516,7 +3686,7 @@
         "questId": "",
         "icon": "MountainObynBalfrogPetIcon",
         "cosmeticPriority": "0",
-        "exclusivity": "ObynMountainGuardianPet",
+        "exclusivity": "ObynGreenfootPet",
         "itemType": "TowerPet",
         "hidden": false
     },
@@ -3582,7 +3752,7 @@
         "questId": "",
         "icon": "PatPenguinPet",
         "cosmeticPriority": "0",
-        "exclusivity": "PatFustyTheSnowmanPet",
+        "exclusivity": "PatFustyPet",
         "itemType": "TowerPet",
         "hidden": true
     },
@@ -3684,6 +3854,17 @@
         "exclusivity": "StrikerPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false
+    },
+    "TEAMPU-Snowflakes": {
+        "storeFilter": "Monkeys",
+        "subFilter": "TowerPlacementUpgrades",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "SnowflakeUpgradeFxIcon",
+        "cosmeticPriority": "3",
+        "exclusivity": "TowerPlacement",
+        "itemType": "TowerAssetChange",
+        "hidden": true
     },
     "TPBombshooterFireworks": {
         "storeFilter": "Monkeys",
@@ -3806,6 +3987,18 @@
         "itemType": "TowerPet",
         "hidden": false
     },
+    "TowerPetDesperadoArmadillo": {
+        "storeFilter": "Monkeys",
+        "subFilter": "TowerPets",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "DesperadoArmadilloPetIcon",
+        "cosmeticPriority": "0",
+        "exclusivity": "DesperadoPet",
+        "itemType": "TowerPet",
+        "hidden": true,
+        "obtainMethod": "Frontier"
+    },
     "TowerPetDruidCapybara": {
         "storeFilter": "Monkeys",
         "subFilter": "TowerPets",
@@ -3870,8 +4063,7 @@
         "cosmeticPriority": "0",
         "exclusivity": "IceMonkeyPet",
         "itemType": "TowerPet",
-        "hidden": false,
-        "isNew": true
+        "hidden": false
     },
     "TowerPetMonkeyAceDragonfly": {
         "storeFilter": "Monkeys",
@@ -4290,5 +4482,17 @@
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
         "hidden": false
+    },
+    "UIMusic-FrontierMain": {
+        "storeFilter": "GameUI",
+        "subFilter": "MusicTracks",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "RemixMusicTracksIcon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "MusicTrack",
+        "hidden": true,
+        "obtainMethod": "Frontier"
     }
 }
