@@ -202,6 +202,7 @@
     /* min-height: 300px; */
     background-color: var(--profile-secondary);
     border-radius: 10px;
+    z-index: 999999;
 }
 .error-modal-close {
     width: 50px;
