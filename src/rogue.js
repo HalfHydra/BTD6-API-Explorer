@@ -134,8 +134,8 @@ function changeRogueTab(selector){
         case 'Artifacts Tracker':
             document.getElementById('rogue-content').style.display = 'none';
             document.getElementById('artifacts-content').style.display = 'flex';
-            generateRogueArtifacts();
             addToBackQueue({source: 'rogue', destination: 'artifacts', callback: generateRogueSelectors})
+            generateRogueArtifacts();
             break;
         case 'Hero Starter Kits':
             document.getElementById('rogue-content').style.display = 'none';
@@ -1775,9 +1775,9 @@ function loadRogueDataFromLocalStorage() {
     readLocalStorage();
 }
 
-function loginModal() {
+function loginModal(firstTime) {
     let modalDiv = createEl('div', {
-        classList: ['ta-center']
+        classList: ['ta-center', 'd-flex', 'fd-column', 'ai-center']
     })
 
     let modalTitle = createEl('p', {
@@ -1787,13 +1787,17 @@ function loginModal() {
     modalDiv.appendChild(modalTitle);
     
     let loginDiv = generateLoginDiv((oak_token) => {
-        goBack();
+        if (!firstTime) {
+            goBack();
+        }
         rogueSaveData.syncingWith = oak_token
         hideLoading();
+        addToBackQueue({callback: generateRogueArtifacts});
         generateArtifactSettings();
         saveRogueDataToLocalStorage();
     }, getRogueSaveData)
-    loginDiv.style.padding = "20px";
+    loginDiv.style.padding = "20px 0";
+    loginDiv.classList.add("w-100");
     modalDiv.appendChild(loginDiv);
 
     let manualBtn = generateButton("Track Manually Instead", { width: "400px" }, () => {
@@ -1801,7 +1805,6 @@ function loginModal() {
     })
     manualBtn.style.margin = "20px";
     modalDiv.appendChild(manualBtn);
-    
     createModal({
         content: modalDiv
     })

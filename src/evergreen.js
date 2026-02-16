@@ -1,5 +1,4 @@
 let readyFlags = [0,0,0,0,0]
-let pressedStart = false;
 let timerInterval = null;
 let activeTimers = new Map();
 
@@ -473,21 +472,18 @@ function generateLoginDiv(callback, loginCallback) {
         entry.appendChild(createEl('p', { classList: ['profile-name', 'tc-white', 'font-luckiest', 'black-outline'], innerHTML: oakdata.displayName }));
         const useBtn = createEl('img', { classList: ['use-button', 'ps-absolute'], src: './Assets/UI/ContinueBtn.png' });
         useBtn.addEventListener('click', async () => {
-            if (!pressedStart) {
-                document.getElementById("loading").style.removeProperty("transform");
-                oak_token = oak;
-                if (loginCallback) {
-                    await loginCallback(oak);
-                } else {
-                    await getSaveData(oak);
-                    loggedIn = true;
-                    pressedStart = true;
-                }
-                if(callback) {
-                    callback(oak_token);
-                } else {
-                    fetchMainDependencies();
-                }
+            document.getElementById("loading").style.removeProperty("transform");
+            oak_token = oak;
+            if (loginCallback) {
+                await loginCallback(oak);
+            } else {
+                await getSaveData(oak);
+                loggedIn = true;
+            }
+            if(callback) {
+                callback(oak_token);
+            } else {
+                fetchMainDependencies();
             }
         });
         entry.appendChild(useBtn);
@@ -547,27 +543,23 @@ function generateLoginDiv(callback, loginCallback) {
     startButton.classList.add('start-button','black-outline');
     startButton.innerHTML = 'Start';
     startButton.addEventListener('click', async () => {
-        // trailerVideo.pause();
         let key = keyEntry.value;
         if (key.length < 5 || key.length > 30 || !key.startsWith('oak_')){
             errorModal('Please enter a valid OAK! This will start with "oak_".');
             return;
         }
-        if (!pressedStart){
-            document.getElementById("loading").style.removeProperty("transform");
-            oak_token = keyEntry.value;
-            if (loginCallback) {
-                await loginCallback(oak_token);
-            } else {
-                await getSaveData(oak_token);
-                loggedIn = true;
-                pressedStart = true;
-            }
-            if(callback) {
-                callback(oak_token);
-            } else {
-                fetchMainDependencies();
-            }
+        document.getElementById("loading").style.removeProperty("transform");
+        oak_token = keyEntry.value;
+        if (loginCallback) {
+            await loginCallback(oak_token);
+        } else {
+            await getSaveData(oak_token);
+            loggedIn = true;
+        }
+        if(callback) {
+            callback(oak_token);
+        } else {
+            fetchMainDependencies();
         }
     })
     oakEntryDiv.appendChild(startButton);

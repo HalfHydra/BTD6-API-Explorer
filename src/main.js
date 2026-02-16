@@ -1905,7 +1905,6 @@ function generateProgress(){
 
 function logoutProgress() {
     loggedIn = false;
-    pressedStart = false;
     generateProgress();
 }
 
