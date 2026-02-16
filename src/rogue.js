@@ -79,6 +79,8 @@ let noArtifactsMessage;
 
 let currentArtifacts = {};
 
+let rogueSyncInterval;
+
 // Promise.all([
 //     fetch('./data/Constants.json').then(response => response.json()),
 //     fetch('./data/English.json').then(response => response.json()),
@@ -255,7 +257,6 @@ function generateRogueSelectors() {
 }
 
 async function generateRogueArtifacts() { 
-    tippy.hideAll()
     let artifactsContent = document.getElementById('artifacts-content');
     artifactsContent.innerHTML = "";
 
@@ -266,16 +267,7 @@ async function generateRogueArtifacts() {
         saveRogueDataToLocalStorage();
     }
 
-    let now = new Date().valueOf();
-    if(rogueSaveData.hasOwnProperty("syncingWith") && rogueSaveData.syncingWith != null && rogueSaveData.hasOwnProperty("lastSynced") && rogueSaveData.lastSynced + 500000 > now) {
-        //when the refresh threshold isn't yet reached
-    } else if (rogueSaveData.hasOwnProperty("syncingWith") && rogueSaveData.syncingWith != null) {
-        rogueSaveData.lastSynced = now;
-        getRogueSaveData(rogueSaveData.syncingWith).then(() => {
-            saveRogueDataToLocalStorage();
-            generateRogueArtifacts();
-        })
-    }
+    startRogueSync();
 
     let rogueHeaderBar = document.createElement('div');
     rogueHeaderBar.classList.add('rogue-bg', 'd-flex', 'jc-between', 'ai-center');
@@ -686,6 +678,7 @@ function generateArtifacts() {
     let artifactsContainer = document.getElementById('artifacts-container');
     artifactsContainer.innerHTML = "";
     artifactDivMap = {};
+    tippy.hideAll()
 
     let artifactsDiv = document.createElement('div');
     artifactsDiv.classList.add('artifacts-div');
@@ -1808,4 +1801,23 @@ function loginModal(firstTime) {
     createModal({
         content: modalDiv
     })
+}
+
+function checkAndSyncRogueData() {
+    let now = new Date().valueOf();
+    if(rogueSaveData.hasOwnProperty("syncingWith") && rogueSaveData.syncingWith != null && rogueSaveData.hasOwnProperty("lastSynced") && rogueSaveData.lastSynced + 300000 > now) {
+        //the refresh threshold isn't yet reached
+    } else if (rogueSaveData.hasOwnProperty("syncingWith") && rogueSaveData.syncingWith != null) {
+        rogueSaveData.lastSynced = now;
+        getRogueSaveData(rogueSaveData.syncingWith).then(() => {
+            saveRogueDataToLocalStorage();
+            generateArtifacts();
+        })
+    }
+}
+
+function startRogueSync() {
+    if (rogueSyncInterval) clearInterval(rogueSyncInterval);
+    checkAndSyncRogueData();
+    rogueSyncInterval = setInterval(checkAndSyncRogueData, 310000);
 }
