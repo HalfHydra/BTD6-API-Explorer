@@ -274,12 +274,12 @@ async function getAllLeaderboardData(link) {
             "entries": [],
             _cachedAt: Date.now()
         };
-        getLeaderboardPage(link);
+        await getLeaderboardPage(link, leaderboardActiveToken, true);
     }
     return leaderboardCache[leaderboardLink];
 }
 
-async function getLeaderboardPage(link, token = leaderboardActiveToken) {
+async function getLeaderboardPage(link, token = leaderboardActiveToken, isInitialLoad = false) {
     if (link == null) return;
     if(leaderboardCache[leaderboardLink].nextRequested){ return };
     requestCount++;
@@ -290,9 +290,12 @@ async function getLeaderboardPage(link, token = leaderboardActiveToken) {
         if(!leaderboardCache[leaderboardLink].hasOwnProperty("entryPerPage")){
             leaderboardCache[leaderboardLink]["entryPerPage"] = json["body"].length;
         }
-        addLeaderboardEntries(json["body"], isNaN(link.split("=")[1]) ? 1 : parseInt(link.split("=")[1]), leaderboardCache[leaderboardLink]["entryPerPage"] ? leaderboardCache[leaderboardLink]["entryPerPage"] : json["body"].length);
         leaderboardCache[leaderboardLink]["next"] = json["next"];
         leaderboardCache[leaderboardLink].nextRequested = false;
+
+        if (!isInitialLoad && json["body"].length > 0) {
+            addLeaderboardEntries(json["body"], isNaN(link.split("=")[1]) ? 1 : parseInt(link.split("=")[1]), leaderboardCache[leaderboardLink]["entryPerPage"] ? leaderboardCache[leaderboardLink]["entryPerPage"] : json["body"].length);
+        }
     });
 }
 

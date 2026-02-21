@@ -612,7 +612,12 @@ function showLeaderboard(source, metadata, type) {
 }
 
 async function generateLeaderboardEntries(metadata, type, token = leaderboardActiveToken) {
+    let leaderboardEntries = document.getElementById('leaderboard-entries');
+    leaderboardEntries.innerHTML = "";
+
     await getAllLeaderboardData(leaderboardLink, token);
+
+    if (token !== leaderboardActiveToken) return;
 
     let columnsType = null;
     switch (type) {
@@ -645,10 +650,18 @@ async function generateLeaderboardEntries(metadata, type, token = leaderboardAct
 
     generateLeaderboardHeader(columnsType);
 
-    let leaderboardEntries = document.getElementById('leaderboard-entries');
-    leaderboardEntries.innerHTML = "";
+    
 
-    addLeaderboardEntries(leaderboardCache[leaderboardLink].entries, 1, leaderboardCache[leaderboardLink].entries.length);
+    if (leaderboardCache[leaderboardLink].entries.length === 0) {
+        hideLoading();
+        let noDataFound = document.createElement('p');
+        noDataFound.classList.add('no-data-found', 'black-outline');
+        noDataFound.style.width = "250px";
+        noDataFound.innerHTML = "No Data Found";
+        leaderboardEntries.appendChild(noDataFound);
+    } else {
+        addLeaderboardEntries(leaderboardCache[leaderboardLink].entries, 1, leaderboardCache[leaderboardLink].entries.length);
+    }
 }
 
 function addLeaderboardEntries(leaderboardData, page, count) {
@@ -660,7 +673,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
         hideLoading();
     }
 
-    if (leaderboardData != null) {
+    if (leaderboardData != null  && leaderboardData.length > 0) {
         leaderboardData.forEach((entry, index) => {
             let scorePartsObj = {}
 
@@ -1018,12 +1031,6 @@ function addLeaderboardEntries(leaderboardData, page, count) {
         Array.from(leaderboardEntries.getElementsByClassName('loading-text-leaderboard')).forEach((icon) => {
             icon.remove();
         })
-    } else {
-        let noDataFound = document.createElement('p');
-        noDataFound.classList.add('no-data-found', 'black-outline');
-        noDataFound.style.width = "250px";
-        noDataFound.innerHTML = "No Data Found";
-        leaderboardEntries.appendChild(noDataFound);
     }
 }
 
