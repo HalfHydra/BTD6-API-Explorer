@@ -1203,7 +1203,6 @@ function generateArtifactPopout(key) {
 
     createModal({
         content: modalContent,
-        // header: modalHeaderDiv,
     })
 }
 
@@ -1644,9 +1643,16 @@ function downloadImage() {
     rightDiv.classList.add('rogue-header-sides', 'rogue-right-div');
     rogueImageHeader.appendChild(rightDiv);
 
+    let extractedArtifacts = [...rogueSaveData.extractedArtifacts];
+    starterArtifacts.forEach((artifact) => {
+        if (!extractedArtifacts.includes(artifact)) {
+            extractedArtifacts.unshift(artifact);
+        }
+    })
+
     let progressText = document.createElement('p');
     progressText.classList.add('rogue-progress-text-export','black-outline');
-    progressText.innerHTML = `${rogueSaveData.extractedArtifacts.length + 8}/${Object.keys(rogueJSON.artifacts).length}`;
+    progressText.innerHTML = `${extractedArtifacts.length}/${Object.keys(rogueJSON.artifacts).length}`;
     rightDiv.appendChild(progressText);
     
     let artifactBag = document.createElement('img');
