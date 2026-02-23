@@ -201,7 +201,17 @@ async function getRogueSaveData(oak_token) {
     let expiryCheck = true;
     let savePromise = new Promise(async (resolve, reject) => {
         await fetchData(`https://data.ninjakiwi.com/btd6/save/${oak_token}`, (json) => {
-            rogueSaveData.extractedArtifacts = json["body"].hasOwnProperty("rogueUnlockedStarterArtifacts") ? Object.values(json["body"]["rogueUnlockedStarterArtifacts"]) : []
+
+            if (json["body"].hasOwnProperty("rogueUnlockedStarterArtifacts")) {
+                if (!rogueSaveData.hasOwnProperty("extractedArtifacts")) {
+                    rogueSaveData.extractedArtifacts = []
+                }
+                Object.values(json["body"]["rogueUnlockedStarterArtifacts"]).forEach(artifact => {
+                    if (!rogueSaveData.extractedArtifacts.includes(artifact)) {
+                        rogueSaveData.extractedArtifacts.push(artifact);
+                    }
+                });
+            }
             expiryCheck = false;
             resolve();
         });
