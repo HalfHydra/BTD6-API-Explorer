@@ -8,7 +8,8 @@
         "cosmeticPriority": "2",
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 26
     },
     "BloonsAllBloonsBucketHat": {
         "storeFilter": "Bloons",
@@ -19,7 +20,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "BloonsAllBloonsBunnyEars": {
         "storeFilter": "Bloons",
@@ -30,7 +32,8 @@
         "cosmeticPriority": "2",
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 24
     },
     "BloonsAllBloonsCatEar": {
         "storeFilter": "Bloons",
@@ -41,7 +44,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 31
     },
     "BloonsAllBloonsClownWigs": {
         "storeFilter": "Bloons",
@@ -52,7 +56,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 44
     },
     "BloonsAllBloonsCowboyHat": {
         "storeFilter": "Bloons",
@@ -63,7 +68,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 49
     },
     "BloonsAllBloonsDaisyChain": {
         "storeFilter": "Bloons",
@@ -74,7 +80,8 @@
         "cosmeticPriority": "2",
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 28
     },
     "BloonsAllBloonsDecalAxe": {
         "storeFilter": "Bloons",
@@ -85,7 +92,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 21
     },
     "BloonsAllBloonsDecalGooglyEyes": {
         "storeFilter": "Bloons",
@@ -96,7 +104,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "BloonsAllBloonsDisguiseGlasses": {
         "storeFilter": "Bloons",
@@ -107,7 +116,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 31
     },
     "BloonsAllBloonsElfHat": {
         "storeFilter": "Bloons",
@@ -118,7 +128,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 29
     },
     "BloonsAllBloonsHeartGlasses": {
         "storeFilter": "Bloons",
@@ -129,7 +140,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 47
     },
     "BloonsAllBloonsMohawks": {
         "storeFilter": "Bloons",
@@ -140,7 +152,8 @@
         "cosmeticPriority": "2",
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 51
     },
     "BloonsAllBloonsNightcap": {
         "storeFilter": "Bloons",
@@ -151,7 +164,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 42
     },
     "BloonsAllBloonsPartyHat": {
         "storeFilter": "Bloons",
@@ -162,7 +176,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 37
     },
     "BloonsAllBloonsPopsBarrelOfMonkeys": {
         "storeFilter": "Bloons",
@@ -173,7 +188,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "BloonsAllBloonsPopsBones": {
         "storeFilter": "Bloons",
@@ -184,7 +200,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 21
     },
     "BloonsAllBloonsPopsConfetti": {
         "storeFilter": "Bloons",
@@ -195,7 +212,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "BloonsAllBloonsPopsFlowers": {
         "storeFilter": "Bloons",
@@ -206,7 +224,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 24
     },
     "BloonsAllBloonsPopsHearts": {
         "storeFilter": "Bloons",
@@ -217,7 +236,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 47
     },
     "BloonsAllBloonsPopsPewpew": {
         "storeFilter": "Bloons",
@@ -228,7 +248,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 25
     },
     "BloonsAllBloonsPopsPow": {
         "storeFilter": "Bloons",
@@ -239,7 +260,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 23
     },
     "BloonsAllBloonsPopsSnowflakes": {
         "storeFilter": "Bloons",
@@ -250,7 +272,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 22
     },
     "BloonsAllBloonsPopsWaterbloon": {
         "storeFilter": "Bloons",
@@ -261,7 +284,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "BloonsAllBloonsPopsWestern": {
         "storeFilter": "Bloons",
@@ -273,7 +297,8 @@
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
         "hidden": true,
-        "obtainMethod": "Frontier"
+        "obtainMethod": "Frontier",
+        "updateAdded": 52
     },
     "BloonsAllBloonsRudolphNose": {
         "storeFilter": "Bloons",
@@ -284,7 +309,8 @@
         "cosmeticPriority": "2",
         "exclusivity": "AllMoabsDecal",
         "itemType": "BloonDecal",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 22
     },
     "BloonsAllBloonsSantaHats": {
         "storeFilter": "Bloons",
@@ -295,7 +321,8 @@
         "cosmeticPriority": "2",
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 22
     },
     "BloonsAllBloonsSunglasses": {
         "storeFilter": "Bloons",
@@ -306,7 +333,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 38
     },
     "BloonsAllBloonsTopHats": {
         "storeFilter": "Bloons",
@@ -317,7 +345,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "BloonsAllBloonsTruckerHats": {
         "storeFilter": "Bloons",
@@ -328,7 +357,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 23
     },
     "BloonsAllBloonsVampireCapes": {
         "storeFilter": "Bloons",
@@ -339,7 +369,8 @@
         "cosmeticPriority": "2",
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 27
     },
     "BloonsAllBloonsWinterHat": {
         "storeFilter": "Bloons",
@@ -350,7 +381,8 @@
         "cosmeticPriority": "2",
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 52
     },
     "BloonsAllMOABSepia": {
         "storeFilter": "Bloons",
@@ -361,7 +393,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "AllMoabsSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 26
     },
     "BloonsBADSkinBones": {
         "storeFilter": "Bloons",
@@ -372,7 +405,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BADSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 21
     },
     "BloonsBADSkinPinata": {
         "storeFilter": "Bloons",
@@ -383,7 +417,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BADSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "BloonsBADSkinScarab": {
         "storeFilter": "Bloons",
@@ -394,7 +429,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BADSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 43
     },
     "BloonsBADSkinWhale": {
         "storeFilter": "Bloons",
@@ -405,7 +441,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BADSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 30
     },
     "BloonsBFBSkinBtd4Retro": {
         "storeFilter": "Bloons",
@@ -416,7 +453,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BFBSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 25
     },
     "BloonsBFBSkinChocolate": {
         "storeFilter": "Bloons",
@@ -427,7 +465,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BFBSkin",
         "itemType": "BloonAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 24
     },
     "BloonsBFBSkinLantern": {
         "storeFilter": "Bloons",
@@ -438,7 +477,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BFBSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 23
     },
     "BloonsBFBSkinLobster": {
         "storeFilter": "Bloons",
@@ -449,7 +489,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BFBSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 36
     },
     "BloonsBFBSkinPizza": {
         "storeFilter": "Bloons",
@@ -460,7 +501,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BFBSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "BloonsBFBSkinSciFi": {
         "storeFilter": "Bloons",
@@ -471,7 +513,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BFBSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "BloonsBfbSkinBat": {
         "storeFilter": "Bloons",
@@ -482,7 +525,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BFBSkin",
         "itemType": "BloonAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 45
     },
     "BloonsDDTSkinMagpie": {
         "storeFilter": "Bloons",
@@ -493,7 +537,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "DDTSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 48
     },
     "BloonsDDTSkinShark": {
         "storeFilter": "Bloons",
@@ -504,7 +549,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "DDTSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "BloonsDDTSkinSleigh": {
         "storeFilter": "Bloons",
@@ -515,7 +561,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "DDTSkin",
         "itemType": "BloonAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 29
     },
     "BloonsDDTSkinSpider": {
         "storeFilter": "Bloons",
@@ -526,7 +573,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "DDTSkin",
         "itemType": "BloonAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 33
     },
     "BloonsDDTSkinTron": {
         "storeFilter": "Bloons",
@@ -537,7 +585,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "DDTSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "BloonsMOABSkinBee": {
         "storeFilter": "Bloons",
@@ -548,7 +597,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 41
     },
     "BloonsMOABSkinBoat": {
         "storeFilter": "Bloons",
@@ -559,7 +609,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 38
     },
     "BloonsMOABSkinBtd4Retro": {
         "storeFilter": "Bloons",
@@ -570,7 +621,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 25
     },
     "BloonsMOABSkinChocolate": {
         "storeFilter": "Bloons",
@@ -581,7 +633,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 24
     },
     "BloonsMOABSkinFootball": {
         "storeFilter": "Bloons",
@@ -592,7 +645,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "BloonsMOABSkinGlacier": {
         "storeFilter": "Bloons",
@@ -603,7 +657,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 22
     },
     "BloonsMOABSkinMauler": {
         "storeFilter": "Bloons",
@@ -614,7 +669,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "BloonsMOABSkinPufferFish": {
         "storeFilter": "Bloons",
@@ -625,7 +681,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "BloonsZOMGAncient": {
         "storeFilter": "Bloons",
@@ -636,7 +693,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "ZOMGSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 50
     },
     "BloonsZOMGPirateTurtle": {
         "storeFilter": "Bloons",
@@ -647,7 +705,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "ZOMGSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 40
     },
     "BloonsZOMGSkinJackOLantern": {
         "storeFilter": "Bloons",
@@ -658,7 +717,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "ZOMGSkin",
         "itemType": "BloonAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 28
     },
     "BloonsZOMGSkinSteampunk": {
         "storeFilter": "Bloons",
@@ -669,7 +729,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "ZOMGSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "BloonsZOMGSkinWatermelon": {
         "storeFilter": "Bloons",
@@ -680,7 +741,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "ZOMGSkin",
         "itemType": "BloonAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "CoopEmoteAnimationBeggingMonkey": {
         "storeFilter": "Coop",
@@ -691,7 +753,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 28
     },
     "CoopEmoteAnimationBenCool": {
         "storeFilter": "Coop",
@@ -702,7 +765,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 29
     },
     "CoopEmoteAnimationBikerBonesRage": {
         "storeFilter": "Coop",
@@ -713,7 +777,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 29
     },
     "CoopEmoteAnimationCelebration": {
         "storeFilter": "Coop",
@@ -724,7 +789,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 22
     },
     "CoopEmoteAnimationConfetti": {
         "storeFilter": "Coop",
@@ -735,7 +801,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "CoopEmoteAnimationDiscoBall": {
         "storeFilter": "Coop",
@@ -746,7 +813,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "CoopEmoteAnimationFacepalm": {
         "storeFilter": "Coop",
@@ -757,7 +825,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 22
     },
     "CoopEmoteAnimationFistpump": {
         "storeFilter": "Coop",
@@ -768,7 +837,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "CoopEmoteAnimationFlowerBloom": {
         "storeFilter": "Coop",
@@ -779,7 +849,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 24
     },
     "CoopEmoteAnimationHappyHolidays": {
         "storeFilter": "Coop",
@@ -790,7 +861,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 22
     },
     "CoopEmoteAnimationLoveHearts": {
         "storeFilter": "Coop",
@@ -801,7 +873,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "CoopEmoteAnimationMindBlown": {
         "storeFilter": "Coop",
@@ -812,7 +885,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 31
     },
     "CoopEmoteAnimationObynPeace": {
         "storeFilter": "Coop",
@@ -823,7 +897,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 30
     },
     "CoopEmoteAnimationPanicMonkey": {
         "storeFilter": "Coop",
@@ -834,7 +909,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 28
     },
     "CoopEmoteAnimationParagon": {
         "storeFilter": "Coop",
@@ -845,7 +921,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 39
     },
     "CoopEmoteAnimationPatFlex": {
         "storeFilter": "Coop",
@@ -856,7 +933,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 31
     },
     "CoopEmoteAnimationPixelMonkeyDance": {
         "storeFilter": "Coop",
@@ -867,7 +945,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 24
     },
     "CoopEmoteAnimationPlayerNumbers": {
         "storeFilter": "Coop",
@@ -878,7 +957,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 25
     },
     "CoopEmoteAnimationPsigh": {
         "storeFilter": "Coop",
@@ -889,7 +969,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 33
     },
     "CoopEmoteAnimationRainbow": {
         "storeFilter": "Coop",
@@ -900,7 +981,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 32
     },
     "CoopEmoteAnimationSiren": {
         "storeFilter": "Coop",
@@ -911,7 +993,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "CoopEmoteAnimationSleighbells": {
         "storeFilter": "Coop",
@@ -922,7 +1005,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 34
     },
     "CoopEmoteAnimationSparklingHearts": {
         "storeFilter": "Coop",
@@ -933,7 +1017,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "CoopEmoteAnimationThinkingMonkey": {
         "storeFilter": "Coop",
@@ -944,7 +1029,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 30
     },
     "CoopEmoteAnimationTowerType": {
         "storeFilter": "Coop",
@@ -955,7 +1041,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 38
     },
     "CoopEmoteAnimationTrophy": {
         "storeFilter": "Coop",
@@ -966,7 +1053,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 25
     },
     "CoopEmoteAnimationTumbleweed": {
         "storeFilter": "Coop",
@@ -977,7 +1065,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 26
     },
     "CoopEmoteAnimationYeehaw": {
         "storeFilter": "Coop",
@@ -989,7 +1078,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": true,
-        "obtainMethod": "Frontier"
+        "obtainMethod": "Frontier",
+        "updateAdded": 52
     },
     "CoopEmoteIconDanger": {
         "storeFilter": "Coop",
@@ -1000,7 +1090,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "CoopEmoteIconNoCashDrops": {
         "storeFilter": "Coop",
@@ -1011,7 +1102,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "CoopEmoteIconSkullAndCrossbones": {
         "storeFilter": "Coop",
@@ -1022,7 +1114,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 26
     },
     "CoopEmoteIconStop": {
         "storeFilter": "Coop",
@@ -1033,7 +1126,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "CoopEmoteSoundAirhorn": {
         "storeFilter": "Coop",
@@ -1044,7 +1138,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "CoopEmoteSoundCrickets": {
         "storeFilter": "Coop",
@@ -1055,7 +1150,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "CoopEmoteSoundScream": {
         "storeFilter": "Coop",
@@ -1066,7 +1162,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 21
     },
     "CoopEmoteTextActivate": {
         "storeFilter": "Coop",
@@ -1077,7 +1174,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 26
     },
     "CoopEmoteTextAllIsFine": {
         "storeFilter": "Coop",
@@ -1088,7 +1186,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "CoopEmoteTextAmazing": {
         "storeFilter": "Coop",
@@ -1099,7 +1198,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "CoopEmoteTextHowdy": {
         "storeFilter": "Coop",
@@ -1111,7 +1211,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": true,
-        "obtainMethod": "Frontier"
+        "obtainMethod": "Frontier",
+        "updateAdded": 52
     },
     "CoopEmoteTextImTheProblem": {
         "storeFilter": "Coop",
@@ -1122,7 +1223,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 44
     },
     "CoopEmoteTextLetsGo": {
         "storeFilter": "Coop",
@@ -1133,7 +1235,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "CoopEmoteTextNeedMore": {
         "storeFilter": "Coop",
@@ -1144,7 +1247,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 32
     },
     "CoopEmoteTextNextRoundScary": {
         "storeFilter": "Coop",
@@ -1155,7 +1259,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "CoopEmoteTextOK": {
         "storeFilter": "Coop",
@@ -1166,7 +1271,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "CoopEmoteTextPerfectTiming": {
         "storeFilter": "Coop",
@@ -1177,7 +1283,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "CoopEmoteTextWhy": {
         "storeFilter": "Coop",
@@ -1188,7 +1295,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "CoopEmote",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "GameUIMusicTrackMusicBMCStreetParty": {
         "storeFilter": "GameUI",
@@ -1199,7 +1307,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 23
     },
     "GameUIMusicTrackMusicFiestaHeliumHeightsMix": {
         "storeFilter": "GameUI",
@@ -1210,7 +1319,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 38
     },
     "GameUIMusicTrackMusicFiestaSynthwaveMix": {
         "storeFilter": "GameUI",
@@ -1221,7 +1331,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 21
     },
     "GameUIMusicTrackMusicHaunted": {
         "storeFilter": "GameUI",
@@ -1232,7 +1343,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 28
     },
     "GameUIMusicTrackMusicJingleBloons": {
         "storeFilter": "GameUI",
@@ -1243,7 +1355,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 22
     },
     "GameUIMusicTrackMusicSunset64Mix": {
         "storeFilter": "GameUI",
@@ -1254,7 +1367,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 37
     },
     "GameUIMusicTrackMusicSunsetSilentNightMix": {
         "storeFilter": "GameUI",
@@ -1265,7 +1379,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "GameUIMusicTrackMusicSunshineFiestaMix": {
         "storeFilter": "GameUI",
@@ -1276,7 +1391,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 31
     },
     "GameUIMusicTrackMusicSunshineGameboyMix": {
         "storeFilter": "GameUI",
@@ -1287,7 +1403,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "GameUIMusicTrackMusicTitleFiestaMix": {
         "storeFilter": "GameUI",
@@ -1298,7 +1415,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "GameUIMusicTrackMusicTribesFunkedMix": {
         "storeFilter": "GameUI",
@@ -1309,7 +1427,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "GameUIMusicTrackMusicTribesJaloonMix": {
         "storeFilter": "GameUI",
@@ -1320,7 +1439,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 32
     },
     "GameUIMusicTrackMusicTropicalClassyBrassMix": {
         "storeFilter": "GameUI",
@@ -1331,7 +1451,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 39
     },
     "GameUIMusicTrackMusicTropicalComplextroMix": {
         "storeFilter": "GameUI",
@@ -1342,7 +1463,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "GameUIMusicTrackMusicTropicalOctopusMix": {
         "storeFilter": "GameUI",
@@ -1353,7 +1475,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 26
     },
     "GameUIMusicTrackMusicWinterChilledMix": {
         "storeFilter": "GameUI",
@@ -1364,7 +1487,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 29
     },
     "GameUIMusicTrackMusicWinterTonkMix": {
         "storeFilter": "GameUI",
@@ -1375,7 +1499,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "MusicTrack",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 40
     },
     "GameUIPowerSkinBananaFarmerBananaCostume": {
         "storeFilter": "GameUI",
@@ -1386,7 +1511,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerBananaFarmer",
         "itemType": "PowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 33
     },
     "GameUIPowerSkinBaubleMine": {
         "storeFilter": "GameUI",
@@ -1397,7 +1523,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerMoabMine",
         "itemType": "PowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 22
     },
     "GameUIPowerSkinCamoTrapSprinkler": {
         "storeFilter": "GameUI",
@@ -1408,7 +1535,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerCamoTrap",
         "itemType": "PowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 38
     },
     "GameUIPowerSkinChocolatePontoon": {
         "storeFilter": "GameUI",
@@ -1419,7 +1547,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerPontoon",
         "itemType": "PowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 41
     },
     "GameUIPowerSkinCoffinDrop": {
         "storeFilter": "GameUI",
@@ -1430,7 +1559,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerCashDrop",
         "itemType": "PowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 21
     },
     "GameUIPowerSkinDartTimeMatrix": {
         "storeFilter": "GameUI",
@@ -1441,7 +1571,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerDartTime",
         "itemType": "PowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 29
     },
     "GameUIPowerSkinEnergisingTotemChristmasTree": {
         "storeFilter": "GameUI",
@@ -1452,7 +1583,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerEnergisingTotem",
         "itemType": "PowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 29
     },
     "GameUIPowerSkinGlueTrapHoneyTrap": {
         "storeFilter": "GameUI",
@@ -1463,7 +1595,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerGlueTrap",
         "itemType": "PowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 33
     },
     "GameUIPowerSkinHalloweenFarmer": {
         "storeFilter": "GameUI",
@@ -1474,7 +1607,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerBananaFarmer",
         "itemType": "PowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 21
     },
     "GameUIPowerSkinIcebergPontoon": {
         "storeFilter": "GameUI",
@@ -1485,7 +1619,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerPontoon",
         "itemType": "PowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 22
     },
     "GameUIPowerSkinLavaLake": {
         "storeFilter": "GameUI",
@@ -1496,7 +1631,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerPortableLake",
         "itemType": "PowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 25
     },
     "GameUIPowerSkinMonkeyBoostFireworks": {
         "storeFilter": "GameUI",
@@ -1507,7 +1643,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerMonkeyBoost",
         "itemType": "PowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 26
     },
     "GameUIPowerSkinMonkeyBoostSugarRush": {
         "storeFilter": "GameUI",
@@ -1518,7 +1655,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerMonkeyBoost",
         "itemType": "PowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 30
     },
     "GameUIPowerSkinPinataCashDrop": {
         "storeFilter": "GameUI",
@@ -1529,7 +1667,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerCashDrop",
         "itemType": "PowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 40
     },
     "GameUIPowerSkinRetroTechbot": {
         "storeFilter": "GameUI",
@@ -1540,7 +1679,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerTechbot",
         "itemType": "PowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 22
     },
     "GameUIPowerSkinRoadSpikesFlowerPatch": {
         "storeFilter": "GameUI",
@@ -1551,7 +1691,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerRoadSpikes",
         "itemType": "PowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 30
     },
     "GameUIPowerSkinSuperVampireStorm": {
         "storeFilter": "GameUI",
@@ -1562,7 +1703,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerSuperMonkeyStorm",
         "itemType": "PowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 21
     },
     "GameUIPowerSkinThriveStonks": {
         "storeFilter": "GameUI",
@@ -1573,7 +1715,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PowerThrive",
         "itemType": "PowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 28
     },
     "GameUIProfileAvatar100": {
         "storeFilter": "GameUI",
@@ -1585,7 +1728,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 44
     },
     "GameUIProfileAvatar101": {
         "storeFilter": "GameUI",
@@ -1596,7 +1740,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 45
     },
     "GameUIProfileAvatar102": {
         "storeFilter": "GameUI",
@@ -1608,7 +1753,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 45
     },
     "GameUIProfileAvatar103": {
         "storeFilter": "GameUI",
@@ -1619,7 +1765,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 46
     },
     "GameUIProfileAvatar104": {
         "storeFilter": "GameUI",
@@ -1631,7 +1778,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 46
     },
     "GameUIProfileAvatar105": {
         "storeFilter": "GameUI",
@@ -1643,7 +1791,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Rogue"
+        "obtainMethod": "Rogue",
+        "updateAdded": 47
     },
     "GameUIProfileAvatar106": {
         "storeFilter": "GameUI",
@@ -1655,7 +1804,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Rogue"
+        "obtainMethod": "Rogue",
+        "updateAdded": 47
     },
     "GameUIProfileAvatar107": {
         "storeFilter": "GameUI",
@@ -1667,7 +1817,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Limited"
+        "obtainMethod": "Limited",
+        "updateAdded": 48
     },
     "GameUIProfileAvatar108": {
         "storeFilter": "GameUI",
@@ -1678,7 +1829,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 47
     },
     "GameUIProfileAvatar109": {
         "storeFilter": "GameUI",
@@ -1690,7 +1842,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Limited"
+        "obtainMethod": "Limited",
+        "updateAdded": 47
     },
     "GameUIProfileAvatar110": {
         "storeFilter": "GameUI",
@@ -1702,7 +1855,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 48
     },
     "GameUIProfileAvatar111": {
         "storeFilter": "GameUI",
@@ -1713,7 +1867,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 48
     },
     "GameUIProfileAvatar112": {
         "storeFilter": "GameUI",
@@ -1725,7 +1880,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 49
     },
     "GameUIProfileAvatar113": {
         "storeFilter": "GameUI",
@@ -1736,7 +1892,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 49
     },
     "GameUIProfileAvatar114": {
         "storeFilter": "GameUI",
@@ -1747,7 +1904,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 50
     },
     "GameUIProfileAvatar115": {
         "storeFilter": "GameUI",
@@ -1759,7 +1917,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 51
     },
     "GameUIProfileAvatar116": {
         "storeFilter": "GameUI",
@@ -1770,7 +1929,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 51
     },
     "GameUIProfileAvatar117": {
         "storeFilter": "GameUI",
@@ -1782,7 +1942,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Frontier"
+        "obtainMethod": "Frontier",
+        "updateAdded": 52
     },
     "GameUIProfileAvatar118": {
         "storeFilter": "GameUI",
@@ -1794,7 +1955,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Frontier"
+        "obtainMethod": "Frontier",
+        "updateAdded": 52
     },
     "GameUIProfileAvatar119": {
         "storeFilter": "GameUI",
@@ -1805,7 +1967,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 52
     },
     "GameUIProfileAvatar120": {
         "storeFilter": "GameUI",
@@ -1817,7 +1980,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "isNew": true
+        "isNew": true,
+        "updateAdded": 53
     },
     "GameUIProfileAvatar121": {
         "storeFilter": "GameUI",
@@ -1829,7 +1993,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "isNew": true
+        "isNew": true,
+        "updateAdded": 53
     },
     "GameUIProfileAvatar13": {
         "storeFilter": "GameUI",
@@ -1840,7 +2005,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "GameUIProfileAvatar14": {
         "storeFilter": "GameUI",
@@ -1851,7 +2017,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "GameUIProfileAvatar15": {
         "storeFilter": "GameUI",
@@ -1862,7 +2029,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "GameUIProfileAvatar16": {
         "storeFilter": "GameUI",
@@ -1873,7 +2041,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "GameUIProfileAvatar17": {
         "storeFilter": "GameUI",
@@ -1884,7 +2053,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "GameUIProfileAvatar18": {
         "storeFilter": "GameUI",
@@ -1895,7 +2065,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "GameUIProfileAvatar19": {
         "storeFilter": "GameUI",
@@ -1906,7 +2077,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "GameUIProfileAvatar20": {
         "storeFilter": "GameUI",
@@ -1917,7 +2089,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "GameUIProfileAvatar21": {
         "storeFilter": "GameUI",
@@ -1928,7 +2101,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "GameUIProfileAvatar22": {
         "storeFilter": "GameUI",
@@ -1939,7 +2113,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "GameUIProfileAvatar23": {
         "storeFilter": "GameUI",
@@ -1950,7 +2125,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 21
     },
     "GameUIProfileAvatar24": {
         "storeFilter": "GameUI",
@@ -1961,7 +2137,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 21
     },
     "GameUIProfileAvatar25": {
         "storeFilter": "GameUI",
@@ -1972,7 +2149,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 21
     },
     "GameUIProfileAvatar26": {
         "storeFilter": "GameUI",
@@ -1983,7 +2161,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 21
     },
     "GameUIProfileAvatar27": {
         "storeFilter": "GameUI",
@@ -1994,7 +2173,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 22
     },
     "GameUIProfileAvatar28": {
         "storeFilter": "GameUI",
@@ -2005,7 +2185,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 22
     },
     "GameUIProfileAvatar29": {
         "storeFilter": "GameUI",
@@ -2016,7 +2197,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 22
     },
     "GameUIProfileAvatar30": {
         "storeFilter": "GameUI",
@@ -2027,7 +2209,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 22
     },
     "GameUIProfileAvatar31": {
         "storeFilter": "GameUI",
@@ -2038,7 +2221,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 23
     },
     "GameUIProfileAvatar32": {
         "storeFilter": "GameUI",
@@ -2049,7 +2233,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 23
     },
     "GameUIProfileAvatar33": {
         "storeFilter": "GameUI",
@@ -2060,7 +2245,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 24
     },
     "GameUIProfileAvatar34": {
         "storeFilter": "GameUI",
@@ -2071,7 +2257,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 24
     },
     "GameUIProfileAvatar35": {
         "storeFilter": "GameUI",
@@ -2082,7 +2269,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 24
     },
     "GameUIProfileAvatar36": {
         "storeFilter": "GameUI",
@@ -2093,7 +2281,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 24
     },
     "GameUIProfileAvatar37": {
         "storeFilter": "GameUI",
@@ -2104,7 +2293,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 25
     },
     "GameUIProfileAvatar38": {
         "storeFilter": "GameUI",
@@ -2115,7 +2305,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 25
     },
     "GameUIProfileAvatar39": {
         "storeFilter": "GameUI",
@@ -2126,7 +2317,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 25
     },
     "GameUIProfileAvatar40": {
         "storeFilter": "GameUI",
@@ -2137,7 +2329,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 26
     },
     "GameUIProfileAvatar41": {
         "storeFilter": "GameUI",
@@ -2148,7 +2341,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 26
     },
     "GameUIProfileAvatar42": {
         "storeFilter": "GameUI",
@@ -2159,7 +2353,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 26
     },
     "GameUIProfileAvatar43": {
         "storeFilter": "GameUI",
@@ -2170,7 +2365,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 26
     },
     "GameUIProfileAvatar44": {
         "storeFilter": "GameUI",
@@ -2181,7 +2377,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "GameUIProfileAvatar45": {
         "storeFilter": "GameUI",
@@ -2192,7 +2389,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "GameUIProfileAvatar46": {
         "storeFilter": "GameUI",
@@ -2203,7 +2401,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "GameUIProfileAvatar47": {
         "storeFilter": "GameUI",
@@ -2214,7 +2413,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "GameUIProfileAvatar48": {
         "storeFilter": "GameUI",
@@ -2225,7 +2425,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 28
     },
     "GameUIProfileAvatar49": {
         "storeFilter": "GameUI",
@@ -2236,7 +2437,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 28
     },
     "GameUIProfileAvatar50": {
         "storeFilter": "GameUI",
@@ -2247,7 +2449,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 28
     },
     "GameUIProfileAvatar51": {
         "storeFilter": "GameUI",
@@ -2258,7 +2461,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 28
     },
     "GameUIProfileAvatar52": {
         "storeFilter": "GameUI",
@@ -2269,7 +2473,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 29
     },
     "GameUIProfileAvatar53": {
         "storeFilter": "GameUI",
@@ -2280,7 +2485,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 29
     },
     "GameUIProfileAvatar54": {
         "storeFilter": "GameUI",
@@ -2291,7 +2497,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 29
     },
     "GameUIProfileAvatar55": {
         "storeFilter": "GameUI",
@@ -2302,7 +2509,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 29
     },
     "GameUIProfileAvatar56": {
         "storeFilter": "GameUI",
@@ -2313,7 +2521,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 30
     },
     "GameUIProfileAvatar57": {
         "storeFilter": "GameUI",
@@ -2324,7 +2533,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 30
     },
     "GameUIProfileAvatar58": {
         "storeFilter": "GameUI",
@@ -2335,7 +2545,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 30
     },
     "GameUIProfileAvatar59": {
         "storeFilter": "GameUI",
@@ -2346,7 +2557,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 31
     },
     "GameUIProfileAvatar60": {
         "storeFilter": "GameUI",
@@ -2357,7 +2569,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 31
     },
     "GameUIProfileAvatar61": {
         "storeFilter": "GameUI",
@@ -2368,7 +2581,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 32
     },
     "GameUIProfileAvatar62": {
         "storeFilter": "GameUI",
@@ -2379,7 +2593,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 32
     },
     "GameUIProfileAvatar63": {
         "storeFilter": "GameUI",
@@ -2390,7 +2605,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 33
     },
     "GameUIProfileAvatar64": {
         "storeFilter": "GameUI",
@@ -2401,7 +2617,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 33
     },
     "GameUIProfileAvatar65": {
         "storeFilter": "GameUI",
@@ -2412,7 +2629,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 34
     },
     "GameUIProfileAvatar66": {
         "storeFilter": "GameUI",
@@ -2423,7 +2641,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 34
     },
     "GameUIProfileAvatar67": {
         "storeFilter": "GameUI",
@@ -2434,7 +2653,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 34
     },
     "GameUIProfileAvatar68": {
         "storeFilter": "GameUI",
@@ -2445,7 +2665,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 34
     },
     "GameUIProfileAvatar69": {
         "storeFilter": "GameUI",
@@ -2456,7 +2677,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 35
     },
     "GameUIProfileAvatar70": {
         "storeFilter": "GameUI",
@@ -2467,7 +2689,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 35
     },
     "GameUIProfileAvatar71": {
         "storeFilter": "GameUI",
@@ -2478,7 +2701,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 35
     },
     "GameUIProfileAvatar72": {
         "storeFilter": "GameUI",
@@ -2489,7 +2713,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 35
     },
     "GameUIProfileAvatar73": {
         "storeFilter": "GameUI",
@@ -2500,7 +2725,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 36
     },
     "GameUIProfileAvatar74": {
         "storeFilter": "GameUI",
@@ -2511,7 +2737,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 36
     },
     "GameUIProfileAvatar75": {
         "storeFilter": "GameUI",
@@ -2522,7 +2749,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 36
     },
     "GameUIProfileAvatar76": {
         "storeFilter": "GameUI",
@@ -2533,7 +2761,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 36
     },
     "GameUIProfileAvatar77": {
         "storeFilter": "GameUI",
@@ -2545,7 +2774,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "obtainMethod": "Nexus"
+        "obtainMethod": "Nexus",
+        "updateAdded": 37
     },
     "GameUIProfileAvatar78": {
         "storeFilter": "GameUI",
@@ -2556,7 +2786,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 37
     },
     "GameUIProfileAvatar79": {
         "storeFilter": "GameUI",
@@ -2568,7 +2799,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Limited"
+        "obtainMethod": "Limited",
+        "updateAdded": 37
     },
     "GameUIProfileAvatar80": {
         "storeFilter": "GameUI",
@@ -2579,7 +2811,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 38
     },
     "GameUIProfileAvatar81": {
         "storeFilter": "GameUI",
@@ -2590,7 +2823,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 38
     },
     "GameUIProfileAvatar82": {
         "storeFilter": "GameUI",
@@ -2601,7 +2835,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 39
     },
     "GameUIProfileAvatar83": {
         "storeFilter": "GameUI",
@@ -2612,7 +2847,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 39
     },
     "GameUIProfileAvatar84": {
         "storeFilter": "GameUI",
@@ -2623,7 +2859,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 39
     },
     "GameUIProfileAvatar85": {
         "storeFilter": "GameUI",
@@ -2634,7 +2871,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 39
     },
     "GameUIProfileAvatar86": {
         "storeFilter": "GameUI",
@@ -2645,7 +2883,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 39
     },
     "GameUIProfileAvatar87": {
         "storeFilter": "GameUI",
@@ -2656,7 +2895,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 40
     },
     "GameUIProfileAvatar88": {
         "storeFilter": "GameUI",
@@ -2667,7 +2907,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 40
     },
     "GameUIProfileAvatar89": {
         "storeFilter": "GameUI",
@@ -2678,7 +2919,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 41
     },
     "GameUIProfileAvatar90": {
         "storeFilter": "GameUI",
@@ -2689,7 +2931,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 41
     },
     "GameUIProfileAvatar91": {
         "storeFilter": "GameUI",
@@ -2700,7 +2943,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 42
     },
     "GameUIProfileAvatar92": {
         "storeFilter": "GameUI",
@@ -2711,7 +2955,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 42
     },
     "GameUIProfileAvatar93": {
         "storeFilter": "GameUI",
@@ -2723,7 +2968,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Limited"
+        "obtainMethod": "Limited",
+        "updateAdded": 42
     },
     "GameUIProfileAvatar94": {
         "storeFilter": "GameUI",
@@ -2735,7 +2981,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Limited"
+        "obtainMethod": "Limited",
+        "updateAdded": 42
     },
     "GameUIProfileAvatar95": {
         "storeFilter": "GameUI",
@@ -2746,7 +2993,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 43
     },
     "GameUIProfileAvatar96": {
         "storeFilter": "GameUI",
@@ -2757,7 +3005,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 43
     },
     "GameUIProfileAvatar97": {
         "storeFilter": "GameUI",
@@ -2768,7 +3017,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Avatar",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 44
     },
     "GameUIProfileAvatar98": {
         "storeFilter": "GameUI",
@@ -2780,7 +3030,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 44
     },
     "GameUIProfileAvatar99": {
         "storeFilter": "GameUI",
@@ -2792,7 +3043,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 44
     },
     "GameUIProfileBanner1": {
         "storeFilter": "GameUI",
@@ -2803,7 +3055,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "GameUIProfileBanner10": {
         "storeFilter": "GameUI",
@@ -2814,7 +3067,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 30
     },
     "GameUIProfileBanner11": {
         "storeFilter": "GameUI",
@@ -2825,7 +3079,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 30
     },
     "GameUIProfileBanner12": {
         "storeFilter": "GameUI",
@@ -2836,7 +3091,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 30
     },
     "GameUIProfileBanner13": {
         "storeFilter": "GameUI",
@@ -2847,7 +3103,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 31
     },
     "GameUIProfileBanner14": {
         "storeFilter": "GameUI",
@@ -2858,7 +3115,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 31
     },
     "GameUIProfileBanner15": {
         "storeFilter": "GameUI",
@@ -2869,7 +3127,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 32
     },
     "GameUIProfileBanner16": {
         "storeFilter": "GameUI",
@@ -2880,7 +3139,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 32
     },
     "GameUIProfileBanner17": {
         "storeFilter": "GameUI",
@@ -2891,7 +3151,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 33
     },
     "GameUIProfileBanner18": {
         "storeFilter": "GameUI",
@@ -2902,7 +3163,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 33
     },
     "GameUIProfileBanner19": {
         "storeFilter": "GameUI",
@@ -2913,7 +3175,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 33
     },
     "GameUIProfileBanner2": {
         "storeFilter": "GameUI",
@@ -2924,7 +3187,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "GameUIProfileBanner20": {
         "storeFilter": "GameUI",
@@ -2935,7 +3199,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 33
     },
     "GameUIProfileBanner21": {
         "storeFilter": "GameUI",
@@ -2946,7 +3211,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 33
     },
     "GameUIProfileBanner22": {
         "storeFilter": "GameUI",
@@ -2957,7 +3223,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 33
     },
     "GameUIProfileBanner23": {
         "storeFilter": "GameUI",
@@ -2968,7 +3235,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 34
     },
     "GameUIProfileBanner24": {
         "storeFilter": "GameUI",
@@ -2979,7 +3247,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 34
     },
     "GameUIProfileBanner25": {
         "storeFilter": "GameUI",
@@ -2990,7 +3259,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 34
     },
     "GameUIProfileBanner26": {
         "storeFilter": "GameUI",
@@ -3001,7 +3271,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 35
     },
     "GameUIProfileBanner27": {
         "storeFilter": "GameUI",
@@ -3012,7 +3283,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 35
     },
     "GameUIProfileBanner28": {
         "storeFilter": "GameUI",
@@ -3023,7 +3295,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 35
     },
     "GameUIProfileBanner29": {
         "storeFilter": "GameUI",
@@ -3034,7 +3307,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 35
     },
     "GameUIProfileBanner3": {
         "storeFilter": "GameUI",
@@ -3045,7 +3319,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "GameUIProfileBanner30": {
         "storeFilter": "GameUI",
@@ -3056,7 +3331,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 36
     },
     "GameUIProfileBanner31": {
         "storeFilter": "GameUI",
@@ -3067,7 +3343,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 37
     },
     "GameUIProfileBanner32": {
         "storeFilter": "GameUI",
@@ -3079,7 +3356,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "obtainMethod": "Quest"
+        "obtainMethod": "Quest",
+        "updateAdded": 37
     },
     "GameUIProfileBanner33": {
         "storeFilter": "GameUI",
@@ -3090,7 +3368,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 38
     },
     "GameUIProfileBanner34": {
         "storeFilter": "GameUI",
@@ -3101,7 +3380,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 39
     },
     "GameUIProfileBanner35": {
         "storeFilter": "GameUI",
@@ -3112,7 +3392,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 40
     },
     "GameUIProfileBanner36": {
         "storeFilter": "GameUI",
@@ -3123,7 +3404,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 41
     },
     "GameUIProfileBanner37": {
         "storeFilter": "GameUI",
@@ -3134,7 +3416,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 42
     },
     "GameUIProfileBanner38": {
         "storeFilter": "GameUI",
@@ -3146,7 +3429,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Limited"
+        "obtainMethod": "Limited",
+        "updateAdded": 42
     },
     "GameUIProfileBanner39": {
         "storeFilter": "GameUI",
@@ -3157,7 +3441,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 43
     },
     "GameUIProfileBanner4": {
         "storeFilter": "GameUI",
@@ -3168,7 +3453,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "GameUIProfileBanner40": {
         "storeFilter": "GameUI",
@@ -3180,7 +3466,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 44
     },
     "GameUIProfileBanner41": {
         "storeFilter": "GameUI",
@@ -3192,7 +3479,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 44
     },
     "GameUIProfileBanner42": {
         "storeFilter": "GameUI",
@@ -3204,7 +3492,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 44
     },
     "GameUIProfileBanner43": {
         "storeFilter": "GameUI",
@@ -3215,7 +3504,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 45
     },
     "GameUIProfileBanner44": {
         "storeFilter": "GameUI",
@@ -3227,7 +3517,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 45
     },
     "GameUIProfileBanner45": {
         "storeFilter": "GameUI",
@@ -3238,7 +3529,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 46
     },
     "GameUIProfileBanner46": {
         "storeFilter": "GameUI",
@@ -3250,7 +3542,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 46
     },
     "GameUIProfileBanner47": {
         "storeFilter": "GameUI",
@@ -3262,7 +3555,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Rogue"
+        "obtainMethod": "Rogue",
+        "updateAdded": 47
     },
     "GameUIProfileBanner48": {
         "storeFilter": "GameUI",
@@ -3274,7 +3568,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Rogue"
+        "obtainMethod": "Rogue",
+        "updateAdded": 47
     },
     "GameUIProfileBanner49": {
         "storeFilter": "GameUI",
@@ -3285,7 +3580,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 47
     },
     "GameUIProfileBanner5": {
         "storeFilter": "GameUI",
@@ -3296,7 +3592,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "GameUIProfileBanner50": {
         "storeFilter": "GameUI",
@@ -3308,7 +3605,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 48
     },
     "GameUIProfileBanner51": {
         "storeFilter": "GameUI",
@@ -3319,7 +3617,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 48
     },
     "GameUIProfileBanner52": {
         "storeFilter": "GameUI",
@@ -3331,7 +3630,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 49
     },
     "GameUIProfileBanner53": {
         "storeFilter": "GameUI",
@@ -3342,7 +3642,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 49
     },
     "GameUIProfileBanner54": {
         "storeFilter": "GameUI",
@@ -3353,7 +3654,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 50
     },
     "GameUIProfileBanner55": {
         "storeFilter": "GameUI",
@@ -3365,7 +3667,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "Purchase",
+        "updateAdded": 51
     },
     "GameUIProfileBanner56": {
         "storeFilter": "GameUI",
@@ -3376,7 +3679,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 51
     },
     "GameUIProfileBanner57": {
         "storeFilter": "GameUI",
@@ -3388,7 +3692,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Frontier"
+        "obtainMethod": "Frontier",
+        "updateAdded": 52
     },
     "GameUIProfileBanner58": {
         "storeFilter": "GameUI",
@@ -3400,7 +3705,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Frontier"
+        "obtainMethod": "Frontier",
+        "updateAdded": 52
     },
     "GameUIProfileBanner59": {
         "storeFilter": "GameUI",
@@ -3411,7 +3717,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 52
     },
     "GameUIProfileBanner6": {
         "storeFilter": "GameUI",
@@ -3422,7 +3729,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 28
     },
     "GameUIProfileBanner60": {
         "storeFilter": "GameUI",
@@ -3434,7 +3742,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "isNew": true
+        "isNew": true,
+        "updateAdded": 53
     },
     "GameUIProfileBanner61": {
         "storeFilter": "GameUI",
@@ -3446,7 +3755,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "isNew": true
+        "isNew": true,
+        "updateAdded": 53
     },
     "GameUIProfileBanner7": {
         "storeFilter": "GameUI",
@@ -3457,7 +3767,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 28
     },
     "GameUIProfileBanner8": {
         "storeFilter": "GameUI",
@@ -3468,7 +3779,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 29
     },
     "GameUIProfileBanner9": {
         "storeFilter": "GameUI",
@@ -3479,7 +3791,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 29
     },
     "GameUIUpgradesDisplayNamedMonkeys": {
         "storeFilter": "GameUI",
@@ -3490,7 +3803,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "NamedMonkeys",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "HeroesAdmiralBrickellPetParrot": {
         "storeFilter": "Heroes",
@@ -3501,7 +3815,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "AdmiralBrickellPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 22
     },
     "HeroesAdmiralBrickellPlacementAerialDeployment": {
         "storeFilter": "Heroes",
@@ -3512,7 +3827,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "AdmiralBrickellPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 39
     },
     "HeroesAdoraPlacementSunbeam": {
         "storeFilter": "Heroes",
@@ -3523,7 +3839,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "AdoraPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "HeroesBenjaminPetMouse": {
         "storeFilter": "Heroes",
@@ -3534,7 +3851,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BenjaminPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 41
     },
     "HeroesBenjaminPlacementMatrix": {
         "storeFilter": "Heroes",
@@ -3545,7 +3863,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "Benjamin",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 24
     },
     "HeroesBenjamminDJSkinPlacementPartyLights": {
         "storeFilter": "Heroes",
@@ -3556,7 +3875,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BenjaminDJPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "HeroesChurchillPlacementTankDrop": {
         "storeFilter": "Heroes",
@@ -3567,7 +3887,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "ChurchillPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "HeroesChurchillSentaiSkinPetDrone": {
         "storeFilter": "Heroes",
@@ -3578,7 +3899,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "CaptainChurchillPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 28
     },
     "HeroesCorvusPetOwl": {
         "storeFilter": "Heroes",
@@ -3589,7 +3911,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "CorvusPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 42
     },
     "HeroesETnPlacementBeamDown": {
         "storeFilter": "Heroes",
@@ -3600,7 +3923,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "EtiennePlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 30
     },
     "HeroesEtiennePetRoomba": {
         "storeFilter": "Heroes",
@@ -3611,7 +3935,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "EtiennePet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 26
     },
     "HeroesEziliPetFrog": {
         "storeFilter": "Heroes",
@@ -3622,7 +3947,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "EziliPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "HeroesEziliPlacementGlyph": {
         "storeFilter": "Heroes",
@@ -3633,7 +3959,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "EziliPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 26
     },
     "HeroesGeraldoPetPackMule": {
         "storeFilter": "Heroes",
@@ -3644,7 +3971,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "GeraldoPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 37
     },
     "HeroesGwendolinPetFirefox": {
         "storeFilter": "Heroes",
@@ -3655,7 +3983,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "GwendolinPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "HeroesGwendolinPlacementFireball": {
         "storeFilter": "Heroes",
@@ -3666,7 +3995,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "GwendolinPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "HeroesJoanOfArcAdoraPetDragon": {
         "storeFilter": "Heroes",
@@ -3677,7 +4007,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "AdoraPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 33
     },
     "HeroesMountainObynPetBalfrog": {
         "storeFilter": "Heroes",
@@ -3688,7 +4019,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "ObynGreenfootPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 31
     },
     "HeroesObynPetBunny": {
         "storeFilter": "Heroes",
@@ -3699,7 +4031,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "ObynGreenfootPet",
         "itemType": "TowerPet",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 24
     },
     "HeroesObynPetWolf": {
         "storeFilter": "Heroes",
@@ -3710,7 +4043,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "ObynGreenfootPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 43
     },
     "HeroesObynPlacementWolf": {
         "storeFilter": "Heroes",
@@ -3721,7 +4055,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "ObynPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 43
     },
     "HeroesPatFustyPetPig": {
         "storeFilter": "Heroes",
@@ -3732,7 +4067,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PatFustyPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 45
     },
     "HeroesPatFustyPlacementSuperjump": {
         "storeFilter": "Heroes",
@@ -3743,7 +4079,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PatFustyPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 25
     },
     "HeroesPatPetPenguin": {
         "storeFilter": "Heroes",
@@ -3754,7 +4091,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PatFustyPet",
         "itemType": "TowerPet",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 22
     },
     "HeroesPsiPetBison": {
         "storeFilter": "Heroes",
@@ -3765,7 +4103,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "PsiPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 29
     },
     "HeroesQuincyCyberQuincyPlacementFireworks": {
         "storeFilter": "Heroes",
@@ -3776,7 +4115,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "QuincyCyberPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "HeroesQuincyPetDadOfQuincy": {
         "storeFilter": "Heroes",
@@ -3787,7 +4127,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "QuincyPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 19
     },
     "HeroesQuincyPlacementSpecialForces": {
         "storeFilter": "Heroes",
@@ -3798,7 +4139,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "QuincyPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 37
     },
     "HeroesRosaliaPetCollie": {
         "storeFilter": "Heroes",
@@ -3809,7 +4151,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "RosaliaPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 48
     },
     "HeroesSaudaPetCrane": {
         "storeFilter": "Heroes",
@@ -3820,7 +4163,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "SaudaPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 25
     },
     "HeroesStrikerJonesBikerBonesPlacementHellrift": {
         "storeFilter": "Heroes",
@@ -3831,7 +4175,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "StrikerJonesBikerBonesPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 35
     },
     "HeroesStrikerJonesPetGermanShepherd": {
         "storeFilter": "Heroes",
@@ -3842,7 +4187,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "StrikerJonesPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 30
     },
     "HeroesStrikerJonesPlacementParadrop": {
         "storeFilter": "Heroes",
@@ -3853,7 +4199,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "StrikerPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 20
     },
     "TEAMPU-Snowflakes": {
         "storeFilter": "Monkeys",
@@ -3864,7 +4211,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "TowerPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 29
     },
     "TPBombshooterFireworks": {
         "storeFilter": "Monkeys",
@@ -3875,7 +4223,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BombShooterProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 49
     },
     "TPWizardSheep": {
         "storeFilter": "Monkeys",
@@ -3886,7 +4235,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 50
     },
     "TowerEffectAllMonkeysPlacementUpgradesBats": {
         "storeFilter": "Monkeys",
@@ -3897,7 +4247,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "TowerPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 28
     },
     "TowerEffectAllMonkeysPlacementUpgradesButterflies": {
         "storeFilter": "Monkeys",
@@ -3908,7 +4259,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "TowerPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "TowerEffectAllMonkeysPlacementUpgradesFireworks": {
         "storeFilter": "Monkeys",
@@ -3919,7 +4271,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "TowerPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 26
     },
     "TowerEffectAllMonkeysPlacementUpgradesGhosts": {
         "storeFilter": "Monkeys",
@@ -3930,7 +4283,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "TowerPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 21
     },
     "TowerEffectAllMonkeysPlacementUpgradesPresents": {
         "storeFilter": "Monkeys",
@@ -3941,7 +4295,8 @@
         "cosmeticPriority": "3",
         "exclusivity": "TowerPlacement",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 22
     },
     "TowerPetAlchemistSlimeCube": {
         "storeFilter": "Monkeys",
@@ -3952,7 +4307,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "AlchemistPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 39
     },
     "TowerPetBananaFarmChicken": {
         "storeFilter": "Monkeys",
@@ -3963,7 +4319,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BananaFarmPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 25
     },
     "TowerPetBombshooterTortoise": {
         "storeFilter": "Monkeys",
@@ -3974,7 +4331,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BombShooterPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 38
     },
     "TowerPetBoomerangKangaroo": {
         "storeFilter": "Monkeys",
@@ -3985,7 +4343,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BoomerangMonkeyPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 43
     },
     "TowerPetDesperadoArmadillo": {
         "storeFilter": "Monkeys",
@@ -3997,7 +4356,8 @@
         "exclusivity": "DesperadoPet",
         "itemType": "TowerPet",
         "hidden": true,
-        "obtainMethod": "Frontier"
+        "obtainMethod": "Frontier",
+        "updateAdded": 52
     },
     "TowerPetDruidCapybara": {
         "storeFilter": "Monkeys",
@@ -4008,7 +4368,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "DruidPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 40
     },
     "TowerPetEngineerBot": {
         "storeFilter": "Monkeys",
@@ -4019,7 +4380,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "EngineerMonkeyPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 42
     },
     "TowerPetGlueGunnerRat": {
         "storeFilter": "Monkeys",
@@ -4030,7 +4392,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "GlueGunnerPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 28
     },
     "TowerPetHeliPilotHummingbird": {
         "storeFilter": "Monkeys",
@@ -4041,7 +4404,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "HeliPilotPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 30
     },
     "TowerPetIceMonkeySnowman": {
         "storeFilter": "Monkeys",
@@ -4052,7 +4416,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "IceMonkeyPet",
         "itemType": "TowerPet",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 29
     },
     "TowerPetIceMonkeyWalrus": {
         "storeFilter": "Monkeys",
@@ -4063,7 +4428,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "IceMonkeyPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 29
     },
     "TowerPetMonkeyAceDragonfly": {
         "storeFilter": "Monkeys",
@@ -4074,7 +4440,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MonkeyAcePet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 33
     },
     "TowerPetMonkeyBuccaneerNarwhal": {
         "storeFilter": "Monkeys",
@@ -4085,7 +4452,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MonkeyBuccaneerPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 28
     },
     "TowerPetMonkeySubRubberDuck": {
         "storeFilter": "Monkeys",
@@ -4096,7 +4464,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MonkeySubPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 21
     },
     "TowerPetMonkeyVillageElf": {
         "storeFilter": "Monkeys",
@@ -4107,7 +4476,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MonkeyVillagePet",
         "itemType": "TowerPet",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 22
     },
     "TowerPetMortarMonkeySafetyMole": {
         "storeFilter": "Monkeys",
@@ -4118,7 +4488,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MortarMonkeyPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 44
     },
     "TowerPetNinjaMonkeyKiwi": {
         "storeFilter": "Monkeys",
@@ -4129,7 +4500,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "NinjaMonkeyPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 24
     },
     "TowerPetSniperMonkeyChameleon": {
         "storeFilter": "Monkeys",
@@ -4140,7 +4512,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "SniperMonkeyPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 35
     },
     "TowerPetSupermonkeyBat": {
         "storeFilter": "Monkeys",
@@ -4151,7 +4524,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "SuperMonkeyPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 21
     },
     "TowerPetTackShooterHedgehog": {
         "storeFilter": "Monkeys",
@@ -4162,7 +4536,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "TackShooterPet",
         "itemType": "TowerPet",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 36
     },
     "TowerProjectileAlchemistSpringFlowers": {
         "storeFilter": "Monkeys",
@@ -4173,7 +4548,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "AlchemistProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 36
     },
     "TowerProjectileBananaFarmCandyCorn": {
         "storeFilter": "Monkeys",
@@ -4184,7 +4560,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BananaFarmProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 21
     },
     "TowerProjectileBananaFarmPresents": {
         "storeFilter": "Monkeys",
@@ -4195,7 +4572,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BananaFarmProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 34
     },
     "TowerProjectileBombshooterPumpkin": {
         "storeFilter": "Monkeys",
@@ -4206,7 +4584,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BombShooterProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 21
     },
     "TowerProjectileBoomerangCandyCane": {
         "storeFilter": "Monkeys",
@@ -4217,7 +4596,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BoomerangMonkeyProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 22
     },
     "TowerProjectileDartMonkeyPumpkins": {
         "storeFilter": "Monkeys",
@@ -4228,7 +4608,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "DartMonkeyProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 39
     },
     "TowerProjectileDartMonkeySnowballs": {
         "storeFilter": "Monkeys",
@@ -4239,7 +4620,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "DartMonkeyProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 34
     },
     "TowerProjectileDartlingEasterEggs": {
         "storeFilter": "Monkeys",
@@ -4250,7 +4632,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "DartlingGunnerProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 24
     },
     "TowerProjectileDruidChristmas": {
         "storeFilter": "Monkeys",
@@ -4261,7 +4644,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "DruidProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 46
     },
     "TowerProjectileEngineerVampireHunter": {
         "storeFilter": "Monkeys",
@@ -4272,7 +4656,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "EngineerMonkeyProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 28
     },
     "TowerProjectileMonkeyAceBones": {
         "storeFilter": "Monkeys",
@@ -4283,7 +4668,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MonkeyAceProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 21
     },
     "TowerProjectileMonkeyBuccaneerFlavouredTrades": {
         "storeFilter": "Monkeys",
@@ -4294,7 +4680,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MonkeyBuccaneerProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 45
     },
     "TowerProjectileMortarSnow": {
         "storeFilter": "Monkeys",
@@ -4305,7 +4692,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "MortarMonkeyProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 29
     },
     "TowerProjectileNinjaMonkeySnowflakes": {
         "storeFilter": "Monkeys",
@@ -4316,7 +4704,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "NinjaMonkeyProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 34
     },
     "TowerProjectileSpikeFactoryPineapples": {
         "storeFilter": "Monkeys",
@@ -4327,7 +4716,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "SpikeFactoryProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 23
     },
     "TowerProjectileTackShooterIcicles": {
         "storeFilter": "Monkeys",
@@ -4338,7 +4728,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "TackShooterProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 34
     },
     "TowerProjectileWizardMonkeyFireworks": {
         "storeFilter": "Monkeys",
@@ -4349,7 +4740,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "WizardMonkeyProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": true
+        "hidden": true,
+        "updateAdded": 26
     },
     "TowerProjectileWizardZombies": {
         "storeFilter": "Monkeys",
@@ -4360,7 +4752,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "WizardMonkeyProjectile",
         "itemType": "TowerAssetChange",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 30
     },
     "TowerPropMonkeyVillageAustralianFlag": {
         "storeFilter": "Monkeys",
@@ -4371,7 +4764,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 29
     },
     "TowerPropMonkeyVillageBananaFlag": {
         "storeFilter": "Monkeys",
@@ -4382,7 +4776,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 26
     },
     "TowerPropMonkeyVillageBrazilFlag": {
         "storeFilter": "Monkeys",
@@ -4393,7 +4788,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 25
     },
     "TowerPropMonkeyVillageCanadianFlag": {
         "storeFilter": "Monkeys",
@@ -4404,7 +4800,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 28
     },
     "TowerPropMonkeyVillageGermanyFlag": {
         "storeFilter": "Monkeys",
@@ -4415,7 +4812,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "TowerPropMonkeyVillageNZFlag": {
         "storeFilter": "Monkeys",
@@ -4426,7 +4824,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 26
     },
     "TowerPropMonkeyVillagePrideFlag": {
         "storeFilter": "Monkeys",
@@ -4437,7 +4836,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 32
     },
     "TowerPropMonkeyVillageScotlandFlag": {
         "storeFilter": "Monkeys",
@@ -4448,7 +4848,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 26
     },
     "TowerPropMonkeyVillageSwedenFlag": {
         "storeFilter": "Monkeys",
@@ -4459,7 +4860,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 37
     },
     "TowerPropMonkeyVillageUKFlag": {
         "storeFilter": "Monkeys",
@@ -4470,7 +4872,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 27
     },
     "TowerPropMonkeyVillageUSAFlag": {
         "storeFilter": "Monkeys",
@@ -4481,7 +4884,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
-        "hidden": false
+        "hidden": false,
+        "updateAdded": 25
     },
     "UIMusic-FrontierMain": {
         "storeFilter": "GameUI",
@@ -4493,6 +4897,7 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": true,
-        "obtainMethod": "Frontier"
+        "obtainMethod": "Frontier",
+        "updateAdded": 52
     }
 }
