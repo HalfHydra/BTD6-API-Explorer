@@ -147,7 +147,7 @@ let imageScroll = [
 let imageScrollIndex = 0;
 
 fetchConstants().then(() => {
-    generateVersionInfo();
+    // generateVersionInfo();
 });
 
 function generateIfReady(){
@@ -9018,6 +9018,32 @@ function generateTrophyStoreContainer(filter, display, counter) {
             itemDiv.appendChild(collectedText);
 
             itemImg.style.borderImageSource = "url(../Assets/UI/TrophyBGPanelBlue.png)";
+        } else if (data.cost) {
+            let costDiv = createEl('div', {
+                classList: ["trophy-store-collected-text", 'd-flex', 'jc-center', 'ai-center'],
+                style: {
+                    gap: "6px"
+                }
+            })
+            itemDiv.appendChild(costDiv)
+
+            let trophyIcon = createEl('img', {
+                style: {
+                    width: "30px",
+                    height: "30px"
+                },
+                src: '../Assets/UI/TrophyIcon.png'
+            })
+            costDiv.appendChild(trophyIcon);
+
+            let costText = createEl('p', {
+                classList: ['black-outline'],
+                style: {
+                    fontSize: "24px"
+                },
+                innerHTML: data.cost
+            })
+            costDiv.appendChild(costText);
         }
 
         let itemTypeIcon = document.createElement('img');
@@ -9036,10 +9062,10 @@ function generateTrophyStoreContainer(filter, display, counter) {
                 backgroundImage: "url(../Assets/UI/TrophyPipIcon.png)",
                 backgroundSize: "50px",
                 color: "white",
-                fontSize: "30px",
+                fontSize: "22px",
                 lineHeight: "50px"
             },
-            innerHTML: data.updateAdded
+            innerHTML: data.updateAdded + ".0"
         })
         itemDiv.appendChild(itemAddedIcon);
     }

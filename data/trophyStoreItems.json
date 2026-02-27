@@ -9,7 +9,8 @@
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": false,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 30
     },
     "BloonsAllBloonsBucketHat": {
         "storeFilter": "Bloons",
@@ -21,7 +22,8 @@
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 40
     },
     "BloonsAllBloonsBunnyEars": {
         "storeFilter": "Bloons",
@@ -33,7 +35,8 @@
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": true,
-        "updateAdded": 24
+        "updateAdded": 24,
+        "cost": 50
     },
     "BloonsAllBloonsCatEar": {
         "storeFilter": "Bloons",
@@ -45,7 +48,8 @@
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": false,
-        "updateAdded": 31
+        "updateAdded": 31,
+        "cost": 75
     },
     "BloonsAllBloonsClownWigs": {
         "storeFilter": "Bloons",
@@ -57,7 +61,8 @@
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": false,
-        "updateAdded": 44
+        "updateAdded": 44,
+        "cost": 75
     },
     "BloonsAllBloonsCowboyHat": {
         "storeFilter": "Bloons",
@@ -69,7 +74,8 @@
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": false,
-        "updateAdded": 49
+        "updateAdded": 49,
+        "cost": 75
     },
     "BloonsAllBloonsDaisyChain": {
         "storeFilter": "Bloons",
@@ -81,7 +87,8 @@
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": true,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 75
     },
     "BloonsAllBloonsDecalAxe": {
         "storeFilter": "Bloons",
@@ -93,7 +100,8 @@
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": true,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 20
     },
     "BloonsAllBloonsDecalGooglyEyes": {
         "storeFilter": "Bloons",
@@ -105,7 +113,8 @@
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 40
     },
     "BloonsAllBloonsDisguiseGlasses": {
         "storeFilter": "Bloons",
@@ -117,7 +126,8 @@
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": false,
-        "updateAdded": 31
+        "updateAdded": 31,
+        "cost": 75
     },
     "BloonsAllBloonsElfHat": {
         "storeFilter": "Bloons",
@@ -129,7 +139,8 @@
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": true,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 75
     },
     "BloonsAllBloonsHeartGlasses": {
         "storeFilter": "Bloons",
@@ -141,7 +152,8 @@
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": false,
-        "updateAdded": 47
+        "updateAdded": 47,
+        "cost": 75
     },
     "BloonsAllBloonsMohawks": {
         "storeFilter": "Bloons",
@@ -153,7 +165,8 @@
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": false,
-        "updateAdded": 51
+        "updateAdded": 51,
+        "cost": 75
     },
     "BloonsAllBloonsNightcap": {
         "storeFilter": "Bloons",
@@ -165,7 +178,8 @@
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": false,
-        "updateAdded": 42
+        "updateAdded": 42,
+        "cost": 75
     },
     "BloonsAllBloonsPartyHat": {
         "storeFilter": "Bloons",
@@ -177,7 +191,8 @@
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": true,
-        "updateAdded": 37
+        "updateAdded": 37,
+        "cost": 75
     },
     "BloonsAllBloonsPopsBarrelOfMonkeys": {
         "storeFilter": "Bloons",
@@ -189,7 +204,8 @@
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 40
     },
     "BloonsAllBloonsPopsBones": {
         "storeFilter": "Bloons",
@@ -201,7 +217,8 @@
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
         "hidden": true,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 30
     },
     "BloonsAllBloonsPopsConfetti": {
         "storeFilter": "Bloons",
@@ -213,7 +230,8 @@
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 40
     },
     "BloonsAllBloonsPopsFlowers": {
         "storeFilter": "Bloons",
@@ -225,7 +243,8 @@
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
         "hidden": false,
-        "updateAdded": 24
+        "updateAdded": 24,
+        "cost": 50
     },
     "BloonsAllBloonsPopsHearts": {
         "storeFilter": "Bloons",
@@ -237,7 +256,8 @@
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
         "hidden": false,
-        "updateAdded": 47
+        "updateAdded": 47,
+        "cost": 50
     },
     "BloonsAllBloonsPopsPewpew": {
         "storeFilter": "Bloons",
@@ -249,7 +269,8 @@
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
         "hidden": true,
-        "updateAdded": 25
+        "updateAdded": 25,
+        "cost": 30
     },
     "BloonsAllBloonsPopsPow": {
         "storeFilter": "Bloons",
@@ -261,7 +282,8 @@
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
         "hidden": false,
-        "updateAdded": 23
+        "updateAdded": 23,
+        "cost": 45
     },
     "BloonsAllBloonsPopsSnowflakes": {
         "storeFilter": "Bloons",
@@ -273,7 +295,8 @@
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
         "hidden": false,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 40
     },
     "BloonsAllBloonsPopsWaterbloon": {
         "storeFilter": "Bloons",
@@ -285,7 +308,8 @@
         "exclusivity": "AllBloonsPopFX",
         "itemType": "BloonPopEffect",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 60
     },
     "BloonsAllBloonsPopsWestern": {
         "storeFilter": "Bloons",
@@ -310,7 +334,8 @@
         "exclusivity": "AllMoabsDecal",
         "itemType": "BloonDecal",
         "hidden": true,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 20
     },
     "BloonsAllBloonsSantaHats": {
         "storeFilter": "Bloons",
@@ -322,7 +347,8 @@
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": true,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 20
     },
     "BloonsAllBloonsSunglasses": {
         "storeFilter": "Bloons",
@@ -334,7 +360,8 @@
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": false,
-        "updateAdded": 38
+        "updateAdded": 38,
+        "cost": 75
     },
     "BloonsAllBloonsTopHats": {
         "storeFilter": "Bloons",
@@ -346,7 +373,8 @@
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 50
     },
     "BloonsAllBloonsTruckerHats": {
         "storeFilter": "Bloons",
@@ -358,7 +386,8 @@
         "exclusivity": "AllBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": false,
-        "updateAdded": 23
+        "updateAdded": 23,
+        "cost": 20
     },
     "BloonsAllBloonsVampireCapes": {
         "storeFilter": "Bloons",
@@ -370,7 +399,8 @@
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": true,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 50
     },
     "BloonsAllBloonsWinterHat": {
         "storeFilter": "Bloons",
@@ -382,7 +412,8 @@
         "exclusivity": "AllSmallBloonsDecal",
         "itemType": "BloonDecal",
         "hidden": false,
-        "updateAdded": 52
+        "updateAdded": 52,
+        "cost": 75
     },
     "BloonsAllMOABSepia": {
         "storeFilter": "Bloons",
@@ -394,7 +425,8 @@
         "exclusivity": "AllMoabsSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 90
     },
     "BloonsBADSkinBones": {
         "storeFilter": "Bloons",
@@ -406,7 +438,8 @@
         "exclusivity": "BADSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 50
     },
     "BloonsBADSkinPinata": {
         "storeFilter": "Bloons",
@@ -418,7 +451,8 @@
         "exclusivity": "BADSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 45
     },
     "BloonsBADSkinScarab": {
         "storeFilter": "Bloons",
@@ -430,7 +464,8 @@
         "exclusivity": "BADSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 43
+        "updateAdded": 43,
+        "cost": 100
     },
     "BloonsBADSkinWhale": {
         "storeFilter": "Bloons",
@@ -442,7 +477,8 @@
         "exclusivity": "BADSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 100
     },
     "BloonsBFBSkinBtd4Retro": {
         "storeFilter": "Bloons",
@@ -454,7 +490,8 @@
         "exclusivity": "BFBSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 25
+        "updateAdded": 25,
+        "cost": 75
     },
     "BloonsBFBSkinChocolate": {
         "storeFilter": "Bloons",
@@ -466,7 +503,8 @@
         "exclusivity": "BFBSkin",
         "itemType": "BloonAssetChange",
         "hidden": true,
-        "updateAdded": 24
+        "updateAdded": 24,
+        "cost": 45
     },
     "BloonsBFBSkinLantern": {
         "storeFilter": "Bloons",
@@ -478,7 +516,8 @@
         "exclusivity": "BFBSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 23
+        "updateAdded": 23,
+        "cost": 100
     },
     "BloonsBFBSkinLobster": {
         "storeFilter": "Bloons",
@@ -490,7 +529,8 @@
         "exclusivity": "BFBSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 36
+        "updateAdded": 36,
+        "cost": 100
     },
     "BloonsBFBSkinPizza": {
         "storeFilter": "Bloons",
@@ -502,7 +542,8 @@
         "exclusivity": "BFBSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 40
     },
     "BloonsBFBSkinSciFi": {
         "storeFilter": "Bloons",
@@ -514,7 +555,8 @@
         "exclusivity": "BFBSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 45
     },
     "BloonsBfbSkinBat": {
         "storeFilter": "Bloons",
@@ -526,7 +568,8 @@
         "exclusivity": "BFBSkin",
         "itemType": "BloonAssetChange",
         "hidden": true,
-        "updateAdded": 45
+        "updateAdded": 45,
+        "cost": 100
     },
     "BloonsDDTSkinMagpie": {
         "storeFilter": "Bloons",
@@ -538,7 +581,8 @@
         "exclusivity": "DDTSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 48
+        "updateAdded": 48,
+        "cost": 100
     },
     "BloonsDDTSkinShark": {
         "storeFilter": "Bloons",
@@ -550,7 +594,8 @@
         "exclusivity": "DDTSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 40
     },
     "BloonsDDTSkinSleigh": {
         "storeFilter": "Bloons",
@@ -562,7 +607,8 @@
         "exclusivity": "DDTSkin",
         "itemType": "BloonAssetChange",
         "hidden": true,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 100
     },
     "BloonsDDTSkinSpider": {
         "storeFilter": "Bloons",
@@ -574,7 +620,8 @@
         "exclusivity": "DDTSkin",
         "itemType": "BloonAssetChange",
         "hidden": true,
-        "updateAdded": 33
+        "updateAdded": 33,
+        "cost": 100
     },
     "BloonsDDTSkinTron": {
         "storeFilter": "Bloons",
@@ -586,7 +633,8 @@
         "exclusivity": "DDTSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 90
     },
     "BloonsMOABSkinBee": {
         "storeFilter": "Bloons",
@@ -598,7 +646,8 @@
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 41
+        "updateAdded": 41,
+        "cost": 80
     },
     "BloonsMOABSkinBoat": {
         "storeFilter": "Bloons",
@@ -610,7 +659,8 @@
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 38
+        "updateAdded": 38,
+        "cost": 100
     },
     "BloonsMOABSkinBtd4Retro": {
         "storeFilter": "Bloons",
@@ -622,7 +672,8 @@
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 25
+        "updateAdded": 25,
+        "cost": 50
     },
     "BloonsMOABSkinChocolate": {
         "storeFilter": "Bloons",
@@ -634,7 +685,8 @@
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
         "hidden": true,
-        "updateAdded": 24
+        "updateAdded": 24,
+        "cost": 30
     },
     "BloonsMOABSkinFootball": {
         "storeFilter": "Bloons",
@@ -646,7 +698,8 @@
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 30
     },
     "BloonsMOABSkinGlacier": {
         "storeFilter": "Bloons",
@@ -658,7 +711,8 @@
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 50
     },
     "BloonsMOABSkinMauler": {
         "storeFilter": "Bloons",
@@ -670,7 +724,8 @@
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 40
     },
     "BloonsMOABSkinPufferFish": {
         "storeFilter": "Bloons",
@@ -682,7 +737,8 @@
         "exclusivity": "MOABSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 35
     },
     "BloonsZOMGAncient": {
         "storeFilter": "Bloons",
@@ -694,7 +750,8 @@
         "exclusivity": "ZOMGSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 50
+        "updateAdded": 50,
+        "cost": 100
     },
     "BloonsZOMGPirateTurtle": {
         "storeFilter": "Bloons",
@@ -706,7 +763,8 @@
         "exclusivity": "ZOMGSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 40
+        "updateAdded": 40,
+        "cost": 100
     },
     "BloonsZOMGSkinJackOLantern": {
         "storeFilter": "Bloons",
@@ -718,7 +776,8 @@
         "exclusivity": "ZOMGSkin",
         "itemType": "BloonAssetChange",
         "hidden": true,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 45
     },
     "BloonsZOMGSkinSteampunk": {
         "storeFilter": "Bloons",
@@ -730,7 +789,8 @@
         "exclusivity": "ZOMGSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 40
     },
     "BloonsZOMGSkinWatermelon": {
         "storeFilter": "Bloons",
@@ -742,7 +802,8 @@
         "exclusivity": "ZOMGSkin",
         "itemType": "BloonAssetChange",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 40
     },
     "CoopEmoteAnimationBeggingMonkey": {
         "storeFilter": "Coop",
@@ -754,7 +815,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 45
     },
     "CoopEmoteAnimationBenCool": {
         "storeFilter": "Coop",
@@ -766,7 +828,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 35
     },
     "CoopEmoteAnimationBikerBonesRage": {
         "storeFilter": "Coop",
@@ -778,7 +841,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 55
     },
     "CoopEmoteAnimationCelebration": {
         "storeFilter": "Coop",
@@ -790,7 +854,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 40
     },
     "CoopEmoteAnimationConfetti": {
         "storeFilter": "Coop",
@@ -802,7 +867,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 40
     },
     "CoopEmoteAnimationDiscoBall": {
         "storeFilter": "Coop",
@@ -814,7 +880,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 45
     },
     "CoopEmoteAnimationFacepalm": {
         "storeFilter": "Coop",
@@ -826,7 +893,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 20
     },
     "CoopEmoteAnimationFistpump": {
         "storeFilter": "Coop",
@@ -838,7 +906,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 25
     },
     "CoopEmoteAnimationFlowerBloom": {
         "storeFilter": "Coop",
@@ -850,7 +919,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 24
+        "updateAdded": 24,
+        "cost": 25
     },
     "CoopEmoteAnimationHappyHolidays": {
         "storeFilter": "Coop",
@@ -862,7 +932,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": true,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 15
     },
     "CoopEmoteAnimationLoveHearts": {
         "storeFilter": "Coop",
@@ -874,7 +945,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 40
     },
     "CoopEmoteAnimationMindBlown": {
         "storeFilter": "Coop",
@@ -886,7 +958,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 31
+        "updateAdded": 31,
+        "cost": 50
     },
     "CoopEmoteAnimationObynPeace": {
         "storeFilter": "Coop",
@@ -898,7 +971,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": true,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 50
     },
     "CoopEmoteAnimationPanicMonkey": {
         "storeFilter": "Coop",
@@ -910,7 +984,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 40
     },
     "CoopEmoteAnimationParagon": {
         "storeFilter": "Coop",
@@ -922,7 +997,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 39
+        "updateAdded": 39,
+        "cost": 75
     },
     "CoopEmoteAnimationPatFlex": {
         "storeFilter": "Coop",
@@ -934,7 +1010,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 31
+        "updateAdded": 31,
+        "cost": 50
     },
     "CoopEmoteAnimationPixelMonkeyDance": {
         "storeFilter": "Coop",
@@ -946,7 +1023,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 24
+        "updateAdded": 24,
+        "cost": 25
     },
     "CoopEmoteAnimationPlayerNumbers": {
         "storeFilter": "Coop",
@@ -958,7 +1036,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 25
+        "updateAdded": 25,
+        "cost": 20
     },
     "CoopEmoteAnimationPsigh": {
         "storeFilter": "Coop",
@@ -970,7 +1049,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 33
+        "updateAdded": 33,
+        "cost": 75
     },
     "CoopEmoteAnimationRainbow": {
         "storeFilter": "Coop",
@@ -982,7 +1062,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 32
+        "updateAdded": 32,
+        "cost": 75
     },
     "CoopEmoteAnimationSiren": {
         "storeFilter": "Coop",
@@ -994,7 +1075,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 50
     },
     "CoopEmoteAnimationSleighbells": {
         "storeFilter": "Coop",
@@ -1006,7 +1088,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": true,
-        "updateAdded": 34
+        "updateAdded": 34,
+        "cost": 75
     },
     "CoopEmoteAnimationSparklingHearts": {
         "storeFilter": "Coop",
@@ -1018,7 +1101,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 40
     },
     "CoopEmoteAnimationThinkingMonkey": {
         "storeFilter": "Coop",
@@ -1030,7 +1114,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 50
     },
     "CoopEmoteAnimationTowerType": {
         "storeFilter": "Coop",
@@ -1042,7 +1127,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 38
+        "updateAdded": 38,
+        "cost": 75
     },
     "CoopEmoteAnimationTrophy": {
         "storeFilter": "Coop",
@@ -1054,7 +1140,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 25
+        "updateAdded": 25,
+        "cost": 40
     },
     "CoopEmoteAnimationTumbleweed": {
         "storeFilter": "Coop",
@@ -1066,7 +1153,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 40
     },
     "CoopEmoteAnimationYeehaw": {
         "storeFilter": "Coop",
@@ -1091,7 +1179,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 10
     },
     "CoopEmoteIconNoCashDrops": {
         "storeFilter": "Coop",
@@ -1103,7 +1192,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 10
     },
     "CoopEmoteIconSkullAndCrossbones": {
         "storeFilter": "Coop",
@@ -1115,7 +1205,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 30
     },
     "CoopEmoteIconStop": {
         "storeFilter": "Coop",
@@ -1127,7 +1218,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 10
     },
     "CoopEmoteSoundAirhorn": {
         "storeFilter": "Coop",
@@ -1139,7 +1231,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 75
     },
     "CoopEmoteSoundCrickets": {
         "storeFilter": "Coop",
@@ -1151,7 +1244,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 40
     },
     "CoopEmoteSoundScream": {
         "storeFilter": "Coop",
@@ -1163,7 +1257,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 15
     },
     "CoopEmoteTextActivate": {
         "storeFilter": "Coop",
@@ -1175,7 +1270,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 10
     },
     "CoopEmoteTextAllIsFine": {
         "storeFilter": "Coop",
@@ -1187,7 +1283,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 10
     },
     "CoopEmoteTextAmazing": {
         "storeFilter": "Coop",
@@ -1199,7 +1296,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 10
     },
     "CoopEmoteTextHowdy": {
         "storeFilter": "Coop",
@@ -1224,7 +1322,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 44
+        "updateAdded": 44,
+        "cost": 50
     },
     "CoopEmoteTextLetsGo": {
         "storeFilter": "Coop",
@@ -1236,7 +1335,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 10
     },
     "CoopEmoteTextNeedMore": {
         "storeFilter": "Coop",
@@ -1248,7 +1348,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 32
+        "updateAdded": 32,
+        "cost": 50
     },
     "CoopEmoteTextNextRoundScary": {
         "storeFilter": "Coop",
@@ -1260,7 +1361,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 15
     },
     "CoopEmoteTextOK": {
         "storeFilter": "Coop",
@@ -1272,7 +1374,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 10
     },
     "CoopEmoteTextPerfectTiming": {
         "storeFilter": "Coop",
@@ -1284,7 +1387,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 10
     },
     "CoopEmoteTextWhy": {
         "storeFilter": "Coop",
@@ -1296,7 +1400,8 @@
         "exclusivity": "",
         "itemType": "CoopEmote",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 10
     },
     "GameUIMusicTrackMusicBMCStreetParty": {
         "storeFilter": "GameUI",
@@ -1308,7 +1413,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 23
+        "updateAdded": 23,
+        "cost": 40
     },
     "GameUIMusicTrackMusicFiestaHeliumHeightsMix": {
         "storeFilter": "GameUI",
@@ -1320,7 +1426,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 38
+        "updateAdded": 38,
+        "cost": 70
     },
     "GameUIMusicTrackMusicFiestaSynthwaveMix": {
         "storeFilter": "GameUI",
@@ -1332,7 +1439,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 40
     },
     "GameUIMusicTrackMusicHaunted": {
         "storeFilter": "GameUI",
@@ -1344,7 +1452,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": true,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 50
     },
     "GameUIMusicTrackMusicJingleBloons": {
         "storeFilter": "GameUI",
@@ -1356,7 +1465,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 40
     },
     "GameUIMusicTrackMusicSunset64Mix": {
         "storeFilter": "GameUI",
@@ -1368,7 +1478,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 37
+        "updateAdded": 37,
+        "cost": 70
     },
     "GameUIMusicTrackMusicSunsetSilentNightMix": {
         "storeFilter": "GameUI",
@@ -1380,7 +1491,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 40
     },
     "GameUIMusicTrackMusicSunshineFiestaMix": {
         "storeFilter": "GameUI",
@@ -1392,7 +1504,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 31
+        "updateAdded": 31,
+        "cost": 70
     },
     "GameUIMusicTrackMusicSunshineGameboyMix": {
         "storeFilter": "GameUI",
@@ -1404,7 +1517,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 40
     },
     "GameUIMusicTrackMusicTitleFiestaMix": {
         "storeFilter": "GameUI",
@@ -1416,7 +1530,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 40
     },
     "GameUIMusicTrackMusicTribesFunkedMix": {
         "storeFilter": "GameUI",
@@ -1428,7 +1543,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 40
     },
     "GameUIMusicTrackMusicTribesJaloonMix": {
         "storeFilter": "GameUI",
@@ -1440,7 +1556,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 32
+        "updateAdded": 32,
+        "cost": 70
     },
     "GameUIMusicTrackMusicTropicalClassyBrassMix": {
         "storeFilter": "GameUI",
@@ -1452,7 +1569,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 39
+        "updateAdded": 39,
+        "cost": 70
     },
     "GameUIMusicTrackMusicTropicalComplextroMix": {
         "storeFilter": "GameUI",
@@ -1464,7 +1582,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 40
     },
     "GameUIMusicTrackMusicTropicalOctopusMix": {
         "storeFilter": "GameUI",
@@ -1476,7 +1595,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 40
     },
     "GameUIMusicTrackMusicWinterChilledMix": {
         "storeFilter": "GameUI",
@@ -1488,7 +1608,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 40
     },
     "GameUIMusicTrackMusicWinterTonkMix": {
         "storeFilter": "GameUI",
@@ -1500,7 +1621,8 @@
         "exclusivity": "",
         "itemType": "MusicTrack",
         "hidden": false,
-        "updateAdded": 40
+        "updateAdded": 40,
+        "cost": 70
     },
     "GameUIPowerSkinBananaFarmerBananaCostume": {
         "storeFilter": "GameUI",
@@ -1512,7 +1634,8 @@
         "exclusivity": "PowerBananaFarmer",
         "itemType": "PowerAssetChange",
         "hidden": false,
-        "updateAdded": 33
+        "updateAdded": 33,
+        "cost": 100
     },
     "GameUIPowerSkinBaubleMine": {
         "storeFilter": "GameUI",
@@ -1524,7 +1647,8 @@
         "exclusivity": "PowerMoabMine",
         "itemType": "PowerAssetChange",
         "hidden": true,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 20
     },
     "GameUIPowerSkinCamoTrapSprinkler": {
         "storeFilter": "GameUI",
@@ -1536,7 +1660,8 @@
         "exclusivity": "PowerCamoTrap",
         "itemType": "PowerAssetChange",
         "hidden": false,
-        "updateAdded": 38
+        "updateAdded": 38,
+        "cost": 100
     },
     "GameUIPowerSkinChocolatePontoon": {
         "storeFilter": "GameUI",
@@ -1548,7 +1673,8 @@
         "exclusivity": "PowerPontoon",
         "itemType": "PowerAssetChange",
         "hidden": true,
-        "updateAdded": 41
+        "updateAdded": 41,
+        "cost": 100
     },
     "GameUIPowerSkinCoffinDrop": {
         "storeFilter": "GameUI",
@@ -1560,7 +1686,8 @@
         "exclusivity": "PowerCashDrop",
         "itemType": "PowerAssetChange",
         "hidden": true,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 25
     },
     "GameUIPowerSkinDartTimeMatrix": {
         "storeFilter": "GameUI",
@@ -1572,7 +1699,8 @@
         "exclusivity": "PowerDartTime",
         "itemType": "PowerAssetChange",
         "hidden": false,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 55
     },
     "GameUIPowerSkinEnergisingTotemChristmasTree": {
         "storeFilter": "GameUI",
@@ -1584,7 +1712,8 @@
         "exclusivity": "PowerEnergisingTotem",
         "itemType": "PowerAssetChange",
         "hidden": true,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 55
     },
     "GameUIPowerSkinGlueTrapHoneyTrap": {
         "storeFilter": "GameUI",
@@ -1596,7 +1725,8 @@
         "exclusivity": "PowerGlueTrap",
         "itemType": "PowerAssetChange",
         "hidden": false,
-        "updateAdded": 33
+        "updateAdded": 33,
+        "cost": 70
     },
     "GameUIPowerSkinHalloweenFarmer": {
         "storeFilter": "GameUI",
@@ -1608,7 +1738,8 @@
         "exclusivity": "PowerBananaFarmer",
         "itemType": "PowerAssetChange",
         "hidden": true,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 50
     },
     "GameUIPowerSkinIcebergPontoon": {
         "storeFilter": "GameUI",
@@ -1620,7 +1751,8 @@
         "exclusivity": "PowerPontoon",
         "itemType": "PowerAssetChange",
         "hidden": false,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 35
     },
     "GameUIPowerSkinLavaLake": {
         "storeFilter": "GameUI",
@@ -1632,7 +1764,8 @@
         "exclusivity": "PowerPortableLake",
         "itemType": "PowerAssetChange",
         "hidden": false,
-        "updateAdded": 25
+        "updateAdded": 25,
+        "cost": 35
     },
     "GameUIPowerSkinMonkeyBoostFireworks": {
         "storeFilter": "GameUI",
@@ -1644,7 +1777,8 @@
         "exclusivity": "PowerMonkeyBoost",
         "itemType": "PowerAssetChange",
         "hidden": true,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 35
     },
     "GameUIPowerSkinMonkeyBoostSugarRush": {
         "storeFilter": "GameUI",
@@ -1656,7 +1790,8 @@
         "exclusivity": "PowerMonkeyBoost",
         "itemType": "PowerAssetChange",
         "hidden": true,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 60
     },
     "GameUIPowerSkinPinataCashDrop": {
         "storeFilter": "GameUI",
@@ -1668,7 +1803,8 @@
         "exclusivity": "PowerCashDrop",
         "itemType": "PowerAssetChange",
         "hidden": false,
-        "updateAdded": 40
+        "updateAdded": 40,
+        "cost": 100
     },
     "GameUIPowerSkinRetroTechbot": {
         "storeFilter": "GameUI",
@@ -1680,7 +1816,8 @@
         "exclusivity": "PowerTechbot",
         "itemType": "PowerAssetChange",
         "hidden": true,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 20
     },
     "GameUIPowerSkinRoadSpikesFlowerPatch": {
         "storeFilter": "GameUI",
@@ -1692,7 +1829,8 @@
         "exclusivity": "PowerRoadSpikes",
         "itemType": "PowerAssetChange",
         "hidden": false,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 60
     },
     "GameUIPowerSkinSuperVampireStorm": {
         "storeFilter": "GameUI",
@@ -1704,7 +1842,8 @@
         "exclusivity": "PowerSuperMonkeyStorm",
         "itemType": "PowerAssetChange",
         "hidden": false,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 20
     },
     "GameUIPowerSkinThriveStonks": {
         "storeFilter": "GameUI",
@@ -1716,7 +1855,8 @@
         "exclusivity": "PowerThrive",
         "itemType": "PowerAssetChange",
         "hidden": false,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 45
     },
     "GameUIProfileAvatar100": {
         "storeFilter": "GameUI",
@@ -1741,7 +1881,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 45
+        "updateAdded": 45,
+        "cost": 50
     },
     "GameUIProfileAvatar102": {
         "storeFilter": "GameUI",
@@ -1766,7 +1907,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 46
+        "updateAdded": 46,
+        "cost": 50
     },
     "GameUIProfileAvatar104": {
         "storeFilter": "GameUI",
@@ -1830,7 +1972,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 47
+        "updateAdded": 47,
+        "cost": 50
     },
     "GameUIProfileAvatar109": {
         "storeFilter": "GameUI",
@@ -1843,7 +1986,8 @@
         "itemType": "Avatar",
         "hidden": true,
         "obtainMethod": "Limited",
-        "updateAdded": 47
+        "updateAdded": 47,
+        "cost": 50
     },
     "GameUIProfileAvatar110": {
         "storeFilter": "GameUI",
@@ -1868,7 +2012,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 48
+        "updateAdded": 48,
+        "cost": 50
     },
     "GameUIProfileAvatar112": {
         "storeFilter": "GameUI",
@@ -1893,7 +2038,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 49
+        "updateAdded": 49,
+        "cost": 50
     },
     "GameUIProfileAvatar114": {
         "storeFilter": "GameUI",
@@ -1905,7 +2051,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 50
+        "updateAdded": 50,
+        "cost": 50
     },
     "GameUIProfileAvatar115": {
         "storeFilter": "GameUI",
@@ -1930,7 +2077,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 51
+        "updateAdded": 51,
+        "cost": 50
     },
     "GameUIProfileAvatar117": {
         "storeFilter": "GameUI",
@@ -1968,7 +2116,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 52
+        "updateAdded": 52,
+        "cost": 50
     },
     "GameUIProfileAvatar120": {
         "storeFilter": "GameUI",
@@ -1981,7 +2130,8 @@
         "itemType": "Avatar",
         "hidden": false,
         "isNew": true,
-        "updateAdded": 53
+        "updateAdded": 53,
+        "cost": 50
     },
     "GameUIProfileAvatar121": {
         "storeFilter": "GameUI",
@@ -1994,7 +2144,8 @@
         "itemType": "Avatar",
         "hidden": false,
         "isNew": true,
-        "updateAdded": 53
+        "updateAdded": 53,
+        "cost": 50
     },
     "GameUIProfileAvatar13": {
         "storeFilter": "GameUI",
@@ -2006,7 +2157,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 10
     },
     "GameUIProfileAvatar14": {
         "storeFilter": "GameUI",
@@ -2018,7 +2170,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 10
     },
     "GameUIProfileAvatar15": {
         "storeFilter": "GameUI",
@@ -2030,7 +2183,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 10
     },
     "GameUIProfileAvatar16": {
         "storeFilter": "GameUI",
@@ -2042,7 +2196,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 10
     },
     "GameUIProfileAvatar17": {
         "storeFilter": "GameUI",
@@ -2054,7 +2209,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 10
     },
     "GameUIProfileAvatar18": {
         "storeFilter": "GameUI",
@@ -2066,7 +2222,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 10
     },
     "GameUIProfileAvatar19": {
         "storeFilter": "GameUI",
@@ -2078,7 +2235,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 10
     },
     "GameUIProfileAvatar20": {
         "storeFilter": "GameUI",
@@ -2090,7 +2248,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 10
     },
     "GameUIProfileAvatar21": {
         "storeFilter": "GameUI",
@@ -2102,7 +2261,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 10
     },
     "GameUIProfileAvatar22": {
         "storeFilter": "GameUI",
@@ -2114,7 +2274,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 10
     },
     "GameUIProfileAvatar23": {
         "storeFilter": "GameUI",
@@ -2126,7 +2287,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 10
     },
     "GameUIProfileAvatar24": {
         "storeFilter": "GameUI",
@@ -2138,7 +2300,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 10
     },
     "GameUIProfileAvatar25": {
         "storeFilter": "GameUI",
@@ -2150,7 +2313,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 10
     },
     "GameUIProfileAvatar26": {
         "storeFilter": "GameUI",
@@ -2162,7 +2326,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 10
     },
     "GameUIProfileAvatar27": {
         "storeFilter": "GameUI",
@@ -2174,7 +2339,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 10
     },
     "GameUIProfileAvatar28": {
         "storeFilter": "GameUI",
@@ -2186,7 +2352,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 10
     },
     "GameUIProfileAvatar29": {
         "storeFilter": "GameUI",
@@ -2198,7 +2365,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 10
     },
     "GameUIProfileAvatar30": {
         "storeFilter": "GameUI",
@@ -2210,7 +2378,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 10
     },
     "GameUIProfileAvatar31": {
         "storeFilter": "GameUI",
@@ -2222,7 +2391,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 23
+        "updateAdded": 23,
+        "cost": 10
     },
     "GameUIProfileAvatar32": {
         "storeFilter": "GameUI",
@@ -2234,7 +2404,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 23
+        "updateAdded": 23,
+        "cost": 10
     },
     "GameUIProfileAvatar33": {
         "storeFilter": "GameUI",
@@ -2246,7 +2417,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 24
+        "updateAdded": 24,
+        "cost": 10
     },
     "GameUIProfileAvatar34": {
         "storeFilter": "GameUI",
@@ -2258,7 +2430,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 24
+        "updateAdded": 24,
+        "cost": 10
     },
     "GameUIProfileAvatar35": {
         "storeFilter": "GameUI",
@@ -2270,7 +2443,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 24
+        "updateAdded": 24,
+        "cost": 10
     },
     "GameUIProfileAvatar36": {
         "storeFilter": "GameUI",
@@ -2282,7 +2456,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 24
+        "updateAdded": 24,
+        "cost": 10
     },
     "GameUIProfileAvatar37": {
         "storeFilter": "GameUI",
@@ -2294,7 +2469,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 25
+        "updateAdded": 25,
+        "cost": 10
     },
     "GameUIProfileAvatar38": {
         "storeFilter": "GameUI",
@@ -2306,7 +2482,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 25
+        "updateAdded": 25,
+        "cost": 10
     },
     "GameUIProfileAvatar39": {
         "storeFilter": "GameUI",
@@ -2318,7 +2495,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 25
+        "updateAdded": 25,
+        "cost": 10
     },
     "GameUIProfileAvatar40": {
         "storeFilter": "GameUI",
@@ -2330,7 +2508,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 10
     },
     "GameUIProfileAvatar41": {
         "storeFilter": "GameUI",
@@ -2342,7 +2521,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 10
     },
     "GameUIProfileAvatar42": {
         "storeFilter": "GameUI",
@@ -2354,7 +2534,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 10
     },
     "GameUIProfileAvatar43": {
         "storeFilter": "GameUI",
@@ -2366,7 +2547,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 10
     },
     "GameUIProfileAvatar44": {
         "storeFilter": "GameUI",
@@ -2378,7 +2560,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 10
     },
     "GameUIProfileAvatar45": {
         "storeFilter": "GameUI",
@@ -2390,7 +2573,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 10
     },
     "GameUIProfileAvatar46": {
         "storeFilter": "GameUI",
@@ -2402,7 +2586,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 10
     },
     "GameUIProfileAvatar47": {
         "storeFilter": "GameUI",
@@ -2414,7 +2599,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 10
     },
     "GameUIProfileAvatar48": {
         "storeFilter": "GameUI",
@@ -2426,7 +2612,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 10
     },
     "GameUIProfileAvatar49": {
         "storeFilter": "GameUI",
@@ -2438,7 +2625,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 10
     },
     "GameUIProfileAvatar50": {
         "storeFilter": "GameUI",
@@ -2450,7 +2638,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 10
     },
     "GameUIProfileAvatar51": {
         "storeFilter": "GameUI",
@@ -2462,7 +2651,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 10
     },
     "GameUIProfileAvatar52": {
         "storeFilter": "GameUI",
@@ -2474,7 +2664,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 25
     },
     "GameUIProfileAvatar53": {
         "storeFilter": "GameUI",
@@ -2486,7 +2677,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 25
     },
     "GameUIProfileAvatar54": {
         "storeFilter": "GameUI",
@@ -2498,7 +2690,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 25
     },
     "GameUIProfileAvatar55": {
         "storeFilter": "GameUI",
@@ -2510,7 +2703,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 25
     },
     "GameUIProfileAvatar56": {
         "storeFilter": "GameUI",
@@ -2522,7 +2716,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 25
     },
     "GameUIProfileAvatar57": {
         "storeFilter": "GameUI",
@@ -2534,7 +2729,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 25
     },
     "GameUIProfileAvatar58": {
         "storeFilter": "GameUI",
@@ -2546,7 +2742,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 25
     },
     "GameUIProfileAvatar59": {
         "storeFilter": "GameUI",
@@ -2558,7 +2755,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 31
+        "updateAdded": 31,
+        "cost": 30
     },
     "GameUIProfileAvatar60": {
         "storeFilter": "GameUI",
@@ -2570,7 +2768,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 31
+        "updateAdded": 31,
+        "cost": 30
     },
     "GameUIProfileAvatar61": {
         "storeFilter": "GameUI",
@@ -2582,7 +2781,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 32
+        "updateAdded": 32,
+        "cost": 30
     },
     "GameUIProfileAvatar62": {
         "storeFilter": "GameUI",
@@ -2594,7 +2794,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 32
+        "updateAdded": 32,
+        "cost": 30
     },
     "GameUIProfileAvatar63": {
         "storeFilter": "GameUI",
@@ -2606,7 +2807,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 33
+        "updateAdded": 33,
+        "cost": 45
     },
     "GameUIProfileAvatar64": {
         "storeFilter": "GameUI",
@@ -2618,7 +2820,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 33
+        "updateAdded": 33,
+        "cost": 45
     },
     "GameUIProfileAvatar65": {
         "storeFilter": "GameUI",
@@ -2630,7 +2833,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 34
+        "updateAdded": 34,
+        "cost": 45
     },
     "GameUIProfileAvatar66": {
         "storeFilter": "GameUI",
@@ -2642,7 +2846,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 34
+        "updateAdded": 34,
+        "cost": 45
     },
     "GameUIProfileAvatar67": {
         "storeFilter": "GameUI",
@@ -2654,7 +2859,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 34
+        "updateAdded": 34,
+        "cost": 45
     },
     "GameUIProfileAvatar68": {
         "storeFilter": "GameUI",
@@ -2666,7 +2872,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 34
+        "updateAdded": 34,
+        "cost": 45
     },
     "GameUIProfileAvatar69": {
         "storeFilter": "GameUI",
@@ -2678,7 +2885,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 35
+        "updateAdded": 35,
+        "cost": 45
     },
     "GameUIProfileAvatar70": {
         "storeFilter": "GameUI",
@@ -2690,7 +2898,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 35
+        "updateAdded": 35,
+        "cost": 45
     },
     "GameUIProfileAvatar71": {
         "storeFilter": "GameUI",
@@ -2702,7 +2911,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 35
+        "updateAdded": 35,
+        "cost": 45
     },
     "GameUIProfileAvatar72": {
         "storeFilter": "GameUI",
@@ -2714,7 +2924,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 35
+        "updateAdded": 35,
+        "cost": 45
     },
     "GameUIProfileAvatar73": {
         "storeFilter": "GameUI",
@@ -2726,7 +2937,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 36
+        "updateAdded": 36,
+        "cost": 45
     },
     "GameUIProfileAvatar74": {
         "storeFilter": "GameUI",
@@ -2738,7 +2950,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 36
+        "updateAdded": 36,
+        "cost": 45
     },
     "GameUIProfileAvatar75": {
         "storeFilter": "GameUI",
@@ -2750,7 +2963,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 36
+        "updateAdded": 36,
+        "cost": 45
     },
     "GameUIProfileAvatar76": {
         "storeFilter": "GameUI",
@@ -2762,7 +2976,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 36
+        "updateAdded": 36,
+        "cost": 45
     },
     "GameUIProfileAvatar77": {
         "storeFilter": "GameUI",
@@ -2787,7 +3002,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 37
+        "updateAdded": 37,
+        "cost": 50
     },
     "GameUIProfileAvatar79": {
         "storeFilter": "GameUI",
@@ -2800,7 +3016,8 @@
         "itemType": "Avatar",
         "hidden": true,
         "obtainMethod": "Limited",
-        "updateAdded": 37
+        "updateAdded": 37,
+        "cost": 50
     },
     "GameUIProfileAvatar80": {
         "storeFilter": "GameUI",
@@ -2812,7 +3029,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 38
+        "updateAdded": 38,
+        "cost": 50
     },
     "GameUIProfileAvatar81": {
         "storeFilter": "GameUI",
@@ -2824,7 +3042,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 38
+        "updateAdded": 38,
+        "cost": 50
     },
     "GameUIProfileAvatar82": {
         "storeFilter": "GameUI",
@@ -2836,7 +3055,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 39
+        "updateAdded": 39,
+        "cost": 50
     },
     "GameUIProfileAvatar83": {
         "storeFilter": "GameUI",
@@ -2848,7 +3068,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 39
+        "updateAdded": 39,
+        "cost": 50
     },
     "GameUIProfileAvatar84": {
         "storeFilter": "GameUI",
@@ -2860,7 +3081,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 39
+        "updateAdded": 39,
+        "cost": 50
     },
     "GameUIProfileAvatar85": {
         "storeFilter": "GameUI",
@@ -2872,7 +3094,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 39
+        "updateAdded": 39,
+        "cost": 50
     },
     "GameUIProfileAvatar86": {
         "storeFilter": "GameUI",
@@ -2884,7 +3107,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 39
+        "updateAdded": 39,
+        "cost": 50
     },
     "GameUIProfileAvatar87": {
         "storeFilter": "GameUI",
@@ -2896,7 +3120,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 40
+        "updateAdded": 40,
+        "cost": 50
     },
     "GameUIProfileAvatar88": {
         "storeFilter": "GameUI",
@@ -2908,7 +3133,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 40
+        "updateAdded": 40,
+        "cost": 50
     },
     "GameUIProfileAvatar89": {
         "storeFilter": "GameUI",
@@ -2920,7 +3146,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 41
+        "updateAdded": 41,
+        "cost": 50
     },
     "GameUIProfileAvatar90": {
         "storeFilter": "GameUI",
@@ -2932,7 +3159,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 41
+        "updateAdded": 41,
+        "cost": 50
     },
     "GameUIProfileAvatar91": {
         "storeFilter": "GameUI",
@@ -2944,7 +3172,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 42
+        "updateAdded": 42,
+        "cost": 50
     },
     "GameUIProfileAvatar92": {
         "storeFilter": "GameUI",
@@ -2956,7 +3185,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 42
+        "updateAdded": 42,
+        "cost": 50
     },
     "GameUIProfileAvatar93": {
         "storeFilter": "GameUI",
@@ -2994,7 +3224,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 43
+        "updateAdded": 43,
+        "cost": 50
     },
     "GameUIProfileAvatar96": {
         "storeFilter": "GameUI",
@@ -3006,7 +3237,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "updateAdded": 43
+        "updateAdded": 43,
+        "cost": 50
     },
     "GameUIProfileAvatar97": {
         "storeFilter": "GameUI",
@@ -3018,7 +3250,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "updateAdded": 44
+        "updateAdded": 44,
+        "cost": 50
     },
     "GameUIProfileAvatar98": {
         "storeFilter": "GameUI",
@@ -3056,7 +3289,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 150
     },
     "GameUIProfileBanner10": {
         "storeFilter": "GameUI",
@@ -3068,7 +3302,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 300
     },
     "GameUIProfileBanner11": {
         "storeFilter": "GameUI",
@@ -3080,7 +3315,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 300
     },
     "GameUIProfileBanner12": {
         "storeFilter": "GameUI",
@@ -3092,7 +3328,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 300
     },
     "GameUIProfileBanner13": {
         "storeFilter": "GameUI",
@@ -3104,7 +3341,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 31
+        "updateAdded": 31,
+        "cost": 300
     },
     "GameUIProfileBanner14": {
         "storeFilter": "GameUI",
@@ -3116,7 +3354,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 31
+        "updateAdded": 31,
+        "cost": 300
     },
     "GameUIProfileBanner15": {
         "storeFilter": "GameUI",
@@ -3128,7 +3367,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 32
+        "updateAdded": 32,
+        "cost": 300
     },
     "GameUIProfileBanner16": {
         "storeFilter": "GameUI",
@@ -3140,7 +3380,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 32
+        "updateAdded": 32,
+        "cost": 300
     },
     "GameUIProfileBanner17": {
         "storeFilter": "GameUI",
@@ -3152,7 +3393,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 33
+        "updateAdded": 33,
+        "cost": 300
     },
     "GameUIProfileBanner18": {
         "storeFilter": "GameUI",
@@ -3164,7 +3406,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 33
+        "updateAdded": 33,
+        "cost": 300
     },
     "GameUIProfileBanner19": {
         "storeFilter": "GameUI",
@@ -3176,7 +3419,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 33
+        "updateAdded": 33,
+        "cost": 100
     },
     "GameUIProfileBanner2": {
         "storeFilter": "GameUI",
@@ -3188,7 +3432,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 150
     },
     "GameUIProfileBanner20": {
         "storeFilter": "GameUI",
@@ -3200,7 +3445,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 33
+        "updateAdded": 33,
+        "cost": 75
     },
     "GameUIProfileBanner21": {
         "storeFilter": "GameUI",
@@ -3212,7 +3458,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 33
+        "updateAdded": 33,
+        "cost": 75
     },
     "GameUIProfileBanner22": {
         "storeFilter": "GameUI",
@@ -3224,7 +3471,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "updateAdded": 33
+        "updateAdded": 33,
+        "cost": 300
     },
     "GameUIProfileBanner23": {
         "storeFilter": "GameUI",
@@ -3236,7 +3484,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "updateAdded": 34
+        "updateAdded": 34,
+        "cost": 150
     },
     "GameUIProfileBanner24": {
         "storeFilter": "GameUI",
@@ -3248,7 +3497,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 34
+        "updateAdded": 34,
+        "cost": 300
     },
     "GameUIProfileBanner25": {
         "storeFilter": "GameUI",
@@ -3260,7 +3510,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 34
+        "updateAdded": 34,
+        "cost": 300
     },
     "GameUIProfileBanner26": {
         "storeFilter": "GameUI",
@@ -3272,7 +3523,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 35
+        "updateAdded": 35,
+        "cost": 150
     },
     "GameUIProfileBanner27": {
         "storeFilter": "GameUI",
@@ -3284,7 +3536,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 35
+        "updateAdded": 35,
+        "cost": 300
     },
     "GameUIProfileBanner28": {
         "storeFilter": "GameUI",
@@ -3296,7 +3549,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 35
+        "updateAdded": 35,
+        "cost": 300
     },
     "GameUIProfileBanner29": {
         "storeFilter": "GameUI",
@@ -3308,7 +3562,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 35
+        "updateAdded": 35,
+        "cost": 300
     },
     "GameUIProfileBanner3": {
         "storeFilter": "GameUI",
@@ -3320,7 +3575,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 250
     },
     "GameUIProfileBanner30": {
         "storeFilter": "GameUI",
@@ -3332,7 +3588,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "updateAdded": 36
+        "updateAdded": 36,
+        "cost": 300
     },
     "GameUIProfileBanner31": {
         "storeFilter": "GameUI",
@@ -3344,7 +3601,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 37
+        "updateAdded": 37,
+        "cost": 300
     },
     "GameUIProfileBanner32": {
         "storeFilter": "GameUI",
@@ -3369,7 +3627,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 38
+        "updateAdded": 38,
+        "cost": 300
     },
     "GameUIProfileBanner34": {
         "storeFilter": "GameUI",
@@ -3381,7 +3640,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 39
+        "updateAdded": 39,
+        "cost": 300
     },
     "GameUIProfileBanner35": {
         "storeFilter": "GameUI",
@@ -3393,7 +3653,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 40
+        "updateAdded": 40,
+        "cost": 300
     },
     "GameUIProfileBanner36": {
         "storeFilter": "GameUI",
@@ -3405,7 +3666,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 41
+        "updateAdded": 41,
+        "cost": 300
     },
     "GameUIProfileBanner37": {
         "storeFilter": "GameUI",
@@ -3417,7 +3679,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 42
+        "updateAdded": 42,
+        "cost": 300
     },
     "GameUIProfileBanner38": {
         "storeFilter": "GameUI",
@@ -3442,7 +3705,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 43
+        "updateAdded": 43,
+        "cost": 300
     },
     "GameUIProfileBanner4": {
         "storeFilter": "GameUI",
@@ -3454,7 +3718,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 200
     },
     "GameUIProfileBanner40": {
         "storeFilter": "GameUI",
@@ -3505,7 +3770,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 45
+        "updateAdded": 45,
+        "cost": 300
     },
     "GameUIProfileBanner44": {
         "storeFilter": "GameUI",
@@ -3530,7 +3796,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "updateAdded": 46
+        "updateAdded": 46,
+        "cost": 300
     },
     "GameUIProfileBanner46": {
         "storeFilter": "GameUI",
@@ -3581,7 +3848,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 47
+        "updateAdded": 47,
+        "cost": 300
     },
     "GameUIProfileBanner5": {
         "storeFilter": "GameUI",
@@ -3593,7 +3861,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 175
     },
     "GameUIProfileBanner50": {
         "storeFilter": "GameUI",
@@ -3618,7 +3887,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "updateAdded": 48
+        "updateAdded": 48,
+        "cost": 300
     },
     "GameUIProfileBanner52": {
         "storeFilter": "GameUI",
@@ -3643,7 +3913,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 49
+        "updateAdded": 49,
+        "cost": 300
     },
     "GameUIProfileBanner54": {
         "storeFilter": "GameUI",
@@ -3655,7 +3926,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 50
+        "updateAdded": 50,
+        "cost": 300
     },
     "GameUIProfileBanner55": {
         "storeFilter": "GameUI",
@@ -3680,7 +3952,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 51
+        "updateAdded": 51,
+        "cost": 300
     },
     "GameUIProfileBanner57": {
         "storeFilter": "GameUI",
@@ -3718,7 +3991,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 52
+        "updateAdded": 52,
+        "cost": 300
     },
     "GameUIProfileBanner6": {
         "storeFilter": "GameUI",
@@ -3730,7 +4004,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 250
     },
     "GameUIProfileBanner60": {
         "storeFilter": "GameUI",
@@ -3743,7 +4018,8 @@
         "itemType": "Banner",
         "hidden": false,
         "isNew": true,
-        "updateAdded": 53
+        "updateAdded": 53,
+        "cost": 300
     },
     "GameUIProfileBanner61": {
         "storeFilter": "GameUI",
@@ -3756,7 +4032,8 @@
         "itemType": "Banner",
         "hidden": true,
         "isNew": true,
-        "updateAdded": 53
+        "updateAdded": 53,
+        "cost": 300
     },
     "GameUIProfileBanner7": {
         "storeFilter": "GameUI",
@@ -3768,7 +4045,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 150
     },
     "GameUIProfileBanner8": {
         "storeFilter": "GameUI",
@@ -3780,7 +4058,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 300
     },
     "GameUIProfileBanner9": {
         "storeFilter": "GameUI",
@@ -3792,7 +4071,8 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 300
     },
     "GameUIUpgradesDisplayNamedMonkeys": {
         "storeFilter": "GameUI",
@@ -3804,7 +4084,8 @@
         "exclusivity": "",
         "itemType": "NamedMonkeys",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 50
     },
     "HeroesAdmiralBrickellPetParrot": {
         "storeFilter": "Heroes",
@@ -3816,7 +4097,8 @@
         "exclusivity": "AdmiralBrickellPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 100
     },
     "HeroesAdmiralBrickellPlacementAerialDeployment": {
         "storeFilter": "Heroes",
@@ -3828,7 +4110,8 @@
         "exclusivity": "AdmiralBrickellPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 39
+        "updateAdded": 39,
+        "cost": 70
     },
     "HeroesAdoraPlacementSunbeam": {
         "storeFilter": "Heroes",
@@ -3840,7 +4123,8 @@
         "exclusivity": "AdoraPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 25
     },
     "HeroesBenjaminPetMouse": {
         "storeFilter": "Heroes",
@@ -3852,7 +4136,8 @@
         "exclusivity": "BenjaminPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 41
+        "updateAdded": 41,
+        "cost": 120
     },
     "HeroesBenjaminPlacementMatrix": {
         "storeFilter": "Heroes",
@@ -3864,7 +4149,8 @@
         "exclusivity": "Benjamin",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 24
+        "updateAdded": 24,
+        "cost": 50
     },
     "HeroesBenjamminDJSkinPlacementPartyLights": {
         "storeFilter": "Heroes",
@@ -3876,7 +4162,8 @@
         "exclusivity": "BenjaminDJPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 40
     },
     "HeroesChurchillPlacementTankDrop": {
         "storeFilter": "Heroes",
@@ -3888,7 +4175,8 @@
         "exclusivity": "ChurchillPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 35
     },
     "HeroesChurchillSentaiSkinPetDrone": {
         "storeFilter": "Heroes",
@@ -3900,7 +4188,8 @@
         "exclusivity": "CaptainChurchillPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 95
     },
     "HeroesCorvusPetOwl": {
         "storeFilter": "Heroes",
@@ -3912,7 +4201,8 @@
         "exclusivity": "CorvusPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 42
+        "updateAdded": 42,
+        "cost": 120
     },
     "HeroesETnPlacementBeamDown": {
         "storeFilter": "Heroes",
@@ -3924,7 +4214,8 @@
         "exclusivity": "EtiennePlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 60
     },
     "HeroesEtiennePetRoomba": {
         "storeFilter": "Heroes",
@@ -3936,7 +4227,8 @@
         "exclusivity": "EtiennePet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 100
     },
     "HeroesEziliPetFrog": {
         "storeFilter": "Heroes",
@@ -3948,7 +4240,8 @@
         "exclusivity": "EziliPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 75
     },
     "HeroesEziliPlacementGlyph": {
         "storeFilter": "Heroes",
@@ -3960,7 +4253,8 @@
         "exclusivity": "EziliPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 50
     },
     "HeroesGeraldoPetPackMule": {
         "storeFilter": "Heroes",
@@ -3972,7 +4266,8 @@
         "exclusivity": "GeraldoPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 37
+        "updateAdded": 37,
+        "cost": 120
     },
     "HeroesGwendolinPetFirefox": {
         "storeFilter": "Heroes",
@@ -3984,7 +4279,8 @@
         "exclusivity": "GwendolinPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 100
     },
     "HeroesGwendolinPlacementFireball": {
         "storeFilter": "Heroes",
@@ -3996,7 +4292,8 @@
         "exclusivity": "GwendolinPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 60
     },
     "HeroesJoanOfArcAdoraPetDragon": {
         "storeFilter": "Heroes",
@@ -4008,7 +4305,8 @@
         "exclusivity": "AdoraPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 33
+        "updateAdded": 33,
+        "cost": 110
     },
     "HeroesMountainObynPetBalfrog": {
         "storeFilter": "Heroes",
@@ -4020,7 +4318,8 @@
         "exclusivity": "ObynGreenfootPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 31
+        "updateAdded": 31,
+        "cost": 110
     },
     "HeroesObynPetBunny": {
         "storeFilter": "Heroes",
@@ -4032,7 +4331,8 @@
         "exclusivity": "ObynGreenfootPet",
         "itemType": "TowerPet",
         "hidden": true,
-        "updateAdded": 24
+        "updateAdded": 24,
+        "cost": 75
     },
     "HeroesObynPetWolf": {
         "storeFilter": "Heroes",
@@ -4044,7 +4344,8 @@
         "exclusivity": "ObynGreenfootPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 43
+        "updateAdded": 43,
+        "cost": 100
     },
     "HeroesObynPlacementWolf": {
         "storeFilter": "Heroes",
@@ -4056,7 +4357,8 @@
         "exclusivity": "ObynPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 43
+        "updateAdded": 43,
+        "cost": 70
     },
     "HeroesPatFustyPetPig": {
         "storeFilter": "Heroes",
@@ -4068,7 +4370,8 @@
         "exclusivity": "PatFustyPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 45
+        "updateAdded": 45,
+        "cost": 120
     },
     "HeroesPatFustyPlacementSuperjump": {
         "storeFilter": "Heroes",
@@ -4080,7 +4383,8 @@
         "exclusivity": "PatFustyPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 25
+        "updateAdded": 25,
+        "cost": 30
     },
     "HeroesPatPetPenguin": {
         "storeFilter": "Heroes",
@@ -4092,7 +4396,8 @@
         "exclusivity": "PatFustyPet",
         "itemType": "TowerPet",
         "hidden": true,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 75
     },
     "HeroesPsiPetBison": {
         "storeFilter": "Heroes",
@@ -4104,7 +4409,8 @@
         "exclusivity": "PsiPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 110
     },
     "HeroesQuincyCyberQuincyPlacementFireworks": {
         "storeFilter": "Heroes",
@@ -4116,7 +4422,8 @@
         "exclusivity": "QuincyCyberPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 25
     },
     "HeroesQuincyPetDadOfQuincy": {
         "storeFilter": "Heroes",
@@ -4128,7 +4435,8 @@
         "exclusivity": "QuincyPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 19
+        "updateAdded": 19,
+        "cost": 75
     },
     "HeroesQuincyPlacementSpecialForces": {
         "storeFilter": "Heroes",
@@ -4140,7 +4448,8 @@
         "exclusivity": "QuincyPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 37
+        "updateAdded": 37,
+        "cost": 70
     },
     "HeroesRosaliaPetCollie": {
         "storeFilter": "Heroes",
@@ -4152,7 +4461,8 @@
         "exclusivity": "RosaliaPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 48
+        "updateAdded": 48,
+        "cost": 120
     },
     "HeroesSaudaPetCrane": {
         "storeFilter": "Heroes",
@@ -4164,7 +4474,8 @@
         "exclusivity": "SaudaPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 25
+        "updateAdded": 25,
+        "cost": 80
     },
     "HeroesStrikerJonesBikerBonesPlacementHellrift": {
         "storeFilter": "Heroes",
@@ -4176,7 +4487,8 @@
         "exclusivity": "StrikerJonesBikerBonesPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 35
+        "updateAdded": 35,
+        "cost": 60
     },
     "HeroesStrikerJonesPetGermanShepherd": {
         "storeFilter": "Heroes",
@@ -4188,7 +4500,8 @@
         "exclusivity": "StrikerJonesPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 110
     },
     "HeroesStrikerJonesPlacementParadrop": {
         "storeFilter": "Heroes",
@@ -4200,7 +4513,8 @@
         "exclusivity": "StrikerPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 20
+        "updateAdded": 20,
+        "cost": 30
     },
     "TEAMPU-Snowflakes": {
         "storeFilter": "Monkeys",
@@ -4212,7 +4526,8 @@
         "exclusivity": "TowerPlacement",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 60
     },
     "TPBombshooterFireworks": {
         "storeFilter": "Monkeys",
@@ -4224,7 +4539,8 @@
         "exclusivity": "BombShooterProjectile",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 49
+        "updateAdded": 49,
+        "cost": 69
     },
     "TPWizardSheep": {
         "storeFilter": "Monkeys",
@@ -4236,7 +4552,8 @@
         "exclusivity": "",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 50
+        "updateAdded": 50,
+        "cost": 120
     },
     "TowerEffectAllMonkeysPlacementUpgradesBats": {
         "storeFilter": "Monkeys",
@@ -4248,7 +4565,8 @@
         "exclusivity": "TowerPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 55
     },
     "TowerEffectAllMonkeysPlacementUpgradesButterflies": {
         "storeFilter": "Monkeys",
@@ -4260,7 +4578,8 @@
         "exclusivity": "TowerPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 60
     },
     "TowerEffectAllMonkeysPlacementUpgradesFireworks": {
         "storeFilter": "Monkeys",
@@ -4272,7 +4591,8 @@
         "exclusivity": "TowerPlacement",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 60
     },
     "TowerEffectAllMonkeysPlacementUpgradesGhosts": {
         "storeFilter": "Monkeys",
@@ -4284,7 +4604,8 @@
         "exclusivity": "TowerPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 90
     },
     "TowerEffectAllMonkeysPlacementUpgradesPresents": {
         "storeFilter": "Monkeys",
@@ -4296,7 +4617,8 @@
         "exclusivity": "TowerPlacement",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 30
     },
     "TowerPetAlchemistSlimeCube": {
         "storeFilter": "Monkeys",
@@ -4308,7 +4630,8 @@
         "exclusivity": "AlchemistPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 39
+        "updateAdded": 39,
+        "cost": 120
     },
     "TowerPetBananaFarmChicken": {
         "storeFilter": "Monkeys",
@@ -4320,7 +4643,8 @@
         "exclusivity": "BananaFarmPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 25
+        "updateAdded": 25,
+        "cost": 60
     },
     "TowerPetBombshooterTortoise": {
         "storeFilter": "Monkeys",
@@ -4332,7 +4656,8 @@
         "exclusivity": "BombShooterPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 38
+        "updateAdded": 38,
+        "cost": 120
     },
     "TowerPetBoomerangKangaroo": {
         "storeFilter": "Monkeys",
@@ -4344,7 +4669,8 @@
         "exclusivity": "BoomerangMonkeyPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 43
+        "updateAdded": 43,
+        "cost": 120
     },
     "TowerPetDesperadoArmadillo": {
         "storeFilter": "Monkeys",
@@ -4369,7 +4695,8 @@
         "exclusivity": "DruidPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 40
+        "updateAdded": 40,
+        "cost": 120
     },
     "TowerPetEngineerBot": {
         "storeFilter": "Monkeys",
@@ -4381,7 +4708,8 @@
         "exclusivity": "EngineerMonkeyPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 42
+        "updateAdded": 42,
+        "cost": 120
     },
     "TowerPetGlueGunnerRat": {
         "storeFilter": "Monkeys",
@@ -4393,7 +4721,8 @@
         "exclusivity": "GlueGunnerPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 80
     },
     "TowerPetHeliPilotHummingbird": {
         "storeFilter": "Monkeys",
@@ -4405,7 +4734,8 @@
         "exclusivity": "HeliPilotPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 120
     },
     "TowerPetIceMonkeySnowman": {
         "storeFilter": "Monkeys",
@@ -4417,7 +4747,8 @@
         "exclusivity": "IceMonkeyPet",
         "itemType": "TowerPet",
         "hidden": true,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 120
     },
     "TowerPetIceMonkeyWalrus": {
         "storeFilter": "Monkeys",
@@ -4429,7 +4760,8 @@
         "exclusivity": "IceMonkeyPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 120
     },
     "TowerPetMonkeyAceDragonfly": {
         "storeFilter": "Monkeys",
@@ -4441,7 +4773,8 @@
         "exclusivity": "MonkeyAcePet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 33
+        "updateAdded": 33,
+        "cost": 120
     },
     "TowerPetMonkeyBuccaneerNarwhal": {
         "storeFilter": "Monkeys",
@@ -4453,7 +4786,8 @@
         "exclusivity": "MonkeyBuccaneerPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 100
     },
     "TowerPetMonkeySubRubberDuck": {
         "storeFilter": "Monkeys",
@@ -4465,7 +4799,8 @@
         "exclusivity": "MonkeySubPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 75
     },
     "TowerPetMonkeyVillageElf": {
         "storeFilter": "Monkeys",
@@ -4477,7 +4812,8 @@
         "exclusivity": "MonkeyVillagePet",
         "itemType": "TowerPet",
         "hidden": true,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 75
     },
     "TowerPetMortarMonkeySafetyMole": {
         "storeFilter": "Monkeys",
@@ -4489,7 +4825,8 @@
         "exclusivity": "MortarMonkeyPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 44
+        "updateAdded": 44,
+        "cost": 120
     },
     "TowerPetNinjaMonkeyKiwi": {
         "storeFilter": "Monkeys",
@@ -4501,7 +4838,8 @@
         "exclusivity": "NinjaMonkeyPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 24
+        "updateAdded": 24,
+        "cost": 100
     },
     "TowerPetSniperMonkeyChameleon": {
         "storeFilter": "Monkeys",
@@ -4513,7 +4851,8 @@
         "exclusivity": "SniperMonkeyPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 35
+        "updateAdded": 35,
+        "cost": 50
     },
     "TowerPetSupermonkeyBat": {
         "storeFilter": "Monkeys",
@@ -4525,7 +4864,8 @@
         "exclusivity": "SuperMonkeyPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 100
     },
     "TowerPetTackShooterHedgehog": {
         "storeFilter": "Monkeys",
@@ -4537,7 +4877,8 @@
         "exclusivity": "TackShooterPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 36
+        "updateAdded": 36,
+        "cost": 120
     },
     "TowerProjectileAlchemistSpringFlowers": {
         "storeFilter": "Monkeys",
@@ -4549,7 +4890,8 @@
         "exclusivity": "AlchemistProjectile",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 36
+        "updateAdded": 36,
+        "cost": 50
     },
     "TowerProjectileBananaFarmCandyCorn": {
         "storeFilter": "Monkeys",
@@ -4561,7 +4903,8 @@
         "exclusivity": "BananaFarmProjectile",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 30
     },
     "TowerProjectileBananaFarmPresents": {
         "storeFilter": "Monkeys",
@@ -4573,7 +4916,8 @@
         "exclusivity": "BananaFarmProjectile",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 34
+        "updateAdded": 34,
+        "cost": 50
     },
     "TowerProjectileBombshooterPumpkin": {
         "storeFilter": "Monkeys",
@@ -4585,7 +4929,8 @@
         "exclusivity": "BombShooterProjectile",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 20
     },
     "TowerProjectileBoomerangCandyCane": {
         "storeFilter": "Monkeys",
@@ -4597,7 +4942,8 @@
         "exclusivity": "BoomerangMonkeyProjectile",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 22
+        "updateAdded": 22,
+        "cost": 20
     },
     "TowerProjectileDartMonkeyPumpkins": {
         "storeFilter": "Monkeys",
@@ -4609,7 +4955,8 @@
         "exclusivity": "DartMonkeyProjectile",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 39
+        "updateAdded": 39,
+        "cost": 50
     },
     "TowerProjectileDartMonkeySnowballs": {
         "storeFilter": "Monkeys",
@@ -4621,7 +4968,8 @@
         "exclusivity": "DartMonkeyProjectile",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 34
+        "updateAdded": 34,
+        "cost": 50
     },
     "TowerProjectileDartlingEasterEggs": {
         "storeFilter": "Monkeys",
@@ -4633,7 +4981,8 @@
         "exclusivity": "DartlingGunnerProjectile",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 24
+        "updateAdded": 24,
+        "cost": 25
     },
     "TowerProjectileDruidChristmas": {
         "storeFilter": "Monkeys",
@@ -4645,7 +4994,8 @@
         "exclusivity": "DruidProjectile",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 46
+        "updateAdded": 46,
+        "cost": 50
     },
     "TowerProjectileEngineerVampireHunter": {
         "storeFilter": "Monkeys",
@@ -4657,7 +5007,8 @@
         "exclusivity": "EngineerMonkeyProjectile",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 35
     },
     "TowerProjectileMonkeyAceBones": {
         "storeFilter": "Monkeys",
@@ -4669,7 +5020,8 @@
         "exclusivity": "MonkeyAceProjectile",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 21
+        "updateAdded": 21,
+        "cost": 25
     },
     "TowerProjectileMonkeyBuccaneerFlavouredTrades": {
         "storeFilter": "Monkeys",
@@ -4681,7 +5033,8 @@
         "exclusivity": "MonkeyBuccaneerProjectile",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 45
+        "updateAdded": 45,
+        "cost": 50
     },
     "TowerProjectileMortarSnow": {
         "storeFilter": "Monkeys",
@@ -4693,7 +5046,8 @@
         "exclusivity": "MortarMonkeyProjectile",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 50
     },
     "TowerProjectileNinjaMonkeySnowflakes": {
         "storeFilter": "Monkeys",
@@ -4705,7 +5059,8 @@
         "exclusivity": "NinjaMonkeyProjectile",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 34
+        "updateAdded": 34,
+        "cost": 50
     },
     "TowerProjectileSpikeFactoryPineapples": {
         "storeFilter": "Monkeys",
@@ -4717,7 +5072,8 @@
         "exclusivity": "SpikeFactoryProjectile",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 23
+        "updateAdded": 23,
+        "cost": 50
     },
     "TowerProjectileTackShooterIcicles": {
         "storeFilter": "Monkeys",
@@ -4729,7 +5085,8 @@
         "exclusivity": "TackShooterProjectile",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 34
+        "updateAdded": 34,
+        "cost": 50
     },
     "TowerProjectileWizardMonkeyFireworks": {
         "storeFilter": "Monkeys",
@@ -4741,7 +5098,8 @@
         "exclusivity": "WizardMonkeyProjectile",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 30
     },
     "TowerProjectileWizardZombies": {
         "storeFilter": "Monkeys",
@@ -4753,7 +5111,8 @@
         "exclusivity": "WizardMonkeyProjectile",
         "itemType": "TowerAssetChange",
         "hidden": false,
-        "updateAdded": 30
+        "updateAdded": 30,
+        "cost": 50
     },
     "TowerPropMonkeyVillageAustralianFlag": {
         "storeFilter": "Monkeys",
@@ -4765,7 +5124,8 @@
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
         "hidden": false,
-        "updateAdded": 29
+        "updateAdded": 29,
+        "cost": 40
     },
     "TowerPropMonkeyVillageBananaFlag": {
         "storeFilter": "Monkeys",
@@ -4777,7 +5137,8 @@
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
         "hidden": false,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 25
     },
     "TowerPropMonkeyVillageBrazilFlag": {
         "storeFilter": "Monkeys",
@@ -4789,7 +5150,8 @@
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
         "hidden": false,
-        "updateAdded": 25
+        "updateAdded": 25,
+        "cost": 25
     },
     "TowerPropMonkeyVillageCanadianFlag": {
         "storeFilter": "Monkeys",
@@ -4801,7 +5163,8 @@
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
         "hidden": false,
-        "updateAdded": 28
+        "updateAdded": 28,
+        "cost": 25
     },
     "TowerPropMonkeyVillageGermanyFlag": {
         "storeFilter": "Monkeys",
@@ -4813,7 +5176,8 @@
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 25
     },
     "TowerPropMonkeyVillageNZFlag": {
         "storeFilter": "Monkeys",
@@ -4825,7 +5189,8 @@
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
         "hidden": false,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 25
     },
     "TowerPropMonkeyVillagePrideFlag": {
         "storeFilter": "Monkeys",
@@ -4837,7 +5202,8 @@
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
         "hidden": false,
-        "updateAdded": 32
+        "updateAdded": 32,
+        "cost": 40
     },
     "TowerPropMonkeyVillageScotlandFlag": {
         "storeFilter": "Monkeys",
@@ -4849,7 +5215,8 @@
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
         "hidden": false,
-        "updateAdded": 26
+        "updateAdded": 26,
+        "cost": 25
     },
     "TowerPropMonkeyVillageSwedenFlag": {
         "storeFilter": "Monkeys",
@@ -4861,7 +5228,8 @@
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
         "hidden": false,
-        "updateAdded": 37
+        "updateAdded": 37,
+        "cost": 25
     },
     "TowerPropMonkeyVillageUKFlag": {
         "storeFilter": "Monkeys",
@@ -4873,7 +5241,8 @@
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
         "hidden": false,
-        "updateAdded": 27
+        "updateAdded": 27,
+        "cost": 25
     },
     "TowerPropMonkeyVillageUSAFlag": {
         "storeFilter": "Monkeys",
@@ -4885,7 +5254,8 @@
         "exclusivity": "TowerPropFlag",
         "itemType": "Prop",
         "hidden": false,
-        "updateAdded": 25
+        "updateAdded": 25,
+        "cost": 25
     },
     "UIMusic-FrontierMain": {
         "storeFilter": "GameUI",
