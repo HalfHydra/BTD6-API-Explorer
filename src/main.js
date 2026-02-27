@@ -9024,6 +9024,24 @@ function generateTrophyStoreContainer(filter, display, counter) {
         itemTypeIcon.classList.add('trophy-store-item-type-icon');
         itemTypeIcon.src = `../Assets/UI/Trophy${data.storeFilter}Icon.png`;
         itemDiv.appendChild(itemTypeIcon);
+
+        let itemAddedIcon = createEl('div', {
+            classList: ['font-luckiest', 'ta-center', 'black-outline'],
+            style: {
+                position: "absolute",
+                width: "50px",
+                height: "50px",
+                left: "0",
+                top: "5%",
+                backgroundImage: "url(../Assets/UI/TrophyPipIcon.png)",
+                backgroundSize: "50px",
+                color: "white",
+                fontSize: "30px",
+                lineHeight: "50px"
+            },
+            innerHTML: data.updateAdded
+        })
+        itemDiv.appendChild(itemAddedIcon);
     }
 }
 
