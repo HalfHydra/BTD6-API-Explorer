@@ -545,215 +545,268 @@
     "quests": {
         "BeastHandlerQuest": {
             "nameLocKey": "BeastHandlerQuestName",
-            "icon": "QuestIconEpicBeastQuest"
+            "icon": "QuestIconEpicBeastQuest",
+            "type": "Tutorial"
         },
         "BikerRaceChallengeQuest": {
             "nameLocKey": "BikerRaceChallengeQuestName",
-            "icon": "QuestIconBikerBonesRace"
+            "icon": "QuestIconBikerBonesRace",
+            "type": "Challenge"
         },
         "QuincyTest": {
             "nameLocKey": "QuincyTestQuestName",
-            "icon": "QuestIconQuincyTestOfQuincy"
+            "icon": "QuestIconQuincyTestOfQuincy",
+            "type": "Tutorial"
         },
         "AnniversaryChallengeQuest": {
             "nameLocKey": "BTD6BirthdayQuestName",
-            "icon": "QuestIconBirthdayParty"
+            "icon": "QuestIconBirthdayParty",
+            "type": "Challenge"
         },
         "SaudaTestQuest": {
             "nameLocKey": "SaudaTestQuestName",
-            "icon": "QuestIconBladeSaudaNowhere"
+            "icon": "QuestIconBladeSaudaNowhere",
+            "type": "Tutorial"
         },
         "LogsCHIMPSChallengeQuest": {
             "nameLocKey": "LogsCHIMPSChallengeQuestName",
-            "icon": "QuestIconLogsChimps"
+            "icon": "QuestIconLogsChimps",
+            "type": "Challenge"
         },
         "Round100FirstStrikeQuest": {
             "nameLocKey": "Round100FirstStrikeQuestName",
-            "icon": "QuestIconStrikenBad"
+            "icon": "QuestIconStrikenBad",
+            "type": "Tutorial"
         },
         "BrickellTestQuest": {
             "nameLocKey": "BrickellTestQuestName",
-            "icon": "QuestIconBrickell"
+            "icon": "QuestIconBrickell",
+            "type": "Tutorial"
         },
         "GwendolinTestQuest": {
             "nameLocKey": "GwendolinTestQuestName",
-            "icon": "QuestIconGwendolin"
+            "icon": "QuestIconGwendolin",
+            "type": "Tutorial"
         },
         "ScoopsTaleIQuest": {
             "nameLocKey": "ScoopsTaleIQuestName",
-            "icon": "QuestIconScoopsTale1"
+            "icon": "QuestIconScoopsTale1",
+            "type": "Tale"
         },
         "GearedLeastTiersChallengeQuest": {
             "nameLocKey": "GearedLeastTiersChallengeQuestName",
-            "icon": "QuestIconGalaxiliLeastTiers"
+            "icon": "QuestIconGalaxiliLeastTiers",
+            "type": "Challenge"
         },
         "EtienneTest": {
             "nameLocKey": "EtienneTestQuestName",
-            "icon": "QuestIconDroneFlying101"
+            "icon": "QuestIconDroneFlying101",
+            "type": "Tutorial"
         },
         "ObynTest": {
             "nameLocKey": "ObynTestQuestName",
-            "icon": "QuestIconObynsGardeningSchool"
+            "icon": "QuestIconObynsGardeningSchool",
+            "type": "Tutorial"
         },
         "BouncyDartsTale": {
             "nameLocKey": "BouncyDartsTaleQuestName",
-            "icon": "QuestIconBouncyDarts"
+            "icon": "QuestIconBouncyDarts",
+            "type": "Tale"
         },
         "StrikerTestQuest": {
             "nameLocKey": "StrikerTestQuestName",
-            "icon": "QuestIconStrikerJones"
+            "icon": "QuestIconStrikerJones",
+            "type": "Tutorial"
         },
         "CorvusTestQuest": {
             "nameLocKey": "CorvusTestQuestName",
-            "icon": "QuestIconCorvus"
+            "icon": "QuestIconCorvus",
+            "type": "Tutorial"
         },
         "AcceleratedRoundSetChallengeQuest": {
             "nameLocKey": "AcceleratedRoundSetQuestName",
-            "icon": "QuestIconAcceleratedRoundSet"
+            "icon": "QuestIconAcceleratedRoundSet",
+            "type": "Experiment"
         },
         "FastUpgradesQuest": {
             "nameLocKey": "FastUpgradesQuestName",
-            "icon": "QuestIconFastUpgradesRemake"
+            "icon": "QuestIconFastUpgradesRemake",
+            "type": "Experiment"
         },
         "ChallengeMOABMadness": {
             "nameLocKey": "MOABMadnessQuestName",
-            "icon": "QuestIconMoabMadness"
+            "icon": "QuestIconMoabMadness",
+            "type": "Experiment"
         },
         "PatTestQuestName": {
             "nameLocKey": "PatTestQuestName",
-            "icon": "QuestIconPatFusty"
+            "icon": "QuestIconPatFusty",
+            "type": "Tutorial"
         },
         "HeroPsiQuest": {
             "nameLocKey": "PsiTestQuestName",
-            "icon": "QuestIconPsi"
+            "icon": "QuestIconPsi",
+            "type": "Tutorial"
         },
         "BloonariusBattleQuest": {
             "nameLocKey": "BloonariusBattleQuestName",
-            "icon": "QuestIconBloonariusBattle"
+            "icon": "QuestIconBloonariusBattle",
+            "type": "Tale"
         },
         "PhayzeOneQuest": {
             "nameLocKey": "PhayzeOneQuestName",
-            "icon": "QuestIconPhayzeOne"
+            "icon": "QuestIconPhayzeOne",
+            "type": "Experiment"
         },
         "HeroChurchillQuest": {
             "nameLocKey": "ChurchillTestQuestName",
-            "icon": "QuestIconCaptainChurchill"
+            "icon": "QuestIconCaptainChurchill",
+            "type": "Tutorial"
         },
         "HeroGeraldoQuest": {
             "nameLocKey": "GeraldoTestQuestName",
-            "icon": "QuestIconGeraldo"
+            "icon": "QuestIconGeraldo",
+            "type": "Tutorial"
         },
         "ProtectTheYacht": {
             "nameLocKey": "ProtectTheYachtQuestName",
-            "icon": "QuestIconMrBeast"
+            "icon": "QuestIconMrBeast",
+            "type": "Challenge"
         },
         "RosaliaTest": {
             "nameLocKey": "RosaliaTestQuestName",
-            "icon": "QuestIconRosalia"
+            "icon": "QuestIconRosalia",
+            "type": "Tutorial"
         },
         "PhayzeBloonQuest": {
             "nameLocKey": "PhayzeBloonQuestName",
-            "icon": "QuestIconPhayzeBloon"
+            "icon": "QuestIconPhayzeBloon",
+            "type": "Tale"
         },
         "DartlingGunnerQuest": {
             "nameLocKey": "DartlingGunnerQuestName",
-            "icon": "QuestIconSuperDartlingBros"
+            "icon": "QuestIconSuperDartlingBros",
+            "type": "Tale"
         },
         "MermonkeyQuest": {
             "nameLocKey": "MermonkeyQuestName",
-            "icon": "QuestIconMermonkeys"
+            "icon": "QuestIconMermonkeys",
+            "type": "Tale"
         },
         "EnduranceRaceQuest": {
             "nameLocKey": "EnduranceRaceQuest1Name",
-            "icon": "QuestIconFrozenRace"
+            "icon": "QuestIconFrozenRace",
+            "type": "Challenge"
         },
         "ChallengeFastTracked": {
             "nameLocKey": "FastTrackedQuestName",
-            "icon": "QuestIconWaterParkFastTrack"
+            "icon": "QuestIconWaterParkFastTrack",
+            "type": "Challenge"
         },
         "ChallengeOneSided": {
             "nameLocKey": "OneSidedQuestName",
-            "icon": "QuestIconInfernalOneSide"
+            "icon": "QuestIconInfernalOneSide",
+            "type": "Challenge"
         },
         "BattleCatQuest": {
             "nameLocKey": "BattleCatQuest1Name",
-            "icon": "QuestIconBattleCat"
+            "icon": "QuestIconBattleCat",
+            "type": "Tale"
         },
         "HeroAdoraQuest": {
             "nameLocKey": "AdoraTestQuest1Name",
-            "icon": "QuestIconAdora"
+            "icon": "QuestIconAdora",
+            "type": "Tutorial"
         },
         "ChallengeABRCHIMPOPPABLE": {
             "nameLocKey": "ABRCHIMPOPPABLEQuestName",
-            "icon": "QuestIconABRCHIMPOPPABLE"
+            "icon": "QuestIconABRCHIMPOPPABLE",
+            "type": "Challenge"
         },
         "ChallengeMoonColony": {
             "nameLocKey": "MoonColonyQuestName",
-            "icon": "QuestIconMoonColony"
+            "icon": "QuestIconMoonColony",
+            "type": "Challenge"
         },
         "ChallengeRaftDefense": {
             "nameLocKey": "RaftDefenseQuestName",
-            "icon": "QuestIconRaftDefense"
+            "icon": "QuestIconRaftDefense",
+            "type": "Challenge"
         },
         "RogueLegendQuest": {
             "nameLocKey": "RogueLegendQuest1Name",
-            "icon": "QuestIconRogueLegend"
+            "icon": "QuestIconRogueLegend",
+            "type": "Tale"
         },
         "ExperimentProjectileCarousel": {
             "nameLocKey": "ProjectileCarouselQuestName",
-            "icon": "QuestIconQuantumEntanglement"
+            "icon": "QuestIconQuantumEntanglement",
+            "type": "Experiment"
         },
         "SheRaQuest": {
             "nameLocKey": "SheRaQuestName",
-            "icon": "QuestIconSheRa"
+            "icon": "QuestIconSheRa",
+            "type": "Tale"
         },
         "ChallengeOneHero": {
             "nameLocKey": "ChallengeOneHeroQuestName",
-            "icon": "QuestIconOneMonkeyArmy"
+            "icon": "QuestIconOneMonkeyArmy",
+            "type": "Challenge"
         },
         "HeroEziliQuest": {
             "nameLocKey": "EziliTestQuestName",
-            "icon": "QuestIconEzili"
+            "icon": "QuestIconEzili",
+            "type": "Tutorial"
         },
         "DesperadoQuest": {
             "nameLocKey": "DesperadoQuestName",
-            "icon": "QuestIconDesperado"
+            "icon": "QuestIconDesperado",
+            "type": "Tale"
         },
         "1stTutorial": {
             "nameLocKey": "1stTutorialName",
-            "icon": "QuestIconTutorial"
+            "icon": "QuestIconTutorial",
+            "type": "Tutorial"
         },
         "ChallengeBloonHackers": {
             "nameLocKey": "ChallengeBloonHackersName",
-            "icon": "QuestIconBloonHackers"
+            "icon": "QuestIconBloonHackers",
+            "type": "Challenge"
         },
         "ExperimentRegularIncome": {
             "nameLocKey": "ExperimentRegularIncomeName",
-            "icon": "QuestIconRegularIncome"
+            "icon": "QuestIconRegularIncome",
+            "type": "Experiment"
         },
         "SilasTestQuest": {
             "nameLocKey": "SilasTestQuestName",
-            "icon": "QuestIconSilas"
+            "icon": "QuestIconSilas",
+            "type": "Tutorial"
         },
         "SkeletorQuest": {
             "nameLocKey": "SkeletorQuestName",
-            "icon": "QuestIconSkeletor"
+            "icon": "QuestIconSkeletor",
+            "type": "Tale"
         },
         "FrontierLegendQuest": {
             "nameLocKey": "FrontierLegendQuestName",
-            "icon": "QuestIconFrontierLegend"
+            "icon": "QuestIconFrontierLegend",
+            "type": "Tale"
         },
         "ChallengeSupportOnly": {
             "nameLocKey": "ChallengeSupportOnlyName",
-            "icon": "QuestIconSupportMonkeys"
+            "icon": "QuestIconSupportMonkeys",
+            "type": "Challenge"
         }, 
         "ChallengeTargetMonkeys": {
             "nameLocKey": "ChallengeTargetMonkeysName",
-            "icon": "QuestIconTargetingMonkeys"
+            "icon": "QuestIconTargetingMonkeys",
+            "type": "Challenge"
         },
         "ChallengeZOMGRush": {
             "nameLocKey": "ChallengeZOMGRushName",
-            "icon": "QuestIconZOMGRush"
+            "icon": "QuestIconZOMGRush",
+            "type": "Challenge"
         }
     },
     "BGColor": [0.000, 0.498, 1.000],
