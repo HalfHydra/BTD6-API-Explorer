@@ -1960,7 +1960,7 @@
         "itemType": "Avatar",
         "hidden": true,
         "obtainMethod": "Limited",
-        "updateAdded": 48
+        "updateAdded": 48.2
     },
     "GameUIProfileAvatar108": {
         "storeFilter": "GameUI",
@@ -3199,7 +3199,7 @@
         "itemType": "Avatar",
         "hidden": true,
         "obtainMethod": "Limited",
-        "updateAdded": 42
+        "updateAdded": 42.3
     },
     "GameUIProfileAvatar94": {
         "storeFilter": "GameUI",
@@ -3212,7 +3212,7 @@
         "itemType": "Avatar",
         "hidden": true,
         "obtainMethod": "Limited",
-        "updateAdded": 42
+        "updateAdded": 42.3
     },
     "GameUIProfileAvatar95": {
         "storeFilter": "GameUI",
@@ -3693,7 +3693,7 @@
         "itemType": "Banner",
         "hidden": true,
         "obtainMethod": "Limited",
-        "updateAdded": 42
+        "updateAdded": 42.3
     },
     "GameUIProfileBanner39": {
         "storeFilter": "GameUI",
@@ -4526,7 +4526,7 @@
         "exclusivity": "TowerPlacement",
         "itemType": "TowerAssetChange",
         "hidden": true,
-        "updateAdded": 29,
+        "updateAdded": 52,
         "cost": 60
     },
     "TPBombshooterFireworks": {

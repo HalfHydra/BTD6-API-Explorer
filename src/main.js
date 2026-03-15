@@ -84,6 +84,7 @@ let subFiltersMap = {
     "Coop": ["All", "StandardEmotes", "TextEmotes", "SoundEmotes", "FullScreenEmotes"],
     "GameUI": ["All", "MusicTracks","Avatars", "ProfileBanners", "PowerSkins", "Misc"]
 }
+let trophyStoreShowHidden = true;
 
 let showTeamsItems = false;
 
@@ -8789,18 +8790,22 @@ function generateTrophyStoreProgress() {
     progressContent.innerHTML = "";
 
     trophyStoreSubFilter = "All";
-    trophyStoreSortOption = "Default";
+    trophyStoreSortOption = "Newly Added";
 
     let progressContainer = document.createElement('div');
     progressContainer.classList.add('trophy-store-progress-container');
     progressContent.appendChild(progressContainer);
 
-    let achievementsHeaderBar = document.createElement('div');
-    achievementsHeaderBar.classList.add('trophy-store-header-bar');
+    let achievementsHeaderBar = createEl('div', {
+        classList: ['trophy-store-header-bar'],
+        style: {
+            backgroundColor: "#3C347E"
+        }
+    });
     progressContainer.appendChild(achievementsHeaderBar);
 
     let headerTop = document.createElement('div');
-    headerTop.classList.add('achievements-header-bar');
+    headerTop.classList.add('achievements-header-bar', 'currency-trophies-div');
     achievementsHeaderBar.appendChild(headerTop);
 
     let headerBottom = document.createElement('div');
@@ -8813,10 +8818,11 @@ function generateTrophyStoreProgress() {
 
     let mapProgressFilterDifficulty2 = document.createElement('div');
     mapProgressFilterDifficulty2.classList.add('map-progress-filter-difficulty');
+    mapProgressFilterDifficulty2.style.width = "250px";
 
     let mapsProgressFilterDifficultyText2 = document.createElement('p');
     mapsProgressFilterDifficultyText2.classList.add('maps-progress-coop-toggle-text','black-outline');
-    mapsProgressFilterDifficultyText2.innerHTML = "Item Type:";
+    mapsProgressFilterDifficultyText2.innerHTML = "Store Tab:";
     mapProgressFilterDifficulty2.appendChild(mapsProgressFilterDifficultyText2);
 
     let mapProgressFilterDifficultySelect2 = document.createElement('select');
@@ -8832,31 +8838,54 @@ function generateTrophyStoreProgress() {
     mapProgressFilterDifficulty2.appendChild(mapProgressFilterDifficultySelect2);
 
     let countsDiv = createEl('div', {
-        classList: ['d-flex','ai-center', 'jc-evenly', 'w-100'],
+        classList: ['d-flex', 'jc-evenly', 'w-100'],
     })
 
     let trophyStoreItemCounter = createEl('p', {
-        classList: ['trophy-store-item-counter', 'black-outline'],
+        classList: ['trophy-store-item-counter', 'black-outline', 'ai-center', 'jc-center'],
         style: {
             padding: "8px 16px",
             backgroundColor: "rgba(0,0,0,0.36)",
             borderRadius: "10px",
-            margin: "4px"
+            margin: "4px",
+            minWidth: "200px"
         },
         innerHTML: "0/0"
     });
     countsDiv.appendChild(trophyStoreItemCounter);
 
     let trophyStoreTrophyCounter = createEl('div', {
-        classList: ['d-flex'],
+        classList: ['d-flex', 'ai-center', 'jc-center'],
         style: {
             padding: "4px 16px",
             backgroundColor: "rgba(0,0,0,0.36)",
             borderRadius: "10px",
-            margin: "4px"
+            margin: "4px",
+            minWidth: "200px"
         },
     });
     countsDiv.appendChild(trophyStoreTrophyCounter);
+
+    let trophyStoreHiddenToggle = createEl('div', {
+        classList: ['d-flex', 'ai-center'],
+        style: {
+            padding: "4px 16px",
+            backgroundColor: "rgba(0,0,0,0.36)",
+            borderRadius: "10px",
+            margin: "4px",
+            minWidth: "200px"
+        },
+    });
+    countsDiv.appendChild(trophyStoreHiddenToggle);
+
+    let hiddenLabel = createEl('p', { classList: ['black-outline'], style: { fontSize: "20px" }, innerHTML: 'Hidden Items' });
+    trophyStoreHiddenToggle.appendChild(hiddenLabel);
+
+    let hiddenToggleBtn = generateToggle(trophyStoreShowHidden, (checked) => {
+        trophyStoreShowHidden = checked;
+        generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue);
+    });
+    trophyStoreHiddenToggle.appendChild(hiddenToggleBtn);
 
     let trophyStoreTrophyCounterLabel = createEl('p', {
         classList: ['trophy-store-item-counter', 'black-outline'],
@@ -8890,6 +8919,7 @@ function generateTrophyStoreProgress() {
 
     let displayFilterToggles = document.createElement('div');
     displayFilterToggles.classList.add('map-progress-filter-difficulty');
+    displayFilterToggles.style.width = "240px";
 
     let displayFiltersText = document.createElement('p');
     displayFiltersText.classList.add('maps-progress-coop-toggle-text','black-outline');
@@ -8901,7 +8931,7 @@ function generateTrophyStoreProgress() {
     mapProgressFilterDifficultySelect.addEventListener('change', () => {
         generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue);
     })
-    let options = ["All","Owned","Unowned","Hidden", "New"]
+    let options = ["All","Owned Only","Unowned Only","Hidden Only", "New Only"]
     options.forEach((option) => {
         let difficultyOption = document.createElement('option');
         difficultyOption.value = option;
@@ -8910,10 +8940,11 @@ function generateTrophyStoreProgress() {
     })
     displayFilterToggles.appendChild(mapProgressFilterDifficultySelect);
 
-    let sortDropdown = generateDropdown("Sort By:", ["Default", "Highest Cost", "Lowest Cost", "Update Added"], "Default", (option) => {
+    let sortDropdown = generateDropdown("Sort By:", ["Default", "Highest Cost", "Lowest Cost", "First Added", "Newly Added"], trophyStoreSortOption, (option) => {
         trophyStoreSortOption = option;
         generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue);
     })
+    sortDropdown.style.width = "240px";
 
     headerTop.appendChild(countsDiv);
 
@@ -8983,17 +9014,20 @@ function generateTrophyStoreContainer(filter, display, counter, trophies) {
     if (trophyStoreSubFilter !== "All") {
         trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.subFilter === trophyStoreSubFilter));
     }
+    if (!trophyStoreShowHidden) {
+        trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => !data.hidden));
+    }
 
     switch(display) {
         case "All":
             break;
-        case "Unowned":
+        case "Unowned Only":
             trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => !getTrophyItemObtained(key)));
             break;
-        case "Owned":
+        case "Owned Only":
             trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => getTrophyItemObtained(key)));
             break;
-        case "Hidden":
+        case "Hidden Only":
             trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.hidden));
             trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).sort(([key1, data1], [key2, data2]) => {
                 if (btd6usersave.trophyStoreItems.hasOwnProperty(key1) && btd6usersave.trophyStoreItems[key1] && (!btd6usersave.trophyStoreItems.hasOwnProperty(key2) || !btd6usersave.trophyStoreItems[key2])) {
@@ -9005,7 +9039,7 @@ function generateTrophyStoreContainer(filter, display, counter, trophies) {
                 }
             }));
             break;
-        case "New":
+        case "New Only":
             trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.hasOwnProperty("isNew")));
             break;
     }
@@ -9027,15 +9061,20 @@ function generateTrophyStoreContainer(filter, display, counter, trophies) {
                 return data1.cost - data2.cost;
             }));
             break;
-        case "Update Added":
+        case "Newly Added":
             trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).sort(([key1, data1], [key2, data2]) => {
                 return data2.updateAdded - data1.updateAdded;
+            }));
+            break;
+        case "First Added":
+            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).sort(([key1, data1], [key2, data2]) => {
+                return data1.updateAdded - data2.updateAdded;
             }));
             break;
     }
 
     switch(display){
-        case "Unowned":
+        case "Unowned Only":
         case "Owned":
             counter.innerHTML = `${Object.keys(trophyStoreItemsToDisplay).length} Items`;
             break;
@@ -9046,7 +9085,7 @@ function generateTrophyStoreContainer(filter, display, counter, trophies) {
     trophies.innerHTML = Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.cost && !getTrophyItemObtained(key)).reduce((total, [key, data]) => total + data.cost, 0);
 
     if (Object.keys(trophyStoreItemsToDisplay).length == 0) {
-        counter.innerHTML = "No Items Match Filters";
+        counter.innerHTML = "No Items Match";
     }
 
     for (let [key, data] of Object.entries(trophyStoreItemsToDisplay)) {
@@ -9134,7 +9173,7 @@ function generateTrophyStoreContainer(filter, display, counter, trophies) {
                 fontSize: "22px",
                 lineHeight: "50px"
             },
-            innerHTML: data.updateAdded + ".0"
+            innerHTML: data.updateAdded.toFixed(1)
         })
         itemDiv.appendChild(itemAddedIcon);
     }
