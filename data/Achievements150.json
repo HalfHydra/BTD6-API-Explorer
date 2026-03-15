@@ -10,10 +10,7 @@
             "achievementGoal": 100000000,
             "loot": "MonkeyMoney:1000#Power:SuperMonkeyStorm,5#InstaMonkey:SuperMonkey,302",
             "isCoop": false,
-            "steamStatName": "bloonsPopped",
-            "hidden": false,
-            "type": "AchievementImpoppable",
-            "googlePlayId": "CgkIipCe5swWEAIQAQ"
+            "hidden": false
         }
     },
     "1": {
@@ -27,10 +24,7 @@
             "achievementGoal": 25000,
             "loot": "MonkeyMoney:250#InstaMonkey:BombShooter,000",
             "isCoop": false,
-            "steamStatName": "moabsPopped",
-            "hidden": false,
-            "type": "AchievementMoabAssasin",
-            "googlePlayId": "CgkIipCe5swWEAIQAg"
+            "hidden": false
         }
     },
     "2": {
@@ -44,10 +38,7 @@
             "achievementGoal": 10000,
             "loot": "MonkeyMoney:500#Power:MoabMine,3",
             "isCoop": false,
-            "steamStatName": "bfbsPopped",
-            "hidden": false,
-            "type": "AchievementBfbBrawler",
-            "googlePlayId": "CgkIipCe5swWEAIQAw"
+            "hidden": false
         }
     },
     "3": {
@@ -61,10 +52,7 @@
             "achievementGoal": 5000,
             "loot": "MonkeyMoney:750#Power:MonkeyBoost,3#InstaMonkey:SniperMonkey,400",
             "isCoop": false,
-            "steamStatName": "zomgsPopped",
-            "hidden": false,
-            "type": "AchievementZomginator",
-            "googlePlayId": "CgkIipCe5swWEAIQBA"
+            "hidden": false
         }
     },
     "4": {
@@ -78,10 +66,7 @@
             "achievementGoal": 5000,
             "loot": "MonkeyMoney:750#Power:SuperMonkeyStorm,3",
             "isCoop": false,
-            "steamStatName": "ddtsPopped",
-            "hidden": false,
-            "type": "AchievementMeDidAJobOnDdt",
-            "googlePlayId": "CgkIipCe5swWEAIQBQ"
+            "hidden": false
         }
     },
     "5": {
@@ -95,10 +80,7 @@
             "achievementGoal": 5000000,
             "loot": "MonkeyMoney:500#KnowledgePoints:1",
             "isCoop": false,
-            "steamStatName": "fortifiedPopped",
-            "hidden": false,
-            "type": "AchievementSapper",
-            "googlePlayId": "CgkIipCe5swWEAIQBg"
+            "hidden": false
         }
     },
     "6": {
@@ -112,10 +94,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:20",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementFirstWin",
-            "googlePlayId": "CgkIipCe5swWEAIQBw"
+            "hidden": false
         }
     },
     "7": {
@@ -129,10 +108,7 @@
             "achievementGoal": 9,
             "loot": "MonkeyMoney:100#InstaMonkey:Druid,000",
             "isCoop": false,
-            "steamStatName": "differentBeginnerWins",
-            "hidden": false,
-            "type": "AchievementGrasshopper",
-            "googlePlayId": "CgkIipCe5swWEAIQCA"
+            "hidden": false
         }
     },
     "8": {
@@ -146,10 +122,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50#Power:RoadSpikes,3",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementNextLevel",
-            "googlePlayId": "CgkIipCe5swWEAIQCQ"
+            "hidden": false
         }
     },
     "9": {
@@ -163,10 +136,7 @@
             "achievementGoal": 5,
             "loot": "MonkeyMoney:250",
             "isCoop": false,
-            "steamStatName": "differentIntermediateWins",
-            "hidden": false,
-            "type": "AchievementAcolyte",
-            "googlePlayId": "CgkIipCe5swWEAIQCg"
+            "hidden": false
         }
     },
     "10": {
@@ -180,10 +150,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#Power:BananaFarmer",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementAdvancedPlayer",
-            "googlePlayId": "CgkIipCe5swWEAIQCw"
+            "hidden": false
         }
     },
     "11": {
@@ -197,10 +164,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:20",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementBigMonkey",
-            "googlePlayId": "CgkIipCe5swWEAIQDA"
+            "hidden": false
         }
     },
     "12": {
@@ -214,10 +178,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementMegaMonkey",
-            "googlePlayId": "CgkIipCe5swWEAIQDQ"
+            "hidden": false
         }
     },
     "13": {
@@ -231,10 +192,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:20",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementHeroTime",
-            "googlePlayId": "CgkIipCe5swWEAIQDg"
+            "hidden": false
         }
     },
     "14": {
@@ -248,10 +206,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:20",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementHeroPowersActivate",
-            "googlePlayId": "CgkIipCe5swWEAIQDw"
+            "hidden": false
         }
     },
     "15": {
@@ -265,10 +220,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementBiggerBadder",
-            "googlePlayId": "CgkIipCe5swWEAIQEA"
+            "hidden": false
         }
     },
     "16": {
@@ -282,10 +234,7 @@
             "achievementGoal": 20,
             "loot": "MonkeyMoney:250",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementEpicHero",
-            "googlePlayId": "CgkIipCe5swWEAIQEQ"
+            "hidden": false
         }
     },
     "17": {
@@ -299,10 +248,7 @@
             "achievementGoal": 4,
             "loot": "MonkeyMoney:100",
             "isCoop": false,
-            "steamStatName": "differentHeroWins",
-            "hidden": false,
-            "type": "AchievementMonkeyAvengerLeague",
-            "googlePlayId": "CgkIipCe5swWEAIQEg"
+            "hidden": false
         }
     },
     "18": {
@@ -316,10 +262,7 @@
             "achievementGoal": 1,
             "loot": "Power:MonkeyBoost",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementYouveGotThePower",
-            "googlePlayId": "CgkIipCe5swWEAIQEw"
+            "hidden": false
         }
     },
     "19": {
@@ -333,10 +276,7 @@
             "achievementGoal": 25,
             "loot": "MonkeyMoney:150",
             "isCoop": false,
-            "steamStatName": "totalPowersActivated",
-            "hidden": false,
-            "type": "AchievementPowerUser",
-            "googlePlayId": "CgkIipCe5swWEAIQFA"
+            "hidden": false
         }
     },
     "20": {
@@ -350,10 +290,7 @@
             "achievementGoal": 100,
             "loot": "MonkeyMoney:250",
             "isCoop": false,
-            "steamStatName": "totalPowersActivated",
-            "hidden": false,
-            "type": "AchievementEmpowered",
-            "googlePlayId": "CgkIipCe5swWEAIQFQ"
+            "hidden": false
         }
     },
     "21": {
@@ -367,10 +304,7 @@
             "achievementGoal": 1,
             "loot": "Power:CashDrop,2#InstaMonkey:WizardMonkey,000",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementStudent",
-            "googlePlayId": "CgkIipCe5swWEAIQFg"
+            "hidden": false
         }
     },
     "22": {
@@ -384,10 +318,7 @@
             "achievementGoal": 10,
             "loot": "MonkeyMoney:100#InstaMonkey:Druid,001",
             "isCoop": false,
-            "steamStatName": "knowledgePointsApplied",
-            "hidden": false,
-            "type": "AchievementScholar",
-            "googlePlayId": "CgkIipCe5swWEAIQFw"
+            "hidden": false
         }
     },
     "23": {
@@ -401,10 +332,7 @@
             "achievementGoal": 106,
             "loot": "MonkeyMoney:1000",
             "isCoop": false,
-            "steamStatName": "knowledgePointsApplied",
-            "hidden": false,
-            "type": "AchievementDrMonkey",
-            "googlePlayId": "CgkIipCe5swWEAIQGQ"
+            "hidden": false
         }
     },
     "24": {
@@ -418,10 +346,7 @@
             "achievementGoal": 10,
             "loot": "Power:MonkeyBoost,2#InstaMonkey:DartMonkey,300",
             "isCoop": false,
-            "steamStatName": "onlyPrimaryWins",
-            "hidden": false,
-            "type": "AchievementFirstMonkeysFirst",
-            "googlePlayId": "CgkIipCe5swWEAIQGg"
+            "hidden": false
         }
     },
     "25": {
@@ -435,10 +360,7 @@
             "achievementGoal": 10,
             "loot": "Power:MoabMine,3#InstaMonkey:SniperMonkey,202",
             "isCoop": false,
-            "steamStatName": "onlyMilitaryWins",
-            "hidden": false,
-            "type": "AchievementWarMonkeys",
-            "googlePlayId": "CgkIipCe5swWEAIQGw"
+            "hidden": false
         }
     },
     "26": {
@@ -452,10 +374,7 @@
             "achievementGoal": 10,
             "loot": "Power:SuperMonkeyStorm#InstaMonkey:Druid,003",
             "isCoop": false,
-            "steamStatName": "onlyMagicWins",
-            "hidden": false,
-            "type": "AchievementAbracadabmonkey",
-            "googlePlayId": "CgkIipCe5swWEAIQHA"
+            "hidden": false
         }
     },
     "27": {
@@ -469,10 +388,7 @@
             "achievementGoal": 10,
             "loot": "Power:BananaFarmer,2#InstaMonkey:BananaFarm,200",
             "isCoop": false,
-            "steamStatName": "onlySupportWins",
-            "hidden": false,
-            "type": "AchievementUnsungMonkeys",
-            "googlePlayId": "CgkIipCe5swWEAIQHQ"
+            "hidden": false
         }
     },
     "28": {
@@ -486,10 +402,7 @@
             "achievementGoal": 100,
             "loot": "MonkeyMoney:100",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementInflated",
-            "googlePlayId": "CgkIipCe5swWEAIQHg"
+            "hidden": false
         }
     },
     "29": {
@@ -503,10 +416,7 @@
             "achievementGoal": 100,
             "loot": "MonkeyMoney:100",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementSurvivor",
-            "googlePlayId": "CgkIipCe5swWEAIQHw"
+            "hidden": false
         }
     },
     "30": {
@@ -520,10 +430,7 @@
             "achievementGoal": 25,
             "loot": "MonkeyMoney:100#Power:GlueTrap,3",
             "isCoop": false,
-            "steamStatName": "alternateBloonRoundsWins",
-            "hidden": false,
-            "type": "AchievementIndie",
-            "googlePlayId": "CgkIipCe5swWEAIQIA"
+            "hidden": false
         }
     },
     "31": {
@@ -537,10 +444,7 @@
             "achievementGoal": 25,
             "loot": "MonkeyMoney:500#Power:SuperMonkeyStorm,3",
             "isCoop": false,
-            "steamStatName": "impoppableWins",
-            "hidden": false,
-            "type": "AchievementPoppable",
-            "googlePlayId": "CgkIipCe5swWEAIQIQ"
+            "hidden": false
         }
     },
     "32": {
@@ -554,10 +458,7 @@
             "achievementGoal": 10,
             "loot": "MonkeyMoney:250#Power:CashDrop,3",
             "isCoop": false,
-            "steamStatName": "halfCashWins",
-            "hidden": false,
-            "type": "AchievementThrifty",
-            "googlePlayId": "CgkIipCe5swWEAIQIg"
+            "hidden": false
         }
     },
     "33": {
@@ -571,10 +472,7 @@
             "achievementGoal": 25,
             "loot": "MonkeyMoney:250#Power:MoabMine,3",
             "isCoop": false,
-            "steamStatName": "doubleHpWins",
-            "hidden": false,
-            "type": "AchievementBloonzilla",
-            "googlePlayId": "CgkIipCe5swWEAIQIw"
+            "hidden": false
         }
     },
     "34": {
@@ -588,10 +486,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementRoleReverser",
-            "googlePlayId": "CgkIipCe5swWEAIQJA"
+            "hidden": false
         }
     },
     "35": {
@@ -605,10 +500,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#Power:PortableLake",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementMedalWinner",
-            "googlePlayId": "CgkIipCe5swWEAIQJQ"
+            "hidden": false
         }
     },
     "36": {
@@ -622,10 +514,7 @@
             "achievementGoal": 36,
             "loot": "MonkeyMoney:250#Power:Thrive,2",
             "isCoop": false,
-            "steamStatName": "beginnerMapMedals",
-            "hidden": false,
-            "type": "AchievementDecoratedHero",
-            "googlePlayId": "CgkIipCe5swWEAIQJg"
+            "hidden": false
         }
     },
     "37": {
@@ -639,10 +528,7 @@
             "achievementGoal": 100000,
             "loot": "MonkeyMoney:200#Power:DartTime,3",
             "isCoop": false,
-            "steamStatName": "purplesPopped",
-            "hidden": false,
-            "type": "AchievementRedAndBlueMakes",
-            "googlePlayId": "CgkIipCe5swWEAIQJw"
+            "hidden": false
         }
     },
     "38": {
@@ -656,10 +542,7 @@
             "achievementGoal": 250000,
             "loot": "MonkeyMoney:100#Power:CamoTrap,3",
             "isCoop": false,
-            "steamStatName": "camosPopped",
-            "hidden": false,
-            "type": "AchievementInfrared",
-            "googlePlayId": "CgkIipCe5swWEAIQKA"
+            "hidden": false
         }
     },
     "39": {
@@ -673,10 +556,7 @@
             "achievementGoal": 12,
             "loot": "MonkeyMoney:200",
             "isCoop": false,
-            "steamStatName": "differentPowersCollected",
-            "hidden": false,
-            "type": "AchievementOurPowersCombined",
-            "googlePlayId": "CgkIipCe5swWEAIQKQ"
+            "hidden": false
         }
     },
     "40": {
@@ -690,10 +570,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:25",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementChallenger",
-            "googlePlayId": "CgkIipCe5swWEAIQKg"
+            "hidden": false
         }
     },
     "41": {
@@ -707,10 +584,7 @@
             "achievementGoal": 10,
             "loot": "MonkeyMoney:100#Power:Pontoon",
             "isCoop": false,
-            "steamStatName": "dailyChallengeWins",
-            "hidden": false,
-            "type": "AchievementChallengeApprentice",
-            "googlePlayId": "CgkIipCe5swWEAIQKw"
+            "hidden": false
         }
     },
     "42": {
@@ -724,10 +598,7 @@
             "achievementGoal": 100,
             "loot": "MonkeyMoney:500",
             "isCoop": false,
-            "steamStatName": "dailyChallengeWins",
-            "hidden": false,
-            "type": "AchievementChallengeMaster",
-            "googlePlayId": "CgkIipCe5swWEAIQLA"
+            "hidden": false
         }
     },
     "43": {
@@ -741,10 +612,7 @@
             "achievementGoal": 7,
             "loot": "MonkeyMoney:250",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementPerfectWeek",
-            "googlePlayId": "CgkIipCe5swWEAIQLQ"
+            "hidden": false
         }
     },
     "44": {
@@ -758,10 +626,7 @@
             "achievementGoal": 100,
             "loot": "InstaMonkey:WizardMonkey,300#Power:Thrive",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementKnowledgablePrimate",
-            "googlePlayId": "CgkIipCe5swWEAIQGA"
+            "hidden": false
         }
     },
     "45": {
@@ -775,10 +640,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:250#KnowledgePoints:1",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementClicker",
-            "googlePlayId": "CgkIipCe5swWEAIQLg"
+            "hidden": false
         }
     },
     "46": {
@@ -792,10 +654,7 @@
             "achievementGoal": 5,
             "loot": "MonkeyMoney:1000#KnowledgePoints:2",
             "isCoop": false,
-            "steamStatName": "chimpsWins",
-            "hidden": false,
-            "type": "AchievementSuperiorClicker",
-            "googlePlayId": "CgkIipCe5swWEAIQLw"
+            "hidden": false
         }
     },
     "47": {
@@ -809,10 +668,7 @@
             "achievementGoal": 15,
             "loot": "MonkeyMoney:2000#KnowledgePoints:4",
             "isCoop": false,
-            "steamStatName": "chimpsWins",
-            "hidden": false,
-            "type": "AchievementUltimateClicker",
-            "googlePlayId": "CgkIipCe5swWEAIQMA"
+            "hidden": false
         }
     },
     "48": {
@@ -826,10 +682,7 @@
             "achievementGoal": 1000,
             "loot": "MonkeyMoney:500#Power:RoadSpikes,10",
             "isCoop": false,
-            "steamStatName": "badsPopped",
-            "hidden": false,
-            "type": "AchievementSuperBad",
-            "googlePlayId": "CgkIipCe5swWEAIQMQ"
+            "hidden": false
         }
     },
     "49": {
@@ -843,10 +696,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementCooperation",
-            "googlePlayId": "CgkIipCe5swWEAIQMg"
+            "hidden": false
         }
     },
     "50": {
@@ -860,10 +710,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementFourTimesTheFun",
-            "googlePlayId": "CgkIipCe5swWEAIQMw"
+            "hidden": false
         }
     },
     "51": {
@@ -877,10 +724,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:75",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementTripleThreat",
-            "googlePlayId": "CgkIipCe5swWEAIQNA"
+            "hidden": false
         }
     },
     "52": {
@@ -894,10 +738,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementCollaborate",
-            "googlePlayId": "CgkIipCe5swWEAIQNQ"
+            "hidden": false
         }
     },
     "53": {
@@ -911,10 +752,7 @@
             "achievementGoal": 10,
             "loot": "MonkeyMoney:200#Power:SuperMonkeyStorm,2",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementWhenTheGoingGetsTough",
-            "googlePlayId": "CgkIipCe5swWEAIQNg"
+            "hidden": false
         }
     },
     "54": {
@@ -928,10 +766,7 @@
             "achievementGoal": 10000,
             "loot": "MonkeyMoney:25",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementKindBenefactor",
-            "googlePlayId": "CgkIipCe5swWEAIQNw"
+            "hidden": false
         }
     },
     "55": {
@@ -945,10 +780,7 @@
             "achievementGoal": 50000,
             "loot": "MonkeyMoney:50",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementGenerousBenefactor",
-            "googlePlayId": "CgkIipCe5swWEAIQOA"
+            "hidden": false
         }
     },
     "56": {
@@ -962,10 +794,7 @@
             "achievementGoal": 100000,
             "loot": "MonkeyMoney:100",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementMonkeyContributor",
-            "googlePlayId": "CgkIipCe5swWEAIQOQ"
+            "hidden": false
         }
     },
     "57": {
@@ -979,10 +808,7 @@
             "achievementGoal": 1000000,
             "loot": "KnowledgePoints:1",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementMonkeyPhilanthropist",
-            "googlePlayId": "CgkIipCe5swWEAIQOg"
+            "hidden": false
         }
     },
     "58": {
@@ -996,10 +822,7 @@
             "achievementGoal": 10,
             "loot": "MonkeyMoney:50",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementPowershare",
-            "googlePlayId": "CgkIipCe5swWEAIQOw"
+            "hidden": false
         }
     },
     "59": {
@@ -1013,10 +836,7 @@
             "achievementGoal": 100,
             "loot": "MonkeyMoney:200",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementPowerOverwhelming",
-            "googlePlayId": "CgkIipCe5swWEAIQPA"
+            "hidden": false
         }
     },
     "60": {
@@ -1030,10 +850,7 @@
             "achievementGoal": 5,
             "loot": "Power:CashDrop,2#Power:PortableLake,1",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementInstaDefence",
-            "googlePlayId": "CgkIipCe5swWEAIQPQ"
+            "hidden": false
         }
     },
     "61": {
@@ -1047,10 +864,7 @@
             "achievementGoal": 10000000,
             "loot": "MonkeyMoney:300",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementCoopPopper",
-            "googlePlayId": "CgkIipCe5swWEAIQPg"
+            "hidden": false
         }
     },
     "62": {
@@ -1064,10 +878,7 @@
             "achievementGoal": 10,
             "loot": "BigBloonsMode",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": true,
-            "type": "AchievementBigBloons",
-            "googlePlayId": "CgkIipCe5swWEAIQPw"
+            "hidden": true
         }
     },
     "63": {
@@ -1081,10 +892,7 @@
             "achievementGoal": 900000,
             "loot": "SmallBloonsMode",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": true,
-            "type": "AchievementSmallBloons",
-            "googlePlayId": "CgkIipCe5swWEAIQQA"
+            "hidden": true
         }
     },
     "64": {
@@ -1098,10 +906,7 @@
             "achievementGoal": 1,
             "loot": "KnowledgePoints:2#InstaMonkey:WizardMonkey,040",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": true,
-            "type": "Achievement2TC",
-            "googlePlayId": "CgkIipCe5swWEAIQQQ"
+            "hidden": true
         }
     },
     "65": {
@@ -1115,10 +920,7 @@
             "achievementGoal": 1,
             "loot": "RandomInstaMonkey:1,2#RandomInstaMonkey:2,2#RandomInstaMonkey:3,1",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementSnapOfYourFingers",
-            "googlePlayId": "CgkIipCe5swWEAIQQg"
+            "hidden": false
         }
     },
     "66": {
@@ -1132,10 +934,7 @@
             "achievementGoal": 1,
             "loot": "Power:CashDrop,5",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": true,
-            "type": "AchievementBillGreates",
-            "googlePlayId": "CgkIipCe5swWEAIQQw"
+            "hidden": true
         }
     },
     "67": {
@@ -1149,10 +948,7 @@
             "achievementGoal": 500,
             "loot": "MonkeyMoney:250",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementBloontona500",
-            "googlePlayId": "CgkIipCe5swWEAIQRA"
+            "hidden": false
         }
     },
     "68": {
@@ -1166,10 +962,7 @@
             "achievementGoal": 1,
             "loot": "Power:MonkeyBoost,2#Power:DartTime,2",
             "isCoop": false,
-            "steamStatName": "raceEntryGained",
-            "hidden": false,
-            "type": "AchievementRookieOfTheYear",
-            "googlePlayId": "CgkIipCe5swWEAIQRQ"
+            "hidden": false
         }
     },
     "69": {
@@ -1183,10 +976,7 @@
             "achievementGoal": 1,
             "loot": "KnowledgePoints:1",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementRisingStar",
-            "googlePlayId": "CgkIipCe5swWEAIQRg"
+            "hidden": false
         }
     },
     "70": {
@@ -1200,10 +990,7 @@
             "achievementGoal": 1,
             "loot": "InstaMonkey:HeliPilot,130",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementTopOfYourGame",
-            "googlePlayId": "CgkIipCe5swWEAIQRw"
+            "hidden": false
         }
     },
     "71": {
@@ -1217,10 +1004,7 @@
             "achievementGoal": 200,
             "loot": "Power:CashDrop#Power:TechBot,5",
             "isCoop": false,
-            "steamStatName": "challengesCreatedOrPlayed",
-            "hidden": false,
-            "type": "AchievementTheGreatestChallenge",
-            "googlePlayId": "CgkIipCe5swWEAIQSA"
+            "hidden": false
         }
     },
     "72": {
@@ -1234,10 +1018,7 @@
             "achievementGoal": 100,
             "loot": "MonkeyMoney:500",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementLookingFab",
-            "googlePlayId": "CgkIipCe5swWEAIQSQ"
+            "hidden": false
         }
     },
     "73": {
@@ -1251,10 +1032,7 @@
             "achievementGoal": 200000,
             "loot": "Power:PortableLake,2#InstaMonkey:MonkeyBuccaneer,040",
             "isCoop": false,
-            "steamStatName": "peninsulaBloonsPopped",
-            "hidden": false,
-            "type": "AchievementTherpopylae",
-            "googlePlayId": "CgkIipCe5swWEAIQSg"
+            "hidden": false
         }
     },
     "74": {
@@ -1268,10 +1046,7 @@
             "achievementGoal": 1000000000,
             "loot": "InstaMonkey:Alchemist,104",
             "isCoop": false,
-            "steamStatName": "masterAlchemistDamage",
-            "hidden": false,
-            "type": "AchievementBloonMasterPopulous",
-            "googlePlayId": "CgkIipCe5swWEAIQSw"
+            "hidden": false
         }
     },
     "75": {
@@ -1285,10 +1060,7 @@
             "achievementGoal": 10000,
             "loot": "Power:CamoTrap,3",
             "isCoop": false,
-            "steamStatName": "shimmeredBloons",
-            "hidden": false,
-            "type": "AchievementISeeYou",
-            "googlePlayId": "CgkIipCe5swWEAIQTA"
+            "hidden": false
         }
     },
     "76": {
@@ -1302,10 +1074,7 @@
             "achievementGoal": 1,
             "loot": "RandomInstaMonkey:0,2",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementTetrimino",
-            "googlePlayId": "CgkIipCe5swWEAIQTQ"
+            "hidden": false
         }
     },
     "77": {
@@ -1319,10 +1088,7 @@
             "achievementGoal": 1,
             "loot": "KnowledgePoints:1",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementAllForOne",
-            "googlePlayId": "CgkIipCe5swWEAIQTg"
+            "hidden": false
         }
     },
     "78": {
@@ -1336,10 +1102,7 @@
             "achievementGoal": 1,
             "loot": "Power:SuperMonkeyStorm,1#Power:GlueTrap,1",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementMasterOfLife",
-            "googlePlayId": "CgkIipCe5swWEAIQTw"
+            "hidden": false
         }
     },
     "79": {
@@ -1353,10 +1116,7 @@
             "achievementGoal": 20000,
             "loot": "Power:MonkeyBoost,1#Power:EnergisingTotem,1",
             "isCoop": false,
-            "steamStatName": "rainbowPopsWithMagic",
-            "hidden": false,
-            "type": "AchievementRainbowIsMagic",
-            "googlePlayId": "CgkIipCe5swWEAIQUA"
+            "hidden": false
         }
     },
     "80": {
@@ -1370,10 +1130,7 @@
             "achievementGoal": 1,
             "loot": "InstaMonkey:SuperMonkey,300",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": true,
-            "type": "AchievementStrangelyAdorable",
-            "googlePlayId": "CgkIipCe5swWEAIQUQ"
+            "hidden": true
         }
     },
     "81": {
@@ -1387,10 +1144,7 @@
             "achievementGoal": 1,
             "loot": "InstaMonkey:SpikeFactory,003",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": true,
-            "type": "AchievementJoshsConstant",
-            "googlePlayId": "CgkIipCe5swWEAIQUg"
+            "hidden": true
         }
     },
     "82": {
@@ -1404,10 +1158,7 @@
             "achievementGoal": 23,
             "loot": "InstaMonkey:BoomerangMonkey,001#InstaMonkey:MonkeyAce,001#InstaMonkey:Druid,010#InstaMonkey:BananaFarm,001",
             "isCoop": false,
-            "steamStatName": "differentTowersSacrificed",
-            "hidden": false,
-            "type": "AchievementWhatDidItCost",
-            "googlePlayId": "CgkIipCe5swWEAIQUw"
+            "hidden": false
         }
     },
     "83": {
@@ -1421,10 +1172,7 @@
             "achievementGoal": 1,
             "loot": "Power:MonkeyBoost#Power:DartTime",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "Achievement2MegaPops",
-            "googlePlayId": "CgkIipCe5swWEAIQVA"
+            "hidden": false
         }
     },
     "84": {
@@ -1438,10 +1186,7 @@
             "achievementGoal": 1,
             "loot": "RandomInstaMonkey:4,1",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementACrateTime",
-            "googlePlayId": "CgkIipCe5swWEAIQVQ"
+            "hidden": false
         }
     },
     "85": {
@@ -1455,10 +1200,7 @@
             "achievementGoal": 1,
             "loot": "Power:GlueTrap,2#Power:CamoTrap,2",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementAxisOfHavoc",
-            "googlePlayId": "CgkIipCe5swWEAIQVg"
+            "hidden": false
         }
     },
     "86": {
@@ -1472,10 +1214,7 @@
             "achievementGoal": 200,
             "loot": "MonkeyMoney:200",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementTowerKeeper",
-            "googlePlayId": "CgkIipCe5swWEAIQVw"
+            "hidden": false
         }
     },
     "87": {
@@ -1489,10 +1228,7 @@
             "achievementGoal": 365,
             "loot": "MonkeyMoney:365#KnowledgePoints:1",
             "isCoop": false,
-            "steamStatName": "dailyChestsOpened",
-            "hidden": false,
-            "type": "AchievementAYearInTheMaking",
-            "googlePlayId": "CgkIipCe5swWEAIQWA"
+            "hidden": false
         }
     },
     "88": {
@@ -1506,10 +1242,7 @@
             "achievementGoal": 1,
             "loot": "Power:CashDrop",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementKaliMaa",
-            "googlePlayId": "CgkIipCe5swWEAIQWQ"
+            "hidden": false
         }
     },
     "89": {
@@ -1523,10 +1256,7 @@
             "achievementGoal": 1,
             "loot": "SmallTowersMode",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": true,
-            "type": "AchievementSmallTowers",
-            "googlePlayId": "CgkIipCe5swWEAIQWw"
+            "hidden": true
         }
     },
     "90": {
@@ -1540,10 +1270,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementAdventurer",
-            "googlePlayId": "CgkIipCe5swWEAIQXA"
+            "hidden": false
         }
     },
     "91": {
@@ -1557,10 +1284,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#Power:CashDrop",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementSeasonedAdventurer",
-            "googlePlayId": "CgkIipCe5swWEAIQXQ"
+            "hidden": false
         }
     },
     "92": {
@@ -1574,10 +1298,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:150#RandomInstaMonkey:2,1",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementNoStoneLeftUnturned",
-            "googlePlayId": "CgkIipCe5swWEAIQXg"
+            "hidden": false
         }
     },
     "93": {
@@ -1591,10 +1312,7 @@
             "achievementGoal": 12,
             "loot": "MonkeyMoney:100#Power:SuperMonkeyStorm#Power:DartTime",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "Achievement12TasksOfMonkules",
-            "googlePlayId": "CgkIipCe5swWEAIQXw"
+            "hidden": false
         }
     },
     "94": {
@@ -1608,10 +1326,7 @@
             "achievementGoal": 50,
             "loot": "MonkeyMoney:250#RandomInstaMonkey:3,1",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementModysseusRises",
-            "googlePlayId": "CgkIipCe5swWEAIQYA"
+            "hidden": false
         }
     },
     "95": {
@@ -1625,10 +1340,7 @@
             "achievementGoal": 100,
             "loot": "MonkeyMoney:500",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementModysseusForever",
-            "googlePlayId": "CgkIipCe5swWEAIQYQ"
+            "hidden": false
         }
     },
     "96": {
@@ -1642,10 +1354,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#Power:GlueTrap#Power:CamoTrap",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementFullSpeedAhead",
-            "googlePlayId": "CgkIipCe5swWEAIQYg"
+            "hidden": false
         }
     },
     "97": {
@@ -1659,10 +1368,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#Power:TechBot,2",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementAllAboutThatBling",
-            "googlePlayId": "CgkIipCe5swWEAIQYw"
+            "hidden": false
         }
     },
     "98": {
@@ -1676,10 +1382,7 @@
             "achievementGoal": 1,
             "loot": "RandomInstaMonkey:1,3",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": true,
-            "type": "AchievementMoHeroesMoProblems",
-            "googlePlayId": "CgkIipCe5swWEAIQZA"
+            "hidden": true
         }
     },
     "99": {
@@ -1693,10 +1396,7 @@
             "achievementGoal": 10,
             "loot": "BigTowersMode",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": true,
-            "type": "AchievementChunkyMonkeys",
-            "googlePlayId": "CgkIipCe5swWEAIQZQ"
+            "hidden": true
         }
     },
     "100": {
@@ -1710,10 +1410,7 @@
             "achievementGoal": 250000,
             "loot": "MonkeyMoney:250#InstaMonkey:WizardMonkey,004",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementOathbreakers",
-            "googlePlayId": "CgkIipCe5swWEAIQZg"
+            "hidden": false
         }
     },
     "101": {
@@ -1727,10 +1424,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#InstaMonkey:Druid,002",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementLivingOnTheEdge",
-            "googlePlayId": "CgkIipCe5swWEAIQZw"
+            "hidden": false
         }
     },
     "102": {
@@ -1744,10 +1438,7 @@
             "achievementGoal": 100,
             "loot": "MonkeyMoney:150#InstaMonkey:Alchemist,040",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementFreakyFriday",
-            "googlePlayId": "CgkIipCe5swWEAIQaA"
+            "hidden": false
         }
     },
     "103": {
@@ -1761,10 +1452,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:500#InstaMonkey:DartMonkey,040",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementMonkeyFanClub",
-            "googlePlayId": "CgkIipCe5swWEAIQaQ"
+            "hidden": false
         }
     },
     "104": {
@@ -1778,10 +1466,7 @@
             "achievementGoal": 10,
             "loot": "MonkeyMoney:150#Power:SuperMonkeyStorm",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementReadyPlayerOne",
-            "googlePlayId": "CgkIipCe5swWEAIQag"
+            "hidden": false
         }
     },
     "105": {
@@ -1795,10 +1480,7 @@
             "achievementGoal": 3000,
             "loot": "MonkeyMoney:300#InstaMonkey:MortarMonkey,004",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementCrashOfTheTitans",
-            "googlePlayId": "CgkIipCe5swWEAIQaw"
+            "hidden": false
         }
     },
     "106": {
@@ -1812,10 +1494,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementALaCode",
-            "googlePlayId": "CgkIipCe5swWEAIQbA"
+            "hidden": false
         }
     },
     "107": {
@@ -1829,10 +1508,7 @@
             "achievementGoal": 1000000,
             "loot": "MonkeyMoney:200#InstaMonkey:DartlingGunner,300#InstaMonkey:DartlingGunner,030#InstaMonkey:DartlingGunner,003",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementRegifted",
-            "googlePlayId": "CgkIipCe5swWEAIQbQ"
+            "hidden": false
         }
     },
     "108": {
@@ -1846,10 +1522,7 @@
             "achievementGoal": 50,
             "loot": "MonkeyMoney:100#Trophy:25",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementCouponCrazy",
-            "googlePlayId": "CgkIipCe5swWEAIQbg"
+            "hidden": false
         }
     },
     "109": {
@@ -1863,10 +1536,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#RandomInstaMonkey:5,1",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementInstantGratification",
-            "googlePlayId": "CgkIipCe5swWEAIQbw"
+            "hidden": false
         }
     },
     "110": {
@@ -1880,10 +1550,7 @@
             "achievementGoal": 100,
             "loot": "MonkeyMoney:1000#Power:MonkeyBoost,3",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementInstaCentury",
-            "googlePlayId": "CgkIipCe5swWEAIQcA"
+            "hidden": false
         }
     },
     "111": {
@@ -1897,10 +1564,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#Power:DartTime",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementLimitedRun",
-            "googlePlayId": "CgkIipCe5swWEAIQcQ"
+            "hidden": false
         }
     },
     "112": {
@@ -1914,10 +1578,7 @@
             "achievementGoal": 20000,
             "loot": "MonkeyMoney:200#RandomInstaMonkey:2,2",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementToolsToDarwin",
-            "googlePlayId": "CgkIipCe5swWEAIQcg"
+            "hidden": false
         }
     },
     "113": {
@@ -1931,10 +1592,7 @@
             "achievementGoal": 100,
             "loot": "MonkeyMoney:500#Power:CashDrop,3",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": true,
-            "type": "AchievementStubbornStrategy",
-            "googlePlayId": "CgkIipCe5swWEAIQcw"
+            "hidden": true
         }
     },
     "114": {
@@ -1948,10 +1606,7 @@
             "achievementGoal": 35,
             "loot": "MonkeyMoney:250",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementAchievementOfAchievements",
-            "googlePlayId": "CgkIipCe5swWEAIQdA"
+            "hidden": false
         }
     },
     "115": {
@@ -1965,10 +1620,7 @@
             "achievementGoal": 3000,
             "loot": "MonkeyMoney:100#InstaMonkey:MonkeyBuccaneer,040#InstaMonkey:Druid,030",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementHookLineAndSinker",
-            "googlePlayId": "CgkIipCe5swWEAIQdQ"
+            "hidden": false
         }
     },
     "116": {
@@ -1982,10 +1634,7 @@
             "achievementGoal": 1000,
             "loot": "MonkeyMoney:150#Power:CashDrop#Power:Thrive",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementMovingHouse",
-            "googlePlayId": "CgkIipCe5swWEAIQdg"
+            "hidden": false
         }
     },
     "117": {
@@ -1999,10 +1648,7 @@
             "achievementGoal": 100,
             "loot": "Trophy:20",
             "isCoop": true,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementSocialButterfly",
-            "googlePlayId": "CgkIipCe5swWEAIQdw"
+            "hidden": false
         }
     },
     "118": {
@@ -2016,10 +1662,7 @@
             "achievementGoal": 20,
             "loot": "MonkeyMoney:50#InstaMonkey:IceMonkey,011",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementSoShiny",
-            "googlePlayId": "CgkIipCe5swWEAIQeA"
+            "hidden": false
         }
     },
     "119": {
@@ -2033,10 +1676,7 @@
             "achievementGoal": 100,
             "loot": "MonkeyMoney:100#InstaMonkey:GlueGunner,020",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementGlitteringGold",
-            "googlePlayId": "CgkIipCe5swWEAIQeQ"
+            "hidden": false
         }
     },
     "120": {
@@ -2050,10 +1690,7 @@
             "achievementGoal": 500,
             "loot": "MonkeyMoney:150#InstaMonkey:SniperMonkey,003",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementGloriousGold",
-            "googlePlayId": "CgkIipCe5swWEAIQeg"
+            "hidden": false
         }
     },
     "121": {
@@ -2067,10 +1704,7 @@
             "achievementGoal": 50,
             "loot": "MonkeyMoney:150#InstaMonkey:NinjaMonkey,003",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementMagicalGold",
-            "googlePlayId": "CgkIipCe5swWEAIQew"
+            "hidden": false
         }
     },
     "122": {
@@ -2084,10 +1718,7 @@
             "achievementGoal": 25,
             "loot": "RandomInstaMonkey:1,3",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementTeamPlayer",
-            "googlePlayId": "CgkIipCe5swWEAIQfA"
+            "hidden": false
         }
     },
     "123": {
@@ -2101,10 +1732,7 @@
             "achievementGoal": 50,
             "loot": "RandomInstaMonkey:2,3",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementTeamCaptain",
-            "googlePlayId": "CgkIipCe5swWEAIQfQ"
+            "hidden": false
         }
     },
     "124": {
@@ -2118,10 +1746,7 @@
             "achievementGoal": 100,
             "loot": "RandomInstaMonkey:3,3",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementUltimateTeamUp",
-            "googlePlayId": "CgkIipCe5swWEAIQfg"
+            "hidden": false
         }
     },
     "125": {
@@ -2135,10 +1760,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementWhatIsThisNewBloonery",
-            "googlePlayId": "CgkIipCe5swWEAIQfw"
+            "hidden": false
         }
     },
     "126": {
@@ -2152,10 +1774,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#RandomInstaMonkey:4,1,DartMonkey#RandomInstaMonkey:4,1,BoomerangMonkey",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementWhosTheBoss",
-            "googlePlayId": "CgkIipCe5swWEAIQgAE"
+            "hidden": false
         }
     },
     "127": {
@@ -2169,10 +1788,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:250#RandomInstaMonkey:5,1,DartMonkey#RandomInstaMonkey:5,1,BoomerangMonkey",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementImTheBoss",
-            "googlePlayId": "CgkIipCe5swWEAIQgQE"
+            "hidden": false
         }
     },
     "128": {
@@ -2186,10 +1802,7 @@
             "achievementGoal": 1,
             "loot": "RandomInstaMonkey:3,3",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementApotheosis",
-            "googlePlayId": "CgkIipCe5swWEAIQggE"
+            "hidden": false
         }
     },
     "129": {
@@ -2203,10 +1816,7 @@
             "achievementGoal": 50,
             "loot": "Power:CashDrop,2#RandomInstaMonkey:0,3",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementLikeABoss",
-            "googlePlayId": "CgkIipCe5swWEAIQgwE"
+            "hidden": false
         }
     },
     "130": {
@@ -2220,10 +1830,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:1000",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": true,
-            "type": "AchievementPerfectParagon",
-            "googlePlayId": "CgkIipCe5swWEAIQhAE"
+            "hidden": true
         }
     },
     "131": {
@@ -2237,10 +1844,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:200#InstaMonkey:BananaFarm,003",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementDavidsVsGoliath",
-            "googlePlayId": "CgkIipCe5swWEAIQhQE"
+            "hidden": false
         }
     },
     "132": {
@@ -2254,10 +1858,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:150#Power:Pontoon,2",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementSoSpiiiceyNinjaKiwi",
-            "googlePlayId": "CgkIipCe5swWEAIQhwE"
+            "hidden": false
         }
     },
     "133": {
@@ -2271,10 +1872,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:400",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementNoHarvest",
-            "googlePlayId": "CgkIipCe5swWEAIQiAE"
+            "hidden": false
         }
     },
     "134": {
@@ -2288,10 +1886,7 @@
             "achievementGoal": 1,
             "loot": "Power:CashDrop,3",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementStudentLoans",
-            "googlePlayId": "CgkIipCe5swWEAIQiQE"
+            "hidden": false
         }
     },
     "135": {
@@ -2305,10 +1900,7 @@
             "achievementGoal": 25000,
             "loot": "InstaMonkey:DartMonkey,004#InstaMonkey:SuperMonkey,030",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": true,
-            "type": "AchievementNotLackingCriticalInformation",
-            "googlePlayId": "CgkIipCe5swWEAIQigE"
+            "hidden": true
         }
     },
     "136": {
@@ -2322,10 +1914,7 @@
             "achievementGoal": 500000,
             "loot": "InstaMonkey:GlueGunner,000#Power:GlueTrap,5",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementStickySituation",
-            "googlePlayId": "CgkIipCe5swWEAIQiwE"
+            "hidden": false
         }
     },
     "137": {
@@ -2339,10 +1928,7 @@
             "achievementGoal": 1,
             "loot": "InstaMonkey:BananaFarm,200#MonkeyMoney:50",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementBigSpender",
-            "googlePlayId": "CgkIipCe5swWEAIQjAE"
+            "hidden": false
         }
     },
     "138": {
@@ -2356,10 +1942,7 @@
             "achievementGoal": 365,
             "loot": "RandomInstaMonkey:5,1",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementTheDailyReid",
-            "googlePlayId": "CgkIipCe5swWEAIQjQE"
+            "hidden": false
         }
     },
     "139": {
@@ -2373,10 +1956,7 @@
             "achievementGoal": 1000,
             "loot": "Power:CashDrop,2#Power:DartTime,2#Power:EnergisingTotem,2",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementIllBeBack",
-            "googlePlayId": "CgkIipCe5swWEAIQjgE"
+            "hidden": false
         }
     },
     "140": {
@@ -2390,10 +1970,7 @@
             "achievementGoal": 5,
             "loot": "MonkeyMoney:150",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementConquestedTerritory",
-            "googlePlayId": "CgkIipCe5swWEAIQjwE"
+            "hidden": false
         }
     },
     "141": {
@@ -2407,10 +1984,7 @@
             "achievementGoal": 50,
             "loot": "RandomInstaMonkey:2,2",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementStageOfEmpires",
-            "googlePlayId": "CgkIipCe5swWEAIQkAE"
+            "hidden": false
         }
     },
     "142": {
@@ -2424,10 +1998,7 @@
             "achievementGoal": 4,
             "loot": "MonkeyMoney:50#Power:CashDrop,2",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementTerritorySampler",
-            "googlePlayId": "CgkIipCe5swWEAIQkQE"
+            "hidden": false
         }
     },
     "143": {
@@ -2441,10 +2012,7 @@
             "achievementGoal": 75,
             "loot": "Power:MonkeyBoost,3#Power:EnergisingTotem,3",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementInvigoration",
-            "googlePlayId": "CgkIipCe5swWEAIQkwE"
+            "hidden": false
         }
     },
     "144": {
@@ -2458,10 +2026,7 @@
             "achievementGoal": 150000,
             "loot": "MonkeyMoney:200",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementWorldLeagueTraining",
-            "googlePlayId": "CgkIipCe5swWEAIQlAE"
+            "hidden": false
         }
     },
     "145": {
@@ -2475,10 +2040,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#RandomInstaMonkey:2,2",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementSideQuest",
-            "googlePlayId": "CgkIipCe5swWEAIQkgE"
+            "hidden": false
         }
     },
     "146": {
@@ -2492,10 +2054,7 @@
             "achievementGoal": 5368709,
             "loot": "Power:DartTime,5#RandomInstaMonkey:4,1",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementLifeExperience",
-            "googlePlayId": "CgkIipCe5swWEAIQlQE"
+            "hidden": false
         }
     },
     "147": {
@@ -2509,10 +2068,7 @@
             "achievementGoal": 401626,
             "loot": "InstaMonkey:DartMonkey,300#InstaMonkey:DartMonkey,030#InstaMonkey:DartMonkey,003#MonkeyMoney:100",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementHeavyInvestment",
-            "googlePlayId": "CgkIipCe5swWEAIQlgE"
+            "hidden": false
         }
     },
     "148": {
@@ -2526,10 +2082,7 @@
             "achievementGoal": 5,
             "loot": "SmallBossesMode",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "Achievement25toLife",
-            "googlePlayId": "CgkIipCe5swWEAIQlwE"
+            "hidden": false
         }
     },
     "149": {
@@ -2543,10 +2096,7 @@
             "achievementGoal": 100,
             "loot": "MonkeyMoney:600",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": false,
-            "type": "AchievementCommunityConnoisseur",
-            "googlePlayId": "CgkIipCe5swWEAIQmAE"
+            "hidden": false
         }
     },
     "150": {
@@ -2560,9 +2110,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:1200",
             "isCoop": false,
-            "steamStatName": "",
-            "hidden": true,
-            "type": "AchievementNahIdWin"
+            "hidden": true
         }
     },
     "151": {
@@ -2576,8 +2124,7 @@
             "achievementGoal": 50000,
             "loot": "Power:CaveMonkey,3",
             "isCoop": false,
-            "hidden": true,
-            "type": "AchievementTheyCallMeCaveMonkey"
+            "hidden": true
         }
     },
     "152": {
@@ -2591,8 +2138,7 @@
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100",
             "isCoop": false,
-            "hidden": false,
-            "type": "AchievementFirstSteps"
+            "hidden": false
         }
     }
 }
