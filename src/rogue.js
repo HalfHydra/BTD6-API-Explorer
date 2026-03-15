@@ -23,56 +23,6 @@ let rogueSaveData = {
 let starterArtifacts = ['BouncingProjectiles3', 'CeramicChunker2', 'FrostedTips1', 'OneShot2', 'SlowerIsHarder1', 'SpiritOfAdventure2', 'SwellingSpikes1', 'Wackywibblywavey1']
 let bossArtifacts = ['EssenceOfBloonarius1','EssenceOfVortex1','EssenceOfDreadbloon1','EssenceOfPhayze1','EssenceOfBlastapopoulos1']
 
-let starterKitNames = {
-    "Quincy": "Quincy",
-    "Cyber Quincy": "Cyber Quincy",
-    "Wolfpack Quincy": "Wolfpack Quincy",
-    "Gwendolin": "Gwendolin",
-    "CircusGwendolin": "Circus Gwendolin",
-    "Scientist Gwendolin": "Scientist Gwendolin",
-    "StrikerJones": "Striker Jones",
-    "Biker Bones": "Biker Bones",
-    "Octo Jones": "Octo Jones",
-    "ObynGreenfoot": "Obyn Greenfoot",
-    "ObynOceanGuardian": "Ocean Guardian Obyn",
-    "MoltenObyn": "Molten Obyn",
-    "CaptainChurchill": "Captain Churchill",
-    "Sentai Captain Churchill": "Sentai Churchill",
-    "Sleigh Captain Churchill": "Sleigh Churchill",
-    "Benjamin": "Benjamin",
-    "BenJammin": "BenJammin",
-    "SushiBento": "Sushi Bento",
-    "PatFusty": "Pat Fusty",
-    "FustyTheSnowman": "Fusty the Snowman",
-    "KaijuPat": "Kaiju Pat",
-    "Ezili": "Ezili",
-    "SmudgeCatt": "Smudge Catt",
-    "Galaxili": "Galaxili",
-    "Adora": "Adora",
-    "JoanOfArcAdora": "Joan of Arc Adora",
-    "Voidora": "Voidora",
-    "Etienne": "Etienne",
-    "ETnEtienne": "ETn",
-    "BookWyrmEtienne": "Book Wyrm Etienne",
-    "Sauda": "Sauda",
-    "VikingSauda": "Viking Sauda",
-    "JiangshiSauda": "Jiangshi Sauda",
-    "AdmiralBrickell": "Admiral Brickell",
-    "DreadPirateBrickell": "Dread Pirate Brickell",
-    "LifeguardBrickell": "Lifeguard Brickell",
-    "Psi": "Psi",
-    "Psimbals": "Psimbals",
-    "DreamstatePsi": "Dreamstate Psi",
-    "Geraldo": "Geraldo",
-    "GeraldoGentlemanGadgeteer": "Gentleman Gadgeteer Geraldo",
-    "Corvus": "Corvus",
-    "Rosalia": "Rosalia",
-    "RosaliaTinkerfairy": "Rosalia Tinkerfairy",
-    "AdoraSheRa": "She-Ra Adora",
-    "Silas": "Silas",
-    "ObynSkeletor": "Skeletor Obyn"
-}
-
 let artifactDivMap = {};
 let totalArtifactsTxt;
 let noArtifactsMessage;
@@ -81,23 +31,6 @@ let currentArtifacts = {};
 
 let rogueSyncInterval;
 
-// Promise.all([
-//     fetch('./data/Constants.json').then(response => response.json()),
-//     fetch('./data/English.json').then(response => response.json()),
-//     fetch('./data/rogueData.json').then(response => response.json()),
-// ])
-// .then(([constantsJSON, englishData, rogueData]) => {
-//     constants = constantsJSON;
-//     locJSON = englishData;
-//     rogueJSON = rogueData;
-//     loadRogueDataFromLocalStorage();
-//     postProcessRogueData();
-//     generateRogueSelectors();
-// })
-// .catch(error => {
-//     console.error('Error:', error);
-//     errorModal(error, "js");
-// });
 fetchRogueDependencies();
 loadRogueDataFromLocalStorage();
 
@@ -1113,7 +1046,7 @@ function generateArtifactPopout(key) {
 
         let heroStarterKitText = document.createElement('p');
         heroStarterKitText.classList.add('font-gardenia', 'ta-center', 'lh-add-quarter');
-        heroStarterKitText.innerHTML = `${starterKitNames[data.starterKitHero]}'s starter kit has this artifact`;
+        heroStarterKitText.innerHTML = `${constants.heroNames[data.starterKitHero]}'s starter kit has this artifact`;
         heroStarterKitText.style.fontSize = "18px";
         heroStarterKitTextDiv.appendChild(heroStarterKitText);
     }
@@ -1479,39 +1412,6 @@ function generateImageBuilder() {
         downloadImage();
     })
     rogueHeaderBar.appendChild(rogueDownloadButton);
-
-    // if (!rogueSaveData.selectedOAK) {
-    //     Object.entries(localStorageOAK).forEach(([oak, oakdata]) => {
-    //         let previousOAKEntry = document.createElement('div');
-    //         previousOAKEntry.classList.add('previous-oak-entry', 'd-flex', 'jc-between', 'ai-center');
-    //         previousOAKEntry.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(${oakdata.banner})`;
-    //         oakDiv.appendChild(previousOAKEntry);
-
-    //         previousOAKEntry.appendChild(generateAvatar(100, oakdata.avatar));
-
-    //         let profileName = document.createElement('p');
-    //         profileName.classList.add('profile-name','black-outline');
-    //         profileName.innerHTML = oakdata.displayName;
-    //         previousOAKEntry.appendChild(profileName);
-
-    //         let useButton = document.createElement('img');
-    //         useButton.classList.add('delete-button');
-    //         useButton.src = './Assets/UI/ContinueBtn.png';
-    //         useButton.addEventListener('click', () => {
-    //             rogueSaveData.imageOptions.avatar = oakdata.avatar.split('/')[2];
-    //             rogueSaveData.imageOptions.banner = oakdata.banner.split('/')[2];
-    //             rogueSaveData.imageOptions.name = oakdata.displayName;
-    //             rogueProfileNameInput.value = oakdata.displayName;
-    //             rogueBannerDiv.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(../Assets/ProfileBanner/${rogueSaveData.imageOptions.banner})`;
-    //             rogueProfileAvatar.querySelector('.avatar-img').src = `Assets/ProfileAvatar/${rogueSaveData.imageOptions.avatar}`;
-    //             rogueProfileNameInput.value = rogueSaveData.imageOptions.name;
-    //             oakDiv.innerHTML = "";
-    //             rogueSaveData.selectedOAK = true;
-    //             saveRogueDataToLocalStorage();
-    //         })
-    //         previousOAKEntry.appendChild(useButton);
-    //     })
-    // }
 }
 
 function generateAvatarSelector() {
