@@ -3387,6 +3387,7 @@ function generateMapsListView(){
         mapLabelTimesCompleted.innerHTML = "Times Completed:";
         mapSection.appendChild(mapLabelTimesCompleted);
 
+        let medalColor = false;
         for (let [difficulty, data] of Object.entries(coopEnabled ? processedMapData.Maps[map].coop : processedMapData.Maps[map].single)) {
             if (data == undefined) { continue; }
             let mapSectionColumn = document.createElement('div');
@@ -3428,6 +3429,13 @@ function generateMapsListView(){
             mapSectionTimesCompleted.classList.add(`map-section-text`,'black-outline');
             mapSectionTimesCompleted.innerHTML = data.timesCompleted;
             mapSectionColumn.appendChild(mapSectionTimesCompleted);
+
+            medalColor = !medalColor;
+            if (medalColor) {
+                mapSectionColumn.style.backgroundColor = "rgba(0,0,0,0.1)";
+            } else {
+                mapSectionColumn.style.backgroundColor = "rgba(255,255,255,0.1)";
+            }
         }
 
         mapDiv.addEventListener('click', () => {
@@ -9046,6 +9054,8 @@ function generateTrophyStoreContainer(filter, display, counter, trophies) {
 
     switch (trophyStoreSortOption) {
         case "Default":
+            const trophyKeyCollator = new Intl.Collator(undefined, { numeric: true, sensitivity: "base" });
+            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).sort(([key1], [key2]) => trophyKeyCollator.compare(key1, key2)));
             break;
         case "Highest Cost":
             trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).sort(([key1, data1], [key2, data2]) => {
@@ -9682,7 +9692,8 @@ function generateQuestsPage() {
         let questImg = createEl('img', {
             classList: ['quest-img'],
             style: {
-                width: "100px"
+                width: "100px",
+                height: "100px",
             },
             src: `../Assets/QuestIcon/${constantsQuest.icon || "QuestIconPhayzeOne"}.png`
         });
