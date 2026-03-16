@@ -1551,8 +1551,8 @@
     font-size: 20px;
 }
 .map-img {
-    width: 200px;
-    height: 127.5px;
+    width: 195px;
+    height: 130px;
     image-rendering: crisp-edges;
     image-rendering: -moz-crisp-edges;
     image-rendering: -o-crisp-edges;
@@ -1831,7 +1831,7 @@
     align-items: center;
 }
 .map-img-ingame {
-    width: 298px;
+    width: 285px;
     height: 190px;
     image-rendering: crisp-edges;
     image-rendering: -moz-crisp-edges;
@@ -2451,7 +2451,7 @@
     font-size: 20px;
 }
 .race-map-img {
-    width: 250px;
+    width: 240px;
     height: 160px;
     image-rendering: crisp-edges;
     image-rendering: -moz-crisp-edges;
@@ -3592,7 +3592,7 @@
     justify-content: space-evenly;
 }
 .browser-list-map-img {
-    width: 156px;
+    width: 150px;
     height: 100px;
     image-rendering: crisp-edges;
     image-rendering: -moz-crisp-edges;

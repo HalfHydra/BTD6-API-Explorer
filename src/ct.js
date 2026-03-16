@@ -1088,7 +1088,7 @@ function renderCTMap(container, ct, tileData, opts = {}) {
 
         const hexW = hexS * 2;
         const hexH = hexS * SQRT3;
-        const imgW = hexH * 1.56;
+        const imgW = hexH * 1.50;
         const imgH = hexH;
         const imgX = (t.x - hexW / 1.475).toFixed(2);
         const imgY = (t.y - hexH / 2).toFixed(2);
