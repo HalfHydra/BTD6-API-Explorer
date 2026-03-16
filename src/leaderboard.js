@@ -192,13 +192,42 @@ async function generateLeaderboards() {
             showLeaderboard('leaderboards', data, "Boss");
         })
 
+        let roundsetIconDiv = createEl('div', { 
+            style: {
+                position: "relative",
+            }
+        })
+        roundsetDiv.appendChild(roundsetIconDiv);
+
         let roundsetIcon = document.createElement('img');
         roundsetIcon.classList.add('roundset-selector-img');
-        roundsetDiv.appendChild(roundsetIcon);
+        roundsetIconDiv.appendChild(roundsetIcon);
 
         roundsetIcon.src = `../Assets/BossIcon/${data.bossType[0].toUpperCase() + data.bossType.slice(1)}EventIcon.png`;
         roundsetDiv.style.backgroundImage = `url(../Assets/EventBanner/EventBannerSmall${data.bossType[0].toUpperCase() + data.bossType.slice(1)}.png)`
         roundsetDiv.classList.add("boss-roundset")
+
+        let bossScoreTypeIcon = createEl('img', {
+            classList: ['ps-absolute', 'white-outline'],
+            style: {
+                width: "36px",
+                right: "-6px",
+                top: "-8px"
+            }
+        })
+        switch(data.scoringType) {
+            case "GameTime":
+                bossScoreTypeIcon.src = "./Assets/UI/StopWatch.png"
+                break;
+            case "LeastCash":
+                bossScoreTypeIcon.src = "./Assets/UI/LeastCashIconSmall.png"
+                break;
+            case "LeastTiers":
+                bossScoreTypeIcon.src = "./Assets/UI/LeastTiersIconSmall.png"
+                break;
+        }
+        roundsetIconDiv.appendChild(bossScoreTypeIcon);
+
 
         let roundsetTextDiv = document.createElement('div');
         roundsetTextDiv.classList.add('roundset-selector-text-div', 'd-flex', 'fd-column', 'ai-center');
@@ -246,13 +275,41 @@ async function generateLeaderboards() {
             showLeaderboard('leaderboards', data, "BossElite");
         })
 
+        let roundsetIconDiv = createEl('div', { 
+            style: {
+                position: "relative",
+            }
+        })
+        roundsetDiv.appendChild(roundsetIconDiv);
+
         let roundsetIcon = document.createElement('img');
         roundsetIcon.classList.add('roundset-selector-img');
-        roundsetDiv.appendChild(roundsetIcon);
+        roundsetIconDiv.appendChild(roundsetIcon);
 
         roundsetIcon.src = `../Assets/BossIcon/Elite${data.bossType[0].toUpperCase() + data.bossType.slice(1)}EventIcon.png`;
         roundsetDiv.style.backgroundImage = `url(../Assets/EventBanner/EventBannerSmall${data.bossType[0].toUpperCase() + data.bossType.slice(1)}.png)`
         roundsetDiv.classList.add("boss-roundset")
+
+        let bossScoreTypeIcon = createEl('img', {
+            classList: ['ps-absolute', 'white-outline'],
+            style: {
+                width: "36px",
+                right: "-6px",
+                top: "-8px"
+            }
+        })
+        switch(data.eliteScoringType) {
+            case "GameTime":
+                bossScoreTypeIcon.src = "./Assets/UI/StopWatch.png"
+                break;
+            case "LeastCash":
+                bossScoreTypeIcon.src = "./Assets/UI/LeastCashIconSmall.png"
+                break;
+            case "LeastTiers":
+                bossScoreTypeIcon.src = "./Assets/UI/LeastTiersIconSmall.png"
+                break;
+        }
+        roundsetIconDiv.appendChild(bossScoreTypeIcon);
 
         let roundsetTextDiv = document.createElement('div');
         roundsetTextDiv.classList.add('roundset-selector-text-div', 'd-flex', 'fd-column', 'ai-center');
