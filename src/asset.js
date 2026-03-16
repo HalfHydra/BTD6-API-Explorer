@@ -375,6 +375,11 @@ function getCollectionEventSkinIcon(eventData) {
     if (!eventData || !eventData.start || !eventData.end) {
         return "CollectingEventTotemBtn";
     }
+
+    if (eventData.id && constants && constants.collection.autoSkinOverride.hasOwnProperty(eventData.id)) {
+        return constants.collection.autoSkinOverride[eventData.id];
+    }
+
     const startDate = new Date(eventData.start);
     const endDate = new Date(eventData.end);
 
