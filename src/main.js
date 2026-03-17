@@ -1137,6 +1137,7 @@ function generateOverview(){
 
         quickStat.addEventListener('click', () => {
             addToBackQueue({source: 'profile', destination: 'profile', callback: generateOverview});
+            resetScroll();
             switch(stat){
                 case 'Towers':
                 case "Upgrades":
@@ -1638,6 +1639,46 @@ function generateOverview(){
             let stat = document.createElement('div');
             stat.classList.add('stat');
             rogueDiv.appendChild(stat);
+
+            let statName = document.createElement('p');
+            statName.classList.add('stat-name');
+            statName.innerHTML = key;
+            stat.appendChild(statName);
+
+            let statValue = document.createElement('p');
+            statValue.classList.add('stat-value');
+            statValue.innerHTML = value.toLocaleString();
+            stat.appendChild(statValue);
+        }
+    }
+    if (btd6usersave.hasOwnProperty("frontierLegends")) {
+
+        let frontierDiv = document.createElement('div');
+        frontierDiv.classList.add('profile-stats');
+        rightColumnDiv.appendChild(frontierDiv);
+
+        let frontierColumnHeader = document.createElement('div');
+        frontierColumnHeader.classList.add('overview-right-column-header');
+        frontierDiv.appendChild(frontierColumnHeader);
+
+        let frontierColumnHeaderText = document.createElement('p');
+        frontierColumnHeaderText.classList.add('column-header-text','black-outline');
+        frontierColumnHeaderText.innerHTML = 'frontier Legends Stats';
+        frontierColumnHeader.appendChild(frontierColumnHeaderText);
+
+        let frontierStats = {};
+        frontierStats["Total Quickdraws Won"] = btd6usersave["frontierLegends"].winQuickdrawAcrossAll;
+        frontierStats["Quickdraws Won in a Row"] = btd6usersave["frontierLegends"].captureBountyBloonsInARow;
+        frontierStats["Total Distance Traveled"] = btd6usersave["frontierLegends"].walkTotalAcrossAll;
+        frontierStats["Total Monkeys Hired"] = btd6usersave["frontierLegends"].hireTotalAcrossAll;
+        frontierStats["Total Legend Monkeys Hired"] = btd6usersave["frontierLegends"].hireLegendsAcrossAll;
+        frontierStats["Total Bananite Spent in the Store"] = btd6usersave["frontierLegends"].spendGoldInGeneralStore;
+        frontierStats["Total Stamina Spent"] = btd6usersave["frontierLegendsStats"].spendStaminaAcrossAll.toFixed(0);
+
+        for (let [key, value] of Object.entries(frontierStats)){
+            let stat = document.createElement('div');
+            stat.classList.add('stat');
+            frontierDiv.appendChild(stat);
 
             let statName = document.createElement('p');
             statName.classList.add('stat-name');
@@ -8797,6 +8838,8 @@ function generateTrophyStoreProgress() {
     let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
+    changeHexBGColor(constants.TrophyStoreBGColor)
+
     trophyStoreSubFilter = "All";
     trophyStoreSortOption = "Newly Added";
 
@@ -9186,6 +9229,19 @@ function generateTrophyStoreContainer(filter, display, counter, trophies) {
             innerHTML: data.updateAdded.toFixed(1)
         })
         itemDiv.appendChild(itemAddedIcon);
+
+        if (data.isNew) {
+            let newIcon = createEl('img', {
+                classList: [],
+                style: {
+                    position: "absolute",
+                    width: "70px",
+                    top: "16px"
+                },
+                src: '../Assets/UI/NewRibbon.png'
+            })
+            itemDiv.appendChild(newIcon);
+        }
     }
 }
 
@@ -9193,10 +9249,6 @@ function generateTrophyStorePopout(key) {
     let data = trophyStoreItemsJSON[key];
 
     let modalContent = document.createElement('div');
-    // modalContent.classList.add('collection-modal');
-    // modal.appendChild(modalContent);
-
-    //getLocValue(`${key}ShortName`);
 
     let imgAndDetails = document.createElement('div');
     imgAndDetails.classList.add('item-img-and-details');
@@ -9223,13 +9275,8 @@ function generateTrophyStorePopout(key) {
     }
 
     let itemDetailsDiv = document.createElement('div');
-    itemDetailsDiv.classList.add('item-details-div');
+    itemDetailsDiv.classList.add('item-details-div', 'jc-between');
     imgAndDetails.appendChild(itemDetailsDiv);
-
-    // let itemTypeIcon = document.createElement('img');
-    // itemTypeIcon.classList.add('trophy-store-item-type-icon');
-    // itemTypeIcon.src = `../Assets/UI/Trophy${data.storeFilter}Icon.png`;
-    // itemDetailsDiv.appendChild(itemTypeIcon);
 
     let itemFullName = document.createElement('p');
     itemFullName.classList.add('trophy-store-item-full-name', 'black-outline');
@@ -9244,6 +9291,77 @@ function generateTrophyStorePopout(key) {
     let itemObtainMethod = document.createElement('p');
     itemObtainMethod.classList.add('trophy-store-item-obtain-method');
     itemDetailsDiv.appendChild(itemObtainMethod);
+
+    let itemPipDiv = createEl('div', {
+        classList: ['d-flex'],
+        style: {
+            gap: "10px",
+        }
+    })
+    itemDetailsDiv.appendChild(itemPipDiv);
+
+    let itemAddedIcon = createEl('div', {
+        classList: ['font-luckiest', 'ta-center', 'black-outline'],
+        style: {
+            width: "50px",
+            height: "50px",
+            backgroundImage: "url(../Assets/UI/TrophyPipIcon.png)",
+            backgroundSize: "50px",
+            color: "white",
+            fontSize: "22px",
+            lineHeight: "50px"
+        },
+        innerHTML: data.updateAdded.toFixed(1)
+    })
+    itemPipDiv.appendChild(itemAddedIcon);
+
+    let itemTypeIcon = createEl('img', {
+        style: { width: "50px", height: "50px" },
+    });
+    itemTypeIcon.src = `../Assets/UI/Trophy${data.storeFilter}Icon.png`;
+    itemPipDiv.appendChild(itemTypeIcon);
+
+    if (data.cost) {
+        let costDiv = createEl('div', {
+            classList: ["trophy-store-collected-text", 'd-flex', 'jc-center', 'ai-center'],
+            style: {
+                position: "unset",
+                gap: "6px"
+            }
+        })
+        itemPipDiv.appendChild(costDiv)
+
+        let trophyIcon = createEl('img', {
+            style: {
+                width: "30px",
+                height: "30px"
+            },
+            src: '../Assets/UI/TrophyIcon.png'
+        })
+        costDiv.appendChild(trophyIcon);
+
+        let costText = createEl('p', {
+            classList: ['black-outline'],
+            style: {
+                fontSize: "24px"
+            },
+            innerHTML: data.cost
+        })
+        costDiv.appendChild(costText);
+    }
+
+    if (getTrophyItemObtained(key)) {
+        let collectedText = createEl('p', {
+            classList: ['trophy-store-collected-text', 'black-outline'],
+            style: {
+                position: "unset",
+                fontSize: "24px",
+                lineHeight: "1.5"
+            },
+            innerHTML: "Owned"
+        });
+        itemPipDiv.appendChild(collectedText);
+    } 
 
     if (data.hasOwnProperty("obtainMethod")) {
         switch(data.obtainMethod) {

@@ -811,6 +811,7 @@
     },
     "BGColor": [0.000, 0.498, 1.000],
     "ParagonBGColor": [0.522, 0.000, 1.000],
+    "TrophyStoreBGColor": [0, 0, 0.392],
     "HeroBGColors": {
         "Quincy": [0.000, 0.522, 0.624],
         "Gwendolin": [0.671, 0.153, 0.133], 
@@ -2126,8 +2127,17 @@
             "displayName": "Vine Crush",
             "description": "Grabs up to 10 Bloons anywhere on the map and crushes them with vines.",
             "icon": "VineCrushAA"
+        },
+        "Activate Zone Ability": {
+            "displayName": "Giddy Up",
+            "description": "Uses Sheriff Morale to boost your Posse, using more stamina but increasing their ability to pop Bloons.",
+            "icon": "SheriffActivateZoneAA"
+        },
+        "DeActivate Zone Ability": {
+            "displayName": "Deactivate Giddy Up",
+            "description": "Deactivates Giddy Up.",
+            "icon": "SheriffDeactivateZoneAA"
         }
-
     },
     "unreleasedContent": {
         "trophyStoreItems": [],

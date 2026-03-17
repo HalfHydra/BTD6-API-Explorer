@@ -4629,13 +4629,11 @@
 
 .trophy-store-item-full-name {
     font-size: 32px;
-    margin-bottom: 22px;
 }
 .trophy-store-item-description {
     font-size: 18px;
     line-height: 24px;
     font-family: GardeniaBold;
-    margin-bottom: 22px;
 }
 .trophy-store-item-obtain-method {
     font-size: 18px;
@@ -4659,7 +4657,7 @@
 .item-details-div {
     display: flex;
     flex-direction: column;
-    margin: 50px 10px;
+    margin: 30px 10px;
     padding: 10px 10px;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
