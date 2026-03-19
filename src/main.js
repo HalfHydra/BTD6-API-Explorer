@@ -3019,8 +3019,12 @@ function generateMapDetails(map){
     mapProgressHeaderBar.classList.add('single-map-progress-header-bar');
     mapProgressContainer.appendChild(mapProgressHeaderBar);
 
-    let mapNextAndPrev = document.createElement('div');
-    mapNextAndPrev.classList.add('map-next-and-prev');
+    let mapNextAndPrev = createEl('div', {
+        classList: ['map-next-and-prev'],
+        style: {
+            width: "230px"
+        }
+    });
     mapProgressHeaderBar.appendChild(mapNextAndPrev);
 
     let mapProgressPrevBtn = document.createElement('div');
@@ -3049,6 +3053,23 @@ function generateMapDetails(map){
     })
     mapNextAndPrev.appendChild(mapProgressNextBtn);
 
+    let mapProgressHeaderText = createEl('p', {
+        classList: ['black-outline'],
+        style: {
+            fontSize: "32px",
+        },
+        innerHTML: 'Map Stats'
+    })
+    mapProgressHeaderBar.appendChild(mapProgressHeaderText);
+
+    let mapHeaderRight = createEl('div', {
+        classList: ['d-flex', 'jc-end'],
+        style: {
+            width: "230px",
+        }
+    })
+    mapProgressHeaderBar.appendChild(mapHeaderRight);
+
     let modalClose = document.createElement('img');
     modalClose.classList.add('modal-close');
     modalClose.src = "./Assets/UI/CloseBtn.png";
@@ -3056,7 +3077,7 @@ function generateMapDetails(map){
         // onExitMap();
         goBack();
     })
-    mapProgressHeaderBar.appendChild(modalClose);
+    mapHeaderRight.appendChild(modalClose);
 
     let mapBelowHeaderBar = document.createElement('div');
     mapBelowHeaderBar.classList.add('map-below-header-bar');
@@ -3067,11 +3088,11 @@ function generateMapDetails(map){
     mapBelowHeaderBar.appendChild(mapLeftColumn);
 
     let mapNameAndIcon = document.createElement('div');
-    mapNameAndIcon.classList.add('map-progress-div');
+    mapNameAndIcon.classList.add('map-progress-div', 'd-flex', 'fd-column', 'ai-center');
     mapLeftColumn.appendChild(mapNameAndIcon);
 
     let mapNameTop = document.createElement('div');
-    mapNameTop.classList.add('map-name-top');
+    mapNameTop.classList.add('map-name-top', 'w-100');
     mapNameAndIcon.appendChild(mapNameTop);
 
     let mapDifficultyIcon = document.createElement('img');
