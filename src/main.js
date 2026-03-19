@@ -205,6 +205,11 @@ function generateRankInfo(){
 }
 
 function generateVeteranRankInfo(){
+    rankInfoVeteran = {
+        "rank": 1,
+        "xp": null,
+        "xpGoal": 20000000
+    }
     let subtractableXPVeteran = parseInt(btd6usersave["veteranXp"]);
     while (subtractableXPVeteran >= xpNeededPerVeteranRank){
         subtractableXPVeteran -= xpNeededPerVeteranRank;
