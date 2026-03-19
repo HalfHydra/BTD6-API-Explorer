@@ -437,7 +437,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
     addToBackQueue({"source": source, "destination": "roundsets"});
     resetScroll();
 
-    let roundsetData = await fetch(`./data/${roundset}.json`).then(response => response.json());
+    let roundsetData = await fetch(`./data/roundsets/${roundset}.json`).then(response => response.json());
     let roundsetType = "unknown";
     if(constants.roundSets[roundset]) {
         roundsetType = constants.roundSets[roundset].type;
