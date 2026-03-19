@@ -200,8 +200,6 @@ async function generateRogueArtifacts() {
         saveRogueDataToLocalStorage();
     }
 
-    startRogueSync();
-
     let rogueHeaderBar = document.createElement('div');
     rogueHeaderBar.classList.add('rogue-bg', 'd-flex', 'jc-between', 'ai-center');
     rogueHeaderBar.style.height = "20px";
@@ -305,6 +303,7 @@ async function generateRogueArtifacts() {
     artifactsContainer.classList.add('insta-monkeys-progress-container');
     artifactsContent.appendChild(artifactsContainer);
 
+    startRogueSync();
     generateArtifacts();
 
     noArtifactsMessage = document.createElement('p');
@@ -1577,6 +1576,10 @@ function downloadImage() {
 
     let artifacts = {...rogueJSON.artifacts}
 
+    starterArtifacts.forEach((artifact) => {
+        delete artifacts[artifact];
+    })
+
     switch (rogueSaveData.imageOptions.sort) {
         case "Rarity (Ascending)":
             artifacts = Object.fromEntries(Object.entries(artifacts).sort((a, b) => a[1].tier - b[1].tier))
@@ -1710,6 +1713,10 @@ function loginModal(firstTime) {
 }
 
 function checkAndSyncRogueData() {
+    if (document.getElementById('artifacts-content').style.display == "none") {
+        clearInterval(rogueSyncInterval);
+        return;
+    }
     let now = new Date().valueOf();
     if(rogueSaveData.hasOwnProperty("syncingWith") && rogueSaveData.syncingWith != null && rogueSaveData.hasOwnProperty("lastSynced") && rogueSaveData.lastSynced + 300000 > now) {
         //the refresh threshold isn't yet reached
