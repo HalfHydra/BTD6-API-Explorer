@@ -3333,9 +3333,9 @@ function generateMapsGridView(){
     mapsGridContainer.classList.add('maps-grid-container');
     mapsProgressContainer.appendChild(mapsGridContainer);
 
-    for (let [map, difficulty] of Object.entries(constants.mapsInOrder)) {
+    for (let [map, data] of Object.entries(constants.mapsInOrder)) {
         if (processedMapData.Borders[coopEnabled ? "coop" : "single"][map] == null) { continue; }
-        if (currentDifficultyFilter != "All" && difficulty != currentDifficultyFilter) { continue; }
+        if (currentDifficultyFilter != "All" && data.difficulty != currentDifficultyFilter) { continue; }
 
 
         let mapDiv = document.createElement('div');
@@ -3391,9 +3391,9 @@ function generateMapsListView(){
     let fragment = document.createDocumentFragment();
 
     let colorToggle = false;
-    for (let [map, difficulty] of Object.entries(constants.mapsInOrder)) {
+    for (let [map, data] of Object.entries(constants.mapsInOrder)) {
         if (processedMapData.Borders[coopEnabled ? "coop" : "single"][map] == null) { continue; }
-        if (currentDifficultyFilter != "All" && difficulty != currentDifficultyFilter) { continue; }
+        if (currentDifficultyFilter != "All" && data.difficulty != currentDifficultyFilter) { continue; }
         if (Object.entries(coopEnabled ? processedMapData.Maps[map].coop : processedMapData.Maps[map].single).every(([key, value]) => value == undefined)) { continue;}
 
         let mapContainer = document.createElement('div');
@@ -3523,7 +3523,7 @@ function generateMapsGameView() {
     mapsProgressContainer.appendChild(mapsGameContainer);
 
     let maps = Object.keys(constants.mapsInOrder).filter(value => Object.keys(btd6usersave.mapProgress).includes(value)); //Object.keys(constants.mapsInOrder);
-    if (currentDifficultyFilter != "All") { maps = maps.filter(map => constants.mapsInOrder[map] == currentDifficultyFilter) }
+    if (currentDifficultyFilter != "All") { maps = maps.filter(map => constants.mapsInOrder[map].difficulty == currentDifficultyFilter) }
     let maxPage = Math.ceil(maps.length / 6) - 1;
     if (mapPage > maxPage) { mapPage = 0; }
     if (mapPage < 0) { mapPage = maxPage; }

@@ -1658,7 +1658,7 @@
     width: 100%;
 }
 .map-icon {
-    width: 502px;
+    width: 480px;
     height: 320px;
     border: 20px solid transparent;
     border-image-source: url(../Assets/UI/BarfillContainer.png);
@@ -2501,7 +2501,7 @@
     text-align: center;
 }
 .challenge-model-map-icon {
-    min-width: 471px;
+    min-width: 450px;
     height: 300px;
 }
 .challenge-setting-icon {
