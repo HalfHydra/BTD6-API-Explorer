@@ -371,11 +371,10 @@ function generateExtras(){
 function generateProgressSubText(){
     let towersCount = Object.keys(btd6usersave.unlockedTowers).filter(k => btd6usersave.unlockedTowers[k]).length;
     progressSubText["Towers"] = `${towersCount}/${Object.keys(constants.towersInOrder).length} Towers Unlocked`;
-    let upgrades = Object.keys(btd6usersave.acquiredUpgrades);
-    let upgradesUnlocked = upgrades.filter(k => btd6usersave.acquiredUpgrades[k]);
-    let paragons = upgrades.filter(k => k.includes("Paragon") && k != "Sentry Paragon");
+    let upgradeInfo = getUnlockedAndTotalUpgrades();
+    let paragons = Object.keys(btd6usersave.acquiredUpgrades).filter(k => k.includes("Paragon") && k != "Sentry Paragon");
     let paragonsUnlocked = paragons.filter(k => btd6usersave.acquiredUpgrades[k]);
-    progressSubText["Upgrades"] = `${upgradesUnlocked.length - paragonsUnlocked.length}/${upgrades.length - paragons.length} Upgrades Unlocked`;
+    progressSubText["Upgrades"] = `${upgradeInfo[0] - paragonsUnlocked.length}/${upgradeInfo[1] - paragons.length} Upgrades Unlocked`;
     if (paragonsUnlocked.length > 0) { progressSubText["Paragons"] = `${paragonsUnlocked.length}/${constants.paragonsAvailable.length} Paragon${paragonsUnlocked.length != 1 ? "s" : ""} Unlocked` }
     let heroesUnlocked = Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length;
     progressSubText["Heroes"] = `${heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeros).length} Hero${heroesUnlocked != 1 ? "es" : ""} Unlocked`;
@@ -2004,6 +2003,26 @@ function changeProgressTab(selector){
     }
 }
 
+function getUnlockedAndTotalUpgrades() {
+    let totalUpgrades = (Object.keys(constants.towersInOrder).length * 15) + Object.keys(constants.paragonsAvailable).length;
+    let invalidUpgrades = [
+        "Camo Bananas",
+        "Adaptive Workers",
+        "Regrow Bananas",
+        "Banana Intelligence Bureau",
+        "Monkey Banker",
+        "Banana Financier",
+        "Mini Stormcaller",
+        "High Impact",
+        "Rapid Recharge",
+        "Beacon of Legends",
+        "Bewildering Storm",
+        "Piercing Wind"
+    ];
+    let unlockedUpgrades = Object.keys(btd6usersave.acquiredUpgrades).filter(k => btd6usersave.acquiredUpgrades[k] && !invalidUpgrades.includes(k)).length;
+    return [unlockedUpgrades, totalUpgrades];
+}
+
 function generateTowerProgress(){
     let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
@@ -2026,24 +2045,11 @@ function generateTowerProgress(){
     towerSelectorHeaderTop.appendChild(towerSelectorHeaderText);
 
 
-    let totalUpgrades = (Object.keys(constants.towersInOrder).length * 15) + Object.keys(constants.paragonsAvailable).length;
-    let invalidUpgrades = [
-        "Camo Bananas",
-        "Adaptive Workers",
-        "Regrow Bananas",
-        "Banana Intelligence Bureau",
-        "Monkey Banker",
-        "Banana Financier",
-        "Mini Stormcaller",
-        "High Impact",
-        "Rapid Recharge",
-        "Beacon of Legends",
-        "Bewildering Storm",
-        "Piercing Wind"
-    ];
+    let upgradesInfo = getUnlockedAndTotalUpgrades();
+
     let towerSelectorHeaderText2 = document.createElement('p');
     towerSelectorHeaderText2.classList.add('tower-selector-header-text','black-outline');
-    towerSelectorHeaderText2.innerHTML = `${Object.keys(btd6usersave.acquiredUpgrades).filter(k => btd6usersave.acquiredUpgrades[k] && !invalidUpgrades.includes(k)).length}/${totalUpgrades} Upgrades`;
+    towerSelectorHeaderText2.innerHTML = `${upgradesInfo[0]}/${upgradesInfo[1]} Upgrades`;
     towerSelectorHeaderTop.appendChild(towerSelectorHeaderText2);
 
     let towerSelectorHeader = document.createElement('div');
