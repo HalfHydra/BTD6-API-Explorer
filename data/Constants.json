@@ -2137,6 +2137,31 @@
             "displayName": "Deactivate Giddy Up",
             "description": "Deactivates Giddy Up.",
             "icon": "SheriffDeactivateZoneAA"
+        },
+        "Super Monkey Beacon 1": {
+            "displayName": "Super Monkey Beacon SMS",
+            "description": "Super Monkey Storm from the unupgraded Beacon.",
+            "icon": "SMSBaseAA"
+        },
+        "Super Monkey Beacon 2": {
+            "displayName": "Mini Stormcaller SMS",
+            "description": "Super Monkey Storm from the Middle Path Upgrades.",
+            "icon": "MiniStormcallerAA"
+        },
+        "Super Monkey Beacon 3": {
+            "displayName": "Charged Beacon SMS",
+            "description": "Super Monkey Storm used from the Top Path Upgrades.",
+            "icon": "ChargedBeaconAA"
+        },
+        "Super Monkey Beacon 4": {
+            "displayName": "High Impact SMS",
+            "description": "Super Monkey Storm from the Bottom Path Upgrades.",
+            "icon": "HighImpactAA"
+        },
+        "Paragon Overclock": {
+            "displayName": "Power Glove",
+            "description": "Can Overclock other Paragons and affects all towers in a small area around the selected tower.",
+            "icon": "PowerGloveAAIcon"
         }
     },
     "unreleasedContent": {
