@@ -2164,6 +2164,227 @@
             "icon": "PowerGloveAAIcon"
         }
     },
+    "abilitiesByTower": {
+        "AdmiralBrickell": [
+            "Naval Tactics",
+            "Blast Chain Ability",
+            "Mega Mine"
+        ],
+        "Adora": [
+            "The Long Arm of Light",
+            "Blood Sacrifice",
+            "Ball of Light"
+        ],
+        "Alchemist": [
+            "Transforming Tonic",
+            "Total Transforming Tonic"
+        ],
+        "BananaFarm": [
+            "IMF loan",
+            "Monkey-Nomics"
+        ],
+        "BananaFarmerPro": [],
+        "BattleCat": [
+            "Battle Cat Transform"
+        ],
+        "BeastHandler": [
+            "T Rex STOMP",
+            "Giga STOMP "
+        ],
+        "Benjamin": [
+            "Biohack",
+            "Syphon Funding"
+        ],
+        "BombShooter": [
+            "Assassinate MOAB",
+            "Moab Eliminator",
+            "Bomb Blitz",
+            "Indomitable Surface-to-Air Ballistic Missile"
+        ],
+        "BoomerangMonkey": [
+            "Turbo Charge",
+            "Perma Charge",
+            "Overcharge"
+        ],
+        "CaptainChurchill": [
+            "Armor Piercing Shells",
+            "MOAB Barrage"
+        ],
+        "Corvus": [
+            "Soul Harvest",
+            "Spirit Walk",
+            "Dark Ritual"
+        ],
+        "DartMonkey": [
+            "Super Monkey Fan Club",
+            "Plasma Monkey Fan Club"
+        ],
+        "DartlingGunner": [
+            "RocketStorm",
+            "RocketStormMAD",
+            "Emergency Unlock"
+        ],
+        "Desperado": [
+            "Take Aim",
+            "Marked To Pop",
+            "TakeAim2",
+            "Marked To Pop2"
+        ],
+        "Druid": [
+            "Jungle's Bounty",
+            "Vine Crush",
+            "Vine Rupture"
+        ],
+        "EngineerMonkey": [
+            "Overclock",
+            "Ultraboost",
+            "Paragon Overclock",
+            "SentryParagonSpawner"
+        ],
+        "Etienne": [
+            "Drone Swarm",
+            "UCAV"
+        ],
+        "Ezili": [
+            "Heartstopper",
+            "Sacrificial Totem",
+            "MOAB Hex"
+        ],
+        "GlueGunner": [
+            "Glue Strike",
+            "Glue Storm"
+        ],
+        "Gwendolin": [
+            "Cocktail of Fire",
+            "Firestorm"
+        ],
+        "HeliPilot": [
+            "Redeploy",
+            "Support Drop",
+            "Special Poperations",
+            "Door Gunner",
+            "Deploy"
+        ],
+        "IceMonkey": [
+            "Snowstorm",
+            "Absolute Zero",
+            "Eclipse of Fimbulwinter"
+        ],
+        "Mermonkey": [
+            "MermonkyAbility",
+            "MermonkyAbilityBig"
+        ],
+        "MonkeyAce": [
+            "Ground Zero",
+            "Tsar Bomba",
+            "Carpet Bomb"
+        ],
+        "MonkeyBuccaneer": [
+            "MOAB Takedown",
+            "ZOMG Takedown",
+            "Large BAD Harpoon"
+        ],
+        "MonkeySub": [
+            "First Strike Capability",
+            "Final Strike"
+        ],
+        "MonkeyVillage": [
+            "Call to Arms",
+            "Homeland Defense"
+        ],
+        "MortarMonkey": [
+            "Bombardment",
+            "Pop And Awe"
+        ],
+        "NinjaMonkey": [
+            "Sabotage",
+            "Grand Sabotage"
+        ],
+        "ObynGreenfoot": [
+            "Brambles",
+            "Wall of Trees"
+        ],
+        "PatFusty": [
+            "Rallying Roar",
+            "Big Squeeze"
+        ],
+        "Psi": [
+            "Psychic Blast",
+            "Psionic Scream"
+        ],
+        "Quincy": [
+            "Rapid Shot",
+            "Storm of Arrows"
+        ],
+        "Rosalia": [
+            "Scatter Missile",
+            "Flight Boost",
+            "Kinetic Charge"
+        ],
+        "Sauda": [
+            "Leaping Sword Attack",
+            "Sword Charge"
+        ],
+        "Sheriff": [
+            "Activate Zone Ability",
+            "DeActivate Zone Ability"
+        ],
+        "Silas": [
+            "Frostbite",
+            "Frozen Cascade",
+            "Frozen Burial"
+        ],
+        "SniperMonkey": [
+            "Supply Drop",
+            "Elite Supply Drop",
+            "Retaliation"
+        ],
+        "SpikeFactory": [
+            "Spike Storm",
+            "Controlled Burst",
+            "Spikeageddon"
+        ],
+        "StrikerJones": [
+            "Concussive Shell",
+            "Target Focus",
+            "Artillery Command"
+        ],
+        "SuperMonkey": [
+            "Tech Terror",
+            "The Anti-Bloon",
+            "Darkshift",
+            "ChampionDarkshift",
+            "Legend of the Night"
+        ],
+        "SuperMonkeyBeacon": [
+            "Super Monkey Beacon 1",
+            "Super Monkey Beacon 2",
+            "Super Monkey Beacon 3",
+            "Super Monkey Beacon 4"
+        ],
+        "TackShooter": [
+            "Blade Maelstrom",
+            "Super Maelstrom",
+            "Eruption",
+            "Meteor Impact"
+        ],
+        "TechBot": [
+            "Link",
+            "Unlink",
+            "Ambush Tech"
+        ],
+        "WizardMonkey": [
+            "Summon Pheonix",
+            "Summon Lord Phoenix",
+            "Arcane Metamorphosis",
+            "Phoenix Rebirth"
+        ]
+    },
+    "hiddenContent": {
+        "heroes": [
+            "RedSauda"
+        ]
+    },
     "unreleasedContent": {
         "trophyStoreItems": [],
         "teamsStoreItems": []

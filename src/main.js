@@ -2022,19 +2022,34 @@ function generateTowerProgress(){
 
     let towerSelectorHeaderText = document.createElement('p');
     towerSelectorHeaderText.classList.add('tower-selector-header-text','black-outline');
-    towerSelectorHeaderText.innerHTML = `Towers - ${Object.keys(btd6usersave.unlockedTowers).filter(k => btd6usersave.unlockedTowers[k]).length}/${Object.keys(btd6usersave.unlockedTowers).length}`;
+    towerSelectorHeaderText.innerHTML = `${Object.keys(btd6usersave.unlockedTowers).filter(k => btd6usersave.unlockedTowers[k]).length}/${Object.keys(btd6usersave.unlockedTowers).length} Towers`;
     towerSelectorHeaderTop.appendChild(towerSelectorHeaderText);
 
+
+    let totalUpgrades = (Object.keys(constants.towersInOrder).length * 15) + Object.keys(constants.paragonsAvailable).length;
+    let invalidUpgrades = [
+        "Camo Bananas",
+        "Adaptive Workers",
+        "Regrow Bananas",
+        "Banana Intelligence Bureau",
+        "Monkey Banker",
+        "Banana Financier",
+        "Mini Stormcaller",
+        "High Impact",
+        "Rapid Recharge",
+        "Beacon of Legends",
+        "Bewildering Storm",
+        "Piercing Wind"
+    ];
     let towerSelectorHeaderText2 = document.createElement('p');
     towerSelectorHeaderText2.classList.add('tower-selector-header-text','black-outline');
-    towerSelectorHeaderText2.innerHTML = `Upgrades - ${Object.keys(btd6usersave.acquiredUpgrades).filter(k => btd6usersave.acquiredUpgrades[k]).length}/${Object.keys(btd6usersave.acquiredUpgrades).length}`;
+    towerSelectorHeaderText2.innerHTML = `${Object.keys(btd6usersave.acquiredUpgrades).filter(k => btd6usersave.acquiredUpgrades[k] && !invalidUpgrades.includes(k)).length}/${totalUpgrades} Upgrades`;
     towerSelectorHeaderTop.appendChild(towerSelectorHeaderText2);
 
     let towerSelectorHeader = document.createElement('div');
     towerSelectorHeader.classList.add('tower-selector-header');
     towerProgressDiv.appendChild(towerSelectorHeader);
 
-    let towersInSave = btd6usersave.unlockedTowers;
     for (let [tower, category] of Object.entries(constants.towersInOrder)) {
         if(!Object.keys(btd6usersave.unlockedTowers).includes(tower)) {continue}
         let towerSelector = document.createElement('div');
@@ -2073,17 +2088,20 @@ function generateTowerProgressTower(tower){
     let towerProgressContent = document.getElementById('tower-progress-content');
     towerProgressContent.innerHTML = "";
 
-    let unlockedAllT5 = 0;
+    let upgradesUnlocked = 0;
     for (let path of Object.values(constants.towerPaths[tower])){
         for (let upgrade of Object.keys(path)){
             if (btd6usersave.acquiredUpgrades[upgrade]){
-                unlockedAllT5 += 1;
+                upgradesUnlocked += 1;
             }
         }
     }
-    unlockedAllT5 = unlockedAllT5 === 15;
+    let unlockedAllT5 = upgradesUnlocked === 15;
+    
+    let upgradesAvailable = (unlockedAllT5) ? constants.paragonsAvailable.includes(tower) ? 16 : 15 : 15;
 
     let paragonUnlocked = constants.paragonsAvailable.includes(tower) ? btd6usersave.acquiredUpgrades[`${tower} Paragon`] : false;
+    if (paragonUnlocked) { upgradesUnlocked += 1; }
 
     let towerProgressTop = document.createElement('div');
     towerProgressTop.classList.add('tower-progress-top');
@@ -2104,19 +2122,67 @@ function generateTowerProgressTower(tower){
     towerProgressContentText.appendChild(document.createTextNode(towerName));
     towerProgressInfoContainer.appendChild(towerProgressContentText);
 
-    let towerProgressContentXP = document.createElement('p');
-    towerProgressContentXP.classList.add('tower-progress-content-xp','mm-outline');
-    towerProgressContentXP.innerHTML = `XP: ${btd6usersave.towerXP[tower].toLocaleString()}`;
-    towerProgressInfoContainer.appendChild(towerProgressContentXP);
+    // let towerProgressContentXP = document.createElement('p');
+    // towerProgressContentXP.classList.add('tower-progress-content-xp','mm-outline');
+    // towerProgressContentXP.innerHTML = `XP: ${btd6usersave.towerXP[tower].toLocaleString()}`;
+    // towerProgressInfoContainer.appendChild(towerProgressContentXP);
 
     let towerProgressContentDesc = document.createElement('p');
     towerProgressContentDesc.classList.add('tower-progress-content-desc'+ (paragonUnlocked ? '-paragon' : ''));
     towerProgressContentDesc.innerHTML = getLocValue(`${tower} Description`);
     towerProgressContentTop.appendChild(towerProgressContentDesc);
 
+    let towerProgressMiddleDiv = createEl('div', {
+        classList: ['d-flex'],
+    })
+
+    let towerLeftBox = createEl('div', {
+        classList: ['d-flex', 'fd-column', 'ai-center'],
+        style: {
+            width: "275px",
+            gap: "16px",
+            padding: "20px 0"
+        }
+    })
+    towerProgressMiddleDiv.appendChild(towerLeftBox);
+
+    let towerProgressContentXP = document.createElement('p');
+    towerProgressContentXP.classList.add('tower-progress-content-xp','mm-outline');
+    towerProgressContentXP.innerHTML = `XP: ${btd6usersave.towerXP[tower].toLocaleString()}`;
+    towerLeftBox.appendChild(towerProgressContentXP);
+
+    let upgradesText = createEl('p', {
+        classList: ['black-outline'],
+        style: {
+            fontSize: "28px"
+        },
+        innerHTML: `${upgradesUnlocked}/${upgradesAvailable} Upgrades`
+    })
+    towerLeftBox.appendChild(upgradesText);
+
+    let towerPlacedText = createEl('p', {
+        classList: ['black-outline'],
+        style: {
+            fontSize: "28px"
+        },
+        innerHTML: `${btd6publicprofile.towersPlaced[tower].toLocaleString()} Placed`
+    })
+    towerLeftBox.appendChild(towerPlacedText);
+
+    if (constants.paragonsAvailable.includes(tower) && btd6publicprofile.stats.paragonsPurchasedByName.hasOwnProperty(tower) && btd6publicprofile.stats.paragonsPurchasedByName[tower] > 0) {
+        let paragonPlacedText = createEl('p', {
+            classList: ['black-outline'],
+            style: {
+                fontSize: "24px"
+            },
+            innerHTML: `${btd6publicprofile.stats.paragonsPurchasedByName[tower].toLocaleString()} Paragon${(btd6publicprofile.stats.paragonsPurchasedByName[tower] > 1) ? "s" : ""} Made`
+        })
+        towerLeftBox.appendChild(paragonPlacedText);
+    }
+
     let towerNameAndPortrait = document.createElement('div');
     towerNameAndPortrait.classList.add('tower-name-and-portrait');
-    towerProgressContent.appendChild(towerNameAndPortrait);
+    towerProgressMiddleDiv.appendChild(towerNameAndPortrait);
 
     let towerPortraitName = document.createElement('p');
     towerPortraitName.id = 'tower-portrait-name';
@@ -2136,20 +2202,106 @@ function generateTowerProgressTower(tower){
     towerProgressPortrait.src = getTowerAssetPath(tower,"000");
     towerProgressPortraitDiv.appendChild(towerProgressPortrait);
 
-    // let upgradeTooltip = document.createElement('div');
-    // upgradeTooltip.id = `upgrade-tooltip`;
-    // upgradeTooltip.classList.add('upgrade-tooltip');
-    // upgradeTooltip.innerHTML = getLocValue(`${tower} Description`);
-    // towerProgressContent.appendChild(upgradeTooltip);
+    let towerRightBox = createEl('div', {
+        classList: ['d-flex', 'f-wrap', 'jc-around'],
+        style: {
+            width: "275px",
+            marginRight: "50px",
+            padding: "20px 0"
+        }
+    })
+    towerProgressMiddleDiv.appendChild(towerRightBox);
+
+    let abilitiesHeaderText = createEl('p', {
+        classList: ['black-outline'],
+        style: {
+            fontSize: "28px",
+            width: "100%",
+            height: "40px",
+            textAlign: "center"
+        },
+        innerHTML: 'Abilities Used'
+    })
+    towerRightBox.appendChild(abilitiesHeaderText);
+
+    let abilitiesIconsDiv = createEl('div', {
+        classList: ['d-flex', 'f-wrap', 'w-100'],
+        style: {
+            height: "190px",
+            gap: "16px",
+            padding: "0 16px"
+        }
+    });
+    towerRightBox.appendChild(abilitiesIconsDiv);
+
+    let abilities = constants.abilitiesByTower[tower] || [];
+    abilities.forEach(ability => {
+        let abilityData = constants.abilities[ability];
+        let abilityUses = btd6publicprofile.stats.abilitiesActivatedByName[ability] || 0;
+        if (abilityUses === 0) { return; }
+        let abilityDiv = createEl('div', {
+            classList: ['d-flex', 'ai-center'],
+            style: {
+                width: "70px",
+                height: "70px",
+                position: 'relative'
+            }
+        })
+        
+        let abilityIcon = createEl('img', {
+            classList: ['of-contain'],
+            style: {
+                width: "70px",
+                height: "70px",
+            },
+            src: `./Assets/AbilityIcon/${abilityData.icon}.png`
+        })
+        abilityDiv.appendChild(abilityIcon);
+
+        let abilityUsesText = createEl('p', {
+            classList: ['black-outline', 'ta-center'],
+            style: {
+                position: "absolute",
+                fontSize: "18px",
+                bottom: "-20px",
+                width: '70px',
+                backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                borderRadius: '5px',
+            },
+            innerHTML: abilityUses.toLocaleString()
+        })
+        abilityDiv.appendChild(abilityUsesText);
+
+        abilitiesIconsDiv.appendChild(abilityDiv);
+
+        tippy(abilityDiv, {
+            content: abilityData.description,
+            placement: 'top',
+            theme: 'speech_bubble',
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            },
+        })
+    });
+
 
     let towerProgressMainDiv = document.createElement('div');
     towerProgressMainDiv.classList.add('tower-progress-main-div', 'fd-column');
     towerProgressContent.appendChild(towerProgressMainDiv);
 
+    towerProgressMainDiv.appendChild(towerProgressMiddleDiv);
+
     towerProgressMainDiv.appendChild(makeUpgradeButtons(tower, unlockedAllT5, paragonUnlocked));
 
     let towerProgressBottom = document.createElement('div');
-    // towerProgressBottom.classList.add('tower-progress-bottom');
     towerProgressBottom.style.maxWidth = "720px";
 
     let relatedKnowledgePointsHeader = createEl('p', { classList: ['black-outline', 'ta-center'], style:{fontSize: "28px"}, innerHTML: 'Knowledge Points:' });
@@ -2166,9 +2318,13 @@ function generateTowerProgressTower(tower){
         relatedKnowledgePointsHeader.style.display = "none";
     } else {
         for (let knowledgePoint of relatedKnowledgePoints) {
-            let knowledgeIcon = document.createElement('img');
-            knowledgeIcon.classList.add('knowledge-icon');
-            knowledgeIcon.src = getKnowledgeAssetPath(knowledgePoint);
+            let knowledgeIcon = createEl('img', {
+                classList: ['knowledge-icon'],
+                src: getKnowledgeAssetPath(knowledgePoint)
+            });
+            if (!btd6usersave.acquiredKnowledge[knowledgePoint]) {
+                knowledgeIcon.classList.add('half-brightness');
+            }
             relatedKnowledgePointsDiv.appendChild(knowledgeIcon);
 
             tippy(knowledgeIcon, {

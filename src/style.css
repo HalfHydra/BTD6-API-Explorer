@@ -936,7 +936,7 @@
 }
 .tower-progress-content-text {
     font-size: 32px;
-    padding: 10px;
+    padding: 0 10px;
 }
 
 .tower-progress-content-xp {
@@ -5358,7 +5358,7 @@ input[type="checkbox"] {
     padding: 5px;
 }
 
-.artifact-unextracted {
+.half-brightness {
     filter: brightness(0.5);
     will-change: filter;
 }

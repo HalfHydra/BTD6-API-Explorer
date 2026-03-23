@@ -743,12 +743,12 @@ function generateArtifacts() {
             if (rogueSaveData.clickToCollect && rogueSaveData.highlightExtracted && !starterArtifacts.includes(artifact)) {
                 if (rogueSaveData.extractedArtifacts.includes(artifact)) {
                     rogueSaveData.extractedArtifacts = rogueSaveData.extractedArtifacts.filter(e => e !== artifact);
-                    artifactDiv.classList.add('artifact-unextracted');
+                    artifactDiv.classList.add('half-brightness');
                     updateArtifactCount();
                     saveRogueDataToLocalStorage();
                 } else {
                     rogueSaveData.extractedArtifacts.push(artifact);
-                    artifactDiv.classList.remove('artifact-unextracted');
+                    artifactDiv.classList.remove('half-brightness');
                     updateArtifactCount();
                     saveRogueDataToLocalStorage();
                 }
@@ -770,7 +770,7 @@ function generateArtifactContainer(artifact, type) {
     let artifactDiv = document.createElement('div');
     artifactDiv.classList.add('artifact-container');
     if ((rogueSaveData.highlightExtracted || type == "force") && !rogueSaveData.extractedArtifacts.includes(artifact) && !starterArtifacts.includes(artifact) && type != "preview") {
-        artifactDiv.classList.add('artifact-unextracted');
+        artifactDiv.classList.add('half-brightness');
     }
 
     let artifactImg = document.createElement('img');
@@ -790,6 +790,7 @@ function generateArtifactContainer(artifact, type) {
             placement: 'top',
             hideOnClick: false,
             theme: 'speech_bubble',
+            touch: false,
             popperOptions: {
                 modifiers: [
                     {
@@ -1101,12 +1102,12 @@ function generateArtifactPopout(key) {
         if (rogueSaveData.extractedArtifacts.includes(key)) {
             rogueSaveData.extractedArtifacts = rogueSaveData.extractedArtifacts.filter(e => e !== key);
             if(rogueSaveData.highlightExtracted){
-                artifactDiv.classList.add('artifact-unextracted');
+                artifactDiv.classList.add('half-brightness');
                 if(currentVariant){
-                    currentVariant.classList.add('artifact-unextracted');
+                    currentVariant.classList.add('half-brightness');
                 }
                 if(artifactDivMap[key]){
-                    artifactDivMap[key].classList.add('artifact-unextracted');
+                    artifactDivMap[key].classList.add('half-brightness');
                 }
             }
             updateArtifactCount();
@@ -1115,12 +1116,12 @@ function generateArtifactPopout(key) {
         } else {
             rogueSaveData.extractedArtifacts.push(key);
             if(rogueSaveData.highlightExtracted){
-                artifactDiv.classList.remove('artifact-unextracted');
+                artifactDiv.classList.remove('half-brightness');
                 if(currentVariant){
-                    currentVariant.classList.remove('artifact-unextracted');
+                    currentVariant.classList.remove('half-brightness');
                 }
                 if(artifactDivMap[key]){
-                    artifactDivMap[key].classList.remove('artifact-unextracted');
+                    artifactDivMap[key].classList.remove('half-brightness');
                 }
             }
             updateArtifactCount();
@@ -1168,7 +1169,7 @@ function updateArtifactCount() {
         let hiddenArtifacts = artifactsDiv.querySelectorAll('.artifact-container[style*="display: none"]');
         searchHidden = hiddenArtifacts.length;
 
-        let shownUnextracted = artifactsDiv.querySelectorAll('.artifact-unextracted[style*="display: flex"]').length;
+        let shownUnextracted = artifactsDiv.querySelectorAll('.half-brightness[style*="display: flex"]').length;
         shownObtained = totalArtifacts - searchHidden - shownUnextracted;
 
         if (searchHidden > 0) {
