@@ -2789,9 +2789,65 @@ function generateHeroProgressHero(hero, nameColor){
         heroLevelDescIconDiv.appendChild(heroLevelDescText);
 
         let heroLevelDesc = document.createElement('p');
-        heroLevelDesc.classList.add('hero-level-desc');
+        heroLevelDesc.classList.add('hero-level-desc', 'fg-1');
         heroLevelDesc.innerHTML = getLocValue(`${hero} Level ${i} Description`);
         heroLevelDescDiv.appendChild(heroLevelDesc);
+        
+        if (constants.abilitiesByHero.hasOwnProperty(hero) && constants.abilitiesByHero[hero].hasOwnProperty(i)) {
+            let ability = constants.abilitiesByHero[hero][i];
+            let abilityData = constants.abilities[ability];
+            let abilityUses = btd6publicprofile.stats.abilitiesActivatedByName[ability] || 0;
+            if (abilityUses > 0) { 
+
+                let heroAbilityDiv = createEl('div', {
+                    classList: ['d-flex', 'ai-center', 'fd-column'],
+                    style: {
+                        width: "70px",
+                    }
+                })
+
+                let abilityIcon = createEl('img', {
+                    classList: ['of-contain'],
+                    style: {
+                        width: "70px",
+                        height: "50px",
+                    },
+                    src: `./Assets/AbilityIcon/${abilityData.icon}.png`
+                })
+                heroAbilityDiv.appendChild(abilityIcon);
+
+                let abilityUsesText = createEl('p', {
+                    classList: ['black-outline', 'ta-center'],
+                    style: {
+                        fontSize: "18px",
+                        width: '70px',
+                        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                        borderRadius: '5px',
+                    },
+                    innerHTML: abilityUses.toLocaleString()
+                })
+                heroAbilityDiv.appendChild(abilityUsesText);
+
+                heroLevelDescDiv.appendChild(heroAbilityDiv);
+
+                tippy(heroAbilityDiv, {
+                    content: abilityData.description,
+                    placement: 'top',
+                    theme: 'speech_bubble',
+                    popperOptions: {
+                        modifiers: [
+                            {
+                            name: 'preventOverflow',
+                            options: {
+                                boundary: 'viewport',
+                                padding: {right: 18},
+                            },
+                            },
+                        ],
+                    },
+                })
+            }
+        }
     }
 
     for (let selector of document.getElementsByClassName('hero-selector-highlight')){

@@ -2162,19 +2162,14 @@
             "displayName": "Power Glove",
             "description": "Can Overclock other Paragons and affects all towers in a small area around the selected tower.",
             "icon": "PowerGloveAAIcon"
+        },
+        "Syphon Funding": {
+            "displayName": "Syphon Funding",
+            "description": "Downgrades most newly spawned Bloons by 1 rank. Cash per pop from affected Bloons is double. Lasts 10 seconds",
+            "icon": "SyphonfundsIconAA"
         }
     },
     "abilitiesByTower": {
-        "AdmiralBrickell": [
-            "Naval Tactics",
-            "Blast Chain Ability",
-            "Mega Mine"
-        ],
-        "Adora": [
-            "The Long Arm of Light",
-            "Blood Sacrifice",
-            "Ball of Light"
-        ],
         "Alchemist": [
             "Transforming Tonic",
             "Total Transforming Tonic"
@@ -2191,10 +2186,6 @@
             "T Rex STOMP",
             "Giga STOMP "
         ],
-        "Benjamin": [
-            "Biohack",
-            "Syphon Funding"
-        ],
         "BombShooter": [
             "Assassinate MOAB",
             "Moab Eliminator",
@@ -2205,15 +2196,6 @@
             "Turbo Charge",
             "Perma Charge",
             "Overcharge"
-        ],
-        "CaptainChurchill": [
-            "Armor Piercing Shells",
-            "MOAB Barrage"
-        ],
-        "Corvus": [
-            "Soul Harvest",
-            "Spirit Walk",
-            "Dark Ritual"
         ],
         "DartMonkey": [
             "Super Monkey Fan Club",
@@ -2241,22 +2223,9 @@
             "Paragon Overclock",
             "SentryParagonSpawner"
         ],
-        "Etienne": [
-            "Drone Swarm",
-            "UCAV"
-        ],
-        "Ezili": [
-            "Heartstopper",
-            "Sacrificial Totem",
-            "MOAB Hex"
-        ],
         "GlueGunner": [
             "Glue Strike",
             "Glue Storm"
-        ],
-        "Gwendolin": [
-            "Cocktail of Fire",
-            "Firestorm"
         ],
         "HeliPilot": [
             "Redeploy",
@@ -2300,40 +2269,6 @@
             "Sabotage",
             "Grand Sabotage"
         ],
-        "ObynGreenfoot": [
-            "Brambles",
-            "Wall of Trees"
-        ],
-        "PatFusty": [
-            "Rallying Roar",
-            "Big Squeeze"
-        ],
-        "Psi": [
-            "Psychic Blast",
-            "Psionic Scream"
-        ],
-        "Quincy": [
-            "Rapid Shot",
-            "Storm of Arrows"
-        ],
-        "Rosalia": [
-            "Scatter Missile",
-            "Flight Boost",
-            "Kinetic Charge"
-        ],
-        "Sauda": [
-            "Leaping Sword Attack",
-            "Sword Charge"
-        ],
-        "Sheriff": [
-            "Activate Zone Ability",
-            "DeActivate Zone Ability"
-        ],
-        "Silas": [
-            "Frostbite",
-            "Frozen Cascade",
-            "Frozen Burial"
-        ],
         "SniperMonkey": [
             "Supply Drop",
             "Elite Supply Drop",
@@ -2343,11 +2278,6 @@
             "Spike Storm",
             "Controlled Burst",
             "Spikeageddon"
-        ],
-        "StrikerJones": [
-            "Concussive Shell",
-            "Target Focus",
-            "Artillery Command"
         ],
         "SuperMonkey": [
             "Tech Terror",
@@ -2379,6 +2309,83 @@
             "Arcane Metamorphosis",
             "Phoenix Rebirth"
         ]
+    },
+    "abilitiesByHero": {
+         "Adora": {
+            "3": "The Long Arm of Light",
+            "7": "Blood Sacrifice",
+            "10": "Ball of Light"
+        },
+        "AdmiralBrickell": {
+            "3": "Naval Tactics",
+            "7": "Blast Chain Ability",
+            "10": "Mega Mine"
+        },
+        "Benjamin": {
+            "3": "Biohack",
+            "10": "Syphon Funding"
+        },
+        "CaptainChurchill": {
+            "3": "Armor Piercing Shells",
+            "10": "MOAB Barrage"
+        },
+        "Corvus": {
+            "3": "Soul Harvest",
+            "7": "Spirit Walk",
+            "10": "Dark Ritual"
+        },
+        "Etienne": {
+            "3": "Drone Swarm",
+            "10": "UCAV"
+        },
+        "Ezili": {
+            "3": "Heartstopper",
+            "7": "Sacrificial Totem",
+            "10": "MOAB Hex"
+        },
+        "Gwendolin": {
+            "3": "Cocktail of Fire",
+            "10": "Firestorm"
+        },
+        "ObynGreenfoot": {
+            "3": "Brambles",
+            "10": "Wall of Trees"
+        },
+        "PatFusty": {
+            "3": "Rallying Roar",
+            "10": "Big Squeeze"
+        },
+        "Psi": {
+            "3": "Psychic Blast",
+            "10": "Psionic Scream"
+        },
+        "Quincy": {
+            "3": "Rapid Shot",
+            "10": "Storm of Arrows"
+        },
+        "Rosalia": {
+            "3": "Scatter Missile",
+            "7": "Flight Boost",
+            "10": "Kinetic Charge"
+        },
+        "Sauda": {
+            "3": "Leaping Sword Attack",
+            "10": "Sword Charge"
+        },
+        "Sheriff": {
+            "3": "Activate Zone Ability",
+            "10": "DeActivate Zone Ability"
+        },
+        "Silas": {
+            "3": "Frostbite",
+            "7": "Frozen Cascade",
+            "10": "Frozen Burial"
+        },
+        "StrikerJones": {
+            "3": "Concussive Shell",
+            "7": "Target Focus",
+            "10": "Artillery Command"
+        }
     },
     "hiddenContent": {
         "heroes": [
