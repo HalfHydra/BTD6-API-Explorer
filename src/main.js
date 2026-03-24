@@ -4096,7 +4096,7 @@ function generateInstaAllView() {
         tierLabelDiv.appendChild(tierLabelCount);
     })
 
-    let dropdownSort = generateDropdown("Sort By:", ["Highest Count", "Tier (Ascending)", "Tier (Descending)", "Tower Type"], allInstaFilter, (value) => {
+    let dropdownSort = generateDropdown("Sort By:", ["Tier (Ascending)", "Tier (Descending)", "Tower Type", "Highest Count"], allInstaFilter, (value) => {
         allInstaFilter = value;
         generateInstaAllView();
     })
