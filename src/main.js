@@ -5339,9 +5339,37 @@ function generateAbilities() {
         case "Least Used":
             abilities = Object.fromEntries(Object.entries(abilities).sort((a, b) => a[1] - b[1]));
             break;
+        case "Monkey Type":
+            const abilityOrder = [];
+
+            Object.keys(constants.towersInOrder).forEach(tower => {
+                if (constants.abilitiesByTower[tower]) {
+                    constants.abilitiesByTower[tower].forEach(ability => abilityOrder.push(ability));
+                }
+            });
+
+            Object.keys(constants.heroesInOrder).forEach(hero => {
+                if (constants.abilitiesByHero[hero]) {
+                    Object.values(constants.abilitiesByHero[hero]).forEach(ability => abilityOrder.push(ability));
+                }
+            });
+            Object.values(constants.abilitiesByPower).forEach(powerAbilities => {
+                powerAbilities.forEach(ability => abilityOrder.push(ability));
+            });
+
+            abilities = Object.fromEntries(
+                Object.entries(abilities).sort((a, b) => {
+                    const indexA = abilityOrder.indexOf(a[0]);
+                    const indexB = abilityOrder.indexOf(b[0]);
+                    const posA = indexA === -1 ? Infinity : indexA;
+                    const posB = indexB === -1 ? Infinity : indexB;
+                    return posA - posB;
+                })
+            );
+            break;
     }
 
-    let dropdownSort = generateDropdown("Sort By:", ["Most Used", "Least Used"], abilitiesFilter, (value) => {
+    let dropdownSort = generateDropdown("Sort By:", ["Most Used", "Least Used", "Monkey Type"], abilitiesFilter, (value) => {
         abilitiesFilter = value;
         generateAbilities();
     })
