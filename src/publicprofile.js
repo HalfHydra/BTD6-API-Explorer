@@ -164,7 +164,7 @@ async function openProfile(source, profile, callback){
     publicMedals["CtGlobalPlayerGoldSilverMedal"] = profile["_medalsCTGlobal"]["GoldSilver"] || 0;
     publicMedals["CtGlobalPlayerDoubleGoldMedal"] = profile["_medalsCTGlobal"]["DoubleGold"] || 0;
     publicMedals["CtGlobalPlayerGoldDiamondMedal"] = profile["_medalsCTGlobal"]["GoldDiamond"] || 0;
-    publicMedals["CtGlobalPlayerDiamondMedal"] = profile["_medalsCTGlobal"]["Diamond"] || 0;
+    publicMedals["CtGlobalPlayerBlueDiamondMedal"] = profile["_medalsCTGlobal"]["BlueDiamond"] || 0;
 
     let currencyAndMedalsDiv = document.createElement('div');
     currencyAndMedalsDiv.classList.add('currency-medals-div');

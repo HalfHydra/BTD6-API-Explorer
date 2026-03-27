@@ -357,7 +357,7 @@ function generateMedals(){
     medalsInOrder["CtGlobalPlayerGoldSilverMedal"] = btd6publicprofile["_medalsCTGlobal"]["GoldSilver"] || 0;
     medalsInOrder["CtGlobalPlayerDoubleGoldMedal"] = btd6publicprofile["_medalsCTGlobal"]["DoubleGold"] || 0;
     medalsInOrder["CtGlobalPlayerGoldDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["GoldDiamond"] || 0;
-    medalsInOrder["CtGlobalPlayerDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["Diamond"] || 0;
+    medalsInOrder["CtGlobalPlayerBlueDiamondMedal"] = btd6publicprofile["_medalsCTGlobal"]["BlueDiamond"] || 0;
 }
 
 function generateExtras(){
