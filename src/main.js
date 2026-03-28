@@ -91,6 +91,9 @@ let showTeamsItems = false;
 let abilitiesFilter = "Most Used";
 let allInstaFilter = "Tier (Ascending)";
 
+let currentKnowledgeTree = "primary";
+let knowledgeTowerFilter = null;
+
 let loggedIn = false;
 
 let imageScroll = [
@@ -1222,18 +1225,21 @@ function generateOverview(){
     currencyMMText.innerHTML = "$" + btd6usersave["monkeyMoney"].toLocaleString();
     currencyMMDiv.appendChild(currencyMMText);
 
-    let currencyKnowledgeDiv = document.createElement('div');
-    currencyKnowledgeDiv.classList.add('currency-knowledge-div');
+    let currencyKnowledgeDiv =createEl('div', {
+        classList: ['currency-knowledge-div']
+    });
     currencyDiv.appendChild(currencyKnowledgeDiv);
 
-    let currencyKnowledgeImg = document.createElement('img');
-    currencyKnowledgeImg.classList.add('currency-knowledge-img');
-    currencyKnowledgeImg.src = '../Assets/UI/KnowledgeIcon.png';
+    let currencyKnowledgeImg = createEl('img', {
+        classList: ['currency-knowledge-img'],
+        src: '../Assets/UI/KnowledgeIcon.png'
+    });
     currencyKnowledgeDiv.appendChild(currencyKnowledgeImg);
 
-    let currencyKnowledgeText = document.createElement('p');
-    currencyKnowledgeText.classList.add('currency-knowledge-text','knowledge-outline');
-    currencyKnowledgeText.innerHTML = btd6usersave["knowledgePoints"].toLocaleString();
+    let currencyKnowledgeText = createEl('p', {
+        classList: ['currency-knowledge-text', 'knowledge-outline'],
+        innerHTML: btd6usersave["knowledgePoints"].toLocaleString()
+    });
     currencyKnowledgeDiv.appendChild(currencyKnowledgeText);
 
     let currencyTrophiesDiv = document.createElement('div');
@@ -2325,7 +2331,12 @@ function generateTowerProgressTower(tower){
     } else {
         for (let knowledgePoint of relatedKnowledgePoints) {
             let knowledgeIcon = createEl('img', {
-                classList: ['knowledge-icon'],
+                classList: ['of-contain'],
+                style: {
+                    width: "100px",
+                    height: "100px",
+                    margin: "10px"
+                },
                 src: getKnowledgeAssetPath(knowledgePoint)
             });
             if (!btd6usersave.acquiredKnowledge[knowledgePoint]) {
@@ -2924,128 +2935,612 @@ function generateKnowledgeProgress(){
     let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
-    changeHexBGColor(constants.ParagonBGColor)
-
-    let totals = [0,0,0]
-    for (let [knowledge, obtained] of Object.entries(btd6usersave.acquiredKnowledge)) {
-        obtained ? totals[0] += 1 : constants.RecommendedKnowledge.includes(knowledge) ? totals[1] += 1 : totals[2] += 1;
+    let knowledgeTrees = {
+      "primary": {
+        "grid": [
+          {"id": "FastTackAttacks","row": 0,"col": 2,"prerequesiteIds": []},
+          {"id": "IncreasedLifespan","row": 0,"col": 8,"prerequesiteIds": []},
+          {"id": "ExtraDartPops","row": 0,"col": 12,"prerequesiteIds": []},
+          {"id": "PoppyBlades","row": 1,"col": 0,"prerequesiteIds": [  "HardTacks"]},
+          {"id": "HardTacks","row": 1,"col": 2,"prerequesiteIds": [  "FastTackAttacks"]},
+          {"id": "FastGlue","row": 1,"col": 4,"prerequesiteIds": [  "FastTackAttacks"]},
+          {"id": "FraggyFrags","row": 1,"col": 6,"prerequesiteIds": [  "IncreasedLifespan"]},
+          {"id": "CheapRangs","row": 1,"col": 10,"prerequesiteIds": [  "IncreasedLifespan"]},
+          {"id": "CrossbowReach","row": 1,"col": 12,"prerequesiteIds": [  "ExtraDartPops"]},
+          {"id": "BigInferno","row": 2,"col": 0,"prerequesiteIds": [  "PoppyBlades"]},
+          {"id": "IcyChill","row": 2,"col": 2,"prerequesiteIds": [  "HardTacks"]},
+          {"id": "MoreSplattyGlue","row": 2,"col": 4,"prerequesiteIds": [  "FastGlue"]},
+          {"id": "BudgetClusters","row": 2,"col": 6,"prerequesiteIds": [  "FraggyFrags"]},
+          {"id": "RecurringRangs","row": 2,"col": 8,"prerequesiteIds": [  "ExtraBounce"]},
+          {"id": "ExtraBounce","row": 2,"col": 10,"prerequesiteIds": [  "CheapRangs"]},
+          {"id": "4And4","row": 2,"col": 12,"prerequesiteIds": [  "CrossbowReach"]},
+          {"id": "ForceVsForce","row": 2,"col": 14,"prerequesiteIds": [  "CrossbowReach"]},
+          {"id": "SoCold","row": 3,"col": 2,"prerequesiteIds": [  "IcyChill"]},
+          {"id": "AviationGradeGlue","row": 3,"col": 4,"prerequesiteIds": [  "MoreSplattyGlue"]},
+          {"id": "MegaMauler","row": 3,"col": 8,"prerequesiteIds": [  "AviationGradeGlue",  "HardPress"]},
+          {"id": "HardPress","row": 3,"col": 10,"prerequesiteIds": [  "ExtraBounce"]},
+          {"id": "MasterDoubleCross","row": 3,"col": 12,"prerequesiteIds": [  "4And4"]},
+          {"id": "BigCryoBlast","row": 4,"col": 0,"prerequesiteIds": [  "SoCold"]},
+          {"id": "Hypothermia","row": 4,"col": 2,"prerequesiteIds": [  "SoCold"]},
+          {"id": "CheaperSolution","row": 4,"col": 4,"prerequesiteIds": [  "AviationGradeGlue"]},
+          {"id": "ViolentImpact","row": 4,"col": 6,"prerequesiteIds": [  "BudgetClusters"]},
+          {"id": "BionicAugmentation","row": 4,"col": 8,"prerequesiteIds": [  "LongTurbo"]},
+          {"id": "LongTurbo","row": 4,"col": 10,"prerequesiteIds": [  "HardPress"]},
+          {"id": "ComeOnEverybody","row": 4,"col": 12,"prerequesiteIds": [  "MasterDoubleCross"]},
+          {"id": "BonusGlueGunner","row": 5,"col": 4,"prerequesiteIds": [  "CheaperSolution"]},
+          {"id": "MoreCash","row": 5,"col": 8,"prerequesiteIds": [  "BonusGlueGunner",  "BonusMonkey"]},
+          {"id": "BonusMonkey","row": 5,"col": 12,"prerequesiteIds": [  "ComeOnEverybody"]}
+        ]
+      },
+      "military": {
+        "grid": [
+          {"id": "NavalUpgrades","row": 0,"col": 1,"prerequesiteIds": []},
+          {"id": "AirforceUpgrades","row": 0,"col": 7,"prerequesiteIds": []},
+          {"id": "EliteMilitaryTraining","row": 0,"col": 10,"prerequesiteIds": []},
+          {"id": "EmergencyUnlock","row": 0,"col": 14,"prerequesiteIds": []},
+          {"id": "BigBunch","row": 1,"col": 2,"prerequesiteIds": [  "NavalUpgrades"]},
+          {"id": "AcceleratedAerodarts","row": 1,"col": 6,"prerequesiteIds": [  "AirforceUpgrades"]},
+          {"id": "CeramicShock","row": 1,"col": 12,"prerequesiteIds": [  "EliteMilitaryTraining"]},
+          {"id": "BreakingBallistic","row": 2,"col": 0,"prerequesiteIds": [  "NavalUpgrades"]},
+          {"id": "FasterTakedowns","row": 2,"col": 2,"prerequesiteIds": [  "BigBunch"]},
+          {"id": "TargetedPineapples","row": 2,"col": 6,"prerequesiteIds": [  "AcceleratedAerodarts"]},
+          {"id": "RapidRazors","row": 2,"col": 8,"prerequesiteIds": [  "AirforceUpgrades"]},
+          {"id": "ExtraBurnyStuff","row": 2,"col": 10,"prerequesiteIds": []},
+          {"id": "CheaperMaiming","row": 2,"col": 12,"prerequesiteIds": [  "CeramicShock"]},
+          {"id": "GorgonStorm","row": 2,"col": 14,"prerequesiteIds": [  "EmergencyUnlock"]},
+          {"id": "QuadBurst","row": 3,"col": 0,"prerequesiteIds": [  "BreakingBallistic"]},
+          {"id": "TradeAgreements","row": 3,"col": 2,"prerequesiteIds": [  "FasterTakedowns"]},
+          {"id": "GunCoolant","row": 3,"col": 6,"prerequesiteIds": [  "TargetedPineapples"]},
+          {"id": "PaintStripper","row": 3,"col": 10,"prerequesiteIds": [  "ExtraBurnyStuff"]},
+          {"id": "CrossTheStreams","row": 3,"col": 14,"prerequesiteIds": [  "GorgonStorm"]},
+          {"id": "FlankingManeuvers","row": 4,"col": 0,"prerequesiteIds": [  "QuadBurst",  "TradeAgreements"]},
+          {"id": "Wingmonkey","row": 4,"col": 4,"prerequesiteIds": [  "AeronauticSubsidy"]},
+          {"id": "AeronauticSubsidy","row": 4,"col": 6,"prerequesiteIds": [  "GunCoolant"]},
+          {"id": "ChargedChinooks","row": 4,"col": 8,"prerequesiteIds": [  "RapidRazors"]},
+          {"id": "BudgetBattery","row": 4,"col": 10,"prerequesiteIds": [  "PaintStripper"]},
+          {"id": "MasterDefender","row": 4,"col": 12,"prerequesiteIds": [  "CheaperMaiming"]},
+          {"id": "SubAdmiral","row": 5,"col": 0,"prerequesiteIds": [  "FlankingManeuvers"]},
+          {"id": "MilitaryConscription","row": 5,"col": 2,"prerequesiteIds": [  "TradeAgreements"]},
+          {"id": "AdvancedLogistics","row": 5,"col": 6,"prerequesiteIds": [  "AeronauticSubsidy",  "DoorGunner"]},
+          {"id": "DoorGunner","row": 5,"col": 8,"prerequesiteIds": [  "ChargedChinooks"]},
+          {"id": "BigBloonSabotage","row": 6,"col": 7,"prerequesiteIds": [  "SubAdmiral",  "MasterDefender"]}
+        ]
+      },
+      "magic": {
+        "grid": [
+          {"id": "SuperRange","row": 0,"col": 2,"prerequesiteIds": []},
+          {"id": "LingeringMagic","row": 0,"col": 8,"prerequesiteIds": []},
+          {"id": "MagicTricks","row": 0,"col": 12,"prerequesiteIds": []},
+          {"id": "CheaperDoubles","row": 1,"col": 0,"prerequesiteIds": [  "SuperRange"]},
+          {"id": "HeavyKnockback","row": 1,"col": 2,"prerequesiteIds": [  "SuperRange"]},
+          {"id": "HotMagic","row": 1,"col": 8,"prerequesiteIds": [  "LingeringMagic"]},
+          {"id": "SpeedyBrewing","row": 1,"col": 12,"prerequesiteIds": [  "MagicTricks"]},
+          {"id": "MoMonkeyMoney","row": 1,"col": 14,"prerequesiteIds": [  "SpeedyBrewing"]},
+          {"id": "DiversionTactics","row": 2,"col": 0,"prerequesiteIds": [  "CheaperDoubles"]},
+          {"id": "StrikeDownTheFalse","row": 2,"col": 2,"prerequesiteIds": [  "HeavyKnockback"]},
+          {"id": "WarmOak","row": 2,"col": 6,"prerequesiteIds": [  "HotMagic"]},
+          {"id": "FlameJet","row": 2,"col": 10,"prerequesiteIds": [  "MagicTricks",  "HotMagic"]},
+          {"id": "StrongTonic","row": 2,"col": 12,"prerequesiteIds": [  "SpeedyBrewing"]},
+          {"id": "XrayUltra","row": 3,"col": 2,"prerequesiteIds": [  "StrikeDownTheFalse"]},
+          {"id": "ColdFront","row": 3,"col": 6,"prerequesiteIds": [  "WarmOak"]},
+          {"id": "ArcaneImpale","row": 3,"col": 10,"prerequesiteIds": [  "FlameJet"]},
+          {"id": "AcidStability","row": 3,"col": 12,"prerequesiteIds": [  "StrongTonic"]},
+          {"id": "DeadlyTranquility","row": 4,"col": 0,"prerequesiteIds": [  "DiversionTactics"]},
+          {"id": "ThereCanBeOnlyOne","row": 4,"col": 2,"prerequesiteIds": [  "XrayUltra"]},
+          {"id": "VineRupture","row": 4,"col": 6,"prerequesiteIds": [  "ColdFront"]},
+          {"id": "TinyTornadoes","row": 5,"col": 6,"prerequesiteIds": [  "DeadlyTranquility", "VineRupture"]},
+          {"id": "ManaShield","row": 5,"col": 10,"prerequesiteIds": [  "ArcaneImpale"]}
+        ]
+      },
+      "support": {
+        "grid": [
+          {"id": "FlatPackBuildings","row": 0,"col": 1,"prerequesiteIds": []},
+          {"id": "OneMoreSpike","row": 0,"col": 5,"prerequesiteIds": []},
+          {"id": "InsiderTrades","row": 1,"col": 0,"prerequesiteIds": [  "FlatPackBuildings"]},
+          {"id": "MoreValuableBananas","row": 1,"col": 2,"prerequesiteIds": [  "FlatPackBuildings"]},
+          {"id": "FirstLastLineOfDefense","row": 1,"col": 6,"prerequesiteIds": [  "OneMoreSpike"]},
+          {"id": "BiggerBanks","row": 2,"col": 0,"prerequesiteIds": [  "InsiderTrades"]},
+          {"id": "FarmSubsidy","row": 2,"col": 2,"prerequesiteIds": [  "MoreValuableBananas"]},
+          {"id": "VigilantSentries","row": 2,"col": 4,"prerequesiteIds": [  "OneMoreSpike"]},
+          {"id": "MonkeyEducation","row": 2,"col": 10,"prerequesiteIds": []},
+          {"id": "BackroomDeals","row": 3,"col": 0,"prerequesiteIds": [  "BiggerBanks"]},
+          {"id": "InlandRevenueStreams","row": 3,"col": 2,"prerequesiteIds": [  "FarmSubsidy"]},
+          {"id": "ThickerFoams","row": 3,"col": 4,"prerequesiteIds": [  "VigilantSentries"]},
+          {"id": "VeryShreddy","row": 3,"col": 6,"prerequesiteIds": [  "FirstLastLineOfDefense"]},
+          {"id": "ToArms","row": 3,"col": 10,"prerequesiteIds": [  "MonkeyEducation"]},
+          {"id": "BetterSellDeals","row": 4,"col": 0,"prerequesiteIds": [  "BackroomDeals"]},
+          {"id": "HealthyBananas","row": 4,"col": 2,"prerequesiteIds": [  "InlandRevenueStreams"]},
+          {"id": "BigTraps","row": 4,"col": 4,"prerequesiteIds": [  "ThickerFoams"]},
+          {"id": "HiValueMines","row": 4,"col": 6,"prerequesiteIds": [  "VeryShreddy"]},
+          {"id": "VeteranMonkeyTraining","row": 4,"col": 8,"prerequesiteIds": [  "ToArms"]},
+          {"id": "GlobalAbilityCooldowns","row": 4,"col": 12,"prerequesiteIds": [  "ToArms"]},
+          {"id": "BankDeposits","row": 5,"col": 0,"prerequesiteIds": [  "BetterSellDeals"]},
+          {"id": "ParagonOfPower","row": 5,"col": 8,"prerequesiteIds": [  "VeteranMonkeyTraining"]}
+        ]
+      },
+      "heroes": {
+        "grid": [
+          {"id": "HeroicReach","row": 0,"col": 0,"prerequesiteIds": []},
+          {"id": "MoreSplody","row": 0,"col": 4,"prerequesiteIds": []},
+          {"id": "AbilityDiscipline","row": 0,"col": 8,"prerequesiteIds": []},
+          {"id": "HeroicVelocity","row": 1,"col": 0,"prerequesiteIds": [  "HeroicReach"]},
+          {"id": "Scholarships","row": 1,"col": 4,"prerequesiteIds": [  "MoreSplody"]},
+          {"id": "QuickHands","row": 2,"col": 0,"prerequesiteIds": [  "HeroicVelocity"]},
+          {"id": "SelfTaughtHeroes","row": 2,"col": 4,"prerequesiteIds": [  "Scholarships"]},
+          {"id": "AbilityMastery","row": 2,"col": 8,"prerequesiteIds": [  "AbilityDiscipline"]},
+          {"id": "HeroFavors","row": 3,"col": 4,"prerequesiteIds": [  "SelfTaughtHeroes",  "QuickHands"]},
+          {"id": "EmpoweredHeroes","row": 4,"col": 4,"prerequesiteIds": [  "HeroFavors"]},
+          {"id": "BigBloonBlueprints","row": 4,"col": 8,"prerequesiteIds": [  "AbilityMastery"]},
+          {"id": "MonkeysTogetherStrong","row": 5,"col": 4,"prerequesiteIds": [  "EmpoweredHeroes"]},
+          {"id": "WeakPoint","row": 5,"col": 8,"prerequesiteIds": [  "MonkeysTogetherStrong",  "BigBloonBlueprints"]}
+        ]
+      },
+      "powers": {
+        "grid": [
+          {"id": "BiggerCamoTrap","row": 0,"col": 0,"prerequesiteIds": []},
+          {"id": "JustOneMore","row": 0,"col": 4,"prerequesiteIds": []},
+          {"id": "CheaperLakes","row": 0,"col": 8,"prerequesiteIds": []},
+          {"id": "MaulingMoabMines","row": 1,"col": 0,"prerequesiteIds": [  "BiggerCamoTrap"]},
+          {"id": "LongerDartTime","row": 1,"col": 4,"prerequesiteIds": [  "JustOneMore"]},
+          {"id": "BudgetPontoons","row": 1,"col": 8,"prerequesiteIds": [  "CheaperLakes"]},
+          {"id": "SupersizeGlueTrap","row": 2,"col": 0,"prerequesiteIds": [  "MaulingMoabMines"]},
+          {"id": "LongerBoosts","row": 2,"col": 4,"prerequesiteIds": [  "LongerDartTime"]},
+          {"id": "PowerfulMonkeyStorm","row": 2,"col": 8,"prerequesiteIds": [  "BudgetPontoons",  "LongerBoosts"]},
+          {"id": "AmbushTech","row": 3,"col": 0,"prerequesiteIds": [  "SupersizeGlueTrap"]},
+          {"id": "PreGamePrep","row": 3,"col": 4,"prerequesiteIds": [  "LongerBoosts"]},
+          {"id": "FitFarmers","row": 3,"col": 8,"prerequesiteIds": [  "PowerfulMonkeyStorm"]},
+          {"id": "BudgetCashDrops","row": 4,"col": 6,"prerequesiteIds": [  "FitFarmers"]},
+          {"id": "SupaThrive","row": 4,"col": 10,"prerequesiteIds": [  "FitFarmers"]},
+          {"id": "GrandPrixSpree","row": 5,"col": 6,"prerequesiteIds": [  "BudgetCashDrops"]}
+        ]
+      }
     }
+
+    changeHexBGColor(constants.ParagonBGColor);
 
     let knowledgeProgressContainer = document.createElement('div');
     knowledgeProgressContainer.id = 'knowledge-progress-container';
     knowledgeProgressContainer.classList.add('knowledge-progress-container');
     progressContent.appendChild(knowledgeProgressContainer);
 
-    // let recommendedKnowledgeContainerDiv = document.createElement('div');
-    // recommendedKnowledgeContainerDiv.id = 'recommended-knowledge-container-div';
-    // recommendedKnowledgeContainerDiv.classList.add('knowledge-progress-container-div');
-    // knowledgeProgressContainer.appendChild(recommendedKnowledgeContainerDiv);
+    let knowledgeProgressHeaderBar = createEl('div', {
+        classList: ['d-flex', 'fd-column'],
+    });
+    knowledgeProgressContainer.appendChild(knowledgeProgressHeaderBar);
+    
+    let knowledgeTreeOptions = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'jc-evenly']
+    });
+    knowledgeProgressHeaderBar.appendChild(knowledgeTreeOptions);
 
-    // let recommendedKnowledgeHeader = document.createElement('p');
-    // recommendedKnowledgeHeader.id = 'left-column-header-text';
-    // recommendedKnowledgeHeader.classList.add('column-header-text');
-    // recommendedKnowledgeHeader.classList.add('black-outline');
-    // recommendedKnowledgeHeader.innerHTML = `${totals[1]} Recommended Knowledge Points`;
-    // recommendedKnowledgeContainerDiv.appendChild(recommendedKnowledgeHeader);
-
-    // let recommendedKnowledgeDiv = document.createElement('div');
-    // recommendedKnowledgeDiv.id = 'recommended-knowledge-div';
-    // recommendedKnowledgeDiv.classList.add('knowledge-progress-div');
-    // recommendedKnowledgeContainerDiv.appendChild(recommendedKnowledgeDiv);
-
-    let knowledgeProgressUnlockedContainerDiv = document.createElement('div');
-    knowledgeProgressUnlockedContainerDiv.classList.add('knowledge-progress-container-div');
-    knowledgeProgressContainer.appendChild(knowledgeProgressUnlockedContainerDiv);
-
-    let knowledgeProgressUnlockedHeader = document.createElement('p');
-    knowledgeProgressUnlockedHeader.classList.add('column-header-text','black-outline');
-    knowledgeProgressUnlockedHeader.innerHTML = `${totals[0]} Unlocked Knowledge Points`;
-    knowledgeProgressUnlockedContainerDiv.appendChild(knowledgeProgressUnlockedHeader);
-
-    let knowledgeProgressUnlockedDiv = document.createElement('div');
-    knowledgeProgressUnlockedDiv.classList.add('knowledge-progress-div');
-    knowledgeProgressUnlockedContainerDiv.appendChild(knowledgeProgressUnlockedDiv);
-
-    let knowledgeProgressLockedContainerDiv = document.createElement('div');
-    knowledgeProgressLockedContainerDiv.classList.add('knowledge-progress-container-div');
-    knowledgeProgressContainer.appendChild(knowledgeProgressLockedContainerDiv);
-
-    let knowledgeProgressLockedHeader = document.createElement('p');
-    knowledgeProgressLockedHeader.classList.add('column-header-text','black-outline');
-    knowledgeProgressLockedHeader.innerHTML = `${totals[2] + totals[1]} Locked Knowledge Points`;
-    knowledgeProgressLockedContainerDiv.appendChild(knowledgeProgressLockedHeader);
-
-    let knowledgeProgressLockedDiv = document.createElement('div');
-    knowledgeProgressLockedDiv.classList.add('knowledge-progress-div');
-    knowledgeProgressLockedContainerDiv.appendChild(knowledgeProgressLockedDiv);
-
-    for (let [knowledge, obtained] of Object.entries(btd6usersave.acquiredKnowledge)) {
-        if (!getLocValue(knowledge)) { continue; }
-        let knowledgeIconDiv = document.createElement('div');
-        knowledgeIconDiv.classList.add('knowledge-icon-div');
-        // obtained ? knowledgeProgressUnlockedDiv.appendChild(knowledgeIconDiv) : constants.RecommendedKnowledge.includes(knowledge) ? recommendedKnowledgeDiv.appendChild(knowledgeIconDiv) : knowledgeProgressLockedDiv.appendChild(knowledgeIconDiv);
-        obtained ? knowledgeProgressUnlockedDiv.appendChild(knowledgeIconDiv) : knowledgeProgressLockedDiv.appendChild(knowledgeIconDiv);
-
-
-        let knowledgeGlow = document.createElement('div');
-        knowledgeGlow.id = `${knowledge}-glow`;
-        // upgradeGlow.classList.add('upgrade-glow');
-        knowledgeIconDiv.appendChild(knowledgeGlow);
-
-        let knowledgeIcon = document.createElement('img');
-        knowledgeIcon.classList.add('knowledge-icon');
-        knowledgeIcon.src = getKnowledgeAssetPath(knowledge);
-        knowledgeIconDiv.appendChild(knowledgeIcon);
-
-        knowledgeIconDiv.addEventListener('click', () => {
-            onSelectKnowledgePoint(knowledge);
-            Array.from(document.getElementsByClassName('knowledge-glow')).forEach((glow) => {
-                glow.classList.remove('knowledge-glow');
-            });
-            knowledgeGlow.classList.add('knowledge-glow');
+    let options = {
+        "primary": "PrimaryIcon",
+        "military": "MilitaryIcon",
+        "magic": "MagicIcon",
+        "support": "SupportIcon",
+        "heroes": "AllHeroesIcon",
+        "powers": "PowerContainer"
+    }
+    for (let [treeKey, iconName] of Object.entries(options)) {
+        let treeOption = createEl('div', {
+            classList: ['knowledge-tree-option', 'd-flex', 'ai-center'],
+            style: {
+                backgroundColor: "#7898af",
+                borderRadius: "8px",
+                padding: "4px",
+            }
+        });
+        if (treeKey == currentKnowledgeTree) {
+            treeOption.style.backgroundColor = "#5c9ecd";
+        }
+        let treeOptionIcon = createEl('img', {
+            classList: ['of-contain'],
+            style: {
+                width: "32px",
+                height: "32px",
+            },
+            src: `./Assets/UI/${iconName}.png`
+        });
+        treeOption.appendChild(treeOptionIcon);
+        let treeOptionText = createEl('p', {
+            classList: ['knowledge-outline'],
+            style: {
+                fontSize: "20px",
+            },
+            innerHTML: treeKey
+        });
+        treeOption.appendChild(treeOptionText);
+        treeOption.addEventListener('click', () => {
+            document.querySelectorAll('.knowledge-tree-option').forEach((option) => {
+                option.style.backgroundColor = "#7898af";
+            })
+            treeOption.style.backgroundColor = "#5c9ecd";
+            createTowerFilterDivs(treeKey);
+            treeContainer.innerHTML = "";
+            generateKnowledgeTree(knowledgeTrees[treeKey]);
         })
-    }
-
-    // if (recommendedKnowledgeDiv.innerHTML == "") {
-    //     recommendedKnowledgeHeader.style.display = "none";
-    // }
-    if (knowledgeProgressLockedDiv.innerHTML == "") {
-        knowledgeProgressLockedHeader.style.display = "none";
-    }
-    if (knowledgeProgressUnlockedDiv.innerHTML == "") {
-        knowledgeProgressUnlockedHeader.style.display = "none";
+        knowledgeTreeOptions.appendChild(treeOption);
     }
 
 
-    let tooltipContainerDiv = document.createElement('div');
-    tooltipContainerDiv.classList.add('tooltip-container-div');
-    knowledgeProgressContainer.appendChild(tooltipContainerDiv);
+    let knowledgeHeaderBottom = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'jc-between'],
+        style: {
+            margin: "8px"
+        }
+    });
+    knowledgeProgressHeaderBar.appendChild(knowledgeHeaderBottom);
 
-    let knowledgeProgressFloatingTooltip = document.createElement('div');
-    knowledgeProgressFloatingTooltip.id = 'knowledge-progress-floating-tooltip';
-    knowledgeProgressFloatingTooltip.classList.add('knowledge-progress-floating-tooltip');
-    tooltipContainerDiv.appendChild(knowledgeProgressFloatingTooltip);
+    let knowledgeOwnedCount = createEl('p', {
+        classList: ['knowledge-outline', 'd-flex', 'ai-center'],
+        style: {
+            fontSize: "24px",
+            padding: "0 16px",
+            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            borderRadius: "10px",
+            height: "50px",
+        },
+        innerHTML: `X/X`
+    });
+    knowledgeHeaderBottom.appendChild(knowledgeOwnedCount);
 
-    let knowledgeNameText = document.createElement('p');
-    knowledgeNameText.id = `knowledge-name-text`;
-    knowledgeNameText.classList.add('knowledge-name-text','black-outline');
-    knowledgeProgressFloatingTooltip.appendChild(knowledgeNameText);
+    let towerFilterDiv = createEl('div', {
+        classList: ['d-flex', 'ai-center'],
+        style: {
+            gap: "8px",
+        }
+    });
+    knowledgeHeaderBottom.appendChild(towerFilterDiv);
 
-    let knowledgeDescText = document.createElement('p');
-    knowledgeDescText.id = `knowledge-desc-text`;
-    knowledgeDescText.classList.add('knowledge-desc-text');
-    knowledgeProgressFloatingTooltip.appendChild(knowledgeDescText);
+    let towerFilters = {
+        "primary": ["DartMonkey", "BoomerangMonkey", "BombShooter", "TackShooter", "IceMonkey", "GlueGunner"],
+        "military": ["SniperMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "HeliPilot", "MortarMonkey", "DartlingGunner"],
+        "magic": ["WizardMonkey", "SuperMonkey", "NinjaMonkey", "Alchemist", "Druid"],
+        "support": ["BananaFarm", "SpikeFactory", "MonkeyVillage", "EngineerMonkey"],
+    }
+    function createTowerFilterDivs(treeKey) {
+        towerFilterDiv.innerHTML = "";
+        if (treeKey in towerFilters) {
+            towerFilters[treeKey].forEach((tower) => {
+                
+                let towerFilterIcon = createEl('img', {
+                    classList: ['of-contain', 'tower-filter-icon'],
+                    style: {
+                        width: "50px",
+                        height: "50px",
+                    },
+                    src: getInstaMonkeyIcon(tower,"000")
+                });
+                towerFilterDiv.appendChild(towerFilterIcon);
+                towerFilterIcon.addEventListener('click', () => {
+                    document.querySelectorAll('.knowledge-tower-filter-active').forEach((icon) => {
+                        icon.classList.remove('knowledge-tower-filter-active');
+                    });
+                    Array.from(document.getElementsByClassName(`knowledge-icon-div`)).forEach((div) => {
+                        div.children[0].classList.remove('knowledge-glow');
+                    });
+                    if (knowledgeTowerFilter == tower) {
+                        knowledgeTowerFilter = null;
+                    } else {
+                        knowledgeTowerFilter = tower;
+                        towerFilterIcon.classList.add('knowledge-tower-filter-active');
+
+                        let knowledgePoints = Object.entries(constants.knowledgeTags).filter(([key, tags]) => tags.includes(tower) || tags.includes(`All${constants.towersInOrder[tower]}`)).map(([key, tags]) => key);
+                        knowledgePoints.forEach((point) => {
+                            let glowDiv = document.getElementById(`${point}-glow`);
+                            if (glowDiv) {
+                                glowDiv.classList.add('knowledge-glow');
+                            }
+                        });
+                    }
+                })
+            })
+        }
+    }
+    createTowerFilterDivs(currentKnowledgeTree);
+
+    let currencyKnowledgeDiv = createEl('div', {
+        classList: ['d-flex', 'ai-center'],
+        style: {
+            gap: "8px",
+            padding: "4px 16px",
+            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            borderRadius: "10px",
+        }
+    });
+    knowledgeHeaderBottom.appendChild(currencyKnowledgeDiv);
+
+    let currencyKnowledgeImg = createEl('img', {
+        classList: [],
+        style: {
+            width: "40px",
+        },
+        src: '../Assets/UI/KnowledgeIcon.png'
+    });
+    currencyKnowledgeDiv.appendChild(currencyKnowledgeImg);
+
+    let currencyKnowledgeText = createEl('p', {
+        classList: ['knowledge-outline'],
+        style: {
+            fontSize: "32px"
+        },
+        innerHTML: btd6usersave["knowledgePoints"].toLocaleString()
+    });
+    currencyKnowledgeDiv.appendChild(currencyKnowledgeText);
+
+    let treeContainer = createEl('div', {
+        classList: ['knowledge-tree-container', 'd-flex', 'jc-center'],
+        style: {
+            width: "770px",
+        }
+    });
+    knowledgeProgressContainer.appendChild(treeContainer);
+
+    function generateKnowledgeTree(treeData) {
+        let totalNodes = treeData.grid.length;
+        let obtainedNodes = treeData.grid.filter(node => btd6usersave.acquiredKnowledge[node.id]).length;
+        knowledgeOwnedCount.innerHTML = `${obtainedNodes}/${totalNodes} Unlocked`;
+
+        let maxRow = 0;
+        let maxCol = 0;
+        for (let node of treeData.grid) {
+            if (node.row > maxRow) maxRow = node.row;
+            if (node.col > maxCol) maxCol = node.col;
+        }
+        maxCol += 1;
+
+        let nodeMap = {};
+        for (let node of treeData.grid) {
+            nodeMap[`${node.row},${node.col}`] = node;
+        }
+
+        let table = createEl('table', {
+            classList: ['knowledge-tree-table'],
+            style: {
+                position: 'relative',
+            }
+        });
+
+        for (let r = 0; r <= maxRow; r++) {
+            let tr = createEl('tr');
+            for (let c = 0; c <= maxCol; c++) {
+                let td = createEl('td', {
+                    classList: ['knowledge-tree-cell']
+                });
+                td.dataset.row = r;
+                td.dataset.col = c;
+
+                let node = nodeMap[`${r},${c}`];
+                if (node) {
+                    td.dataset.nodeId = node.id;
+                    let obtained = btd6usersave.acquiredKnowledge[node.id];
+
+
+                    let knowledgeIconDiv = createEl('div', {
+                        classList: ['knowledge-icon-div']
+                    });
+                    if (!obtained) knowledgeIconDiv.classList.add('half-brightness');
+
+                    let knowledgeGlow = document.createElement('div');
+                    knowledgeGlow.id = `${node.id}-glow`;
+                    knowledgeIconDiv.appendChild(knowledgeGlow);
+
+                    let knowledgeAsset = getKnowledgeSprite(node.id);
+
+                    const displaySize = 80;
+                    const scale = displaySize / knowledgeAsset.width;
+
+                    let knowledgeIcon = createEl('div', {
+                        classList: ['knowledge-icon'],
+                        style: {
+                            backgroundPosition: `-${knowledgeAsset.x * scale}px -${knowledgeAsset.y * scale}px`,
+                            backgroundImage: `url(Assets/KnowledgeIcon/knowledge_sheet.png)`,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: `${3611 * scale}px auto`,
+                            width: `${displaySize}px`,
+                            height: `${displaySize}px`,
+                        }
+                    });
+                    knowledgeIconDiv.appendChild(knowledgeIcon);
+
+                    // knowledgeIconDiv.addEventListener('click', () => {
+                    //     Array.from(document.getElementsByClassName('knowledge-glow')).forEach((glow) => {
+                    //         glow.classList.remove('knowledge-glow');
+                    //     });
+                    //     knowledgeGlow.classList.add('knowledge-glow');
+                    // });
+
+                    tippy(knowledgeIcon, {
+                        content: `<p class="artifact-title">${getLocValue(node.id)}</p>${getLocValue(node.id + "Description")}`,
+                        allowHTML: true,
+                        placement: 'top',
+                        hideOnClick: false,
+                        theme: 'speech_bubble',
+                        popperOptions: {
+                            modifiers: [
+                                {
+                                name: 'preventOverflow',
+                                options: {
+                                    boundary: 'viewport',
+                                    padding: {right: 18},
+                                },
+                                },
+                            ],
+                        },
+                    });
+
+                    td.appendChild(knowledgeIconDiv);
+                }
+
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+
+        treeContainer.appendChild(table);
+        
+        requestAnimationFrame(() => drawKnowledgeArrows(table, treeData));
+    }
+
+    generateKnowledgeTree(knowledgeTrees[currentKnowledgeTree])
 }
 
-function onSelectKnowledgePoint(knowledge){
-    let knowledgeProgressFloatingTooltip = document.getElementById('knowledge-progress-floating-tooltip');
-    knowledgeProgressFloatingTooltip.style.display = "block";
+function drawKnowledgeArrows(table, treeData) {
+    const nodeById = Object.fromEntries(treeData.grid.map(n => [n.id, n]));
+    const iconImgById = {};
 
-    let knowledgeNameText = document.getElementById('knowledge-name-text');
-    knowledgeNameText.innerHTML = getLocValue(knowledge);
+    for (let td of table.querySelectorAll('td[data-node-id]')) {
+        const icon = td.querySelector('.knowledge-icon');
+        if (icon) iconImgById[td.dataset.nodeId] = icon;
+    }
 
-    let knowledgeDescText = document.getElementById('knowledge-desc-text');
-    knowledgeDescText.innerHTML = getLocValue(`${knowledge}Description`);
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    Object.assign(svg.style, {
+        position: 'absolute', top: '0', left: '0',
+        width: table.offsetWidth + 'px', height: table.offsetHeight + 'px',
+        pointerEvents: 'none', overflow: 'visible'
+    });
+    table.style.position = 'relative';
+    table.appendChild(svg);
+
+    const tableRect = table.getBoundingClientRect();
+    const ARROW_SIZE = 8;
+    const LINE_GAP = -8;
+
+    function relX(rect) { return rect.left - tableRect.left; }
+    function relY(rect) { return rect.top - tableRect.top; }
+    function centerX(rect) { return relX(rect) + rect.width / 2; }
+    function centerY(rect) { return relY(rect) + rect.height / 2; }
+
+    function makeArrowRight(tipX, tipY) {
+        return `${tipX},${tipY} ${tipX + ARROW_SIZE * 1.5},${tipY - ARROW_SIZE} ${tipX + ARROW_SIZE * 1.5},${tipY + ARROW_SIZE}`;
+    }
+    function makeArrowLeft(tipX, tipY) {
+        return `${tipX},${tipY} ${tipX - ARROW_SIZE * 1.5},${tipY - ARROW_SIZE} ${tipX - ARROW_SIZE * 1.5},${tipY + ARROW_SIZE}`;
+    }
+    function makeArrowDown(tipX, tipY) {
+        return `${tipX},${tipY} ${tipX - ARROW_SIZE},${tipY - ARROW_SIZE * 1.5} ${tipX + ARROW_SIZE},${tipY - ARROW_SIZE * 1.5}`;
+    }
+
+    function addArrow(pathD, arrowPoints) {
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', pathD);
+        path.setAttribute('stroke', 'white');
+        path.setAttribute('stroke-width', '5');
+        path.setAttribute('fill', 'none');
+        svg.appendChild(path);
+
+        const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        arrow.setAttribute('points', arrowPoints);
+        arrow.setAttribute('fill', 'white');
+        svg.appendChild(arrow);
+    }
+
+    function isRowBlocked(row, minCol, maxCol, excludeIds) {
+        return treeData.grid.some(n =>
+            !excludeIds.includes(n.id) &&
+            n.row === row &&
+            n.col >= minCol && n.col <= maxCol
+        );
+    }
+
+    for (let node of treeData.grid) {
+        if (!node.prerequesiteIds?.length) continue;
+        const toImg = iconImgById[node.id];
+        if (!toImg) continue;
+
+        const toRect = toImg.getBoundingClientRect();
+        const prereqCount = node.prerequesiteIds.length;
+
+        const sortedPrereqIds = prereqCount > 1
+            ? [...node.prerequesiteIds].sort((a, b) => (nodeById[a]?.col ?? 0) - (nodeById[b]?.col ?? 0))
+            : node.prerequesiteIds;
+
+        node.prerequesiteIds.forEach(prereqId => {
+            const fromImg = iconImgById[prereqId];
+            if (!fromImg) return;
+
+            const fromNode = nodeById[prereqId];
+            const fromRect = fromImg.getBoundingClientRect();
+            const offsetX = prereqCount > 1
+                ? (sortedPrereqIds.indexOf(prereqId) - (prereqCount - 1) / 2) * 10
+                : 0;
+
+            const isSameRow = fromNode?.row === node.row;
+            const isFromRight = fromNode?.col > node.col;
+
+            if (isSameRow) {
+                let fromX, lineEndX, tipX;
+                const y = centerY(fromRect);
+
+                if (isFromRight) {
+                    fromX = relX(fromRect);
+                    tipX = relX(toRect) + toRect.width;
+                    lineEndX = tipX - LINE_GAP;
+                    const midX = (fromX + lineEndX) / 2;
+                    addArrow(
+                        `M ${fromX} ${y} L ${midX} ${y} L ${midX} ${y} L ${lineEndX} ${y}`,
+                        makeArrowRight(tipX, y)
+                    );
+                } else {
+                    fromX = relX(fromRect) + fromRect.width;
+                    tipX = relX(toRect);
+                    lineEndX = tipX + LINE_GAP;
+                    const midX = (fromX + lineEndX) / 2;
+                    addArrow(
+                        `M ${fromX} ${y} L ${midX} ${y} L ${midX} ${y} L ${lineEndX} ${y}`,
+                        makeArrowLeft(tipX, y)
+                    );
+                }
+                return;
+            }
+
+            const fx = centerX(fromRect);
+            const fy = centerY(fromRect);
+            const tx = centerX(toRect) + offsetX;
+            const ty = centerY(toRect);
+            const toTopY = relY(toRect);
+
+            const isSameCol = fromNode?.col === node.col;
+            const isFromRightCol = fromNode?.col > node.col;
+
+            let fromRowBlocked = false;
+            let toRowBlocked = false;
+
+            if (!isSameCol) {
+                const minCol = Math.min(fromNode.col, node.col);
+                const maxCol = Math.max(fromNode.col, node.col);
+                const excluded = [fromNode.id, node.id];
+                fromRowBlocked = isRowBlocked(fromNode.row, minCol, maxCol, excluded);
+                toRowBlocked = isRowBlocked(node.row, minCol + 1, maxCol, excluded);
+            }
+
+            if (isSameCol || (!fromRowBlocked && !toRowBlocked)) {
+                const tipY = toTopY;
+                addArrow(
+                    `M ${fx} ${fy} L ${tx} ${fy} L ${tx} ${tipY + LINE_GAP}`,
+                    makeArrowDown(tx, tipY)
+                );
+            } else if (isFromRightCol && fromRowBlocked && !toRowBlocked) {
+                const sideX = relX(toRect) + toRect.width;
+                addArrow(
+                    `M ${fx} ${fy} L ${fx} ${ty} L ${sideX - LINE_GAP} ${ty}`,
+                    makeArrowRight(sideX, ty)
+                );
+            } else if (isFromRightCol) {
+                addArrow(
+                    `M ${fx} ${fy} L ${tx} ${fy} L ${tx} ${toTopY + LINE_GAP}`,
+                    makeArrowDown(tx, toTopY)
+                );
+            } else {
+                const sideX = relX(toRect);
+                addArrow(
+                    `M ${fx} ${fy} L ${fx} ${ty} L ${sideX + LINE_GAP} ${ty}`,
+                    makeArrowLeft(sideX, ty)
+                );
+            }
+        });
+    }
 }
 
 function generateMapsProgress(){
