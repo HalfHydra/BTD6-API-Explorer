@@ -948,7 +948,7 @@ function generateVersionInfo(){
 
     let toolVersionText = document.createElement('p');
     toolVersionText.classList.add('tool-version-text');
-    toolVersionText.innerHTML = `App Version: ${constants.version} / Game Content Version: v${constants.projectContentVersion}`;
+    toolVersionText.innerHTML = `Site Version: ${constants.version} / Game Content Version: v${constants.projectContentVersion}`;
     versionDiv?.appendChild(toolVersionText);
 }
 
@@ -1834,7 +1834,7 @@ function generateProgress(){
 
         let profileSelectorText = document.createElement('p');
         profileSelectorText.classList.add('selector-text','black-outline');
-        profileSelectorText.innerHTML = "View Your Profile Stats";
+        profileSelectorText.innerHTML = "View Your Profile & Stats";
         profileSelectorDiv.appendChild(profileSelectorText);
 
         let profileSelectorGoImg = document.createElement('img');
