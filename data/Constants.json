@@ -94,31 +94,28 @@
         "RedSauda",
         "Sheriff"
     ],
-    "powersInOrder": [
-        "CashDrop",
-        "RoadSpikes",
-        "MonkeyBoost",
-        "BananaFarmer",
-        "CamoTrap",
-        "Pontoon",
-        "SuperMonkeyStorm",
-        "GlueTrap",
-        "PortableLake",
-        "MoabMine",
-        "Thrive",
-        "EnergisingTotem",
-        "DartTime",
-        "TechBot",
-        "CaveMonkey",
-        "BattleCat",
-        "SheRa",
-        "Skeletor"
-    ],
-    "powersIAP": [
-        "BattleCat",
-        "SheRa",
-        "Skeletor"
-    ],
+    "powersInOrder": {
+        "CashDrop": "Power",
+        "RoadSpikes": "Power",
+        "MonkeyBoost": "Power",
+        "BananaFarmer": "Power",
+        "CamoTrap": "Power",
+        "Pontoon": "Power",
+        "SuperMonkeyStorm": "Power",
+        "GlueTrap": "Power",
+        "PortableLake": "Power",
+        "MoabMine": "Power",
+        "Thrive": "Power",
+        "EnergisingTotem": "Power",
+        "DartTime": "Power",
+        "TechBot": "Power",
+        "CaveMonkey": "Power",
+        "BattleCat": "IAP",
+        "SheRa": "IAP",
+        "Skeletor": "IAP",
+        "BananaFarmerPro": "Pro",
+        "SuperMonkeyBeacon": "Pro"
+    },
     "mapsInOrder": {
         "Tutorial": {
             "difficulty": "Beginner",
@@ -2392,7 +2389,11 @@
     },
     "hiddenContent": {
         "heroes": [
-            "RedSauda"
+            "RedSauda",
+            "Sheriff"
+        ],
+        "powers": [
+            "CaveMonkey"
         ]
     },
     "unreleasedContent": {

@@ -382,7 +382,7 @@ function generateProgressSubText(){
     let heroesUnlocked = Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length;
     progressSubText["Heroes"] = `${heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeros).length} Hero${heroesUnlocked != 1 ? "es" : ""} Unlocked`;
     let totalSkins = Object.values(constants.heroSkins).flat().filter(k => !Object.keys(constants.heroesInOrder).includes(k));
-    constants.hiddenHeroes.forEach((skin) => {
+    constants.hiddenContent.heroes.forEach((skin) => {
         if (!(btd6usersave.unlockedSkins.hasOwnProperty(skin) && btd6usersave.unlockedSkins[skin])) {
             totalSkins.splice(totalSkins.indexOf(skin), 1)
         }
@@ -2757,7 +2757,7 @@ function generateHeroProgressHero(hero, nameColor){
     heroProgressMiddle.appendChild(heroSkinsDiv);
 
     constants.heroSkins[hero].forEach((skin) => {
-        if ((btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == null && constants.hiddenHeroes.includes(skin)) && skin != hero) { return; }
+        if ((btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == null && constants.hiddenContent.heroes.includes(skin)) && skin != hero) { return; }
 
         let heroSkin = document.createElement('img');
         heroSkin.id = `${hero}-${skin}-skin`;
@@ -4368,13 +4368,21 @@ function generatePowersProgress() {
     powersProgressContainer.classList.add('powers-progress-container');
     progressContent.appendChild(powersProgressContainer);
 
-    for (let power of constants.powersInOrder) {
-        if(!btd6usersave.powers.hasOwnProperty(power)) { continue; }
+    // for (let power of constants.powersInOrder) {
+    Object.entries(constants.powersInOrder).forEach(([power, type]) => {
+        if(constants.hiddenContent.powers.includes(power) && !btd6usersave.powers.hasOwnProperty(power)) { return; }
         let powerDiv = document.createElement('div');
         powerDiv.classList.add('power-div');
         powersProgressContainer.appendChild(powerDiv);
 
-        if(constants.powersIAP.includes(power)) { powerDiv.style.backgroundImage = "url(../Assets/UI/PowerIAPContainer.png)"}
+        switch (type) {
+            case "IAP":
+                powerDiv.style.backgroundImage = "url(../Assets/UI/PowerIAPContainer.png)"
+                break;
+            case "Pro":
+                powerDiv.style.backgroundImage = "url(../Assets/UI/PowersProContainer.png)"
+                break;
+        }
 
         let powerImg = document.createElement('img');
         powerImg.classList.add('power-img');
@@ -4392,9 +4400,9 @@ function generatePowersProgress() {
 
         let powerProgressText = document.createElement('p');
         powerProgressText.classList.add('power-progress-text','black-outline');
-        powerProgressText.innerHTML = `${btd6usersave.powers[power].quantity || 0}`;
+        powerProgressText.innerHTML = `${btd6usersave.powers[power]?.quantity || 0}`;
         powerProgress.appendChild(powerProgressText);
-    }
+    });
 }
 
 function generateInstaMonkeysProgress() {
