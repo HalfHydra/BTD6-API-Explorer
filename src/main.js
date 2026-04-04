@@ -6540,6 +6540,10 @@ function generateBosses(elite){
         let bossNumber = bossNumberMatch ? bossNumberMatch[1] : '';
         let bossName = `${elite ? "Elite" : ""} ${titleCaseBoss} ${bossNumber}`;
 
+        if (bossNumber == "") {
+            bossName = `${race.name}${elite ? " (Elite)" : ""}`;
+        }
+
         let eventData = {
             'name': titleCaseBoss,
             'elite': elite,
