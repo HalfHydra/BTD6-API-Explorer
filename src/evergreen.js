@@ -36,13 +36,12 @@ function goBack(noScroll){
     if (currentState.source) {
         document.getElementById(currentState.destination + "-content").style.display = 'none';
         document.getElementById(currentState.source + "-content").style.display = 'flex';
+        changeHexBGColor(constants.BGColor)
     }
 
     if (currentState.callback) {
         currentState.callback();
     }
-
-    changeHexBGColor(constants.BGColor)
 
     if (backQueue.length === 0) {
         backButton.classList.remove('visible');
