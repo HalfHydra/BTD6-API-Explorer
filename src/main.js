@@ -396,10 +396,15 @@ function generateProgressSubText(){
     let chimpsTotal = Object.values(processedMapData.Medals.single).map(map => map["Clicks"]).filter(medal => medal).length;
     let chimpsTotalCoop = Object.values(processedMapData.Medals.coop).map(map => map["Clicks"]).filter(medal => medal).length;
     if (chimpsTotal + chimpsTotalCoop > 0) { progressSubText["CHIMPS"] = `${chimpsTotal + chimpsTotalCoop} CHIMPS Medal${chimpsTotal + chimpsTotalCoop != 1 ? "s" : ""} Earned` }
-    let powersTotal = Object.values(btd6usersave.powers).map(power => (typeof power === 'object' && power.quantity) ? power.quantity : 0).reduce((acc, amount) => acc + amount) + btd6publicprofile.gameplay.powersUsed;
+    let powersAvailable = Object.values(btd6usersave.powers).map(power => (typeof power === 'object' && power.quantity) ? power.quantity : 0).reduce((acc, amount) => acc + amount);
+    let powersTotal = powersAvailable + btd6publicprofile.gameplay.powersUsed;
+    progressSubText["PowersUsable"] = `${powersAvailable} Power${powersAvailable != 1 ? "s" : ""} Available`;
     progressSubText["Powers"] = `${powersTotal} Power${powersTotal != 1 ? "s" : ""} Collected`
-    let instaTotal = Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount) + btd6publicprofile.gameplay.instaMonkeysUsed;
-    progressSubText["InstaMonkeys"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Collected`;
+    let powersProUnlocked = Object.values(btd6usersave.powersPro).map(power => power.unlockedTier).reduce((acc, amount) => acc + amount);
+    progressSubText["PowersPro"] = `${powersProUnlocked} Pro Power${(powersProUnlocked > 1) ? "s" : ""} Unlocked`
+    let instaTotal = Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount);
+    progressSubText["InstaMonkeysUsable"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Available`;
+    progressSubText["InstaMonkeys"] = `${instaTotal + btd6publicprofile.gameplay.instaMonkeysUsed} Insta${instaTotal != 1 ? "s" : ""} Collected`;
     progressSubText["Achievements"] = `${btd6usersave.achievementsClaimed.length}/${constants.achievements + constants.hiddenAchievements} Achievement${btd6publicprofile.achievements != 1 ? "s" : ""} Earned`;
     let extrasTotal = Object.keys(extrasUnlocked).length;
     progressSubText["TrophyStore"] = `${Object.keys(trophyStoreItemsJSON).filter(k => getTrophyItemObtained(k)).length} Trophy Store Items Collected`
@@ -1117,6 +1122,7 @@ function generateOverview(){
         "MapProgress": "../Assets/UI/StartRoundIconSmall.png",
         "Paragons": "../Assets/UI/ParagonPip.png",
         "Powers": "../Assets/UI/PowerContainer.png",
+        "PowersPro": "../Assets/UI/PowersProContainer.png",
         "Skins": "../Assets/UI/TopHatSprite.png",
         "Upgrades": "../Assets/UI/UpgradeIcon.png",
         "Knowledge": "../Assets/UI/KnowledgeIcon.png",
@@ -1126,8 +1132,9 @@ function generateOverview(){
         "Quests": "../Assets/UI/QuestIcon.png",
     }
 
+    let excluded = ["Team Store", "0 Extras", "Instas Available", "Powers Available"]
     Object.entries(progressSubText).forEach(([stat,text]) => {
-        if(text.includes("0 Extras") || text.includes("Team Store")) { return }
+        if(excluded.some(excludedStat => text.includes(excludedStat))) { return }
         if(text.match(/(^|[^0-9])0\/\d{1,2}(?!\d)/)) { return }
         let quickStat = document.createElement('div');
         quickStat.classList.add('quick-stat', 'pointer');
@@ -1848,11 +1855,11 @@ function generateProgress(){
         profileSelectorGoImg.src = '../Assets/UI/ContinueBtn.png';
         profileSelectorDiv.appendChild(profileSelectorGoImg);
 
-        let selectors = ['Towers', 'Heroes', 'ActivatedAbilities', 'MapProgress', 'Powers', 'InstaMonkeys', 'Knowledge', 'Achievements', 'Quests', 'TrophyStore', 'TeamsStore', 'Extras'];
+        let selectors = ['Towers', 'Heroes', 'ActivatedAbilities', 'MapProgress', 'PowersUsable', 'InstaMonkeysUsable', 'Knowledge', 'Achievements', 'Quests', 'TrophyStore', 'TeamsStore', 'Extras'];
 
         selectors.forEach((selector) => {
             if(progressSubText[selector].includes("0 Extras")) { return; }
-            if(progressSubText[selector].includes("Team Store") && !showTeamsItems) { return; }
+            if(progressSubText[selector].includes("Team Store")) { return; }
             let selectorDiv = document.createElement('div');
             selectorDiv.classList.add('selector-div', 'progress-selector-div');
             selectorDiv.addEventListener('click', () => {
@@ -1862,7 +1869,7 @@ function generateProgress(){
 
             let selectorImg = document.createElement('img');
             selectorImg.classList.add('selector-img');
-            selectorImg.src = selector == "Heroes" ? `../Assets/HeroIconCircle/HeroIcon${btd6usersave.primaryHero}.png` : '../Assets/UI/' + selector.replace(" ","") + 'Btn.png';
+            selectorImg.src = selector == "Heroes" ? `../Assets/HeroIconCircle/HeroIcon${btd6usersave.primaryHero}.png` : '../Assets/UI/' + selector.replace(" ","").replace("Usable","") + 'Btn.png';
             selectorDiv.appendChild(selectorImg);
 
             let selectorText = document.createElement('p');
@@ -1982,10 +1989,10 @@ function changeProgressTab(selector){
         case "MapProgress":
             generateMapsProgress();
             break;
-        case "Powers":
+        case "PowersUsable":
             generatePowersProgress();
             break;
-        case "InstaMonkeys":
+        case "InstaMonkeysUsable":
             generateInstaMonkeysProgress();
             break;
         case "Achievements":
