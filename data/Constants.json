@@ -543,7 +543,7 @@
         "BeastHandlerQuest": {
             "nameLocKey": "BeastHandlerQuestName",
             "icon": "QuestIconEpicBeastQuest",
-            "type": "Tutorial"
+            "type": "Tale"
         },
         "BikerRaceChallengeQuest": {
             "nameLocKey": "BikerRaceChallengeQuestName",

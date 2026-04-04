@@ -94,6 +94,8 @@ let allInstaFilter = "Tier (Ascending)";
 let currentKnowledgeTree = "primary";
 let knowledgeTowerFilter = null;
 
+let questsFilter = "All";
+
 let loggedIn = false;
 
 let imageScroll = [
@@ -10571,9 +10573,48 @@ function generateQuestsPage() {
             textAlign: "center",
             marginBottom: "10px"
         },
-        innerHTML: "Completion status will be inaccurate for quests that were completed before NK changed the quest system internally. Replaying and clearing the quests will fix the completion status. Note: If you click 'Replay' on a quest, this will make it 'incomplete' as well."
+        innerHTML: "NOTE: Completion status will be inaccurate for quests completed before NK changed the quest system internally. Replaying and clearing the quests will fix the completion status. Also, if you click 'Replay' on a quest, this will make it 'incomplete' as well."
     });
     questsHeader.appendChild(questsDisclaimer);
+
+    let subFilterContainer = document.createElement('div');
+    subFilterContainer.classList.add('sub-filter-container');
+    questsContainer.appendChild(subFilterContainer);
+
+    ["All", "Tale", "Challenge", "Tutorial", "Experiment"].forEach((subFilterOption) => {
+        let subFilterButton = createEl('div', {
+            classList: ['maps-progress-view', 'sub-filter', 'black-outline'],
+            style: {
+                width: "unset",
+                fontSize: "20px",
+                padding: "2px 20px"
+            },
+            innerHTML: (subFilterOption == "All") ? subFilterOption : `${subFilterOption}s`
+        });
+        if (subFilterOption === "All") {
+            subFilterButton.classList.add('stats-tab-yellow');
+        }
+        subFilterButton.addEventListener('click', () => {
+            questsFilter = subFilterOption;
+            Array.from(subFilterContainer.children).forEach((button) => {
+                if (button === subFilterButton) {
+                    button.classList.add('stats-tab-yellow');
+                } else {
+                    button.classList.remove('stats-tab-yellow');
+                }
+            })
+            generateQuestList();
+        })
+        subFilterContainer.appendChild(subFilterButton);
+    })
+
+    let questsListContainer = createEl('div', {
+        classList: ['d-flex', 'fd-column'],
+        style: {
+            gap: "10px"
+        }
+    });
+    questsContainer.appendChild(questsListContainer);
 
     const iconToRoundsets = {};
     Object.entries(constants.roundSets).forEach(([key, rs]) => {
@@ -10582,85 +10623,102 @@ function generateQuestsPage() {
         }
     });
 
-    btd6usersave.quests.forEach((quest) => {
-        if (!constants.quests.hasOwnProperty(quest.id)) { return }
-        let constantsQuest = constants.quests[quest.id];
+    function generateQuestList() {
+        questsListContainer.innerHTML = "";
 
-        let questDiv = createEl('div', {
-            classList: ['d-flex', 'ai-center', 'jc-between', 'wood-container'],
-            style: {
-                margin: "10px 0px"
+        //sort quests by completion status
+        let sortedQuests = [...btd6usersave.quests].sort((a, b) => {
+            if (a.complete && !b.complete) {
+                return 1;
+            } else if (!a.complete && b.complete) {
+                return -1;
+            } else {
+                return 0;
             }
         });
-        questsContainer.appendChild(questDiv);
 
-        let questImg = createEl('img', {
-            classList: ['quest-img'],
-            style: {
-                width: "100px",
-                height: "100px",
-            },
-            src: `../Assets/QuestIcon/${constantsQuest.icon || "QuestIconPhayzeOne"}.png`
-        });
-        questDiv.appendChild(questImg);
+        sortedQuests.forEach((quest) => {
+            if (!constants.quests.hasOwnProperty(quest.id)) { return }
+            let constantsQuest = constants.quests[quest.id];
+            if (questsFilter !== "All" && constantsQuest.type !== questsFilter) { return; }
 
-        let questCenterDiv = createEl('div', {
-            classList: ['d-flex', 'fd-column', 'jc-center', 'ai-center'],
-            style: { gap: "10px"}
-        });
-        questDiv.appendChild(questCenterDiv);
+            let questDiv = createEl('div', {
+                classList: ['d-flex', 'ai-center', 'jc-between', 'wood-container'],
+                style: {
+                    // margin: "10px 0px"
+                }
+            });
+            questsListContainer.appendChild(questDiv);
 
-        let questTitle = createEl('p', {
-            classList: ['quest-title', 'black-outline'],
-            style: {
-                fontSize: "28px",
-            },
-            innerHTML: getLocValue(`${constantsQuest.nameLocKey}`) || quest.id
-        });
-        questCenterDiv.appendChild(questTitle);
-
-        if (constantsQuest?.icon && iconToRoundsets[constantsQuest.icon]?.length) {
-            const stages = iconToRoundsets[constantsQuest.icon];
-            if (stages.length) {
-                const row = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-start'], });
-                questCenterDiv.appendChild(row);
-
-                stages.forEach((key, idx) => {
-                    let n = constants.roundSets[key]?.part || null;
-                    const btn = createEl('div', { classList: ['maps-progress-view', 'black-outline', 'pointer'], style: {filter: 'hue-rotate(270deg)'}});
-                    btn.innerHTML = n ? `Stage ${n}` : (stages.length > 1 ? `Stage ${idx + 1}` : 'Open Rounds');
-                    btn.addEventListener('click', (e) => {
-                        showLoading();
-                        showRoundsetModel('profile', constants.roundSets[key]?.roundset || key);
-                    });
-                    row.appendChild(btn);
-                });
-            }
-        }
-
-        if (quest.complete) {
-            let questTick = createEl('img', {
-                classList: [],
+            let questImg = createEl('img', {
+                classList: ['quest-img'],
                 style: {
                     width: "100px",
                     height: "100px",
-                    transform: "scale(0.75)"
                 },
-                src: "../Assets/UI/TickGreenIcon.png"
+                src: `../Assets/QuestIcon/${constantsQuest.icon || "QuestIconPhayzeOne"}.png`
             });
-            questDiv.appendChild(questTick);
-        } else {
-            let questProgress = createEl('p', {
-                classList: ['quest-progress', 'ta-center', 'black-outline'],
+            questDiv.appendChild(questImg);
+
+            let questCenterDiv = createEl('div', {
+                classList: ['d-flex', 'fd-column', 'jc-center', 'ai-center'],
+                style: { gap: "10px"}
+            });
+            questDiv.appendChild(questCenterDiv);
+
+            let questTitle = createEl('p', {
+                classList: ['quest-title', 'black-outline'],
                 style: {
-                    width: "100px",
-                    fontSize: "36px",
+                    fontSize: "28px",
                 },
-                innerHTML: `${quest.partsComplete}/${quest.parts}`
+                innerHTML: getLocValue(`${constantsQuest.nameLocKey}`) || quest.id
             });
-            questDiv.appendChild(questProgress);
-        } 
-    });
+            questCenterDiv.appendChild(questTitle);
+
+            if (constantsQuest?.icon && iconToRoundsets[constantsQuest.icon]?.length) {
+                const stages = iconToRoundsets[constantsQuest.icon];
+                if (stages.length) {
+                    const row = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-start'], });
+                    questCenterDiv.appendChild(row);
+
+                    stages.forEach((key, idx) => {
+                        let n = constants.roundSets[key]?.part || null;
+                        const btn = createEl('div', { classList: ['maps-progress-view', 'black-outline', 'pointer'], style: {filter: 'hue-rotate(270deg)'}});
+                        btn.innerHTML = n ? `Stage ${n}` : (stages.length > 1 ? `Stage ${idx + 1}` : 'Open Rounds');
+                        btn.addEventListener('click', (e) => {
+                            showLoading();
+                            showRoundsetModel('profile', constants.roundSets[key]?.roundset || key);
+                        });
+                        row.appendChild(btn);
+                    });
+                }
+            }
+
+            if (quest.complete) {
+                let questTick = createEl('img', {
+                    classList: [],
+                    style: {
+                        width: "100px",
+                        height: "100px",
+                        transform: "scale(0.75)"
+                    },
+                    src: "../Assets/UI/TickGreenIcon.png"
+                });
+                questDiv.appendChild(questTick);
+            } else {
+                let questProgress = createEl('p', {
+                    classList: ['quest-progress', 'ta-center', 'black-outline'],
+                    style: {
+                        width: "100px",
+                        fontSize: "36px",
+                    },
+                    innerHTML: `${quest.partsComplete}/${quest.parts}`
+                });
+                questDiv.appendChild(questProgress);
+            } 
+        });
+    }
+    generateQuestList(questsFilter);
 }
 
 // function processLegendsData() {
