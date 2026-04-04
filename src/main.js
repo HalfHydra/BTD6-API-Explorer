@@ -385,7 +385,7 @@ function generateProgressSubText(){
     progressSubText["Heroes"] = `${heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeros).length} Hero${heroesUnlocked != 1 ? "es" : ""} Unlocked`;
     let totalSkins = Object.values(constants.heroSkins).flat().filter(k => !Object.keys(constants.heroesInOrder).includes(k));
     constants.hiddenContent.heroes.forEach((skin) => {
-        if (!(btd6usersave.unlockedSkins.hasOwnProperty(skin) && btd6usersave.unlockedSkins[skin])) {
+        if (totalSkins.indexOf(skin) !== -1 && !(btd6usersave.unlockedSkins.hasOwnProperty(skin) && btd6usersave.unlockedSkins[skin])) {
             totalSkins.splice(totalSkins.indexOf(skin), 1)
         }
     })
