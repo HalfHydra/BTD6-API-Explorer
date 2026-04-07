@@ -9723,7 +9723,7 @@ function generateTrophyStoreProgress() {
 
     let hiddenToggleBtn = generateToggle(trophyStoreShowHidden, (checked) => {
         trophyStoreShowHidden = checked;
-        generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue);
+        generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue, trophyStoreTrophyCounterLabel);
     });
     trophyStoreHiddenToggle.appendChild(hiddenToggleBtn);
 
@@ -9754,7 +9754,7 @@ function generateTrophyStoreProgress() {
         } else {
             subFilterContainer.style.display = "none";
         }
-        generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue);
+        generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue, trophyStoreTrophyCounterLabel);
     })
 
     let displayFilterToggles = document.createElement('div');
@@ -9769,7 +9769,7 @@ function generateTrophyStoreProgress() {
     let mapProgressFilterDifficultySelect = document.createElement('select');
     mapProgressFilterDifficultySelect.classList.add('map-progress-filter-difficulty-select');
     mapProgressFilterDifficultySelect.addEventListener('change', () => {
-        generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue);
+        generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue, trophyStoreTrophyCounterLabel);
     })
     let options = ["All","Owned Only","Unowned Only","Hidden Only", "New Only"]
     options.forEach((option) => {
@@ -9782,7 +9782,7 @@ function generateTrophyStoreProgress() {
 
     let sortDropdown = generateDropdown("Sort By:", ["Default", "Highest Cost", "Lowest Cost", "First Added", "Newly Added"], trophyStoreSortOption, (option) => {
         trophyStoreSortOption = option;
-        generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue);
+        generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue, trophyStoreTrophyCounterLabel);
     })
     sortDropdown.style.width = "240px";
 
@@ -9819,14 +9819,14 @@ function generateTrophyStoreProgress() {
                         button.classList.remove('stats-tab-yellow');
                     }
                 })
-                generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue);
+                generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue, trophyStoreTrophyCounterLabel);
             })
             subFilterContainer.appendChild(subFilterButton);
         })
     
     }
 
-    generateTrophyStoreContainer("All", "All", trophyStoreItemCounter, trophyStoreTrophyCounterValue);
+    generateTrophyStoreContainer("All", "All", trophyStoreItemCounter, trophyStoreTrophyCounterValue, trophyStoreTrophyCounterLabel);
 }
 
 function getTrophyItemObtained(key) {
@@ -9839,7 +9839,7 @@ function getTrophyItemObtained(key) {
     }
 }
 
-function generateTrophyStoreContainer(filter, display, counter, trophies) {
+function generateTrophyStoreContainer(filter, display, counter, trophies, needed) {
     let itemsContainer = document.getElementById('trophy-store-items-container');
     itemsContainer.innerHTML = "";
 
@@ -9917,14 +9917,17 @@ function generateTrophyStoreContainer(filter, display, counter, trophies) {
 
     switch(display){
         case "Unowned Only":
-        case "Owned":
+        case "Owned Only":
             counter.innerHTML = `${Object.keys(trophyStoreItemsToDisplay).length} Items`;
+            trophies.innerHTML = Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.cost && getTrophyItemObtained(key)).reduce((total, [key, data]) => total + data.cost, 0);
+            needed.innerHTML = "Spent";
             break;
         default:
             counter.innerHTML = `${Object.keys(trophyStoreItemsToDisplay).filter(key => getTrophyItemObtained(key)).length}/${Object.keys(trophyStoreItemsToDisplay).length} Owned`;
+            trophies.innerHTML = Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.cost && !getTrophyItemObtained(key)).reduce((total, [key, data]) => total + data.cost, 0);
+            needed.innerHTML = "Needed";
+            break;
     }
-
-    trophies.innerHTML = Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.cost && !getTrophyItemObtained(key)).reduce((total, [key, data]) => total + data.cost, 0);
 
     if (Object.keys(trophyStoreItemsToDisplay).length == 0) {
         counter.innerHTML = "No Items Match";
