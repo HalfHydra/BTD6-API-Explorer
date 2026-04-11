@@ -1377,7 +1377,6 @@ function applyCTFilter(container, tileData) {
 
         if (isVisible && renderSettings.heroFilter !== 'NoFilter') {
             const heroes = Object.keys(simplifyTowerData(data.GameData.dcModel).heroes);
-            console.log(heroes, heroes.length, heroes.length == 0)
             if (renderSettings.heroFilter === 'NoHeroes') {
                 if (heroes.length !== 0) isVisible = false;
             } else if (renderSettings.heroFilter === 'AnyHeroes') {

@@ -1,10 +1,10 @@
 async function openProfile(source, profile, callback){
+    addToBackQueue({ source: source, destination: 'publicprofile', callback: callback });
     profile = await getUserProfile(profile)
     if (profile == null) { return; }
+    if (backQueue[backQueue.length - 1].destination != 'publicprofile') { return; }
     resetScroll();
     document.getElementById(`${source}-content`).style.display = "none";
-
-    addToBackQueue({ source: source, destination: 'publicprofile', callback: callback });
 
     let publicProfileContent = document.getElementById('publicprofile-content');
     publicProfileContent.style.display = "flex";

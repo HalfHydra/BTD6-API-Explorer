@@ -562,15 +562,15 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
 
         let frontierRoundsets = {
             "FrontierBase1": { 
-                name: "Base 1",
+                name: "Act 1",
                 comment: `Story missions use this roundset from Sandytown until Furlong Fields. "Reinforcements" rushes are specific to each mission, and inject various rounds from the "Rush 1" roundset into the rounds`,
             },
             "FrontierBase2": { 
-                name: "Base 2",
+                name: "Act 2",
                 comment: `Story missions starting from Furlong Fields until The Coast use this roundset. "Reinforcements" rushes are specific to each mission, and inject various rounds from the "Rush 2" roundset into the rounds`,
             },
             "FrontierBase3": { 
-                name: "Base 3",
+                name: "Act 3",
                 comment: `All Side Missions and Story Missions starting from The Coast and beyond use this roundset. "Reinforcements" rushes are specific to each mission, and inject various rounds from the "Rush 3" roundset into the rounds`,
             },
             "FrontierRush1": { 

@@ -3,8 +3,8 @@ let oak_token = ""
 let btd6usersave = {};
 let _btd6usersave = {};
 
-let btd6publicprofile = {}
-let _btd6publicprofile = {}
+let btd6publicprofile = null;
+let _btd6publicprofile = null;
 
 let racesData = null;
 
@@ -180,19 +180,17 @@ async function getSaveData(oak_token) {
 
 async function getPublicProfileData(oak_token) {
     cacheBust = true;
-    return new Promise((resolve, reject) => {
-        fetchData(`https://data.ninjakiwi.com/btd6/users/${oak_token}`, (json) => {
-            btd6publicprofile = json["body"]
-            _btd6publicprofile = json["model"]
-            localStorageOAK[oak_token] = {
-                "displayName": btd6publicprofile["displayName"],
-                "avatar": getProfileAvatar(btd6publicprofile),
-                "banner": getProfileBanner(btd6publicprofile)
-            }
-            writeLocalStorage()
-            readyFlags[1] = 1
-            resolve();
-        });
+    readyFlags[1] = 1
+    await fetchData(`https://data.ninjakiwi.com/btd6/users/${oak_token}`, (json) => {
+        btd6publicprofile = json["body"]
+        _btd6publicprofile = json["model"]
+        localStorageOAK[oak_token] = {
+            "displayName": btd6publicprofile["displayName"],
+            "avatar": getProfileAvatar(btd6publicprofile),
+            "banner": getProfileBanner(btd6publicprofile)
+        }
+        writeLocalStorage()
+        readyFlags[1] = 1
     });
 }
 

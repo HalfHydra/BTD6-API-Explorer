@@ -88,7 +88,8 @@ let trophyStoreShowHidden = true;
 
 let showTeamsItems = false;
 
-let abilitiesFilter = "Most Used";
+let abilitiesFilter = "Default";
+let abilitiesFilterType = "All";
 let allInstaFilter = "Tier (Ascending)";
 
 let currentKnowledgeTree = "primary";
@@ -97,6 +98,7 @@ let knowledgeTowerFilter = null;
 let questsFilter = "All";
 
 let loggedIn = false;
+let seenOutOfDate = false;
 
 let imageScroll = [
     {
@@ -166,16 +168,15 @@ function generateIfReady(){
         generateRankInfo()
         generateVeteranRankInfo()
         generateAchievementsHelper()
-        generateStats()
-        generateMedals()
+        if (btd6publicprofile != null) {
+            generateStats()
+            generateMedals()
+        }
         generateExtras()
         generateInstaData()
         generateMapData()
         generateProgressSubText()
         changeTab('profile');
-        if(parseInt(btd6usersave.latestGameVersion.split(".")[0]) > constants.projectContentVersion) {
-            errorModal(`The content of this site (v${constants.projectContentVersion}.0) is out of date with the current version (v${btd6usersave.latestGameVersion.split(".")[0]}.0). New content might be missing, but everything else should remain functional.`, "api", true)
-        }
     } else if(!loggedIn && readyFlags.slice(2).every(flag => flag === 1)){
         document.getElementById("home-content").style.display = "none";
         document.body.classList.add('transition-bg')
@@ -287,6 +288,12 @@ function generateStats(){
     // exclusiveStats["Total Tier 4 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["4"];
     // exclusiveStats["Total Tier 5 Upgrades"] = btd6publicprofile.stats["upgradesPurchasedByTier"]["5"];
 
+    let unlockedAchievements = getAchievementsUnlocked();
+    profileStats["Hidden Achievements"] = `${unlockedAchievements.hidden}/${constants.hiddenAchievements}`;
+    profileStats["Achievements"] = `${unlockedAchievements.normal}/${constants.achievements}`;
+}
+
+function getAchievementsUnlocked() {
     let hiddenAchievements = 0;
     let normalAchievements = 0;
     btd6usersave.achievementsClaimed.forEach((achievement) => {
@@ -298,8 +305,11 @@ function generateStats(){
             normalAchievements += 1;
         }
     })
-    profileStats["Hidden Achievements"] = `${hiddenAchievements}/${constants.hiddenAchievements}`;
-    profileStats["Achievements"] = `${normalAchievements}/${constants.achievements}`;
+    return {
+        hidden: hiddenAchievements,
+        normal: normalAchievements,
+        total: hiddenAchievements + normalAchievements
+    }
 }
 
 function generateMedals(){
@@ -373,41 +383,61 @@ function generateExtras(){
     if (btd6usersave["unlockedSmallBosses"]){ extrasUnlocked["Small Bosses"] = btd6usersave["smallBossesActive"] }
 }
 
-function generateProgressSubText(){
-    let towersCount = Object.keys(btd6usersave.unlockedTowers).filter(k => btd6usersave.unlockedTowers[k]).length;
-    progressSubText["Towers"] = `${towersCount}/${Object.keys(constants.towersInOrder).length} Towers Unlocked`;
-    let upgradeInfo = getUnlockedAndTotalUpgrades();
-    let paragons = Object.keys(btd6usersave.acquiredUpgrades).filter(k => k.includes("Paragon") && k != "Sentry Paragon");
-    let paragonsUnlocked = paragons.filter(k => btd6usersave.acquiredUpgrades[k]);
-    progressSubText["Upgrades"] = `${upgradeInfo[0] - paragonsUnlocked.length}/${upgradeInfo[1] - paragons.length} Upgrades Unlocked`;
-    if (paragonsUnlocked.length > 0) { progressSubText["Paragons"] = `${paragonsUnlocked.length}/${constants.paragonsAvailable.length} Paragon${paragonsUnlocked.length != 1 ? "s" : ""} Unlocked` }
-    let heroesUnlocked = Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length;
-    progressSubText["Heroes"] = `${heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeros).length} Hero${heroesUnlocked != 1 ? "es" : ""} Unlocked`;
+function generateHeroesSkinsUnlocked() {
+    let heroesUnlocked = Object.keys(btd6usersave.unlockedHeroes).filter(k => btd6usersave.unlockedHeroes[k]).length;
     let totalSkins = Object.values(constants.heroSkins).flat().filter(k => !Object.keys(constants.heroesInOrder).includes(k));
     constants.hiddenContent.heroes.forEach((skin) => {
         if (totalSkins.indexOf(skin) !== -1 && !(btd6usersave.unlockedSkins.hasOwnProperty(skin) && btd6usersave.unlockedSkins[skin])) {
             totalSkins.splice(totalSkins.indexOf(skin), 1)
         }
     })
-    let skinsUnlocked = Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).filter(k => btd6usersave.unlockedSkins[k]  && k != "Sheriff").length
-    progressSubText["Skins"] = `${skinsUnlocked}/${totalSkins.length} Hero Skin${skinsUnlocked != 1 ? "s" : ""} Unlocked`;
-    progressSubText["ActivatedAbilities"] = `${Object.keys(btd6publicprofile.stats["abilitiesActivatedByName"]).filter(key => key in constants.abilities).length} Unique Abilities Used`;
-    progressSubText["Knowledge"] = `${Object.keys(btd6usersave.acquiredKnowledge).filter(k => btd6usersave.acquiredKnowledge[k]).length}/${Object.keys(constants.knowledgeTags).length} Knowledge Points Unlocked`;
+    let skinsUnlocked = Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).filter(k => btd6usersave.unlockedSkins[k] && k != "Sheriff").length
+    return {
+        heroesUnlocked: heroesUnlocked,
+        totalSkins: totalSkins,
+        skinsUnlocked: skinsUnlocked
+    }
+}
+
+function generateProgressSubText(){
+    let towersCount = Object.keys(btd6usersave.unlockedTowers).filter(k => btd6usersave.unlockedTowers[k]).length;
+    progressSubText["Towers"] = `${towersCount} Towers Unlocked`;
+    progressSubText["TowersUnlocked"] = `${towersCount}/${Object.keys(constants.towersInOrder).length} Towers Unlocked`;
+    let upgradeInfo = getUnlockedAndTotalUpgrades();
+    let paragons = Object.keys(btd6usersave.acquiredUpgrades).filter(k => k.includes("Paragon") && k != "Sentry Paragon");
+    let paragonsUnlocked = paragons.filter(k => btd6usersave.acquiredUpgrades[k]);
+    progressSubText["Upgrades"] = `${upgradeInfo[0] - paragonsUnlocked.length} Upgrades Unlocked`;
+    progressSubText["UpgradesUnlocked"] = `${upgradeInfo[0] - paragonsUnlocked.length}/${upgradeInfo[1] - paragons.length} Upgrades Unlocked`;
+    progressSubText["Paragons"] = `${paragonsUnlocked.length}/${constants.paragonsAvailable.length} Paragon${paragonsUnlocked.length != 1 ? "s" : ""} Unlocked`
+    let heroInfo = generateHeroesSkinsUnlocked();
+    progressSubText["Heroes"] = `${heroInfo.heroesUnlocked} Hero${heroInfo.heroesUnlocked != 1 ? "es" : ""} Unlocked`;
+    progressSubText["HeroesUnlocked"] = `${heroInfo.heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeros).length} Hero${heroInfo.heroesUnlocked != 1 ? "es" : ""} Unlocked`;
+    progressSubText["Skins"] = `${heroInfo.skinsUnlocked}/${heroInfo.totalSkins.length} Hero Skin${heroInfo.skinsUnlocked != 1 ? "s" : ""} Unlocked`;
+    if (btd6publicprofile != null) {
+        progressSubText["ActivatedAbilities"] = `${Object.keys(btd6publicprofile.stats["abilitiesActivatedByName"]).filter(key => key in constants.abilities).length} Unique Abilities Used`;
+    }
+    progressSubText["Knowledge"] = `${Object.keys(btd6usersave.acquiredKnowledge).filter(k => btd6usersave.acquiredKnowledge[k]).length} Knowledge Points Unlocked`;
+    progressSubText["KnowledgeEarned"] = `${Object.keys(btd6usersave.acquiredKnowledge).filter(k => btd6usersave.acquiredKnowledge[k]).length}/${Object.keys(constants.knowledgeTags).length} Knowledge Points Unlocked`;
     let mapsPlayed = Object.keys(btd6usersave.mapProgress).filter(k => btd6usersave.mapProgress[k]).length
     progressSubText["MapProgress"] = `${mapsPlayed} Map${mapsPlayed != 1 ? "s" : ""} Played`;
     let chimpsTotal = Object.values(processedMapData.Medals.single).map(map => map["Clicks"]).filter(medal => medal).length;
     let chimpsTotalCoop = Object.values(processedMapData.Medals.coop).map(map => map["Clicks"]).filter(medal => medal).length;
     if (chimpsTotal + chimpsTotalCoop > 0) { progressSubText["CHIMPS"] = `${chimpsTotal + chimpsTotalCoop} CHIMPS Medal${chimpsTotal + chimpsTotalCoop != 1 ? "s" : ""} Earned` }
     let powersAvailable = Object.values(btd6usersave.powers).map(power => (typeof power === 'object' && power.quantity) ? power.quantity : 0).reduce((acc, amount) => acc + amount);
-    let powersTotal = powersAvailable + btd6publicprofile.gameplay.powersUsed;
     progressSubText["PowersUsable"] = `${powersAvailable} Power${powersAvailable != 1 ? "s" : ""} Available`;
-    progressSubText["Powers"] = `${powersTotal} Power${powersTotal != 1 ? "s" : ""} Collected`
+    if (btd6publicprofile != null) {
+        let powersTotal = powersAvailable + btd6publicprofile.gameplay.powersUsed;
+        progressSubText["Powers"] = `${powersTotal} Power${powersTotal != 1 ? "s" : ""} Collected`
+    }
     let powersProUnlocked = Object.values(btd6usersave.powersPro).map(power => power.unlockedTier).reduce((acc, amount) => acc + amount);
     progressSubText["PowersPro"] = `${powersProUnlocked} Pro Power${(powersProUnlocked > 1) ? "s" : ""} Unlocked`
     let instaTotal = Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount);
     progressSubText["InstaMonkeysUsable"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Available`;
-    progressSubText["InstaMonkeys"] = `${instaTotal + btd6publicprofile.gameplay.instaMonkeysUsed} Insta${instaTotal != 1 ? "s" : ""} Collected`;
-    progressSubText["Achievements"] = `${btd6usersave.achievementsClaimed.length}/${constants.achievements + constants.hiddenAchievements} Achievement${btd6publicprofile.achievements != 1 ? "s" : ""} Earned`;
+    if (btd6publicprofile != null) {
+        progressSubText["InstaMonkeys"] = `${instaTotal + btd6publicprofile.gameplay.instaMonkeysUsed} Insta${instaTotal != 1 ? "s" : ""} Collected`;
+    }
+    progressSubText["Achievements"] = `${btd6usersave.achievementsClaimed.length} Achievement${getAchievementsUnlocked().total != 1 ? "s" : ""} Earned`;
+    progressSubText["AchievementsEarned"] = `${btd6usersave.achievementsClaimed.length}/${constants.achievements + constants.hiddenAchievements} Achievement${getAchievementsUnlocked().total != 1 ? "s" : ""} Earned`;
     let extrasTotal = Object.keys(extrasUnlocked).length;
     progressSubText["TrophyStore"] = `${Object.keys(trophyStoreItemsJSON).filter(k => getTrophyItemObtained(k)).length} Trophy Store Items Collected`
     progressSubText["TeamsStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k] && teamsStoreItemsJSON[k]).length} Team Store Items Unlocked`
@@ -528,6 +558,7 @@ function generateInstaData(){
     let towerBorders = {};
     let towerObtained = {};
     let towerTotalUsableByTier = {};
+
     for (let [tower, data] of Object.entries(btd6usersave.instaTowers)){
         towerObtained[tower] = [],
         towerTotal[tower] = 0;
@@ -599,6 +630,44 @@ function generateInstaData(){
             }
             towerBorders[tower] = "Gold";
         } else {
+            towerBorders[tower] = "";
+        }
+    }
+    for (let tower of Object.keys(constants.towersInOrder)){
+        if (!towerTotal[tower]) {
+            towerObtained[tower] = [],
+            towerTierTotals[tower] = {
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            };
+            let missingInstasTemplate = {
+                "1": [],
+                "2": [],
+                "3": [],
+                "4": [],
+                "5": []
+            }
+            towerMissingByTier[tower] = towerMissingByTier[tower] || missingInstasTemplate;
+            constants.collectionOrder.forEach((tier) => {
+                if (constants.instaTiers["5"].includes(tier)){
+                    towerMissingByTier[tower]["5"].push(tier);
+                }
+                if (constants.instaTiers["4"].includes(tier)){
+                    towerMissingByTier[tower]["4"].push(tier);
+                }
+                if (constants.instaTiers["3"].includes(tier)){
+                    towerMissingByTier[tower]["3"].push(tier);
+                }
+                if (constants.instaTiers["2"].includes(tier)){
+                    towerMissingByTier[tower]["2"].push(tier);
+                }
+                if (constants.instaTiers["1"].includes(tier)){
+                    towerMissingByTier[tower]["1"].push(tier);
+                }
+            })
             towerBorders[tower] = "";
         }
     }
@@ -1114,37 +1183,35 @@ function generateOverview(){
     quickStatsContent.classList.add('quick-stats-content');
     quickStatsDiv.appendChild(quickStatsContent);
 
-    let statIcons = {
-        "Towers": "../Assets/UI/MaxMonkeysIcon.png",
-        "Heroes": "../Assets/UI/AllHeroesIcon.png",
-        "Extras": "../Assets/UI/SmallBloonsModeIcon.png",
-        "Achievements": "../Assets/AchievementIcon/AchievementsIcon.png",
+    let quickStats = {
+        "TowersUnlocked": "../Assets/UI/MaxMonkeysIcon.png",
+        "UpgradesUnlocked": "../Assets/UI/UpgradeIcon.png",
+        "Paragons": "../Assets/UI/ParagonPip.png",
+        "HeroesUnlocked": "../Assets/UI/AllHeroesIcon.png",
+        "Skins": "../Assets/UI/TopHatSprite.png",
+        "ActivatedAbilities": "../Assets/UI/RapidShotIcon.png",
+        "KnowledgeEarned": "../Assets/UI/KnowledgeIcon.png",
+        "MapProgress": "../Assets/UI/StartRoundIconSmall.png",
         "CHIMPS": "../Assets/MedalIcon/MedalImpoppableRuby.png",
         "InstaMonkeys": "../Assets/UI/InstaIcon.png",
-        "MapProgress": "../Assets/UI/StartRoundIconSmall.png",
-        "Paragons": "../Assets/UI/ParagonPip.png",
         "Powers": "../Assets/UI/PowerContainer.png",
         "PowersPro": "../Assets/UI/PowersProContainer.png",
-        "Skins": "../Assets/UI/TopHatSprite.png",
-        "Upgrades": "../Assets/UI/UpgradeIcon.png",
-        "Knowledge": "../Assets/UI/KnowledgeIcon.png",
+        "AchievementsEarned": "../Assets/AchievementIcon/AchievementsIcon.png",
         "TrophyStore": "../Assets/UI/LimitedRunIcon.png",
         'TeamsStore': "../Assets/UI/TeamTrophyIconSmall.png",
-        "ActivatedAbilities": "../Assets/UI/RapidShotIcon.png",
         "Quests": "../Assets/UI/QuestIcon.png",
     }
 
-    let excluded = ["Team Store", "0 Extras", "Instas Available", "Powers Available"]
-    Object.entries(progressSubText).forEach(([stat,text]) => {
-        if(excluded.some(excludedStat => text.includes(excludedStat))) { return }
-        if(text.match(/(^|[^0-9])0\/\d{1,2}(?!\d)/)) { return }
+    Object.entries(quickStats).forEach(([stat,icon]) => {
+        let text = progressSubText[stat] || "";
+        if(text.startsWith("0/") || text.startsWith("0 ")) { return }
         let quickStat = document.createElement('div');
         quickStat.classList.add('quick-stat', 'pointer');
         quickStatsContent.appendChild(quickStat);
 
         let statIcon = document.createElement('img');
         statIcon.classList.add('quick-stat-icon');
-        statIcon.src = statIcons[stat];
+        statIcon.src = icon;
         quickStat.appendChild(statIcon);
 
         let statName = document.createElement('p');
@@ -1156,19 +1223,19 @@ function generateOverview(){
             addToBackQueue({source: 'profile', destination: 'profile', callback: generateOverview});
             resetScroll();
             switch(stat){
-                case 'Towers':
-                case "Upgrades":
+                case 'TowersUnlocked':
+                case "UpgradesUnlocked":
                 case "Paragons":
                     generateTowerProgress();
                     break;
-                case 'Heroes':
+                case 'HeroesUnlocked':
                 case "Skins":
                     generateHeroesProgress();
                     break;
                 case "ActivatedAbilities":
                     generateAbilities();
                     break;
-                case "Knowledge":
+                case "KnowledgeEarned":
                     generateKnowledgeProgress();
                     break;
                 case "MapProgress":
@@ -1181,7 +1248,7 @@ function generateOverview(){
                 case "InstaMonkeys":
                     generateInstaMonkeysProgress();
                     break;
-                case "Achievements":
+                case "AchievementsEarned":
                     generateAchievementsProgress();
                     break;
                 case "Extras":
@@ -1829,35 +1896,50 @@ function generateProgress(){
         logoutDiv.addEventListener('click', () => {
             logoutProgress();
         })
-        logoutDiv.appendChild(createEl('p', { classList: ['profile-name', 'tc-white', 'font-luckiest', 'black-outline'], innerHTML: 'Logged in as: ' + btd6publicprofile.displayName }));
+        logoutDiv.appendChild(createEl('p', { classList: ['profile-name', 'tc-white', 'font-luckiest', 'black-outline'], innerHTML: (btd6publicprofile == null) ? "Logged In (Limited Profile Info)" : 'Logged in as: ' + btd6publicprofile.displayName }));
         const logoutBtn = createEl('img', { style:{height: "50px"}, src: './Assets/UI/BackBtn.png' });
         logoutDiv.appendChild(logoutBtn);
         selectorsDiv.appendChild(logoutDiv);
 
-        let profileSelectorDiv = document.createElement('div');
-        profileSelectorDiv.classList.add('d-flex', 'jc-between', 'ai-center', 'view-profile', 'pointer', 'transparent-border');
-        profileSelectorDiv.style.backgroundImage = `url(${getProfileBanner(btd6publicprofile)})`;
-        profileSelectorDiv.addEventListener('click', () => {
-            generateOverview();
-        })
-        selectorsDiv.appendChild(profileSelectorDiv);
+        if(parseInt(btd6usersave.latestGameVersion.split(".")[0]) > constants.projectContentVersion && !seenOutOfDate) {
+            selectorsDiv.appendChild(
+                generateComment("The content of this site (v" + constants.projectContentVersion + ".0) is out of date with the current version (v" + btd6usersave.latestGameVersion + "). New content might be missing, but everything else should remain functional.", () => {
+                seenOutOfDate = true;
+            }));
+        }
+        
+        if (btd6publicprofile != null) {
+            let profileSelectorDiv = document.createElement('div');
+            profileSelectorDiv.classList.add('d-flex', 'jc-between', 'ai-center', 'view-profile', 'pointer', 'transparent-border');
+            profileSelectorDiv.style.backgroundImage = `url(${getProfileBanner(btd6publicprofile)})`;
+            profileSelectorDiv.addEventListener('click', () => {
+                generateOverview();
+            })
+            selectorsDiv.appendChild(profileSelectorDiv);
 
-        let profileSelectorImg = document.createElement('img');
-        profileSelectorImg.classList.add('selector-img');
-        profileSelectorImg.src = getProfileAvatar(btd6publicprofile);
-        profileSelectorDiv.appendChild(profileSelectorImg);
+            let profileSelectorImg = document.createElement('img');
+            profileSelectorImg.classList.add('selector-img');
+            profileSelectorImg.src = getProfileAvatar(btd6publicprofile);
+            profileSelectorDiv.appendChild(profileSelectorImg);
 
-        let profileSelectorText = document.createElement('p');
-        profileSelectorText.classList.add('selector-text','black-outline');
-        profileSelectorText.innerHTML = "View Your Profile & Stats";
-        profileSelectorDiv.appendChild(profileSelectorText);
+            let profileSelectorText = document.createElement('p');
+            profileSelectorText.classList.add('selector-text','black-outline');
+            profileSelectorText.innerHTML = "View Your Profile & Stats";
+            profileSelectorDiv.appendChild(profileSelectorText);
 
-        let profileSelectorGoImg = document.createElement('img');
-        profileSelectorGoImg.classList.add('selector-go-img');
-        profileSelectorGoImg.src = '../Assets/UI/ContinueBtn.png';
-        profileSelectorDiv.appendChild(profileSelectorGoImg);
+            let profileSelectorGoImg = document.createElement('img');
+            profileSelectorGoImg.classList.add('selector-go-img');
+            profileSelectorGoImg.src = '../Assets/UI/ContinueBtn.png';
+            profileSelectorDiv.appendChild(profileSelectorGoImg);
+        } else {
+            let statsUnavailableText = createEl('p', { classList: ['font-gardenia'], style: {fontSize: "1em", lineHeight: "1.5"}, innerHTML: "Profile & stats are temporarily unavailable, but all other tracking such as your Insta Monkey collection is still available. This Open Data API error happens after a new major update and is usually fixed within a couple days." });
+            selectorsDiv.appendChild(statsUnavailableText);
+        }
 
         let selectors = ['Towers', 'Heroes', 'ActivatedAbilities', 'MapProgress', 'PowersUsable', 'InstaMonkeysUsable', 'Knowledge', 'Achievements', 'Quests', 'TrophyStore', 'TeamsStore', 'Extras'];
+        if (btd6publicprofile == null) {
+            selectors.splice(selectors.indexOf("ActivatedAbilities"),1);
+        }
 
         selectors.forEach((selector) => {
             if(progressSubText[selector].includes("0 Extras")) { return; }
@@ -1968,6 +2050,7 @@ function generateProgress(){
 
 function logoutProgress() {
     loggedIn = false;
+    btd6publicprofile = null;
     generateProgress();
 }
 
@@ -2181,24 +2264,26 @@ function generateTowerProgressTower(tower){
     })
     towerLeftBox.appendChild(upgradesText);
 
-    let towerPlacedText = createEl('p', {
-        classList: ['black-outline'],
-        style: {
-            fontSize: "28px"
-        },
-        innerHTML: `${btd6publicprofile.towersPlaced[tower].toLocaleString()} Placed`
-    })
-    towerLeftBox.appendChild(towerPlacedText);
-
-    if (constants.paragonsAvailable.includes(tower) && btd6publicprofile.stats.paragonsPurchasedByName.hasOwnProperty(tower) && btd6publicprofile.stats.paragonsPurchasedByName[tower] > 0) {
-        let paragonPlacedText = createEl('p', {
+    if (btd6publicprofile != null) {
+        let towerPlacedText = createEl('p', {
             classList: ['black-outline'],
             style: {
-                fontSize: "24px"
+                fontSize: "28px"
             },
-            innerHTML: `${btd6publicprofile.stats.paragonsPurchasedByName[tower].toLocaleString()} Paragon${(btd6publicprofile.stats.paragonsPurchasedByName[tower] > 1) ? "s" : ""} Made`
+            innerHTML: `${btd6publicprofile.towersPlaced[tower].toLocaleString()} Placed`
         })
-        towerLeftBox.appendChild(paragonPlacedText);
+        towerLeftBox.appendChild(towerPlacedText);
+
+        if (constants.paragonsAvailable.includes(tower) && btd6publicprofile.stats.paragonsPurchasedByName.hasOwnProperty(tower) && btd6publicprofile.stats.paragonsPurchasedByName[tower] > 0) {
+            let paragonPlacedText = createEl('p', {
+                classList: ['black-outline'],
+                style: {
+                    fontSize: "24px"
+                },
+                innerHTML: `${btd6publicprofile.stats.paragonsPurchasedByName[tower].toLocaleString()} Paragon${(btd6publicprofile.stats.paragonsPurchasedByName[tower] > 1) ? "s" : ""} Made`
+            })
+            towerLeftBox.appendChild(paragonPlacedText);
+        }
     }
 
     let towerNameAndPortrait = document.createElement('div');
@@ -2233,86 +2318,87 @@ function generateTowerProgressTower(tower){
     })
     towerProgressMiddleDiv.appendChild(towerRightBox);
 
-    let abilitiesHeaderText = createEl('p', {
-        classList: ['black-outline'],
-        style: {
-            fontSize: "28px",
-            width: "100%",
-            height: "40px",
-            textAlign: "center"
-        },
-        innerHTML: 'Abilities Used'
-    })
-    towerRightBox.appendChild(abilitiesHeaderText);
-
-    let abilitiesIconsDiv = createEl('div', {
-        classList: ['d-flex', 'f-wrap', 'w-100'],
-        style: {
-            height: "190px",
-            gap: "16px",
-            padding: "0 16px"
-        }
-    });
-    towerRightBox.appendChild(abilitiesIconsDiv);
-
-    let abilities = constants.abilitiesByTower[tower] || [];
-    abilities.forEach(ability => {
-        let abilityData = constants.abilities[ability];
-        let abilityUses = btd6publicprofile.stats.abilitiesActivatedByName[ability] || 0;
-        if (abilityUses === 0) { return; }
-        let abilityDiv = createEl('div', {
-            classList: ['d-flex', 'ai-center'],
+    if (btd6publicprofile != null) {
+        let abilitiesHeaderText = createEl('p', {
+            classList: ['black-outline'],
             style: {
-                width: "70px",
-                height: "70px",
-                position: 'relative'
+                fontSize: "28px",
+                width: "100%",
+                height: "40px",
+                textAlign: "center"
+            },
+            innerHTML: 'Abilities Used'
+        })
+        towerRightBox.appendChild(abilitiesHeaderText);
+
+        let abilitiesIconsDiv = createEl('div', {
+            classList: ['d-flex', 'f-wrap', 'w-100'],
+            style: {
+                height: "190px",
+                gap: "16px",
+                padding: "0 16px"
             }
-        })
-        
-        let abilityIcon = createEl('img', {
-            classList: ['of-contain'],
-            style: {
-                width: "70px",
-                height: "70px",
-            },
-            src: `./Assets/AbilityIcon/${abilityData.icon}.png`
-        })
-        abilityDiv.appendChild(abilityIcon);
+        });
+        towerRightBox.appendChild(abilitiesIconsDiv);
 
-        let abilityUsesText = createEl('p', {
-            classList: ['black-outline', 'ta-center'],
-            style: {
-                position: "absolute",
-                fontSize: "18px",
-                bottom: "-20px",
-                width: '70px',
-                backgroundColor: 'rgba(0, 0, 0, 0.4)',
-                borderRadius: '5px',
-            },
-            innerHTML: abilityUses.toLocaleString()
-        })
-        abilityDiv.appendChild(abilityUsesText);
+        let abilities = constants.abilitiesByTower[tower] || [];
+        abilities.forEach(ability => {
+            let abilityData = constants.abilities[ability];
+            let abilityUses = btd6publicprofile.stats.abilitiesActivatedByName[ability] || 0;
+            if (abilityUses === 0) { return; }
+            let abilityDiv = createEl('div', {
+                classList: ['d-flex', 'ai-center'],
+                style: {
+                    width: "70px",
+                    height: "70px",
+                    position: 'relative'
+                }
+            })
+            
+            let abilityIcon = createEl('img', {
+                classList: ['of-contain'],
+                style: {
+                    width: "70px",
+                    height: "70px",
+                },
+                src: `./Assets/AbilityIcon/${abilityData.icon}.png`
+            })
+            abilityDiv.appendChild(abilityIcon);
 
-        abilitiesIconsDiv.appendChild(abilityDiv);
+            let abilityUsesText = createEl('p', {
+                classList: ['black-outline', 'ta-center'],
+                style: {
+                    position: "absolute",
+                    fontSize: "18px",
+                    bottom: "-20px",
+                    width: '70px',
+                    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                    borderRadius: '5px',
+                },
+                innerHTML: abilityUses.toLocaleString()
+            })
+            abilityDiv.appendChild(abilityUsesText);
 
-        tippy(abilityDiv, {
-            content: abilityData.description,
-            placement: 'top',
-            theme: 'speech_bubble',
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            },
-        })
-    });
+            abilitiesIconsDiv.appendChild(abilityDiv);
 
+            tippy(abilityDiv, {
+                content: abilityData.description,
+                placement: 'top',
+                theme: 'speech_bubble',
+                popperOptions: {
+                    modifiers: [
+                        {
+                        name: 'preventOverflow',
+                        options: {
+                            boundary: 'viewport',
+                            padding: {right: 18},
+                        },
+                        },
+                    ],
+                },
+            })
+        });
+    }
 
     let towerProgressMainDiv = document.createElement('div');
     towerProgressMainDiv.classList.add('tower-progress-main-div', 'fd-column');
@@ -2639,16 +2725,16 @@ function generateHeroesProgress(){
     heroSelectorHeaderTop.classList.add('hero-selector-header-top');
     heroProgressDiv.appendChild(heroSelectorHeaderTop);
 
-    let correctedHeroesList = Object.keys(btd6usersave.unlockedSkins).filter(k => !constants.heroesInOrder[k]);
+    let heroesInfo = generateHeroesSkinsUnlocked();
 
     let heroSelectorHeaderText = document.createElement('p');
     heroSelectorHeaderText.classList.add('hero-selector-header-text','black-outline');
-    heroSelectorHeaderText.innerHTML = `Heroes - ${Object.keys(btd6usersave.unlockedHeros).filter(k => btd6usersave.unlockedHeros[k]).length}/${Object.keys(btd6usersave.unlockedHeros).length}`;
+    heroSelectorHeaderText.innerHTML = `Heroes - ${heroesInfo.heroesUnlocked}/${Object.keys(constants.heroesInOrder).length}`;
     heroSelectorHeaderTop.appendChild(heroSelectorHeaderText);
 
     let heroSelectorHeaderText2 = document.createElement('p');
     heroSelectorHeaderText2.classList.add('hero-selector-header-text','black-outline');
-    heroSelectorHeaderText2.innerHTML = `Skins - ${Object.keys(btd6usersave.unlockedSkins).filter(k => btd6usersave.unlockedSkins[k] && correctedHeroesList.includes(k)).length}/${correctedHeroesList.length}`;
+    heroSelectorHeaderText2.innerHTML = `Skins - ${heroesInfo.skinsUnlocked}/${heroesInfo.totalSkins.length}`;
     heroSelectorHeaderTop.appendChild(heroSelectorHeaderText2);
 
     let heroSelectorHeader = document.createElement('div');
@@ -2697,8 +2783,9 @@ function generateHeroProgressHero(hero, nameColor){
     heroProgressContainer.classList.add('hero-progress-container');
     heroProgressContent.appendChild(heroProgressContainer);
 
-    let heroProgressTop = document.createElement('div');
-    heroProgressTop.classList.add('hero-progress-top');
+    let heroProgressTop = createEl('div', {
+        classList: ['hero-progress-top', 'pos-rel'],
+    });
     heroProgressContainer.appendChild(heroProgressTop);
 
     let heroProgressHeader = document.createElement('div');
@@ -2722,6 +2809,26 @@ function generateHeroProgressHero(hero, nameColor){
     heroProgressHeaderSubtitle.classList.add('hero-progress-header-subtitle','subtitle-outline');
     heroProgressHeaderSubtitle.innerHTML = getLocValue(`${hero} Short Description`);
     heroProgressHeader.appendChild(heroProgressHeaderSubtitle);
+
+    if (btd6publicprofile != null) {
+        let heroUsesDiv = createEl('div', {
+            style: {
+                width: "150px",
+                position: 'absolute',
+                right: "0"
+            }
+        })
+        heroProgressTop.appendChild(heroUsesDiv);
+
+        let heroUsesText = createEl('p', {
+            classList: ['black-outline', 'ta-center'],
+            style: {
+                fontSize: "24px",
+            },
+            innerHTML: `Placed<br>${(btd6publicprofile["heroesPlaced"].hasOwnProperty(hero)) ? btd6publicprofile["heroesPlaced"][hero].toLocaleString() : "0"} Times`
+        })
+        heroUsesDiv.appendChild(heroUsesText);
+    }
 
     let heroProgressMiddle = document.createElement('div');
     heroProgressMiddle.classList.add('hero-progress-middle');
@@ -2813,7 +2920,7 @@ function generateHeroProgressHero(hero, nameColor){
         heroLevelDesc.innerHTML = getLocValue(`${hero} Level ${i} Description`);
         heroLevelDescDiv.appendChild(heroLevelDesc);
         
-        if (constants.abilitiesByHero.hasOwnProperty(hero) && constants.abilitiesByHero[hero].hasOwnProperty(i)) {
+        if (btd6publicprofile != null && constants.abilitiesByHero.hasOwnProperty(hero) && constants.abilitiesByHero[hero].hasOwnProperty(i)) {
             let ability = constants.abilitiesByHero[hero][i];
             let abilityData = constants.abilities[ability];
             let abilityUses = btd6publicprofile.stats.abilitiesActivatedByName[ability] || 0;
@@ -3976,6 +4083,56 @@ function generateMapDetails(map){
     rightColumnHeaderText.innerHTML = 'Mode Stats';
     rightColumnHeader.appendChild(rightColumnHeaderText);
 
+    let difficultyModes = {
+        "Easy": ["Easy", "PrimaryOnly", "Deflation"],
+        "Medium": ["Medium", "MilitaryOnly", "Reverse", "Apopalypse"],
+        "Hard": ["Hard", "MagicOnly", "HalfCash", "DoubleMoabHealth", "AlternateBloonsRounds"],
+        "Impoppable": ["Impoppable", "Clicks"]
+    }
+    function getRemainingMM() {
+        let mmCount = 0;
+        for (let [difficulty, bool] of Object.entries(processedMapData.Medals.single[map])) {
+            if (difficulty == "CHIMPS-BLACK") { continue; }
+            if (bool == false) {
+                let modeDifficulty = Object.entries(difficultyModes).find(([key, value]) => value.includes(difficulty))[0];
+                mmCount += constants.mapMonkeyMoney[modeDifficulty] * constants.mapMonkeyMoney[constants.mapsInOrder[map].difficulty];
+            }
+        }
+        return mmCount;
+    }
+
+    if (getRemainingMM() > 0) {
+        let mapProgressMMLeft = createEl('div', {
+            classList: ['d-flex', 'ai-center'],
+            style: {
+                margin: "10px"
+            }
+        });
+        mapNameAndIcon.appendChild(mapProgressMMLeft);
+
+        let mmCounterLabel = createEl('p', {
+            classList: ['trophy-store-item-counter', 'font-gardenia'],
+            style: {
+                width: "390px"
+            },
+            innerHTML: "Bonus Monkey Money available by earning medals on single player:"
+        });
+
+        let mmCounterValue = createEl('p', {
+            classList: ['trophy-store-item-counter', 'black-outline'],
+            innerHTML: getRemainingMM()
+        });
+
+        let mmIcon = createEl('img', {
+            classList: [],
+            style: { width: "70px", marginLeft: "5px", marginRight: "10px" },
+            src: '../Assets/UI/BloonjaminsIcon.png'
+        });
+        mapProgressMMLeft.appendChild(mmCounterLabel);
+        mapProgressMMLeft.appendChild(mmCounterValue);
+        mapProgressMMLeft.appendChild(mmIcon);
+    }
+
     let mapProgressCoopToggle = document.createElement('div');
     mapProgressCoopToggle.classList.add('maps-progress-coop-toggle');  
     rightColumnHeader.appendChild(mapProgressCoopToggle);
@@ -4157,6 +4314,7 @@ function generateMapsListView(){
 
         let mapSections = document.createElement('div');
         mapSections.classList.add(`map-sections`);
+        mapSections.style.overflowX = "auto";
         mapContainer.appendChild(mapSections);
 
         let mapSection = document.createElement('div');
@@ -4370,14 +4528,14 @@ function generatePowersProgress() {
     powersProgressContainer.classList.add('powers-progress-container');
     progressContent.appendChild(powersProgressContainer);
 
-    // for (let power of constants.powersInOrder) {
-    Object.entries(constants.powersInOrder).forEach(([power, type]) => {
+    let mmEquivalent = 0;
+    Object.entries(constants.powersInOrder).forEach(([power, data]) => {
         if(constants.hiddenContent.powers.includes(power) && !btd6usersave.powers.hasOwnProperty(power)) { return; }
         let powerDiv = document.createElement('div');
         powerDiv.classList.add('power-div');
         powersProgressContainer.appendChild(powerDiv);
 
-        switch (type) {
+        switch (data.type) {
             case "IAP":
                 powerDiv.style.backgroundImage = "url(../Assets/UI/PowerIAPContainer.png)"
                 break;
@@ -4404,6 +4562,8 @@ function generatePowersProgress() {
         powerProgressText.classList.add('power-progress-text','black-outline');
         powerProgressText.innerHTML = `${btd6usersave.powers[power]?.quantity || 0}`;
         powerProgress.appendChild(powerProgressText);
+
+        mmEquivalent += (btd6usersave.powers[power]?.quantity || 0) * data.cost;
     });
 }
 
@@ -4460,7 +4620,7 @@ function generateInstaMonkeysProgress() {
     let instaMonkeyProgressText = document.createElement('p');
     instaMonkeyProgressText.id = "insta-total-counter";
     instaMonkeyProgressText.classList.add('insta-monkey-progress-text','insta-total-counter','black-outline');
-    instaMonkeyProgressText.innerHTML = `${btd6publicprofile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}`;
+    instaMonkeyProgressText.innerHTML = `${Object.values(processedInstaData.TowerTierTotals).flatMap(Object.values).reduce((sum, n) => sum + n, 0)}/${constants.totalInstaMonkeys}`;
     instaMonkeysHeaderBar.appendChild(instaMonkeyProgressText);
 
     let instaMonkeysExtras = document.createElement('div');
@@ -4986,7 +5146,7 @@ function generateInstaListView(){
 
         let instaMonkeysTotalText = document.createElement('p');
         instaMonkeysTotalText.classList.add('insta-monkey-total-text','black-outline');
-        instaMonkeysTotalText.innerHTML = processedInstaData.TowerTotal[tower];
+        instaMonkeysTotalText.innerHTML = (processedInstaData.TowerTotal.hasOwnProperty(tower)) ? processedInstaData.TowerTotal[tower] : 0;
         instaMonkeyTotal.appendChild(instaMonkeysTotalText);
 
         let instaMonkeyTierProgress = document.createElement('div');
@@ -5341,14 +5501,14 @@ function generateChances(tower){
         for(let i = 1; i<6; i++) {
             let value = 0;
             Object.keys(constants.towersInOrder).forEach(tower => {
-                if(!Object.keys(btd6usersave.unlockedTowers).includes(tower)) {return}
+                if(!Object.keys(btd6usersave.unlockedTowers).includes(tower) || !processedInstaData.TowerMissingByTier.hasOwnProperty(tower)) {return}
                 value += processedInstaData.TowerMissingByTier[tower][i].length || 0;
             })
             chances.push(value > 0 ? value / (constants.instaTiers[i].length * Object.keys(btd6usersave.unlockedTowers).length) : 0);
         }
     } else {
         for(let i = 1; i<6; i++) {
-            let value = processedInstaData.TowerMissingByTier[tower][i].length || 0;
+            let value = (processedInstaData.TowerMissingByTier.hasOwnProperty(tower)) ? processedInstaData.TowerMissingByTier[tower][i].length : 0;
             chances.push(value > 0 ? value / constants.instaTiers[i].length : 0);
         }
     }
@@ -5450,7 +5610,7 @@ function generateCollectionEventTowerInfo(tower) {
 
     let instaMonkeysTotalText = document.createElement('p');
     instaMonkeysTotalText.classList.add('insta-monkey-total-text','black-outline');
-    instaMonkeysTotalText.innerHTML = tower == "All" ? Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount) : processedInstaData.TowerTotal[tower];
+    instaMonkeysTotalText.innerHTML = tower == "All" ? Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount) : (processedInstaData.TowerTotal.hasOwnProperty(tower))? processedInstaData.TowerTotal[tower] : 0;
     instaMonkeyTotal.appendChild(instaMonkeysTotalText);
 
     let instaMonkeyTierProgress = document.createElement('div');
@@ -5464,7 +5624,7 @@ function generateCollectionEventTowerInfo(tower) {
 
     let instaMonkeyProgressText = document.createElement('p');
     instaMonkeyProgressText.classList.add('insta-monkey-progress-text','black-outline');
-    instaMonkeyProgressText.innerHTML = tower == "All" ? `${btd6publicprofile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}` : `${Object.values(processedInstaData.TowerTierTotals[tower]).reduce((a, b) => a + b, 0)}/64`;
+    instaMonkeyProgressText.innerHTML = tower == "All" ? `${Object.values(processedInstaData.TowerTierTotals).flatMap(Object.values).reduce((sum, n) => sum + n, 0)}/${constants.totalInstaMonkeys}` : `${processedInstaData.TowerTierTotals.hasOwnProperty(tower) ? Object.values(processedInstaData.TowerTierTotals[tower]).reduce((a, b) => a + b, 0) : 0}/64`;
     instaMonkeyTierProgress.appendChild(instaMonkeyProgressText);
 
     let instaMonkeyNewChance = document.createElement('div');
@@ -5489,7 +5649,7 @@ function generateCollectionEventTowerInfo(tower) {
     instaMonkeyTiersLabel.innerHTML = "Unique By Tier:";
     instaMonkeyTiersContainer.appendChild(instaMonkeyTiersLabel);
 
-    let tierCounts = tower == "All" ? Object.entries([1, 2, 3, 4, 5].reduce((acc, key) => ({ ...acc, [key]: Object.values(processedInstaData.TowerTierTotals).map(tower => tower[key] || 0).reduce((a, b) => a + b, 0) }), {})) : Object.entries(processedInstaData.TowerTierTotals[tower]);
+    let tierCounts = tower == "All" ? Object.entries([1, 2, 3, 4, 5].reduce((acc, key) => ({ ...acc, [key]: Object.values(processedInstaData.TowerTierTotals).map(tower => tower[key] || 0).reduce((a, b) => a + b, 0) }), {})) : (processedInstaData.TowerTierTotals.hasOwnProperty(tower)) ? Object.entries(processedInstaData.TowerTierTotals[tower]) : [["1", 0], ["2", 0], ["3", 0], ["4", 0], ["5", 0]];
     for (let [tier, tierTotal] of tierCounts) {
         let instaMonkeyTierDiv = document.createElement('div');
         instaMonkeyTierDiv.classList.add('insta-monkey-tier-div');
@@ -5635,8 +5795,7 @@ function onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, towe
                 processedInstaData.TowerMissingByTier[towerType][key].push(tiers);
                 delete btd6usersave.instaTowers[towerType][tiers];
                 processedInstaData.TowerTierTotals[towerType][key] -= 1;
-                btd6publicprofile.gameplay["instaMonkeyCollection"] -= 1;
-                document.getElementById('insta-total-counter').innerHTML = `${btd6publicprofile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}`;
+                document.getElementById('insta-total-counter').innerHTML = `${Object.values(processedInstaData.TowerTierTotals).flatMap(Object.values).reduce((sum, n) => sum + n, 0)}/${constants.totalInstaMonkeys}`;
                 calculateInstaBorder(towerType);
                 generateCollectionEventTowerInfo(towerType);
             });
@@ -5647,8 +5806,7 @@ function onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, towe
                 processedInstaData.TowerMissingByTier[towerType][key] = processedInstaData.TowerMissingByTier[towerType][key].filter(value => value != tiers);
                 btd6usersave.instaTowers[towerType][tiers] = 0;
                 processedInstaData.TowerTierTotals[towerType][key] += 1;
-                btd6publicprofile.gameplay["instaMonkeyCollection"] += 1;
-                document.getElementById('insta-total-counter').innerHTML = `${btd6publicprofile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}`;
+                document.getElementById('insta-total-counter').innerHTML = `${Object.values(processedInstaData.TowerTierTotals).flatMap(Object.values).reduce((sum, n) => sum + n, 0)}/${constants.totalInstaMonkeys}`;
                 calculateInstaBorder(towerType);
                 generateCollectionEventTowerInfo(towerType);
             })
@@ -5844,6 +6002,34 @@ function generateAbilities() {
     abilitiesContent.appendChild(abilitiesHeaderBar);
 
     let abilities = {...btd6publicprofile.stats.abilitiesActivatedByName};
+
+    let filteredAbilityOrder = [];
+    switch (abilitiesFilterType) {
+        case "Towers":
+            Object.keys(constants.towersInOrder).forEach(tower => {
+                if (constants.abilitiesByTower[tower]) {
+                    constants.abilitiesByTower[tower].forEach(ability => filteredAbilityOrder.push(ability));
+                }
+            });
+            break;
+        case "Heroes":
+            Object.keys(constants.heroesInOrder).forEach(hero => {
+                if (constants.abilitiesByHero[hero]) {
+                    Object.values(constants.abilitiesByHero[hero]).forEach(ability => filteredAbilityOrder.push(ability));
+                }
+            });
+            break;
+        case "Powers":
+            Object.values(constants.abilitiesByPower).forEach(powerAbilities => {
+                powerAbilities.forEach(ability => filteredAbilityOrder.push(ability));
+            });
+            break;
+    }
+
+    if (abilitiesFilterType !== "All") {
+        abilities = Object.fromEntries(Object.entries(abilities).filter(([ability]) => filteredAbilityOrder.includes(ability)));
+    }
+
     switch(abilitiesFilter) {
         case "Most Used":
             abilities = Object.fromEntries(Object.entries(abilities).sort((a, b) => b[1] - a[1]));
@@ -5851,28 +6037,17 @@ function generateAbilities() {
         case "Least Used":
             abilities = Object.fromEntries(Object.entries(abilities).sort((a, b) => a[1] - b[1]));
             break;
-        case "Monkey Type":
-            const abilityOrder = [];
-
-            Object.keys(constants.towersInOrder).forEach(tower => {
-                if (constants.abilitiesByTower[tower]) {
-                    constants.abilitiesByTower[tower].forEach(ability => abilityOrder.push(ability));
-                }
-            });
-
-            Object.keys(constants.heroesInOrder).forEach(hero => {
-                if (constants.abilitiesByHero[hero]) {
-                    Object.values(constants.abilitiesByHero[hero]).forEach(ability => abilityOrder.push(ability));
-                }
-            });
-            Object.values(constants.abilitiesByPower).forEach(powerAbilities => {
-                powerAbilities.forEach(ability => abilityOrder.push(ability));
-            });
-
+        case "Default":
+            let defaultOrder = [
+                ...Object.keys(constants.towersInOrder).flatMap(tower => constants.abilitiesByTower[tower] ?? []),
+                ...Object.keys(constants.heroesInOrder).flatMap(hero => Object.values(constants.abilitiesByHero[hero] ?? {})),
+                ...Object.values(constants.abilitiesByPower).flat()
+            ];
+            console.log(defaultOrder)
             abilities = Object.fromEntries(
                 Object.entries(abilities).sort((a, b) => {
-                    const indexA = abilityOrder.indexOf(a[0]);
-                    const indexB = abilityOrder.indexOf(b[0]);
+                    const indexA = defaultOrder.indexOf(a[0]);
+                    const indexB = defaultOrder.indexOf(b[0]);
                     const posA = indexA === -1 ? Infinity : indexA;
                     const posB = indexB === -1 ? Infinity : indexB;
                     return posA - posB;
@@ -5881,18 +6056,37 @@ function generateAbilities() {
             break;
     }
 
-    let dropdownSort = generateDropdown("Sort By:", ["Most Used", "Least Used", "Monkey Type"], abilitiesFilter, (value) => {
+    let sortOptions = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'jc-start'],
+        style: {
+            flex: '1',
+        }
+    })
+    abilitiesHeaderBar.appendChild(sortOptions);
+
+    let dropdownSort = generateDropdown("Sort By:", ["Default", "Most Used", "Least Used"], abilitiesFilter, (value) => {
         abilitiesFilter = value;
         generateAbilities();
     })
     dropdownSort.style.padding = "10px";
-    abilitiesHeaderBar.appendChild(dropdownSort);
+    sortOptions.appendChild(dropdownSort);
 
-    let abilitiesTotalText = document.createElement('p');
-    abilitiesTotalText.classList.add('abilities-total-text','black-outline');
-    abilitiesTotalText.style.padding = "10px";
-    abilitiesTotalText.style.fontSize = "22px";
-    abilitiesTotalText.innerHTML = `Total Abilities Used: ${profileStats["Abilities Used"].toLocaleString()}`;
+    let dropdownFilter = generateDropdown("Filter:", ["All", "Towers", "Heroes", "Powers"], abilitiesFilterType, (value) => {
+        abilitiesFilterType = value;
+        generateAbilities();
+    })
+    dropdownFilter.style.padding = "10px";
+    sortOptions.appendChild(dropdownFilter);
+
+    let abilitiesTotalText = createEl('p', {
+        classList: ['black-outline'],
+        style: {
+            fontSize: "22px",
+            padding: "10px",
+            paddingRight: "20px"
+        },
+        innerHTML: `Total Abilities Used: ${profileStats["Abilities Used"].toLocaleString()}`
+    });
     abilitiesHeaderBar.appendChild(abilitiesTotalText);
 
     let abilitiesDiv = document.createElement('div');
@@ -5944,6 +6138,18 @@ function generateAbilities() {
             },
         })
     });
+
+    if (Object.keys(abilities).length === 0) {
+        let noDataText = createEl('p', {
+            classList: ['black-outline'],
+            style: {
+                fontSize: "24px",
+                marginTop: "20px"
+            },
+            innerHTML: "No abilities match the filter!"
+        });
+        abilitiesDiv.appendChild(noDataText);
+    }
 }
 
 function generateAchievementsProgress() {
@@ -5954,11 +6160,21 @@ function generateAchievementsProgress() {
     achievementsProgressContainer.classList.add('achievements-progress-container');
     progressContent.appendChild(achievementsProgressContainer);
 
-    let achievementsHeaderBar = document.createElement('div');
-    achievementsHeaderBar.classList.add('achievements-header-bar');
+    let achievementsHeaderBar = createEl('div', {
+        classList: ['achievements-header-bar', 'ai-center'],
+        style: {
+            gap: "20px",
+        }
+    });
     achievementsProgressContainer.appendChild(achievementsHeaderBar);
     
-    let achievementsViews = document.createElement('div');
+    let achievementsViews = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'jc-start'],
+        style: {
+            flex: '1',
+            padding: "10px",
+        }
+    });
     achievementsViews.classList.add('maps-progress-views');
     achievementsHeaderBar.appendChild(achievementsViews);
 
@@ -5974,7 +6190,7 @@ function generateAchievementsProgress() {
     let mapProgressFilterDifficultySelect2 = document.createElement('select');
     mapProgressFilterDifficultySelect2.classList.add('map-progress-filter-difficulty-select');
 
-    let options2 = ["None",/*"Monkey Money",*/"Knowledge Points","Insta Monkeys","Hidden Achievements"]
+    let options2 = ["All","Only Locked","Only Unlocked","Knowledge Points","Insta Monkeys","Hidden Achievements"]
     options2.forEach((option) => {
         let difficultyOption = document.createElement('option');
         difficultyOption.value = option;
@@ -5983,33 +6199,38 @@ function generateAchievementsProgress() {
     })
     mapProgressFilterDifficulty2.appendChild(mapProgressFilterDifficultySelect2);
 
+    let center = document.createElement('div');
+    center.classList.add('pos-rel');
+    achievementsHeaderBar.appendChild(center);
 
-    let mapsProgressFilter = document.createElement('div');
-    mapsProgressFilter.classList.add('maps-progress-filter');
-    achievementsHeaderBar.appendChild(mapsProgressFilter);
-
-    let mapProgressFilterDifficulty = document.createElement('div');
-    mapProgressFilterDifficulty.classList.add('map-progress-filter-difficulty');
-    mapsProgressFilter.appendChild(mapProgressFilterDifficulty);
-
-    let mapsProgressFilterDifficultyText = document.createElement('p');
-    mapsProgressFilterDifficultyText.classList.add('maps-progress-coop-toggle-text','black-outline');
-    mapsProgressFilterDifficultyText.innerHTML = "Display:";
-    mapProgressFilterDifficulty.appendChild(mapsProgressFilterDifficultyText);
-
-    let mapProgressFilterDifficultySelect = document.createElement('select');
-    mapProgressFilterDifficultySelect.classList.add('map-progress-filter-difficulty-select');
-    mapProgressFilterDifficultySelect.addEventListener('change', () => {
-        onChangeAchievementsFilter(mapProgressFilterDifficultySelect.value);
+    let searchInput = document.createElement('input');
+    searchInput.id = "achievements-search-input";
+    searchInput.classList.add('search-box', 'font-gardenia', 'rogue-search');
+    searchInput.placeholder = "Search";
+    searchInput.style.paddingRight = '40px';
+    searchInput.addEventListener('input', () => {
+        generateAchievementsGameView(searchInput.value);
     })
-    let options = ["All","Locked","Unlocked"]
-    options.forEach((option) => {
-        let difficultyOption = document.createElement('option');
-        difficultyOption.value = option;
-        difficultyOption.innerHTML = option;
-        mapProgressFilterDifficultySelect.appendChild(difficultyOption);
+
+    let searchIcon = document.createElement('img');
+    searchIcon.src = `../Assets/UI/SearchIcon.png`;
+    searchIcon.classList.add('search-icon');
+    center.appendChild(searchIcon);
+
+    center.appendChild(searchInput);
+
+    let achievementsCountText = createEl("p", {
+        classList: ['black-outline'],
+        id: 'achievements-count-text',
+        style: {
+            fontSize: "32px",
+            paddingRight: "20px",
+            flex: '1',
+            textAlign: "right"
+        },
+        innerHTML: `${btd6usersave.achievementsClaimed.length}/${constants.achievements + constants.hiddenAchievements}`
     })
-    mapProgressFilterDifficulty.appendChild(mapProgressFilterDifficultySelect);
+    achievementsHeaderBar.appendChild(achievementsCountText);
 
     let AchievementsContainer = document.createElement('div');
     AchievementsContainer.id = 'achievements-container';
@@ -6020,12 +6241,11 @@ function generateAchievementsProgress() {
         onChangeAchievementRewardFilter(mapProgressFilterDifficultySelect2.value);
     })
 
-    onChangeAchievementsFilter("All");
     onChangeAchievementRewardFilter("None")
     generateAchievementsGameView();
 }
 
-function generateAchievementsGameView(){
+function generateAchievementsGameView(searchTerm = "") {
     let AchievementsContainer = document.getElementById('achievements-container');
     AchievementsContainer.innerHTML = "";
 
@@ -6053,19 +6273,13 @@ function generateAchievementsGameView(){
     }
 
     let achievements = Object.keys(achievementsJSON);
-    switch(currentAchievementFilter){
-        case "Locked":
+    switch(currentAchievementRewardFilter){
+        case "Only Locked":
             achievements = achievements.filter(achievement => !btd6usersave.achievementsClaimed.includes(reverseAchievementNameFixMap[achievementsJSON[achievement].name] || achievementsJSON[achievement].name));
             break;
-        case "Unlocked":
+        case "Only Unlocked":
             achievements = achievements.filter(achievement => btd6usersave.achievementsClaimed.includes(reverseAchievementNameFixMap[achievementsJSON[achievement].name] || achievementsJSON[achievement].name));
             break;
-        case "All":
-            achievements = achievements.sort((a,b) => btd6usersave.achievementsClaimed.includes(reverseAchievementNameFixMap[achievementsJSON[a].name] || achievementsJSON[a].name) - btd6usersave.achievementsClaimed.includes(reverseAchievementNameFixMap[achievementsJSON[b].name] || achievementsJSON[b].name));
-            break;
-    }
-
-    switch(currentAchievementRewardFilter){
         case "Monkey Money":
             achievements = achievements.filter(achievement => achievementsJSON[achievement].model.loot.includes("MonkeyMoney"));
             achievements = achievements.sort((a,b) => Object.values(processRewardsString(achievementsJSON[a].model.loot)).find(reward => reward.type == 'MonkeyMoney').amount - Object.values(processRewardsString(achievementsJSON[b].model.loot)).find(reward => reward.type == 'MonkeyMoney').amount)
@@ -6080,6 +6294,23 @@ function generateAchievementsGameView(){
             achievements = achievements.filter(achievement => achievementsJSON[achievement].model.hidden);
             break;
     }
+
+    if (searchTerm != "") {
+        achievements = achievements.filter(achievement => {
+            let achievementData = achievementsJSON[achievement];
+            let achievementName = getLocValue(`Achievement ${achievementData.model.achievementId} Name`);            let achievementDesc = getLocValue(`Achievement ${achievementData.model.achievementId} Description`);
+            return achievementName.toLowerCase().includes(searchTerm.toLowerCase()) || achievementDesc.toLowerCase().includes(searchTerm.toLowerCase());
+        })
+    } else {
+        document.getElementById('achievements-search-input').value = "";
+    }
+
+    let achievementsCountText = document.getElementById('achievements-count-text');
+    let claimedCount = achievements.filter(achievement => btd6usersave.achievementsClaimed.includes(reverseAchievementNameFixMap[achievementsJSON[achievement].name] || achievementsJSON[achievement].name)).length;
+    achievementsCountText.innerHTML = `${claimedCount}/${achievements.length}`;
+
+    // let achievementsCountText = document.getElementById('achievements-count-text');
+    // achievementsCountText.innerHTML = `${1}/${achievements.length}`;
 
     if (achievements.length == 0) {
         let noDataFound = document.createElement('p');
@@ -6238,11 +6469,6 @@ function generateExtrasProgress() {
             extraProgressDiv.appendChild(extraProgressTick);
         }
     }
-}
-
-function onChangeAchievementsFilter(filter){
-    currentAchievementFilter = filter;
-    generateAchievementsGameView();
 }
 
 function onChangeAchievementRewardFilter(filter){
@@ -10654,6 +10880,7 @@ function generateQuestsPage() {
             questsListContainer.appendChild(questDiv);
 
             let questImg = createEl('img', {
+                loading: "lazy",
                 classList: ['quest-img'],
                 style: {
                     width: "100px",

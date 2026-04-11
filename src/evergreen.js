@@ -49,6 +49,7 @@ function goBack(noScroll){
     if (!noScroll) {
         resetScroll();
     }
+    hideLoading();
 }
 
 function addToBackQueue(object) {
@@ -212,9 +213,8 @@ async function fetchRogueDependencies() {
 
 async function fetchInstaDependencies() {
     await fetchLocKeys();
-    generateStats();
     generateInstaData();
-    changeProgressTab('InstaMonkeys')
+    changeProgressTab('InstaMonkeysUsable')
     clearBackQueue();
     hideLoading();
 }
@@ -601,7 +601,7 @@ function openOAKInstructionsModal(){
 
     OAKInstructionsDiv.appendChild(createEl('p', {
         classList: ['oak-instructions-text'],
-        innerHTML: 'An Open Access Key (OAK) is a unique key that allows you to access your Bloons TD 6 data from Ninja Kiwi\'s Open Data API. The site will use this to fetch your information from the API to be displayed in a familiar way. <br><br>NOTE: Progress tracking is not available for BTD6+ on Apple Arcade and BTD6 Netflix as OAK tokens are unavailable.'
+        innerHTML: 'An Open Access Key (OAK) is a unique key that allows you to access your Bloons TD 6 data from Ninja Kiwi\'s Open Data API. The site will use this to fetch your information from the API to be displayed in a familiar way. <br><br>NOTE: Progress tracking is not available for the following: Epic Games Store (PC), BTD6+ on Apple Arcade and BTD6 Netflix as OAK tokens are unavailable.'
     }));
 
     OAKInstructionsDiv.appendChild(createEl('p', {
@@ -631,17 +631,12 @@ function openOAKInstructionsModal(){
 
     OAKInstructionsDiv.appendChild(createEl('p', {
         classList: ['oak-instructions-text'],
-        innerHTML: 'Step 3: Generate a key and copy that in to the above text field. It should start with "oak_". Then click "Start" to begin!'
-    }));
-
-    OAKInstructionsDiv.appendChild(createEl('img', {
-        classList: ['oak-instruction-img'],
-        src: './Assets/UI/OAKTutorial3.jpg'
+        innerHTML: 'Step 3: Generate a key and copy that in to the above text field. It should start with "oak_". Then click "Start" to login!'
     }));
 
     OAKInstructionsDiv.appendChild(createEl('p', {
         classList: ['oak-instructions-text'],
-        innerHTML: 'You can read more about the Open Data API here: <a href="https://ninja.kiwi/opendatafaq" target="_blank", style="color:white";>Open Data API Article</a><br><br>Privacy Note: This app does not store any data being sent to or retrieved from Ninja Kiwi\'s Open Data API outside of your browser/device. The localStorage browser feature is used to prevent users from having to re-enter their OAK token every time they visit the site. If you would like to delete this stored data, you can do so by clicking the "X" on the profile you would like to delete on this homepage or clearing your browsing data.'
+        innerHTML: 'You can read more about the Open Data API here: <a href="https://ninja.kiwi/opendatafaq" target="_blank", style="color:white";>Open Data API Article</a><br><br>Privacy Note: This site does not store any data being sent to or retrieved from Ninja Kiwi\'s Open Data API outside of your browser/device. The localStorage browser feature is used to prevent users from having to re-enter their OAK token every time they visit the site. If you would like to delete this stored data, you can do so by clicking the "X" on the profile you would like to delete on this homepage or clearing your browsing data.'
     }));
     createModal({
         header: 'OAK Instructions',
@@ -696,7 +691,9 @@ function errorModal(body, source, force) {
             modal.appendChild(modalContent2);
             break;
         case "Cannot load public profile. Player does not play this game or is running a newer version":
-            modalContent2.innerHTML = "Note from this Site: If a major update for the game just released, it is possible the Open Data API is temporarily broken until updates are made.";
+            modalContent2.innerHTML = "Note from this site: If a major update for the game just released, the Open Data API may be temporarily broken until updated to be compatible with the new version (usually within a couple days)";
+            preventRateLimiting = true;
+            clearProfileRequestQueue();
             modal.appendChild(modalContent2);
             break;
     }
@@ -805,7 +802,7 @@ function clearAllTimers(){
     }
 }
 
-function generateComment(text) {
+function generateComment(text, callback) {
     let commentDiv = createEl('div', {
         classList: ['round-hint-div','coop-border']
     });
@@ -816,6 +813,9 @@ function generateComment(text) {
     });
     closeBtn.addEventListener('click', () => {
         commentDiv.style.display = "none";
+        if (callback) {
+            callback();
+        }   
     })
     commentDiv.appendChild(closeBtn);
 

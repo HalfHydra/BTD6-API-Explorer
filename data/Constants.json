@@ -91,26 +91,86 @@
     },
     "heroesInOrder": {"Quincy": "Blue", "Gwendolin": "Yellow", "StrikerJones": "Grey", "ObynGreenfoot": "Aqua", "CaptainChurchill": "Grey", "Benjamin": "Aqua", "PatFusty": "Green", "Ezili":"Purple", "Adora":"Yellow", "Etienne":"Grey", "Sauda":"Grey", "AdmiralBrickell":"Yellow", "Psi":"Yellow", "Geraldo":"Aqua", "Corvus": "Aqua", "Rosalia": "Green", "Silas": "Blue"},
     "powersInOrder": {
-        "CashDrop": "Power",
-        "RoadSpikes": "Power",
-        "MonkeyBoost": "Power",
-        "BananaFarmer": "Power",
-        "CamoTrap": "Power",
-        "Pontoon": "Power",
-        "SuperMonkeyStorm": "Power",
-        "GlueTrap": "Power",
-        "PortableLake": "Power",
-        "MoabMine": "Power",
-        "Thrive": "Power",
-        "EnergisingTotem": "Power",
-        "DartTime": "Power",
-        "TechBot": "Power",
-        "CaveMonkey": "Power",
-        "BattleCat": "IAP",
-        "SheRa": "IAP",
-        "Skeletor": "IAP",
-        "BananaFarmerPro": "Pro",
-        "SuperMonkeyBeacon": "Pro"
+        "CashDrop": {
+            "type": "Power",
+            "cost": 180
+        },
+        "RoadSpikes": {
+            "type": "Power",
+            "cost": 50
+        },
+        "MonkeyBoost": {
+            "type": "Power",
+            "cost": 100
+        },
+        "BananaFarmer": {
+            "type": "Power",
+            "cost": 50
+        },
+        "CamoTrap": {
+            "type": "Power",
+            "cost": 50
+        },
+        "Pontoon": {
+            "type": "Power",
+            "cost": 40
+        },
+        "SuperMonkeyStorm": {
+            "type": "Power",
+            "cost": 100
+        },
+        "GlueTrap": {
+            "type": "Power",
+            "cost": 50
+        },
+        "PortableLake": {
+            "type": "Power",
+            "cost": 40
+        },
+        "MoabMine": {
+            "type": "Power",
+            "cost": 50
+        },
+        "Thrive": {
+            "type": "Power",
+            "cost": 70
+        },
+        "EnergisingTotem": {
+            "type": "Power",
+            "cost": 80
+        },
+        "DartTime": {
+            "type": "Power",
+            "cost": 50
+        },
+        "TechBot": {
+            "type": "Power",
+            "cost": 50
+        },
+        "CaveMonkey": {
+            "type": "Power",
+            "cost": 150
+        },
+        "BattleCat": {
+            "type": "IAP",
+            "cost": 0
+        },
+        "SheRa": {
+            "type": "IAP",
+            "cost": 0
+        },
+        "Skeletor": {
+            "type": "IAP",
+            "cost": 0
+        },
+        "BananaFarmerPro": {
+            "type": "Pro",
+            "cost": 100
+        },
+        "SuperMonkeyBeacon": {
+            "type": "Pro",
+            "cost": 400
+        }
     },
     "mapsInOrder": {
         "Tutorial": {
@@ -885,7 +945,7 @@
         "Gwendolin": ["Gwendolin", "CircusGwendolin", "ScientistGwendolin", "FirecrackerGwendolin"], 
         "StrikerJones": ["StrikerJones", "BikerBones", "OctoJones"],
         "ObynGreenfoot": ["ObynGreenfoot", "MoltenObyn", "ObynOceanGuardian", "ObynSkeletor"],
-        "Benjamin": ["Benjamin", "SushiBento", "BenJammin"],
+        "Benjamin": ["Benjamin", "BenJammin", "SushiBento"],
         "PatFusty": ["PatFusty", "FustyTheSnowman", "KaijuPat"],
         "CaptainChurchill": ["CaptainChurchill", "SentaiCaptainChurchill", "SleighCaptainChurchill"],
         "Ezili": ["Ezili", "Galaxili", "SmudgeCatt"],
@@ -2494,37 +2554,37 @@
             "startingCash": 0
         },
         "FrontierBase1": {
-            "name": "Frontier Base Roundset 1",
+            "name": "Frontier Base Roundset Act 1",
             "icon": "QuestIconFrontierLegend",
             "type": "frontier",
             "startingCash": 0
         },
         "FrontierBase2": {
-            "name": "Frontier Base Roundset 2",
+            "name": "Frontier Base Roundset Act 2",
             "icon": "QuestIconFrontierLegend",
             "type": "frontier",
             "startingCash": 0
         },
         "FrontierBase3": {
-            "name": "Frontier Base Roundset 3",
+            "name": "Frontier Base Roundset Act 3",
             "icon": "QuestIconFrontierLegend",
             "type": "frontier",
             "startingCash": 0
         },
         "FrontierRush1": {
-            "name": "Frontier Rush Roundset 1",
+            "name": "Frontier Rush Roundset Act 1",
             "icon": "QuestIconFrontierLegend",
             "type": "frontier",
             "startingCash": 0
         },
         "FrontierRush2": {
-            "name": "Frontier Rush Roundset 2",
+            "name": "Frontier Rush Roundset Act 2",
             "icon": "QuestIconFrontierLegend",
             "type": "frontier",
             "startingCash": 0
         },
         "FrontierRush3": {
-            "name": "Frontier Rush Roundset 3",
+            "name": "Frontier Rush Roundset Act 3",
             "icon": "QuestIconFrontierLegend",
             "type": "frontier",
             "startingCash": 0
@@ -3929,5 +3989,16 @@
         "AlternateBloonsRounds": 80,
         "Impoppable": 100,
         "Clicks": 100
+    },
+    "mapMonkeyMoney": {
+        "Easy": "75",
+        "Medium": "125",
+        "Hard": "200",
+        "Impoppable": "300",
+        "coopMultiplier": 0.2,
+        "Beginner": 1,
+        "Intermediate": 2,
+        "Advanced": 3,
+        "Expert": 4
     }
 }

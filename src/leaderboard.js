@@ -774,6 +774,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
             leaderboardEntry.classList.add('leaderboard-entry');
             if (type != "CTTeam") {
                 leaderboardEntry.addEventListener('click', () => {
+                    showLoading();
                     openProfile('leaderboard', entry.profile);
                 })
             } else {
@@ -1022,56 +1023,55 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                 leaderboardEntryPlayer.classList.add('leaderboard-entry-team');
             }
 
-            if (!preventRateLimiting) {
-                let observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(async observerentry => {
-                        if (observerentry.isIntersecting) {
-                            if (leaderboardData.length == index + 1) {
-                                if (leaderboardCache[leaderboardLink].next != null) {
-                                    if (leaderboardEntries.getElementsByClassName('loading-text-leaderboard').length == 0) {
-                                        let loadingEntriesText = createEl('p', { classList: ['loading-text-leaderboard', 'black-outline'], style: { fontSize: '24px', paddingBottom: '50px' }, innerHTML: "Loading more entries..." });
-                                        leaderboardEntries.appendChild(loadingEntriesText);
-                                    }
-                                    clearProfileRequestQueue();
-                                    getLeaderboardPage(leaderboardCache[leaderboardLink].next, leaderboardActiveToken);
-                                    leaderboardCache[leaderboardLink].nextRequested = true;
-                                } else {
-                                    if (!leaderboardCache[leaderboardLink].ended) {
-                                        leaderboardCache[leaderboardLink].ended = true;
-                                        let leaderboardText = (leaderboardCache[leaderboardLink].entries.length == 1000) ? `The API only hosts the top 1000 players` : "End of Leaderboard";
-                                        let endOfLeaderboard = createEl('p', { classList: ['black-outline'], style: { fontSize: '24px', paddingBottom: '50px' }, innerHTML: leaderboardText });
-                                        leaderboardEntries.appendChild(endOfLeaderboard);
-                                    }
+            let observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(async observerentry => {
+                    if (observerentry.isIntersecting) {
+                        if (leaderboardData.length == index + 1) {
+                            if (leaderboardCache[leaderboardLink].next != null) {
+                                if (leaderboardEntries.getElementsByClassName('loading-text-leaderboard').length == 0) {
+                                    let loadingEntriesText = createEl('p', { classList: ['loading-text-leaderboard', 'black-outline'], style: { fontSize: '24px', paddingBottom: '50px' }, innerHTML: "Loading more entries..." });
+                                    leaderboardEntries.appendChild(loadingEntriesText);
+                                }
+                                clearProfileRequestQueue();
+                                getLeaderboardPage(leaderboardCache[leaderboardLink].next, leaderboardActiveToken);
+                                leaderboardCache[leaderboardLink].nextRequested = true;
+                            } else {
+                                if (!leaderboardCache[leaderboardLink].ended) {
+                                    leaderboardCache[leaderboardLink].ended = true;
+                                    let leaderboardText = (leaderboardCache[leaderboardLink].entries.length == 1000) ? `The API only hosts the top 1000 players` : "End of Leaderboard";
+                                    let endOfLeaderboard = createEl('p', { classList: ['black-outline'], style: { fontSize: '24px', paddingBottom: '50px' }, innerHTML: leaderboardText });
+                                    leaderboardEntries.appendChild(endOfLeaderboard);
                                 }
                             }
-
-                            if (page == 1 && ((index + ((page - 1) * count) + 1) <= 50)) {
-                                addRequestToQueue(entry.profile, async () => {
-                                    try {
-                                        let userProfile = await getUserProfile(entry.profile);
-                                        if (userProfile != null) {
-                                            if (userProfile.hasOwnProperty('owner')) {
-                                                leaderboardEntryFrame.src = userProfile.frameURL;
-                                                leaderboardEntryEmblem.src = userProfile.iconURL;
-                                                leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                                            } else {
-                                                leaderboardEntryIcon.src = getProfileAvatar(userProfile);
-                                                leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
-                                            }
-                                            observer.unobserve(observerentry.target);
-                                        }
-                                    } catch (error) {
-                                        console.error("Error fetching user profile:", error);
-                                    }
-                                });
-                            }
-                        } else {
-                            removeRequestFromQueue(entry.profile);
                         }
-                    });
+
+                        if (page == 1 && ((index + ((page - 1) * count) + 1) <= 50) && !preventRateLimiting) {
+                            addRequestToQueue(entry.profile, async () => {
+                                try {
+                                    let userProfile = await getUserProfile(entry.profile);
+                                    if (userProfile != null) {
+                                        if (userProfile.hasOwnProperty('owner')) {
+                                            leaderboardEntryFrame.src = userProfile.frameURL;
+                                            leaderboardEntryEmblem.src = userProfile.iconURL;
+                                            leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
+                                        } else {
+                                            leaderboardEntryIcon.src = getProfileAvatar(userProfile);
+                                            leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
+                                        }
+                                        observer.unobserve(observerentry.target);
+                                    }
+                                } catch (error) {
+                                    console.error("Error fetching user profile:", error);
+                                }
+                            });
+                        }
+                    } else {
+                        removeRequestFromQueue(entry.profile);
+                    }
                 });
-                observer.observe(leaderboardEntryIcon);
-            }
+            });
+            observer.observe(leaderboardEntryIcon);
+
             if (profileCache[(entry.profile).split("/").pop()] != null) {
                 let userProfile = profileCache[(entry.profile).split("/").pop()];
                 if (userProfile.hasOwnProperty('owner')) {

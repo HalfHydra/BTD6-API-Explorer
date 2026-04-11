@@ -782,6 +782,7 @@
     font-size: 24px;
     color: white;
     text-align: center;
+    margin: 0 20px;
 }
 .event-selector-text {
     font-family: 'Luckiest Guy';
@@ -5754,6 +5755,10 @@ input[type="checkbox"] {
 
 .jc-end {
     justify-content: flex-end;
+}
+
+.jc-start {
+    justify-content: flex-start;
 }
 
 .fd-column {
