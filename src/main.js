@@ -426,8 +426,8 @@ function generateProgressSubText(){
     let powersAvailable = Object.values(btd6usersave.powers).map(power => (typeof power === 'object' && power.quantity) ? power.quantity : 0).reduce((acc, amount) => acc + amount);
     progressSubText["PowersUsable"] = `${powersAvailable} Power${powersAvailable != 1 ? "s" : ""} Available`;
     if (btd6publicprofile != null) {
-        let powersTotal = powersAvailable + btd6publicprofile.gameplay.powersUsed;
-        progressSubText["Powers"] = `${powersTotal} Power${powersTotal != 1 ? "s" : ""} Collected`
+        // let powersTotal = powersAvailable + btd6publicprofile.gameplay.powersUsed; // may include CT uses
+        progressSubText["Powers"] = `${powersAvailable} Power${powersAvailable != 1 ? "s" : ""} Collected`
     }
     let powersProUnlocked = Object.values(btd6usersave.powersPro).map(power => power.unlockedTier).reduce((acc, amount) => acc + amount);
     progressSubText["PowersPro"] = `${powersProUnlocked} Pro Power${(powersProUnlocked > 1) ? "s" : ""} Unlocked`
@@ -4524,9 +4524,43 @@ function generatePowersProgress() {
     let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
 
+    let powersHeaderBar = createEl('div', {
+        classList: ['insta-monkeys-header-bar', 'd-flex', 'jc-between', 'ai-center', 'w-100']
+    });
+    progressContent.appendChild(powersHeaderBar);
+
     let powersProgressContainer = document.createElement('div');
     powersProgressContainer.classList.add('powers-progress-container');
+    powersProgressContainer.style.paddingBottom = "20px";
     progressContent.appendChild(powersProgressContainer);
+
+    let headerLeft = createEl('div', {
+        classList: ['d-flex', 'ai-center'],
+        style: {
+            padding: "0 10px"
+        }
+    });
+    powersHeaderBar.appendChild(headerLeft);
+
+    let totalPowers = btd6usersave.powers ? Object.values(btd6usersave.powers).reduce((sum, power) => sum + (power.quantity || 0), 0) : 0;
+    let totalPowersText = createEl('p', {
+        classList: ['black-outline'],
+        style: {
+            fontSize: '24px'
+        },
+        innerHTML: `${totalPowers.toLocaleString()} Total Powers,`
+    });
+    headerLeft.appendChild(totalPowersText);
+
+    let powersUsedText = createEl('p', {
+        classList: ['black-outline'],
+        style: {
+            fontSize: '24px',
+            paddingRight: "10px"
+        },
+        innerHTML: `${(btd6publicprofile != null) ? btd6publicprofile.gameplay.powersUsed.toLocaleString() : "???"} Powers Used`
+    });
+    powersHeaderBar.appendChild(powersUsedText);
 
     let mmEquivalent = 0;
     Object.entries(constants.powersInOrder).forEach(([power, data]) => {
@@ -4565,6 +4599,37 @@ function generatePowersProgress() {
 
         mmEquivalent += (btd6usersave.powers[power]?.quantity || 0) * data.cost;
     });
+    if (mmEquivalent > 0) {
+        let powersMMEquiv = createEl('div', {
+            classList: ['d-flex', 'ai-center'],
+            style: {
+                margin: "10px"
+            }
+        });
+        headerLeft.appendChild(powersMMEquiv);
+
+        let mmCounterLabel = createEl('p', {
+            classList: ['trophy-store-item-counter', 'black-outline'],
+            style: {
+                paddingRight: "8px"
+            },
+            innerHTML: "Equal to: "
+        });
+
+        let mmCounterValue = createEl('p', {
+            classList: ['trophy-store-item-counter', 'black-outline'],
+            innerHTML: mmEquivalent
+        });
+
+        let mmIcon = createEl('img', {
+            classList: [],
+            style: { width: "70px", marginLeft: "5px" },
+            src: '../Assets/UI/BloonjaminsIcon.png'
+        });
+        powersMMEquiv.appendChild(mmCounterLabel);
+        powersMMEquiv.appendChild(mmCounterValue);
+        powersMMEquiv.appendChild(mmIcon);
+    }
 }
 
 function generateInstaMonkeysProgress() {
