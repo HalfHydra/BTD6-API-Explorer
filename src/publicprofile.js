@@ -203,7 +203,18 @@ async function openProfile(source, profile, callback){
         tippy(medalDiv, {
             content: constants.medalLabels[medal],
             placement: 'top',
-            theme: 'speech_bubble'
+            theme: 'speech_bubble',
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            }
         })
     }
 
@@ -291,9 +302,21 @@ async function openProfile(source, profile, callback){
         counter++;
 
         tippy(heroDiv, {
-            content: `${getLocValue(hero)} Placed ${xp.toLocaleString()} Times`,
+            content: `<p class="artifact-title">${getLocValue(hero)}</p>Placed ${xp.toLocaleString()} Times`,
             placement: 'top',
-            theme: 'speech_bubble'
+            theme: 'speech_bubble',
+            allowHTML: true,
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            }
         })
     }
 
@@ -367,9 +390,21 @@ async function openProfile(source, profile, callback){
         counter++;
 
         tippy(towerDiv, {
-            content: `${getLocValue(tower)} Placed ${xp.toLocaleString()} Times`,
+            content: `<p class="artifact-title">${getLocValue(tower)}</p>Placed ${xp.toLocaleString()} Times`,
             placement: 'top',
-            theme: 'speech_bubble'
+            theme: 'speech_bubble',
+            allowHTML: true,
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            }
         })
     }
 
@@ -447,9 +482,21 @@ async function openProfile(source, profile, callback){
         counter++;
 
         tippy(towerDiv, {
-            content: `${getLocValue(tower + " Paragon")} Placed ${xp.toLocaleString()} Times`,
+            content: `<p class="artifact-title">${getLocValue(tower + " Paragon")}</p>Placed ${xp.toLocaleString()} Times`,
             placement: 'top',
-            theme: 'speech_bubble'
+            theme: 'speech_bubble',
+            allowHTML: true,
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            }
         })
     }
 

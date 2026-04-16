@@ -1051,9 +1051,10 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                                     let userProfile = await getUserProfile(entry.profile);
                                     if (userProfile != null) {
                                         if (userProfile.hasOwnProperty('owner')) {
-                                            leaderboardEntryFrame.src = userProfile.frameURL;
-                                            leaderboardEntryEmblem.src = userProfile.iconURL;
-                                            leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
+                                            // currently broken
+                                            // leaderboardEntryFrame.src = userProfile.frameURL;
+                                            // leaderboardEntryEmblem.src = userProfile.iconURL;
+                                            // leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
                                         } else {
                                             leaderboardEntryIcon.src = getProfileAvatar(userProfile);
                                             leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
@@ -1422,8 +1423,9 @@ function openTeamModalPopout(groupUrl) {
 
                     ref.teamProfile = profileData;
 
-                    if (profileData.frameURL) ref.frameEl.src = profileData.frameURL;
-                    if (profileData.iconURL) ref.emblemEl.src = profileData.iconURL;
+                    // currently broken
+                    // if (profileData.frameURL) ref.frameEl.src = profileData.frameURL;
+                    // if (profileData.iconURL) ref.emblemEl.src = profileData.iconURL;
                     if (profileData.numMembers != null) ref.membersSpan.textContent = profileData.numMembers;
                     if (profileData.status) {
                         switch (profileData.status) {

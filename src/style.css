@@ -263,7 +263,7 @@
     max-height: calc(var(--vh, 1vh) * 80);
     overflow-y: auto;
     background-color: var(--profile-secondary);
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
 }
 
 .previous-oak-entry {
@@ -1775,6 +1775,13 @@
     background: linear-gradient(#08349C 0%, #2a78d4 100%) no-repeat;
 }
 
+.power-pro-border {
+    border: 20px solid transparent;
+    border-image-source: url(../Assets/UI/TeamsStoreButtonOff.png);
+    border-image-slice: 45;
+    background: linear-gradient(#0A2B57 0%, #234282 100%) no-repeat;
+}
+
 .ct-panel {
     border: 20px solid transparent;
     border-image-source: url(../Assets/UI/MainBgPanelCT.png);
@@ -1960,7 +1967,7 @@
     top: 185px;
 }
 .medal-div-unobtained{
-    filter: opacity(0.2);
+    filter: opacity(0.4);
 }
 .map-arrow-img {
     width: 50px;
@@ -3006,7 +3013,7 @@
     align-items: center;
     background-size: contain;
     padding: 10px;
-    justify-content: space-evenly;
+    justify-content: space-between;
     border-radius: 5px;
     border: 5px solid black;
     border-top-width: 0px;
@@ -3017,14 +3024,14 @@
     object-fit: contain;
 }
 .switch-boss-div {
-    width: 360px;
+    width: 440px;
 }
 .switch-right-div {
 
 }
 .switch-text {
-    font-size: 26px;
-    width: 350px;
+    font-size: 23px;
+    /* width: 350px; */
     text-align: center;
 }
 
@@ -5618,6 +5625,7 @@ input[type="checkbox"] {
     border-image-slice: 50;
     border-image-source: url(../Assets/UI/SpeechBubbleSquare.png);
     background-color: #F4F3E2;
+    text-align: center;
 }
 
 .tippy-box[data-theme~='speech_bubble'] > .tippy-arrow {

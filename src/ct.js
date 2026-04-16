@@ -14,7 +14,8 @@ let bossIDToName = {
     2: "Vortex",
     3: "Dreadbloon",
     4: "Phayze",
-    5: "Blastapopoulos"
+    5: "Blastapopoulos",
+    6: "Diamondback"
 }
 
 const teamAngles = {
@@ -28,8 +29,8 @@ const teamAngles = {
 
 let renderSettings = {
     advancedLayers: false,
-    filter: "none", //banner, relic, race, leastCash, leastTiers, boss
-    backgroundType: "default", //default, tileType, mapIcon, nearestTeam
+    filter: "none",
+    backgroundType: "default",
     selectedTeamRotation: 270,
     searchTerm: "",
     showIds: false,
@@ -217,6 +218,17 @@ async function generateCTs(){
             placement: 'top',
             theme: 'speech_bubble',
             allowHTML: true,
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            }
         })
 
         let raceInfoRules = createEl('div', { classList: ["start-button", "currency-trophies-div", "black-outline"], style: {width: "200px"}, innerHTML: "Event Details"});
@@ -1279,7 +1291,8 @@ function renderCTMap(container, ct, tileData, opts = {}) {
         label.setAttribute('fill', '#FFF');
         label.setAttribute('paint-order', 'stroke');
         label.setAttribute('stroke', '#111');
-        label.setAttribute('stroke-width', '2');
+        label.setAttribute('stroke-width', '2.5');
+        label.setAttribute('letter-spacing', '0.5');
         label.textContent = t.id;
         gText.appendChild(label);
 

@@ -103,19 +103,19 @@ let seenOutOfDate = false;
 let imageScroll = [
     {
         "title": "New Site Update!",
-        "text": `Site Update 2.6.0:<br>
-        - Trophy Store Rework<br>
+        "text": `Site Update 2.7.0:<br>
+        - Profile Tab Overhaul<br>
+        - Powers Pro Tracking<br>
         <br>
         Recent Updates:<br>
-        - Coop Leaderboards<br>
         - Contested Territory Map<br>
         - Rogue Artifacts Autotracking<br>
         <br>
-        Try the <a href="https://btd6store.ninjakiwi.com/" target="_blank" style="color: white;">Official BTD6 Webshop</a>!<br>
+        Try the <a href="https://btd6store.ninjakiwi.com/?code=halfhydra" target="_blank" style="color: white;">Official BTD6 Webshop</a>!<br>
         Creator Code: 'HalfHydra' - TY!<br>
         Report Bugs: <a href="https://discord.gg/wep2RDmcqZ" target="_blank" style="color: white;">Discord Server</a><br>
         `,
-        "image": "/LandingScroll/Update53&TrophyStore"
+        "image": "/LandingScroll/Update54&PowersPro"
     },
     {
         "title": "View Your Profile!",
@@ -155,10 +155,7 @@ let imageScroll = [
 ]
 let imageScrollIndex = 0;
 
-fetchConstants().then(() => {
-    // generateVersionInfo();
-});
-
+fetchConstants()
 function generateIfReady(){
     if (readyFlags.every(flag => flag === 1)){
         if(document.getElementById("home-content")){
@@ -274,7 +271,7 @@ function generateStats(){
     profileStats["Damage Done To Bosses"] = btd6publicprofile.gameplay["damageDoneToBosses"];
 
     exclusiveStats["Daily Challenges Completed"] = btd6usersave["totalDailyChallengesCompleted"];
-    exclusiveStats["Consecutive DCs Completed"] = btd6usersave["consecutiveDailyChallengesCompleted"];
+    exclusiveStats["Consecutive Days DCs Completed"] = btd6usersave["consecutiveDailyChallengesCompleted"];
     exclusiveStats["Race Event Attempts"] = btd6usersave["totalRacesEntered"];
     exclusiveStats["Contested Territory Tiles Captured"] = btd6publicprofile.stats["ctCapturedTiles"];
     exclusiveStats["Challenges Played"] = btd6usersave["challengesPlayed"];
@@ -384,7 +381,7 @@ function generateExtras(){
 }
 
 function generateHeroesSkinsUnlocked() {
-    let heroesUnlocked = Object.keys(btd6usersave.unlockedHeroes).filter(k => btd6usersave.unlockedHeroes[k]).length;
+    let heroesUnlocked = Object.keys(btd6usersave.unlockedHeroes).filter(k => btd6usersave.unlockedHeroes[k] && k != "Sheriff").length;
     let totalSkins = Object.values(constants.heroSkins).flat().filter(k => !Object.keys(constants.heroesInOrder).includes(k));
     constants.hiddenContent.heroes.forEach((skin) => {
         if (totalSkins.indexOf(skin) !== -1 && !(btd6usersave.unlockedSkins.hasOwnProperty(skin) && btd6usersave.unlockedSkins[skin])) {
@@ -429,8 +426,8 @@ function generateProgressSubText(){
         // let powersTotal = powersAvailable + btd6publicprofile.gameplay.powersUsed; // may include CT uses
         progressSubText["Powers"] = `${powersAvailable} Power${powersAvailable != 1 ? "s" : ""} Collected`
     }
-    let powersProUnlocked = Object.values(btd6usersave.powersPro).map(power => power.unlockedTier).reduce((acc, amount) => acc + amount);
-    progressSubText["PowersPro"] = `${powersProUnlocked} Pro Power${(powersProUnlocked > 1) ? "s" : ""} Unlocked`
+    let powersProUnlocked = Object.values(btd6usersave.powersPro).filter(power => power.unlockedTier > 0).length;
+    progressSubText["PowersPro"] = `${powersProUnlocked} Pro Power${(powersProUnlocked != 1) ? "s" : ""} Unlocked`
     let instaTotal = Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount);
     progressSubText["InstaMonkeysUsable"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Available`;
     if (btd6publicprofile != null) {
@@ -705,8 +702,6 @@ function generateFrontPage(){
         textAlign: "center",
         lineHeight: "1.5",
     }, innerHTML: 'A fanmade viewer for the Ninja Kiwi <a href="https://data.ninjakiwi.com/" target="_blank" style="color: white;">Open Data API</a> plus other features.<br>This site is not affiliated with Ninja Kiwi. All game assets belong to Ninja Kiwi.' }));
-    // frontPage.appendChild(createEl('p', { classList: ['front-page-text', 'font-gardenia', 'ta-center'], innerHTML: 'Access your profile using an OAK token for the best experience!' }));
-    // frontPage.appendChild(generateLoginDiv());
 
     frontPage.appendChild(createEl('p', { classList: ['site-info-header', 'black-outline'], innerHTML: 'Site Features and Information' }));
 
@@ -759,11 +754,6 @@ function generateFrontPage(){
     versionDiv.classList.add('version-div');
     frontPage.appendChild(versionDiv);
     generateVersionInfo();
-
-    // let OtherInfoHeader = document.createElement('p');
-    // OtherInfoHeader.classList.add('site-info-header','black-outline');
-    // OtherInfoHeader.innerHTML = 'Site Information';
-    // frontPage.appendChild(OtherInfoHeader);
 
     let infoButtons = document.createElement('div');
     infoButtons.classList.add('d-flex', 'jc-evenly', 'w-100');
@@ -948,7 +938,7 @@ function generateFrontPage(){
 
     let knownIssuesText = document.createElement('p');
     knownIssuesText.classList.add('oak-instructions-text');
-    knownIssuesText.innerHTML = `None Currently!`;
+    knownIssuesText.innerHTML = `- Diamondback badges are missing<br>- Teams Decor is currently broken for leaderboards profiles`;
     knownIssuesDiv.appendChild(knownIssuesText);
     
     let changelogHeader = document.createElement('p');
@@ -958,7 +948,8 @@ function generateFrontPage(){
 
     let changelogText = document.createElement('p');
     changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = `v2.6.0 (3/16/26): Trophy Store Overhaul + Frontier Stats<br>- Added information to Trophy Store items such as costs, update added, and a label for new items<br>- Added new Trophy Store sorting options: First Added & Newly Added<br>- Frontier Stats added to the stats page. It's very short for now, as I am verifying some additional stats accuracy<br>- Added leaderboard type icons to bosses on the leaderboards tab<br>- Fix map icon widths across all pages<br>- Manually override collection event icons for events like Ninja Kiwi's 20th anniversary<br>- Site version info should no longer show twice<br>- When no scores are available on a leaderboard, it won't get stuck on second load and instead properly refresh<br><br>
+    changelogText.innerHTML = `v2.7.0 (4/15/26): Powers Pro + Profile Overhaul<br>- Added Powers Pro information and calculator to show how much Monkey Money you need to use to unlock the tiers.<br>- Powers Pro now show up in the Powers section<br>- Fixed certain profile information from being unavailable when the leaderboards API breaks on a major game update. You can now view limited profile info (most everything besides stats)<br>- Fixed counts on some quick stats to be worded more accurately for what they represent<br>- Fixed powers pro upgrades being included in upgrades total<br>- Added missing abilities<br>- Abilities tab can now filter by tower type<br>- Towers menu now displays relevant stats and related abilities used<br>- Heroes menu now shows placement stats and abilities used<br>- Maps menu now shows leftover single player bonus cash obtainable<br>- Knowledge menu completely redone to show trees, and can filter by tower for relevant knowledge points<br>- Achievements now has a search bar, a total obtained count, and can filter by coop specific achievements<br>- Owned Only now changes the trophy store to display the total trophies spent<br>- Quests now has filtering by type like in game, and sort the incomplete ones to the top of the list<br>- Add more information to most tooltips<br>- Fixed some tooltips going off screen<br>- Ice Monkey Walrus no longer accidentally shows as being added in update 29<br>- The Insta Monkeys section should no longer break when there's a monkey with no instas ever obtained.<br>- Fixed bug preventing new entries from loading on leaderboards in some cases<br>- Leaderboard profiles now correctly show a loading icon when you click on one<br>- Updated the OAK token guide to use the new in game account menu<br>- Renamed Frontier Legends roundsets from "Base X" to "Act X"<br>- Updated all the roundsets to reflect the rounds 120-140 income changes<br>- Bosses that don't have a standard event name will now show it (too bad most people didn't get to see the silly names those fake April Fools events had!)<br>- Fixed hero skins count (again)<br>- Fixed an issue causing the CT top 25 medal to now show up<br>- Fixed modifier icons after adjustments to map icons<br>- Knowledge points in the towers menu now correctly reflect the unlocked status<br>- tooltips should no longer show incorrectly on tap for mobile in Rogue Legends artifacts<br>- Fixed broken difficulty filter for maps<br>- Veteran levels should no longer add every single time you exit and login (lol)<br>- Starter artifacts removed from rogue progress image to make it a perfect square again<br>- Fix rogue legends artifacts syncing bug causing it to not stop pinging when you're not on the menu<br>That sure was a lot, now time for something I very much should've added a long long time ago: Odyssey events coming next<br><br>
+    v2.6.0 (3/16/26): Trophy Store Overhaul + Frontier Stats<br>- Added information to Trophy Store items such as costs, update added, and a label for new items<br>- Added new Trophy Store sorting options: First Added & Newly Added<br>- Frontier Stats added to the stats page. It's very short for now, as I am verifying some additional stats accuracy<br>- Added leaderboard type icons to bosses on the leaderboards tab<br>- Fix map icon widths across all pages<br>- Manually override collection event icons for events like Ninja Kiwi's 20th anniversary<br>- Site version info should no longer show twice<br>- When no scores are available on a leaderboard, it won't get stuck on second load and instead properly refresh<br><br>
     v2.5.1 (2/15/26): Update 53 & Automatic Rogue Tracking<br>- You can now select an OAK token to sync the extracted artifacts section with. It will refresh once every few minutes of opening the artifacts menu. You can track manually until you refresh the page, and all new artifacts will be automatically pulled<br>- Rogue image export is now hidden until you extract an artifact<br>- The back button now works correctly on the insta monkeys menus<br>- Tower Type sort will no longer be out of order on Insta "All" view<br>- New quests that aren't supported yet won't show up until they are<br>- Insta borders on the stats page will no longer show nothing if you have no instas of that monkey type<br>- Removed broken API exclusive stats temporarily from profiles<br>- Total counts for various stats on Quick Stats have been fixed<br>- Added a "New" filter for Trophy Store items<br>- Fix incorrect parsing of Boss Names ex: "Blastapopolous 152" instead of "Blastapopoulos 15"<br><br>
     v2.5.0 (1/11/26): Coop Leaderboards, Frontier Roundsets, other refinements<br>- Added coop boss leaderboards + boss tier for each score<br>- Added "All" view to Insta Monkey collection, allowing you to see which one you've collected the most of<br>- Added Frontier Legends base and rush roundsets, along with comment explanations. I may add the frontier stages data in the future but no promises<br>- Added icons for scoring type on the boss event list<br>-  Added achievement guide buttons for some less clear and difficult ones linking to relevant Bloonscyclopedia and Steam community guide pages<br>- Collection events now show when the group changes, and auto refreshes to show the latest groupings<br>- Top Towers for your individual profile now uses the Insta Monkey collection borders<br>- Fixed the Rogue Legends artifact image, and hide the option until after you enable the tracking mode in the main tab<br>- Many UI fixes such as resizing the browsing window now updating various elements correctly, overlapping text fixed, trophy store items filter no longer persists incorrectly<br>- I've hidden historic CT data before CT 33 (and this may change again later) as I cannot verify they are accurate<br>- Trophy store items should be accurate now<br><br>
     v2.4.0 (12/10/25): Update 52 and Contested Territory Map!<br>- New Contested Territory Map and Event Details revamp! Big thanks to a certain dataminer for hosting the generated CT tile data as that is not available on the Open Data API currently.<br>- Added a <a href="./ct" target="_blank" style="color: white;">standalone CT site</a> that will host only the current events information<br>Collection Events will now automatically be added<br>- Collection events now display when the event ends at the bottom of the schedule<br>- Any time a new update happens, there will now be text hinting that the update is not available on the API yet.<br>- Fixed Fortified DDTs not showing up on "Lead and DDT" preset filter<br>- Events with multiple custom roundsets will now show correctly<br>- Filtering now works on the standalone rounds site<br>- Roundsets will now show the currently listed rounds at the top<br>- Added a link to the Discord server in the extras tab.<br><br>
@@ -987,16 +978,6 @@ function generateFrontPage(){
     v1.0.1 (7/13/24): Bug Fixes<br>- Daily challenges now show the correct associated date<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes<br><br>
     v1.0.0 (7/7/24): Initial Release <br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.`;
     changelogDiv.appendChild(changelogText);
-
-    // let feedbackHeader = document.createElement('p');
-    // feedbackHeader.classList.add('oak-instructions-header','black-outline');
-    // feedbackHeader.innerHTML = 'Send Feedback';
-    // frontPage.appendChild(feedbackHeader);
-
-    // let feedbackText = document.createElement('p');
-    // feedbackText.classList.add('tool-version-text');
-    // feedbackText.innerHTML = 'If you have any feedback, things to add or change on the site, or most importantly bug reports, please fill out this anonymous form: <a href="https://forms.gle/Tg1PuRNj2ftojMde6" target="_blank" style="color: white;">Feedback Form</a>';
-    // frontPage.appendChild(feedbackText);
 
     function hideAllButOne(selectedTab){
         const tabs = ['faq', 'known-issues', 'changelog'];
@@ -1087,11 +1068,10 @@ function changeTab(tab) {
             generateExplore();
             break;
         case "leaderboards":
-            // changeTitle("Bloons TD 6 Leaderboards")
             generateLeaderboards();
             break;
         case "rounds":
-            changeTitle("Bloons TD 6 Roundsets")
+            changeTitle("Roundsets Explorer")
             generateRoundsets();
             break;
         case 'extras':
@@ -1193,13 +1173,14 @@ function generateOverview(){
         "KnowledgeEarned": "../Assets/UI/KnowledgeIcon.png",
         "MapProgress": "../Assets/UI/StartRoundIconSmall.png",
         "CHIMPS": "../Assets/MedalIcon/MedalImpoppableRuby.png",
-        "InstaMonkeys": "../Assets/UI/InstaIcon.png",
         "Powers": "../Assets/UI/PowerContainer.png",
         "PowersPro": "../Assets/UI/PowersProContainer.png",
+        "InstaMonkeys": "../Assets/UI/InstaIcon.png",
         "AchievementsEarned": "../Assets/AchievementIcon/AchievementsIcon.png",
         "TrophyStore": "../Assets/UI/LimitedRunIcon.png",
         'TeamsStore': "../Assets/UI/TeamTrophyIconSmall.png",
         "Quests": "../Assets/UI/QuestIcon.png",
+        "Extras": "../Assets/UI/SmallBloonsModeIcon.png",
     }
 
     Object.entries(quickStats).forEach(([stat,icon]) => {
@@ -1265,6 +1246,9 @@ function generateOverview(){
                     break;
                 case 'Quests':
                     generateQuestsPage();
+                    break;
+                case 'PowersPro':
+                    generateProPowerProgress();
                     break;
             }
         });
@@ -1340,15 +1324,23 @@ function generateOverview(){
         if(num === 0) { continue; }
         let medalDiv = document.createElement('div');
         medalDiv.classList.add('medal-div');
-        // medalDiv.title = constants.medalLabels[medal];
         medalsDiv.appendChild(medalDiv);
 
         tippy(medalDiv, {
             content: constants.medalLabels[medal],
             placement: 'top',
             theme: 'speech_bubble',
-            // hideOnClick: false,
-            // trigger: 'click'
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            }
         })
 
         let medalImg = document.createElement('img');
@@ -1455,9 +1447,21 @@ function generateOverview(){
         counter++;
 
         tippy(heroDiv, {
-            content: `${getLocValue(hero)} Placed ${xp.toLocaleString()} Times`,
+            content: `<p class="artifact-title">${getLocValue(hero)}</p>Placed ${xp.toLocaleString()} Times`,
             placement: 'top',
-            theme: 'speech_bubble'
+            theme: 'speech_bubble',
+            allowHTML: true,
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            }
         })
     }
 
@@ -1544,9 +1548,21 @@ function generateOverview(){
         counter++;
 
         tippy(towerDiv, {
-            content: `${getLocValue(tower)} Placed ${xp.toLocaleString()} Times`,
+            content: `<p class="artifact-title">${getLocValue(tower)}</p>Placed ${xp.toLocaleString()} Times`,
             placement: 'top',
             theme: 'speech_bubble',
+            allowHTML: true,
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            }
         })
     }
 
@@ -1624,9 +1640,21 @@ function generateOverview(){
         counter++;
 
         tippy(towerDiv, {
-            content: `${getLocValue(tower + " Paragon")} Placed ${xp.toLocaleString()} Times`,
+            content: `<p class="artifact-title">${getLocValue(tower + " Paragon")}</p>Placed ${xp.toLocaleString()} Times`,
             placement: 'top',
-            theme: 'speech_bubble'
+            theme: 'speech_bubble',
+            allowHTML: true,
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            }
         })
     }
 
@@ -1714,7 +1742,7 @@ function generateOverview(){
         rogueStats["Common Artifacts Collected"] = btd6usersave["rogueLegends"].commonArtifactsCollected;
         rogueStats["Rare Artifacts Collected"] = btd6usersave["rogueLegends"].rareArtifactsCollected;
         rogueStats["Legendary Artifacts Collected"] = btd6usersave["rogueLegends"].legendaryArtifactsCollected;
-        // rogueStats["Extracted Artifacts"] = btd6usersave["rogueLegends"];
+        rogueStats["Extracted Artifacts"] = Object.keys(btd6usersave["rogueUnlockedStarterArtifacts"]).length;
         // rogueStats["Bloon Encounters Won"] = btd6usersave["rogueLegends"];
         // rogueStats["Mini Games Won"] = btd6usersave["rogueLegends"];
         // rogueStats["Mini Bosses Won"] = btd6usersave["rogueLegends"];
@@ -1779,56 +1807,6 @@ function generateOverview(){
         }
     }
     }
-    // } else {
-    //     let notLoggedInText = document.createElement('p');
-    //     notLoggedInText.classList.add('not-logged-in-text');
-    //     notLoggedInText.innerHTML = "You're in preview mode.<br>The Events, Explore, and Extras tabs can be used without an OAK token.";
-    //     overviewContent.appendChild(notLoggedInText);
-
-    //     let OtherInfoHeader = document.createElement('p');
-    //     OtherInfoHeader.classList.add('site-info-header','black-outline');
-    //     OtherInfoHeader.innerHTML = 'When an OAK token is entered:';
-    //     overviewContent.appendChild(OtherInfoHeader);
-
-    //     let panels = {
-    //         "Profile": {
-    //             "name": "View Your Profile!",
-    //             "desc": "You can see anything you can see on your in-game profile plus some extra Quick Stats"},
-    //         "FullMonkeyUses": {
-    //             "name": "Full Top Heroes and Top Monkeys List!",
-    //             "desc": "The in-game profiles only show the top 3 heroes and towers, but here you can see the full list!"
-    //         },
-    //         "ExtraStats": {
-    //             "name": "View Extra Stats!",
-    //             "desc": "In addition to the in-game profile stats, you can view extra stats such as Total Race Attempts, Total Challenges Played, and even Continues Used"
-    //         }
-    //     }
-
-    //     let instaMonkeyGuideContainer = document.createElement('div');
-    //     instaMonkeyGuideContainer.classList.add('insta-monkey-guide-container');
-    //     overviewContent.appendChild(instaMonkeyGuideContainer);
-
-    //     Object.keys(panels).forEach(method => {
-    //         let instaMonkeyGuideMethod = document.createElement('div');
-    //         instaMonkeyGuideMethod.classList.add('insta-monkey-guide-method');
-    //         instaMonkeyGuideContainer.appendChild(instaMonkeyGuideMethod);
-
-    //         let instaMonkeyGuideMethodText = document.createElement('p');
-    //         instaMonkeyGuideMethodText.classList.add('insta-monkey-guide-method-text','black-outline');
-    //         instaMonkeyGuideMethodText.innerHTML = panels[method].name;
-    //         instaMonkeyGuideMethod.appendChild(instaMonkeyGuideMethodText);
-
-    //         let instaMonkeyGuideMethodDesc = document.createElement('p');
-    //         instaMonkeyGuideMethodDesc.classList.add('insta-monkey-guide-method-desc');
-    //         instaMonkeyGuideMethodDesc.innerHTML = panels[method].desc;
-    //         instaMonkeyGuideMethod.appendChild(instaMonkeyGuideMethodDesc);
-
-    //         let instaMonkeyImage = document.createElement('img');
-    //         instaMonkeyImage.classList.add('insta-monkey-guide-method-img');
-    //         instaMonkeyImage.src = `./Assets/UI/Overview${method}.png`;
-    //         instaMonkeyGuideMethod.appendChild(instaMonkeyImage);
-    //     })
-    // }
 }
 
 function generateRank(veteran){
@@ -1936,7 +1914,7 @@ function generateProgress(){
             selectorsDiv.appendChild(statsUnavailableText);
         }
 
-        let selectors = ['Towers', 'Heroes', 'ActivatedAbilities', 'MapProgress', 'PowersUsable', 'InstaMonkeysUsable', 'Knowledge', 'Achievements', 'Quests', 'TrophyStore', 'TeamsStore', 'Extras'];
+        let selectors = ['Towers', 'Heroes', 'ActivatedAbilities', 'MapProgress', 'PowersUsable', "PowersPro", 'InstaMonkeysUsable', 'Knowledge', 'Achievements', 'Quests', 'TrophyStore', 'TeamsStore', 'Extras'];
         if (btd6publicprofile == null) {
             selectors.splice(selectors.indexOf("ActivatedAbilities"),1);
         }
@@ -1972,14 +1950,7 @@ function generateProgress(){
         progressContent.appendChild(notLoggedInContent);
 
         let loginDiv = generateLoginDiv();
-        notLoggedInContent.appendChild(loginDiv)
-
-        // let notLoggedInText = document.createElement('p');
-        // notLoggedInText.classList.add('not-logged-in-text');
-        // notLoggedInText.innerHTML = "You're in preview mode.<br>The Events, Explore, and Extras tabs can be used without an OAK token.";
-        // notLoggedInContent.appendChild(notLoggedInText);
-
-        // progressContent.classList.add("overview")
+        notLoggedInContent.appendChild(loginDiv);
 
         let OtherInfoHeader = document.createElement('p');
         OtherInfoHeader.classList.add('site-info-header','black-outline');
@@ -2097,6 +2068,9 @@ function changeProgressTab(selector){
             break;
         case 'Quests':
             generateQuestsPage();
+            break;
+        case 'PowersPro':
+            generateProPowerProgress();
             break;
     }
 }
@@ -2225,11 +2199,6 @@ function generateTowerProgressTower(tower){
     let towerName = (useNamedMonkeys && btd6usersave.namedMonkeys[tower]) ? btd6usersave.namedMonkeys[tower] : getLocValue(tower)
     towerProgressContentText.appendChild(document.createTextNode(towerName));
     towerProgressInfoContainer.appendChild(towerProgressContentText);
-
-    // let towerProgressContentXP = document.createElement('p');
-    // towerProgressContentXP.classList.add('tower-progress-content-xp','mm-outline');
-    // towerProgressContentXP.innerHTML = `XP: ${btd6usersave.towerXP[tower].toLocaleString()}`;
-    // towerProgressInfoContainer.appendChild(towerProgressContentXP);
 
     let towerProgressContentDesc = document.createElement('p');
     towerProgressContentDesc.classList.add('tower-progress-content-desc'+ (paragonUnlocked ? '-paragon' : ''));
@@ -2382,9 +2351,10 @@ function generateTowerProgressTower(tower){
             abilitiesIconsDiv.appendChild(abilityDiv);
 
             tippy(abilityDiv, {
-                content: abilityData.description,
+                content: `<p class="artifact-title">${getLocValue(abilityData.displayName)}</p>${abilityData.description}`,
                 placement: 'top',
                 theme: 'speech_bubble',
+                allowHTML: true,
                 popperOptions: {
                     modifiers: [
                         {
@@ -2567,7 +2537,6 @@ function generateUpgradeIcon(tower, upgrade, status, row, tier, paragon, grayOut
 
     upgradeDiv.addEventListener('click', () => {
         onSelectTowerUpgrade(tower, upgrade, towerUpgrade);
-        // document.getElementById("upgrade-tooltip").innerHTML = getLocValue(`${upgrade} Description`);
         Array.from(document.getElementsByClassName('upgrade-glow')).forEach((glow) => {
             glow.classList.remove('upgrade-glow');
         });
@@ -2586,7 +2555,18 @@ function generateUpgradeIcon(tower, upgrade, status, row, tier, paragon, grayOut
         placement: 'top',
         theme: 'speech_bubble',
         hideOnClick: false,
-        allowHTML: true
+        allowHTML: true,
+        popperOptions: {
+            modifiers: [
+                {
+                name: 'preventOverflow',
+                options: {
+                    boundary: 'viewport',
+                    padding: {right: 18},
+                },
+                },
+            ],
+        }
     })
 
     return upgradeDiv;
@@ -2619,7 +2599,6 @@ function generateParagonIcon(tower, upgrade, status){
 
     paragonDiv.addEventListener('click', () => {
         onSelectTowerUpgradeParagon(tower, upgrade, "Paragon");
-        // document.getElementById("upgrade-tooltip").innerHTML = getLocValue(`${upgrade} Description`);
         Array.from(document.getElementsByClassName('upgrade-glow')).forEach((glow) => {
             glow.classList.remove('upgrade-glow');
         });
@@ -2958,9 +2937,10 @@ function generateHeroProgressHero(hero, nameColor){
                 heroLevelDescDiv.appendChild(heroAbilityDiv);
 
                 tippy(heroAbilityDiv, {
-                    content: abilityData.description,
+                    content: `<p class="artifact-title">${getLocValue(abilityData.displayName)}</p>${abilityData.description}`,
                     placement: 'top',
                     theme: 'speech_bubble',
+                    allowHTML: true,
                     popperOptions: {
                         modifiers: [
                             {
@@ -3458,13 +3438,6 @@ function generateKnowledgeProgress(){
                         }
                     });
                     knowledgeIconDiv.appendChild(knowledgeIcon);
-
-                    // knowledgeIconDiv.addEventListener('click', () => {
-                    //     Array.from(document.getElementsByClassName('knowledge-glow')).forEach((glow) => {
-                    //         glow.classList.remove('knowledge-glow');
-                    //     });
-                    //     knowledgeGlow.classList.add('knowledge-glow');
-                    // });
 
                     tippy(knowledgeIcon, {
                         content: `<p class="artifact-title">${getLocValue(node.id)}</p>${getLocValue(node.id + "Description")}`,
@@ -4015,7 +3988,18 @@ function generateMapDetails(map){
         tippy(medalDiv, {
             content: constants.medalLabels[`Medal${medalMap[difficulty]}`],
             placement: 'top',
-            theme: 'speech_bubble'
+            theme: 'speech_bubble',
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            },
         })
     }
 
@@ -4048,7 +4032,18 @@ function generateMapDetails(map){
         tippy(medalDiv, {
             content: constants.medalLabels[`MedalCoop${medalMap[difficulty]}`],
             placement: 'top',
-            theme: 'speech_bubble'
+            theme: 'speech_bubble',
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            },
         })
     }
 
@@ -4365,7 +4360,18 @@ function generateMapsListView(){
             tippy(mapSectionMedal, {
                 content: constants.medalLabels[`Medal${coopEnabled ? "Coop" : ""}${medalMap[difficulty]}`],
                 placement: 'top',
-                theme: 'speech_bubble'
+                theme: 'speech_bubble',
+                popperOptions: {
+                    modifiers: [
+                        {
+                        name: 'preventOverflow',
+                        options: {
+                            boundary: 'viewport',
+                            padding: {right: 18},
+                        },
+                        },
+                    ],
+                }
             })
 
             let mapSectionBestRound = document.createElement('p');
@@ -4563,7 +4569,7 @@ function generatePowersProgress() {
     powersHeaderBar.appendChild(powersUsedText);
 
     let mmEquivalent = 0;
-    Object.entries(constants.powersInOrder).forEach(([power, data]) => {
+    Object.entries({...constants.powersInOrder, ...constants.powersProInOrder}).forEach(([power, data]) => {
         if(constants.hiddenContent.powers.includes(power) && !btd6usersave.powers.hasOwnProperty(power)) { return; }
         let powerDiv = document.createElement('div');
         powerDiv.classList.add('power-div');
@@ -6255,7 +6261,7 @@ function generateAchievementsProgress() {
     let mapProgressFilterDifficultySelect2 = document.createElement('select');
     mapProgressFilterDifficultySelect2.classList.add('map-progress-filter-difficulty-select');
 
-    let options2 = ["All","Only Locked","Only Unlocked","Knowledge Points","Insta Monkeys","Hidden Achievements"]
+    let options2 = ["All","Only Locked","Only Unlocked","Knowledge Points","Insta Monkeys","Hidden Achievements","Coop"]
     options2.forEach((option) => {
         let difficultyOption = document.createElement('option');
         difficultyOption.value = option;
@@ -6358,6 +6364,9 @@ function generateAchievementsGameView(searchTerm = "") {
         case "Hidden Achievements":
             achievements = achievements.filter(achievement => achievementsJSON[achievement].model.hidden);
             break;
+        case "Coop":
+            achievements = achievements.filter(achievement => achievementsJSON[achievement].model.isCoop);
+            break;        
     }
 
     if (searchTerm != "") {
@@ -6380,7 +6389,7 @@ function generateAchievementsGameView(searchTerm = "") {
     if (achievements.length == 0) {
         let noDataFound = document.createElement('p');
         noDataFound.classList.add('no-data-found','black-outline');
-        noDataFound.innerHTML = "No achievements match the filters!";
+        noDataFound.innerHTML = "No achievements match the filters/search!";
         noDataFound.style.width = "100%";
         AchievementsContainer.appendChild(noDataFound);
     }
@@ -6574,7 +6583,7 @@ async function generateEvents(){
         },
         'Odyssey': {
             'img': 'OdysseyEventBtn',
-            'text': "Odyssey Events (Coming Soon)",
+            'text': "Odyssey Events<br>(Working On It Now)",
             'bgimg': 'EventBanner/EventBannerSmallOdyssey'
         },
         'ContestedTerritory': {
@@ -6605,7 +6614,7 @@ async function generateEvents(){
     }
 
     Object.entries(selectors).forEach(([selector,object]) => {
-        let selectorDiv = createEl('div', { classList: ['events-selector-div', 'transparent-border'], style: {borderWidth: "5px", borderStyle: "solid"} });
+        let selectorDiv = createEl('div', { classList: ['events-selector-div', 'transparent-border', 'ta-center'], style: {borderWidth: "5px", borderStyle: "solid"} });
         object.bgcolor ? selectorDiv.style.background = object.bgcolor : selectorDiv.style.backgroundImage = `url(../Assets/${object.bgimg}.png)`;
         /*selectorDiv.innerHTML = progressSubText[selector];*/
         selectorDiv.addEventListener('click', () => {
@@ -6742,6 +6751,17 @@ function generateRaces(){
             placement: 'top',
             theme: 'speech_bubble',
             allowHTML: true,
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            }
         })
 
         let raceInfoTotalScores = document.createElement('p');
@@ -6815,7 +6835,7 @@ function generateBosses(elite){
     switchBossDiv.classList.add("switch-boss-div");
     switchBanner.appendChild(switchBossDiv);
 
-    let bosses = ["Bloonarius", "Lych", "Vortex", "Dreadbloon", "Phayze", "Blastapopoulos"]
+    let bosses = ["Bloonarius", "Lych", "Vortex", "Dreadbloon", "Phayze", "Blastapopoulos", "Diamondback"]
 
     for (let boss of bosses) {
         let bossIcon = document.createElement('img')
@@ -6945,6 +6965,17 @@ function generateBosses(elite){
             placement: 'top',
             theme: 'speech_bubble',
             allowHTML: true,
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            }
         })
 
         let raceInfoTotalScores = document.createElement('p');
@@ -7958,6 +7989,9 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             }
             if(metadata.roundSets.includes("blastapopoulos")) {
                 roundset = "BlastapopoulosRoundSet";
+            }
+            if(metadata.roundSets.includes("diamondback")) {
+                roundset = "DiamondbackRoundSet";
             }
 
             if(roundset != null) {
@@ -9748,7 +9782,7 @@ function generateArticle(content){
             {
                 "type": "text",
                 "class": "oak-instructions-text",
-                "content": "In addition to frequent sales exclusive to the web store, purchasing in game items on the web store will give you bonus rewards such as extra Monkey Money. You can also leave a tip if wish to support me further! <a href='https://btd6store.ninjakiwi.com/' target='_blank' rel='noopener noreferrer'>Official Bloons TD 6 Web Store</a>"
+                "content": "In addition to frequent sales exclusive to the web store, purchasing in game items on the web store will give you bonus rewards such as extra Monkey Money. You can also leave a tip if wish to support me further! <a href='https://btd6store.ninjakiwi.com/?code=halfhydra' target='_blank' rel='noopener noreferrer'>Official Bloons TD 6 Web Store</a>"
             },
             {
                 "type": "img",
@@ -10313,7 +10347,7 @@ function generateTrophyStoreContainer(filter, display, counter, trophies, needed
         })
         itemDiv.appendChild(itemAddedIcon);
 
-        if (data.isNew) {
+        if (data.updateAdded === parseInt(btd6usersave.latestGameVersion.split(".")[0])) {
             let newIcon = createEl('img', {
                 classList: [],
                 style: {
@@ -10465,6 +10499,9 @@ function generateTrophyStorePopout(key) {
                 break;
             case "Purchase":
                 itemObtainMethod.innerHTML = "Obtained by purchasing the associated bundle in the store";
+                break;
+            case "SocialSeason":
+                itemObtainMethod.innerHTML = "Awarded to all players who earn points to help reach the All-Teams Global Goal during the related Social Seasons event";
                 break;
         }
     }
@@ -11016,16 +11053,765 @@ function generateQuestsPage() {
     generateQuestList(questsFilter);
 }
 
-// function processLegendsData() {
-//     let featsCompleted = [];
-//     let rogueLegendsStats = btd6usersave.rogueLegendsStats || {};
-//     if (rogueLegendsStats) {
-//         if (rogueLegendsStats.tilesCaptured > 0) { featsCompleted.push(1)}
-//         if (rogueLegendsStats.tilesCapturedWithinCampaign >= 20) { featsCompleted.push(2)}
-//         if (rogueLegendsStats.bossesDefeated > 0) { featsCompleted.push(3)}
-//         if (rogueLegendsStats.perfectAdventure) { featsCompleted.push(4)}
-//         if (rogueLegendsStats.tilesCaptured >= 100) { featsCompleted.push(5)}
-//         if (rogueLegendsStats.fullParty) { featsCompleted.push(6)}
-//         if (rogueLegendsStats.)
-//     }
-// }
+function generateProPowerProgress() {
+    let progressContent = document.getElementById('profile-content');
+    progressContent.innerHTML = "";
+
+    changeHexBGColor(constants.PowersProBGColor);
+
+    let proPowerContainer = createEl('div', {
+        classList: ['power-pro-border', 'd-flex', 'ai-center', 'f-wrap', 'jc-center'],
+        style: {
+            gap: "1rem",
+            marginBottom: "1rem"
+        }
+    });
+    progressContent.appendChild(proPowerContainer);
+
+    for (let power of Object.keys(constants.powersProInOrder)) {
+        let powerDiv = createEl('div', {
+            classList: ['power-div'],
+            style: {
+                width: "unset",
+                height: "126px",
+                margin: "unset",
+                backgroundImage: `url(../Assets/UI/PowersProContainer.png)`,
+            }
+        });
+        proPowerContainer.appendChild(powerDiv);
+
+        let powerImg = createEl('img', {
+            classList: ['power-img'],
+            style: {
+                transform: "scale(0.75)"
+            },
+            src: getPowerIcon(power)
+        });
+        powerDiv.appendChild(powerImg);
+
+        let powerUnlockText = createEl('p', {
+            classList: ['black-outline'],
+            style: {
+                fontSize: "22px",
+                position: "absolute",
+                bottom: "0",
+            },
+            innerHTML: `Locked`
+        });
+        powerDiv.appendChild(powerUnlockText);
+
+        if (btd6usersave.powersPro[power]?.unlockedTier > 0) {
+            powerUnlockText.innerHTML = `Tier ${btd6usersave.powersPro[power].unlockedTier}`;
+        }
+
+        powerDiv.addEventListener('click', () => {
+            generateProPowerDetails(power);
+        })
+    }
+
+    let mainContainer = createEl('div', {
+        classList: ['d-flex', 'w-100'],
+        style: {
+            maxWidth: "800px",
+        }
+    });
+    progressContent.appendChild(mainContainer);
+
+    let leftDiv = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'gap-10'],
+    });
+    mainContainer.appendChild(leftDiv);
+
+
+    let towerNameAndPortrait = createEl('div', {
+        classList: ['tower-name-and-portrait'],
+        style: {
+            padding: "20px",
+        }
+    });
+    leftDiv.appendChild(towerNameAndPortrait);
+
+    let towerPortraitName = createEl('p', {
+        id: 'tower-portrait-name',
+        classList: ['tower-portrait-name', 'black-outline'],
+        innerHTML: "DEFAULT",
+    });
+    towerNameAndPortrait.appendChild(towerPortraitName);
+
+    let towerProgressPortraitDiv = createEl('div', {
+        classList: ['tower-progress-portrait'],
+        style: {
+            backgroundImage: `url(../Assets/UI/PowerProContainerLarge.png)`,
+        }
+    });
+    towerNameAndPortrait.appendChild(towerProgressPortraitDiv);
+
+    let towerProgressPortrait = createEl('img', {
+        classList: ['tower-progress-portrait-img'],
+        src: getTowerAssetPath("DartMonkey", "000"),
+    });
+    towerProgressPortraitDiv.appendChild(towerProgressPortrait);
+
+
+    let rightDiv = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'jc-evenly', 'fg-1'],
+        style: {}
+    });
+    mainContainer.appendChild(rightDiv);
+
+    let bottomDiv = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'fd-column'],
+        style: {
+            marginTop: "20px"
+        }
+    });
+    progressContent.appendChild(bottomDiv);
+
+    function generateProPowerDetails(power) {
+        let powerData = constants.powersProInOrder[power];
+        towerPortraitName.innerHTML = getLocValue(power);
+        towerProgressPortrait.src = `../Assets/Portrait/${power}Portrait.png`;
+
+        if (towerNameAndPortrait._tippy) {
+            towerNameAndPortrait._tippy.destroy();
+        }
+
+        tippy(towerNameAndPortrait, {
+            content: getLocValue(`${power}Power Description`),
+            placement: 'top',
+            theme: 'speech_bubble',
+            hideOnClick: false,
+            allowHTML: true,
+            popperOptions: {
+                modifiers: [
+                    {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: 'viewport',
+                        padding: {right: 18},
+                    },
+                    },
+                ],
+            }
+        })
+
+
+
+        let powerSaveData = btd6usersave.powersPro[power] || { xp: 0, unlockedTier: 0};
+        let thresholds = powerData.unlockThresholds;
+        let currentXP = powerSaveData.xp || 0;
+        let unlockedTier = powerSaveData.unlockedTier || 0;
+
+        let tierXPStatus = {};
+        for (let tier = 1; tier <= 3; tier++) {
+            let tierThreshold = thresholds[tier - 1];
+            let prevThreshold = tier > 1 ? thresholds[tier - 2] : 0;
+
+            if (unlockedTier >= tier) {
+                tierXPStatus[`tier${tier}`] = {
+                    current: tierThreshold,
+                    goal: tierThreshold,
+                    unlocked: true
+                };
+            } else if (unlockedTier === tier - 1) {
+                tierXPStatus[`tier${tier}`] = {
+                    current: currentXP,
+                    goal: tierThreshold,
+                    unlocked: false
+                };
+            } else {
+                tierXPStatus[`tier${tier}`] = {
+                    current: 0,
+                    goal: tierThreshold,
+                    unlocked: false
+                };
+            }
+            currentXP -= tierThreshold - prevThreshold;
+        }
+
+        let regularCost = constants.powersInOrder[powerData.upgradedFrom].cost;
+        let proCost = powerData.cost;
+
+        let regularBuyXP = regularCost * 8;
+        let regularUseXP = regularCost * 2;
+        let proBuyXP = proCost * 8 * 2;
+        let proUseXP = proCost * 2 * 2;
+
+        let regularBuyAndUseXP = regularBuyXP + regularUseXP;
+        let proBuyAndUseXP = proBuyXP + proUseXP;
+
+        let ownedRegular = btd6usersave.powers[powerData.upgradedFrom]?.quantity || 0;
+        let ownedPro = btd6usersave.powers[power]?.quantity || 0;
+
+        bottomDiv.innerHTML = "";
+        let xpPerActionDiv = createEl('div', {
+            classList: ['d-flex'],
+            style: {
+                gap: "1rem"
+            }
+        });
+
+        function createXPCard(power, isPro) {    
+            let powerXPDiv = createEl('div', {
+                classList: ['d-flex'],
+                style: {}
+            });
+            xpPerActionDiv.appendChild(powerXPDiv);
+
+            let powerDiv = createEl('div', {
+                classList: ['power-div'],
+                style: {
+                    width: "unset",
+                    height: "126px",
+                    margin: "unset",
+                    backgroundImage: (isPro) ? `url(../Assets/UI/PowersProContainer.png)` : `url(../Assets/UI/PowerContainer.png)`,
+                }
+            });
+            powerXPDiv.appendChild(powerDiv);
+
+            let powerImg = createEl('img', {
+                classList: ['power-img'],
+                style: {
+                    transform: "scale(0.75)"
+                },
+                src: getPowerIcon(power)
+            });
+            powerDiv.appendChild(powerImg);
+
+            let powerProgress = createEl('div', {
+                classList: ['power-progress'],
+                style: {
+                    width: "36px",
+                    height: "36px",
+                    right: "0"
+                }
+            });
+            powerDiv.appendChild(powerProgress);
+
+            let powerProgressText = createEl('p', {
+                classList: ['power-progress-text', 'black-outline'],
+                style: {
+                    fontSize: "22px",
+                },
+                innerHTML: `${btd6usersave.powers[power]?.quantity || 0}`
+            });
+            powerProgress.appendChild(powerProgressText);
+
+            let xpInfo = createEl('div', {
+                classList: ['d-flex', 'fd-column', 'ai-center', 'jc-evenly'],
+                style: {  
+                    width: "280px"
+                },
+            });
+            powerXPDiv.appendChild(xpInfo);
+
+            let buyXP = isPro ? proBuyXP : regularBuyXP;
+            let useXP = isPro ? proUseXP : regularUseXP;
+            let totalXP = buyXP + useXP;
+
+            let buyXPText = createEl('p', {
+                classList: ['black-outline'],
+                style: {
+                    fontSize: "24px",
+                },
+                innerHTML: `Purchase 1: <span style="color:#9AE42C">+${buyXP} XP</span>`
+            });
+            xpInfo.appendChild(buyXPText);
+
+            let useXPText = createEl('p', {
+                classList: ['black-outline'],
+                style: {
+                    fontSize: "24px",
+                },
+                innerHTML: `Place/Spend 1: <span style="color:#9AE42C">+${useXP} XP</span>`
+            });
+            xpInfo.appendChild(useXPText);
+
+            let totalXPGainedText = createEl('p', {
+                classList: ['black-outline'],
+                style: {
+                    fontSize: "22px",
+                },
+                innerHTML: `${totalXP} XP Total per ${isPro ? proCost : regularCost} MM`
+            });
+            xpInfo.appendChild(totalXPGainedText);
+        }
+        createXPCard(powerData.upgradedFrom, false);
+        createXPCard(power, true);
+
+
+        let tiersDiv = createEl('div', {
+            classList: ['d-flex', 'ai-center'],
+            style: {
+                
+            }
+        });
+        bottomDiv.appendChild(tiersDiv);
+        bottomDiv.appendChild(xpPerActionDiv);
+
+        function generateTier(tier) {
+            let tierDiv = createEl('div', {
+                classList: ['d-flex', 'fd-column', 'ai-center'],
+                style: { 
+                    width: "260px" 
+                }
+            });
+            tiersDiv.appendChild(tierDiv);
+
+            let tierLabel = createEl('p', {
+                classList: ['black-outline'],
+                style: {
+                    fontSize: "28px",
+                    color: "#06C3FD"
+                },
+                innerHTML: (tier == 1) ? "Pro & Tier 1" : `Tier ${tier}:`
+            });
+            tierDiv.appendChild(tierLabel);
+
+            function generateTierBar(tier) {
+                let bar = createEl('div', {
+                    style: {}
+                });
+                tierDiv.appendChild(bar);
+
+                let progressBar = createEl('div', {
+                    classList: ['pos-rel'],
+                    style: {
+                        background: "linear-gradient(180deg,#0F1620 0%,#101922 100%)",
+                        width: "250px",
+                        height: "35px",
+                        margin: "8px",
+                        outline: "3px solid black",
+                        borderRadius: "3px",
+                    }
+                });
+                bar.appendChild(progressBar);
+
+                let rankInfo = tierXPStatus[`tier${tier}`];
+
+                let rankBarFill = createEl('div', {
+                    style: {
+                        backgroundImage: `url(../Assets/UI/ProBarFill.png)`,
+                        height: "100%",
+                        backgroundSize: "contain",
+                        position: "absolute",
+                        width: `${(rankInfo.current/rankInfo.goal) * 100}%`
+                    }
+                });
+                progressBar.appendChild(rankBarFill);
+
+                if (tier == 1 && rankInfo.current !== rankInfo.goal) {
+                    rankBarFill.style.backgroundImage = `url(../Assets/UI/ProBarFillYellow.png)`;
+                }
+
+                let rankBarText = createEl('p', {
+                    classList: ['black-outline', 'pos-rel', 'ta-center', 'd-flex', 'ai-center', 'jc-center'],
+                    style: {
+                        height: "100%",
+                        fontSize: "20px",
+                    }
+                });
+                rankBarText.innerHTML = rankInfo.current === rankInfo.goal ? "Tier Unlocked" : `XP: ${rankInfo.current}/${rankInfo.goal}`;
+                progressBar.appendChild(rankBarText);
+            }
+            generateTierBar(tier);
+        }
+
+        generateTier(1);
+        generateTier(2);
+        generateTier(3);
+
+        let strategyContainer = createEl('div', {
+            classList: ['d-flex', 'fd-column', 'ai-center', 'w-100'],
+            style: {
+                margin: "20px 0",
+                gap: "1rem"
+            }
+        });
+        bottomDiv.appendChild(strategyContainer);
+
+        let cumulativeMMCost = 0;
+
+        let remainingOwnedRegular = ownedRegular;
+        let remainingOwnedPro = ownedPro;
+
+        for (let tier = 1; tier <= 3; tier++) {
+            let tierStatus = tierXPStatus[`tier${tier}`];
+
+            if (tierStatus.unlocked) {
+                cumulativeMMCost = 0;
+                remainingOwnedRegular = ownedRegular;
+                remainingOwnedPro = ownedPro;
+                continue;
+            }
+
+            let xpNeededForThisTier = tierStatus.goal - tierStatus.current;
+            let totalXPNeededFromNow = xpNeededForThisTier;
+            for (let priorTier = 1; priorTier < tier; priorTier++) {
+                let priorStatus = tierXPStatus[`tier${priorTier}`];
+                if (!priorStatus.unlocked) {
+                    totalXPNeededFromNow += priorStatus.goal - priorStatus.current;
+                }
+            }
+
+            let remaining = totalXPNeededFromNow;
+            let steps = [];
+            let tierMMCost = 0;
+
+            if (tier === 1) {
+                let freeRegularUsable = Math.min(remainingOwnedRegular, Math.ceil(remaining / regularUseXP));
+                let freeRegularXPApplied = freeRegularUsable * regularUseXP;
+                remaining -= freeRegularXPApplied;
+                freeRegularUsedThisTier = freeRegularUsable;
+
+                if (freeRegularUsable > 0) {
+                    steps.push({
+                        action: "PlaceRegularFree",
+                        actionsNeeded: freeRegularUsable,
+                        totalXP: freeRegularXPApplied,
+                        isFree: true
+                    });
+                }
+
+                if (remaining > 0) {
+                    let regularActionsNeeded = Math.ceil(remaining / regularBuyAndUseXP);
+                    tierMMCost = regularActionsNeeded * regularCost;
+                    steps.push({
+                        action: "PurchaseRegular",
+                        actionsNeeded: regularActionsNeeded,
+                        mmCost: regularCost,
+                        totalMMCost: regularActionsNeeded * regularCost,
+                        totalXP: regularActionsNeeded * regularBuyXP
+                    });
+                    steps.push({
+                        action: "PlaceRegular",
+                        actionsNeeded: regularActionsNeeded,
+                        totalXP: regularActionsNeeded * regularUseXP
+                    });
+                }
+            } else {
+                let freeProUsable = Math.min(remainingOwnedPro, Math.ceil(remaining / proUseXP));
+                let freeProXPApplied = freeProUsable * proUseXP;
+                remaining -= freeProXPApplied;
+                freeProUsedThisTier = freeProUsable;
+
+                if (freeProUsable > 0) {
+                    steps.push({
+                        action: "PlaceProFree",
+                        actionsNeeded: freeProUsable,
+                        totalXP: freeProXPApplied,
+                        isFree: true
+                    });
+                }
+
+                if (remaining > 0) {
+                    let freeRegularUsable = Math.min(remainingOwnedRegular, Math.ceil(remaining / regularUseXP));
+                    let freeRegularXPApplied = freeRegularUsable * regularUseXP;
+                    remaining -= freeRegularXPApplied;
+                    freeRegularUsedThisTier = freeRegularUsable;
+
+                    if (freeRegularUsable > 0) {
+                        steps.push({
+                            action: "PlaceRegularFree",
+                            actionsNeeded: freeRegularUsable,
+                            totalXP: freeRegularXPApplied,
+                            isFree: true
+                        });
+                    }
+                }
+
+                if (remaining > 0) {
+                    let proActionsNeeded = Math.floor(remaining / proBuyAndUseXP);
+                    remaining -= proActionsNeeded * proBuyAndUseXP;
+
+                    let regularActionsNeeded = 0;
+                    if (remaining > 0) {
+                        regularActionsNeeded = Math.ceil(remaining / regularBuyAndUseXP);
+                    }
+
+                    tierMMCost = (proActionsNeeded * proCost) + (regularActionsNeeded * regularCost);
+
+                    if (proActionsNeeded > 0) {
+                        steps.push({
+                            action: "PurchasePro",
+                            actionsNeeded: proActionsNeeded,
+                            totalMMCost: proActionsNeeded * proCost,
+                            totalXP: proActionsNeeded * proBuyXP
+                        });
+                        steps.push({
+                            action: "PlacePro",
+                            actionsNeeded: proActionsNeeded,
+                            totalXP: proActionsNeeded * proUseXP
+                        });
+                    }
+                    if (regularActionsNeeded > 0) {
+                        steps.push({
+                            action: "PurchaseRegular",
+                            actionsNeeded: regularActionsNeeded,
+                            totalMMCost: regularActionsNeeded * regularCost,
+                            totalXP: regularActionsNeeded * regularBuyXP
+                        });
+                        steps.push({
+                            action: "PlaceRegular",
+                            actionsNeeded: regularActionsNeeded,
+                            totalXP: regularActionsNeeded * regularUseXP
+                        });
+                    }
+                }
+            }
+
+            cumulativeMMCost += tierMMCost;
+
+            let allCumulativeSteps = [
+                ...steps
+            ];
+
+            tierXPStatus[`tier${tier}`].strategy = {
+                xpNeeded: xpNeededForThisTier,
+                totalMMCost: cumulativeMMCost,
+                tierOnlyMMCost: tierMMCost,
+                steps: steps
+            };
+
+            let strategyDiv = createEl('div', {
+                classList: ['w-100'],
+            });
+            strategyContainer.appendChild(strategyDiv);
+
+            let strategyHeader = createEl('div', {
+                style: {
+                    background: "linear-gradient(rgb(15, 22, 32) 0%, rgb(16, 25, 34) 100%)",
+                    padding: "10px",
+                    borderRadius: "10px 10px 0 0",
+                }
+            });
+            strategyDiv.appendChild(strategyHeader);
+
+            let strategyTitle = createEl('p', {
+                classList: ['black-outline'],
+                style: {
+                    fontSize: "24px",
+                },
+                innerHTML: `Unlock <span class="black-outline" style="color:#06C3FD;font-size:24px">Tier ${tier}</span> Minimum Monkey Money Guide:  <span class="mm-outline" style="color:#9AE42C;font-size:24px">${cumulativeMMCost}</span>`
+            });
+            strategyHeader.appendChild(strategyTitle);
+
+            let mmIcon = createEl('img', {
+                classList: [],
+                style: { width: "50px", margin: "-7px", marginLeft: "5px" },
+                src: '../Assets/UI/BloonjaminsIcon.png'
+            });
+            strategyTitle.appendChild(mmIcon);
+
+            let stepsContainer = createEl('div', {
+                classList: ['d-flex'],
+                style: {
+                    borderRadius: "0 0 10px 10px",
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                    padding: "10px 0",
+                }
+            });
+            strategyDiv.appendChild(stepsContainer);
+
+            let hasProSteps = allCumulativeSteps.some(s => s.action.includes("Pro"));
+
+            let stepContainerPro = createEl('div', {
+                classList: ['d-flex', 'ai-center'],
+                style: {
+                    gap: "1rem",
+                    display: hasProSteps ? "flex" : "none",
+                    padding: "0 20px"
+                }
+            });
+            stepsContainer.appendChild(stepContainerPro);
+
+            let powerDivPro = createEl('div', {
+                classList: ['power-div'],
+                style: {
+                    width: "unset",
+                    height: "126px",
+                    margin: "unset",
+                    backgroundImage: `url(../Assets/UI/PowersProContainer.png)`
+                }
+            });
+            stepContainerPro.appendChild(powerDivPro);
+
+            let powerImgPro = createEl('img', {
+                classList: ['power-img'],
+                style: {
+                    transform: "scale(0.75)"
+                },
+                src: getPowerIcon(power)
+            });
+            powerDivPro.appendChild(powerImgPro);
+
+            let stepDetailsPro = createEl('div', {
+                classList: ['d-flex', 'fd-column', 'jc-center'],
+                style: {
+                    gap: "8px"
+                }
+            });
+            stepContainerPro.appendChild(stepDetailsPro);
+
+            let hasRegularSteps = allCumulativeSteps.some(s => !s.action.includes("Pro"));
+
+            let stepContainerRegular = createEl('div', {
+                classList: ['d-flex', 'ai-center'],
+                style: {
+                    gap: "1rem",
+                    display: hasRegularSteps ? "flex" : "none",
+                    padding: "0 20px"
+                }
+            });
+            stepsContainer.appendChild(stepContainerRegular);
+
+            let powerDiv = createEl('div', {
+                classList: ['power-div'],
+                style: {
+                    width: "unset",
+                    height: "126px",
+                    margin: "unset",
+                    backgroundImage: `url(../Assets/UI/PowerContainer.png)`,
+                }
+            });
+            stepContainerRegular.appendChild(powerDiv);
+
+            let powerImg = createEl('img', {
+                classList: ['power-img'],
+                style: {
+                    transform: "scale(0.75)"
+                },
+                src: getPowerIcon(powerData.upgradedFrom)
+            });
+            powerDiv.appendChild(powerImg);
+
+            let stepDetailsRegular = createEl('div', {
+                classList: ['d-flex', 'fd-column', 'jc-center'],
+                style: {
+                    gap: "8px"
+                }
+            });
+            stepContainerRegular.appendChild(stepDetailsRegular);
+
+            allCumulativeSteps.forEach(step => {
+                let stepDetails = (step.action.includes("Pro")) ? stepDetailsPro : stepDetailsRegular;
+
+                let line = createEl('div', {
+                    classList: ['d-flex', 'fd-column'],
+                    style: {}
+                })
+                stepDetails.appendChild(line);
+
+                let stepTitle = createEl('p', {
+                    classList: ['black-outline'],
+                    style: {
+                        fontSize: "24px",
+                    },
+                });
+                line.appendChild(stepTitle);
+
+                let xpAdd = createEl('p', {
+                    classList: ['black-outline'],
+                    style: {
+                        fontSize: "22px",
+                        color: "#9AE42C"
+                    },
+                    innerHTML: `+${step.totalXP} XP`
+                })
+                line.appendChild(xpAdd);
+
+                switch(step.action) {
+                    case "PlaceProFree":
+                        stepTitle.innerHTML = `${step.actionsNeeded} Already Usable:`;
+                        break;
+                    case "PlaceRegularFree":
+                        stepTitle.innerHTML = `${step.actionsNeeded} Already Usable:`;
+                        break;
+                    case "PurchasePro":
+                        stepTitle.innerHTML = `Purchase ${step.actionsNeeded}:`;
+                        break;
+                    case "PlacePro":
+                        stepTitle.innerHTML = `Use ${step.actionsNeeded}:`;
+                        break;
+                    case "PurchaseRegular":
+                        stepTitle.innerHTML = `Purchase ${step.actionsNeeded}:`;
+                        break;
+                    case "PlaceRegular":
+                        stepTitle.innerHTML = `Use ${step.actionsNeeded}:`;
+                        break;
+                }
+            });
+        }
+
+        rightDiv.innerHTML = "";
+
+        function generateProUpgradeContainer(upgrade, unlocked) {
+            let container = createEl('div', {
+                classList: ['upgrade-div'],
+                style: {
+                    height: "126px",
+                    backgroundImage: 'url(../Assets/UI/PowersProContainer.png)',
+                    backgroundSize: "contain",
+                    opacity: unlocked ? "1" : "0.3",
+                }
+            });
+
+            let upgradeImg = createEl('img', {
+                classList: ['upgrade-img'],
+                style: {
+                    height: "126px",
+                },
+                src: `Assets/UpgradeIcon/${upgrade.replaceAll(" ", "")}.png`
+            });
+            container.appendChild(upgradeImg);
+
+            tippy(container, {
+                content: `<p class="artifact-title">${getLocValue(upgrade)}</p>${getLocValue(`${upgrade} Description`)}`,
+                placement: 'top',
+                theme: 'speech_bubble',
+                hideOnClick: false,
+                allowHTML: true,
+                popperOptions: {
+                    modifiers: [
+                        {
+                        name: 'preventOverflow',
+                        options: {
+                            boundary: 'viewport',
+                            padding: {right: 18},
+                        },
+                        },
+                    ],
+                }
+            })
+
+            return container;
+        }
+
+
+        for (let tier = 1; tier <= 3; tier++) {
+            let tier1Div = createEl('div', {
+                classList: [],
+                style: {
+                    border: "5px #008BF4 solid",
+                    borderRadius: "10px",
+                    backgroundColor: "#02122B85"
+                }
+            });
+            rightDiv.appendChild(tier1Div);
+
+            let tier1Title = createEl('p', {
+                classList: ['black-outline', 'ta-center'],
+                style: {
+                    fontSize: "28px"
+                },
+                innerHTML: `Tier ${tier}`
+            });
+            tier1Div.appendChild(tier1Title);
+
+            powerData.upgrades[`tier${tier}`].forEach(upgrade => {
+                tier1Div.appendChild(generateProUpgradeContainer(upgrade, unlockedTier >= tier));
+            })
+        }
+    }
+    generateProPowerDetails("BananaFarmerPro")
+}

@@ -2140,5 +2140,48 @@
             "isCoop": false,
             "hidden": false
         }
+    },
+    "153": {
+        "name": "Season Starts",
+        "description": "Achieve Tier 1 in any Stage in a Social Season",
+        "model": {
+            "achievementId": 157,
+            "achievementIcon": "SeasonStarts",
+            "hiddenAchievementIcon": "",
+            "subscript": "",
+            "achievementGoal": 1,
+            "loot": "MonkeyMoney:50#Power:CashDrop,1",
+            "isCoop": false,
+            "hidden": false,
+            "type": "AchievementSeasonStarts"
+        }
+    },
+    "154": {
+        "name": "Mid Season",
+        "description": "Earn 7,500 Stars in any Social Season",
+        "model": {
+            "achievementId": 158,
+            "achievementIcon": "MidSeason",
+            "hiddenAchievementIcon": "",
+            "subscript": "",
+            "achievementGoal": 7500,
+            "loot": "MonkeyMoney:100#KnowledgePoints:1",
+            "isCoop": false,
+            "hidden": false
+        }
+    },
+    "155": {
+        "name": "Season Champion",
+        "description": "Earn a perfect 15,000 Stars in any Social Season",
+        "model": {
+            "achievementId": 159,
+            "achievementIcon": "SeasonChampion",
+            "hiddenAchievementIcon": "",
+            "subscript": "",
+            "achievementGoal": 15000,
+            "loot": "MonkeyMoney:200#RandomInstaMonkey:5,1",
+            "isCoop": false,
+            "hidden": false
+        }
     }
 }

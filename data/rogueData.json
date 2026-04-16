@@ -975,6 +975,144 @@
             },
             "added": 47
         },
+        "DivineInspiration1": {
+            "tier": 0,
+            "baseId": "DivineInspiration",
+            "nameLocKey": "DivineInspirationX",
+            "descriptionLocKey": "DivineInspirationXDescription",
+            "descriptionParams": [
+                "20",
+                "10"
+            ],
+            "isBossArtifact": 0,
+            "isSheriffArtifact": 0,
+            "icon": "BoostVelocity",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 54
+        },
+        "DivineInspiration2": {
+            "tier": 1,
+            "baseId": "DivineInspiration",
+            "nameLocKey": "DivineInspirationX",
+            "descriptionLocKey": "DivineInspirationXDescription",
+            "descriptionParams": [
+                "26",
+                "14"
+            ],
+            "isBossArtifact": 0,
+            "isSheriffArtifact": 0,
+            "icon": "BoostVelocity",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 54
+        },
+        "DivineInspiration3": {
+            "tier": 2,
+            "baseId": "DivineInspiration",
+            "nameLocKey": "DivineInspirationX",
+            "descriptionLocKey": "DivineInspirationXDescription",
+            "descriptionParams": [
+                "36",
+                "18"
+            ],
+            "isBossArtifact": 0,
+            "isSheriffArtifact": 0,
+            "icon": "BoostVelocity",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 54
+        },
+        "DivinePrecision1": {
+            "tier": 0,
+            "baseId": "DivinePrecision",
+            "nameLocKey": "DivinePrecisionX",
+            "descriptionLocKey": "DivinePrecisionXDescription",
+            "descriptionParams": [
+                "16",
+                "10"
+            ],
+            "isBossArtifact": 0,
+            "icon": "BoostToughness",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 54
+        },
+        "DivinePrecision2": {
+            "tier": 1,
+            "baseId": "DivinePrecision",
+            "nameLocKey": "DivinePrecisionX",
+            "descriptionLocKey": "DivinePrecisionXDescription",
+            "descriptionParams": [
+                "20",
+                "14"
+            ],
+            "isBossArtifact": 0,
+            "icon": "BoostToughness",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 54
+        },
+        "DivinePrecision3": {
+            "tier": 2,
+            "baseId": "DivinePrecision",
+            "nameLocKey": "DivinePrecisionX",
+            "descriptionLocKey": "DivinePrecisionXDescription",
+            "descriptionParams": [
+                "30",
+                "24"
+            ],
+            "isBossArtifact": 0,
+            "icon": "BoostToughness",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 54
+        },
+        "DivineQuickening1": {
+            "tier": 0,
+            "baseId": "DivineQuickening",
+            "nameLocKey": "DivineQuickeningX",
+            "descriptionLocKey": "DivineQuickeningXDescription",
+            "descriptionParams": [
+                "8",
+                "20"
+            ],
+            "isBossArtifact": 0,
+            "icon": "BoostQuickening",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 54
+        },
+        "DivineQuickening2": {
+            "tier": 1,
+            "baseId": "DivineQuickening",
+            "nameLocKey": "DivineQuickeningX",
+            "descriptionLocKey": "DivineQuickeningXDescription",
+            "descriptionParams": [
+                "11",
+                "26"
+            ],
+            "isBossArtifact": 0,
+            "icon": "BoostQuickening",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 54
+        },
+        "DivineQuickening3": {
+            "tier": 2,
+            "baseId": "DivineQuickening",
+            "nameLocKey": "DivineQuickeningX",
+            "descriptionLocKey": "DivineQuickeningXDescription",
+            "descriptionParams": [
+                "18",
+                "32"
+            ],
+            "isBossArtifact": 0,
+            "icon": "BoostQuickening",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 54
+        },
         "DreamTeams1": {
             "tier": 0,
             "baseId": "DreamTeams",
@@ -1317,6 +1455,23 @@
             "isQuestArtifact": 0,
             "added": 47
         },
+        "EssenceOfDiamondback1": {
+            "tier": 2,
+            "baseId": "EssenceOfDiamondback",
+            "nameLocKey": "EssenceOfDiamondback1",
+            "descriptionLocKey": "EssenceOfDiamondback1Description",
+            "descriptionParams": [
+                "4",
+                "15",
+                "0.3",
+                "-35%"
+            ],
+            "isBossArtifact": 1,
+            "icon": "ArtifactEssenceOfDiamondback",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 54
+        },
         "EssenceOfDreadbloon1": {
             "tier": 2,
             "baseId": "EssenceOfDreadbloon",
@@ -1339,7 +1494,7 @@
             "icon": "ArtifactEssenceOfLych",
             "rarityFrameType": "AllMonkeyTowerSets",
             "isQuestArtifact": 0,
-            "added": 47
+            "added": 54
         },
         "EssenceOfPhayze1": {
             "tier": 2,
@@ -1371,7 +1526,7 @@
             "nameLocKey": "ExplosiveEconomicsX",
             "descriptionLocKey": "ExplosiveEconomicsXDescription",
             "descriptionParams": [
-                "100",
+                "250",
                 "1"
             ],
             "isBossArtifact": 0,
@@ -1386,7 +1541,7 @@
             "nameLocKey": "ExplosiveEconomicsX",
             "descriptionLocKey": "ExplosiveEconomicsXDescription",
             "descriptionParams": [
-                "300",
+                "500",
                 "1"
             ],
             "isBossArtifact": 0,
@@ -2773,7 +2928,7 @@
             "nameLocKey": "ImprovedSpellingX",
             "descriptionLocKey": "ImprovedSpellingXDescription",
             "descriptionParams": [
-                "20",
+                "10",
                 "15",
                 "15"
             ],
@@ -2789,7 +2944,7 @@
             "nameLocKey": "ImprovedSpellingX",
             "descriptionLocKey": "ImprovedSpellingXDescription",
             "descriptionParams": [
-                "20",
+                "10",
                 "20",
                 "20"
             ],
@@ -2805,7 +2960,7 @@
             "nameLocKey": "ImprovedSpellingX",
             "descriptionLocKey": "ImprovedSpellingXDescription",
             "descriptionParams": [
-                "20",
+                "0",
                 "30",
                 "30"
             ],
@@ -4355,7 +4510,7 @@
             "nameLocKey": "TooManyCooksX",
             "descriptionLocKey": "TooManyCooksXDescription",
             "descriptionParams": [
-                "33",
+                "18",
                 "5"
             ],
             "isBossArtifact": 0,
@@ -4370,7 +4525,7 @@
             "nameLocKey": "TooManyCooksX",
             "descriptionLocKey": "TooManyCooksXDescription",
             "descriptionParams": [
-                "42",
+                "27",
                 "5"
             ],
             "isBossArtifact": 0,
@@ -4385,7 +4540,7 @@
             "nameLocKey": "TooManyCooksX",
             "descriptionLocKey": "TooManyCooksXDescription",
             "descriptionParams": [
-                "80",
+                "56",
                 "5"
             ],
             "isBossArtifact": 0,
@@ -4779,7 +4934,7 @@
             "nameLocKey": "BattleCatX",
             "descriptionLocKey": "BattleCatXDescription",
             "descriptionParams": [
-                "1"
+                "2"
             ],
             "isBossArtifact": 0,
             "icon": "ArtifactBattlecat",
@@ -4793,7 +4948,7 @@
             "nameLocKey": "BattleCatX",
             "descriptionLocKey": "BattleCatXDescription",
             "descriptionParams": [
-                "2"
+                "4"
             ],
             "isBossArtifact": 0,
             "icon": "ArtifactBattlecat",

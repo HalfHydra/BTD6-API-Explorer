@@ -2129,7 +2129,6 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "isNew": true,
         "updateAdded": 53,
         "cost": 50
     },
@@ -2143,8 +2142,77 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "isNew": true,
         "updateAdded": 53,
+        "cost": 50
+    },
+    "GameUIProfileAvatar122": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar122",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": true,
+        "isNew": true,
+        "updateAdded": 54,
+        "cost": 50
+    },
+    "GameUIProfileAvatar123": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar123",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "isNew": true,
+        "updateAdded": 54,
+        "cost": 50
+    },
+    "GameUIProfileAvatar124": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar124",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "isNew": true,
+        "updateAdded": 54,
+        "cost": 50
+    },
+    "GameUIProfileAvatar125": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar125",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "isNew": true,
+        "updateAdded": 54,
+        "cost": 50
+    },
+    "GameUIProfileAvatar126": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar126",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "isNew": true,
+        "updateAdded": 54,
         "cost": 50
     },
     "GameUIProfileAvatar13": {
@@ -4017,7 +4085,6 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "isNew": true,
         "updateAdded": 53,
         "cost": 300
     },
@@ -4031,8 +4098,35 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "isNew": true,
         "updateAdded": 53,
+        "cost": 300
+    },
+    "GameUIProfileBanner62": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner62Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": false,
+        "isNew": true,
+        "updateAdded": 54,
+        "cost": 300
+    },
+    "GameUIProfileBanner63": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner63Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": false,
+        "isNew": true,
+        "updateAdded": 54,
         "cost": 300
     },
     "GameUIProfileBanner7": {
@@ -4620,6 +4714,19 @@
         "updateAdded": 22,
         "cost": 30
     },
+    "TowerPetAlchemistPossum": {
+        "storeFilter": "Monkeys",
+        "subFilter": "TowerPets",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "AlchemistPossumPetIcon",
+        "cosmeticPriority": "0",
+        "exclusivity": "AlchemistPet",
+        "itemType": "TowerPet",
+        "hidden": true,
+        "obtainMethod": "SocialSeason",
+        "updateAdded": 54
+    },
     "TowerPetAlchemistSlimeCube": {
         "storeFilter": "Monkeys",
         "subFilter": "TowerPets",
@@ -4760,7 +4867,7 @@
         "exclusivity": "IceMonkeyPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "updateAdded": 29,
+        "updateAdded": 51,
         "cost": 120
     },
     "TowerPetMonkeyAceDragonfly": {

@@ -42,7 +42,7 @@ function postProcessRogueData(){
         );
     }
 
-    let unusedArtifacts = ['EssenceOfLych1', 'Token', 'TokenMonkeyMoney', 'TokenRogueXp', 'ProjectileCarousel1']
+    let unusedArtifacts = ['Token', 'TokenMonkeyMoney', 'TokenRogueXp', 'ProjectileCarousel1']
     for (let [hero, starterKit] of Object.entries(rogueJSON.heroStarterKits)){
         rogueJSON.artifacts[starterKit.artifact].starterKitHero = hero;
     }
@@ -452,33 +452,36 @@ function generateArtifactSettings() {
                 settingsFilterDescription.innerHTML = "Only Artifacts that have not been extracted will be included to start.";
                 break;
             case "Starter Kit":
-                settingsFilterDescription.innerHTML = "Only Artifacts that are available in Hero Starter Kits will be included to start.";
+                settingsFilterDescription.innerHTML = "Only Artifacts available in Hero Starter Kits will be included to start.";
                 break;
             case "Non Starter Kit":
-                settingsFilterDescription.innerHTML = "Only Artifacts that are not available in Hero Starter Kits will be included to start.";
+                settingsFilterDescription.innerHTML = "Only Artifacts not available in Hero Starter Kits will be included to start.";
                 break;
             case "One Variant":
-                settingsFilterDescription.innerHTML = "Only Artifacts that have only one tier will be included to start.";
+                settingsFilterDescription.innerHTML = "Only Artifacts with only one tier will be included to start.";
                 break;
             case "Two Variants":
-                settingsFilterDescription.innerHTML = "Only Artifacts that have only have two tiers will be included to start.";
+                settingsFilterDescription.innerHTML = "Only Artifacts with only two tiers will be included to start.";
                 break;
             case "Added Update 48":
-                settingsFilterDescription.innerHTML = "Only Artifacts that were added in Update 48 will be included to start.";
+                settingsFilterDescription.innerHTML = "Only Artifacts added in Update 48 will be included to start.";
                 break;
             case "Added Update 49":
-                settingsFilterDescription.innerHTML = "Only Artifacts that were added in Update 49 will be included to start.";
+                settingsFilterDescription.innerHTML = "Only Artifacts added in Update 49 will be included to start.";
                 break;
             case "Added Update 50":
-                settingsFilterDescription.innerHTML = "Only Artifacts that were added in Update 50 will be included to start.";
+                settingsFilterDescription.innerHTML = "Only Artifacts added in Update 50 will be included to start.";
                 break;
             case "Added Update 51":
-                settingsFilterDescription.innerHTML = "Only Artifacts that were added in Update 51 will be included to start.";
+                settingsFilterDescription.innerHTML = "Only Artifacts added in Update 51 will be included to start.";
+                break;
+            case "Added Update 54":
+                settingsFilterDescription.innerHTML = "Only Artifacts added in Update 54 will be included to start.";
                 break;
         }
     }
 
-    let settingsFilterDropdown = generateDropdown("Artifact Filter:", ["All", "Starter Kit", "Non Starter Kit", "One Variant", "Two Variants", "Added Update 48", "Added Update 49", "Added Update 50", "Added Update 51"], rogueSaveData.artifactFilter, (value) => {
+    let settingsFilterDropdown = generateDropdown("Artifact Filter:", ["All", "Starter Kit", "Non Starter Kit", "One Variant", "Two Variants", "Added Update 48", "Added Update 49", "Added Update 50", "Added Update 51", "Added Update 54"], rogueSaveData.artifactFilter, (value) => {
         rogueSaveData.artifactFilter = value;
         updateDescription();
         saveRogueDataToLocalStorage();
@@ -673,6 +676,9 @@ function generateArtifacts() {
         case "Added Update 51":
             currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => value.added == 51))
             break;
+        case "Added Update 54":
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => value.added == 54))
+            break;
     }
 
     if (!rogueSaveData.showStarterArtifacts) {
@@ -800,8 +806,8 @@ function generateArtifactContainer(artifact, type) {
                         padding: {right: 18},
                     },
                     },
-                ],
-            },
+                ]
+            }
         });
     }
 

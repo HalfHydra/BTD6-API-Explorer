@@ -622,6 +622,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
             "DreadbloonRoundSet": "Dreadbloon Changes: In general summary, Zebra -> Lead, Lead -> Fortified Lead, Rainbow -> Ceramic, Ceramic -> Fortified Ceramic. After Round 50, every other Blue MOAB is fortified, and after round 70 all Blue MOABs are fortified. There are some exceptions. Rounds that Dreadbloon spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
             "PhayzeRoundSet": "Phayze Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
             "BlastapopoulosRoundSet": "Blastapopoulos Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+            "DiamondbackRoundSet": "Diamondback Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
         }
         headerBar.appendChild(generateComment('Showing modified rounds. Disable "Only Modified" in Roundset Settings to show all rounds.<br>' + bossExplanations[selectedRoundset]));
     }

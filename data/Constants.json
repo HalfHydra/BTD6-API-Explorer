@@ -1,10 +1,10 @@
 {
-    "version": "2.6.0",
-    "projectContentVersion": 53,
-    "achievements": 139,
+    "version": "2.7.0",
+    "projectContentVersion": 54,
+    "achievements": 142,
     "hiddenAchievements": 14,
-    "profileBanners": 61,
-    "profileAvatars": 121,
+    "profileBanners": 63,
+    "profileAvatars": 126,
     "teamsBanners": 15,
     "limitedTimeEvents": {
         "Dreadbloon 32": {
@@ -162,14 +162,52 @@
         "Skeletor": {
             "type": "IAP",
             "cost": 0
-        },
+        }
+    },
+    "powersProInOrder": {
         "BananaFarmerPro": {
             "type": "Pro",
-            "cost": 100
+            "cost": 100,
+            "upgradedFrom": "BananaFarmer",
+            "unlockThresholds": [10000, 50000, 150000],
+            "upgrades": {
+                "tier1": ["Banana Vacuum", "Camo Bananas", "Adaptive Workers"],
+                "tier2": ["Banana Peels", "Regrow Bananas", "Monkey Banker"],
+                "tier3": ["Robo Farmer", "Banana Intelligence Bureau", "Banana Financier"]
+            }
         },
         "SuperMonkeyBeacon": {
             "type": "Pro",
-            "cost": 400
+            "cost": 400,
+            "upgradedFrom": "SuperMonkeyStorm",
+            "unlockThresholds": [12500, 70000, 200000],
+            "upgrades": {
+                "tier1": ["Charged Beacon", "Mini Stormcaller", "High Impact"],
+                "tier2": ["Storm Tremors", "Rapid Recharge", "Bewildering Storm"],
+                "tier3": ["Reverberation", "Beacon of Legends", "Piercing Wind"]
+            }
+        },
+        "MonkeyBoostPro": {
+            "type": "Pro",
+            "cost": 400,
+            "upgradedFrom": "MonkeyBoost",
+            "unlockThresholds": [10000, 50000, 150000],
+            "upgrades": {
+                "tier1": ["Cheer", "Resistance", "Condition"],
+                "tier2": ["LookSharp", "HighReps", "Intensity"],
+                "tier3": ["MonkeySpirit", "NoQuit", "MaxOutput"]
+            }
+        },
+        "TechBotPrime": {
+            "type": "Pro",
+            "cost": 100,
+            "upgradedFrom": "TechBot",
+            "unlockThresholds": [12500, 70000, 200000],
+            "upgrades": {
+                "tier1": ["InitiateLinkAMP", "AUT0M8", "DroneAmbusNetwork"],
+                "tier2": ["ChainLink", "NEUR0MAP", "TriggerHappyDrones"],
+                "tier3": ["LeadTheStorm", "CMDRCh1p", "OhBoyICantWait"]
+            }
         }
     },
     "mapsInOrder": {
@@ -307,6 +345,11 @@
             "difficulty": "Intermediate",
             "theme": "Water",
             "hasWater": true
+        }, 
+        "AncientPortal": {
+            "difficulty": "Intermediate",
+            "theme": "DarkGrass",
+            "hasWater": true
         },
         "SulfurSprings": {
             "difficulty": "Intermediate",
@@ -418,6 +461,11 @@
             "theme": "Water",
             "hasWater": true
         },
+        "MushroomGrotto": {
+            "difficulty": "Advanced",
+            "theme": "DarkGrass",
+            "hasWater": false
+        },
         "PartyParade": {
             "difficulty": "Advanced",
             "theme": "City",
@@ -436,11 +484,6 @@
         "LastResort": {
             "difficulty": "Advanced",
             "theme": "Snow",
-            "hasWater": true
-        },
-        "AncientPortal": {
-            "difficulty": "Advanced",
-            "theme": "DarkGrass",
             "hasWater": true
         },
         "CastleRevenge": {
@@ -594,7 +637,7 @@
             "hasWater": true
         }
     },
-    "paragonsAvailable": ["DartMonkey", "BoomerangMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "WizardMonkey", "NinjaMonkey", "EngineerMonkey", "TackShooter", "SpikeFactory", "BombShooter", "IceMonkey"],
+    "paragonsAvailable": ["DartMonkey", "BoomerangMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "WizardMonkey", "NinjaMonkey", "EngineerMonkey", "TackShooter", "SpikeFactory", "BombShooter", "IceMonkey", "Druid"],
     "quests": {
         "BeastHandlerQuest": {
             "nameLocKey": "BeastHandlerQuestName",
@@ -865,6 +908,7 @@
     "BGColor": [0.000, 0.498, 1.000],
     "ParagonBGColor": [0.522, 0.000, 1.000],
     "TrophyStoreBGColor": [0, 0, 0.392],
+    "PowersProBGColor": [0, 0.274, 0.796],
     "HeroBGColors": {
         "Quincy": [0.000, 0.522, 0.624],
         "Gwendolin": [0.671, 0.153, 0.133], 
@@ -1783,7 +1827,7 @@
         },
         "Jungle's Bounty": {
             "displayName": "Jungle's Bounty",
-            "description": "Generates cash and 1 life each use, plus extra cash per Banana Farm near the Druid",
+            "description": "(Removed) Generates cash and 1 life each use, plus extra cash per Banana Farm near the Druid",
             "icon": "JunglesBountyUpgradeIconAA"
         },
         "Overclock": {
@@ -2220,6 +2264,41 @@
             "displayName": "Syphon Funding",
             "description": "Downgrades most newly spawned Bloons by 1 rank. Cash per pop from affected Bloons is double. Lasts 10 seconds",
             "icon": "SyphonfundsIconAA"
+        },
+        "Primordial Wrath": {
+            "displayName": "Primordial Wrath",
+            "description": "Enter a beautifully furious wrathful nature state draining cash over time while providing a massive damage boost until disabled. Note: no cash can be generated from towers during this state.",
+            "icon": "RootOfAllNatureWrathIconAA"
+        },
+        "ActivateTechBot": {
+            "displayName": "Manual Activation",
+            "description": "Triggers all linked abilities and in radius",
+            "icon": "CMDRCh1pAA"
+        },
+        "Go Go Go Send It": {
+            "displayName": "Pop Off",
+            "description": "Activates abilities for all towers in Techbot's radius ignoring ready-state. Each ability activated has a chance to not go into cooldown",
+            "icon": "PopOffAA"
+        },
+        "Monkey Boost Pro 1": {
+            "displayName": "Monkey Boost Pro",
+            "description": "Monkey Boost from an unupgraded Hype Boost Monkey",
+            "icon": "MonkeyBoostProAA"
+        },
+        "Monkey Boost Pro 2": {
+            "displayName": "Resistance",
+            "description": "Monkey Boost used from any tier middle path Hype Boost Monkey",
+            "icon": "ResistanceAA"
+        },
+        "Monkey Boost Pro 3": {
+            "displayName": "Cheer",
+            "description": "Monkey Boost used from any tier top path Hype Boost Monkey",
+            "icon": "CheerAA"
+        },
+        "Monkey Boost Pro 4": {
+            "displayName": "Condition",
+            "description": "Monkey Boost used from any tier bottom path Hype Boost Monkey",
+            "icon": "ConditionAA"
         }
     },
     "abilitiesByTower": {
@@ -2264,7 +2343,8 @@
         "Druid": [
             "Jungle's Bounty",
             "Vine Crush",
-            "Vine Rupture"
+            "Vine Rupture",
+            "Primordial Wrath"
         ],
         "EngineerMonkey": [
             "Overclock",
@@ -2435,12 +2515,21 @@
         "BattleCat": [
             "Battle Cat Transform"
         ],
-        "BananaFarmerPro": [],
         "SuperMonkeyBeacon": [
             "Super Monkey Beacon 1",
             "Super Monkey Beacon 2",
             "Super Monkey Beacon 3",
             "Super Monkey Beacon 4"
+        ],
+        "MonkeyBoostPro": [
+            "Monkey Boost Pro 1",
+            "Monkey Boost Pro 2",
+            "Monkey Boost Pro 3",
+            "Monkey Boost Pro 4"
+        ],
+        "TechBotPrime": [
+            "ActivateTechBot",
+            "Go Go Go Send It"
         ]
     },
     "hiddenContent": {
@@ -2507,6 +2596,13 @@
         "BlastapopoulosRoundSet": {
             "name": "Blastapopoulos Custom Rounds",
             "icon": "BlastapopoulosRoundSetIcon",
+            "type": "boss",
+            "startingCash": 650,
+            "modifiedRounds": [40, 60, 80, 100]
+        },
+        "DiamondbackRoundSet": {
+            "name": "Diamondback Custom Rounds",
+            "icon": "DiamondbackRoundSetIcon",
             "type": "boss",
             "startingCash": 650,
             "modifiedRounds": [40, 60, 80, 100]
@@ -3870,7 +3966,7 @@
         "MedalGold02": "Hard - Alternate Bloons Rounds",
         "MedalImpoppable": "Hard - Impoppable",
         "MedalImpoppableRuby": "Hard - CHIMPS",
-        "MedalImpoppableHematite": "Hard - CHIMPS",
+        "MedalImpoppableHematite": "Hard - CHIMPS (In One Go)",
         "MedalCoopBronze": "Co-op - Easy - Standard",
         "MedalCoopBronze01": "Co-op - Easy - Primary Only",
         "MedalCoopBronze02": "Co-op - Easy - Deflation",
@@ -3885,7 +3981,7 @@
         "MedalCoopGold02": "Co-op - Hard - Alternate Bloons Rounds",
         "MedalCoopImpoppable": "Co-op - Hard - Impoppable",
         "MedalCoopImpoppableRuby": "Co-op - Hard - CHIMPS",
-        "MedalCoopImpoppableHematite": "Co-op - Hard - CHIMPS",
+        "MedalCoopImpoppableHematite": "Co-op - Hard - CHIMPS (In One Go)",
         "BlastapopoulosEliteBadge": "Boss Event - Blastapopoulos - Elite",
         "BlastapopoulosBadge": "Boss Event - Blastapopoulos",
         "PhayzeEliteBadge": "Boss Event - Phayze - Elite",

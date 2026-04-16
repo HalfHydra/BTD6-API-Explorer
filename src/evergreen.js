@@ -96,6 +96,7 @@ function createModal({ header = '', content = '', footer = '', backgroundColor =
     const modalHeader = createEl('div', { classList: ['modal-header'] });
     if(header != '') {
         modalBox.appendChild(modalHeader);
+
     }
 
 
@@ -227,7 +228,7 @@ async function fetchMainDependencies() {
     await fetchLocKeys();
     await fetchRogueDependencies();
     Promise.all([
-        fetch('./data/Achievements150.json').then(response => response.json()),
+        fetch('./data/Achievements.json').then(response => response.json()),
         fetch('./data/trophyStoreItems.json').then(response => response.json()),
         fetch('./data/teamsStoreItems.json').then(response => response.json())
     ])
@@ -631,7 +632,7 @@ function openOAKInstructionsModal(){
 
     OAKInstructionsDiv.appendChild(createEl('p', {
         classList: ['oak-instructions-text'],
-        innerHTML: 'Step 3: Generate a key and copy that in to the above text field. It should start with "oak_". Then click "Start" to login!'
+        innerHTML: 'Step 3: Generate a key and copy that in to the text field on the page. It should start with "oak_". Then click "Start" to login!'
     }));
 
     OAKInstructionsDiv.appendChild(createEl('p', {
