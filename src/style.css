@@ -3699,7 +3699,7 @@
     background: linear-gradient(180deg, #2E4A83 0%, #344181 100%);
 }
 .other-roundset-selector-img {
-    width: 100px;
+    width: 85px;
 }
 .other-roundsets-selector-text {
     font-family: 'Luckiest Guy';
@@ -3719,7 +3719,7 @@
 .other-roundset-selector-text {
     position: absolute;
     right: 4px;
-    font-size: 24px;
+    font-size: 22px;
 }
 .roundset-header-bar {
     background-color: var(--profile-primary);
@@ -4341,7 +4341,7 @@
 
 .max-count {
     position: absolute;
-    background-image: url(../Assets/UI/BlueBtnCircleSmall.png);
+    background-image: url(../Assets/UI/NotifyBlue.png);
     width: 50px;
     height: 50px;
     background-size: contain;

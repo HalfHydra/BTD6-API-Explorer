@@ -13,6 +13,7 @@ async function generateLeaderboards() {
     let leaderboardPage = document.createElement('div');
     leaderboardPage.classList.add('leaderboard-page', 'page-extra', 'fd-column', 'ai-center');
     leaderboardPage.style.display = "none";
+    leaderboardPage.style.paddingBottom = "20px";
     // leaderboardPage.style.minHeight = "800px";
     leaderboardsContent.appendChild(leaderboardPage);
 
@@ -130,7 +131,7 @@ async function generateLeaderboards() {
         hideLoading();
     });
 
-    racesData.forEach((data) => {
+    racesData?.forEach((data) => {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('roundset-selector-div');
         roundsetDiv.style.height = "75px";
@@ -179,7 +180,7 @@ async function generateLeaderboards() {
         roundsetDiv.appendChild(roundsetGoImg);
     })
 
-    bossesData.forEach((data) => {
+    bossesData?.forEach((data) => {
         let titleCaseBoss = data.bossType.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
         let bossNumber = data.name.replace(/\D/g, '');
         let bossName = `${titleCaseBoss} ${bossNumber}`;
@@ -262,7 +263,7 @@ async function generateLeaderboards() {
         roundsetDiv.appendChild(roundsetGoImg);
     })
 
-    bossesData.forEach((data) => {
+    bossesData?.forEach((data) => {
         let titleCaseBoss = data.bossType.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
         let bossNumber = data.name.replace(/\D/g, '');
         let bossName = `Elite ${titleCaseBoss} ${bossNumber}`;
@@ -344,7 +345,7 @@ async function generateLeaderboards() {
         roundsetDiv.appendChild(roundsetGoImg);
     })
 
-    CTData.forEach((data) => {
+    CTData?.forEach((data) => {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('roundset-selector-div');
         roundsetDiv.style.height = "75px";
@@ -393,7 +394,7 @@ async function generateLeaderboards() {
         roundsetDiv.appendChild(roundsetGoImg);
     })
 
-    CTData.forEach((data) => {
+    CTData?.forEach((data) => {
         let roundsetDiv = document.createElement('div');
         roundsetDiv.classList.add('roundset-selector-div');
         roundsetDiv.style.height = "75px";
@@ -453,6 +454,14 @@ async function generateLeaderboards() {
     if (currentSelectorsDiv.childNodes.length == 0) {
         currentText.style.display = "none";
         currentSelectorsDiv.style.display = "none";
+    }
+
+    if ( selectorsDiv.childNodes.length == 0) {
+        let unableToLoadText = createEl('p', {
+            classList: ['selector-text', 'black-outline'],
+            innerHTML: 'Unable to load events'
+        })
+        selectorsDiv.appendChild(unableToLoadText);
     }
 }
 

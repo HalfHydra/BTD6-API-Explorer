@@ -126,11 +126,13 @@ async function fetchData(url, onSuccess) {
             errorModal(`You are currently offline. Please check your internet connection.`, "api");
             return `You are currently offline. [${e}]`;
         }
+
         rateLimited = true;
         requestQueue = [];        
         // errorModal(`You have hit the rate limit.<br>If you are browsing the leaderboards or content browsers, please slow down!<br><br>The rate limit will clear after a short time. You can also help prevent rate limiting by toggling the setting below which stops player profiles from loading automatically.`, "ratelimit")
+        errorModal(`Failed to reach the Ninja Kiwi Open Data API. The API server may be down, or you may have hit the rate limit. Please try again later.`)
         hideLoading();
-        return `You have hit the rate limit. [${e}]`;
+        return `Failed to reach the Ninja Kiwi Open Data API. [${e}]`;
     }
     try {
         let json = await res.json();
@@ -430,7 +432,7 @@ async function getLatestEvents() {
 }
 
 async function getLatestCollectionEvent() {
-    let events = await getLatestEvents();
+    let events = await getLatestEvents() || [];
     for (let event of events) {
         if (event["type"] == "collectableEvent") {
             return event;

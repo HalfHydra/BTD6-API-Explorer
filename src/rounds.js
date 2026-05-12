@@ -232,7 +232,7 @@ function generateRoundsets() {
         let roundsetDiv = createEl('div', {
             classList: ['other-roundset-selector-div'],
             style: {
-                height: "100px"
+                height: "85px"
             }
         });
         roundsetDiv.addEventListener('click', () => {
@@ -259,7 +259,7 @@ function generateRoundsets() {
         let roundsetDiv = createEl('div', {
             classList: ['other-roundset-selector-div'],
             style: {
-                height: "100px"
+                height: "85px"
             }
         });
         roundsetDiv.addEventListener('click', () => {

@@ -1,11 +1,11 @@
 {
-    "version": "2.7.0",
+    "version": "2.7.1",
     "projectContentVersion": 54,
     "achievements": 142,
     "hiddenAchievements": 14,
     "profileBanners": 63,
     "profileAvatars": 126,
-    "teamsBanners": 15,
+    "teamsBanners": 17,
     "limitedTimeEvents": {
         "Dreadbloon 32": {
             "type": "Boss", 
