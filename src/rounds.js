@@ -527,22 +527,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
             roundsetIcon.src = `../Assets/UI/${rs}.png`;
             roundsetDiv.appendChild(roundsetIcon);
 
-            tippy(roundsetDiv, {
-                content: desc,
-                placement: 'top',
-                theme: 'speech_bubble',
-                popperOptions: {
-                    modifiers: [
-                        {
-                        name: 'preventOverflow',
-                        options: {
-                            boundary: 'viewport',
-                            padding: {right: 18},
-                        },
-                        },
-                    ],
-                },
-            })
+            addTooltip(roundsetDiv, desc, {});
         });
     }
     if(roundset.startsWith("Frontier")) {
@@ -1110,22 +1095,7 @@ async function generateRounds(type, reverse, roundsetType, presetSettings={}) {
                         bloonBarFill.style.border = `4px solid ${bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].border}`;
                     }
 
-                    tippy(bloonBarFill, {
-                        content: `${bloonGroup.start.toFixed(2)}s - ${bloonGroup.end.toFixed(2)}s`,
-                        placement: 'top',
-                        theme: 'speech_bubble',
-                        popperOptions: {
-                            modifiers: [
-                                {
-                                    name: 'preventOverflow',
-                                    options: {
-                                        boundary: 'viewport',
-                                        padding: { right: 18 },
-                                    },
-                                },
-                            ],
-                        },
-                    });
+                    addTooltip(bloonBarFill, `${bloonGroup.start.toFixed(2)}s - ${bloonGroup.end.toFixed(2)}s`, {});
 
                     let widthPercentage = ((bloonGroup.end - bloonGroup.start) / roundDuration) * 100;
                     let leftPercentage = (bloonGroup.start / roundDuration) * 100;
@@ -1528,22 +1498,7 @@ function updatePreviewRoundTimeline() {
             bloonBarFill.style.border = `4px solid ${bloonsData[bloonGroup.bloon.replace("Camo", "").replace("Regrow", "").replace("Fortified", "")].border}`;
         }
 
-        tippy(bloonBarFill, {
-            content: `${bloonGroup.start.toFixed(2)}s - ${bloonGroup.end.toFixed(2)}s`,
-            placement: 'top',
-            theme: 'speech_bubble',
-            popperOptions: {
-                modifiers: [
-                    {
-                        name: 'preventOverflow',
-                        options: {
-                            boundary: 'viewport',
-                            padding: { right: 18 },
-                        },
-                    },
-                ],
-            },
-        });
+        addTooltip(bloonBarFill, `${bloonGroup.start.toFixed(2)}s - ${bloonGroup.end.toFixed(2)}s`, {});
 
         let widthPercentage = ((bloonGroup.end - bloonGroup.start) / roundDuration) * 100;
         let leftPercentage = (bloonGroup.start / roundDuration) * 100;

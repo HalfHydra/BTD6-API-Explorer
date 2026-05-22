@@ -790,24 +790,10 @@ function generateArtifactContainer(artifact, type) {
     artifactDiv.appendChild(artifactFrame);
 
     if (type != "modal" && type != "preview") {
-        tippy(artifactDiv, {
-            content: `<p class="artifact-title">${artifactData.title}</p>${artifactData.description}`,
+        addTooltip(artifactDiv, `<p class="artifact-title">${artifactData.title}</p>${artifactData.description}`, {
             allowHTML: true,
-            placement: 'top',
             hideOnClick: false,
-            theme: 'speech_bubble',
-            touch: false,
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ]
-            }
+            touch: false
         });
     }
 

@@ -36,7 +36,7 @@ function goBack(noScroll){
     if (currentState.source) {
         document.getElementById(currentState.destination + "-content").style.display = 'none';
         document.getElementById(currentState.source + "-content").style.display = 'flex';
-        changeHexBGColor(constants.BGColor)
+        // changeHexBGColor(constants.BGColor)
     }
 
     if (currentState.callback) {
@@ -386,7 +386,11 @@ function changeHexBGColor(color){
         document.body.style.removeProperty("background-color")
         return; 
     }
-    document.body.style.backgroundColor = `rgb(${color[0] * 255},${color[1] * 255},${color[2] * 255})`;
+    if (typeof color == "string") {
+        document.body.style.backgroundColor = color;
+    } else if (Array.isArray(color)) {
+        document.body.style.backgroundColor = `rgb(${color[0] * 255},${color[1] * 255},${color[2] * 255})`;
+    }
 }
 
 function ratioCalc(unknown, x1, x2, y1, y2){
@@ -406,15 +410,15 @@ function ratioCalc(unknown, x1, x2, y1, y2){
     }
 }
 
-function processRewardsString(input){
+function processRewards(input){
     let result = {};
-    let rewards = input.split("#");
+    let rewards = (typeof(input) == "string") ? input.split("#") : input;
     let counter = 0;
     for (let reward of rewards) {
         result[counter] = {};
         let rewardData = reward.split(":");
         let rewardType = rewardData[0];
-        if (!["MonkeyMoney","Power","InstaMonkey","KnowledgePoints","RandomInstaMonkey","Trophy"].includes(rewardType)) {
+        if (!["MonkeyMoney","Power","InstaMonkey","KnowledgePoints","RandomInstaMonkey","Trophy","CollectionEvent"].includes(rewardType)) {
             result[counter].type = "Other";
             result[counter].value = rewardType;
             counter++;
@@ -448,6 +452,10 @@ function processRewardsString(input){
                 break;
             case "Trophy":
                 result[counter].type = "Trophy";
+                result[counter].amount = params[0];
+                break;
+            case "CollectionEvent":
+                result[counter].type = "CollectionEvent";
                 result[counter].amount = params[0];
                 break;
         }
@@ -833,4 +841,86 @@ function preloadImage(url) {
     let forceLoad = new Image();
     forceLoad.src = url
     return url;
+}
+
+function collapsableDiv(headerText, options = {}) {
+    let container = createEl('div', { 
+        classList: ['w-100'],
+        style: {
+            backgroundColor: "rgba(0,0,0,0.1)",
+            borderRadius: "10px",
+        }
+    });
+
+    let header = createEl('div', {
+        classList: ['pointer', 'd-flex', 'jc-between', 'ai-center'],
+        style: {
+            backgroundColor: "var(--profile-tertiary)",
+            padding: "10px",
+            borderRadius: "10px",
+        }
+    });
+    container.appendChild(header);
+
+    let headerLabel = createEl('p', {
+        classList: ['black-outline'],
+        style: {
+            fontSize: "24px",
+        },
+        innerHTML: headerText
+    });
+    header.appendChild(headerLabel);
+
+    let arrow = createEl('img', {
+        classList: ['of-contain'],
+        style: {
+            width: "30px",
+            transform: 'rotate(90deg)'
+        },
+        src: './Assets/UI/NextArrowSmallYellow.png'
+    });
+    header.appendChild(arrow);
+
+    let content = createEl('div', {
+        classList: options.classList ? options.classList : [],
+        style: options.style ? options.style : {}
+    });
+    container.appendChild(content);
+
+    header.addEventListener('click', () => {
+        if (content.style.display === 'none') {
+            content.style.display = 'flex';
+            arrow.style.transform = 'rotate(90deg)';
+        } else {
+            content.style.display = 'none';
+            arrow.style.transform = 'rotate(270deg)';
+        }
+    });
+    if (options.collapse) {
+        header.click();
+    }
+    return {container, header, content, arrow};
+}
+
+function addTooltip(element, content, options = {}) {
+    tippy(element, {
+        content: content,
+        placement: 'top',
+        theme: 'speech_bubble',
+        allowHTML: options.allowHTML || false,
+        hideOnClick: options.hideOnClick || true,
+        zIndex: options.zIndex || 9999,
+        touch: options.touch || true,
+        popperOptions: {
+            modifiers: [
+                {
+                name: 'preventOverflow',
+                options: {
+                    boundary: 'viewport',
+                    padding: {right: 18},
+                },
+                },
+            ],
+        }
+    })
 }

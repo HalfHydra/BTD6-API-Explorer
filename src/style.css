@@ -111,7 +111,7 @@
 .start-button {
     border: 15px solid transparent;
     border-image-source: url(../Assets/UI/GreenBtnSquare.png);
-    border-image-slice: 40;
+    border-image-slice: 40 fill;
     border-radius: 20px;
     width: 100px;
     font-family: 'Luckiest Guy';
@@ -123,7 +123,7 @@
 .where-button {
     border: 15px solid transparent;
     border-image-source: url(../Assets/UI/BlueBtnSquare.png);
-    border-image-slice: 40;
+    border-image-slice: 40 fill;
     border-radius: 20px;
     width: 200px;
     font-family: 'Luckiest Guy';
@@ -460,7 +460,7 @@
 }
 .progress-page{
     background-color: var(--profile-primary);
-    border-radius: 20px;
+    border-radius: 10px;
     width: 750px;
     display: flex;
     justify-content: center;
@@ -468,7 +468,7 @@
 }
 .leaderboard-page{
     background-color: var(--profile-primary);
-    border-radius: 20px;
+    border-radius: 10px;
     width: 750px;
     display: flex;
     justify-content: center;
@@ -476,7 +476,7 @@
 
 .article-page {
     background-color: var(--profile-primary);
-    border-radius: 20px;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -529,7 +529,7 @@
     border: 20px solid transparent;
     /* padding: 15px; */
     border-image-source: url(../Assets/UI/BarfillContainer.png);
-    border-image-slice: 50;
+    border-image-slice: 50 fill;
     background-color: #9F7842;
     border-radius: 20px;
     /*margin-left:10px;*/
@@ -557,7 +557,7 @@
     border: 20px solid transparent;
     /* padding: 15px; */
     border-image-source: url(../Assets/UI/BarfillContainer.png);
-    border-image-slice: 50;
+    border-image-slice: 50 fill;
     background-color: #9F7842;
     border-radius: 20px;
     /*margin-left:10px;*/
@@ -590,7 +590,7 @@
     border: 20px solid transparent;
     /* padding: 15px; */
     border-image-source: url(../Assets/UI/BarfillTrophyContainer.png);
-    border-image-slice: 50;
+    border-image-slice: 50 fill;
     background-color: #314683;
     border-radius: 20px;
     /* margin-left: 10px; */
@@ -761,7 +761,7 @@
     height: 110px;
     border: 20px solid transparent;
     border-image-source: url(../Assets/UI/InstaTowersContainerGold.png);
-    border-image-slice: 115;
+    border-image-slice: 115 fill;
     background: linear-gradient(180deg, #005280 0%, #0075A0 100%);
     border-radius: 20px;
     margin: 10px 0px;
@@ -816,7 +816,7 @@
 .tower-selector-header-top {
     border: 10px solid transparent;
     border-image-source: url(../Assets/UI/BarfillContainer.png);
-    border-image-slice: 45;
+    border-image-slice: 45 fill;
     background-color: #9F7842;
     border-radius: 20px;
     display: flex;
@@ -908,7 +908,7 @@
 .tower-selector-highlight {
     border: 40px solid transparent;
     border-image-source: url(../Assets/UI/SmallSquareGlowOutline.png);
-    border-image-slice: 110;
+    border-image-slice: 110 fill;
     position: absolute;
     width: 32px;
     height: 54px;
@@ -932,7 +932,7 @@
     margin: 0 110px;
     border: 20px solid transparent;
     border-image-source: url(../Assets/UI/InfoContainer.png);
-    border-image-slice: 110;
+    border-image-slice: 110 fill;
     background: linear-gradient(#b4834c 0%, #bd925a 100%) no-repeat;
 }
 .tower-progress-content-text {
@@ -1194,7 +1194,7 @@
 .hero-selector-highlight {
     border: 40px solid transparent;
     border-image-source: url(../Assets/UI/SmallSquareGlowOutline.png);
-    border-image-slice: 110;
+    border-image-slice: 110 fill;
     position: absolute;
     width: 32px;
     height: 58px;
@@ -1214,7 +1214,7 @@
 .hero-selector-header-top {
     border: 10px solid transparent;
     border-image-source: url(../Assets/UI/BarfillVeteranContainer.png);
-    border-image-slice: 46;
+    border-image-slice: 46 fill;
     background-color: #9F7842;
     border-radius: 20px;
     background: linear-gradient(180deg, #2E4A83 0%, #344181 100%);
@@ -1535,7 +1535,7 @@
 .maps-progress-view {
     border: 5px solid transparent;
     border-image-source: url(../Assets/UI/StatsTabBlue.png);
-    border-image-slice: 25;
+    border-image-slice: 25 fill;
     border-radius: 20px;
     background: linear-gradient(180deg, #2E4A83 0%, #344181 100%);
     font-family: 'Luckiest Guy';
@@ -1679,7 +1679,7 @@
     height: 320px;
     border: 20px solid transparent;
     border-image-source: url(../Assets/UI/BarfillContainer.png);
-    border-image-slice: 40;
+    border-image-slice: 40 fill;
     background-color: #9F7842;
     border-radius: 20px;
     margin: 0 5px;
@@ -1716,76 +1716,83 @@
 .none-border {
     border: 10px solid transparent;
     border-image-source: url(../Assets/UI/MainBGPanel.png);
-    border-image-slice: 60;
+    border-image-slice: 60 fill;
     background: linear-gradient(#bf955c, #b37f49);
     border-radius: 20px;
 }
 .coop-border {
     border: 10px solid transparent;
     border-image-source: url(../Assets/UI/MainBGPanelBlue.png);
-    border-image-slice: 60;
+    border-image-slice: 60 fill;
     background: linear-gradient(180deg, #6599d9 0%, #5085d2 100%);
     border-radius: 20px;
 }
 .bronze-border {
     border: 10px solid transparent;
     border-image-source: url(../Assets/UI/MainBGPanelBronze.png);
-    border-image-slice: 60;
+    border-image-slice: 60 fill;
     background: linear-gradient(180deg, #d1810e 0%, #e48e15 100%);
     border-radius: 20px;
 }
 .silver-border {
     border: 10px solid transparent;
     border-image-source: url(../Assets/UI/MainBGPanelGrey.png);
-    border-image-slice: 60;
+    border-image-slice: 60 fill;
     background: linear-gradient(180deg, #b8c5cf 0%, #9aaab6 100%);
     border-radius: 20px;
 }
 .gold-border {
     border: 10px solid transparent;
     border-image-source: url(../Assets/UI/MainBGPanelGold.png);
-    border-image-slice: 60;
+    border-image-slice: 60 fill;
     background: linear-gradient(180deg, #ffcf00 0%, #ffdb00 100%);
     border-radius: 20px;
 }
 .black-border {
     border: 10px solid transparent;
     border-image-source: url(../Assets/UI/MainBGPanelHematite.png);
-    border-image-slice: 60;
+    border-image-slice: 60 fill;
     background: linear-gradient(180deg, #293548 0%, #121824 100%);
     border-radius: 20px;
 }
 .grey-border {
     border: 10px solid transparent;
     border-image-source: url(../Assets/UI/MainBGPanelGrey.png);
-    border-image-slice: 60;
+    border-image-slice: 60 fill;
     background: linear-gradient(180deg, #b8c5cf 0%, #9aaab6 100%);
     border-radius: 20px;
 }
 .boss-border {
     border: 10px solid transparent;
     border-image-source: url(../Assets/UI/BossFrame.png);
-    border-image-slice: 30;
+    border-image-slice: 30 fill;
 }
 
 .ct-border {
     border: 20px solid transparent;
     border-image-source: url(../Assets/UI/TeamsStoreButton.png);
-    border-image-slice: 45;
+    border-image-slice: 45 fill;
     background: linear-gradient(#08349C 0%, #2a78d4 100%) no-repeat;
+}
+
+.odyssey-border {
+    border: 10px solid transparent;
+    border-image-source: url(../Assets/UI/OdysseyMapFrame.png);
+    border-image-slice: 25 fill;
+    background: linear-gradient(#FFB200 0%, #ffe000 100%) no-repeat;
 }
 
 .power-pro-border {
     border: 20px solid transparent;
     border-image-source: url(../Assets/UI/TeamsStoreButtonOff.png);
-    border-image-slice: 45;
+    border-image-slice: 45 fill;
     background: linear-gradient(#0A2B57 0%, #234282 100%) no-repeat;
 }
 
 .ct-panel {
     border: 20px solid transparent;
     border-image-source: url(../Assets/UI/MainBgPanelCT.png);
-    border-image-slice: 70;
+    border-image-slice: 70 fill;
     background: linear-gradient(#9C8E78 0%, #6f5b4a 100%) no-repeat;
 }
 
@@ -2101,7 +2108,7 @@
     width: 600px;
     border: 20px solid transparent;
     border-image-source: url(../Assets/UI/TitleContainer.png);
-    border-image-slice: 90;
+    border-image-slice: 90 fill;
     background: linear-gradient(#804A24 100%, transparent) no-repeat;
     justify-content: space-between;
 }
@@ -3103,7 +3110,7 @@
 .blue-btn {
     border: 15px solid transparent;
     border-image-source: url(../Assets/UI/BlueBtnSquare.png);
-    border-image-slice: 40;
+    border-image-slice: 40 fill;
     border-radius: 20px;
     background: linear-gradient(180deg, #00d8ff 0%, #00c6ff 100%);
 }
@@ -3462,7 +3469,7 @@
 .blueprint-bg {
     border: 20px solid transparent;
     border-image-source: url(../Assets/UI/BlueprintPanel.png);
-    border-image-slice: 50;
+    border-image-slice: 50 fill;
     background: linear-gradient(180deg, #1467ac 0%, #208ed5 100%);
 }
 .browser-footer-middle {
@@ -3688,14 +3695,14 @@
 .wood-container {
     border: 20px solid transparent;
     border-image-source: url(../Assets/UI/BarfillContainer.png);
-    border-image-slice: 40;
+    border-image-slice: 40 fill;
     background-color: #9F7842;
     border-radius: 20px;
 }
 .veteran-container {
     border: 20px solid transparent;
     border-image-source: url(../Assets/UI/BarfillVeteranContainer.png);
-    border-image-slice: 40;
+    border-image-slice: 40 fill;
     background: linear-gradient(180deg, #2E4A83 0%, #344181 100%);
 }
 .other-roundset-selector-img {
@@ -4318,7 +4325,7 @@
 .site-access-button {
     border: 15px solid transparent;
     border-image-source: url(../Assets/UI/GreenBtnSquare.png);
-    border-image-slice: 40;
+    border-image-slice: 40 fill;
     border-radius: 20px;
     width: 220px;
     font-family: 'Luckiest Guy';
@@ -4589,7 +4596,7 @@
     border-image-slice: 100%;
     border-image-source: none;
     border-image-source: url(../Assets/UI/TrophyBGPanelGold.png);
-    border-image-slice: 50;
+    border-image-slice: 50 fill;
     background-color: #2d2154;
 }
 
@@ -4888,7 +4895,7 @@
     justify-content: center;
     align-items: center;
     border: 20px solid transparent;
-    border-image-slice: 50;
+    border-image-slice: 50 fill;
     border-image-source: url(../Assets/UI/SpeechBubbleSquare.png);
 }
 .upgrade-div:hover .upgrade-tooltip {
@@ -4977,9 +4984,15 @@ input[type="checkbox"] {
     background-image: url('../Assets/UI/MkOnGreen.png');
 }
 
+.stats-tab-ody {
+    border-image-source: url(../Assets/UI/StatsTabOdyssey.png);
+    background: linear-gradient(180deg, #e7d7c3 0%, #dcc5aa 100%)
+}
+
 .stats-tab-yellow {
     border-image-source: url(../Assets/UI/StatsTabYellow.png);
     background: linear-gradient(180deg, #fecf00 0%, #fec600 100%);
+    border-image-slice: 30 fill;
 }
 
 .overview, .progress-page, .leaderboard-page, .events, .explore, .extras, .challenge, .publicprofile, .relics {
@@ -5447,7 +5460,7 @@ input[type="checkbox"] {
 .rogue-bg {
     border: 35px solid transparent;
     border-image-source: url(../Assets/UI/RogueBgPanelSml.png);
-    border-image-slice: 80;
+    border-image-slice: 80 fill;
     border-radius: 20px !important;
     background: linear-gradient(180deg, #e4c495 0%, #d6b483 100%);   
 }
@@ -5615,6 +5628,36 @@ input[type="checkbox"] {
     border-color: rgba(255,255,255,0.25);
 }
 
+.odyssey-pillar {
+    border: 25px solid transparent;
+    border-image-source: url(../Assets/UI/OdysseyMainPillar.png);
+    border-image-slice: 100 fill;
+    border-radius: 20px;
+    background: linear-gradient(#E2CDB6 0%, #dbc3a7 100%) no-repeat
+}
+
+.odyssey-bg {
+    /* border: 25px solid transparent;
+    border-image-source: url(../Assets/UI/OdysseyBgPanel.png);
+    border-image-slice: 80 fill;
+    border-radius: 20px; */
+    border: 25px solid transparent;
+    border-image-source: url(../Assets/UI/OdysseyBgPanel.png);
+    border-image-slice: 40% 150 100 150 fill;
+    border-radius: 20px;
+    border-top-width: 80px;
+    border-left-width: 60px;
+    border-right-width: 60px;
+    /* background: linear-gradient(#E2CDB6 0%, #dbc3a7 100%) no-repeat */
+}
+
+.odyssey-ribbon {
+    border: 25px solid transparent;
+    border-image-source: url(../Assets/UI/SubRibbonOdyssey.png);
+    border-image-slice: 0 70 0 70 fill;
+    border-radius: 20px;
+}
+
 /* Tippy Styles */
 .tippy-box[data-theme~='speech_bubble'] {
     border-radius: 26px;
@@ -5622,7 +5665,7 @@ input[type="checkbox"] {
     justify-content: center;
     align-items: center;
     border: 20px solid transparent;
-    border-image-slice: 50;
+    border-image-slice: 50 fill;
     border-image-source: url(../Assets/UI/SpeechBubbleSquare.png);
     background-color: #F4F3E2;
     text-align: center;
@@ -5643,7 +5686,7 @@ input[type="checkbox"] {
     border-width: 15px;
     border-style: solid;
     border-image-source: url(../Assets/UI/SpeechBubblePoint2.png);
-    border-image-slice: 35;
+    border-image-slice: 35 fill;
     height: unset;
     top: 28px; 
     left: -8px;
@@ -5741,6 +5784,10 @@ input[type="checkbox"] {
     align-items: start;
 }
 
+.ac-start {
+    align-content: start;
+}
+
 .ta-center {
     text-align: center;
 }
@@ -5781,6 +5828,10 @@ input[type="checkbox"] {
     width: 100%;
 }
 
+.h-100 {
+    height: 100%;
+}
+
 .f-wrap {
     flex-wrap: wrap;
 }
@@ -5790,6 +5841,10 @@ input[type="checkbox"] {
 
 .pos-rel {
     position: relative;
+}
+
+.pos-abs {
+    position: absolute;
 }
 
 .of-contain {
@@ -5838,6 +5893,10 @@ input[type="checkbox"] {
 
 .lh-add-full {
     line-height: 2.0;
+}
+
+.bs-box {
+    box-sizing: border-box;
 }
 
 .ct-map {

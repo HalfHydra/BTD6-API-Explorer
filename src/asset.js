@@ -485,6 +485,8 @@ function getRewardIcon(rewardData){
             return `Assets/UI/InstaRandomTier${rewardData.tier == 0 ? 1 : rewardData.tier}.png`;
         case "Trophy":
             return `Assets/UI/TrophyIcon.png`;
+        case "CollectionEvent":
+            return `Assets/UI/EventTotemLootIcon.png`;
         default:
             return `Assets/UI/${rewardData.value}Icon.png`;
     }

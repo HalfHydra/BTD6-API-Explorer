@@ -2215,6 +2215,48 @@
         "updateAdded": 54,
         "cost": 50
     },
+    "GameUIProfileAvatar131": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar131",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": true,
+        "obtainMethod": "Frontier",
+        "isNew": true,
+        "updateAdded": 54.3
+    },
+    "GameUIProfileAvatar132": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar132",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": true,
+        "obtainMethod": "Frontier",
+        "isNew": true,
+        "updateAdded": 54.3
+    },
+    "GameUIProfileAvatar133": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar133",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": true,
+        "obtainMethod": "Frontier",
+        "isNew": true,
+        "updateAdded": 54.3
+    },
     "GameUIProfileAvatar13": {
         "storeFilter": "GameUI",
         "subFilter": "Avatars",

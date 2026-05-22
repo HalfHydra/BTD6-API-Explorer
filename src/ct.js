@@ -213,23 +213,9 @@ async function generateCTs(){
         raceInfoDates.innerHTML = `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`;
         ctInfoLeftDiv.appendChild(raceInfoDates);
 
-        tippy(raceInfoDates, {
-            content: `${new Date(race.start).toLocaleString()}<br>${new Date(race.end).toLocaleString()}`,
-            placement: 'top',
-            theme: 'speech_bubble',
+        addTooltip(raceInfoDates, `${new Date(race.start).toLocaleString()}<br>${new Date(race.end).toLocaleString()}`, {
             allowHTML: true,
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            }
-        })
+        });
 
         let raceInfoRules = createEl('div', { classList: ["start-button", "currency-trophies-div", "black-outline"], style: {width: "200px"}, innerHTML: "Event Details"});
         raceInfoRules.addEventListener('click', () => {
@@ -509,23 +495,9 @@ async function openCTEventDetails(source, eventData) {
             eventRelicAvailableText.style.display = "none";
         }
 
-        tippy(relicDiv, {
-            content: `<p class="artifact-title">${getLocValue(`Relic${relic}`)}</p>${getLocValue(`Relic${relic}Description`)}`,
+        addTooltip(relicDiv, `<p class="artifact-title">${getLocValue(`Relic${relic}`)}</p>${getLocValue(`Relic${relic}Description`)}`, {
             allowHTML: true,
-            placement: 'top',
             hideOnClick: false,
-            theme: 'speech_bubble',
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            },
         });
     });
 
@@ -594,23 +566,9 @@ async function openCTEventDetails(source, eventData) {
         let relicIcon = createEl('img', { classList: ['relic-icon'], src: `./Assets/RelicIcon/${relicTypeName}.png` });
         relicDiv.appendChild(relicIcon);
 
-        tippy(relicDiv, {
-            content: `<p class="artifact-title">${getLocValue(`Relic${relicTypeName}`)}</p>${getLocValue(`Relic${relicTypeName}Description`)}`,
+        addTooltip(relicDiv, `<p class="artifact-title">${getLocValue(`Relic${relicTypeName}`)}</p>${getLocValue(`Relic${relicTypeName}Description`)}`, {
             allowHTML: true,
-            placement: 'top',
             hideOnClick: false,
-            theme: 'speech_bubble',
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            },
         });
     })
 
@@ -627,23 +585,9 @@ async function openCTEventDetails(source, eventData) {
         let relicIcon = createEl('img', { classList: ['relic-icon'], src: `./Assets/RelicIcon/${relicTypeName}.png` });
         relicDiv.appendChild(relicIcon);
 
-        tippy(relicDiv, {
-            content: `<p class="artifact-title">${getLocValue(`Relic${relicTypeName}`)}</p>${getLocValue(`Relic${relicTypeName}Description`)}`,
+        addTooltip(relicDiv, `<p class="artifact-title">${getLocValue(`Relic${relicTypeName}`)}</p>${getLocValue(`Relic${relicTypeName}Description`)}`, {
             allowHTML: true,
-            placement: 'top',
             hideOnClick: false,
-            theme: 'speech_bubble',
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            },
         });
     });
 
@@ -2049,24 +1993,10 @@ function openTileModal(tileData, source) {
     });
     tileTypeAndID.appendChild(tileIconImg);
     if (tileData.TileType == 'Relic') {
-        tippy(tileIconImg, {
-            content: `<p class="artifact-title">${getLocValue(`Relic${tileData.RelicType}`)}</p>${getLocValue(`Relic${tileData.RelicType}Description`)}`,
+        addTooltip(tileIconImg, `<p class="artifact-title">${getLocValue(`Relic${tileData.RelicType}`)}</p>${getLocValue(`Relic${tileData.RelicType}Description`)}`, {
             allowHTML: true,
-            placement: 'top',
             hideOnClick: false,
-            theme: 'speech_bubble',
-            zIndex: 10001,
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            },
+            zIndex: 10001
         });
     }
 

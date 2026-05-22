@@ -62,6 +62,9 @@ let racesDataCachedAt = null;
 let bossesDataCachedAt = null;
 let CTDataCachedAt = null;
 let challengesDataCachedAt = null;
+let odysseyDataCachedAt = null;
+
+let odysseyData = null;
 
 let latestEvents = null;
 
@@ -238,14 +241,16 @@ async function getRogueSaveData(oak_token) {
     await profilePromise;
 }
 
-async function getRacesData() {
+async function getRacesData(dataOnly = false) {
     if (racesData == null || isStale(racesDataCachedAt)) {
         await fetchData(`https://data.ninjakiwi.com/btd6/races`, (json) => {
             racesData = json["body"];
             racesDataCachedAt = Date.now();
+            if (dataOnly) return;
             generateRaces();
         });
     } else {
+        if (dataOnly) return;
         generateRaces();
     }
     addToBackQueue({callback: generateEvents})
@@ -309,14 +314,16 @@ async function getLeaderboardPage(link, token = leaderboardActiveToken, isInitia
     });
 }
 
-async function getBossesData() {
+async function getBossesData(dataOnly = false) {
     if (bossesData == null || isStale(bossesDataCachedAt)) {
         await fetchData(`https://data.ninjakiwi.com/btd6/bosses`, (json) => {
             bossesData = json["body"];
             bossesDataCachedAt = Date.now();
+            if (dataOnly) return;
             generateBosses(showElite);
         });
     } else {
+        if (dataOnly) return;
         generateBosses(showElite);
     }
     addToBackQueue({callback: generateEvents})
@@ -333,14 +340,16 @@ async function getBossMetadata(key, elite) {
     }
 }
 
-async function getCTData(standalone) {
+async function getCTData(standalone, dataOnly = false) {
     if (CTData == null || isStale(CTDataCachedAt)) {
         await fetchData(`https://data.ninjakiwi.com/btd6/ct`, (json) => {
             CTData = json["body"];
             CTDataCachedAt = Date.now();
+            if (dataOnly) return;
             generateCTs();
         });
     } else {
+        if (dataOnly) return;
         generateCTs();
     }
     if (!standalone) { 
@@ -431,10 +440,12 @@ async function getLatestEvents() {
     return latestEvents;
 }
 
-async function getLatestCollectionEvent() {
+async function getLatestCollectionEvent(id = null) {
     let events = await getLatestEvents() || [];
     for (let event of events) {
-        if (event["type"] == "collectableEvent") {
+        if (event["type"] == "collectableEvent" && (Date.now() < event.end) && id == null) {
+            return event;
+        } else if (event["type"] == "collectableEvent" && event.id == id) {
             return event;
         }
     }
@@ -443,7 +454,48 @@ async function getLatestCollectionEvent() {
     //   "start": 1767992460000,
     //   "end": 1768446000000,
     // }
+    // return {
+    //   "id": "mp07sijd",
+    //   "start": 1779528800000,
+    //   "end": 1779828800000,
+    // }
     return null;
+}
+
+async function getOdysseyData(dataOnly = false) {
+    if (odysseyData == null || isStale(odysseyDataCachedAt)) {
+        await fetchData(`https://data.ninjakiwi.com/btd6/odyssey`, (json) => {
+            odysseyData = json["body"];
+            odysseyDataCachedAt = Date.now();
+            if (dataOnly) return;
+            generateOdyssey();
+        });
+    } else {
+        if (dataOnly) return;
+        generateOdyssey();
+    }
+    addToBackQueue({callback: generateEvents})
+}
+
+async function getOdyMetadata(key, difficulty, dataOnly = false) {
+    let metaKey = `metadata_${difficulty}`;
+
+    if (typeof odysseyData[key][metaKey] === 'string') {
+        await fetchData(odysseyData[key][metaKey], (json) => {
+            odysseyData[key][metaKey] = json["body"];
+        });
+    }
+
+    if (odysseyData[key][metaKey] && typeof odysseyData[key][metaKey] === 'object') {
+        if (typeof odysseyData[key][metaKey].maps === 'string') {
+            await fetchData(odysseyData[key][metaKey].maps, (json) => {
+                odysseyData[key][metaKey].maps = json["body"];
+            });
+        }
+    }
+    if (dataOnly) return;
+    showOdyssey(difficulty, odysseyData[key], odysseyData[key][metaKey]);
+    return odysseyData[key][metaKey];
 }
 
 function readLocalStorage(){

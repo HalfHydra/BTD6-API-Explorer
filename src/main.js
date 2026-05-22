@@ -103,19 +103,19 @@ let seenOutOfDate = false;
 let imageScroll = [
     {
         "title": "New Site Update!",
-        "text": `Site Update 2.7.1:<br>
-        - Profile Tab Overhaul<br>
-        - Powers Pro Tracking<br>
+        "text": `Site Update 2.8.0:<br>
+        - Odyssey Events<br>
+        - Events Menu Rework<br>
         <br>
         Recent Updates:<br>
+        - Powers Pro Tracking<br>
         - Contested Territory Map<br>
-        - Rogue Artifacts Autotracking<br>
         <br>
         Try the <a href="https://btd6store.ninjakiwi.com/?code=halfhydra" target="_blank" style="color: white;">Official BTD6 Webshop</a>!<br>
         Creator Code: 'HalfHydra' - TY!<br>
         Report Bugs: <a href="https://discord.gg/wep2RDmcqZ" target="_blank" style="color: white;">Discord Server</a><br>
         `,
-        "image": "/LandingScroll/Update54&PowersPro"
+        "image": "/LandingScroll/Update54&Odysseys"
     },
     {
         "title": "View Your Profile!",
@@ -154,6 +154,40 @@ let imageScroll = [
     }
 ]
 let imageScrollIndex = 0;
+
+let changelog = {
+    "v2.8.0 (5/21/26)": "Events Update + Odyssey Events Added (finally)<br>- If you look at version 1.0.0 of this site (7/7/24), I mentioned that Odyssey events were coming soon and that it was \"still being worked on\" (I hadn't started). Anyway, it's here now! Yay!<br>- Events screen reworked to be more efficient with space.<br>- Events screen now displays all events that are upcoming, active, and recently finished.<br>- Added a default menu for Collection Events when none events are found on the API.<br>- Added new avatars from Update 54.3 <br>- Fixed a bug causing the new trophy store items added by an update to not show up as new.<br>- The boss event details will now have a better decision between if it should show excluded or available towers by default.<br>- Fixed an issue with certain menu items have a random invisible line when zooming out the browser<br>- As you might've noticed, the changelog is now collapsable. Too many entries! Super proud of how much effort I've been able to give this project.<br><br>",
+    "v2.7.1 (5/11/26)": "Open Data API Downtime Handling<br>- Ninja Kiwi's Open Data API is currently unavailable. This is affecting all sites/apps/bots that use the API, and we will have to wait until it is fixed (may take a few weeks). The site now displays a proper error message when the Open Data API is unreachable.<br>- Added missing teams banner<br>- Minor UI Adjustments<br><br>",
+    "v2.7.0 (4/15/26)": "Powers Pro + Profile Overhaul<br>- Added Powers Pro information and calculator to show how much Monkey Money you need to use to unlock the tiers.<br>- Powers Pro now show up in the Powers section<br>- Fixed certain profile information from being unavailable when the leaderboards API breaks on a major game update. You can now view limited profile info (most everything besides stats)<br>- Fixed counts on some quick stats to be worded more accurately for what they represent<br>- Fixed powers pro upgrades being included in upgrades total<br>- Added missing abilities<br>- Abilities tab can now filter by tower type<br>- Towers menu now displays relevant stats and related abilities used<br>- Heroes menu now shows placement stats and abilities used<br>- Maps menu now shows leftover single player bonus cash obtainable<br>- Knowledge menu completely redone to show trees, and can filter by tower for relevant knowledge points<br>- Achievements now has a search bar, a total obtained count, and can filter by coop specific achievements<br>- Owned Only now changes the trophy store to display the total trophies spent<br>- Quests now has filtering by type like in game, and sort the incomplete ones to the top of the list<br>- Add more information to most tooltips<br>- Fixed some tooltips going off screen<br>- Ice Monkey Walrus no longer accidentally shows as being added in update 29<br>- The Insta Monkeys section should no longer break when there's a monkey with no instas ever obtained.<br>- Fixed bug preventing new entries from loading on leaderboards in some cases<br>- Leaderboard profiles now correctly show a loading icon when you click on one<br>- Updated the OAK token guide to use the new in game account menu<br>- Renamed Frontier Legends roundsets from \"Base X\" to \"Act X\"<br>- Updated all the roundsets to reflect the rounds 120-140 income changes<br>- Bosses that don't have a standard event name will now show it (too bad most people didn't get to see the silly names those fake April Fools events had!)<br>- Fixed hero skins count (again)<br>- Fixed an issue causing the CT top 25 medal to now show up<br>- Fixed modifier icons after adjustments to map icons<br>- Knowledge points in the towers menu now correctly reflect the unlocked status<br>- tooltips should no longer show incorrectly on tap for mobile in Rogue Legends artifacts<br>- Fixed broken difficulty filter for maps<br>- Veteran levels should no longer add every single time you exit and login (lol)<br>- Starter artifacts removed from rogue progress image to make it a perfect square again<br>- Fix rogue legends artifacts syncing bug causing it to not stop pinging when you're not on the menu<br>That sure was a lot, now time for something I very much should've added a long long time ago: Odyssey events coming next<br><br>",
+    "v2.6.0 (3/16/26)": "Trophy Store Overhaul + Frontier Stats<br>- Added information to Trophy Store items such as costs, update added, and a label for new items<br>- Added new Trophy Store sorting options: First Added & Newly Added<br>- Frontier Stats added to the stats page. It's very short for now, as I am verifying some additional stats accuracy<br>- Added leaderboard type icons to bosses on the leaderboards tab<br>- Fix map icon widths across all pages<br>- Manually override collection event icons for events like Ninja Kiwi's 20th anniversary<br>- Site version info should no longer show twice<br>- When no scores are available on a leaderboard, it won't get stuck on second load and instead properly refresh<br><br>",
+    "v2.5.1 (2/15/26)": "Update 53 & Automatic Rogue Tracking<br>- You can now select an OAK token to sync the extracted artifacts section with. It will refresh once every few minutes of opening the artifacts menu. You can track manually until you refresh the page, and all new artifacts will be automatically pulled<br>- Rogue image export is now hidden until you extract an artifact<br>- The back button now works correctly on the insta monkeys menus<br>- Tower Type sort will no longer be out of order on Insta \"All\" view<br>- New quests that aren't supported yet won't show up until they are<br>- Insta borders on the stats page will no longer show nothing if you have no instas of that monkey type<br>- Removed broken API exclusive stats temporarily from profiles<br>- Total counts for various stats on Quick Stats have been fixed<br>- Added a \"New\" filter for Trophy Store items<br>- Fix incorrect parsing of Boss Names ex: \"Blastapopolous 152\" instead of \"Blastapopoulos 15\"<br><br>",
+    "v2.5.0 (1/11/26)": "Coop Leaderboards, Frontier Roundsets, other refinements<br>- Added coop boss leaderboards + boss tier for each score<br>- Added \"All\" view to Insta Monkey collection, allowing you to see which one you've collected the most of<br>- Added Frontier Legends base and rush roundsets, along with comment explanations. I may add the frontier stages data in the future but no promises<br>- Added icons for scoring type on the boss event list<br>-  Added achievement guide buttons for some less clear and difficult ones linking to relevant Bloonscyclopedia and Steam community guide pages<br>- Collection events now show when the group changes, and auto refreshes to show the latest groupings<br>- Top Towers for your individual profile now uses the Insta Monkey collection borders<br>- Fixed the Rogue Legends artifact image, and hide the option until after you enable the tracking mode in the main tab<br>- Many UI fixes such as resizing the browsing window now updating various elements correctly, overlapping text fixed, trophy store items filter no longer persists incorrectly<br>- I've hidden historic CT data before CT 33 (and this may change again later) as I cannot verify they are accurate<br>- Trophy store items should be accurate now<br><br>",
+    "v2.4.0 (12/10/25)": "Update 52 and Contested Territory Map!<br>- New Contested Territory Map and Event Details revamp! Big thanks to a certain dataminer for hosting the generated CT tile data as that is not available on the Open Data API currently.<br>- Added a <a href=\"./ct\" target=\"_blank\" style=\"color: white;\">standalone CT site</a> that will host only the current events information<br>Collection Events will now automatically be added<br>- Collection events now display when the event ends at the bottom of the schedule<br>- Any time a new update happens, there will now be text hinting that the update is not available on the API yet.<br>- Fixed Fortified DDTs not showing up on \"Lead and DDT\" preset filter<br>- Events with multiple custom roundsets will now show correctly<br>- Filtering now works on the standalone rounds site<br>- Roundsets will now show the currently listed rounds at the top<br>- Added a link to the Discord server in the extras tab.<br><br>",
+    "v2.3.1 (10/26/25)": "Minor fixes<br>- Updated trophy store items to use newer structure on the Open Data API, which should prevent this from being as inaccurate as before - still testing though.<br>- Games played text now shows up with the correct value<br>- SheRa Adora skin will now show up correctly.<br>- Other minor UI tweaks<br><br>",
+    "v2.3.0 (10/16/25)": "Update 51 and Minor Updates<br>- Added Update 51 content including new Rogue changes <br>- You can now navigate to the more detailed menus from Quick Stats<br>- Towers menu now shows related Monkey Knowledge points (rework coming eventually)<br>- Added total of each tier to the game-like view of Insta Monkeys collection when \"Missing\" is toggled.<br>- Unavailable Relics will now displayed on the CT Relics page in prepration for a CT rework<br>- Duplicate (IAP/Special) Rogue starter kits will now show at the bottom<br>- The leaderboard refresh button will now only appear for currently active events<br>- Fixed a bug causing the Clear Filters button to break some roundsets functionality.<br>- Top Paragons will no longer show if there aren't any<br>- Events will now refetch their information from the API after 10 minutes.<br>- The scrollbar is no longer accidentally unstyled. Whoops<br>- Fixed numerous bugs with the back button not clearing when going back<br><br>",
+    "v2.2.0 (9/29/25)": "Leaderboard Revamp + Rogue Improvements<br>- Leaderboards have been revamped with better loading times.<br>- Clicking a team on the Contested Territory leaderboard will now show their group of competing teams and their scores.<br>- Leaderboards will now refresh the next time you access them if it's been a while and you don't refresh the page.<br>- A manual refresh button has been added to the top of individual leaderboards.<br>- Leaderboards now show text indicating if it is loading new entries and if it has reached the end.<br>- Fixed a bug causing the timers on events to freeze after going back and forward to various menus.<br>- Rogue Artifacts now has a clear filter button.<br>- Rogue Artifacts count should now correctly display if the collection mode is turned off.<br>- Rogue Legends artifact popout updated to include the update that the artifact was added in as well as display an insta monkey that is added if it has one.<br>- Rogue legends starter kits now also show the insta monkey that is added via a starter artifact.<br>- Fixed numerous UI bugs including a missing Fortified DDT Icon, the rogue legends artifact sorting preview not working anymore.<br><br>",
+    "v2.1.0 (9/23/25)": "Roundsets Revamp + Quests!<br>- The roundset viewer now has options for filtering. This includes a round range (good for Rogue Legends), starting cash, as well as filtering by bloons. There are 6 basic filters and then a toggle for an advanced mode that allows you to filter down to specific bloons.<br>- Bloon Group timings in the detailed view of rounds now has a tooltip that will show the exact timings on hover.<br>- Clicking the round number in simple or detailed will now take you to the previewer for that round.<br>- The roundset previewer has been fixed, and the UI has been rearranged. No more lag issues causing inaccurate previews, it should always be accurate now no matter the capabilities of your device.<br>- You can now turn off round hints.<br>- A helpful message describing the boss roundset changes has been added for each boss.<br>- Quests have been added under the Profile tab. You can also view the custom roundset (if it has one) from there.<br>- Fixed boss details showing the incorrect scoring type.<br>- Fixed some UI issues in Collection Event menus.<br>- You can now reveal hidden achievement descriptions. This will be complimented later with a guide for a select few taht are tougher or less straight forward in the future.<br>- Fixed the download for Rogue artifacts on Firefox.<br>- Fixed a bug that enabled XSS with named monkeys.<br>- New heroes should no longer break the site before I add them. Oops.<br>- 2 variant artifacts filtering has been fixed to include all of them.<br>- Rogue Artifact popout should no longer make you jump to the top of the scrollbar.<br>- Fixed a bug involving reverse mode in the detailed section of roundsets.<br>- Fixed a bug where the list view on map stats would not show any maps after update 45. Whoops, thank you @200e200w for reporting this on the Discord Server.<br><br>",
+    "v2.0.0 (7/5/25)": "Major Update and Update 49!<br>- The site has been completely reworked and redesigned, allowing for less focus on logging in.<br>- A global back button has been implemented at the top left that will always immediately take you back to wherever you just were.<br>- A way of viewing and filtering the current schedule for collection event featured instas has been added.<br>- Top 1% Boss medal was renamed to Top 100.<br>- Roundsets simple view now shows the time per round on the right.<br>- The full time information for events can now be found via a tooltip on the events list.<br>- Rogue Artifacts search now correctly changes the total count for searching.<br>- Special Rogue Roundsets now show their tooltip of what you would see in game for the associated roundset.<br>- Fixed Hero Skin count. NK wasn't the only one who somehow had issues with that...<br>- Fixed ordering for artifacts using internal name instead of alphabetical name.<br>- You can now logout of your profile and use another OAK token without refreshing the page.<br>- Profiles from leaderboards should no longer be missing many medals.<br>- Standalone pages now only load what's essential for them.<br>- The new achievement was added. <br>- Leaderboards have been fixed.<br><br>",
+    "v1.9.1 (5/16/25)": "Many Bug Fixes<br>- Fixed Voidora's hero starter kit being incorrect<br>- Fixed CT Local Medals not appearing and Global medals being incorrectly labeled<br>- Fixed the normal Rogue Legends roundset not being updated with the Update 48 changes<br>- Fixed a bug causing modded paragons to show up and error out<br><br>",
+    "v.1.9.0 (4/3/25)": "Update 48 Content, Abilites Used Section, Top Paragons<br>- Added all content from Update 48 (there was a lot)<br>- You are now able to view how many times you've used each ability. You can find this under Progress -> Unqiue Abilities Used<br>- Top Paragons will now appear under Top Towers and Top Heroes on the overview<br>- Rogue Legends received an update with 6 new roundset variations, those have been added as a top bar with an icon of what bloons on the tile the roundset correlates to.<br>- Rogue Legends Artifacts has been updated to include all the artifacts added, as well as be able to sort for only Update 48 artifacts.<br><br>",
+    "v1.8.1 (3/23/25)": "Rogue Artifacts Updates<br>- Filter & Sort has been reworked into a new settings menu that adds lots of new filtering options<br>- A search bar has been added to find artifacts quickly<br>- The total count of artifacts should now always be accurate<br>- The back button now correctly returns you to where you were prior<br><br>",
+    "v1.8.0 (3/8/25)": "Rogue Legends Artifacts<br>- Added Rogue Legends Artifacts standalone site. Allows you to track and share your artifacts collection with others, as well as reference Hero Starter Kits for each artifact<br>- Unfortunately the Open Data API does not have the extracted artifacts available for your profile, so all entry will be manual<br>- Updated the standalone site buttons to be simpler<br><br>",
+    "v.1.7.1 (2/17/25)": "Inevitable bug fixes<br>- Rogue Legends Stats will no longer show up if you don't own it<br>- Tooltips now render HTML entities, have larger text, and have the arrow centered<br>- Added missing tooltips from leaderboards site<br><br>",
+    "v.1.7.0 (2/16/25)": "Update 47 and Tooltips!<br>- Added Update 47.1 content including the new Rogue Legends roundset<br>- Added proper tooltips to medals and a few other places like the Towers section.<br>- Added Rogue Legends stats to the overview page<br>- Added Round Hints to the roundset viewer<br>- Added Overall Highest Round and Total Games Won on the map specific details menu<br>- Added missing Adora + Battle Cat Roundsets, and a few older Odysseys courtesy of @jessiepatch<br>- The standalone site buttons got a glow up.<br>- The roundset selection screen has been condensed and cleaned up.<br>- Fixed a bug involving leaderboard requests that result in incorrect placements and duplicated entries<br>- Leaderboard entries should only have the profiles loaded if they are currently rendered on screen.<br><br>",
+    "v1.6.1 (1/16/25)": "Inevitable Leaderboard Fixes<br>- The site no longer infinite loads when there are no active events<br>- The site no longer has any leaderboards with 0 scores shown (some older events get their leaderboards wiped early)<br>- Events that aren't started won't show up until they are active<br>- The initial load was improved, and the loading icon now shows correctly when clicking a leaderboard for the first time<br><br>",
+    "v1.6.0 (1/12/25)": "Leaderboards improvements and page!<br>- There is now a <a href=\"./leaderboards\" target=\"_blank\" style=\"color: white;\">Leaderboards Page</a> made specifically for viewing them all in one place.<br>- Loading profiles automatically has been turned back on because...<br>- Improved the handling of automatically loading leaderboard profiles to not be rate limited as quickly. This system should hopefully prevent any rate limiting at all.<br><br>",
+    "v1.5.1 (12/19/24)": "Bug fixes! <br>- Zero limited or excluded towers/heroes like the upcoming Bloonarius 56 will no longer show an empty box<br>- The timer no longer jumps to the first event of the list assuming there is only one active at a time.<br><br>",
+    "v1.5.0 (12/15/24)": "Trophy Store Items and Update 46!<br>- Added Update 46 content<br>- Added the Trophy Store Items menu for those who want to see all that exist and your collection.<br>- Team Store items have also been added, but since I am unable to test how that works, it is hidden in settings by default.<br>- Settings should now save when reloading the page using the same system that saves the OAK tokens you've used.<br>- Fixed a bug that prevented newer maps from showing up<br>- Added missing badges<br><br>",
+    "v1.4.0 (12/7/24)": "Extras and Events in Roundsets<br>- User profiles on the leaderboards and content browser no longer load by default. This caused too many rate limiting issues.<br>- Added a setting in Settings to toggle automatic profile loading back on if you wanted to see the profile avatar and banner of users on the leaderboard.<br>- Added known previous events with custom roundsets to the Roundsets section.<br>- Fixed a bug involving timers going weirdly negative<br>- Added Creator Support instructions<br><br>",
+    "v1.3.0 (11/31/24)": "QoL Changes<br>- Added Update 45 images and content<br>- You can now toggle to see just the excluded towers and heroes of a challenge or event<br>- You can now swap between Normal/Elite on the details for a boss<br>- Bloon groups can now be hidden in the round previewer by clicking on them<br>- Added a checkmark in the Collection Event list to categories that were completely collected<br>- Updated Endurance Rounds to use updated round thresholds<br>- Resolved an issue when applying a filter to content browser content and not refreshing<br>- Added Ceramic Flood Roundset (very late)<br><br>",
+    "v1.2.3 (9/3/24)": "Collection Event Menu Upgrade<br>- Added a how to use guide at the top of the Collection Event Menu<br>- Added the Insta Chest odds to the Collection Event Menu<br>- Clicking on a missing Insta will now temporarily mark it as obtained<br><br>",
+    "v1.2.2 (8/29/24)": "Missing Medals<br>- Added a few missing medals from the overview/leaderboard profile pages<br>- Added mouse hover tooltips to various elements<br><br>",
+    "v1.2.1 (8/22/24)": "Insta Monkey Collection Improvements<br>- Resolved an issue preventing the collected but used Insta Monkeys from being displayed.<br>- Add a new list of all the Insta Monkey tower chances in the Collection Event Helper for efficient checking of what the best Featured Insta Monkey to choose is.<br>- The trailer video no longer plays in the background after previewing the site or logging in! Thanks for the feedback.<br><br>",
+    "v1.2.0 (8/5/24)": "Preview Mode and UI Improvements <br>- Added a way to use the site without an OAK token. Useful when you don't have it accessible or can't make one<br>- The site now prompts when your data has new content that the site doesn't have updated yet<br>- Challenge details now correctly shows the max amount of specific monkeys if limited<br>- Other UI fixes<br><br>",
+    "v1.1.0 (7/16/24)": "Insta Monkey Collection Features<br>- Added Insta Monkey Collection Event Helper. This displays the odds of getting a new Insta Monkey for each chest type and when selecting a featured tower.<br>- Also added a page documentating all of the continuous sources of Insta Monkeys<br>- UI fixes and improvements<br><br>",
+    "v1.0.1 (7/13/24)": "Bug Fixes<br>- Daily challenges now show the correct associated date<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes<br><br>",
+    "v1.0.0 (7/7/24)": "Initial Release <br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon."
+}
 
 fetchConstants()
 function generateIfReady(){
@@ -775,22 +809,33 @@ function generateFrontPage(){
     infoButtons.appendChild(faqButton);
     infoButtons.appendChild(knownIssuesButton);
 
-    let FAQDiv = document.createElement('div');
-    FAQDiv.id = 'faq-div';
-    FAQDiv.classList.add('faq-div');
-    FAQDiv.style.display = 'none';
+    let FAQDiv = createEl('div', {
+        id: 'faq-div',
+        classList: ['faq-div','f-wrap','jc-center'],
+        style: {
+            gap: "1rem",
+            display: 'none',
+        }
+    });
     frontPage.appendChild(FAQDiv);
 
-    let knownIssuesDiv = document.createElement('div');
-    knownIssuesDiv.id = 'known-issues-div';
-    knownIssuesDiv.classList.add('known-issues-div');
-    knownIssuesDiv.style.display = 'none';
+    let knownIssuesDiv = createEl('div', {
+        id: 'known-issues-div',
+        classList: ['known-issues-div','f-wrap','jc-center'],
+        style: {
+            display: 'none',
+        }
+    });
     frontPage.appendChild(knownIssuesDiv);
 
-    let changelogDiv = document.createElement('div');
-    changelogDiv.id = 'changelog-div';
-    changelogDiv.classList.add('changelog-div');
-    changelogDiv.style.display = 'none';
+    let changelogDiv = createEl('div', {
+        id: 'changelog-div',
+        classList: ['changelog-div', 'f-wrap', 'jc-center'],
+        style: {
+            gap: "1rem",
+            display: "none",
+        }
+    });
     frontPage.appendChild(changelogDiv);
 
     let StandaloneSiteText = document.createElement('p');
@@ -938,7 +983,7 @@ function generateFrontPage(){
 
     let knownIssuesText = document.createElement('p');
     knownIssuesText.classList.add('oak-instructions-text');
-    knownIssuesText.innerHTML = `- Diamondback badges are missing<br>- Teams Decor is currently broken for leaderboards profiles`;
+    knownIssuesText.innerHTML = `- Daily challenges endpoint is broken, taking multiple minutes to respond and often failing. The issue has been brought up and will hopefully get resolved by the NK Open Data API team soon.<br>- Diamondback badges are missing<br>- Teams Decor is currently broken for leaderboards profiles`;
     knownIssuesDiv.appendChild(knownIssuesText);
     
     let changelogHeader = document.createElement('p');
@@ -946,39 +991,21 @@ function generateFrontPage(){
     changelogHeader.innerHTML = 'Changelog';
     changelogDiv.appendChild(changelogHeader);
 
-    let changelogText = document.createElement('p');
-    changelogText.classList.add('oak-instructions-text');
-    changelogText.innerHTML = `v.2.7.1 (5/11/26): Open Data API is Down! <br>- Ninja Kiwi's Open Data API is currently unavailable. This is affecting all sites/apps/bots that use the API, and we will have to wait until it is fixed (may take a few weeks). The site now displays a proper error message when the Open Data API is unreachable.<br>- Added missing teams banner<br>- Minor UI Adjustments<br><br>
-    v2.7.0 (4/15/26): Powers Pro + Profile Overhaul<br>- Added Powers Pro information and calculator to show how much Monkey Money you need to use to unlock the tiers.<br>- Powers Pro now show up in the Powers section<br>- Fixed certain profile information from being unavailable when the leaderboards API breaks on a major game update. You can now view limited profile info (most everything besides stats)<br>- Fixed counts on some quick stats to be worded more accurately for what they represent<br>- Fixed powers pro upgrades being included in upgrades total<br>- Added missing abilities<br>- Abilities tab can now filter by tower type<br>- Towers menu now displays relevant stats and related abilities used<br>- Heroes menu now shows placement stats and abilities used<br>- Maps menu now shows leftover single player bonus cash obtainable<br>- Knowledge menu completely redone to show trees, and can filter by tower for relevant knowledge points<br>- Achievements now has a search bar, a total obtained count, and can filter by coop specific achievements<br>- Owned Only now changes the trophy store to display the total trophies spent<br>- Quests now has filtering by type like in game, and sort the incomplete ones to the top of the list<br>- Add more information to most tooltips<br>- Fixed some tooltips going off screen<br>- Ice Monkey Walrus no longer accidentally shows as being added in update 29<br>- The Insta Monkeys section should no longer break when there's a monkey with no instas ever obtained.<br>- Fixed bug preventing new entries from loading on leaderboards in some cases<br>- Leaderboard profiles now correctly show a loading icon when you click on one<br>- Updated the OAK token guide to use the new in game account menu<br>- Renamed Frontier Legends roundsets from "Base X" to "Act X"<br>- Updated all the roundsets to reflect the rounds 120-140 income changes<br>- Bosses that don't have a standard event name will now show it (too bad most people didn't get to see the silly names those fake April Fools events had!)<br>- Fixed hero skins count (again)<br>- Fixed an issue causing the CT top 25 medal to now show up<br>- Fixed modifier icons after adjustments to map icons<br>- Knowledge points in the towers menu now correctly reflect the unlocked status<br>- tooltips should no longer show incorrectly on tap for mobile in Rogue Legends artifacts<br>- Fixed broken difficulty filter for maps<br>- Veteran levels should no longer add every single time you exit and login (lol)<br>- Starter artifacts removed from rogue progress image to make it a perfect square again<br>- Fix rogue legends artifacts syncing bug causing it to not stop pinging when you're not on the menu<br>That sure was a lot, now time for something I very much should've added a long long time ago: Odyssey events coming next<br><br>
-    v2.6.0 (3/16/26): Trophy Store Overhaul + Frontier Stats<br>- Added information to Trophy Store items such as costs, update added, and a label for new items<br>- Added new Trophy Store sorting options: First Added & Newly Added<br>- Frontier Stats added to the stats page. It's very short for now, as I am verifying some additional stats accuracy<br>- Added leaderboard type icons to bosses on the leaderboards tab<br>- Fix map icon widths across all pages<br>- Manually override collection event icons for events like Ninja Kiwi's 20th anniversary<br>- Site version info should no longer show twice<br>- When no scores are available on a leaderboard, it won't get stuck on second load and instead properly refresh<br><br>
-    v2.5.1 (2/15/26): Update 53 & Automatic Rogue Tracking<br>- You can now select an OAK token to sync the extracted artifacts section with. It will refresh once every few minutes of opening the artifacts menu. You can track manually until you refresh the page, and all new artifacts will be automatically pulled<br>- Rogue image export is now hidden until you extract an artifact<br>- The back button now works correctly on the insta monkeys menus<br>- Tower Type sort will no longer be out of order on Insta "All" view<br>- New quests that aren't supported yet won't show up until they are<br>- Insta borders on the stats page will no longer show nothing if you have no instas of that monkey type<br>- Removed broken API exclusive stats temporarily from profiles<br>- Total counts for various stats on Quick Stats have been fixed<br>- Added a "New" filter for Trophy Store items<br>- Fix incorrect parsing of Boss Names ex: "Blastapopolous 152" instead of "Blastapopoulos 15"<br><br>
-    v2.5.0 (1/11/26): Coop Leaderboards, Frontier Roundsets, other refinements<br>- Added coop boss leaderboards + boss tier for each score<br>- Added "All" view to Insta Monkey collection, allowing you to see which one you've collected the most of<br>- Added Frontier Legends base and rush roundsets, along with comment explanations. I may add the frontier stages data in the future but no promises<br>- Added icons for scoring type on the boss event list<br>-  Added achievement guide buttons for some less clear and difficult ones linking to relevant Bloonscyclopedia and Steam community guide pages<br>- Collection events now show when the group changes, and auto refreshes to show the latest groupings<br>- Top Towers for your individual profile now uses the Insta Monkey collection borders<br>- Fixed the Rogue Legends artifact image, and hide the option until after you enable the tracking mode in the main tab<br>- Many UI fixes such as resizing the browsing window now updating various elements correctly, overlapping text fixed, trophy store items filter no longer persists incorrectly<br>- I've hidden historic CT data before CT 33 (and this may change again later) as I cannot verify they are accurate<br>- Trophy store items should be accurate now<br><br>
-    v2.4.0 (12/10/25): Update 52 and Contested Territory Map!<br>- New Contested Territory Map and Event Details revamp! Big thanks to a certain dataminer for hosting the generated CT tile data as that is not available on the Open Data API currently.<br>- Added a <a href="./ct" target="_blank" style="color: white;">standalone CT site</a> that will host only the current events information<br>Collection Events will now automatically be added<br>- Collection events now display when the event ends at the bottom of the schedule<br>- Any time a new update happens, there will now be text hinting that the update is not available on the API yet.<br>- Fixed Fortified DDTs not showing up on "Lead and DDT" preset filter<br>- Events with multiple custom roundsets will now show correctly<br>- Filtering now works on the standalone rounds site<br>- Roundsets will now show the currently listed rounds at the top<br>- Added a link to the Discord server in the extras tab.<br><br>
-    v2.3.1 (10/26/25): Minor fixes<br>- Updated trophy store items to use newer structure on the Open Data API, which should prevent this from being as inaccurate as before - still testing though.<br>- Games played text now shows up with the correct value<br>- SheRa Adora skin will now show up correctly.<br>- Other minor UI tweaks<br><br>
-    v2.3.0 (10/16/25): Update 51 and Minor Updates<br>- Added Update 51 content including new Rogue changes <br>- You can now navigate to the more detailed menus from Quick Stats<br>- Towers menu now shows related Monkey Knowledge points (rework coming eventually)<br>- Added total of each tier to the game-like view of Insta Monkeys collection when "Missing" is toggled.<br>- Unavailable Relics will now displayed on the CT Relics page in prepration for a CT rework<br>- Duplicate (IAP/Special) Rogue starter kits will now show at the bottom<br>- The leaderboard refresh button will now only appear for currently active events<br>- Fixed a bug causing the Clear Filters button to break some roundsets functionality.<br>- Top Paragons will no longer show if there aren't any<br>- Events will now refetch their information from the API after 10 minutes.<br>- The scrollbar is no longer accidentally unstyled. Whoops<br>- Fixed numerous bugs with the back button not clearing when going back<br><br>
-    v2.2.0 (9/29/25): Leaderboard Revamp + Rogue Improvements<br>- Leaderboards have been revamped with better loading times.<br>- Clicking a team on the Contested Territory leaderboard will now show their group of competing teams and their scores.<br>- Leaderboards will now refresh the next time you access them if it's been a while and you don't refresh the page.<br>- A manual refresh button has been added to the top of individual leaderboards.<br>- Leaderboards now show text indicating if it is loading new entries and if it has reached the end.<br>- Fixed a bug causing the timers on events to freeze after going back and forward to various menus.<br>- Rogue Artifacts now has a clear filter button.<br>- Rogue Artifacts count should now correctly display if the collection mode is turned off.<br>- Rogue Legends artifact popout updated to include the update that the artifact was added in as well as display an insta monkey that is added if it has one.<br>- Rogue legends starter kits now also show the insta monkey that is added via a starter artifact.<br>- Fixed numerous UI bugs including a missing Fortified DDT Icon, the rogue legends artifact sorting preview not working anymore.<br><br>
-    v2.1.0 (9/23/25): Roundsets Revamp + Quests!<br>- The roundset viewer now has options for filtering. This includes a round range (good for Rogue Legends), starting cash, as well as filtering by bloons. There are 6 basic filters and then a toggle for an advanced mode that allows you to filter down to specific bloons.<br>- Bloon Group timings in the detailed view of rounds now has a tooltip that will show the exact timings on hover.<br>- Clicking the round number in simple or detailed will now take you to the previewer for that round.<br>- The roundset previewer has been fixed, and the UI has been rearranged. No more lag issues causing inaccurate previews, it should always be accurate now no matter the capabilities of your device.<br>- You can now turn off round hints.<br>- A helpful message describing the boss roundset changes has been added for each boss.<br>- Quests have been added under the Profile tab. You can also view the custom roundset (if it has one) from there.<br>- Fixed boss details showing the incorrect scoring type.<br>- Fixed some UI issues in Collection Event menus.<br>- You can now reveal hidden achievement descriptions. This will be complimented later with a guide for a select few taht are tougher or less straight forward in the future.<br>- Fixed the download for Rogue artifacts on Firefox.<br>- Fixed a bug that enabled XSS with named monkeys.<br>- New heroes should no longer break the site before I add them. Oops.<br>- 2 variant artifacts filtering has been fixed to include all of them.<br>- Rogue Artifact popout should no longer make you jump to the top of the scrollbar.<br>- Fixed a bug involving reverse mode in the detailed section of roundsets.<br>- Fixed a bug where the list view on map stats would not show any maps after update 45. Whoops, thank you @200e200w for reporting this on the Discord Server.<br><br>
-    v2.0.0 (7/5/25): Major Update and Update 49!<br>- The site has been completely reworked and redesigned, allowing for less focus on logging in.<br>- A global back button has been implemented at the top left that will always immediately take you back to wherever you just were.<br>- A way of viewing and filtering the current schedule for collection event featured instas has been added.<br>- Top 1% Boss medal was renamed to Top 100.<br>- Roundsets simple view now shows the time per round on the right.<br>- The full time information for events can now be found via a tooltip on the events list.<br>- Rogue Artifacts search now correctly changes the total count for searching.<br>- Special Rogue Roundsets now show their tooltip of what you would see in game for the associated roundset.<br>- Fixed Hero Skin count. NK wasn't the only one who somehow had issues with that...<br>- Fixed ordering for artifacts using internal name instead of alphabetical name.<br>- You can now logout of your profile and use another OAK token without refreshing the page.<br>- Profiles from leaderboards should no longer be missing many medals.<br>- Standalone pages now only load what's essential for them.<br>- The new achievement was added. <br>- Leaderboards have been fixed.<br><br>
-    v1.9.1 (5/16/25): Many Bug Fixes<br>- Fixed Voidora's hero starter kit being incorrect<br>- Fixed CT Local Medals not appearing and Global medals being incorrectly labeled<br>- Fixed the normal Rogue Legends roundset not being updated with the Update 48 changes<br>- Fixed a bug causing modded paragons to show up and error out<br><br>
-    v.1.9.0 (4/3/25): Update 48 Content, Abilites Used Section, Top Paragons<br>- Added all content from Update 48 (there was a lot)<br>- You are now able to view how many times you've used each ability. You can find this under Progress -> Unqiue Abilities Used<br>- Top Paragons will now appear under Top Towers and Top Heroes on the overview<br>- Rogue Legends received an update with 6 new roundset variations, those have been added as a top bar with an icon of what bloons on the tile the roundset correlates to.<br>- Rogue Legends Artifacts has been updated to include all the artifacts added, as well as be able to sort for only Update 48 artifacts.<br><br>
-    v1.8.1 (3/23/25): Rogue Artifacts Updates<br>- Filter & Sort has been reworked into a new settings menu that adds lots of new filtering options<br>- A search bar has been added to find artifacts quickly<br>- The total count of artifacts should now always be accurate<br>- The back button now correctly returns you to where you were prior<br><br>
-    v1.8.0 (3/8/25): Rogue Legends Artifacts<br>- Added Rogue Legends Artifacts standalone site. Allows you to track and share your artifacts collection with others, as well as reference Hero Starter Kits for each artifact<br>- Unfortunately the Open Data API does not have the extracted artifacts available for your profile, so all entry will be manual<br>- Updated the standalone site buttons to be simpler<br><br>
-    v.1.7.1 (2/17/25): Inevitable bug fixes<br>- Rogue Legends Stats will no longer show up if you don't own it<br>- Tooltips now render HTML entities, have larger text, and have the arrow centered<br>- Added missing tooltips from leaderboards site<br><br>
-    v.1.7.0 (2/16/25): Update 47 and Tooltips!<br>- Added Update 47.1 content including the new Rogue Legends roundset<br>- Added proper tooltips to medals and a few other places like the Towers section.<br>- Added Rogue Legends stats to the overview page<br>- Added Round Hints to the roundset viewer<br>- Added Overall Highest Round and Total Games Won on the map specific details menu<br>- Added missing Adora + Battle Cat Roundsets, and a few older Odysseys courtesy of @jessiepatch<br>- The standalone site buttons got a glow up.<br>- The roundset selection screen has been condensed and cleaned up.<br>- Fixed a bug involving leaderboard requests that result in incorrect placements and duplicated entries<br>- Leaderboard entries should only have the profiles loaded if they are currently rendered on screen.<br><br>
-    v1.6.1 (1/16/25): Inevitable Leaderboard Fixes<br>- The site no longer infinite loads when there are no active events<br>- The site no longer has any leaderboards with 0 scores shown (some older events get their leaderboards wiped early)<br>- Events that aren't started won't show up until they are active<br>- The initial load was improved, and the loading icon now shows correctly when clicking a leaderboard for the first time<br><br>
-    v1.6.0 (1/12/25): Leaderboards improvements and page!<br>- There is now a <a href="./leaderboards" target="_blank" style="color: white;">Leaderboards Page</a> made specifically for viewing them all in one place.<br>- Loading profiles automatically has been turned back on because...<br>- Improved the handling of automatically loading leaderboard profiles to not be rate limited as quickly. This system should hopefully prevent any rate limiting at all.<br><br>
-    v1.5.1 (12/19/24): Bug fixes! <br>- Zero limited or excluded towers/heroes like the upcoming Bloonarius 56 will no longer show an empty box<br>- The timer no longer jumps to the first event of the list assuming there is only one active at a time.<br><br>
-    v1.5.0 (12/15/24): Trophy Store Items and Update 46!<br>- Added Update 46 content<br>- Added the Trophy Store Items menu for those who want to see all that exist and your collection.<br>- Team Store items have also been added, but since I am unable to test how that works, it is hidden in settings by default.<br>- Settings should now save when reloading the page using the same system that saves the OAK tokens you've used.<br>- Fixed a bug that prevented newer maps from showing up<br>- Added missing badges<br><br>
-    v1.4.0 (12/7/24): Extras and Events in Roundsets<br>- User profiles on the leaderboards and content browser no longer load by default. This caused too many rate limiting issues.<br>- Added a setting in Settings to toggle automatic profile loading back on if you wanted to see the profile avatar and banner of users on the leaderboard.<br>- Added known previous events with custom roundsets to the Roundsets section.<br>- Fixed a bug involving timers going weirdly negative<br>- Added Creator Support instructions<br><br>
-    v1.3.0 (11/31/24): QoL Changes<br>- Added Update 45 images and content<br>- You can now toggle to see just the excluded towers and heroes of a challenge or event<br>- You can now swap between Normal/Elite on the details for a boss<br>- Bloon groups can now be hidden in the round previewer by clicking on them<br>- Added a checkmark in the Collection Event list to categories that were completely collected<br>- Updated Endurance Rounds to use updated round thresholds<br>- Resolved an issue when applying a filter to content browser content and not refreshing<br>- Added Ceramic Flood Roundset (very late)<br><br>
-    v1.2.3 (9/3/24): Collection Event Menu Upgrade<br>- Added a how to use guide at the top of the Collection Event Menu<br>- Added the Insta Chest odds to the Collection Event Menu<br>- Clicking on a missing Insta will now temporarily mark it as obtained<br><br>
-    v1.2.2 (8/29/24): Missing Medals<br>- Added a few missing medals from the overview/leaderboard profile pages<br>- Added mouse hover tooltips to various elements<br><br>
-    v1.2.1 (8/22/24): Insta Monkey Collection Improvements<br>- Resolved an issue preventing the collected but used Insta Monkeys from being displayed.<br>- Add a new list of all the Insta Monkey tower chances in the Collection Event Helper for efficient checking of what the best Featured Insta Monkey to choose is.<br>- The trailer video no longer plays in the background after previewing the site or logging in! Thanks for the feedback.<br><br>
-    v1.2.0 (8/5/24): Preview Mode and UI Improvements <br>- Added a way to use the site without an OAK token. Useful when you don\'t have it accessible or can\'t make one<br>- The site now prompts when your data has new content that the site doesn\'t have updated yet<br>- Challenge details now correctly shows the max amount of specific monkeys if limited<br>- Other UI fixes<br><br>
-    v1.1.0 (7/16/24): Insta Monkey Collection Features<br>- Added Insta Monkey Collection Event Helper. This displays the odds of getting a new Insta Monkey for each chest type and when selecting a featured tower.<br>- Also added a page documentating all of the continuous sources of Insta Monkeys<br>- UI fixes and improvements<br><br>
-    v1.0.1 (7/13/24): Bug Fixes<br>- Daily challenges now show the correct associated date<br>- Rework roundset processing to fix numerous bugs<br>- Add extra one-off roundsets to the list for completion sake<br>- Other minor UI fixes<br><br>
-    v1.0.0 (7/7/24): Initial Release <br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon.`;
-    changelogDiv.appendChild(changelogText);
+    let first = true;
+    for (let [version, desc] of Object.entries(changelog)){
+        let container = collapsableDiv(version, {
+            collapse: !first
+        });
+        changelogDiv.appendChild(container.container);
+
+        let content = createEl('p', { 
+            classList: ['oak-instructions-text'], 
+            innerHTML: desc 
+        });
+        container.content.appendChild(content);
+
+        first = false;
+    }
 
     function hideAllButOne(selectedTab){
         const tabs = ['faq', 'known-issues', 'changelog'];
@@ -991,7 +1018,7 @@ function generateFrontPage(){
                 const isCurrentlyHidden = contentDiv.style.display === 'none';
                 if (isCurrentlyHidden) {
                     tabButton.classList.add('square-btn-yellow');
-                    contentDiv.style.display = 'block';
+                    contentDiv.style.display = 'flex';
                 } else {
                     tabButton.classList.remove('square-btn-yellow');
                     contentDiv.style.display = 'none';
@@ -1327,22 +1354,7 @@ function generateOverview(){
         medalDiv.classList.add('medal-div');
         medalsDiv.appendChild(medalDiv);
 
-        tippy(medalDiv, {
-            content: constants.medalLabels[medal],
-            placement: 'top',
-            theme: 'speech_bubble',
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            }
-        })
+        addTooltip(medalDiv, constants.medalLabels[medal]);
 
         let medalImg = document.createElement('img');
         medalImg.classList.add('medal-img');
@@ -1447,23 +1459,9 @@ function generateOverview(){
         heroDiv.appendChild(heroText);
         counter++;
 
-        tippy(heroDiv, {
-            content: `<p class="artifact-title">${getLocValue(hero)}</p>Placed ${xp.toLocaleString()} Times`,
-            placement: 'top',
-            theme: 'speech_bubble',
+        addTooltip(heroDiv, `<p class="artifact-title">${getLocValue(hero)}</p>Placed ${xp.toLocaleString()} Times`, {
             allowHTML: true,
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            }
-        })
+        });
     }
 
     let topTowersDiv = document.createElement('div');
@@ -1548,23 +1546,9 @@ function generateOverview(){
         towerDiv.appendChild(towerText);
         counter++;
 
-        tippy(towerDiv, {
-            content: `<p class="artifact-title">${getLocValue(tower)}</p>Placed ${xp.toLocaleString()} Times`,
-            placement: 'top',
-            theme: 'speech_bubble',
+        addTooltip(towerDiv, `<p class="artifact-title">${getLocValue(tower)}</p>Placed ${xp.toLocaleString()} Times`, {
             allowHTML: true,
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            }
-        })
+        });
     }
 
     let topParagonsDiv = document.createElement('div');
@@ -1640,23 +1624,9 @@ function generateOverview(){
         towerDiv.appendChild(towerText);
         counter++;
 
-        tippy(towerDiv, {
-            content: `<p class="artifact-title">${getLocValue(tower + " Paragon")}</p>Placed ${xp.toLocaleString()} Times`,
-            placement: 'top',
-            theme: 'speech_bubble',
+        addTooltip(towerDiv, `<p class="artifact-title">${getLocValue(tower + " Paragon")}</p>Placed ${xp.toLocaleString()} Times`, {
             allowHTML: true,
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            }
-        })
+        });
     }
 
     let rightColumnDiv = document.createElement('div');
@@ -1859,6 +1829,8 @@ function generateRank(veteran){
 function generateProgress(){
     let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
+
+    changeHexBGColor(constants.BGColor);
 
     if(loggedIn){
         let progressPage = document.createElement('div');
@@ -2351,23 +2323,9 @@ function generateTowerProgressTower(tower){
 
             abilitiesIconsDiv.appendChild(abilityDiv);
 
-            tippy(abilityDiv, {
-                content: `<p class="artifact-title">${getLocValue(abilityData.displayName)}</p>${abilityData.description}`,
-                placement: 'top',
-                theme: 'speech_bubble',
+            addTooltip(abilityDiv, `<p class="artifact-title">${getLocValue(abilityData.displayName)}</p>${abilityData.description}`, {
                 allowHTML: true,
-                popperOptions: {
-                    modifiers: [
-                        {
-                        name: 'preventOverflow',
-                        options: {
-                            boundary: 'viewport',
-                            padding: {right: 18},
-                        },
-                        },
-                    ],
-                },
-            })
+            });
         });
     }
 
@@ -2410,23 +2368,9 @@ function generateTowerProgressTower(tower){
             }
             relatedKnowledgePointsDiv.appendChild(knowledgeIcon);
 
-            tippy(knowledgeIcon, {
-                content: `<p class="artifact-title">${getLocValue(knowledgePoint)}</p>${getLocValue(knowledgePoint + "Description")}`,
+            addTooltip(knowledgeIcon, `<p class="artifact-title">${getLocValue(knowledgePoint)}</p>${getLocValue(knowledgePoint + "Description")}`, {
                 allowHTML: true,
-                placement: 'top',
                 hideOnClick: false,
-                theme: 'speech_bubble',
-                popperOptions: {
-                    modifiers: [
-                        {
-                        name: 'preventOverflow',
-                        options: {
-                            boundary: 'viewport',
-                            padding: {right: 18},
-                        },
-                        },
-                    ],
-                },
             });
         }
     }
@@ -2551,24 +2495,10 @@ function generateUpgradeIcon(tower, upgrade, status, row, tier, paragon, grayOut
         upgradeImg.classList.add('upgrade-after-locked');
     }
 
-    tippy(upgradeDiv, {
-        content: getLocValue(`${upgrade} Description`),
-        placement: 'top',
-        theme: 'speech_bubble',
-        hideOnClick: false,
+    addTooltip(upgradeDiv, getLocValue(`${upgrade} Description`), {
         allowHTML: true,
-        popperOptions: {
-            modifiers: [
-                {
-                name: 'preventOverflow',
-                options: {
-                    boundary: 'viewport',
-                    padding: {right: 18},
-                },
-                },
-            ],
-        }
-    })
+        hideOnClick: false,
+    });
 
     return upgradeDiv;
 }
@@ -2606,23 +2536,9 @@ function generateParagonIcon(tower, upgrade, status){
         paragonGlow.classList.add('upgrade-glow-paragon');
     })
 
-    tippy(paragonDiv, {
-        content: getLocValue(`${upgrade} Description`),
-        placement: 'top',
-        theme: 'speech_bubble',
-        popperOptions: {
-            modifiers: [
-                {
-                name: 'preventOverflow',
-                options: {
-                    boundary: 'viewport',
-                    padding: {right: 18},
-                },
-                },
-            ],
-        },
-        hideOnClick: false
-    })
+    addTooltip(paragonDiv, getLocValue(`${upgrade} Description`), {
+        hideOnClick: false,
+    });
 
     return paragonDiv;
 }
@@ -2937,22 +2853,8 @@ function generateHeroProgressHero(hero, nameColor){
 
                 heroLevelDescDiv.appendChild(heroAbilityDiv);
 
-                tippy(heroAbilityDiv, {
-                    content: `<p class="artifact-title">${getLocValue(abilityData.displayName)}</p>${abilityData.description}`,
-                    placement: 'top',
-                    theme: 'speech_bubble',
+                addTooltip(heroAbilityDiv, `<p class="artifact-title">${getLocValue(abilityData.displayName)}</p>${abilityData.description}`, {
                     allowHTML: true,
-                    popperOptions: {
-                        modifiers: [
-                            {
-                            name: 'preventOverflow',
-                            options: {
-                                boundary: 'viewport',
-                                padding: {right: 18},
-                            },
-                            },
-                        ],
-                    },
                 })
             }
         }
@@ -3440,23 +3342,9 @@ function generateKnowledgeProgress(){
                     });
                     knowledgeIconDiv.appendChild(knowledgeIcon);
 
-                    tippy(knowledgeIcon, {
-                        content: `<p class="artifact-title">${getLocValue(node.id)}</p>${getLocValue(node.id + "Description")}`,
+                    addTooltip(knowledgeIcon, `<p class="artifact-title">${getLocValue(node.id)}</p>${getLocValue(node.id + "Description")}`, {
                         allowHTML: true,
-                        placement: 'top',
                         hideOnClick: false,
-                        theme: 'speech_bubble',
-                        popperOptions: {
-                            modifiers: [
-                                {
-                                name: 'preventOverflow',
-                                options: {
-                                    boundary: 'viewport',
-                                    padding: {right: 18},
-                                },
-                                },
-                            ],
-                        },
                     });
 
                     td.appendChild(knowledgeIconDiv);
@@ -3986,22 +3874,8 @@ function generateMapDetails(map){
             medalImg.style.removeProperty('display');
         })
         medalDiv.appendChild(medalImg);
-        tippy(medalDiv, {
-            content: constants.medalLabels[`Medal${medalMap[difficulty]}`],
-            placement: 'top',
-            theme: 'speech_bubble',
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            },
-        })
+
+        addTooltip(medalDiv, constants.medalLabels[`Medal${medalMap[difficulty]}`], {});
     }
 
     let mapProgressCoopMedals = document.createElement('div');
@@ -4030,22 +3904,8 @@ function generateMapDetails(map){
             medalImg.style.removeProperty('display');
         })
         medalDiv.appendChild(medalImg);
-        tippy(medalDiv, {
-            content: constants.medalLabels[`MedalCoop${medalMap[difficulty]}`],
-            placement: 'top',
-            theme: 'speech_bubble',
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            },
-        })
+
+        addTooltip(medalDiv, constants.medalLabels[`MedalCoop${medalMap[difficulty]}`], {});
     }
 
     switch(processedMapData.Borders["coop"][map]) {
@@ -4358,22 +4218,7 @@ function generateMapsListView(){
             })
             mapSectionMedal.appendChild(mapSectionMedalImg);
 
-            tippy(mapSectionMedal, {
-                content: constants.medalLabels[`Medal${coopEnabled ? "Coop" : ""}${medalMap[difficulty]}`],
-                placement: 'top',
-                theme: 'speech_bubble',
-                popperOptions: {
-                    modifiers: [
-                        {
-                        name: 'preventOverflow',
-                        options: {
-                            boundary: 'viewport',
-                            padding: {right: 18},
-                        },
-                        },
-                    ],
-                }
-            })
+            addTooltip(mapSectionMedal, constants.medalLabels[`Medal${coopEnabled ? "Coop" : ""}${medalMap[difficulty]}`], {});
 
             let mapSectionBestRound = document.createElement('p');
             mapSectionBestRound.classList.add(`map-section-text`,'black-outline');
@@ -6193,22 +6038,7 @@ function generateAbilities() {
         usesCounter.innerHTML = `${uses.toLocaleString()} uses`;
         abilityContainer.appendChild(usesCounter);
 
-        tippy(abilityContainer, {
-            content: abilityData.description,
-            placement: 'top',
-            theme: 'speech_bubble',
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            },
-        })
+        addTooltip(abilityContainer, abilityData.description, {});
     });
 
     if (Object.keys(abilities).length === 0) {
@@ -6354,7 +6184,7 @@ function generateAchievementsGameView(searchTerm = "") {
             break;
         case "Monkey Money":
             achievements = achievements.filter(achievement => achievementsJSON[achievement].model.loot.includes("MonkeyMoney"));
-            achievements = achievements.sort((a,b) => Object.values(processRewardsString(achievementsJSON[a].model.loot)).find(reward => reward.type == 'MonkeyMoney').amount - Object.values(processRewardsString(achievementsJSON[b].model.loot)).find(reward => reward.type == 'MonkeyMoney').amount)
+            achievements = achievements.sort((a,b) => Object.values(processRewards(achievementsJSON[a].model.loot)).find(reward => reward.type == 'MonkeyMoney').amount - Object.values(processRewards(achievementsJSON[b].model.loot)).find(reward => reward.type == 'MonkeyMoney').amount)
             break;
         case "Knowledge Points":
             achievements = achievements.filter(achievement => achievementsJSON[achievement].model.loot.includes("KnowledgePoints"));
@@ -6441,7 +6271,7 @@ function generateAchievementsGameView(searchTerm = "") {
         achievementRewardsDiv.classList.add('achievement-rewards-div');
         achievementBottomDiv.appendChild(achievementRewardsDiv);
 
-        for (let [index, data] of Object.entries(processRewardsString(achievementData.model.loot))) {
+        for (let [index, data] of Object.entries(processRewards(achievementData.model.loot))) {
             let achievementRewardDiv = document.createElement('div');
             achievementRewardDiv.classList.add('achievement-reward-div');
             achievementRewardsDiv.appendChild(achievementRewardDiv);
@@ -6555,23 +6385,29 @@ async function generateEvents(){
     let eventsContent = document.getElementById('events-content');
     eventsContent.innerHTML = "";
 
-    let eventsPage = document.createElement('div');
-    eventsPage.classList.add('progress-page');
+    clearAllTimers();
+
+    let eventsPage = createEl('div', {
+        classList: ['progress-page', 'fd-column'],
+        style: {
+            padding: "15px",
+        }
+    });
     eventsContent.appendChild(eventsPage);
 
-    let selectorsDiv = document.createElement('div');
-    selectorsDiv.classList.add('selectors-div');
+    let selectorsDiv = createEl('div', {
+        classList: ['d-flex', 'f-wrap', 'jc-evenly'],
+        style: {
+            margin: "10px",
+            backgroundColor: "var(--profile-secondary)",
+            borderRadius: "15px",
+        }
+    });
     eventsPage.appendChild(selectorsDiv);
 
-    showLoading();
-    let current = await getLatestCollectionEvent();
+    let collectionIcon = null;
 
     let selectors = {
-        'Collection': {
-            'img': getCollectionEventSkinIcon(current),
-            'text': "Collection Event Schedule",
-            'bgimg': 'EventBanner/EventBannerSmallTotem'
-        },
         'Races': {
             'img': 'EventRaceBtn',
             'text': "Race Events",
@@ -6584,13 +6420,24 @@ async function generateEvents(){
         },
         'Odyssey': {
             'img': 'OdysseyEventBtn',
-            'text': "Odyssey Events<br>(Working On It Now)",
+            'text': "Odyssey Events",
             'bgimg': 'EventBanner/EventBannerSmallOdyssey'
+        },
+        'Collection': {
+            'img': "CollectingEventTotemBtn",
+            'text': "Collection Event",
+            'bgimg': 'EventBanner/EventBannerSmallTotem'
         },
         'ContestedTerritory': {
             'img': 'ContestedTerritoryEventBtn',
             'text': "Contested Territory",
-            'bgimg': 'ProfileBanner/TeamsBanner8'
+            'bgimg': 'ProfileBanner/TeamsBanner8',
+            "fontSize": "20px"
+        },
+        'BossRush': {
+            'img': 'BossRushBtn',
+            'text': "Boss Rush",
+            'bgimg': 'EventBanner/EventBannerSmallBossRush'
         },
         'DailyChallenges': {
             'img': 'DailyChallengeBtn',
@@ -6599,8 +6446,9 @@ async function generateEvents(){
         },
         'AdvancedDailyChallenges': {
             'img': 'DailyChallengeBtn',
-            'text': "Advanced Daily Challenges",
-            'bgcolor': 'radial-gradient(circle, transparent 50%, rgba(0,0,0,1) 100%),linear-gradient(45deg, rgb(234,99,52), rgb(234,99,52))'
+            'text': "Advanced Challenges",
+            'bgcolor': 'radial-gradient(circle, transparent 50%, rgba(0,0,0,1) 100%),linear-gradient(45deg, rgb(234,99,52), rgb(234,99,52))',
+            'fontSize': "20px"
         },
         'CoopDailyChallenges': {
             'img': 'DailyChallengeBtn',
@@ -6609,15 +6457,15 @@ async function generateEvents(){
         }
     }
 
-    let now = new Date();
-    if (current == null || now > new Date(current.end)) {
-        delete selectors['Collection'];
-    }
-
     Object.entries(selectors).forEach(([selector,object]) => {
-        let selectorDiv = createEl('div', { classList: ['events-selector-div', 'transparent-border', 'ta-center'], style: {borderWidth: "5px", borderStyle: "solid"} });
+        let selectorDiv = createEl('div', { 
+            classList: ['events-selector-div', 'transparent-border', 'ta-center', 'pos-rel', 'jc-center'], style: {
+                borderWidth: "5px", 
+                borderStyle: "solid",
+                width: "180px"
+            } 
+        });
         object.bgcolor ? selectorDiv.style.background = object.bgcolor : selectorDiv.style.backgroundImage = `url(../Assets/${object.bgimg}.png)`;
-        /*selectorDiv.innerHTML = progressSubText[selector];*/
         selectorDiv.addEventListener('click', () => {
             changeEventTab(selector);
         })
@@ -6628,16 +6476,214 @@ async function generateEvents(){
         selectorImg.src = `../Assets/UI/${object.img}.png`;
         selectorDiv.appendChild(selectorImg);
 
-        let selectorText = document.createElement('p');
-        selectorText.classList.add('event-selector-text','black-outline');
-        selectorText.innerHTML = object.text;
+        let selectorText = createEl('p', {
+            classList: ['event-selector-text','black-outline', 'pos-abs', 'ta-center', 'w-100'],
+            innerHTML: object.text,
+            style: {
+                bottom: "0px",
+                left: "0px",
+                fontSize: object.fontSize ? object.fontSize : "24px",
+            }
+        });
         selectorDiv.appendChild(selectorText);
 
-        let selectorGoImg = document.createElement('img');
-        selectorGoImg.classList.add('selector-go-img');
-        if(selector == 'Odyssey') { selectorGoImg.classList.add('hero-selector-div-disabled'); }
-        selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
-        selectorDiv.appendChild(selectorGoImg);
+        switch(selector) {
+            case "BossRush":
+                selectorDiv.style.cursor = "not-allowed";
+                selectorDiv.style.filter = "grayscale(100%)";
+                break;
+            case "Collection":
+                collectionIcon = selectorImg;
+                break;
+        }
+    })
+
+    let eventsDiv = createEl('div', {
+        classList: ['d-flex', 'fd-column', 'jc-start', 'ai-center', 'boss-info-div', 'pos-rel'],
+        style: {
+            minHeight: "330px",
+            margin: "10px",
+            padding: "10px",
+            gap: "12px"
+        }
+    });
+    eventsPage.appendChild(eventsDiv);
+
+    copyLoadingIcon(eventsDiv);
+
+    let current = await getLatestCollectionEvent();
+
+    if (collectionIcon) {
+        collectionIcon.src = `../Assets/UI/${getCollectionEventSkinIcon(current)}.png`;
+    }
+
+    eventsDiv.innerHTML = "";
+
+    let activeDiv = collapsableDiv("Active Events", {
+        collapse: false,
+        classList: ['d-flex', 'f-wrap'],
+        style: {},
+    });
+    eventsDiv.appendChild(activeDiv.container);
+
+    let upcomingDiv = collapsableDiv("Upcoming Events", {
+        collapse: false,
+        classList: ['d-flex', 'f-wrap'],
+        style: {},
+    });
+    eventsDiv.appendChild(upcomingDiv.container);
+
+    let finishedDiv = collapsableDiv("Recent Events", {
+        collapse: false,
+        classList: ['d-flex', 'f-wrap'],
+        style: {},
+    });
+    eventsDiv.appendChild(finishedDiv.container);
+
+    latestEvents.forEach((event, index) => {
+        if (!['socialseason', 'bossRush', 'ct', 'raceEvent', 'bossBloon', 'collectableEvent', 'odysseyEvent'].includes(event.type)) { return; }
+        let eventDiv = createEl('div', {
+            classList: ['d-flex', 'w-100', 'jc-between', 'ai-center', 'pointer'],
+            style: {
+                padding: "10px",
+                borderRadius: "10px",
+            }
+        });
+        if ((index + 1) % 2 == 0) {
+            eventDiv.style.backgroundColor = "rgba(0,0,0,0.1)";
+        }
+        // eventsDiv.appendChild(eventDiv);
+
+        let eventIcon = createEl('img', {
+            classList: ['of-contain'],
+            style: {
+                width: "70px",
+            }
+        });
+        eventDiv.appendChild(eventIcon);
+
+        let eventNameId = createEl('p', {
+            classList: ['black-outline'],
+            style: {
+                fontSize: "20px",
+                width: "220px"
+            },
+            innerHTML: event.name
+        });
+        eventDiv.appendChild(eventNameId);
+
+        let eventDates = createEl('p', {
+            classList: ['black-outline', 'ta-center'],
+            style: {
+                width: "230px",
+                fontSize: "20px"
+            },
+            innerHTML: `${new Date(event.start).toLocaleString()}<br>${new Date(event.end).toLocaleString()}`
+        })
+        eventDiv.appendChild(eventDates);
+
+        let countdownDiv = createEl('div', {
+            classList: ['d-flex', 'jc-end'],
+            style: {
+                width: "160px",
+            }
+        })
+        eventDiv.appendChild(countdownDiv);
+
+        let countdown = createEl('p', {
+            id: `Event-${event.id}-TimeLeft`,
+            classList: ['black-outline', 'race-time-left'],
+            innerHTML: "Finished"
+        });
+        countdownDiv.appendChild(countdown);    
+
+        if(new Date() < new Date(event.start)) {
+            countdown.innerHTML = "Coming Soon!";
+            upcomingDiv.content.appendChild(eventDiv);
+        } else if (new Date(event.end) > new Date()) {
+            activeDiv.content.appendChild(eventDiv);
+            registerTimer(countdown.id, new Date(event.end));
+        } else if (new Date() > new Date(event.end)) {
+            countdown.innerHTML = "Finished";
+            finishedDiv.content.appendChild(eventDiv);
+        }
+
+        switch (event.type) {
+            case "socialseason":
+                eventIcon.src = `../Assets/UI/EventSocialSeasonsIcon.png`;
+                eventNameId.innerHTML = `Social Season Event`;
+                eventDiv.addEventListener('click', () => {
+                    errorModal("This event type currently does not have additional details available on the Open Data API.");
+                });
+                break;
+            case "collectableEvent":
+                eventIcon.src = `../Assets/UI/${getCollectionEventSkinIcon(event)}.png`;
+                eventNameId.innerHTML = `Collection Event`;
+                eventDiv.addEventListener('click', () => {
+                    resetScroll();
+                    addToBackQueue({ source: "events", destination: "featured" });
+                    generateInstaSchedule(true, event.id);
+                    document.getElementById('events-content').style.display = "none";
+                    document.getElementById('featured-content').style.display = "flex";
+                });
+                break;
+            case "raceEvent":
+                eventIcon.src = `../Assets/UI/EventRaceBtn.png`;
+                eventNameId.innerHTML = `Race Event`;
+                eventDiv.addEventListener('click', async () => {
+                    showLoading();
+                    await getRacesData(true);
+                    let raceIndex = racesData.findIndex(r => r.id === event.id);
+                    await getRaceMetadata(raceIndex)
+                    showChallengeModel('events', racesData[raceIndex].metadata, "Race");
+                    resetScroll();
+                });
+                break;
+            case "bossBloon":
+                eventIcon.src = `../Assets/UI/BossesBtn.png`;
+                eventNameId.innerHTML = `Boss Event`;
+                eventDiv.addEventListener('click', async () => {
+                    showLoading();
+                    await getBossesData(true);
+                    let bossIndex = bossesData.findIndex(b => b.id === event.id);
+                    await getBossMetadata(bossIndex, false)
+                    let eventData = getBossEventData(bossIndex, false)
+                    showChallengeModel('events', bossesData[bossIndex].metadataStandard, "Boss", eventData);
+                    resetScroll();
+                });
+                break;
+            case "odysseyEvent":
+                eventIcon.src = `../Assets/UI/OdysseyEventBtn.png`;
+                eventNameId.innerHTML = `Odyssey Event`;
+                eventDiv.addEventListener('click', async () => {
+                    showLoading();
+                    await getOdysseyData(true);
+                    let odysseyIndex = odysseyData.findIndex(o => o.id === event.id);
+                    await getOdyMetadata(odysseyIndex, "hard", true);
+                    showOdyssey("hard", odysseyData[odysseyIndex], odysseyData[odysseyIndex]["metadata_hard"]);
+                    resetScroll();
+                });
+                break;
+            case "ct":
+                eventIcon.src = `../Assets/UI/ContestedTerritoryEventBtn.png`;
+                eventNameId.innerHTML = `Contested Territory`;
+                eventDiv.addEventListener('click', async () => {
+                    showLoading();
+                    await getCTData(false, true);
+                    let ctIndex = CTData.findIndex(c => c.id === event.id);
+                    openCTEventDetails('events', CTData[ctIndex]);
+                    resetScroll();
+                });
+                break;
+            case "bossRush":
+                eventIcon.src = `../Assets/UI/BossRushBtn.png`;
+                eventNameId.innerHTML = `Boss Rush`;
+                eventDiv.addEventListener('click', () => {
+                    generateBossRush();
+                });
+                break;
+        }
+        addTooltip(eventNameId, `Event ID: ${event.id}`)
     })
 }
 
@@ -6654,6 +6700,8 @@ function changeEventTab(selector){
             getBossesData();
             break;
         case "Odyssey":
+            showLoading();
+            getOdysseyData();
             break;
         case "ContestedTerritory":
             showLoading();
@@ -6676,6 +6724,10 @@ function changeEventTab(selector){
             generateInstaSchedule();
             document.getElementById('events-content').style.display = "none";
             document.getElementById('featured-content').style.display = "flex";
+            break;
+        case "BossRush":
+            generateBossRush();
+            break;
     }
     // addToBackQueue({callback: generateEvents})
 }
@@ -6747,23 +6799,9 @@ function generateRaces(){
         raceInfoDates.innerHTML = `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`;
         raceInfoMiddleDiv.appendChild(raceInfoDates);
 
-        tippy(raceInfoDates, {
-            content: `${new Date(race.start).toLocaleString()}<br>${new Date(race.end).toLocaleString()}`,
-            placement: 'top',
-            theme: 'speech_bubble',
+        addTooltip(raceInfoDates, `${new Date(race.start).toLocaleString()}<br>${new Date(race.end).toLocaleString()}`, {
             allowHTML: true,
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            }
-        })
+        });
 
         let raceInfoTotalScores = document.createElement('p');
         raceInfoTotalScores.classList.add("race-info-total-scores", "black-outline");
@@ -6821,6 +6859,21 @@ function generateRaces(){
     })
 }
 
+function getBossEventData(bossDataIndex, elite) {
+    let bossData = bossesData[bossDataIndex];
+    let titleCaseBoss = bossData.bossType.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
+    let bossNumberMatch = bossData.name.match(/(\d+)/);
+    let bossNumber = bossNumberMatch ? bossNumberMatch[1] : '';
+    return {
+        name: titleCaseBoss,
+        elite: elite,
+        eventNumber: bossNumber,
+        scoringType: bossData.normalScoringType,
+        eliteScoringType: bossData.eliteScoringType,
+        index: bossDataIndex
+    }
+}
+
 function generateBosses(elite){
     let eventsContent = document.getElementById('events-content');
     eventsContent.innerHTML = "";
@@ -6866,14 +6919,16 @@ function generateBosses(elite){
             bossName = `${race.name}${elite ? " (Elite)" : ""}`;
         }
 
-        let eventData = {
-            'name': titleCaseBoss,
-            'elite': elite,
-            'eventNumber': bossNumber,
-            'scoringType': race.normalScoringType,
-            'eliteScoringType': race.eliteScoringType,
-            'index': index
-        }
+        // let eventData = {
+        //     'name': titleCaseBoss,
+        //     'elite': elite,
+        //     'eventNumber': bossNumber,
+        //     'scoringType': race.normalScoringType,
+        //     'eliteScoringType': race.eliteScoringType,
+        //     'index': index
+        // }
+
+        let eventData = getBossEventData(index, elite);
 
         let raceDiv = document.createElement('div');
         raceDiv.classList.add("race-div");
@@ -6961,23 +7016,9 @@ function generateBosses(elite){
         raceInfoDates.innerHTML = `${new Date(race.start).toLocaleDateString()} - ${new Date(race.end).toLocaleDateString()}`;
         raceInfoMiddleDiv.appendChild(raceInfoDates);
 
-        tippy(raceInfoDates, {
-            content: `${new Date(race.start).toLocaleString()}<br>${new Date(race.end).toLocaleString()}`,
-            placement: 'top',
-            theme: 'speech_bubble',
+        addTooltip(raceInfoDates, `${new Date(race.start).toLocaleString()}<br>${new Date(race.end).toLocaleString()}`, {
             allowHTML: true,
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            }
-        })
+        });
 
         let raceInfoTotalScores = document.createElement('p');
         raceInfoTotalScores.classList.add("race-info-total-scores", "black-outline");
@@ -7674,22 +7715,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         }
     }
 
-    let heroesToDisplay = {};
-    let towersToDisplay = {};
-    let shouldUseHeroList = false;
-
-    let towersExcluded = {};
-    let heroesExcluded = {};
-    let towersLimited = {};
-
-    Object.entries(metadata._towers).forEach(([tower, data]) => {
-        if (data.max == 0) { 
-            data.isHero ? heroesExcluded[data.tower] = data : towersExcluded[data.tower] = data;
-            return; 
-        }
-        if (data.tower === "ChosenPrimaryHero" && data.max != 0) { shouldUseHeroList = true; }
-        data.isHero ? heroesToDisplay[data.tower] = data : towersToDisplay[data.tower] = data;
-    })
+    let challengeTowers = processTowers(metadata._towers);
 
     let towerSelector = document.createElement('div');
     towerSelector.classList.add('challenge-towers-list');
@@ -7760,7 +7786,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     towerSelectorExcluded.classList.add('challenge-tower-selector');
     towerSelector.appendChild(towerSelectorExcluded);
 
-    if (shouldUseHeroList) {
+    if (challengeTowers.shouldUseHeroList) {
         let towerSelector = document.createElement('div');
         towerSelector.classList.add(`tower-selector-hero`);
         towerSelectorAvailable.appendChild(towerSelector)
@@ -7771,7 +7797,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         towerSelector.appendChild(towerSelectorImg);
     } else {
         for (let [tower, nameColor] of Object.entries(constants.heroesInOrder)) {
-            if (!heroesToDisplay[tower]) { continue; }
+            if (!challengeTowers.heroesToDisplay[tower]) { continue; }
             let towerSelector = document.createElement('div');
             towerSelector.classList.add(`tower-selector-hero`);
 
@@ -7785,7 +7811,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     }
 
     for (let [tower, category] of Object.entries(constants.towersInOrder)) {
-        if (!towersExcluded[tower]) { continue; }
+        if (!challengeTowers.towersExcluded[tower]) { continue; }
         let towerSelector = document.createElement('div');
         towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
         towerSelectorExcluded.appendChild(towerSelector)
@@ -7801,7 +7827,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     }
 
     for (let [tower, category] of Object.entries(constants.towersInOrder)) {
-        if (!towersToDisplay[tower]) { continue; }
+        if (!challengeTowers.towersToDisplay[tower]) { continue; }
         let towerSelector = document.createElement('div');
         towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
         towerSelectorAvailable.appendChild(towerSelector)
@@ -7813,21 +7839,21 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
 
         let isLimited = false;
 
-        if (towersToDisplay[tower].path1NumBlockedTiers != 0 || towersToDisplay[tower].path2NumBlockedTiers != 0  || towersToDisplay[tower].path3NumBlockedTiers != 0 ) {
+        if (challengeTowers.towersToDisplay[tower].path1NumBlockedTiers != 0 || challengeTowers.towersToDisplay[tower].path2NumBlockedTiers != 0  || challengeTowers.towersToDisplay[tower].path3NumBlockedTiers != 0 ) {
             isLimited = true;
 
             let towerSelectorTiers = document.createElement('p');
             towerSelectorTiers.classList.add('tower-selector-tiers', 'black-outline');
-            towerSelectorTiers.innerHTML = `${towersToDisplay[tower].path1NumBlockedTiers == -1 ? "0" : 5 - towersToDisplay[tower].path1NumBlockedTiers}-${towersToDisplay[tower].path2NumBlockedTiers == -1 ? "0" : 5- towersToDisplay[tower].path2NumBlockedTiers}-${towersToDisplay[tower].path3NumBlockedTiers == -1 ? "0" : 5 - towersToDisplay[tower].path3NumBlockedTiers}`;
+            towerSelectorTiers.innerHTML = `${challengeTowers.towersToDisplay[tower].path1NumBlockedTiers == -1 ? "0" : 5 - challengeTowers.towersToDisplay[tower].path1NumBlockedTiers}-${challengeTowers.towersToDisplay[tower].path2NumBlockedTiers == -1 ? "0" : 5- challengeTowers.towersToDisplay[tower].path2NumBlockedTiers}-${challengeTowers.towersToDisplay[tower].path3NumBlockedTiers == -1 ? "0" : 5 - challengeTowers.towersToDisplay[tower].path3NumBlockedTiers}`;
             towerSelector.appendChild(towerSelectorTiers);
-        } else if (towersToDisplay[tower].hasOwnProperty('restrictParagon') && towersToDisplay[tower].restrictParagon) {
+        } else if (challengeTowers.towersToDisplay[tower].hasOwnProperty('restrictParagon') && challengeTowers.towersToDisplay[tower].restrictParagon) {
             let towerSelectorTiers = document.createElement('p');
             towerSelectorTiers.classList.add('tower-selector-tiers', 'black-outline');
             towerSelectorTiers.innerHTML = "5-5-5";
             towerSelector.appendChild(towerSelectorTiers);
         }
 
-        if(towersToDisplay[tower].max != -1) {
+        if(challengeTowers.towersToDisplay[tower].max != -1) {
             isLimited = true;
 
             let maxCount = document.createElement('div');
@@ -7836,7 +7862,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
 
             let maxCountText = document.createElement('p');
             maxCountText.classList.add('towerTopLeftText','black-outline');
-            maxCountText.innerHTML = `${towersToDisplay[tower].max}`;
+            maxCountText.innerHTML = `${challengeTowers.towersToDisplay[tower].max}`;
             maxCount.appendChild(maxCountText);
         }
 
@@ -7845,9 +7871,9 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         }
     }
 
-    if (!shouldUseHeroList) {
+    if (!challengeTowers.shouldUseHeroList) {
         for (let [tower, nameColor] of Object.entries(constants.heroesInOrder)) {
-            if (!heroesExcluded[tower]) { continue; }
+            if (!challengeTowers.heroesExcluded[tower]) { continue; }
             let towerSelector = document.createElement('div');
             towerSelector.classList.add(`tower-selector-hero`);
 
@@ -7874,7 +7900,9 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         noLimitedOrExcluded = true;
     }
 
-    if (challengeType == "Boss" && !noLimitedOrExcluded) {
+    console.log(challengeTowers)
+
+    if (challengeType == "Boss" && !noLimitedOrExcluded && ((Object.keys(challengeTowers.towersLimited).length == 0 && Object.keys(challengeTowers.towersExcluded).length == 0 && Object.keys(challengeTowers.heroesExcluded).length == 0) || (Object.keys(challengeTowers.towersExcluded).length > 0 && Object.keys(challengeTowers.towersExcluded).length < 10) || Object.keys(challengeTowers.heroesToDisplay).length > 6)) {
         mapsProgressCoopToggleInput.checked = true;
         towerSelectorExcluded.style.display = towerSelectorExcluded.style.display == "none" ? "flex" : "none";
         towerSelectorAvailable.style.display = towerSelectorAvailable.style.display == "none" ? "flex" : "none";
@@ -8007,7 +8035,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             }
         }
 
-        let roundset = metadata.roundSets.filter(value => value !== 'default' && value !== 'bloonarius' && value !== 'lych' && value !== 'vortex' && value !== 'dreadbloon' && value !== 'phayze')
+        let roundset = metadata.roundSets.filter(value => value !== 'default' && value !== 'bloonarius' && value !== 'lych' && value !== 'vortex' && value !== 'dreadbloon' && value !== 'phayze' && value !== 'blastapopoulos' && value !== 'diamondback');
         if (rule == "Custom Rounds" && constants.skuRoundsets.includes(roundset[0]) && metadata.mode != "AlternateBloonsRounds") {
             let challengeRuleValue = document.createElement('div');
             challengeRuleValue.classList.add('challenge-rule-subtext','start-button','black-outline');
@@ -8200,6 +8228,33 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             challengeStatsDiv.style.display = challengeStatsDiv.style.display == "none" ? "flex" : "none";
         });
         challengeHeaderRightTop.appendChild(challengeStatsBtn);
+    }
+}
+
+function processTowers(_towers) {
+    let heroesToDisplay = {};
+    let towersToDisplay = {};
+    let shouldUseHeroList = false;
+
+    let towersExcluded = {};
+    let heroesExcluded = {};
+    let towersLimited = {};
+
+    Object.entries(_towers).forEach(([tower, data]) => {
+        if (data.max == 0) { 
+            data.isHero ? heroesExcluded[data.tower] = data : towersExcluded[data.tower] = data;
+            return; 
+        }
+        if (data.tower === "ChosenPrimaryHero" && data.max != 0) { shouldUseHeroList = true; }
+        data.isHero ? heroesToDisplay[data.tower] = data : towersToDisplay[data.tower] = data;
+    })
+    return {
+        heroesToDisplay,
+        towersToDisplay,
+        shouldUseHeroList,
+        towersExcluded,
+        heroesExcluded,
+        towersLimited
     }
 }
 
@@ -10348,7 +10403,7 @@ function generateTrophyStoreContainer(filter, display, counter, trophies, needed
         })
         itemDiv.appendChild(itemAddedIcon);
 
-        if (data.updateAdded === parseInt(btd6usersave.latestGameVersion.split(".")[0])) {
+        if (parseInt(data.updateAdded) === parseInt(btd6usersave.latestGameVersion.split(".")[0])) {
             let newIcon = createEl('img', {
                 classList: [],
                 style: {
@@ -10631,10 +10686,8 @@ function generateTeamsStorePopout(key) {
 
 }
 
-async function generateInstaSchedule() {
-    let current = await getLatestCollectionEvent();
-    current = processCollectionEvent(current);
-
+async function generateInstaSchedule(fullSchedule = false, id = null) {
+    let current = await getLatestCollectionEvent(id);
     clearAllTimers();
 
     let featuredContent = document.getElementById('featured-content');
@@ -10661,6 +10714,44 @@ async function generateInstaSchedule() {
         classList: ['d-flex', 'jc-between', 'ai-center', 'w-100']
     })
     instaScheduleHeader.appendChild(instaHeaderTop);
+
+    if (current == null) {
+        let noEventTitle = createEl('p', {
+            classList: ['black-outline', 'fg-1'],
+            style: {
+                fontSize: "32px",
+                padding: "10px 20px",
+            },
+            innerHTML: `No Upcoming Collection Event Found`
+        });
+        instaScheduleHeader.appendChild(noEventTitle);
+
+        let noEventDescription = createEl('p', {
+            classList: ['font-gardenia', 'boss-info-div'],
+            style: {
+                fontSize: "18px",
+                padding: "10px 20px",
+                textAlign: "center",
+                lineHeight: "1.5",
+            },
+            innerHTML: "Collection Events occur approximately every other month and are usually around holiday seasons. The next event schedule will be available here on the site as soon as it is added to the Open Data API (which is usually about a week before it starts). This site will generate the schedule in your local timezone. The schedule will look something like this:"
+        });
+        instaScheduleHeader.appendChild(noEventDescription);
+
+        let exampleImage = createEl('img', {
+            style: {
+                width: "100%",
+                height: "660px",
+                margin: "20px",
+                objectFit: "cover",
+                borderRadius: "10px"
+            },
+            src: '../Assets/UI/LandingScroll/CollectionEvent.png'
+        });
+        instaScheduleHeader.appendChild(exampleImage);
+        return;
+    }
+    current = processCollectionEvent(current);
 
     let startDate = new Date(current.start);
     let endDate = new Date(current.end);
@@ -10694,7 +10785,7 @@ async function generateInstaSchedule() {
             textAlign: "center",
             lineHeight: "1.5",
         },
-        innerHTML: "Times are your local timezone. Event list and times may change. Special thanks to Minecool for helping me find what broke my list generator!"
+        innerHTML: "Times are your local timezone. Event list and times may change."
     });
     instaScheduleHeader.appendChild(instaHeaderDescription);
 
@@ -10714,7 +10805,7 @@ async function generateInstaSchedule() {
                 element.classList.remove('collection-event-tower-selector-active');
             }
             if (currentFeaturedTower != "All") { collectionEventTowerSelector.classList.add('collection-event-tower-selector-active') }
-            generateRotations(scheduleContainer, current);
+            generateRotations(scheduleContainer, current, fullSchedule);
         })
         collectionEventTowerSelectors.appendChild(collectionEventTowerSelector);
 
@@ -10739,13 +10830,13 @@ async function generateInstaSchedule() {
         generateInstaSchedule();
     }, timeUntilNextRotation);
 
-    generateRotations(scheduleContainer, current);
+    generateRotations(scheduleContainer, current, fullSchedule);
 }
 
-function generateRotations(scheduleContainer, current){
+function generateRotations(scheduleContainer, current, fullSchedule){
     scheduleContainer.innerHTML = "";
     let iterate = 0;
-    let currentRotation = Math.floor((Date.now() - current.start) / 28800000);
+    let currentRotation = (fullSchedule) ? 0 : Math.floor((Date.now() - current.start) / 28800000);
 
     Object.values(current.rotations).forEach((rotation, index) => {
         if(!rotation.includes(currentFeaturedTower) && currentFeaturedTower !== "All") { return; }
@@ -10769,9 +10860,9 @@ function generateRotations(scheduleContainer, current){
                 textAlign: "center",
                 flexGrow: "1",
             },
-            innerHTML: currentRotation == index ? "--:--:--" : `${date.toLocaleDateString()}<br>${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+            innerHTML: (currentRotation == index && !fullSchedule) ? "--:--:--" : `${date.toLocaleDateString()}<br>${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
         });
-        if (currentRotation == index) {
+        if (currentRotation == index && !fullSchedule) {
             rotationDate.id = "active-selction"
             let rotationTextDiv = createEl('div', {
                 classList: ['d-flex', 'fd-column', 'ai-center', 'w-100']
@@ -11177,27 +11268,11 @@ function generateProPowerProgress() {
             towerNameAndPortrait._tippy.destroy();
         }
 
-        tippy(towerNameAndPortrait, {
-            content: getLocValue(`${power}Power Description`),
-            placement: 'top',
-            theme: 'speech_bubble',
-            hideOnClick: false,
+        addTooltip(towerNameAndPortrait, getLocValue(`${power}Power Description`), {
             allowHTML: true,
-            popperOptions: {
-                modifiers: [
-                    {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: 'viewport',
-                        padding: {right: 18},
-                    },
-                    },
-                ],
-            }
-        })
-
-
-
+            hideOnClick: false,
+        });
+ 
         let powerSaveData = btd6usersave.powersPro[power] || { xp: 0, unlockedTier: 0};
         let thresholds = powerData.unlockThresholds;
         let currentXP = powerSaveData.xp || 0;
@@ -11766,24 +11841,11 @@ function generateProPowerProgress() {
             });
             container.appendChild(upgradeImg);
 
-            tippy(container, {
-                content: `<p class="artifact-title">${getLocValue(upgrade)}</p>${getLocValue(`${upgrade} Description`)}`,
-                placement: 'top',
-                theme: 'speech_bubble',
-                hideOnClick: false,
+            addTooltip(container, `<p class="artifact-title">${getLocValue(upgrade)}</p>${getLocValue(`${upgrade} Description`)}`, {
                 allowHTML: true,
-                popperOptions: {
-                    modifiers: [
-                        {
-                        name: 'preventOverflow',
-                        options: {
-                            boundary: 'viewport',
-                            padding: {right: 18},
-                        },
-                        },
-                    ],
-                }
-            })
+                hideOnClick: false,
+            });
+
 
             return container;
         }
@@ -11815,4 +11877,1037 @@ function generateProPowerProgress() {
         }
     }
     generateProPowerDetails("BananaFarmerPro")
+}
+
+function generateOdyssey(){
+    let eventsContent = document.getElementById('events-content');
+    eventsContent.innerHTML = "";
+
+    clearAllTimers();
+
+    Object.values(odysseyData).forEach((ody, index) => {
+        let odyDiv = createEl('div', {
+            classList: ['race-div', 'fd-column'],
+            style: {
+                backgroundImage: `url(../Assets/EventBanner/EventBannerSmallOdyssey.png)`,
+            }
+        });
+        eventsContent.appendChild(odyDiv);
+
+        let odyInfoDiv = createEl('div', {
+            classList: ['race-info-div', 'boss-info-div'],
+            style: {
+                height: "90px"
+            }
+        });
+        odyDiv.appendChild(odyInfoDiv);
+
+        let odyInfoTopDiv = createEl('div', {
+            classList: ['race-info-top-div'],
+            style: {
+                width: "unset",
+            }
+        });
+        odyInfoDiv.appendChild(odyInfoTopDiv);
+
+        let odyInfoMiddleDiv = createEl('div', {
+            classList: ['race-info-middle-div'],
+        });
+        odyInfoDiv.appendChild(odyInfoMiddleDiv);
+
+        let odyInfoBottomDiv = createEl('div', {
+            classList: ['race-info-bottom-div', 'jc-around'],
+        });
+        odyDiv.appendChild(odyInfoBottomDiv);
+
+        let odyInfoName = createEl('p', {
+            classList: ['race-info-name', 'black-outline'],
+            style: {
+                fontSize: "28px",
+                maxWidth: "unset"
+            },
+            innerHTML: ody.name,
+        });
+        odyInfoTopDiv.appendChild(odyInfoName);
+
+        let odyInfoDesc = createEl('p', {
+            classList: ['font-gardenia'],
+            style: {
+                fontSize: "20px",
+            },
+            innerHTML: ody.description,
+        });
+        odyInfoMiddleDiv.appendChild(odyInfoDesc);
+
+        let odyTimeLeft = createEl('p', {
+            id: `Odyssey-${ody.id}-TimeLeft`,
+            classList: ['race-time-left', 'black-outline'],
+            innerHTML: "Finished",
+        });
+        odyInfoTopDiv.appendChild(odyTimeLeft);    
+        if(new Date() < new Date(ody.start)) {
+            odyTimeLeft.innerHTML = "Coming Soon!";
+        } else if (new Date(ody.end) > new Date()) {
+            registerTimer(odyTimeLeft.id, new Date(ody.end));
+        } else if (new Date() > new Date(ody.end)) {
+            odyTimeLeft.innerHTML = "Finished";
+        }
+
+        let odyInfoDates = createEl('p', {
+            classList: ['race-info-dates', 'black-outline', 'ta-center', 'h-100', 'd-flex', 'ai-center'],
+            style: {
+                minWidth: "200px",
+            },
+            innerHTML: `${new Date(ody.start).toLocaleDateString()} - ${new Date(ody.end).toLocaleDateString()}`,
+        });
+        odyInfoBottomDiv.appendChild(odyInfoDates);
+
+        ["easy", "medium", "hard"].forEach(diff => {
+            let odyInfoRules = createEl('div', {
+                classList: ['race-info-rules', 'start-button', 'black-outline'],
+                style: {
+                    width: "110px"
+                },
+                innerHTML: diff.charAt(0).toUpperCase() + diff.slice(1),
+            });
+
+             switch(diff) {
+                case "medium":
+                    odyInfoRules.classList.add("square-btn-yellow")
+                    break;
+                case "hard":
+                    odyInfoRules.classList.add("btn-rotate-boss-elite")
+                    break;
+             }
+
+            odyInfoRules.addEventListener('click', () => {
+                showLoading();
+                getOdyMetadata(index, diff);
+            })
+            odyInfoBottomDiv.appendChild(odyInfoRules);
+        });
+
+        addTooltip(odyInfoDates, `${new Date(ody.start).toLocaleString()}<br>${new Date(ody.end).toLocaleString()}`, {
+            allowHTML: true,
+        });
+    })
+    hideLoading();
+}
+
+async function showOdyssey(difficulty, odyData, metadata, source="events") {
+    switch(difficulty) {
+        case "easy":
+            changeHexBGColor("#06C3FD");
+            break;
+        case "medium":
+            changeHexBGColor("#ff7726");
+            break;
+        case "hard":
+            changeHexBGColor("#8c36f4");
+            break;
+    }
+    hideLoading();
+
+    let challengeContent = document.getElementById('challenge-content');
+
+    challengeContent.style.display = "flex";
+    challengeContent.innerHTML = "";
+    document.getElementById(`${source}-content`).style.display = "none";
+    resetScroll();
+
+    addToBackQueue({"source": source, "destination": "challenge", callback: function () { changeHexBGColor(constants.BGColor) } });
+
+    let odyContent = createEl('div', {
+        classList: ['w-100'],
+    });
+    challengeContent.appendChild(odyContent);
+
+    let odyMainInfoDiv = createEl('div', {
+        classList: ['d-flex', 'fd-column', 'ai-center', 'odyssey-pillar', 'w-100', 'bs-box', 'pos-rel'],
+        style: {},
+    });
+    odyContent.appendChild(odyMainInfoDiv);
+
+    let odyTitleDesc = createEl('div', {
+        classList: ['d-flex', 'fd-column', 'ai-center', 'boss-info-div', 'w-100'],
+        style: {
+            padding: "20px 0"
+        }
+    });
+    odyMainInfoDiv.appendChild(odyTitleDesc);
+
+    let odyTitle = createEl('p', {
+        classList: ['black-outline'],
+        style: {
+            fontSize: "32px",
+            padding: "10px",
+            paddingTop: "0"
+        },
+        innerHTML: odyData.name
+    });
+    odyTitleDesc.appendChild(odyTitle);
+
+    let odyDesc = createEl('p', {
+        classList: ['font-gardenia', 'ta-center'],
+        style: {
+            fontSize: "20px",
+        },
+        innerHTML: odyData.description
+    });
+    odyTitleDesc.appendChild(odyDesc);
+
+    let odyDiffSelect = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'jc-center'],
+        style: {
+            gap: "1rem"
+        }
+    });
+    odyContent.appendChild(odyDiffSelect);
+
+    ["easy", "medium", "hard"].forEach(diff => {
+        let diffBtn = createEl('div', {
+            classList: ['d-flex', 'ai-center', 'maps-progress-view', 'stats-tab-ody'],
+            style: {
+                width: "220px"
+            },
+        });
+        if (diff === difficulty) {
+            diffBtn.classList.add('stats-tab-yellow');
+        }
+
+        let diffIcon = createEl('img', {
+            classList: ['of-contain'],
+            style: {
+                width: "100px",
+                height: "100px",
+                gap: "8px"
+            },
+            src: `../Assets/UI/OdysseyMode${diff.charAt(0).toUpperCase() + diff.slice(1)}Btn.png`
+        });
+        diffBtn.appendChild(diffIcon);
+        
+        let diffLabel = createEl('p', {
+            classList: ['black-outline', 'fg-1', 'ta-center'],
+            style: {
+                fontSize: "28px",
+                marginLeft: "8px"
+            },
+            innerHTML: diff.charAt(0).toUpperCase() + diff.slice(1)
+        });
+        diffBtn.appendChild(diffLabel);
+
+        diffBtn.addEventListener('click', () => {
+            document.querySelectorAll('.odyssey-diff-btn').forEach(btn => {
+                btn.classList.remove('stats-tab-yellow');
+            });
+            diffBtn.classList.add('stats-tab-yellow');
+            showLoading();
+            getOdyMetadata(odysseyData.findIndex(o => o.id === odyData.id), diff);
+        });
+        diffBtn.classList.add('odyssey-diff-btn');
+        odyDiffSelect.appendChild(diffBtn);
+    }); 
+
+    let odyMetadataDiv = createEl('div', {
+        classList: ['d-flex', 'fd-column', 'ai-center', 'w-100', 'pos-rel', 'bs-box'],
+        style: {
+            gap: "1rem",
+            padding: "20px 0"
+        }
+    });
+    odyContent.appendChild(odyMetadataDiv);
+
+    let odyBG = createEl('div', {
+        classList: ['odyssey-bg', 'pos-abs', 'w-100', 'h-100', 'bs-box'],
+        style: {
+            inset: "0",
+            zIndex: "-1",
+        }
+    })
+    odyMetadataDiv.appendChild(odyBG);
+
+    let odyMetadataInfoTop = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'jc-center'],
+        style: {
+            gap: "2rem",
+            height: "50px",
+            marginTop: "12px"
+        }
+    });
+    odyMetadataDiv.appendChild(odyMetadataInfoTop);
+
+
+    let odysseyMetaData = {
+        "Lives": {
+            value: metadata.startingHealth,
+            icon: `../Assets/UI/LivesIcon.png`
+        },
+        "Max Seats": {
+            value: metadata.maxMonkeySeats,
+            icon: `../Assets/UI/MaxSeatsIcon.png`
+        },
+        "Max Towers": {
+            value: metadata.maxMonkeysOnBoat,
+            icon: `../Assets/UI/MaxMonkeysIcon.png`
+        },
+        // "Power Seats": {
+        //     value: metadata.maxPowerSlots,
+        //     icon: `../Assets/UI/MaxPowersIcon.png`
+        // }
+    }
+
+    Object.entries(odysseyMetaData).forEach(([key, data]) => {
+
+        let statContainer = createEl('div', {
+            classList: ['odyssey-ribbon', 'd-flex', 'ai-center', 'jc-center'],
+        })
+        odyMetadataInfoTop.appendChild(statContainer);
+
+        let statIcon = createEl('img', {
+            classList: ['of-contain'],
+            style: {
+                width: "30px",
+                height: "30px",
+                padding: "4px"
+            },
+            src: data.icon
+        });
+        statContainer.appendChild(statIcon);
+
+        let statLabel = createEl('p', {
+            classList: ['black-outline'],
+            style: {
+                fontSize: "20px",
+            },
+            innerHTML: `${key}: `
+        });
+        statContainer.appendChild(statLabel);
+
+        let statValue = createEl('p', {
+            classList: ['black-outline'],
+            style: {
+                fontSize: "20px",
+                margin: "0 4px"
+            },
+            innerHTML: data.value
+        });
+        statContainer.appendChild(statValue);
+    })
+    //lives
+    //extreme mode (if it is)
+    //max seats
+    //max towers
+    //max power slots
+    //rewards
+
+    let boatAndRewardsDiv = createEl('div', {
+        classList: ['d-flex', 'f-wrap', 'jc-center'],
+        style: {
+            gap: "12px"
+        },
+    });
+    odyMetadataDiv.appendChild(boatAndRewardsDiv);
+
+    let boatDiv = createEl('div', {
+        classList: ['d-flex', 'bs-box', 'jc-between', 'pos-rel'],
+        style: {
+            width: "770px",
+            height: "200px",
+            // backgroundColor: "#936E44",
+            backgroundColor: "#B58A52",
+            borderRadius: "10px",
+            padding: "10px"
+        }
+    });
+
+    let defaultLabel = createEl('p', {
+        classList: ['black-outline', 'pos-abs'],
+        style: {
+            fontSize: "19px",
+        },
+        innerHTML: "Default Crew"
+    });
+    boatDiv.appendChild(defaultLabel);
+
+    let boatLeftDiv = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'jc-center'],
+        style: {
+            width: "120px",
+        }
+    });
+    boatDiv.appendChild(boatLeftDiv);
+
+    let boatHeroDiv = createEl('div', {
+        classList: ['pos-rel'],
+        style: {
+            backgroundImage: "url(../Assets/UI/HeroSeat.png)",
+            width: "100px",
+            height: "100px",
+            backgroundSize: "100px"
+        },
+    });
+    boatLeftDiv.appendChild(boatHeroDiv);
+    
+    let boatSeatsDiv = createEl('div', {
+        classList: ['d-flex', 'jc-start', 'f-wrap', 'bs-box'],
+        style: {
+            width: "620px",
+            gap: "5px",
+            paddingTop: "20px",
+            paddingLeft: "10px",
+            backgroundColor: "#936E44",
+            borderRadius: "10px",
+        }
+    });
+    boatDiv.appendChild(boatSeatsDiv);
+
+    let seatObjects = []
+
+    for (let i = 0; i< metadata.maxMonkeySeats; i++) {
+        let seat = createEl('div', {
+            classList: ['pos-rel'],
+            style: {
+                backgroundImage: "url(../Assets/UI/TowerSeatEmpty.png)",
+                backgroundSize: "70px",
+                width: "70px",
+                height: "70px"
+            },
+        });
+        boatSeatsDiv.appendChild(seat);
+        seatObjects.push(seat);
+    }
+
+    let availableTowers = processTowers(metadata._availableTowers);
+
+    metadata._defaultTowers.forEach(data => {
+        console.log(availableTowers)
+        let towerData = availableTowers.towersToDisplay[data.name] || availableTowers.heroesToDisplay[data.name];
+        console.log(towerData)
+        if (towerData.isHero) {
+             let heroIcon = createEl('img', {
+                classList: ['of-contain'],
+                style: {
+                    width: "100px",
+                    height: "100px",
+                },
+                src: getInstaContainerIcon(data.name, '000')
+            });
+            boatHeroDiv.appendChild(heroIcon);
+        } else {
+            let seat = seatObjects.shift();
+            seat.style.backgroundImage = `url(../Assets/UI/TowerSeat${constants.towersInOrder[data.name]}.png)`;
+
+            let towerIcon = createEl('img', {
+                classList: ['of-contain'],
+                style: {
+                    width: "70px",
+                    height: "70px",
+                },
+                src: getInstaContainerIcon(data.name, '000')
+            });
+            seat.appendChild(towerIcon);
+
+            let towerCount = createEl('p', {
+                classList: ['black-outline', 'ta-center', 'pos-abs', 'w-100'],
+                style: {
+                    fontSize: "24px",
+                    top: "-18px"
+                },
+                innerHTML: `${data.quantity}${(towerData.max > -1) ? `/${towerData.max}` : ""}`
+            });
+            seat.appendChild(towerCount);
+        }
+    });
+
+    if (metadata.isExtreme) {
+        let extremeRibbon = createEl('div', {
+            classList: ['odyssey-ribbon', 'd-flex', 'ai-center', 'jc-center', 'pos-abs'],
+            style: {
+                height: "40px",
+                top: "-50px",
+                filter: "hue-rotate(-180deg)",
+            }
+        })
+        odyMainInfoDiv.appendChild(extremeRibbon);
+
+        let extremeLabel = createEl('p', {
+            classList: ['black-outline'],
+            style: {
+                fontSize: "20px",
+                padding: "20px"
+            },
+            innerHTML: "EXTREME MODE!"
+        });
+        extremeRibbon.appendChild(extremeLabel);
+    }
+
+    let rewardsDiv = createEl('div', {
+        classList: ['d-flex', 'pos-rel', 'jc-center', 'fg-1'],
+        style: {
+            backgroundColor: "#ab927c",
+            borderRadius: "10px",
+            padding: "10px",
+            paddingTop: "50px",
+            maxWidth: "730px",
+            minWidth: "320px"
+        }
+    });
+    
+    boatAndRewardsDiv.appendChild(boatDiv);
+    boatAndRewardsDiv.appendChild(rewardsDiv);
+    
+    let statContainer = createEl('div', {
+        classList: ['odyssey-ribbon', 'd-flex', 'ai-center', 'jc-center', 'pos-abs'],
+        style: {
+            height: "40px",
+            top: "-20px",
+        }
+    })
+    rewardsDiv.appendChild(statContainer);
+
+    let statLabel = createEl('p', {
+        classList: ['black-outline'],
+        style: {
+            fontSize: "20px",
+            padding: "50px"
+        },
+        innerHTML: "Rewards:"
+    });
+    statContainer.appendChild(statLabel);
+
+    let trophiesPerDifficulty = {
+        "easy": 15,
+        "medium": 25,
+        "hard": 50
+    }
+
+    let rewards = processRewards(metadata._rewards.concat([`Trophy:${trophiesPerDifficulty[difficulty]}`]));
+    for (let data of Object.values(rewards)) {
+        let rewardDiv = createEl('div', {
+            classList: ['achievement-reward-div', 'd-flex', 'fd-column', 'ai-center'],
+            style: {
+                width: "100px",
+            },
+        });
+        rewardsDiv.appendChild(rewardDiv);
+
+        let rewardImg = createEl('img', {
+            classList: ['achievement-reward-img'],
+            style: {
+                width: "80px",
+            },
+            src: getRewardIcon(data)
+        });
+        rewardDiv.appendChild(rewardImg);
+
+        let rewardText = createEl('p', {
+            classList: ['achievement-reward-text', 'black-outline']
+        });
+        let text = "";
+        switch (data.type) {
+            case "InstaMonkey":
+                text = data.tiers.split("").join("-")
+                break;
+            case "Knowledge":
+                text = "+ " + data.amount.toLocaleString()
+                break;
+            case "Power":
+            case "RandomInstaMonkey":
+                text = "X " + data.amount.toLocaleString()
+                break;
+            default:
+                text = data.amount ? data.amount.toLocaleString() : "";
+                break;
+        }
+        rewardText.innerHTML = text;
+        rewardDiv.appendChild(rewardText);
+    };
+
+    let crewOptionsDiv = createEl('div', {
+        classList: ['d-flex', 'bs-box', 'jc-center', 'ai-start', 'f-wrap'],
+        style: {
+            // width: "800px",
+            gap: "8px",
+            padding: "18px"
+        }
+    });
+    odyMetadataDiv.appendChild(crewOptionsDiv);
+
+    let heroesWrapper = createEl('div', {
+        classList: ['pos-rel'],
+        style: {
+            marginBottom: '20px'
+        }
+    });
+    crewOptionsDiv.appendChild(heroesWrapper);
+
+    let crewHeroesDiv = createEl('div', {
+        classList: ['d-flex', 'f-wrap', 'ac-start', 'bs-box', 'jc-center'],
+        style: {
+            width: "228px",
+            backgroundColor: "#AB927C",
+            padding: "4px 0",
+            borderRadius: "10px",
+            overflowY: "auto",
+        }
+    });
+    heroesWrapper.appendChild(crewHeroesDiv);
+
+    let heroesLabel = createEl('p', {
+        classList: ['black-outline', 'pos-abs', 'w-100', 'ta-center'],
+        style: {
+            fontSize: "24px",
+            top: "-24px",
+            // left: "12px"
+        },
+        innerHTML: "Heroes Available:"
+    });
+    heroesWrapper.appendChild(heroesLabel);
+
+    let towersWrapper = createEl('div', {
+        classList: ['pos-rel']
+    });
+    crewOptionsDiv.appendChild(towersWrapper);
+
+    let crewTowersDiv = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'ac-start', 'f-wrap', 'fg-1', 'bs-box'],
+        style: {
+            width: "528px",
+            backgroundColor: "#AB927C",
+            padding: "4px",
+            borderRadius: "10px",
+            minHeight: "380px",
+            // maxWidth: "832px",
+            // maxWidth: "520px"
+        }
+    });
+    towersWrapper.appendChild(crewTowersDiv);
+
+    let towersLabel = createEl('p', {
+        classList: ['black-outline', 'pos-abs', 'w-100', 'ta-center'],
+        style: {
+            fontSize: "24px",
+            top: "-24px",
+            // left: "12px"
+        },
+        innerHTML: "Towers Available:"
+    });
+    towersWrapper.appendChild(towersLabel);
+
+    let powersWrapper = createEl('div', {
+        classList: ['pos-rel', 'd-flex', 'jc-center', 'fg-1'],
+    });
+    crewOptionsDiv.appendChild(powersWrapper);
+
+    let crewPowersDiv = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'ac-start', 'f-wrap', 'fg-1', 'bs-box'],
+        style: {
+            width: "340px",
+            backgroundColor: "#AB927C",
+            padding: "6px 4px",
+            borderRadius: "10px",
+            gap: "4px",
+            overflowY: "auto",
+            maxWidth: "736px"
+        }
+    });
+    powersWrapper.appendChild(crewPowersDiv);
+
+    let powersLabel = createEl('p', {
+        classList: ['black-outline', 'pos-abs', 'w-100', 'ta-center'],
+        style: {
+            fontSize: "24px",
+            top: "-24px",
+            // left: "16px"
+        },
+        innerHTML: "Powers Available:"
+    });
+    powersWrapper.appendChild(powersLabel);
+
+    console.log(availableTowers)
+
+    if (Object.keys(constants.heroesInOrder).every(hero => availableTowers.heroesToDisplay.hasOwnProperty(hero))) {
+        let allHeroesDiv = createEl('div', {
+            classList: ['d-flex', 'f-wrap', 'ac-start', 'bs-box', 'jc-center', 'pos-rel'],
+            style: {}
+        });
+        crewHeroesDiv.appendChild(allHeroesDiv);
+
+        let allHeroesImg = createEl('img', {
+            classList: ['of-contain', 'bs-box'],
+            style: {
+                width: "216px",
+                height: "216px",
+                padding: "10px 20px",
+                backgroundColor: "#DDC5AC",
+                borderRadius: "10px",
+            },
+            src: `../Assets/UI/AllHeroesIcon.png`
+        });
+        allHeroesDiv.appendChild(allHeroesImg);
+
+        let allHeroesLabel = createEl('p', {
+            classList: ['black-outline', 'ta-center', 'pos-abs', 'w-100'],
+            style: {
+                fontSize: "24px",
+                bottom: "4px"
+            },
+            innerHTML: `All Heroes`
+        });
+        allHeroesDiv.appendChild(allHeroesLabel);
+    } else {
+        for (let [tower, nameColor] of Object.entries(constants.heroesInOrder)) {
+            if (!availableTowers.heroesToDisplay[tower]) { continue; }
+            let towerSelector = document.createElement('div');
+            towerSelector.classList.add(`tower-selector-hero`);
+
+            let towerSelectorImg = document.createElement('img');
+            towerSelectorImg.classList.add('hero-selector-img');
+            towerSelectorImg.src = getInstaContainerIcon(tower,"000");
+            towerSelector.appendChild(towerSelectorImg);
+
+            crewHeroesDiv.appendChild(towerSelector)
+        }
+    }
+
+    for (let [tower, category] of Object.entries(constants.towersInOrder)) {
+        if (!availableTowers.towersToDisplay[tower]) { continue; }
+        let towerSelector = document.createElement('div');
+        towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
+        crewTowersDiv.appendChild(towerSelector)
+
+        let towerSelectorImg = document.createElement('img');
+        towerSelectorImg.classList.add('tower-selector-img');
+        towerSelectorImg.src = getInstaContainerIcon(tower,"000");
+        towerSelector.appendChild(towerSelectorImg);
+
+        let isLimited = false;
+
+        if (availableTowers.towersToDisplay[tower].path1NumBlockedTiers != 0 || availableTowers.towersToDisplay[tower].path2NumBlockedTiers != 0  || availableTowers.towersToDisplay[tower].path3NumBlockedTiers != 0 ) {
+            isLimited = true;
+
+            let towerSelectorTiers = document.createElement('p');
+            towerSelectorTiers.classList.add('tower-selector-tiers', 'black-outline');
+            towerSelectorTiers.innerHTML = `${availableTowers.towersToDisplay[tower].path1NumBlockedTiers == -1 ? "0" : 5 - availableTowers.towersToDisplay[tower].path1NumBlockedTiers}-${availableTowers.towersToDisplay[tower].path2NumBlockedTiers == -1 ? "0" : 5- availableTowers.towersToDisplay[tower].path2NumBlockedTiers}-${availableTowers.towersToDisplay[tower].path3NumBlockedTiers == -1 ? "0" : 5 - availableTowers.towersToDisplay[tower].path3NumBlockedTiers}`;
+            towerSelector.appendChild(towerSelectorTiers);
+        } else if (availableTowers.towersToDisplay[tower].hasOwnProperty('restrictParagon') && availableTowers.towersToDisplay[tower].restrictParagon) {
+            let towerSelectorTiers = document.createElement('p');
+            towerSelectorTiers.classList.add('tower-selector-tiers', 'black-outline');
+            towerSelectorTiers.innerHTML = "5-5-5";
+            towerSelector.appendChild(towerSelectorTiers);
+        }
+
+        if(availableTowers.towersToDisplay[tower].max != -1) {
+            isLimited = true;
+
+            let maxCount = document.createElement('div');
+            maxCount.classList.add('max-count','towerTopLeft');
+            towerSelector.appendChild(maxCount);
+
+            let maxCountText = document.createElement('p');
+            maxCountText.classList.add('towerTopLeftText','black-outline');
+            maxCountText.innerHTML = `${availableTowers.towersToDisplay[tower].max}`;
+            maxCount.appendChild(maxCountText);
+        }
+    }
+
+    requestAnimationFrame(() => {
+        crewHeroesDiv.style.height = (crewTowersDiv.offsetHeight) + 'px';
+        crewPowersDiv.style.maxHeight = (crewTowersDiv.offsetHeight) + 'px';
+        crewPowersDiv.style.maxHeight = ((crewPowersDiv.offsetWidth > 400) ? 300 : crewTowersDiv.offsetHeight) + 'px';
+        // powersWrapper.style.marginTop = "20px";
+    });
+
+    let powersToDisplay = {};
+    metadata._availablePowers.forEach(obj => {
+        powersToDisplay[obj.power] = obj.max;
+    })
+
+    for (let [power, data] of Object.entries(constants.powersInOrder).concat(Object.entries(constants.powersProInOrder))) {
+        if (powersToDisplay.hasOwnProperty(power) && powersToDisplay[power] == 0) { continue; }
+        let powerDiv = createEl('div', {classList: ['pos-rel'], style: {}});
+        crewPowersDiv.appendChild(powerDiv);
+
+        let powerIconDiv = createEl('div', {classList: ['power-div'], style: {width: "unset", height: "120px", margin: "unset"}});
+        powerDiv.appendChild(powerIconDiv);
+
+        switch (data.type) {
+            case "IAP":
+                powerIconDiv.style.backgroundImage = "url(../Assets/UI/PowerIAPContainer.png)"
+                break;
+            case "Pro":
+                powerIconDiv.style.backgroundImage = "url(../Assets/UI/PowersProContainer.png)"
+                break;
+            default:
+                powerIconDiv.style.backgroundImage = "url(../Assets/UI/PowerSeat.png)"
+                break;
+        }
+
+        let powerImg = createEl('img', {classList: ['power-img'], style: {transform: 'scale(0.75)'},src: getPowerIcon((power === "Techbot") ? "TechBot" : power) });
+        powerIconDiv.appendChild(powerImg);
+
+        if(powersToDisplay.hasOwnProperty(power) && powersToDisplay[power] != -1) {
+            let maxCount = document.createElement('div');
+            maxCount.classList.add('max-count','towerTopLeft');
+            powerDiv.appendChild(maxCount);
+
+            let maxCountText = document.createElement('p');
+            maxCountText.classList.add('towerTopLeftText','black-outline');
+            maxCountText.innerHTML = `${powersToDisplay[power]}`;
+            maxCount.appendChild(maxCountText);
+        }
+    }
+
+    let islandDetailsDiv = createEl('div', {
+        classList: ['d-flex', 'fd-column', 'ai-center', 'bs-box', 'pos-rel', 'w-100'],
+        style: {
+            minWidth: "770px",
+            maxWidth: "1100px",
+            // backgroundColor: "#AB927C",
+            borderRadius: "10px",
+            padding: "10px",
+            paddingTop: "20px",
+            gap: "12px"
+        }
+    });
+    odyMetadataDiv.appendChild(islandDetailsDiv);
+
+    let islandsLabelContainer = createEl('div', {
+        classList: ['odyssey-ribbon', 'd-flex', 'ai-center', 'jc-center', 'pos-abs'],
+        style: {
+            height: "40px",
+            top: "-50px",
+        }
+    })
+    islandDetailsDiv.appendChild(islandsLabelContainer);
+
+    let islandsLabel = createEl('p', {
+        classList: ['black-outline'],
+        style: {
+            fontSize: "20px",
+            padding: "50px"
+        },
+        innerHTML: "Island Rules"
+    });
+    islandsLabelContainer.appendChild(islandsLabel);
+
+    metadata.maps.forEach((map, index) => {
+        let modifiers = challengeModifiers(map);
+        let rules = challengeRules(map);
+        console.log(modifiers)
+        console.log(rules)
+
+        let mapDiv = createEl('div', {
+            classList: ['d-flex', 'bs-box', 'w-100'],
+            style: {
+                // padding: "10px",
+                backgroundColor: "#AB927C",
+                borderRadius: "10px",
+            }
+        });
+        islandDetailsDiv.appendChild(mapDiv);
+
+        let leftDiv = createEl('div', {
+            classList: ['d-flex', 'ai-center', 'jc-center', 'pos-rel'],
+            style: {},
+        });
+        mapDiv.appendChild(leftDiv);
+
+        let mapAndLabelDiv = createEl('div', {
+            classList: ['pos-rel'],
+        });
+        leftDiv.appendChild(mapAndLabelDiv);
+
+        let mapIcon = createEl('img', {
+            classList: ["race-map-img", 'odyssey-border'],
+            style: {
+                borderRadius: "10px",
+                minWidth: "240px",
+            },
+            src: `../Assets/MapIcon/MapSelect${map.map}Button.png`
+        });
+        mapAndLabelDiv.appendChild(mapIcon);
+
+        let mapLabel = createEl('p', {
+            classList: ['black-outline', 'pos-abs', 'w-100', 'ta-center'],
+            style: {
+                fontSize: "24px",
+                top: "10px"
+            },
+            innerHTML: `Island ${index + 1}`
+        });
+        mapAndLabelDiv.appendChild(mapLabel);
+
+        //bar ont op of rules div
+
+        let rightDiv = createEl('div', {
+            classList: ['d-flex', 'fd-column', 'w-100', 'fg-1'],
+        });
+        mapDiv.appendChild(rightDiv);
+
+        let rulesBar = createEl('div', {
+            classList: ['d-flex'],
+            style: {
+                gap: "8px",
+                paddingTop: "10px",
+                paddingLeft: "16px"
+            }
+        });
+        rightDiv.appendChild(rulesBar);
+
+        let barItems = {
+            "/UI/CoinIcon": map.startingCash,
+            "/UI/StartRoundIconSmall": `${map.startRound}/${map.endRound}`
+        }
+        barItems[`/ModeIcon/${(map.mode == "Standard") ? map.difficulty : map.mode}Btn`] = `${map.difficulty} / ${getLocValue("Mode " + map.mode)}`
+
+        Object.entries(barItems).forEach(([icon, value]) => {
+            let barItem = createEl('div', {
+                classList: ['d-flex', 'ai-center', 'jc-center'],
+                style: {
+                    gap: "8px"
+                },
+            });
+            rulesBar.appendChild(barItem);
+
+            let barItemIcon = createEl('img', {
+                classList: ['of-contain'],
+                style: {
+                    width: "36px",
+                    height: "36px"
+                },
+                src: `../Assets${icon}.png`
+            });
+            barItem.appendChild(barItemIcon);
+
+            let barItemText = createEl('p', {
+                classList: ['black-outline'],
+                style: {
+                    fontSize: "20px",
+                },
+                innerHTML: value            
+            });
+            barItem.appendChild(barItemText);
+        });
+
+        let rulesDiv = createEl('div', {
+            classList: ['d-flex', 'f-wrap', 'ai-center', 'w-100', 'fg-1'],
+            style: {},
+        });
+        rightDiv.appendChild(rulesDiv);
+
+        Object.entries(modifiers).forEach(([modifier, data]) => {
+            let challengeModifier = createEl('div', {
+                classList: ['challenge-modifier'],
+                style: {
+                    width: "240px",
+                    margin: "4px 10px"
+                }
+            });
+            rulesDiv.appendChild(challengeModifier);
+
+            let challengeModifierIcon = createEl('img', {
+                classList: ['challenge-modifier-icon'],
+                style: {
+                    width: "70px",
+                },
+                src: `./Assets/ChallengeRulesIcon/${data.icon}.png`
+            });
+            challengeModifier.appendChild(challengeModifierIcon);
+
+            let challengeModifierTexts = createEl('div', {
+                classList: ['challenge-modifier-texts']
+            });
+            challengeModifier.appendChild(challengeModifierTexts);
+
+            let challengeModifierLabel = createEl('p', {
+                classList: ['challenge-modifier-text', 'black-outline'],
+                style: {
+                    fontSize: "18px",
+                },
+                innerHTML: `${modifier}:`
+            });
+            challengeModifierTexts.appendChild(challengeModifierLabel);
+
+            let challengeModifierValue = createEl('p', {
+                classList: ['challenge-modifier-text', 'black-outline'],
+                style: {
+                    fontSize: "20px",
+                },
+                innerHTML: isNaN(data.value) ? data.value : `${(data.value * 100).toFixed(0)}%`
+            });
+            challengeModifierTexts.appendChild(challengeModifierValue);
+        })
+
+        rules.forEach(rule => {
+            if (rule == "No Round 100 Reward") { return; }
+            if (rule == "Paragon Limit" && map.maxParagons == 0) { return; }
+            let challengeRule = createEl('div', {
+                classList: ['challenge-rule'],
+                style: {
+                    width: "240px",
+                    margin: "4px 10px"
+                }
+            });
+            rulesDiv.appendChild(challengeRule);
+
+            let challengeRuleIcon = createEl('img', {
+                classList: ['challenge-modifier-icon'],
+                src: `./Assets/ChallengeRulesIcon/${rulesMap[rule]}.png`,
+                style: {
+                    width: "70px"
+                }
+            });
+            challengeRule.appendChild(challengeRuleIcon);
+
+            let challengeRuleTextDiv = createEl('div', {
+                classList: ['challenge-rule-text-div'],
+            });
+            challengeRule.appendChild(challengeRuleTextDiv);
+
+            let challengeRuleText = createEl('p', {
+                classList: ['challenge-rule-text', 'black-outline'],
+                style: {
+                    fontSize: "18px",
+                },
+                innerHTML: rule
+            });
+            challengeRuleTextDiv.appendChild(challengeRuleText);
+
+            let roundset = map.roundSets.filter(value => value !== 'default' && value !== 'bloonarius' && value !== 'lych' && value !== 'vortex' && value !== 'dreadbloon' && value !== 'phayze' && value !== 'blastapopoulos' && value !== "diamondback")
+            console.log(roundset)
+            if (rule == "Custom Rounds" && constants.skuRoundsets.includes(roundset[0]) && map.mode != "AlternateBloonsRounds") {
+                console.log("passed test")
+                let challengeRuleValue = createEl('div', {
+                    classList: ['challenge-rule-subtext', 'start-button', 'black-outline'],
+                    innerHTML: "View"
+                });
+                challengeRuleTextDiv.appendChild(challengeRuleValue);
+
+                challengeRuleValue.addEventListener('click', () => {
+                    showRoundsetModel('challenge', roundset[0]);
+                })
+            }
+
+            if(rule == "Paragon Limit") {
+                let challengeRuleValue = createEl('p', {
+                    classList: ['challenge-rule-value', 'black-outline'],
+                    innerHTML: map.maxParagons
+                });
+                challengeRuleTextDiv.appendChild(challengeRuleValue);
+            }
+        });
+
+        if (rulesDiv.children.length == 0) {
+            let none = createEl('p', {
+                classList: ['challenge-modifier-none', 'w-100'],
+                innerHTML: "Default"
+            });
+            rulesDiv.appendChild(none);
+        }
+    })
+}
+
+function generateBossRush() {
+    errorModal("Unfortunately Boss Rush islands are not available via the Open Data API currently due to how the game generates the details. If a way to fetch this information becomes available, I will include it!");
 }
