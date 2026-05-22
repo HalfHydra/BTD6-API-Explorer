@@ -5960,7 +5960,6 @@ function generateAbilities() {
                 ...Object.keys(constants.heroesInOrder).flatMap(hero => Object.values(constants.abilitiesByHero[hero] ?? {})),
                 ...Object.values(constants.abilitiesByPower).flat()
             ];
-            console.log(defaultOrder)
             abilities = Object.fromEntries(
                 Object.entries(abilities).sort((a, b) => {
                     const indexA = defaultOrder.indexOf(a[0]);
@@ -6683,7 +6682,9 @@ async function generateEvents(){
                 });
                 break;
         }
-        addTooltip(eventNameId, `Event ID: ${event.id}`)
+        addTooltip(eventNameId, `Event ID: ${event.id}`, {
+            touch: false
+        })
     })
 }
 
@@ -7899,8 +7900,6 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         towerSelectorExcluded.appendChild(none);
         noLimitedOrExcluded = true;
     }
-
-    console.log(challengeTowers)
 
     if (challengeType == "Boss" && !noLimitedOrExcluded && ((Object.keys(challengeTowers.towersLimited).length == 0 && Object.keys(challengeTowers.towersExcluded).length == 0 && Object.keys(challengeTowers.heroesExcluded).length == 0) || (Object.keys(challengeTowers.towersExcluded).length > 0 && Object.keys(challengeTowers.towersExcluded).length < 10) || Object.keys(challengeTowers.heroesToDisplay).length > 6)) {
         mapsProgressCoopToggleInput.checked = true;
@@ -12280,9 +12279,7 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
     let availableTowers = processTowers(metadata._availableTowers);
 
     metadata._defaultTowers.forEach(data => {
-        console.log(availableTowers)
         let towerData = availableTowers.towersToDisplay[data.name] || availableTowers.heroesToDisplay[data.name];
-        console.log(towerData)
         if (towerData.isHero) {
              let heroIcon = createEl('img', {
                 classList: ['of-contain'],
@@ -12518,13 +12515,11 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
         style: {
             fontSize: "24px",
             top: "-24px",
-            // left: "16px"
         },
         innerHTML: "Powers Available:"
     });
     powersWrapper.appendChild(powersLabel);
 
-    console.log(availableTowers)
 
     if (Object.keys(constants.heroesInOrder).every(hero => availableTowers.heroesToDisplay.hasOwnProperty(hero))) {
         let allHeroesDiv = createEl('div', {
@@ -12694,8 +12689,6 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
     metadata.maps.forEach((map, index) => {
         let modifiers = challengeModifiers(map);
         let rules = challengeRules(map);
-        console.log(modifiers)
-        console.log(rules)
 
         let mapDiv = createEl('div', {
             classList: ['d-flex', 'bs-box', 'w-100'],
@@ -12875,9 +12868,7 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
             challengeRuleTextDiv.appendChild(challengeRuleText);
 
             let roundset = map.roundSets.filter(value => value !== 'default' && value !== 'bloonarius' && value !== 'lych' && value !== 'vortex' && value !== 'dreadbloon' && value !== 'phayze' && value !== 'blastapopoulos' && value !== "diamondback")
-            console.log(roundset)
             if (rule == "Custom Rounds" && constants.skuRoundsets.includes(roundset[0]) && map.mode != "AlternateBloonsRounds") {
-                console.log("passed test")
                 let challengeRuleValue = createEl('div', {
                     classList: ['challenge-rule-subtext', 'start-button', 'black-outline'],
                     innerHTML: "View"
