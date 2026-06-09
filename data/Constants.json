@@ -1,11 +1,11 @@
 {
-    "version": "2.8.0",
-    "projectContentVersion": 54,
+    "version": "2.8.1",
+    "projectContentVersion": 55,
     "achievements": 142,
     "hiddenAchievements": 14,
-    "profileBanners": 63,
-    "profileAvatars": 126,
-    "teamsBanners": 17,
+    "profileAvatars": 133,
+    "profileBanners": 65,
+    "teamsBanners": 19,
     "limitedTimeEvents": {
         "Dreadbloon 32": {
             "type": "Boss", 
@@ -61,7 +61,43 @@
             "end": 1725937200000
         }
     },
-    "skuRoundsets": ["1roundEarly","2roundEarly","3roundEarly","4roundEarly","5roundEarly","DDTbadness","countdownGroupOf5","monkeyVSmachines","rabbitYear","valentinesCF","TheFinalGambit","eggs","BeastHandlerjourney","Apocrypha3","31Plus","allOrNothingEnd60","allOrNothingEnd80","Sauda63","MiniMe","BlimpMyCrib","alternateRound140","raceExperiment","SinkingFeeling","CeramicFlood","Doubleupody","Jumpscare","masterymode","chimpsbloonarius","BADbutharder","BADbutfortharder","Jumpscare1","Jumpscare2","Jumpscare3","Jumpscare4","Jumpscare5"],
+    "skuRoundsets": [
+        "1roundEarly",
+        "2roundEarly",
+        "3roundEarly",
+        "4roundEarly",
+        "5roundEarly",
+        "DDTbadness",
+        "countdownGroupOf5",
+        "monkeyVSmachines",
+        "rabbitYear",
+        "valentinesCF",
+        "TheFinalGambit",
+        "eggs",
+        "BeastHandlerjourney",
+        "Apocrypha3",
+        "31Plus",
+        "allOrNothingEnd60",
+        "allOrNothingEnd80",
+        "Sauda63",
+        "MiniMe",
+        "BlimpMyCrib",
+        "alternateRound140",
+        "raceExperiment",
+        "SinkingFeeling",
+        "CeramicFlood",
+        "Doubleupody",
+        "Jumpscare",
+        "masterymode",
+        "chimpsbloonarius",
+        "BADbutharder",
+        "BADbutfortharder",
+        "Jumpscare1",
+        "Jumpscare2",
+        "Jumpscare3",
+        "Jumpscare4",
+        "Jumpscare5"
+    ],
     "towersInOrder": {
         "DartMonkey": "Primary",
         "BoomerangMonkey": "Primary",
@@ -89,7 +125,889 @@
         "EngineerMonkey": "Support",
         "BeastHandler": "Support"
     },
-    "heroesInOrder": {"Quincy": "Blue", "Gwendolin": "Yellow", "StrikerJones": "Grey", "ObynGreenfoot": "Aqua", "CaptainChurchill": "Grey", "Benjamin": "Aqua", "PatFusty": "Green", "Ezili":"Purple", "Adora":"Yellow", "Etienne":"Grey", "Sauda":"Grey", "AdmiralBrickell":"Yellow", "Psi":"Yellow", "Geraldo":"Aqua", "Corvus": "Aqua", "Rosalia": "Green", "Silas": "Blue"},
+    "heroesInOrder": {
+        "Quincy": {
+            "nameColor": "Blue",
+            "added": 1,
+            "skins": [
+                "Quincy",
+                "CyberQuincy",
+                "WolfpackQuincy"
+            ],
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "bgColor": [
+                0,
+                0.522,
+                0.624
+            ],
+            "abilities": {
+                "3": "Rapid Shot",
+                "10": "Storm of Arrows"
+            },
+            "fqName": "Quincy"
+        },
+        "Gwendolin": {
+            "nameColor": "Yellow",
+            "added": 1,
+            "skins": [
+                "Gwendolin",
+                "CircusGwendolin",
+                "ScientistGwendolin",
+                "FirecrackerGwendolin"
+            ],
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "bgColor": [
+                0.671,
+                0.153,
+                0.133
+            ],
+            "abilities": {
+                "3": "Cocktail of Fire",
+                "10": "Firestorm"
+            },
+            "fqName": "Gwendolin"
+        },
+        "StrikerJones": {
+            "nameColor": "Grey",
+            "added": 1,
+            "skins": [
+                "StrikerJones",
+                "BikerBones",
+                "OctoJones"
+            ],
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "bgColor": [
+                0.306,
+                0.475,
+                0.129
+            ],
+            "abilities": {
+                "3": "Concussive Shell",
+                "7": "Target Focus",
+                "10": "Artillery Command"
+            },
+            "fqName": "Striker Jones"
+        },
+        "ObynGreenfoot": {
+            "nameColor": "Aqua",
+            "added": 1,
+            "skins": [
+                "ObynGreenfoot",
+                "MoltenObyn",
+                "ObynOceanGuardian",
+                "ObynSkeletor"
+            ],
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "bgColor": [
+                0.004,
+                0.576,
+                0.286
+            ],
+            "abilities": {
+                "3": "Brambles",
+                "10": "Wall of Trees"
+            },
+            "fqName": "Obyn Greenfoot"
+        },
+        "DanDMonke": {
+            "nameColor": "Blue",
+            "added": 55,
+            "bgColor": [
+                0.6509804,
+                0.20784314,
+                0.30588236
+            ],
+            "skins": [
+                "DanDMonke",
+                "DanDMonkeHeMan"
+            ],
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "transformPortraits": [
+                3, 10, 20
+            ],
+            "abilities": {
+                "3": "Transform Ability",
+                "5": "Magic Barrier",
+                "7": "Teleport",
+                "10": "Battlecry",
+                "12": "QuickThinking"
+            },
+            "transformAbilities": {
+                "3": "Transform Ability",
+                "5": "Magic Barrier",
+                "7": "LeapingSmash",
+                "10": "Warcry",
+                "12": "QuickThinking"
+            },
+            "fqName": "Dan D'Monke"
+        },
+        "CaptainChurchill": {
+            "nameColor": "Grey",
+            "added": 2,
+            "skins": [
+                "CaptainChurchill",
+                "SentaiCaptainChurchill",
+                "SleighCaptainChurchill"
+            ],
+            "portraits": [
+                1,
+                3,
+                5,
+                6,
+                10,
+                20
+            ],
+            "bgColor": [
+                0.263,
+                0.494,
+                0.149
+            ],
+            "abilities": {
+                "3": "Armor Piercing Shells",
+                "10": "MOAB Barrage"
+            },
+            "fqName": "Captain Churchill"
+        },
+        "Benjamin": {
+            "nameColor": "Aqua",
+            "added": 3,
+            "skins": [
+                "Benjamin",
+                "BenJammin",
+                "SushiBento"
+            ],
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "bgColor": [
+                0.165,
+                0.341,
+                0.082
+            ],
+            "abilities": {
+                "3": "Biohack",
+                "10": "Syphon Funding"
+            },
+            "fqName": "Benjamin"
+        },
+        "PatFusty": {
+            "nameColor": "Green",
+            "added": 7,
+            "skins": [
+                "PatFusty",
+                "FustyTheSnowman",
+                "KaijuPat"
+            ],
+            "portraits": [
+                1,
+                3,
+                5,
+                10,
+                20
+            ],
+            "bgColor": [
+                0.035,
+                0.529,
+                0.412
+            ],
+            "abilities": {
+                "3": "Rallying Roar",
+                "10": "Big Squeeze"
+            },
+            "fqName": "Pat Fusty"
+        },
+        "Ezili": {
+            "nameColor": "Purple",
+            "added": 9,
+            "skins": [
+                "Ezili",
+                "Galaxili",
+                "SmudgeCatt"
+            ],
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                16,
+                20
+            ],
+            "bgColor": [
+                0.357,
+                0.208,
+                0.494
+            ],
+            "abilities": {
+                "3": "Heartstopper",
+                "7": "Sacrificial Totem",
+                "10": "MOAB Hex"
+            },
+            "fqName": "Ezili"
+        },
+        "Adora": {
+            "nameColor": "Yellow",
+            "added": 14,
+            "skins": [
+                "Adora",
+                "JoanOfArcAdora",
+                "Voidora",
+                "AdoraSheRa"
+            ],
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20,
+                "20SunGod",
+                "20SunGodVengeful"
+            ],
+            "bgColor": [
+                0.51,
+                0.224,
+                0.569
+            ],
+            "abilities": {
+                "3": "The Long Arm of Light",
+                "7": "Blood Sacrifice",
+                "10": "Ball of Light"
+            },
+            "fqName": "Adora"
+        },
+        "Etienne": {
+            "nameColor": "Grey",
+            "added": 20,
+            "skins": [
+                "Etienne",
+                "ETnEtienne",
+                "BookWyrmEtienne"
+            ],
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "bgColor": [
+                0.596,
+                0.322,
+                0.161
+            ],
+            "abilities": {
+                "3": "Drone Swarm",
+                "10": "UCAV"
+            },
+            "fqName": "Etienne"
+        },
+        "Sauda": {
+            "nameColor": "Grey",
+            "added": 24,
+            "skins": [
+                "Sauda",
+                "JiangshiSauda",
+                "VikingSauda",
+                "RedSauda"
+            ],
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "bgColor": [
+                0.541,
+                0.169,
+                0.325
+            ],
+            "abilities": {
+                "3": "Leaping Sword Attack",
+                "10": "Sword Charge"
+            },
+            "fqName": "Sauda"
+        },
+        "AdmiralBrickell": {
+            "nameColor": "Yellow",
+            "added": 18,
+            "skins": [
+                "AdmiralBrickell",
+                "DreadPirateBrickell",
+                "LifeguardBrickell"
+            ],
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "bgColor": [
+                0.133,
+                0.51,
+                0.851
+            ],
+            "abilities": {
+                "3": "Naval Tactics",
+                "7": "Blast Chain Ability",
+                "10": "Mega Mine"
+            },
+            "fqName": "Admiral Brickell"
+        },
+        "Psi": {
+            "nameColor": "Yellow",
+            "added": 26,
+            "skins": [
+                "Psi",
+                "Psimbals",
+                "DreamstatePsi"
+            ],
+            "portraits": [
+                1,
+                3,
+                8,
+                9,
+                10,
+                17,
+                20
+            ],
+            "bgColor": [
+                0.306,
+                0.341,
+                0.698
+            ],
+            "abilities": {
+                "3": "Psychic Blast",
+                "10": "Psionic Scream"
+            },
+            "fqName": "Psi"
+        },
+        "Geraldo": {
+            "nameColor": "Aqua",
+            "added": 31,
+            "skins": [
+                "Geraldo",
+                "GeraldoGentlemanGadgeteer"
+            ],
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "bgColor": [
+                0.314,
+                0.251,
+                0.435
+            ],
+            "abilities": {},
+            "fqName": "Geraldo"
+        },
+        "Corvus": {
+            "nameColor": "Aqua",
+            "added": 40,
+            "skins": [
+                "Corvus"
+            ],
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                15,
+                20
+            ],
+            "bgColor": [
+                0.122,
+                0.318,
+                0.518
+            ],
+            "abilities": {
+                "3": "Soul Harvest",
+                "7": "Spirit Walk",
+                "10": "Dark Ritual"
+            },
+            "fqName": "Corvus"
+        },
+        "Rosalia": {
+            "nameColor": "Green",
+            "added": 43,
+            "skins": [
+                "Rosalia",
+                "RosaliaTinkerfairy"
+            ],
+            "portraits": [
+                1,
+                2,
+                5,
+                7,
+                13,
+                20
+            ],
+            "bgColor": [
+                1,
+                0.297,
+                0.622
+            ],
+            "abilities": {
+                "3": "Scatter Missile",
+                "7": "Flight Boost",
+                "10": "Kinetic Charge"
+            },
+            "fqName": "Rosalia"
+        },
+        "Silas": {
+            "nameColor": "Blue",
+            "added": 50,
+            "skins": [
+                "Silas"
+            ],
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "bgColor": [
+                0.376,
+                0.459,
+                0.937
+            ],
+            "abilities": {
+                "3": "Frostbite",
+                "7": "Frozen Cascade",
+                "10": "Frozen Burial"
+            },
+            "fqName": "Silas"
+        }
+    },
+    "heroSkins": {
+        "CyberQuincy": {
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "fqName": "Cyber Quincy",
+            "baseHero": "Quincy"
+        },
+        "WolfpackQuincy": {
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "fqName": "Wolfpack Quincy",
+            "baseHero": "Quincy"
+        },
+        "CircusGwendolin": {
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "fqName": "Circus Gwendolin",
+            "baseHero": "Gwendolin"
+        },
+        "ScientistGwendolin": {
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "fqName": "Scientist Gwendolin",
+            "baseHero": "Gwendolin"
+        },
+        "FirecrackerGwendolin": {
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "fqName": "Firecracker Gwendolin",
+            "baseHero": "Gwendolin"
+        },
+        "BikerBones": {
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "fqName": "Biker Bones",
+            "baseHero": "StrikerJones"
+        },
+        "OctoJones": {
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "fqName": "Octo Jones",
+            "baseHero": "StrikerJones"
+        },
+        "MoltenObyn": {
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "fqName": "Molten Obyn",
+            "baseHero": "ObynGreenfoot"
+        },
+        "ObynOceanGuardian": {
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "fqName": "Ocean Guardian Obyn",
+            "baseHero": "ObynGreenfoot"
+        },
+        "ObynSkeletor": {
+            "bgColor": [
+                0.408,
+                0.004,
+                0.576
+            ],
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "fqName": "Skeletor Obyn",
+            "baseHero": "ObynGreenfoot"
+        },
+        "DanDMonkeHeMan": {
+            "bgColor": [
+                0.12941177,
+                0.17254902,
+                0.40392157
+            ],
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "transformPortraits": [
+                3, 10, 20
+            ],
+            "fqName": "He-Man",
+            "baseHero": "DanDMonke"
+        },
+        "SentaiCaptainChurchill": {
+            "portraits": [
+                1,
+                3,
+                5,
+                6,
+                10,
+                20
+            ],
+            "fqName": "Sentai Churchill",
+            "baseHero": "CaptainChurchill"
+        },
+        "SleighCaptainChurchill": {
+            "portraits": [
+                1,
+                3,
+                5,
+                6,
+                10,
+                20
+            ],
+            "fqName": "Sleigh Churchill",
+            "baseHero": "CaptainChurchill"
+        },
+        "BenJammin": {
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "fqName": "BenJammin",
+            "baseHero": "Benjamin"
+        },
+        "SushiBento": {
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "fqName": "Sushi Bento",
+            "baseHero": "Benjamin"
+        },
+        "FustyTheSnowman": {
+            "portraits": [
+                1,
+                3,
+                5,
+                10,
+                20
+            ],
+            "fqName": "Fusty the Snowman",
+            "baseHero": "PatFusty"
+        },
+        "KaijuPat": {
+            "portraits": [
+                1,
+                3,
+                5,
+                10,
+                20
+            ],
+            "fqName": "Kaiju Pat",
+            "baseHero": "PatFusty"
+        },
+        "Galaxili": {
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                16,
+                20
+            ],
+            "fqName": "Galaxili",
+            "baseHero": "Ezili"
+        },
+        "SmudgeCatt": {
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                16,
+                20
+            ],
+            "fqName": "Smudge Catt",
+            "baseHero": "Ezili"
+        },
+        "JoanOfArcAdora": {
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20,
+                "20SunGod",
+                "20SunGodVengful"
+            ],
+            "fqName": "Joan of Arc Adora",
+            "baseHero": "Adora"
+        },
+        "Voidora": {
+            "bgColor": [
+                0.102,
+                0.145,
+                0.341
+            ],
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20,
+                "20SunGod",
+                "20SunGodVengful"
+            ],
+            "fqName": "Voidora",
+            "baseHero": "Adora"
+        },
+        "AdoraSheRa": {
+            "bgColor": [
+                0.925,
+                0.424,
+                0.816
+            ],
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20,
+                "20SunGod",
+                "20SunGodVengeful"
+            ],
+            "fqName": "She-Ra Adora",
+            "baseHero": "Adora"
+        },
+        "ETnEtienne": {
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "fqName": "ETn",
+            "baseHero": "Etienne"
+        },
+        "BookWyrmEtienne": {
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "fqName": "Book Wyrm Etienne",
+            "baseHero": "Etienne"
+        },
+        "JiangshiSauda": {
+            "bgColor": [
+                0.359,
+                0.453,
+                0.547
+            ],
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "fqName": "Jiangshi Sauda",
+            "baseHero": "Sauda"
+        },
+        "VikingSauda": {
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "fqName": "Viking Sauda",
+            "baseHero": "Sauda"
+        },
+        "RedSauda": {
+            "bgColor": [
+                0.689,
+                0.036,
+                0.016
+            ],
+            "portraits": [
+                1,
+                3,
+                10,
+                20
+            ],
+            "baseHero": "Sauda"
+        },
+        "DreadPirateBrickell": {
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "fqName": "Dread Pirate Brickell",
+            "baseHero": "AdmiralBrickell"
+        },
+        "LifeguardBrickell": {
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "fqName": "Lifeguard Brickell",
+            "baseHero": "AdmiralBrickell"
+        },
+        "Psimbals": {
+            "portraits": [
+                1,
+                3,
+                8,
+                10,
+                20
+            ],
+            "fqName": "Psimbals",
+            "baseHero": "Psi"
+        },
+        "DreamstatePsi": {
+            "portraits": [
+                1,
+                3,
+                8,
+                10,
+                20
+            ],
+            "fqName": "Dreamstate Psi",
+            "baseHero": "Psi"
+        },
+        "GeraldoGentlemanGadgeteer": {
+            "portraits": [
+                1,
+                3,
+                7,
+                10,
+                20
+            ],
+            "fqName": "Gentleman Gadgeteer Geraldo",
+            "baseHero": "Geraldo"
+        },
+        "RosaliaTinkerfairy": {
+            "portraits": [
+                1,
+                2,
+                5,
+                7,
+                13,
+                20
+            ],
+            "fqName": "Rosalia Tinkerfairy",
+            "baseHero": "Rosalia"
+        }
+    },
     "powersInOrder": {
         "CashDrop": {
             "type": "Power",
@@ -162,6 +1080,10 @@
         "Skeletor": {
             "type": "IAP",
             "cost": 0
+        },
+        "SwordOfPower": {
+            "type": "IAP",
+            "cost": 0
         }
     },
     "powersProInOrder": {
@@ -189,7 +1111,7 @@
         },
         "MonkeyBoostPro": {
             "type": "Pro",
-            "cost": 400,
+            "cost": 300,
             "upgradedFrom": "MonkeyBoost",
             "unlockThresholds": [10000, 50000, 150000],
             "upgrades": {
@@ -200,7 +1122,7 @@
         },
         "TechBotPrime": {
             "type": "Pro",
-            "cost": 100,
+            "cost": 150,
             "upgradedFrom": "TechBot",
             "unlockThresholds": [12500, 70000, 200000],
             "upgrades": {
@@ -219,6 +1141,11 @@
         "InTheLoop": {
             "difficulty": "Beginner",
             "theme": "DarkGrass",
+            "hasWater": true
+        },
+        "SkullTweak": {
+            "difficulty": "Beginner",
+            "theme": "MountainCave",
             "hasWater": true
         },
         "ThreeMinesAround": {
@@ -637,7 +1564,21 @@
             "hasWater": true
         }
     },
-    "paragonsAvailable": ["DartMonkey", "BoomerangMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "WizardMonkey", "NinjaMonkey", "EngineerMonkey", "TackShooter", "SpikeFactory", "BombShooter", "IceMonkey", "Druid"],
+    "paragonsAvailable": {
+        "DartMonkey": 27,
+        "BoomerangMonkey": 27,
+        "NinjaMonkey": 28,
+        "MonkeyBuccaneer": 29,
+        "EngineerMonkey": 32,
+        "MonkeyAce": 33,
+        "WizardMonkey": 37,
+        "MonkeySub": 41,
+        "TackShooter": 46,
+        "SpikeFactory": 48,
+        "BombShooter": 51,
+        "IceMonkey": 52,
+        "Druid": 54
+    },
     "quests": {
         "BeastHandlerQuest": {
             "nameLocKey": "BeastHandlerQuestName",
@@ -903,175 +1844,32 @@
             "nameLocKey": "ChallengeZOMGRushName",
             "icon": "QuestIconZOMGRush",
             "type": "Challenge"
+        },
+        "ChallengeAnotherPath": {
+            "nameLocKey": "ChallengeAnotherPathName",
+            "icon": "QuestIconAnotherPath",
+            "type": "Challenge"
+        },
+        "ChallengePrimaryPairs": {
+            "nameLocKey": "ChallengePrimaryPairsName",
+            "icon": "QuestIconPrimaryPairs",
+            "type": "Challenge"
+        },
+        "ChallengeWildWest": {
+            "nameLocKey": "ChallengeWildWestName",
+            "icon": "QuestIconWildWest",
+            "type": "Challenge"
+        },
+        "HeManQuest": {
+            "nameLocKey": "HeManQuestName",
+            "icon": "QuestIconHeMan",
+            "type": "Tale"
         }
     },
     "BGColor": [0.000, 0.498, 1.000],
     "ParagonBGColor": [0.522, 0.000, 1.000],
     "TrophyStoreBGColor": [0, 0, 0.392],
     "PowersProBGColor": [0, 0.274, 0.796],
-    "HeroBGColors": {
-        "Quincy": [0.000, 0.522, 0.624],
-        "Gwendolin": [0.671, 0.153, 0.133], 
-        "StrikerJones": [0.306, 0.475, 0.129],
-        "ObynGreenfoot": [0.004, 0.576, 0.286],
-        "Benjamin": [0.165, 0.341, 0.082],
-        "PatFusty": [0.035, 0.529, 0.412],
-        "CaptainChurchill": [0.263, 0.494, 0.149],
-        "Ezili": [0.357, 0.208, 0.494],
-        "Adora": [0.510, 0.224, 0.569],
-        "AdmiralBrickell": [0.133, 0.510, 0.851],
-        "Etienne": [0.596, 0.322, 0.161],
-        "Psi": [0.306, 0.341, 0.698],
-        "Geraldo": [0.314, 0.251, 0.435],
-        "Sauda": [0.541, 0.169, 0.325],
-        "Corvus": [0.122, 0.318, 0.518],
-        "Voidora": [0.102, 0.145, 0.341],
-        "JiangshiSauda": [0.359, 0.453, 0.547],
-        "Rosalia": [1.000, 0.297, 0.622],
-        "Silas": [0.376, 0.459, 0.937],
-        "AdoraSheRa": [0.925, 0.424, 0.816],
-        "RedSauda": [0.689, 0.036, 0.016],
-        "ObynSkeletor": [0.408, 0.004, 0.576]
-    },
-    "HeroPortraitLevels": {
-        "AdmiralBrickell": [1,3,7,10,20],
-        "LifeguardBrickell": [1,3,7,10,20],
-        "DreadPirateBrickell": [1,3,7,10,20],
-        "Benjamin": [1,3,7,10,20],
-        "SushiBento": [1,3,7,10,20],
-        "BenJammin": [1,3,7,10,20],
-        "BikerBones": [1,3,10,20],
-        "CaptainChurchill": [1,3,5,6,10,20],
-        "SentaiCaptainChurchill": [1,3,5,6,10,20],
-        "SleighCaptainChurchill": [1,3,5,6,10,20],
-        "Ezili": [1,3,7,10,16,20],
-        "Galaxili": [1,3,7,10,16,20],
-        "SmudgeCatt": [1,3,7,10,16,20],
-        "Gwendolin": [1,3,10,20],
-        "CircusGwendolin": [1,3,10,20],
-        "ScientistGwendolin": [1,3,10,20],
-        "ObynGreenfoot": [1,3,10,20],
-        "MoltenObyn": [1,3,10,20],
-        "ObynOceanGuardian": [1,3,10,20],
-        "PatFusty": [1,3,5,10,20],
-        "FustyTheSnowman": [1,3,5,10,20],
-        "KaijuPat": [1,3,5,10,20],
-        "Quincy": [1,3,7,10,20],
-        "CyberQuincy": [1,3,7,10,20],
-        "WolfpackQuincy": [1,3,7,10,20],
-        "Sauda": [1,3,10,20],
-        "JiangshiSauda": [1,3,10,20],
-        "VikingSauda": [1,3,10,20],
-        "StrikerJones": [1,3,10,20],
-        "OctoJones": [1,3,10,20],
-        "Adora": [1,3,7,10,20,"20SunGod","20SunGodVengeful"],
-        "JoanOfArcAdora": [1,3,7,10,20,"20SunGod","20SunGodVengful"],
-        "Voidora": [1,3,7,10,20,"20SunGod","20SunGodVengful"],
-        "Etienne": [1,3,7,10,20],
-        "BookWyrmEtienne": [1,3,7,10,20],
-        "ETnEtienne": [1,3,7,10,20],
-        "Psi": [1,3,8,9,10,17,20],
-        "Psimbals": [1,3,8,10,20],
-        "Geraldo": [1,3,7,10,20],
-        "GeraldoGentlemanGadgeteer": [1,3,7,10,20],
-        "Corvus": [1,3,7,10,15,20],
-        "Rosalia": [1,2,5,7,13,20],
-        "DreamstatePsi": [1,3,8,10,20],
-        "RedSauda": [1,3,10,20],
-        "RosaliaTinkerfairy": [1,2,5,7,13,20],
-        "AdoraSheRa": [1,3,7,10,20,"20SunGod","20SunGodVengeful"],
-        "Silas": [1,3,7,10,20],
-        "ObynSkeletor": [1,3,10,20],
-        "FirecrackerGwendolin": [1,3,10,20]
-    },
-    "heroSkins": {
-        "Quincy": ["Quincy", "CyberQuincy", "WolfpackQuincy"],
-        "Gwendolin": ["Gwendolin", "CircusGwendolin", "ScientistGwendolin", "FirecrackerGwendolin"], 
-        "StrikerJones": ["StrikerJones", "BikerBones", "OctoJones"],
-        "ObynGreenfoot": ["ObynGreenfoot", "MoltenObyn", "ObynOceanGuardian", "ObynSkeletor"],
-        "Benjamin": ["Benjamin", "BenJammin", "SushiBento"],
-        "PatFusty": ["PatFusty", "FustyTheSnowman", "KaijuPat"],
-        "CaptainChurchill": ["CaptainChurchill", "SentaiCaptainChurchill", "SleighCaptainChurchill"],
-        "Ezili": ["Ezili", "Galaxili", "SmudgeCatt"],
-        "Adora": ["Adora", "JoanOfArcAdora", "Voidora", "AdoraSheRa"],
-        "AdmiralBrickell": ["AdmiralBrickell", "DreadPirateBrickell", "LifeguardBrickell"],
-        "Etienne": ["Etienne", "ETnEtienne", "BookWyrmEtienne"],
-        "Psi": ["Psi", "Psimbals", "DreamstatePsi"],
-        "Geraldo": ["Geraldo", "GeraldoGentlemanGadgeteer"],
-        "Sauda": ["Sauda", "JiangshiSauda", "VikingSauda", "RedSauda"],
-        "Corvus": ["Corvus"],
-        "Rosalia": ["Rosalia", "RosaliaTinkerfairy"],
-        "Silas": ["Silas"]
-    },
-    "heroLevelIcons": {
-        "Quincy": [3,10],
-        "Gwendolin": [3,10], 
-        "StrikerJones": [3,7,10],
-        "ObynGreenfoot": [3,10],
-        "Benjamin": [3,10],
-        "PatFusty": [3,10],
-        "CaptainChurchill": [3,10],
-        "Ezili": [3,7,10],
-        "Adora": [3,7,10],
-        "AdmiralBrickell": [3,7,10],
-        "Etienne": [3,10],
-        "Psi": [3,10],
-        "Geraldo": [],
-        "Sauda": [3,10],
-        "Corvus": [3,7,10],
-        "Rosalia": [3,7,10],
-        "Silas": [3,7,10]
-    },
-    "heroNames": {
-        "Quincy": "Quincy",
-        "Cyber Quincy": "Cyber Quincy",
-        "Wolfpack Quincy": "Wolfpack Quincy",
-        "Gwendolin": "Gwendolin",
-        "CircusGwendolin": "Circus Gwendolin",
-        "Scientist Gwendolin": "Scientist Gwendolin",
-        "StrikerJones": "Striker Jones",
-        "Biker Bones": "Biker Bones",
-        "Octo Jones": "Octo Jones",
-        "ObynGreenfoot": "Obyn Greenfoot",
-        "ObynOceanGuardian": "Ocean Guardian Obyn",
-        "MoltenObyn": "Molten Obyn",
-        "CaptainChurchill": "Captain Churchill",
-        "Sentai Captain Churchill": "Sentai Churchill",
-        "Sleigh Captain Churchill": "Sleigh Churchill",
-        "Benjamin": "Benjamin",
-        "BenJammin": "BenJammin",
-        "SushiBento": "Sushi Bento",
-        "PatFusty": "Pat Fusty",
-        "FustyTheSnowman": "Fusty the Snowman",
-        "KaijuPat": "Kaiju Pat",
-        "Ezili": "Ezili",
-        "SmudgeCatt": "Smudge Catt",
-        "Galaxili": "Galaxili",
-        "Adora": "Adora",
-        "JoanOfArcAdora": "Joan of Arc Adora",
-        "Voidora": "Voidora",
-        "Etienne": "Etienne",
-        "ETnEtienne": "ETn",
-        "BookWyrmEtienne": "Book Wyrm Etienne",
-        "Sauda": "Sauda",
-        "VikingSauda": "Viking Sauda",
-        "JiangshiSauda": "Jiangshi Sauda",
-        "AdmiralBrickell": "Admiral Brickell",
-        "DreadPirateBrickell": "Dread Pirate Brickell",
-        "LifeguardBrickell": "Lifeguard Brickell",
-        "Psi": "Psi",
-        "Psimbals": "Psimbals",
-        "DreamstatePsi": "Dreamstate Psi",
-        "Geraldo": "Geraldo",
-        "GeraldoGentlemanGadgeteer": "Gentleman Gadgeteer Geraldo",
-        "Corvus": "Corvus",
-        "Rosalia": "Rosalia",
-        "RosaliaTinkerfairy": "Rosalia Tinkerfairy",
-        "AdoraSheRa": "She-Ra Adora",
-        "Silas": "Silas",
-        "ObynSkeletor": "Skeletor Obyn",
-        "FirecrackerGwendolin": "Firecracker Gwendolin"
-    },
     "towerPaths": {
         "DartMonkey": {
             "path1": {
@@ -2299,6 +3097,41 @@
             "displayName": "Condition",
             "description": "Monkey Boost used from any tier bottom path Hype Boost Monkey",
             "icon": "ConditionAA"
+        },
+        "Transform Ability": {
+            "displayName": "Transform",
+            "description": "Dan D'Monke transfroms to and from The Masked Macaque!",
+            "icon": "TransformationAA"
+        },
+        "Teleport": {
+            "displayName": "Reposition",
+            "description": "Dan D'Monke can move a Monkey to a new location, including himself.",
+            "icon": "TeleportAA"
+        },
+        "Battlecry": {
+            "displayName": "Rabble Rouser",
+            "description": "Dan D'Monke rouses nearby Monkeys. They attack slower, but deal more damage. Passive life loss abilities activate. Buffed Monkeys are immune to enemy debuff mechanics.",
+            "icon": "BattlecryAA"
+        },
+        "Magic Barrier": {
+            "displayName": "Magic Barrier",
+            "description": "(Dan D'Monke Passive level 7) Upon a Bloon leaking, Dan D'Monke's intimidating presence reduces the damage taken while pushing back any more Bloons that try to escape.",
+            "icon": "MagicBarrierPA"
+        },
+        "QuickThinking": {
+            "displayName": "Quick Thinking",
+            "description": "(Dan D'Monke Passive level 12) When a Bloon leaks, gain a short period of reduced lives lost, and up to 40 Bloons that would leak are distracted instead.",
+            "icon": "MagicBarrierPA"
+        },
+        "LeapingSmash": {
+            "displayName": "Volant Strike",
+            "description": "The Masqued Macaque leaps to target location, stunning and dealing incredible damage to the surrounding area.",
+            "icon": "LeapingSmashAA"
+        },
+        "Warcry": {
+            "displayName": "Berserk Frenzy",
+            "description": "The Masqued Macaque goes into a frenzy, savagely attacking Bloons in a wide area faster than can be seen.",
+            "icon": "WarcryAA"
         }
     },
     "abilitiesByTower": {
@@ -2504,6 +3337,15 @@
             "3": "Concussive Shell",
             "7": "Target Focus",
             "10": "Artillery Command"
+        },
+        "DanDMonke": {
+            "3": "Transform Ability",
+            "5": "Magic Barrier",
+            "7": "Teleport",
+            "8": "LeapingSmash",
+            "10": "Battlecry",
+            "11": "Warcry",
+            "12": "QuickThinking"
         }
     },
     "abilitiesByPower": {
@@ -2530,6 +3372,19 @@
         "TechBotPrime": [
             "ActivateTechBot",
             "Go Go Go Send It"
+        ]
+    },
+    "iapContent": {
+        "heroSkins": [
+            "ObynSkeletor",
+            "AdoraSheRa",
+            "DanDMonkeHeMan"
+        ],
+        "powers": [
+            "BattleCat",
+            "SheRa",
+            "Skeletor",
+            "SwordOfPower"
         ]
     },
     "hiddenContent": {
@@ -2896,6 +3751,14 @@
             "endRound": 60,
             "part": 3,
             "roundset": "RogueRoundSet"
+        },
+        "HeManStage3RoundSet": {
+            "name": "He-Man Has The Powers! Part 3 Rounds",
+            "icon": "QuestIconHeMan",
+            "type": "quest",
+            "startingCash": 650,
+            "endRound": 100,
+            "part": 3
         }
     },
     "incomeSets": {

@@ -478,10 +478,13 @@ function generateArtifactSettings() {
             case "Added Update 54":
                 settingsFilterDescription.innerHTML = "Only Artifacts added in Update 54 will be included to start.";
                 break;
+            case "Added Update 55":
+                settingsFilterDescription.innerHTML = "Only Artifacts added in Update 55 will be included to start.";
+                break;
         }
     }
 
-    let settingsFilterDropdown = generateDropdown("Artifact Filter:", ["All", "Starter Kit", "Non Starter Kit", "One Variant", "Two Variants", "Added Update 48", "Added Update 49", "Added Update 50", "Added Update 51", "Added Update 54"], rogueSaveData.artifactFilter, (value) => {
+    let settingsFilterDropdown = generateDropdown("Artifact Filter:", ["All", "Starter Kit", "Non Starter Kit", "One Variant", "Two Variants", "Added Update 48", "Added Update 49", "Added Update 50", "Added Update 51", "Added Update 54", "Added Update 55"], rogueSaveData.artifactFilter, (value) => {
         rogueSaveData.artifactFilter = value;
         updateDescription();
         saveRogueDataToLocalStorage();
@@ -678,6 +681,9 @@ function generateArtifacts() {
             break;
         case "Added Update 54":
             currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => value.added == 54))
+            break;
+        case "Added Update 55":
+            currentArtifacts = Object.fromEntries(Object.entries(currentArtifacts).filter(([key, value]) => value.added == 55))
             break;
     }
 
@@ -1038,7 +1044,7 @@ function generateArtifactPopout(key) {
 
         let heroStarterKitText = document.createElement('p');
         heroStarterKitText.classList.add('font-gardenia', 'ta-center', 'lh-add-quarter');
-        heroStarterKitText.innerHTML = `${constants.heroNames[data.starterKitHero]}'s starter kit has this artifact`;
+        heroStarterKitText.innerHTML = `${getHeroOrSkinData(data.starterKitHero).fqName}'s starter kit has this artifact`;
         heroStarterKitText.style.fontSize = "18px";
         heroStarterKitTextDiv.appendChild(heroStarterKitText);
     }

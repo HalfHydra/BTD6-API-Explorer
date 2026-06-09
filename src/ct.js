@@ -186,9 +186,11 @@ async function generateCTs(){
 
         let CTEventNum = CTSeedToEventNumber[race.id] ? CTSeedToEventNumber[race.id] : Math.max(...Object.values(CTSeedToEventNumber)) + 1;
 
-        let raceInfoName = document.createElement('p');
-        raceInfoName.classList.add("race-info-name", "black-outline");
-        raceInfoName.innerHTML = "Contested Territory #" + CTEventNum;
+        let raceInfoName = createEl('p', {
+            classList: ['race-info-name', 'black-outline'],
+            innerHTML: `Contested Territory #${CTEventNum}`,
+            style: { maxWidth: "500px" }
+        });
         raceInfoTopDiv.appendChild(raceInfoName);
 
         let raceTimeLeft = document.createElement('p');
@@ -2406,7 +2408,7 @@ let once = {};
 function calculateDecorShown(tileData) {
     if (!tileData.Code) { return false }
 
-    if (constants.mapsInOrder[tileData.GameData.selectedMap].theme === "Water") {
+    if (constants.mapsInOrder[tileData.GameData.selectedMap]?.theme === "Water") {
         return true;
     }
 

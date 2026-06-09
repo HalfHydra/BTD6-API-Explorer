@@ -134,7 +134,7 @@ let locJSONOverrides = {
     "RosaliaTinkerfairySkinName": "TinkerfairyRosaliaSkinName",
     "RosaliaTinkerfairySkinDescription": "TinkerfairyRosaliaSkinDescription",
     "AdoraSheRaSkinDescription": "SheRaAdoraSkinDescription",
-    "AdoraSheRaSkinName": "SheRaSkinName"
+    "AdoraSheRaSkinName": "SheRaSkinName",
 }
 
 let medalMap = {
@@ -169,8 +169,15 @@ let saveSkintoSkinMap = {
     "CyberQuincy": "Cyber Quincy",
     "OctoJones": "Octo Jones",
     "SleighCaptainChurchill": "Sleigh Captain Churchill",
-    "WolfpackQuincy": "Wolfpack Quincy"
+    "WolfpackQuincy": "Wolfpack Quincy",
+    "DanDMonkeHeMan": "HeMan",
+    "DanDMonkeHeManTransformed": "HeManTransformed"
 }
+
+let saveSkinToSkinMapReversed = Object.entries(saveSkintoSkinMap).reduce((acc, [key, value]) => {
+    acc[value] = key;
+    return acc;
+}, {});
 
 let trophyStoreKeyFixes = {
     "HeroesQuincyCyberQuincyPlacementFireworks": "H-CyberQuincyPlacementFireworks",

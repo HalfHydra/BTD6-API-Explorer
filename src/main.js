@@ -100,10 +100,15 @@ let questsFilter = "All";
 let loggedIn = false;
 let seenOutOfDate = false;
 
+let isHeroTransformed = false;
+let heroDescKeyOverrides = {
+    "DanDMonkeHeMan": "HeMan"
+}
+
 let imageScroll = [
     {
         "title": "New Site Update!",
-        "text": `Site Update 2.8.0:<br>
+        "text": `Site Update 2.8.1:<br>
         - Odyssey Events<br>
         - Events Menu Rework<br>
         <br>
@@ -115,7 +120,7 @@ let imageScroll = [
         Creator Code: 'HalfHydra' - TY!<br>
         Report Bugs: <a href="https://discord.gg/wep2RDmcqZ" target="_blank" style="color: white;">Discord Server</a><br>
         `,
-        "image": "/LandingScroll/Update54&Odysseys"
+        "image": "/LandingScroll/Update55&Odysseys"
     },
     {
         "title": "View Your Profile!",
@@ -156,6 +161,7 @@ let imageScroll = [
 let imageScrollIndex = 0;
 
 let changelog = {
+    "v2.8.1 (6/9/26)": "Update 55 Content + Minor Updates<br>- Added 55 content including Transformation feature for Dan D'Monke. <br>- Missing maps should no longer break the CT map<br>- IAP hero counts should no longer contribute to the total untitl owned similar to the game<br>- Updated trophy store item details modal<br>- Trophy store items should no longer incorrect label text for counts<br>- Sorted events in the events menu by a more logical order.",
     "v2.8.0 (5/21/26)": "Events Update + Odyssey Events Added (finally)<br>- If you look at version 1.0.0 of this site (7/7/24), I mentioned that Odyssey events were coming soon and that it was \"still being worked on\" (I hadn't started). Anyway, it's here now! Yay!<br>- Events screen reworked to be more efficient with space.<br>- Events screen now displays all events that are upcoming, active, and recently finished.<br>- Added a default menu for Collection Events when none events are found on the API.<br>- Added new avatars from Update 54.3 <br>- Fixed a bug causing the new trophy store items added by an update to not show up as new.<br>- The boss event details will now have a better decision between if it should show excluded or available towers by default.<br>- Fixed an issue with certain menu items have a random invisible line when zooming out the browser<br>- As you might've noticed, the changelog is now collapsable. Too many entries! Super proud of how much effort I've been able to give this project.<br><br>",
     "v2.7.1 (5/11/26)": "Open Data API Downtime Handling<br>- Ninja Kiwi's Open Data API is currently unavailable. This is affecting all sites/apps/bots that use the API, and we will have to wait until it is fixed (may take a few weeks). The site now displays a proper error message when the Open Data API is unreachable.<br>- Added missing teams banner<br>- Minor UI Adjustments<br><br>",
     "v2.7.0 (4/15/26)": "Powers Pro + Profile Overhaul<br>- Added Powers Pro information and calculator to show how much Monkey Money you need to use to unlock the tiers.<br>- Powers Pro now show up in the Powers section<br>- Fixed certain profile information from being unavailable when the leaderboards API breaks on a major game update. You can now view limited profile info (most everything besides stats)<br>- Fixed counts on some quick stats to be worded more accurately for what they represent<br>- Fixed powers pro upgrades being included in upgrades total<br>- Added missing abilities<br>- Abilities tab can now filter by tower type<br>- Towers menu now displays relevant stats and related abilities used<br>- Heroes menu now shows placement stats and abilities used<br>- Maps menu now shows leftover single player bonus cash obtainable<br>- Knowledge menu completely redone to show trees, and can filter by tower for relevant knowledge points<br>- Achievements now has a search bar, a total obtained count, and can filter by coop specific achievements<br>- Owned Only now changes the trophy store to display the total trophies spent<br>- Quests now has filtering by type like in game, and sort the incomplete ones to the top of the list<br>- Add more information to most tooltips<br>- Fixed some tooltips going off screen<br>- Ice Monkey Walrus no longer accidentally shows as being added in update 29<br>- The Insta Monkeys section should no longer break when there's a monkey with no instas ever obtained.<br>- Fixed bug preventing new entries from loading on leaderboards in some cases<br>- Leaderboard profiles now correctly show a loading icon when you click on one<br>- Updated the OAK token guide to use the new in game account menu<br>- Renamed Frontier Legends roundsets from \"Base X\" to \"Act X\"<br>- Updated all the roundsets to reflect the rounds 120-140 income changes<br>- Bosses that don't have a standard event name will now show it (too bad most people didn't get to see the silly names those fake April Fools events had!)<br>- Fixed hero skins count (again)<br>- Fixed an issue causing the CT top 25 medal to now show up<br>- Fixed modifier icons after adjustments to map icons<br>- Knowledge points in the towers menu now correctly reflect the unlocked status<br>- tooltips should no longer show incorrectly on tap for mobile in Rogue Legends artifacts<br>- Fixed broken difficulty filter for maps<br>- Veteran levels should no longer add every single time you exit and login (lol)<br>- Starter artifacts removed from rogue progress image to make it a perfect square again<br>- Fix rogue legends artifacts syncing bug causing it to not stop pinging when you're not on the menu<br>That sure was a lot, now time for something I very much should've added a long long time ago: Odyssey events coming next<br><br>",
@@ -416,8 +422,11 @@ function generateExtras(){
 
 function generateHeroesSkinsUnlocked() {
     let heroesUnlocked = Object.keys(btd6usersave.unlockedHeroes).filter(k => btd6usersave.unlockedHeroes[k] && k != "Sheriff").length;
-    let totalSkins = Object.values(constants.heroSkins).flat().filter(k => !Object.keys(constants.heroesInOrder).includes(k));
-    constants.hiddenContent.heroes.forEach((skin) => {
+    let totalSkins = []
+    for(let [hero, data] of Object.entries(constants.heroesInOrder)) {
+        totalSkins = totalSkins.concat(data.skins.filter(k => !Object.keys(constants.heroesInOrder).includes(k)));
+    }
+    constants.iapContent.heroSkins.concat(constants.hiddenContent.heroes).forEach((skin) => {
         if (totalSkins.indexOf(skin) !== -1 && !(btd6usersave.unlockedSkins.hasOwnProperty(skin) && btd6usersave.unlockedSkins[skin])) {
             totalSkins.splice(totalSkins.indexOf(skin), 1)
         }
@@ -439,10 +448,10 @@ function generateProgressSubText(){
     let paragonsUnlocked = paragons.filter(k => btd6usersave.acquiredUpgrades[k]);
     progressSubText["Upgrades"] = `${upgradeInfo[0] - paragonsUnlocked.length} Upgrades Unlocked`;
     progressSubText["UpgradesUnlocked"] = `${upgradeInfo[0] - paragonsUnlocked.length}/${upgradeInfo[1] - paragons.length} Upgrades Unlocked`;
-    progressSubText["Paragons"] = `${paragonsUnlocked.length}/${constants.paragonsAvailable.length} Paragon${paragonsUnlocked.length != 1 ? "s" : ""} Unlocked`
+    progressSubText["Paragons"] = `${paragonsUnlocked.length}/${Object.keys(constants.paragonsAvailable).length} Paragon${paragonsUnlocked.length != 1 ? "s" : ""} Unlocked`
     let heroInfo = generateHeroesSkinsUnlocked();
     progressSubText["Heroes"] = `${heroInfo.heroesUnlocked} Hero${heroInfo.heroesUnlocked != 1 ? "es" : ""} Unlocked`;
-    progressSubText["HeroesUnlocked"] = `${heroInfo.heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeros).length} Hero${heroInfo.heroesUnlocked != 1 ? "es" : ""} Unlocked`;
+    progressSubText["HeroesUnlocked"] = `${heroInfo.heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeroes).length} Hero${heroInfo.heroesUnlocked != 1 ? "es" : ""} Unlocked`;
     progressSubText["Skins"] = `${heroInfo.skinsUnlocked}/${heroInfo.totalSkins.length} Hero Skin${heroInfo.skinsUnlocked != 1 ? "s" : ""} Unlocked`;
     if (btd6publicprofile != null) {
         progressSubText["ActivatedAbilities"] = `${Object.keys(btd6publicprofile.stats["abilitiesActivatedByName"]).filter(key => key in constants.abilities).length} Unique Abilities Used`;
@@ -1607,7 +1616,7 @@ function generateOverview(){
     for (let [tower, xp] of Object.entries(btd6publicprofile.stats["paragonsPurchasedByName"]).sort((a, b) => b[1] - a[1])){
         
         if(xp === 0) { continue; }
-        if(!constants.paragonsAvailable.includes(tower)) { continue; }
+        if(!Object.keys(constants.paragonsAvailable).includes(tower)) { continue; }
         let towerDiv = document.createElement('div');
         towerDiv.classList.add('hero-div');
         towerDiv.style.backgroundImage = "url(../Assets/UI/ParagonContainer.png)";
@@ -1882,6 +1891,17 @@ function generateProgress(){
             profileSelectorGoImg.classList.add('selector-go-img');
             profileSelectorGoImg.src = '../Assets/UI/ContinueBtn.png';
             profileSelectorDiv.appendChild(profileSelectorGoImg);
+
+            // let completionistDiv = createEl('div', {
+            //     classList: ['d-flex', 'jc-between', 'ai-center', 'view-profile', 'pointer', 'transparent-border'],
+            //     style: {
+            //         height: "80px",
+            //     }
+            // })
+            // selectorsDiv.appendChild(completionistDiv)
+            // completionistDiv.addEventListener("click", () => {
+            //     generateCompletionist();
+            // })
         } else {
             let statsUnavailableText = createEl('p', { classList: ['font-gardenia'], style: {fontSize: "1em", lineHeight: "1.5"}, innerHTML: "Profile & stats are temporarily unavailable, but all other tracking such as your Insta Monkey collection is still available. This Open Data API error happens after a new major update and is usually fixed within a couple days." });
             selectorsDiv.appendChild(statsUnavailableText);
@@ -2107,7 +2127,7 @@ function generateTowerProgress(){
         towerSelector.id = tower + '-selector';
         towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
         if(!btd6usersave.unlockedTowers[tower]){
-            towerSelector.classList.add('hero-selector-div-disabled');
+            towerSelector.classList.add('grayscale-100');
         }
         towerSelector.addEventListener('click', () => {
             if(btd6usersave.unlockedTowers[tower]){
@@ -2149,9 +2169,9 @@ function generateTowerProgressTower(tower){
     }
     let unlockedAllT5 = upgradesUnlocked === 15;
     
-    let upgradesAvailable = (unlockedAllT5) ? constants.paragonsAvailable.includes(tower) ? 16 : 15 : 15;
+    let upgradesAvailable = (unlockedAllT5) ? Object.keys(constants.paragonsAvailable).includes(tower) ? 16 : 15 : 15;
 
-    let paragonUnlocked = constants.paragonsAvailable.includes(tower) ? btd6usersave.acquiredUpgrades[`${tower} Paragon`] : false;
+    let paragonUnlocked = Object.keys(constants.paragonsAvailable).includes(tower) ? btd6usersave.acquiredUpgrades[`${tower} Paragon`] : false;
     if (paragonUnlocked) { upgradesUnlocked += 1; }
 
     let towerProgressTop = document.createElement('div');
@@ -2216,7 +2236,7 @@ function generateTowerProgressTower(tower){
         })
         towerLeftBox.appendChild(towerPlacedText);
 
-        if (constants.paragonsAvailable.includes(tower) && btd6publicprofile.stats.paragonsPurchasedByName.hasOwnProperty(tower) && btd6publicprofile.stats.paragonsPurchasedByName[tower] > 0) {
+        if (Object.keys(constants.paragonsAvailable).includes(tower) && btd6publicprofile.stats.paragonsPurchasedByName.hasOwnProperty(tower) && btd6publicprofile.stats.paragonsPurchasedByName[tower] > 0) {
             let paragonPlacedText = createEl('p', {
                 classList: ['black-outline'],
                 style: {
@@ -2431,7 +2451,7 @@ function makeUpgradeButtons(tower, unlockedAllT5, paragonUnlocked){
         index++;
     }
 
-    if (constants.paragonsAvailable.includes(tower) && unlockedAllT5){
+    if (Object.keys(constants.paragonsAvailable).includes(tower) && unlockedAllT5){
 
         let upgradeContainerParagon = document.createElement('div');
         upgradeContainerParagon.classList.add('upgrade-container-paragon');
@@ -2637,15 +2657,15 @@ function generateHeroesProgress(){
     heroSelectorHeader.classList.add('hero-selector-header');
     heroProgressDiv.appendChild(heroSelectorHeader);
 
-    for (let [hero, nameColor] of Object.entries(constants.heroesInOrder)) {
+    for (let [hero, data] of Object.entries(constants.heroesInOrder)) {
         let heroSelector = document.createElement('div');
         heroSelector.classList.add(`hero-selector-div`);
-        if(!btd6usersave.unlockedHeros[hero]){ 
-            heroSelector.classList.add(`hero-selector-div-disabled`);
+        if(!btd6usersave.unlockedHeroes[hero]){ 
+            heroSelector.classList.add(`grayscale-100`);
         }
         heroSelector.addEventListener('click', () => {
-            if(btd6usersave.unlockedHeros[hero]){ 
-                generateHeroProgressHero(hero, nameColor);
+            if(true || btd6usersave.unlockedHeroes[hero]){ 
+                generateHeroProgressHero(hero, data);
             }
         })
         heroSelectorHeader.appendChild(heroSelector);
@@ -2669,8 +2689,9 @@ function generateHeroesProgress(){
     generateHeroProgressHero(btd6usersave.primaryHero, constants.heroesInOrder[btd6usersave.primaryHero])
 }
 
-function generateHeroProgressHero(hero, nameColor){
+function generateHeroProgressHero(hero, data){
     currentlySelectedHero = hero;
+    isHeroTransformed = false;
 
     let heroProgressContent = document.getElementById('hero-progress-content');
     heroProgressContent.innerHTML = "";
@@ -2696,7 +2717,7 @@ function generateHeroProgressHero(hero, nameColor){
     let heroProgressHeaderText = document.createElement('p');
     heroProgressHeaderText.id = 'hero-progress-header-text';
     heroProgressHeaderText.classList.add('hero-progress-header-text');
-    heroProgressHeaderText.style.backgroundImage = `url('../Assets/UI/${nameColor}TxtTextureMain.png')`;
+    heroProgressHeaderText.style.backgroundImage = `url('../Assets/UI/${data.nameColor}TxtTextureMain.png')`;
     heroProgressHeaderText.innerHTML = getLocValue(hero);
     heroProgressHeader.appendChild(heroProgressHeaderText);
 
@@ -2726,6 +2747,24 @@ function generateHeroProgressHero(hero, nameColor){
         heroUsesDiv.appendChild(heroUsesText);
     }
 
+    let transformBtn = createEl('img', {
+        classList: ['pos-abs', 'of-contain'],
+        style: {
+            left: "20px",
+            width: "90px"
+        },
+        src: "../Assets/AbilityIcon/TransformationAA.png"
+    })
+    if (data.hasOwnProperty("transformPortraits")) { heroProgressTop.appendChild(transformBtn) };
+    transformBtn.addEventListener('click', () => {
+        transformHero(hero);
+        if (isHeroTransformed) {
+            transformBtn.src = "../Assets/AbilityIcon/TransformationReturnAA.png";
+        } else {
+            transformBtn.src = "../Assets/AbilityIcon/TransformationAA.png";
+        }
+    })
+
     let heroProgressMiddle = document.createElement('div');
     heroProgressMiddle.classList.add('hero-progress-middle');
     heroProgressContainer.appendChild(heroProgressMiddle);
@@ -2754,14 +2793,15 @@ function generateHeroProgressHero(hero, nameColor){
     let heroPortraitGlow = document.createElement('div');
     heroPortraitGlow.id = 'hero-portrait-glow';
     heroPortraitGlow.classList.add('hero-portrait-glow');
-    heroPortraitGlow.style.background = `radial-gradient(circle, rgb(${constants.HeroBGColors[hero][0] * 255},${constants.HeroBGColors[hero][1] * 255},${constants.HeroBGColors[hero][2] * 255}) 0%, transparent 70%)`
+    changeHexBGColor(data.bgColor)
+    heroPortraitGlow.style.background = `radial-gradient(circle, rgb(${data.bgColor[0] * 255},${data.bgColor[1] * 255},${data.bgColor[2] * 255}) 0%, transparent 70%)`
     heroPortraitDiv.appendChild(heroPortraitGlow);
 
     let heroSkinsDiv = document.createElement('div');
     heroSkinsDiv.classList.add('hero-skins-div');
     heroProgressMiddle.appendChild(heroSkinsDiv);
 
-    constants.heroSkins[hero].forEach((skin) => {
+    constants.heroesInOrder[hero].skins.forEach((skin) => {
         if ((btd6usersave.unlockedSkins[saveSkintoSkinMap[skin] || skin] == null && constants.hiddenContent.heroes.includes(skin)) && skin != hero) { return; }
 
         let heroSkin = document.createElement('img');
@@ -2773,10 +2813,7 @@ function generateHeroProgressHero(hero, nameColor){
             heroSkin.classList.add('insta-tower-container-none');
         } else {
             heroSkin.addEventListener('click', () => {
-                let colorToUse = constants.HeroBGColors[skin] ? constants.HeroBGColors[skin] : constants.HeroBGColors[hero];
-                changeHexBGColor(colorToUse);
                 changeHeroSkin(skin, hero == skin);
-                document.getElementById("hero-portrait-glow").style.background = `radial-gradient(circle, rgb(${colorToUse[0] * 255},${colorToUse[1] * 255},${colorToUse[2] * 255}) 0%, transparent 70%)`
             })
         }
         heroSkinsDiv.appendChild(heroSkin);
@@ -2792,32 +2829,49 @@ function generateHeroProgressHero(hero, nameColor){
     heroProgressDesc.innerHTML = getLocValue(`${hero} Description`);
     heroProgressBottom.appendChild(heroProgressDesc);
 
-    let heroLevelDescs = document.createElement('div');
-    heroLevelDescs.classList.add('hero-level-descs');
+    let heroLevelDescs = createEl('div', {
+        classList: ['hero-level-descs'],
+        id: "hero-levels"
+    });
     heroProgressBottom.appendChild(heroLevelDescs);
 
-    for (let i = 1; i<21; i++){
+    generateHeroLevels(hero)
+
+    for (let selector of document.getElementsByClassName('hero-selector-highlight')){
+        selector.style.display = "none";
+    }
+    document.getElementById(`${hero}-selector-highlight`).style.display = "block";
+    changeHexBGColor(data.bgColor);
+
+    return heroProgressContent;
+}
+
+function generateHeroLevels(hero, override) {
+    let heroLevelDescs = document.getElementById('hero-levels')
+    heroLevelDescs.innerHTML = "";
+
+    for (let i = 1; i < 21; i++) {
         let heroLevelDescDiv = document.createElement('div');
         heroLevelDescDiv.classList.add('hero-level-desc-div');
         heroLevelDescs.appendChild(heroLevelDescDiv);
 
         let heroLevelDescIconDiv = document.createElement('div');
         heroLevelDescIconDiv.classList.add('hero-level-desc-icon-div');
-        i == 20 ? heroLevelDescIconDiv.classList.add('hero-level-desc-image-purple') : constants.heroLevelIcons[hero].includes(i) ? heroLevelDescIconDiv.classList.add("hero-level-desc-image-gold")  : heroLevelDescIconDiv.classList.add('hero-level-desc-image');
+        i == 20 ? heroLevelDescIconDiv.classList.add('hero-level-desc-image-purple') : Object.keys(constants.heroesInOrder[hero].abilities).map((L) => { return parseInt(L) }).includes(i) ? heroLevelDescIconDiv.classList.add("hero-level-desc-image-gold") : heroLevelDescIconDiv.classList.add('hero-level-desc-image');
         heroLevelDescDiv.appendChild(heroLevelDescIconDiv);
 
         let heroLevelDescText = document.createElement('p');
-        heroLevelDescText.classList.add('hero-level-desc-text','black-outline');
+        heroLevelDescText.classList.add('hero-level-desc-text', 'black-outline');
         heroLevelDescText.innerHTML = i;
         heroLevelDescIconDiv.appendChild(heroLevelDescText);
 
         let heroLevelDesc = document.createElement('p');
         heroLevelDesc.classList.add('hero-level-desc', 'fg-1');
-        heroLevelDesc.innerHTML = getLocValue(`${hero} Level ${i} Description`);
+        heroLevelDesc.innerHTML = getLocValue(`${override != null ? override : hero}${isHeroTransformed ? "Transformed" : ""} Level ${i} Description`);
         heroLevelDescDiv.appendChild(heroLevelDesc);
         
-        if (btd6publicprofile != null && constants.abilitiesByHero.hasOwnProperty(hero) && constants.abilitiesByHero[hero].hasOwnProperty(i)) {
-            let ability = constants.abilitiesByHero[hero][i];
+        if (btd6publicprofile != null && constants.heroesInOrder[hero].abilities.hasOwnProperty(i)) {
+            let ability = constants.heroesInOrder[hero].abilities[i];
             let abilityData = constants.abilities[ability];
             let abilityUses = btd6publicprofile.stats.abilitiesActivatedByName[ability] || 0;
             if (abilityUses > 0) { 
@@ -2859,33 +2913,37 @@ function generateHeroProgressHero(hero, nameColor){
             }
         }
     }
-
-    for (let selector of document.getElementsByClassName('hero-selector-highlight')){
-        selector.style.display = "none";
-    }
-    document.getElementById(`${hero}-selector-highlight`).style.display = "block";
-    changeHexBGColor(constants.HeroBGColors[hero]);
-
-    return heroProgressContent;
 }
 
 function changeHeroSkin(skin, isOriginal){
     currentlySelectedHero = skin;
+    let locKey = heroDescKeyOverrides[skin] || skin;
     let heroProgressHeaderSubtitle = document.getElementById('hero-progress-header-subtitle');
-    heroProgressHeaderSubtitle.innerHTML = isOriginal ? getLocValue(`${skin} Short Description`) : getLocValue(`${skin}SkinName`);
+    heroProgressHeaderSubtitle.innerHTML = isOriginal ? getLocValue(`${locKey} Short Description`) : getLocValue(`${locKey}SkinName`);
     let heroProgressDesc = document.getElementById('hero-progress-desc');
-    heroProgressDesc.innerHTML = isOriginal ? getLocValue(`${skin} Description`) : getLocValue(`${skin}SkinDescription`);
-    // if(skin == "AdoraSheRa") { heroProgressDesc.innerHTML = getLocValue(`SheRaAdoraSkinDescription`) }
-    changeHeroLevelPortrait(1);
+    heroProgressDesc.innerHTML = isOriginal ? getLocValue(`${locKey} Description${isHeroTransformed ? "Transformed" : ""}`) : getLocValue(`${locKey}SkinDescription${isHeroTransformed ? "Transformed" : ""}`);
+    let heroData = getHeroOrSkinData(skin);
+    let portraits = (heroData.hasOwnProperty("transformPortraits") && isHeroTransformed) ? heroData.transformPortraits : heroData.portraits;
+    changeHeroLevelPortrait(portraits[0]);
+    generateHeroLevels(isOriginal ? skin : constants.heroSkins[skin].baseHero, Object.keys(heroDescKeyOverrides).includes(skin) ? locKey : null);
+    let colorToUse = heroData.bgColor ? heroData.bgColor : constants.heroesInOrder[heroData.baseHero].bgColor;
+    changeHexBGColor(colorToUse);
+    document.getElementById("hero-portrait-glow").style.background = `radial-gradient(circle, rgb(${colorToUse[0] * 255},${colorToUse[1] * 255},${colorToUse[2] * 255}) 0%, transparent 70%)`
     //stupid hack to fix ios redraw
     document.body.style.display = "none"
     document.body.offsetHeight;
     document.body.style.removeProperty("display")
 }
 
+function transformHero(hero) {
+    isHeroTransformed = !isHeroTransformed;
+    changeHeroSkin(currentlySelectedHero, Object.keys(constants.heroesInOrder).includes(currentlySelectedHero));
+    generateHeroLevels(hero, (Object.keys(heroDescKeyOverrides).includes(currentlySelectedHero)) ? heroDescKeyOverrides[currentlySelectedHero] || currentlySelectedHero : null)
+}
+
 function changeHeroLevelPortrait(level){
     let heroPortraitImg = document.getElementById('hero-portrait-img');
-    heroPortraitImg.src = getSkinAssetPath(currentlySelectedHero, level);
+    heroPortraitImg.src = getSkinAssetPath(`${currentlySelectedHero}${isHeroTransformed ? "Transformed" : ""}`, level);
     updatePortraitLevelButtons(currentlySelectedHero);
     for (let btn of document.getElementsByClassName('hero-level-select-btn')){
         btn.classList.remove('selected-level-btn');
@@ -2896,8 +2954,9 @@ function changeHeroLevelPortrait(level){
 function updatePortraitLevelButtons(hero){
     let heroPortraitLevelSelectBtns = document.getElementById('hero-portrait-level-select-btns');
     heroPortraitLevelSelectBtns.innerHTML = "";
-
-    constants.HeroPortraitLevels[hero].forEach((level) => {
+    let heroData = getHeroOrSkinData(hero);
+    let portraits = (heroData.hasOwnProperty("transformPortraits") && isHeroTransformed) ? heroData.transformPortraits : heroData.portraits;
+    portraits.forEach((level) => {
         if (level == "20SunGod" && !btd6usersave.acquiredUpgrades["True Sun God"]) { return; }
         if ((level == "20SunGodVengeful" || level == "20SunGodVengful") && !btd6usersave.achievementsClaimed.includes("Strangely Adorable")) { return; }
         let heroLevelSelectBtnDiv = document.createElement('div');
@@ -2927,7 +2986,7 @@ function updatePortraitLevelButtons(hero){
             changeHeroLevelPortrait(level);
         })
     })
-    document.getElementById(`1-level-select-btn`).classList.add('selected-level-btn');
+    document.getElementById(`${portraits[0]}-level-select-btn`).classList.add('selected-level-btn');
 }
 
 function generateKnowledgeProgress(){
@@ -6539,7 +6598,26 @@ async function generateEvents(){
     });
     eventsDiv.appendChild(finishedDiv.container);
 
-    latestEvents.forEach((event, index) => {
+    let activeEvents = []
+    let upcomingEvents = []
+    let finishedEvents = []
+    latestEvents.forEach(event => {
+        if(new Date() < new Date(event.start)) {
+            upcomingEvents.push(event);
+        } else if (new Date(event.end) > new Date()) {
+            activeEvents.push(event);
+        } else if (new Date() > new Date(event.end)) {
+            finishedEvents.push(event);
+        }
+    })
+
+    activeEvents.sort((a,b) => new Date(a.end) - new Date(b.end));
+    upcomingEvents.sort((a,b) => new Date(a.start) - new Date(b.start));
+    finishedEvents.sort((a,b) => new Date(b.end) - new Date(a.end));
+
+    sortedEvents = [...activeEvents, ...upcomingEvents, ...finishedEvents];
+
+    sortedEvents.forEach((event, index) => {
         if (!['socialseason', 'bossRush', 'ct', 'raceEvent', 'bossBloon', 'collectableEvent', 'odysseyEvent'].includes(event.type)) { return; }
         let eventDiv = createEl('div', {
             classList: ['d-flex', 'w-100', 'jc-between', 'ai-center', 'pointer'],
@@ -6551,7 +6629,6 @@ async function generateEvents(){
         if ((index + 1) % 2 == 0) {
             eventDiv.style.backgroundColor = "rgba(0,0,0,0.1)";
         }
-        // eventsDiv.appendChild(eventDiv);
 
         let eventIcon = createEl('img', {
             classList: ['of-contain'],
@@ -6633,6 +6710,10 @@ async function generateEvents(){
                     showLoading();
                     await getRacesData(true);
                     let raceIndex = racesData.findIndex(r => r.id === event.id);
+                    if (raceIndex == -1) {
+                        errorModal("Event metadata not found. Check back again soon!");
+                        return;
+                    }
                     await getRaceMetadata(raceIndex)
                     showChallengeModel('events', racesData[raceIndex].metadata, "Race");
                     resetScroll();
@@ -6645,6 +6726,10 @@ async function generateEvents(){
                     showLoading();
                     await getBossesData(true);
                     let bossIndex = bossesData.findIndex(b => b.id === event.id);
+                    if (bossIndex == -1) {
+                        errorModal("Event metadata not found. Check back again soon!");
+                        return;
+                    }
                     await getBossMetadata(bossIndex, false)
                     let eventData = getBossEventData(bossIndex, false)
                     showChallengeModel('events', bossesData[bossIndex].metadataStandard, "Boss", eventData);
@@ -6658,6 +6743,10 @@ async function generateEvents(){
                     showLoading();
                     await getOdysseyData(true);
                     let odysseyIndex = odysseyData.findIndex(o => o.id === event.id);
+                    if (odysseyIndex == -1) {
+                        errorModal("Event metadata not found. Check back again soon!");
+                        return;
+                    }
                     await getOdyMetadata(odysseyIndex, "hard", true);
                     showOdyssey("hard", odysseyData[odysseyIndex], odysseyData[odysseyIndex]["metadata_hard"]);
                     resetScroll();
@@ -6670,6 +6759,10 @@ async function generateEvents(){
                     showLoading();
                     await getCTData(false, true);
                     let ctIndex = CTData.findIndex(c => c.id === event.id);
+                    if (ctIndex == -1) {
+                        errorModal("Event metadata not found. Check back again soon!");
+                        return;
+                    }
                     openCTEventDetails('events', CTData[ctIndex]);
                     resetScroll();
                 });
@@ -6686,6 +6779,21 @@ async function generateEvents(){
             touch: false
         })
     })
+
+    if (upcomingDiv.content.innerHTML == "") {
+        let noUpcoming = createEl('p', {
+            classList: ['font-gardenia', 'lh-add-half'],
+            style: {
+                fontSize: "20px",
+                padding: "10px"
+            },
+            innerHTML: "No upcoming events found! This usually means a recent update has broken the Open Data API and it will be fixed soon. Active events may be missing."
+        });
+        upcomingDiv.content.appendChild(noUpcoming);
+    }
+    if (activeDiv.content.innerHTML == "") {
+        activeDiv.style.display = "none";
+    }
 }
 
 function changeEventTab(selector){
@@ -6810,7 +6918,7 @@ function generateRaces(){
         raceInfoMiddleDiv.appendChild(raceInfoTotalScores);
 
         let raceInfoRules = document.createElement('div');
-        raceInfoRules.classList.add("race-info-rules", "start-button", 'hero-selector-div-disabled', "black-outline");
+        raceInfoRules.classList.add("race-info-rules", "start-button", 'grayscale-100', "black-outline");
         raceInfoRules.innerHTML = "Details"
         raceInfoRules.addEventListener('click', () => {
             if (typeof racesData[index]["metadata"] == 'string') { return; }
@@ -6833,7 +6941,7 @@ function generateRaces(){
                     await getRaceMetadata(index);
                     if (typeof racesData[index]["metadata"] != 'string') {
                         observer.unobserve(entry.target);
-                        raceInfoRules.classList.remove('hero-selector-div-disabled');
+                        raceInfoRules.classList.remove('grayscale-100');
                         raceMapImg.src = Object.keys(constants.mapsInOrder).includes(race.metadata.map) ? getMapIcon(race.metadata.map) : race.metadata.mapURL;
                         let modifiers = challengeModifiers(race.metadata);
                         let rules = challengeRules(race.metadata)
@@ -7027,7 +7135,7 @@ function generateBosses(elite){
         raceInfoMiddleDiv.appendChild(raceInfoTotalScores);
 
         let raceInfoRules = document.createElement('div');
-        raceInfoRules.classList.add("race-info-rules", "start-button", 'hero-selector-div-disabled', elite ? "btn-rotate-boss-elite" : "btn-rotate-boss", "black-outline");
+        raceInfoRules.classList.add("race-info-rules", "start-button", 'grayscale-100', elite ? "btn-rotate-boss-elite" : "btn-rotate-boss", "black-outline");
         raceInfoRules.innerHTML = "Details"
         raceInfoRules.addEventListener('click', () => {
             if (typeof bossesData[index][elite ? "metadataElite" : "metadataStandard"] == 'string') { return; }
@@ -7049,7 +7157,7 @@ function generateBosses(elite){
                 if (entry.isIntersecting) {
                     await getBossMetadata(index, elite);
                     if (typeof bossesData[index][elite ? "metadataElite" : "metadataStandard"] != 'string') {
-                        raceInfoRules.classList.remove('hero-selector-div-disabled');
+                        raceInfoRules.classList.remove('grayscale-100');
                         let challengeScoreTypeIcon = document.createElement('img');
                         challengeScoreTypeIcon.classList.add('challenge-modifier-icon-event');
                         switch(elite ? race.eliteScoringType : race.normalScoringType){
@@ -7797,7 +7905,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         towerSelectorImg.src = `./Assets/UI/AllHeroesIcon.png`;
         towerSelector.appendChild(towerSelectorImg);
     } else {
-        for (let [tower, nameColor] of Object.entries(constants.heroesInOrder)) {
+        for (let [tower, data] of Object.entries(constants.heroesInOrder)) {
             if (!challengeTowers.heroesToDisplay[tower]) { continue; }
             let towerSelector = document.createElement('div');
             towerSelector.classList.add(`tower-selector-hero`);
@@ -7873,7 +7981,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     }
 
     if (!challengeTowers.shouldUseHeroList) {
-        for (let [tower, nameColor] of Object.entries(constants.heroesInOrder)) {
+        for (let [tower, data] of Object.entries(constants.heroesInOrder)) {
             if (!challengeTowers.heroesExcluded[tower]) { continue; }
             let towerSelector = document.createElement('div');
             towerSelector.classList.add(`tower-selector-hero`);
@@ -10296,11 +10404,11 @@ function generateTrophyStoreContainer(filter, display, counter, trophies, needed
     }
 
     switch(display){
-        case "Unowned Only":
         case "Owned Only":
-            counter.innerHTML = `${Object.keys(trophyStoreItemsToDisplay).length} Items`;
             trophies.innerHTML = Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.cost && getTrophyItemObtained(key)).reduce((total, [key, data]) => total + data.cost, 0);
+        case "Unowned Only":
             needed.innerHTML = "Spent";
+            counter.innerHTML = `${Object.keys(trophyStoreItemsToDisplay).length} Items`;
             break;
         default:
             counter.innerHTML = `${Object.keys(trophyStoreItemsToDisplay).filter(key => getTrophyItemObtained(key)).length}/${Object.keys(trophyStoreItemsToDisplay).length} Owned`;
@@ -10430,10 +10538,23 @@ function generateTrophyStorePopout(key) {
     itemDiv.classList.add('modal-trophy-div');
     imgAndDetails.appendChild(itemDiv);
 
-    let itemImg = document.createElement('img');
-    itemImg.classList.add('trophy-store-item-img', 'trophy-store-item-div', 'modal-trophy-item');
-    itemImg.src = data.itemType === "Avatar"?  `../Assets/ProfileAvatar/${data.icon}.png` : `../Assets/TrophyStoreIcon/${data.icon}.png`;
-    itemDiv.appendChild(itemImg);
+    let itemLeftDiv = createEl("div", {
+        classList: ['d-flex', 'fd-column', 'ai-center'],
+        style: {
+            gap: "10px",
+            margin: "30px 0"
+        }
+    })
+    itemDiv.appendChild(itemLeftDiv);
+
+    let itemImg = createEl('img', {
+        classList: ['trophy-store-item-img', 'trophy-store-item-div', 'modal-trophy-item'],
+        style: {
+            margin: "0 10px"
+        },
+        src: data.itemType === "Avatar"?  `../Assets/ProfileAvatar/${data.icon}.png` : `../Assets/TrophyStoreIcon/${data.icon}.png`
+    });
+    itemLeftDiv.appendChild(itemImg);
 
     if (data.subFilter === "TextEmotes") {
         let itemTextEmote = document.createElement('p');
@@ -10446,8 +10567,12 @@ function generateTrophyStorePopout(key) {
         itemImg.style.borderImageSource = "url(../Assets/UI/TrophyBGPanelBlue.png)";
     }
 
-    let itemDetailsDiv = document.createElement('div');
-    itemDetailsDiv.classList.add('item-details-div', 'jc-between');
+    let itemDetailsDiv = createEl('div', {
+        classList: ["item-details-div", "jc-between"],
+        style: {
+            margin: "30px 10px 30px 0px",
+        }
+    });
     imgAndDetails.appendChild(itemDetailsDiv);
 
     let itemFullName = document.createElement('p');
@@ -10455,9 +10580,13 @@ function generateTrophyStorePopout(key) {
     itemFullName.innerHTML = getLocValue(`${key}Name`);
     itemDetailsDiv.appendChild(itemFullName);
 
-    let itemDescription = document.createElement('p');
-    itemDescription.classList.add('trophy-store-item-description');
-    itemDescription.innerHTML = getLocValue(`${key}Description`);
+    let itemDescription = createEl('p', {
+        classList: ['trophy-store-item-description'],
+        innerHTML: getLocValue(`${key}Description`),
+        style: {
+            height: "200px"
+        }
+    });
     itemDetailsDiv.appendChild(itemDescription);
 
     let itemObtainMethod = document.createElement('p');
@@ -10465,12 +10594,16 @@ function generateTrophyStorePopout(key) {
     itemDetailsDiv.appendChild(itemObtainMethod);
 
     let itemPipDiv = createEl('div', {
-        classList: ['d-flex'],
+        classList: ['d-flex', 'jc-center'],
         style: {
             gap: "10px",
+            background: "rgba(0, 0, 0, 0.3)",
+            padding: "10px",
+            borderRadius: "10px",
+            minWidth: "320px",
         }
     })
-    itemDetailsDiv.appendChild(itemPipDiv);
+    itemLeftDiv.appendChild(itemPipDiv);
 
     let itemAddedIcon = createEl('div', {
         classList: ['font-luckiest', 'ta-center', 'black-outline'],
@@ -12551,7 +12684,7 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
         });
         allHeroesDiv.appendChild(allHeroesLabel);
     } else {
-        for (let [tower, nameColor] of Object.entries(constants.heroesInOrder)) {
+        for (let [tower, data] of Object.entries(constants.heroesInOrder)) {
             if (!availableTowers.heroesToDisplay[tower]) { continue; }
             let towerSelector = document.createElement('div');
             towerSelector.classList.add(`tower-selector-hero`);
@@ -12901,4 +13034,209 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
 
 function generateBossRush() {
     errorModal("Unfortunately Boss Rush islands are not available via the Open Data API currently due to how the game generates the details. If a way to fetch this information becomes available, I will include it!");
+}
+
+function generateCompletionist() {
+    let contentDiv = document.getElementById('profile-content');
+    contentDiv.innerHTML = '';
+
+    addToBackQueue({source: 'profile', destination: 'profile', callback: generateProgress});
+
+    let mainDiv = createEl("div", {
+        classList: ['w-100']
+    });
+    contentDiv.appendChild(mainDiv)
+
+    //Main div elements needed
+    //Content Lock selection
+    //IAP included/disabled
+    //Customize button (should most options go here?)
+    //under customize:
+
+    let modulesAvailable = ["Towers", "Upgrades", "Paragons", "Heroes", "HeroSkins", "Knowledge", "Quests", "PowersPro", "InstaCollection", "Maps", "Achievements", "TrophyStore",]
+    let modulesSettings = {
+        "PowersPro": ["Pro Unlock Only", "All Upgrades"],
+        "Maps": ["All CHIMPS Only", "Black Borders", "Coop Black Borders"],
+        "TrophyStore": ["Non Seasonal Items", "All Items"],
+        "Achievements": ["All", "Filtered"],
+    }
+
+    let modulesToGenerate = ["Towers", "Upgrades", "Heroes",]
+
+    for (let module of modulesAvailable) {
+        let container = collapsableDiv(module, {
+            collapse: true
+        });
+        mainDiv.appendChild(container.container);
+
+        let content = createEl('div', { 
+            classList: ['d-flex', 'w-100', 'f-wrap', 'jc-center'],
+        });
+        container.content.appendChild(content);
+        let items = null;
+        let data = null;
+        switch(module) {
+            case "Towers":
+                items = Object.keys(constants.towersInOrder)
+                data = Object.keys(constants.towersInOrder).filter(t => btd6usersave.unlockedTowers[t])
+                for (let item of items) {
+                    let towerSelector = createEl('div');
+                    towerSelector.classList.add(`tower-selector-${(constants.towersInOrder[item]).toLowerCase()}`);
+                    content.appendChild(towerSelector)
+
+                    if (!data.includes(item)) { towerSelector.classList.add("grayscale-100")}
+
+                    let towerSelectorImg = document.createElement('img');
+                    towerSelectorImg.classList.add('tower-selector-img');
+                    towerSelectorImg.src = getInstaContainerIcon(item,"000");
+                    towerSelector.appendChild(towerSelectorImg);
+                }
+                break;
+            case "HeroesOld":
+                items = Object.keys(constants.heroesInOrder)
+                data = Object.keys(constants.heroesInOrder).filter(t => btd6usersave.unlockedHeroes[t])
+                for (let item of items) {
+                    let towerSelector = document.createElement('div');
+                    towerSelector.classList.add(`tower-selector-hero`);
+                    if (!data.includes(item)) { towerSelector.classList.add("grayscale-100")}
+                    content.appendChild(towerSelector)
+
+                    let towerSelectorImg = document.createElement('img');
+                    towerSelectorImg.classList.add('hero-selector-img');
+                    towerSelectorImg.src = getInstaContainerIcon(item,"000");
+                    towerSelector.appendChild(towerSelectorImg);
+                }
+                break;
+            case "Heroes":
+                data = Object.keys(constants.heroesInOrder).filter(t => btd6usersave.unlockedHeroes[t])
+                Object.keys(constants.heroesInOrder).forEach(hero => {
+                    let skinImageSquare = createEl('img', {
+                        classList: ['of-contain'],
+                        style: {
+                            width: "100px"
+                        },
+                        src: getHeroSquareIcon(hero)
+                    })
+                    if(!data.includes(hero)) {
+                        skinImageSquare.classList.add("grayscale-100")
+                    }
+                    content.appendChild(skinImageSquare)
+                })
+                content.style.gap = "1rem"
+                break;
+            case "Upgrades":
+                for(let tower of Object.keys(constants.towersInOrder)) {
+                    let t5s = [
+                        Object.keys(constants.towerPaths[tower].path1)[4], 
+                        Object.keys(constants.towerPaths[tower].path2)[4], 
+                        Object.keys(constants.towerPaths[tower].path3)[4]
+                    ]
+                    for (let upgrade of t5s) {
+                        let unlockStatus = btd6usersave.acquiredUpgrades[upgrade];
+                        let upgradeDiv = createEl('div', {
+                            classList: ['upgrade-div'],
+                            style: {
+                                width: "100px",
+                            }
+                        });
+                        if (!unlockStatus) {
+                            upgradeDiv.classList.add('grayscale-100')
+                        }
+                        let upgradeBGImg = createEl('div', {
+                            classList: ['upgrade-bg-img', 'upgrade-t5'],
+                            style: {
+                                width: "100px",
+                                height: "100px"
+                            }
+                        })
+                        upgradeDiv.appendChild(upgradeBGImg)
+                        let upgradeImg = createEl('img', {
+                            classList: ['upgrade-img'],
+                            style: {
+                                width: "72px",
+                                height: "100px"
+                            },
+                            src: getUpgradeAssetPath(upgrade),
+                        });
+                        upgradeDiv.appendChild(upgradeImg);
+
+                        addTooltip(upgradeDiv, `<p class="artifact-title">${getLocValue(upgrade)}</p>` + getLocValue(`${upgrade} Description`), {
+                            allowHTML: true,
+                            hideOnClick: false,
+                        });
+                        content.appendChild(upgradeDiv)
+                    }
+                }
+                break;
+            case "Paragons":
+                for (let tower of Object.keys(constants.paragonsAvailable)) {
+                    let upgrade = `${tower} Paragon`
+                    let unlockStatus = btd6usersave.acquiredUpgrades[upgrade];
+                    let upgradeDiv = createEl('div', {
+                        classList: ['upgrade-div']
+                    });
+                    if (!unlockStatus) {
+                        upgradeDiv.classList.add('grayscale-100')
+                    }
+                    let upgradeBGImg = createEl('div', {
+                        classList: ['upgrade-bg-img', 'upgrade-paragon-special']
+                    })
+                    upgradeDiv.appendChild(upgradeBGImg)
+                    let upgradeImg = createEl('img', {
+                        classList: ['upgrade-img'],
+                        src: getUpgradeAssetPath(upgrade),
+                    });
+                    upgradeDiv.appendChild(upgradeImg);
+
+                    addTooltip(upgradeDiv, `<p class="artifact-title">${getLocValue(upgrade)}</p>` + getLocValue(`${upgrade} Description`), {
+                        allowHTML: true,
+                        hideOnClick: false,
+                    });
+                    content.appendChild(upgradeDiv)
+                }
+                break;
+            case "HeroSkins":
+                let allSkins = [];
+                for(let [hero, data] of Object.entries(constants.heroesInOrder)) {
+                    for(let skin of data.skins) {
+                        if (skin !== hero) { constants.heroSkins[skin].baseHero = hero };
+                    }
+                    allSkins = allSkins.concat(data.skins.filter(k => !Object.keys(constants.heroesInOrder).includes(k)));
+                }
+                let unlockedSkins = Object.keys(btd6usersave.unlockedSkins).filter(k => !Object.keys(constants.heroesInOrder).includes(k)).filter(k => btd6usersave.unlockedSkins[k] && k != "Sheriff");
+                allSkins.forEach(skin => {
+                    let skinImageSquare = createEl('img', {
+                        classList: ['of-contain'],
+                        style: {
+                            width: "100px"
+                        },
+                        src: getHeroSquareIcon(skin)
+                    })
+                    if(!unlockedSkins.includes(saveSkintoSkinMap[skin] || skin)) {
+                        skinImageSquare.classList.add("grayscale-100")
+                    }
+                    content.appendChild(skinImageSquare)
+                })
+                content.style.gap = "1rem"
+                break;
+            case "Quests":
+                for (let quest of Object.keys(constants.quests)) {
+                    let questImg = createEl('img', {
+                        classList: ['quest-img'],
+                        style: {
+                            width: "100px",
+                            height: "100px",
+                        },
+                        src: `../Assets/QuestIcon/${constants.quests[quest].icon}.png`
+                    });
+                    content.appendChild(questImg);
+
+                    if (btd6usersave.quests.hasOwnProperty(quest) && !btd6usersave.quests.complete) {
+                        questImg.classList.add("grayscale-100")
+                    }
+                }
+                content.style.gap = "1rem"
+                break;
+        }
+    }
 }

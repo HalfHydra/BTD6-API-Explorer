@@ -415,6 +415,34 @@
             "isQuestArtifact": 0,
             "added": 47
         },
+        "CharismaticLeader2": {
+            "tier": 1,
+            "baseId": "CharismaticLeader",
+            "nameLocKey": "CharismaticLeaderX",
+            "descriptionLocKey": "CharismaticLeaderXDescription",
+            "descriptionParams": [
+                "1"
+            ],
+            "isBossArtifact": 0,
+            "icon": "ArtifactCharismaticLeader",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 55
+        },
+        "CharismaticLeader3": {
+            "tier": 2,
+            "baseId": "CharismaticLeader",
+            "nameLocKey": "CharismaticLeaderX",
+            "descriptionLocKey": "CharismaticLeaderXDescription",
+            "descriptionParams": [
+                "2"
+            ],
+            "isBossArtifact": 0,
+            "icon": "ArtifactCharismaticLeader",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 55
+        },
         "ColdSteel1": {
             "tier": 0,
             "baseId": "ColdSteel",
@@ -6201,6 +6229,50 @@
                 }
             ],
             "artifact": "EsotericElementalist2"
+        },
+        "DanDMonke": {
+            "heroID": "DanDMonke",
+            "startingInstas": [
+                {
+                    "baseId": "NinjaMonkey",
+                    "tiers": [
+                        0,
+                        0,
+                        2
+                    ]
+                },
+                {
+                    "baseId": "MonkeyVillage",
+                    "tiers": [
+                        0,
+                        0,
+                        2
+                    ]
+                }
+            ],
+            "artifact": "ExtraChange2"
+        },
+        "DanDMonkeHeMan": {
+            "heroID": "DanDMonkeHeMan",
+            "startingInstas": [
+                {
+                    "baseId": "NinjaMonkey",
+                    "tiers": [
+                        0,
+                        0,
+                        2
+                    ]
+                },
+                {
+                    "baseId": "MonkeyVillage",
+                    "tiers": [
+                        0,
+                        0,
+                        2
+                    ]
+                }
+            ],
+            "artifact": "BattleCat3"
         }
     }
 }

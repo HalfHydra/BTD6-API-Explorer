@@ -74,7 +74,7 @@ function createEl(tag, options = {}) {
     if (options.onclick) el.onclick = options.onclick;
     if (options.type) el.type = options.type;
     if (options.name) el.name = options.name;
-    if (options.loading) el.loading = options.loading;
+    el.loading = options.loading || "lazy";
     if (options.attributes) {
         for (const [key, value] of Object.entries(options.attributes)) {
             el.setAttribute(key, value);
@@ -923,4 +923,12 @@ function addTooltip(element, content, options = {}) {
             ],
         }
     })
+}
+
+function getHeroOrSkinData(typeName) {
+    return constants.heroesInOrder.hasOwnProperty(typeName) 
+    ? constants.heroesInOrder[typeName] : constants.heroSkins.hasOwnProperty(typeName) 
+    ? constants.heroSkins[typeName] : constants.heroSkins.hasOwnProperty(saveSkintoSkinMap[typeName]) 
+    ? constants.heroSkins[saveSkintoSkinMap[typeName]] : constants.heroSkins.hasOwnProperty(saveSkinToSkinMapReversed[typeName])
+    ? constants.heroSkins[saveSkinToSkinMapReversed[typeName]]  : null;
 }

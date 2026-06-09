@@ -421,7 +421,7 @@ async function openProfile(source, profile, callback){
     for (let [tower, xp] of Object.entries(profile.stats["paragonsPurchasedByName"]).sort((a, b) => b[1] - a[1])){
         
         if(xp === 0) { continue; }
-        if(!constants.paragonsAvailable.includes(tower)) { continue; }
+        if(!Object.keys(constants.paragonsAvailable).includes(tower)) { continue; }
         let towerDiv = document.createElement('div');
         towerDiv.classList.add('hero-div');
         towerDiv.style.backgroundImage = "url(../Assets/UI/ParagonContainer.png)";

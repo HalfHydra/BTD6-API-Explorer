@@ -2169,7 +2169,6 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "isNew": true,
         "updateAdded": 54,
         "cost": 50
     },
@@ -2183,7 +2182,6 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "isNew": true,
         "updateAdded": 54,
         "cost": 50
     },
@@ -2197,7 +2195,6 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "isNew": true,
         "updateAdded": 54,
         "cost": 50
     },
@@ -2211,8 +2208,62 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "isNew": true,
         "updateAdded": 54,
+        "cost": 50
+    },
+    "GameUIProfileAvatar127": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar127",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": true,
+        "isNew": true,
+        "updateAdded": 55
+    },
+    "GameUIProfileAvatar128": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar128",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "isNew": true,
+        "updateAdded": 55,
+        "cost": 50
+    },
+    "GameUIProfileAvatar129": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar129",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "isNew": true,
+        "updateAdded": 55,
+        "cost": 50
+    },
+    "GameUIProfileAvatar130": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar130",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "isNew": true,
+        "updateAdded": 55,
         "cost": 50
     },
     "GameUIProfileAvatar131": {
@@ -4153,7 +4204,6 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "isNew": true,
         "updateAdded": 54,
         "cost": 300
     },
@@ -4167,8 +4217,34 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "isNew": true,
         "updateAdded": 54,
+        "cost": 300
+    },
+    "GameUIProfileBanner64": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner64Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": true,
+        "isNew": true,
+        "updateAdded": 55
+},
+    "GameUIProfileBanner65": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner65Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": false,
+        "isNew": true,
+        "updateAdded": 55,
         "cost": 300
     },
     "GameUIProfileBanner7": {
@@ -4689,6 +4765,34 @@
         "itemType": "TowerPet",
         "hidden": false,
         "updateAdded": 50,
+        "cost": 120
+    },
+    "TPetBombshooterBestboy": {
+        "storeFilter": "Monkeys",
+        "subFilter": "TowerPets",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "BombshooterPetBestboyIcon",
+        "cosmeticPriority": "0",
+        "exclusivity": "BombShooterPet",
+        "itemType": "TowerPet",
+        "obtainMethod": "SocialSeason",
+        "hidden": true,
+        "isNew": true,
+        "updateAdded": 55
+    },
+    "TPetDartMonkeyWindUpOG": {
+        "storeFilter": "Monkeys",
+        "subFilter": "TowerPets",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "DartMonkeyWindUpToyPetIcon",
+        "cosmeticPriority": "0",
+        "exclusivity": "DartMonkeyPet",
+        "itemType": "TowerPet",
+        "hidden": false,
+        "isNew": true,
+        "updateAdded": 55,
         "cost": 120
     },
     "TowerEffectAllMonkeysPlacementUpgradesBats": {

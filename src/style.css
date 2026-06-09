@@ -1280,9 +1280,10 @@
 .hero-portrait-level-select-btns {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     width: 130px;
     height:490px;
+    gap: 8px;
 }
 .hero-level-select-btn {
     background-image: url(../Assets/UI/BlankButton.png);
@@ -1349,7 +1350,7 @@
     justify-content: center;
 }
 .hero-skin {
-    width: 130px;
+    width: 120px;
     padding: 5px;
 }
 
@@ -1434,7 +1435,7 @@
 .selected-level-btn {
     filter: hue-rotate(270deg)
 }
-.hero-selector-div-disabled {
+.grayscale-100 {
     filter: grayscale(100%);
 }
 
@@ -4677,8 +4678,8 @@
     width: 275px;
     text-align: center;
     display: flex;
-    bottom: 135px;
-    left: 60px;
+    bottom: 215px;
+    left: 40px;
     align-items: center;
     justify-content: center;
 }

@@ -1060,10 +1060,9 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                                     let userProfile = await getUserProfile(entry.profile);
                                     if (userProfile != null) {
                                         if (userProfile.hasOwnProperty('owner')) {
-                                            // currently broken
-                                            // leaderboardEntryFrame.src = userProfile.frameURL;
-                                            // leaderboardEntryEmblem.src = userProfile.iconURL;
-                                            // leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
+                                            leaderboardEntryFrame.src = userProfile.frameURL;
+                                            leaderboardEntryEmblem.src = userProfile.iconURL;
+                                            leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
                                         } else {
                                             leaderboardEntryIcon.src = getProfileAvatar(userProfile);
                                             leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
