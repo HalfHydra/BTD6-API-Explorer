@@ -553,7 +553,7 @@ function getCollectionEventSkinIcon(eventData) {
         return "CollectingEventFireworksBtn";
     } else if (isDateInRange(4, 5)) {
         return "CollectingEventEasterBtn";
-    } else if (isDateInRange(7, 14)) {
+    } else if (isDateInRange(6, 14)) {
         return "CollectingEventPartyTimeBtn";
     } 
 
