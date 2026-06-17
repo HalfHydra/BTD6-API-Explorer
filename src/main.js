@@ -2121,11 +2121,11 @@ function generateTowerProgress(){
     towerSelectorHeader.classList.add('tower-selector-header');
     towerProgressDiv.appendChild(towerSelectorHeader);
 
-    for (let [tower, category] of Object.entries(constants.towersInOrder)) {
+    for (let [tower, data] of Object.entries(constants.towersInOrder)) {
         if(!Object.keys(btd6usersave.unlockedTowers).includes(tower)) {continue}
         let towerSelector = document.createElement('div');
         towerSelector.id = tower + '-selector';
-        towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
+        towerSelector.classList.add(`tower-selector-${data.category.toLowerCase()}`);
         if(!btd6usersave.unlockedTowers[tower]){
             towerSelector.classList.add('grayscale-100');
         }
@@ -2160,8 +2160,8 @@ function generateTowerProgressTower(tower){
     towerProgressContent.innerHTML = "";
 
     let upgradesUnlocked = 0;
-    for (let path of Object.values(constants.towerPaths[tower])){
-        for (let upgrade of Object.keys(path)){
+    for (let i = 1; i < 4; i++) {
+        for (let upgrade of Object.keys(constants.towersInOrder[tower][`path${i}`])){
             if (btd6usersave.acquiredUpgrades[upgrade]){
                 upgradesUnlocked += 1;
             }
@@ -2261,7 +2261,7 @@ function generateTowerProgressTower(tower){
     let towerProgressPortraitDiv = document.createElement('div');
     towerProgressPortraitDiv.id = 'tower-progress-portrait';
     towerProgressPortraitDiv.classList.add('tower-progress-portrait');
-    towerProgressPortraitDiv.classList.add(`tower-progress-portrait-${constants.towersInOrder[tower].toLowerCase()}`)
+    towerProgressPortraitDiv.classList.add(`tower-progress-portrait-${constants.towersInOrder[tower].category.toLowerCase()}`)
     towerNameAndPortrait.appendChild(towerProgressPortraitDiv);
 
     let towerProgressPortrait = document.createElement('img');
@@ -2368,7 +2368,7 @@ function generateTowerProgressTower(tower){
     let relatedKnowledgePointsDiv = createEl('div', { classList: [] });
     towerProgressBottom.appendChild(relatedKnowledgePointsDiv);
 
-    let relatedKnowledgePoints = Object.keys(constants.knowledgeTags).filter(k => constants.knowledgeTags[k].includes(tower) || constants.knowledgeTags[k].includes("All" + constants.towersInOrder[tower]));
+    let relatedKnowledgePoints = Object.keys(constants.knowledgeTags).filter(k => constants.knowledgeTags[k].includes(tower) || constants.knowledgeTags[k].includes("All" + constants.towersInOrder[tower].category));
 
     if (relatedKnowledgePoints.length === 0) {
         relatedKnowledgePointsHeader.style.display = "none";
@@ -2426,7 +2426,7 @@ function makeUpgradeButtons(tower, unlockedAllT5, paragonUnlocked){
 
     let index = 0;
     let grayOut = false;
-    for (let [upgrade, model] of Object.entries(constants.towerPaths[tower].path1)) {
+    for (let [upgrade, model] of Object.entries(constants.towersInOrder[tower].path1)) {
         let unlockStatus = btd6usersave.acquiredUpgrades[upgrade] ? "unlocked" : "locked";
         row1.appendChild(generateUpgradeIcon(tower, upgrade, unlockStatus, 1, index, paragonUnlocked, grayOut));
         if (unlockStatus == "locked") { grayOut = true }
@@ -2435,7 +2435,7 @@ function makeUpgradeButtons(tower, unlockedAllT5, paragonUnlocked){
 
     index = 0;
     grayOut = false;
-    for (let [upgrade, model] of Object.entries(constants.towerPaths[tower].path2)) {
+    for (let [upgrade, model] of Object.entries(constants.towersInOrder[tower].path2)) {
         let unlockStatus = btd6usersave.acquiredUpgrades[upgrade] ? "unlocked" : "locked";
         row2.appendChild(generateUpgradeIcon(tower, upgrade, unlockStatus, 2, index, paragonUnlocked, grayOut));
         if (unlockStatus == "locked") { grayOut = true }
@@ -2444,7 +2444,7 @@ function makeUpgradeButtons(tower, unlockedAllT5, paragonUnlocked){
 
     index = 0;
     grayOut = false;
-    for (let [upgrade, model] of Object.entries(constants.towerPaths[tower].path3)) {
+    for (let [upgrade, model] of Object.entries(constants.towersInOrder[tower].path3)) {
         let unlockStatus = btd6usersave.acquiredUpgrades[upgrade] ? "unlocked" : "locked";
         row3.appendChild(generateUpgradeIcon(tower, upgrade, unlockStatus, 3, index, paragonUnlocked, grayOut));
         if (unlockStatus == "locked") { grayOut = true }
@@ -2485,7 +2485,7 @@ function generateUpgradeIcon(tower, upgrade, status, row, tier, paragon, grayOut
 
     let upgradeBGImg = document.createElement('div');
     upgradeBGImg.classList.add('upgrade-bg-img');
-    let enoughXP = btd6usersave.towerXP[tower] >= constants.towerPaths[tower][`path${row}`][upgrade];
+    let enoughXP = btd6usersave.towerXP[tower] >= constants.towersInOrder[tower][`path${row}`][upgrade];
     tier == 4 ? btd6usersave.acquiredUpgrades[upgrade] ? upgradeBGImg.classList.add(`upgrade-t5`) : upgradeBGImg.classList.add(`upgrade-t5-locked`) : upgradeBGImg.classList.add(`upgrade-${paragon ? "paragon" : status == "unlocked" ? status : (enoughXP ? "green" : "red")}`);
     upgradeDiv.appendChild(upgradeBGImg);
 
@@ -2588,7 +2588,7 @@ function onSelectTowerUpgrade(tower, upgrade, tiers){
         portrait_div.classList.remove('tower-progress-portrait-paragon-locked');
     }
 
-    portrait_div.classList.add(`tower-progress-portrait-${constants.towersInOrder[tower].toLowerCase()}`);
+    portrait_div.classList.add(`tower-progress-portrait-${constants.towersInOrder[tower].category.toLowerCase()}`);
 
     for (let upgrade of document.getElementsByClassName('upgrade-div')){
         upgrade.classList.remove('selected');
@@ -2613,8 +2613,8 @@ function onSelectTowerUpgradeParagon(tower, upgrade, tiers){
         return;
     } 
 
-    if (portrait_div.classList.contains(`tower-progress-portrait-${constants.towersInOrder[tower].toLowerCase()}`)) {
-        portrait_div.classList.remove(`tower-progress-portrait-${constants.towersInOrder[tower].toLowerCase()}`);
+    if (portrait_div.classList.contains(`tower-progress-portrait-${constants.towersInOrder[tower].category.toLowerCase()}`)) {
+        portrait_div.classList.remove(`tower-progress-portrait-${constants.towersInOrder[tower].category.toLowerCase()}`);
     }
     portrait_div.classList.add('tower-progress-portrait-paragon')
 
@@ -3283,7 +3283,7 @@ function generateKnowledgeProgress(){
                         knowledgeTowerFilter = tower;
                         towerFilterIcon.classList.add('knowledge-tower-filter-active');
 
-                        let knowledgePoints = Object.entries(constants.knowledgeTags).filter(([key, tags]) => tags.includes(tower) || tags.includes(`All${constants.towersInOrder[tower]}`)).map(([key, tags]) => key);
+                        let knowledgePoints = Object.entries(constants.knowledgeTags).filter(([key, tags]) => tags.includes(tower) || tags.includes(`All${constants.towersInOrder[tower].category}`)).map(([key, tags]) => key);
                         knowledgePoints.forEach((point) => {
                             let glowDiv = document.getElementById(`${point}-glow`);
                             if (glowDiv) {
@@ -7919,10 +7919,10 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         }
     }
 
-    for (let [tower, category] of Object.entries(constants.towersInOrder)) {
+    for (let [tower, data] of Object.entries(constants.towersInOrder)) {
         if (!challengeTowers.towersExcluded[tower]) { continue; }
         let towerSelector = document.createElement('div');
-        towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
+        towerSelector.classList.add(`tower-selector-${data.category.toLowerCase()}`);
         towerSelectorExcluded.appendChild(towerSelector)
 
         let towerSelectorImg = document.createElement('img');
@@ -7935,10 +7935,10 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         towerSelector.appendChild(maxCount);
     }
 
-    for (let [tower, category] of Object.entries(constants.towersInOrder)) {
+    for (let [tower, data] of Object.entries(constants.towersInOrder)) {
         if (!challengeTowers.towersToDisplay[tower]) { continue; }
         let towerSelector = document.createElement('div');
-        towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
+        towerSelector.classList.add(`tower-selector-${data.category.toLowerCase()}`);
         towerSelectorAvailable.appendChild(towerSelector)
 
         let towerSelectorImg = document.createElement('img');
@@ -11027,7 +11027,7 @@ function generateRotations(scheduleContainer, current, fullSchedule){
             let itemDiv = createEl('div', {
                 classList: ['insta-schedule-item'],
                 style: {
-                    backgroundImage: `url(../Assets/UI/TowerContainer${constants.towersInOrder[item]}.png)`,
+                    backgroundImage: `url(../Assets/UI/TowerContainer${constants.towersInOrder[item].category}.png)`,
                     backgroundSize: "cover",
                     backgroundPosition: "center 130px",
                     height: "75px",
@@ -12425,7 +12425,7 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
             boatHeroDiv.appendChild(heroIcon);
         } else {
             let seat = seatObjects.shift();
-            seat.style.backgroundImage = `url(../Assets/UI/TowerSeat${constants.towersInOrder[data.name]}.png)`;
+            seat.style.backgroundImage = `url(../Assets/UI/TowerSeat${constants.towersInOrder[data.name].category}.png)`;
 
             let towerIcon = createEl('img', {
                 classList: ['of-contain'],
@@ -12698,10 +12698,10 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
         }
     }
 
-    for (let [tower, category] of Object.entries(constants.towersInOrder)) {
+    for (let [tower, data] of Object.entries(constants.towersInOrder)) {
         if (!availableTowers.towersToDisplay[tower]) { continue; }
         let towerSelector = document.createElement('div');
-        towerSelector.classList.add(`tower-selector-${category.toLowerCase()}`);
+        towerSelector.classList.add(`tower-selector-${data.category.toLowerCase()}`);
         crewTowersDiv.appendChild(towerSelector)
 
         let towerSelectorImg = document.createElement('img');
@@ -13081,7 +13081,7 @@ function generateCompletionist() {
                 data = Object.keys(constants.towersInOrder).filter(t => btd6usersave.unlockedTowers[t])
                 for (let item of items) {
                     let towerSelector = createEl('div');
-                    towerSelector.classList.add(`tower-selector-${(constants.towersInOrder[item]).toLowerCase()}`);
+                    towerSelector.classList.add(`tower-selector-${(constants.towersInOrder[item].category).toLowerCase()}`);
                     content.appendChild(towerSelector)
 
                     if (!data.includes(item)) { towerSelector.classList.add("grayscale-100")}
@@ -13127,9 +13127,9 @@ function generateCompletionist() {
             case "Upgrades":
                 for(let tower of Object.keys(constants.towersInOrder)) {
                     let t5s = [
-                        Object.keys(constants.towerPaths[tower].path1)[4], 
-                        Object.keys(constants.towerPaths[tower].path2)[4], 
-                        Object.keys(constants.towerPaths[tower].path3)[4]
+                        Object.keys(constants.towersInOrder[tower].path1)[4], 
+                        Object.keys(constants.towersInOrder[tower].path2)[4], 
+                        Object.keys(constants.towersInOrder[tower].path3)[4]
                     ]
                     for (let upgrade of t5s) {
                         let unlockStatus = btd6usersave.acquiredUpgrades[upgrade];
