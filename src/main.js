@@ -14,7 +14,6 @@ let rankInfoVeteran = {
 let profileStats = {}
 let exclusiveStats = {}
 let medalsInOrder = {}
-let extrasUnlocked = {}
 
 let progressSubText = {}
 let processedMapData = {
@@ -209,7 +208,6 @@ function generateIfReady(){
             generateStats()
             generateMedals()
         }
-        generateExtras()
         generateInstaData()
         generateMapData()
         generateProgressSubText()
@@ -478,6 +476,7 @@ function generateProgressSubText(){
     }
     progressSubText["Achievements"] = `${btd6usersave.achievementsClaimed.length} Achievement${getAchievementsUnlocked().total != 1 ? "s" : ""} Earned`;
     progressSubText["AchievementsEarned"] = `${btd6usersave.achievementsClaimed.length}/${constants.achievements + constants.hiddenAchievements} Achievement${getAchievementsUnlocked().total != 1 ? "s" : ""} Earned`;
+    let extrasUnlocked = generateExtrasUnlocked();
     let extrasTotal = Object.keys(extrasUnlocked).length;
     progressSubText["TrophyStore"] = `${Object.keys(trophyStoreItemsJSON).filter(k => getTrophyItemObtained(k)).length} Trophy Store Items Collected`
     progressSubText["TeamsStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k] && teamsStoreItemsJSON[k]).length} Team Store Items Unlocked`
@@ -6398,6 +6397,16 @@ function generateAchievementsGameView(searchTerm = "") {
     AchievementsContainer.appendChild(fragment);
 }
 
+function generateExtrasUnlocked(){
+    let extrasUnlocked = {};
+    if (btd6usersave["unlockedBigBloons"]){ extrasUnlocked["Big Bloons"] = btd6usersave["bigBloonsActive"] }
+    if (btd6usersave["unlockedSmallBloons"]){ extrasUnlocked["Small Bloons"] = btd6usersave["smallBloonsActive"] }
+    if (btd6usersave["seenBigTowers"]){ extrasUnlocked["Big Monkey Towers"] = btd6usersave["bigTowersActive"] }
+    if (btd6usersave["unlockedSmallTowers"]){ extrasUnlocked["Small Monkey Towers"] = btd6usersave["smallTowersActive"] }
+    if (btd6usersave["unlockedSmallBosses"]){ extrasUnlocked["Small Bosses"] = btd6usersave["smallBossesActive"] }
+    return extrasUnlocked;
+}
+
 function generateExtrasProgress() {
     let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
@@ -6407,6 +6416,7 @@ function generateExtrasProgress() {
     progressContent.appendChild(extrasProgressContainer);
 
     let extras = [["Big Bloons", "BigBloonsMode"],["Small Bloons", "SmallBloonsMode"],["Big Monkey Towers","BigTowersMode"],["Small Monkey Towers", "SmallTowersMode"],["Small Bosses","SmallBossesMode"]]
+    let extrasUnlocked = generateExtrasUnlocked();
 
     for (let [name, loc] of extras) {
         let locked = extrasUnlocked[name] == undefined;
