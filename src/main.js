@@ -10252,7 +10252,7 @@ function generateTrophyStoreProgress() {
     })
     displayFilterToggles.appendChild(mapProgressFilterDifficultySelect);
 
-    let sortDropdown = generateDropdown("Sort By:", ["Default", "Highest Cost", "Lowest Cost", "First Added", "Newly Added"], trophyStoreSortOption, (option) => {
+    let sortDropdown = generateDropdown("Sort By:", ["Category", "Highest Cost", "Lowest Cost", "First Added", "Newly Added"], trophyStoreSortOption, (option) => {
         trophyStoreSortOption = option;
         generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue, trophyStoreTrophyCounterLabel);
     })
@@ -10357,7 +10357,7 @@ function generateTrophyStoreContainer(filter, display, counter, trophies, needed
     }
 
     switch (trophyStoreSortOption) {
-        case "Default":
+        case "Category":
             const trophyKeyCollator = new Intl.Collator(undefined, { numeric: true, sensitivity: "base" });
             trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).sort(([key1], [key2]) => trophyKeyCollator.compare(key1, key2)));
             break;
