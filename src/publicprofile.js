@@ -1,6 +1,8 @@
 async function openProfile(source, profile, callback){
+    let isSaveProfile = source === 'profile';
+
     addToBackQueue({ source: source, destination: 'publicprofile', callback: callback });
-    profile = await getUserProfile(profile)
+    profile = isSaveProfile ? profile : await getUserProfile(profile)
     if (profile == null) { return; }
     if (backQueue[backQueue.length - 1].destination != 'publicprofile') { return; }
     resetScroll();
@@ -34,7 +36,7 @@ async function openProfile(source, profile, callback){
     profileHeader.appendChild(profileTopBottom);
 
     let profileTop = document.createElement('div');
-    profileTop.classList.add('profile-top-public');
+    profileTop.classList.add(isSaveProfile ? 'profile-top' : 'profile-top-public');
     profileTopBottom.appendChild(profileTop);
 
     let profileName = document.createElement('p');
@@ -42,34 +44,45 @@ async function openProfile(source, profile, callback){
     profileName.innerHTML = profile["displayName"];
     profileTop.appendChild(profileName);
 
-    let rankStar = document.createElement('div');
-    rankStar.classList.add('rank-star-public');
-    profileTop.appendChild(rankStar);
+    if (!isSaveProfile) {
+        let rankStar = document.createElement('div');
+        rankStar.classList.add('rank-star-public');
+        profileTop.appendChild(rankStar);
 
-    let rankImg = document.createElement('img');
-    rankImg.classList.add('rank-img');
-    rankImg.src = '../Assets/UI/LvlHolder.png';
-    rankStar.appendChild(rankImg);
+        let rankImg = document.createElement('img');
+        rankImg.classList.add('rank-img');
+        rankImg.src = '../Assets/UI/LvlHolder.png';
+        rankStar.appendChild(rankImg);
 
-    let rankText = document.createElement('p');
-    rankText.classList.add('rank-text','black-outline');
-    rankText.innerHTML = profile.rank;
-    rankStar.appendChild(rankText);
+        let rankText = document.createElement('p');
+        rankText.classList.add('rank-text','black-outline');
+        rankText.innerHTML = profile.rank;
+        rankStar.appendChild(rankText);
 
-    if (profile.veteranRank > 0) {
-        let rankStarVeteran = document.createElement('div');
-        rankStarVeteran.classList.add('rank-star-public');
-        profileTop.appendChild(rankStarVeteran);
+        if (profile.veteranRank > 0) {
+            let rankStarVeteran = document.createElement('div');
+            rankStarVeteran.classList.add('rank-star-public');
+            profileTop.appendChild(rankStarVeteran);
 
-        let rankImgVeteran = document.createElement('img');
-        rankImgVeteran.classList.add('rank-img');
-        rankImgVeteran.src = '../Assets/UI/LvlHolderVeteran.png';
-        rankStarVeteran.appendChild(rankImgVeteran);
+            let rankImgVeteran = document.createElement('img');
+            rankImgVeteran.classList.add('rank-img');
+            rankImgVeteran.src = '../Assets/UI/LvlHolderVeteran.png';
+            rankStarVeteran.appendChild(rankImgVeteran);
 
-        let rankTextVeteran = document.createElement('p');
-        rankTextVeteran.classList.add('rank-text','black-outline');
-        rankTextVeteran.innerHTML = profile.veteranRank;
-        rankStarVeteran.appendChild(rankTextVeteran);
+            let rankTextVeteran = document.createElement('p');
+            rankTextVeteran.classList.add('rank-text','black-outline');
+            rankTextVeteran.innerHTML = profile.veteranRank;
+            rankStarVeteran.appendChild(rankTextVeteran);
+        }
+    } else {
+        let profileBottom = document.createElement('div');
+        profileBottom.classList.add('profile-bottom');
+        profileTopBottom.appendChild(profileBottom);
+
+        profileBottom.appendChild(generateRank());
+        if(btd6usersave["veteranXp"] > 0){
+            profileBottom.appendChild(generateRank(true));
+        }
     }
 
     let profileFollowers = document.createElement('div')
@@ -86,23 +99,127 @@ async function openProfile(source, profile, callback){
     followersCount.innerHTML = profile["followers"].toLocaleString();
     profileFollowers.appendChild(followersCount);
 
-
     let belowProfileHeader = document.createElement('div');
     belowProfileHeader.classList.add('below-profile-header');
     publicProfileDiv.appendChild(belowProfileHeader);
 
     let leftColumnDiv = document.createElement('div');
-    leftColumnDiv.classList.add('left-column-div');
+    leftColumnDiv.classList.add('left-column-div', 'd-flex', 'fd-column', 'ai-center');
     belowProfileHeader.appendChild(leftColumnDiv);
 
-    let leftColumnHeader = document.createElement('div');
-    leftColumnHeader.classList.add('left-column-header');
-    leftColumnDiv.appendChild(leftColumnHeader);
+    if (isSaveProfile) {
+        let quickStatsDiv = createEl('div', {
+            classList: ['quick-stats-div'],
+            style: {
+                width: "500px"
+            }
+        });
+        leftColumnDiv.appendChild(quickStatsDiv);
 
-    let leftColumnHeaderText = document.createElement('p');
-    leftColumnHeaderText.classList.add('column-header-text','black-outline');
-    leftColumnHeaderText.innerHTML = 'Medals';
-    leftColumnHeader.appendChild(leftColumnHeaderText);
+        let quickStatsHeader = document.createElement('div');
+        quickStatsHeader.classList.add('quick-stats-header');
+        quickStatsDiv.appendChild(quickStatsHeader);
+
+        let quickStatsHeaderText = document.createElement('p');
+        quickStatsHeaderText.classList.add('column-header-text','black-outline');
+        quickStatsHeaderText.innerHTML = 'Quick Stats';
+        quickStatsHeader.appendChild(quickStatsHeaderText);
+
+        let quickStatsContent = document.createElement('div');
+        quickStatsContent.classList.add('quick-stats-content');
+        quickStatsDiv.appendChild(quickStatsContent);
+
+        let quickStats = {
+            "TowersUnlocked": "../Assets/UI/MaxMonkeysIcon.png",
+            "UpgradesUnlocked": "../Assets/UI/UpgradeIcon.png",
+            "Paragons": "../Assets/UI/ParagonPip.png",
+            "HeroesUnlocked": "../Assets/UI/AllHeroesIcon.png",
+            "Skins": "../Assets/UI/TopHatSprite.png",
+            "ActivatedAbilities": "../Assets/UI/RapidShotIcon.png",
+            "KnowledgeEarned": "../Assets/UI/KnowledgeIcon.png",
+            "MapProgress": "../Assets/UI/StartRoundIconSmall.png",
+            "CHIMPS": "../Assets/MedalIcon/MedalImpoppableRuby.png",
+            "Powers": "../Assets/UI/PowerContainer.png",
+            "PowersPro": "../Assets/UI/PowersProContainer.png",
+            "InstaMonkeys": "../Assets/UI/InstaIcon.png",
+            "AchievementsEarned": "../Assets/AchievementIcon/AchievementsIcon.png",
+            "TrophyStore": "../Assets/UI/LimitedRunIcon.png",
+            'TeamsStore': "../Assets/UI/TeamTrophyIconSmall.png",
+            "Quests": "../Assets/UI/QuestIcon.png",
+            "Extras": "../Assets/UI/SmallBloonsModeIcon.png",
+        }
+
+        Object.entries(quickStats).forEach(([stat,icon]) => {
+            let text = progressSubText[stat] || "";
+            if(text.startsWith("0/") || text.startsWith("0 ")) { return }
+            let quickStat = document.createElement('div');
+            quickStat.classList.add('quick-stat', 'pointer');
+            quickStatsContent.appendChild(quickStat);
+
+            let statIcon = document.createElement('img');
+            statIcon.classList.add('quick-stat-icon');
+            statIcon.src = icon;
+            quickStat.appendChild(statIcon);
+
+            let statName = document.createElement('p');
+            statName.classList.add('quick-stat-name');
+            statName.innerHTML = text;
+            quickStat.appendChild(statName);
+
+            quickStat.addEventListener('click', () => {
+                addToBackQueue({source: 'profile', destination: 'profile', callback: generateOverview});
+                resetScroll();
+                switch(stat){
+                    case 'TowersUnlocked':
+                    case "UpgradesUnlocked":
+                    case "Paragons":
+                        generateTowerProgress();
+                        break;
+                    case 'HeroesUnlocked':
+                    case "Skins":
+                        generateHeroesProgress();
+                        break;
+                    case "ActivatedAbilities":
+                        generateAbilities();
+                        break;
+                    case "KnowledgeEarned":
+                        generateKnowledgeProgress();
+                        break;
+                    case "MapProgress":
+                    case "CHIMPS":
+                        generateMapsProgress();
+                        break;
+                    case "Powers":
+                        generatePowersProgress();
+                        break;
+                    case "InstaMonkeys":
+                        generateInstaMonkeysProgress();
+                        break;
+                    case "AchievementsEarned":
+                        generateAchievementsProgress();
+                        break;
+                    case "Extras":
+                        generateExtrasProgress();
+                        break;
+                    case "TrophyStore":
+                        generateTrophyStoreProgress();
+                        break;
+                    case "TeamsStore":
+                        generateTeamsStoreProgress();
+                        break;
+                    case "Logout":
+                        logoutProgress();
+                        break;
+                    case 'Quests':
+                        generateQuestsPage();
+                        break;
+                    case 'PowersPro':
+                        generateProPowerProgress();
+                        break;
+                }
+            });
+        })
+    }
 
     let publicMedals = {};
     let tempCoop = {};
@@ -111,6 +228,7 @@ async function openProfile(source, profile, callback){
         tempCoop["MedalCoop" + value] = profile["_medalsMultiplayer"][key] || 0;
     }
     publicMedals = {...publicMedals, ...tempCoop};
+
     publicMedals["BlastapopoulosEliteBadge"] = profile["bossBadgesElite"]["Blastapopoulos"] || 0;
     publicMedals["BlastapopoulosBadge"] = profile["bossBadgesNormal"]["Blastapopoulos"] || 0;
     publicMedals["PhayzeEliteBadge"] = profile["bossBadgesElite"]["Phayze"] || 0;
@@ -123,6 +241,7 @@ async function openProfile(source, profile, callback){
     publicMedals["LychBadge"] = profile["bossBadgesNormal"]["Lych"] || 0;
     publicMedals["BloonariusEliteBadge"] = profile["bossBadgesElite"]["Bloonarius"] || 0;
     publicMedals["BloonariusBadge"] = profile["bossBadgesNormal"]["Bloonarius"] || 0;
+
     publicMedals["MedalEventBronzeMedal"] = profile["_medalsRace"]["Bronze"] || 0;
     publicMedals["MedalEventSilverMedal"] = profile["_medalsRace"]["Silver"] || 0;
     publicMedals["MedalEventDoubleSilverMedal"] = profile["_medalsRace"]["DoubleSilver"] || 0;
@@ -132,7 +251,9 @@ async function openProfile(source, profile, callback){
     publicMedals["MedalEventBlueDiamondMedal"] = profile["_medalsRace"]["BlueDiamond"] || 0;
     publicMedals["MedalEventRedDiamondMedal"] = profile["_medalsRace"]["RedDiamond"] || 0;
     publicMedals["MedalEventBlackDiamondMedal"] = profile["_medalsRace"]["BlackDiamond"] || 0;
+
     publicMedals["OdysseyStarIcon"] = profile.gameplay["totalOdysseyStars"] || 0;
+
     publicMedals["BossMedalEventBronzeMedal"] = profile["_medalsBoss"]["Bronze"] || 0;
     publicMedals["BossMedalEventSilverMedal"] = profile["_medalsBoss"]["Silver"] || 0;
     publicMedals["BossMedalEventDoubleSilverMedal"] = profile["_medalsBoss"]["DoubleSilver"] || 0;
@@ -142,6 +263,7 @@ async function openProfile(source, profile, callback){
     publicMedals["BossMedalEventBlueDiamondMedal"] = profile["_medalsBoss"]["BlueDiamond"] || 0;
     publicMedals["BossMedalEventRedDiamondMedal"] = profile["_medalsBoss"]["RedDiamond"] || 0;
     publicMedals["BossMedalEventBlackDiamondMedal"] = profile["_medalsBoss"]["BlackDiamond"] || 0;
+
     publicMedals["EliteBossMedalEventBronzeMedal"] = profile["_medalsBossElite"]["Bronze"] || 0;
     publicMedals["EliteBossMedalEventSilverMedal"] = profile["_medalsBossElite"]["Silver"] || 0;
     publicMedals["EliteBossMedalEventDoubleSilverMedal"] = profile["_medalsBossElite"]["DoubleSilver"] || 0;
@@ -151,6 +273,7 @@ async function openProfile(source, profile, callback){
     publicMedals["EliteBossMedalEventBlueDiamondMedal"] = profile["_medalsBossElite"]["BlueDiamond"] || 0;
     publicMedals["EliteBossMedalEventRedDiamondMedal"] = profile["_medalsBossElite"]["RedDiamond"] || 0;
     publicMedals["EliteBossMedalEventBlackDiamondMedal"] = profile["_medalsBossElite"]["BlackDiamond"] || 0;
+
     publicMedals["CtLocalPlayerBronzeMedal"] = profile["_medalsCTLocal"]["Bronze"] || 0;
     publicMedals["CtLocalPlayerSilverMedal"] = profile["_medalsCTLocal"]["Silver"] || 0;
     publicMedals["CtLocalPlayerDoubleGoldMedal"] = profile["_medalsCTLocal"]["DoubleGold"] || 0;
@@ -166,9 +289,77 @@ async function openProfile(source, profile, callback){
     publicMedals["CtGlobalPlayerGoldDiamondMedal"] = profile["_medalsCTGlobal"]["GoldDiamond"] || 0;
     publicMedals["CtGlobalPlayerBlueDiamondMedal"] = profile["_medalsCTGlobal"]["BlueDiamond"] || 0;
 
-    let currencyAndMedalsDiv = document.createElement('div');
-    currencyAndMedalsDiv.classList.add('currency-medals-div');
+    let currencyAndMedalsDiv = createEl('div', {
+        classList: ['currency-medals-div'],
+        style: {
+            // width: "560px"
+        }
+    });
     leftColumnDiv.appendChild(currencyAndMedalsDiv);
+
+    let leftColumnHeader = document.createElement('div');
+    leftColumnHeader.classList.add('left-column-header');
+    currencyAndMedalsDiv.appendChild(leftColumnHeader);
+
+    let leftColumnHeaderText = document.createElement('p');
+    leftColumnHeaderText.classList.add('column-header-text','black-outline');
+    leftColumnHeaderText.innerHTML = isSaveProfile ? 'Currency & Medals' : 'Medals';
+    leftColumnHeader.appendChild(leftColumnHeaderText);
+
+    if (isSaveProfile) {
+        let currencyDiv = createEl('div', {
+            classList: ['currency-div', 'jc-center'],
+            style: {
+                gap: "2rem"
+            }
+        });
+        currencyAndMedalsDiv.appendChild(currencyDiv);
+
+        let currencyMMDiv = document.createElement('div');
+        currencyMMDiv.classList.add('currency-mm-div');
+        currencyDiv.appendChild(currencyMMDiv);
+
+        let currencyMMImg = document.createElement('img');
+        currencyMMImg.classList.add('currency-mm-img');
+        currencyMMImg.src = '../Assets/UI/BloonjaminsIcon.png';
+        currencyMMDiv.appendChild(currencyMMImg);
+
+        let currencyMMText = document.createElement('p');
+        currencyMMText.classList.add('currency-mm-text','mm-outline');
+        currencyMMText.innerHTML = "$" + btd6usersave["monkeyMoney"].toLocaleString();
+        currencyMMDiv.appendChild(currencyMMText);
+
+        let currencyKnowledgeDiv =createEl('div', {
+            classList: ['currency-knowledge-div']
+        });
+        currencyDiv.appendChild(currencyKnowledgeDiv);
+
+        let currencyKnowledgeImg = createEl('img', {
+            classList: ['currency-knowledge-img'],
+            src: '../Assets/UI/KnowledgeIcon.png'
+        });
+        currencyKnowledgeDiv.appendChild(currencyKnowledgeImg);
+
+        let currencyKnowledgeText = createEl('p', {
+            classList: ['currency-knowledge-text', 'knowledge-outline'],
+            innerHTML: btd6usersave["knowledgePoints"].toLocaleString()
+        });
+        currencyKnowledgeDiv.appendChild(currencyKnowledgeText);
+
+        let currencyTrophiesDiv = document.createElement('div');
+        currencyTrophiesDiv.classList.add('currency-trophies-div');
+        currencyDiv.appendChild(currencyTrophiesDiv);
+
+        let currencyTrophiesImg = document.createElement('img');
+        currencyTrophiesImg.classList.add('currency-trophies-img');
+        currencyTrophiesImg.src = '../Assets/UI/TrophyIcon.png';
+        currencyTrophiesDiv.appendChild(currencyTrophiesImg);
+
+        let currencyTrophiesText = document.createElement('p');
+        currencyTrophiesText.classList.add('currency-trophies-text','black-outline');
+        currencyTrophiesText.innerHTML = btd6usersave["trophies"].toLocaleString();
+        currencyTrophiesDiv.appendChild(currencyTrophiesText);
+    }
 
     let medalsDiv = document.createElement('div');
     medalsDiv.classList.add('medals-div');
@@ -178,7 +369,6 @@ async function openProfile(source, profile, callback){
         if(num === 0) { continue; }
         let medalDiv = document.createElement('div');
         medalDiv.classList.add('medal-div');
-        medalDiv.title = constants.medalLabels[medal];
         medalsDiv.appendChild(medalDiv);
 
         let medalImg = document.createElement('img');
@@ -360,6 +550,20 @@ async function openProfile(source, profile, callback){
         towerDiv.appendChild(towerText);
         counter++;
 
+        if (isSaveProfile) {
+            towerDiv.style.backgroundImage = `url(../Assets/UI/InstaTowersContainer${(processedInstaData.TowerBorders[tower]) ? processedInstaData.TowerBorders[tower] : ""}.png)`;
+            switch(processedInstaData.TowerBorders[tower]){
+                case "Gold":
+                    break;
+                case "Black":
+                    towerDiv.style.backgroundImage = "url(../Assets/UI/InstaTowersContainerBlack.png)";
+                    break;
+                case "":
+                    towerDiv.style.backgroundImage = "url(../Assets/UI/InstaTowersContainer.png)";
+                    break;
+            }
+        }
+
         addTooltip(towerDiv, `<p class="artifact-title">${getLocValue(tower)}</p>Placed ${xp.toLocaleString()} Times`, {
             allowHTML: true,
         });
@@ -447,15 +651,6 @@ async function openProfile(source, profile, callback){
     rightColumnDiv.classList.add('right-column-div');
     belowProfileHeader.appendChild(rightColumnDiv);
 
-    let rightColumnHeader = document.createElement('div');
-    rightColumnHeader.classList.add('overview-right-column-header');
-    rightColumnDiv.appendChild(rightColumnHeader);
-
-    let rightColumnHeaderText = document.createElement('p');
-    rightColumnHeaderText.classList.add('column-header-text','black-outline');
-    rightColumnHeaderText.innerHTML = 'Overall Stats';
-    rightColumnHeader.appendChild(rightColumnHeaderText);
-
     let statsPublic = {};
     statsPublic["Games Played"] = profile.gameplay["gameCount"];
     statsPublic["Games Won"] = profile.gameplay["gamesWon"];
@@ -484,11 +679,13 @@ async function openProfile(source, profile, callback){
     statsPublic["Daily Reward Chests Opened"] = profile.gameplay["dailyRewards"];
     statsPublic["Challenges Completed"] = profile.gameplay["challengesCompleted"];
     statsPublic["Achievements"] = `${profile["achievements"]}/${constants.achievements + constants.hiddenAchievements}`;
+    statsPublic["Hidden Achievements"] = 0;
     statsPublic["Odysseys Completed"] = profile.gameplay["totalOdysseysCompleted"];
     statsPublic["Lifetime Trophies"] = profile.gameplay["totalTrophiesEarned"];
     statsPublic["Necro Bloons Reanimated"] = profile.bloonsPopped["necroBloonsReanimated"];
     statsPublic["Transforming Tonics Used"] = profile.bloonsPopped["transformingTonicsUsed"];
     statsPublic["Most Experienced Monkey"] = getLocValue(profile["mostExperiencedMonkey"]);
+    statsPublic["Most Experienced Monkey XP"] = 0;
     statsPublic["Insta Monkey Collection"] = `${profile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}`;
     statsPublic["Collection Chests Opened"] = profile.gameplay["collectionChestsOpened"];
     statsPublic["Golden Bloons Popped"] = profile.bloonsPopped["goldenBloonsPopped"];
@@ -496,9 +693,29 @@ async function openProfile(source, profile, callback){
     statsPublic["Bosses Popped"] = profile.bloonsPopped["bossesPopped"];
     statsPublic["Damage Done To Bosses"] = profile.gameplay["damageDoneToBosses"];
 
+    if (isSaveProfile) {
+        let unlockedAchievements = getAchievementsUnlocked();
+        statsPublic["Hidden Achievements"] = `${unlockedAchievements.hidden}/${constants.hiddenAchievements}`;
+        statsPublic["Achievements"] = `${unlockedAchievements.normal}/${constants.achievements}`;
+        statsPublic["Most Experienced Monkey XP"] = btd6usersave.towerXP[profile["mostExperiencedMonkey"]];
+    } else {
+        delete statsPublic["Hidden Achievements"];
+        delete statsPublic["Most Experienced Monkey XP"];
+    }
+
     let profileStatsDiv = document.createElement('div');
     profileStatsDiv.classList.add('profile-stats');
     rightColumnDiv.appendChild(profileStatsDiv);
+
+    let rightColumnHeader = document.createElement('div');
+    rightColumnHeader.classList.add('overview-right-column-header');
+    profileStatsDiv.appendChild(rightColumnHeader);
+
+    let rightColumnHeaderText = document.createElement('p');
+    rightColumnHeaderText.classList.add('column-header-text','black-outline');
+    rightColumnHeaderText.innerHTML = 'Main Game Stats';
+    rightColumnHeader.appendChild(rightColumnHeaderText);
+
 
     for (let [key, value] of Object.entries(statsPublic)){
         let stat = document.createElement('div');
@@ -517,8 +734,18 @@ async function openProfile(source, profile, callback){
     }
 
     let exclusiveStatsPublic = {}
-    exclusiveStatsPublic["Contested Territory Tiles Captured"] = profile.stats["ctCapturedTiles"];
     exclusiveStatsPublic["Towers Sold"] = profile.stats["totalTowersSold"];
+    exclusiveStatsPublic["Contested Territory Tiles Captured"] = profile.stats["ctCapturedTiles"];
+    if (isSaveProfile) {
+        exclusiveStatsPublic["Daily Challenges Completed"] = btd6usersave["totalDailyChallengesCompleted"];
+        exclusiveStatsPublic["Consecutive Days DCs Completed"] = btd6usersave["consecutiveDailyChallengesCompleted"];
+        exclusiveStatsPublic["Race Event Attempts"] = btd6usersave["totalRacesEntered"];
+        exclusiveStatsPublic["Contested Territory Tiles Captured"] = btd6publicprofile.stats["ctCapturedTiles"];
+        exclusiveStatsPublic["Challenges Played"] = btd6usersave["challengesPlayed"];
+        exclusiveStatsPublic["Challenges Shared"] = btd6usersave["challengesShared"];
+        exclusiveStatsPublic["Continues Used"] = btd6usersave["continuesUsed"];
+        exclusiveStatsPublic["Towers Sold"] = btd6publicprofile.stats["totalTowersSold"];
+    }
     // Currently broken
     // exclusiveStatsPublic["Total Tier 1 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["1"];
     // exclusiveStatsPublic["Total Tier 2 Upgrades"] = profile.stats["upgradesPurchasedByTier"]["2"];
@@ -555,4 +782,180 @@ async function openProfile(source, profile, callback){
         statValue.innerHTML = value.toLocaleString();
         stat.appendChild(statValue);
     }
+
+    if (isSaveProfile && btd6usersave.hasOwnProperty("rogueLegends")) {
+
+        let rogueDiv = document.createElement('div');
+        rogueDiv.classList.add('profile-stats');
+        rightColumnDiv.appendChild(rogueDiv);
+
+        let rogueColumnHeader = document.createElement('div');
+        rogueColumnHeader.classList.add('overview-right-column-header');
+        rogueDiv.appendChild(rogueColumnHeader);
+
+        let rogueColumnHeaderText = document.createElement('p');
+        rogueColumnHeaderText.classList.add('column-header-text','black-outline');
+        rogueColumnHeaderText.innerHTML = 'Rogue Legends Stats';
+        rogueColumnHeader.appendChild(rogueColumnHeaderText);
+
+        let rogueStats = {};
+        rogueStats["Tiles Captured"] = btd6usersave["rogueLegends"].tilesCaptured || 0;
+        rogueStats["Campaign Maps Won"] = btd6usersave["rogueLegends"].bossesDefeated || 0;
+        rogueStats["Common Artifacts Collected"] = btd6usersave["rogueLegends"].commonArtifactsCollected || 0;
+        rogueStats["Rare Artifacts Collected"] = btd6usersave["rogueLegends"].rareArtifactsCollected || 0;
+        rogueStats["Legendary Artifacts Collected"] = btd6usersave["rogueLegends"].legendaryArtifactsCollected || 0;
+        rogueStats["Extracted Artifacts"] = Object.keys(btd6usersave["rogueUnlockedStarterArtifacts"]).length || 0;
+        rogueStats["Bloon Encounters Won"] = btd6usersave["rogueLegendsStats"].winsByTileType["pathStandardGame"];
+        rogueStats["Mini Games Won"] = btd6usersave["rogueLegendsStats"].winsByTileType["miniGame"];;
+        rogueStats["Mini Bosses Won"] = btd6usersave["rogueLegendsStats"].winsByTileType["miniBoss"];
+        rogueStats["Common Boosts Collected"] = btd6usersave["rogueLegends"].commonBoostsCollected || 0;
+        rogueStats["Rare Boosts Collected"] = btd6usersave["rogueLegends"].rareBoostsCollected || 0;
+        rogueStats["Legendary Boosts Collected"] = btd6usersave["rogueLegends"].legendaryBoostsCollected || 0;
+
+        for (let [key, value] of Object.entries(rogueStats)){
+            let stat = document.createElement('div');
+            stat.classList.add('stat');
+            rogueDiv.appendChild(stat);
+
+            let statName = document.createElement('p');
+            statName.classList.add('stat-name');
+            statName.innerHTML = key;
+            stat.appendChild(statName);
+
+            let statValue = document.createElement('p');
+            statValue.classList.add('stat-value');
+            statValue.innerHTML = value.toLocaleString();
+            stat.appendChild(statValue);
+        }
+    }
+    if (isSaveProfile && btd6usersave.hasOwnProperty("frontierLegends")) {
+        let frontierDiv = document.createElement('div');
+        frontierDiv.classList.add('profile-stats');
+        rightColumnDiv.appendChild(frontierDiv);
+
+        let frontierColumnHeader = document.createElement('div');
+        frontierColumnHeader.classList.add('overview-right-column-header');
+        frontierDiv.appendChild(frontierColumnHeader);
+
+        let frontierColumnHeaderText = document.createElement('p');
+        frontierColumnHeaderText.classList.add('column-header-text','black-outline');
+        frontierColumnHeaderText.innerHTML = 'frontier Legends Stats';
+        frontierColumnHeader.appendChild(frontierColumnHeaderText);
+
+        let frontierStats = {};
+        frontierStats["Total Quickdraws Won"] = btd6usersave["frontierLegends"].winQuickdrawAcrossAll || 0;
+        frontierStats["Quickdraws Won in a Row"] = btd6usersave["frontierLegends"].captureBountyBloonsInARow || 0;
+        frontierStats["Total Distance Traveled"] = btd6usersave["frontierLegends"].walkTotalAcrossAll || 0;
+        frontierStats["Total Monkeys Hired"] = btd6usersave["frontierLegends"].hireTotalAcrossAll || 0;
+        frontierStats["Total Legend Monkeys Hired"] = btd6usersave["frontierLegends"].hireLegendsAcrossAll || 0;
+        frontierStats["Total Bananite Spent in the Store"] = btd6usersave["frontierLegends"].spendGoldInGeneralStore || 0;
+        frontierStats["Total Stamina Spent"] = btd6usersave["frontierLegendsStats"].spendStaminaAcrossAll.toFixed(0) || 0;
+
+        for (let [key, value] of Object.entries(frontierStats)){
+            let stat = document.createElement('div');
+            stat.classList.add('stat');
+            frontierDiv.appendChild(stat);
+
+            let statName = document.createElement('p');
+            statName.classList.add('stat-name');
+            statName.innerHTML = key;
+            stat.appendChild(statName);
+
+            let statValue = document.createElement('p');
+            statValue.classList.add('stat-value');
+            statValue.innerHTML = value.toLocaleString();
+            stat.appendChild(statValue);
+        }
+    }
+}
+
+function generateRankInfo(){
+    let rankInfo = {
+        "rank": 1,
+        "xp": null,
+        "xpGoal": null
+    };
+    if (btd6usersave["xp"] === 180000000){
+        rankInfo["rank"] = 155;
+        rankInfo["xp"] = null;
+        rankInfo["xpGoal"] = null;
+        return rankInfo;
+    }
+    let subtractableXP = parseInt(btd6usersave["xp"]);
+    for (let [rank, model] of Object.entries(constants.Rank)) {
+        rank = parseInt(rank);
+        if (subtractableXP < model["totalXpNeeded"]){
+            subtractableXP = subtractableXP - parseInt(constants.Rank[rank - 1].totalXpNeeded);
+            xpGoal = parseInt(model["totalXpNeeded"]) - parseInt(constants.Rank[rank - 1].totalXpNeeded);
+            rankInfo["rank"] = rank - 1;
+            rankInfo["xp"] = subtractableXP;
+            rankInfo["xpGoal"] = xpGoal;
+            return rankInfo;
+        }
+    }
+}
+
+function generateVeteranRankInfo(){
+    let rankInfoVeteran = {
+        "rank": 1,
+        "xp": null,
+        "xpGoal": 20000000
+    }
+    let xpNeededPerVeteranRank = 20000000;
+    let subtractableXPVeteran = parseInt(btd6usersave["veteranXp"]);
+    while (subtractableXPVeteran >= xpNeededPerVeteranRank){
+        subtractableXPVeteran -= xpNeededPerVeteranRank;
+        rankInfoVeteran["rank"] += 1;
+    }
+    rankInfoVeteran["xp"] = subtractableXPVeteran;
+    return rankInfoVeteran;
+}
+
+function generateRank(veteran){
+    let rankInfo = generateRankInfo();
+    let rankInfoVeteran = generateVeteranRankInfo();
+
+    let rank = document.createElement('div');
+    rank.classList.add('rank');
+
+    let rankStar = document.createElement('div');
+    rankStar.classList.add('rank-star');
+    rank.appendChild(rankStar);
+
+    let rankImg = document.createElement('img');
+    rankImg.classList.add('rank-img');
+    rankImg.src = veteran ? '../Assets/UI/LvlHolderVeteran.png' : '../Assets/UI/LvlHolder.png';
+    rankStar.appendChild(rankImg);
+
+    let rankText = document.createElement('p');
+    rankText.classList.add('rank-text','black-outline');
+    rankText.innerHTML = veteran ? rankInfoVeteran["rank"] : rankInfo["rank"];
+    rankStar.appendChild(rankText);
+
+    let rankBar = document.createElement('div');
+    rankBar.classList.add('rank-bar');
+    rank.appendChild(rankBar);
+
+    let rankBarFill = document.createElement('div');
+    rankBarFill.classList.add('rank-bar-fill');
+    if (veteran) { 
+        rankBar.classList.add('rank-bar-veteran');
+        rankBarFill.classList.add('rank-bar-fill-veteran');
+        rankBarFill.style.width = rankInfoVeteran["xp"] === null ? "100%" : `${(rankInfoVeteran["xp"]/rankInfoVeteran["xpGoal"]) * 100}%`;
+    } else {
+        rankBarFill.style.width = rankInfo["xp"] === null ? "100%" : `${(rankInfo["xp"]/rankInfo["xpGoal"]) * 100}%`;
+    }
+    rankBar.appendChild(rankBarFill);
+
+    let rankBarText = document.createElement('p');
+    rankBarText.classList.add('rank-bar-text');
+    if (veteran) {
+        rankBarText.innerHTML = rankInfoVeteran["xp"] === null ? "Max Level" : `${rankInfoVeteran["xp"].toLocaleString()}/${rankInfoVeteran["xpGoal"].toLocaleString()}`;
+    } else {
+        rankBarText.innerHTML = rankInfo["xp"] === null ? "Max Level" : `${rankInfo["xp"].toLocaleString()}/${rankInfo["xpGoal"].toLocaleString()}`;
+    }
+    if (rankInfo["xp"] == null && !veteran) { rankBarText.classList.add("rank-bar-text-max") }
+    rankBar.appendChild(rankBarText);
+
+    return rank;
 }
