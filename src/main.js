@@ -6720,7 +6720,8 @@ async function generateEvents(){
                 });
                 break;
             case "bossBloon":
-                eventIcon.src = `../Assets/UI/BossesBtn.png`;
+                let inferredBoss = constants.bossesInOrder.find(b => event.id.toLowerCase().includes(b.toLowerCase()));
+                inferredBoss ? eventIcon.src = `../Assets/BossIcon/${inferredBoss}EventIcon.png` : eventIcon.src = `../Assets/UI/BossesBtn.png`;
                 eventNameId.innerHTML = `Boss Event`;
                 eventDiv.addEventListener('click', async () => {
                     showLoading();
