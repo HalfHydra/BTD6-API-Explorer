@@ -203,7 +203,6 @@ function generateIfReady(){
         document.body.classList.add('transition-bg')
         generateRankInfo()
         generateVeteranRankInfo()
-        generateAchievementsHelper()
         if (btd6publicprofile != null) {
             generateStats()
             generateMedals()
@@ -331,6 +330,10 @@ function generateStats(){
 function getAchievementsUnlocked() {
     let hiddenAchievements = 0;
     let normalAchievements = 0;
+    let achievementsHelper = {}
+    for (let [key, model] of Object.entries(achievementsJSON)) {
+        achievementsHelper[model.name] = model;
+    }
     btd6usersave.achievementsClaimed.forEach((achievement) => {
         let achievementModel = achievementsHelper[fixAchievementName(achievement)];
         if(!achievementModel) { return }

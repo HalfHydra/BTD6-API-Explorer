@@ -5,7 +5,6 @@ let activeTimers = new Map();
 let constants = {}
 let locJSON = {}
 let achievementsJSON = {}
-let achievementsHelper = {}
 let trophyStoreItemsJSON = {}
 let teamsStoreItemsJSON = {}
 let rogueJSON = {}
