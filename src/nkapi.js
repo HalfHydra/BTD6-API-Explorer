@@ -442,6 +442,7 @@ async function getLatestEvents() {
 
 async function getLatestCollectionEvent(id = null) {
     let events = await getLatestEvents() || [];
+    events.sort((a, b) => a.start - b.start);
     for (let event of events) {
         if (event["type"] == "collectableEvent" && (Date.now() < event.end) && id == null) {
             return event;
