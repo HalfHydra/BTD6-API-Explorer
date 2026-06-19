@@ -1753,19 +1753,19 @@ function openCTSettingsModal(){
     }
     updateHeroFilterIcon(renderSettings.heroFilter);
 
-    let horriblePractice = {
+    let internalToLoc = {
         "NoFilter": "No Filter",
         "NoHeroes": "No Heroes",
         "AnyHeroes": "Any Heroes",
-        "StrikerJones": "Striker Jones",
-        "AdmiralBrickell": "Admiral Brickell",
-        "CaptainChurchill": "Captain Churchill",
-        "PatFusty": "Pat Fusty",
-        "ObynGreenfoot": "Obyn Greenfoot",
+    }
+    for (let id of Object.keys(constants.heroesInOrder)) {
+        internalToLoc[id] = getLocValue(id);
     }
 
-    let heroFilterDropdown = generateDropdown("Hero Filter:", ["No Filter", "No Heroes", "Any Heroes", ...Object.keys(constants.heroesInOrder).map((id) => { return getLocValue(id)})], horriblePractice[renderSettings.heroFilter] || renderSettings.heroFilter, (selected) => {
-        renderSettings.heroFilter = selected.replaceAll(' ', '');
+    let reverseLocToInternal = Object.fromEntries(Object.entries(internalToLoc).map(([k,v]) => [v,k]));
+
+    let heroFilterDropdown = generateDropdown("Hero Filter:", ["No Filter", "No Heroes", "Any Heroes", ...Object.keys(constants.heroesInOrder).map((id) => { return getLocValue(id)})], internalToLoc[renderSettings.heroFilter] || renderSettings.heroFilter, (selected) => {
+        renderSettings.heroFilter = reverseLocToInternal[selected];
         updateHeroFilterIcon(renderSettings.heroFilter);
         applyCTFilter(debugGlobalCTMap, selectedCTData);
         saveLocalStorageCTData();
