@@ -6,6 +6,7 @@
     "profileAvatars": 133,
     "profileBanners": 65,
     "teamsBanners": 19,
+    "bossesInOrder": ["Bloonarius", "Lych", "Vortex", "Dreadbloon", "Phayze", "Blastapopoulos", "Diamondback"],
     "limitedTimeEvents": {
         "Dreadbloon 32": {
             "type": "Boss", 

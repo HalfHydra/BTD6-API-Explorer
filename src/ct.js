@@ -8,16 +8,6 @@ let teamColors = {
     "M": "#B9E546"
 }
 
-let bossIDToName = {
-    0: "Bloonarius",
-    1: "Lych",
-    2: "Vortex",
-    3: "Dreadbloon",
-    4: "Phayze",
-    5: "Blastapopoulos",
-    6: "Diamondback"
-}
-
 const teamAngles = {
     "Purple": 270,
     "Pink": 330,
@@ -638,7 +628,7 @@ async function openCTEventDetails(source, eventData) {
         bannerImgDiv.appendChild(bannerIcon);  
 
         if (extData?.tiles[banner.id] && banner.gameType === "Boss") {
-            bannerIcon.src = `../Assets/BossIcon/${bossIDToName[extData.tiles[banner.id].GameData.bossData.bossBloon]}EventIcon.png`;
+            bannerIcon.src = `../Assets/BossIcon/${constants.bossesInOrder[extData.tiles[banner.id].GameData.bossData.bossBloon]}EventIcon.png`;
             
             let bossTier = extData.tiles[banner.id].GameData?.bossData?.TierCount || 0;
             if (bossTier > 0) {
@@ -1112,7 +1102,7 @@ function renderCTMap(container, ct, tileData, opts = {}) {
 
         if (data.GameData.subGameType == 4) {
             let gBossImg = document.createElementNS(svg.namespaceURI, 'image');
-            gBossImg.setAttribute('href', `./Assets/BossIcon/${bossIDToName[data.GameData.bossData.bossBloon]}Portrait.png`);
+            gBossImg.setAttribute('href', `./Assets/BossIcon/${constants.bossesInOrder[data.GameData.bossData.bossBloon]}Portrait.png`);
             gBossImg.setAttribute('x', (t.x - 20).toFixed(2));
             gBossImg.setAttribute('y', (t.y - 25).toFixed(2));
             gBossImg.setAttribute('width', (size * 0.75).toFixed(2));
@@ -1897,7 +1887,7 @@ function getCTGameTypeIconPath(data) {
         case 2:  
             return '/UI/EventRaceBtn'; 
         case 4:  
-            return `/BossIcon/${bossIDToName[data.GameData.bossData.bossBloon]}EventIcon`;
+            return `/BossIcon/${constants.bossesInOrder[data.GameData.bossData.bossBloon]}EventIcon`;
         case 8:  
             return '/ChallengeRulesIcon/LeastCashIcon'; 
         case 9:  
@@ -1952,7 +1942,7 @@ function openTileModal(tileData, source) {
             subGameLabel = 'Time Attack';
             break;
         case 4:
-            subGameLabel = `${getLocValue(bossIDToName[tileData.GameData.bossData.bossBloon])} (${tileData.GameData.bossData.TierCount} ${(tileData.GameData.bossData.TierCount > 1) ? "Tiers" : "Tier"})`;
+            subGameLabel = `${getLocValue(constants.bossesInOrder[tileData.GameData.bossData.bossBloon])} (${tileData.GameData.bossData.TierCount} ${(tileData.GameData.bossData.TierCount > 1) ? "Tiers" : "Tier"})`;
             break;
         case 8:
             subGameLabel = 'Least Cash';
@@ -2081,7 +2071,7 @@ function openTileModal(tileData, source) {
         showLoading();
         let roundset = "DefaultRoundSet";
         if (tileData.GameData.subGameType == 4) {
-            roundset = bossIDToName[tileData.GameData.bossData.bossBloon] + "RoundSet";
+            roundset = constants.bossesInOrder[tileData.GameData.bossData.bossBloon] + "RoundSet";
         }
         let endRound = tileData.GameData.dcModel.startRules.endRound;
         if (endRound == -1) {

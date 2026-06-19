@@ -6998,9 +6998,7 @@ function generateBosses(elite){
     switchBossDiv.classList.add("switch-boss-div");
     switchBanner.appendChild(switchBossDiv);
 
-    let bosses = ["Bloonarius", "Lych", "Vortex", "Dreadbloon", "Phayze", "Blastapopoulos", "Diamondback"]
-
-    for (let boss of bosses) {
+    for (let boss of constants.bossesInOrder) {
         let bossIcon = document.createElement('img')
         bossIcon.classList.add("switch-boss-img");
         bossIcon.src = `./Assets/BossIcon/${boss}Portrait${!showElite ? "Elite" : ""}.png`
@@ -8108,26 +8106,11 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
 
         if(rule == "Custom Rounds" && challengeType == "Boss")  {
             let roundset = null;
-            if (metadata.roundSets.includes("bloonarius")) {
-                roundset = "BloonariusRoundSet";
-            }
-            if (metadata.roundSets.includes("lych")) {
-                roundset = "LychRoundSet";
-            }
-            if (metadata.roundSets.includes("vortex")) {
-                roundset = "VortexRoundSet";
-            }
-            if (metadata.roundSets.includes("dreadbloon")) {
-                roundset = "DreadbloonRoundSet";
-            }
-            if (metadata.roundSets.includes("phayze")) {
-                roundset = "PhayzeRoundSet";
-            }
-            if(metadata.roundSets.includes("blastapopoulos")) {
-                roundset = "BlastapopoulosRoundSet";
-            }
-            if(metadata.roundSets.includes("diamondback")) {
-                roundset = "DiamondbackRoundSet";
+
+            for (let boss of constants.bossesInOrder) {
+                if (metadata.roundSets.includes(boss.toLowerCase())) {
+                    roundset = `${boss}RoundSet`;
+                }
             }
 
             if(roundset != null) {
@@ -8142,7 +8125,8 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             }
         }
 
-        let roundset = metadata.roundSets.filter(value => value !== 'default' && value !== 'bloonarius' && value !== 'lych' && value !== 'vortex' && value !== 'dreadbloon' && value !== 'phayze' && value !== 'blastapopoulos' && value !== 'diamondback');
+        constants.bossesInOrder.map(boss => { return boss.toLowerCase() })
+        let roundset = metadata.roundSets.filter(value => value !== 'default' && !(constants.bossesInOrder.map(boss => { return boss.toLowerCase() }).includes(value)));
         if (rule == "Custom Rounds" && constants.skuRoundsets.includes(roundset[0]) && metadata.mode != "AlternateBloonsRounds") {
             let challengeRuleValue = document.createElement('div');
             challengeRuleValue.classList.add('challenge-rule-subtext','start-button','black-outline');
@@ -13000,7 +12984,7 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
             });
             challengeRuleTextDiv.appendChild(challengeRuleText);
 
-            let roundset = map.roundSets.filter(value => value !== 'default' && value !== 'bloonarius' && value !== 'lych' && value !== 'vortex' && value !== 'dreadbloon' && value !== 'phayze' && value !== 'blastapopoulos' && value !== "diamondback")
+            let roundset = map.roundSets.filter(value => value !== 'default' && !(constants.bossesInOrder.map(boss => { return boss.toLowerCase() }).includes(value)))
             if (rule == "Custom Rounds" && constants.skuRoundsets.includes(roundset[0]) && map.mode != "AlternateBloonsRounds") {
                 let challengeRuleValue = createEl('div', {
                     classList: ['challenge-rule-subtext', 'start-button', 'black-outline'],
