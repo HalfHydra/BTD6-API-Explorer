@@ -367,8 +367,12 @@ async function openProfile(source, profile, callback){
 
     for (let [medal, num] of Object.entries(publicMedals)){
         if(num === 0) { continue; }
-        let medalDiv = document.createElement('div');
-        medalDiv.classList.add('medal-div');
+        let medalDiv = createEl('div', {
+            classList: ['medal-div'],
+            style: {
+                width: "62px"
+            }
+        });
         medalsDiv.appendChild(medalDiv);
 
         let medalImg = document.createElement('img');
@@ -377,9 +381,9 @@ async function openProfile(source, profile, callback){
         medalImg.style.display = "none";
         medalImg.addEventListener('load', () => {
             if(medalImg.width < medalImg.height){
-                medalImg.style.width = `${ratioCalc(3,70,256,0,medalImg.width)}px`
+                medalImg.style.width = `${ratioCalc(3,62,256,0,medalImg.width)}px`
             } else {
-                medalImg.style.height = `${ratioCalc(3,70,256,0,medalImg.height)}px`
+                medalImg.style.height = `${ratioCalc(3,62,256,0,medalImg.height)}px`
             }
             medalImg.style.removeProperty('display');
         })
