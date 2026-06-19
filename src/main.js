@@ -94,7 +94,7 @@ let heroDescKeyOverrides = {
 let imageScroll = [
     {
         "title": "New Site Update!",
-        "text": `Site Update 2.8.1:<br>
+        "text": `Site Update 2.8.2:<br>
         - Odyssey Events<br>
         - Events Menu Rework<br>
         <br>
@@ -147,6 +147,7 @@ let imageScroll = [
 let imageScrollIndex = 0;
 
 let changelog = {
+    "v2.8.2 (6/18/26)": "Minor fixes<br>- Fixed a bug causing the collection events to show the latest one instead of the active one<br>- Fixed Dan D'Monke not showing up in CT map correctly.<br>- Fixed incorrect BTD6 birthday date for collection event skins guesser<br>- Renamed \"Default\" to \"Category\" in the Trophy Store filters.<br>- Events list now infers boss type from the id and displays that icon instead",
     "v2.8.1 (6/9/26)": "Update 55 Content + Minor Updates<br>- Added 55 content including Transformation feature for Dan D'Monke. <br>- Missing maps should no longer break the CT map<br>- IAP hero counts should no longer contribute to the total untitl owned similar to the game<br>- Updated trophy store item details modal<br>- Trophy store items should no longer incorrect label text for counts<br>- Sorted events in the events menu by a more logical order.",
     "v2.8.0 (5/21/26)": "Events Update + Odyssey Events Added (finally)<br>- If you look at version 1.0.0 of this site (7/7/24), I mentioned that Odyssey events were coming soon and that it was \"still being worked on\" (I hadn't started). Anyway, it's here now! Yay!<br>- Events screen reworked to be more efficient with space.<br>- Events screen now displays all events that are upcoming, active, and recently finished.<br>- Added a default menu for Collection Events when none events are found on the API.<br>- Added new avatars from Update 54.3 <br>- Fixed a bug causing the new trophy store items added by an update to not show up as new.<br>- The boss event details will now have a better decision between if it should show excluded or available towers by default.<br>- Fixed an issue with certain menu items have a random invisible line when zooming out the browser<br>- As you might've noticed, the changelog is now collapsable. Too many entries! Super proud of how much effort I've been able to give this project.<br><br>",
     "v2.7.1 (5/11/26)": "Open Data API Downtime Handling<br>- Ninja Kiwi's Open Data API is currently unavailable. This is affecting all sites/apps/bots that use the API, and we will have to wait until it is fixed (may take a few weeks). The site now displays a proper error message when the Open Data API is unreachable.<br>- Added missing teams banner<br>- Minor UI Adjustments<br><br>",
