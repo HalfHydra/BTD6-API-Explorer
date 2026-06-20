@@ -907,9 +907,9 @@ function addTooltip(element, content, options = {}) {
         placement: 'top',
         theme: 'speech_bubble',
         allowHTML: options.allowHTML || false,
-        hideOnClick: options.hideOnClick || true,
+        hideOnClick: options.hasOwnProperty("hideOnClick") ? options.hideOnClick : true,
         zIndex: options.zIndex || 9999,
-        touch: options.touch || true,
+        touch: options.hasOwnProperty("touch") ? options.touch : true,
         popperOptions: {
             modifiers: [
                 {
