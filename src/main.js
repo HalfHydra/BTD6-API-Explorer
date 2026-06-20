@@ -990,7 +990,6 @@ function generateProgress(){
         }
 
         selectors.forEach((selector) => {
-            if(progressSubText[selector].includes("0 Extras")) { return; }
             if(progressSubText[selector].includes("Team Store")) { return; }
             let selectorDiv = document.createElement('div');
             selectorDiv.classList.add('selector-div', 'progress-selector-div');
@@ -5223,7 +5222,7 @@ function generateAchievementsProgress() {
     let mapProgressFilterDifficultySelect2 = document.createElement('select');
     mapProgressFilterDifficultySelect2.classList.add('map-progress-filter-difficulty-select');
 
-    let options2 = ["All","Only Locked","Only Unlocked","Knowledge Points","Insta Monkeys","Hidden Achievements","Coop"]
+    let options2 = ["All","Only Locked","Only Unlocked","Knowledge Points","Insta Monkeys","Hidden Achievements","Coop","Extras"]
     options2.forEach((option) => {
         let difficultyOption = document.createElement('option');
         difficultyOption.value = option;
@@ -5274,7 +5273,7 @@ function generateAchievementsProgress() {
         onChangeAchievementRewardFilter(mapProgressFilterDifficultySelect2.value);
     })
 
-    onChangeAchievementRewardFilter("None")
+    onChangeAchievementRewardFilter("All")
     generateAchievementsGameView();
 }
 
@@ -5328,6 +5327,9 @@ function generateAchievementsGameView(searchTerm = "") {
             break;
         case "Coop":
             achievements = achievements.filter(achievement => achievementsJSON[achievement].model.isCoop);
+            break;
+        case "Extras":
+            achievements = achievements.filter(achievement => ["BigBloonsMode", "SmallBloonsMode", "SmallTowersMode", "BigTowersMode", "SmallBossesMode"].some(val => achievementsJSON[achievement].model.loot.includes(val)));
             break;        
     }
 
@@ -5491,6 +5493,46 @@ function generateExtrasProgress() {
 
     let extras = [["Big Bloons", "BigBloonsMode"],["Small Bloons", "SmallBloonsMode"],["Big Monkey Towers","BigTowersMode"],["Small Monkey Towers", "SmallTowersMode"],["Small Bosses","SmallBossesMode"]]
     let extrasUnlocked = generateExtrasUnlocked();
+
+    if (Object.keys(extrasUnlocked).length != extras.length) {
+        let unlockHelpDiv = createEl('div', {
+            classList: ['d-flex', 'ai-center', 'jc-center', 'pointer', 'pos-rel'],
+            style: {
+                backgroundColor: "var(--profile-primary)",
+                padding: "10px",
+                margin: "10px",
+                borderRadius: "10px",
+                border: "3px solid var(--profile-tertiary)",
+                height: "30px"
+            }
+        })
+        extrasProgressContainer.appendChild(unlockHelpDiv);
+
+        let unlockHelpText = createEl('p', {
+            classList: ['black-outline'],
+            style: {
+                fontSize: "20px",
+                textAlign: "center"
+            },
+            innerHTML: "Open Extras Achievement Unlock Guides",
+        })
+        unlockHelpDiv.appendChild(unlockHelpText);
+        unlockHelpDiv.addEventListener('click', () => {
+            generateAchievementsProgress();
+            onChangeAchievementRewardFilter("Extras");
+            addToBackQueue({source: "profile", destination: "profile", callback: generateExtrasProgress });
+        })
+
+        let selectorGoImg = createEl('img', {
+            classList: ['pos-abs'],
+            style: {
+                width: "50px",
+                right: 0
+            },
+            src: '../Assets/UI/ContinueBtn.png'
+        });
+        unlockHelpDiv.appendChild(selectorGoImg);
+    }
 
     for (let [name, loc] of extras) {
         let locked = extrasUnlocked[name] == undefined;
