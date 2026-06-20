@@ -3613,7 +3613,7 @@ function generatePowersProgress() {
 
         let mmCounterValue = createEl('p', {
             classList: ['trophy-store-item-counter', 'black-outline'],
-            innerHTML: mmEquivalent
+            innerHTML: mmEquivalent.toLocaleString()
         });
 
         let mmIcon = createEl('img', {

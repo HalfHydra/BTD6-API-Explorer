@@ -869,7 +869,7 @@ async function openProfile(source, profile, callback){
 
             let statValue = document.createElement('p');
             statValue.classList.add('stat-value');
-            statValue.innerHTML = value.toLocaleString();
+            statValue.innerHTML = parseInt(value).toLocaleString();
             stat.appendChild(statValue);
         }
     }
