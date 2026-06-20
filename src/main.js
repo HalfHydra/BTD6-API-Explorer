@@ -9407,8 +9407,10 @@ function generateTrophyStoreContainer(filter, display, counter, trophies, needed
 
     let trophyStoreItemsToDisplay = JSON.parse(JSON.stringify(trophyStoreItemsJSON));
     
-    for (let key of constants.unreleasedContent.trophyStoreItems) {
-        delete trophyStoreItemsToDisplay[key];
+    for (let key of Object.keys(constants.unreleasedContent.trophyStoreItems)) {
+        if (new Date() < new Date(constants.unreleasedContent.trophyStoreItems[key])) {
+            delete trophyStoreItemsToDisplay[key];
+        }
     }
     if (filter !== "All") {
         trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.storeFilter === filter));
@@ -9787,8 +9789,10 @@ function generateTeamsStoreProgress() {
 
     let teamsStoreItemsToDisplay = JSON.parse(JSON.stringify(teamsStoreItemsJSON));
 
-    for (let key of constants.unreleasedContent.teamsStoreItems) {
-        delete teamsStoreItemsToDisplay[key];
+    for (let key of Object.keys(constants.unreleasedContent.teamsStoreItems)) {
+        if (new Date() < new Date(constants.unreleasedContent.teamsStoreItems[key])) {
+            delete teamsStoreItemsToDisplay[key];
+        }
     }
 
     for (let [key, data] of Object.entries(teamsStoreItemsToDisplay)) {

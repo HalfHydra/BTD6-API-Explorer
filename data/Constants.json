@@ -3521,8 +3521,10 @@
         ]
     },
     "unreleasedContent": {
-        "trophyStoreItems": [],
-        "teamsStoreItems": []
+        "trophyStoreItems": {
+            "TPetBombshooterBestboy": 1782943200000
+        },
+        "teamsStoreItems": {}
     },
     "roundSets": {
         "DefaultRoundSet": {
