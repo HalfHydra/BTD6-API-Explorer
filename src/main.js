@@ -5144,7 +5144,7 @@ function generateAbilities() {
             padding: "10px",
             paddingRight: "20px"
         },
-        innerHTML: `Total Abilities Used: ${profileStats["Abilities Used"].toLocaleString()}`
+        innerHTML: `Total Abilities Used: ${btd6publicprofile.gameplay["abilitiesUsed"].toLocaleString()}`
     });
     abilitiesHeaderBar.appendChild(abilitiesTotalText);
 
