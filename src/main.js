@@ -70,7 +70,7 @@ let subFiltersMap = {
     "Coop": ["All", "StandardEmotes", "TextEmotes", "SoundEmotes", "FullScreenEmotes"],
     "GameUI": ["All", "MusicTracks","Avatars", "ProfileBanners", "PowerSkins", "Misc"]
 }
-let trophyStoreShowHidden = true;
+let trophyStoreShowHidden = false;
 
 let showTeamsItems = false;
 
