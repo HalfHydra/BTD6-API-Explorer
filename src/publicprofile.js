@@ -856,6 +856,12 @@ async function openProfile(source, profile, callback){
         frontierStats["Total Legend Monkeys Hired"] = btd6usersave["frontierLegends"].hireLegendsAcrossAll || 0;
         frontierStats["Total Bananite Spent in the Store"] = btd6usersave["frontierLegends"].spendGoldInGeneralStore || 0;
         frontierStats["Total Stamina Spent"] = btd6usersave["frontierLegendsStats"].spendStaminaAcrossAll.toFixed(0) || 0;
+        frontierStats["Dynamite Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats.frontierSpecialBloons["DynamiteBloon"] || 0;
+        frontierStats["Aura Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats.frontierSpecialBloons["AuraBloon"] || 0;
+        frontierStats["Ringleader Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats.frontierSpecialBloons["RingleaderBloon"] || 0;
+        frontierStats["Glass Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats.frontierSpecialBloons["GlassBloon"] || 0;
+        frontierStats["Retribution Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats.frontierSpecialBloons["RetributionBloon"] || 0;
+        frontierStats["Diamond Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats.frontierSpecialBloons["DiamondBloon"] || 0;
 
         for (let [key, value] of Object.entries(frontierStats)){
             let stat = document.createElement('div');
