@@ -2308,19 +2308,21 @@ function generateKnowledgeProgress(){
     let knowledgeHeaderBottom = createEl('div', {
         classList: ['d-flex', 'ai-center', 'jc-between'],
         style: {
+            height: "60px",
             margin: "8px"
         }
     });
     knowledgeProgressHeaderBar.appendChild(knowledgeHeaderBottom);
 
     let knowledgeOwnedCount = createEl('p', {
-        classList: ['knowledge-outline', 'd-flex', 'ai-center'],
+        classList: ['knowledge-outline', 'd-flex', 'ai-center', 'jc-center'],
         style: {
-            fontSize: "24px",
+            fontSize: "32px",
             padding: "0 16px",
             backgroundColor: "rgba(0, 0, 0, 0.3)",
             borderRadius: "10px",
             height: "50px",
+            width: "85px"
         },
         innerHTML: `X/X`
     });
@@ -2348,8 +2350,8 @@ function generateKnowledgeProgress(){
                 let towerFilterIcon = createEl('img', {
                     classList: ['of-contain', 'tower-filter-icon'],
                     style: {
-                        width: "50px",
-                        height: "50px",
+                        width: "60px",
+                        height: "60px",
                     },
                     src: getInstaMonkeyIcon(tower,"000")
                 });
@@ -2421,7 +2423,7 @@ function generateKnowledgeProgress(){
     function generateKnowledgeTree(treeData) {
         let totalNodes = treeData.grid.length;
         let obtainedNodes = treeData.grid.filter(node => btd6usersave.acquiredKnowledge[node.id]).length;
-        knowledgeOwnedCount.innerHTML = `${obtainedNodes}/${totalNodes} Unlocked`;
+        knowledgeOwnedCount.innerHTML = `${obtainedNodes}/${totalNodes}`;
 
         let maxRow = 0;
         let maxCol = 0;
