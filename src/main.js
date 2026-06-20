@@ -4485,23 +4485,17 @@ async function generateInstaCollectionEventHelper(){
     })
     instaMonkeyCollectionTopBtns.appendChild(chestOddsButton);
 
-    let current = await getLatestCollectionEvent();
-
-    let now = new Date();
-    if (current != null && now < new Date(current.end)) {
-        let featuredInstaButton = document.createElement('p');
-        featuredInstaButton.classList.add('where-button','black-outline');
-        featuredInstaButton.style.width = "230px";
-        featuredInstaButton.innerHTML = 'Featured Instas';
-        featuredInstaButton.addEventListener('click', () => {
-            addToBackQueue({ source: "profile", destination: "featured" });
-            generateInstaSchedule();
-            document.getElementById('profile-content').style.display = "none";
-            document.getElementById('featured-content').style.display = "flex";
-        })
-        instaMonkeyCollectionTopBtns.appendChild(featuredInstaButton);
-    }
-
+    let featuredInstaButton = document.createElement('p');
+    featuredInstaButton.classList.add('where-button','black-outline');
+    featuredInstaButton.style.width = "230px";
+    featuredInstaButton.innerHTML = 'Featured Instas';
+    featuredInstaButton.addEventListener('click', () => {
+        addToBackQueue({ source: "profile", destination: "featured" });
+        generateInstaSchedule();
+        document.getElementById('profile-content').style.display = "none";
+        document.getElementById('featured-content').style.display = "flex";
+    })
+    instaMonkeyCollectionTopBtns.appendChild(featuredInstaButton);
 
     let instaMonkeyCollectionDescText = document.createElement('p');
     instaMonkeyCollectionDescText.classList.add('collection-desc-text');
