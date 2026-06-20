@@ -5473,11 +5473,11 @@ function generateAchievementsGameView(searchTerm = "") {
 
 function generateExtrasUnlocked(){
     let extrasUnlocked = {};
-    if (btd6usersave["unlockedBigBloons"]){ extrasUnlocked["Big Bloons"] = btd6usersave["bigBloonsActive"] }
-    if (btd6usersave["unlockedSmallBloons"]){ extrasUnlocked["Small Bloons"] = btd6usersave["smallBloonsActive"] }
-    if (btd6usersave["seenBigTowers"]){ extrasUnlocked["Big Monkey Towers"] = btd6usersave["bigTowersActive"] }
-    if (btd6usersave["unlockedSmallTowers"]){ extrasUnlocked["Small Monkey Towers"] = btd6usersave["smallTowersActive"] }
-    if (btd6usersave["unlockedSmallBosses"]){ extrasUnlocked["Small Bosses"] = btd6usersave["smallBossesActive"] }
+    if (btd6usersave["unlockedBigBloons"] || btd6usersave.achievementsClaimed.includes("Big Bloons")){ extrasUnlocked["Big Bloons"] = btd6usersave["bigBloonsActive"] }
+    if (btd6usersave["unlockedSmallBloons"] || btd6usersave.achievementsClaimed.includes("Small Bloons")){ extrasUnlocked["Small Bloons"] = btd6usersave["smallBloonsActive"] }
+    if (btd6usersave["seenBigTowers"] || btd6usersave.achievementsClaimed.includes("Chunky Monkeys")){ extrasUnlocked["Big Monkey Towers"] = btd6usersave["bigTowersActive"] }
+    if (btd6usersave["unlockedSmallTowers"] || btd6usersave.achievementsClaimed.includes("GoldenTicket")){ extrasUnlocked["Small Monkey Towers"] = btd6usersave["smallTowersActive"] }
+    if (btd6usersave["unlockedSmallBosses"] || btd6usersave.achievementsClaimed.includes("25 to Life")){ extrasUnlocked["Small Bosses"] = btd6usersave["smallBossesActive"] }
     return extrasUnlocked;
 }
 
