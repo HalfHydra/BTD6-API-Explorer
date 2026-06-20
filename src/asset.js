@@ -97,6 +97,10 @@ const upgradeNameFixMap = {
     "TackShooterParagon": "CycloneOfFireAndMetal"
 }
 
+let heroDescKeyOverrides = {
+    "DanDMonkeHeMan": "HeMan"
+}
+
 let locJSONOverrides = {
     "Directed Spikes": "Smart Spikes",
     "Directed Spikes Description": "Smart Spikes Description",

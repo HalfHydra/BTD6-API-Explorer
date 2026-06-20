@@ -3,17 +3,7 @@ let exclusiveStats = {}
 let medalsInOrder = {}
 
 let progressSubText = {}
-let processedMapData = {
-    "Maps": {},
-    "Medals": {
-        "single": {},
-        "coop": {}
-    },
-    "Borders": {
-        "single": {},
-        "coop": {}
-    }
-}
+let processedMapData = {}
 
 let useNamedMonkeys = true;
 
@@ -33,13 +23,7 @@ let instasMissingToggle = false;
 let currentAchievementFilter = "game";
 let currentAchievementRewardFilter = "None";
 
-let processedInstaData = {
-    "TowerTotal": {},
-    "TowerTierTotals": {},
-    "TowerMissingByTier": {},
-    "TowerBorders": {},
-    "TowerObtained": {}
-}
+let processedInstaData = {};
 
 let showElite = false;
 
@@ -87,9 +71,6 @@ let loggedIn = false;
 let seenOutOfDate = false;
 
 let isHeroTransformed = false;
-let heroDescKeyOverrides = {
-    "DanDMonkeHeMan": "HeMan"
-}
 
 let imageScroll = [
     {
@@ -291,6 +272,18 @@ function generateProgressSubText(){
 }
 
 function generateMapData() {
+    processedMapData = {
+        "Maps": {},
+        "Medals": {
+            "single": {},
+            "coop": {}
+        },
+        "Borders": {
+            "single": {},
+            "coop": {}
+        }
+    }
+
     for (let [map, data] of Object.entries(btd6usersave.mapProgress)) {
         let mapData = {"single": {}, "coop": {}}
         mapData["single"]["Easy"] = data.difficulty?.Easy?.single?.["Standard"];
