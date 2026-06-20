@@ -821,9 +821,9 @@ async function openProfile(source, profile, callback){
         rogueStats["Rare Artifacts Collected"] = btd6usersave["rogueLegends"].rareArtifactsCollected || 0;
         rogueStats["Legendary Artifacts Collected"] = btd6usersave["rogueLegends"].legendaryArtifactsCollected || 0;
         rogueStats["Extracted Artifacts"] = Object.keys(btd6usersave["rogueUnlockedStarterArtifacts"]).length || 0;
-        rogueStats["Bloon Encounters Won"] = btd6usersave["rogueLegendsStats"].winsByTileType["pathStandardGame"];
-        rogueStats["Mini Games Won"] = btd6usersave["rogueLegendsStats"].winsByTileType["miniGame"];;
-        rogueStats["Mini Bosses Won"] = btd6usersave["rogueLegendsStats"].winsByTileType["miniBoss"];
+        rogueStats["Bloon Encounters Won"] = btd6usersave["rogueLegendsStats"].winsByTileType["pathStandardGame"] || 0;
+        rogueStats["Mini Games Won"] = btd6usersave["rogueLegendsStats"].winsByTileType["miniGame"] || 0;
+        rogueStats["Mini Bosses Won"] = btd6usersave["rogueLegendsStats"].winsByTileType["miniBoss"] || 0;
         rogueStats["Common Boosts Collected"] = btd6usersave["rogueLegends"].commonBoostsCollected || 0;
         rogueStats["Rare Boosts Collected"] = btd6usersave["rogueLegends"].rareBoostsCollected || 0;
         rogueStats["Legendary Boosts Collected"] = btd6usersave["rogueLegends"].legendaryBoostsCollected || 0;
@@ -865,13 +865,13 @@ async function openProfile(source, profile, callback){
         frontierStats["Total Monkeys Hired"] = btd6usersave["frontierLegends"].hireTotalAcrossAll || 0;
         frontierStats["Total Legend Monkeys Hired"] = btd6usersave["frontierLegends"].hireLegendsAcrossAll || 0;
         frontierStats["Total Bananite Spent in the Store"] = btd6usersave["frontierLegends"].spendGoldInGeneralStore || 0;
-        frontierStats["Total Stamina Spent"] = btd6usersave["frontierLegendsStats"].spendStaminaAcrossAll.toFixed(0) || 0;
-        frontierStats["Dynamite Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats.frontierSpecialBloons["DynamiteBloon"] || 0;
-        frontierStats["Aura Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats.frontierSpecialBloons["AuraBloon"] || 0;
-        frontierStats["Ringleader Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats.frontierSpecialBloons["RingleaderBloon"] || 0;
-        frontierStats["Glass Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats.frontierSpecialBloons["GlassBloon"] || 0;
-        frontierStats["Retribution Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats.frontierSpecialBloons["RetributionBloon"] || 0;
-        frontierStats["Diamond Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats.frontierSpecialBloons["DiamondBloon"] || 0;
+        frontierStats["Total Stamina Spent"] = btd6usersave["frontierLegendsStats"].spendStaminaAcrossAll?.toFixed(0) || 0;
+        frontierStats["Dynamite Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats?.frontierSpecialBloons["DynamiteBloon"] || 0;
+        frontierStats["Aura Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats?.frontierSpecialBloons["AuraBloon"] || 0;
+        frontierStats["Ringleader Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats?.frontierSpecialBloons["RingleaderBloon"] || 0;
+        frontierStats["Glass Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats?.frontierSpecialBloons["GlassBloon"] || 0;
+        frontierStats["Retribution Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats?.frontierSpecialBloons["RetributionBloon"] || 0;
+        frontierStats["Diamond Bloons Popped"] = btd6usersave["frontierLegendsStats"].basicStats?.frontierSpecialBloons["DiamondBloon"] || 0;
 
         for (let [key, value] of Object.entries(frontierStats)){
             let stat = document.createElement('div');
