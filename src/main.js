@@ -957,7 +957,7 @@ function generateProgress(){
             profileSelectorDiv.classList.add('d-flex', 'jc-between', 'ai-center', 'view-profile', 'pointer', 'transparent-border');
             profileSelectorDiv.style.backgroundImage = `url(${getProfileBanner(btd6publicprofile)})`;
             profileSelectorDiv.addEventListener('click', () => {
-                openProfile("profile", btd6publicprofile)
+                openProfile("profile", btd6publicprofile, generateProgress)
             })
             selectorsDiv.appendChild(profileSelectorDiv);
 

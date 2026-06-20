@@ -167,7 +167,9 @@ async function openProfile(source, profile, callback){
             quickStat.appendChild(statName);
 
             quickStat.addEventListener('click', () => {
-                addToBackQueue({source: 'profile', destination: 'profile', callback: generateOverview});
+                addToBackQueue({source: 'publicprofile', destination: 'profile'});
+                document.getElementById('publicprofile-content').style.display = "none";
+                document.getElementById('profile-content').style.display = "flex";
                 resetScroll();
                 switch(stat){
                     case 'TowersUnlocked':
