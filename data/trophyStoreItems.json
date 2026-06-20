@@ -2222,6 +2222,7 @@
         "itemType": "Avatar",
         "hidden": true,
         "isNew": true,
+        "obtainMethod": "Purchase",
         "updateAdded": 55
     },
     "GameUIProfileAvatar128": {
@@ -4231,6 +4232,7 @@
         "itemType": "Banner",
         "hidden": true,
         "isNew": true,
+        "obtainMethod": "Purchase",
         "updateAdded": 55
 },
     "GameUIProfileBanner65": {
