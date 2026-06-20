@@ -3,6 +3,7 @@ async function openProfile(source, profile, callback){
 
     addToBackQueue({ source: source, destination: 'publicprofile', callback: callback });
     profile = isSaveProfile ? profile : await getUserProfile(profile)
+    hideLoading();
     if (profile == null) { return; }
     if (backQueue[backQueue.length - 1].destination != 'publicprofile') { return; }
     resetScroll();
@@ -659,6 +660,114 @@ async function openProfile(source, profile, callback){
         counter++;
 
         addTooltip(towerDiv, `<p class="artifact-title">${getLocValue(tower + " Paragon")}</p>Placed ${xp.toLocaleString()} Times`, {
+            allowHTML: true,
+        });
+    }
+
+    let topAbilitiesDiv = createEl('div', {
+        classList: ['top-heroes-div']
+    });
+    if (Object.entries(profile.stats["abilitiesActivatedByName"]).length > 0) {
+        topHeroesMonkesyDiv.appendChild(topAbilitiesDiv);
+    }
+
+    let topAbilitiesTopDiv = createEl('div', {
+        classList: ['top-heroes-top-div']
+    });
+    topAbilitiesDiv.appendChild(topAbilitiesTopDiv);
+
+    let topAbilitiesTopRibbonDiv = createEl('div', {
+        classList: ['top-heroes-top-ribbon-div'],
+        style: {
+            borderImageSource: "url('../Assets/UI/StatsRibbonYellow.png')",
+        }
+    });
+    topAbilitiesTopDiv.appendChild(topAbilitiesTopRibbonDiv);
+    
+    let topAbilitiesText = createEl('p', {
+        classList: ['top-heroes-text','black-outline'],
+        innerHTML: 'Top Abilities'
+    });
+    topAbilitiesTopRibbonDiv.appendChild(topAbilitiesText);
+
+    let topAbilitiesList = createEl('div', {
+        classList: ['top-heroes-list']
+    });
+    topAbilitiesDiv.appendChild(topAbilitiesList);
+
+    let top3AbilitiesDiv = createEl('div', {
+        classList: ['top-3-heroes-div', 'f-wrap'],
+        style: {
+            minHeight: "180px"
+        }
+    });
+    topAbilitiesList.appendChild(top3AbilitiesDiv);
+
+    let otherAbilitiesDiv = createEl('div', {
+        classList: ['other-heroes-div'],
+        style: {
+            display: 'none'
+        }
+    });
+    topAbilitiesList.appendChild(otherAbilitiesDiv);
+    
+    let topAbilitiesToggle = createEl('input', {
+        classList: ['maps-progress-coop-toggle-input'],
+        type: 'checkbox'
+    });
+    let topAbilitiesToggleDiv = createEl('div', {
+        classList: ['maps-progress-coop-toggle']
+    });
+    let topAbilitiesToggleText = createEl('p', {
+        classList: ['maps-progress-coop-toggle-text','black-outline'],
+        innerHTML: "Show All: "
+    });
+    topAbilitiesToggleDiv.appendChild(topAbilitiesToggleText);
+    topAbilitiesToggleDiv.appendChild(topAbilitiesToggle);
+    topAbilitiesTopDiv.appendChild(topAbilitiesToggleDiv);
+
+    topAbilitiesToggle.addEventListener('change', () => {
+        topAbilitiesToggle.checked ? otherAbilitiesDiv.style.display = 'flex' : otherAbilitiesDiv.style.display = 'none';
+    })
+
+    counter = 0;
+    for (let [ability, uses] of Object.entries(profile.stats["abilitiesActivatedByName"]).sort((a, b) => b[1] - a[1])){
+        if(uses === 0) { continue; }
+        let abilityData = constants.abilities[ability];
+        if(!abilityData) { continue; }
+
+        let abilityDiv = createEl('div', {
+            classList: ['hero-div'],
+            style: {
+                width: "72px",
+                height: "72px",
+                margin: "4px",
+                backgroundImage: `url(../Assets/UI/YellowBtn.png)`,
+            }
+        });
+        counter < 12 ? top3AbilitiesDiv.appendChild(abilityDiv) : otherAbilitiesDiv.appendChild(abilityDiv);
+
+        let abilityImg = createEl('img', {
+            classList: ['hero-img'],
+            src: `./Assets/AbilityIcon/${abilityData.icon}.png`,
+            style: {
+                width: "55px",
+                padding: "8px"
+            }
+        });
+        abilityDiv.appendChild(abilityImg);
+
+        let abilityText = createEl('p', {
+            classList: ['hero-text','black-outline'],
+            innerHTML: uses.toLocaleString(),
+            style: {
+                fontSize: uses > 100000 ? "20px" : "22px"
+            }
+        });
+        abilityDiv.appendChild(abilityText);
+        counter++;
+
+        addTooltip(abilityDiv, `<p class="artifact-title">${abilityData.displayName}</p>Used ${uses.toLocaleString()} Times`, {
             allowHTML: true,
         });
     }

@@ -679,17 +679,18 @@
     margin: 10px 0;
 }
 
-.top-heroes-top-ribbon-div{
+.top-heroes-top-ribbon-div {
     display: inline-block;
-    background-image: url(../Assets/UI/StatsRibbonLong.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 340px;
+    width: 250px;
     height: 60px;
+    border-image-source: url(../Assets/UI/StatsRibbon.png);
+    border-width: 10px 50px 10px 50px;
+    border-style: solid;
+    border-image-slice: 0 140 0 140 fill;
 }
 .top-heroes-text {
     font-size: 32px;
-    padding: 14px 30px;
+    padding: 14px 0px;
 }
 .top-heroes-monkeys-div {
     background-color: var(--profile-tertiary);

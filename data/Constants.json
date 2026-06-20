@@ -2748,8 +2748,8 @@
             "icon": "PlasmaMonkeyFanClubUpgradeIcon"
         },
         "Jungle's Bounty": {
-            "displayName": "Jungle's Bounty",
-            "description": "(Removed) Generates cash and 1 life each use, plus extra cash per Banana Farm near the Druid",
+            "displayName": "(Removed) Jungle's Bounty",
+            "description": "(Removed in 53.0) Generates cash and 1 life each use, plus extra cash per Banana Farm near the Druid",
             "icon": "JunglesBountyUpgradeIconAA"
         },
         "Overclock": {
