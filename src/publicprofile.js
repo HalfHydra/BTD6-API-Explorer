@@ -231,6 +231,8 @@ async function openProfile(source, profile, callback){
     }
     publicMedals = {...publicMedals, ...tempCoop};
 
+    publicMedals["DiamondbackEliteBadge"] = profile["bossBadgesElite"]["Diamondback"] || 0;
+    publicMedals["DiamondbackBadge"] = profile["bossBadgesNormal"]["Diamondback"] || 0;
     publicMedals["BlastapopoulosEliteBadge"] = profile["bossBadgesElite"]["Blastapopoulos"] || 0;
     publicMedals["BlastapopoulosBadge"] = profile["bossBadgesNormal"]["Blastapopoulos"] || 0;
     publicMedals["PhayzeEliteBadge"] = profile["bossBadgesElite"]["Phayze"] || 0;
@@ -290,6 +292,14 @@ async function openProfile(source, profile, callback){
     publicMedals["CtGlobalPlayerDoubleGoldMedal"] = profile["_medalsCTGlobal"]["DoubleGold"] || 0;
     publicMedals["CtGlobalPlayerGoldDiamondMedal"] = profile["_medalsCTGlobal"]["GoldDiamond"] || 0;
     publicMedals["CtGlobalPlayerBlueDiamondMedal"] = profile["_medalsCTGlobal"]["BlueDiamond"] || 0;
+
+    publicMedals["SocialSeasonsUltimate1Medal"] = profile["seasonBadges"]["SeasonUltimate1"]?.count || 0;
+    publicMedals["SocialSeasonsUltimate2Medal"] = profile["seasonBadges"]["SeasonUltimate2"]?.count || 0;
+    publicMedals["SocialSeasonsChampionMedal"] = profile["seasonBadges"]["SeasonChampion"]?.count || 0;
+    publicMedals["SocialSeasonsTier4Medal"] = profile["seasonBadges"]["SeasonTier4"]?.count || 0;
+    publicMedals["SocialSeasonsTier3Medal"] = profile["seasonBadges"]["SeasonTier3"]?.count || 0;
+    publicMedals["SocialSeasonsTier2Medal"] = profile["seasonBadges"]["SeasonTier2"]?.count || 0;
+    publicMedals["SocialSeasonsTier1Medal"] = profile["seasonBadges"]["SeasonTier1"]?.count || 0;
 
     let currencyAndMedalsDiv = createEl('div', {
         classList: ['currency-medals-div'],
