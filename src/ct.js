@@ -301,6 +301,8 @@ async function openCTEventDetails(source, eventData) {
         document.getElementById(`${source}-content`).style.display = "none";
         addToBackQueue({ "source": source, "destination": "relics" });
     }
+    hideLoading();
+
     let relicsContent = document.getElementById('relics-content');
     relicsContent.style.display = "flex";
     relicsContent.innerHTML = "";
@@ -1600,6 +1602,7 @@ function openCTSettingsModal(){
             advancedLayerDiv.style.display = 'flex';
             advancedFiltersDiv.style.display = 'flex';
             rebuildAdvancedToggles();
+            rightDivHeader.innerHTML = 'Advanced Layer Settings';
         } else {
             presetLayersDiv.style.display = 'flex';
             advancedLayerDiv.style.display = 'none';
@@ -1608,6 +1611,7 @@ function openCTSettingsModal(){
             renderSettings.roundFilterEnd = 100;
             renderSettings.heroFilter = 'NoFilter';
             applyCTFilter(debugGlobalCTMap, selectedCTData);
+            rightDivHeader.innerHTML = 'Display Presets';
         }
         saveLocalStorageCTData();
     });
@@ -1621,7 +1625,7 @@ function openCTSettingsModal(){
 
     leftDiv.appendChild(createEl('p', {
         classList: ['oak-instructions-header', 'black-outline'],
-        innerHTML: 'Filter Tiles'
+        innerHTML: 'Basic Tile Filters'
     }));
 
     let filterRadioButtonsDiv = createEl('div', { classList: ['d-flex', 'fd-column', 'jc-evenly', 'fg-1'], style: { gap: '8px' } });
@@ -1767,10 +1771,11 @@ function openCTSettingsModal(){
     let rightDiv = createEl('div', { classList: ['d-flex', 'f-wrap', 'fd-column'], style: { gap: '12px', width: '350px' } });
     mainContainer.appendChild(rightDiv);
 
-    rightDiv.appendChild(createEl('p', {
+    let rightDivHeader = createEl('p', {
         classList: ['oak-instructions-header', 'black-outline'],
-        innerHTML: 'Display Options'
-    }));
+        innerHTML: 'Display Presets'
+    });
+    rightDiv.appendChild(rightDivHeader);
 
     rightDiv.appendChild(advancedLayerDiv);
     rightDiv.appendChild(presetLayersDiv);
@@ -1780,11 +1785,11 @@ function openCTSettingsModal(){
     let presetsDiv = createEl('div', { classList: ['d-flex', 'fd-column'], style: { } });
     presetLayersDiv.appendChild(presetsDiv);
 
-     presetsDiv.appendChild(createEl('p', {
-        classList: ['black-outline', 'ta-center'],
-        style: { fontSize: '20px' },
-        innerHTML: 'Layout Presets'
-    }));
+    // presetsDiv.appendChild(createEl('p', {
+    //     classList: ['black-outline', 'ta-center'],
+    //     style: { fontSize: '20px' },
+    //     innerHTML: 'Layout Presets'
+    // }));
 
     let presetOptionsDiv = createEl('div', { classList: ['d-flex', 'f-wrap', 'jc-between'], style: { width: '330px', gap: '8px', marginTop: '12px' } });
     presetsDiv.appendChild(presetOptionsDiv);
