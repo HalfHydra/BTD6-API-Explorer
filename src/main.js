@@ -9130,11 +9130,11 @@ function generateSettings(){
             "description": "When switched on, the site will use the nicknames you've set for towers instead of the tower names.",
             "input": "toggle"
         },
-        "TeamsStoreItems": {
-            "name": "Show Teams Store Items in Progress Tab",
-            "description": "When switched on, the progress tab will show collected team store items. I don't have a way to test this so it may not work.",
-            "input": "toggle"
-        }
+        // "TeamsStoreItems": {
+        //     "name": "Show Teams Store Items in Progress Tab",
+        //     "description": "When switched on, the progress tab will show collected team store items. I don't have a way to test this so it may not work.",
+        //     "input": "toggle"
+        // }
     }
 
     let settingsContainer = document.createElement('div');
