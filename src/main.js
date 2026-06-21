@@ -9324,6 +9324,7 @@ function generateTrophyStoreProgress() {
 
     let hiddenToggleBtn = generateToggle(trophyStoreShowHidden, (checked) => {
         trophyStoreShowHidden = checked;
+        saveSettings();
         generateTrophyStoreContainer(mapProgressFilterDifficultySelect2.value, mapProgressFilterDifficultySelect.value, trophyStoreItemCounter, trophyStoreTrophyCounterValue, trophyStoreTrophyCounterLabel);
     });
     trophyStoreHiddenToggle.appendChild(hiddenToggleBtn);

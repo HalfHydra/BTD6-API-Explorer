@@ -256,9 +256,10 @@ function resetScroll() {
 function loadSettings() {
     let settings = JSON.parse(localStorage.getItem("BTD6OAKSettings"));
     if (settings) {
-        preventRateLimiting = settings.ProfileLoading;
-        useNamedMonkeys = settings.UseNamedMonkeys;
-        showTeamsItems = settings.TeamsStoreItems;
+        if (settings.hasOwnProperty("ProfileLoading")) { preventRateLimiting = settings.ProfileLoading };
+        if (settings.hasOwnProperty("UseNamedMonkeys")) { useNamedMonkeys = settings.UseNamedMonkeys };
+        if (settings.hasOwnProperty("TeamsStoreItems")) { showTeamsItems = settings.TeamsStoreItems };
+        if (settings.hasOwnProperty("ShowHiddenTrophyItems")) { trophyStoreShowHidden = settings.ShowHiddenTrophyItems };
     }
 }
 
@@ -266,7 +267,8 @@ function saveSettings() {
     let settings = {
         "ProfileLoading": preventRateLimiting,
         "UseNamedMonkeys": useNamedMonkeys,
-        "TeamsStoreItems": showTeamsItems
+        "TeamsStoreItems": showTeamsItems,
+        "ShowHiddenTrophyItems": trophyStoreShowHidden
     }
     localStorage.setItem("BTD6OAKSettings", JSON.stringify(settings));
 }
