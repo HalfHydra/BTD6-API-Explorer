@@ -967,6 +967,17 @@ async function openProfile(source, profile, callback){
         frontierColumnHeaderText.innerHTML = 'frontier Legends Stats';
         frontierColumnHeader.appendChild(frontierColumnHeaderText);
 
+        let frontierSubTitle = createEl('p', {
+            classList: ['font-gardenia', 'ta-center'],
+            innerHTML: 'Stats are tracked across all saves',
+            style: {
+                fontSize: "18px",
+                marginTop: "-8px",
+                marginBottom: "8px"
+            }
+        });
+        frontierDiv.appendChild(frontierSubTitle);
+
         let frontierStats = {};
         frontierStats["Total Quickdraws Won"] = btd6usersave["frontierLegends"].winQuickdrawAcrossAll || 0;
         frontierStats["Quickdraws Won in a Row"] = btd6usersave["frontierLegends"].captureBountyBloonsInARow || 0;
