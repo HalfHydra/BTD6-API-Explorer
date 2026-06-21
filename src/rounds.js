@@ -162,9 +162,10 @@ function generateRoundsets() {
         })
         selectorsDiv.appendChild(roundsetDiv);
 
-        let roundsetIcon = document.createElement('img');
-        roundsetIcon.classList.add('roundset-selector-img');
-        roundsetIcon.src = `../Assets/UI/${data.icon}.png`;
+        let roundsetIcon = createEl('img', {
+            classList: ['roundset-selector-img'],
+            src: `../Assets/UI/${data.icon}.png`
+        });
         roundsetDiv.appendChild(roundsetIcon);
 
         let roundsetText = document.createElement('p');
@@ -172,9 +173,10 @@ function generateRoundsets() {
         roundsetText.innerHTML = data.name;
         roundsetDiv.appendChild(roundsetText);
 
-        let roundsetGoImg = document.createElement('img');
-        roundsetGoImg.classList.add('selector-go-img');
-        roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
+        let roundsetGoImg = createEl('img', {
+            classList: ['selector-go-img'],
+            src: '../Assets/UI/ContinueBtn.png'
+        });
         roundsetDiv.appendChild(roundsetGoImg);
     })
 
@@ -202,9 +204,10 @@ function generateRoundsets() {
         })
         selectorsDiv.appendChild(roundsetDiv);
 
-        let roundsetIcon = document.createElement('img');
-        roundsetIcon.classList.add('roundset-selector-img');
-        roundsetIcon.src = `../Assets/${data.icon}.png`;
+        let roundsetIcon = createEl('img', {
+            classList: ['roundset-selector-img'],
+            src: `../Assets/${data.icon}.png`
+        });
         roundsetDiv.appendChild(roundsetIcon);
 
         let roundsetText = document.createElement('p');
@@ -212,9 +215,10 @@ function generateRoundsets() {
         roundsetText.innerHTML = name;
         roundsetDiv.appendChild(roundsetText);
 
-        let roundsetGoImg = document.createElement('img');
-        roundsetGoImg.classList.add('selector-go-img');
-        roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
+        let roundsetGoImg = createEl('img', {
+            classList: ['selector-go-img'],
+            src: '../Assets/UI/ContinueBtn.png'
+        });
         roundsetDiv.appendChild(roundsetGoImg);
     })
 
@@ -240,9 +244,10 @@ function generateRoundsets() {
         })
         bossRoundsetDiv.appendChild(roundsetDiv);
 
-        let roundsetIcon = document.createElement('img');
-        roundsetIcon.classList.add('other-roundset-selector-img');
-        roundsetIcon.src = `../Assets/UI/${data.icon}.png`;
+        let roundsetIcon = createEl('img', {
+            classList: ['other-roundset-selector-img'],
+            src: `../Assets/UI/${data.icon}.png`
+        });
         roundsetDiv.appendChild(roundsetIcon);
     })
 
@@ -277,9 +282,10 @@ function generateRoundsets() {
             roundsetDiv.appendChild(roundsetText);
         }
 
-        let roundsetIcon = document.createElement('img');
-        roundsetIcon.classList.add('other-roundset-selector-img');
-        roundsetIcon.src = `../Assets/QuestIcon/${data.icon}.png`;
+        let roundsetIcon = createEl('img', {
+            classList: ['other-roundset-selector-img'],
+            src: `../Assets/QuestIcon/${data.icon}.png`
+        });
         roundsetDiv.appendChild(roundsetIcon);
     })
 
