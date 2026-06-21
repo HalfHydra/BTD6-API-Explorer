@@ -1945,9 +1945,11 @@ function generateHeroLevels(hero, override) {
         heroLevelDesc.classList.add('hero-level-desc', 'fg-1');
         heroLevelDesc.innerHTML = getLocValue(`${override != null ? override : hero}${isHeroTransformed ? "Transformed" : ""} Level ${i} Description`);
         heroLevelDescDiv.appendChild(heroLevelDesc);
+
+        let heroAbilities = isHeroTransformed ? constants.heroesInOrder[hero].transformAbilities : constants.heroesInOrder[hero].abilities;
         
-        if (btd6publicprofile != null && constants.heroesInOrder[hero].abilities.hasOwnProperty(i)) {
-            let ability = constants.heroesInOrder[hero].abilities[i];
+        if (btd6publicprofile != null && heroAbilities.hasOwnProperty(i)) {
+            let ability = heroAbilities[i];
             let abilityData = constants.abilities[ability];
             let abilityUses = btd6publicprofile.stats.abilitiesActivatedByName[ability] || 0;
             if (abilityUses > 0) { 
