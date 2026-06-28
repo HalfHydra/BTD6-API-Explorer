@@ -352,7 +352,7 @@ function updateTimer(targetTime, elementId, finishedText = "Finished") {
     if (remainingTime > 48 * 3600) {
         const days = Math.floor(remainingTime / (24 * 3600));
         timerElement.textContent = `${days} days left`;
-        timerElement.style.width = "130px";
+        timerElement.style.width = days > 9 ? "140px" : "130px";
     } else if (remainingTime < 0) {
         timerElement.textContent = finishedText;
         timerElement.style.textAlign = "right";
