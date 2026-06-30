@@ -2780,7 +2780,8 @@
         "Heartstopper": {
             "displayName": "Heartstopper",
             "description": "Allows Purple popping and prevents any regrow from happening for 10 seconds.",
-            "icon": "HeartstopperAA"
+            "icon": "HeartstopperAA",
+            "oldId": "HeartstopperAbility"
         },
         "Sacrificial Totem": {
             "displayName": "Sacrificial Totem",
@@ -3266,11 +3267,13 @@
             "displayName": "Anti-Camo Dust",
             "description": "Removes Camo from all Bloons on screen, including any that spawn over the next 25 seconds.",
             "icon": "PerkAntiCamoDustAA",
+            "oldId": "Anti-Camo Dust"
         },
         "Anti-RegrowSerum": {
             "displayName": "Anti-Regrow Serum",
             "description": "All Regen Bloons have their regen effect blocked, including any that spawn over the next 10 seconds. All Regen Bloons will also be affected by a dangerous serum that rapidly pops them down into nothing.",
             "icon": "PerkAntiRegrowAA",
+            "oldId": "Anti-Regrow Serum"
         }
     },
     "abilitiesByTower": {

@@ -1380,10 +1380,13 @@ function generateTowerProgressTower(tower){
         });
         towerRightBox.appendChild(abilitiesIconsDiv);
 
-        let abilities = constants.abilitiesByTower[tower] || [];
+        let abilities = constants.towersInOrder[tower].abilities || [];
         abilities.forEach(ability => {
             let abilityData = constants.abilities[ability];
             let abilityUses = btd6publicprofile.stats.abilitiesActivatedByName[ability] || 0;
+            if (abilityData.hasOwnProperty("oldId")) {
+                abilityUses += btd6publicprofile.stats.abilitiesActivatedByName[abilityData.oldId] || 0;
+            }
             if (abilityUses === 0) { return; }
             let abilityDiv = createEl('div', {
                 classList: ['d-flex', 'ai-center'],
@@ -1953,8 +1956,10 @@ function generateHeroLevels(hero, override) {
             let ability = heroAbilities[i];
             let abilityData = constants.abilities[ability];
             let abilityUses = btd6publicprofile.stats.abilitiesActivatedByName[ability] || 0;
+            if (abilityData.hasOwnProperty("oldId")) {
+                abilityUses += btd6publicprofile.stats.abilitiesActivatedByName[abilityData.oldId] || 0;
+            }
             if (abilityUses > 0) { 
-
                 let heroAbilityDiv = createEl('div', {
                     classList: ['d-flex', 'ai-center', 'fd-column'],
                     style: {
@@ -5146,6 +5151,9 @@ function generateAbilities() {
     Object.entries(abilities).forEach(([ability, uses]) => {
         if(constants.abilities[ability] == undefined) {return}
         let abilityData = constants.abilities[ability];
+        if (abilityData.hasOwnProperty("oldId")) {
+            uses += btd6publicprofile.stats.abilitiesActivatedByName[abilityData.oldId] || 0;
+        }
 
         let abilityContainer = document.createElement('div');
         // abilityContainer.style.width = '150px';

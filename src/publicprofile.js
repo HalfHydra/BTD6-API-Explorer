@@ -731,7 +731,17 @@ async function openProfile(source, profile, callback){
     })
 
     counter = 0;
-    for (let [ability, uses] of Object.entries(profile.stats["abilitiesActivatedByName"]).sort((a, b) => b[1] - a[1])){
+    let abilities = {...profile.stats["abilitiesActivatedByName"]};
+    abilities = Object.entries(abilities).map(([ability, uses]) => {
+        let abilityData = constants.abilities[ability];
+        if (abilityData && abilityData.hasOwnProperty("oldId")) {
+            let oldIdUses = profile.stats["abilitiesActivatedByName"][abilityData.oldId] || 0;
+            uses += oldIdUses;
+        }
+        return [ability, uses];
+    });
+
+    for (let [ability, uses] of abilities.sort((a, b) => b[1] - a[1])){
         if(uses === 0) { continue; }
         let abilityData = constants.abilities[ability];
         if(!abilityData) { continue; }
