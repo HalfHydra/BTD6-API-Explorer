@@ -3256,6 +3256,21 @@
             "displayName": "Berserk Frenzy",
             "description": "The Masqued Macaque goes into a frenzy, savagely attacking Bloons in a wide area faster than can be seen.",
             "icon": "WarcryAA"
+        },
+        "Soulbind": {
+            "displayName": "(Removed) Soulbind",
+            "description": "(Removed in 2.0) Bind a tower to sacrifice for lives upon death.",
+            "icon": "SoulbindAA"
+        },
+        "Anti-CamoDust": {
+            "displayName": "Anti-Camo Dust",
+            "description": "Removes Camo from all Bloons on screen, including any that spawn over the next 25 seconds.",
+            "icon": "PerkAntiCamoDustAA",
+        },
+        "Anti-RegrowSerum": {
+            "displayName": "Anti-Regrow Serum",
+            "description": "All Regen Bloons have their regen effect blocked, including any that spawn over the next 10 seconds. All Regen Bloons will also be affected by a dangerous serum that rapidly pops them down into nothing.",
+            "icon": "PerkAntiRegrowAA",
         }
     },
     "abilitiesByTower": {
