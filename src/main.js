@@ -12087,6 +12087,7 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
         rules.forEach(rule => {
             if (rule == "No Round 100 Reward") { return; }
             if (rule == "Paragon Limit" && map.maxParagons == 0) { return; }
+            if (rule == "No Lives Lost") { return; }
             let challengeRule = createEl('div', {
                 classList: ['challenge-rule'],
                 style: {
