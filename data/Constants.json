@@ -8,6 +8,18 @@
     "teamsBanners": 19,
     "bossesInOrder": ["Bloonarius", "Lych", "Vortex", "Dreadbloon", "Phayze", "Blastapopoulos", "Diamondback"],
     "limitedTimeEvents": {
+        "Corntada 3": {
+            "type": "Race",
+            "roundset": "corntada3",
+            "start": 1783044000000,
+            "end": 1783393200000
+        },
+        "ABR but harder": {
+            "type": "Odyssey",
+            "roundset": "abrbutharder",
+            "start": 1782957600000,
+            "end": 1783476000000
+        },
         "Dreadbloon 32": {
             "type": "Boss", 
             "boss": "dreadbloon", 
@@ -97,7 +109,9 @@
         "Jumpscare2",
         "Jumpscare3",
         "Jumpscare4",
-        "Jumpscare5"
+        "Jumpscare5",
+        "abrbutharder",
+        "corntada3"
     ],
     "towersInOrder": {
         "DartMonkey": {
