@@ -6104,6 +6104,7 @@ function generateRaces(){
         });
         observer.observe(raceMapDiv);
     })
+    hideLoading();
 }
 
 function getBossEventData(bossDataIndex, elite) {
@@ -6329,6 +6330,7 @@ function generateBosses(elite){
         });
         observer.observe(raceMapDiv);
     })
+    hideLoading();
 }
 
 async function generateChallenges(type) {

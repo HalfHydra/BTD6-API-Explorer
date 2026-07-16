@@ -283,6 +283,7 @@ async function generateCTs(){
             openCTEventDetails('events', {id: seed, noODA: true})
         })
     })
+    hideLoading();
 }
 
 async function openCTEventDetails(source, eventData) {
