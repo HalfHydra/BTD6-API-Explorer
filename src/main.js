@@ -7265,7 +7265,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
 
         constants.bossesInOrder.map(boss => { return boss.toLowerCase() })
         let roundset = metadata.roundSets.filter(value => value !== 'default' && !(constants.bossesInOrder.map(boss => { return boss.toLowerCase() }).includes(value)));
-        if (rule == "Custom Rounds" && constants.skuRoundsets.includes(roundset[0]) && metadata.mode != "AlternateBloonsRounds") {
+        if (rule == "Custom Rounds" && constants.skuRoundsets.includes(roundset[0])) {
             let challengeRuleValue = document.createElement('div');
             challengeRuleValue.classList.add('challenge-rule-subtext','start-button','black-outline');
             challengeRuleValue.innerHTML = "Open";
@@ -12120,7 +12120,7 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
             challengeRuleTextDiv.appendChild(challengeRuleText);
 
             let roundset = map.roundSets.filter(value => value !== 'default' && !(constants.bossesInOrder.map(boss => { return boss.toLowerCase() }).includes(value)))
-            if (rule == "Custom Rounds" && constants.skuRoundsets.includes(roundset[0]) && map.mode != "AlternateBloonsRounds") {
+            if (rule == "Custom Rounds" && constants.skuRoundsets.includes(roundset[0])) {
                 let challengeRuleValue = createEl('div', {
                     classList: ['challenge-rule-subtext', 'start-button', 'black-outline'],
                     innerHTML: "View"
