@@ -82,7 +82,7 @@ let renderPresets = {
                 banner: true,
                 relic: true,
                 map: false,
-                boss: true,
+                boss: false,
                 gameMode: false,
                 hero: false,
                 rounds: false,
