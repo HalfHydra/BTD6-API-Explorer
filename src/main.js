@@ -11364,6 +11364,7 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
             diffBtn.classList.add('stats-tab-yellow');
             showLoading();
             getOdyMetadata(odysseyData.findIndex(o => o.id === odyData.id), diff);
+            backQueue.pop();
         });
         diffBtn.classList.add('odyssey-diff-btn');
         odyDiffSelect.appendChild(diffBtn);
