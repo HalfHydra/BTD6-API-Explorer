@@ -2155,7 +2155,6 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "isNew": true,
         "updateAdded": 54,
         "cost": 50
     },
@@ -2221,7 +2220,6 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "isNew": true,
         "obtainMethod": "Purchase",
         "updateAdded": 55
     },
@@ -2235,7 +2233,6 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "isNew": true,
         "updateAdded": 55,
         "cost": 50
     },
@@ -2249,65 +2246,8 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": false,
-        "isNew": true,
         "updateAdded": 55,
         "cost": 50
-    },
-    "GameUIProfileAvatar130": {
-        "storeFilter": "GameUI",
-        "subFilter": "Avatars",
-        "lootSetFilter": "None",
-        "questId": "",
-        "icon": "ProfileAvatar130",
-        "cosmeticPriority": "0",
-        "exclusivity": "",
-        "itemType": "Avatar",
-        "hidden": false,
-        "isNew": true,
-        "updateAdded": 55,
-        "cost": 50
-    },
-    "GameUIProfileAvatar131": {
-        "storeFilter": "GameUI",
-        "subFilter": "Avatars",
-        "lootSetFilter": "None",
-        "questId": "",
-        "icon": "ProfileAvatar131",
-        "cosmeticPriority": "0",
-        "exclusivity": "",
-        "itemType": "Avatar",
-        "hidden": true,
-        "obtainMethod": "Frontier",
-        "isNew": true,
-        "updateAdded": 54.3
-    },
-    "GameUIProfileAvatar132": {
-        "storeFilter": "GameUI",
-        "subFilter": "Avatars",
-        "lootSetFilter": "None",
-        "questId": "",
-        "icon": "ProfileAvatar132",
-        "cosmeticPriority": "0",
-        "exclusivity": "",
-        "itemType": "Avatar",
-        "hidden": true,
-        "obtainMethod": "Frontier",
-        "isNew": true,
-        "updateAdded": 54.3
-    },
-    "GameUIProfileAvatar133": {
-        "storeFilter": "GameUI",
-        "subFilter": "Avatars",
-        "lootSetFilter": "None",
-        "questId": "",
-        "icon": "ProfileAvatar133",
-        "cosmeticPriority": "0",
-        "exclusivity": "",
-        "itemType": "Avatar",
-        "hidden": true,
-        "obtainMethod": "Frontier",
-        "isNew": true,
-        "updateAdded": 54.3
     },
     "GameUIProfileAvatar13": {
         "storeFilter": "GameUI",
@@ -2321,6 +2261,58 @@
         "hidden": false,
         "updateAdded": 19,
         "cost": 10
+    },
+    "GameUIProfileAvatar130": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar130",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "updateAdded": 55,
+        "cost": 50
+    },
+    "GameUIProfileAvatar131": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar131",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "obtainMethod": "Frontier",
+        "updateAdded": 54.3
+    },
+    "GameUIProfileAvatar132": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar132",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "obtainMethod": "Frontier",
+        "updateAdded": 54.3
+    },
+    "GameUIProfileAvatar133": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar133",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "obtainMethod": "Frontier",
+        "updateAdded": 54.3
     },
     "GameUIProfileAvatar14": {
         "storeFilter": "GameUI",
@@ -3775,7 +3767,7 @@
         "cosmeticPriority": "0",
         "exclusivity": "",
         "itemType": "Banner",
-        "hidden": false,
+        "hidden": true,
         "obtainMethod": "Quest",
         "updateAdded": 37
     },
@@ -4231,10 +4223,9 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "isNew": true,
         "obtainMethod": "Purchase",
         "updateAdded": 55
-},
+    },
     "GameUIProfileBanner65": {
         "storeFilter": "GameUI",
         "subFilter": "ProfileBanners",
@@ -4245,7 +4236,6 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": false,
-        "isNew": true,
         "updateAdded": 55,
         "cost": 300
     },
@@ -4754,7 +4744,7 @@
         "itemType": "TowerAssetChange",
         "hidden": true,
         "updateAdded": 49,
-        "cost": 69
+        "cost": 50
     },
     "TPWizardSheep": {
         "storeFilter": "Monkeys",
@@ -4778,9 +4768,8 @@
         "cosmeticPriority": "0",
         "exclusivity": "BombShooterPet",
         "itemType": "TowerPet",
-        "obtainMethod": "SocialSeason",
         "hidden": true,
-        "isNew": true,
+        "obtainMethod": "SocialSeason",
         "updateAdded": 55
     },
     "TPetDartMonkeyWindUpOG": {
@@ -4793,7 +4782,6 @@
         "exclusivity": "DartMonkeyPet",
         "itemType": "TowerPet",
         "hidden": false,
-        "isNew": true,
         "updateAdded": 55,
         "cost": 120
     },

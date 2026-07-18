@@ -9495,7 +9495,7 @@ function generateTrophyStoreContainer(filter, display, counter, trophies, needed
             }));
             break;
         case "New Only":
-            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => data.hasOwnProperty("isNew")));
+            trophyStoreItemsToDisplay = Object.fromEntries(Object.entries(trophyStoreItemsToDisplay).filter(([key, data]) => (Math.floor(data["updateAdded"]) == constants.projectContentVersion)));
             break;
     }
 
