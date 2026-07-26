@@ -75,7 +75,7 @@ let isHeroTransformed = false;
 let imageScroll = [
     {
         "title": "New Site Update!",
-        "text": `Site Update 2.8.3:<br>
+        "text": `Site Update 2.8.4:<br>
         - Odyssey Events<br>
         - Events Menu Rework<br>
         <br>
@@ -128,6 +128,7 @@ let imageScroll = [
 let imageScrollIndex = 0;
 
 let changelog = {
+    "v2.8.4 (7/25/26)": "Various fixes and behind the scenes reworks<br>- Corrected Lych rounds after the boss events use the correct version<br>- Added a couple missing custom roundsets such as One Sided Infernal<br>- Added missing abilities: Soulbind, Anti-Camo Dust, Anti-Regrow Serum<br>- Odyssey details minor fixes such as Alternate Bloons Rounds no longer overwriting custom rounds<br>- Fixed loading bug with various events menus<br>- CT Map no longer displays a preview for tiles that are filtered out<br>- Added CHIMPS to the roundsets tab since it is a commonly used preset<br>- Added first time messages system",
     "v2.8.3 (6/20/26)": "Profile Updates + even more fixes!<br>- Top Abilities can be seen in player profiles now<br>- Diamondback and Social Season badges have been added<br>- Frontier bloons pop totals have been added to the frontier stats including Diamond bloons which aren't seen in game for some reason<br>- Achievements now has a filter for just ones that unlock extra settings, and a link to this has been added from the extras tab if you have some locked<br>- Fixed activated abilities menu breaking due to backend changes<br>- Fixed extras unlocked not racking correctly in some cases<br>- The hidden items toggle is now switched off by default in the trophy store menu<br>- Trophy store items that haven't been revealed yet will now show up once they are (sorry Bestboy!)<br>- Fixed quick stats navigation<br>- Fixed He-Man avatar and banner not showing up as IAP<br>- Clarified Frontier stats are tracked across all saves<br>- Some processed data should no longer linger after switching users without reloading<br>- Fixed the insta tracker menu loading for a while due to collection event fetch reasons",
     "v2.8.2 (6/18/26)": "Minor fixes<br>- Fixed a bug causing the collection events to show the latest one instead of the active one<br>- Fixed Dan D'Monke not showing up in CT map correctly.<br>- Fixed incorrect BTD6 birthday date for collection event skins guesser<br>- Renamed \"Default\" to \"Category\" in the Trophy Store filters.<br>- Events list now infers boss type from the id and displays that icon instead",
     "v2.8.1 (6/9/26)": "Update 55 Content + Minor Updates<br>- Added 55 content including Transformation feature for Dan D'Monke. <br>- Missing maps should no longer break the CT map<br>- IAP hero counts should no longer contribute to the total untitl owned similar to the game<br>- Updated trophy store item details modal<br>- Trophy store items should no longer incorrect label text for counts<br>- Sorted events in the events menu by a more logical order.",
