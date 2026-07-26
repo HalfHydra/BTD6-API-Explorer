@@ -5063,23 +5063,21 @@ function generateAbilities() {
     let filteredAbilityOrder = [];
     switch (abilitiesFilterType) {
         case "Towers":
-            Object.keys(constants.towersInOrder).forEach(tower => {
-                if (constants.abilitiesByTower[tower]) {
-                    constants.abilitiesByTower[tower].forEach(ability => filteredAbilityOrder.push(ability));
-                }
+            Object.values(constants.towersInOrder).forEach(towerData => {
+                towerData.abilities.forEach(ability => filteredAbilityOrder.push(ability));
             });
             break;
         case "Heroes":
-            Object.keys(constants.heroesInOrder).forEach(hero => {
-                if (constants.abilitiesByHero[hero]) {
-                    Object.values(constants.abilitiesByHero[hero]).forEach(ability => filteredAbilityOrder.push(ability));
-                }
+            Object.values(constants.heroesInOrder).forEach(heroData => {
+                Object.values(heroData.abilities).forEach(ability => filteredAbilityOrder.push(ability));
+                if (heroData.hasOwnProperty("transformAbilities")) { Object.values(heroData.transformAbilities).forEach(ability => filteredAbilityOrder.push(ability)); }
             });
             break;
-        case "Powers":
-            Object.values(constants.abilitiesByPower).forEach(powerAbilities => {
-                powerAbilities.forEach(ability => filteredAbilityOrder.push(ability));
-            });
+        case "Other":
+            let allAbilities = Object.keys(constants.abilities);
+            let abilitiesToIgnore = [...Object.values(constants.towersInOrder).flatMap(tower => tower.abilities), ...Object.values(constants.heroesInOrder).flatMap(hero => Object.values(hero.abilities))];
+            abilitiesToIgnore.push(...Object.values(constants.heroesInOrder).flatMap(hero => hero.hasOwnProperty("transformAbilities") ? Object.values(hero.transformAbilities) : []));
+            filteredAbilityOrder = allAbilities.filter(ability => !abilitiesToIgnore.includes(ability));
             break;
     }
 
@@ -5096,9 +5094,8 @@ function generateAbilities() {
             break;
         case "Default":
             let defaultOrder = [
-                ...Object.keys(constants.towersInOrder).flatMap(tower => constants.abilitiesByTower[tower] ?? []),
-                ...Object.keys(constants.heroesInOrder).flatMap(hero => Object.values(constants.abilitiesByHero[hero] ?? {})),
-                ...Object.values(constants.abilitiesByPower).flat()
+                ...Object.values(constants.towersInOrder).flatMap(tower => tower.abilities),
+                ...Object.values(constants.heroesInOrder).flatMap(hero => Object.values(hero.abilities).concat(hero.hasOwnProperty("transformAbilities") ? Object.values(hero.transformAbilities) : [])),
             ];
             abilities = Object.fromEntries(
                 Object.entries(abilities).sort((a, b) => {
@@ -5127,7 +5124,7 @@ function generateAbilities() {
     dropdownSort.style.padding = "10px";
     sortOptions.appendChild(dropdownSort);
 
-    let dropdownFilter = generateDropdown("Filter:", ["All", "Towers", "Heroes", "Powers"], abilitiesFilterType, (value) => {
+    let dropdownFilter = generateDropdown("Filter:", ["All", "Towers", "Heroes", "Other"], abilitiesFilterType, (value) => {
         abilitiesFilterType = value;
         generateAbilities();
     })
