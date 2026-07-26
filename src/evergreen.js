@@ -933,3 +933,13 @@ function getHeroOrSkinData(typeName) {
     ? constants.heroSkins[saveSkintoSkinMap[typeName]] : constants.heroSkins.hasOwnProperty(saveSkinToSkinMapReversed[typeName])
     ? constants.heroSkins[saveSkinToSkinMapReversed[typeName]]  : null;
 }
+
+function getQuestPartLabel(roundsetName, partIndex) {
+    let keyword = "Part"
+    if (roundsetName.includes("Stage")) {
+        keyword = "Stage"
+    } else if (roundsetName.includes("Act")) {
+        keyword = "Act"
+    }
+    return `${keyword} ${partIndex}`;
+}

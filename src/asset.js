@@ -467,7 +467,7 @@ function getPowerIcon(power){
 }
 
 function getAchievementIcon(achievement, hidden){
-    return hidden ? `Assets/AchievementIcon/HiddenIcon.png` : `Assets/AchievementIcon/${achievement}Icon.png`;
+    return hidden ? `Assets/AchievementIcon/HiddenIcon.png` : `Assets/AchievementIcon/${achievement.trim()}Icon.png`;
 }
 
 function fixAchievementName(name){

@@ -5,28 +5,28 @@
                 {
                     "bloon": "Pink",
                     "count": 5,
-                    "start": 0,
+                    "start": 0.0,
                     "end": 4.5
                 },
                 {
                     "bloon": "Yellow",
                     "count": 10,
                     "start": 5.5,
-                    "end": 10
+                    "end": 10.0
                 }
             ],
             "roundNumber": 1,
             "rbe": 65,
-            "income": 166,
+            "income": 166.0,
             "rbeSum": 65,
-            "incomeSum": 166
+            "incomeSum": 166.0
         },
         {
             "bloonGroups": [
                 {
                     "bloon": "Pink",
                     "count": 5,
-                    "start": 0,
+                    "start": 0.0,
                     "end": 4.5
                 },
                 {
@@ -39,286 +39,286 @@
                     "bloon": "Yellow",
                     "count": 10,
                     "start": 5.5,
-                    "end": 10
+                    "end": 10.0
                 },
                 {
                     "bloon": "Lead",
                     "count": 1,
-                    "start": 5,
-                    "end": 6
+                    "start": 5.0,
+                    "end": 6.0
                 }
             ],
             "roundNumber": 2,
             "rbe": 182,
-            "income": 284,
+            "income": 284.0,
             "rbeSum": 247,
-            "incomeSum": 450
+            "incomeSum": 450.0
         },
         {
             "bloonGroups": [
                 {
                     "bloon": "Blue",
                     "count": 10,
-                    "start": 0,
+                    "start": 0.0,
                     "end": 4.5
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 6,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 },
                 {
                     "bloon": "Green",
                     "count": 10,
                     "start": 5.5,
-                    "end": 10
+                    "end": 10.0
                 },
                 {
                     "bloon": "LeadFortified",
                     "count": 1,
-                    "start": 5,
-                    "end": 6
+                    "start": 5.0,
+                    "end": 6.0
                 }
             ],
             "roundNumber": 3,
             "rbe": 358,
-            "income": 458,
+            "income": 458.0,
             "rbeSum": 605,
-            "incomeSum": 908
+            "incomeSum": 908.0
         },
         {
             "bloonGroups": [
                 {
                     "bloon": "Yellow",
                     "count": 20,
-                    "start": 0,
+                    "start": 0.0,
                     "end": 4.5
                 },
                 {
                     "bloon": "RainbowCamo",
                     "count": 8,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 },
                 {
                     "bloon": "Yellow",
                     "count": 20,
                     "start": 5.5,
-                    "end": 10
+                    "end": 10.0
                 },
                 {
                     "bloon": "LeadFortifiedCamo",
                     "count": 1,
-                    "start": 5,
-                    "end": 6
+                    "start": 5.0,
+                    "end": 6.0
                 }
             ],
             "roundNumber": 4,
             "rbe": 562,
-            "income": 663,
+            "income": 663.0,
             "rbeSum": 1167,
-            "incomeSum": 1571
+            "incomeSum": 1571.0
         },
         {
             "bloonGroups": [
                 {
                     "bloon": "PinkCamo",
                     "count": 15,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 3,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 },
                 {
                     "bloon": "Yellow",
                     "count": 20,
                     "start": 2.5,
-                    "end": 7
+                    "end": 7.0
                 },
                 {
                     "bloon": "Lead",
                     "count": 5,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 }
             ],
             "roundNumber": 5,
             "rbe": 582,
-            "income": 660,
+            "income": 660.0,
             "rbeSum": 1749,
-            "incomeSum": 2231
+            "incomeSum": 2231.0
         },
         {
             "bloonGroups": [
                 {
                     "bloon": "Pink",
                     "count": 20,
-                    "start": 0,
-                    "end": 5
+                    "start": 0.0,
+                    "end": 5.0
                 },
                 {
                     "bloon": "Ceramic",
                     "count": 5,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 },
                 {
                     "bloon": "RainbowCamo",
                     "count": 5,
                     "start": 5.5,
-                    "end": 10
+                    "end": 10.0
                 },
                 {
                     "bloon": "Lead",
                     "count": 5,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 }
             ],
             "roundNumber": 6,
             "rbe": 970,
-            "income": 1031,
+            "income": 1031.0,
             "rbeSum": 2719,
-            "incomeSum": 3262
+            "incomeSum": 3262.0
         },
         {
             "bloonGroups": [
                 {
                     "bloon": "PinkRegrow",
                     "count": 20,
-                    "start": 0,
-                    "end": 5
+                    "start": 0.0,
+                    "end": 5.0
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 5,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 },
                 {
                     "bloon": "YellowRegrow",
                     "count": 20,
                     "start": 5.5,
-                    "end": 10
+                    "end": 10.0
                 },
                 {
                     "bloon": "CeramicCamo",
                     "count": 5,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 }
             ],
             "roundNumber": 7,
             "rbe": 935,
-            "income": 997,
+            "income": 997.0,
             "rbeSum": 3654,
-            "incomeSum": 4259
+            "incomeSum": 4259.0
         },
         {
             "bloonGroups": [
                 {
                     "bloon": "Pink",
                     "count": 20,
-                    "start": 0,
-                    "end": 5
+                    "start": 0.0,
+                    "end": 5.0
                 },
                 {
                     "bloon": "RainbowRegrow",
                     "count": 5,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 },
                 {
                     "bloon": "Yellow",
                     "count": 40,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 },
                 {
                     "bloon": "Purple",
                     "count": 10,
-                    "start": 4,
-                    "end": 6
+                    "start": 4.0,
+                    "end": 6.0
                 }
             ],
             "roundNumber": 8,
             "rbe": 605,
-            "income": 713,
+            "income": 713.0,
             "rbeSum": 4259,
-            "incomeSum": 4972
+            "incomeSum": 4972.0
         },
         {
             "bloonGroups": [
                 {
                     "bloon": "Zebra",
                     "count": 20,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 },
                 {
                     "bloon": "RainbowRegrow",
                     "count": 10,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 },
                 {
                     "bloon": "LeadCamo",
                     "count": 20,
                     "start": 5.5,
-                    "end": 10
+                    "end": 10.0
                 }
             ],
             "roundNumber": 9,
             "rbe": 1390,
-            "income": 1499,
+            "income": 1499.0,
             "rbeSum": 5649,
-            "incomeSum": 6471
+            "incomeSum": 6471.0
         },
         {
             "bloonGroups": [
                 {
                     "bloon": "Ceramic",
                     "count": 8,
-                    "start": 0,
-                    "end": 5
+                    "start": 0.0,
+                    "end": 5.0
                 },
                 {
                     "bloon": "RainbowRegrow",
                     "count": 8,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 },
                 {
                     "bloon": "CeramicCamo",
                     "count": 5,
                     "start": 5.5,
-                    "end": 10
+                    "end": 10.0
                 }
             ],
             "roundNumber": 10,
             "rbe": 1728,
-            "income": 1721,
+            "income": 1721.0,
             "rbeSum": 7377,
-            "incomeSum": 8192
+            "incomeSum": 8192.0
         },
         {
             "bloonGroups": [
                 {
                     "bloon": "LeadFortifiedCamo",
                     "count": 20,
-                    "start": 0,
-                    "end": 5
+                    "start": 0.0,
+                    "end": 5.0
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 5,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 },
                 {
                     "bloon": "Moab",
@@ -329,69 +329,69 @@
             ],
             "roundNumber": 11,
             "rbe": 1987,
-            "income": 1568,
+            "income": 1568.0,
             "rbeSum": 9364,
-            "incomeSum": 9760
+            "incomeSum": 9760.0
         },
         {
             "bloonGroups": [
                 {
                     "bloon": "Rainbow",
                     "count": 20,
-                    "start": 0,
-                    "end": 5
+                    "start": 0.0,
+                    "end": 5.0
                 },
                 {
                     "bloon": "CeramicRegrowFortifiedCamo",
                     "count": 5,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 },
                 {
                     "bloon": "Rainbow",
                     "count": 15,
                     "start": 5.5,
-                    "end": 10
+                    "end": 10.0
                 },
                 {
                     "bloon": "Moab",
                     "count": 3,
-                    "start": 1,
-                    "end": 9
+                    "start": 1.0,
+                    "end": 9.0
                 }
             ],
             "roundNumber": 12,
             "rbe": 4063,
-            "income": 3375,
+            "income": 3375.0,
             "rbeSum": 13427,
-            "incomeSum": 13135
+            "incomeSum": 13135.0
         },
         {
             "bloonGroups": [
                 {
                     "bloon": "CeramicCamo",
                     "count": 10,
-                    "start": 0,
-                    "end": 5
+                    "start": 0.0,
+                    "end": 5.0
                 },
                 {
                     "bloon": "Moab",
                     "count": 4,
-                    "start": 0,
-                    "end": 10
+                    "start": 0.0,
+                    "end": 10.0
                 },
                 {
                     "bloon": "CeramicFortified",
                     "count": 10,
                     "start": 5.5,
-                    "end": 10
+                    "end": 10.0
                 }
             ],
             "roundNumber": 13,
             "rbe": 4644,
-            "income": 3537,
+            "income": 3537.0,
             "rbeSum": 18071,
-            "incomeSum": 16672
+            "incomeSum": 16672.0
         }
     ]
 }

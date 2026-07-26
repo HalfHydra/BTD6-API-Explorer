@@ -131,9 +131,13 @@ function generateRoundsets() {
                 })
             }
         } else {
-             let roundsetGoImg = document.createElement('img');
-            roundsetGoImg.classList.add('selector-go-img');
-            roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
+            let roundsetGoImg = createEl('img', {
+                classList: ['selector-go-img'],
+                src: '../Assets/UI/ContinueBtn.png',
+                style: {
+                    width: "65px"
+                }
+            });
             mainDiv.appendChild(roundsetGoImg);
 
             roundsetDiv.addEventListener('click', () => {
@@ -146,14 +150,38 @@ function generateRoundsets() {
     
     let normalRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "normal"));
     let bossRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "boss"));
-    let legendsRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "legends"));
-    let otherRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "quest"));
+    let otherRoundsets = {};
+    Object.entries(constants.quests).forEach(([name, data]) => {
+        data.parts.forEach((part, index) => {
+            if (part.roundSets.length != 0) {
+                let ignoredRoundSets = ["AlternateRoundSet"]
+                if (part.roundSets.some(rs => ignoredRoundSets.includes(rs))) {
+                    return;
+                }
+                let setObj = {
+                    name: getLocValue(data.nameLocKey),
+                    icon: data.icon,
+                    type: "quest",
+                    startingCash: part.startingCash,
+                    startRound: part.startRound,
+                    endRound: part.endRound,
+                    roundset: part.roundSets[0]
+                }
+                if (data.parts.length > 1) {
+                    setObj["part"] = index + 1
+                }
+                otherRoundsets[`${name}${(data.parts.length > 1) ? `Part${index + 1}` : ""}`] = setObj
+            }
+        })
+    })
 
     Object.entries(normalRoundsets).forEach(([roundset, data]) => {
         let roundsetDiv = createEl('div', {
             classList: ['roundset-selector-div', 'wood-container'],
             style: {
-                height: "75px"
+                height: "65px",
+                borderWidth: "16px",
+                margin: "4px 0"
             }
         });
         roundsetDiv.addEventListener('click', () => {
@@ -175,34 +203,84 @@ function generateRoundsets() {
 
         let roundsetGoImg = createEl('img', {
             classList: ['selector-go-img'],
-            src: '../Assets/UI/ContinueBtn.png'
+            src: '../Assets/UI/ContinueBtn.png',
+            style: {
+                width: "65px"
+            }
         });
         roundsetDiv.appendChild(roundsetGoImg);
     })
 
+    let roundsetChimpsDiv = createEl('div', {
+        classList: ['roundset-selector-div', 'wood-container'],
+        style: {
+            height: "65px",
+                borderWidth: "16px",
+                margin: "4px 0"
+        }
+    });
+    roundsetChimpsDiv.addEventListener('click', () => {
+        showLoading();
+        showRoundsetModel('rounds', "DefaultRoundSet", {
+            roundFilterPreset: "CHIMPS",
+            roundFilterStart: 6,
+            roundFilterEnd: 100,
+        });
+    })
+    selectorsDiv.appendChild(roundsetChimpsDiv);
+
+    let roundsetChimpsIcon = createEl('img', {
+        classList: ['roundset-selector-img'],
+        src: `../Assets/UI/CHIMPSIcon.png`
+    });
+    roundsetChimpsDiv.appendChild(roundsetChimpsIcon);
+
+    let roundsetChimpsText = document.createElement('p');
+    roundsetChimpsText.classList.add('selector-text', 'black-outline');
+    roundsetChimpsText.innerHTML = "CHIMPS Mode";
+    roundsetChimpsDiv.appendChild(roundsetChimpsText);
+
+    let roundsetChimpsGoImg = createEl('img', {
+        classList: ['selector-go-img'],
+        src: '../Assets/UI/ContinueBtn.png',
+        style: {
+            width: "65px"
+        }
+    });
+    roundsetChimpsDiv.appendChild(roundsetChimpsGoImg);
+
     let legendsRoundsetData = {
-        "Rogue Custom Rounds": {
+        "Rogue Legends": {
             icon: "QuestIcon/QuestIconRogueLegend",
             roundset: "RogueRoundSet"
         },
-        "Frontier Custom Rounds": {
+        "Frontier Legends": {
             icon: "QuestIcon/QuestIconFrontierLegend",
             roundset: "FrontierBase1"
         }
     }
 
+    let legendsRoundsetContainer = createEl('div', {
+        classList: ['d-flex']
+    })
+    selectorsDiv.appendChild(legendsRoundsetContainer);
+
     Object.entries(legendsRoundsetData).forEach(([name, data]) => {
         let roundsetDiv = createEl('div', {
             classList: ['roundset-selector-div', 'veteran-container'],
             style: {
-                height: "75px"
+                height: "65px",
+                borderWidth: "16px",
+                margin: "4px 0"
             }
         });
         roundsetDiv.addEventListener('click', () => {
             showLoading();
-            showRoundsetModel('rounds', data.roundset);
+            showRoundsetModel('rounds', data.roundset, {
+                special: constants.roundSets[data.roundset].special ? constants.roundSets[data.roundset].special : ""
+            });
         })
-        selectorsDiv.appendChild(roundsetDiv);
+        legendsRoundsetContainer.appendChild(roundsetDiv);
 
         let roundsetIcon = createEl('img', {
             classList: ['roundset-selector-img'],
@@ -210,14 +288,21 @@ function generateRoundsets() {
         });
         roundsetDiv.appendChild(roundsetIcon);
 
-        let roundsetText = document.createElement('p');
-        roundsetText.classList.add('selector-text', 'black-outline');
-        roundsetText.innerHTML = name;
+        let roundsetText = createEl('p', {
+            classList: ['selector-text', 'black-outline'],
+            innerHTML: name,
+            style: {
+                margin: 0
+            }
+        });
         roundsetDiv.appendChild(roundsetText);
 
         let roundsetGoImg = createEl('img', {
             classList: ['selector-go-img'],
-            src: '../Assets/UI/ContinueBtn.png'
+            src: '../Assets/UI/ContinueBtn.png',
+            style: {
+                width: "65px"
+            }
         });
         roundsetDiv.appendChild(roundsetGoImg);
     })
@@ -268,17 +353,25 @@ function generateRoundsets() {
             }
         });
         roundsetDiv.addEventListener('click', () => {
-            showRoundsetModel('rounds', data.roundset ? data.roundset : roundset);
+            let presetOptions = {
+                roundsetName: data.name ? `${data.name} ${data.part ? `${getQuestPartLabel(data.roundset ? data.roundset : roundset, data.part)}` : ""}` : roundset
+            }
+            if (data.startRound && data.startRound != -1) {
+                presetOptions.roundFilterStart = data.startRound ? data.startRound : 1
+            }
+            if (data.endRound && data.endRound != -1) {
+                presetOptions.roundFilterEnd = data.endRound ? data.endRound : null
+            }
+            if (data.startingCash && data.startingCash != -1) {
+                presetOptions.roundsetStartingCash = data.startingCash ? data.startingCash : 650
+            }
+            showRoundsetModel('rounds', data.roundset ? data.roundset : roundset, presetOptions);
         })
         otherRoundsetDiv.appendChild(roundsetDiv);
-
-        let roundsetText = document.createElement('p');
-        roundsetText.classList.add('other-roundset-selector-text', 'black-outline');
-
-        let stage = roundset.match(/(Part|Stage)(\d+)/i);
-        if (!stage && data.part) { stage = [roundset, 'Part', data.part]}
-        if (stage != null) {
-            roundsetText.innerHTML = `${stage[1]} ${stage[2]}`;
+        if (data.part) {
+            let roundsetText = document.createElement('p');
+            roundsetText.innerHTML = getQuestPartLabel(data.roundset ? data.roundset : roundset, data.part);
+            roundsetText.classList.add('other-roundset-selector-text', 'black-outline');
             roundsetDiv.appendChild(roundsetText);
         }
 
@@ -366,9 +459,13 @@ function generateRoundsets() {
                 })
             }
         } else {
-             let roundsetGoImg = document.createElement('img');
-            roundsetGoImg.classList.add('selector-go-img');
-            roundsetGoImg.src = '../Assets/UI/ContinueBtn.png';
+            let roundsetGoImg = createEl('img', {
+                classList: ['selector-go-img'],
+                src: '../Assets/UI/ContinueBtn.png',
+                style: {
+                    width: "65px"
+                }
+            });
             mainDiv.appendChild(roundsetGoImg);
 
             roundsetDiv.addEventListener('click', () => {
@@ -416,6 +513,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
     currentRoundsetData = null;
 
     roundsetFilterSettings = {
+        roundsetName: constants.roundSets.hasOwnProperty(roundset) ? constants.roundSets[roundset].name : roundset,
         roundFilterStart: 1,
         roundFilterEnd: null,
         roundsetStartingCash: constants.roundSets.hasOwnProperty(roundset) ? constants.roundSets[roundset].startingCash : 650,
@@ -427,7 +525,8 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
         roundsetAdvancedFilterMode: false,
         roundsetBasicFilter: null,
         roundsetAdvancedFilterLogic: 'ANY',
-        roundsetShowHints: true
+        roundsetShowHints: true,
+        special: ""
     }
 
     if (Object.keys(presetSettings).length > 0) {
@@ -483,7 +582,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
 
     let roundsetHeaderText = document.createElement('p');
     roundsetHeaderText.classList.add('roundset-header-text', 'black-outline');
-    roundsetHeaderText.innerHTML = constants.roundSets[roundset] ? constants.roundSets[roundset].name : roundset;
+    roundsetHeaderText.innerHTML = roundsetFilterSettings.roundsetName;
     roundsetHeaderTitle.appendChild(roundsetHeaderText);
 
     let rightDiv = document.createElement('div');
@@ -497,8 +596,8 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
         goBack()
     })
     rightDiv.appendChild(modalClose);
-
-    if(roundset.startsWith("Rogue")) {
+    
+    if(roundsetFilterSettings.special.includes("Rogue")) {
         let rogueHeaderBar = document.createElement('div');
         rogueHeaderBar.classList.add('d-flex', 'jc-evenly');
         headerBar.appendChild(rogueHeaderBar);
@@ -519,7 +618,9 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
             roundsetDiv.addEventListener('click', () => {
                 showLoading();
                 goBack();
-                showRoundsetModel(source, rs);
+                showRoundsetModel(source, rs, {
+                    special: constants.roundSets[rs].special ? constants.roundSets[rs].special : ""
+                });
             })
             rogueHeaderBar.appendChild(roundsetDiv);
 
@@ -536,7 +637,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
             addTooltip(roundsetDiv, desc, {});
         });
     }
-    if(roundset.startsWith("Frontier")) {
+    if(roundsetFilterSettings.special.includes("Frontier")) {
         let frontierHeaderBar = document.createElement('div');
         frontierHeaderBar.classList.add('d-flex', 'jc-center', 'ai-center');
         headerBar.appendChild(frontierHeaderBar);
@@ -598,7 +699,9 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
             roundsetBtn.addEventListener('click', () => {
                 showLoading();
                 goBack();
-                showRoundsetModel(source, rs);
+                showRoundsetModel(source, rs, {
+                    special: constants.roundSets[rs].special ? constants.roundSets[rs].special : ""
+                });
             })
             frontierRoundsetsDiv.appendChild(roundsetBtn)
         })
@@ -607,13 +710,13 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
     }
     if (roundsetType === 'boss' && roundsetFilterSettings.roundsetShowModified) {
         let bossExplanations = {
-            "BloonariusRoundSet": "Bloonarius Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
-            "LychRoundSet": "Lych Changes: Rounds 40 to 48 have extra MOABs added in for Lych to resurrect when hitting a skull. Rounds that Lych spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
-            "VortexRoundSet": "Vortex Changes: A small group of rounds have Bloons upgraded to speedier ones as well as adding some extra faster bloons. Rounds that Vortex spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
-            "DreadbloonRoundSet": "Dreadbloon Changes: In general summary, Zebra -> Lead, Lead -> Fortified Lead, Rainbow -> Ceramic, Ceramic -> Fortified Ceramic. After Round 50, every other Blue MOAB is fortified, and after round 70 all Blue MOABs are fortified. There are some exceptions. Rounds that Dreadbloon spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
-            "PhayzeRoundSet": "Phayze Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
-            "BlastapopoulosRoundSet": "Blastapopoulos Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
-            "DiamondbackRoundSet": "Diamondback Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+            "bloonarius": "Bloonarius Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+            "lych": "Lych Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+            "vortex": "Vortex Changes: A small group of rounds have Bloons upgraded to speedier ones as well as adding some extra faster bloons. Rounds that Vortex spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+            "dreadbloon": "Dreadbloon Changes: In general summary, Zebra -> Lead, Lead -> Fortified Lead, Rainbow -> Ceramic, Ceramic -> Fortified Ceramic. After Round 50, every other Blue MOAB is fortified, and after round 70 all Blue MOABs are fortified. There are some exceptions. Rounds that Dreadbloon spawns from are changed to spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+            "phayze": "Phayze Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+            "blastapopoulos": "Blastapopoulos Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
+            "diamondback": "Diamondback Changes: Only rounds that the boss spawns from are changed. They now spawn Bloons that are one tier lower than normal with 10 seconds of delay.",
         }
         headerBar.appendChild(generateComment('Showing modified rounds. Disable "Only Modified" in Roundset Settings to show all rounds.<br>' + bossExplanations[selectedRoundset]));
     }

@@ -23,9 +23,9 @@
             ],
             "roundNumber": 40,
             "rbe": 2512,
-            "income": 1852,
+            "income": 1852.0,
             "rbeSum": 2512,
-            "incomeSum": 1852
+            "incomeSum": 1852.0
         },
         {
             "bloonGroups": [

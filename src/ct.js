@@ -2077,7 +2077,7 @@ function openTileModal(tileData, source) {
         showLoading();
         let roundset = "DefaultRoundSet";
         if (tileData.GameData.subGameType == 4) {
-            roundset = constants.bossesInOrder[tileData.GameData.bossData.bossBloon] + "RoundSet";
+            roundset = constants.bossesInOrder[tileData.GameData.bossData.bossBloon].toLowerCase();
         }
         let endRound = tileData.GameData.dcModel.startRules.endRound;
         if (endRound == -1) {

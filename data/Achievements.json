@@ -1,2187 +1,2030 @@
 {
-    "0": {
+    "1": {
         "name": "Impoppable",
-        "description": "Pop 100,000,000 Bloons",
         "model": {
             "achievementId": 1,
             "achievementIcon": "Impoppable",
-            "hiddenAchievementIcon": "",
             "subscript": "100M",
             "achievementGoal": 100000000,
             "loot": "MonkeyMoney:1000#Power:SuperMonkeyStorm,5#InstaMonkey:SuperMonkey,302",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "1": {
+    "2": {
         "name": "MOAB Assassin",
-        "description": "Destroy 25,000 MOABs",
         "model": {
             "achievementId": 2,
             "achievementIcon": "MOAB",
-            "hiddenAchievementIcon": "",
             "subscript": "25K",
             "achievementGoal": 25000,
             "loot": "MonkeyMoney:250#InstaMonkey:BombShooter,000",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "2": {
+    "3": {
         "name": "BFB Brawler",
-        "description": "Destroy 10,000 BFBs",
         "model": {
             "achievementId": 3,
             "achievementIcon": "BFB",
-            "hiddenAchievementIcon": "",
             "subscript": "10K",
             "achievementGoal": 10000,
             "loot": "MonkeyMoney:500#Power:MoabMine,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "3": {
+    "4": {
         "name": "ZOMGinator",
-        "description": "Destroy 5,000 ZOMGs",
         "model": {
             "achievementId": 4,
             "achievementIcon": "ZOMG",
-            "hiddenAchievementIcon": "",
             "subscript": "5K",
             "achievementGoal": 5000,
             "loot": "MonkeyMoney:750#Power:MonkeyBoost,3#InstaMonkey:SniperMonkey,400",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "4": {
+    "5": {
         "name": "Me Did A Job on DDT",
-        "description": "Destroy 5,000 DDTs",
         "model": {
             "achievementId": 5,
             "achievementIcon": "DDT",
-            "hiddenAchievementIcon": "",
             "subscript": "5K",
             "achievementGoal": 5000,
             "loot": "MonkeyMoney:750#Power:SuperMonkeyStorm,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "5": {
+    "6": {
         "name": "Sapper",
-        "description": "Pop 5,000,000 Fortified Bloons or MOAB-Class. Avoid insta-kills and Fort stripping for best results.",
         "model": {
             "achievementId": 6,
             "achievementIcon": "FortifiedBloons",
-            "hiddenAchievementIcon": "",
             "subscript": "5M",
             "achievementGoal": 5000000,
             "loot": "MonkeyMoney:500#KnowledgePoints:1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "6": {
+    "7": {
         "name": "First Win",
-        "description": "1 Non-Tutorial Beginner map Win",
         "model": {
             "achievementId": 7,
             "achievementIcon": "BeginnerMap",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:20",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "7": {
+    "8": {
         "name": "Grasshopper",
-        "description": "Win on 9 different Beginner maps",
         "model": {
             "achievementId": 8,
             "achievementIcon": "BeginnerMap",
-            "hiddenAchievementIcon": "",
             "subscript": "9",
             "achievementGoal": 9,
             "loot": "MonkeyMoney:100#InstaMonkey:Druid,000",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "8": {
+    "9": {
         "name": "Next Level",
-        "description": "Win 1 game on an Intermediate map",
         "model": {
             "achievementId": 9,
             "achievementIcon": "IntermediateMap",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50#Power:RoadSpikes,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "9": {
+    "10": {
         "name": "Acolyte",
-        "description": "Win games on 5 different Intermediate maps",
         "model": {
             "achievementId": 10,
             "achievementIcon": "IntermediateMap",
-            "hiddenAchievementIcon": "",
             "subscript": "5",
             "achievementGoal": 5,
             "loot": "MonkeyMoney:250",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "10": {
+    "11": {
         "name": "Advanced Player",
-        "description": "Win 1 game on an Advanced map",
         "model": {
             "achievementId": 11,
             "achievementIcon": "AdvancedMap",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#Power:BananaFarmer",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "11": {
+    "13": {
         "name": "Big Monkey",
-        "description": "Deploy a tier 4 monkey tower",
         "model": {
             "achievementId": 13,
             "achievementIcon": "T4Monkey",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:20",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "12": {
+    "14": {
         "name": "Mega Monkey",
-        "description": "Deploy a tier 5 monkey tower",
         "model": {
             "achievementId": 14,
             "achievementIcon": "T5Monkey",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "13": {
+    "15": {
         "name": "Hero Time",
-        "description": "Deploy a Hero on a non-tutorial map",
         "model": {
             "achievementId": 15,
             "achievementIcon": "Heroes",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:20",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "14": {
+    "16": {
         "name": "Hero Powers Activate",
-        "description": "Use any Hero Level 3 Ability",
         "model": {
             "achievementId": 16,
             "achievementIcon": "RapidShot",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:20",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "15": {
+    "17": {
         "name": "Bigger, Badder",
-        "description": "Use any Hero Level 10 Ability",
         "model": {
             "achievementId": 17,
             "achievementIcon": "StormOfArrows",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "16": {
+    "18": {
         "name": "Epic Hero",
-        "description": "Level any Hero to Level 20",
         "model": {
             "achievementId": 18,
             "achievementIcon": "Lvl20",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 20,
             "loot": "MonkeyMoney:250",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "17": {
+    "19": {
         "name": "Monkey Avenger League",
-        "description": "Win a game for 4 different Heroes",
         "model": {
             "achievementId": 19,
             "achievementIcon": "Heroes",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 4,
             "loot": "MonkeyMoney:100",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "18": {
+    "20": {
         "name": "You've Got the Power",
-        "description": "Use Powers for the first time",
         "model": {
             "achievementId": 20,
             "achievementIcon": "Powers",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "Power:MonkeyBoost",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "19": {
+    "21": {
         "name": "Power User",
-        "description": "Use Powers 25 times",
         "model": {
             "achievementId": 21,
             "achievementIcon": "Powers",
-            "hiddenAchievementIcon": "",
             "subscript": "25",
             "achievementGoal": 25,
             "loot": "MonkeyMoney:150",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "20": {
+    "22": {
         "name": "Empowered",
-        "description": "Use Powers 100 times",
         "model": {
             "achievementId": 22,
             "achievementIcon": "Powers",
-            "hiddenAchievementIcon": "",
             "subscript": "100",
             "achievementGoal": 100,
             "loot": "MonkeyMoney:250",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "21": {
+    "23": {
         "name": "Student",
-        "description": "Apply your first Monkey Knowledge point",
         "model": {
             "achievementId": 23,
             "achievementIcon": "Knowledge",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "Power:CashDrop,2#InstaMonkey:WizardMonkey,000",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "22": {
+    "24": {
         "name": "Scholar",
-        "description": "Apply 10 Monkey Knowledge points",
         "model": {
             "achievementId": 24,
             "achievementIcon": "Knowledge",
-            "hiddenAchievementIcon": "",
             "subscript": "10",
             "achievementGoal": 10,
             "loot": "MonkeyMoney:100#InstaMonkey:Druid,001",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "23": {
+    "25": {
         "name": "Dr. Monkey",
-        "description": "Spend 106 Monkey Knowledge points",
         "model": {
             "achievementId": 25,
             "achievementIcon": "Knowledge",
-            "hiddenAchievementIcon": "",
             "subscript": "106",
             "achievementGoal": 106,
             "loot": "MonkeyMoney:1000",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "24": {
+    "26": {
         "name": "First Monkeys First",
-        "description": "Win 10 games using only Primary monkeys",
         "model": {
             "achievementId": 26,
             "achievementIcon": "PrimaryMonkey",
-            "hiddenAchievementIcon": "",
             "subscript": "10",
             "achievementGoal": 10,
             "loot": "Power:MonkeyBoost,2#InstaMonkey:DartMonkey,300",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "25": {
+    "27": {
         "name": "War Monkeys",
-        "description": "Win 10 games using only Military monkeys",
         "model": {
             "achievementId": 27,
             "achievementIcon": "MilitaryMonkey",
-            "hiddenAchievementIcon": "",
             "subscript": "10",
             "achievementGoal": 10,
             "loot": "Power:MoabMine,3#InstaMonkey:SniperMonkey,202",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "26": {
+    "28": {
         "name": "Abracadabmonkey",
-        "description": "Win 10 games using only Magic monkeys",
         "model": {
             "achievementId": 28,
             "achievementIcon": "MagicMonkey",
-            "hiddenAchievementIcon": "",
             "subscript": "10",
             "achievementGoal": 10,
             "loot": "Power:SuperMonkeyStorm#InstaMonkey:Druid,003",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "27": {
+    "29": {
         "name": "Unsung Monkeys",
-        "description": "Win 10 games using only Support monkeys",
         "model": {
             "achievementId": 29,
             "achievementIcon": "SupportMonkey",
-            "hiddenAchievementIcon": "",
             "subscript": "10",
             "achievementGoal": 10,
             "loot": "Power:BananaFarmer,2#InstaMonkey:BananaFarm,200",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "28": {
+    "30": {
         "name": "Inflated",
-        "description": "Beat round 100 in Deflation mode",
         "model": {
             "achievementId": 30,
             "achievementIcon": "Deflation",
-            "hiddenAchievementIcon": "",
             "subscript": "100",
             "achievementGoal": 100,
             "loot": "MonkeyMoney:100",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "29": {
+    "31": {
         "name": "Survivor",
-        "description": "Beat round 100 in Apopalypse mode",
         "model": {
             "achievementId": 31,
             "achievementIcon": "ApopalypseBloon",
-            "hiddenAchievementIcon": "",
             "subscript": "100",
             "achievementGoal": 100,
             "loot": "MonkeyMoney:100",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "30": {
+    "32": {
         "name": "Indie",
-        "description": "Win 25 games with Alternate Bloon Rounds",
         "model": {
             "achievementId": 32,
             "achievementIcon": "AlternateBloons",
-            "hiddenAchievementIcon": "",
             "subscript": "25",
             "achievementGoal": 25,
             "loot": "MonkeyMoney:100#Power:GlueTrap,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "31": {
+    "33": {
         "name": "Poppable",
-        "description": "Win 25 games on Impoppable Difficulty",
         "model": {
             "achievementId": 33,
             "achievementIcon": "Impoppable",
-            "hiddenAchievementIcon": "",
             "subscript": "25",
             "achievementGoal": 25,
             "loot": "MonkeyMoney:500#Power:SuperMonkeyStorm,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "32": {
+    "34": {
         "name": "Thrifty",
-        "description": "Win 10 games in Half Cash mode",
         "model": {
             "achievementId": 34,
             "achievementIcon": "HalfCash",
-            "hiddenAchievementIcon": "",
             "subscript": "10",
             "achievementGoal": 10,
             "loot": "MonkeyMoney:250#Power:CashDrop,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "33": {
+    "35": {
         "name": "Bloonzilla!",
-        "description": "Win 25 games against Double HP MOABs",
         "model": {
             "achievementId": 35,
             "achievementIcon": "DoubleHp",
-            "hiddenAchievementIcon": "",
             "subscript": "25",
             "achievementGoal": 25,
             "loot": "MonkeyMoney:250#Power:MoabMine,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "34": {
+    "36": {
         "name": "Role Reverser",
-        "description": "Win a game in Reverse mode",
         "model": {
             "achievementId": 36,
             "achievementIcon": "ReversePlay",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "35": {
+    "37": {
         "name": "Medal Winner",
-        "description": "Get all medals for a map",
         "model": {
             "achievementId": 37,
             "achievementIcon": "Medals",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#Power:PortableLake",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "36": {
+    "38": {
         "name": "Decorated Hero",
-        "description": "Get 36 difficulty medals on Beginner maps",
         "model": {
             "achievementId": 38,
             "achievementIcon": "Medals",
-            "hiddenAchievementIcon": "",
             "subscript": "36",
             "achievementGoal": 36,
             "loot": "MonkeyMoney:250#Power:Thrive,2",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "37": {
+    "39": {
         "name": "Red and Blue Makes...",
-        "description": "Pop 100,000 Purple Bloons",
         "model": {
             "achievementId": 39,
             "achievementIcon": "PurpleBloons",
-            "hiddenAchievementIcon": "",
             "subscript": "100K",
             "achievementGoal": 100000,
             "loot": "MonkeyMoney:200#Power:DartTime,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "38": {
+    "40": {
         "name": "Infrared",
-        "description": "Pop 250,000 Camo Bloons",
         "model": {
             "achievementId": 40,
             "achievementIcon": "CamoBloons",
-            "hiddenAchievementIcon": "",
             "subscript": "250K",
             "achievementGoal": 250000,
             "loot": "MonkeyMoney:100#Power:CamoTrap,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "39": {
+    "41": {
         "name": "Our Powers Combined",
-        "description": "Collect at least 12 different Powers",
         "model": {
             "achievementId": 41,
             "achievementIcon": "Powers",
-            "hiddenAchievementIcon": "",
             "subscript": "12",
             "achievementGoal": 12,
             "loot": "MonkeyMoney:200",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "40": {
+    "42": {
         "name": "Challenger",
-        "description": "Win 1 Daily Challenge",
         "model": {
             "achievementId": 42,
             "achievementIcon": "Challenges",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:25",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "41": {
+    "43": {
         "name": "Challenge Apprentice",
-        "description": "Win 10 Daily Challenges",
         "model": {
             "achievementId": 43,
             "achievementIcon": "Challenges",
-            "hiddenAchievementIcon": "",
             "subscript": "10",
             "achievementGoal": 10,
             "loot": "MonkeyMoney:100#Power:Pontoon",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "42": {
+    "44": {
         "name": "Challenge Master",
-        "description": "Win 100 Daily Challenges",
         "model": {
             "achievementId": 44,
             "achievementIcon": "Challenges",
-            "hiddenAchievementIcon": "",
             "subscript": "100",
             "achievementGoal": 100,
             "loot": "MonkeyMoney:500",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "43": {
+    "45": {
         "name": "Perfect Week",
-        "description": "Complete all Daily Challenges in a week",
         "model": {
             "achievementId": 45,
             "achievementIcon": "Challenges",
-            "hiddenAchievementIcon": "",
             "subscript": "100%",
             "achievementGoal": 7,
             "loot": "MonkeyMoney:250",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "44": {
-        "name": "Knowledgeable Primate",
-        "description": "Unlock all Monkey Knowledge in one branch",
+    "46": {
+        "name": "Knowledgable Primate",
         "model": {
             "achievementId": 46,
             "achievementIcon": "Knowledge",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 100,
             "loot": "InstaMonkey:WizardMonkey,300#Power:Thrive",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "45": {
-        "name": "Bloons Master",
-        "description": "Beat 1 map in CHIMPS mode",
+    "47": {
+        "name": "Clicker",
         "model": {
             "achievementId": 47,
             "achievementIcon": "CHIMPS",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:250#KnowledgePoints:1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "46": {
-        "name": "Superior Bloons Master",
-        "description": "Beat 5 maps in CHIMPS mode",
+    "48": {
+        "name": "Superior Clicker",
         "model": {
             "achievementId": 48,
             "achievementIcon": "CHIMPS",
-            "hiddenAchievementIcon": "",
             "subscript": "5",
             "achievementGoal": 5,
             "loot": "MonkeyMoney:1000#KnowledgePoints:2",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "47": {
-        "name": "Ultimate Bloons Master",
-        "description": "Beat 15 maps in CHIMPS mode",
+    "49": {
+        "name": "Ultimate Clicker",
         "model": {
             "achievementId": 49,
             "achievementIcon": "CHIMPS",
-            "hiddenAchievementIcon": "",
             "subscript": "15",
             "achievementGoal": 15,
             "loot": "MonkeyMoney:2000#KnowledgePoints:4",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "48": {
+    "50": {
         "name": "Super BAD",
-        "description": "Destroy 1,000 BADs",
         "model": {
             "achievementId": 50,
             "achievementIcon": "BAD",
-            "hiddenAchievementIcon": "",
             "subscript": "1K",
             "achievementGoal": 1000,
             "loot": "MonkeyMoney:500#Power:RoadSpikes,10",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 1
     },
-    "49": {
+    "51": {
         "name": "Co-operation",
-        "description": "Beat 1 map in Co-op mode",
         "model": {
             "achievementId": 51,
             "achievementIcon": "Coop2Players",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50",
             "isCoop": true,
             "hidden": false
-        }
+        },
+        "added": 11
     },
-    "50": {
+    "52": {
         "name": "Four times the fun",
-        "description": "Beat 1 map in 4-player Co-op mode",
         "model": {
             "achievementId": 52,
             "achievementIcon": "Coop4Players",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100",
             "isCoop": true,
             "hidden": false
-        }
+        },
+        "added": 11
     },
-    "51": {
-        "name": "Triple threat",
-        "description": "Beat 1 map in 3-player Co-op mode",
+    "53": {
+        "name": "Triple Threat",
         "model": {
             "achievementId": 53,
             "achievementIcon": "Coop3Players",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:75",
             "isCoop": true,
             "hidden": false
-        }
+        },
+        "added": 11
     },
-    "52": {
+    "54": {
         "name": "Collaborate!",
-        "description": "Have 4 Heroes on screen at once",
         "model": {
             "achievementId": 54,
             "achievementIcon": "Heroes",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50",
             "isCoop": true,
             "hidden": false
-        }
+        },
+        "added": 11
     },
-    "53": {
+    "55": {
         "name": "When the going gets tough...",
-        "description": "Win 10 games on Hard difficulty in Co-op mode",
         "model": {
             "achievementId": 55,
             "achievementIcon": "CoopLongMatch",
-            "hiddenAchievementIcon": "",
             "subscript": "10",
             "achievementGoal": 10,
             "loot": "MonkeyMoney:200#Power:SuperMonkeyStorm,2",
             "isCoop": true,
             "hidden": false
-        }
+        },
+        "added": 11
     },
-    "54": {
+    "56": {
         "name": "Kind Benefactor",
-        "description": "Give 10,000 Cash in Co-op mode",
         "model": {
             "achievementId": 56,
             "achievementIcon": "MMBundle",
-            "hiddenAchievementIcon": "",
             "subscript": "10K",
             "achievementGoal": 10000,
             "loot": "MonkeyMoney:25",
             "isCoop": true,
             "hidden": false
-        }
+        },
+        "added": 11
     },
-    "55": {
+    "57": {
         "name": "Generous Benefactor",
-        "description": "Give 50,000 Cash in Co-op mode",
         "model": {
             "achievementId": 57,
             "achievementIcon": "MMBundle",
-            "hiddenAchievementIcon": "",
             "subscript": "50K",
             "achievementGoal": 50000,
             "loot": "MonkeyMoney:50",
             "isCoop": true,
             "hidden": false
-        }
+        },
+        "added": 11
     },
-    "56": {
+    "58": {
         "name": "Monkey Contributor",
-        "description": "Give 100,000 Cash in Co-op mode",
         "model": {
             "achievementId": 58,
             "achievementIcon": "MMBundle",
-            "hiddenAchievementIcon": "",
             "subscript": "100K",
             "achievementGoal": 100000,
             "loot": "MonkeyMoney:100",
             "isCoop": true,
             "hidden": false
-        }
+        },
+        "added": 11
     },
-    "57": {
+    "59": {
         "name": "Monkey Philanthropist",
-        "description": "Give 1,000,000 Cash in Co-op mode",
         "model": {
             "achievementId": 59,
             "achievementIcon": "MMBundle",
-            "hiddenAchievementIcon": "",
             "subscript": "1M",
             "achievementGoal": 1000000,
             "loot": "KnowledgePoints:1",
             "isCoop": true,
             "hidden": false
-        }
+        },
+        "added": 11
     },
-    "58": {
+    "60": {
         "name": "Powershare",
-        "description": "Use 10 Powers in Co-op mode",
         "model": {
             "achievementId": 60,
             "achievementIcon": "Powers",
-            "hiddenAchievementIcon": "",
             "subscript": "10",
             "achievementGoal": 10,
             "loot": "MonkeyMoney:50",
             "isCoop": true,
             "hidden": false
-        }
+        },
+        "added": 11
     },
-    "59": {
+    "61": {
         "name": "Power overwhelming!",
-        "description": "Use 100 Powers in Co-op mode",
         "model": {
             "achievementId": 61,
             "achievementIcon": "Powers",
-            "hiddenAchievementIcon": "",
             "subscript": "100",
             "achievementGoal": 100,
             "loot": "MonkeyMoney:200",
             "isCoop": true,
             "hidden": false
-        }
+        },
+        "added": 11
     },
-    "60": {
+    "62": {
         "name": "Insta-defense",
-        "description": "Use 5 Insta Monkeys in Co-op mode",
         "model": {
             "achievementId": 62,
             "achievementIcon": "InstaMonkey",
-            "hiddenAchievementIcon": "",
             "subscript": "5",
             "achievementGoal": 5,
             "loot": "Power:CashDrop,2#Power:PortableLake,1",
             "isCoop": true,
             "hidden": false
-        }
+        },
+        "added": 11
     },
-    "61": {
-        "name": "Co-op Popper",
-        "description": "Pop 10,000,000 Bloons in Co-op mode",
+    "63": {
+        "name": "Co-op Popper!",
         "model": {
             "achievementId": 63,
             "achievementIcon": "AlternateBloons",
-            "hiddenAchievementIcon": "",
             "subscript": "10M",
             "achievementGoal": 10000000,
             "loot": "MonkeyMoney:300",
             "isCoop": true,
             "hidden": false
-        }
+        },
+        "added": 11
     },
-    "62": {
+    "64": {
         "name": "Big Bloons",
-        "description": "Pat likes hugging Big Bloons even more",
         "model": {
             "achievementId": 64,
             "achievementIcon": "BigBloonMode",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 10,
             "loot": "BigBloonsMode",
             "isCoop": false,
             "hidden": true
-        }
+        },
+        "added": 9
     },
-    "63": {
-        "name": "Alchermistman and Bloonacleboy",
-        "description": "You have it set to M for mini, when it should be W for wumbo",
+    "65": {
+        "name": "Small Bloons",
         "model": {
             "achievementId": 65,
             "achievementIcon": "SmallBloonMode",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 900000,
             "loot": "SmallBloonsMode",
             "isCoop": false,
             "hidden": true
-        }
+        },
+        "added": 12
     },
-    "64": {
+    "66": {
         "name": "2TC",
-        "description": "Complete a game in CHIMPS Difficulty with only 2 monkey towers",
         "model": {
             "achievementId": 66,
             "achievementIcon": "CHIMPS",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "2",
             "achievementGoal": 1,
             "loot": "KnowledgePoints:2#InstaMonkey:WizardMonkey,040",
             "isCoop": false,
             "hidden": true
-        }
+        },
+        "added": 12
     },
-    "65": {
+    "67": {
         "name": "Snap of your fingers",
-        "description": "Finish a game with exactly half your starting lives and half your starting cash",
         "model": {
             "achievementId": 67,
             "achievementIcon": "FingerSnap",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "RandomInstaMonkey:1,2#RandomInstaMonkey:2,2#RandomInstaMonkey:3,1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 12
     },
-    "66": {
+    "68": {
         "name": "Bill Greates",
-        "description": "Send $500,000 to an ally in co-op in one go",
         "model": {
             "achievementId": 68,
             "achievementIcon": "MMBundle",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "500K",
             "achievementGoal": 1,
             "loot": "Power:CashDrop,5",
             "isCoop": true,
             "hidden": true
-        }
+        },
+        "added": 12
     },
-    "67": {
+    "69": {
         "name": "Bloontona 500",
-        "description": "Gain entry to 500 races",
         "model": {
             "achievementId": 69,
             "achievementIcon": "Race",
-            "hiddenAchievementIcon": "",
             "subscript": "500",
             "achievementGoal": 500,
             "loot": "MonkeyMoney:250",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 12
     },
-    "68": {
+    "70": {
         "name": "Rookie of the year",
-        "description": "Complete a race in under 10 minutes",
         "model": {
             "achievementId": 70,
             "achievementIcon": "Race",
-            "hiddenAchievementIcon": "",
             "subscript": "10:00:00",
             "achievementGoal": 1,
             "loot": "Power:MonkeyBoost,2#Power:DartTime,2",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 12
     },
-    "69": {
+    "71": {
         "name": "Rising star",
-        "description": "Complete a race in under 5 minutes",
         "model": {
             "achievementId": 71,
             "achievementIcon": "Race",
-            "hiddenAchievementIcon": "",
             "subscript": "05:00:00",
             "achievementGoal": 1,
             "loot": "KnowledgePoints:1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 12
     },
-    "70": {
+    "72": {
         "name": "Top of your game",
-        "description": "Complete any race in under 3 minutes",
         "model": {
             "achievementId": 72,
             "achievementIcon": "Race",
-            "hiddenAchievementIcon": "",
             "subscript": "03:00:00",
             "achievementGoal": 1,
             "loot": "InstaMonkey:HeliPilot,130",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 12
     },
-    "71": {
+    "73": {
         "name": "The greatest challenge",
-        "description": "Create or Play 200 challenges",
         "model": {
             "achievementId": 73,
             "achievementIcon": "CreateChallenges",
-            "hiddenAchievementIcon": "",
             "subscript": "200",
             "achievementGoal": 200,
             "loot": "Power:CashDrop#Power:TechBot,5",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 12
     },
-    "72": {
-        "name": "Lookin fab",
-        "description": "Win 100 games using a skin of any Hero",
+    "74": {
+        "name": "Looking fab",
         "model": {
             "achievementId": 74,
             "achievementIcon": "HeroSkin",
-            "hiddenAchievementIcon": "",
             "subscript": "100",
             "achievementGoal": 100,
             "loot": "MonkeyMoney:500",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 12
     },
-    "73": {
+    "75": {
         "name": "Therpopylae",
-        "description": "Pop 200,000 Bloons on Peninsula",
         "model": {
             "achievementId": 75,
             "achievementIcon": "AlternateBloons",
-            "hiddenAchievementIcon": "",
             "subscript": "200",
             "achievementGoal": 200000,
             "loot": "Power:PortableLake,2#InstaMonkey:MonkeyBuccaneer,040",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 12
     },
-    "74": {
+    "76": {
         "name": "Bloon Master Populous",
-        "description": "Deal 1 billion damage with the Bloon Master Alchemist",
         "model": {
             "achievementId": 76,
             "achievementIcon": "T5Alchemist",
-            "hiddenAchievementIcon": "",
             "subscript": "1B",
             "achievementGoal": 1000000000,
             "loot": "InstaMonkey:Alchemist,104",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 12
     },
-    "75": {
+    "77": {
         "name": "I see you",
-        "description": "Reveal 10,000 Bloons using Shimmer",
         "model": {
             "achievementId": 77,
             "achievementIcon": "Shimmer",
-            "hiddenAchievementIcon": "",
             "subscript": "10K",
             "achievementGoal": 10000,
             "loot": "Power:CamoTrap,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 12
     },
-    "76": {
+    "78": {
         "name": "Tetrimino",
-        "description": "Place 50 monkey towers on a map at once",
         "model": {
             "achievementId": 78,
             "achievementIcon": "PrimaryMonkey",
-            "hiddenAchievementIcon": "",
             "subscript": "50",
             "achievementGoal": 1,
             "loot": "RandomInstaMonkey:0,2",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 13
     },
-    "77": {
+    "80": {
         "name": "All for one and one for one",
-        "description": "Win a game with only 1 monkey tower on screen at any one time in any Hard Difficulty game",
         "model": {
             "achievementId": 80,
             "achievementIcon": "PrimaryMonkey",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "KnowledgePoints:1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 13
     },
-    "78": {
-        "name": "Master of life",
-        "description": "Have 1000 lives at once in a single game",
+    "81": {
+        "name": "Master of Life",
         "model": {
             "achievementId": 81,
             "achievementIcon": "Lives",
-            "hiddenAchievementIcon": "",
             "subscript": "1K",
             "achievementGoal": 1,
             "loot": "Power:SuperMonkeyStorm,1#Power:GlueTrap,1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 13
     },
-    "79": {
+    "82": {
         "name": "Rainbow is Magic",
-        "description": "Pop 20,000 Rainbow Bloons with Magic Monkeys",
         "model": {
             "achievementId": 82,
             "achievementIcon": "RainbowBloons",
-            "hiddenAchievementIcon": "",
             "subscript": "20K",
             "achievementGoal": 20000,
             "loot": "Power:MonkeyBoost,1#Power:EnergisingTotem,1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 13
     },
-    "80": {
+    "83": {
         "name": "Strangely Adorable",
-        "description": "When the planets align ever so nicely",
         "model": {
             "achievementId": 83,
             "achievementIcon": "VengefulAdora",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "InstaMonkey:SuperMonkey,300",
             "isCoop": false,
             "hidden": true
-        }
+        },
+        "added": 14
     },
-    "81": {
+    "84": {
         "name": "Josh's Constant",
-        "description": "B-B-Beat any Expert map on CHIMPS with $40,870 or more spent on 1 Spike Factory",
         "model": {
             "achievementId": 84,
             "achievementIcon": "CHIMPS",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "$40K",
             "achievementGoal": 1,
             "loot": "InstaMonkey:SpikeFactory,003",
             "isCoop": false,
             "hidden": true
-        }
+        },
+        "added": 14
     },
-    "82": {
-        "name": "What did it cost? - Everything",
-        "description": "Sacrifice every tower type in the game to the Temple",
+    "85": {
+        "name": "What did it cost",
         "model": {
             "achievementId": 85,
             "achievementIcon": "SunTemple",
-            "hiddenAchievementIcon": "",
             "subscript": "",
-            "achievementGoal": 23,
+            "achievementGoal": 1,
             "loot": "InstaMonkey:BoomerangMonkey,001#InstaMonkey:MonkeyAce,001#InstaMonkey:Druid,010#InstaMonkey:BananaFarm,001",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 14
     },
-    "83": {
-        "name": "2 MegaPops",
-        "description": "Complete a game of CHIMPS with more than 2 million damage dealt by one tower",
+    "86": {
+        "name": "2 Mega Pops",
         "model": {
             "achievementId": 86,
             "achievementIcon": "CHIMPS",
-            "hiddenAchievementIcon": "",
             "subscript": "2M",
             "achievementGoal": 1,
             "loot": "Power:MonkeyBoost#Power:DartTime",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 14
     },
-    "84": {
+    "87": {
         "name": "A Crate Time",
-        "description": "Open a Diamond Crate in any Collection Event",
         "model": {
             "achievementId": 87,
             "achievementIcon": "DiamondBox",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "RandomInstaMonkey:4,1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 14
     },
-    "85": {
-        "name": "Axis of Havoc",
-        "description": "Have one of each T5 sniper in one game of CHIMPS",
+    "88": {
+        "name": "Axis of Havok",
         "model": {
             "achievementId": 88,
             "achievementIcon": "T5Snipers",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "Power:GlueTrap,2#Power:CamoTrap,2",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 14
     },
-    "86": {
+    "89": {
         "name": "Tower Keeper",
-        "description": "Have 200 insta monkeys in your inventory at one time",
         "model": {
             "achievementId": 89,
             "achievementIcon": "InstaMonkey",
-            "hiddenAchievementIcon": "",
             "subscript": "200",
             "achievementGoal": 200,
             "loot": "MonkeyMoney:200",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 14
     },
-    "87": {
+    "90": {
         "name": "A year in the making",
-        "description": "Open the Daily Chest 365 times",
         "model": {
             "achievementId": 90,
             "achievementIcon": "DailyChest",
-            "hiddenAchievementIcon": "",
             "subscript": "365",
             "achievementGoal": 365,
             "loot": "MonkeyMoney:365#KnowledgePoints:1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 14
     },
-    "88": {
+    "91": {
         "name": "Kali Maaaaaaaa",
-        "description": "Gain 10 levels for Adora in one round",
         "model": {
             "achievementId": 91,
             "achievementIcon": "Adora",
-            "hiddenAchievementIcon": "",
             "subscript": "10",
             "achievementGoal": 1,
             "loot": "Power:CashDrop",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 14
     },
-    "89": {
-        "name": "Golden Ticket",
-        "description": "Bloompa-loompa-doompa-dee-doo!",
+    "92": {
+        "name": "GoldenTicket",
         "model": {
             "achievementId": 92,
             "achievementIcon": "GoldenTicket",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "SmallTowersMode",
             "isCoop": false,
             "hidden": true
-        }
+        },
+        "added": 17
     },
-    "90": {
+    "93": {
         "name": "Adventurer",
-        "description": "Complete an Odyssey",
         "model": {
             "achievementId": 93,
             "achievementIcon": "OdysseyStar",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 20
     },
-    "91": {
+    "94": {
         "name": "Seasoned Adventurer",
-        "description": "Complete a Hard Odyssey",
         "model": {
             "achievementId": 94,
             "achievementIcon": "OdysseyHardMode",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#Power:CashDrop",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 20
     },
-    "92": {
+    "95": {
         "name": "No Stone Left Unturned",
-        "description": "Complete all 3 difficulties of a single Odyssey",
         "model": {
             "achievementId": 95,
             "achievementIcon": "OdysseyModes",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:150#RandomInstaMonkey:2,1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 20
     },
-    "93": {
+    "96": {
         "name": "12 Tasks of Monk-ules",
-        "description": "Complete 12 different Odysseys",
         "model": {
             "achievementId": 96,
             "achievementIcon": "OdysseyHardMode",
-            "hiddenAchievementIcon": "",
             "subscript": "12",
             "achievementGoal": 12,
             "loot": "MonkeyMoney:100#Power:SuperMonkeyStorm#Power:DartTime",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 20
     },
-    "94": {
+    "97": {
         "name": "Modysseus Rises",
-        "description": "Complete 50 Odysseys",
         "model": {
             "achievementId": 97,
             "achievementIcon": "Odyssey",
-            "hiddenAchievementIcon": "",
             "subscript": "50",
             "achievementGoal": 50,
             "loot": "MonkeyMoney:250#RandomInstaMonkey:3,1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 20
     },
-    "95": {
+    "98": {
         "name": "Modysseus Forever",
-        "description": "Complete 100 Odysseys",
         "model": {
             "achievementId": 98,
             "achievementIcon": "Odyssey",
-            "hiddenAchievementIcon": "",
             "subscript": "100",
             "achievementGoal": 100,
             "loot": "MonkeyMoney:500",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 20
     },
-    "96": {
+    "99": {
         "name": "Full Speed Ahead!",
-        "description": "Complete an Odyssey in under 1 hour",
         "model": {
             "achievementId": 99,
             "achievementIcon": "OdysseyTimer",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#Power:GlueTrap#Power:CamoTrap",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 20
     },
-    "97": {
+    "100": {
         "name": "All About That Bling",
-        "description": "Purchase a Trophy Store item",
         "model": {
             "achievementId": 100,
             "achievementIcon": "GooglyEyes",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#Power:TechBot,2",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 20
     },
-    "98": {
+    "101": {
         "name": "Mo Heroes, Mo Problems",
-        "description": "Complete an Odyssey without a Hero",
         "model": {
             "achievementId": 101,
             "achievementIcon": "OdysseyNoHero",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "RandomInstaMonkey:1,3",
             "isCoop": false,
             "hidden": true
-        }
+        },
+        "added": 20
     },
-    "99": {
+    "102": {
         "name": "Chunky Monkeys",
-        "description": "I like 'em big, I like 'em chunkay",
         "model": {
             "achievementId": 102,
             "achievementIcon": "ChunkyMonkey",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "10",
             "achievementGoal": 10,
             "loot": "BigTowersMode",
             "isCoop": false,
             "hidden": true
-        }
+        },
+        "added": 21
     },
-    "100": {
+    "103": {
         "name": "Oathbreakers",
-        "description": "Reanimate 250,000 Bloons to fight on your side using the Necromancer Wizard",
         "model": {
             "achievementId": 103,
             "achievementIcon": "NecroBloon",
-            "hiddenAchievementIcon": "",
             "subscript": "250K",
             "achievementGoal": 250000,
             "loot": "MonkeyMoney:250#InstaMonkey:WizardMonkey,004",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 21
     },
-    "101": {
+    "104": {
         "name": "Living on the Edge",
-        "description": "Win any non-CHIMPS/Impoppable game with only 1 life remaining",
         "model": {
             "achievementId": 104,
             "achievementIcon": "Lives",
-            "hiddenAchievementIcon": "",
             "subscript": "1",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#InstaMonkey:Druid,002",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 21
     },
-    "102": {
+    "105": {
         "name": "Freaky Friday",
-        "description": "Use the Alchemist's Transforming Tonic abilities 100 times",
         "model": {
             "achievementId": 105,
             "achievementIcon": "Tonic",
-            "hiddenAchievementIcon": "",
             "subscript": "100",
             "achievementGoal": 100,
             "loot": "MonkeyMoney:150#InstaMonkey:Alchemist,040",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 21
     },
-    "103": {
+    "106": {
         "name": "Monkey Fan Club",
-        "description": "Create or Login to your Ninja Kiwi account to cloud save your progress",
         "model": {
             "achievementId": 106,
             "achievementIcon": "FanClub",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:500#InstaMonkey:DartMonkey,040",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 21
     },
-    "104": {
-        "name": "Ready Player One?",
-        "description": "Host and win 10 Co-op games",
+    "107": {
+        "name": "ReadyPlayerOne",
         "model": {
             "achievementId": 107,
             "achievementIcon": "ReadyPlayer",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 10,
             "loot": "MonkeyMoney:150#Power:SuperMonkeyStorm",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 22
     },
-    "105": {
-        "name": "Crash of the Titans",
-        "description": "Strip the fortifications from Fortified DDTs 3000 times",
+    "108": {
+        "name": "CrashOfTheTitans",
         "model": {
             "achievementId": 108,
             "achievementIcon": "StripFortification",
-            "hiddenAchievementIcon": "",
             "subscript": "3K",
             "achievementGoal": 3000,
             "loot": "MonkeyMoney:300#InstaMonkey:MortarMonkey,004",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 22
     },
-    "106": {
-        "name": "A La Code",
-        "description": "Submit a Challenge to the Content Browser",
+    "109": {
+        "name": "ALaCode",
         "model": {
             "achievementId": 109,
             "achievementIcon": "EnterCode",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 22
     },
-    "107": {
+    "110": {
         "name": "Regifted",
-        "description": "Pop 1,000,000 Bloons with Dartling Gunners",
         "model": {
             "achievementId": 110,
             "achievementIcon": "GiftBox",
-            "hiddenAchievementIcon": "",
             "subscript": "1M",
             "achievementGoal": 1000000,
             "loot": "MonkeyMoney:200#InstaMonkey:DartlingGunner,300#InstaMonkey:DartlingGunner,030#InstaMonkey:DartlingGunner,003",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 22
     },
-    "108": {
-        "name": "Coupon Crazy",
-        "description": "Spend at least 50 Trophies in the Trophy Store",
+    "111": {
+        "name": "CouponCrazy",
         "model": {
             "achievementId": 111,
             "achievementIcon": "Trophy",
-            "hiddenAchievementIcon": "",
             "subscript": "50",
             "achievementGoal": 50,
             "loot": "MonkeyMoney:100#Trophy:25",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 22
     },
-    "109": {
-        "name": "Instant Gratification",
-        "description": "Use a Tier 5 Insta Monkey. NOTE: even after being used, Instas still count toward your collection!",
+    "112": {
+        "name": "InstantGratification",
         "model": {
             "achievementId": 112,
             "achievementIcon": "InstaT5",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#RandomInstaMonkey:5,1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 22
     },
-    "110": {
-        "name": "Insta Century",
-        "description": "Use 100 Insta Monkeys. NOTE: even after being used, Instas still count toward your collection!",
+    "113": {
+        "name": "InstaCentury",
         "model": {
             "achievementId": 113,
             "achievementIcon": "Instas",
-            "hiddenAchievementIcon": "",
             "subscript": "100",
             "achievementGoal": 100,
             "loot": "MonkeyMoney:1000#Power:MonkeyBoost,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 22
     },
-    "111": {
-        "name": "Limited Run",
-        "description": "Purchase at least 1 new Limited Time item in the Trophy Store",
+    "114": {
+        "name": "LimitedRun",
         "model": {
             "achievementId": 114,
             "achievementIcon": "LimitedRun",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#Power:DartTime",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 22
     },
-    "112": {
-        "name": "Tools to Darwin",
-        "description": "Upgrade towers 20,000 times",
+    "115": {
+        "name": "ToolsToDarwin",
         "model": {
             "achievementId": 115,
             "achievementIcon": "Upgrade",
-            "hiddenAchievementIcon": "",
             "subscript": "20K",
             "achievementGoal": 20000,
             "loot": "MonkeyMoney:200#RandomInstaMonkey:2,2",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 22
     },
-    "113": {
-        "name": "Stubborn Strategy",
-        "description": "Just because a thing can be done, does not mean that it should be done",
+    "116": {
+        "name": "StubbornStrategy",
         "model": {
             "achievementId": 116,
             "achievementIcon": "Maps",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 100,
             "loot": "MonkeyMoney:500#Power:CashDrop,3",
             "isCoop": false,
             "hidden": true
-        }
+        },
+        "added": 22
     },
-    "114": {
-        "name": "Achievement of Achievements",
-        "description": "Collect 35 achievements",
+    "117": {
+        "name": "Achievement Of Achievements",
         "model": {
             "achievementId": 117,
             "achievementIcon": "Achievements",
-            "hiddenAchievementIcon": "",
             "subscript": "35",
             "achievementGoal": 35,
             "loot": "MonkeyMoney:250",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 26
     },
-    "115": {
-        "name": "Hook, Line, and Sinker",
-        "description": "Rope in 3,000 MOAB-Class Bloons using the MOAB Takedown ability",
+    "118": {
+        "name": "Hook Line And Sinker",
         "model": {
             "achievementId": 118,
             "achievementIcon": "Takedown",
-            "hiddenAchievementIcon": "",
             "subscript": "3000",
             "achievementGoal": 3000,
             "loot": "MonkeyMoney:100#InstaMonkey:MonkeyBuccaneer,040#InstaMonkey:Druid,030",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 26
     },
-    "116": {
+    "119": {
         "name": "Moving House",
-        "description": "Redeploy 1,000 monkey towers using the Support Chinook",
         "model": {
             "achievementId": 119,
             "achievementIcon": "SupportChinook",
-            "hiddenAchievementIcon": "",
             "subscript": "1000",
             "achievementGoal": 1000,
             "loot": "MonkeyMoney:150#Power:CashDrop#Power:Thrive",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 26
     },
-    "117": {
+    "120": {
         "name": "Social Butterfly",
-        "description": "Use emotes 100 times in co-op games",
         "model": {
             "achievementId": 120,
             "achievementIcon": "Emotes",
-            "hiddenAchievementIcon": "",
             "subscript": "100",
             "achievementGoal": 100,
             "loot": "Trophy:20",
             "isCoop": true,
             "hidden": false
-        }
+        },
+        "added": 26
     },
-    "118": {
-        "name": "So Shiny!",
-        "description": "Pop 20 Golden Bloons",
+    "121": {
+        "name": "So Shiny",
         "model": {
             "achievementId": 121,
             "achievementIcon": "GoldenBloon",
-            "hiddenAchievementIcon": "",
             "subscript": "20",
             "achievementGoal": 20,
             "loot": "MonkeyMoney:50#InstaMonkey:IceMonkey,011",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 26
     },
-    "119": {
+    "122": {
         "name": "Glittering Gold",
-        "description": "Pop 100 Golden Bloons",
         "model": {
             "achievementId": 122,
             "achievementIcon": "GoldenBloon",
-            "hiddenAchievementIcon": "",
             "subscript": "100",
             "achievementGoal": 100,
             "loot": "MonkeyMoney:100#InstaMonkey:GlueGunner,020",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 26
     },
-    "120": {
+    "123": {
         "name": "Glorious Gold",
-        "description": "Pop 500 Golden Bloons",
         "model": {
             "achievementId": 123,
             "achievementIcon": "GoldenBloon",
-            "hiddenAchievementIcon": "",
             "subscript": "500",
             "achievementGoal": 500,
             "loot": "MonkeyMoney:150#InstaMonkey:SniperMonkey,003",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 26
     },
-    "121": {
+    "124": {
         "name": "Magical Gold",
-        "description": "Pop 50 Golden Bloons in Magic Monkeys only mode",
         "model": {
             "achievementId": 124,
             "achievementIcon": "GoldenBloonMagic",
-            "hiddenAchievementIcon": "",
             "subscript": "50",
             "achievementGoal": 50,
             "loot": "MonkeyMoney:150#InstaMonkey:NinjaMonkey,003",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 26
     },
-    "122": {
+    "125": {
         "name": "Team Player",
-        "description": "Win 25 times with Monkey Teams",
         "model": {
             "achievementId": 125,
             "achievementIcon": "MonkeyTeams",
-            "hiddenAchievementIcon": "",
             "subscript": "25",
             "achievementGoal": 25,
             "loot": "RandomInstaMonkey:1,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 26
     },
-    "123": {
+    "126": {
         "name": "Team Captain",
-        "description": "Win 50 times with Monkey Teams",
         "model": {
             "achievementId": 126,
             "achievementIcon": "MonkeyTeams",
-            "hiddenAchievementIcon": "",
             "subscript": "50",
             "achievementGoal": 50,
             "loot": "RandomInstaMonkey:2,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 26
     },
-    "124": {
-        "name": "Ultimate Team-up",
-        "description": "Win 100 times with Monkey Teams",
+    "127": {
+        "name": "Ultimate Team Up",
         "model": {
             "achievementId": 127,
             "achievementIcon": "MonkeyTeams",
-            "hiddenAchievementIcon": "",
             "subscript": "100",
             "achievementGoal": 100,
             "loot": "RandomInstaMonkey:3,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 26
     },
-    "125": {
-        "name": "What is this new Bloonery?",
-        "description": "Defeat a Tier 1 Boss",
+    "128": {
+        "name": "What is this new Bloonery",
         "model": {
             "achievementId": 128,
             "achievementIcon": "BossT1",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 27
     },
-    "126": {
-        "name": "Who's the Boss?",
-        "description": "Defeat a Tier 5 Boss",
+    "129": {
+        "name": "Who's the Boss",
         "model": {
             "achievementId": 129,
             "achievementIcon": "BossT5",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#RandomInstaMonkey:4,1,DartMonkey#RandomInstaMonkey:4,1,BoomerangMonkey",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 27
     },
-    "127": {
+    "130": {
         "name": "I'm the Boss",
-        "description": "Defeat a Tier 5 Elite Boss",
         "model": {
             "achievementId": 130,
             "achievementIcon": "BossEliteT5",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:250#RandomInstaMonkey:5,1,DartMonkey#RandomInstaMonkey:5,1,BoomerangMonkey",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 27
     },
-    "128": {
+    "131": {
         "name": "Apotheosis",
-        "description": "Upgrade to a Monkey Paragon Tower",
         "model": {
             "achievementId": 131,
             "achievementIcon": "Paragon",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "RandomInstaMonkey:3,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 27
     },
-    "129": {
+    "132": {
         "name": "Like a Boss",
-        "description": "Pop 50 Boss Bloons",
         "model": {
             "achievementId": 132,
             "achievementIcon": "Bloonarius",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 50,
             "loot": "Power:CashDrop,2#RandomInstaMonkey:0,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 27
     },
-    "130": {
+    "133": {
         "name": "Perfect Paragon",
-        "description": "Paragon of Paragons",
         "model": {
             "achievementId": 133,
             "achievementIcon": "PerfectParagon",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:1000",
             "isCoop": false,
             "hidden": true
-        }
+        },
+        "added": 28
     },
-    "131": {
-        "name": "Davids vs Goliath",
-        "description": "Win a boss battle without using a Hero",
+    "134": {
+        "name": "DavidsVsGoliath",
         "model": {
             "achievementId": 134,
             "achievementIcon": "DavidsVsGoliath",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:200#InstaMonkey:BananaFarm,003",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 29
     },
-    "132": {
-        "name": "So Spiiicey Ninja Kiwi",
-        "description": "Beat Spice Islands on Alternate Bloon Rounds with only land towers",
+    "135": {
+        "name": "SoSpiiiceyNinjaKiwi",
         "model": {
             "achievementId": 135,
             "achievementIcon": "SoSpiiiceyNinjaKiwi",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:150#Power:Pontoon,2",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 29
     },
-    "133": {
-        "name": "No Harvest",
-        "description": "Beat Cornfield on CHIMPS without removing any corn",
+    "136": {
+        "name": "NoHarvest",
         "model": {
             "achievementId": 136,
             "achievementIcon": "NoHarvest",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:400",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 29
     },
-    "134": {
-        "name": "Student Loans",
-        "description": "4 x 10^5 (Go into $400,000 of debt)",
+    "137": {
+        "name": "StudentLoans",
         "model": {
             "achievementId": 137,
             "achievementIcon": "StudentLoans",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "Power:CashDrop,3",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 29
     },
-    "135": {
-        "name": "Not Lacking Critical Information",
-        "description": "Get 25,000 Critical hits",
+    "138": {
+        "name": "NotLackingCriticalInformation",
         "model": {
             "achievementId": 138,
             "achievementIcon": "NotLackingCriticalInformation",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 25000,
             "loot": "InstaMonkey:DartMonkey,004#InstaMonkey:SuperMonkey,030",
             "isCoop": false,
             "hidden": true
-        }
+        },
+        "added": 29
     },
-    "136": {
-        "name": "Sticky Situation",
-        "description": "Glue 500,000 Bloons",
+    "139": {
+        "name": "StickySituation",
         "model": {
             "achievementId": 139,
             "achievementIcon": "StickySituation",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 500000,
             "loot": "InstaMonkey:GlueGunner,000#Power:GlueTrap,5",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 30
     },
-    "137": {
-        "name": "Big Spender",
-        "description": "Spend 1,000,000 cash in one round",
+    "140": {
+        "name": "BigSpender",
         "model": {
             "achievementId": 140,
             "achievementIcon": "BigSpender",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "InstaMonkey:BananaFarm,200#MonkeyMoney:50",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 30
     },
-    "138": {
-        "name": "The Daily Reid",
-        "description": "Win 365 unique daily challenges",
+    "141": {
+        "name": "TheDailyReid",
         "model": {
             "achievementId": 141,
             "achievementIcon": "TheDailyReid",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 365,
             "loot": "RandomInstaMonkey:5,1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 30
     },
-    "139": {
-        "name": "I'll Be Back",
-        "description": "Spend 1,000 MM on Continues or Checkpoints",
+    "142": {
+        "name": "I'llBeBack",
         "model": {
             "achievementId": 142,
             "achievementIcon": "IWillBeBack",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 1000,
             "loot": "Power:CashDrop,2#Power:DartTime,2#Power:EnergisingTotem,2",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 30
     },
-    "140": {
+    "143": {
         "name": "Conquested Territory",
-        "description": "Capture 5 Tiles off other players",
         "model": {
             "achievementId": 143,
             "achievementIcon": "ConquestedTerritory",
-            "hiddenAchievementIcon": "",
             "subscript": "5",
             "achievementGoal": 5,
             "loot": "MonkeyMoney:150",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 32
     },
-    "141": {
+    "144": {
         "name": "Stage of Empires",
-        "description": "Capture 50 Tiles",
         "model": {
             "achievementId": 144,
             "achievementIcon": "StageOfEmpires",
-            "hiddenAchievementIcon": "",
             "subscript": "50",
             "achievementGoal": 50,
             "loot": "RandomInstaMonkey:2,2",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 32
     },
-    "142": {
+    "145": {
         "name": "Territory Sampler",
-        "description": "Capture 1 of each: Boss, Time Attack, Least Tiers and Least Cash Tiles",
         "model": {
             "achievementId": 145,
             "achievementIcon": "TerritorySampler",
-            "hiddenAchievementIcon": "",
             "subscript": "4",
             "achievementGoal": 4,
             "loot": "MonkeyMoney:50#Power:CashDrop,2",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 32
     },
-    "143": {
-        "name": "Invigoration",
-        "description": "Have 75 buffs active on your Monkeys at once",
-        "model": {
-            "achievementId": 147,
-            "achievementIcon": "Invigoration",
-            "hiddenAchievementIcon": "",
-            "subscript": "75",
-            "achievementGoal": 75,
-            "loot": "Power:MonkeyBoost,3#Power:EnergisingTotem,3",
-            "isCoop": false,
-            "hidden": false
-        }
-    },
-    "144": {
-        "name": "World League Training",
-        "description": "Have 150,000 Beast Handler XP at once",
-        "model": {
-            "achievementId": 148,
-            "achievementIcon": "WorldLeagueTraining",
-            "hiddenAchievementIcon": "",
-            "subscript": "150K",
-            "achievementGoal": 150000,
-            "loot": "MonkeyMoney:200",
-            "isCoop": false,
-            "hidden": false
-        }
-    },
-    "145": {
+    "146": {
         "name": "Side Quest",
-        "description": "Complete a Quest",
         "model": {
             "achievementId": 146,
             "achievementIcon": "SideQuest",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100#RandomInstaMonkey:2,2",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 36
     },
-    "146": {
+    "147": {
+        "name": "Invigoration",
+        "model": {
+            "achievementId": 147,
+            "achievementIcon": "Invigoration",
+            "subscript": "75",
+            "achievementGoal": 75,
+            "loot": "Power:MonkeyBoost,3#Power:EnergisingTotem,3",
+            "isCoop": false,
+            "hidden": false
+        },
+        "added": 34
+    },
+    "148": {
+        "name": "World League Training",
+        "model": {
+            "achievementId": 148,
+            "achievementIcon": "WorldLeagueTraining",
+            "subscript": "150K",
+            "achievementGoal": 150000,
+            "loot": "MonkeyMoney:200",
+            "isCoop": false,
+            "hidden": false
+        },
+        "added": 36
+    },
+    "149": {
         "name": "Life Experience",
-        "description": "Earn 5,368,709 experience for any tower",
         "model": {
             "achievementId": 149,
             "achievementIcon": "LifeExperience",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 5368709,
             "loot": "Power:DartTime,5#RandomInstaMonkey:4,1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 40
     },
-    "147": {
+    "151": {
         "name": "Heavy Investment",
-        "description": "Invest at least $401,626 extra when creating any Paragon",
         "model": {
             "achievementId": 151,
             "achievementIcon": "HeavyInvestment",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 401626,
             "loot": "InstaMonkey:DartMonkey,300#InstaMonkey:DartMonkey,030#InstaMonkey:DartMonkey,003#MonkeyMoney:100",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 40
     },
-    "148": {
+    "152": {
         "name": "25 to Life",
-        "description": "Defeat 5 unique Bosses at Tier 5 (Boss Event or Challenge Mode)",
         "model": {
             "achievementId": 152,
             "achievementIcon": "25ToLife",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 5,
             "loot": "SmallBossesMode",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 40
     },
-    "149": {
+    "153": {
         "name": "Community Connoisseur",
-        "description": "Win 100 different community submissions in the Content Browser. (Challenges, Odysseys, Maps)",
         "model": {
             "achievementId": 153,
             "achievementIcon": "CommunityConnoisseur",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 100,
             "loot": "MonkeyMoney:600",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 40
     },
-    "150": {
+    "154": {
         "name": "Nah I'd win",
-        "description": "Basically NAPSFRILLS'd it",
         "model": {
             "achievementId": 154,
             "achievementIcon": "NAPSFRILLS",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:1200",
             "isCoop": false,
             "hidden": true
-        }
+        },
+        "added": 48
     },
-    "151": {
+    "155": {
         "name": "They call me Cave Monkey!",
-        "description": "Rhymes with Grug",
         "model": {
             "achievementId": 155,
             "achievementIcon": "CaveMonkey",
-            "hiddenAchievementIcon": "Hidden",
             "subscript": "",
             "achievementGoal": 50000,
             "loot": "Power:CaveMonkey,3",
             "isCoop": false,
             "hidden": true
-        }
+        },
+        "added": 50
     },
-    "152": {
+    "156": {
         "name": "First Steps",
-        "description": "Complete the First Time Tutorial quest.",
         "model": {
             "achievementId": 156,
             "achievementIcon": "FirstSteps",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:100",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 50
     },
-    "153": {
+    "157": {
         "name": "Season Starts",
-        "description": "Achieve Tier 1 in any Stage in a Social Season",
         "model": {
             "achievementId": 157,
             "achievementIcon": "SeasonStarts",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 1,
             "loot": "MonkeyMoney:50#Power:CashDrop,1",
             "isCoop": false,
-            "hidden": false,
-            "type": "AchievementSeasonStarts"
-        }
+            "hidden": false
+        },
+        "added": 54
     },
-    "154": {
+    "158": {
         "name": "Mid Season",
-        "description": "Earn 7,500 Stars in any Social Season",
         "model": {
             "achievementId": 158,
             "achievementIcon": "MidSeason",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 7500,
             "loot": "MonkeyMoney:100#KnowledgePoints:1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 54
     },
-    "155": {
+    "159": {
         "name": "Season Champion",
-        "description": "Earn a perfect 15,000 Stars in any Social Season",
         "model": {
             "achievementId": 159,
             "achievementIcon": "SeasonChampion",
-            "hiddenAchievementIcon": "",
             "subscript": "",
             "achievementGoal": 15000,
             "loot": "MonkeyMoney:200#RandomInstaMonkey:5,1",
             "isCoop": false,
             "hidden": false
-        }
+        },
+        "added": 54
     }
 }

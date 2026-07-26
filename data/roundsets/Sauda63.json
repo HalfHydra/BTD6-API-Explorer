@@ -29,9 +29,9 @@
             ],
             "roundNumber": 7,
             "rbe": 70,
-            "income": 177,
+            "income": 177.0,
             "rbeSum": 70,
-            "incomeSum": 177
+            "incomeSum": 177.0
         },
         {
             "bloonGroups": [
@@ -86,9 +86,9 @@
             ],
             "roundNumber": 14,
             "rbe": 145,
-            "income": 259,
+            "income": 259.0,
             "rbeSum": 215,
-            "incomeSum": 436
+            "incomeSum": 436.0
         },
         {
             "bloonGroups": [
@@ -113,9 +113,9 @@
             ],
             "roundNumber": 21,
             "rbe": 234,
-            "income": 355,
+            "income": 355.0,
             "rbeSum": 449,
-            "incomeSum": 791
+            "incomeSum": 791.0
         },
         {
             "bloonGroups": [
@@ -128,9 +128,9 @@
             ],
             "roundNumber": 28,
             "rbe": 156,
-            "income": 266,
+            "income": 266.0,
             "rbeSum": 605,
-            "incomeSum": 1057
+            "incomeSum": 1057.0
         },
         {
             "bloonGroups": [
@@ -161,9 +161,9 @@
             ],
             "roundNumber": 35,
             "rbe": 1510,
-            "income": 1600,
+            "income": 1600.0,
             "rbeSum": 2115,
-            "incomeSum": 2657
+            "incomeSum": 2657.0
         },
         {
             "bloonGroups": [
@@ -182,9 +182,9 @@
             ],
             "roundNumber": 42,
             "rbe": 1144,
-            "income": 1187,
+            "income": 1187.0,
             "rbeSum": 3259,
-            "incomeSum": 3844
+            "incomeSum": 3844.0
         },
         {
             "bloonGroups": [
@@ -227,9 +227,9 @@
             ],
             "roundNumber": 49,
             "rbe": 6138,
-            "income": 5855,
+            "income": 5855.0,
             "rbeSum": 9397,
-            "incomeSum": 9699
+            "incomeSum": 9699.0
         },
         {
             "bloonGroups": [

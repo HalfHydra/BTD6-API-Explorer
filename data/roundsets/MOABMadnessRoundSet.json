@@ -5,8 +5,8 @@
                 {
                     "bloon": "Moab",
                     "count": 50,
-                    "start": 0,
-                    "end": 50
+                    "start": 0.0,
+                    "end": 50.0
                 }
             ],
             "roundNumber": 1,
@@ -20,8 +20,8 @@
                 {
                     "bloon": "Bfb",
                     "count": 50,
-                    "start": 0,
-                    "end": 50
+                    "start": 0.0,
+                    "end": 50.0
                 }
             ],
             "roundNumber": 2,
@@ -35,8 +35,8 @@
                 {
                     "bloon": "DdtFortifiedCamo",
                     "count": 50,
-                    "start": 0,
-                    "end": 50
+                    "start": 0.0,
+                    "end": 50.0
                 }
             ],
             "roundNumber": 3,
@@ -50,8 +50,8 @@
                 {
                     "bloon": "Zomg",
                     "count": 50,
-                    "start": 0,
-                    "end": 50
+                    "start": 0.0,
+                    "end": 50.0
                 }
             ],
             "roundNumber": 4,
@@ -65,8 +65,8 @@
                 {
                     "bloon": "Bad",
                     "count": 50,
-                    "start": 0,
-                    "end": 60
+                    "start": 0.0,
+                    "end": 60.0
                 }
             ],
             "roundNumber": 5,

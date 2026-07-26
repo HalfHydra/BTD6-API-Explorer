@@ -2183,9 +2183,9 @@
             ],
             "roundNumber": 1,
             "rbe": 356543,
-            "income": 260572,
+            "income": 260572.0,
             "rbeSum": 356543,
-            "incomeSum": 260572
+            "incomeSum": 260572.0
         }
     ],
     "description": "Set: 1-80 packed into one round"

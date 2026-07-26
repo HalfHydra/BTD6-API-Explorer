@@ -5293,26 +5293,26 @@ function generateAchievementsGameView(searchTerm = "") {
     AchievementsContainer.innerHTML = "";
 
     let achievementGuides = {
-        5: "https://steamcommunity.com/sharedfiles/filedetails/?id=3601481780",
-        28: "https://www.bloonswiki.com/Inflated",
-        64: "https://www.bloonswiki.com/2TC",
-        65: "https://www.bloonswiki.com/Snap_of_your_fingers",
-        77: "https://www.bloonswiki.com/All_for_one_and_one_for_one",
-        78: "https://www.bloonswiki.com/Master_of_life",
-        80: "https://www.bloonswiki.com/Strangely_Adorable",
-        82: "https://www.bloonswiki.com/What_did_it_cost%3F_-_Everything",
-        83: "https://www.bloonswiki.com/2_MegaPops",
-        89: "https://www.bloonswiki.com/Candy_Falls#Easter_eggs",
-        99: "https://www.bloonswiki.com/Chunky_Monkeys",
-        101: "https://www.bloonswiki.com/Living_on_the_Edge",
-        113: "https://www.bloonswiki.com/Stubborn_Strategy",
-        120: "https://www.bloonswiki.com/Golden_Bloon_(BTD6)#Popping_Golden_Bloons",
-        121: "https://www.bloonswiki.com/Golden_Bloon_(BTD6)#Popping_Golden_Bloons",
-        130: "https://www.bloonswiki.com/Perfect_Paragon",
-        150: "https://www.bloonswiki.com/Nah,_I'd_Win",
-        151: "https://www.bloonswiki.com/They_call_me_Cave_Monkey!",
-        62: "https://www.bloonswiki.com/Big_Bloons",
-        63: "https://www.bloonswiki.com/Alchermistman_and_Bloonacleboy"
+        "6": "https://steamcommunity.com/sharedfiles/filedetails/?id=3601481780",
+        "30": "https://www.bloonswiki.com/Inflated",
+        "64": "https://www.bloonswiki.com/Big_Bloons",
+        "65": "https://www.bloonswiki.com/Alchermistman_and_Bloonacleboy",
+        "66": "https://www.bloonswiki.com/2TC",
+        "67": "https://www.bloonswiki.com/Snap_of_your_fingers",
+        "80": "https://www.bloonswiki.com/All_for_one_and_one_for_one",
+        "81": "https://www.bloonswiki.com/Master_of_life",
+        "83": "https://www.bloonswiki.com/Strangely_Adorable",
+        "85": "https://www.bloonswiki.com/What_did_it_cost%3F_-_Everything",
+        "86": "https://www.bloonswiki.com/2_MegaPops",
+        "92": "https://www.bloonswiki.com/Candy_Falls#Easter_eggs",
+        "102": "https://www.bloonswiki.com/Chunky_Monkeys",
+        "104": "https://www.bloonswiki.com/Living_on_the_Edge",
+        "116": "https://www.bloonswiki.com/Stubborn_Strategy",
+        "123": "https://www.bloonswiki.com/Golden_Bloon_(BTD6)#Popping_Golden_Bloons",
+        "124": "https://www.bloonswiki.com/Golden_Bloon_(BTD6)#Popping_Golden_Bloons",
+        "133": "https://www.bloonswiki.com/Perfect_Paragon",
+        "154": "https://www.bloonswiki.com/Nah,_I'd_Win",
+        "155": "https://www.bloonswiki.com/They_call_me_Cave_Monkey!"
     }
 
     let achievements = Object.keys(achievementsJSON);
@@ -5347,7 +5347,8 @@ function generateAchievementsGameView(searchTerm = "") {
     if (searchTerm != "") {
         achievements = achievements.filter(achievement => {
             let achievementData = achievementsJSON[achievement];
-            let achievementName = getLocValue(`Achievement ${achievementData.model.achievementId} Name`);            let achievementDesc = getLocValue(`Achievement ${achievementData.model.achievementId} Description`);
+            let achievementName = getLocValue(`Achievement ${achievementData.model.achievementId} Name`);            
+            let achievementDesc = getLocValue(`Achievement ${achievementData.model.achievementId} Description`);
             return achievementName.toLowerCase().includes(searchTerm.toLowerCase()) || achievementDesc.toLowerCase().includes(searchTerm.toLowerCase());
         })
     } else {
@@ -7249,7 +7250,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
 
             for (let boss of constants.bossesInOrder) {
                 if (metadata.roundSets.includes(boss.toLowerCase())) {
-                    roundset = `${boss}RoundSet`;
+                    roundset = boss.toLowerCase();
                 }
             }
 
@@ -7265,7 +7266,6 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
             }
         }
 
-        constants.bossesInOrder.map(boss => { return boss.toLowerCase() })
         let roundset = metadata.roundSets.filter(value => value !== 'default' && !(constants.bossesInOrder.map(boss => { return boss.toLowerCase() }).includes(value)));
         if (rule == "Custom Rounds" && constants.skuRoundsets.includes(roundset[0])) {
             let challengeRuleValue = document.createElement('div');
@@ -10360,6 +10360,32 @@ function generateQuestsPage() {
             });
             questCenterDiv.appendChild(questTitle);
 
+            const row = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-start'], });
+            questCenterDiv.appendChild(row);
+            constantsQuest.parts.forEach((part, index) => {
+                if(part.roundSets.length > 0) {
+                    const btn = createEl('div', { classList: ['maps-progress-view', 'black-outline', 'pointer'], style: {filter: 'hue-rotate(270deg)'}});
+                    btn.innerHTML = index > 0 ? `Stage ${index + 1}` : (constantsQuest.parts.length > 1 ? `Stage ${index + 1}` : 'Custom Rounds');
+                    btn.addEventListener('click', (e) => {
+                        showLoading();
+                        let presetOptions = {
+                            roundsetName: `${getLocValue(constantsQuest.nameLocKey)}${(constantsQuest.parts.length > 1) ? ` Stage ${index + 1}` : ""}` || quest.id
+                        }
+                        if (part.startRound && part.startRound != -1) {
+                            presetOptions.roundFilterStart = part.startRound ? part.startRound : 1
+                        }
+                        if (part.endRound && part.endRound != -1) {
+                            presetOptions.roundFilterEnd = part.endRound ? part.endRound : null
+                        }
+                        if (part.startingCash && part.startingCash != -1) {
+                            presetOptions.roundsetStartingCash = part.startingCash ? part.startingCash : 650
+                        }
+                        showRoundsetModel('profile', part.roundSets[0], presetOptions);
+                    });
+                    row.appendChild(btn);
+                }
+            });
+
             if (constantsQuest?.icon && iconToRoundsets[constantsQuest.icon]?.length) {
                 const stages = iconToRoundsets[constantsQuest.icon];
                 if (stages.length) {
@@ -10369,7 +10395,7 @@ function generateQuestsPage() {
                     stages.forEach((key, idx) => {
                         let n = constants.roundSets[key]?.part || null;
                         const btn = createEl('div', { classList: ['maps-progress-view', 'black-outline', 'pointer'], style: {filter: 'hue-rotate(270deg)'}});
-                        btn.innerHTML = n ? `Stage ${n}` : (stages.length > 1 ? `Stage ${idx + 1}` : 'Open Rounds');
+                        btn.innerHTML = n ? `Stage ${n}` : (stages.length > 1 ? `Stage ${idx + 1}` : 'Custom Rounds');
                         btn.addEventListener('click', (e) => {
                             showLoading();
                             showRoundsetModel('profile', constants.roundSets[key]?.roundset || key);

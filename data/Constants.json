@@ -316,7 +316,8 @@
                 "Marked To Pop",
                 "TakeAim2",
                 "Marked To Pop2"
-            ]
+            ],
+            "added": 49
         },
         "SniperMonkey": {
             "category": "Military",
@@ -490,7 +491,8 @@
             "abilities": [
                 "Bombardment",
                 "Pop And Awe"
-            ]
+            ],
+            "added": 6
         },
         "DartlingGunner": {
             "category": "Military",
@@ -519,7 +521,8 @@
                 "RocketStorm",
                 "RocketStormMAD",
                 "Emergency Unlock"
-            ]
+            ],
+            "added": 22
         },
         "WizardMonkey": {
             "category": "Magic",
@@ -548,7 +551,8 @@
                 "Summon Pheonix",
                 "Summon Lord Phoenix",
                 "Arcane Metamorphosis",
-                "Phoenix Rebirth"
+                "Phoenix Rebirth",
+                "Soulbind"
             ]
         },
         "SuperMonkey": {
@@ -694,7 +698,8 @@
             "abilities": [
                 "MermonkyAbility",
                 "MermonkyAbilityBig"
-            ]
+            ],
+            "added": 44
         },
         "BananaFarm": {
             "category": "Support",
@@ -837,7 +842,8 @@
             "abilities": [
                 "T Rex STOMP",
                 "Giga STOMP "
-            ]
+            ],
+            "added": 36
         }
     },
     "heroesInOrder": {
@@ -948,11 +954,6 @@
         "DanDMonke": {
             "nameColor": "Blue",
             "added": 55,
-            "bgColor": [
-                0.6509804,
-                0.20784314,
-                0.30588236
-            ],
             "skins": [
                 "DanDMonke",
                 "DanDMonkeHeMan"
@@ -965,6 +966,11 @@
             ],
             "transformPortraits": [
                 3, 10, 20
+            ],
+            "bgColor": [
+                0.6509804,
+                0.20784314,
+                0.30588236
             ],
             "abilities": {
                 "3": "Transform Ability",
@@ -1337,7 +1343,8 @@
                 20
             ],
             "fqName": "Cyber Quincy",
-            "baseHero": "Quincy"
+            "baseHero": "Quincy",
+            "added": 5
         },
         "WolfpackQuincy": {
             "portraits": [
@@ -1348,7 +1355,8 @@
                 20
             ],
             "fqName": "Wolfpack Quincy",
-            "baseHero": "Quincy"
+            "baseHero": "Quincy",
+            "added": 15
         },
         "CircusGwendolin": {
             "portraits": [
@@ -1358,7 +1366,8 @@
                 20
             ],
             "fqName": "Circus Gwendolin",
-            "baseHero": "Gwendolin"
+            "baseHero": "Gwendolin",
+            "added": 17
         },
         "ScientistGwendolin": {
             "portraits": [
@@ -1368,7 +1377,8 @@
                 20
             ],
             "fqName": "Scientist Gwendolin",
-            "baseHero": "Gwendolin"
+            "baseHero": "Gwendolin",
+            "added": 6
         },
         "FirecrackerGwendolin": {
             "portraits": [
@@ -1378,7 +1388,8 @@
                 20
             ],
             "fqName": "Firecracker Gwendolin",
-            "baseHero": "Gwendolin"
+            "baseHero": "Gwendolin",
+            "added": 53
         },
         "BikerBones": {
             "portraits": [
@@ -1388,7 +1399,8 @@
                 20
             ],
             "fqName": "Biker Bones",
-            "baseHero": "StrikerJones"
+            "baseHero": "StrikerJones",
+            "added": 9
         },
         "OctoJones": {
             "portraits": [
@@ -1398,7 +1410,8 @@
                 20
             ],
             "fqName": "Octo Jones",
-            "baseHero": "StrikerJones"
+            "baseHero": "StrikerJones",
+            "added": 19
         },
         "MoltenObyn": {
             "portraits": [
@@ -1408,7 +1421,8 @@
                 20
             ],
             "fqName": "Molten Obyn",
-            "baseHero": "ObynGreenfoot"
+            "baseHero": "ObynGreenfoot",
+            "added": 22
         },
         "ObynOceanGuardian": {
             "portraits": [
@@ -1418,7 +1432,8 @@
                 20
             ],
             "fqName": "Ocean Guardian Obyn",
-            "baseHero": "ObynGreenfoot"
+            "baseHero": "ObynGreenfoot",
+            "added": 10
         },
         "ObynSkeletor": {
             "bgColor": [
@@ -1433,7 +1448,8 @@
                 20
             ],
             "fqName": "Skeletor Obyn",
-            "baseHero": "ObynGreenfoot"
+            "baseHero": "ObynGreenfoot",
+            "added": 51
         },
         "DanDMonkeHeMan": {
             "bgColor": [
@@ -1451,7 +1467,8 @@
                 3, 10, 20
             ],
             "fqName": "He-Man",
-            "baseHero": "DanDMonke"
+            "baseHero": "DanDMonke",
+            "added": 55
         },
         "SentaiCaptainChurchill": {
             "portraits": [
@@ -1463,7 +1480,8 @@
                 20
             ],
             "fqName": "Sentai Churchill",
-            "baseHero": "CaptainChurchill"
+            "baseHero": "CaptainChurchill",
+            "added": 8
         },
         "SleighCaptainChurchill": {
             "portraits": [
@@ -1475,7 +1493,8 @@
                 20
             ],
             "fqName": "Sleigh Churchill",
-            "baseHero": "CaptainChurchill"
+            "baseHero": "CaptainChurchill",
+            "added": 34
         },
         "BenJammin": {
             "portraits": [
@@ -1486,7 +1505,8 @@
                 20
             ],
             "fqName": "BenJammin",
-            "baseHero": "Benjamin"
+            "baseHero": "Benjamin",
+            "added": 11
         },
         "SushiBento": {
             "portraits": [
@@ -1497,7 +1517,8 @@
                 20
             ],
             "fqName": "Sushi Bento",
-            "baseHero": "Benjamin"
+            "baseHero": "Benjamin",
+            "added": 24
         },
         "FustyTheSnowman": {
             "portraits": [
@@ -1508,7 +1529,8 @@
                 20
             ],
             "fqName": "Fusty the Snowman",
-            "baseHero": "PatFusty"
+            "baseHero": "PatFusty",
+            "added": 14
         },
         "KaijuPat": {
             "portraits": [
@@ -1519,7 +1541,8 @@
                 20
             ],
             "fqName": "Kaiju Pat",
-            "baseHero": "PatFusty"
+            "baseHero": "PatFusty",
+            "added": 35
         },
         "Galaxili": {
             "portraits": [
@@ -1531,7 +1554,8 @@
                 20
             ],
             "fqName": "Galaxili",
-            "baseHero": "Ezili"
+            "baseHero": "Ezili",
+            "added": 29
         },
         "SmudgeCatt": {
             "portraits": [
@@ -1543,7 +1567,8 @@
                 20
             ],
             "fqName": "Smudge Catt",
-            "baseHero": "Ezili"
+            "baseHero": "Ezili",
+            "added": 12
         },
         "JoanOfArcAdora": {
             "portraits": [
@@ -1556,7 +1581,8 @@
                 "20SunGodVengful"
             ],
             "fqName": "Joan of Arc Adora",
-            "baseHero": "Adora"
+            "baseHero": "Adora",
+            "added": 17
         },
         "Voidora": {
             "bgColor": [
@@ -1574,7 +1600,8 @@
                 "20SunGodVengful"
             ],
             "fqName": "Voidora",
-            "baseHero": "Adora"
+            "baseHero": "Adora",
+            "added": 32
         },
         "AdoraSheRa": {
             "bgColor": [
@@ -1592,7 +1619,8 @@
                 "20SunGodVengeful"
             ],
             "fqName": "She-Ra Adora",
-            "baseHero": "Adora"
+            "baseHero": "Adora",
+            "added": 48
         },
         "ETnEtienne": {
             "portraits": [
@@ -1603,7 +1631,8 @@
                 20
             ],
             "fqName": "ETn",
-            "baseHero": "Etienne"
+            "baseHero": "Etienne",
+            "added": 25
         },
         "BookWyrmEtienne": {
             "portraits": [
@@ -1614,7 +1643,8 @@
                 20
             ],
             "fqName": "Book Wyrm Etienne",
-            "baseHero": "Etienne"
+            "baseHero": "Etienne",
+            "added": 39
         },
         "JiangshiSauda": {
             "bgColor": [
@@ -1629,7 +1659,8 @@
                 20
             ],
             "fqName": "Jiangshi Sauda",
-            "baseHero": "Sauda"
+            "baseHero": "Sauda",
+            "added": 37
         },
         "VikingSauda": {
             "portraits": [
@@ -1639,7 +1670,8 @@
                 20
             ],
             "fqName": "Viking Sauda",
-            "baseHero": "Sauda"
+            "baseHero": "Sauda",
+            "added": 28
         },
         "RedSauda": {
             "bgColor": [
@@ -1653,7 +1685,8 @@
                 10,
                 20
             ],
-            "baseHero": "Sauda"
+            "baseHero": "Sauda",
+            "added": 48.2
         },
         "DreadPirateBrickell": {
             "portraits": [
@@ -1664,7 +1697,8 @@
                 20
             ],
             "fqName": "Dread Pirate Brickell",
-            "baseHero": "AdmiralBrickell"
+            "baseHero": "AdmiralBrickell",
+            "added": 20
         },
         "LifeguardBrickell": {
             "portraits": [
@@ -1675,7 +1709,8 @@
                 20
             ],
             "fqName": "Lifeguard Brickell",
-            "baseHero": "AdmiralBrickell"
+            "baseHero": "AdmiralBrickell",
+            "added": 38
         },
         "Psimbals": {
             "portraits": [
@@ -1686,7 +1721,8 @@
                 20
             ],
             "fqName": "Psimbals",
-            "baseHero": "Psi"
+            "baseHero": "Psi",
+            "added": 30
         },
         "DreamstatePsi": {
             "portraits": [
@@ -1697,7 +1733,8 @@
                 20
             ],
             "fqName": "Dreamstate Psi",
-            "baseHero": "Psi"
+            "baseHero": "Psi",
+            "added": 44
         },
         "GeraldoGentlemanGadgeteer": {
             "portraits": [
@@ -1708,7 +1745,8 @@
                 20
             ],
             "fqName": "Gentleman Gadgeteer Geraldo",
-            "baseHero": "Geraldo"
+            "baseHero": "Geraldo",
+            "added": 42
         },
         "RosaliaTinkerfairy": {
             "portraits": [
@@ -1720,7 +1758,8 @@
                 20
             ],
             "fqName": "Rosalia Tinkerfairy",
-            "baseHero": "Rosalia"
+            "baseHero": "Rosalia",
+            "added": 47
         }
     },
     "powersInOrder": {
@@ -1811,7 +1850,8 @@
                 "tier1": ["Banana Vacuum", "Camo Bananas", "Adaptive Workers"],
                 "tier2": ["Banana Peels", "Regrow Bananas", "Monkey Banker"],
                 "tier3": ["Robo Farmer", "Banana Intelligence Bureau", "Banana Financier"]
-            }
+            },
+            "added": 50
         },
         "SuperMonkeyBeacon": {
             "type": "Pro",
@@ -1822,7 +1862,8 @@
                 "tier1": ["Charged Beacon", "Mini Stormcaller", "High Impact"],
                 "tier2": ["Storm Tremors", "Rapid Recharge", "Bewildering Storm"],
                 "tier3": ["Reverberation", "Beacon of Legends", "Piercing Wind"]
-            }
+            },
+            "added": 50
         },
         "MonkeyBoostPro": {
             "type": "Pro",
@@ -1833,7 +1874,8 @@
                 "tier1": ["Cheer", "Resistance", "Condition"],
                 "tier2": ["LookSharp", "HighReps", "Intensity"],
                 "tier3": ["MonkeySpirit", "NoQuit", "MaxOutput"]
-            }
+            },
+            "added": 54
         },
         "TechBotPrime": {
             "type": "Pro",
@@ -1844,439 +1886,526 @@
                 "tier1": ["InitiateLinkAMP", "AUT0M8", "DroneAmbusNetwork"],
                 "tier2": ["ChainLink", "NEUR0MAP", "TriggerHappyDrones"],
                 "tier3": ["LeadTheStorm", "CMDRCh1p", "OhBoyICantWait"]
-            }
+            },
+            "added": 54
         }
     },
     "mapsInOrder": {
         "Tutorial": {
             "difficulty": "Beginner",
             "theme": "Grass",
-            "hasWater": false
+            "hasWater": false,
+            "added": 1
         },
         "InTheLoop": {
             "difficulty": "Beginner",
             "theme": "DarkGrass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         },
         "SkullTweak": {
             "difficulty": "Beginner",
             "theme": "MountainCave",
-            "hasWater": true
+            "hasWater": true,
+            "added": 55
         },
         "ThreeMinesAround": {
             "difficulty": "Beginner",
             "theme": "Dirt",
-            "hasWater": true
+            "hasWater": true,
+            "added": 51
         },
         "SpaPits": {
             "difficulty": "Beginner",
             "theme": "Grass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 48
         },
         "Tinkerton": {
             "difficulty": "Beginner",
             "theme": "City",
-            "hasWater": true
+            "hasWater": true,
+            "added": 43
         },
         "TreeStump": {
             "difficulty": "Beginner",
             "theme": "Grass",
-            "hasWater": false
+            "hasWater": false,
+            "added": 1
         },
         "TownCentre": {
             "difficulty": "Beginner",
             "theme": "Grass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         },
         "MiddleOfTheRoad": {
             "difficulty": "Beginner",
             "theme": "Dirt",
-            "hasWater": true
+            "hasWater": true,
+            "added": 35
         },
         "OneTwoTree": {
             "difficulty": "Beginner",
             "theme": "Snow",
-            "hasWater": true
+            "hasWater": true,
+            "added": 34
         },
         "Scrapyard": {
             "difficulty": "Beginner",
             "theme": "Dirt",
-            "hasWater": false
+            "hasWater": false,
+            "added": 31
         },
         "TheCabin": {
             "difficulty": "Beginner",
             "theme": "DarkGrass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 28
         },
         "Resort": {
             "difficulty": "Beginner",
             "theme": "Dirt",
-            "hasWater": true
+            "hasWater": true,
+            "added": 25
         },
         "Skates": {
             "difficulty": "Beginner",
             "theme": "Snow",
-            "hasWater": true
+            "hasWater": true,
+            "added": 22
         },
         "LotusIsland": {
             "difficulty": "Beginner",
             "theme": "Water",
-            "hasWater": true
+            "hasWater": true,
+            "added": 19
         },
         "CandyFalls": {
             "difficulty": "Beginner",
             "theme": "Grass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 17
         },
         "WinterPark": {
             "difficulty": "Beginner",
             "theme": "Snow",
-            "hasWater": true
+            "hasWater": true,
+            "added": 14
         },
         "Carved": {
             "difficulty": "Beginner",
             "theme": "DarkGrass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 13
         },
         "ParkPath": {
             "difficulty": "Beginner",
             "theme": "Grass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 11
         },
         "AlpineRun": {
             "difficulty": "Beginner",
             "theme": "Snow",
-            "hasWater": false
+            "hasWater": false,
+            "added": 7
         },
         "FrozenOver": {
             "difficulty": "Beginner",
             "theme": "Snow",
-            "hasWater": true
+            "hasWater": true,
+            "added": 5
         },
         "Cubism": {
             "difficulty": "Beginner",
             "theme": "City",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         },
         "FourCircles": {
             "difficulty": "Beginner",
             "theme": "City",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         },
         "Hedge": {
             "difficulty": "Beginner",
             "theme": "City",
-            "hasWater": false
+            "hasWater": false,
+            "added": 1
         },
         "EndOfTheRoad": {
             "difficulty": "Beginner",
             "theme": "Dirt",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         },
         "Logs": {
             "difficulty": "Beginner",
             "theme": "Grass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         },
         "LostCrevasse": {
             "difficulty": "Intermediate",
             "theme": "Snow",
-            "hasWater": true
+            "hasWater": true,
+            "added": 50
         },
         "LuminousCove": {
             "difficulty": "Intermediate",
             "theme": "Water",
-            "hasWater": true
-        }, 
+            "hasWater": true,
+            "added": 44
+        },
         "AncientPortal": {
             "difficulty": "Intermediate",
             "theme": "DarkGrass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 45
         },
         "SulfurSprings": {
             "difficulty": "Intermediate",
             "theme": "MountainCave",
-            "hasWater": true
+            "hasWater": true,
+            "added": 41
         },
         "WaterPark": {
             "difficulty": "Intermediate",
             "theme": "City",
-            "hasWater": true
+            "hasWater": true,
+            "added": 38
         },
         "Polyphemus": {
             "difficulty": "Intermediate",
             "theme": "Water",
-            "hasWater": true
+            "hasWater": true,
+            "added": 36
         },
         "CoveredGarden": {
             "difficulty": "Intermediate",
             "theme": "City",
-            "hasWater": true
+            "hasWater": true,
+            "added": 33
         },
         "Quarry": {
             "difficulty": "Intermediate",
             "theme": "Dirt",
-            "hasWater": true
+            "hasWater": true,
+            "added": 32
         },
         "QuietStreet": {
             "difficulty": "Intermediate",
             "theme": "Snow",
-            "hasWater": true
+            "hasWater": true,
+            "added": 29
         },
         "BloonariusPrime": {
             "difficulty": "Intermediate",
             "theme": "DarkGrass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 27
         },
         "Balance": {
             "difficulty": "Intermediate",
             "theme": "Grass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 24
         },
         "Encrypted": {
             "difficulty": "Intermediate",
             "theme": "DarkGrass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 21
         },
         "Bazaar": {
             "difficulty": "Intermediate",
             "theme": "Dirt",
-            "hasWater": true
+            "hasWater": true,
+            "added": 18
         },
         "AdorasTemple": {
             "difficulty": "Intermediate",
             "theme": "Grass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 14
         },
         "SpringSpring": {
             "difficulty": "Intermediate",
             "theme": "Water",
-            "hasWater": true
+            "hasWater": true,
+            "added": 10
         },
         "KartsNDarts": {
             "difficulty": "Intermediate",
             "theme": "City",
-            "hasWater": false
+            "hasWater": false,
+            "added": 8
         },
         "MoonLanding": {
             "difficulty": "Intermediate",
             "theme": "MountainCave",
-            "hasWater": false
+            "hasWater": false,
+            "added": 6
         },
         "Haunted": {
             "difficulty": "Intermediate",
             "theme": "DarkGrass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 5
         },
         "Downstream": {
             "difficulty": "Intermediate",
             "theme": "Grass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 4
         },
         "FiringRange": {
             "difficulty": "Intermediate",
             "theme": "Dirt",
-            "hasWater": true
+            "hasWater": true,
+            "added": 2
         },
         "Cracked": {
             "difficulty": "Intermediate",
             "theme": "Dirt",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         },
         "Streambed": {
             "difficulty": "Intermediate",
             "theme": "Grass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         },
         "Chutes": {
             "difficulty": "Intermediate",
             "theme": "Grass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         },
         "Rake": {
             "difficulty": "Intermediate",
             "theme": "Grass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         },
         "SpiceIslands": {
             "difficulty": "Intermediate",
             "theme": "Water",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         },
         "MushroomGrotto": {
             "difficulty": "Advanced",
             "theme": "DarkGrass",
-            "hasWater": false
+            "hasWater": false,
+            "added": 54
         },
         "PartyParade": {
             "difficulty": "Advanced",
             "theme": "City",
-            "hasWater": false
+            "hasWater": false,
+            "added": 53
         },
         "SunsetGulch": {
             "difficulty": "Advanced",
             "theme": "Dirt",
-            "hasWater": false
+            "hasWater": false,
+            "added": 49
         },
         "EnchantedGlade": {
             "difficulty": "Advanced",
             "theme": "DarkGrass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 47
         },
         "LastResort": {
             "difficulty": "Advanced",
             "theme": "Snow",
-            "hasWater": true
+            "hasWater": true,
+            "added": 46
         },
         "CastleRevenge": {
             "difficulty": "Advanced",
             "theme": "City",
-            "hasWater": true
+            "hasWater": true,
+            "added": 42
         },
         "DarkPath": {
             "difficulty": "Advanced",
             "theme": "Snow",
-            "hasWater": false
+            "hasWater": false,
+            "added": 39
         },
         "Erosion": {
             "difficulty": "Advanced",
             "theme": "Water",
-            "hasWater": true
+            "hasWater": true,
+            "added": 37
         },
         "MidnightMansion": {
             "difficulty": "Advanced",
             "theme": "City",
-            "hasWater": false
+            "hasWater": false,
+            "added": 33
         },
         "SunkenColumns": {
             "difficulty": "Advanced",
             "theme": "MountainCave",
-            "hasWater": true
+            "hasWater": true,
+            "added": 30
         },
         "XFactor": {
             "difficulty": "Advanced",
             "theme": "DarkGrass",
-            "hasWater": false
+            "hasWater": false,
+            "added": 22
         },
         "Mesa": {
             "difficulty": "Advanced",
             "theme": "MountainCave",
-            "hasWater": false
+            "hasWater": false,
+            "added": 20
         },
         "Geared": {
             "difficulty": "Advanced",
             "theme": "City",
-            "hasWater": false
+            "hasWater": false,
+            "added": 16
         },
         "Spillway": {
             "difficulty": "Advanced",
             "theme": "City",
-            "hasWater": true
+            "hasWater": true,
+            "added": 12
         },
         "Cargo": {
             "difficulty": "Advanced",
             "theme": "City",
-            "hasWater": true
+            "hasWater": true,
+            "added": 11
         },
         "PatsPond": {
             "difficulty": "Advanced",
             "theme": "Water",
-            "hasWater": true
+            "hasWater": true,
+            "added": 9
         },
         "Peninsula": {
             "difficulty": "Advanced",
             "theme": "Water",
-            "hasWater": true
+            "hasWater": true,
+            "added": 7
         },
         "HighFinance": {
             "difficulty": "Advanced",
             "theme": "City",
-            "hasWater": true
+            "hasWater": true,
+            "added": 3
         },
         "AnotherBrick": {
             "difficulty": "Advanced",
             "theme": "City",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         },
         "OffTheCoast": {
             "difficulty": "Advanced",
             "theme": "Water",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         },
         "Cornfield": {
             "difficulty": "Advanced",
             "theme": "City",
-            "hasWater": false
+            "hasWater": false,
+            "added": 1
         },
         "Underground": {
             "difficulty": "Advanced",
             "theme": "MountainCave",
-            "hasWater": false
+            "hasWater": false,
+            "added": 1
         },
         "TrickyTracks": {
             "difficulty": "Expert",
             "theme": "City",
-            "hasWater": false
+            "hasWater": false,
+            "added": 52
         },
         "GlacialTrail": {
             "difficulty": "Expert",
             "theme": "Snow",
-            "hasWater": true
+            "hasWater": true,
+            "added": 40
         },
         "DarkDungeons": {
             "difficulty": "Expert",
             "theme": "DarkGrass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 35
         },
         "Sanctuary": {
             "difficulty": "Expert",
             "theme": "MountainCave",
-            "hasWater": true
+            "hasWater": true,
+            "added": 26
         },
         "Ravine": {
             "difficulty": "Expert",
             "theme": "DarkGrass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 23
         },
         "FloodedValley": {
             "difficulty": "Expert",
             "theme": "Water",
-            "hasWater": true
+            "hasWater": true,
+            "added": 18
         },
         "Infernal": {
             "difficulty": "Expert",
             "theme": "MountainCave",
-            "hasWater": true
+            "hasWater": true,
+            "added": 15
         },
         "BloodyPuddles": {
             "difficulty": "Expert",
             "theme": "DarkGrass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 13
         },
         "Workshop": {
             "difficulty": "Expert",
             "theme": "City",
-            "hasWater": false
+            "hasWater": false,
+            "added": 12
         },
         "Quad": {
             "difficulty": "Expert",
             "theme": "City",
-            "hasWater": true
+            "hasWater": true,
+            "added": 6
         },
         "DarkCastle": {
             "difficulty": "Expert",
             "theme": "DarkGrass",
-            "hasWater": true
+            "hasWater": true,
+            "added": 5
         },
         "MuddyPuddles": {
             "difficulty": "Expert",
             "theme": "Dirt",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         },
         "#ouch": {
             "difficulty": "Expert",
             "theme": "City",
-            "hasWater": true
+            "hasWater": true,
+            "added": 1
         }
     },
     "paragonsAvailable": {
@@ -2298,287 +2427,1211 @@
         "BeastHandlerQuest": {
             "nameLocKey": "BeastHandlerQuestName",
             "icon": "QuestIconEpicBeastQuest",
-            "type": "Tale"
+            "type": "Tale",
+            "added": 36,
+            "parts": [
+                {
+                    "startingCash": 850,
+                    "startRound": 3,
+                    "endRound": 16,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": 1050,
+                    "startRound": 5,
+                    "endRound": 20,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": 1250,
+                    "startRound": 8,
+                    "endRound": 25,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "InstaMonkey:BeastHandler,300,1",
+                "InstaMonkey:BeastHandler,030,1",
+                "InstaMonkey:BeastHandler,003,1"
+            ]
         },
         "BikerRaceChallengeQuest": {
             "nameLocKey": "BikerRaceChallengeQuestName",
             "icon": "QuestIconBikerBonesRace",
-            "type": "Challenge"
+            "type": "Challenge",
+            "added": 36,
+            "parts": [
+                {
+                    "startingCash": 1200,
+                    "startRound": 10,
+                    "endRound": 40,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
         "QuincyTest": {
             "nameLocKey": "QuincyTestQuestName",
             "icon": "QuestIconQuincyTestOfQuincy",
-            "type": "Tutorial"
-        },
-        "AnniversaryChallengeQuest": {
-            "nameLocKey": "BTD6BirthdayQuestName",
-            "icon": "QuestIconBirthdayParty",
-            "type": "Challenge"
-        },
-        "SaudaTestQuest": {
-            "nameLocKey": "SaudaTestQuestName",
-            "icon": "QuestIconBladeSaudaNowhere",
-            "type": "Tutorial"
+            "type": "Tutorial",
+            "added": 36,
+            "parts": [
+                {
+                    "startingCash": 850,
+                    "startRound": 1,
+                    "endRound": 15,
+                    "roundSets": [
+                        "QuestQuincyTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:MonkeyBoost,2",
+                "Power:EnergisingTotem,2",
+                "Power:SuperMonkeyStorm,2"
+            ]
         },
         "LogsCHIMPSChallengeQuest": {
             "nameLocKey": "LogsCHIMPSChallengeQuestName",
             "icon": "QuestIconLogsChimps",
-            "type": "Challenge"
+            "type": "Challenge",
+            "added": 37,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": 6,
+                    "endRound": 100,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
+        },
+        "AnniversaryChallengeQuest": {
+            "nameLocKey": "BTD6BirthdayQuestName",
+            "icon": "QuestIconBirthdayParty",
+            "type": "Challenge",
+            "added": 37,
+            "parts": [
+                {
+                    "startingCash": 2200,
+                    "startRound": 35,
+                    "endRound": 100,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
+        },
+        "SaudaTestQuest": {
+            "nameLocKey": "SaudaTestQuestName",
+            "icon": "QuestIconBladeSaudaNowhere",
+            "type": "Tutorial",
+            "added": 37,
+            "parts": [
+                {
+                    "startingCash": 650,
+                    "startRound": 1,
+                    "endRound": 16,
+                    "roundSets": [
+                        "QuestSaudaTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:DartTime,2",
+                "Power:MoabMine,2",
+                "Power:GlueTrap,2"
+            ]
         },
         "Round100FirstStrikeQuest": {
             "nameLocKey": "Round100FirstStrikeQuestName",
             "icon": "QuestIconStrikenBad",
-            "type": "Tutorial"
+            "type": "Tutorial",
+            "added": 37,
+            "parts": [
+                {
+                    "startingCash": 0,
+                    "startRound": 100,
+                    "endRound": 100,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "InstaMonkey:MonkeySub,040,1"
+            ]
         },
         "BrickellTestQuest": {
             "nameLocKey": "BrickellTestQuestName",
             "icon": "QuestIconBrickell",
-            "type": "Tutorial"
-        },
-        "GwendolinTestQuest": {
-            "nameLocKey": "GwendolinTestQuestName",
-            "icon": "QuestIconGwendolin",
-            "type": "Tutorial"
+            "type": "Tutorial",
+            "added": 38,
+            "parts": [
+                {
+                    "startingCash": 650,
+                    "startRound": 1,
+                    "endRound": 15,
+                    "roundSets": [
+                        "QuestBrickellTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:PortableLake,2",
+                "Power:MoabMine,2",
+                "Power:RoadSpikes,10"
+            ]
         },
         "ScoopsTaleIQuest": {
             "nameLocKey": "ScoopsTaleIQuestName",
             "icon": "QuestIconScoopsTale1",
-            "type": "Tale"
+            "type": "Tale",
+            "added": 38,
+            "parts": [
+                {
+                    "startingCash": 250,
+                    "startRound": 1,
+                    "endRound": 13,
+                    "roundSets": [
+                        "ScoopsTaleIPart1RoundSet"
+                    ]
+                },
+                {
+                    "startingCash": 500,
+                    "startRound": 1,
+                    "endRound": 15,
+                    "roundSets": [
+                        "ScoopsTaleIPart2RoundSet"
+                    ]
+                },
+                {
+                    "startingCash": 5000,
+                    "startRound": 1,
+                    "endRound": 23,
+                    "roundSets": [
+                        "ScoopsTaleIPart3RoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "InstaMonkey:DartMonkey,003,1",
+                "InstaMonkey:Alchemist,300,1",
+                "InstaMonkey:EngineerMonkey,003,1",
+                "MonkeyMoney:1000"
+            ]
         },
-        "GearedLeastTiersChallengeQuest": {
-            "nameLocKey": "GearedLeastTiersChallengeQuestName",
-            "icon": "QuestIconGalaxiliLeastTiers",
-            "type": "Challenge"
-        },
-        "EtienneTest": {
-            "nameLocKey": "EtienneTestQuestName",
-            "icon": "QuestIconDroneFlying101",
-            "type": "Tutorial"
+        "GwendolinTestQuest": {
+            "nameLocKey": "GwendolinTestQuestName",
+            "icon": "QuestIconGwendolin",
+            "type": "Tutorial",
+            "added": 38,
+            "parts": [
+                {
+                    "startingCash": 650,
+                    "startRound": 1,
+                    "endRound": 11,
+                    "roundSets": [
+                        "QuestGwendolinTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:TechBot,2",
+                "Power:Thrive,2",
+                "Power:CamoTrap,2"
+            ]
         },
         "ObynTest": {
             "nameLocKey": "ObynTestQuestName",
             "icon": "QuestIconObynsGardeningSchool",
-            "type": "Tutorial"
+            "type": "Tutorial",
+            "added": 39,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": 1,
+                    "endRound": 15,
+                    "roundSets": [
+                        "QuestObynTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:Thrive,2",
+                "Power:EnergisingTotem,2",
+                "Power:CashDrop,2"
+            ]
         },
-        "BouncyDartsTale": {
-            "nameLocKey": "BouncyDartsTaleQuestName",
-            "icon": "QuestIconBouncyDarts",
-            "type": "Tale"
+        "GearedLeastTiersChallengeQuest": {
+            "nameLocKey": "GearedLeastTiersChallengeQuestName",
+            "icon": "QuestIconGalaxiliLeastTiers",
+            "type": "Challenge",
+            "added": 39,
+            "parts": [
+                {
+                    "startingCash": 1500,
+                    "startRound": 1,
+                    "endRound": 80,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
+        },
+        "EtienneTest": {
+            "nameLocKey": "EtienneTestQuestName",
+            "icon": "QuestIconDroneFlying101",
+            "type": "Tutorial",
+            "added": 39,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": 1,
+                    "endRound": 15,
+                    "roundSets": [
+                        "QuestEtienneTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:DartTime,2",
+                "Power:SuperMonkeyStorm,2",
+                "Power:Pontoon,2"
+            ]
         },
         "StrikerTestQuest": {
             "nameLocKey": "StrikerTestQuestName",
             "icon": "QuestIconStrikerJones",
-            "type": "Tutorial"
+            "type": "Tutorial",
+            "added": 40,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": 1,
+                    "endRound": 15,
+                    "roundSets": [
+                        "QuestStrikerTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:MoabMine,2",
+                "Power:CamoTrap,2",
+                "Power:TechBot,2"
+            ]
         },
         "CorvusTestQuest": {
             "nameLocKey": "CorvusTestQuestName",
             "icon": "QuestIconCorvus",
-            "type": "Tutorial"
+            "type": "Tutorial",
+            "added": 40,
+            "parts": [
+                {
+                    "startingCash": 1,
+                    "startRound": 1,
+                    "endRound": 15,
+                    "roundSets": [
+                        "QuestCorvusTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:CamoTrap,2",
+                "Power:TechBot,2",
+                "Power:DartTime,2"
+            ]
         },
         "AcceleratedRoundSetChallengeQuest": {
             "nameLocKey": "AcceleratedRoundSetQuestName",
             "icon": "QuestIconAcceleratedRoundSet",
-            "type": "Experiment"
+            "type": "Experiment",
+            "added": 40,
+            "parts": [
+                {
+                    "startingCash": 2000,
+                    "startRound": 1,
+                    "endRound": 30,
+                    "roundSets": [
+                        "AcceleratedRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
+        },
+        "BouncyDartsTale": {
+            "nameLocKey": "BouncyDartsTaleQuestName",
+            "icon": "QuestIconBouncyDarts",
+            "type": "Tale",
+            "added": 40,
+            "parts": [
+                {
+                    "startingCash": 10,
+                    "startRound": 1,
+                    "endRound": 100,
+                    "roundSets": [
+                        "BouncyDartsTaleStage1RoundSet"
+                    ]
+                },
+                {
+                    "startingCash": 1000,
+                    "startRound": 1,
+                    "endRound": 25,
+                    "roundSets": [
+                        "BouncyDartsTaleStage2RoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:1000",
+                "InstaMonkey:DartlingGunner,230,1",
+                "InstaMonkey:DartlingGunner,230,1"
+            ]
         },
         "FastUpgradesQuest": {
             "nameLocKey": "FastUpgradesQuestName",
             "icon": "QuestIconFastUpgradesRemake",
-            "type": "Experiment"
-        },
-        "ChallengeMOABMadness": {
-            "nameLocKey": "MOABMadnessQuestName",
-            "icon": "QuestIconMoabMadness",
-            "type": "Experiment"
+            "type": "Experiment",
+            "added": 40,
+            "parts": [
+                {
+                    "startingCash": 650,
+                    "startRound": 1,
+                    "endRound": 6,
+                    "roundSets": [
+                        "FastUpgradesRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
         "PatTestQuestName": {
             "nameLocKey": "PatTestQuestName",
             "icon": "QuestIconPatFusty",
-            "type": "Tutorial"
+            "type": "Tutorial",
+            "added": 41,
+            "parts": [
+                {
+                    "startingCash": 800,
+                    "startRound": 1,
+                    "endRound": 15,
+                    "roundSets": [
+                        "QuestPatTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:CashDrop,2",
+                "Power:MonkeyBoost,2",
+                "Power:CamoTrap,2"
+            ]
+        },
+        "ChallengeMOABMadness": {
+            "nameLocKey": "MOABMadnessQuestName",
+            "icon": "QuestIconMoabMadness",
+            "type": "Experiment",
+            "added": 41,
+            "parts": [
+                {
+                    "startingCash": 50000,
+                    "startRound": 1,
+                    "endRound": 5,
+                    "roundSets": [
+                        "MOABMadnessRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
         "HeroPsiQuest": {
             "nameLocKey": "PsiTestQuestName",
             "icon": "QuestIconPsi",
-            "type": "Tutorial"
-        },
-        "BloonariusBattleQuest": {
-            "nameLocKey": "BloonariusBattleQuestName",
-            "icon": "QuestIconBloonariusBattle",
-            "type": "Tale"
+            "type": "Tutorial",
+            "added": 41,
+            "parts": [
+                {
+                    "startingCash": 100,
+                    "startRound": 1,
+                    "endRound": 15,
+                    "roundSets": [
+                        "QuestPsiTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:CashDrop,2",
+                "Power:TechBot,2",
+                "Power:MonkeyBoost,2"
+            ]
         },
         "PhayzeOneQuest": {
             "nameLocKey": "PhayzeOneQuestName",
             "icon": "QuestIconPhayzeOne",
-            "type": "Experiment"
+            "type": "Experiment",
+            "added": 42,
+            "parts": [
+                {
+                    "startingCash": 2000,
+                    "startRound": 1,
+                    "endRound": 100,
+                    "roundSets": [
+                        "EnduranceRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
         "HeroChurchillQuest": {
             "nameLocKey": "ChurchillTestQuestName",
             "icon": "QuestIconCaptainChurchill",
-            "type": "Tutorial"
+            "type": "Tutorial",
+            "added": 42,
+            "parts": [
+                {
+                    "startingCash": 170,
+                    "startRound": 1,
+                    "endRound": 15,
+                    "roundSets": [
+                        "QuestChurchillTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:DartTime,2",
+                "Power:Pontoon,2",
+                "Power:CashDrop,2"
+            ]
+        },
+        "BloonariusBattleQuest": {
+            "nameLocKey": "BloonariusBattleQuestName",
+            "icon": "QuestIconBloonariusBattle",
+            "type": "Tale",
+            "added": 42,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": 4,
+                    "endRound": 100,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": -1,
+                    "startRound": 4,
+                    "endRound": 100,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": 2000,
+                    "startRound": 4,
+                    "endRound": 100,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:1000"
+            ]
         },
         "HeroGeraldoQuest": {
             "nameLocKey": "GeraldoTestQuestName",
             "icon": "QuestIconGeraldo",
-            "type": "Tutorial"
+            "type": "Tutorial",
+            "added": 42,
+            "parts": [
+                {
+                    "startingCash": 3,
+                    "startRound": 1,
+                    "endRound": 15,
+                    "roundSets": [
+                        "QuestGeraldoTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:Thrive,2",
+                "Power:DartTime,2",
+                "Power:GlueTrap,2"
+            ]
         },
         "ProtectTheYacht": {
             "nameLocKey": "ProtectTheYachtQuestName",
             "icon": "QuestIconMrBeast",
-            "type": "Challenge"
-        },
-        "RosaliaTest": {
-            "nameLocKey": "RosaliaTestQuestName",
-            "icon": "QuestIconRosalia",
-            "type": "Tutorial"
+            "type": "Challenge",
+            "added": 42.3,
+            "parts": [
+                {
+                    "startingCash": 15000,
+                    "startRound": 50,
+                    "endRound": 90,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "InstaMonkey:DartMonkey,000,1",
+                "InstaMonkey:DartlingGunner,000,1",
+                "InstaMonkey:SniperMonkey,000,1"
+            ]
         },
         "PhayzeBloonQuest": {
             "nameLocKey": "PhayzeBloonQuestName",
             "icon": "QuestIconPhayzeBloon",
-            "type": "Tale"
+            "type": "Tale",
+            "added": 43,
+            "parts": [
+                {
+                    "startingCash": 2443,
+                    "startRound": 10,
+                    "endRound": 60,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": 4868,
+                    "startRound": 20,
+                    "endRound": 80,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": 8283,
+                    "startRound": 30,
+                    "endRound": 100,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500",
+                "Power:MonkeyBoost,3",
+                "Power:DartTime,3",
+                "Power:SuperMonkeyStorm,3",
+                "MonkeyMoney:55"
+            ]
+        },
+        "RosaliaTest": {
+            "nameLocKey": "RosaliaTestQuestName",
+            "icon": "QuestIconRosalia",
+            "type": "Tutorial",
+            "added": 43,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": 1,
+                    "endRound": 15,
+                    "roundSets": [
+                        "QuestRosaliaTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:GlueTrap,2",
+                "Power:TechBot,2",
+                "Power:CamoTrap,2"
+            ]
         },
         "DartlingGunnerQuest": {
             "nameLocKey": "DartlingGunnerQuestName",
             "icon": "QuestIconSuperDartlingBros",
-            "type": "Tale"
+            "type": "Tale",
+            "added": 44,
+            "parts": [
+                {
+                    "startingCash": 4500,
+                    "startRound": 60,
+                    "endRound": 90,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "InstaMonkey:DartlingGunner,300,1",
+                "InstaMonkey:DartlingGunner,030,1",
+                "InstaMonkey:DartlingGunner,003,1"
+            ]
         },
         "MermonkeyQuest": {
             "nameLocKey": "MermonkeyQuestName",
             "icon": "QuestIconMermonkeys",
-            "type": "Tale"
-        },
-        "EnduranceRaceQuest": {
-            "nameLocKey": "EnduranceRaceQuest1Name",
-            "icon": "QuestIconFrozenRace",
-            "type": "Challenge"
+            "type": "Tale",
+            "added": 44,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": 1,
+                    "endRound": 7,
+                    "roundSets": [
+                        "QuestMermonkeyStage1RoundSet"
+                    ]
+                },
+                {
+                    "startingCash": 3000,
+                    "startRound": 45,
+                    "endRound": 90,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "InstaMonkey:Mermonkey,300,1",
+                "InstaMonkey:Mermonkey,030,1",
+                "InstaMonkey:Mermonkey,003,1"
+            ]
         },
         "ChallengeFastTracked": {
             "nameLocKey": "FastTrackedQuestName",
             "icon": "QuestIconWaterParkFastTrack",
-            "type": "Challenge"
+            "type": "Challenge",
+            "added": 45,
+            "parts": [
+                {
+                    "startingCash": 4150,
+                    "startRound": 21,
+                    "endRound": -1,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "Power:DartTime,3",
+                "Power:CashDrop,3",
+                "MonkeyMoney:250"
+            ]
         },
         "ChallengeOneSided": {
             "nameLocKey": "OneSidedQuestName",
             "icon": "QuestIconInfernalOneSide",
-            "type": "Challenge"
+            "type": "Challenge",
+            "added": 45,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": -1,
+                    "endRound": -1,
+                    "roundSets": [
+                        "DefaultSkipEveryOddRound"
+                    ]
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
+        },
+        "EnduranceRaceQuest": {
+            "nameLocKey": "EnduranceRaceQuest1Name",
+            "icon": "QuestIconFrozenRace",
+            "type": "Challenge",
+            "added": 45,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": -1,
+                    "endRound": 255,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
         "BattleCatQuest": {
             "nameLocKey": "BattleCatQuest1Name",
             "icon": "QuestIconBattleCat",
-            "type": "Tale"
-        },
-        "HeroAdoraQuest": {
-            "nameLocKey": "AdoraTestQuest1Name",
-            "icon": "QuestIconAdora",
-            "type": "Tutorial"
+            "type": "Tale",
+            "added": 46,
+            "parts": [
+                {
+                    "startingCash": 2000,
+                    "startRound": -1,
+                    "endRound": 22,
+                    "roundSets": [
+                        "BattleCatQuestRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:BattleCat,3"
+            ]
         },
         "ChallengeABRCHIMPOPPABLE": {
             "nameLocKey": "ABRCHIMPOPPABLEQuestName",
             "icon": "QuestIconABRCHIMPOPPABLE",
-            "type": "Challenge"
+            "type": "Challenge",
+            "added": 46,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": -1,
+                    "endRound": -1,
+                    "roundSets": [
+                        "AlternateRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
-        "ChallengeMoonColony": {
-            "nameLocKey": "MoonColonyQuestName",
-            "icon": "QuestIconMoonColony",
-            "type": "Challenge"
+        "HeroAdoraQuest": {
+            "nameLocKey": "AdoraTestQuest1Name",
+            "icon": "QuestIconAdora",
+            "type": "Tutorial",
+            "added": 46,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": 1,
+                    "endRound": 15,
+                    "roundSets": [
+                        "QuestAdoraTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:CamoTrap,2",
+                "Power:MoabMine,2",
+                "Power:DartTime,2"
+            ]
         },
         "ChallengeRaftDefense": {
             "nameLocKey": "RaftDefenseQuestName",
             "icon": "QuestIconRaftDefense",
-            "type": "Challenge"
+            "type": "Challenge",
+            "added": 47,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": -1,
+                    "endRound": -1,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
         "RogueLegendQuest": {
             "nameLocKey": "RogueLegendQuest1Name",
             "icon": "QuestIconRogueLegend",
-            "type": "Tale"
+            "type": "Tale",
+            "added": 47,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": -1,
+                    "endRound": -1,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
-        "ExperimentProjectileCarousel": {
-            "nameLocKey": "ProjectileCarouselQuestName",
-            "icon": "QuestIconQuantumEntanglement",
-            "type": "Experiment"
+        "ChallengeMoonColony": {
+            "nameLocKey": "MoonColonyQuestName",
+            "icon": "QuestIconMoonColony",
+            "type": "Challenge",
+            "added": 47,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": -1,
+                    "endRound": -1,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
         "SheRaQuest": {
             "nameLocKey": "SheRaQuestName",
             "icon": "QuestIconSheRa",
-            "type": "Tale"
+            "type": "Tale",
+            "added": 48,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": 13,
+                    "endRound": 20,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": -1,
+                    "startRound": 20,
+                    "endRound": 40,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": -1,
+                    "startRound": 38,
+                    "endRound": 100,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "Power:SheRa,3"
+            ]
         },
-        "ChallengeOneHero": {
-            "nameLocKey": "ChallengeOneHeroQuestName",
-            "icon": "QuestIconOneMonkeyArmy",
-            "type": "Challenge"
-        },
-        "HeroEziliQuest": {
-            "nameLocKey": "EziliTestQuestName",
-            "icon": "QuestIconEzili",
-            "type": "Tutorial"
+        "ExperimentProjectileCarousel": {
+            "nameLocKey": "ProjectileCarouselQuestName",
+            "icon": "QuestIconQuantumEntanglement",
+            "type": "Experiment",
+            "added": 48,
+            "parts": [
+                {
+                    "startingCash": 6000,
+                    "startRound": 22,
+                    "endRound": 80,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
         "DesperadoQuest": {
             "nameLocKey": "DesperadoQuestName",
             "icon": "QuestIconDesperado",
-            "type": "Tale"
+            "type": "Tale",
+            "added": 49,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": 1,
+                    "endRound": 2,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": 2100,
+                    "startRound": 27,
+                    "endRound": -1,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "InstaMonkey:Desperado,300,1",
+                "InstaMonkey:Desperado,030,1",
+                "InstaMonkey:Desperado,003,1"
+            ]
         },
-        "1stTutorial": {
-            "nameLocKey": "1stTutorialName",
-            "icon": "QuestIconTutorial",
-            "type": "Tutorial"
+        "HeroEziliQuest": {
+            "nameLocKey": "EziliTestQuestName",
+            "icon": "QuestIconEzili",
+            "type": "Tutorial",
+            "added": 49,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": 1,
+                    "endRound": 15,
+                    "roundSets": [
+                        "QuestEziliTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:MoabMine,2",
+                "Power:EnergisingTotem,2",
+                "Power:TechBot,2"
+            ]
+        },
+        "ChallengeOneHero": {
+            "nameLocKey": "ChallengeOneHeroQuestName",
+            "icon": "QuestIconOneMonkeyArmy",
+            "type": "Challenge",
+            "added": 49,
+            "parts": [
+                {
+                    "startingCash": 5000,
+                    "startRound": 1,
+                    "endRound": 80,
+                    "roundSets": [
+                        "RogueRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
         "ChallengeBloonHackers": {
             "nameLocKey": "ChallengeBloonHackersName",
             "icon": "QuestIconBloonHackers",
-            "type": "Challenge"
+            "type": "Experiment",
+            "added": 50,
+            "parts": [
+                {
+                    "startingCash": 1100,
+                    "startRound": -1,
+                    "endRound": -1,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
+        },
+        "1stTutorial": {
+            "nameLocKey": "1stTutorialName",
+            "icon": "QuestIconTutorial",
+            "type": "Tutorial",
+            "added": 50,
+            "parts": [
+                {
+                    "startingCash": 450,
+                    "startRound": 3,
+                    "endRound": 8,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": 5000,
+                    "startRound": 24,
+                    "endRound": 33,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": 10000,
+                    "startRound": 34,
+                    "endRound": 40,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:200"
+            ]
         },
         "ExperimentRegularIncome": {
             "nameLocKey": "ExperimentRegularIncomeName",
             "icon": "QuestIconRegularIncome",
-            "type": "Experiment"
-        },
-        "SilasTestQuest": {
-            "nameLocKey": "SilasTestQuestName",
-            "icon": "QuestIconSilas",
-            "type": "Tutorial"
+            "type": "Experiment",
+            "added": 50,
+            "parts": [
+                {
+                    "startingCash": 2000,
+                    "startRound": 30,
+                    "endRound": 80,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
         "SkeletorQuest": {
             "nameLocKey": "SkeletorQuestName",
             "icon": "QuestIconSkeletor",
-            "type": "Tale"
+            "type": "Tale",
+            "added": 51,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": -1,
+                    "endRound": 3,
+                    "roundSets": [
+                        "SkeletorQuestRoundSet1"
+                    ]
+                },
+                {
+                    "startingCash": -1,
+                    "startRound": -1,
+                    "endRound": -1,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": 6000,
+                    "startRound": -1,
+                    "endRound": 60,
+                    "roundSets": [
+                        "RogueRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:Skeletor,3"
+            ]
+        },
+        "SilasTestQuest": {
+            "nameLocKey": "SilasTestQuestName",
+            "icon": "QuestIconSilas",
+            "type": "Tutorial",
+            "added": 51,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": 1,
+                    "endRound": 10,
+                    "roundSets": [
+                        "QuestSilasTrialRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:MoabMine,2",
+                "Power:CamoTrap,2",
+                "Power:TechBot,2"
+            ]
         },
         "FrontierLegendQuest": {
             "nameLocKey": "FrontierLegendQuestName",
             "icon": "QuestIconFrontierLegend",
-            "type": "Tale"
-        },
-        "ChallengeSupportOnly": {
-            "nameLocKey": "ChallengeSupportOnlyName",
-            "icon": "QuestIconSupportMonkeys",
-            "type": "Challenge"
-        }, 
-        "ChallengeTargetMonkeys": {
-            "nameLocKey": "ChallengeTargetMonkeysName",
-            "icon": "QuestIconTargetingMonkeys",
-            "type": "Challenge"
+            "type": "Tale",
+            "added": 52,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": -1,
+                    "endRound": -1,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
         "ChallengeZOMGRush": {
             "nameLocKey": "ChallengeZOMGRushName",
             "icon": "QuestIconZOMGRush",
-            "type": "Challenge"
+            "type": "Challenge",
+            "added": 53,
+            "parts": [
+                {
+                    "startingCash": 10000,
+                    "startRound": 30,
+                    "endRound": 60,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
-        "ChallengeAnotherPath": {
-            "nameLocKey": "ChallengeAnotherPathName",
-            "icon": "QuestIconAnotherPath",
-            "type": "Challenge"
+        "ChallengeTargetMonkeys": {
+            "nameLocKey": "ChallengeTargetMonkeysName",
+            "icon": "QuestIconTargetingMonkeys",
+            "type": "Challenge",
+            "added": 53,
+            "parts": [
+                {
+                    "startingCash": 1000,
+                    "startRound": -1,
+                    "endRound": 35,
+                    "roundSets": [
+                        "RogueRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
-        "ChallengePrimaryPairs": {
-            "nameLocKey": "ChallengePrimaryPairsName",
-            "icon": "QuestIconPrimaryPairs",
-            "type": "Challenge"
+        "ChallengeSupportOnly": {
+            "nameLocKey": "ChallengeSupportOnlyName",
+            "icon": "QuestIconSupportMonkeys",
+            "type": "Challenge",
+            "added": 53,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": -1,
+                    "endRound": -1,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
         "ChallengeWildWest": {
             "nameLocKey": "ChallengeWildWestName",
             "icon": "QuestIconWildWest",
-            "type": "Challenge"
+            "type": "Challenge",
+            "added": 55,
+            "parts": [
+                {
+                    "startingCash": 3000,
+                    "startRound": 27,
+                    "endRound": 100,
+                    "roundSets": [
+                        "FrontierBase1"
+                    ]
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
+        },
+        "ChallengeAnotherPath": {
+            "nameLocKey": "ChallengeAnotherPathName",
+            "icon": "QuestIconAnotherPath",
+            "type": "Challenge",
+            "added": 55,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": -1,
+                    "endRound": -1,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
+        },
+        "ChallengePrimaryPairs": {
+            "nameLocKey": "ChallengePrimaryPairsName",
+            "icon": "QuestIconPrimaryPairs",
+            "type": "Challenge",
+            "added": 55,
+            "parts": [
+                {
+                    "startingCash": 6789,
+                    "startRound": 30,
+                    "endRound": 140,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         },
         "HeManQuest": {
             "nameLocKey": "HeManQuestName",
             "icon": "QuestIconHeMan",
-            "type": "Tale"
+            "type": "Tale",
+            "added": 55,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": 1,
+                    "endRound": 4,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": -1,
+                    "startRound": -1,
+                    "endRound": -1,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": -1,
+                    "startRound": 1,
+                    "endRound": 100,
+                    "roundSets": [
+                        "HeManStage3RoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "Power:SwordOfPower,5",
+                "Power:SheRa,5",
+                "Power:BattleCat,5",
+                "Power:Skeletor,5"
+            ]
         }
     },
     "BGColor": [0.000, 0.498, 1.000],
@@ -3410,7 +4463,6 @@
             "Eruption",
             "Meteor Impact"
         ],
-        
         "WizardMonkey": [
             "Summon Pheonix",
             "Summon Lord Phoenix",
@@ -3571,49 +4623,49 @@
             "type": "normal",
             "startingCash": 650
         },
-        "BloonariusRoundSet": {
+        "bloonarius": {
             "name": "Bloonarius Custom Rounds",
             "icon": "BloonariusRoundSetIcon",
             "type": "boss",
             "startingCash": 650,
             "modifiedRounds": [40, 60, 80, 100]
         },
-        "LychRoundSet": {
+        "lych": {
             "name": "Lych Custom Rounds",
             "icon": "LychRoundSetIcon",
             "type": "boss",
             "startingCash": 650,
-            "modifiedRounds": [40, 41, 42, 43, 44, 45, 46, 47, 48, 60, 80, 100]
+            "modifiedRounds": [40, 60, 80, 100]
         },
-        "VortexRoundSet": {
+        "vortex": {
             "name": "Vortex Custom Rounds",
             "icon": "VortexRoundSetIcon",
             "type": "boss",
             "startingCash": 650,
             "modifiedRounds": [5, 12, 24, 30, 40, 41, 60, 80, 100]
         },
-        "DreadbloonRoundSet": {
+        "dreadbloon": {
             "name": "Dreadbloon Custom Rounds",
             "icon": "DreadbloonRoundSetIcon",
             "type": "boss",
             "startingCash": 650,
             "modifiedRounds": [26,28,30,31,34,35,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,83,84,88,99,103,104,105,113,114,115,117,123,125,127,129,130,133,137,139]
         },
-        "PhayzeRoundSet": {
+        "phayze": {
             "name": "Phayze Custom Rounds",
             "icon": "PhayzeRoundSetIcon",
             "type": "boss",
             "startingCash": 650,
             "modifiedRounds": [40, 60, 80, 100]
         },
-        "BlastapopoulosRoundSet": {
+        "blastapopoulos": {
             "name": "Blastapopoulos Custom Rounds",
             "icon": "BlastapopoulosRoundSetIcon",
             "type": "boss",
             "startingCash": 650,
             "modifiedRounds": [40, 60, 80, 100]
         },
-        "DiamondbackRoundSet": {
+        "diamondback": {
             "name": "Diamondback Custom Rounds",
             "icon": "DiamondbackRoundSetIcon",
             "type": "boss",
@@ -3624,299 +4676,92 @@
             "name": "Rogue Custom Rounds",
             "icon": "QuestIconRogueLegend",
             "type": "legends",
-            "startingCash": 0
+            "startingCash": 0,
+            "special": "Rogue"
         },
         "RogueBloonierSet": {
             "name": "Rogue Bloonier Rounds",
             "icon": "RogueBloonierSet",
             "type": "rogue",
-            "startingCash": 0
+            "startingCash": 0,
+            "special": "Rogue"
         },
         "RogueDenseSet": {
             "name": "Rogue Dense Rounds",
             "icon": "RogueDenseSet",
             "type": "rogue",
-            "startingCash": 0
+            "startingCash": 0,
+            "special": "Rogue"
         },
         "RogueImmuneSet": {
             "name": "Rogue Immune Rounds",
             "icon": "RogueImmuneSet",
             "type": "rogue",
-            "startingCash": 0
+            "startingCash": 0,
+            "special": "Rogue"
         },
         "RogueLeadSet": {
             "name": "Rogue Lead Rounds",
             "icon": "RogueLeadSet",
             "type": "rogue",
-            "startingCash": 0
+            "startingCash": 0,
+            "special": "Rogue"
         },
         "RoguePinkSet": {
             "name": "Rogue Pink Rounds",
             "icon": "RoguePinkSet",
             "type": "rogue",
-            "startingCash": 0
+            "startingCash": 0,
+            "special": "Rogue"
         },
         "RoguePurpleSet": {
             "name": "Rogue Purple Rounds",
             "icon": "RoguePurpleSet",
             "type": "rogue",
-            "startingCash": 0
+            "startingCash": 0,
+            "special": "Rogue"
         },
         "FrontierBase1": {
             "name": "Frontier Base Roundset Act 1",
             "icon": "QuestIconFrontierLegend",
             "type": "frontier",
-            "startingCash": 0
+            "startingCash": 0,
+            "special": "Frontier"
         },
         "FrontierBase2": {
             "name": "Frontier Base Roundset Act 2",
             "icon": "QuestIconFrontierLegend",
             "type": "frontier",
-            "startingCash": 0
+            "startingCash": 0,
+            "special": "Frontier"
         },
         "FrontierBase3": {
             "name": "Frontier Base Roundset Act 3",
             "icon": "QuestIconFrontierLegend",
             "type": "frontier",
-            "startingCash": 0
+            "startingCash": 0,
+            "special": "Frontier"
         },
         "FrontierRush1": {
             "name": "Frontier Rush Roundset Act 1",
             "icon": "QuestIconFrontierLegend",
             "type": "frontier",
-            "startingCash": 0
+            "startingCash": 0,
+            "special": "Frontier"
         },
         "FrontierRush2": {
             "name": "Frontier Rush Roundset Act 2",
             "icon": "QuestIconFrontierLegend",
             "type": "frontier",
-            "startingCash": 0
+            "startingCash": 0,
+            "special": "Frontier"
         },
         "FrontierRush3": {
             "name": "Frontier Rush Roundset Act 3",
             "icon": "QuestIconFrontierLegend",
             "type": "frontier",
-            "startingCash": 0
-        },
-        "AcceleratedRoundSet": {
-            "name": "Accelerated Rounds",
-            "icon": "QuestIconAcceleratedRoundSet",
-            "type": "quest",
-            "startingCash": 2000,
-            "endRound": 30
-        },
-        "EnduranceRoundSet": {
-            "name": "Phayze One - Endurance Rounds",
-            "icon": "QuestIconPhayzeOne",
-            "type": "quest",
-            "startingCash": 2000,
-            "endRound": 205
-        },
-        "FastUpgradesRoundSet": {
-            "name": "Fast Upgrades Rounds",
-            "icon": "QuestIconFastUpgradesRemake",
-            "type": "quest",
-            "startingCash": 650,
-            "endRound": 6
-        },
-        "MOABMadnessRoundSet": {
-            "name": "MOAB Madness Rounds",
-            "icon": "QuestIconMoabMadness",
-            "type": "quest",
-            "startingCash": 50000,
-            "endRound": 5
-        },
-        "QuestMermonkeyStage1RoundSet": {
-            "name": "Mermonkeys. No Mere Monkeys Stage 1 Rounds",
-            "icon": "QuestIconMermonkeys",
-            "type": "quest",
-            "startingCash": 650,
-            "endRound": 7,
-            "part": 1
-        },
-        "QuestAdoraTrialRoundSet": {
-            "name": "Adora Explorer! Rounds",
-            "icon": "QuestIconAdora",
-            "type": "quest",
-            "startingCash": 650,
-            "endRound": 15
-        },
-        "QuestBrickellTrialRoundSet": {
-            "name": "Brickell Bootcamp Rounds",
-            "icon": "QuestIconBrickell",
-            "type": "quest",
-            "startingCash": 650,
-            "endRound": 15
-        },
-        "QuestChurchillTrialRoundSet": {
-            "name": "Royal Tank Academy Rounds",
-            "icon": "QuestIconCaptainChurchill",
-            "type": "quest",
-            "startingCash": 170,
-            "endRound": 15
-        },
-        "QuestCorvusTrialRoundSet": {
-            "name": "A Guide to the Book of Spirits Rounds",
-            "icon": "QuestIconCorvus",
-            "type": "quest",
-            "startingCash": 1,
-            "endRound": 15
-        },
-        "QuestEtienneTrialRoundSet": {
-            "name": "Drone Flying 101 Rounds",
-            "icon": "QuestIconDroneFlying101",
-            "type": "quest",
-            "startingCash": 650,
-            "endRound": 15
-        },
-        "QuestEziliTrialRoundSet": {
-            "name": "How To Do Voodoo!",
-            "icon": "QuestIconEzili",
-            "type": "quest",
-            "startingCash": 650,
-            "endRound": 15
-        },
-        "QuestGeraldoTrialRoundSet": {
-            "name": "One Stop Pop Shop! Rounds",
-            "icon": "QuestIconGeraldo",
-            "type": "quest",
-            "startingCash": 3,
-            "endRound": 15
-        },
-        "QuestGwendolinTrialRoundSet": {
-            "name": "Trial By Fire Rounds",
-            "icon": "QuestIconGwendolin",
-            "type": "quest",
-            "startingCash": 650,
-            "endRound": 11
-        },
-        "QuestObynTrialRoundSet": {
-            "name": "Obyn's Gardening School Rounds",
-            "icon": "QuestIconObynsGardeningSchool",
-            "type": "quest",
-            "startingCash": 650,
-            "endRound": 15
-        },
-        "QuestPatTrialRoundSet": {
-            "name": "Pat Trial Rounds",
-            "icon": "QuestIconPatFusty",
-            "type": "quest",
-            "startingCash": 800,
-            "endRound": 15
-        },
-        "QuestPsiTrialRoundSet": {
-            "name": "Psi Insight! Rounds",
-            "icon": "QuestIconPsi",
-            "type": "quest",
-            "startingCash": 100,
-            "endRound": 15
-        },
-        "QuestQuincyTrialRoundSet": {
-            "name": "Quincy, Student of Quincy Rounds",
-            "icon": "QuestIconQuincyTestOfQuincy",
-            "type": "quest",
-            "startingCash": 850,
-            "endRound": 15
-        },
-        "QuestRosaliaTrialRoundSet": {
-            "name": "Tinkerer's Tutorial Rounds",
-            "icon": "QuestIconRosalia",
-            "type": "quest",
-            "startingCash": 650,
-            "endRound": 15
-        },
-        "QuestSaudaTrialRoundSet": {
-            "name": "Blade Sauda Nowhere Rounds",
-            "icon": "QuestIconBladeSaudaNowhere",
-            "type": "quest",
-            "startingCash": 650,
-            "endRound": 16
-        },
-        "QuestSilasTrialRoundSet": {
-            "name": "Ice to Meet You! Rounds",
-            "icon": "QuestIconSilas",
-            "type": "quest",
-            "startingCash": 650,
-            "endRound": 10
-        },
-        "QuestStrikerTrialRoundSet": {
-            "name": "Striker Instruction! Rounds",
-            "icon": "QuestIconStrikerJones",
-            "type": "quest",
-            "startingCash": 650,
-            "endRound": 15
-        },
-        "BouncyDartsTaleStage1RoundSet": {
-            "name": "New Dart Just Dropped Stage 1 Rounds",
-            "icon": "QuestIconBouncyDarts",
-            "type": "quest",
-            "startingCash": 10,
-            "endRound": 137,
-            "part": 1
-        },
-        "BouncyDartsTaleStage2RoundSet": {
-            "name": "New Dart Just Dropped Stage 2 Rounds",
-            "icon": "QuestIconBouncyDarts",
-            "type": "quest",
-            "startingCash": 1000,
-            "endRound": 140,
-            "part": 2
-        },
-        "ScoopsTaleIPart1RoundSet": {
-            "name": "Scoop's Tall Tale Part 1 Rounds",
-            "icon": "QuestIconScoopsTale1",
-            "type": "quest",
-            "startingCash": 250,
-            "endRound": 13,
-            "part": 1
-        },
-        "ScoopsTaleIPart2RoundSet": {
-            "name": "Scoop's Tall Tale Part 2 Rounds",
-            "icon": "QuestIconScoopsTale1",
-            "type": "quest",
-            "startingCash": 500,
-            "endRound": 15,
-            "part": 2
-        },
-        "ScoopsTaleIPart3RoundSet": {
-            "name": "Scoop's Tall Tale Part 3 Rounds",
-            "icon": "QuestIconScoopsTale1",
-            "type": "quest",
-            "startingCash": 5000,
-            "endRound": 23,
-            "part": 3
-        },
-        "BattleCatQuestRoundSet": {
-            "name": "By the Power of Battle Cat! Rounds",
-            "icon": "QuestIconBattleCat",
-            "type": "quest",
-            "startingCash": 2200,
-            "endRound": 22
-        },
-        "SkeletorQuestRoundSet1": {
-            "name": "Oh no! Skeletor! Part 1 Rounds",
-            "icon": "QuestIconSkeletor",
-            "type": "quest",
-            "startingCash": 650,
-            "endRound": 3,
-            "part": 1
-        },
-        "SkeletorQuestRoundsetPart3": {
-            "name": "Oh no! Skeletor! Part 3 Rounds",
-            "icon": "QuestIconSkeletor",
-            "type": "quest",
-            "startingCash": 6000,
-            "endRound": 60,
-            "part": 3,
-            "roundset": "RogueRoundSet"
-        },
-        "HeManStage3RoundSet": {
-            "name": "He-Man Has The Powers! Part 3 Rounds",
-            "icon": "QuestIconHeMan",
-            "type": "quest",
-            "startingCash": 650,
-            "endRound": 100,
-            "part": 3
+            "startingCash": 0,
+            "special": "Frontier"
         }
     },
     "incomeSets": {
