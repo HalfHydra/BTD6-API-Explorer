@@ -1338,12 +1338,16 @@ function applyCTFilter(container, tileData) {
             }
         }
 
+        const tippyInstance = entry.gTile._tippyInstance;
+
         if (isVisible) {
             entry.gTile.style.filter = '';
             entry.gTile.style.opacity = '1';
+            if (tippyInstance) tippyInstance.enable();
         } else {
             entry.gTile.style.filter = 'grayscale(60%) brightness(0.55)';
             entry.gTile.style.opacity = '0.6';
+            if (tippyInstance) tippyInstance.disable();
         }
     }
 
@@ -2615,7 +2619,7 @@ function challengeModifiersCT(dcModel){
 }
 
 function attachTileHoverTippy(element, tileData) {
-    tippy(element, {
+    let instance = tippy(element, {
         allowHTML: true,
         interactive: false,
         placement: 'top',
@@ -2645,6 +2649,7 @@ function attachTileHoverTippy(element, tileData) {
             ],
         },
     });
+    element._tippyInstance = instance;
 }
 
 function convertExtCTDataToODAFormat(tiles) {
