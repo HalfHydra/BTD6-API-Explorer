@@ -41,6 +41,14 @@ function generateRoundsets() {
     selectorsDiv.classList.add('selectors-div');
     roundsetPage.appendChild(selectorsDiv);
 
+    if (!seenFTMessages.includes("manualRoundsetMessage")) {
+        selectorsDiv.appendChild(generateComment("One-Time Note: Event custom rounds are not available on the Open Data API. New events may take some time to be added here manually.", function() {
+            seenFTMessages.push("manualRoundsetMessage")
+            saveSettings();
+        }));
+    }
+
+
     // let roundsetHeaderText = createEl('p', {
     //     classList: ['sku-roundset-selector-desc', 'ta-center'],
     //     style: {

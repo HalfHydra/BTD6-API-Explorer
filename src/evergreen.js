@@ -9,6 +9,8 @@ let trophyStoreItemsJSON = {}
 let teamsStoreItemsJSON = {}
 let rogueJSON = {}
 
+let seenFTMessages = [];
+
 let rulesMap = {
     "Monkey Knowledge Disabled": "NoKnowledgeIcon",
     "No Lives Lost": "NoLivesLostIcon",
@@ -22,6 +24,9 @@ let rulesMap = {
     "Custom Rounds": "CustomRoundIcon",
     "Paragon Limit": "ParagonLimitIcon"
 }
+
+
+loadSettings();
 
 let backQueue = [];
 let backButton = createEl('img', { src: '../Assets/UI/BackBtn.png', classList: ['back-button', 'pointer'] });
@@ -260,6 +265,7 @@ function loadSettings() {
         if (settings.hasOwnProperty("UseNamedMonkeys")) { useNamedMonkeys = settings.UseNamedMonkeys };
         if (settings.hasOwnProperty("TeamsStoreItems")) { showTeamsItems = settings.TeamsStoreItems };
         if (settings.hasOwnProperty("ShowHiddenTrophyItems")) { trophyStoreShowHidden = settings.ShowHiddenTrophyItems };
+        if (settings.hasOwnProperty("seenFTMessages")) { seenFTMessages = settings.seenFTMessages };
     }
 }
 
@@ -268,7 +274,8 @@ function saveSettings() {
         "ProfileLoading": preventRateLimiting,
         "UseNamedMonkeys": useNamedMonkeys,
         "TeamsStoreItems": showTeamsItems,
-        "ShowHiddenTrophyItems": trophyStoreShowHidden
+        "ShowHiddenTrophyItems": trophyStoreShowHidden,
+        "seenFTMessages": seenFTMessages
     }
     localStorage.setItem("BTD6OAKSettings", JSON.stringify(settings));
 }
