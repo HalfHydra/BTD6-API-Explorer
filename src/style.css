@@ -2533,7 +2533,8 @@
 }
 .challenge-model-map-icon {
     min-width: 450px;
-    height: 300px;
+    aspect-ratio: 1.5;
+    flex-grow: 0.25;
 }
 .challenge-setting-icon {
     width:50px;

@@ -6811,6 +6811,20 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
         if((data.key == "maxLives" || data.key == "lives" || data.key == "startingCash" || data.key == "startRound" || data.key == "endRound") && metadata[data.key] == 0) { challengeSettingValue.innerHTML = "Default"; }
     })
 
+    function adjustSettingsWidth() {
+        const topWidth = challengeModelTop.offsetWidth;
+        const availableWidth = topWidth - 250 - 40;
+        
+        if (availableWidth >= 800) {
+            challengeModelSettings.style.width = '500px';
+        } else {
+            challengeModelSettings.style.width = '250px';
+        }
+    }
+    adjustSettingsWidth();
+    window.addEventListener('resize', adjustSettingsWidth);
+
+
     let challengeSetting = document.createElement('div');
     challengeSetting.classList.add('challenge-setting');
     challengeModelSettings.appendChild(challengeSetting);
@@ -12174,7 +12188,7 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
         if (rulesDiv.children.length == 0) {
             let none = createEl('p', {
                 classList: ['challenge-modifier-none', 'w-100'],
-                innerHTML: "Default"
+                innerHTML: "Default Rules & No Modifiers"
             });
             rulesDiv.appendChild(none);
         }
