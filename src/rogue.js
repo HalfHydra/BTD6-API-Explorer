@@ -30,6 +30,7 @@ let noArtifactsMessage;
 let currentArtifacts = {};
 
 let rogueSyncInterval;
+let currentSyncContext = null;
 
 fetchRogueDependencies();
 loadRogueDataFromLocalStorage();
@@ -1712,8 +1713,12 @@ function loginModal(firstTime) {
 }
 
 function checkAndSyncRogueData() {
-    if (document.getElementById('artifacts-content').style.display == "none") {
+    if (!document.getElementById('artifacts-container') || document.getElementById('artifacts-content').style.display === "none" || !currentSyncContext) {
         clearInterval(rogueSyncInterval);
+        currentSyncContext = null;
+        return;
+    }
+    if (!rogueSaveData.hasOwnProperty("syncingWith") || rogueSaveData.syncingWith == null) {
         return;
     }
     let now = new Date().valueOf();
