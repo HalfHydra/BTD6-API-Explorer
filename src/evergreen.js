@@ -622,6 +622,11 @@ function openOAKInstructionsModal(){
     }));
 
     OAKInstructionsDiv.appendChild(createEl('p', {
+        classList: ['oak-instructions-text'],
+        innerHTML: 'You can read more about the Open Data API here: <a href="https://ninja.kiwi/opendatafaq" target="_blank", style="color:white";>Open Data API Article</a>'
+    }));
+
+    OAKInstructionsDiv.appendChild(createEl('p', {
         classList: ['oak-instructions-header', 'black-outline'],
         innerHTML: 'How do I get one?'
     }));
@@ -653,7 +658,7 @@ function openOAKInstructionsModal(){
 
     OAKInstructionsDiv.appendChild(createEl('p', {
         classList: ['oak-instructions-text'],
-        innerHTML: 'You can read more about the Open Data API here: <a href="https://ninja.kiwi/opendatafaq" target="_blank", style="color:white";>Open Data API Article</a><br><br>Privacy Note: This site does not store any data being sent to or retrieved from Ninja Kiwi\'s Open Data API outside of your browser/device. The localStorage browser feature is used to prevent users from having to re-enter their OAK token every time they visit the site. If you would like to delete this stored data, you can do so by clicking the "X" on the profile you would like to delete on this homepage or clearing your browsing data.'
+        innerHTML: 'Privacy Note: This site does not store any data being sent to or retrieved from Ninja Kiwi\'s Open Data API outside of your browser/device. The localStorage browser feature is used to prevent users from having to re-enter their OAK token every time they visit the site. If you would like to delete this stored data, you can do so by clicking the "X" on the profile you would like to delete on this homepage or clearing your browsing data.'
     }));
     createModal({
         header: 'OAK Instructions',
