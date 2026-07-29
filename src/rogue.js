@@ -17,7 +17,9 @@ let rogueSaveData = {
     categoryFilter: ["Common", "Rare", "Legendary"],
     syncingWith: null,
     lastSynced: null,
-    firstTimeModal: true
+    firstTimeModal: true,
+    monkeyManager: [],
+    oneForAll: []
 }
 
 let starterArtifacts = ['BouncingProjectiles3', 'CeramicChunker2', 'FrostedTips1', 'OneShot2', 'SlowerIsHarder1', 'SpiritOfAdventure2', 'SwellingSpikes1', 'Wackywibblywavey1']
@@ -66,21 +68,24 @@ function postProcessRogueData(){
 
 function changeRogueTab(selector){
     resetScroll();
+    document.getElementById('rogue-content').style.display = 'none';
     switch(selector){
         case 'Artifacts Tracker':
-            document.getElementById('rogue-content').style.display = 'none';
             document.getElementById('artifacts-content').style.display = 'flex';
             addToBackQueue({source: 'rogue', destination: 'artifacts', callback: generateRogueSelectors})
             generateRogueArtifacts();
             break;
         case 'Hero Starter Kits':
-            document.getElementById('rogue-content').style.display = 'none';
             document.getElementById('starter-kits-content').style.display = 'flex';
             generateRogueHeroStarterKits();
             addToBackQueue({source: 'rogue', destination: 'starter-kits'})
             break;
+        case "Rogue Feat Trackers":
+            document.getElementById('artifacts-content').style.display = 'flex';
+            generateRogueFeatHelpers();
+            addToBackQueue({source: 'rogue', destination: 'artifacts'})
+            break;
         case 'Export Image':
-            document.getElementById('rogue-content').style.display = 'none';
             document.getElementById('artifacts-content').style.display = 'flex';
             generateImageBuilder();
             addToBackQueue({source: 'rogue', destination: 'artifacts'})
@@ -88,7 +93,6 @@ function changeRogueTab(selector){
         default: 
             document.getElementById('rogue-content').style.display = 'flex';
             document.getElementById('artifacts-content').style.display = 'none';
-            document.getElementById('starter-kits-content').style.display = 'none';
             document.getElementById('starter-kits-content').style.display = 'none';
             break;
     }
@@ -113,6 +117,7 @@ function generateRogueSelectors() {
     let selectors = {
         "Artifacts Tracker": "RoguePermanantArtifactsBtn",
         "Hero Starter Kits": "RogueStarterKitsBtn",
+        "Rogue Feat Trackers": "RogueFeatBtn",
         "Export Image": "ArtifactShareBtn"
     }
 
@@ -195,7 +200,7 @@ async function generateRogueArtifacts() {
     artifactsContent.innerHTML = "";
 
     if (rogueSaveData.hasOwnProperty("syncingWith") && rogueSaveData.syncingWith == null && rogueSaveData.firstTimeModal) {
-        loginModal();
+        loginModal("artifacts");
         rogueSaveData.highlightExtracted = true;
         rogueSaveData.firstTimeModal = false;
         saveRogueDataToLocalStorage();
@@ -304,6 +309,7 @@ async function generateRogueArtifacts() {
     artifactsContainer.classList.add('insta-monkeys-progress-container');
     artifactsContent.appendChild(artifactsContainer);
 
+    currentSyncContext = 'artifacts';
     startRogueSync();
     generateArtifacts();
 
@@ -372,7 +378,7 @@ function generateArtifactSettings() {
         settingsExtraction.appendChild(entry);
     } else {
         let loginBtn = generateButton("Login with OAK", { width: "280px" }, () => {
-            loginModal();
+            loginModal("artifacts");
         })
         settingsExtraction.appendChild(loginBtn);
     }
@@ -1677,26 +1683,36 @@ function loadRogueDataFromLocalStorage() {
     readLocalStorage();
 }
 
-function loginModal(firstTime) {
+function loginModal(source) {
     let modalDiv = createEl('div', {
         classList: ['ta-center', 'd-flex', 'fd-column', 'ai-center']
     })
 
     let modalTitle = createEl('p', {
         classList: ['collection-modal-header-text', 'black-outline'],
-        innerHTML: "Automatic Artifact Tracking"
+        innerHTML: "Automatic Tracking"
     });
     modalDiv.appendChild(modalTitle);
     
     let loginDiv = generateLoginDiv((oak_token) => {
-        if (!firstTime) {
-            goBack();
+        switch (source) {
+            case "artifacts":
+                goBack();
+                rogueSaveData.syncingWith = oak_token
+                hideLoading();
+                addToBackQueue({callback: generateRogueArtifacts});
+                generateArtifactSettings();
+                saveRogueDataToLocalStorage();
+                break;
+            case "feats":
+                goBack();
+                rogueSaveData.syncingWith = oak_token
+                hideLoading();
+                addToBackQueue({callback: generateRogueFeatHelpers});
+                generateRogueFeatHelpers();
+                saveRogueDataToLocalStorage();
+                break;
         }
-        rogueSaveData.syncingWith = oak_token
-        hideLoading();
-        addToBackQueue({callback: generateRogueArtifacts});
-        generateArtifactSettings();
-        saveRogueDataToLocalStorage();
     }, getRogueSaveData)
     loginDiv.style.padding = "20px 0";
     loginDiv.classList.add("w-100");
@@ -1723,18 +1739,333 @@ function checkAndSyncRogueData() {
     }
     let now = new Date().valueOf();
     if(rogueSaveData.hasOwnProperty("syncingWith") && rogueSaveData.syncingWith != null && rogueSaveData.hasOwnProperty("lastSynced") && rogueSaveData.lastSynced + 300000 > now) {
-        //the refresh threshold isn't yet reached
-    } else if (rogueSaveData.hasOwnProperty("syncingWith") && rogueSaveData.syncingWith != null) {
-        rogueSaveData.lastSynced = now;
-        getRogueSaveData(rogueSaveData.syncingWith).then(() => {
-            saveRogueDataToLocalStorage();
+        return;
+    } 
+
+    rogueSaveData.lastSynced = now;
+    getRogueSaveData(rogueSaveData.syncingWith).then(() => {
+        saveRogueDataToLocalStorage(); 
+        if (currentSyncContext === 'artifacts') {
             generateArtifacts();
-        })
-    }
+        } else if (currentSyncContext === 'feats') {
+            generateRogueFeatHelpers();
+        }
+    }).catch(error => {
+        console.error('Failed to sync rogue data:', error);
+    });
 }
 
 function startRogueSync() {
     if (rogueSyncInterval) clearInterval(rogueSyncInterval);
     checkAndSyncRogueData();
     rogueSyncInterval = setInterval(checkAndSyncRogueData, 310000);
+}
+
+function generateRogueFeatHelpers() {
+    let rogueFeatContent = document.getElementById('artifacts-content');
+    rogueFeatContent.innerHTML = "";
+
+    if (!seenFTMessages.includes("rogueFeatsMessage")) {
+        rogueFeatContent.appendChild(generateComment(`One-Time Note: It's hard to tell what towers you've already placed for the Rogue feats "Monkey Manager" and "One for All". The specific towers progress is available on the Open Data API! Login to your profile first on the profile tab to see your current progress automatically. Alternatively, you can manually select towers to mark them.`, function() {
+            seenFTMessages.push("rogueFeatsMessage")
+            saveSettings();
+        }));
+    }
+
+    let monkeyManager = createEl('div', {
+        classList: ['d-flex', 'f-wrap', 'rogue-bg'],
+        style: {
+            borderWidth: "25px"
+        }
+    });
+    rogueFeatContent.appendChild(monkeyManager);
+
+    let rogueFeatHeaderDiv = createEl('div', {
+        classList: ['d-flex', 'jc-center', 'ai-center', 'w-100', 'f-wrap'],
+        style: {
+            gap: "10px"
+        }
+    });
+    monkeyManager.appendChild(rogueFeatHeaderDiv);
+
+    let rogueFeatHeader = createEl('p', {
+        classList: ['font-gardenia', 'ta-center', 'lh-add-quarter'],
+        style: {
+            padding: "10px",
+            background: 'rgba(0, 0, 0, 0.3)',
+            borderRadius: "10px",
+            flex: "1 1 600px"
+        },
+        innerHTML: "The progress % for certain Rogue feats are not very helpful because they don't show which towers are counted. Tracking for these two feats is possible with the Open Data API - you can sync this with your account using an OAK token. Otherwise, you can manually select towers to track them.",
+    });
+    rogueFeatHeaderDiv.appendChild(rogueFeatHeader);
+
+    if (rogueSaveData.syncingWith != null) {
+        const entry = createEl('div', {
+            classList: ['previous-oak-entry', 'd-flex', 'ai-center', 'ps-relative'],
+            style: { minWidth:"480px", backgroundImage: `linear-gradient(to right, transparent 80%, #9D8665 100%),url("./Assets/ProfileBanner/${rogueSaveData.imageOptions.banner}")` }
+        });
+        entry.appendChild(generateAvatar(100, "./Assets/ProfileAvatar/" + rogueSaveData.imageOptions.avatar));
+        entry.appendChild(createEl('p', { classList: ['profile-name', 'tc-white', 'font-luckiest', 'black-outline'], innerHTML: rogueSaveData.imageOptions.name }));
+        const delBtn = createEl('img', { classList: ['delete-button', 'ps-absolute'], src: './Assets/UI/CloseBtn.png' });
+        delBtn.addEventListener('click', () => {
+            rogueSaveData.syncingWith = null;
+            rogueSaveData.monkeyManager = [];
+            rogueSaveData.oneForAll = [];
+            generateRogueFeatHelpers();
+            saveRogueDataToLocalStorage();
+        });
+        entry.appendChild(delBtn);
+        rogueFeatHeaderDiv.appendChild(entry);
+    } else {
+        let loginBtn = generateButton("Sync with OAK", { width: "280px" }, () => {
+            loginModal("feats");
+        })
+        rogueFeatHeaderDiv.appendChild(loginBtn);
+    }
+
+    // let loginBtn = generateButton("Login with OAK", { width: "280px" }, () => {
+    //     loginModal("feats");
+    // })
+    // rogueFeatHeaderDiv.appendChild(loginBtn);
+
+
+    let feats = {
+        "Monkey Manager": {
+            "icon": "MonkeyManager",
+            "description": "Obtain a Tier 5 of each Tower throughout all campaigns",
+            "guide": "Towers are counted immediately when added to your party. T5 towers are obtained in rewards from finishing stage bosses and sparkling tiles, or by upgrading a T4 to T5 at a sparkling campfire.",
+            "element": null,
+            "dataKey": "monkeyManager"
+        },
+        "One For All": {
+            "icon": "OneForAll",
+            "description": "Place every unique type of tower in one Campaign adventure",
+            "guide": "Towers need to be placed down in-game to be counted. Be sure to check boosts, artifact descriptions, and campfire recruits to find every tower you need to place!",
+            "element": null,
+            "dataKey": "oneForAll"
+        }
+    }
+
+    for (let [feat, data] of Object.entries(feats)) {
+        // Get data from rogueSaveData and filter valid towers
+        let obtainedData = rogueSaveData[data.dataKey] || [];
+        obtainedData = obtainedData.filter(tower => constants.towersInOrder.hasOwnProperty(tower));
+        
+        // Store back in rogueSaveData to ensure it's clean
+        rogueSaveData[data.dataKey] = obtainedData;
+
+        let achievementDiv = createEl('div', {
+            classList: ['achievement-div', 'fg-1'],
+            style: {
+                backgroundColor: "rgba(0,0,0,0.3)",
+                width: "540px",
+                margin: "8px"
+            }
+        });
+        monkeyManager.appendChild(achievementDiv);
+
+        let achievementTopDiv = document.createElement('div');
+        achievementTopDiv.classList.add('achievement-top-div');
+        achievementDiv.appendChild(achievementTopDiv);
+
+        let achievementIconDiv = createEl('div', {
+            classList: ["achievement-icon-div"],
+            style: {
+                minWidth: "100px",
+            }
+        });
+        achievementTopDiv.appendChild(achievementIconDiv);
+
+        let achievementIconImg = document.createElement('img');
+        achievementIconImg.classList.add('achievement-icon-img');
+        achievementIconImg.src = `./Assets/FeatIcon/${data.icon}.png`;
+        achievementIconDiv.appendChild(achievementIconImg);
+
+        let achievementTextDiv = document.createElement('div');
+        achievementTextDiv.classList.add('achievement-text-div', 'fg-1');
+        achievementTopDiv.appendChild(achievementTextDiv);
+
+        let achievementNameText = document.createElement('p');
+        achievementNameText.classList.add('achievement-name-text','black-outline');
+        achievementNameText.innerHTML = feat;
+        achievementTextDiv.appendChild(achievementNameText);
+
+        let achievementDescText = document.createElement('p');
+        achievementDescText.classList.add('achievement-desc-text');
+        achievementDescText.innerHTML = data.description;
+        achievementTextDiv.appendChild(achievementDescText);
+
+        let achievementBottomDiv = document.createElement('div');
+        achievementBottomDiv.classList.add('achievement-bottom-div', 'fd-column');
+        achievementDiv.appendChild(achievementBottomDiv);
+
+        let details = createEl('p', {
+            classList: ['font-gardenia', 'ta-center', 'lh-add-quarter'],
+            style: {
+                fontSize: "16px",
+                padding: "0px 20px"
+            },
+            innerHTML: data.guide
+        })
+        achievementBottomDiv.appendChild(details);
+
+        let bar = createEl('div', {
+            classList: ['w-100'],
+            style: {}
+        });
+        achievementBottomDiv.appendChild(bar);
+
+        let progressBar = createEl('div', {
+            classList: ['pos-rel'],
+            style: {
+                background: "linear-gradient(180deg,#0F1620 0%,#101922 100%)",
+                height: "35px",
+                margin: "8px 30px",
+                outline: "3px solid black",
+                borderRadius: "3px",
+            }
+        });
+        bar.appendChild(progressBar);
+
+        let rankInfo = {
+            current: rogueSaveData[data.dataKey].length,
+            goal: Object.keys(constants.towersInOrder).length
+        };
+
+        let rankBarFill = createEl('div', {
+            style: {
+                backgroundImage: `url(../Assets/UI/ProBarFill.png)`,
+                height: "100%",
+                backgroundSize: "contain",
+                position: "absolute",
+                width: `${(rankInfo.current/rankInfo.goal) * 100}%`
+            }
+        });
+        progressBar.appendChild(rankBarFill);
+
+        if (rankInfo.current == rankInfo.goal) {
+            rankBarFill.style.backgroundImage = `url(../Assets/UI/ProBarFillYellow.png)`;
+        }
+
+        let rankBarText = createEl('p', {
+            classList: ['black-outline', 'pos-rel', 'ta-center', 'd-flex', 'ai-center', 'jc-center'],
+            style: {
+                height: "100%",
+                fontSize: "20px",
+            }
+        });
+        rankBarText.innerHTML = `${Math.floor((rankInfo.current/rankInfo.goal) * 100)}% Collected`;
+        progressBar.appendChild(rankBarText);
+
+        let towersDiv = createEl('div', {
+            classList: ['d-flex', 'jc-center', 'ai-center', 'f-wrap'],
+            style: {
+                gap: "8px",
+                marginTop: "10px"
+            }
+        })
+        achievementBottomDiv.appendChild(towersDiv);
+
+        function updateBar() {
+            rankInfo.current = rogueSaveData[data.dataKey].length;
+            rankBarFill.style.width = `${Math.floor((rankInfo.current/rankInfo.goal) * 100)}%`;
+            rankBarText.innerHTML = `${Math.floor((rankInfo.current/rankInfo.goal) * 100)}% Collected`;
+            if (rankInfo.current == rankInfo.goal) {
+                rankBarFill.style.backgroundImage = `url(../Assets/UI/ProBarFillYellow.png)`;
+            } else {
+                rankBarFill.style.backgroundImage = `url(../Assets/UI/ProBarFill.png)`;
+            }
+        }
+        data.update = updateBar;
+        data.element = towersDiv;
+    }
+
+    
+    Object.entries(constants.towersInOrder).forEach(([tower, towerData]) => {
+        let obtained = rogueSaveData["monkeyManager"].includes(tower);
+        let towerDiv = createEl('div', {
+            classList: ['pos-rel', 'd-flex', 'jc-center', 'ai-center'],
+            style: {
+                width: "100px",
+                height: "100px",
+                backgroundSize: "contain",
+                backgroundImage: obtained ? `url(./Assets/UI/InstaTier2Container.png)` : `url(./Assets/UI/InstaTier1Container.png)`,
+            }
+        })
+
+        let towerImg = createEl('img', {
+            classList: ['of-contain'],
+            src: getInstaContainerIcon(tower, "000"),
+            style: {
+                width: "100px",
+                height: "100px",
+            }
+        })
+        towerDiv.appendChild(towerImg);
+
+        let towerCopyAFO = towerDiv.cloneNode(true);
+
+        let collectedTick = createEl('img', {
+            src: "../Assets/UI/SelectedTick.png",
+            classList: ['of-contain', 'pos-abs'],
+            style: {
+                display: rogueSaveData["monkeyManager"].includes(tower) ? "block" : "none",
+                width: "40px",
+                height: "40px",
+                top: "0",
+                right: "0"
+            }
+        });
+        towerDiv.appendChild(collectedTick);
+        feats["Monkey Manager"].element.appendChild(towerDiv);
+
+        towerDiv.addEventListener('click', () => {
+            if (rogueSaveData["monkeyManager"].includes(tower)) {
+                rogueSaveData["monkeyManager"] = rogueSaveData["monkeyManager"].filter(t => t !== tower);
+                collectedTick.style.display = "none";
+                towerDiv.style.backgroundImage = `url(./Assets/UI/InstaTier1Container.png)`;
+            } else {
+                rogueSaveData["monkeyManager"].push(tower);
+                collectedTick.style.display = "block";
+                towerDiv.style.backgroundImage = `url(./Assets/UI/InstaTier2Container.png)`;
+            }
+            feats["Monkey Manager"]["update"]();
+            saveRogueDataToLocalStorage();
+        })
+
+        obtained = rogueSaveData["oneForAll"].includes(tower);
+        towerCopyAFO.style.backgroundImage = obtained ? `url(./Assets/UI/InstaTier2Container.png)` : `url(./Assets/UI/InstaTier1Container.png)`;
+
+        let collectedTick2 = createEl('img', {
+            src: "../Assets/UI/SelectedTick.png",
+            classList: ['of-contain', 'pos-abs'],
+            style: {
+                display: rogueSaveData["oneForAll"].includes(tower) ? "block" : "none",
+                width: "40px",
+                height: "40px",
+                top: "0",
+                right: "0"
+            }
+        });
+        towerCopyAFO.appendChild(collectedTick2);
+        feats["One For All"].element.appendChild(towerCopyAFO);
+
+        towerCopyAFO.addEventListener('click', () => {
+            if (rogueSaveData["oneForAll"].includes(tower)) {
+                rogueSaveData["oneForAll"] = rogueSaveData["oneForAll"].filter(t => t !== tower);
+                collectedTick2.style.display = "none";
+                towerCopyAFO.style.backgroundImage = `url(./Assets/UI/InstaTier1Container.png)`;
+            } else {
+                rogueSaveData["oneForAll"].push(tower);
+                collectedTick2.style.display = "block";
+                towerCopyAFO.style.backgroundImage = `url(./Assets/UI/InstaTier2Container.png)`;
+            }
+            feats["One For All"]["update"]();
+            saveRogueDataToLocalStorage();
+        })
+    });
+
+    currentSyncContext = 'feats';
+    startRogueSync();
 }

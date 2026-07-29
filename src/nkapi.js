@@ -209,11 +209,19 @@ async function getRogueSaveData(oak_token) {
                 if (!rogueSaveData.hasOwnProperty("extractedArtifacts")) {
                     rogueSaveData.extractedArtifacts = []
                 }
+                if(!rogueSaveData.hasOwnProperty("monkeyManager")) {
+                    rogueSaveData.monkeyManager = []
+                }
+                if(!rogueSaveData.hasOwnProperty("oneForAll")) {
+                    rogueSaveData.oneForAll = []
+                }
                 Object.values(json["body"]["rogueUnlockedStarterArtifacts"]).forEach(artifact => {
                     if (!rogueSaveData.extractedArtifacts.includes(artifact)) {
                         rogueSaveData.extractedArtifacts.push(artifact);
                     }
                 });
+                rogueSaveData.monkeyManager = json["body"].rogueLegendsStats?.tier5sAcrossAll || []
+                rogueSaveData.oneForAll = json["body"].rogueLegendsStats?.towerTypesPlaced || []
             }
             expiryCheck = false;
             resolve();
