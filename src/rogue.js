@@ -118,12 +118,12 @@ function generateRogueSelectors() {
         "Artifacts Tracker": "RoguePermanantArtifactsBtn",
         "Hero Starter Kits": "RogueStarterKitsBtn",
         "Rogue Feat Trackers": "RogueFeatBtn",
-        "Export Image": "ArtifactShareBtn"
+        // "Export Image": "ArtifactShareBtn"
     }
 
-    if (rogueSaveData.extractedArtifacts.length == 0) {
-        delete selectors["Export Image"]
-    }
+    // if (rogueSaveData.extractedArtifacts.length == 0) {
+    //     delete selectors["Export Image"]
+    // }
     
     Object.entries(selectors).forEach(([selector, icon]) => {
         let selectorDiv = document.createElement('div');
@@ -148,50 +148,6 @@ function generateRogueSelectors() {
         selectorGoImg.classList.add('selector-go-img');
         selectorGoImg.src = '../Assets/UI/ContinueBtn.png';
         selectorDiv.appendChild(selectorGoImg);
-    });
-
-    let importExportDataDiv = document.createElement('div');
-    importExportDataDiv.classList.add('d-flex', 'jc-evenly');
-    rogueSelectors.appendChild(importExportDataDiv);
-
-    let exportData = document.createElement('div');
-    exportData.classList.add('d-flex', 'ai-center');
-    exportData.style.gap = "10px";
-    importExportDataDiv.appendChild(exportData);
-    
-    let exportDataText = document.createElement('p');
-    exportDataText.classList.add('selector-text','black-outline');
-    exportDataText.innerHTML = "Export Data";
-    exportData.appendChild(exportDataText);
-
-    let exportDataGoImg = document.createElement('img');
-    exportDataGoImg.classList.add('selector-go-img', 'pointer');
-    exportDataGoImg.style.width = "56px"
-    exportDataGoImg.src = '../Assets/UI/DownloadBtn.png';
-    exportData.appendChild(exportDataGoImg);
-
-    exportDataGoImg.addEventListener('click', () => {
-        downloadArtifactsSave();
-    })
-
-    let importData = document.createElement('div');
-    importData.classList.add('d-flex', 'ai-center');
-    importData.style.gap = "10px";
-    importExportDataDiv.appendChild(importData);
-
-    let importDataText = document.createElement('p');
-    importDataText.classList.add('selector-text','black-outline');
-    importDataText.innerHTML = "Import Data";
-    importData.appendChild(importDataText);
-
-    let importDataGoImg = document.createElement('img');
-    importDataGoImg.classList.add('pointer');
-    importDataGoImg.style.width = "56px"
-    importDataGoImg.src = '../Assets/UI/UploadBtn.png';
-    importData.appendChild(importDataGoImg);
-
-    importDataGoImg.addEventListener('click', () => {
-        importArtifactsSave();
     });
 }
 
@@ -602,7 +558,7 @@ function generateArtifactSettings() {
         });
     }
     updatePreviewArtifacts();
-    let settingsSortDropdown = generateDropdown("Sort:", ["Name","Rarity (Ascending)","Rarity (Descending)", "Extracted Order"], rogueSaveData.artifactSort, (value) => {
+    let settingsSortDropdown = generateDropdown("Sort By:", ["Name","Rarity (Ascending)","Rarity (Descending)", "Extracted Order"], rogueSaveData.artifactSort, (value) => {
         rogueSaveData.artifactSort = value;
         saveRogueDataToLocalStorage();
         updatePreviewArtifacts();
@@ -617,6 +573,78 @@ function generateArtifactSettings() {
         goBack();
     })
     settingsDiv.appendChild(rogueDownloadButton);
+
+    let importExportDataDiv = document.createElement('div');
+    importExportDataDiv.classList.add('d-flex', 'jc-center', 'w-100');
+    importExportDataDiv.style.gap = "16px";
+    settingsContent.appendChild(importExportDataDiv);
+
+    let exportData = document.createElement('div');
+    exportData.classList.add('d-flex', 'ai-center');
+    exportData.style.gap = "10px";
+    importExportDataDiv.appendChild(exportData);
+    
+    let exportDataText = document.createElement('p');
+    exportDataText.classList.add('selector-text','black-outline');
+    exportDataText.style.margin = "0px";
+    exportDataText.innerHTML = "Export Data";
+
+    let exportDataGoImg = document.createElement('img');
+    exportDataGoImg.classList.add('selector-go-img', 'pointer');
+    exportDataGoImg.style.width = "56px"
+    exportDataGoImg.src = '../Assets/UI/DownloadBtn.png';
+    exportData.appendChild(exportDataGoImg);
+    exportData.appendChild(exportDataText);
+
+    exportData.addEventListener('click', () => {
+        downloadArtifactsSave();
+    });
+
+    let importData = document.createElement('div');
+    importData.classList.add('d-flex', 'ai-center');
+    importData.style.gap = "10px";
+    importExportDataDiv.appendChild(importData);
+
+    let importDataText = document.createElement('p');
+    importDataText.classList.add('selector-text','black-outline');
+    importDataText.style.margin = "0px";
+    importDataText.innerHTML = "Import Data";
+
+    let importDataGoImg = document.createElement('img');
+    importDataGoImg.classList.add('pointer');
+    importDataGoImg.style.width = "56px"
+    importDataGoImg.src = '../Assets/UI/UploadBtn.png';
+    importData.appendChild(importDataGoImg);
+    importData.appendChild(importDataText);
+
+    importData.addEventListener('click', () => {
+        importArtifactsSave();
+    });
+
+    // importExportDataDiv.appendChild(generateButton("Import Data", { width: "220px" }, () => {
+    //     importArtifactsSave();
+    // }));
+
+    let renderExtracted = document.createElement('div');
+    renderExtracted.classList.add('d-flex', 'ai-center');
+    renderExtracted.style.gap = "10px";
+    importExportDataDiv.appendChild(renderExtracted);
+    
+    let renderExtractedText = document.createElement('p');
+    renderExtractedText.classList.add('selector-text','black-outline');
+    renderExtractedText.style.margin = "0px";
+    renderExtractedText.innerHTML = "Render Extracted";
+    
+    let renderExtractedGoImg = document.createElement('img');
+    renderExtractedGoImg.classList.add('selector-go-img', 'pointer');
+    renderExtractedGoImg.style.width = "56px"
+    renderExtractedGoImg.src = '../Assets/UI/RoguePermanantArtifactsBtn.png';
+    renderExtracted.appendChild(renderExtractedGoImg);
+    renderExtracted.appendChild(renderExtractedText);
+    
+    renderExtracted.addEventListener('click', () => {
+        generateImageBuilder();
+    });
 }
 
 function generateArtifacts() {
@@ -1263,15 +1291,11 @@ function generateInstaMonkeyContainer(instaMonkey) {
 }
 
 function generateImageBuilder() {
-    let artifactsContent = document.getElementById('artifacts-content');
-    artifactsContent.innerHTML = "";
-
     let rogueHeaderBar = document.createElement('div');
-    rogueHeaderBar.classList.add('insta-monkeys-header-bar', 'fd-column');
+    rogueHeaderBar.classList.add('insta-monkeys-header-bar', 'fd-column', 'rogue-bg');
     rogueHeaderBar.style.width = "auto";
     rogueHeaderBar.style.gap = "10px";
     rogueHeaderBar.style.padding = "10px";
-    artifactsContent.appendChild(rogueHeaderBar);
 
     let headerText = document.createElement('p');
     headerText.classList.add('black-outline');
@@ -1279,9 +1303,15 @@ function generateImageBuilder() {
     headerText.innerHTML = "Extracted Artifacts Image";
     rogueHeaderBar.appendChild(headerText);
 
-    let rogueHeaderMessage = document.createElement('p');
-    rogueHeaderMessage.classList.add('sku-roundset-selector-desc','ta-center');
-    rogueHeaderMessage.innerHTML = "This will generate a nice image to share with others of your progress in extracting the artifacts.<br>This may not work as intended on mobile, and is currently broken on Firefox due to a bug with fonts.";
+    let rogueHeaderMessage = createEl('p', {
+        classList: ['sku-roundset-selector-desc','ta-center'],
+        style: {
+            background: 'rgba(0, 0, 0, 0.3)',
+            borderRadius: '10px',
+            padding: '10px',
+        },
+        innerHTML: "This will generate a nice image to share with others showing your progress in extracting all the artifacts. This may not work as intended on mobile."
+    });
     rogueHeaderBar.appendChild(rogueHeaderMessage);
 
     let oakDiv = document.createElement('div');
@@ -1347,7 +1377,7 @@ function generateImageBuilder() {
     let rogueFiltersLabel2 = document.createElement('p');
     rogueFiltersLabel2.classList.add('maps-progress-coop-toggle-text','black-outline');
     rogueFiltersLabel2.classList.add('black-outline');
-    rogueFiltersLabel2.innerHTML = "Sort:";
+    rogueFiltersLabel2.innerHTML = "Sort By:";
     rogueViews.appendChild(rogueFiltersLabel2);
 
     let mapProgressFilterDifficulty2 = document.createElement('div');
@@ -1368,45 +1398,45 @@ function generateImageBuilder() {
     mapProgressFilterDifficulty2.appendChild(mapProgressFilterDifficultySelect2);
     mapProgressFilterDifficultySelect2.value = rogueSaveData.imageOptions.sort;
 
-    let sortPreviewArtifactsDiv = document.createElement('div');
-    sortPreviewArtifactsDiv.classList.add('preview-artifacts-div');
-    rogueSortPreview.appendChild(sortPreviewArtifactsDiv);
+    // let sortPreviewArtifactsDiv = document.createElement('div');
+    // sortPreviewArtifactsDiv.classList.add('preview-artifacts-div');
+    // rogueSortPreview.appendChild(sortPreviewArtifactsDiv);
 
-    let updatePreviewArtifacts = () => {
-        sortPreviewArtifactsDiv.innerHTML = "";
-        let previewArtifacts = [];
-        let sampleArtifacts = ['SplodeyDarts', 'SquadronTogether', 'DivineIntervention'];
+    // let updatePreviewArtifacts = () => {
+    //     sortPreviewArtifactsDiv.innerHTML = "";
+    //     let previewArtifacts = [];
+    //     let sampleArtifacts = ['SplodeyDarts', 'SquadronTogether', 'DivineIntervention'];
 
-        sampleArtifacts.forEach(artifact => {
-            previewArtifacts.push(artifact + "1");
-            previewArtifacts.push(artifact + "2");
-            previewArtifacts.push(artifact + "3");
-        });
+    //     sampleArtifacts.forEach(artifact => {
+    //         previewArtifacts.push(artifact + "1");
+    //         previewArtifacts.push(artifact + "2");
+    //         previewArtifacts.push(artifact + "3");
+    //     });
 
-        switch (rogueSaveData.imageOptions.sort) {
-            case "Rarity (Ascending)":
-                previewArtifacts = previewArtifacts.sort((a, b) => rogueJSON.artifacts[a].tier - rogueJSON.artifacts[b].tier)
-                break;
-            case "Rarity (Descending)":
-                previewArtifacts = previewArtifacts.sort((a, b) => rogueJSON.artifacts[b].tier - rogueJSON.artifacts[a].tier)
-                break;
-            case "Category":
-                previewArtifacts = previewArtifacts.sort((a, b) => rogueJSON.artifacts[a].rarityFrameType.localeCompare(rogueJSON.artifacts[b].rarityFrameType))
-                break;
-            case "Extracted Order":
-                previewArtifacts = previewArtifacts.sort((a, b) => rogueSaveData.extractedArtifacts.includes(b) - rogueSaveData.extractedArtifacts.includes(a))
-                break;
-        }
+    //     switch (rogueSaveData.imageOptions.sort) {
+    //         case "Rarity (Ascending)":
+    //             previewArtifacts = previewArtifacts.sort((a, b) => rogueJSON.artifacts[a].tier - rogueJSON.artifacts[b].tier)
+    //             break;
+    //         case "Rarity (Descending)":
+    //             previewArtifacts = previewArtifacts.sort((a, b) => rogueJSON.artifacts[b].tier - rogueJSON.artifacts[a].tier)
+    //             break;
+    //         case "Category":
+    //             previewArtifacts = previewArtifacts.sort((a, b) => rogueJSON.artifacts[a].rarityFrameType.localeCompare(rogueJSON.artifacts[b].rarityFrameType))
+    //             break;
+    //         case "Extracted Order":
+    //             previewArtifacts = previewArtifacts.sort((a, b) => rogueSaveData.extractedArtifacts.includes(b) - rogueSaveData.extractedArtifacts.includes(a))
+    //             break;
+    //     }
 
-        previewArtifacts.forEach(artifact => {
-            sortPreviewArtifactsDiv.appendChild(generateArtifactContainer(artifact, 'preview'));
-        });
-    }
-    updatePreviewArtifacts();
+    //     previewArtifacts.forEach(artifact => {
+    //         sortPreviewArtifactsDiv.appendChild(generateArtifactContainer(artifact, 'preview'));
+    //     });
+    // }
+    // updatePreviewArtifacts();
     mapProgressFilterDifficultySelect2.addEventListener('change', () => {
         rogueSaveData.imageOptions.sort = mapProgressFilterDifficultySelect2.value;
         saveRogueDataToLocalStorage();
-        updatePreviewArtifacts();
+        // updatePreviewArtifacts();
     });
 
     let rogueDownloadButton = document.createElement('div');
@@ -1415,8 +1445,14 @@ function generateImageBuilder() {
     rogueDownloadButton.style.width = "auto";
     rogueDownloadButton.addEventListener('click', () => {
         downloadImage();
+        closeModal();
     })
     rogueHeaderBar.appendChild(rogueDownloadButton);
+
+    createModal({
+        content: rogueHeaderBar,
+        backgroundColor: "transparent",
+    })
 }
 
 function generateAvatarSelector() {
@@ -1426,8 +1462,12 @@ function generateAvatarSelector() {
 
     addToBackQueue({callback: () => {modal.remove()}})
 
-    let modalContent = document.createElement('div');
-    modalContent.classList.add('collection-modal', 'rogue-bg');
+    let modalContent = createEl('div', {
+        classList: ['collection-modal', 'rogue-bg'],
+        style: { 
+            zIndex: "100"
+        }
+    });
     modal.appendChild(modalContent);
 
     let modalHeaderDiv = document.createElement('div');
@@ -1450,7 +1490,7 @@ function generateAvatarSelector() {
             document.querySelector('.rogue-profile-div .avatar-img').src = `Assets/ProfileAvatar/ProfileAvatar${i < 10 ? "0" + i : i}.png`;
             rogueSaveData.imageOptions.avatar = `ProfileAvatar${i < 10 ? "0" + i : i}.png`;
             saveRogueDataToLocalStorage();
-            modal.remove();
+            goBack(true);
             backState = "home";
         })
         modalAvatars.appendChild(avatar);
@@ -1464,8 +1504,12 @@ function generateBannerSelector() {
 
     addToBackQueue({callback: () => {modal.remove()}})
 
-    let modalContent = document.createElement('div');
-    modalContent.classList.add('collection-modal', 'rogue-bg');
+    let modalContent = createEl('div', {
+        classList: ['collection-modal', 'rogue-bg'],
+        style: { 
+            zIndex: "100"
+        }
+    });
     modal.appendChild(modalContent);
 
     let modalHeaderDiv = document.createElement('div');
@@ -1483,13 +1527,14 @@ function generateBannerSelector() {
 
     for (let i = 1; i <= constants.profileBanners; i++) {
         let bannerImg = document.createElement('img');
+        bannerImg.style.minHeight = "96px";
         bannerImg.src = `Assets/ProfileBanner/ProfileBanner${i}.png`;
         bannerImg.classList.add('profile-banner-img');
         bannerImg.addEventListener('click', () => {
             document.querySelector('.rogue-banner-div').style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(../Assets/ProfileBanner/ProfileBanner${i}.png)`;
             rogueSaveData.imageOptions.banner = `ProfileBanner${i}.png`;
             saveRogueDataToLocalStorage();
-            modal.remove();
+            goBack(true);
             backState = "home";
         })
         modalBanners.appendChild(bannerImg);
@@ -1497,13 +1542,14 @@ function generateBannerSelector() {
 
     for (let i = 1; i <= constants.teamsBanners; i++) {
         let bannerImg = document.createElement('img');
+        bannerImg.style.minHeight = "96px";
         bannerImg.src = `Assets/ProfileBanner/TeamsBanner${i}.png`;
         bannerImg.classList.add('profile-banner-img');
         bannerImg.addEventListener('click', () => {
             document.querySelector('.rogue-banner-div').style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-primary) 100%),url(../Assets/ProfileBanner/TeamsBanner${i}.png)`;
             rogueSaveData.imageOptions.banner = `TeamsBanner${i}.png`;
             saveRogueDataToLocalStorage();
-            modal.remove();
+            goBack(true);
         })
         modalBanners.appendChild(bannerImg);
     }
