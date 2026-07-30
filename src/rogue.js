@@ -1777,7 +1777,7 @@ function loginModal(source) {
 }
 
 function checkAndSyncRogueData() {
-    if (!document.getElementById('artifacts-container') || document.getElementById('artifacts-content').style.display === "none" || !currentSyncContext) {
+    if (document.getElementById('artifacts-container') == null || document.getElementById('artifacts-content').style.display === "none" || !currentSyncContext) {
         clearInterval(rogueSyncInterval);
         currentSyncContext = null;
         return;
