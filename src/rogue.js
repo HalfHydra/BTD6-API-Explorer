@@ -109,10 +109,12 @@ function generateRogueSelectors() {
     rogueSelectors.classList.add('selectors-div');
     rogueSelectorsPage.appendChild(rogueSelectors);
 
-    let rogueHeaderMessage = document.createElement('p');
-    rogueHeaderMessage.classList.add('sku-roundset-selector-desc');
-    rogueHeaderMessage.innerHTML = "You can now track your extracted artifacts automatically with the API using an OAK Token! You can also track them manually, as this data will be saved in the current browsers local storage, and will not be cleared unless you clear your browsing data. If you need to switch browsers, use Export/Import Data.";
-    rogueSelectors.appendChild(rogueHeaderMessage);
+    if (!seenFTMessages.includes("rogueTopMessage")) {
+        rogueSelectors.appendChild(generateComment("One-Time Note: You can track your extracted artifacts automatically with the Open Data API using an OAK Token! You can also track them manually and the data will be saved in the current browsers storage, and will not be cleared unless you clear your browsing data. If you need to switch browsers, use Export/Import Data in the tracker settings at the top left.", function() {
+            seenFTMessages.push("rogueTopMessage")
+            saveSettings();
+        }));
+    }
 
     let selectors = {
         "Artifacts Tracker": "RoguePermanantArtifactsBtn",
