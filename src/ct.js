@@ -2208,7 +2208,7 @@ function openTileModal(tileData, source) {
     }
 
     for (let [towerID, count] of Object.entries(simplifiedTowerData.towers)) {
-        let towerDiv = createEl('div', { classList: ['d-flex', 'ai-center', `tower-selector-${constants.towersInOrder[towerID].category.toLowerCase()}`], style: { width: '90px', height: '108px' } });
+        let towerDiv = createEl('div', { classList: ['d-flex', 'ai-center', `tower-selector-${constants.towersInOrder.hasOwnProperty(towerID) ? constants.towersInOrder[towerID].category.toLowerCase() : "hero"}`], style: { width: '90px', height: '108px' } });
         towersListDiv.appendChild(towerDiv);
 
         let towerImg = createEl('img', { classList: ['tower-selector-img'], src: getInstaContainerIcon(towerID,"000"), style: { width: '90px' /*width: '90px', maxHeight: '108px'*/ } });
@@ -2427,7 +2427,7 @@ function generateTileHover(tileData) {
     }
 
     for (let [towerID, count] of Object.entries(simplifiedTowerData.towers)) {
-        let towerDiv = createEl('div', { classList: ['d-flex', 'ai-center', `tower-selector-${constants.towersInOrder[towerID].category.toLowerCase()}`], style: { width: '90px', height: '108px' } });
+        let towerDiv = createEl('div', { classList: ['d-flex', 'ai-center', `tower-selector-${constants.towersInOrder.hasOwnProperty(towerID) ? constants.towersInOrder[towerID].category.toLowerCase() : "hero"}`], style: { width: '90px', height: '108px' } });
         towersListDiv.appendChild(towerDiv);
 
         let towerImg = createEl('img', { classList: ['tower-selector-img'], src: getInstaContainerIcon(towerID,"000"), style: { width: '90px' /*width: '90px', maxHeight: '108px'*/ } });
