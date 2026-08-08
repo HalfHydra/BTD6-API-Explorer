@@ -1630,9 +1630,9 @@ function downloadImage() {
 
     let artifacts = {...rogueJSON.artifacts}
 
-    // starterArtifacts.forEach((artifact) => {
-    //     delete artifacts[artifact];
-    // })
+    starterArtifacts.forEach((artifact) => {
+        delete artifacts[artifact];
+    })
 
     switch (rogueSaveData.imageOptions.sort) {
         case "Rarity (Ascending)":
@@ -1675,7 +1675,7 @@ function downloadImage() {
     document.getElementById('rogue-image-content').style.display = "block";
     setTimeout(function () {
         htmlToImage.toJpeg(document.getElementById(`rogue-image-content`), {
-            width: 2000,
+            width: 1900,
             quality: 0.85,
             style: {
                 opacity: 1,
