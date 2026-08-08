@@ -415,34 +415,6 @@
             "isQuestArtifact": 0,
             "added": 47
         },
-        "CharismaticLeader2": {
-            "tier": 1,
-            "baseId": "CharismaticLeader",
-            "nameLocKey": "CharismaticLeaderX",
-            "descriptionLocKey": "CharismaticLeaderXDescription",
-            "descriptionParams": [
-                "1"
-            ],
-            "isBossArtifact": 0,
-            "icon": "ArtifactCharismaticLeader",
-            "rarityFrameType": "AllMonkeyTowerSets",
-            "isQuestArtifact": 0,
-            "added": 55
-        },
-        "CharismaticLeader3": {
-            "tier": 2,
-            "baseId": "CharismaticLeader",
-            "nameLocKey": "CharismaticLeaderX",
-            "descriptionLocKey": "CharismaticLeaderXDescription",
-            "descriptionParams": [
-                "2"
-            ],
-            "isBossArtifact": 0,
-            "icon": "ArtifactCharismaticLeader",
-            "rarityFrameType": "AllMonkeyTowerSets",
-            "isQuestArtifact": 0,
-            "added": 55
-        },
         "ColdSteel1": {
             "tier": 0,
             "baseId": "ColdSteel",
@@ -934,6 +906,51 @@
             "isQuestArtifact": 0,
             "added": 48
         },
+        "DivineInspiration1": {
+            "tier": 0,
+            "baseId": "DivineInspiration",
+            "nameLocKey": "DivineInspirationX",
+            "descriptionLocKey": "DivineInspirationXDescription",
+            "descriptionParams": [
+                "20",
+                "10"
+            ],
+            "isBossArtifact": 0,
+            "icon": "BoostVelocity",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 54
+        },
+        "DivineInspiration2": {
+            "tier": 1,
+            "baseId": "DivineInspiration",
+            "nameLocKey": "DivineInspirationX",
+            "descriptionLocKey": "DivineInspirationXDescription",
+            "descriptionParams": [
+                "26",
+                "14"
+            ],
+            "isBossArtifact": 0,
+            "icon": "BoostVelocity",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 54
+        },
+        "DivineInspiration3": {
+            "tier": 2,
+            "baseId": "DivineInspiration",
+            "nameLocKey": "DivineInspirationX",
+            "descriptionLocKey": "DivineInspirationXDescription",
+            "descriptionParams": [
+                "36",
+                "18"
+            ],
+            "isBossArtifact": 0,
+            "icon": "BoostVelocity",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 54
+        },
         "DivineIntervention1": {
             "tier": 0,
             "baseId": "DivineIntervention",
@@ -1002,54 +1019,6 @@
                 ]
             },
             "added": 47
-        },
-        "DivineInspiration1": {
-            "tier": 0,
-            "baseId": "DivineInspiration",
-            "nameLocKey": "DivineInspirationX",
-            "descriptionLocKey": "DivineInspirationXDescription",
-            "descriptionParams": [
-                "20",
-                "10"
-            ],
-            "isBossArtifact": 0,
-            "isSheriffArtifact": 0,
-            "icon": "BoostVelocity",
-            "rarityFrameType": "AllMonkeyTowerSets",
-            "isQuestArtifact": 0,
-            "added": 54
-        },
-        "DivineInspiration2": {
-            "tier": 1,
-            "baseId": "DivineInspiration",
-            "nameLocKey": "DivineInspirationX",
-            "descriptionLocKey": "DivineInspirationXDescription",
-            "descriptionParams": [
-                "26",
-                "14"
-            ],
-            "isBossArtifact": 0,
-            "isSheriffArtifact": 0,
-            "icon": "BoostVelocity",
-            "rarityFrameType": "AllMonkeyTowerSets",
-            "isQuestArtifact": 0,
-            "added": 54
-        },
-        "DivineInspiration3": {
-            "tier": 2,
-            "baseId": "DivineInspiration",
-            "nameLocKey": "DivineInspirationX",
-            "descriptionLocKey": "DivineInspirationXDescription",
-            "descriptionParams": [
-                "36",
-                "18"
-            ],
-            "isBossArtifact": 0,
-            "isSheriffArtifact": 0,
-            "icon": "BoostVelocity",
-            "rarityFrameType": "AllMonkeyTowerSets",
-            "isQuestArtifact": 0,
-            "added": 54
         },
         "DivinePrecision1": {
             "tier": 0,
@@ -4770,9 +4739,8 @@
             "descriptionLocKey": "WhatInTarnationXDescription",
             "descriptionParams": [
                 "1",
-                "1",
-                "2",
-                "1-0-1"
+                "30",
+                "1-1-0"
             ],
             "isBossArtifact": 0,
             "icon": "ArtifactWhatInTarnation",
@@ -4782,8 +4750,8 @@
                 "baseId": "Desperado",
                 "tiers": [
                     1,
-                    0,
-                    1
+                    1,
+                    0
                 ]
             },
             "added": 49
@@ -4794,10 +4762,9 @@
             "nameLocKey": "WhatInTarnationX",
             "descriptionLocKey": "WhatInTarnationXDescription",
             "descriptionParams": [
-                "2",
-                "2",
-                "4",
-                "1-0-2"
+                "1",
+                "60",
+                "2-1-0"
             ],
             "isBossArtifact": 0,
             "icon": "ArtifactWhatInTarnation",
@@ -4806,9 +4773,9 @@
             "instaTowerToGive": {
                 "baseId": "Desperado",
                 "tiers": [
+                    2,
                     1,
-                    0,
-                    2
+                    0
                 ]
             },
             "added": 49
@@ -4819,10 +4786,9 @@
             "nameLocKey": "WhatInTarnationX",
             "descriptionLocKey": "WhatInTarnationXDescription",
             "descriptionParams": [
-                "4",
-                "4",
-                "8",
-                "0-0-2"
+                "3",
+                "90",
+                "2-0-0"
             ],
             "isBossArtifact": 0,
             "icon": "ArtifactWhatInTarnation",
@@ -4831,9 +4797,9 @@
             "instaTowerToGive": {
                 "baseId": "Desperado",
                 "tiers": [
+                    2,
                     0,
-                    0,
-                    2
+                    0
                 ]
             },
             "added": 49
@@ -5046,13 +5012,83 @@
             "nameLocKey": "CarryABigStickX",
             "descriptionLocKey": "CarryABigStickXDescription",
             "descriptionParams": [
-                "3"
+                "4"
             ],
             "isBossArtifact": 0,
             "icon": "ArtifactCarryABigStick",
             "rarityFrameType": "AllMonkeyTowerSets",
             "isQuestArtifact": 0,
             "added": 48
+        },
+        "CharismaticLeader2": {
+            "tier": 1,
+            "baseId": "CharismaticLeader",
+            "nameLocKey": "CharismaticLeaderX",
+            "descriptionLocKey": "CharismaticLeaderXDescription",
+            "descriptionParams": [
+                "1"
+            ],
+            "isBossArtifact": 0,
+            "icon": "ArtifactCharismaticLeader",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 55
+        },
+        "CharismaticLeader3": {
+            "tier": 2,
+            "baseId": "CharismaticLeader",
+            "nameLocKey": "CharismaticLeaderX",
+            "descriptionLocKey": "CharismaticLeaderXDescription",
+            "descriptionParams": [
+                "2"
+            ],
+            "isBossArtifact": 0,
+            "icon": "ArtifactCharismaticLeader",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 55
+        },
+        "InsiderTrading1": {
+            "tier": 0,
+            "baseId": "InsiderTrading",
+            "nameLocKey": "InsiderTradingX",
+            "descriptionLocKey": "InsiderTradingXDescription",
+            "descriptionParams": [
+                "6"
+            ],
+            "isBossArtifact": 0,
+            "icon": "ArtifactInsiderTrading",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 56
+        },
+        "InsiderTrading2": {
+            "tier": 1,
+            "baseId": "InsiderTrading",
+            "nameLocKey": "InsiderTradingX",
+            "descriptionLocKey": "InsiderTradingXDescription",
+            "descriptionParams": [
+                "9"
+            ],
+            "isBossArtifact": 0,
+            "icon": "ArtifactInsiderTrading",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 56
+        },
+        "InsiderTrading3": {
+            "tier": 2,
+            "baseId": "InsiderTrading",
+            "nameLocKey": "InsiderTradingX",
+            "descriptionLocKey": "InsiderTradingXDescription",
+            "descriptionParams": [
+                "15"
+            ],
+            "isBossArtifact": 0,
+            "icon": "ArtifactInsiderTrading",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 56
         },
         "MightyMulligan1": {
             "tier": 0,
@@ -5494,10 +5530,10 @@
                     ]
                 },
                 {
-                    "baseId": "Druid",
+                    "baseId": "Skywarden",
                     "tiers": [
-                        2,
                         0,
+                        2,
                         0
                     ]
                 }
@@ -6164,6 +6200,28 @@
             ],
             "artifact": "TitForTat3"
         },
+        "CorvusDecryptor": {
+            "heroID": "CorvusDecryptor",
+            "startingInstas": [
+                {
+                    "baseId": "SpikeFactory",
+                    "tiers": [
+                        1,
+                        0,
+                        2
+                    ]
+                },
+                {
+                    "baseId": "MonkeyVillage",
+                    "tiers": [
+                        1,
+                        0,
+                        2
+                    ]
+                }
+            ],
+            "artifact": "PowerNexus2"
+        },
         "Rosalia": {
             "heroID": "Rosalia",
             "startingInstas": [
@@ -6190,9 +6248,9 @@
             "heroID": "RosaliaTinkerfairy",
             "startingInstas": [
                 {
-                    "baseId": "Druid",
+                    "baseId": "Skywarden",
                     "tiers": [
-                        1,
+                        2,
                         0,
                         0
                     ]
@@ -6220,7 +6278,7 @@
                     ]
                 },
                 {
-                    "baseId": "EngineerMonkey",
+                    "baseId": "Skywarden",
                     "tiers": [
                         0,
                         0,

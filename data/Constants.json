@@ -1,10 +1,10 @@
 {
     "version": "2.8.4",
     "projectContentVersion": 55,
-    "achievements": 142,
+    "achievements": 148,
     "hiddenAchievements": 14,
-    "profileAvatars": 133,
-    "profileBanners": 65,
+    "profileAvatars": 137,
+    "profileBanners": 66,
     "teamsBanners": 19,
     "bossesInOrder": ["Bloonarius", "Lych", "Vortex", "Dreadbloon", "Phayze", "Blastapopoulos", "Diamondback"],
     "limitedTimeEvents": {
@@ -48,7 +48,13 @@
             "start": 1749693600000, 
             "end": 1750212000000
         },
-        "Bloonarius 55": {"type": "Boss", "roundset": "chimpsbloonarius", "boss": "bloonarius", "start": 1732953600000, "end": 1733367600000}, 
+        "Bloonarius 55": {
+            "type": "Boss",
+            "roundset": "chimpsbloonarius",
+            "boss": "bloonarius",
+            "start": 1732953600000,
+            "end": 1733367600000
+        },
         "Mastery(ish) Mode!": {
             "type": "Odyssey",
             "roundset": "masterymode",
@@ -701,6 +707,34 @@
             ],
             "added": 44
         },
+        "Skywarden": {
+            "category": "Magic",
+            "path1": {
+                "AerialAttunement": 150,
+                "ZephyrSense": 550,
+                "WindWeaver": 2750,
+                "Galesage": 16000,
+                "FarwindSeer": 30000
+            },
+            "path2": {
+                "StormsPulse": 175,
+                "ThunderingArc": 650,
+                "GalvanicConduit": 3000,
+                "ThundersDecree": 12000,
+                "StormwrathArchon": 36000
+            },
+            "path3": {
+                "Shatterpoint": 200,
+                "Icebore": 500,
+                "Coldchain": 2750,
+                "FrozenVerdict": 14000,
+                "WintersMercy": 32000
+            },
+            "abilities": [
+                "ThunderCharge",
+                "BigThunderAbility"
+            ]
+        },
         "BananaFarm": {
             "category": "Support",
             "path1": {
@@ -863,7 +897,7 @@
                 20
             ],
             "bgColor": [
-                0,
+                0.0,
                 0.522,
                 0.624
             ],
@@ -952,7 +986,7 @@
             "fqName": "Obyn Greenfoot"
         },
         "DanDMonke": {
-            "nameColor": "Blue",
+            "nameColor": "Aqua",
             "added": 55,
             "skins": [
                 "DanDMonke",
@@ -1258,7 +1292,8 @@
             "nameColor": "Aqua",
             "added": 40,
             "skins": [
-                "Corvus"
+                "Corvus",
+                "CorvusDecryptor"
             ],
             "portraits": [
                 1,
@@ -1296,7 +1331,7 @@
                 20
             ],
             "bgColor": [
-                1,
+                1.0,
                 0.297,
                 0.622
             ],
@@ -1335,6 +1370,11 @@
     },
     "heroSkins": {
         "CyberQuincy": {
+            "bgColor": [
+                0.0,
+                0.522,
+                0.624
+            ],
             "portraits": [
                 1,
                 3,
@@ -1347,6 +1387,11 @@
             "added": 5
         },
         "WolfpackQuincy": {
+            "bgColor": [
+                0.0,
+                0.522,
+                0.624
+            ],
             "portraits": [
                 1,
                 3,
@@ -1359,6 +1404,11 @@
             "added": 15
         },
         "CircusGwendolin": {
+            "bgColor": [
+                0.671,
+                0.153,
+                0.133
+            ],
             "portraits": [
                 1,
                 3,
@@ -1370,6 +1420,11 @@
             "added": 17
         },
         "ScientistGwendolin": {
+            "bgColor": [
+                0.671,
+                0.153,
+                0.133
+            ],
             "portraits": [
                 1,
                 3,
@@ -1381,6 +1436,11 @@
             "added": 6
         },
         "FirecrackerGwendolin": {
+            "bgColor": [
+                0.671,
+                0.153,
+                0.133
+            ],
             "portraits": [
                 1,
                 3,
@@ -1392,6 +1452,11 @@
             "added": 53
         },
         "BikerBones": {
+            "bgColor": [
+                0.306,
+                0.475,
+                0.129
+            ],
             "portraits": [
                 1,
                 3,
@@ -1403,6 +1468,11 @@
             "added": 9
         },
         "OctoJones": {
+            "bgColor": [
+                0.306,
+                0.475,
+                0.129
+            ],
             "portraits": [
                 1,
                 3,
@@ -1414,6 +1484,11 @@
             "added": 19
         },
         "MoltenObyn": {
+            "bgColor": [
+                0.004,
+                0.576,
+                0.286
+            ],
             "portraits": [
                 1,
                 3,
@@ -1425,6 +1500,11 @@
             "added": 22
         },
         "ObynOceanGuardian": {
+            "bgColor": [
+                0.004,
+                0.576,
+                0.286
+            ],
             "portraits": [
                 1,
                 3,
@@ -1453,9 +1533,9 @@
         },
         "DanDMonkeHeMan": {
             "bgColor": [
-                0.12941177,
-                0.17254902,
-                0.40392157
+                0.129,
+                0.173,
+                0.404
             ],
             "portraits": [
                 1,
@@ -1463,14 +1543,21 @@
                 10,
                 20
             ],
-            "transformPortraits": [
-                3, 10, 20
-            ],
             "fqName": "He-Man",
             "baseHero": "DanDMonke",
-            "added": 55
+            "added": 55,
+            "transformPortraits": [
+                3,
+                10,
+                20
+            ]
         },
         "SentaiCaptainChurchill": {
+            "bgColor": [
+                0.263,
+                0.494,
+                0.149
+            ],
             "portraits": [
                 1,
                 3,
@@ -1484,6 +1571,11 @@
             "added": 8
         },
         "SleighCaptainChurchill": {
+            "bgColor": [
+                0.263,
+                0.494,
+                0.149
+            ],
             "portraits": [
                 1,
                 3,
@@ -1497,6 +1589,11 @@
             "added": 34
         },
         "BenJammin": {
+            "bgColor": [
+                0.165,
+                0.341,
+                0.082
+            ],
             "portraits": [
                 1,
                 3,
@@ -1509,6 +1606,11 @@
             "added": 11
         },
         "SushiBento": {
+            "bgColor": [
+                0.165,
+                0.341,
+                0.082
+            ],
             "portraits": [
                 1,
                 3,
@@ -1521,6 +1623,11 @@
             "added": 24
         },
         "FustyTheSnowman": {
+            "bgColor": [
+                0.035,
+                0.529,
+                0.412
+            ],
             "portraits": [
                 1,
                 3,
@@ -1533,6 +1640,11 @@
             "added": 14
         },
         "KaijuPat": {
+            "bgColor": [
+                0.035,
+                0.529,
+                0.412
+            ],
             "portraits": [
                 1,
                 3,
@@ -1545,6 +1657,11 @@
             "added": 35
         },
         "Galaxili": {
+            "bgColor": [
+                0.357,
+                0.208,
+                0.494
+            ],
             "portraits": [
                 1,
                 3,
@@ -1558,6 +1675,11 @@
             "added": 29
         },
         "SmudgeCatt": {
+            "bgColor": [
+                0.357,
+                0.208,
+                0.494
+            ],
             "portraits": [
                 1,
                 3,
@@ -1571,6 +1693,11 @@
             "added": 12
         },
         "JoanOfArcAdora": {
+            "bgColor": [
+                0.51,
+                0.224,
+                0.569
+            ],
             "portraits": [
                 1,
                 3,
@@ -1623,6 +1750,11 @@
             "added": 48
         },
         "ETnEtienne": {
+            "bgColor": [
+                0.596,
+                0.322,
+                0.161
+            ],
             "portraits": [
                 1,
                 3,
@@ -1635,6 +1767,11 @@
             "added": 25
         },
         "BookWyrmEtienne": {
+            "bgColor": [
+                0.596,
+                0.322,
+                0.161
+            ],
             "portraits": [
                 1,
                 3,
@@ -1663,6 +1800,11 @@
             "added": 37
         },
         "VikingSauda": {
+            "bgColor": [
+                0.541,
+                0.169,
+                0.325
+            ],
             "portraits": [
                 1,
                 3,
@@ -1689,6 +1831,11 @@
             "added": 48.2
         },
         "DreadPirateBrickell": {
+            "bgColor": [
+                0.133,
+                0.51,
+                0.851
+            ],
             "portraits": [
                 1,
                 3,
@@ -1701,6 +1848,11 @@
             "added": 20
         },
         "LifeguardBrickell": {
+            "bgColor": [
+                0.133,
+                0.51,
+                0.851
+            ],
             "portraits": [
                 1,
                 3,
@@ -1713,6 +1865,11 @@
             "added": 38
         },
         "Psimbals": {
+            "bgColor": [
+                0.306,
+                0.341,
+                0.698
+            ],
             "portraits": [
                 1,
                 3,
@@ -1725,6 +1882,11 @@
             "added": 30
         },
         "DreamstatePsi": {
+            "bgColor": [
+                0.306,
+                0.341,
+                0.698
+            ],
             "portraits": [
                 1,
                 3,
@@ -1737,6 +1899,11 @@
             "added": 44
         },
         "GeraldoGentlemanGadgeteer": {
+            "bgColor": [
+                0.314,
+                0.251,
+                0.435
+            ],
             "portraits": [
                 1,
                 3,
@@ -1749,6 +1916,11 @@
             "added": 42
         },
         "RosaliaTinkerfairy": {
+            "bgColor": [
+                1.0,
+                0.297,
+                0.622
+            ],
             "portraits": [
                 1,
                 2,
@@ -1760,6 +1932,29 @@
             "fqName": "Rosalia Tinkerfairy",
             "baseHero": "Rosalia",
             "added": 47
+        },
+        "CorvusDecryptor": {
+            "bgColor": [
+                0.122,
+                0.318,
+                0.518
+            ],
+            "portraits": [1,3,7,10,15,20],
+            "fqName": null,
+            "baseHero": "Corvus",
+            "added": 56,
+            "transformPortraits": [
+                3,
+                10,
+                20
+            ],
+            "transformAbilities": {
+                "3": "Transform Ability",
+                "5": "Magic Barrier",
+                "7": "LeapingSmash",
+                "10": "Warcry",
+                "12": "QuickThinking"
+            }
         }
     },
     "powersInOrder": {
@@ -1845,49 +2040,164 @@
             "type": "Pro",
             "cost": 100,
             "upgradedFrom": "BananaFarmer",
-            "unlockThresholds": [10000, 50000, 150000],
+            "unlockThresholds": [
+                10000,
+                50000,
+                150000
+            ],
             "upgrades": {
-                "tier1": ["Banana Vacuum", "Camo Bananas", "Adaptive Workers"],
-                "tier2": ["Banana Peels", "Regrow Bananas", "Monkey Banker"],
-                "tier3": ["Robo Farmer", "Banana Intelligence Bureau", "Banana Financier"]
+                "tier1": [
+                    "Banana Vacuum",
+                    "Camo Bananas",
+                    "Adaptive Workers"
+                ],
+                "tier2": [
+                    "Banana Peels",
+                    "Regrow Bananas",
+                    "Monkey Banker"
+                ],
+                "tier3": [
+                    "Robo Farmer",
+                    "Banana Intelligence Bureau",
+                    "Banana Financier"
+                ]
             },
+            "abilities": [],
             "added": 50
         },
         "SuperMonkeyBeacon": {
             "type": "Pro",
             "cost": 400,
             "upgradedFrom": "SuperMonkeyStorm",
-            "unlockThresholds": [12500, 70000, 200000],
+            "unlockThresholds": [
+                12500,
+                70000,
+                200000
+            ],
             "upgrades": {
-                "tier1": ["Charged Beacon", "Mini Stormcaller", "High Impact"],
-                "tier2": ["Storm Tremors", "Rapid Recharge", "Bewildering Storm"],
-                "tier3": ["Reverberation", "Beacon of Legends", "Piercing Wind"]
+                "tier1": [
+                    "Charged Beacon",
+                    "Mini Stormcaller",
+                    "High Impact"
+                ],
+                "tier2": [
+                    "Storm Tremors",
+                    "Rapid Recharge",
+                    "Bewildering Storm"
+                ],
+                "tier3": [
+                    "Reverberation",
+                    "Beacon of Legends",
+                    "Piercing Wind"
+                ]
             },
+            "abilities": [
+                "Super Monkey Beacon 1",
+                "Super Monkey Beacon 2",
+                "Super Monkey Beacon 3",
+                "Super Monkey Beacon 4"
+            ],
             "added": 50
         },
         "MonkeyBoostPro": {
             "type": "Pro",
             "cost": 300,
             "upgradedFrom": "MonkeyBoost",
-            "unlockThresholds": [10000, 50000, 150000],
+            "unlockThresholds": [
+                10000,
+                50000,
+                150000
+            ],
             "upgrades": {
-                "tier1": ["Cheer", "Resistance", "Condition"],
-                "tier2": ["LookSharp", "HighReps", "Intensity"],
-                "tier3": ["MonkeySpirit", "NoQuit", "MaxOutput"]
+                "tier1": [
+                    "Cheer",
+                    "Resistance",
+                    "Condition"
+                ],
+                "tier2": [
+                    "LookSharp",
+                    "HighReps",
+                    "Intensity"
+                ],
+                "tier3": [
+                    "MonkeySpirit",
+                    "NoQuit",
+                    "MaxOutput"
+                ]
             },
+            "abilities": [
+                "Monkey Boost Pro 1",
+                "Monkey Boost Pro 2",
+                "Monkey Boost Pro 3",
+                "Monkey Boost Pro 4"
+            ],
             "added": 54
         },
         "TechBotPrime": {
             "type": "Pro",
             "cost": 150,
             "upgradedFrom": "TechBot",
-            "unlockThresholds": [12500, 70000, 200000],
+            "unlockThresholds": [
+                12500,
+                70000,
+                200000
+            ],
             "upgrades": {
-                "tier1": ["InitiateLinkAMP", "AUT0M8", "DroneAmbusNetwork"],
-                "tier2": ["ChainLink", "NEUR0MAP", "TriggerHappyDrones"],
-                "tier3": ["LeadTheStorm", "CMDRCh1p", "OhBoyICantWait"]
+                "tier1": [
+                    "InitiateLinkAMP",
+                    "AUT0M8",
+                    "DroneAmbusNetwork"
+                ],
+                "tier2": [
+                    "ChainLink",
+                    "NEUR0MAP",
+                    "TriggerHappyDrones"
+                ],
+                "tier3": [
+                    "LeadTheStorm",
+                    "CMDRCh1p",
+                    "OhBoyICantWait"
+                ]
             },
+            "abilities": [
+                "Link",
+                "Unlink",
+                "Ambush Tech",
+                "ActivateTechBot",
+                "Go Go Go Send It"
+            ],
             "added": 54
+        },
+        "PortableLakePro": {
+            "type": "Pro",
+            "cost": 150,
+            "upgradedFrom": "PortableLake",
+            "unlockThresholds": [
+                12500,
+                70000,
+                200000
+            ],
+            "upgrades": {
+                "tier1": [
+                    "LuxuryPool",
+                    "CozyRadiantBath",
+                    "RejuvenatingHotspring"
+                ],
+                "tier2": [
+                    "PristinePool",
+                    "SnugOozeSurprise",
+                    "TherapeuticMudBath"
+                ],
+                "tier3": [
+                    "JamminBassDropBasin",
+                    "ReleasetheQuacken",
+                    "SoothingGeothermalSpa"
+                ]
+            },
+            "abilities": [
+                "HovercraftDoorGunner",
+                "HovercraftDeploy"
+            ]
         }
     },
     "mapsInOrder": {
@@ -2035,15 +2345,15 @@
             "hasWater": false,
             "added": 1
         },
-        "EndOfTheRoad": {
-            "difficulty": "Beginner",
-            "theme": "Dirt",
-            "hasWater": true,
-            "added": 1
-        },
         "Logs": {
             "difficulty": "Beginner",
             "theme": "Grass",
+            "hasWater": true,
+            "added": 1
+        },
+        "EndOfTheRoad": {
+            "difficulty": "Beginner",
+            "theme": "Dirt",
             "hasWater": true,
             "added": 1
         },
@@ -2196,6 +2506,12 @@
             "theme": "Water",
             "hasWater": true,
             "added": 1
+        },
+        "Ascent": {
+            "difficulty": "Advanced",
+            "theme": "Grass",
+            "hasWater": true,
+            "added": 56
         },
         "MushroomGrotto": {
             "difficulty": "Advanced",
@@ -2883,7 +3199,7 @@
                 {
                     "startingCash": 2000,
                     "startRound": 1,
-                    "endRound": 100,
+                    "endRound": -1,
                     "roundSets": [
                         "EnduranceRoundSet"
                     ]
@@ -3111,7 +3427,7 @@
                 {
                     "startingCash": -1,
                     "startRound": -1,
-                    "endRound": -1,
+                    "endRound": 100,
                     "roundSets": [
                         "DefaultSkipEveryOddRound"
                     ]
@@ -3631,6 +3947,58 @@
                 "Power:SheRa,5",
                 "Power:BattleCat,5",
                 "Power:Skeletor,5"
+            ]
+        },
+        "SkywardenQuest": {
+            "nameLocKey": "SkywardenQuestName",
+            "icon": "QuestIconSkywarden",
+            "type": "Tale",
+            "added": 56,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": 1,
+                    "endRound": 24,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": 5000,
+                    "startRound": 25,
+                    "endRound": 50,
+                    "roundSets": []
+                },
+                {
+                    "startingCash": 50000,
+                    "startRound": 50,
+                    "endRound": 80,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "InstaMonkey:Skywarden,300,1",
+                "InstaMonkey:Skywarden,030,1",
+                "InstaMonkey:Skywarden,003,1"
+            ]
+        },
+        "ChallengePowersPro": {
+            "nameLocKey": "ChallengePowersProName",
+            "icon": "QuestIconPowersProShowcase",
+            "type": "Challenge",
+            "added": 56,
+            "parts": [
+                {
+                    "startingCash": 7000,
+                    "startRound": 30,
+                    "endRound": 100,
+                    "roundSets": []
+                }
+            ],
+            "loot": [
+                "Power:SuperMonkeyStorm,1",
+                "Power:TechBot,1",
+                "Power:BananaFarmer,1",
+                "Power:MonkeyBoost,1",
+                "Power:PortableLake,1"
             ]
         }
     },
@@ -4341,6 +4709,26 @@
             "description": "All Regen Bloons have their regen effect blocked, including any that spawn over the next 10 seconds. All Regen Bloons will also be affected by a dangerous serum that rapidly pops them down into nothing.",
             "icon": "PerkAntiRegrowAA",
             "oldId": "Anti-Regrow Serum"
+        },
+        "ThunderCharge": {
+            "displayName": "Thunder Charge",
+            "description": "Electrically charges nearby Monkeys, granting them faster, ricocheting projectiles that can pop Frozen Bloons.",
+            "icon": "ThunderChargeAA"
+        },
+        "BigThunderAbility": {
+            "displayName": "Stormwrath Thunder Charge",
+            "description": "Weaves a lethal web of lightning between all conduits, obliterating anything caught in the crossfire.",
+            "icon": "StormwrathThunderChargeAA"
+        },
+        "HovercraftDoorGunner": {
+            "displayName": "Hoverducky Door Gunner",
+            "description": "Pick up a tower and allow it to shoot while mid-air on the Hoverducky platform.",
+            "icon": "HoverboatDoorGunnerAAIcon"
+        },
+        "HovercraftDeploy": {
+            "displayName": "Hoverducky Deploy",
+            "description": "Redeploy the Hoverducky tower.",
+            "icon": "HoverboatDeployAAIcon"
         }
     },
     "iapContent": {
@@ -4367,7 +4755,9 @@
     },
     "unreleasedContent": {
         "trophyStoreItems": {
-            "TPetBombshooterBestboy": 1782943200000
+            "TPetBombshooterBestboy": 1782943200000,
+            "BloonsAllBloonsBumperStickers": 1788127200000,
+            "BloonsMOABSkinCampervan": 1788127200000
         },
         "teamsStoreItems": {}
     },
@@ -4645,7 +5035,7 @@
         "MoreValuableBananas": ["Support", "BananaFarm"],
         "SpeedyBrewing": ["Magic", "Alchemist"],
         "MoMonkeyMoney": ["Magic", "General"],
-        "LingeringMagic": ["Magic", "WizardMonkey", "NinjaMonkey", "Druid", "SuperMonkey"],
+        "LingeringMagic": ["Magic", "WizardMonkey", "Skywarden", "Druid", "SuperMonkey"],
         "FlameJet": ["Magic", "WizardMonkey"],
         "ArcaneImpale": ["Magic", "WizardMonkey"],
         "SuperRange": ["Magic", "SuperMonkey"],

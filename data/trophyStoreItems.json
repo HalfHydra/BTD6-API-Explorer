@@ -25,6 +25,19 @@
         "updateAdded": 27,
         "cost": 40
     },
+    "BloonsAllBloonsBumperStickers": {
+        "storeFilter": "Bloons",
+        "subFilter": "RegularSkins",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "BumperStickersBloonsIcon",
+        "cosmeticPriority": "2",
+        "exclusivity": "AllSmallBloonsDecal",
+        "itemType": "BloonDecal",
+        "hidden": true,
+        "updateAdded": 56,
+        "obtainMethod": "SocialSeason"
+    },
     "BloonsAllBloonsBunnyEars": {
         "storeFilter": "Bloons",
         "subFilter": "RegularSkins",
@@ -674,6 +687,19 @@
         "hidden": false,
         "updateAdded": 25,
         "cost": 50
+    },
+    "BloonsMOABSkinCampervan": {
+        "storeFilter": "Bloons",
+        "subFilter": "MoabSkins",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "MoabCampervanIcon",
+        "cosmeticPriority": "0",
+        "exclusivity": "MOABSkin",
+        "itemType": "BloonAssetChange",
+        "hidden": true,
+        "updateAdded": 56,
+        "obtainMethod": "SocialSeason"
     },
     "BloonsMOABSkinChocolate": {
         "storeFilter": "Bloons",
@@ -2313,6 +2339,58 @@
         "hidden": false,
         "obtainMethod": "Frontier",
         "updateAdded": 54.3
+    },
+    "GameUIProfileAvatar134": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar134",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": true,
+        "updateAdded": 56,
+        "obtainMethod": "Purchase"
+    },
+    "GameUIProfileAvatar135": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar135",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "updateAdded": 56,
+        "cost": 50
+    },
+    "GameUIProfileAvatar136": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar136",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "updateAdded": 56,
+        "cost": 50
+    },
+    "GameUIProfileAvatar137": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar137",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "updateAdded": 56,
+        "cost": 50
     },
     "GameUIProfileAvatar14": {
         "storeFilter": "GameUI",
@@ -4239,6 +4317,19 @@
         "updateAdded": 55,
         "cost": 300
     },
+    "GameUIProfileBanner66": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner66Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": true,
+        "updateAdded": 56,
+        "obtainMethod": "Purchase"
+    },
     "GameUIProfileBanner7": {
         "storeFilter": "GameUI",
         "subFilter": "ProfileBanners",
@@ -4771,6 +4862,19 @@
         "hidden": true,
         "obtainMethod": "SocialSeason",
         "updateAdded": 55
+    },
+    "TPetDartMonkeyDiscord": {
+        "storeFilter": "Monkeys",
+        "subFilter": "TowerPets",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "DartMonkeyWumpusPetIcon",
+        "cosmeticPriority": "0",
+        "exclusivity": "DartMonkeyPet",
+        "itemType": "TowerPet",
+        "hidden": true,
+        "updateAdded": 56,
+        "obtainMethod": "Discord"
     },
     "TPetDartMonkeyWindUpOG": {
         "storeFilter": "Monkeys",

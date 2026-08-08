@@ -2026,5 +2026,89 @@
             "hidden": false
         },
         "added": 54
+    },
+    "160": {
+        "name": "Full Strength Posse",
+        "model": {
+            "achievementId": 160,
+            "achievementIcon": "FullStrengthPosse",
+            "subscript": "",
+            "achievementGoal": 6,
+            "loot": "MonkeyMoney:200",
+            "isCoop": false,
+            "hidden": false,
+            "legendsName": "Frontier"
+        },
+        "added": 56
+    },
+    "161": {
+        "name": "Gon' Fishin'",
+        "model": {
+            "achievementId": 161,
+            "achievementIcon": "GonFishin",
+            "subscript": "",
+            "achievementGoal": 30,
+            "loot": "InstaMonkey:BeastHandler,010#InstaMonkey:BeastHandler,020#InstaMonkey:BeastHandler,030#InstaMonkey:BeastHandler,040",
+            "isCoop": false,
+            "hidden": false,
+            "legendsName": "Frontier"
+        },
+        "added": 56
+    },
+    "162": {
+        "name": "New Stuff, Same ol' Bloons",
+        "model": {
+            "achievementId": 162,
+            "achievementIcon": "SameOlBloons",
+            "subscript": "",
+            "achievementGoal": 1,
+            "loot": "MonkeyMoney:100#Power:MonkeyBoost,3",
+            "isCoop": false,
+            "hidden": false,
+            "legendsName": "Frontier"
+        },
+        "added": 56
+    },
+    "163": {
+        "name": "Double Trouble",
+        "model": {
+            "achievementId": 163,
+            "achievementIcon": "DoubleTrouble",
+            "subscript": "",
+            "achievementGoal": 2,
+            "loot": "MonkeyMoney:200#Power:CashDrop,2#Power:MoabMine,2",
+            "isCoop": false,
+            "hidden": false,
+            "legendsName": "Rogue"
+        },
+        "added": 56
+    },
+    "164": {
+        "name": "Marshmallow Maxing",
+        "model": {
+            "achievementId": 164,
+            "achievementIcon": "MarshmallowMaxing",
+            "subscript": "",
+            "achievementGoal": 1,
+            "loot": "MonkeyMoney:300#Trophy:100",
+            "isCoop": false,
+            "hidden": false,
+            "legendsName": "Rogue"
+        },
+        "added": 56
+    },
+    "165": {
+        "name": "Power Creep",
+        "model": {
+            "achievementId": 165,
+            "achievementIcon": "PowerCreep",
+            "subscript": "",
+            "achievementGoal": 250,
+            "loot": "MonkeyMoney:250#Trophy:250",
+            "isCoop": false,
+            "hidden": false,
+            "legendsName": "Rogue"
+        },
+        "added": 56
     }
 }
