@@ -1291,7 +1291,7 @@ function generateTowerProgressTower(tower){
 
     let towerProgressContentXP = document.createElement('p');
     towerProgressContentXP.classList.add('tower-progress-content-xp','mm-outline');
-    towerProgressContentXP.innerHTML = `XP: ${btd6usersave.towerXP[tower].toLocaleString()}`;
+    towerProgressContentXP.innerHTML = `XP: ${(btd6usersave.towerXP.hasOwnProperty(tower) ? btd6usersave.towerXP[tower] : "Unknown").toLocaleString()}`;
     towerLeftBox.appendChild(towerProgressContentXP);
 
     let upgradesText = createEl('p', {
@@ -1309,7 +1309,7 @@ function generateTowerProgressTower(tower){
             style: {
                 fontSize: "28px"
             },
-            innerHTML: `${btd6publicprofile.towersPlaced[tower].toLocaleString()} Placed`
+            innerHTML: `${btd6publicprofile.towersPlaced.hasOwnProperty(tower) ? btd6publicprofile.towersPlaced[tower].toLocaleString() : "Unknown"} Placed`
         })
         towerLeftBox.appendChild(towerPlacedText);
 
