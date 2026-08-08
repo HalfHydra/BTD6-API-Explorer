@@ -768,7 +768,7 @@
     margin: 10px 0px;
 }
 .progress-selector-div {
-    height: 90px;
+    height: 80px;
 }
 .selector-img {
     height: 100px;
@@ -776,7 +776,7 @@
     object-fit: contain;
 }
 .selector-go-img {
-    width: 75px;
+    width: 65px;
 }
 .selector-text {
     font-family: 'Luckiest Guy';
