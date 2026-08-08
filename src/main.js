@@ -165,7 +165,6 @@ let changelog = {
     "v1.0.0 (7/7/24)": "Initial Release <br>- The Odyssey tab is still being worked on and will be added in the near future.<br>- An Insta Monkeys Rotation helper will also be added soon."
 }
 
-fetchConstants()
 function generateIfReady(){
     if (readyFlags.every(flag => flag === 1)){
         if(document.getElementById("home-content")){
@@ -942,7 +941,7 @@ function generateProgress(){
 
         if(parseInt(btd6usersave.latestGameVersion.split(".")[0]) > constants.projectContentVersion && !seenOutOfDate) {
             selectorsDiv.appendChild(
-                generateComment("The content of this site (v" + constants.projectContentVersion + ".0) is out of date with the current version (v" + btd6usersave.latestGameVersion + "). New content might be missing, but everything else should remain functional.", () => {
+                generateComment("The content of this site (v" + constants.projectContentVersion + ".0) is out of date with the current version (v" + btd6usersave.latestGameVersion + "). New content might be missing or appear incorrect, but everything else should remain functional.", () => {
                 seenOutOfDate = true;
             }));
         }
@@ -982,7 +981,7 @@ function generateProgress(){
             //     generateCompletionist();
             // })
         } else {
-            let statsUnavailableText = createEl('p', { classList: ['font-gardenia'], style: {fontSize: "1em", lineHeight: "1.5"}, innerHTML: "Profile & stats are temporarily unavailable, but all other tracking such as your Insta Monkey collection is still available. This Open Data API error happens after a new major update and is usually fixed within a couple days." });
+            let statsUnavailableText = createEl('p', { classList: ['font-gardenia'], style: {fontSize: "1em", lineHeight: "1.5"}, innerHTML: "Profile & stats are temporarily unavailable, but most other tracking like Insta Monkey collections is still available, excluding new content. This Open Data API error happens after a new major update and is usually fixed within a couple days." });
             selectorsDiv.appendChild(statsUnavailableText);
         }
 
