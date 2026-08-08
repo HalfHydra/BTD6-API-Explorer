@@ -238,7 +238,7 @@ function generateProgressSubText(){
     progressSubText["Paragons"] = `${paragonsUnlocked.length}/${Object.keys(constants.paragonsAvailable).length} Paragon${paragonsUnlocked.length != 1 ? "s" : ""} Unlocked`
     let heroInfo = generateHeroesSkinsUnlocked();
     progressSubText["Heroes"] = `${heroInfo.heroesUnlocked} Hero${heroInfo.heroesUnlocked != 1 ? "es" : ""} Unlocked`;
-    progressSubText["HeroesUnlocked"] = `${heroInfo.heroesUnlocked}/${Object.keys(btd6usersave.unlockedHeroes).length} Hero${heroInfo.heroesUnlocked != 1 ? "es" : ""} Unlocked`;
+    progressSubText["HeroesUnlocked"] = `${heroInfo.heroesUnlocked}/${Object.keys(constants.heroesInOrder).length} Hero${heroInfo.heroesUnlocked != 1 ? "es" : ""} Unlocked`;
     progressSubText["Skins"] = `${heroInfo.skinsUnlocked}/${heroInfo.totalSkins.length} Hero Skin${heroInfo.skinsUnlocked != 1 ? "s" : ""} Unlocked`;
     if (btd6publicprofile != null) {
         progressSubText["ActivatedAbilities"] = `${Object.keys(btd6publicprofile.stats["abilitiesActivatedByName"]).filter(key => key in constants.abilities).length} Unique Abilities Used`;
