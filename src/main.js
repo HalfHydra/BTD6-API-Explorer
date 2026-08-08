@@ -2337,10 +2337,26 @@ function generateKnowledgeProgress(){
     knowledgeHeaderBottom.appendChild(towerFilterDiv);
 
     let towerFilters = {
-        "primary": ["DartMonkey", "BoomerangMonkey", "BombShooter", "TackShooter", "IceMonkey", "GlueGunner"],
-        "military": ["SniperMonkey", "MonkeySub", "MonkeyBuccaneer", "MonkeyAce", "HeliPilot", "MortarMonkey", "DartlingGunner"],
-        "magic": ["WizardMonkey", "SuperMonkey", "NinjaMonkey", "Alchemist", "Druid"],
-        "support": ["BananaFarm", "SpikeFactory", "MonkeyVillage", "EngineerMonkey"],
+        "primary": [],
+        "military": [],
+        "magic": [],
+        "support": [],
+    }
+    for (let [tower, data] of Object.entries(constants.towersInOrder)) {
+        switch (data.category) {
+            case "Primary":
+                towerFilters.primary.push(tower);
+                break;
+            case "Military":
+                towerFilters.military.push(tower);
+                break;
+            case "Magic":
+                towerFilters.magic.push(tower);
+                break;
+            case "Support":
+                towerFilters.support.push(tower);
+                break;
+        }
     }
     function createTowerFilterDivs(treeKey) {
         towerFilterDiv.innerHTML = "";
@@ -3198,9 +3214,17 @@ function generateMapRightColStats(map,coop){
     }
 
     if (mapStatsContainer.innerHTML == "") {
-        let noDataFound = document.createElement('p');
-        noDataFound.classList.add('no-data-found','black-outline');
-        noDataFound.innerHTML = "No Data Available. Try switching the Coop Toggle";
+        let noDataFound = createEl('p', {
+            classList: ['font-gardenia', 'ta-center'],
+            style: {
+                fontSize: "24px",
+                marginTop: "20px",
+                padding: "20px",
+                borderRadius: "10px",
+                backgroundColor: "var(--profile-tertiary)",
+            },
+            innerHTML: `No Data Available for ${coop ? "Co-op" : "Single Player"} on this map.`
+        });
         mapStatsContainer.appendChild(noDataFound);
     }
 }
@@ -5230,7 +5254,7 @@ function generateAchievementsProgress() {
     let mapProgressFilterDifficultySelect2 = document.createElement('select');
     mapProgressFilterDifficultySelect2.classList.add('map-progress-filter-difficulty-select');
 
-    let options2 = ["All","Only Locked","Only Unlocked","Knowledge Points","Insta Monkeys","Hidden Achievements","Coop","Extras"]
+    let options2 = ["All","Only Locked","Only Unlocked","Knowledge Points","Insta Monkeys","Hidden Achievements","Coop","Extras Unlock","Legends Only"]
     options2.forEach((option) => {
         let difficultyOption = document.createElement('option');
         difficultyOption.value = option;
@@ -5336,9 +5360,12 @@ function generateAchievementsGameView(searchTerm = "") {
         case "Coop":
             achievements = achievements.filter(achievement => achievementsJSON[achievement].model.isCoop);
             break;
-        case "Extras":
+        case "Extras Unlock":
             achievements = achievements.filter(achievement => ["BigBloonsMode", "SmallBloonsMode", "SmallTowersMode", "BigTowersMode", "SmallBossesMode"].some(val => achievementsJSON[achievement].model.loot.includes(val)));
-            break;        
+            break;
+        case "Legends Only":
+            achievements = achievements.filter(achievement => achievementsJSON[achievement].model.hasOwnProperty("legendsName"));
+            break;
     }
 
     if (searchTerm != "") {
@@ -9828,6 +9855,9 @@ function generateTrophyStorePopout(key) {
                 break;
             case "SocialSeason":
                 itemObtainMethod.innerHTML = "Awarded to all players who earn points to help reach the All-Teams Global Goal during the related Social Seasons event";
+                break;
+            case "Discord":
+                itemObtainMethod.innerHTML = "Obtained as a bonus when purchasing any item from the Discord BTD6 Store";
                 break;
         }
     }
