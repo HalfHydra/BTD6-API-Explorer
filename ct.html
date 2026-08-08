@@ -243,7 +243,12 @@
     document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
     addEventListener("resize", (event) => { document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`); })
     fetchConstants().then(async () => {
-        showLoading();
+        let relics = document.getElementById("relics-content")
+        let relicsDiv = createEl('div', {
+            classList: ['d-flex', 'jc-center', 'w-100'],
+        })
+        relics.appendChild(relicsDiv)
+        copyLoadingIcon(relicsDiv)
         getCTData(true).then(async () => {
             let currentEvent = null;
             CTData.forEach(element => {
@@ -257,7 +262,16 @@
                     currentEvent = element;
                 }
             });
-            await openCTEventDetails(null, currentEvent);
+            if (currentEvent == null) {
+                currentEvent = await detectMissingLatestCTEvent();
+                if (currentEvent) {
+                    await openCTEventDetails(null, {id: currentEvent.seed, noODA: true, missingLatest: true});
+                } else {
+                    errorModal("Unable to retrieve the latest CT event details.")
+                }
+            } else {
+                await openCTEventDetails(null, currentEvent);
+            }
         });
         fetchLocKeys();
     });

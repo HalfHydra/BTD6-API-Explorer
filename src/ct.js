@@ -152,6 +152,41 @@ async function generateCTs(){
 
     await getCTSeedToEventNumber();
 
+    let missingEvent = await detectMissingLatestCTEvent();
+    if (missingEvent) {
+        let notificationDiv = createEl('div', {
+            classList: ['d-flex', 'jc-between', 'ai-center', 'currency-trophies-div', 'pointer'],
+            style: {
+                marginBottom: '10px',
+                backgroundColor: '#B9E546',
+                borderRadius: '10px',
+                fontSize: '28px',
+                width: "650px"
+            }
+        });
+        eventsContent.appendChild(notificationDiv);
+
+        let notificationText = createEl('p', {
+            classList: ['black-outline'],
+            innerHTML: `Contested Territory #${missingEvent.eventNumber} (Limited Details)`
+        });
+        notificationDiv.appendChild(notificationText);
+
+        let selectorGoImg = createEl('img', {
+            classList: ["selector-go-img"],
+            style: {
+                width: "45px",
+            },
+            src: '../Assets/UI/ContinueBtn.png',
+        });
+        notificationDiv.appendChild(selectorGoImg);
+
+        notificationDiv.addEventListener('click', () => {
+            showLoading();
+            openCTEventDetails('events', {id: missingEvent.seed, noODA: true, missingLatest: true});
+        });
+    }
+
     clearAllTimers();
 
     document.getElementById("loading").style.transform = "scale(0)";
@@ -376,7 +411,10 @@ async function openCTEventDetails(source, eventData) {
     newTicketsTextDiv.appendChild(ticketsTimer);
 
     clearAllTimers();
-    if (eventData.noODA) {
+    if (eventData.missingLatest) {
+        ticketsTimer.innerHTML = "Unknown Reset Time";
+        nextTicketsLabel.style.display = "none";
+    } else if (eventData.noODA) {
         ticketsTimer.innerHTML = "Event Ended";
         nextTicketsLabel.style.display = "none";
     } else if (now >= new Date(new Date(eventData.end).getTime() - dayMs) && now < eventData.end) {
@@ -2693,3 +2731,24 @@ function loadLocalStorageCTData() {
     }
 }
 loadLocalStorageCTData();
+
+async function detectMissingLatestCTEvent() {
+    if (!CTSeedToEventNumber) {
+        await getCTSeedToEventNumber();
+    }
+
+    let highestEventNumber = Math.max(...Object.values(CTSeedToEventNumber));
+    let highestEventSeed = Object.keys(CTSeedToEventNumber).find(
+        seed => CTSeedToEventNumber[seed] === highestEventNumber
+    );
+    let activeCTSeeds = new Set(Object.values(CTData).map(event => event.id));
+
+    if (!CTData || Object.keys(CTData).length === 0 || (activeCTSeeds && !activeCTSeeds.has(highestEventSeed))) {
+        return {
+            seed: highestEventSeed,
+            eventNumber: highestEventNumber
+        };
+    }
+
+    return null;
+}
