@@ -1777,12 +1777,12 @@ function loginModal(source) {
 }
 
 function checkAndSyncRogueData() {
-    if (document.getElementById('artifacts-container') == null || document.getElementById('artifacts-content').style.display === "none" || !currentSyncContext) {
+    if (document.getElementById('artifacts-content').style.display === "none") {
         clearInterval(rogueSyncInterval);
         currentSyncContext = null;
         return;
     }
-    if (!rogueSaveData.hasOwnProperty("syncingWith") || rogueSaveData.syncingWith == null) {
+    if (!rogueSaveData.hasOwnProperty("syncingWith") || rogueSaveData.syncingWith == null || (currentSyncContext === "artifacts" && document.getElementById('artifacts-container') == null)) {
         return;
     }
     let now = new Date().valueOf();
