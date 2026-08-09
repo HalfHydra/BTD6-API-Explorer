@@ -75,9 +75,9 @@ let isHeroTransformed = false;
 let imageScroll = [
     {
         "title": "New Site Update!",
-        "text": `Site Update 2.8.4:<br>
+        "text": `Site Update 2.8.5:<br>
+        - Rogue Feat Tracking<br>
         - Odyssey Events<br>
-        - Events Menu Rework<br>
         <br>
         Recent Updates:<br>
         - Powers Pro Tracking<br>
@@ -87,7 +87,7 @@ let imageScroll = [
         Creator Code: 'HalfHydra' - TY!<br>
         Report Bugs: <a href="https://discord.gg/wep2RDmcqZ" target="_blank" style="color: white;">Discord Server</a><br>
         `,
-        "image": "/LandingScroll/Update55&Odysseys"
+        "image": "/LandingScroll/Update56&RogueFeat"
     },
     {
         "title": "View Your Profile!",
@@ -128,6 +128,7 @@ let imageScroll = [
 let imageScrollIndex = 0;
 
 let changelog = {
+    "v2.8.5 (8/8/26)": `Rogue Feat Trackers & Update 56 Content<br>- Added ways to see which towers you've placed for Rogue Feats automatically: Monkey Manager and One for All<br>- The latest CT should now show up with limited information from a secondary data source even if the Open Data API is currently broken<br>- Fixed CT Map site to not break when latest CT event doesn't show up on ODA<br>- Fixed CT errors on unknown towers<br>- Fixed towers menu when data is missing from stats objects<br>- Clarified text regarding Open Data API needing updates<br>- Fix hero count including Sheriff erroroneously<br>- Rogue auto syncing should no longer cause errors on other pages<br>- Fix rogue progress image dimensions to support new artifacts<br>- Added legends filter to achievements`,
     "v2.8.4 (7/25/26)": "Various fixes and behind the scenes reworks<br>- Corrected Lych rounds after the boss events use the correct version<br>- Added a couple missing custom roundsets such as One Sided Infernal<br>- Added missing abilities: Soulbind, Anti-Camo Dust, Anti-Regrow Serum<br>- Odyssey details minor fixes such as Alternate Bloons Rounds no longer overwriting custom rounds<br>- Fixed loading bug with various events menus<br>- CT Map no longer displays a preview for tiles that are filtered out<br>- Added CHIMPS to the roundsets tab since it is a commonly used preset<br>- Added first time messages system",
     "v2.8.3 (6/20/26)": "Profile Updates + even more fixes!<br>- Top Abilities can be seen in player profiles now<br>- Diamondback and Social Season badges have been added<br>- Frontier bloons pop totals have been added to the frontier stats including Diamond bloons which aren't seen in game for some reason<br>- Achievements now has a filter for just ones that unlock extra settings, and a link to this has been added from the extras tab if you have some locked<br>- Fixed activated abilities menu breaking due to backend changes<br>- Fixed extras unlocked not racking correctly in some cases<br>- The hidden items toggle is now switched off by default in the trophy store menu<br>- Trophy store items that haven't been revealed yet will now show up once they are (sorry Bestboy!)<br>- Fixed quick stats navigation<br>- Fixed He-Man avatar and banner not showing up as IAP<br>- Clarified Frontier stats are tracked across all saves<br>- Some processed data should no longer linger after switching users without reloading<br>- Fixed the insta tracker menu loading for a while due to collection event fetch reasons",
     "v2.8.2 (6/18/26)": "Minor fixes<br>- Fixed a bug causing the collection events to show the latest one instead of the active one<br>- Fixed Dan D'Monke not showing up in CT map correctly.<br>- Fixed incorrect BTD6 birthday date for collection event skins guesser<br>- Renamed \"Default\" to \"Category\" in the Trophy Store filters.<br>- Events list now infers boss type from the id and displays that icon instead",

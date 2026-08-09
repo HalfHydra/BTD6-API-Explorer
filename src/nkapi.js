@@ -204,7 +204,6 @@ async function getRogueSaveData(oak_token) {
     let expiryCheck = true;
     let savePromise = new Promise(async (resolve, reject) => {
         await fetchData(`https://data.ninjakiwi.com/btd6/save/${oak_token}`, (json) => {
-
             if (json["body"].hasOwnProperty("rogueUnlockedStarterArtifacts")) {
                 if (!rogueSaveData.hasOwnProperty("extractedArtifacts")) {
                     rogueSaveData.extractedArtifacts = []
