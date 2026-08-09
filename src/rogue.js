@@ -1814,13 +1814,6 @@ function generateRogueFeatHelpers() {
     let rogueFeatContent = document.getElementById('artifacts-content');
     rogueFeatContent.innerHTML = "";
 
-    if (!seenFTMessages.includes("rogueFeatsMessage")) {
-        rogueFeatContent.appendChild(generateComment(`One-Time Note: It's hard to tell what towers you've already placed for the Rogue feats "Monkey Manager" and "One for All". The specific towers progress is available on the Open Data API! Login to your profile first on the profile tab to see your current progress automatically. Alternatively, you can manually select towers to mark them.`, function() {
-            seenFTMessages.push("rogueFeatsMessage")
-            saveSettings();
-        }));
-    }
-
     let monkeyManager = createEl('div', {
         classList: ['d-flex', 'f-wrap', 'rogue-bg'],
         style: {
@@ -1873,12 +1866,6 @@ function generateRogueFeatHelpers() {
         rogueFeatHeaderDiv.appendChild(loginBtn);
     }
 
-    // let loginBtn = generateButton("Login with OAK", { width: "280px" }, () => {
-    //     loginModal("feats");
-    // })
-    // rogueFeatHeaderDiv.appendChild(loginBtn);
-
-
     let feats = {
         "Monkey Manager": {
             "icon": "MonkeyManager",
@@ -1897,11 +1884,9 @@ function generateRogueFeatHelpers() {
     }
 
     for (let [feat, data] of Object.entries(feats)) {
-        // Get data from rogueSaveData and filter valid towers
         let obtainedData = rogueSaveData[data.dataKey] || [];
         obtainedData = obtainedData.filter(tower => constants.towersInOrder.hasOwnProperty(tower));
         
-        // Store back in rogueSaveData to ensure it's clean
         rogueSaveData[data.dataKey] = obtainedData;
 
         let achievementDiv = createEl('div', {
