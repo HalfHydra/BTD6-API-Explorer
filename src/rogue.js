@@ -73,6 +73,7 @@ function changeRogueTab(selector){
         case 'Artifacts Tracker':
             document.getElementById('artifacts-content').style.display = 'flex';
             addToBackQueue({source: 'rogue', destination: 'artifacts', callback: generateRogueSelectors})
+            rogueSaveData.lastSynced = 0;
             generateRogueArtifacts();
             break;
         case 'Hero Starter Kits':
