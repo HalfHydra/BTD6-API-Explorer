@@ -887,7 +887,8 @@ function collapsableDiv(headerText, options = {}) {
     let arrow = createEl('img', {
         classList: ['of-contain'],
         style: {
-            width: "30px",
+            width: "36px",
+            height: "36px",
             transform: 'rotate(90deg)'
         },
         src: './Assets/UI/NextArrowSmallYellow.png'

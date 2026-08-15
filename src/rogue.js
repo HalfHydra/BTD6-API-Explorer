@@ -19,7 +19,9 @@ let rogueSaveData = {
     lastSynced: null,
     firstTimeModal: true,
     monkeyManager: [],
-    oneForAll: []
+    oneForAll: [],
+    combineHeroStats: true,
+    heroStatsFilter: "Game Order",
 }
 
 let starterArtifacts = ['BouncingProjectiles3', 'CeramicChunker2', 'FrostedTips1', 'OneShot2', 'SlowerIsHarder1', 'SpiritOfAdventure2', 'SwellingSpikes1', 'Wackywibblywavey1']
@@ -91,6 +93,11 @@ function changeRogueTab(selector){
             generateImageBuilder();
             addToBackQueue({source: 'rogue', destination: 'artifacts'})
             break;
+        case "Hero Campaign Stats":
+            document.getElementById('artifacts-content').style.display = 'flex';
+            generateHeroCompletions();
+            addToBackQueue({source: 'rogue', destination: 'artifacts'})
+            break;
         default: 
             document.getElementById('rogue-content').style.display = 'flex';
             document.getElementById('artifacts-content').style.display = 'none';
@@ -121,6 +128,7 @@ function generateRogueSelectors() {
         "Artifacts Tracker": "RoguePermanantArtifactsBtn",
         "Hero Starter Kits": "RogueStarterKitsBtn",
         "Rogue Feat Trackers": "RogueFeatBtn",
+        "Hero Campaign Stats": "RogueHeroStatsBtn",
         // "Export Image": "ArtifactShareBtn"
     }
 
@@ -1828,6 +1836,17 @@ function loadRogueDataFromLocalStorage() {
     if (data) {
         rogueSaveData = JSON.parse(data);
     }
+    if (!rogueSaveData.hasOwnProperty("combineHeroStats")) {
+        rogueSaveData.combineHeroStats = true;
+        rogueSaveData.heroStatsFilter = "Game Order";
+    }
+    if (!rogueSaveData.hasOwnProperty('campaignStats')) {
+        rogueSaveData.campaignStats = {
+            "unlockedHeroes": {},
+            "unlockedSkins": {},
+            "rogueHeroStats": null
+        }
+    }
     readLocalStorage();
 }
 
@@ -1858,6 +1877,14 @@ function loginModal(source) {
                 hideLoading();
                 addToBackQueue({callback: generateRogueFeatHelpers});
                 generateRogueFeatHelpers();
+                saveRogueDataToLocalStorage();
+                break;
+            case "stats":
+                goBack();
+                rogueSaveData.syncingWith = oak_token
+                hideLoading();
+                addToBackQueue({callback: generateHeroCompletions});
+                generateHeroCompletions();
                 saveRogueDataToLocalStorage();
                 break;
         }
@@ -1897,6 +1924,9 @@ function checkAndSyncRogueData() {
             generateArtifacts();
         } else if (currentSyncContext === 'feats') {
             generateRogueFeatHelpers();
+        } else if (currentSyncContext === 'firstTimeStats') {
+            generateHeroCompletions();
+            currentSyncContext = 'stats';
         }
     }).catch(error => {
         console.error('Failed to sync rogue data:', error);
@@ -2200,5 +2230,781 @@ function generateRogueFeatHelpers() {
     });
 
     currentSyncContext = 'feats';
+    startRogueSync();
+}
+
+function generateHeroStats(heroOrSkin, shouldCombine = false) {
+    let heroStatsContent = document.getElementById('artifacts-content');
+    heroStatsContent.innerHTML = "";
+
+    resetScroll()
+
+    let baseHero;
+    let relevantData = [];
+    let allSkinsForHero = [];
+    
+    if (heroOrSkin === null && shouldCombine) {
+        relevantData = rogueSaveData.campaignStats.rogueHeroStats;
+    } else if (heroOrSkin === null || shouldCombine) {
+        let firstEntry = rogueSaveData.campaignStats.rogueHeroStats.find(h => 
+            h.heroName === heroOrSkin || h.skinName === heroOrSkin
+        );
+        if (!firstEntry) return;
+        
+        baseHero = firstEntry.heroName;
+        relevantData = rogueSaveData.campaignStats.rogueHeroStats.filter(h => h.heroName === baseHero);
+        allSkinsForHero = constants.heroesInOrder[baseHero].skins;
+    } else {
+        let skinData = rogueSaveData.campaignStats.rogueHeroStats.find(h => h.skinName === heroOrSkin);
+        if (!skinData) {
+            skinData = rogueSaveData.campaignStats.rogueHeroStats.find(h => h.heroName === saveSkintoSkinMap[heroOrSkin] || heroOrSkin);
+            skinNameKey = saveSkintoSkinMap[heroOrSkin] || heroOrSkin;
+        }
+        if (!skinData) return;
+        
+        baseHero = skinData.heroName;
+        relevantData = [skinData];
+        allSkinsForHero = constants.heroesInOrder[baseHero].skins;
+    }
+
+    let contentDiv = createEl('div', {
+        classList: ['d-flex', 'f-wrap', 'rogue-bg'],
+        style: {
+            borderWidth: "25px"
+        }
+    });
+    heroStatsContent.appendChild(contentDiv);
+
+    let heroStatsHeader = createEl('div', {
+        classList: ['d-flex', 'jc-evenly', 'ai-center', 'w-100', 'f-wrap'],
+        style: {
+            gap: "10px"
+        }
+    });
+    contentDiv.appendChild(heroStatsHeader);
+
+    let overallStatsHeader = createEl('p', {
+        classList: ['black-outline', 'fg-1'],
+        style: {
+            fontSize: "28px"
+        },
+        innerHTML: `${heroOrSkin == null ? "Overall " : ""}Rogue Hero Stats (Since Update 56)`
+    });
+    heroStatsHeader.appendChild(overallStatsHeader);
+
+    let skinsUnlockedObj = getUnlockedSkinsObj();
+    let dropdownOptions = ["Combined Stats"];
+    let skinKeyMap = { "Combined Stats": "combined" };
+    
+    allSkinsForHero.forEach(skin => {
+        if (skinsUnlockedObj[skin]) {
+            let displayName = getHeroOrSkinData(skin).fqName || skin;
+            dropdownOptions.push(displayName);
+            skinKeyMap[displayName] = saveSkintoSkinMap[skin] || skin;
+        }
+    });
+
+    let currentSelection = shouldCombine ? "Combined Stats" : 
+        (getHeroOrSkinData(heroOrSkin).fqName || getHeroOrSkinData(heroOrSkin).displayName || heroOrSkin);
+
+    let skinDropdown = generateDropdown("", dropdownOptions, currentSelection, (selectedDisplay) => {
+        let selectedSkin = skinKeyMap[selectedDisplay];
+        if (selectedSkin === "combined") {
+            generateHeroStats(baseHero, true);
+        } else {
+            generateHeroStats(selectedSkin, false);
+        }
+    });
+    if (allSkinsForHero.length != 0) {
+        heroStatsHeader.appendChild(skinDropdown);
+    }
+
+    let modalClose = createEl('img', {
+        classList: ['pointer'],
+        style: {
+            height: "50px",
+            width: "50px",
+        },
+        src: "./Assets/UI/CloseBtn.png"
+    });
+    modalClose.addEventListener('click', () => {
+        goBack();
+    })
+    heroStatsHeader.appendChild(modalClose);
+
+
+    function calculateOverallStats(relevantData) {
+        let stats = {
+            lifetimePops: 0,
+            runsCompletedNormal: 0,
+            runsCompletedChimps: 0,
+            highestStageReachedNormal: 0,
+            highestStageReachedChimps: 0,
+            favoriteArtifacts: {},
+            favoriteTeamMembers: {},
+            monkeyMoneyTokensBought: 0,
+            rogueXPTokensBought: 0,
+            bossArtifactsObtained: {}
+        }
+
+        for (let heroData of relevantData) { //rogueSaveData.rogueHeroStats
+            stats.lifetimePops += heroData.lifetimePops || 0;
+            stats.runsCompletedNormal += heroData.runsCompletedNormal || 0;
+            stats.runsCompletedChimps += heroData.runsCompletedChimps || 0;
+            stats.highestStageReachedNormal = Math.max(stats.highestStageReachedNormal, heroData.highestStageReachedNormal || 0);
+            stats.highestStageReachedChimps = Math.max(stats.highestStageReachedChimps, heroData.highestStageReachedChimps || 0);
+            if (!heroData.favouriteArtifacts) {
+                console.log(`No favorite artifacts for hero ${heroData.skinName}`);
+                console.log(heroData)
+                continue;
+            }
+            heroData.favouriteArtifacts.forEach((artifact, index) => {
+                switch (artifact.name) {
+                    case "TokenMonkeyMoney":
+                        stats.monkeyMoneyTokensBought += artifact.count;
+                        break;
+                    case "TokenRogueXp":
+                        stats.rogueXPTokensBought += artifact.count;
+                        break;
+                    default:
+                        let artifactKey = `${artifact.name}-${artifact.tier}`;
+                        let isBossArtifact = artifact.name.startsWith("Essence");
+                        let targetObj = isBossArtifact ? stats.bossArtifactsObtained : stats.favoriteArtifacts;
+                        if (!targetObj[artifactKey]) {
+                            targetObj[artifactKey] = { count: artifact.count, insertionIndex: Object.keys(targetObj).length };
+                        } else {
+                            targetObj[artifactKey].count += artifact.count;
+                        }
+                }
+            });
+            heroData.favouriteTeamMembers.forEach(teamMember => {
+                let teamMemberKey = `${teamMember.tiers.join('')}-${teamMember.name}`;
+                if (!stats.favoriteTeamMembers[teamMemberKey]) {
+                    stats.favoriteTeamMembers[teamMemberKey] = { count: teamMember.count, insertionIndex: Object.keys(stats.favoriteTeamMembers).length };
+                } else {
+                    stats.favoriteTeamMembers[teamMemberKey].count += teamMember.count;
+                }
+            });
+        }
+
+        stats.favoriteArtifacts = Object.fromEntries(Object.entries(stats.favoriteArtifacts).sort((a, b) => {
+            if (a[1].count !== b[1].count) return b[1].count - a[1].count;
+            return b[1].insertionIndex - a[1].insertionIndex;
+        }));
+
+        stats.bossArtifactsObtained = Object.fromEntries(Object.entries(stats.bossArtifactsObtained).sort((a, b) => {
+            if (a[1].count !== b[1].count) return b[1].count - a[1].count;
+            return b[1].insertionIndex - a[1].insertionIndex;
+        }));
+
+        stats.favoriteTeamMembers = Object.fromEntries(Object.entries(stats.favoriteTeamMembers).sort((a, b) => {
+            if (a[1].count !== b[1].count) return b[1].count - a[1].count;
+            let aMaxTier = Math.max(...a[0].split('-')[0].split('').map(Number));
+            let bMaxTier = Math.max(...b[0].split('-')[0].split('').map(Number));
+            if (aMaxTier !== bMaxTier) return bMaxTier - aMaxTier;
+            return b[1].insertionIndex - a[1].insertionIndex;
+        }));
+
+        let [favoriteArtifactKey] = Object.keys(stats.favoriteArtifacts);
+        let [favoriteTeamMemberKey] = Object.keys(stats.favoriteTeamMembers);
+
+        stats.favoriteArtifact = favoriteArtifactKey ?? null;
+        stats.favoriteTeamMember = favoriteTeamMemberKey ?? null;
+
+        stats.favoriteArtifacts = Object.fromEntries(Object.entries(stats.favoriteArtifacts).map(([k, v]) => [k, v.count]));
+        stats.favoriteTeamMembers = Object.fromEntries(Object.entries(stats.favoriteTeamMembers).map(([k, v]) => [k, v.count]));
+        stats.bossArtifactsObtained = Object.fromEntries(Object.entries(stats.bossArtifactsObtained).map(([k, v]) => [k, v.count]));
+
+        return stats;
+    }
+    let overallStats = calculateOverallStats(relevantData);
+    let stats = {
+        "Total Hero Pops": overallStats.lifetimePops,
+        "Runs Completed": overallStats.runsCompletedNormal + overallStats.runsCompletedChimps,
+        "Highest Stage (Normal)": overallStats.highestStageReachedNormal,
+        "Highest Stage (CHIMPS)": overallStats.highestStageReachedChimps,
+        "Favorite Artifact (Most Acquired)": overallStats.favoriteArtifact,
+        "Favorite Monkey (Most Acquired)": overallStats.favoriteTeamMember,
+        "MM Tokens Bought": overallStats.monkeyMoneyTokensBought,
+        "XP Tokens Bought": overallStats.rogueXPTokensBought
+    }
+
+    let overallStatsDiv = createEl('div', {
+        classList: ['d-flex', 'jc-evenly', 'f-wrap'],
+        style: {
+            gap: "10px"
+        }
+    });
+    contentDiv.appendChild(overallStatsDiv);
+
+    let heroStatsTopDiv = createEl('div', {
+        classList: ['d-flex', 'w-100', 'jc-center'],
+    });
+    overallStatsDiv.appendChild(heroStatsTopDiv);
+
+    let heroStatsIconDiv = createEl('div', {});
+    heroStatsTopDiv.appendChild(heroStatsIconDiv);
+
+    let heroStatsIconImg = createEl('img', {
+        src: heroOrSkin ? constants.heroesInOrder.hasOwnProperty(heroOrSkin) ? getHeroPortrait(heroOrSkin, 1) : getSkinAssetPath(saveSkintoSkinMap[heroOrSkin] || heroOrSkin, 1) : "./Assets/UI/AllHeroesIcon.png",
+        classList: ['of-contain'],
+        style: {
+            width: "150px",
+            height: "150px",
+            padding: "10px"
+        }
+    });
+    heroStatsIconDiv.appendChild(heroStatsIconImg);
+
+    let heroStatsRightDiv = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'f-wrap', 'ac-center'],
+        style: {
+            gap: "10px",
+            maxWidth: "800px",
+        }
+    });
+    heroStatsTopDiv.appendChild(heroStatsRightDiv);
+
+    for (let [stat, value] of Object.entries(stats)) {
+        let statDiv = createEl('div', {
+            classList: ['d-flex', 'ai-center', 'jc-between', 'fg-1'],
+            style: {
+                backgroundColor: "rgba(0,0,0,0.3)",
+                width: "250px",
+                padding: "10px",
+                borderRadius: "10px",
+            },
+        });
+
+        let statName = createEl('p', {
+            classList: ['font-gardenia', 'lh-add-half'],
+            style: {
+                fontSize: "20px"
+            },
+            innerHTML: stat
+        });
+        statDiv.appendChild(statName);
+
+        switch (stat) {
+            case "Total Hero Pops":
+            case "Runs Completed":
+            case "Highest Stage (Normal)":
+            case "Highest Stage (CHIMPS)":
+                heroStatsRightDiv.appendChild(statDiv);
+                break;
+            default:
+                statName.style.maxWidth = "200px";
+                overallStatsDiv.appendChild(statDiv);
+        }
+
+        switch(stat) {
+            case "Favorite Artifact (Most Acquired)":
+                if (value) {
+                    let [artifactName, artifactTier] = value.split('-');
+                    let actualArtifactId = null;
+                    for (let [artifactId, artifactData] of Object.entries(rogueJSON.artifacts)) {
+                        if (artifactData.baseId === artifactName && artifactData.tier == artifactTier) {
+                            actualArtifactId = artifactId;
+                            break;
+                        }
+                    }
+                    statDiv.appendChild(generateArtifactContainer(actualArtifactId, "stats", 0.75, overallStats.favoriteArtifacts[value]));
+                } else {
+                    let statValue = createEl('p', {
+                        classList: ['font-gardenia'],
+                        style: {
+                            fontSize: "18px",
+                            backgroundColor: "rgba(0,0,0,0.3)",
+                            padding: "10px",
+                            borderRadius: "10px",
+                        },
+                        innerHTML: "None"
+                    });
+                    statDiv.appendChild(statValue);
+                }
+                break;
+            case "Favorite Monkey (Most Acquired)":
+                if (value) {
+                    let [tiers, monkeyName] = value.split('-');
+                    statDiv.appendChild(generateInstaMonkeyContainer({baseId: monkeyName, tiers: tiers.split('')}, 0.75, overallStats.favoriteTeamMembers[value]));
+                } else {
+                    let statValue = createEl('p', {
+                        classList: ['font-gardenia'],
+                        style: {
+                            fontSize: "18px",
+                            backgroundColor: "rgba(0,0,0,0.3)",
+                            padding: "10px",
+                            borderRadius: "10px",
+                        },
+                        innerHTML: "None"
+                    });
+                    statDiv.appendChild(statValue);
+                }
+                break;
+            case "MM Tokens Bought":
+            case "XP Tokens Bought":
+                statDiv.appendChild(generateArtifactContainer(stat === "MM Tokens Bought" ? "TokenMonkeyMoney" : "TokenRogueXp", "preview", 0.75, stat === "MM Tokens Bought" ? stats["MM Tokens Bought"] : stats["XP Tokens Bought"]));
+                break;
+            default:
+                let statValue = createEl('p', {
+                    classList: ['font-gardenia'],
+                    style: {
+                        fontSize: "18px",
+                        backgroundColor: "rgba(0,0,0,0.3)",
+                        padding: "10px",
+                        borderRadius: "10px",
+                    },
+                    innerHTML: value.toLocaleString()
+                });
+                statDiv.appendChild(statValue);
+        }
+    }
+
+    let bossArtifactsDiv = createEl('div', {
+        classList: ['d-flex', 'jc-center', 'w-100'],
+        style: {
+            backgroundColor: "rgba(0,0,0,0.3)",
+            padding: "10px",
+            borderRadius: "10px",
+            gap: "20px"
+        }
+    })
+    if(Object.keys(overallStats.bossArtifactsObtained).length > 0) {
+        overallStatsDiv.appendChild(bossArtifactsDiv);
+    }
+
+    for (let [artifactId, count] of Object.entries(overallStats.bossArtifactsObtained)) {
+        let [artifactName, artifactTier] = artifactId.split('-');
+        let actualArtifactId = null;
+        for (let [artifactId, artifactData] of Object.entries(rogueJSON.artifacts)) {
+            if (artifactData.baseId === artifactName && artifactData.tier == artifactTier) {
+                actualArtifactId = artifactId;
+                break;
+            }
+        }
+        let artifactContainer = generateArtifactContainer(actualArtifactId, "stats", 0.75, count);
+        bossArtifactsDiv.appendChild(artifactContainer);
+    }
+
+    let allArtifactsDiv = collapsableDiv(`${Object.values(overallStats.favoriteArtifacts).reduce((acc, count) => acc + count, 0)} Artifacts Collected${heroOrSkin == null ? " (All Campaigns)" : ""}`, {
+        classList: ['d-flex', 'f-wrap', 'jc-center'],
+        style: {
+            gap: "12px"
+        },
+    });
+    for (let [artifactId, count] of Object.entries(overallStats.favoriteArtifacts)) {
+        let [artifactName, artifactTier] = artifactId.split('-');
+        let actualArtifactId = null;
+        for (let [artifactId, artifactData] of Object.entries(rogueJSON.artifacts)) {
+            if (artifactData.baseId === artifactName && artifactData.tier == artifactTier) {
+                actualArtifactId = artifactId;
+                break;
+            }
+        }
+        let artifactContainer = generateArtifactContainer(actualArtifactId, "stats", 0.75, count);
+        allArtifactsDiv.content.appendChild(artifactContainer);
+    }
+    allArtifactsDiv.header.style.backgroundColor = "rgba(0,0,0,0.5)";
+    overallStatsDiv.appendChild(allArtifactsDiv.container);
+
+    let allTeamMembersDiv = collapsableDiv(`${Object.values(overallStats.favoriteTeamMembers).reduce((acc, count) => acc + count, 0)} Towers Recruited or Upgraded${heroOrSkin == null ? " (All Campaigns)" : ""}`, {
+        classList: ['d-flex', 'f-wrap', 'jc-center'],
+        style: {
+            gap: "12px"
+        },
+    });
+    for (let [teamMemberId, count] of Object.entries(overallStats.favoriteTeamMembers)) {
+        let [tiers, monkeyName] = teamMemberId.split('-');
+        let teamMemberContainer = generateInstaMonkeyContainer({baseId: monkeyName, tiers: tiers.split('')}, 0.75, count);
+        allTeamMembersDiv.content.appendChild(teamMemberContainer);
+    }
+    allTeamMembersDiv.header.style.backgroundColor = "rgba(0,0,0,0.5)";
+    overallStatsDiv.appendChild(allTeamMembersDiv.container);
+}
+
+function getUnlockedSkinsObj() {
+    let skinsUnlocked = rogueSaveData.campaignStats.unlockedSkins;
+    let heroesUnlocked = Object.keys(constants.heroesInOrder).filter(t => rogueSaveData.campaignStats.unlockedHeroes[t])
+    let skinsUnlockedObj = {};
+    Object.values(constants.heroesInOrder).forEach(hero => {
+        hero.skins.forEach(skin => {
+            let skinKey = saveSkintoSkinMap[skin] || skin;
+            skinsUnlockedObj[skin] = (skinsUnlocked.hasOwnProperty(skinKey) && skinsUnlocked[skinKey]) || heroesUnlocked.includes(skinKey);
+        });
+    });
+    return skinsUnlockedObj;
+}
+
+function generateHeroCompletions() {
+    let heroStatsContent = document.getElementById('artifacts-content');
+    heroStatsContent.innerHTML = "";
+
+    let contentDiv = createEl('div', {
+        classList: ['d-flex', 'f-wrap', 'rogue-bg'],
+        style: {
+            borderWidth: "25px"
+        }
+    });
+    heroStatsContent.appendChild(contentDiv);
+
+    let heroStatsHeader = createEl('div', {
+        classList: ['d-flex', 'jc-center', 'ai-center', 'w-100', 'f-wrap'],
+        style: {
+            gap: "10px"
+        }
+    });
+    contentDiv.appendChild(heroStatsHeader);
+
+    let heroesLabel = createEl('p', {
+        classList: ['ta-center', 'black-outline'],
+        style: {
+            fontSize: "28px"
+        },
+        innerHTML: "Rogue Legends Campaign Stats"
+    });
+    heroStatsHeader.appendChild(heroesLabel);
+
+    let heroStatsHeaderLabel = createEl('p', {
+        classList: ['font-gardenia', 'lh-add-quarter'],
+        style: {
+            fontSize: "16px",
+            backgroundColor: "rgba(0,0,0,0.3)",
+            padding: "10px",
+            borderRadius: "10px",
+        },
+        innerHTML: "As of Update 56, the game tracks information about your Rogue campaigns separated by Hero. Only data from after Update 56 is available. By default, stats for skins of the same base hero are combined, but you can toggle to track completion for skins separately. Click a hero to see full stats.",
+    });
+    heroStatsHeader.appendChild(heroStatsHeaderLabel);
+
+    let heroesContainer = createEl('div', {
+        classList: ['d-flex', 'jc-center', 'ai-center', 'fd-column', 'w-100'],
+        style: {
+            gap: "10px"
+        }
+    });
+    heroStatsHeader.appendChild(heroesContainer);
+
+    let rogueHeroStats = rogueSaveData.campaignStats.rogueHeroStats || null;
+
+    if (rogueHeroStats == null || rogueSaveData.syncingWith == null) {
+        let noDataLabel = createEl('p', {
+            classList: ['font-gardenia', 'ta-center'],
+            style: {
+                fontSize: "20px",
+                backgroundColor: "rgba(0,0,0,0.3)",
+                padding: "10px",
+                borderRadius: "10px",
+            },
+            innerHTML: "No Rogue Legends data found. Please log in with your OAK token and play a Rogue Legends campaign to generate stats."
+        });
+        heroStatsHeader.appendChild(noDataLabel);
+
+        if (rogueSaveData.syncingWith != null) {
+            showLoading();
+            rogueSaveData.lastSynced = 0;
+            currentSyncContext = 'firstTimeStats';
+            checkAndSyncRogueData()
+        } else {
+            let loginBtn = generateButton("Sync with OAK", { width: "280px" }, () => {
+                loginModal("stats");
+            })
+            heroStatsHeader.appendChild(loginBtn);
+        }
+        return;
+    }
+
+    let heroesTopDiv = createEl('div', {
+        classList: ['d-flex', 'jc-evenly', 'ai-center', 'f-wrap'],
+        style: {
+            gap: "10px"
+        }
+    });
+    heroesContainer.appendChild(heroesTopDiv);
+
+    let combineToggle = createEl('div', {
+        classList: ['d-flex', 'ai-center'],
+        style: {
+            padding: "4px 0 4px 16px",
+            backgroundColor: "rgba(0,0,0,0.36)",
+            borderRadius: "10px",
+        },
+    });
+    heroesTopDiv.appendChild(combineToggle);
+
+    let combineLabel = createEl('p', { classList: ['black-outline'], style: { fontSize: "20px" }, innerHTML: 'Combine Hero Skins' });
+    combineToggle.appendChild(combineLabel);
+
+    let combineToggleBtn = generateToggle(rogueSaveData.combineHeroStats, (checked) => {
+        rogueSaveData.combineHeroStats = checked;
+        generateHeroCompletions();
+    });
+    combineToggle.appendChild(combineToggleBtn);
+
+    let sortOptions = ["Game Order", "Runs Completed", "Highest Stage", "Total Artifacts"];
+    let sortDropdown = generateDropdown("Sort:", sortOptions, rogueSaveData.heroStatsFilter, (selected) => {
+        rogueSaveData.heroStatsFilter = selected;
+        generateHeroCompletions();
+    });
+    
+
+    let combineAllDiv = createEl('div', {
+        classList: ['d-flex', 'jc-center', 'ai-center', 'pointer'],
+        style: {
+            gap: "10px",
+            backgroundColor: "rgba(0,0,0,0.3)",
+            borderRadius: "10px",
+            padding: "0px 0px 0px 10px",
+        }
+    });
+    heroesTopDiv.appendChild(combineAllDiv);
+
+    combineAllDiv.addEventListener('click', () => {
+        addToBackQueue({callback: generateHeroCompletions});
+        generateHeroStats(null, true);
+    });
+
+    let combineAllLabel = createEl('p', { classList: ['black-outline'], style: { fontSize: "20px" }, innerHTML: 'Combine All Stats' });
+    combineAllDiv.appendChild(combineAllLabel);
+
+    let goBtnImg = createEl('img', {
+        src: "../Assets/UI/ContinueBtn.png",
+        classList: ['of-contain'],
+        style: {
+            width: "35px",
+            height: "35px",
+        }
+    });
+    combineAllDiv.appendChild(goBtnImg);
+
+    heroesTopDiv.appendChild(sortDropdown);
+
+    let heroesDiv = createEl('div', {
+        classList: ['d-flex', 'jc-center', 'ai-center', 'f-wrap'],
+        style: {
+            gap: "10px"
+        }
+    });
+    heroesContainer.appendChild(heroesDiv);
+    
+    let heroStatsBySkinName = {};
+    let heroStatsDataByBaseHero = {};
+    for (let heroData of rogueHeroStats) {
+        heroStatsBySkinName[heroData.skinName.replaceAll(" ", "")] = heroData;
+        if (!heroStatsDataByBaseHero[heroData.heroName]) {
+            heroStatsDataByBaseHero[heroData.heroName] = [];
+        }
+        heroStatsDataByBaseHero[heroData.heroName].push(heroData);
+    }
+
+    let skinsUnlockedObj = getUnlockedSkinsObj();
+
+    let heroDataObjects = [];
+    if (!rogueSaveData.combineHeroStats) {
+        for (let hero of Object.keys(constants.heroesInOrder)) {
+            for (let skin of constants.heroesInOrder[hero].skins) {
+                let skinKey = skin;
+                if (!skinsUnlockedObj[skin]) {
+                    continue;
+                }
+                heroDataObjects.push({
+                    hero: skin,
+                    runsCompleted: heroStatsBySkinName[skinKey] ? heroStatsBySkinName[skinKey].runsCompletedNormal + heroStatsBySkinName[skinKey].runsCompletedChimps : 0,
+                    highestStage: heroStatsBySkinName[skinKey] ? Math.max(heroStatsBySkinName[skinKey].highestStageReachedNormal, heroStatsBySkinName[skinKey].highestStageReachedChimps) : 0,
+                    totalArtifacts: heroStatsBySkinName[skinKey] ? heroStatsBySkinName[skinKey].favouriteArtifacts.reduce((acc, artifact) => acc + artifact.count, 0) : 0,
+                    completed: heroStatsBySkinName[skinKey] ? (heroStatsBySkinName[skinKey].runsCompletedNormal + heroStatsBySkinName[skinKey].runsCompletedChimps) > 0 : false
+                });
+            }
+        }
+    } else {
+        for (let hero of Object.keys(constants.heroesInOrder)) {
+            let heroSkins = heroStatsDataByBaseHero[hero];
+            let combinedRunsCompleted = 0;
+            let combinedHighestStage = 0;
+            let combinedTotalArtifacts = 0;
+            let completed = false;
+            for (let skin of heroSkins) {
+                combinedRunsCompleted += skin.runsCompletedNormal + skin.runsCompletedChimps; 
+                combinedHighestStage = Math.max(combinedHighestStage, skin.highestStageReachedNormal, skin.highestStageReachedChimps);
+                combinedTotalArtifacts += skin.favouriteArtifacts.reduce((acc, artifact) => acc + artifact.count, 0);
+                completed = completed || (skin.runsCompletedNormal + skin.runsCompletedChimps) > 0;
+            }
+            heroDataObjects.push({
+                hero: hero,
+                runsCompleted: combinedRunsCompleted,
+                highestStage: combinedHighestStage,
+                totalArtifacts: combinedTotalArtifacts,
+                completed: completed
+            });
+        }
+    }
+
+    switch (rogueSaveData.heroStatsFilter) {
+        case "Runs Completed":
+            heroDataObjects.sort((a, b) => {
+                if (b.runsCompleted !== a.runsCompleted) {
+                    return b.runsCompleted - a.runsCompleted;
+                }
+                return Object.keys(constants.heroesInOrder).indexOf(constants.heroesInOrder.hasOwnProperty(a.hero) ? a.hero : rogueSaveData.campaignStats.rogueHeroStats.find(h => h.skinName === a.hero)?.heroName) - Object.keys(constants.heroesInOrder).indexOf(constants.heroesInOrder.hasOwnProperty(b.hero) ? b.hero : rogueSaveData.campaignStats.rogueHeroStats.find(h => h.skinName === b.hero)?.heroName);
+            });
+            break;
+        case "Highest Stage":
+            heroDataObjects.sort((a, b) => {
+                if (b.highestStage !== a.highestStage) {
+                    return b.highestStage - a.highestStage;
+                }
+                return Object.keys(constants.heroesInOrder).indexOf(constants.heroesInOrder.hasOwnProperty(a.hero) ? a.hero : rogueSaveData.campaignStats.rogueHeroStats.find(h => h.skinName === a.hero)?.heroName) - Object.keys(constants.heroesInOrder).indexOf(constants.heroesInOrder.hasOwnProperty(b.hero) ? b.hero : rogueSaveData.campaignStats.rogueHeroStats.find(h => h.skinName === b.hero)?.heroName);
+            });
+            break;
+        case "Total Artifacts":
+            heroDataObjects.sort((a, b) => {
+                if (b.totalArtifacts !== a.totalArtifacts) {
+                    return b.totalArtifacts - a.totalArtifacts;
+                }
+                return Object.keys(constants.heroesInOrder).indexOf(constants.heroesInOrder.hasOwnProperty(a.hero) ? a.hero : rogueSaveData.campaignStats.rogueHeroStats.find(h => h.skinName === a.hero)?.heroName) - Object.keys(constants.heroesInOrder).indexOf(constants.heroesInOrder.hasOwnProperty(b.hero) ? b.hero : rogueSaveData.campaignStats.rogueHeroStats.find(h => h.skinName === b.hero)?.heroName);
+            });
+            break;
+    }
+
+    let bar = createEl('div', {
+        classList: ['w-100'],
+        style: {}
+    });
+    heroesTopDiv.appendChild(bar);
+
+    let progressBar = createEl('div', {
+        classList: ['pos-rel'],
+        style: {
+            background: "linear-gradient(180deg,#0F1620 0%,#101922 100%)",
+            height: "35px",
+            margin: "8px 30px",
+            outline: "3px solid black",
+            borderRadius: "3px",
+        }
+    });
+    bar.appendChild(progressBar);
+
+    let rankInfo = {
+        current: heroDataObjects.filter(data => data.completed).length,
+        goal: heroDataObjects.length
+    };
+
+    let rankBarFill = createEl('div', {
+        style: {
+            backgroundImage: `url(../Assets/UI/ProBarFill.png)`,
+            height: "100%",
+            backgroundSize: "contain",
+            position: "absolute",
+            width: `${(rankInfo.current/rankInfo.goal) * 100}%`
+        }
+    });
+    progressBar.appendChild(rankBarFill);
+
+    if (rankInfo.current == rankInfo.goal) {
+        rankBarFill.style.backgroundImage = `url(../Assets/UI/ProBarFillYellow.png)`;
+    }
+
+    let rankBarText = createEl('p', {
+        classList: ['black-outline', 'pos-rel', 'ta-center', 'd-flex', 'ai-center', 'jc-center'],
+        style: {
+            height: "100%",
+            fontSize: "20px",
+        }
+    });
+    rankBarText.innerHTML = `${Math.floor((rankInfo.current/rankInfo.goal) * 100)}% of ${rogueSaveData.combineHeroStats ? "Heroes" : " Hero Skins"} Won a Campaign`;
+    progressBar.appendChild(rankBarText);
+
+    heroDataObjects.forEach(data => {
+        let skinDetailsDiv = createEl('div', {
+            classList: ['d-flex', 'ai-center', 'pointer'],
+            style: {
+                borderRadius: "10px"
+            }
+        });
+        heroesDiv.appendChild(skinDetailsDiv);
+
+        skinDetailsDiv.addEventListener('click', () => {
+            addToBackQueue({callback: generateHeroCompletions});
+            generateHeroStats(saveSkintoSkinMap[data.hero] || data.hero, rogueSaveData.combineHeroStats);
+        })
+
+        let skinImageDiv = createEl('div', {
+            classList: ['pos-rel', 'd-flex', 'jc-center']
+        });
+        skinDetailsDiv.appendChild(skinImageDiv);
+
+        let skinImageSquare = createEl('img', {
+            classList: ['of-contain'],
+            style: {
+                width: "100px",
+                height: "125px"
+            },
+            src: getHeroSquareIcon(data.hero)
+        })
+        if(!skinsUnlockedObj[data.hero]) {
+            skinImageSquare.classList.add("grayscale-100")
+        }
+        if (data.completed) {
+            let completedIcon = createEl('img', {
+                classList: ['of-contain', 'pos-abs'],
+                style: {
+                    width: "45px",
+                    height: "45px",
+                    bottom: "-10px"
+                },
+                src: "../Assets/MedalIcon/Legends1.png"
+            });
+            skinImageDiv.appendChild(completedIcon);
+
+            skinDetailsDiv.style.backgroundColor = "#ffc903";
+        }
+        skinImageDiv.appendChild(skinImageSquare)
+
+        let skinDetailsStats = createEl('div', {
+            classList: ['d-flex', 'fd-column', 'ai-center'],
+            style: {
+                gap: "5px"
+            }
+        })
+        skinDetailsDiv.appendChild(skinDetailsStats)
+
+        let stats = {
+            "Total Artifacts": data.totalArtifacts,
+            "Highest Stage": data.highestStage,
+            "Runs Completed": data.runsCompleted,
+        }
+        for (let [stat, value] of Object.entries(stats)) {
+            let statDiv = createEl('div', {
+                classList: ['d-flex', 'ai-center', 'jc-between', 'fg-1'],
+                style: {
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                    width: "260px",
+                    padding: "0px 0px 0px 10px",
+                    borderRadius: "10px",
+                },
+            });
+            let statName = createEl('p', {
+                classList: ['font-gardenia', 'lh-add-half'],
+                style: {
+                    fontSize: "20px"
+                },
+                innerHTML: stat
+            });
+            let statValue = createEl('p', {
+                classList: ['font-gardenia'],
+                style: {
+                    fontSize: "18px",
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                    padding: "10px",
+                    borderRadius: "10px",
+                },
+                innerHTML: value.toLocaleString()
+            });
+            statDiv.appendChild(statName);
+            statDiv.appendChild(statValue);
+            skinDetailsStats.appendChild(statDiv);
+        }
+    })
+
+    currentSyncContext = 'stats';
     startRogueSync();
 }

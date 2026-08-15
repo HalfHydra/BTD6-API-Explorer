@@ -214,6 +214,13 @@ async function getRogueSaveData(oak_token) {
                 if(!rogueSaveData.hasOwnProperty("oneForAll")) {
                     rogueSaveData.oneForAll = []
                 }
+                if(!rogueSaveData.hasOwnProperty("campaignStats")) {
+                    rogueSaveData.campaignStats = {
+                        "unlockedHeroes": {},
+                        "unlockedSkins": {},
+                        "rogueHeroStats": null
+                    }
+                }
                 Object.values(json["body"]["rogueUnlockedStarterArtifacts"]).forEach(artifact => {
                     if (!rogueSaveData.extractedArtifacts.includes(artifact)) {
                         rogueSaveData.extractedArtifacts.push(artifact);
@@ -221,6 +228,9 @@ async function getRogueSaveData(oak_token) {
                 });
                 rogueSaveData.monkeyManager = json["body"].rogueLegendsStats?.tier5sAcrossAll || []
                 rogueSaveData.oneForAll = json["body"].rogueLegendsStats?.towerTypesPlaced || []
+                rogueSaveData.campaignStats.unlockedHeroes = json["body"].unlockedHeroes || {}
+                rogueSaveData.campaignStats.unlockedSkins = json["body"].unlockedSkins || {}
+                rogueSaveData.campaignStats.rogueHeroStats = json["body"].rogueLegendsStats.rogueHeroStats || []
             }
             expiryCheck = false;
             resolve();

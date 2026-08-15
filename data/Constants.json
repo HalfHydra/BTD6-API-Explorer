@@ -1827,6 +1827,7 @@
                 10,
                 20
             ],
+            "fqName": "Red Sauda",
             "baseHero": "Sauda",
             "added": 48.2
         },
@@ -1940,7 +1941,7 @@
                 0.518
             ],
             "portraits": [1,3,7,10,15,20],
-            "fqName": null,
+            "fqName": "Decryptor Corvus",
             "baseHero": "Corvus",
             "added": 56,
             "transformPortraits": [

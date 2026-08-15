@@ -163,7 +163,7 @@ let saveSkintoSkinMap = {
     "Scientist Gwendolin": "ScientistGwendolin",
     "Biker Bones": "BikerBones",
     "Sentai Captain Churchill": "SentaiCaptainChurchill",
-    "Cyber Quincy": "Cyber Quincy",
+    "Cyber Quincy": "CyberQuincy",
     "Octo Jones": "OctoJones",
     "Sleigh Captain Churchill": "SleighCaptainChurchill",
     "Wolfpack Quincy": "WolfpackQuincy",
@@ -174,8 +174,6 @@ let saveSkintoSkinMap = {
     "OctoJones": "Octo Jones",
     "SleighCaptainChurchill": "Sleigh Captain Churchill",
     "WolfpackQuincy": "Wolfpack Quincy",
-    "DanDMonkeHeMan": "HeMan",
-    "DanDMonkeHeManTransformed": "HeManTransformed"
 }
 
 let saveSkinToSkinMapReversed = Object.entries(saveSkintoSkinMap).reduce((acc, [key, value]) => {
