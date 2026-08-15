@@ -814,24 +814,63 @@ function generateArtifacts() {
     return artifactsDiv;
 }
 
-function generateArtifactContainer(artifact, type) {
+function generateArtifactContainer(artifact, type, size=1, count=null) {
     let artifactData = rogueJSON.artifacts[artifact];
 
-    let artifactDiv = document.createElement('div');
-    artifactDiv.classList.add('artifact-container');
-    if ((rogueSaveData.highlightExtracted || type == "force") && !rogueSaveData.extractedArtifacts.includes(artifact) && !starterArtifacts.includes(artifact) && type != "preview") {
+    let artifactDiv = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'jc-center', 'pos-rel'],
+        style: {
+            width: `${size * 100}px`,
+            height: `${size * 115}px`,
+            margin: "6px 4px"
+        }
+    });
+    if ((rogueSaveData.highlightExtracted || type == "force") && !rogueSaveData.extractedArtifacts.includes(artifact) && !starterArtifacts.includes(artifact) && type != "preview" && type != "stats") {
         artifactDiv.classList.add('half-brightness');
     }
 
-    let artifactImg = document.createElement('img');
-    artifactImg.src = `../Assets/RogueArtifacts/${artifactData.icon}.png`;
-    artifactImg.classList.add('artifact-img');
+    let artifactImg = createEl('img', {
+        classList: ['of-contain', 'pos-abs'],
+        style: {
+            width: `${size * 70}px`,
+            height: `${size * 70}px`,
+        },
+        src: `../Assets/RogueArtifacts/${artifactData.icon}.png`,
+    });
     artifactDiv.appendChild(artifactImg);
 
-    let artifactFrame = document.createElement('img');
-    artifactFrame.src = `../Assets/RogueFrames/${getFrameIconName(artifactData)}.png`;
-    artifactFrame.classList.add('artifact-frame');
+    let artifactFrame = createEl('img', {
+        classList: [],
+        style: {
+            width: `${size * 100}px`,
+        },
+        src: `../Assets/RogueFrames/${getFrameIconName(artifactData)}.png`,
+    });
     artifactDiv.appendChild(artifactFrame);
+    
+    if (count != null) {
+        let countDiv = createEl('div', {
+            classList: ['pos-abs', 'd-flex', 'ai-center', 'jc-center'],
+            style: {
+                width: `${size * 45}px`,
+                height: `${size * 45}px`,
+                top: `${size * -4}px`,
+                left: `${size * -12}px`,
+                backgroundImage: `url('../Assets/UI/NotifyRed.png')`,
+                backgroundSize: "contain"
+            }
+        });
+        artifactDiv.appendChild(countDiv);
+
+        let countText = createEl('p', {
+            classList: ['black-outline'],
+            style: {
+                fontSize: `${size * 26}px`,
+            },
+            innerHTML: `${count || 0}`
+        });
+        countDiv.appendChild(countText);
+    }
 
     if (type != "modal" && type != "preview") {
         addTooltip(artifactDiv, `<p class="artifact-title">${artifactData.title}</p>${artifactData.description}`, {
@@ -1272,23 +1311,63 @@ function generateRogueHeroStarterKits() {
     });
 }
 
-function generateInstaMonkeyContainer(instaMonkey) {
+function generateInstaMonkeyContainer(instaMonkey, size=1, count=null) {
     let tower = instaMonkey.baseId;
     let tiers = instaMonkey.tiers;
 
-    let instaMonkeyTierContainer = document.createElement('div');
-    instaMonkeyTierContainer.classList.add('insta-monkey-tier-container');
-    instaMonkeyTierContainer.style.padding = "10px 0px";
+    let instaMonkeyTierContainer = createEl('div', {
+        classList: ['pos-rel'],
+        style: {
+            padding: "10px 0px",
+            height: `${size * 110}px`,
+            width: `${size * 100}px`,
+        }
+    });
 
-    let instaMonkeyTierImg = document.createElement('img');
-    instaMonkeyTierImg.classList.add('insta-monkey-tier-img');
-    instaMonkeyTierImg.src = getInstaMonkeyIcon(tower,tiers);
+    let instaMonkeyTierImg = createEl('img', {
+        style: {
+            width: `${size * 100}px`,
+            height: `${size * 100}px`,
+            objectFit: "cover",
+        },
+        src: getInstaMonkeyIcon(tower,tiers),
+    });
     instaMonkeyTierContainer.appendChild(instaMonkeyTierImg);
 
-    let instaMonkeyTierText = document.createElement('p');
-    instaMonkeyTierText.classList.add('insta-monkey-tier-text','black-outline');
-    instaMonkeyTierText.innerHTML = `${tiers[0]}-${tiers[1]}-${tiers[2]}`;
+    let instaMonkeyTierText = createEl('p', {
+        classList: ['pos-abs','black-outline', 'ta-center'],
+        style: {
+            width: `${size * 100}px`,
+            bottom: `${size * 4}px`,
+            fontSize: `${size * 24}px`,
+        },
+        innerHTML: `${tiers[0]}-${tiers[1]}-${tiers[2]}`,
+    });
     instaMonkeyTierContainer.appendChild(instaMonkeyTierText);
+
+    if (count != null) {
+        let countDiv = createEl('div', {
+            classList: ['pos-abs', 'd-flex', 'ai-center', 'jc-center'],
+            style: {
+                width: `${size * 45}px`,
+                height: `${size * 45}px`,
+                top: `${size * 4}px`,
+                left: `${size * -12}px`,
+                backgroundImage: `url('../Assets/UI/NotifyRed.png')`,
+                backgroundSize: "contain"
+            }
+        });
+        instaMonkeyTierContainer.appendChild(countDiv);
+
+        let countText = createEl('p', {
+            classList: ['black-outline'],
+            style: {
+                fontSize: `${size * 26}px`,
+            },
+            innerHTML: `${count || 0}`
+        });
+        countDiv.appendChild(countText);
+    }
     
     return instaMonkeyTierContainer;
 }
