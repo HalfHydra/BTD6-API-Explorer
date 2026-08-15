@@ -816,6 +816,26 @@ function generateArtifacts() {
 
 function generateArtifactContainer(artifact, type, size=1, count=null) {
     let artifactData = rogueJSON.artifacts[artifact];
+    switch (artifact) {
+        case "TokenMonkeyMoney":
+            artifactData = {
+                "tier": 0,
+                "nameLocKey": "TokenMonkeyMoney",
+                "descriptionLocKey": "TokenMonkeyMoneyDescription",
+                "icon": "ArtifactTokenMonkeyMoney",
+                "rarityFrameType": "Token",
+            }
+            break;
+        case "TokenRogueXp":
+            artifactData = {
+                "tier": 0,
+                "nameLocKey": "TokenRogueXp",
+                "descriptionLocKey": "TokenRogueXpDescription",
+                "icon": "ArtifactTokenRogueXp",
+                "rarityFrameType": "Token",
+            }
+            break;
+    }
 
     let artifactDiv = createEl('div', {
         classList: ['d-flex', 'ai-center', 'jc-center', 'pos-rel'],
