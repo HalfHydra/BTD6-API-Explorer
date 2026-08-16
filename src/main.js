@@ -3710,7 +3710,7 @@ function generateInstaMonkeysProgress() {
     let instaMonkeyProgressText = document.createElement('p');
     instaMonkeyProgressText.id = "insta-total-counter";
     instaMonkeyProgressText.classList.add('insta-monkey-progress-text','insta-total-counter','black-outline');
-    instaMonkeyProgressText.innerHTML = `${Object.values(processedInstaData.TowerTierTotals).flatMap(Object.values).reduce((sum, n) => sum + n, 0)}/${constants.totalInstaMonkeys}`;
+    instaMonkeyProgressText.innerHTML = `${Object.values(processedInstaData.TowerTierTotals).flatMap(Object.values).reduce((sum, n) => sum + n, 0)}/${(Object.keys(constants.towersInOrder).length * 64)}`;
     instaMonkeysHeaderBar.appendChild(instaMonkeyProgressText);
 
     let instaMonkeysExtras = document.createElement('div');
@@ -4708,7 +4708,7 @@ function generateCollectionEventTowerInfo(tower) {
 
     let instaMonkeyProgressText = document.createElement('p');
     instaMonkeyProgressText.classList.add('insta-monkey-progress-text','black-outline');
-    instaMonkeyProgressText.innerHTML = tower == "All" ? `${Object.values(processedInstaData.TowerTierTotals).flatMap(Object.values).reduce((sum, n) => sum + n, 0)}/${constants.totalInstaMonkeys}` : `${processedInstaData.TowerTierTotals.hasOwnProperty(tower) ? Object.values(processedInstaData.TowerTierTotals[tower]).reduce((a, b) => a + b, 0) : 0}/64`;
+    instaMonkeyProgressText.innerHTML = tower == "All" ? `${Object.values(processedInstaData.TowerTierTotals).flatMap(Object.values).reduce((sum, n) => sum + n, 0)}/${(Object.keys(constants.towersInOrder).length * 64)}` : `${processedInstaData.TowerTierTotals.hasOwnProperty(tower) ? Object.values(processedInstaData.TowerTierTotals[tower]).reduce((a, b) => a + b, 0) : 0}/64`;
     instaMonkeyTierProgress.appendChild(instaMonkeyProgressText);
 
     let instaMonkeyNewChance = document.createElement('div');
@@ -4879,7 +4879,7 @@ function onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, towe
                 processedInstaData.TowerMissingByTier[towerType][key].push(tiers);
                 delete btd6usersave.instaTowers[towerType][tiers];
                 processedInstaData.TowerTierTotals[towerType][key] -= 1;
-                document.getElementById('insta-total-counter').innerHTML = `${Object.values(processedInstaData.TowerTierTotals).flatMap(Object.values).reduce((sum, n) => sum + n, 0)}/${constants.totalInstaMonkeys}`;
+                document.getElementById('insta-total-counter').innerHTML = `${Object.values(processedInstaData.TowerTierTotals).flatMap(Object.values).reduce((sum, n) => sum + n, 0)}/${(Object.keys(constants.towersInOrder).length * 64)}`;
                 calculateInstaBorder(towerType);
                 generateCollectionEventTowerInfo(towerType);
             });
@@ -4890,7 +4890,7 @@ function onSelectCollectionEventMissingToggle(instaMonkeysMissingContainer, towe
                 processedInstaData.TowerMissingByTier[towerType][key] = processedInstaData.TowerMissingByTier[towerType][key].filter(value => value != tiers);
                 btd6usersave.instaTowers[towerType][tiers] = 0;
                 processedInstaData.TowerTierTotals[towerType][key] += 1;
-                document.getElementById('insta-total-counter').innerHTML = `${Object.values(processedInstaData.TowerTierTotals).flatMap(Object.values).reduce((sum, n) => sum + n, 0)}/${constants.totalInstaMonkeys}`;
+                document.getElementById('insta-total-counter').innerHTML = `${Object.values(processedInstaData.TowerTierTotals).flatMap(Object.values).reduce((sum, n) => sum + n, 0)}/${(Object.keys(constants.towersInOrder).length * 64)}`;
                 calculateInstaBorder(towerType);
                 generateCollectionEventTowerInfo(towerType);
             })

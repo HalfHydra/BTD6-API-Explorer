@@ -822,7 +822,7 @@ async function openProfile(source, profile, callback){
     statsPublic["Transforming Tonics Used"] = profile.bloonsPopped["transformingTonicsUsed"];
     statsPublic["Most Experienced Monkey"] = getLocValue(profile["mostExperiencedMonkey"]);
     statsPublic["Most Experienced Monkey XP"] = 0;
-    statsPublic["Insta Monkey Collection"] = `${profile.gameplay["instaMonkeyCollection"]}/${constants.totalInstaMonkeys}`;
+    statsPublic["Insta Monkey Collection"] = `${profile.gameplay["instaMonkeyCollection"]}/${(Object.keys(constants.towersInOrder).length * 64)}`;
     statsPublic["Collection Chests Opened"] = profile.gameplay["collectionChestsOpened"];
     statsPublic["Golden Bloons Popped"] = profile.bloonsPopped["goldenBloonsPopped"];
     statsPublic["Monkey Teams Wins"] = profile.gameplay["monkeyTeamsWins"];
