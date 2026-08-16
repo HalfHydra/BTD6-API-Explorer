@@ -218,7 +218,7 @@
     </div>
     <div class="header">
         <div class="header-div">
-            <h1 class="title">Rogue Legends Artifacts</h1>
+            <h1 class="title">Rogue Legends Tools</h1>
         </div>
         <div class="header-container"></div>
     </div>
@@ -246,6 +246,8 @@
     document.getElementById("loading").style.transform = "scale(0)";
     document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
     addEventListener("resize", (event) => { document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`); })
-    generateRogueSelectors();
+    fetchConstants().then(async () => {
+        generateRogueSelectors();
+    });
 </script>
 </html>
