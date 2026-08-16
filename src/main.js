@@ -463,12 +463,15 @@ function generateInstaData(){
             }
         })
 
-        if (towerTierTotals[tower]["4"] == constants.instaTiers["4"].length && towerTierTotals[tower]["3"] == constants.instaTiers["3"].length && towerTierTotals[tower]["2"] == constants.instaTiers["2"].length && towerTierTotals[tower]["1"] == constants.instaTiers["1"].length){
-            if (towerTierTotals[tower]["5"] == constants.instaTiers["5"].length) {
-                towerBorders[tower] = "Black";
-                continue;
-            }
+        let hasTier = (tier) => towerTierTotals[tower][tier] === constants.instaTiers[tier].length;
+        if (hasTier("1") && hasTier("2") && hasTier("3") && hasTier("4") && hasTier("5")) {
+            towerBorders[tower] = "Black";
+        } else if (hasTier("1") && hasTier("2") && hasTier("3") && hasTier("4")) {
             towerBorders[tower] = "Gold";
+        } else if (hasTier("1") && hasTier("2") && hasTier("3")) {
+            towerBorders[tower] = "Silver";
+        } else if (hasTier("1") && hasTier("2")) {
+            towerBorders[tower] = "Bronze";
         } else {
             towerBorders[tower] = "";
         }
