@@ -202,6 +202,50 @@ function fetchLocKeys() {
     })
 }
 
+function getLocValue(key){
+    let locJSONOverrides = {
+        "Directed Spikes": "Smart Spikes",
+        "Directed Spikes Description": "Smart Spikes Description",
+        "CircusGwendolinSkinName": "HarlegwenGwendolinSkinName",
+        "CircusGwendolinSkinDescription": "HarlegwenGwendolinSkinDescription",
+        "OctoJonesSkinName": "OctoJonesStrikerJonesSkinName",
+        "OctoJonesSkinDescription": "OctoJonesStrikerJonesSkinDescription",
+        "MoltenObynSkinName": "ObynMountainGuardianSkinName",
+        "MoltenObynSkinDescription": "ObynMountainGuardianSkinDescription",
+        "SushiBentoSkinName": "SushiBentoBenjaminSkinName",
+        "SushiBentoSkinDescription": "SushiBentoBenjaminSkinDescription",
+        "KaijuPatSkinName": "KaijuPatFustySkinName",
+        "KaijuPatSkinDescription": "KaijuPatFustySkinDescription",
+        "GalaxiliSkinName": "GalaxiliEziliSkinName",
+        "GalaxiliSkinDescription": "GalaxiliEziliSkinDescription",
+        "VoidoraSkinName": "VoidoraAdoraSkinName",
+        "VoidoraSkinDescription": "VoidoraAdoraSkinDescription",
+        "VikingSaudaSkinName": "VikingSaudaSaudaSkinName",
+        "VikingSaudaSkinDescription": "VikingSaudaSaudaSkinDescription",
+        "JiangshiSaudaSkinName": "JiangshiSaudaSaudaSkinName",
+        "JiangshiSaudaSkinDescription": "JiangshiSaudaSaudaSkinDescription",
+        "DreadPirateBrickellSkinName": "DreadPirateBrickellAdmiralBrickellSkinName",
+        "DreadPirateBrickellSkinDescription": "DreadPirateBrickellAdmiralBrickellSkinDescription",
+        "LifeguardBrickellSkinName": "LifeguardBrickellAdmiralBrickellSkinName",
+        "LifeguardBrickellSkinDescription": "LifeguardBrickellAdmiralBrickellSkinDescription",
+        "PsimbalsSkinName": "PsimbalsPsiSkinName",
+        "PsimbalsSkinDescription": "PsimbalsPsiSkinDescription",
+        "GeraldoGentlemanGadgeteerSkinName": "GentlemonkeyGadgeteerGeraldoSkinName",
+        "GeraldoGentlemanGadgeteerSkinDescription": "GentlemonkeyGadgeteerGeraldoSkinDescription",
+        "Mode Easy": "Easy",
+        "Mode Medium": "Medium",
+        "Mode Hard": "Hard",
+        "Mode Impoppable": "Impoppable",
+        "Mode Sandbox": "Sandbox",
+        "RosaliaTinkerfairySkinName": "TinkerfairyRosaliaSkinName",
+        "RosaliaTinkerfairySkinDescription": "TinkerfairyRosaliaSkinDescription",
+        "AdoraSheRaSkinDescription": "SheRaAdoraSkinDescription",
+        "AdoraSheRaSkinName": "SheRaSkinName",
+    }
+    if(locJSONOverrides[key]) return locJSON[locJSONOverrides[key]];
+    return locJSON[key] ? locJSON[key] : key;
+}
+
 async function fetchRogueDependencies() {
     await fetchLocKeys();
     return fetch('./data/rogueData.json')

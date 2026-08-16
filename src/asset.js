@@ -101,46 +101,6 @@ let heroDescKeyOverrides = {
     "DanDMonkeHeMan": "HeMan"
 }
 
-let locJSONOverrides = {
-    "Directed Spikes": "Smart Spikes",
-    "Directed Spikes Description": "Smart Spikes Description",
-    "CircusGwendolinSkinName": "HarlegwenGwendolinSkinName",
-    "CircusGwendolinSkinDescription": "HarlegwenGwendolinSkinDescription",
-    "OctoJonesSkinName": "OctoJonesStrikerJonesSkinName",
-    "OctoJonesSkinDescription": "OctoJonesStrikerJonesSkinDescription",
-    "MoltenObynSkinName": "ObynMountainGuardianSkinName",
-    "MoltenObynSkinDescription": "ObynMountainGuardianSkinDescription",
-    "SushiBentoSkinName": "SushiBentoBenjaminSkinName",
-    "SushiBentoSkinDescription": "SushiBentoBenjaminSkinDescription",
-    "KaijuPatSkinName": "KaijuPatFustySkinName",
-    "KaijuPatSkinDescription": "KaijuPatFustySkinDescription",
-    "GalaxiliSkinName": "GalaxiliEziliSkinName",
-    "GalaxiliSkinDescription": "GalaxiliEziliSkinDescription",
-    "VoidoraSkinName": "VoidoraAdoraSkinName",
-    "VoidoraSkinDescription": "VoidoraAdoraSkinDescription",
-    "VikingSaudaSkinName": "VikingSaudaSaudaSkinName",
-    "VikingSaudaSkinDescription": "VikingSaudaSaudaSkinDescription",
-    "JiangshiSaudaSkinName": "JiangshiSaudaSaudaSkinName",
-    "JiangshiSaudaSkinDescription": "JiangshiSaudaSaudaSkinDescription",
-    "DreadPirateBrickellSkinName": "DreadPirateBrickellAdmiralBrickellSkinName",
-    "DreadPirateBrickellSkinDescription": "DreadPirateBrickellAdmiralBrickellSkinDescription",
-    "LifeguardBrickellSkinName": "LifeguardBrickellAdmiralBrickellSkinName",
-    "LifeguardBrickellSkinDescription": "LifeguardBrickellAdmiralBrickellSkinDescription",
-    "PsimbalsSkinName": "PsimbalsPsiSkinName",
-    "PsimbalsSkinDescription": "PsimbalsPsiSkinDescription",
-    "GeraldoGentlemanGadgeteerSkinName": "GentlemonkeyGadgeteerGeraldoSkinName",
-    "GeraldoGentlemanGadgeteerSkinDescription": "GentlemonkeyGadgeteerGeraldoSkinDescription",
-    "Mode Easy": "Easy",
-    "Mode Medium": "Medium",
-    "Mode Hard": "Hard",
-    "Mode Impoppable": "Impoppable",
-    "Mode Sandbox": "Sandbox",
-    "RosaliaTinkerfairySkinName": "TinkerfairyRosaliaSkinName",
-    "RosaliaTinkerfairySkinDescription": "TinkerfairyRosaliaSkinDescription",
-    "AdoraSheRaSkinDescription": "SheRaAdoraSkinDescription",
-    "AdoraSheRaSkinName": "SheRaSkinName",
-}
-
 let medalMap = {
     "Easy": "Bronze",
     "PrimaryOnly": "Bronze01",
@@ -521,11 +481,6 @@ function getProfileBanner(profileData) {
 
 function getCustomMapIcon(id) {
     return knownProblematicMaps.includes(id) ? `Assets/CustomMapIcon/${id}.jpg` : `https://data.ninjakiwi.com/btd6/maps/map/${id}/preview`;
-}
-
-function getLocValue(key){
-    if(locJSONOverrides[key]) return locJSON[locJSONOverrides[key]];
-    return locJSON[key] ? locJSON[key] : key;
 }
 
 function getCollectionEventSkinIcon(eventData) {
