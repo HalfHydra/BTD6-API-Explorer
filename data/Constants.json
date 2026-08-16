@@ -6058,12 +6058,13 @@
         "CtGlobalPlayerBlueDiamondMedal": "CT Global - Top 25",
         "Legends1": "Legends - Rogue Legends Feats",
         "SocialSeasonsChampionMedal": "Season Champion - Medal for completing all goals in a Social Season Event.",
-        "SocialSeasonsUltimate1Medal": "Perfect Team score in Social Season 1",
-        "SocialSeasonsUltimate2Medal": "Perfect Team score in Social Season 2",
         "SocialSeasonsTier4Medal": "Season Tier 4 - Medal for reaching Tier 4 in Social Seasons Event",
         "SocialSeasonsTier3Medal": "Season Tier 3 - Medal for reaching Tier 3 in Social Seasons Event",
         "SocialSeasonsTier2Medal": "Season Tier 2 - Medal for reaching Tier 2 in Social Seasons Event",
-        "SocialSeasonsTier1Medal": "Season Tier 1 - Medal for reaching Tier 1 in Social Seasons Event"
+        "SocialSeasonsTier1Medal": "Season Tier 1 - Medal for reaching Tier 1 in Social Seasons Event",
+        "SocialSeasonsUltimate1Medal": "Perfect Team score in Social Season 1",
+        "SocialSeasonsUltimate2Medal": "Perfect Team score in Social Season 2",
+        "SocialSeasonsUltimate3Medal": "Perfect Team score in Social Season 3"
     },
     "lives": {
         "Easy": 200,
