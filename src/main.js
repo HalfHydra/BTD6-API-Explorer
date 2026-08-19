@@ -5948,7 +5948,7 @@ async function generateEvents(){
                 eventDiv.addEventListener('click', () => {
                     resetScroll();
                     addToBackQueue({ source: "events", destination: "featured" });
-                    generateInstaSchedule(true, event.id);
+                    generateInstaSchedule((new Date() > new Date(event.end)), event.id);
                     document.getElementById('events-content').style.display = "none";
                     document.getElementById('featured-content').style.display = "flex";
                 });
