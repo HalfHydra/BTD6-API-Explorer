@@ -479,6 +479,22 @@ function getProfileBanner(profileData) {
     return (bannerIndex <= constants.profileBanners) ? `Assets/ProfileBanner/${profileData.banner}.png` : profileData.bannerURL
 }
 
+function getTeamFrame(teamData) {
+    if(teamData.frame == 0) return "Assets/TeamIcon/TeamsEmblemFrame1.png";
+    let frameIndex = parseInt(teamData.frame.replace(/\D/g,''));
+    frameIndex = 99; //force API for now
+    if (teamData.frame == "" || isNaN(frameIndex)) return "Assets/TeamIcon/TeamsEmblemFrame1.png";
+    return (frameIndex <= constants.teamFrames) ? `Assets/TeamIcon/${teamData.frame}.png` : teamData.frameURL
+}
+
+function getTeamIcon(teamData) {
+    if(teamData.icon == 0) return "Assets/TeamIcon/TeamsEmblemIcon1.png";
+    let iconIndex = parseInt(teamData.icon.replace(/\D/g,''));
+    iconIndex = 99; // force API for now
+    if (teamData.icon == "" || isNaN(iconIndex)) return "Assets/TeamIcon/TeamsEmblemIcon1.png";
+    return (iconIndex <= constants.teamIcons) ? `Assets/TeamIcon/${teamData.icon}.png` : teamData.iconURL
+}
+
 function getCustomMapIcon(id) {
     return knownProblematicMaps.includes(id) ? `Assets/CustomMapIcon/${id}.jpg` : `https://data.ninjakiwi.com/btd6/maps/map/${id}/preview`;
 }

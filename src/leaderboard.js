@@ -1060,8 +1060,16 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                                     let userProfile = await getUserProfile(entry.profile);
                                     if (userProfile != null) {
                                         if (userProfile.hasOwnProperty('owner')) {
-                                            leaderboardEntryFrame.src = userProfile.frameURL;
-                                            leaderboardEntryEmblem.src = userProfile.iconURL;
+                                            
+                                            let teamFrame = getTeamFrame(userProfile);
+                                            let teamIcon = getTeamIcon(userProfile);
+                                            leaderboardEntryFrame.src = teamFrame;
+                                            leaderboardEntryEmblem.src = teamIcon;
+                                            if (teamFrame.includes("TeamIcon")) {
+                                                leaderboardEntryEmblem.style.maxWidth = "70%";
+                                                leaderboardEntryEmblem.style.maxHeight = "70%";
+                                                leaderboardEntryIcon.classList.add('d-flex', 'jc-center', 'ai-center');
+                                            }
                                             leaderboardEntryDiv.style.backgroundImage = `url(${getProfileBanner(userProfile)})`;
                                         } else {
                                             leaderboardEntryIcon.src = getProfileAvatar(userProfile);
@@ -1431,9 +1439,14 @@ function openTeamModalPopout(groupUrl) {
 
                     ref.teamProfile = profileData;
 
-                    // currently broken
-                    // if (profileData.frameURL) ref.frameEl.src = profileData.frameURL;
-                    // if (profileData.iconURL) ref.emblemEl.src = profileData.iconURL;
+                    let teamFrame = getTeamFrame(profileData);
+                    let teamIcon = getTeamIcon(profileData);
+                    if (profileData.frameURL) ref.frameEl.src = teamFrame;
+                    if (profileData.iconURL) ref.emblemEl.src = teamIcon;
+                    if (teamFrame.includes("TeamIcon")) {
+                        ref.emblemEl.style.width = "70%";
+                        ref.iconWrap.classList.add('d-flex', 'jc-center');
+                    }
                     if (profileData.numMembers != null) ref.membersSpan.textContent = profileData.numMembers;
                     if (profileData.status) {
                         switch (profileData.status) {

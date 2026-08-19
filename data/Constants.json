@@ -6,6 +6,8 @@
     "profileAvatars": 137,
     "profileBanners": 66,
     "teamsBanners": 19,
+    "teamIcons": 33,
+    "teamFrames": 27,
     "bossesInOrder": ["Bloonarius", "Lych", "Vortex", "Dreadbloon", "Phayze", "Blastapopoulos", "Diamondback"],
     "limitedTimeEvents": {
         "Corntada 3": {
