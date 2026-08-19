@@ -99,7 +99,7 @@ function processCollectionEvent(eventData) {
 
   let maxPages = Math.ceil((eventData.end - eventData.start) / (secondsPerPage * 1000));
 
-  const featuredMonkeyTypes = ["Alchemist","BananaFarm","BombShooter","BoomerangMonkey","DartMonkey","Druid","GlueGunner","HeliPilot","IceMonkey","MonkeyAce","MonkeyBuccaneer","MonkeySub","MonkeyVillage","NinjaMonkey","SniperMonkey","SpikeFactory","SuperMonkey","TackShooter","WizardMonkey","MortarMonkey","EngineerMonkey","DartlingGunner","BeastHandler","Mermonkey","Desperado"]
+  const featuredMonkeyTypes = constants.collection.towerOrder;
 
   const shuffledMonkeyTypes = ShuffleSeeded(seed, featuredMonkeyTypes);
 
