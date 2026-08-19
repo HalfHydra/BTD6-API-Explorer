@@ -852,7 +852,7 @@ function generateVersionInfo(){
     versionDiv?.appendChild(toolVersionText);
 }
 
-let headerTabs = ['home', 'profile', 'events', 'leaderboards', 'rounds', 'extras'];
+let headerTabs = ['home', 'profile', 'events', 'leaderboards', 'rounds', 'legends'];
 function generateHeaderTabs(){
     const headerContainer = document.querySelector('.header-container');
 
@@ -895,6 +895,9 @@ function changeTab(tab) {
     }
     changeTitle("Bloons TD 6 API Explorer")
     switch(tab){
+        case 'home':
+            generateFrontPage();
+            break;
         case 'profile':
             generateProgress();
             break;
@@ -911,7 +914,7 @@ function changeTab(tab) {
             changeTitle("Roundsets Explorer")
             generateRoundsets();
             break;
-        case 'extras':
+        case 'legends':
             generateExtrasPage();
             break;
     }
@@ -8923,7 +8926,7 @@ async function showMapModel(source, metadata) {
 }
 
 function generateExtrasPage() {
-    let extrasContent = document.getElementById('extras-content');
+    let extrasContent = document.getElementById('legends-content');
     extrasContent.innerHTML = "";
 
     changeTitle("Bloons TD 6 API Explorer")
@@ -8939,12 +8942,12 @@ function generateExtrasPage() {
     let selectors = [
         // 'Collection Event Odds',
         // 'Export Data', 
-        'Rogue Legends Artifacts',
-        'Challenge & Map Browser',
-        'Settings',
+        'Rogue Legends',
+        // 'Challenge & Map Browser',
+        // 'Settings',
         // 'Send Feedback',
-        "Use Code 'HalfHydra' <br>in the BTD6 Shop!",
-        "Discord Server"
+        // "Use Code 'HalfHydra' <br>in the BTD6 Shop!",
+        // "Discord Server"
     ];
 
     if (!loggedIn) {
@@ -8956,7 +8959,7 @@ function generateExtrasPage() {
         selectorDiv.classList.add('selector-div', 'blueprint-bg');
         selectorDiv.addEventListener('click', () => {
             extrasContent.style.display = "none";
-            document.getElementById('extras-content').style.display = "flex"
+            document.getElementById('legends-content').style.display = "flex"
             changeExtrasTab(selector);
         })
         selectorsDiv.appendChild(selectorDiv);
@@ -8987,9 +8990,9 @@ function generateExtrasPage() {
             case "Use Code 'HalfHydra' <br>in the BTD6 Shop!":
                 selectorImg.src = '../Assets/UI/CreatorSupportBtn.png';
                 break;
-            case "Rogue Legends Artifacts":
+            case "Rogue Legends":
                 selectorDiv.classList.add("rogue-bg")
-                selectorImg.src = '../Assets/UI/RogueBtn.png';
+                selectorImg.src = '../Assets/UI/RogueLegendBtn.png';
                 break;
             case "Challenge & Map Browser":
                 selectorImg.src = '../Assets/UI/PatchNotesMonkeyIcon.png';
@@ -9040,11 +9043,10 @@ function changeExtrasTab(selected){
             addToBackQueue({ callback: generateExtrasPage });
             generateSettings();
             break;
-        case "Rogue Legends Artifacts":
-            changeTitle("Rogue Legends Artifacts")
-            addToBackQueue({source: "extras", destination: "rogue", callback: generateExtrasPage });
+        case "Rogue Legends":
+            addToBackQueue({source: "legends", destination: "rogue", callback: generateExtrasPage });
             generateRogueSelectors();
-            document.getElementById('extras-content').style.display = "none";
+            document.getElementById('legends-content').style.display = "none";
             document.getElementById('rogue-content').style.display = "flex";
             break;
         case "Challenge & Map Browser":
