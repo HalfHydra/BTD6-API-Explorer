@@ -6125,5 +6125,10 @@
         "Intermediate": 2,
         "Advanced": 3,
         "Expert": 4
+    },
+    "knownIssues": {
+        "Skywarden is missing": "Skywarden is currently missing from some places in the Open Data API including Insta Monkeys. This is a known issue and has been reported.",
+        "Some Events may be missing": "Events can sometimes be missing after an update is made to the game, including minor versions. This is usually fixed within a few days.",
+        "\"Cannot load public profile\"": "When BTD6 gets a major update, the Open Data API can break for a few days with some information being inaccessible. This will be fixed when the API is updated to support the new content."
     }
 }

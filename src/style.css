@@ -4768,7 +4768,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin: 0 70px;
+    margin: 0 50px;
     flex-wrap: wrap;
 }
 .site-button-div {
@@ -5789,6 +5789,10 @@ input[type="checkbox"] {
 
 .ac-start {
     align-content: start;
+}
+
+.ac-center {
+    align-content: center;
 }
 
 .ta-center {

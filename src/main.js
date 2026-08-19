@@ -74,13 +74,14 @@ let isHeroTransformed = false;
 
 let imageScroll = [
     {
-        "title": "New Site Update!",
-        "text": `Site Update 2.8.5:<br>
-        - Rogue Feat Tracking<br>
+        "title": "Recent Site Updates",
+        "text": `
+        - Rogue Campaign Stats<br>
+        - Rogue Feat Auto Tracking<br>
         - Odyssey Events<br>
-        <br>
-        Recent Updates:<br>
         - Powers Pro Tracking<br>
+        - Recent Events List<br>
+        - Collection Event Schedules<br>
         - Contested Territory Map<br>
         <br>
         Try the <a href="https://btd6store.ninjakiwi.com/?code=halfhydra" target="_blank" style="color: white;">Official BTD6 Webshop</a>!<br>
@@ -111,7 +112,7 @@ let imageScroll = [
     },
     {
         "title": "View Leaderboards!",
-        "text": "- View event leaderboards<br>- Up to 1000 entries<br>- View extra score information<br>- View user profiles<br>- Contested Territory groups",
+        "text": "- View event leaderboards<br>- Up to 1000 player entries<br>- View extra score information<br>- View user profiles<br>- Contested Territory groups",
         "image": "/LandingScroll/Leaderboards"
     },
     {
@@ -542,6 +543,7 @@ const content = document.querySelector('.content');
 readLocalStorage()
 function generateFrontPage(){
     const frontPage = document.getElementById('home-content');
+    frontPage.innerHTML = '';
 
     frontPage.appendChild(createEl('p', { classList: ['disclaimer-text', 'font-gardenia'], style: {
         fontSize: "18px",
@@ -549,7 +551,7 @@ function generateFrontPage(){
         lineHeight: "1.5",
     }, innerHTML: 'A fanmade viewer for the Ninja Kiwi <a href="https://data.ninjakiwi.com/" target="_blank" style="color: white;">Open Data API</a> plus other features.<br>This site is not affiliated with Ninja Kiwi. All game assets belong to Ninja Kiwi.' }));
 
-    frontPage.appendChild(createEl('p', { classList: ['site-info-header', 'black-outline'], innerHTML: 'Site Features and Information' }));
+    // frontPage.appendChild(createEl('p', { classList: ['site-info-header', 'black-outline'], innerHTML: 'Site Features and Information' }));
 
     let siteImageScroll = createEl('div', { classList: ['d-flex', 'jc-between'], style: {width: "700px", height: "400px", paddingTop: "20px"}});
     frontPage.appendChild(siteImageScroll);
@@ -608,11 +610,11 @@ function generateFrontPage(){
 
     let faqButton = document.createElement('p');
     faqButton.classList.add('where-button','black-outline')
-    faqButton.innerHTML = 'FAQ';
+    faqButton.innerHTML = 'FAQ & Site Info';
 
     let knownIssuesButton = document.createElement('p');
     knownIssuesButton.classList.add('where-button','black-outline');
-    knownIssuesButton.innerHTML = 'Known Issues';
+    knownIssuesButton.innerHTML = 'Extras';
 
     let changelogButton = document.createElement('p');
     changelogButton.classList.add('where-button','black-outline');
@@ -623,10 +625,11 @@ function generateFrontPage(){
 
     let FAQDiv = createEl('div', {
         id: 'faq-div',
-        classList: ['faq-div','f-wrap','jc-center'],
+        classList: ['changelog-div','f-wrap','jc-center'],
         style: {
-            gap: "1rem",
             display: 'none',
+            gap: "10px",
+            width: "700px"
         }
     });
     frontPage.appendChild(FAQDiv);
@@ -636,6 +639,8 @@ function generateFrontPage(){
         classList: ['known-issues-div','f-wrap','jc-center'],
         style: {
             display: 'none',
+            gap: "10px",
+            width: "700px"
         }
     });
     frontPage.appendChild(knownIssuesDiv);
@@ -646,81 +651,10 @@ function generateFrontPage(){
         style: {
             gap: "1rem",
             display: "none",
+            width: "700px"
         }
     });
     frontPage.appendChild(changelogDiv);
-
-    let StandaloneSiteText = document.createElement('p');
-    StandaloneSiteText.classList.add('site-info-header', 'sites-text', 'black-outline');
-    StandaloneSiteText.innerHTML = 'Standalone Sites';
-    frontPage.appendChild(StandaloneSiteText);
-
-    let sitesText = document.createElement('p');
-    sitesText.classList.add('where-text');
-    sitesText.innerHTML = 'Separate pages with just one module of this site:';
-    frontPage.appendChild(sitesText);
-
-    let StandaloneSiteDiv = document.createElement('div');
-    StandaloneSiteDiv.classList.add('site-access-div');
-    frontPage.appendChild(StandaloneSiteDiv);
-
-    let siteButtons = document.createElement('div');
-    siteButtons.classList.add('standalone-site-buttons');
-    StandaloneSiteDiv.appendChild(siteButtons);
-
-    let standaloneSites = {
-        "CT Map": {
-            "link": "https://btd6apiexplorer.github.io/ct",
-            "text": "Current CT Map",
-            "icon": "CTSiteBtn",
-            "background": "CTMapBG"
-        },
-        "Leaderboards": {
-            "link": "https://btd6apiexplorer.github.io/leaderboards",
-            "text": "Leaderboards",
-            "icon": "LeaderboardSiteBtn",
-            "background": "TrophyStoreTiledBG"
-        },
-        "Roundsets": {
-            "link": "https://btd6apiexplorer.github.io/rounds",
-            "text": "Roundsets",
-            "icon": "DefaultRoundSetIcon",
-            "background": "BloonsBG"
-        },
-        "Rogue Artifacts": {
-            "link": "https://btd6apiexplorer.github.io/rogue",
-            "text": "Rogue Artifacts",
-            "icon": "RogueSiteBtn",
-            "background": "RogueBG"
-        },
-        "Insta Tracker": {
-            "link": "https://btd6apiexplorer.github.io/insta",
-            "text": "Insta Tracker",
-            "icon": "InstaSiteBtn",
-            "background": "CollectionHelp2"
-        }
-    }
-
-    Object.entries(standaloneSites).forEach(([site, data]) => {
-        let siteButtonDiv = document.createElement('div');
-        siteButtonDiv.classList.add('site-button-div', 'pointer');
-        siteButtonDiv.style.backgroundImage = `url(Assets/UI/${data.background}.png)`;
-        siteButtons.appendChild(siteButtonDiv);
-        siteButtonDiv.addEventListener('click', () => {
-            window.location.href = data.link;
-        })
-    
-        let siteButtonIcon = document.createElement('img');
-        siteButtonIcon.classList.add('site-button-icon');
-        siteButtonIcon.src = `./Assets/UI/${data.icon}.png`;
-        siteButtonDiv.appendChild(siteButtonIcon);
-    
-        let profileName = document.createElement('p');
-        profileName.classList.add('profile-name','readability-bg','black-outline');
-        profileName.style.marginLeft = '0';
-        profileName.innerHTML = data.text;
-        siteButtonDiv.appendChild(profileName);
-    })
 
     faqButton.id = 'faq-button';
     faqButton.addEventListener('click', () => {
@@ -737,71 +671,59 @@ function generateFrontPage(){
         hideAllButOne('changelog')
     })
 
-    let faqHeader = document.createElement('p');
-    faqHeader.classList.add('oak-instructions-header','black-outline');
-    faqHeader.innerHTML = 'Frequently Asked Questions';
-    FAQDiv.appendChild(faqHeader);
+    let knownIssuesCollapse = collapsableDiv('Known Issues', {
+        classList: ['d-flex', 'fd-column'],
+        style: {
+            gap: "10px",
+            padding: "10px"
+        }
+    });
+    FAQDiv.appendChild(knownIssuesCollapse.container);
+
+    for (let [version, desc] of Object.entries(constants.knownIssues)){
+        let container = collapsableDiv(version, {
+            collapse: true
+        });
+        knownIssuesCollapse.content.appendChild(container.container);
+
+        container.header.style.backgroundColor = "var(--profile-secondary)"
+
+        let content = createEl('p', { 
+            classList: ['oak-instructions-text'], 
+            innerHTML: desc 
+        });
+        container.content.appendChild(content);
+    }
+
+    let FAQCollapse = collapsableDiv('Frequently Asked Questions', {
+        classList: ['d-flex', 'fd-column'],
+        style: {
+            gap: "10px",
+            padding: "10px"
+        }
+    });
+    FAQDiv.appendChild(FAQCollapse.container);
 
     let FAQ = {
         "How long does the API take to update after I do something in the game?": "15 minutes is the most I've seen. Be sure to press the save button in settings if you want to minimize the time it takes to update! It should not take more than 24 hours to update in any circumstance (browser caching, etc).",
-        "Why is logging in not available for BTD6+ and Netflix?": "This is because the data is stored differently for these versions such as using iCloud for BTD6+. This is not compatible with the Open Data API.",
+        "Why is profile info not available for BTD6+ and Netflix?": "This is because the data is stored differently for these versions such as using iCloud for BTD6+. This is not compatible with the Open Data API.",
         "How do I leave feedback?": 'If you have any feedback including features to add or change on the site or bug reports, please join the project\'s <a href="https://discord.gg/wep2RDmcqZ" target="_blank" style="color: white;">Discord Server</a>. Alternatively, you can create an issue on <a href="https://github.com/HalfHydra/BTD6-API-Explorer/issues" target="_blank" style="color: white;">GitHub</a'
     }
 
     for (let [question, answer] of Object.entries(FAQ)){
-        let FAQEntryDiv = document.createElement('div');
-        FAQEntryDiv.classList.add('faq-entry-div');
-        FAQDiv.appendChild(FAQEntryDiv);
+        let container = collapsableDiv(question, {
+            collapse: true
+        });
+        FAQCollapse.content.appendChild(container.container);
 
-        let FAQQuestionDiv = document.createElement('div');
-        FAQQuestionDiv.classList.add('faq-question-div');
-        FAQEntryDiv.appendChild(FAQQuestionDiv);
+        container.header.style.backgroundColor = "var(--profile-secondary)"
 
-        let FAQQuestion = document.createElement('p');
-        FAQQuestion.classList.add('faq-question');
-        FAQQuestion.innerHTML = question;
-        FAQQuestionDiv.appendChild(FAQQuestion);
-
-        let arrowHideBtn = document.createElement('img');
-        arrowHideBtn.classList.add('arrow-hide-btn');
-        arrowHideBtn.src = './Assets/UI/ArrowHideBtn.png';
-        FAQQuestionDiv.appendChild(arrowHideBtn);
-
-        let FAQAnswerDiv = document.createElement('div');
-        FAQAnswerDiv.classList.add('faq-answer-div');
-        FAQAnswerDiv.style.display = 'none';
-        FAQEntryDiv.appendChild(FAQAnswerDiv);
-
-        let FAQAnswer = document.createElement('p');
-        FAQAnswer.classList.add('faq-answer');
-        FAQAnswer.innerHTML = answer;
-        FAQAnswerDiv.appendChild(FAQAnswer);
-
-        FAQQuestionDiv.addEventListener('click', () => {
-            if (FAQAnswerDiv.style.display === 'none'){
-                FAQAnswerDiv.style.display = 'block';
-                arrowHideBtn.style.transform = 'rotate(180deg)';
-            } else {
-                FAQAnswerDiv.style.display = 'none';
-                arrowHideBtn.style.transform = 'rotate(0deg)';
-            }
-        })
+        let content = createEl('p', { 
+            classList: ['oak-instructions-text'], 
+            innerHTML: answer 
+        });
+        container.content.appendChild(content);
     }
-
-    let knownIsseusHeader = document.createElement('p');
-    knownIsseusHeader.classList.add('oak-instructions-header','black-outline');
-    knownIsseusHeader.innerHTML = 'Known Issues';
-    knownIssuesDiv.appendChild(knownIsseusHeader);
-
-    let knownIssuesText = document.createElement('p');
-    knownIssuesText.classList.add('oak-instructions-text');
-    knownIssuesText.innerHTML = `None currently!`;
-    knownIssuesDiv.appendChild(knownIssuesText);
-    
-    let changelogHeader = document.createElement('p');
-    changelogHeader.classList.add('oak-instructions-header','black-outline');
-    changelogHeader.innerHTML = 'Changelog';
-    changelogDiv.appendChild(changelogHeader);
 
     let first = true;
     for (let [version, desc] of Object.entries(changelog)){
@@ -817,6 +739,165 @@ function generateFrontPage(){
         container.content.appendChild(content);
 
         first = false;
+    }
+
+    let extras = {
+        "Legacy Content Browser": { 
+            "desc": "An older menu that can be used to see what map browser and challenge browser content is available on the Open Data API. This is not very useful since the in-game browser is much more filterable and easier to browse and play.", 
+        },
+        "Use Creator Code: HalfHydra": {
+            "desc": "If you want to support the developer of this site, you can use the creator code HalfHydra in the BTD6 store. Thanks to everyone who has used it so far, I really appreciate it!",
+        },
+        "Standalone Sites": {
+            "desc": "Certain sections of this site have a standalone verison that be accessed directly by a link. These currently include sites for the current CT map, Leaderboards, Roundsets, Rogue Tools, and the Insta Tracker.",
+        }
+    }
+
+    for (let [title, data] of Object.entries(extras)){
+        let container = collapsableDiv(title, {
+            classList: ['d-flex', 'ai-center'],
+            collapse: true
+        });
+        knownIssuesDiv.appendChild(container.container);
+        
+        let content = createEl('p', { 
+            classList: ['oak-instructions-text'],
+            innerHTML: data.desc
+        });
+        container.content.appendChild(content);
+
+        switch(title){
+            case "Legacy Content Browser":
+                let goButton = createEl('p', {
+                    classList: ['where-button', 'black-outline'], 
+                    innerHTML: 'Open',
+                    style: {
+                        width: "100px",
+                        textAlign: "center",
+                        marginTop: "10px"
+                    }
+                });
+                goButton.addEventListener('click', () => {
+                    generateExplore();
+                    document.getElementById('home-content').style.display = 'none';
+                    document.getElementById('explore-content').style.display = 'flex';
+                    addToBackQueue({callback: () => {
+                        changeTab('home');
+                    }});
+                });
+                container.content.appendChild(goButton);
+                break;
+            case "Use Creator Code: HalfHydra":
+                let fdDiv = createEl('div', {
+                    classList: ['d-flex', 'jc-center', 'ai-center', 'fd-column'],
+                });
+                container.content.appendChild(fdDiv);
+                let codeButton = createEl('p', {
+                    classList: ['where-button', 'black-outline'],
+                    innerHTML: 'Copy Code',
+                    style: {
+                        minWidth: "150px",
+                        textAlign: "center",
+                        marginTop: "10px"
+                    }
+                });
+                codeButton.addEventListener('click', () => {
+                    navigator.clipboard.writeText("HalfHydra").then(function() {
+                        console.log('Copying to clipboard was successful!');
+                        codeButton.innerHTML = "Copied!";
+                        setTimeout(() => {
+                            codeButton.innerHTML = "Copy Code";
+                        }, 2000);
+                    }, function(err) {
+                        console.log('Could not copy text: ', err);
+                        errorModal(`Failed to copy text to clipboard. ${err}`);
+                    });
+                });
+                fdDiv.appendChild(codeButton);
+
+                let useGuideBtn = createEl('p', {
+                    classList: ['where-button', 'black-outline'],
+                    innerHTML: 'Open Guide',
+                    style: {
+                        minWidth: "150px",
+                        textAlign: "center",
+                        marginTop: "10px"
+                    }
+                });
+                useGuideBtn.addEventListener('click', () => {
+                    createModal({
+                        header: "How to Use Creator Code",
+                        content: generateArticle("CreatorSupport"),
+                    })
+                });
+                fdDiv.appendChild(useGuideBtn);
+                break;
+            case "Standalone Sites":
+                container.content.classList.add('fd-column', 'ai-center');
+
+                let StandaloneSiteDiv = document.createElement('div');
+                StandaloneSiteDiv.classList.add('site-access-div');
+                container.content.appendChild(StandaloneSiteDiv);
+
+                let siteButtons = document.createElement('div');
+                siteButtons.classList.add('standalone-site-buttons');
+                StandaloneSiteDiv.appendChild(siteButtons);
+
+                let standaloneSites = {
+                    "CT Map": {
+                        "link": "https://btd6apiexplorer.github.io/ct",
+                        "text": "Current CT Map",
+                        "icon": "CTSiteBtn",
+                        "background": "CTMapBG"
+                    },
+                    "Leaderboards": {
+                        "link": "https://btd6apiexplorer.github.io/leaderboards",
+                        "text": "Leaderboards",
+                        "icon": "LeaderboardSiteBtn",
+                        "background": "TrophyStoreTiledBG"
+                    },
+                    "Roundsets": {
+                        "link": "https://btd6apiexplorer.github.io/rounds",
+                        "text": "Roundsets",
+                        "icon": "DefaultRoundSetIcon",
+                        "background": "BloonsBG"
+                    },
+                    "Rogue Tools": {
+                        "link": "https://btd6apiexplorer.github.io/rogue",
+                        "text": "Rogue Tools",
+                        "icon": "RogueSiteBtn",
+                        "background": "RogueBG"
+                    },
+                    "Insta Tracker": {
+                        "link": "https://btd6apiexplorer.github.io/insta",
+                        "text": "Insta Tracker",
+                        "icon": "InstaSiteBtn",
+                        "background": "CollectionHelp2"
+                    }
+                }
+
+                Object.entries(standaloneSites).forEach(([site, data]) => {
+                    let siteButtonDiv = document.createElement('div');
+                    siteButtonDiv.classList.add('site-button-div', 'pointer');
+                    siteButtonDiv.style.backgroundImage = `url(Assets/UI/${data.background}.png)`;
+                    siteButtons.appendChild(siteButtonDiv);
+                    siteButtonDiv.addEventListener('click', () => {
+                        window.location.href = data.link;
+                    })
+                
+                    let siteButtonIcon = document.createElement('img');
+                    siteButtonIcon.classList.add('site-button-icon');
+                    siteButtonIcon.src = `./Assets/UI/${data.icon}.png`;
+                    siteButtonDiv.appendChild(siteButtonIcon);
+                
+                    let profileName = document.createElement('p');
+                    profileName.classList.add('profile-name','readability-bg','black-outline');
+                    profileName.style.marginLeft = '0';
+                    profileName.innerHTML = data.text;
+                    siteButtonDiv.appendChild(profileName);
+                })
+                break;
+        }
     }
 
     function hideAllButOne(selectedTab){
@@ -9062,12 +9143,8 @@ function changeExtrasTab(selected){
 }
 
 function generateArticle(content){
-    let articleContent = document.getElementById('extras-content');
-    articleContent.innerHTML = "";
-
     let articlePage = document.createElement('div');
     articlePage.classList.add('article-page');
-    articleContent.appendChild(articlePage);
 
     let articleContentDiv = document.createElement('div');
     articleContentDiv.classList.add('d-flex', 'fd-column', 'ai-center');
@@ -9078,7 +9155,7 @@ function generateArticle(content){
             {
                 "type": "text",
                 "class": "oak-instructions-text",
-                "content": "Creator support is a program offered by Ninja Kiwi that allows players to give a cut of the purchases you make in game to the creator who's code you've entered in the Bloons TD 6 shop. You can support me and my site by using the code \"HalfHydra\""
+                "content": "Creator support is a program offered by Ninja Kiwi that allows players to give a cut of the purchases you make in game to the creator who's code you've entered in the Bloons TD 6 shop. You can support me and my site by using the code \"HalfHydra\"<br>"
             },
             {
                 "type": "text",
@@ -9134,7 +9211,7 @@ function generateArticle(content){
             case "img":
                 let articleImg = document.createElement('img');
                 if (section.class) { articleImg.className = section.class };
-                articleImg.style.width = "800px";
+                articleImg.style.width = "750px";
                 articleImg.src = `../Assets/UI/${section.content}`;
                 articleContentDiv.appendChild(articleImg);
                 break;
@@ -9167,7 +9244,7 @@ function generateArticle(content){
                 })
         }
     })
-
+    return articleContentDiv;
 }
 
 function generateSettings(){
