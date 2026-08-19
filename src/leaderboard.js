@@ -5,6 +5,8 @@ let coopBossData = {
     leaderboardRankIndex: 1,
 }
 
+let hideTeamGroups = false;
+
 async function generateLeaderboards() {
     showLoading();
     let leaderboardsContent = document.getElementById('leaderboards-content');
@@ -528,6 +530,7 @@ function showLeaderboard(source, metadata, type) {
         case "CTTeam":
             if (leaderboardLink != metadata.leaderboard_team) { leaderboardPage = 1 }
             leaderboardLink = metadata.leaderboard_team;
+            hideTeamGroups = metadata.end < new Date(Date.now() - (6 * 24 * 60 * 60 * 1000));
             break;
         default:
             if (leaderboardLink != metadata.leaderboard) { leaderboardPage = 1 }
@@ -788,7 +791,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                 })
             } else {
                 leaderboardEntry.addEventListener('click', () => {
-                    openTeamModalPopout(entry.group);
+                    openTeamModalPopout(entry);
                 });
             }
             leaderboardEntries.appendChild(leaderboardEntry);
@@ -1167,7 +1170,7 @@ function generateLeaderboardHeader(columnsType) {
     }
 }
 
-function openTeamModalPopout(groupUrl) {
+function openTeamModalPopout(entry) {
     const container = createEl('div', { classList: ['d-flex', 'jc-center'], style: { padding: '10px 0', minHeight: "550px" } });
     const list = createEl('div', { classList: [] });
     container.appendChild(list);
@@ -1179,10 +1182,96 @@ function openTeamModalPopout(groupUrl) {
 
     let loading = null;
 
+    function buildTeamRow(e, idx, rowMap) {
+        const wrapper = createEl('div', { classList: ['d-flex', 'fd-column'] });
+        const entryOuter = createEl('div', { classList: ['leaderboard-entry', 'team-group-entry'] });
+        const entryDiv = createEl('div', { classList: ['leaderboard-entry-div'] });
+
+        const caret = createEl('img', {
+            src: './Assets/UI/ArrowHideBtn.png',
+            style: { width: '40px', height: '40px', cursor: 'pointer', transition: 'transform .2s' },
+            classList: ['team-group-caret']
+        });
+
+        const leftWrap = createEl('div', { classList: ['team-group-rank-wrap'] });
+        leftWrap.appendChild(createEl('p', {
+            classList: ['leaderboard-entry-rank', 'black-outline'],
+            textContent: idx != null ? (idx + 1) : ''
+        }));
+
+        const playerDiv = createEl('div', { classList: ['leaderboard-entry-player', 'leaderboard-entry-team'] });
+        const iconWrap = createEl('div', { classList: ['leaderboard-entry-icon-ct'] });
+        const frame = createEl('img', { classList: ['leaderboard-entry-frame'], src: './Assets/UI/TeamFrame1.png' });
+        const emblem = createEl('img', { classList: ['leaderboard-entry-emblem'], src: './Assets/UI/TeamIcon1.png' });
+        iconWrap.appendChild(frame);
+        iconWrap.appendChild(emblem);
+        playerDiv.appendChild(iconWrap);
+        playerDiv.appendChild(createEl('p', { classList: ['leaderboard-entry-name', 'black-outline'], textContent: e.displayName || 'Unknown Team' }));
+
+        const scoreDiv = createEl('div', { classList: ['leaderboard-entry-score'] });
+        scoreDiv.appendChild(createEl('img', { classList: ['leaderboard-entry-score-icon', 'leaderboard-entry-score-icon-large'], src: './Assets/UI/CtPointsIconSmall.png' }));
+        scoreDiv.appendChild(createEl('p', { classList: ['leaderboard-entry-main-score', 'black-outline', 'fg-1', 'ta-center'], textContent: (e.score || 0).toLocaleString() }));
+
+        entryDiv.appendChild(leftWrap);
+        entryDiv.appendChild(playerDiv);
+        entryDiv.appendChild(scoreDiv);
+        entryOuter.appendChild(entryDiv);
+        entryOuter.appendChild(caret);
+
+        const extra = createEl('div', {
+            classList: ['d-flex', 'ai-center', 'jc-between'],
+            style: { display: 'none', margin: '-10px 60px 0px 20px', border: "6px solid var(--profile-tertiary)", borderTop: 'none', borderRadius: "0 0 10px 10px", paddingLeft: "10px", backgroundColor: "var(--profile-primary)" }
+        });
+
+        const membersP = createEl('p', { classList: ['black-outline', 'team-group-members'], style: { fontSize: '22px' }, innerHTML: `<span class="team-group-members-value">?</span>/15 Members` });
+        const statusP = createEl('p', { classList: ['black-outline'], style: { fontSize: '22px' }, innerHTML: '<span class="team-group-status-value">Loading...</span>' });
+        const ownerContainer = createEl('div', { classList: ['d-flex', 'ai-center'], style: { gap: '8px' } });
+        ownerContainer.appendChild(createEl('p', { classList: ['black-outline'], style: { fontSize: '22px' }, textContent: 'Owner:' }));
+        const ownerBlock = createEl('div', { classList: ['challenge-creator', 'team-owner-block', 'pointer'], style: { width: '300px' } });
+        const ownerAvatar = createEl('div', { classList: ['avatar'] });
+        const ownerFrame = createEl('img', { classList: ['avatar-frame', 'noSelect'], style: { width: '50px' }, src: '../Assets/UI/InstaTowersContainer.png' });
+        const ownerImg = createEl('img', { classList: ['avatar-img', 'noSelect'], style: { width: '50px' }, src: '../Assets/ProfileAvatar/ProfileAvatar01.png' });
+        const ownerName = createEl('p', { classList: ['black-outline'], textContent: preventRateLimiting ? 'Click to Load Owner' : 'Loading...' });
+        ownerAvatar.appendChild(ownerFrame);
+        ownerAvatar.appendChild(ownerImg);
+        ownerBlock.appendChild(ownerAvatar);
+        ownerBlock.appendChild(ownerName);
+        ownerContainer.appendChild(ownerBlock);
+
+        extra.appendChild(statusP);
+        extra.appendChild(membersP);
+        extra.appendChild(ownerContainer);
+
+        caret.addEventListener('click', (ev) => {
+            ev.stopPropagation();
+            const open = extra.style.display === 'flex';
+            extra.style.display = open ? 'none' : 'flex';
+            caret.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
+            if (!open) {
+                const ref = rowMap.get(e.profile);
+                if (ref && !ref.ownerLoaded && ref.teamProfile) loadOwner(ref, entry);
+            }
+        });
+        entryDiv.addEventListener('click', () => caret.click());
+
+        wrapper.appendChild(entryOuter);
+        wrapper.appendChild(extra);
+
+        rowMap.set(e.profile, {
+            entryDiv, frameEl: frame, emblemEl: emblem, iconWrap,
+            membersSpan: membersP.querySelector('.team-group-members-value'),
+            statusSpan: statusP.querySelector('.team-group-status-value'),
+            ownerBlock, ownerImg, ownerFrame, ownerName, extra,
+            ownerLoaded: false, teamProfile: null
+        });
+
+        return wrapper;
+    }
+
     (async () => {
         try {
             loading = copyLoadingIcon(container);
-            const res = await fetch(groupUrl);
+            const res = await fetch(entry.group);
             if (!res.ok) throw new Error(`Failed to fetch group: ${res.status}`);
             const json = await res.json();
 
@@ -1191,168 +1280,47 @@ function openTeamModalPopout(groupUrl) {
             else if (Array.isArray(json.body)) entries = json.body;
             else if (Array.isArray(json?.body?.entries)) entries = json.body.entries;
 
-            if (!entries || entries.length === 0) {
+            const rowMap = new Map();
+
+            if (!entries || entries.length === 0 || hideTeamGroups) {
                 list.innerHTML = '';
+                try {
+                    const profileRes = await fetch(entry.profile);
+                    if (profileRes.ok) {
+                        const profileJson = await profileRes.json();
+                        const profileData = profileJson?.body ?? profileJson;
+
+                        if (profileData) {
+                            const fallbackEntry = {
+                                profile: entry.profile,
+                                displayName: profileData.displayName || profileData.name || 'Unknown Team',
+                                score: entry.score ?? 0,
+                            };
+                            list.appendChild(createEl('p', {
+                                classList: ['black-outline'],
+                                style: { fontSize: '18px', padding: '8px 0', textAlign: 'center' },
+                                textContent: 'Group data unavailable - showing this team only.'
+                            }));
+                            list.appendChild(buildTeamRow(fallbackEntry, null, rowMap));
+                            setTimeout(() => enrichTeams([fallbackEntry], rowMap), 20);
+                            return;
+                        }
+                    }
+                } catch (e) {
+                    console.error('Failed to load fallback profile:', e);
+                }
+
                 list.appendChild(createEl('p', {
                     classList: ['no-data-found', 'black-outline'],
-                    textContent: 'No teams found for this group.'
+                    textContent: 'CT group teams are unavailable after next event starts.'
                 }));
                 return;
             }
 
             entries.sort((a, b) => (b.score || 0) - (a.score || 0));
 
-            const rowMap = new Map();
-
             entries.forEach((e, idx) => {
-                const wrapper = createEl('div', { classList: ['d-flex', 'fd-column'] });
-
-                const entryOuter = createEl('div', { classList: ['leaderboard-entry', 'team-group-entry'] });
-                const entryDiv = createEl('div', { classList: ['leaderboard-entry-div'] });
-
-                const caret = createEl('img', {
-                    src: './Assets/UI/ArrowHideBtn.png',
-                    style: { width: '40px', height: '40px', cursor: 'pointer', transition: 'transform .2s' },
-                    classList: ['team-group-caret']
-                });
-
-                const rank = createEl('p', {
-                    classList: ['leaderboard-entry-rank', 'black-outline'],
-                    textContent: (idx + 1)
-                });
-
-                const leftWrap = createEl('div', { classList: ['team-group-rank-wrap'] });
-                leftWrap.appendChild(rank);
-
-                const playerDiv = createEl('div', { classList: ['leaderboard-entry-player', 'leaderboard-entry-team'] });
-                const iconWrap = createEl('div', { classList: ['leaderboard-entry-icon-ct'] });
-
-                const frame = createEl('img', {
-                    classList: ['leaderboard-entry-frame'],
-                    src: './Assets/UI/TeamFrame1.png'
-                });
-                const emblem = createEl('img', {
-                    classList: ['leaderboard-entry-emblem'],
-                    src: './Assets/UI/TeamIcon1.png'
-                });
-                iconWrap.appendChild(frame);
-                iconWrap.appendChild(emblem);
-
-                const name = createEl('p', {
-                    classList: ['leaderboard-entry-name', 'black-outline'],
-                    textContent: e.displayName || 'Unknown Team'
-                });
-
-                playerDiv.appendChild(iconWrap);
-                playerDiv.appendChild(name);
-
-                const scoreDiv = createEl('div', { classList: ['leaderboard-entry-score'] });
-                const scoreIcon = createEl('img', {
-                    classList: ['leaderboard-entry-score-icon', 'leaderboard-entry-score-icon-large'],
-                    src: './Assets/UI/CtPointsIconSmall.png'
-                });
-                const scoreVal = createEl('p', {
-                    classList: ['leaderboard-entry-main-score', 'black-outline', 'fg-1', 'ta-center'],
-                    textContent: (e.score || 0).toLocaleString()
-                });
-                scoreDiv.appendChild(scoreIcon);
-                scoreDiv.appendChild(scoreVal);
-
-                entryDiv.appendChild(leftWrap);
-                entryDiv.appendChild(playerDiv);
-                entryDiv.appendChild(scoreDiv);
-                entryOuter.appendChild(entryDiv);
-                entryOuter.appendChild(caret);
-
-                const extra = createEl('div', {
-                    classList: ['d-flex', 'ai-center', 'jc-between'],
-                    style: { display: 'none', margin: '-10px 60px 0px 20px', border: "6px solid var(--profile-tertiary)", borderTop: 'none', borderRadius: "0 0 10px 10px", paddingLeft: "10px", backgroundColor: "var(--profile-primary)" }
-                });
-
-                const membersP = createEl('p', {
-                    classList: ['black-outline', 'team-group-members'],
-                    style: { fontSize: '22px' },
-                    innerHTML: `<span class="team-group-members-value">?</span>/15 Members`
-                });
-
-                const ownerContainer = createEl('div', { classList: ['d-flex', 'ai-center'], style: { gap: '8px' } });
-
-                const ownerLabel = createEl('p', {
-                    classList: ['black-outline'],
-                    style: { fontSize: '22px' },
-                    textContent: 'Owner:'
-                });
-                ownerContainer.appendChild(ownerLabel);
-
-                const ownerBlock = createEl('div', { classList: ['challenge-creator', 'team-owner-block', 'pointer'], style: { width: '300px' } });
-                ownerContainer.appendChild(ownerBlock);
-
-                const ownerAvatar = createEl('div', { classList: ['avatar'] });
-                ownerBlock.appendChild(ownerAvatar);
-
-                const ownerFrame = createEl('img', {
-                    classList: ['avatar-frame', 'noSelect'],
-                    style: { width: '50px' },
-                    src: '../Assets/UI/InstaTowersContainer.png'
-                });
-                ownerAvatar.appendChild(ownerFrame);
-
-                const ownerImg = createEl('img', {
-                    classList: ['avatar-img', 'noSelect'],
-                    style: { width: '50px' },
-                    src: '../Assets/ProfileAvatar/ProfileAvatar01.png'
-                });
-                ownerAvatar.appendChild(ownerImg);
-
-                const ownerName = createEl('p', {
-                    classList: ['black-outline'],
-                    textContent: preventRateLimiting ? 'Click to Load Owner' : 'Loading...'
-                });
-                ownerBlock.appendChild(ownerName);
-
-                const statusP = createEl('p', {
-                    classList: ['black-outline'],
-                    style: { fontSize: '22px' },
-                    innerHTML: '<span class="team-group-status-value">Loading...</span>'
-                });
-
-                extra.appendChild(statusP);
-                extra.appendChild(membersP);
-                extra.appendChild(ownerContainer);
-
-                caret.addEventListener('click', (ev) => {
-                    ev.stopPropagation();
-                    const open = extra.style.display === 'flex';
-                    extra.style.display = open ? 'none' : 'flex';
-                    caret.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
-                    if (!open) {
-                        const ref = rowMap.get(e.profile);
-                        if (ref && !ref.ownerLoaded && ref.teamProfile) {
-                            loadOwner(ref, groupUrl);
-                        }
-                    }
-                });
-                entryDiv.addEventListener('click', () => caret.click());
-
-                wrapper.appendChild(entryOuter);
-                wrapper.appendChild(extra);
-                list.appendChild(wrapper);
-
-                rowMap.set(e.profile, {
-                    entryDiv,
-                    frameEl: frame,
-                    emblemEl: emblem,
-                    iconWrap,
-                    membersSpan: membersP.querySelector('.team-group-members-value'),
-                    statusSpan: statusP.querySelector('.team-group-status-value'),
-                    ownerBlock,
-                    ownerImg,
-                    ownerFrame,
-                    ownerName,
-                    extra,
-                    ownerLoaded: false,
-                    teamProfile: null
-                });
+                list.appendChild(buildTeamRow(e, idx, rowMap));
             });
 
             if (entries.length < 6) {
@@ -1474,7 +1442,7 @@ function openTeamModalPopout(groupUrl) {
         await Promise.all(Array.from({ length: concurrency }, () => worker()));
     }
 
-    function loadOwner(ref, groupUrl) {
+    function loadOwner(ref, entry) {
         if (!ref.teamProfile || !ref.teamProfile.owner) {
             ref.ownerName.textContent = 'No Owner';
             return;
@@ -1495,7 +1463,7 @@ function openTeamModalPopout(groupUrl) {
                 ref.ownerBlock.style.backgroundImage = `linear-gradient(to right, transparent 80%, var(--profile-secondary) 100%),url(${getProfileBanner(ownerData)})`;
                 ref.ownerBlock.onclick = () => {
                     goBack();
-                    openProfile('leaderboard', ownerURL, () => openTeamModalPopout(groupUrl));
+                    openProfile('leaderboard', ownerURL, () => openTeamModalPopout(entry));
                 }
                 ref.ownerLoaded = true;
             } catch {
