@@ -78,7 +78,7 @@ function changeRogueTab(selector){
             rogueSaveData.lastSynced = 0;
             generateRogueArtifacts();
             break;
-        case 'Hero Starter Kits':
+        case 'All Hero Starter Kits':
             document.getElementById('starter-kits-content').style.display = 'flex';
             generateRogueHeroStarterKits();
             addToBackQueue({source: 'rogue', destination: 'starter-kits'})
@@ -126,8 +126,8 @@ function generateRogueSelectors() {
 
     let selectors = {
         "Artifacts Tracker": "RoguePermanantArtifactsBtn",
-        "Hero Starter Kits": "RogueStarterKitsBtn",
         "Rogue Feat Trackers": "RogueFeatBtn",
+        "All Hero Starter Kits": "RogueStarterKitsBtn",
         "Hero Campaign Stats": "RogueHeroStatsBtn",
         // "Export Image": "ArtifactShareBtn"
     }
@@ -2745,6 +2745,8 @@ function generateHeroCompletions() {
         rogueSaveData.heroStatsFilter = selected;
         generateHeroCompletions();
     });
+    sortDropdown.style.backgroundColor = "rgba(0,0,0,0.3)";
+    sortDropdown.style.borderRadius = "10px";
     
 
     let combineAllDiv = createEl('div', {
