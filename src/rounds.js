@@ -48,17 +48,6 @@ function generateRoundsets() {
         }));
     }
 
-
-    // let roundsetHeaderText = createEl('p', {
-    //     classList: ['sku-roundset-selector-desc', 'ta-center'],
-    //     style: {
-    //         fontSize: "18px",
-    //         lineHeight: "1.5",
-    //     },
-    //     innerHTML: "Roundset information is not available on the Open Data API"
-    // });
-    // selectorsDiv.appendChild(roundsetHeaderText);
-
     let limitedRoundsets = {};
     let expiredRoundsets = {};
     Object.entries(constants.limitedTimeEvents).forEach(([roundset, data]) => {
@@ -1685,16 +1674,14 @@ function openRoundsetSettingsModal(type){
     }
 
     const container = createEl('div', {
-        style: { padding: '16px', display: 'flex', flexDirection: 'column', gap: '16px' }
+        style: { display: 'flex', flexDirection: 'column' }
     });
 
-    // container.appendChild(createEl('p', {
-    //     classList: ['oak-instructions-header', 'black-outline'],
-    //     innerHTML: 'Roundset Settings'
-    // }));
+    let roundsetSettingsDiv = createEl('div', { classList: ['d-flex', 'fd-column',], style: { gap: '16px', backgroundColor: "rgba(0,0,0,0.12)", borderRadius: "10px", margin: "8px", padding: "8px" } });
+    container.appendChild(roundsetSettingsDiv);
 
     let roundModalTopDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-between'], style: { gap: '8px' } });
-    container.appendChild(roundModalTopDiv);
+    roundsetSettingsDiv.appendChild(roundModalTopDiv);
 
     let roundFiltersDiv = createEl('div', { classList: ['d-flex'], style: { gap: '8px', flexDirection: 'column' } });
     roundModalTopDiv.appendChild(roundFiltersDiv);
@@ -1744,7 +1731,6 @@ function openRoundsetSettingsModal(type){
             const presetBtn = generateSelectorTab(preset, preset === roundsetFilterSettings.roundFilterPreset);
             presetBtn.addEventListener('click', () => {
                 roundsetFilterSettings.roundFilterPreset = preset;
-                // highlight
                 Array.from(presetsDiv.children).forEach(c => c.classList.remove('stats-tab-yellow'));
                 presetBtn.classList.add('stats-tab-yellow');
 
@@ -1757,7 +1743,6 @@ function openRoundsetSettingsModal(type){
                     case "CHIMPS": roundsetFilterSettings.roundFilterStart = 6; roundsetFilterSettings.roundFilterEnd = Math.min(100, lastRound); break;
                     case "Custom": break;
                 }
-                // update input UI
                 const sIn = startRoundInput.querySelector('input');
                 const eIn = endRoundInput.querySelector('input');
                 if (sIn) sIn.value = roundsetFilterSettings.roundFilterStart;
@@ -1778,7 +1763,7 @@ function openRoundsetSettingsModal(type){
     });
 
     let otherSettingsDiv = createEl('div', { classList: ['d-flex'] });
-    container.appendChild(otherSettingsDiv);
+    roundsetSettingsDiv.appendChild(otherSettingsDiv);
 
     let startingCashDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
     otherSettingsDiv.appendChild(startingCashDiv);
@@ -1823,10 +1808,10 @@ function openRoundsetSettingsModal(type){
         otherSettingsDiv.style.gap = '32px';
     }
 
-    container.appendChild(rogueReverseDesc);
+    roundsetSettingsDiv.appendChild(rogueReverseDesc);
 
     let convertBloonsDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-evenly'], style: { gap: '8px' } });
-    container.appendChild(convertBloonsDiv);
+    roundsetSettingsDiv.appendChild(convertBloonsDiv);
 
     let allCamoDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
     convertBloonsDiv.appendChild(allCamoDiv);
@@ -1876,8 +1861,11 @@ function openRoundsetSettingsModal(type){
     });
     allFortifiedDiv.appendChild(convertAllFortifiedInput);
 
+    let roundFilterDiv = createEl('div', { classList: ['d-flex', 'fd-column',], style: { gap: '16px', backgroundColor: "rgba(0,0,0,0.12)", borderRadius: "10px", margin: "8px", padding: "8px" } });
+    container.appendChild(roundFilterDiv);
+
     let bloonsFilterTitleDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-between'], style: { gap: '8px' } });
-    container.appendChild(bloonsFilterTitleDiv);
+    roundFilterDiv.appendChild(bloonsFilterTitleDiv);
 
     let bloonsFilterTitle = createEl('p', {
         classList: ['dropdown-label', 'black-outline'],
@@ -1931,13 +1919,10 @@ function openRoundsetSettingsModal(type){
     advancedToggleDiv.appendChild(advancedToggle);
 
     let bloonsFileredDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-start'], style: { gap: '8px' } });
-    container.appendChild(bloonsFileredDiv);
+    roundFilterDiv.appendChild(bloonsFileredDiv);
 
     let filtersContentDiv = createEl('div', { classList: ['d-flex', 'jc-center'], style: { gap: '6px', flexWrap: 'wrap' } });
     bloonsFileredDiv.appendChild(filtersContentDiv);
-
-    // let bloonsSelectorDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-center'], style: { gap: '6px', flexWrap: 'wrap' } });
-    // bloonsFileredDiv.appendChild(bloonsSelectorDiv);
 
     let bloons = ["Red", "Blue", "Green", "Yellow", "Pink", "Black", "White", "Purple", "Lead", "Zebra", "Rainbow", "Ceramic"];
     let blimps = ["Moab", "Bfb", "Zomg", "DdtCamo", "Bad"];
@@ -2063,7 +2048,7 @@ function openRoundsetSettingsModal(type){
     }
     buildBloonFilters();
 
-    const footer = createEl('div', { classList: ['d-flex', 'jc-end'], style: { marginTop: '8px', gap: '10px' } });
+    const footer = createEl('div', { classList: ['d-flex', 'jc-end'], style: { margin: '8px', gap: '10px' } });
     const closeBtn = createEl('div', {
         classList: ['maps-progress-view', 'black-outline', 'pointer'],
         innerHTML: 'Apply',
@@ -2146,6 +2131,9 @@ function isFiltersActive(){
         roundsetFilterSettings.roundsetAdvancedFilterMode === true,
         bossOnlyModifiedActive,
         roundsetFilterSettings.roundsetReversed === true,
+        roundsetFilterSettings.roundsetConvertAllCamo === true,
+        roundsetFilterSettings.roundsetConvertAllRegrow === true,
+        roundsetFilterSettings.roundsetConvertAllFortified === true
     ];
 
     return conditions.some(Boolean);
