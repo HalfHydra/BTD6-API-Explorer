@@ -783,6 +783,9 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
         roundsetFilterSettings.roundsetReversed = false;
         roundsetFilterSettings.roundsetHideUnused = true;
         roundsetFilterSettings.roundsetShowModified = false;
+        roundsetFilterSettings.roundsetConvertAllRegrow = false;
+        roundsetFilterSettings.roundsetConvertAllCamo = false;
+        roundsetFilterSettings.roundsetConvertAllFortified = false;
         applyRoundFilters(roundsetType);
         generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed, roundsetType);
     });
@@ -823,8 +826,6 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
 }
 
 function processRoundset(name, data){
-    const MOAB_CLASS_PREFIXES = ["Moab","Bfb","Zomg","Ddt","Bad"];
-
     let processed = JSON.parse(JSON.stringify(data));
 
     processed = addRoundHints(name, processed);
@@ -832,6 +833,45 @@ function processRoundset(name, data){
     let incomeRunning = 0;
     let rbeRunning = 0;
     processed.rounds.forEach(r => {
+        if (typeof r.income === 'number') {
+            incomeRunning += r.income;
+            r.incomeSum = incomeRunning;
+        }
+        if (typeof r.rbe === 'number') {
+            rbeRunning += r.rbe;
+            r.rbeSum = rbeRunning;
+        }
+    });
+    return processed;
+}
+
+function applyRoundFilters(type){
+    if (!currentRoundsetData) return;
+    const effectiveEnd = (roundsetFilterSettings.roundFilterEnd ?? currentRoundsetData.rounds[currentRoundsetData.rounds.length - 1].roundNumber);
+    let filtered = JSON.parse(JSON.stringify(currentRoundsetData));
+    filtered.rounds = filtered.rounds.filter(r => r.roundNumber >= roundsetFilterSettings.roundFilterStart && r.roundNumber <= effectiveEnd);
+
+    bloonsToRounds = new Map();
+    const MOAB_CLASS_PREFIXES = ["Moab","Bfb","Zomg","Ddt","Bad"];
+    filtered.rounds.forEach(r => {
+        r.bloonGroups.forEach(bg => {
+            let noProperties = ["AuraBloon", "DiamondBloon", "DynamiteBloon", "GlassBloon", "RetributionBloon", "RingleaderBloon"]
+            let onlyFortified = ["Moab", "Bfb", "Zomg", "Ddt", "Bad"]
+            let fortifiedPossible = ["Lead", "Ceramic", ... onlyFortified]
+
+            let newBloon = bg.bloon.replace('Regrow', '').replace('Camo', '').replace('Fortified', '');
+            if (bg.bloon.includes('Regrow') || roundsetFilterSettings.roundsetConvertAllRegrow && !noProperties.some(p => bg.bloon.includes(p)) && !onlyFortified.some(p => bg.bloon.includes(p))) {
+                newBloon += 'Regrow';
+            }
+            if (bg.bloon.includes('Fortified') || roundsetFilterSettings.roundsetConvertAllFortified && fortifiedPossible.some(p => bg.bloon.includes(p))) {
+                newBloon += 'Fortified';
+            }
+            if (bg.bloon.includes('Camo') || roundsetFilterSettings.roundsetConvertAllCamo && !noProperties.some(p => bg.bloon.includes(p)) && !onlyFortified.some(p => bg.bloon.includes(p))) {
+                newBloon += 'Camo';
+            }
+            bg.bloon = newBloon;
+        });
+
         let traitMask = 0;
         r.bloonGroups.forEach(bg => {
             const bloon = bg.bloon.toLowerCase();
@@ -850,24 +890,7 @@ function processRoundset(name, data){
         });
 
         r.traitMask = traitMask;
-
-        if (typeof r.income === 'number') {
-            incomeRunning += r.income;
-            r.incomeSum = incomeRunning;
-        }
-        if (typeof r.rbe === 'number') {
-            rbeRunning += r.rbe;
-            r.rbeSum = rbeRunning;
-        }
     });
-    return processed;
-}
-
-function applyRoundFilters(type){
-    if (!currentRoundsetData) return;
-    const effectiveEnd = (roundsetFilterSettings.roundFilterEnd ?? currentRoundsetData.rounds[currentRoundsetData.rounds.length - 1].roundNumber);
-    let filtered = JSON.parse(JSON.stringify(currentRoundsetData));
-    filtered.rounds = filtered.rounds.filter(r => r.roundNumber >= roundsetFilterSettings.roundFilterStart && r.roundNumber <= effectiveEnd);
 
     let incomeRunning = roundsetFilterSettings.roundsetStartingCash;
     let rbeRunning = 0;
@@ -1801,6 +1824,57 @@ function openRoundsetSettingsModal(type){
     }
 
     container.appendChild(rogueReverseDesc);
+
+    let convertBloonsDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-evenly'], style: { gap: '8px' } });
+    container.appendChild(convertBloonsDiv);
+
+    let allCamoDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
+    convertBloonsDiv.appendChild(allCamoDiv);
+
+    let allCamoIcon = createEl('img', {
+        classList: ['of-contain'],
+        src: './Assets/BloonIcon/GreenCamo.png',
+        style: { width: '40px', height: '40px' }
+    });
+    allCamoDiv.appendChild(allCamoIcon);
+
+    let convertAllCamoInput = generateCheckbox("All Camo", roundsetFilterSettings.roundsetConvertAllCamo, (checked) => {
+        roundsetFilterSettings.roundsetConvertAllCamo = checked;
+        applyRoundFilters(type);
+    });
+    allCamoDiv.appendChild(convertAllCamoInput);
+
+    let allRegrowDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
+    convertBloonsDiv.appendChild(allRegrowDiv);
+
+    let allRegrowIcon = createEl('img', {
+        classList: ['of-contain'],
+        src: './Assets/BloonIcon/PinkRegrow.png',
+        style: { width: '40px', height: '40px' }
+    });
+    allRegrowDiv.appendChild(allRegrowIcon);
+
+    let convertAllRegrowInput = generateCheckbox("All Regrow", roundsetFilterSettings.roundsetConvertAllRegrow, (checked) => {
+        roundsetFilterSettings.roundsetConvertAllRegrow = checked;
+        applyRoundFilters(type);
+    });
+    allRegrowDiv.appendChild(convertAllRegrowInput);
+
+    let allFortifiedDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
+    convertBloonsDiv.appendChild(allFortifiedDiv);
+
+    let allFortifiedIcon = createEl('img', {
+        classList: ['of-contain'],
+        src: './Assets/BloonIcon/CeramicFortified.png',
+        style: { width: '40px', height: '40px' }
+    });
+    allFortifiedDiv.appendChild(allFortifiedIcon);
+
+    let convertAllFortifiedInput = generateCheckbox("All Fortified", roundsetFilterSettings.roundsetConvertAllFortified, (checked) => {
+        roundsetFilterSettings.roundsetConvertAllFortified = checked;
+        applyRoundFilters(type);
+    });
+    allFortifiedDiv.appendChild(convertAllFortifiedInput);
 
     let bloonsFilterTitleDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-between'], style: { gap: '8px' } });
     container.appendChild(bloonsFilterTitleDiv);
