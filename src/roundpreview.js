@@ -658,7 +658,7 @@ class Bloon {
         this.width = ratioCalc(1, 0, 100, bloonImageMap[type].width, bloonImageMap[type].height);
     }
     move(deltaTime) {
-        this.x += this.speed * deltaTime * 6.86 * speedMultiplier * roundSpeedModifier * difficultySpeedModifier;
+        this.x += this.speed * deltaTime * 6.86 * speedMultiplier * roundSpeedModifier * difficultySpeedModifier * modifierSpeedMultiplier;
     }
     shouldDelete() {
         const certainValue = 800; 
@@ -679,7 +679,7 @@ class Blimp {
         this.groupIndex = groupIndex;
     }
     move(deltaTime) {
-        this.x += this.speed * deltaTime * 6.86 * speedMultiplier * roundSpeedModifier * difficultySpeedModifier;
+        this.x += this.speed * deltaTime * 6.86 * speedMultiplier * roundSpeedModifier * difficultySpeedModifier * modifierMOABSpeedMultiplier;
     }
     shouldDelete() {
         const certainValue = 800; 
@@ -697,6 +697,8 @@ const bloons = [];
 
 let currentRoundGroups;
 let difficultySpeedModifier = 1;
+let modifierSpeedMultiplier = 1;
+let modifierMOABSpeedMultiplier = 1;
 let roundSpeedModifier = 1;
 
 function resetPreview() {

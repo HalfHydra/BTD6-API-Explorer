@@ -523,6 +523,11 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
         roundsetBasicFilter: null,
         roundsetAdvancedFilterLogic: 'ANY',
         roundsetShowHints: true,
+        roundsetConvertAllCamo: false,
+        roundsetConvertAllRegrow: false,
+        roundsetConvertAllFortified: false,
+        roundsetBloonsSpeedMultiplier: 1,
+        roundsetMOABSpeedMultiplier: 1,
         special: ""
     }
 
@@ -531,6 +536,9 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
             roundsetFilterSettings[key] = value;
         });
     }
+
+    modifierSpeedMultiplier = roundsetFilterSettings.roundsetBloonsSpeedMultiplier || 1;
+    modifierMOABSpeedMultiplier = roundsetFilterSettings.roundsetMOABSpeedMultiplier || 1;
     
     let roundsetContent = document.getElementById('roundsets-content');
     roundsetContent.style.display = "flex";
@@ -1399,6 +1407,20 @@ async function generateRounds(type, reverse, roundsetType, presetSettings={}) {
                 case "RogueLeadSet":
                     difficultyMedium.click();
                     break;
+            }
+
+            if (roundsetFilterSettings.roundsetDifficulty) {
+                switch(roundsetFilterSettings.roundsetDifficulty) {
+                    case "Easy":
+                        difficultyEasy.click();
+                        break;
+                    case "Medium":
+                        difficultyMedium.click();
+                        break;
+                    case "Hard":
+                        difficultyHard.click();
+                        break;
+                }
             }
 
             let nextPrevDiv = document.createElement('div');

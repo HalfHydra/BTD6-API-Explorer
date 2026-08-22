@@ -7341,6 +7341,29 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
 
     let rules = challengeRules(metadata);
 
+    if (challengeType != "Boss") {
+        let bossTypeSwapButton = createEl('div', {
+            classList: ['start-button', 'black-outline'],
+            innerHTML: 'Rounds',
+        });
+        bossTypeSwapButton.addEventListener('click', async () => {
+            document.getElementById('challenge-content').style.display = "none";
+            let roundset = metadata.roundSets.filter(value => value !== 'default' && !(constants.bossesInOrder.map(boss => { return boss.toLowerCase() }).includes(value)));
+            showRoundsetModel("challenge", roundset.length > 0 ? roundset[0] : "DefaultRoundSet", {
+                roundFilterStart: metadata.startRound,
+                roundFilterEnd:  metadata.endRound,
+                roundsetStartingCash: metadata.startingCash,
+                roundsetReversed: metadata.mode == 'Reverse',
+                roundsetConvertAllRegrow: metadata._bloonModifiers.allRegen,
+                roundsetConvertAllCamo: metadata._bloonModifiers.allCamo,
+                roundsetBloonsSpeedMultiplier: metadata._bloonModifiers.speedMultiplier,
+                roundsetMOABSpeedMultiplier: metadata._bloonModifiers.moabSpeedMultiplier,
+                roundsetDifficulty: metadata.difficulty,
+            });
+        })
+        challengeHeaderRightContainer.appendChild(bossTypeSwapButton);
+    }
+
     let challengeRulesHeader = document.createElement('p');
     challengeRulesHeader.classList.add('challenge-rules-header','black-outline');
     challengeRulesHeader.innerHTML = "Rules";
@@ -7387,7 +7410,17 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
                 challengeRuleTextDiv.appendChild(challengeRuleValue);
 
                 challengeRuleValue.addEventListener('click', () => {
-                    showRoundsetModel('challenge', roundset);
+                    showRoundsetModel('challenge', roundset, {
+                        roundFilterStart: metadata.startRound,
+                        roundFilterEnd: metadata.endRound,
+                        roundsetStartingCash: metadata.startingCash,
+                        roundsetReversed: metadata.mode == 'Reverse',
+                        roundsetConvertAllRegrow: metadata._bloonModifiers.allRegen,
+                        roundsetConvertAllCamo: metadata._bloonModifiers.allCamo,
+                        roundsetBloonsSpeedMultiplier: metadata._bloonModifiers.speedMultiplier,
+                        roundsetMOABSpeedMultiplier: metadata._bloonModifiers.moabSpeedMultiplier,
+                        roundsetDifficulty: metadata.difficulty,
+                    });
                 })
             }
         }
@@ -12186,6 +12219,24 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
                 innerHTML: value            
             });
             barItem.appendChild(barItemText);
+
+            if (icon == "/UI/StartRoundIconSmall") {
+                barItem.classList.add('pointer');
+                let roundset = map.roundSets.filter(value => value !== 'default' && !(constants.bossesInOrder.map(boss => { return boss.toLowerCase() }).includes(value)))
+                barItem.addEventListener('click', () => {
+                    showRoundsetModel('challenge', roundset.length > 0 ? roundset[0] : "DefaultRoundSet", {
+                        roundFilterStart: map.startRound == -1 ? 1 : map.startRound,
+                        roundFilterEnd: map.endRound == -1 ? endRound : map.endRound,
+                        roundsetStartingCash: map.startingCash,
+                        roundsetReversed: map.mode == 'Reverse',
+                        roundsetConvertAllRegrow: map._bloonModifiers.allRegen,
+                        roundsetConvertAllCamo: map._bloonModifiers.allCamo,
+                        roundsetBloonsSpeedMultiplier: map._bloonModifiers.speedMultiplier,
+                        roundsetMOABSpeedMultiplier: map._bloonModifiers.moabSpeedMultiplier,
+                        roundsetDifficulty: map.difficulty,
+                    });
+                })
+            }
         });
 
         let rulesDiv = createEl('div', {
@@ -12282,7 +12333,17 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
                 challengeRuleTextDiv.appendChild(challengeRuleValue);
 
                 challengeRuleValue.addEventListener('click', () => {
-                    showRoundsetModel('challenge', roundset[0]);
+                    showRoundsetModel('challenge', roundset[0], {
+                        roundFilterStart: map.startRound == -1 ? 1 : map.startRound,
+                        roundFilterEnd: map.endRound == -1 ? endRound : map.endRound,
+                        roundsetStartingCash: map.startingCash,
+                        roundsetReversed: map.mode == 'Reverse',
+                        roundsetConvertAllRegrow: map._bloonModifiers.allRegen,
+                        roundsetConvertAllCamo: map._bloonModifiers.allCamo,
+                        roundsetBloonsSpeedMultiplier: map._bloonModifiers.speedMultiplier,
+                        roundsetMOABSpeedMultiplier: map._bloonModifiers.moabSpeedMultiplier,
+                        roundsetDifficulty: map.difficulty,
+                    });
                 })
             }
 

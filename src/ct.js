@@ -2133,6 +2133,9 @@ function openTileModal(tileData, source) {
             roundsetReversed: tileData.GameData.dcModel.mode == 'Reverse',
             roundsetShowModified: false,
             roundsetShowHints: false,
+            roundsetDifficulty: tileData.GameData.dcModel.difficulty,
+            roundsetBloonsSpeedMultiplier: tileData.GameData.dcModel.bloonModifiers.speedMultiplier,
+            roundsetMOABSpeedMultiplier: tileData.GameData.dcModel.bloonModifiers.moabSpeedMultiplier
         });
     });
     ctRulesTop.appendChild(roundsBtn);
