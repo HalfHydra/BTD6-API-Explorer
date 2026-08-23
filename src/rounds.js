@@ -15,8 +15,6 @@ let roundsetFilterSettings = {};
 let currentRoundsetData = null;
 let bloonToRounds = new Map();
 
-let roundsetPreviewButton = null;
-
 const BloonTraitBits = {
     Camo:        1 << 0,
     Regrow:      1 << 1,
@@ -740,20 +738,19 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
     mapsProgressViews.appendChild(mapsProgressViewsText);
 
     let mapsProgressGrid = document.createElement('div');
-    mapsProgressGrid.classList.add('maps-progress-view', 'stats-tab-yellow', 'black-outline');
+    mapsProgressGrid.classList.add('maps-progress-view', 'stats-tab-yellow', 'black-outline', 'rs-view-simple');
     mapsProgressGrid.innerHTML = "Simple";
     mapsProgressViews.appendChild(mapsProgressGrid);
 
     let mapsProgressList = document.createElement('div');
-    mapsProgressList.classList.add('maps-progress-view','black-outline');
+    mapsProgressList.classList.add('maps-progress-view','black-outline', 'rs-view-detailed');
     mapsProgressList.innerHTML = "Detailed";
     mapsProgressViews.appendChild(mapsProgressList);
 
     let mapsProgressGame = document.createElement('div');
-    mapsProgressGame.classList.add('maps-progress-view','black-outline');
+    mapsProgressGame.classList.add('maps-progress-view','black-outline', 'rs-view-preview');
     mapsProgressGame.innerHTML = "Preview";
     mapsProgressViews.appendChild(mapsProgressGame);
-    roundsetPreviewButton = mapsProgressGame;
 
     let headerRightControls = document.createElement('div');
     headerRightControls.classList.add('maps-progress-views');
@@ -795,31 +792,42 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
     roundsetContent.appendChild(roundsContent);
 
     mapsProgressGrid.addEventListener('click', () => {
-        mapsProgressGrid.classList.add('stats-tab-yellow');
-        mapsProgressList.classList.remove('stats-tab-yellow');
-        mapsProgressGame.classList.remove('stats-tab-yellow');
-        currentRoundsetView = "Simple";
-        generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed, roundsetType);
+        switchRoundsetView("Simple", roundsetType);
     })
     mapsProgressList.addEventListener('click', () => {
-        mapsProgressList.classList.add('stats-tab-yellow');
-        mapsProgressGrid.classList.remove('stats-tab-yellow');
-        mapsProgressGame.classList.remove('stats-tab-yellow');
-        currentRoundsetView = "Topper";
-        generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed, roundsetType);
+        switchRoundsetView("Topper", roundsetType);
     })
     mapsProgressGame.addEventListener('click', () => {
-        mapsProgressGame.classList.add('stats-tab-yellow');
-        mapsProgressGrid.classList.remove('stats-tab-yellow');
-        mapsProgressList.classList.remove('stats-tab-yellow');
-        currentRoundsetView = "Preview";
-        generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed, roundsetType);
+        switchRoundsetView("Preview", roundsetType);
     })
 
     currentPreviewRound = 0;
     currentRoundsetView = "Simple";
     generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed, roundsetType)
     updateRoundsShownLabel();
+}
+
+function switchRoundsetView(view, roundsetType) {
+    let mapsProgressGrid = document.querySelector('.rs-view-simple');
+    let mapsProgressList = document.querySelector('.rs-view-detailed');
+    let mapsProgressGame = document.querySelector('.rs-view-preview');
+
+    mapsProgressGrid.classList.remove('stats-tab-yellow');
+    mapsProgressList.classList.remove('stats-tab-yellow');
+    mapsProgressGame.classList.remove('stats-tab-yellow');
+    switch(view) {
+        case "Simple":
+            mapsProgressGrid.classList.add('stats-tab-yellow');
+            break;
+        case "Topper":
+            mapsProgressList.classList.add('stats-tab-yellow');
+            break;
+        case "Preview":
+            mapsProgressGame.classList.add('stats-tab-yellow');
+            break;
+    }
+    currentRoundsetView = view;
+    generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed, roundsetType);
 }
 
 function processRoundset(name, data){
@@ -1029,7 +1037,8 @@ async function generateRounds(type, reverse, roundsetType, presetSettings={}) {
                 roundNumber.addEventListener('click', () => {
                     currentPreviewRound = indexOfRoundNumberOrNearest(round.roundNumber);
                     currentRoundsetView = "Preview";
-                    roundsetPreviewButton.click();
+                    addToBackQueue({ callback: () => { switchRoundsetView("Simple", roundsetType) } });
+                    switchRoundsetView("Preview", roundsetType)
                 });
                 roundDiv.appendChild(roundNumber);
             
@@ -1131,10 +1140,11 @@ async function generateRounds(type, reverse, roundsetType, presetSettings={}) {
                 let roundNumber = document.createElement('p');
                 roundNumber.classList.add('round-number', 'round-number-detailed', 'black-outline', 'pointer');
                 roundNumber.innerHTML = `Round ${round.roundNumber}`;
-                roundNumber.addEventListener('click', () => {             // open in preview
+                roundNumber.addEventListener('click', () => {
                     currentPreviewRound = indexOfRoundNumberOrNearest(round.roundNumber);
                     currentRoundsetView = "Preview";
-                    roundsetPreviewButton.click();
+                    addToBackQueue({ callback: () => { switchRoundsetView("Topper", roundsetType) } });
+                    switchRoundsetView("Preview", roundsetType)
                 });
                 roundsDivHeader.appendChild(roundNumber);
 
