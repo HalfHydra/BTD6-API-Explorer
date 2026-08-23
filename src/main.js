@@ -10386,12 +10386,7 @@ function generateQuestsPage() {
 
     let questsHeader = createEl('div', {
         classList: ['d-flex', 'jc-center', 'ai-center', 'coop-border', 'fd-column'],
-        style: {
-            // borderRadius: "20px",
-            // backgroundColor: "#7a674b",
-            // padding: "10px 20px",
-            // marginBottom: "20px"
-        }
+        style: {}
     });
     questsContainer.appendChild(questsHeader);
     
@@ -10414,7 +10409,7 @@ function generateQuestsPage() {
             textAlign: "center",
             marginBottom: "10px"
         },
-        innerHTML: "NOTE: Completion status will be inaccurate for quests completed before NK changed the quest system internally. Replaying and clearing the quests will fix the completion status. Also, if you click 'Replay' on a quest, this will make it 'incomplete' as well."
+        innerHTML: "NOTE: Completion status will be inaccurate for quests completed before NK changed the quest system internally. Replaying and clearing the quests will fix the completion status."
     });
     questsHeader.appendChild(questsDisclaimer);
 
@@ -10457,12 +10452,12 @@ function generateQuestsPage() {
     });
     questsContainer.appendChild(questsListContainer);
 
-    const iconToRoundsets = {};
-    Object.entries(constants.roundSets).forEach(([key, rs]) => {
-        if (rs && rs.type === 'quest' && rs.icon) {
-            (iconToRoundsets[rs.icon] ||= []).push(key);
-        }
-    });
+    // const iconToRoundsets = {};
+    // Object.entries(constants.roundSets).forEach(([key, rs]) => {
+    //     if (rs && rs.type === 'quest' && rs.icon) {
+    //         (iconToRoundsets[rs.icon] ||= []).push(key);
+    //     }
+    // });
 
     function generateQuestList() {
         questsListContainer.innerHTML = "";
@@ -10478,7 +10473,62 @@ function generateQuestsPage() {
             }
         });
 
-        sortedQuests.forEach((quest) => {
+        let quests = sortedQuests.filter((quest) => {
+            if (!constants.quests.hasOwnProperty(quest.id)) { return false }
+            let constantsQuest = constants.quests[quest.id];
+            if (questsFilter !== "All" && constantsQuest.type !== questsFilter) { return false; }
+            return true;
+        });
+
+        let bar = createEl('div', {
+            classList: ['w-100'],
+            style: {}
+        });
+        questsListContainer.appendChild(bar);
+
+        let progressBar = createEl('div', {
+            classList: ['pos-rel'],
+            style: {
+                background: "linear-gradient(180deg,#0F1620 0%,#101922 100%)",
+                height: "35px",
+                margin: "8px 30px",
+                outline: "3px solid black",
+                borderRadius: "3px",
+            }
+        });
+        bar.appendChild(progressBar);
+
+        let rankInfo = {
+            current: quests.filter((quest) => quest.complete).length,
+            goal: quests.length
+        };
+
+        let rankBarFill = createEl('div', {
+            style: {
+                backgroundImage: `url(../Assets/UI/ProBarFill.png)`,
+                height: "100%",
+                backgroundSize: "contain",
+                position: "absolute",
+                width: `${(rankInfo.current/rankInfo.goal) * 100}%`
+            }
+        });
+        progressBar.appendChild(rankBarFill);
+
+        if (rankInfo.current == rankInfo.goal) {
+            rankBarFill.style.backgroundImage = `url(../Assets/UI/ProBarFillYellow.png)`;
+        }
+
+        let rankBarText = createEl('p', {
+            classList: ['black-outline', 'pos-rel', 'ta-center', 'd-flex', 'ai-center', 'jc-center'],
+            style: {
+                height: "100%",
+                fontSize: "20px",
+            }
+        });
+        rankBarText.innerHTML = `${Math.floor((rankInfo.current/rankInfo.goal) * 100)}% of ${questsFilter === "All" ? "" : `${questsFilter} `}Quests Complete (${rankInfo.current}/${rankInfo.goal})`;
+        progressBar.appendChild(rankBarText);
+
+        quests.forEach((quest) => {
             if (!constants.quests.hasOwnProperty(quest.id)) { return }
             let constantsQuest = constants.quests[quest.id];
             if (questsFilter !== "All" && constantsQuest.type !== questsFilter) { return; }
@@ -10543,24 +10593,24 @@ function generateQuestsPage() {
                 }
             });
 
-            if (constantsQuest?.icon && iconToRoundsets[constantsQuest.icon]?.length) {
-                const stages = iconToRoundsets[constantsQuest.icon];
-                if (stages.length) {
-                    const row = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-start'], });
-                    questCenterDiv.appendChild(row);
+            // if (constantsQuest?.icon && iconToRoundsets[constantsQuest.icon]?.length) {
+            //     const stages = iconToRoundsets[constantsQuest.icon];
+            //     if (stages.length) {
+            //         const row = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-start'], });
+            //         questCenterDiv.appendChild(row);
 
-                    stages.forEach((key, idx) => {
-                        let n = constants.roundSets[key]?.part || null;
-                        const btn = createEl('div', { classList: ['maps-progress-view', 'black-outline', 'pointer'], style: {filter: 'hue-rotate(270deg)'}});
-                        btn.innerHTML = n ? `Stage ${n}` : (stages.length > 1 ? `Stage ${idx + 1}` : 'Custom Rounds');
-                        btn.addEventListener('click', (e) => {
-                            showLoading();
-                            showRoundsetModel('profile', constants.roundSets[key]?.roundset || key);
-                        });
-                        row.appendChild(btn);
-                    });
-                }
-            }
+            //         stages.forEach((key, idx) => {
+            //             let n = constants.roundSets[key]?.part || null;
+            //             const btn = createEl('div', { classList: ['maps-progress-view', 'black-outline', 'pointer'], style: {filter: 'hue-rotate(270deg)'}});
+            //             btn.innerHTML = n ? `Stage ${n}` : (stages.length > 1 ? `Stage ${idx + 1}` : 'Custom Rounds');
+            //             btn.addEventListener('click', (e) => {
+            //                 showLoading();
+            //                 showRoundsetModel('profile', constants.roundSets[key]?.roundset || key);
+            //             });
+            //             row.appendChild(btn);
+            //         });
+            //     }
+            // }
 
             if (quest.complete) {
                 let questTick = createEl('img', {
