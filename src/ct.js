@@ -602,6 +602,7 @@ async function openCTEventDetails(source, eventData) {
         addTooltip(relicDiv, `<p class="artifact-title">${getLocValue(`Relic${relicTypeName}`)}</p>${getLocValue(`Relic${relicTypeName}Description`)}`, {
             allowHTML: true,
             hideOnClick: false,
+            touch: false
         });
     })
 
