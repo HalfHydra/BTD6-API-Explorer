@@ -10397,7 +10397,9 @@ function generateQuestsPage() {
 
     let questsHeader = createEl('div', {
         classList: ['d-flex', 'jc-center', 'ai-center', 'coop-border', 'fd-column'],
-        style: {}
+        style: {
+            marginBottom: "10px",
+        }
     });
     questsContainer.appendChild(questsHeader);
     
@@ -10426,7 +10428,8 @@ function generateQuestsPage() {
 
     let subFilterContainer = document.createElement('div');
     subFilterContainer.classList.add('sub-filter-container');
-    questsContainer.appendChild(subFilterContainer);
+    subFilterContainer.style.padding = "0";
+    questsHeader.appendChild(subFilterContainer);
 
     ["All", "Tale", "Challenge", "Tutorial", "Experiment"].forEach((subFilterOption) => {
         let subFilterButton = createEl('div', {
@@ -10455,6 +10458,19 @@ function generateQuestsPage() {
         subFilterContainer.appendChild(subFilterButton);
     })
 
+    let bar = createEl('div', {
+        classList: ['w-100'],
+        style: {
+            margin: "10px",
+        }
+    });
+    questsHeader.appendChild(bar);
+
+    let rewardsDiv = createEl('div', {
+        classList: ['d-flex', 'fd-column', 'w-100'],
+    });
+    questsHeader.appendChild(rewardsDiv);
+
     let questsListContainer = createEl('div', {
         classList: ['d-flex', 'fd-column'],
         style: {
@@ -10463,17 +10479,9 @@ function generateQuestsPage() {
     });
     questsContainer.appendChild(questsListContainer);
 
-    // const iconToRoundsets = {};
-    // Object.entries(constants.roundSets).forEach(([key, rs]) => {
-    //     if (rs && rs.type === 'quest' && rs.icon) {
-    //         (iconToRoundsets[rs.icon] ||= []).push(key);
-    //     }
-    // });
-
     function generateQuestList() {
         questsListContainer.innerHTML = "";
 
-        //sort quests by completion status
         let sortedQuests = [...btd6usersave.quests].sort((a, b) => {
             if (a.complete && !b.complete) {
                 return 1;
@@ -10491,11 +10499,7 @@ function generateQuestsPage() {
             return true;
         });
 
-        let bar = createEl('div', {
-            classList: ['w-100'],
-            style: {}
-        });
-        questsListContainer.appendChild(bar);
+        bar.innerHTML = "";
 
         let progressBar = createEl('div', {
             classList: ['pos-rel'],
@@ -10539,18 +10543,159 @@ function generateQuestsPage() {
         rankBarText.innerHTML = `${Math.floor((rankInfo.current/rankInfo.goal) * 100)}% of ${questsFilter === "All" ? "" : `${questsFilter} `}Quests Complete (${rankInfo.current}/${rankInfo.goal})`;
         progressBar.appendChild(rankBarText);
 
+        let allLootRemaining = [];
+        quests.filter((quest) => !quest.complete).forEach((quest) => {
+            if (!constants.quests.hasOwnProperty(quest.id)) { return }
+            let constantsQuest = constants.quests[quest.id];
+            allLootRemaining.push(...Object.values(processRewards(constantsQuest.loot)));
+        });
+
+        let totalMonkeyMoney = 0;
+        let newLootRemaining = allLootRemaining.filter((loot) => {
+            if (loot.type == "MonkeyMoney") {
+                totalMonkeyMoney += loot.amount;
+                return false;
+            }
+            return true;
+        });
+        let powerMap = {};
+        newLootRemaining = newLootRemaining.filter((loot) => {
+            if (loot.type == "Power") {
+                if (!powerMap[loot.power]) {
+                    powerMap[loot.power] = { type: "Power", power: loot.power, amount: 0 };
+                }
+                powerMap[loot.power].amount += loot.amount;
+                return false;
+            }
+            return true;
+        });
+        newLootRemaining.unshift(...Object.values(powerMap));
+
+        if (totalMonkeyMoney > 0) {
+            newLootRemaining.unshift({ type: "MonkeyMoney", amount: totalMonkeyMoney });
+        }
+
+        if (newLootRemaining.length > 0) {
+            rewardsDiv.style.display = "flex";
+            rewardsDiv.innerHTML = "";
+
+            let rewardsHeader = createEl('div', {
+                classList: ['d-flex', 'jc-between', 'ai-center'],
+                style: {
+                    backgroundColor: "var(--profile-tertiary)",
+                    padding: "10px",
+                    borderRadius: "10px 10px 0 0",
+                }
+            });
+            rewardsDiv.appendChild(rewardsHeader);
+
+            let rewardsHeaderText = createEl('p', {
+                classList: ['black-outline'],
+                style: {
+                    fontSize: "24px",
+                    margin: "0px"
+                },
+                innerHTML: "Rewards Remaining"
+            });
+            rewardsHeader.appendChild(rewardsHeaderText);
+
+            let showAllToggle = createEl('div', {
+                classList: ['d-flex', 'ai-center'],
+                style: {
+                    padding: "4px 0 4px 16px",
+                    backgroundColor: "rgba(0,0,0,0.36)",
+                    borderRadius: "10px",
+                },
+            });
+            rewardsHeader.appendChild(showAllToggle);
+
+            let showAllLabel = createEl('p', { classList: ['black-outline'], style: { fontSize: "20px" }, innerHTML: 'Show All' });
+            showAllToggle.appendChild(showAllLabel);
+
+            let allRewardsLeft = createEl('div', {
+                classList: ['d-flex', 'f-wrap', 'ai-end', 'w-100','jc-center'],
+                style: {
+                    maxHeight: "84px",
+                    backgroundColor: "var(--profile-secondary)",
+                    overflow: "hidden",
+                    borderRadius: "0 0 10px 10px",
+                }
+            });
+            rewardsDiv.appendChild(allRewardsLeft);
+
+            let showAllToggleBtn = generateToggle(false, (checked) => {
+                if (checked) {
+                    allRewardsLeft.style.maxHeight = "unset";
+                } else {
+                    allRewardsLeft.style.maxHeight = "84px";
+                }
+            });
+            showAllToggle.appendChild(showAllToggleBtn);
+
+            for (let data of newLootRemaining) {
+                let rewardDiv = createEl('div', {
+                    classList: ['achievement-reward-div', 'd-flex', 'fd-column', 'ai-center'],
+                    style: {
+                        width: "100px",
+                    },
+                });
+                allRewardsLeft.appendChild(rewardDiv);
+
+                let rewardImg = createEl('img', {
+                    classList: ['achievement-reward-img'],
+                    style: {
+                        maxWidth: "60px",
+                        height: "60px",
+                        objectPosition: "unset"
+                    },
+                    src: getRewardIcon(data)
+                });
+                rewardDiv.appendChild(rewardImg);
+
+                let rewardText = createEl('p', {
+                    classList: ['achievement-reward-text', 'black-outline']
+                });
+                let text = "";
+                switch (data.type) {
+                    case "InstaMonkey":
+                        text = data.tiers.split("").join("-")
+                        break;
+                    case "Knowledge":
+                        text = "+ " + data.amount.toLocaleString()
+                        break;
+                    case "Power":
+                    case "RandomInstaMonkey":
+                        text = "X " + data.amount.toLocaleString()
+                        break;
+                    default:
+                        text = data.amount ? data.amount.toLocaleString() : "";
+                        break;
+                }
+                rewardText.innerHTML = text;
+                rewardDiv.appendChild(rewardText);
+            };
+        } else {
+            rewardsDiv.style.display = "none";
+        }
+
+
         quests.forEach((quest) => {
             if (!constants.quests.hasOwnProperty(quest.id)) { return }
             let constantsQuest = constants.quests[quest.id];
             if (questsFilter !== "All" && constantsQuest.type !== questsFilter) { return; }
 
             let questDiv = createEl('div', {
-                classList: ['d-flex', 'ai-center', 'jc-between', 'wood-container'],
+                classList: ['d-flex', 'fd-column', 'wood-container', 'w-100', 'bs-box'],
                 style: {
                     // margin: "10px 0px"
                 }
             });
             questsListContainer.appendChild(questDiv);
+
+            let questContainer = createEl('div', {
+                classList: ['d-flex', 'ai-center', 'jc-between',],
+            });
+            questDiv.appendChild(questContainer);
 
             let questImg = createEl('img', {
                 loading: "lazy",
@@ -10561,13 +10706,13 @@ function generateQuestsPage() {
                 },
                 src: `../Assets/QuestIcon/${constantsQuest.icon || "QuestIconPhayzeOne"}.png`
             });
-            questDiv.appendChild(questImg);
+            questContainer.appendChild(questImg);
 
             let questCenterDiv = createEl('div', {
                 classList: ['d-flex', 'fd-column', 'jc-center', 'ai-center'],
                 style: { gap: "10px"}
             });
-            questDiv.appendChild(questCenterDiv);
+            questContainer.appendChild(questCenterDiv);
 
             let questTitle = createEl('p', {
                 classList: ['quest-title', 'black-outline'],
@@ -10604,25 +10749,6 @@ function generateQuestsPage() {
                 }
             });
 
-            // if (constantsQuest?.icon && iconToRoundsets[constantsQuest.icon]?.length) {
-            //     const stages = iconToRoundsets[constantsQuest.icon];
-            //     if (stages.length) {
-            //         const row = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-start'], });
-            //         questCenterDiv.appendChild(row);
-
-            //         stages.forEach((key, idx) => {
-            //             let n = constants.roundSets[key]?.part || null;
-            //             const btn = createEl('div', { classList: ['maps-progress-view', 'black-outline', 'pointer'], style: {filter: 'hue-rotate(270deg)'}});
-            //             btn.innerHTML = n ? `Stage ${n}` : (stages.length > 1 ? `Stage ${idx + 1}` : 'Custom Rounds');
-            //             btn.addEventListener('click', (e) => {
-            //                 showLoading();
-            //                 showRoundsetModel('profile', constants.roundSets[key]?.roundset || key);
-            //             });
-            //             row.appendChild(btn);
-            //         });
-            //     }
-            // }
-
             if (quest.complete) {
                 let questTick = createEl('img', {
                     classList: [],
@@ -10633,7 +10759,7 @@ function generateQuestsPage() {
                     },
                     src: "../Assets/UI/TickGreenIcon.png"
                 });
-                questDiv.appendChild(questTick);
+                questContainer.appendChild(questTick);
             } else {
                 let questProgress = createEl('p', {
                     classList: ['quest-progress', 'ta-center', 'black-outline'],
@@ -10643,8 +10769,64 @@ function generateQuestsPage() {
                     },
                     innerHTML: `${quest.partsComplete}/${quest.parts}`
                 });
-                questDiv.appendChild(questProgress);
+                questContainer.appendChild(questProgress);
             } 
+
+            let lootBar = createEl('div', {
+                classList: ['d-flex', 'jc-center', 'ai-center', 'quest-loot-bar'],
+                style: {
+                    gap: "10px",
+                    backgroundColor: "rgba(0, 0, 0, 0.3)",
+                    borderRadius: "10px",
+                }
+            });
+            questDiv.appendChild(lootBar);
+
+            if (!quest.complete) {
+                let rewards = processRewards(constantsQuest.loot);
+                for (let data of Object.values(rewards)) {
+                    let rewardDiv = createEl('div', {
+                        classList: ['achievement-reward-div', 'd-flex', 'fd-column', 'ai-center'],
+                        style: {
+                            width: "100px",
+                        },
+                    });
+                    lootBar.appendChild(rewardDiv);
+
+                    let rewardImg = createEl('img', {
+                        classList: ['achievement-reward-img'],
+                        style: {
+                            maxWidth: "60px",
+                            height: "60px",
+                            objectPosition: "unset"
+                        },
+                        src: getRewardIcon(data)
+                    });
+                    rewardDiv.appendChild(rewardImg);
+
+                    let rewardText = createEl('p', {
+                        classList: ['achievement-reward-text', 'black-outline']
+                    });
+                    let text = "";
+                    switch (data.type) {
+                        case "InstaMonkey":
+                            text = data.tiers.split("").join("-")
+                            break;
+                        case "Knowledge":
+                            text = "+ " + data.amount.toLocaleString()
+                            break;
+                        case "Power":
+                        case "RandomInstaMonkey":
+                            text = "X " + data.amount.toLocaleString()
+                            break;
+                        default:
+                            text = data.amount ? data.amount.toLocaleString() : "";
+                            break;
+                    }
+                    rewardText.innerHTML = text;
+                    rewardDiv.appendChild(rewardText);
+                };
+            }
         });
     }
     generateQuestList(questsFilter);

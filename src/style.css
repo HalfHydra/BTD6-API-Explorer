@@ -5787,6 +5787,10 @@ input[type="checkbox"] {
     align-items: start;
 }
 
+.ai-end {
+    align-items: end;
+}
+
 .ac-start {
     align-content: start;
 }
