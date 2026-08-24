@@ -234,8 +234,8 @@ function generateProgressSubText(){
     let upgradeInfo = getUnlockedAndTotalUpgrades();
     let paragons = Object.keys(btd6usersave.acquiredUpgrades).filter(k => k.includes("Paragon") && k != "Sentry Paragon");
     let paragonsUnlocked = paragons.filter(k => btd6usersave.acquiredUpgrades[k]);
-    progressSubText["Upgrades"] = `${upgradeInfo[0] - paragonsUnlocked.length} Upgrades Unlocked`;
-    progressSubText["UpgradesUnlocked"] = `${upgradeInfo[0] - paragonsUnlocked.length}/${upgradeInfo[1] - paragons.length} Upgrades Unlocked`;
+    progressSubText["Upgrades"] = `${upgradeInfo[0]} Upgrades Unlocked`;
+    progressSubText["UpgradesUnlocked"] = `${upgradeInfo[0]}/${upgradeInfo[1]} Upgrades Unlocked`;
     progressSubText["Paragons"] = `${paragonsUnlocked.length}/${Object.keys(constants.paragonsAvailable).length} Paragon${paragonsUnlocked.length != 1 ? "s" : ""} Unlocked`
     let heroInfo = generateHeroesSkinsUnlocked();
     progressSubText["Heroes"] = `${heroInfo.heroesUnlocked} Hero${heroInfo.heroesUnlocked != 1 ? "es" : ""} Unlocked`;
@@ -1234,7 +1234,7 @@ function changeProgressTab(selector){
 }
 
 function getUnlockedAndTotalUpgrades() {
-    let totalUpgrades = (Object.keys(constants.towersInOrder).length * 15) + Object.keys(constants.paragonsAvailable).length;
+    let totalUpgrades = (Object.keys(constants.towersInOrder).length * 15);
     let invalidUpgrades = [
         "Camo Bananas",
         "Adaptive Workers",
@@ -1249,7 +1249,7 @@ function getUnlockedAndTotalUpgrades() {
         "Bewildering Storm",
         "Piercing Wind"
     ];
-    let unlockedUpgrades = Object.keys(btd6usersave.acquiredUpgrades).filter(k => btd6usersave.acquiredUpgrades[k] && !invalidUpgrades.includes(k)).length;
+    let unlockedUpgrades = Object.keys(btd6usersave.acquiredUpgrades).filter(k => btd6usersave.acquiredUpgrades[k] && !invalidUpgrades.includes(k)).filter(k => !k.includes("Paragon") || k === "Sentry Paragon").length;
     return [unlockedUpgrades, totalUpgrades];
 }
 
@@ -1281,6 +1281,17 @@ function generateTowerProgress(){
     towerSelectorHeaderText2.classList.add('tower-selector-header-text','black-outline');
     towerSelectorHeaderText2.innerHTML = `${upgradesInfo[0]}/${upgradesInfo[1]} Upgrades`;
     towerSelectorHeaderTop.appendChild(towerSelectorHeaderText2);
+
+    let paragons = Object.keys(btd6usersave.acquiredUpgrades).filter(k => k.includes("Paragon") && k != "Sentry Paragon");
+    let paragonsUnlocked = paragons.filter(k => btd6usersave.acquiredUpgrades[k]);
+
+    if (paragonsUnlocked.length > 0) {
+        let towerSelectorHeaderText3 = createEl('p', {
+            classList: ['tower-selector-header-text','black-outline'],
+            innerHTML: `${paragonsUnlocked.length}/${Object.keys(constants.paragonsAvailable).length} Paragons`
+        });
+        towerSelectorHeaderTop.appendChild(towerSelectorHeaderText3);
+    }
 
     let towerSelectorHeader = document.createElement('div');
     towerSelectorHeader.classList.add('tower-selector-header');
