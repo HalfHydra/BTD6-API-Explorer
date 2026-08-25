@@ -1894,7 +1894,7 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 44
     },
     "GameUIProfileAvatar101": {
@@ -1920,7 +1920,7 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 45
     },
     "GameUIProfileAvatar103": {
@@ -1946,7 +1946,7 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 46
     },
     "GameUIProfileAvatar105": {
@@ -2025,7 +2025,7 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 48
     },
     "GameUIProfileAvatar111": {
@@ -2051,7 +2051,7 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 49
     },
     "GameUIProfileAvatar113": {
@@ -2090,7 +2090,7 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 51
     },
     "GameUIProfileAvatar116": {
@@ -2246,7 +2246,7 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 55
     },
     "GameUIProfileAvatar128": {
@@ -2351,7 +2351,7 @@
         "itemType": "Avatar",
         "hidden": true,
         "updateAdded": 56,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "IAP"
     },
     "GameUIProfileAvatar135": {
         "storeFilter": "GameUI",
@@ -3495,7 +3495,7 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 44
     },
     "GameUIProfileAvatar99": {
@@ -3508,7 +3508,7 @@
         "exclusivity": "",
         "itemType": "Avatar",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 44
     },
     "GameUIProfileBanner1": {
@@ -3963,7 +3963,7 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 44
     },
     "GameUIProfileBanner41": {
@@ -3976,7 +3976,7 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 44
     },
     "GameUIProfileBanner42": {
@@ -3989,7 +3989,7 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 44
     },
     "GameUIProfileBanner43": {
@@ -4015,7 +4015,7 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 45
     },
     "GameUIProfileBanner45": {
@@ -4041,7 +4041,7 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 46
     },
     "GameUIProfileBanner47": {
@@ -4106,7 +4106,7 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 48
     },
     "GameUIProfileBanner51": {
@@ -4132,7 +4132,7 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 49
     },
     "GameUIProfileBanner53": {
@@ -4171,7 +4171,7 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 51
     },
     "GameUIProfileBanner56": {
@@ -4301,7 +4301,7 @@
         "exclusivity": "",
         "itemType": "Banner",
         "hidden": true,
-        "obtainMethod": "Purchase",
+        "obtainMethod": "IAP",
         "updateAdded": 55
     },
     "GameUIProfileBanner65": {
@@ -4328,7 +4328,7 @@
         "itemType": "Banner",
         "hidden": true,
         "updateAdded": 56,
-        "obtainMethod": "Purchase"
+        "obtainMethod": "IAP"
     },
     "GameUIProfileBanner7": {
         "storeFilter": "GameUI",
