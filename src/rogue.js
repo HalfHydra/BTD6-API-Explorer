@@ -236,8 +236,12 @@ async function generateRogueArtifacts() {
     rogueArtifactSearch.style.paddingRight = '40px';
     rogueArtifactSearch.addEventListener('input', () => {
         let searchValue = rogueArtifactSearch.value.toLowerCase().replace(/[^a-z0-9]/g, '');
-        Object.values(artifactDivMap).forEach(artifactDiv => {
-            if (artifactDiv.alt.toLowerCase().replace(/[^a-z0-9]/g, '').includes(searchValue)) {
+        let matchingArtifacts = Object.entries(currentArtifacts).filter(([artifact, data]) => {
+            return data.title.toLowerCase().replace(/[^a-z0-9]/g, '').includes(searchValue) || data.description.toLowerCase().replace(/[^a-z0-9]/g, '').includes(searchValue);
+        });
+
+        Object.entries(artifactDivMap).forEach(([artifact, artifactDiv]) => {
+            if (matchingArtifacts.some(([matchingArtifact, data]) => matchingArtifact === artifact)) {
                 artifactDiv.style.display = "flex";
             } else {
                 artifactDiv.style.display = "none";
