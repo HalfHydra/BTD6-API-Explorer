@@ -1215,36 +1215,29 @@ function generateProgress(){
         notLoggedInContent.appendChild(OtherInfoHeader);
 
         let panels = {
-            "Maps": {
-                "name": "View Extra Map Stats!",
-                "desc": "You can view your highest round and times completed count for every map on every mode!"
+            "ExclusiveStats": {
+                "name": "API Exclusive Stats",
+                "desc": "You can view the full list of Top Towers and Top Heroes, as well as Top Paragons and Top Abilities. Other bonus stats include total race entries, total CT tiles captured, and various unseen Rogue and Frontier Legends stats."
             },
-            "InstaMonkeys": {
-                "name": "View Your Insta Monkeys Collection!",
+            "PowersPro": {
+                "name": "Powers Pro Calculator",
+                "desc": "Use your account save data to optimize how much monkey money you need to spend to unlock Pro Powers and each of their upgrade tiers using as little as possible. "
+            },
+            "InstaCollectionAll": {
+                "name": "Insta Monkeys Collection!",
                 "desc": "You can view how many of each Insta Monkey you've accumulated here as well as track your collection."
             },
-            "CollectionEvent": {
-                "name": "Collection Event Helper!",
-                "desc": "Using your current inventory, you can view the odds of getting a new Insta Monkey for each chest type in general and when selecting a featured tower."
+            "ProgressMaps": {
+                "name": "Extra Map Stats",
+                "desc": "You can view your highest round and times completed count for every map on every mode!"
             },
             "Achievements": {
-                "name": "View Achievements!",
-                "desc": "You can view your achievement progress here as well as use a few useful filters such as finding Monkey Knowledge points as rewards."
+                "name": "Achievements Helper",
+                "desc": "You can view your achievement progress here as well as use a few useful filters such as finding Monkey Knowledge points as rewards. You can also choose to reveal hidden achievements, and view guides for some of the tougher achievements."
             },
-            "Towers": {
-                "name": "View Your Towers!",
-                "desc": "You can view portait art and total xp for every tower you've unlocked here."},
-            "Heroes": {
-                "name": "View Your Heroes!",
-                "desc": "You can view all portrait art for all heroes and skins you've unlocked as well as hero level information here."
-            },
-            "Powers": {
-                "name": "View Your Powers!",
-                "desc": "You can view how many of each power you've accumulated here."
-            },
-            "Knowledge": {
-                "name": "View Your Knowledge!",
-                "desc": "You can view your Monkey Knowledge point unlock progress here."
+            "TrophyStore": {
+                "name": "Trophy Store Collection",
+                "desc": "You can view your Trophy Store collection here as well as the full list of items in the game. You can sort and filter items based on the source of the item, the version it was added, the cost, and the type of item."
             }
         }
 
@@ -1270,7 +1263,7 @@ function generateProgress(){
 
             let instaMonkeyImage = document.createElement('img');
             instaMonkeyImage.classList.add('insta-monkey-guide-method-img');
-            instaMonkeyImage.src = `./Assets/UI/Progress${method}.png`;
+            instaMonkeyImage.src = `./Assets/UI/LandingScroll/${method}.png`;
             instaMonkeyGuideMethod.appendChild(instaMonkeyImage);
         })
     }
