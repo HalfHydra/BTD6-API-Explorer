@@ -6051,7 +6051,7 @@ async function generateEvents(){
                 eventNameId.innerHTML = `Collection Event`;
                 eventDiv.addEventListener('click', () => {
                     resetScroll();
-                    addToBackQueue({ source: "events", destination: "featured" });
+                    addToBackQueue({ source: "events", destination: "featured", callback: generateEvents });
                     generateInstaSchedule((new Date() > new Date(event.end)), event.id);
                     document.getElementById('events-content').style.display = "none";
                     document.getElementById('featured-content').style.display = "flex";
@@ -6198,7 +6198,7 @@ function changeEventTab(selector){
             generateChallenges("CoopDailyChallenges");
             break;
         case "Collection":
-            addToBackQueue({ source: "events", destination: "featured" });
+            addToBackQueue({ source: "events", destination: "featured", callback: generateEvents });
             generateInstaSchedule();
             document.getElementById('events-content').style.display = "none";
             document.getElementById('featured-content').style.display = "flex";
