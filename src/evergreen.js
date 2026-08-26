@@ -1000,3 +1000,40 @@ function getQuestPartLabel(roundsetName, partIndex) {
     }
     return `${keyword} ${partIndex}`;
 }
+
+function standaloneGoToMainSite() {
+    let mainSiteDiv = createEl('div', {
+        classList: ['d-flex', 'jc-center', 'ai-center', 'pointer'],
+        style: {
+            backgroundColor: "rgba(0,0,0,0.3)",
+            borderRadius: "10px",
+            padding: "10px",
+            marginTop: "10px",
+            gap: "16px",
+        }
+    });
+    
+    let mainSiteLabel = createEl('p', {
+        classList: ['main-site-label', 'black-outline'],
+        style: {
+            fontSize: "24px",
+        },
+        innerHTML: 'Check out the main site for more features!'
+    });
+    mainSiteDiv.appendChild(mainSiteLabel);
+
+    let selectorGoImg = createEl('img', {
+        classList: [],
+        style: {
+            width: "40px",
+        },
+        src: '../Assets/UI/ContinueBtn.png'
+    });
+    mainSiteDiv.appendChild(selectorGoImg);
+
+    mainSiteDiv.addEventListener('click', () => {
+        openBTD6Site("https://btd6apiexplorer.github.io");
+    });
+
+    return mainSiteDiv;
+}

@@ -240,6 +240,7 @@
     addEventListener("resize", (event) => { document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`); })
     fetchConstants().then(() => {
         generateRoundsets();
+        document.getElementById("rounds-content").appendChild(standaloneGoToMainSite())
     });
 </script>
 </html>

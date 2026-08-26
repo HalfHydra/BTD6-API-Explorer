@@ -252,6 +252,8 @@
         loginDiv.style.borderRadius = "10px";
         document.getElementById("profile-content").appendChild(loginDiv);
 
+        document.getElementById("profile-content").appendChild(standaloneGoToMainSite())
+
         let current = await getLatestCollectionEvent();
         if (current != null && now < new Date(current.end)) {
             featuredInstaDiv.style.width = "780px";

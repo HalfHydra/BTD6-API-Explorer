@@ -223,7 +223,6 @@
         <div class="header-container"></div>
     </div>
     <div class="content">
-        <div id="home-content" class="front-page" style="display: none;"></div>
         <div id="extras-content" class="content-div extras" style="display: none;"></div>
         <div id="rogue-content" class="content-div extras" style="display: flex;"></div>
         <div id="artifacts-content" class="content-div extras" style="display: none;"></div>
@@ -248,6 +247,8 @@
     addEventListener("resize", (event) => { document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`); })
     fetchConstants().then(async () => {
         generateRogueSelectors();
+        document.getElementById("rogue-content").appendChild(standaloneGoToMainSite())
     });
+    
 </script>
 </html>

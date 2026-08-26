@@ -254,6 +254,7 @@
     fetchConstants().then(() => {
         fetchLocKeys();
         generateLeaderboards();
+        document.getElementById("leaderboards-content").appendChild(standaloneGoToMainSite())
     });
 </script>
 </html>
