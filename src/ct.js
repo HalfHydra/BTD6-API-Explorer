@@ -326,11 +326,11 @@ async function openCTEventDetails(source, eventData) {
     let data = null;
     if (eventData.tiles) {
         data = await getCTTiles(eventData.tiles);
-        if (data.tiles == []) {
+        if (data.tiles.length == 0) {
             eventData.noODA = true;
         }
     }
-    if (data == null) { 
+    if (data == null || data.tiles.length == 0) {
         data = convertExtCTDataToODAFormat(extData.tiles); 
     }
     if (source != null) {
