@@ -674,6 +674,13 @@ function showLeaderboard(source, metadata, type) {
         // leaderboardDisclaimer.innerHTML = "Note: Only singleplayer boss leaderboards are available on the API currently.";
         // leaderboardTop.appendChild(leaderboardDisclaimer);
 
+        if (!seenFTMessages.includes("coopBossMessage") && coopBossData.currentBossPage != 1) {
+            leaderboardTop.appendChild(generateComment("One-Time Note: Coop Boss leaderboards are not officially supported. All players are treated as individual entries on the Open Data API, and groupings are made here using a logical best guess using available score information (there could be mistakes). The order of players will not match how it appears in-game due to this, and the last group shown may not have all players due to the 1000 entry limit.", function() {
+                seenFTMessages.push("coopBossMessage")
+                saveSettings();
+            }));
+        }
+
         let leaderboardSubFilterDiv = createEl('div', {
             classList: ["d-flex", 'jc-center']
         })
