@@ -380,12 +380,12 @@ function generateRoundsets() {
     let knownPreviousEventsDiv = createEl('div', {
         classList: [],
         style: {
-            margin: "20px 0"
+            margin: "10px 0"
         }
     });
     selectorsDiv.appendChild(knownPreviousEventsDiv);
 
-    let knownPreviousEventsCollapse = collapsableDiv("Known Previous Events", {
+    let knownPreviousEventsCollapse = collapsableDiv(`${Object.keys(expiredRoundsets).length} Known Events with Custom Rounds`, {
         classList: ['f-wrap'],
         collapse: true
     })
