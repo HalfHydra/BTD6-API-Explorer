@@ -63,6 +63,7 @@ let bossesDataCachedAt = null;
 let CTDataCachedAt = null;
 let challengesDataCachedAt = null;
 let odysseyDataCachedAt = null;
+let eventsDataCachedAt = null;
 
 let odysseyData = null;
 
@@ -449,9 +450,10 @@ async function getCustomMapMetadata(mapId) {
 }
 
 async function getLatestEvents() {
-    if (latestEvents == null) {
+    if (latestEvents == null || isStale(eventsDataCachedAt)) {
         await fetchData(`https://data.ninjakiwi.com/btd6/events`, (json) => {
             latestEvents = json["body"];
+            eventsDataCachedAt = Date.now();
         });
     }
     return latestEvents;
