@@ -4144,7 +4144,7 @@ function generateInstaAllView() {
     }
 
     let instaMonkeyIconsContainer = createEl('div', {
-        classList: ['insta-monkey-icons-container']
+        classList: ['d-flex', 'f-wrap', 'jc-center']
     })
     instaMonkeysAllDiv.appendChild(instaMonkeyIconsContainer);
 
