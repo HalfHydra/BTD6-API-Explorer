@@ -1091,7 +1091,7 @@ function changeTab(tab) {
             generateLeaderboards();
             break;
         case "rounds":
-            changeTitle("Roundsets Explorer")
+            changeTitle("Bonus: Roundsets Explorer")
             generateRoundsets();
             break;
         case 'legends':
