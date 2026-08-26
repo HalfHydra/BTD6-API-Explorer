@@ -6,6 +6,7 @@ let coopBossData = {
 }
 
 let hideTeamGroups = false;
+let maxProfilesLoaded = 10;
 
 async function generateLeaderboards() {
     showLoading();
@@ -19,10 +20,38 @@ async function generateLeaderboards() {
     // leaderboardPage.style.minHeight = "800px";
     leaderboardsContent.appendChild(leaderboardPage);
 
-    // let workInProgressText = document.createElement('p');
-    // workInProgressText.classList.add('site-info-header', 'sites-text', 'black-outline');
-    // workInProgressText.innerHTML = 'Note: Update 48 changed leaderboards and broke the site. It will be fixed sometime soon.';
-    // leaderboardPage.appendChild(workInProgressText);
+    let headerDiv = createEl('div', {
+        classList: ['d-flex', 'ai-center', 'jc-center', 'fd-column'],
+        style: {
+            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            padding: "10px",
+            borderRadius: "10px",
+            marginTop: "10px",
+        }
+    });
+    leaderboardPage.appendChild(headerDiv);
+
+    let workInProgressText = createEl('p', {
+        classList: ['font-gardenia', 'lh-add-half'],
+        innerHTML: `These settings can help you avoid rate limiting when browsing the leaderboards.`
+    });
+    headerDiv.appendChild(workInProgressText);
+
+    let leaderboardSettingsDiv = createEl('div', {
+        classList: ['d-flex', 'jc-between']
+    })
+    headerDiv.appendChild(leaderboardSettingsDiv);
+
+    let autoLoad = generateCheckbox("Auto Load Profiles", !preventRateLimiting, (checked) => {
+        preventRateLimiting = !checked;
+    });
+    leaderboardSettingsDiv.appendChild(autoLoad);
+
+    let maxProfilesLoadedDiv = generateNumberInput("Max Profiles Loaded:", maxProfilesLoaded, 0, 1000, 1, (value) => {
+        maxProfilesLoaded = value;
+    });
+    leaderboardSettingsDiv.appendChild(maxProfilesLoadedDiv);
+
 
     let currentText = document.createElement('p');
     currentText.classList.add('hero-progress-header-text', 'leaderboards-header-text');
@@ -1057,7 +1086,7 @@ function addLeaderboardEntries(leaderboardData, page, count) {
                             }
                         }
 
-                        if (page == 1 && ((index + ((page - 1) * count) + 1) <= 50) && !preventRateLimiting) {
+                        if (((index + ((page - 1) * count) + 1) <= maxProfilesLoaded) && !preventRateLimiting) {
                             addRequestToQueue(entry.profile, async () => {
                                 try {
                                     let userProfile = await getUserProfile(entry.profile);
