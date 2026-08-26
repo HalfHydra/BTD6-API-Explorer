@@ -95,40 +95,135 @@ let imageScroll = [
         "image": "/LandingScroll/Update56&RogueFeat"
     },
     {
-        "title": "View Your Profile!",
-        "text": "- View API exclusive stats<br>- Full Top Heroes/Towers list<br>- Top Paragons counts<br>- Ability usage counts<br>- Detailed map statistics<br>- Track your insta monkey collection",
+        "title": "View Your Profile",
+        "text": `
+            API Exclusive Stats:<br>
+            - Top Paragons<br>
+            - Abilities Usage Counts<br>
+            - Detailed Map Play Stats<br>
+            <br>
+            Auto Tracking:<br>
+            - Towers, Heroes, Paragons<br>
+            - Maps Medals, Knowledge<br>
+            - Quests, Trophy Store Items<br>
+            - Powers Pro, Achievements<br>
+            - Insta Monkey Collection<br>
+        `,
         "image": "OverviewProfile"
     },
     {
-        "title": "View Events!",
-        "text": "- Recent events details<br>- Race event details<br>- Boss event details<br>- Odyssey event details<br>- Contested Territory details<br>- Daily Challenge details<br>- Collection event details",
+        "title": "Insta Collection",
+        "text": `
+            Profile Login Required:<br>
+            - Track missing Instas Monkeys<br>
+            - See All Available Instas<br>
+            - Collection Event odds helper<br>
+            <br>
+            Collection Event Schedules<br>
+            - Featured insta list<br>
+            - Times in your timezone<br>
+            - Filter by a tower<br>
+        `,
+        "image": "/LandingScroll/InstaCollectionAll"
+    },
+    {
+        "title": "Powers Pro Calculator",
+        "text": `
+            - Uses your account data<br>
+            - Learn how to get XP<br>
+            - See Monkey Money needed<br>
+            - Optimize unlock spending<br>
+        `,
+        "image": "/LandingScroll/PowersPro"
+    },
+    {
+        "title": "API Events List",
+        "text": `
+            - Active, Upcoming, Past<br>
+            - Event timers and exact times<br>
+            <br>
+            Site Supported Events:<br>
+            - Race Events<br>
+            - Boss Events<br>
+            - Odyssey Events<br>
+            - Collection Events<br>
+            - Boss Rush<br>
+            - Contested Territory<br>
+            - Daily Challenges<br>
+        `,
         "image": "/LandingScroll/Events"
     },
     {
-        "title": "Featured Insta Schedule!",
-        "text": "- View Collection Event's rotation and schedule<br>- View in your local timezone<br>- Filter schedule by tower type",
-        "image": "/LandingScroll/CollectionEvent"
-    },
-    {
-        "title": "Contested Territory Map!",
-        "text": "- Accurate depiction of the latest CT map<br>- Simple tile summaries<br>- Customizable map<br>- Identify relic locations relative to your team",
+        "title": "Contested Territory Map",
+        "text": `
+            - Overview Summary<br>
+            - Accurate Map Visuals<br>
+            - Simple Tile Summaries<br>
+            - Advanced Filtering<br>
+            - Configurable Display<br>
+        `,
         "image": "/LandingScroll/CTMap"
     },
     {
-        "title": "View Leaderboards!",
-        "text": "- View event leaderboards<br>- Up to 1000 player entries<br>- View extra score information<br>- View user profiles<br>- Contested Territory groups",
+        "title": "Leaderboards",
+        "text": `
+            Leaderboards<br>
+            - Extra Score Details<br>
+            - Up to 1000 players/entries<br>
+            - See profile/team info<br>
+            <br>
+            Lobby Groups for CT<br>
+            - Teams and CT point scores<br>
+        `,
         "image": "/LandingScroll/Leaderboards"
     },
     {
-        "title": "View Roundsets!",
-        "text": "- Detailed round information<br>- Advanced round filtering<br>- Preview rounds visually<br>- Boss custom rounds<br>- Custom event rounds<br>- Rogue Legends special rounds included",
-        "image": "/LandingScroll/Roundsets"
+        "title": "Rogue Extracted Artifacts Tracker",
+        "text": `
+            - Track all artifacts<br>
+            - Sync with API<br>
+            - Advanced filtering<br>
+            - Render progress image<br>
+        `,
+        "image": "/LandingScroll/RogueLegends"
     },
     {
-        "title": "Rogue Legends Helper!",
-        "text": "- View all artifacts<br>- Search, sort, and filtering<br>- Hero Starter Kits reference<br>- Track extracted artifacts<br>- Export progress image (desktop only)",
-        "image": "/LandingScroll/RogueLegends"
-    }
+        "title": "Rogue Feat Trackers",
+        "text": `
+            - View specific towers needed<br>
+            - Monkey Manager<br>
+            - One for All<br>
+            - Synced with API<br>
+        `,
+        "image": "/LandingScroll/RogueFeats"
+    },
+    {
+        "title": "Rogue Campaign Stats",
+        "text": `
+            - Track Hero Completions<br>
+            - See Overall Stats or By Hero<br>
+            - Separate Heroes and Skins<br>
+            <br>
+            Hero/Skin Stats Available:<br>
+            - All Towers Obtained<br>
+            - All Artifacts Obtained<br>
+            - Total Hero Pops<br>
+            - Runs Completed<br>
+            - Highest Stage Reached<br>
+        `,
+        "image": "/LandingScroll/RogueHeroStats"
+    },
+    {
+        "title": "Bonus: Roundset Info",
+        "text": `
+            - Detailed round information<br>
+            - Advanced filtering<br>
+            - Preview rounds visually<br>
+            - Event Custom Roundsets<br>
+            - Rogue Legends Rounds<br>
+        `,
+        "image": "/LandingScroll/Roundsets"
+    },
 ]
 let imageScrollIndex = 0;
 
@@ -550,7 +645,7 @@ function generateFrontPage(){
     frontPage.innerHTML = '';
 
     frontPage.appendChild(createEl('p', { classList: ['disclaimer-text', 'font-gardenia'], style: {
-        fontSize: "18px",
+        fontSize: "20px",
         textAlign: "center",
         lineHeight: "1.5",
     }, innerHTML: 'A fanmade viewer for the Ninja Kiwi <a href="https://data.ninjakiwi.com/" target="_blank" style="color: white;">Open Data API</a> plus other features.<br>This site is not affiliated with Ninja Kiwi. All game assets belong to Ninja Kiwi.' }));
@@ -563,10 +658,10 @@ function generateFrontPage(){
     let siteImageScrollLeft = createEl('div', { classList: ['d-flex', 'fd-column'], style: {width: "300px", background: "rgba(0,0,0,0.36)", padding: "10px", borderRadius: "10px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", gap: "1rem"}});
     siteImageScroll.appendChild(siteImageScrollLeft);
 
-    let siteImageScrollTitle = createEl('p', { classList: ['font-luckiest', 'black-outline'], style: {fontSize: "28px", textAlign: "center"}, innerHTML: 'BTD6 API Explorer' });
+    let siteImageScrollTitle = createEl('p', { classList: ['font-luckiest', 'black-outline'], style: {fontSize: "24px", textAlign: "center"}, innerHTML: '' });
     siteImageScrollLeft.appendChild(siteImageScrollTitle);
 
-    let siteImageScrollOverlayText = createEl('p', { classList: ['font-gardenia'], style: {fontSize: "20px", lineHeight: "1.5"}, innerHTML: 'Click on the images to access the sites!' });
+    let siteImageScrollOverlayText = createEl('p', { classList: ['font-gardenia'], style: {fontSize: "20px", lineHeight: "1.5"}, innerHTML: '' });
     siteImageScrollLeft.appendChild(siteImageScrollOverlayText);
 
     let siteImageScrollImage = createEl('img', { classList: ['site-image-scroll'], style: { borderRadius: "10px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)", transition: "background-image 0.5s ease-in-out", width: "400px"}});
@@ -821,7 +916,7 @@ function generateFrontPage(){
 
                 let useGuideBtn = createEl('p', {
                     classList: ['where-button', 'black-outline'],
-                    innerHTML: 'Open Guide',
+                    innerHTML: 'How to Use',
                     style: {
                         minWidth: "150px",
                         textAlign: "center",
