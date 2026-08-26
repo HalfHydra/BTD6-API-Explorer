@@ -5978,7 +5978,7 @@ async function generateEvents(){
     sortedEvents = [...activeEvents, ...upcomingEvents, ...finishedEvents];
 
     sortedEvents.forEach((event, index) => {
-        if (!['socialseason', 'bossRush', 'ct', 'raceEvent', 'bossBloon', 'collectableEvent', 'odysseyEvent'].includes(event.type)) { return; }
+        if (!['socialseason', 'bossRush', 'ct', 'raceEvent', 'bossBloon', 'collectableEvent', 'odysseyEvent', 'maintenance', 'sweepstakes'].includes(event.type)) { return; }
         let eventDiv = createEl('div', {
             classList: ['d-flex', 'w-100', 'jc-between', 'ai-center', 'pointer'],
             style: {
@@ -6132,7 +6132,21 @@ async function generateEvents(){
                 eventIcon.src = `../Assets/UI/BossRushBtn.png`;
                 eventNameId.innerHTML = `Boss Rush`;
                 eventDiv.addEventListener('click', () => {
-                    generateBossRush();
+                    openBossRushDetails(event);
+                });
+                break;
+            case "sweepstakes":
+                eventIcon.src = `../Assets/UI/SweepstakesBtn.png`;
+                eventNameId.innerHTML = `Sweepstakes`;
+                eventDiv.addEventListener('click', () => {
+                    errorModal("Check the in-game menu for Sweepstakes event details. Good luck!", null, false, "No Sweepstakes Info");
+                });
+                break;
+            case "maintenance":
+                eventIcon.src = `../Assets/UI/BadConnectionBtn.png`;
+                eventNameId.innerHTML = `Maintenance`;
+                eventDiv.addEventListener('click', () => {
+                    errorModal(`Not exactly an event, but the game is scheduled to have server maintenance during this time.<br><br>${new Date(event.start).toLocaleString()} until ${new Date(event.end).toLocaleString()}`, null, false, "Maintenance Info");
                 });
                 break;
         }

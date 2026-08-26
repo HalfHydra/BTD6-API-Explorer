@@ -712,7 +712,7 @@ function openOAKInstructionsModal(){
     
 }
 
-function errorModal(body, source, force) {
+function errorModal(body, source, force, header) {
     if (isErrorModalOpen && !force) { return; }
     let modalOverlay = document.createElement('div');
     modalOverlay.classList.add('error-modal-overlay');
@@ -736,7 +736,7 @@ function errorModal(body, source, force) {
 
     let modalHeaderText = document.createElement('p');
     modalHeaderText.classList.add('error-modal-header-text','black-outline');
-    modalHeaderText.innerHTML = "Error";
+    modalHeaderText.innerHTML = header || "Error";
     modalHeader.appendChild(modalHeaderText);
 
     let dummyElmnt = document.createElement('div');
