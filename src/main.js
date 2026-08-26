@@ -644,10 +644,11 @@ function generateFrontPage(){
     const frontPage = document.getElementById('home-content');
     frontPage.innerHTML = '';
 
-    frontPage.appendChild(createEl('p', { classList: ['disclaimer-text', 'font-gardenia'], style: {
-        fontSize: "20px",
+    frontPage.appendChild(createEl('p', { classList: ['font-gardenia'], style: {
+        fontSize: "17px",
         textAlign: "center",
         lineHeight: "1.5",
+        paddingTop: "10px",
     }, innerHTML: 'A fanmade viewer for the Ninja Kiwi <a href="https://data.ninjakiwi.com/" target="_blank" style="color: white;">Open Data API</a> plus other features.<br>This site is not affiliated with Ninja Kiwi. All game assets belong to Ninja Kiwi.' }));
 
     // frontPage.appendChild(createEl('p', { classList: ['site-info-header', 'black-outline'], innerHTML: 'Site Features and Information' }));
