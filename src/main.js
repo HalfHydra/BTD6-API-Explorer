@@ -11163,7 +11163,7 @@ function generateProPowerProgress() {
     progressContent.appendChild(mainContainer);
 
     let leftDiv = createEl('div', {
-        classList: ['d-flex', 'ai-center', 'gap-10'],
+        classList: ['d-flex', 'jc-center', 'ai-center', 'pos-rel'],
     });
     mainContainer.appendChild(leftDiv);
 
@@ -11196,6 +11196,18 @@ function generateProPowerProgress() {
         src: getTowerAssetPath("DartMonkey", "000"),
     });
     towerProgressPortraitDiv.appendChild(towerProgressPortrait);
+
+    let powerProXPTotal = createEl('p', {
+        classList: ['tower-progress-content-xp', 'mm-outline'],
+        style: {
+            fontSize: "24px",
+            position: "absolute",
+            bottom: "40px",
+            display: "none"
+        },
+        innerHTML: `Total XP: ?`,
+    });
+    leftDiv.appendChild(powerProXPTotal);
 
 
     let rightDiv = createEl('div', {
@@ -11230,6 +11242,13 @@ function generateProPowerProgress() {
         let thresholds = powerData.unlockThresholds;
         let currentXP = powerSaveData.xp || 0;
         let unlockedTier = powerSaveData.unlockedTier || 0;
+
+        if (currentXP > thresholds[2]) {
+            powerProXPTotal.innerHTML = `Total XP: ${currentXP.toLocaleString()}`;
+            powerProXPTotal.style.display = "flex";
+        } else {
+            powerProXPTotal.style.display = "none";
+        }
 
         let tierXPStatus = {};
         for (let tier = 1; tier <= 3; tier++) {
