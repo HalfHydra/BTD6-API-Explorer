@@ -377,19 +377,24 @@ function generateRoundsets() {
         roundsetDiv.appendChild(roundsetIcon);
     })
 
-    let knownPreviousEventsDiv = document.createElement('div');
-    knownPreviousEventsDiv.classList.add('known-previous-events-div');
+    let knownPreviousEventsDiv = createEl('div', {
+        classList: [],
+        style: {
+            margin: "20px 0"
+        }
+    });
     selectorsDiv.appendChild(knownPreviousEventsDiv);
 
-    let knownPreviousEventsText = document.createElement('p');
-    knownPreviousEventsText.classList.add('other-roundsets-selector-text', 'black-outline');
-    knownPreviousEventsText.innerHTML = "Known Previous Events";
-    knownPreviousEventsDiv.appendChild(knownPreviousEventsText);
+    let knownPreviousEventsCollapse = collapsableDiv("Known Previous Events", {
+        classList: ['f-wrap'],
+        collapse: true
+    })
+    knownPreviousEventsDiv.appendChild(knownPreviousEventsCollapse.container);
 
     Object.entries(expiredRoundsets).forEach(([event, data]) => {
         let roundsetDiv = document.createElement('div');
-        roundsetDiv.classList.add('roundset-selector-div', 'fd-column');
-        selectorsDiv.appendChild(roundsetDiv);
+        roundsetDiv.classList.add('roundset-selector-div', 'fd-column', 'fg-1');
+        knownPreviousEventsCollapse.content.appendChild(roundsetDiv);
 
         let mainDiv = createEl('div', {classList: ['d-flex', 'jc-between', 'ai-center', 'w-100']});
         roundsetDiv.appendChild(mainDiv);
@@ -474,19 +479,24 @@ function generateRoundsets() {
     skuRoundsetDiv.classList.add('sku-roundset-selector-div');
     selectorsDiv.appendChild(skuRoundsetDiv);
 
-    let skuRoundsetText = document.createElement('p');
-    skuRoundsetText.classList.add('other-roundsets-selector-text', 'black-outline');
-    skuRoundsetText.innerHTML = "Other Custom Rounds";
-    skuRoundsetDiv.appendChild(skuRoundsetText);
+    let skuRoundsCollapse = collapsableDiv("Other Custom Rounds", {
+        classList: ['f-wrap', 'jc-center'],
+        collapse: true
+    });
+    skuRoundsetDiv.appendChild(skuRoundsCollapse.container);
 
-    let skuRoundsetDesc = document.createElement('p');
-    skuRoundsetDesc.classList.add('sku-roundset-selector-desc');
-    skuRoundsetDesc.innerHTML = "These mostly old roundsets will have only been used in one-off events such as Odysseys, Races, or Bosses and may not have ended up being used for their intended purpose despite their name. Take these roundsets with a grain of salt. I'm including them on the viewer for completeness sake.";
-    skuRoundsetDiv.appendChild(skuRoundsetDesc);
+    let skuRoundsetDesc = createEl('p', {
+        classList: ['font-gardenia', 'lh-add-half'],
+        style: {
+            padding: "10px"
+        },
+        innerHTML: "These mostly old roundsets will have only been used in one-off events such as Odysseys, Races, or Bosses and may not have ended up being used for their intended purpose despite their name. Take these roundsets with a grain of salt. I'm including them on the viewer for completeness sake."
+    });
+    skuRoundsCollapse.content.appendChild(skuRoundsetDesc);
 
     let skuRoundsetsDiv = document.createElement('div');
     skuRoundsetsDiv.classList.add('sku-roundsets-selector-div');
-    skuRoundsetDiv.appendChild(skuRoundsetsDiv);
+    skuRoundsCollapse.content.appendChild(skuRoundsetsDiv);
 
     constants.skuRoundsets.forEach(roundset => {
         let roundsetDiv = document.createElement('div');
@@ -497,7 +507,7 @@ function generateRoundsets() {
         skuRoundsetsDiv.appendChild(roundsetDiv);
 
         let roundsetText = document.createElement('p');
-        roundsetText.classList.add('sku-roundset-selector-text', 'black-outline');
+        roundsetText.classList.add('sku-roundset-selector-text', 'font-gardenia');
         roundsetText.innerHTML = roundset;
         roundsetDiv.appendChild(roundsetText);
     });
