@@ -1134,6 +1134,88 @@ async function generateRounds(type, reverse, roundsetType, presetSettings={}) {
 
             let minWidthPercentage = (30 / 600) * 100;
 
+            let roundsDetailedHeaderDiv = createEl('div', {
+                classList: ['round-div-detailed']
+            });
+            fragment.appendChild(roundsDetailedHeaderDiv);
+
+            let startingCashDiv = createEl('div', {
+                classList: ['d-flex', 'ai-center', 'jc-between'],
+            });
+            roundsDetailedHeaderDiv.appendChild(startingCashDiv);
+
+            let leftDiv = createEl('div', {
+                classList: ['d-flex', 'ai-center'],
+                style: {
+                    gap: "10px"
+                }
+            });
+            startingCashDiv.appendChild(leftDiv);
+
+            let labelStart = createEl('p', {
+                classList: ['black-outline'],
+                style: {
+                    fontSize: "24px",
+                },
+                innerHTML: `Starting Cash:`
+            });
+            leftDiv.appendChild(labelStart);
+
+            let startingCashGroup = createEl('div', {
+                classList: ['d-flex', 'ai-center']
+            });
+            leftDiv.appendChild(startingCashGroup);
+
+            let labelCashIcon = createEl('img', {
+                classList: ['income-img'],
+                src: "../Assets/UI/CoinIcon.png"
+            });
+            startingCashGroup.appendChild(labelCashIcon);
+
+            let labelCashText = createEl('p', {
+                classList: ['black-outline'],
+                style: {
+                    fontSize: "24px",
+                },
+                innerHTML: `${roundsetFilterSettings.roundsetStartingCash.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
+            });
+            startingCashGroup.appendChild(labelCashText);
+
+            let rightDiv = createEl('div', {
+                classList: ['d-flex', 'ai-center'],
+                style: {
+                    gap: "10px"
+                }
+            });
+            startingCashDiv.appendChild(rightDiv);
+
+            let labelEnd = createEl('p', {
+                classList: ['black-outline'],
+                style: {
+                    fontSize: "24px",
+                },
+                innerHTML: `Total Cash on Round ${roundsetFilterSettings.roundsetFilterEnd || roundsetProcessed.rounds[roundsetProcessed.rounds.length - 1].roundNumber}:`
+            });
+            rightDiv.appendChild(labelEnd);
+
+            let endCashGroup = createEl('div', {
+                classList: ['d-flex', 'ai-center']
+            });
+            rightDiv.appendChild(endCashGroup);
+
+            endCashGroup.appendChild(labelCashIcon.cloneNode(true));
+
+            let labelCashTotal = createEl('p', {
+                classList: ['black-outline'],
+                style: {
+                    fontSize: "24px",
+                },
+                innerHTML: `${roundsetProcessed.rounds[roundsetFilterSettings.roundsetFilterEnd ? roundsetFilterSettings.roundsetFilterEnd - 1 : roundsetProcessed.rounds.length - 1].incomeSum.toFixed(0).toLocaleString()}`
+            });
+            endCashGroup.appendChild(labelCashTotal);
+
+
+
             roundsetProcessed.rounds.forEach(async (round, index) => {
                 if(!isRoundInFilter(round.roundNumber)){
                     return;
