@@ -6149,7 +6149,7 @@ async function generateEvents(){
         })
     })
 
-    if (upcomingDiv.content.innerHTML == "") {
+    if (upcomingEvents.length == 0) {
         let noUpcoming = createEl('p', {
             classList: ['font-gardenia', 'lh-add-half'],
             style: {
@@ -6160,8 +6160,8 @@ async function generateEvents(){
         });
         upcomingDiv.content.appendChild(noUpcoming);
     }
-    if (activeDiv.content.innerHTML == "") {
-        activeDiv.style.display = "none";
+    if (activeEvents.length == 0) {
+        activeDiv.container.style.display = "none";
     }
 }
 
