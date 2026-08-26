@@ -5987,6 +5987,7 @@ async function generateEvents(){
             classList: ['of-contain'],
             style: {
                 width: "70px",
+                height: "70px"
             }
         });
         eventDiv.appendChild(eventIcon);
