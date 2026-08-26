@@ -850,7 +850,7 @@ function generateArtifactContainer(artifact, type, size=1, count=null) {
     }
 
     let artifactDiv = createEl('div', {
-        classList: ['d-flex', 'ai-center', 'jc-center', 'pos-rel'],
+        classList: ['d-flex', 'ai-center', 'jc-center', 'pos-rel', 'artifact-container'],
         style: {
             width: `${size * 100}px`,
             height: `${size * 115}px`,
