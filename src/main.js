@@ -6979,34 +6979,22 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     challengeModelSettings.classList.add('challenge-model-settings');
     challengeModelTop.appendChild(challengeModelSettings);
 
-    let challengeModelSettingsLeft = document.createElement('div');
-    challengeModelSettingsLeft.classList.add('challenge-model-settings-left');
-    challengeModelSettings.appendChild(challengeModelSettingsLeft);
-
-    let challengeModelSettingsRight = document.createElement('div');
-    challengeModelSettingsRight.classList.add('challenge-model-settings-right');
-    challengeModelSettings.appendChild(challengeModelSettingsRight);
-
     let challengeSettings = {
         'Starting Cash': {
             "icon": "CoinIcon",
             "key": "startingCash",
         },
-        'Start Round': {
-            "icon": "StartRoundIconSmall",
-            "key": "startRound",
-        },
         'Starting Lives': {
             "icon": "LivesIcon",
             "key": "lives",
         },
+        'Start Round': {
+            "icon": "StartRoundIconSmall",
+            "key": "startRound",
+        },
         'End Round': {
             "icon": "EndRoundIconSmall",
             "key": "endRound",
-        },
-        'Max Lives': {
-            "icon": "LivesIcon",
-            "key": "maxLives",
         },
         'Max Monkeys': {
             "icon": "MaxMonkeysIcon",
@@ -7017,8 +7005,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     Object.entries(challengeSettings).forEach(([setting,data], index) => {
         let challengeSetting = document.createElement('div');
         challengeSetting.classList.add('challenge-setting');
-
-        index % 2 ? challengeModelSettingsRight.appendChild(challengeSetting) : challengeModelSettingsLeft.appendChild(challengeSetting);
+        challengeModelSettings.appendChild(challengeSetting)
 
         let challengeSettingIcon = document.createElement('img');
         challengeSettingIcon.classList.add('challenge-setting-icon');
