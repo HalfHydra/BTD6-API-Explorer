@@ -310,16 +310,18 @@ function loadSettings() {
         if (settings.hasOwnProperty("TeamsStoreItems")) { showTeamsItems = settings.TeamsStoreItems };
         if (settings.hasOwnProperty("ShowHiddenTrophyItems")) { trophyStoreShowHidden = settings.ShowHiddenTrophyItems };
         if (settings.hasOwnProperty("seenFTMessages")) { seenFTMessages = settings.seenFTMessages };
+        if (settings.hasOwnProperty("maxProfilesLoaded")) { maxProfilesLoaded = settings.maxProfilesLoaded };
     }
 }
 
 function saveSettings() {
     let settings = {
-        "ProfileLoading": preventRateLimiting,
-        "UseNamedMonkeys": useNamedMonkeys,
-        "TeamsStoreItems": showTeamsItems,
-        "ShowHiddenTrophyItems": trophyStoreShowHidden,
-        "seenFTMessages": seenFTMessages
+        "ProfileLoading": preventRateLimiting || false,
+        "UseNamedMonkeys": useNamedMonkeys || false,
+        "TeamsStoreItems": showTeamsItems || false,
+        "ShowHiddenTrophyItems": trophyStoreShowHidden || true,
+        "seenFTMessages": seenFTMessages || [],
+        "maxProfilesLoaded": maxProfilesLoaded || 10
     }
     localStorage.setItem("BTD6OAKSettings", JSON.stringify(settings));
 }

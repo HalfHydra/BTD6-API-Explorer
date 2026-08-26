@@ -42,13 +42,17 @@ async function generateLeaderboards() {
     })
     headerDiv.appendChild(leaderboardSettingsDiv);
 
+    loadSettings();
+
     let autoLoad = generateCheckbox("Auto Load Profiles", !preventRateLimiting, (checked) => {
         preventRateLimiting = !checked;
+        saveSettings();
     });
     leaderboardSettingsDiv.appendChild(autoLoad);
 
     let maxProfilesLoadedDiv = generateNumberInput("Max Profiles Loaded:", maxProfilesLoaded, 0, 1000, 1, (value) => {
         maxProfilesLoaded = value;
+        saveSettings();
     });
     leaderboardSettingsDiv.appendChild(maxProfilesLoadedDiv);
 
