@@ -90,7 +90,7 @@ function createEl(tag, options = {}) {
     return el;
 }
 
-function createModal({ header = '', content = '', footer = '', backgroundColor = "var(--profile-secondary)" } = {}) {
+function createModal({ header = '', content = '', footer = '', backgroundColor = "var(--profile-secondary)", headerColor = "var(--profile-primary)" } = {}) {
     const modalOverlay = createEl('div', {
         classList: ['modal-overlay']
     });
@@ -101,6 +101,9 @@ function createModal({ header = '', content = '', footer = '', backgroundColor =
     if(header != '') {
         modalBox.appendChild(modalHeader);
 
+    }
+    if(headerColor) {
+        modalHeader.style.backgroundColor = headerColor;
     }
 
 

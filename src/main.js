@@ -9633,6 +9633,7 @@ function generateTrophyStoreProgress() {
     trophyStoreModalBtn.addEventListener('click', () => {
         createModal({
             header: "Filter and Sort Items", 
+            headerColor: "#4F3993",
             content: trophyStoreItemsModal,
         })
     })
@@ -10261,7 +10262,8 @@ function generateTrophyStorePopout(key) {
 
     createModal({
         content: modalContent,
-        header: getLocValue(`${key}ShortName`),
+        header: getLocValue(`${key}ShortName`), 
+        headerColor: "#4F3993",
     })
 }
 
@@ -10377,7 +10379,8 @@ function generateTeamsStorePopout(key) {
 
     createModal({
         content: modalContent,
-        header: getLocValue(`${key}ShortName`),
+        header: getLocValue(`${key}ShortName`), 
+        headerColor: "#4F3993",
     });
 
 }
