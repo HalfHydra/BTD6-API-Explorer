@@ -275,12 +275,15 @@
     document.getElementById("loading").style.transform = "scale(0)";
     document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
     addEventListener("resize", (event) => { document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`); })
+    document.getElementsByClassName('title')[0].addEventListener("click", () => {
+        changeTab('home')
+    })
+
     showLoading();
     fetchConstants().then(() => {
         hideLoading();
         generateHeaderTabs();
-        changeTab("home");
-        generateFrontPage();
+        restoreFromURL();
     });
 </script>
 </html>

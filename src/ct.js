@@ -248,6 +248,7 @@ async function generateCTs(){
         raceInfoRules.addEventListener('click', () => {
             showLoading();
             openCTEventDetails('events', race)
+            updateURL('events', "ContestedTerritory", race.id);
         })
         ctInfoLeftDiv.appendChild(raceInfoRules);
 
@@ -269,6 +270,7 @@ async function generateCTs(){
         ctPlayerLeaderboard.innerHTML = "Players"
         ctPlayerLeaderboard.addEventListener('click', () => {
             showLeaderboard('events', race, "CTPlayer");
+            updateURL('leaderboards', "CTPlayer", race.id);
         })
         CTLeaderboardsBtns.appendChild(ctPlayerLeaderboard);
 
@@ -277,6 +279,7 @@ async function generateCTs(){
         ctTeamsLeaderboard.innerHTML = "Teams"
         ctTeamsLeaderboard.addEventListener('click', () => {
             showLeaderboard('events', race, "CTTeam");
+            updateURL('leaderboards', "CTTeam", race.id);
         })
         CTLeaderboardsBtns.appendChild(ctTeamsLeaderboard);
 
@@ -335,7 +338,9 @@ async function openCTEventDetails(source, eventData) {
     }
     if (source != null) {
         document.getElementById(`${source}-content`).style.display = "none";
-        addToBackQueue({ "source": source, "destination": "relics" });
+        addToBackQueue({ "source": source, "destination": "relics", callback: () => { 
+            updateURL(currentRoute.tab, currentRoute.subtab);
+        }});
     }
     hideLoading();
 

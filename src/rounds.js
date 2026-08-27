@@ -25,7 +25,7 @@ const BloonTraitBits = {
     MOABClass:   1 << 6
 };
 
-function generateRoundsets() {
+async function generateRoundsets() {
     let roundsetsContent = document.getElementById('rounds-content');
     roundsetsContent.innerHTML = "";
 
@@ -145,30 +145,7 @@ function generateRoundsets() {
     
     let normalRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "normal"));
     let bossRoundsets = Object.fromEntries(Object.entries(constants.roundSets).filter(([key, value]) => value.type === "boss"));
-    let otherRoundsets = {};
-    Object.entries(constants.quests).forEach(([name, data]) => {
-        data.parts.forEach((part, index) => {
-            if (part.roundSets.length != 0) {
-                let ignoredRoundSets = ["AlternateRoundSet"]
-                if (part.roundSets.some(rs => ignoredRoundSets.includes(rs))) {
-                    return;
-                }
-                let setObj = {
-                    name: getLocValue(data.nameLocKey),
-                    icon: data.icon,
-                    type: "quest",
-                    startingCash: part.startingCash,
-                    startRound: part.startRound,
-                    endRound: part.endRound,
-                    roundset: part.roundSets[0]
-                }
-                if (data.parts.length > 1) {
-                    setObj["part"] = index + 1
-                }
-                otherRoundsets[`${name}${(data.parts.length > 1) ? `Part${index + 1}` : ""}`] = setObj
-            }
-        })
-    })
+    let otherRoundsets = await processQuestRoundsetData();
 
     Object.entries(normalRoundsets).forEach(([roundset, data]) => {
         let roundsetDiv = createEl('div', {
@@ -271,9 +248,7 @@ function generateRoundsets() {
         });
         roundsetDiv.addEventListener('click', () => {
             showLoading();
-            showRoundsetModel('rounds', data.roundset, {
-                special: constants.roundSets[data.roundset].special ? constants.roundSets[data.roundset].special : ""
-            });
+            showRoundsetModel('rounds', data.roundset);
         })
         legendsRoundsetContainer.appendChild(roundsetDiv);
 
@@ -348,19 +323,9 @@ function generateRoundsets() {
             }
         });
         roundsetDiv.addEventListener('click', () => {
-            let presetOptions = {
-                roundsetName: data.name ? `${data.name} ${data.part ? `${getQuestPartLabel(data.roundset ? data.roundset : roundset, data.part)}` : ""}` : roundset
-            }
-            if (data.startRound && data.startRound != -1) {
-                presetOptions.roundFilterStart = data.startRound ? data.startRound : 1
-            }
-            if (data.endRound && data.endRound != -1) {
-                presetOptions.roundFilterEnd = data.endRound ? data.endRound : null
-            }
-            if (data.startingCash && data.startingCash != -1) {
-                presetOptions.roundsetStartingCash = data.startingCash ? data.startingCash : 650
-            }
-            showRoundsetModel('rounds', data.roundset ? data.roundset : roundset, presetOptions);
+            console.log(data)
+            showRoundsetFromQuest(roundset, data);
+            updateURL("rounds", "Quest", roundset);
         })
         otherRoundsetDiv.appendChild(roundsetDiv);
         if (data.part) {
@@ -513,9 +478,64 @@ function generateRoundsets() {
     });
 }
 
+async function processQuestRoundsetData() {
+    let questRoundsets = {};
+    if (Object.keys(locJSON).length == 0) {
+        await fetchLocKeys();
+    }
+    Object.entries(constants.quests).forEach(([name, data]) => {
+        data.parts.forEach((part, index) => {
+            if (part.roundSets.length != 0) {
+                let ignoredRoundSets = ["AlternateRoundSet"]
+                if (part.roundSets.some(rs => ignoredRoundSets.includes(rs))) {
+                    return;
+                }
+                let setObj = {
+                    name: getLocValue(data.nameLocKey),
+                    icon: data.icon,
+                    type: "quest",
+                    startingCash: part.startingCash,
+                    startRound: part.startRound,
+                    endRound: part.endRound,
+                    roundset: part.roundSets[0]
+                }
+                if (data.parts.length > 1) {
+                    setObj["part"] = index + 1
+                }
+                questRoundsets[`${name}${(data.parts.length > 1) ? `Part${index + 1}` : ""}`] = setObj
+            }
+        })
+    })
+    return questRoundsets;
+}
+
+async function showRoundsetFromQuest(roundset, data) {
+    if (data == null) {
+        let questRoundsets = await processQuestRoundsetData();
+        data = questRoundsets[roundset];
+    }
+
+    let presetOptions = {
+        roundsetName: data.name ? `${data.name} ${data.part ? `${getQuestPartLabel(data.roundset ? data.roundset : roundset, data.part)}` : ""}` : roundset,
+        noSpecial: true,
+    }
+    if (data.startRound && data.startRound != -1) {
+        presetOptions.roundFilterStart = data.startRound ? data.startRound : 1
+    }
+    if (data.endRound && data.endRound != -1) {
+        presetOptions.roundFilterEnd = data.endRound ? data.endRound : null
+    }
+    if (data.startingCash && data.startingCash != -1) {
+        presetOptions.roundsetStartingCash = data.startingCash ? data.startingCash : 650
+    }
+    showRoundsetModel('rounds', data.roundset ? data.roundset : roundset, presetOptions);
+}
+
 async function showRoundsetModel(source, roundset, presetSettings={}) {
     roundsetProcessed = null;
     currentRoundsetData = null;
+
+    updateURL("rounds", null, roundset);
 
     roundsetFilterSettings = {
         roundsetName: constants.roundSets.hasOwnProperty(roundset) ? constants.roundSets[roundset].name : roundset,
@@ -536,7 +556,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
         roundsetConvertAllFortified: false,
         roundsetBloonsSpeedMultiplier: 1,
         roundsetMOABSpeedMultiplier: 1,
-        special: ""
+        noSpecial: false
     }
 
     if (Object.keys(presetSettings).length > 0) {
@@ -552,7 +572,9 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
     roundsetContent.style.display = "flex";
     roundsetContent.innerHTML = "";
     document.getElementById(`${source}-content`).style.display = "none";
-    addToBackQueue({"source": source, "destination": "roundsets"});
+    addToBackQueue({"source": source, "destination": "roundsets", callback: () => {
+        updateURL(currentRoute.tab);
+    }});
     resetScroll();
 
     let roundsetData = await fetch(`./data/roundsets/${roundset}.json`).then(response => response.json());
@@ -610,7 +632,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
     })
     rightDiv.appendChild(modalClose);
     
-    if(roundsetFilterSettings.special.includes("Rogue")) {
+    if(roundset.includes("Rogue") && roundsetFilterSettings.noSpecial == false) {
         let rogueHeaderBar = document.createElement('div');
         rogueHeaderBar.classList.add('d-flex', 'jc-evenly');
         headerBar.appendChild(rogueHeaderBar);
@@ -631,9 +653,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
             roundsetDiv.addEventListener('click', () => {
                 showLoading();
                 goBack();
-                showRoundsetModel(source, rs, {
-                    special: constants.roundSets[rs].special ? constants.roundSets[rs].special : ""
-                });
+                showRoundsetModel(source, rs);
             })
             rogueHeaderBar.appendChild(roundsetDiv);
 
@@ -650,7 +670,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
             addTooltip(roundsetDiv, desc, {});
         });
     }
-    if(roundsetFilterSettings.special.includes("Frontier")) {
+    if(roundset.includes("Frontier") && roundsetFilterSettings.noSpecial == false) {
         let frontierHeaderBar = document.createElement('div');
         frontierHeaderBar.classList.add('d-flex', 'jc-center', 'ai-center');
         headerBar.appendChild(frontierHeaderBar);
@@ -712,9 +732,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
             roundsetBtn.addEventListener('click', () => {
                 showLoading();
                 goBack();
-                showRoundsetModel(source, rs, {
-                    special: constants.roundSets[rs].special ? constants.roundSets[rs].special : ""
-                });
+                showRoundsetModel(source, rs);
             })
             frontierRoundsetsDiv.appendChild(roundsetBtn)
         })

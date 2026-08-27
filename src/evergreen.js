@@ -25,6 +25,12 @@ let rulesMap = {
     "Paragon Limit": "ParagonLimitIcon"
 }
 
+let currentRoute = {
+    tab: 'home',
+    subtab: null,
+    id: null,
+    params: {}
+};
 
 loadSettings();
 
@@ -266,7 +272,7 @@ async function fetchRogueDependencies() {
 async function fetchInstaDependencies() {
     await fetchLocKeys();
     generateInstaData();
-    changeProgressTab('InstaMonkeysUsable')
+    changeProgressTab('InstaMonkeys')
     clearBackQueue();
     hideLoading();
 }
@@ -548,7 +554,8 @@ function generateLoginDiv(callback, loginCallback) {
             if(callback) {
                 callback(oak_token);
             } else {
-                fetchMainDependencies();
+                isRestoringFromURL = true;
+                fetchMainDependencies()
             }
         });
         entry.appendChild(useBtn);
@@ -1006,6 +1013,187 @@ function getQuestPartLabel(roundsetName, partIndex) {
     return `${keyword} ${partIndex}`;
 }
 
+let isRestoringFromURL = false;
+
+function parseURL() {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return { tab: 'home' };
+    
+    const [path, queryString] = hash.split('?');
+    const parts = path.split('/').filter(Boolean);
+    
+    const route = {
+        tab: parts[0] || 'home',
+        subtab: parts[1] || null,
+        id: parts[2] || null,
+        params: {}
+    };
+
+    if (queryString) {
+        queryString.split('&').forEach(param => {
+            const [key, value] = param.split('=');
+            route.params[key] = decodeURIComponent(value);
+        });
+    }
+    
+    return route;
+}
+
+function updateURL(tab, subtab = null, id = null, params = {}) {
+    if (isRestoringFromURL) return;
+    let path = `#${tab}`;
+    if (subtab) path += `/${subtab}`;
+    if (id) path += `/${id}`;
+    
+    const queryParams = Object.entries(params).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
+    
+    if (queryParams) path += `?${queryParams}`;
+    
+    history.pushState(null, '', path);
+    currentRoute = { tab, subtab, id, params };
+}
+
+async function restoreFromURL() {
+    let route = parseURL();
+    isRestoringFromURL = true;
+    currentRoute = route;
+    
+    if (headerTabs.includes(route.tab)) {
+        changeTab(route.tab);
+    }
+    
+    switch(route.tab) {
+        case 'profile':
+            if (route.subtab) {
+                if (loggedIn) {
+                    changeProgressTab(route.subtab);
+                    switch(route.subtab) {
+                        case 'InstaMonkeys':
+                            onChangeInstaMonkeysView(null, route.params.view);
+                            break;
+                    }
+                    hideLoading();
+                }
+            }
+            break;
+            
+        case 'events':
+            if (route.subtab) {
+                changeEventTab(route.subtab);
+                if (route.id) {
+                    switch(route.subtab) {
+                        case 'Odyssey':
+                            if (!odysseyData) {
+                                await getOdysseyData(true);
+                            }
+                            const odysseyIndex = Object.keys(odysseyData).find(key => odysseyData[key].id === route.id);
+                            if (odysseyIndex) {
+                                await getOdyMetadata(odysseyIndex, "hard");
+                            }
+                            break;
+                        case "Bosses":
+                            if (!bossesData) {
+                                await getBossesData(true);
+                            }
+                            const bossIndex = Object.keys(bossesData).find(key => bossesData[key].id === route.id);
+                            if (bossIndex && route.params.elite) {
+                                const isElite = route.params.elite === 'Elite';
+                                const bossData = bossesData[bossIndex];
+                                await getBossMetadata(bossIndex, isElite);
+                                const eventData = getBossEventData(bossIndex, isElite);
+                                showChallengeModel('events', isElite ? bossData.metadataElite : bossData.metadataStandard, "Boss", eventData);
+                            }
+                            break;
+                        case "Races":
+                            if (!racesData) {
+                                await getRacesData(true);
+                            }
+                            const raceIndex = Object.keys(racesData).find(key => racesData[key].id === route.id);
+                            if (raceIndex) {
+                                await getRaceMetadata(raceIndex);
+                                showChallengeModel('events', racesData[raceIndex].metadata, "Race");
+                            }
+                            break;
+                        case "ContestedTerritory":
+                            if(!CTData) {
+                                await getCTData(false, true);
+                            }
+                            const CTIndex = Object.keys(CTData).find(key => CTData[key].id === route.id);
+                            if (CTIndex) {
+                                await openCTEventDetails('events', CTData[CTIndex]);
+                            }
+                            break;
+                        case "DailyChallenges":
+                        case "AdvancedDailyChallenges":
+                        case "CoopDailyChallenges":
+                            if(!DCData) {
+                                await getDailyChallengesData();
+                            }
+                            console.log(route.id)
+                            showChallengeModel('events', await getChallengeMetadata(route.id), false);
+                            break;
+                            
+                    }
+                }
+            }
+            break;   
+        case 'leaderboards':
+            if (route.subtab) {
+                switch (route.subtab) {
+                    case "Race":
+                        if (!racesData) {
+                            await getRacesData(true);
+                        }
+                        const raceIndex = Object.keys(racesData).find(key => racesData[key].id === route.id);
+                        if (raceIndex) {
+                            showLeaderboard('leaderboards', racesData[raceIndex], "Race");
+                        }
+                        break;
+                    case "Boss":
+                    case "BossElite":
+                        if (!bossesData) {
+                            await getBossesData(true);
+                        }
+                        const bossIndex = Object.keys(bossesData).find(key => bossesData[key].id === route.id);
+                        if (bossIndex) {
+                            showLeaderboard('leaderboards', bossesData[bossIndex], route.subtab === "BossElite" ? "BossElite" : "Boss");
+                        }
+                        break;
+                    case "CTTeam":
+                    case "CTPlayer":
+                        if (!CTData) {
+                            await getCTData(true);
+                        }
+                        const ctTeamIndex = Object.keys(CTData).find(key => CTData[key].id === route.id);
+                        if (ctTeamIndex) {
+                            showLeaderboard('leaderboards', CTData[ctTeamIndex], route.subtab === "CTPlayer" ? "CTPlayer" : "CTTeam");
+                        }
+                        break;
+                }
+            }
+            break;
+        case 'rounds':
+            if (route.subtab) {
+                console.log("Loading roundset from URL: " + route.subtab);
+                if (route.subtab === "Quest") {
+                    showRoundsetFromQuest(route.id);
+                } else {
+                    showRoundsetModel('rounds', route.subtab);
+                }
+            }
+            break;
+        case 'legends':
+            if (route.subtab) {
+                changeLegendTab(route.subtab);
+                if (route.id) {
+                    changeRogueTab(route.id);
+                }
+            }
+            break;
+    }
+    isRestoringFromURL = false; 
+}
+
 function standaloneGoToMainSite() {
     let mainSiteDiv = createEl('div', {
         classList: ['d-flex', 'jc-center', 'ai-center', 'pointer'],
@@ -1017,7 +1205,7 @@ function standaloneGoToMainSite() {
             gap: "16px",
         }
     });
-    
+
     let mainSiteLabel = createEl('p', {
         classList: ['main-site-label', 'black-outline'],
         style: {

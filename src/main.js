@@ -88,9 +88,9 @@ let imageScroll = [
         - Collection Event Schedules<br>
         - Contested Territory Map<br>
         <br>
-        Try the <a href="https://btd6store.ninjakiwi.com/?code=halfhydra" target="_blank" style="color: white;">Official BTD6 Webshop</a>!<br>
-        Creator Code: 'HalfHydra' - TY!<br>
-        Report Bugs: <a href="https://discord.gg/wep2RDmcqZ" target="_blank" style="color: white;">Discord Server</a><br>
+        Try the <a href="https://btd6store.ninjakiwi.com/?code=halfhydra" target="_blank" style="color: white;" onclick="event.stopPropagation()">Official BTD6 Webshop</a>!<br>
+        Creator Code: '<span class="us-all" onclick="event.stopPropagation()">HalfHydra</span>' - TY!<br>
+        Report Bugs: <a href="https://discord.gg/wep2RDmcqZ" target="_blank" style="color: white;" onclick="event.stopPropagation()">Discord Server</a><br>
         `,
         "image": "/LandingScroll/Update56&RogueFeat"
     },
@@ -276,11 +276,13 @@ function generateIfReady(){
         generateMapData()
         generateProgressSubText()
         changeTab('profile');
+        restoreFromURL()
     } else if(!loggedIn && readyFlags.slice(2).every(flag => flag === 1)){
         document.getElementById("home-content").style.display = "none";
         document.body.classList.add('transition-bg')
         generateHeaderTabs();
         changeTab('profile');
+        restoreFromURL()
     }
 }
 
@@ -351,24 +353,24 @@ function generateProgressSubText(){
     let chimpsTotalCoop = Object.values(processedMapData.Medals.coop).map(map => map["Clicks"]).filter(medal => medal).length;
     if (chimpsTotal + chimpsTotalCoop > 0) { progressSubText["CHIMPS"] = `${chimpsTotal + chimpsTotalCoop} CHIMPS Medal${chimpsTotal + chimpsTotalCoop != 1 ? "s" : ""} Earned` }
     let powersAvailable = Object.values(btd6usersave.powers).map(power => (typeof power === 'object' && power.quantity) ? power.quantity : 0).reduce((acc, amount) => acc + amount);
-    progressSubText["PowersUsable"] = `${powersAvailable} Power${powersAvailable != 1 ? "s" : ""} Available`;
+    progressSubText["Powers"] = `${powersAvailable} Power${powersAvailable != 1 ? "s" : ""} Available`;
     if (btd6publicprofile != null) {
         // let powersTotal = powersAvailable + btd6publicprofile.gameplay.powersUsed; // may include CT uses
-        progressSubText["Powers"] = `${powersAvailable} Power${powersAvailable != 1 ? "s" : ""} Collected`
+        progressSubText["PowersCollected"] = `${powersAvailable} Power${powersAvailable != 1 ? "s" : ""} Collected`
     }
     let powersProUnlocked = Object.values(btd6usersave.powersPro).filter(power => power.unlockedTier > 0).length;
     progressSubText["PowersPro"] = `${powersProUnlocked} Pro Power${(powersProUnlocked != 1) ? "s" : ""} Unlocked`
     let instaTotal = Object.values(processedInstaData.TowerTotal).reduce((acc, amount) => acc + amount);
-    progressSubText["InstaMonkeysUsable"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Available`;
+    progressSubText["InstaMonkeys"] = `${instaTotal} Insta${instaTotal != 1 ? "s" : ""} Available`;
     if (btd6publicprofile != null) {
-        progressSubText["InstaMonkeys"] = `${instaTotal + btd6publicprofile.gameplay.instaMonkeysUsed} Insta${instaTotal != 1 ? "s" : ""} Collected`;
+        progressSubText["InstaMonkeysTotal"] = `${instaTotal + btd6publicprofile.gameplay.instaMonkeysUsed} Insta${instaTotal != 1 ? "s" : ""} Collected`;
     }
     progressSubText["Achievements"] = `${btd6usersave.achievementsClaimed.length} Achievement${getAchievementsUnlocked().total != 1 ? "s" : ""} Earned`;
     progressSubText["AchievementsEarned"] = `${btd6usersave.achievementsClaimed.length}/${constants.achievements + constants.hiddenAchievements} Achievement${getAchievementsUnlocked().total != 1 ? "s" : ""} Earned`;
     let extrasUnlocked = generateExtrasUnlocked();
     let extrasTotal = Object.keys(extrasUnlocked).length;
     progressSubText["TrophyStore"] = `${Object.keys(trophyStoreItemsJSON).filter(k => getTrophyItemObtained(k)).length} Trophy Store Items Collected`
-    progressSubText["TeamsStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k] && teamsStoreItemsJSON[k]).length} Team Store Items Unlocked`
+    // progressSubText["TeamsStore"] = `${Object.keys(btd6usersave.trophyStoreItems).filter(k => btd6usersave.trophyStoreItems[k] && teamsStoreItemsJSON[k]).length} Team Store Items Unlocked`
     progressSubText["Quests"] = `${btd6usersave.quests.filter(q => q.complete).length} Quests Complete`;
     progressSubText["Extras"] = `${extrasTotal} Extra${extrasTotal != 1 ? "s" : ""} Unlocked`;
 }
@@ -846,7 +848,7 @@ function generateFrontPage(){
             "desc": "An older menu that can be used to see what map browser and challenge browser content is available on the Open Data API. This is not very useful since the in-game browser is much more filterable and easier to browse and play.", 
         },
         "Use Creator Code: HalfHydra": {
-            "desc": "If you want to support the developer of this site, you can use the creator code HalfHydra in the BTD6 store. Thanks to everyone who has used it so far, I really appreciate it!",
+            "desc": "If you want to support the developer of this site, you can use the creator code <span class='us-all' onclick='event.stopPropagation()'>HalfHydra</span> in the BTD6 store. Thanks to everyone who has used it so far, I really appreciate it!",
         },
         "Standalone Sites": {
             "desc": "Certain sections of this site have a standalone verison that be accessed directly by a link. These currently include sites for the current CT map, Leaderboards, Roundsets, Rogue Tools, and the Insta Tracker.",
@@ -1099,11 +1101,14 @@ function changeTab(tab) {
             generateExtrasPage();
             break;
     }
+    updateURL(tab);
 }
 
 function generateProgress(){
     let progressContent = document.getElementById('profile-content');
     progressContent.innerHTML = "";
+
+    updateURL('profile');
 
     changeHexBGColor(constants.BGColor);
 
@@ -1139,7 +1144,7 @@ function generateProgress(){
             profileSelectorDiv.classList.add('d-flex', 'jc-between', 'ai-center', 'view-profile', 'pointer', 'transparent-border');
             profileSelectorDiv.style.backgroundImage = `url(${getProfileBanner(btd6publicprofile)})`;
             profileSelectorDiv.addEventListener('click', () => {
-                openProfile("profile", btd6publicprofile, generateProgress)
+                changeProgressTab('Profile');
             })
             selectorsDiv.appendChild(profileSelectorDiv);
 
@@ -1173,13 +1178,12 @@ function generateProgress(){
             selectorsDiv.appendChild(statsUnavailableText);
         }
 
-        let selectors = ['Towers', 'Heroes', 'ActivatedAbilities', 'MapProgress', 'PowersUsable', "PowersPro", 'InstaMonkeysUsable', 'Knowledge', 'Achievements', 'Quests', 'TrophyStore', 'TeamsStore', 'Extras'];
+        let selectors = ['Towers', 'Heroes', 'ActivatedAbilities', 'MapProgress', 'Powers', "PowersPro", 'InstaMonkeys', 'Knowledge', 'Achievements', 'Quests', 'TrophyStore', 'Extras'];
         if (btd6publicprofile == null) {
             selectors.splice(selectors.indexOf("ActivatedAbilities"),1);
         }
 
         selectors.forEach((selector) => {
-            if(progressSubText[selector].includes("Team Store")) { return; }
             let selectorDiv = document.createElement('div');
             selectorDiv.classList.add('selector-div', 'progress-selector-div');
             selectorDiv.addEventListener('click', () => {
@@ -1273,6 +1277,7 @@ function generateProgress(){
 function logoutProgress() {
     loggedIn = false;
     btd6publicprofile = null;
+    updateURL('profile');
     generateProgress();
 }
 
@@ -1281,6 +1286,9 @@ function changeProgressTab(selector){
     if(timerInterval) { clearInterval(timerInterval); }
     addToBackQueue({source: 'profile', destination: 'profile', callback: generateProgress});
     switch(selector){
+        case "Profile":
+            openProfile("profile", btd6publicprofile, generateProgress);
+            break;
         case 'Towers':
             generateTowerProgress();
             break;
@@ -1296,10 +1304,10 @@ function changeProgressTab(selector){
         case "MapProgress":
             generateMapsProgress();
             break;
-        case "PowersUsable":
+        case "Powers":
             generatePowersProgress();
             break;
-        case "InstaMonkeysUsable":
+        case "InstaMonkeys":
             generateInstaMonkeysProgress();
             break;
         case "Achievements":
@@ -1324,6 +1332,7 @@ function changeProgressTab(selector){
             generateProPowerProgress();
             break;
     }
+    updateURL('profile', selector);
 }
 
 function getUnlockedAndTotalUpgrades() {
@@ -3971,6 +3980,8 @@ function onChangeInstaMonkeysView(instaMonkeysHeaderBar, view) {
             generateInstaCollectionEventHelper();
             break;
     }
+
+    updateURL('profile', 'InstaMonkeys', null, {view: view});
 }
 
 function generateInstaGameView(){
@@ -5797,6 +5808,8 @@ async function generateEvents(){
     let eventsContent = document.getElementById('events-content');
     eventsContent.innerHTML = "";
 
+    updateURL('events');
+
     clearAllTimers();
 
     let eventsPage = createEl('div', {
@@ -6044,7 +6057,7 @@ async function generateEvents(){
                 eventIcon.src = `../Assets/UI/EventSocialSeasonsIcon.png`;
                 eventNameId.innerHTML = `Social Season Event`;
                 eventDiv.addEventListener('click', () => {
-                    errorModal("This event type currently does not have additional details available on the Open Data API.");
+                    errorModal("This event type currently does not have additional details available on the Open Data API. Check the in-game menu for more details when the event starts!", null, false, "No Social Seasons Info");
                 });
                 break;
             case "collectableEvent":
@@ -6071,6 +6084,7 @@ async function generateEvents(){
                     }
                     await getRaceMetadata(raceIndex)
                     showChallengeModel('events', racesData[raceIndex].metadata, "Race");
+                    updateURL("events", "Races", racesData[raceIndex].id);
                     resetScroll();
                 });
                 break;
@@ -6089,6 +6103,7 @@ async function generateEvents(){
                     await getBossMetadata(bossIndex, false)
                     let eventData = getBossEventData(bossIndex, false)
                     showChallengeModel('events', bossesData[bossIndex].metadataStandard, "Boss", eventData);
+                    updateURL("events", "Bosses", bossesData[bossIndex].id, {elite: "Standard"});
                     resetScroll();
                 });
                 break;
@@ -6105,6 +6120,7 @@ async function generateEvents(){
                     }
                     await getOdyMetadata(odysseyIndex, "hard", true);
                     showOdyssey("hard", odysseyData[odysseyIndex], odysseyData[odysseyIndex]["metadata_hard"]);
+                    updateURL("events", "Odyssey", odysseyData[odysseyIndex].id);   
                     resetScroll();
                 });
                 break;
@@ -6120,6 +6136,7 @@ async function generateEvents(){
                         return;
                     }
                     openCTEventDetails('events', CTData[ctIndex]);
+                    updateURL("events", "ContestedTerritory", CTData[ctIndex].id);
                     resetScroll();
                 });
                 break;
@@ -6128,13 +6145,14 @@ async function generateEvents(){
                 eventNameId.innerHTML = `Boss Rush`;
                 eventDiv.addEventListener('click', () => {
                     openBossRushDetails(event);
+                    updateURL("events", "BossRush");
                 });
                 break;
             case "sweepstakes":
                 eventIcon.src = `../Assets/UI/SweepstakesBtn.png`;
                 eventNameId.innerHTML = `Sweepstakes`;
                 eventDiv.addEventListener('click', () => {
-                    errorModal("Check the in-game menu for Sweepstakes event details. Good luck!", null, false, "No Sweepstakes Info");
+                    errorModal("This event type currently does not have additional details available on the Open Data API. Check the in-game menu for more details when the event starts! Good luck!", null, false, "No Sweepstakes Info");
                 });
                 break;
             case "maintenance":
@@ -6207,6 +6225,9 @@ function changeEventTab(selector){
         case "BossRush":
             generateBossRush();
             break;
+    }
+    if (!isRestoringFromURL) {
+        updateURL('events', selector);
     }
     // addToBackQueue({callback: generateEvents})
 }
@@ -6294,6 +6315,7 @@ function generateRaces(){
             if (typeof racesData[index]["metadata"] == 'string') { return; }
             showLoading();
             showChallengeModel('events',  race.metadata, "Race");
+            updateURL('events', "Races", race.id);
         })
         raceInfoBottomDiv.appendChild(raceInfoRules);
 
@@ -6302,6 +6324,7 @@ function generateRaces(){
         raceInfoLeaderboard.innerHTML = "Leaderboard"
         raceInfoLeaderboard.addEventListener('click', () => {
             showLeaderboard('events', race, "Race");
+            updateURL('leaderboards', "Race", race.id);
         })
         raceInfoBottomDiv.appendChild(raceInfoLeaderboard);
 
@@ -6312,9 +6335,9 @@ function generateRaces(){
                     if (typeof racesData[index]["metadata"] != 'string') {
                         observer.unobserve(entry.target);
                         raceInfoRules.classList.remove('grayscale-100');
-                        raceMapImg.src = Object.keys(constants.mapsInOrder).includes(race.metadata.map) ? getMapIcon(race.metadata.map) : race.metadata.mapURL;
-                        let modifiers = challengeModifiers(race.metadata);
-                        let rules = challengeRules(race.metadata)
+                        raceMapImg.src = Object.keys(constants.mapsInOrder).includes(racesData[index]["metadata"].map) ? getMapIcon(racesData[index]["metadata"].map) : racesData[index]["metadata"].mapURL;
+                        let modifiers = challengeModifiers(racesData[index]["metadata"]);
+                        let rules = challengeRules(racesData[index]["metadata"])
                         for (let modifier of Object.values(modifiers)) {
                             let challengeModifierIcon = document.createElement('img');
                             challengeModifierIcon.classList.add('challenge-modifier-icon-event');
@@ -6329,7 +6352,7 @@ function generateRaces(){
                             challengeRuleIcon.src = `./Assets/ChallengeRulesIcon/${rulesMap[rule]}.png`;
                             raceChallengeIcons.appendChild(challengeRuleIcon);
                         }
-                        raceMapRounds.innerHTML = `Rounds ${race.metadata.startRound}/${race.metadata.endRound}`
+                        raceMapRounds.innerHTML = `Rounds ${racesData[index]["metadata"].startRound}/${racesData[index]["metadata"].endRound}`
                     }
                 }
             });
@@ -6509,7 +6532,8 @@ function generateBosses(elite){
         raceInfoRules.addEventListener('click', () => {
             if (typeof bossesData[index][elite ? "metadataElite" : "metadataStandard"] == 'string') { return; }
             showLoading();
-            showChallengeModel('events', (elite ? race.metadataElite : race.metadataStandard),"Boss", eventData);
+            updateURL('events', "Bosses", race.id, { elite: elite ? "Elite" : "Standard" });
+            showChallengeModel('events', (elite ? bossesData[index].metadataElite : bossesData[index].metadataStandard),"Boss", eventData);
         })
         raceInfoBottomDiv.appendChild(raceInfoRules);
 
@@ -6518,6 +6542,7 @@ function generateBosses(elite){
         raceInfoLeaderboard.innerHTML = "Leaderboard"
         raceInfoLeaderboard.addEventListener('click', () => {
             showLeaderboard('events', race, elite ? "BossElite" : "Boss");
+            updateURL('leaderboards', elite ? "BossElite" : "Boss", race.id);
         })
         raceInfoBottomDiv.appendChild(raceInfoLeaderboard);
 
@@ -6540,8 +6565,8 @@ function generateBosses(elite){
                                 break;
                         }
                         observer.unobserve(entry.target);
-                        let modifiers = challengeModifiers(elite ? race.metadataElite : race.metadataStandard);
-                        let rules = challengeRules(elite ? race.metadataElite : race.metadataStandard)
+                        let modifiers = challengeModifiers(elite ? bossesData[index].metadataElite : bossesData[index].metadataStandard);
+                        let rules = challengeRules(elite ? bossesData[index].metadataElite : bossesData[index].metadataStandard);
                         for (let modifier of Object.values(modifiers)) {
                             let challengeModifierIcon = document.createElement('img');
                             challengeModifierIcon.classList.add('challenge-modifier-icon-event');
@@ -6555,7 +6580,7 @@ function generateBosses(elite){
                             challengeRuleIcon.src = `./Assets/ChallengeRulesIcon/${rulesMap[rule]}.png`;
                             raceChallengeIcons.appendChild(challengeRuleIcon);
                         }
-                        raceMapImg.src = Object.keys(constants.mapsInOrder).includes(elite ? race.metadataElite.map : race.metadataStandard.map) ? getMapIcon(elite ? race.metadataElite.map : race.metadataStandard.map) : elite ? race.metadataElite.mapURL : race.metadataStandard.mapURL;
+                        raceMapImg.src = Object.keys(constants.mapsInOrder).includes(elite ? bossesData[index].metadataElite.map : bossesData[index].metadataStandard.map) ? getMapIcon(elite ? bossesData[index].metadataElite.map : bossesData[index].metadataStandard.map) : elite ? bossesData[index].metadataElite.mapURL : bossesData[index].metadataStandard.mapURL;
                     }
                 }
             });
@@ -6651,6 +6676,7 @@ async function generateChallenges(type) {
         challengeSelectorDateImg.addEventListener('click', async () => {
             showLoading();
             showChallengeModel('events', await getChallengeMetadata(getChallengeIDFromDate(challengeSelectorDateInput.value,type == "AdvancedDailyChallenges")), type);
+            updateURL('events', type, getChallengeIDFromDate(challengeSelectorDateInput.value,type == "AdvancedDailyChallenges"));
         })
         challengeSelectorDate.appendChild(challengeSelectorDateImg);
 
@@ -6686,6 +6712,7 @@ async function generateChallenges(type) {
         challengeSelectorIDImg.addEventListener('click', async () => {
             showLoading();
             showChallengeModel('events', await getChallengeMetadata(getChallengeIdFromInt(challengeSelectorIDInput.value, type == "AdvancedDailyChallenges")), type);
+            updateURL('events', type, getChallengeIdFromInt(challengeSelectorIDInput.value, type == "AdvancedDailyChallenges"));
         })
         challengeSelectorID.appendChild(challengeSelectorIDImg);
     }
@@ -6771,6 +6798,7 @@ async function generateChallenges(type) {
         challengeInfoRules.addEventListener('click', async () => {
             showLoading();
             showChallengeModel('events', await getChallengeMetadata(challenge.id), type);
+            updateURL('events', type, challenge.id);
         })
         challengeInfoMiddleDiv.appendChild(challengeInfoRules);
 
@@ -6885,7 +6913,9 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     document.getElementById(`${source}-content`).style.display = "none";
     resetScroll();
 
-    addToBackQueue({"source": source, "destination": "challenge"});
+    addToBackQueue({"source": source, "destination": "challenge", callback: () => {
+        updateURL(currentRoute.tab, currentRoute.subtab);
+    }});
 
     let challengeExtraData = processChallenge(metadata);
     if (challengeType == "Boss") {
@@ -7086,6 +7116,7 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
                 goBack();
                 showChallengeModel('events', bossesData[eventData.index][eventData.elite ? "metadataElite" : "metadataStandard"], challengeType, eventData);
                 hideLoading();
+                updateURL('events', "Bosses", bossesData[eventData.index].id, { elite: eventData.elite ? "Elite" : "Standard" });
             })
             challengeHeaderRightContainer.appendChild(bossTypeSwapButton);
             break;
@@ -9159,75 +9190,33 @@ function generateExtrasPage() {
     selectorsDiv.classList.add('selectors-div');
     explorePage.appendChild(selectorsDiv);
 
-    let selectors = [
-        // 'Collection Event Odds',
-        // 'Export Data', 
-        'Rogue Legends',
-        // 'Challenge & Map Browser',
-        // 'Settings',
-        // 'Send Feedback',
-        // "Use Code 'HalfHydra' <br>in the BTD6 Shop!",
-        // "Discord Server"
-    ];
-
-    if (!loggedIn) {
-        selectors = selectors.filter(selector => selector != 'Collection Event Odds');
+    let selectors = {
+        "Rogue": { 
+            icon: "../Assets/UI/RogueLegendBtn.png", 
+            bg: "rogue-bg", 
+            name: "Rogue Legends" 
+        }
     }
 
-    selectors.forEach((selector) => {
+    Object.entries(selectors).forEach(([selector, data]) => {
         let selectorDiv = document.createElement('div');
         selectorDiv.classList.add('selector-div', 'blueprint-bg');
+        selectorDiv.classList.add(data.bg);
         selectorDiv.addEventListener('click', () => {
             extrasContent.style.display = "none";
             document.getElementById('legends-content').style.display = "flex"
-            changeExtrasTab(selector);
+            changeLegendTab(selector);
         })
         selectorsDiv.appendChild(selectorDiv);
 
         let selectorImg = document.createElement('img');
         selectorImg.classList.add('selector-img');
+        selectorImg.src = data.icon;
         selectorDiv.appendChild(selectorImg);
-
-        switch(selector){
-            case 'Custom Round Sets':
-                selectorImg.src = '../Assets/ChallengeRulesIcon/CustomRoundIcon.png';
-                break;
-            case 'Featured Insta Schedule':
-                selectorImg.src = '../Assets/UI/InstaBtn.png';
-                break;
-            case 'Collection Event Odds':
-                selectorImg.src = '../Assets/UI/CollectingEventTotemBtn.png';
-                break;
-            case 'Monkey Money Helper':
-                selectorImg.src = '../Assets/UI/WoodenRoundButton.png';
-                break;
-            case "Send Feedback":
-                selectorImg.src = '../Assets/UI/FeedbackBtn.png';
-                break;
-            case "Settings":
-                selectorImg.src = '../Assets/UI/OptionsBtn.png';
-                break;
-            case "Use Code 'HalfHydra' <br>in the BTD6 Shop!":
-                selectorImg.src = '../Assets/UI/CreatorSupportBtn.png';
-                break;
-            case "Rogue Legends":
-                selectorDiv.classList.add("rogue-bg")
-                selectorImg.src = '../Assets/UI/RogueLegendBtn.png';
-                break;
-            case "Challenge & Map Browser":
-                selectorImg.src = '../Assets/UI/PatchNotesMonkeyIcon.png';
-                break;
-            case "Discord Server":
-                selectorImg.src = '../Assets/UI/DiscordBtn.png';
-                break;
-            default: 
-                selectorImg.src = '../Assets/UI/WoodenRoundButton.png';
-                break;
-        }
 
         let selectorText = document.createElement('p');
         selectorText.classList.add('selector-text','black-outline');
-        selectorText.innerHTML = selector;
+        selectorText.innerHTML = data.name;
         selectorDiv.appendChild(selectorText);
 
         let selectorGoImg = document.createElement('img');
@@ -9237,48 +9226,17 @@ function generateExtrasPage() {
     })
 }
 
-function changeExtrasTab(selected){
+function changeLegendTab(selected){
     resetScroll();
     switch(selected){
-        case 'Custom Round Sets':
-            generateRoundsets();
-            break;
-        case "Featured Insta Schedule":
-            addToBackQueue({ source: "extras", destination: "featured" });
-            generateInstaSchedule();
-            document.getElementById('extras-content').style.display = "none";
-            document.getElementById('featured-content').style.display = "flex";
-            break;
-        case "Collection Event Odds": 
-            changeTab('profile');
-            currentInstaView = "collection";
-            changeProgressTab('InstaMonkeys');
-            break;
-        case "CreatorSupport":
-        case "Use Code 'HalfHydra' <br>in the BTD6 Shop!":
-            addToBackQueue({ callback: generateExtrasPage });
-            generateArticle("CreatorSupport")
-            break;
-        case 'Settings':
-            addToBackQueue({ callback: generateExtrasPage });
-            generateSettings();
-            break;
-        case "Rogue Legends":
+        case "Rogue":
             addToBackQueue({source: "legends", destination: "rogue", callback: generateExtrasPage });
             generateRogueSelectors();
             document.getElementById('legends-content').style.display = "none";
             document.getElementById('rogue-content').style.display = "flex";
             break;
-        case "Challenge & Map Browser":
-            addToBackQueue({source: "extras", destination: "explore", callback: generateExtrasPage });
-            generateExplore();
-            document.getElementById('extras-content').style.display = "none";
-            document.getElementById('explore-content').style.display = "flex";
-            break;
-        case "Discord Server":
-            window.open("https://discord.gg/BSpSeXrAQy", "_blank");
-            break;
     }
+    updateURL("legends", selected);
 }
 
 function generateArticle(content){
@@ -9294,7 +9252,7 @@ function generateArticle(content){
             {
                 "type": "text",
                 "class": "oak-instructions-text",
-                "content": "Creator support is a program offered by Ninja Kiwi that allows players to give a cut of the purchases you make in game to the creator who's code you've entered in the Bloons TD 6 shop. You can support me and my site by using the code \"HalfHydra\"<br>"
+                "content": "Creator support is a program offered by Ninja Kiwi that allows players to give a cut of the purchases you make in game to the creator who's code you've entered in the Bloons TD 6 shop. You can support me and my site by using the code \"<span class='us-all' onclick='event.stopPropagation()'>HalfHydra</span>\"<br>"
             },
             {
                 "type": "text",
@@ -9316,7 +9274,7 @@ function generateArticle(content){
                     },
                     "3": {
                         "name": "Step 3",
-                        "desc": "Enter code \"HalfHydra\" (or any other creators code) and press submit. When purchasing anything in the store, a cut will go to the creator chosen.",
+                        "desc": "Enter code \"<span class='us-all' onclick='event.stopPropagation()'>HalfHydra</span>\" (or any other creators code) and press submit. When purchasing anything in the store, a cut will go to the creator chosen.",
                         "img": "CS3"
                     }
                 }
@@ -11945,6 +11903,7 @@ function generateOdyssey(){
 
             odyInfoRules.addEventListener('click', () => {
                 showLoading();
+                updateURL('events', "Odyssey", ody.id);
                 getOdyMetadata(index, diff);
             })
             odyInfoBottomDiv.appendChild(odyInfoRules);
@@ -11976,9 +11935,12 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
     challengeContent.style.display = "flex";
     challengeContent.innerHTML = "";
     document.getElementById(`${source}-content`).style.display = "none";
-    resetScroll();
+    resetScroll(); 
 
-    addToBackQueue({"source": source, "destination": "challenge", callback: function () { changeHexBGColor(constants.BGColor) } });
+    addToBackQueue({"source": source, "destination": "challenge", callback: function () { 
+        changeHexBGColor(constants.BGColor) 
+        updateURL(currentRoute.tab, currentRoute.subtab)
+    }});
 
     let odyContent = createEl('div', {
         classList: ['w-100'],

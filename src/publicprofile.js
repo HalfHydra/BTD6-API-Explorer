@@ -140,12 +140,12 @@ async function openProfile(source, profile, callback){
             "KnowledgeEarned": "../Assets/UI/KnowledgeIcon.png",
             "MapProgress": "../Assets/UI/StartRoundIconSmall.png",
             "CHIMPS": "../Assets/MedalIcon/MedalImpoppableRuby.png",
-            "Powers": "../Assets/UI/PowerContainer.png",
+            "PowersCollected": "../Assets/UI/PowerContainer.png",
             "PowersPro": "../Assets/UI/PowersProContainer.png",
-            "InstaMonkeys": "../Assets/UI/InstaIcon.png",
+            "InstaMonkeysTotal": "../Assets/UI/InstaIcon.png",
             "AchievementsEarned": "../Assets/AchievementIcon/AchievementsIcon.png",
             "TrophyStore": "../Assets/UI/LimitedRunIcon.png",
-            'TeamsStore': "../Assets/UI/TeamTrophyIconSmall.png",
+            // 'TeamsStore': "../Assets/UI/TeamTrophyIconSmall.png",
             "Quests": "../Assets/UI/QuestIcon.png",
             "Extras": "../Assets/UI/SmallBloonsModeIcon.png",
         }
@@ -192,10 +192,10 @@ async function openProfile(source, profile, callback){
                     case "CHIMPS":
                         generateMapsProgress();
                         break;
-                    case "Powers":
+                    case "PowersCollected":
                         generatePowersProgress();
                         break;
-                    case "InstaMonkeys":
+                    case "InstaMonkeysTotal":
                         generateInstaMonkeysProgress();
                         break;
                     case "AchievementsEarned":

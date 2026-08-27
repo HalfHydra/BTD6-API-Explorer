@@ -36,7 +36,6 @@ let currentArtifacts = {};
 let rogueSyncInterval;
 let currentSyncContext = null;
 
-fetchRogueDependencies();
 loadRogueDataFromLocalStorage();
 
 function postProcessRogueData(){
@@ -68,35 +67,40 @@ function postProcessRogueData(){
     });
 }
 
-function changeRogueTab(selector){
+async function changeRogueTab(selector){
     resetScroll();
     document.getElementById('rogue-content').style.display = 'none';
+    await fetchRogueDependencies();
     switch(selector){
-        case 'Artifacts Tracker':
+        case 'Artifacts':
             document.getElementById('artifacts-content').style.display = 'flex';
-            addToBackQueue({source: 'rogue', destination: 'artifacts', callback: generateRogueSelectors})
+            addToBackQueue({source: 'rogue', destination: 'artifacts', callback: () => { 
+                generateRogueSelectors()
+                updateURL("legends", "Rogue")
+            }})
             rogueSaveData.lastSynced = 0;
             generateRogueArtifacts();
             break;
-        case 'All Hero Starter Kits':
+        case 'StarterKits':
             document.getElementById('starter-kits-content').style.display = 'flex';
             generateRogueHeroStarterKits();
-            addToBackQueue({source: 'rogue', destination: 'starter-kits'})
+            addToBackQueue({source: 'rogue', destination: 'starter-kits', callback: () => { 
+                updateURL("legends", "Rogue")
+            }})
             break;
-        case "Rogue Feat Trackers":
+        case "FeatTracker":
             document.getElementById('artifacts-content').style.display = 'flex';
             generateRogueFeatHelpers();
-            addToBackQueue({source: 'rogue', destination: 'artifacts'})
+            addToBackQueue({source: 'rogue', destination: 'artifacts', callback: () => { 
+                updateURL("legends", "Rogue")
+            }})
             break;
-        case 'Export Image':
-            document.getElementById('artifacts-content').style.display = 'flex';
-            generateImageBuilder();
-            addToBackQueue({source: 'rogue', destination: 'artifacts'})
-            break;
-        case "Hero Campaign Stats":
+        case "CampaignStats":
             document.getElementById('artifacts-content').style.display = 'flex';
             generateHeroCompletions();
-            addToBackQueue({source: 'rogue', destination: 'artifacts'})
+            addToBackQueue({source: 'rogue', destination: 'artifacts', callback: () => { 
+                updateURL("legends", "Rogue")
+            }})
             break;
         default: 
             document.getElementById('rogue-content').style.display = 'flex';
@@ -104,6 +108,7 @@ function changeRogueTab(selector){
             document.getElementById('starter-kits-content').style.display = 'none';
             break;
     }
+    updateURL("legends", "Rogue", selector);
 }
 
 function generateRogueSelectors() {
@@ -125,18 +130,13 @@ function generateRogueSelectors() {
     }
 
     let selectors = {
-        "Artifacts Tracker": "RoguePermanantArtifactsBtn",
-        "Rogue Feat Trackers": "RogueFeatBtn",
-        "All Hero Starter Kits": "RogueStarterKitsBtn",
-        "Hero Campaign Stats": "RogueHeroStatsBtn",
-        // "Export Image": "ArtifactShareBtn"
+        "Artifacts": { icon: "RoguePermanantArtifactsBtn", name: "Artifacts Tracker" },
+        "FeatTracker": { icon: "RogueFeatBtn", name: "Rogue Feat Trackers" },
+        "StarterKits": { icon: "RogueStarterKitsBtn", name: "All Hero Starter Kits" },
+        "CampaignStats": { icon: "RogueHeroStatsBtn", name: "Hero Campaign Stats" },
     }
 
-    // if (rogueSaveData.extractedArtifacts.length == 0) {
-    //     delete selectors["Export Image"]
-    // }
-    
-    Object.entries(selectors).forEach(([selector, icon]) => {
+    Object.entries(selectors).forEach(([selector, data]) => {
         let selectorDiv = document.createElement('div');
         selectorDiv.classList.add('rogue-bg', 'd-flex', 'jc-between', 'ai-center', 'pointer');
         selectorDiv.style.margin = "10px";
@@ -147,12 +147,12 @@ function generateRogueSelectors() {
 
         let selectorImg = document.createElement('img');
         selectorImg.classList.add('selector-img');
-        selectorImg.src = '../Assets/UI/' + icon + '.png';
+        selectorImg.src = '../Assets/UI/' + data.icon + '.png';
         selectorDiv.appendChild(selectorImg);
 
         let selectorText = document.createElement('p');
         selectorText.classList.add('selector-text','black-outline');
-        selectorText.innerHTML = selector;
+        selectorText.innerHTML = data.name;
         selectorDiv.appendChild(selectorText);
 
         let selectorGoImg = document.createElement('img');

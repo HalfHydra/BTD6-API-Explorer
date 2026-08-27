@@ -173,6 +173,7 @@ async function generateLeaderboards() {
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "Race");
+            updateURL('leaderboards', "Race", data.id);
         })
 
         let roundsetIcon = document.createElement('img');
@@ -226,6 +227,7 @@ async function generateLeaderboards() {
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_standard]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "Boss");
+            updateURL('leaderboards', "Boss", data.id);
         })
 
         let roundsetIconDiv = createEl('div', { 
@@ -309,6 +311,7 @@ async function generateLeaderboards() {
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_elite]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "BossElite");
+            updateURL('leaderboards', "BossElite", data.id);
         })
 
         let roundsetIconDiv = createEl('div', { 
@@ -387,6 +390,7 @@ async function generateLeaderboards() {
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_team]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "CTTeam");
+            updateURL('leaderboards', "CTTeam", data.id);
         })
 
         let roundsetIcon = document.createElement('img');
@@ -436,6 +440,7 @@ async function generateLeaderboards() {
         (now > new Date(data.start) && now < new Date(data.end)) ? currentSelectorsDiv.appendChild(roundsetDiv) : pastEvents.push([data, roundsetDiv, data.totalScores_player]);
         roundsetDiv.addEventListener('click', () => {
             showLeaderboard('leaderboards', data, "CTPlayer");
+            updateURL('leaderboards', "CTPlayer", data.id);
         })
 
         let roundsetIcon = document.createElement('img');
@@ -541,6 +546,9 @@ function showLeaderboard(source, metadata, type) {
     showLoading(true);
     leaderboardActiveToken++;
     coopBossData.leaderboardRankIndex = 0;
+
+    updateURL('leaderboards', null, )
+
     switch (type) {
         case "Boss":
             if (leaderboardLink != metadata.leaderboard_standard_players_1) { leaderboardPage = 1 }
@@ -575,7 +583,11 @@ function showLeaderboard(source, metadata, type) {
     leaderboardContent.innerHTML = "";
     document.getElementById(`${source}-content`).style.display = "none";
 
-    addToBackQueue({ source: source, destination: 'leaderboard', callback: () => { leaderboardLink = null; leaderboardActiveToken++ } })
+    addToBackQueue({ source: source, destination: 'leaderboard', callback: () => { 
+        leaderboardLink = null; 
+        leaderboardActiveToken++;
+        updateURL(currentRoute.tab);
+    }})
 
     let leaderboardDiv = document.createElement('div');
     leaderboardDiv.classList.add('full-leaderboard-div');
