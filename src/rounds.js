@@ -193,11 +193,7 @@ async function generateRoundsets() {
     });
     roundsetChimpsDiv.addEventListener('click', () => {
         showLoading();
-        showRoundsetModel('rounds', "DefaultRoundSet", {
-            roundFilterPreset: "CHIMPS",
-            roundFilterStart: 6,
-            roundFilterEnd: 100,
-        });
+        showRoundsetModel('rounds', "CHIMPS");
     })
     selectorsDiv.appendChild(roundsetChimpsDiv);
 
@@ -557,6 +553,13 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
         roundsetBloonsSpeedMultiplier: 1,
         roundsetMOABSpeedMultiplier: 1,
         noSpecial: false
+    }
+
+    if (roundset === "CHIMPS") {
+        roundsetFilterSettings.roundFilterStart = 6;
+        roundsetFilterSettings.roundFilterEnd = 100;
+        roundsetFilterSettings.roundFilterPreset = "CHIMPS";
+        roundset = "DefaultRoundSet";
     }
 
     if (Object.keys(presetSettings).length > 0) {
