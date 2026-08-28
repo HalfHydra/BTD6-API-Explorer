@@ -81,10 +81,10 @@ let imageScroll = [
         "title": "Recent Site Updates",
         "text": `
         - Rogue Campaign Stats<br>
+        - Boss Rush Event Details<br>
         - Rogue Feat Auto Tracking<br>
         - Odyssey Events<br>
         - Powers Pro Tracking<br>
-        - Recent Events List<br>
         - Collection Event Schedules<br>
         - Contested Territory Map<br>
         <br>
@@ -92,7 +92,7 @@ let imageScroll = [
         Creator Code: '<span class="us-all" onclick="event.stopPropagation()">HalfHydra</span>' - TY!<br>
         Report Bugs: <a href="https://discord.gg/wep2RDmcqZ" target="_blank" style="color: white;" onclick="event.stopPropagation()">Discord Server</a><br>
         `,
-        "image": "/LandingScroll/Update56&RogueFeat"
+        "image": "/LandingScroll/Homepage"
     },
     {
         "title": "View Your Profile",
@@ -228,6 +228,7 @@ let imageScroll = [
 let imageScrollIndex = 0;
 
 let changelog = {
+    "v3.0.0 (8/27/26)": `Major, Major Update<br>- Added Boss Rush details thanks to Lucy's recreation of the generation logic which allows island details to be generated from the event seed.<br>- Added Rogue Legends Campaign Stats to show your progress and stats for each hero and skin. This provides much more information than the in game "Hero Stats" menu.<br>- Trophy store items list now has a filter and sort modal that allows much more granual control over what kinds of items you'll see.<br>- Added Quests completion bar and remaining quest loot earnable in the Quests menu.<br>- Added bronze and silver borders for Insta Monkey Collection<br>- Added rounds button from challenge details to view the standard rounds with any modifiers<br>- Added "All Regrow", "All Camo", and "All Fortified" filters to the roundset viewer<br>- Added starting cash + total cash bar on detailed round view to prevent confusion on initial cash sum in total<br>- Added settings to leaderboards allowing you to control how many profiles are automatically loaded and if they are at all (this will help prevent rate limiting if you run into that)<br>- Added the total xp your pro power has earned once you've unlocked all the tiers<br>- Added paragon unlock count in the upgrades menu.<br>- The collecton schedule should now use the current time when clicking the event from the list<br>- Events should now refresh every so often when navigating the menus to ensure the latest events are shown<br>- Cleaned up the front page, updated features scroll and profile tab features list<br>- Moved the Extras features into the front page, replaced Extras tab with Legends tab.<br>- Invalid CT leaderboard team groups should no longer show up (groups in past events show the wrong group once the next CT starts)<br>- Add missing social season 3 medal<br>- Sweepstakes and maintenance should now show up in events, just for fun<br>- Many one-time disclaimer messages including one for coop boss leaderboards<br>- Numerous long lists are now collapsable such as the previous known events list in the rounds tab.<br>- Rogue artifacts search now includes the description in the logic too.<br>- The timers on the events list shouldn't freeze anymore<br>- Fix fallback for CT not appearing on Open Data API<br>- Many visuals changes such as making the modals have custom header colors, removed width limit of the all menu in the Instas collection, etc<br>- Removed max lives from challenge details to avoid confusion.`,
     "v2.8.5 (8/8/26)": `Rogue Feat Trackers & Update 56 Content<br>- Added ways to see which towers you've placed for Rogue Feats automatically: Monkey Manager and One for All<br>- The latest CT should now show up with limited information from a secondary data source even if the Open Data API is currently broken<br>- Fixed CT Map site to not break when latest CT event doesn't show up on ODA<br>- Fixed CT errors on unknown towers<br>- Fixed towers menu when data is missing from stats objects<br>- Clarified text regarding Open Data API needing updates<br>- Fix hero count including Sheriff erroroneously<br>- Rogue auto syncing should no longer cause errors on other pages<br>- Fix rogue progress image dimensions to support new artifacts<br>- Added legends filter to achievements`,
     "v2.8.4 (7/25/26)": "Various fixes and behind the scenes reworks<br>- Corrected Lych rounds after the boss events use the correct version<br>- Added a couple missing custom roundsets such as One Sided Infernal<br>- Added missing abilities: Soulbind, Anti-Camo Dust, Anti-Regrow Serum<br>- Odyssey details minor fixes such as Alternate Bloons Rounds no longer overwriting custom rounds<br>- Fixed loading bug with various events menus<br>- CT Map no longer displays a preview for tiles that are filtered out<br>- Added CHIMPS to the roundsets tab since it is a commonly used preset<br>- Added first time messages system",
     "v2.8.3 (6/20/26)": "Profile Updates + even more fixes!<br>- Top Abilities can be seen in player profiles now<br>- Diamondback and Social Season badges have been added<br>- Frontier bloons pop totals have been added to the frontier stats including Diamond bloons which aren't seen in game for some reason<br>- Achievements now has a filter for just ones that unlock extra settings, and a link to this has been added from the extras tab if you have some locked<br>- Fixed activated abilities menu breaking due to backend changes<br>- Fixed extras unlocked not racking correctly in some cases<br>- The hidden items toggle is now switched off by default in the trophy store menu<br>- Trophy store items that haven't been revealed yet will now show up once they are (sorry Bestboy!)<br>- Fixed quick stats navigation<br>- Fixed He-Man avatar and banner not showing up as IAP<br>- Clarified Frontier stats are tracked across all saves<br>- Some processed data should no longer linger after switching users without reloading<br>- Fixed the insta tracker menu loading for a while due to collection event fetch reasons",
@@ -6171,7 +6172,7 @@ async function generateEvents(){
                 fontSize: "20px",
                 padding: "10px"
             },
-            innerHTML: "No upcoming events found! This usually means a recent update has broken the Open Data API and it will be fixed soon. Active events may be missing."
+            innerHTML: "No upcoming events found! This usually means a BTD6 update has broken the Open Data API and it will be fixed soon. Active events may be missing."
         });
         upcomingDiv.content.appendChild(noUpcoming);
     }
