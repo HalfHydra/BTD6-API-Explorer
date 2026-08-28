@@ -5913,10 +5913,6 @@ async function generateEvents(){
         selectorDiv.appendChild(selectorText);
 
         switch(selector) {
-            case "BossRush":
-                selectorDiv.style.cursor = "not-allowed";
-                selectorDiv.style.filter = "grayscale(100%)";
-                break;
             case "Collection":
                 collectionIcon = selectorImg;
                 break;
@@ -6223,7 +6219,7 @@ function changeEventTab(selector){
             document.getElementById('featured-content').style.display = "flex";
             break;
         case "BossRush":
-            generateBossRush();
+            openBossRushDetails();
             break;
     }
     if (!isRestoringFromURL) {
@@ -12845,10 +12841,6 @@ async function showOdyssey(difficulty, odyData, metadata, source="events") {
             rulesDiv.appendChild(none);
         }
     })
-}
-
-function generateBossRush() {
-    errorModal("Unfortunately Boss Rush islands are not available via the Open Data API currently due to how the game generates the details. If a way to fetch this information becomes available, I will include it!");
 }
 
 function generateCompletionist() {
