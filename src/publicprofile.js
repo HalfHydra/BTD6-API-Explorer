@@ -177,47 +177,61 @@ async function openProfile(source, profile, callback){
                     case "UpgradesUnlocked":
                     case "Paragons":
                         generateTowerProgress();
+                        updateURL("profile", "Towers");
                         break;
                     case 'HeroesUnlocked':
                     case "Skins":
                         generateHeroesProgress();
+                        updateURL("profile", "Heroes");
                         break;
                     case "ActivatedAbilities":
                         generateAbilities();
+                        updateURL("profile", "ActivatedAbilities");
                         break;
                     case "KnowledgeEarned":
                         generateKnowledgeProgress();
+                        updateURL("profile", "Knowledge");
                         break;
                     case "MapProgress":
                     case "CHIMPS":
                         generateMapsProgress();
+                        updateURL("profile", "MapProgress");
                         break;
                     case "PowersCollected":
                         generatePowersProgress();
+                        updateURL("profile", "Powers");
                         break;
                     case "InstaMonkeysTotal":
                         generateInstaMonkeysProgress();
+                        updateURL("profile", "InstaMonkeys");
                         break;
                     case "AchievementsEarned":
                         generateAchievementsProgress();
+                        updateURL("profile", "Achievements");
                         break;
                     case "Extras":
                         generateExtrasProgress();
+                        updateURL("profile", "Extras");
                         break;
                     case "TrophyStore":
                         generateTrophyStoreProgress();
+                        updateURL("profile", "TrophyStore");
                         break;
                     case "TeamsStore":
                         generateTeamsStoreProgress();
+                        updateURL("profile", "TeamsStore");
                         break;
                     case "Logout":
                         logoutProgress();
+                        updateURL("profile");
                         break;
                     case 'Quests':
                         generateQuestsPage();
+                        updateURL("profile", "Quests");
                         break;
                     case 'PowersPro':
                         generateProPowerProgress();
+                        updateURL("profile", "PowersPro");
                         break;
                 }
             });
