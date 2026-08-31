@@ -192,7 +192,8 @@ function hideLoading(){
     document.getElementById("loading").style.transform = "scale(0)";
 }
 
-function fetchConstants() {
+async function fetchConstants() {
+    await fetchLocKeys();
     return fetch('./data/Constants.json')
         .then(response => response.json())
         .then(data => {
@@ -206,6 +207,9 @@ function fetchConstants() {
 }
 
 function fetchLocKeys() {
+    if (locJSON && Object.keys(locJSON).length > 0) {
+        return Promise.resolve();
+    }
     return fetch('./data/English.json').then(response => response.json()).then(data => {
         locJSON = data;
     })
