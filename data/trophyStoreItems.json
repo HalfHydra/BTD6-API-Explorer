@@ -2392,6 +2392,32 @@
         "updateAdded": 56,
         "cost": 50
     },
+    "GameUIProfileAvatar138": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar138",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": false,
+        "updateAdded": 57,
+        "cost": 50
+    },
+    "GameUIProfileAvatar139": {
+        "storeFilter": "GameUI",
+        "subFilter": "Avatars",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileAvatar139",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Avatar",
+        "hidden": true,
+        "updateAdded": 57,
+        "cost": 50
+    },
     "GameUIProfileAvatar14": {
         "storeFilter": "GameUI",
         "subFilter": "Avatars",
@@ -4330,6 +4356,18 @@
         "updateAdded": 56,
         "obtainMethod": "IAP"
     },
+    "GameUIProfileBanner67": {
+        "storeFilter": "GameUI",
+        "subFilter": "ProfileBanners",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "ProfileBanner67Icon",
+        "cosmeticPriority": "0",
+        "exclusivity": "",
+        "itemType": "Banner",
+        "hidden": true,
+        "updateAdded": 57
+    },
     "GameUIProfileBanner7": {
         "storeFilter": "GameUI",
         "subFilter": "ProfileBanners",
@@ -4382,6 +4420,19 @@
         "updateAdded": 19,
         "cost": 50
     },
+    "H-JiangshiPlacementSpooky": {
+        "storeFilter": "Heroes",
+        "subFilter": "HeroPlacementUpgrades",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "JiangshiSpookyPlacementIcon",
+        "cosmeticPriority": "0",
+        "exclusivity": "JiangshiPlacement",
+        "itemType": "TowerAssetChange",
+        "hidden": false,
+        "updateAdded": 57,
+        "cost": 70
+    },
     "HeroesAdmiralBrickellPetParrot": {
         "storeFilter": "Heroes",
         "subFilter": "HeroPets",
@@ -4421,6 +4472,19 @@
         "updateAdded": 19,
         "cost": 25
     },
+    "HeroesAllPlacementDarkMagic": {
+        "storeFilter": "Heroes",
+        "subFilter": "HeroPlacementUpgrades",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "DarkMagicHeroPlaceIcon",
+        "cosmeticPriority": "-1",
+        "exclusivity": "HeroPlacement",
+        "itemType": "TowerAssetChange",
+        "hidden": true,
+        "updateAdded": 57,
+        "obtainMethod": "SocialSeason"
+    },
     "HeroesBenjaminPetMouse": {
         "storeFilter": "Heroes",
         "subFilter": "HeroPets",
@@ -4441,7 +4505,7 @@
         "questId": "",
         "icon": "BenjaminMatrixPlacementIcon",
         "cosmeticPriority": "0",
-        "exclusivity": "Benjamin",
+        "exclusivity": "BenjaminPlacement",
         "itemType": "TowerAssetChange",
         "hidden": false,
         "updateAdded": 24,
@@ -4811,6 +4875,19 @@
         "updateAdded": 20,
         "cost": 30
     },
+    "PSkin-CamoTrapDarkMagic": {
+        "storeFilter": "GameUI",
+        "subFilter": "PowerSkins",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "CamoTrapDarkMagicIcon",
+        "cosmeticPriority": "0",
+        "exclusivity": "PowerCamoTrap",
+        "itemType": "PowerAssetChange",
+        "hidden": true,
+        "updateAdded": 57,
+        "obtainMethod": "SocialSeason"
+    },
     "TEAMPU-Snowflakes": {
         "storeFilter": "Monkeys",
         "subFilter": "TowerPlacementUpgrades",
@@ -4888,6 +4965,19 @@
         "hidden": false,
         "updateAdded": 55,
         "cost": 120
+    },
+    "TProp-VillagePirateFlag": {
+        "storeFilter": "Monkeys",
+        "subFilter": "Flags",
+        "lootSetFilter": "None",
+        "questId": "",
+        "icon": "VillagePirateFlag",
+        "cosmeticPriority": "0",
+        "exclusivity": "TowerPropFlag",
+        "itemType": "Prop",
+        "hidden": false,
+        "updateAdded": 57,
+        "cost": 40
     },
     "TowerEffectAllMonkeysPlacementUpgradesBats": {
         "storeFilter": "Monkeys",

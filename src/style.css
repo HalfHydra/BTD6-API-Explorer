@@ -1941,11 +1941,11 @@
     left: 17%;
     top: 180px;
 }
-.medal-div-reverse {
+.medal-div-apopalypse {
     left: 33%;
     top: 180px;
 }
-.medal-div-apopalypse {
+.medal-div-reverse {
     left: 25%;
     top: 190px;
     z-index: 3;
@@ -2061,7 +2061,7 @@
     border-radius: 10px;
 }
 .towers-container {
-    max-width: 850px;
+    max-width: 1020px;
     display: flex;
     flex-wrap: wrap;
 }

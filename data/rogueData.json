@@ -5241,6 +5241,34 @@
             "rarityFrameType": "Token",
             "isQuestArtifact": 0,
             "added": 50
+        },
+        "WindowShopping1": {
+            "tier": 1,
+            "baseId": "WindowShopping",
+            "nameLocKey": "WindowShoppingX",
+            "descriptionLocKey": "WindowShoppingXDescription",
+            "descriptionParams": [
+                "12"
+            ],
+            "isBossArtifact": 0,
+            "icon": "ArtifactWindowShopping",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 57
+        },
+        "WindowShopping2": {
+            "tier": 2,
+            "baseId": "WindowShopping",
+            "nameLocKey": "WindowShoppingX",
+            "descriptionLocKey": "WindowShoppingXDescription",
+            "descriptionParams": [
+                "24"
+            ],
+            "isBossArtifact": 0,
+            "icon": "ArtifactWindowShopping",
+            "rarityFrameType": "AllMonkeyTowerSets",
+            "isQuestArtifact": 0,
+            "added": 57
         }
     },
     "starterArtifacts": [

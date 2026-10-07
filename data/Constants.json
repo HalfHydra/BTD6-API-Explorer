@@ -1,10 +1,10 @@
 {
     "version": "3.0.0",
-    "projectContentVersion": 56,
+    "projectContentVersion": 57,
     "achievements": 148,
     "hiddenAchievements": 14,
-    "profileAvatars": 137,
-    "profileBanners": 66,
+    "profileAvatars": 139,
+    "profileBanners": 67,
     "teamsBanners": 19,
     "teamIcons": 33,
     "teamFrames": 27,
@@ -2510,6 +2510,12 @@
             "hasWater": true,
             "added": 1
         },
+        "ShipCapture": {
+            "difficulty": "Advanced",
+            "theme": "Water",
+            "hasWater": true,
+            "added": 57
+        },
         "Ascent": {
             "difficulty": "Advanced",
             "theme": "Grass",
@@ -2740,7 +2746,8 @@
         "SpikeFactory": 48,
         "BombShooter": 51,
         "IceMonkey": 52,
-        "Druid": 54
+        "Druid": 54,
+        "SniperMonkey": 57 
     },
     "quests": {
         "BeastHandlerQuest": {
@@ -4003,6 +4010,41 @@
                 "Power:MonkeyBoost,1",
                 "Power:PortableLake,1"
             ]
+        },
+        "MasteryModeQuest": {
+            "nameLocKey": "MasteryModeQuestName",
+            "icon": "QuestIconMasteryMode",
+            "type": "Experiment",
+            "added": 57,
+            "parts": [
+                {
+                    "startingCash": -1,
+                    "startRound": -1,
+                    "endRound": -1,
+                    "roundSets": [
+                        "MasteryModeRoundSet"
+                    ]
+                },
+                {
+                    "startingCash": -1,
+                    "startRound": -1,
+                    "endRound": -1,
+                    "roundSets": [
+                        "MasteryModeRoundSet"
+                    ]
+                },
+                {
+                    "startingCash": -1,
+                    "startRound": 6,
+                    "endRound": 100,
+                    "roundSets": [
+                        "MasteryModeRoundSet"
+                    ]
+                }
+            ],
+            "loot": [
+                "MonkeyMoney:500"
+            ]
         }
     },
     "BGColor": [0.000, 0.498, 1.000],
@@ -4760,7 +4802,10 @@
         "trophyStoreItems": {
             "TPetBombshooterBestboy": 1782943200000,
             "BloonsAllBloonsBumperStickers": 1788127200000,
-            "BloonsMOABSkinCampervan": 1788127200000
+            "BloonsMOABSkinCampervan": 1788127200000,
+            "HeroesAllPlacementDarkMagic": 1798761540000,
+            "PSkin-CamoTrapDarkMagic": 1798761540000,
+            "GameUIProfileBanner67": 1798761540000
         },
         "teamsStoreItems": {}
     },
@@ -6128,19 +6173,17 @@
         "Expert": 4
     },
     "knownIssues": {
-        "Skywarden is missing": "Skywarden is currently missing from some places in the Open Data API including Insta Monkeys. This is a known issue and has been reported.",
         "Some Events may be missing": "Events can sometimes be missing after an update is made to the game, including minor versions. This is usually fixed within a few days.",
         "\"Cannot load public profile\"": "When BTD6 gets a major update, the Open Data API can break for a few days with some information being inaccessible. This will be fixed when the API is updated to support the new content.",
-        "Quests X/X progress is incorrect": "There is a bug where the Open Data API is not returning the # of completed parts for each quest properly. It has been reported.",
-        "Update 56 achievements are missing": "This has been reported, these are missing from the API."
+        "Quests X/X progress is incorrect": "There is a bug where the Open Data API is not returning the # of completed parts for each quest properly. It has been reported."
     },
     "bossRush": {
         "StageScores": [
-            850,
-            1175,
-            1850,
-            2850,
-            3350
+            250,
+            500,
+            1100,
+            3000,
+            5225
         ],
         "DailyScoreSlots": 4,
         "StageRewards": [

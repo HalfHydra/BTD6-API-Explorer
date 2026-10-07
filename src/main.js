@@ -7007,26 +7007,26 @@ async function showChallengeModel(source, metadata, challengeType, eventData){
     challengeModelTop.appendChild(challengeModelSettings);
 
     let challengeSettings = {
-        'Starting Cash': {
-            "icon": "CoinIcon",
-            "key": "startingCash",
-        },
-        'Starting Lives': {
-            "icon": "LivesIcon",
-            "key": "lives",
+        'Max Monkeys': {
+            "icon": "MaxMonkeysIcon",
+            "key": "maxTowers",
         },
         'Start Round': {
             "icon": "StartRoundIconSmall",
             "key": "startRound",
         },
+        'Starting Cash': {
+            "icon": "CoinIcon",
+            "key": "startingCash",
+        },
         'End Round': {
             "icon": "EndRoundIconSmall",
             "key": "endRound",
         },
-        'Max Monkeys': {
-            "icon": "MaxMonkeysIcon",
-            "key": "maxTowers",
-        }
+        'Starting Lives': {
+            "icon": "LivesIcon",
+            "key": "lives",
+        },
     }
 
     Object.entries(challengeSettings).forEach(([setting,data], index) => {
