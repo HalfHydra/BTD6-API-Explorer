@@ -183,6 +183,11 @@ async function generateRoundsets() {
         roundsetDiv.appendChild(roundsetGoImg);
     })
 
+    let modeRoundsetContainer = createEl('div', {
+        classList: ['d-flex']
+    })
+    selectorsDiv.appendChild(modeRoundsetContainer);
+
     let roundsetChimpsDiv = createEl('div', {
         classList: ['roundset-selector-div', 'wood-container'],
         style: {
@@ -195,7 +200,6 @@ async function generateRoundsets() {
         showLoading();
         showRoundsetModel('rounds', "CHIMPS");
     })
-    selectorsDiv.appendChild(roundsetChimpsDiv);
 
     let roundsetChimpsIcon = createEl('img', {
         classList: ['roundset-selector-img'],
@@ -205,7 +209,7 @@ async function generateRoundsets() {
 
     let roundsetChimpsText = document.createElement('p');
     roundsetChimpsText.classList.add('selector-text', 'black-outline');
-    roundsetChimpsText.innerHTML = "CHIMPS Mode";
+    roundsetChimpsText.innerHTML = "CHIMPS";
     roundsetChimpsDiv.appendChild(roundsetChimpsText);
 
     let roundsetChimpsGoImg = createEl('img', {
@@ -216,6 +220,42 @@ async function generateRoundsets() {
         }
     });
     roundsetChimpsDiv.appendChild(roundsetChimpsGoImg);
+
+    let roundsetHalfCashDiv = createEl('div', {
+        classList: ['roundset-selector-div', 'wood-container'],
+        style: {
+            height: "65px",
+            borderWidth: "16px",
+            margin: "4px 0"
+        }
+    });
+    roundsetHalfCashDiv.addEventListener('click', () => {
+        showLoading();
+        showRoundsetModel('rounds', "HalfCash");
+    })
+    modeRoundsetContainer.appendChild(roundsetHalfCashDiv);
+
+    let roundsetHalfCashIcon = createEl('img', {
+        classList: ['roundset-selector-img'],
+        src: `../Assets/UI/HalfCashIcon.png`
+    });
+    roundsetHalfCashDiv.appendChild(roundsetHalfCashIcon);
+
+    let roundsetHalfCashText = document.createElement('p');
+    roundsetHalfCashText.classList.add('selector-text', 'black-outline');
+    roundsetHalfCashText.style.margin = "0 10px";
+    roundsetHalfCashText.innerHTML = "Half Cash";
+    roundsetHalfCashDiv.appendChild(roundsetHalfCashText);
+
+    let roundsetHalfCashGoImg = createEl('img', {
+        classList: ['selector-go-img'],
+        src: '../Assets/UI/ContinueBtn.png',
+        style: {
+            width: "65px"
+        }
+    });
+    roundsetHalfCashDiv.appendChild(roundsetHalfCashGoImg);
+    modeRoundsetContainer.appendChild(roundsetChimpsDiv);
 
     let legendsRoundsetData = {
         "Rogue Legends": {
@@ -257,11 +297,11 @@ async function generateRoundsets() {
         let roundsetText = createEl('p', {
             classList: ['selector-text', 'black-outline'],
             innerHTML: name,
-            style: {
-                margin: 0
-            }
         });
         roundsetDiv.appendChild(roundsetText);
+        if (name === "Frontier Legends") {
+            roundsetText.style.margin = "0";
+        }
 
         let roundsetGoImg = createEl('img', {
             classList: ['selector-go-img'],
@@ -560,6 +600,14 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
         roundsetFilterSettings.roundFilterStart = 6;
         roundsetFilterSettings.roundFilterEnd = 100;
         roundsetFilterSettings.roundFilterPreset = "CHIMPS";
+        roundset = "DefaultRoundSet";
+    }
+
+    if (roundset === "HalfCash") {
+        roundsetFilterSettings.roundFilterStart = 1;
+        roundsetFilterSettings.roundFilterEnd = 80;
+        roundsetFilterSettings.roundFilterPreset = "Hard";
+        roundsetFilterSettings.roundsetCashMultiplier = 50;
         roundset = "DefaultRoundSet";
     }
 
