@@ -10,6 +10,13 @@
     "teamFrames": 27,
     "bossesInOrder": ["Bloonarius", "Lych", "Vortex", "Dreadbloon", "Phayze", "Blastapopoulos", "Diamondback"],
     "limitedTimeEvents": {
+        "Diamondback8": {
+            "type": "Boss",
+            "boss": "diamondback",
+            "roundset": "chimpsboss",
+            "start": 1792202400000,
+            "end": 1792638000000
+        },
         "Corntada 3": {
             "type": "Race",
             "roundset": "corntada3",
@@ -119,7 +126,8 @@
         "Jumpscare4",
         "Jumpscare5",
         "abrbutharder",
-        "corntada3"
+        "corntada3",
+        "chimpsboss"
     ],
     "towersInOrder": {
         "DartMonkey": {
@@ -351,9 +359,13 @@
                 "Elite Defender": 30000
             },
             "abilities": [
+                "Retaliation",
                 "Supply Drop",
-                "Elite Supply Drop",
-                "Retaliation"
+                "Supply Drop 5",
+                "AmmoSwap",
+                "Tier5AmmoSwap",
+                "SniperParaogonAmmoSwap",
+                "SingleOut"
             ]
         },
         "MonkeySub": {
@@ -4473,8 +4485,8 @@
             "description": "Drops a crate full of cash and will trigger Supply Drop for other Snipers if they're ready",
             "icon": "CashDropUpgradeIcon"
         },
-        "Elite Supply Drop": {
-            "displayName": "Elite Supply Drop",
+        "Supply Drop 5": {
+            "displayName": "Elite Supply Drop (v57+ only)",
             "description": "Supply drop gives much more cash.",
             "icon": "EliteSniperUpgradeIcon"
         },
@@ -4774,6 +4786,26 @@
             "displayName": "Hoverducky Deploy",
             "description": "Redeploy the Hoverducky tower.",
             "icon": "HoverboatDeployAAIcon"
+        },
+        "AmmoSwap": {
+            "displayName": "Ammo Supply Drop",
+            "description": "Drops a special ammo crate that grants improved shrapnel that can pop all Bloon types for the next few shots.",
+            "icon": "AmmoDropT4AAIcon"
+        },
+        "Tier5AmmoSwap": {
+            "displayName": "Elite Ammo Supply Drop",
+            "description": "Ammo Supply Drop buffs up to 2 other nearby snipers.",
+            "icon": "AmmoDropT5AAIcon"
+        },
+        "SniperParaogonAmmoSwap": {
+            "displayName": "S.P.I.D.E.R. Ammo Supply Drop",
+            "description": "Ammo Supply Drop that has no shot limit and supercharges nearby shrapnel snipers.",
+            "icon": "ParagonAmmoSwapAAIcon"
+        },
+        "SingleOut": {
+            "displayName": "Single Out",
+            "description": "Lock onto the strongest Bloon on screen charging up a powerful shot that grows in damage the longer it charges, releasing a terrifying blast to the next Boss Skull or annihilating the target in a single shot.",
+            "icon": "SingleOutAAIcon"
         }
     },
     "iapContent": {
@@ -6111,7 +6143,8 @@
         "SocialSeasonsTier1Medal": "Season Tier 1 - Medal for reaching Tier 1 in Social Seasons Event",
         "SocialSeasonsUltimate1Medal": "Perfect Team score in Social Season 1",
         "SocialSeasonsUltimate2Medal": "Perfect Team score in Social Season 2",
-        "SocialSeasonsUltimate3Medal": "Perfect Team score in Social Season 3"
+        "SocialSeasonsUltimate3Medal": "Perfect Team score in Social Season 3",
+        "SocialSeasonsUltimate4Medal": "Perfect Team score in Social Season 4"
     },
     "lives": {
         "Easy": 200,
