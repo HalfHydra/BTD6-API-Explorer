@@ -564,6 +564,9 @@ async function showRoundsetFromQuest(roundset, data) {
     if (data.startingCash && data.startingCash != -1) {
         presetOptions.roundsetStartingCash = data.startingCash ? data.startingCash : 650
     }
+    if (presetOptions.roundsetName.includes("Mastery")) {
+        presetOptions.roundsetCashMultiplier = 50
+    }
     showRoundsetModel('rounds', data.roundset ? data.roundset : roundset, presetOptions);
 }
 

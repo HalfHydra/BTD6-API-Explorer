@@ -10955,6 +10955,9 @@ function generateQuestsPage() {
                         if (part.startingCash && part.startingCash != -1) {
                             presetOptions.roundsetStartingCash = part.startingCash ? part.startingCash : 650
                         }
+                        if (presetOptions.roundsetName.includes("Mastery")) {
+                            presetOptions.roundsetCashMultiplier = 50
+                        }
                         showRoundsetModel('profile', part.roundSets[0], presetOptions);
                     });
                     row.appendChild(btn);
