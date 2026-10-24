@@ -1575,7 +1575,7 @@ function generateTowerProgressTower(tower){
         let abilitiesIconsDiv = createEl('div', {
             classList: ['d-flex', 'f-wrap', 'w-100'],
             style: {
-                height: "190px",
+                minHeight: "190px",
                 gap: "16px",
                 padding: "0 16px"
             }
