@@ -552,7 +552,8 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
         roundsetConvertAllFortified: false,
         roundsetBloonsSpeedMultiplier: 1,
         roundsetMOABSpeedMultiplier: 1,
-        noSpecial: false
+        noSpecial: false,
+        roundsetCashMultiplier: 100
     }
 
     if (roundset === "CHIMPS") {
@@ -811,6 +812,7 @@ async function showRoundsetModel(source, roundset, presetSettings={}) {
         roundsetFilterSettings.roundsetConvertAllRegrow = false;
         roundsetFilterSettings.roundsetConvertAllCamo = false;
         roundsetFilterSettings.roundsetConvertAllFortified = false;
+        roundsetFilterSettings.roundsetCashMultiplier = 100;
         applyRoundFilters(roundsetType);
         generateRounds(currentRoundsetView, roundsetFilterSettings.roundsetReversed, roundsetType);
     });
@@ -881,6 +883,21 @@ function processRoundset(name, data){
     return processed;
 }
 
+function applyCashMultiplier(cashValue) {
+    if (typeof cashValue !== 'number' || !Number.isFinite(cashValue)) return 0;
+    const multiplier = Number.isFinite(roundsetFilterSettings.roundsetCashMultiplier) ? roundsetFilterSettings.roundsetCashMultiplier : 100;
+    return Math.round((cashValue * multiplier + Number.EPSILON) * 100) / 10000;
+}
+
+function formatCash(cashValue) {
+    if (typeof cashValue !== 'number' || !Number.isFinite(cashValue)) return '0';
+    const hasFraction = Math.abs(cashValue % 1) > Number.EPSILON;
+    return cashValue.toLocaleString(undefined, {
+        minimumFractionDigits: hasFraction ? 2 : 0,
+        maximumFractionDigits: 2
+    });
+}
+
 function applyRoundFilters(type){
     if (!currentRoundsetData) return;
     const effectiveEnd = (roundsetFilterSettings.roundFilterEnd ?? currentRoundsetData.rounds[currentRoundsetData.rounds.length - 1].roundNumber);
@@ -933,6 +950,7 @@ function applyRoundFilters(type){
     filtered.rounds.forEach(r => {
         (roundsetFilterSettings.roundsetReversed) ? r.bloonGroups.sort((a, b) => a.end - b.end) : r.bloonGroups.sort((a, b) => a.start - b.start)
         if (typeof r.income === 'number'){
+            r.income = applyCashMultiplier(r.income);
             incomeRunning += r.income;
             r.incomeSum = incomeRunning;
         }
@@ -1276,12 +1294,12 @@ async function generateRounds(type, reverse, roundsetType, presetSettings={}) {
                 
                 let roundIncome = document.createElement('p');
                 roundIncome.classList.add('round-income', 'black-outline');
-                roundIncome.innerHTML = `Income: ${round.income.toLocaleString()}`;
+                roundIncome.innerHTML = `Income: ${formatCash(round.income)}`;
                 incomeTextDiv.appendChild(roundIncome);
                 
                 let roundIncomeTotal = document.createElement('p');
                 roundIncomeTotal.classList.add('round-income-total', 'black-outline');
-                roundIncomeTotal.innerHTML = `Total: ${round.incomeSum.toLocaleString()}`;
+                roundIncomeTotal.innerHTML = `Total: ${formatCash(round.incomeSum)}`;
                 if (roundsetHasNoGaps){ incomeTextDiv.appendChild(roundIncomeTotal); }
 
                 let rbeDiv = document.createElement('div');
@@ -1666,12 +1684,12 @@ function updatePreviewRoundTimeline() {
     
     let roundIncome = document.createElement('p');
     roundIncome.classList.add('round-income', 'black-outline');
-    roundIncome.innerHTML = `Income: ${round.income.toLocaleString()}`;
+    roundIncome.innerHTML = `Income: ${formatCash(round.income)}`;
     incomeTextDiv.appendChild(roundIncome);
     
     let roundIncomeTotal = document.createElement('p');
     roundIncomeTotal.classList.add('round-income-total', 'black-outline');
-    roundIncomeTotal.innerHTML = `Total: ${round.incomeSum.toLocaleString()}`;
+    roundIncomeTotal.innerHTML = `Total: ${formatCash(round.incomeSum)}`;
     incomeTextDiv.appendChild(roundIncomeTotal);
 
     let rbeDiv = document.createElement('div');
@@ -1902,12 +1920,12 @@ function openRoundsetSettingsModal(type){
     }
 
     let rogueReverseDesc = createEl('p', {
-        classList: ['font-gardenia'],
+        classList: ['font-gardenia', 'ta-center'],
         style: { fontSize: '22px',  display: selectedRoundset.startsWith("Rogue") && roundsetFilterSettings.roundsetReversed ? 'block' : 'none'  },
         innerHTML: 'In Rogue Legends, the rounds are not reversed even when the track path is.'
     });
 
-    let otherSettingsDiv = createEl('div', { classList: ['d-flex'] });
+    let otherSettingsDiv = createEl('div', { classList: ['d-flex'], style: { gap: "32px"} });
     roundsetSettingsDiv.appendChild(otherSettingsDiv);
 
     let startingCashDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
@@ -1925,35 +1943,23 @@ function openRoundsetSettingsModal(type){
     });
     startingCashDiv.appendChild(startingCashInput);
 
-    let reverseModeInput = generateCheckbox("Reverse Mode", roundsetFilterSettings.roundsetReversed, (checked) => {
-        roundsetFilterSettings.roundsetReversed = checked;
-        rogueReverseDesc.style.display = selectedRoundset.startsWith("Rogue") && checked ? 'block' : 'none';
+    let cashMultiplierDiv = createEl('div', { classList: ['d-flex', 'ai-center'] });
+    otherSettingsDiv.appendChild(cashMultiplierDiv);
+
+    let cashMultiplierIcon = createEl('img', {
+        classList: ['of-contain'],
+        src: './Assets/UI/CoinIcon.png',
+        style: { width: '40px', height: '40px', marginRight: '4px' }
     });
-    otherSettingsDiv.appendChild(reverseModeInput);
+    cashMultiplierDiv.appendChild(cashMultiplierIcon);
 
-    if (type === "quest") {
-        let showUnusedInput = generateCheckbox("Hide Unused", roundsetFilterSettings.roundsetHideUnused, (checked) => {
-            roundsetFilterSettings.roundsetHideUnused = checked;
-        });
-        otherSettingsDiv.appendChild(showUnusedInput);
-        otherSettingsDiv.classList.add('jc-between');
-    } else if (type === 'boss') {
-        let showBossInput = generateCheckbox("Only Modified", roundsetFilterSettings.roundsetShowModified, (checked) => {
-            roundsetFilterSettings.roundsetShowModified = checked;
-        });
-        otherSettingsDiv.appendChild(showBossInput);
-        otherSettingsDiv.classList.add('jc-between');
-    } else if (selectedRoundset === "DefaultRoundSet" || selectedRoundset.startsWith("Rogue")) {
-        let showHintsInput = generateCheckbox("Round Hints", roundsetFilterSettings.roundsetShowHints, (checked) => {
-            roundsetFilterSettings.roundsetShowHints = checked;
-        });
-        otherSettingsDiv.appendChild(showHintsInput);
-        otherSettingsDiv.classList.add('jc-between');
-    } else {
-        otherSettingsDiv.style.gap = '32px';
-    }
+    let cashMultiplierInput = generateNumberInput("Cash Multiplier", roundsetFilterSettings.roundsetCashMultiplier, 0, 99999999, 0.05, (val) => {
+        roundsetFilterSettings.roundsetCashMultiplier = val;
+    });
+    cashMultiplierDiv.appendChild(cashMultiplierInput);
 
-    roundsetSettingsDiv.appendChild(rogueReverseDesc);
+    let cashMultiplierPercent = createEl('p', { classList: ['font-gardenia'], style: { fontSize: '24px' }, innerHTML: `%` });
+    cashMultiplierDiv.appendChild(cashMultiplierPercent);
 
     let convertBloonsDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-evenly'], style: { gap: '8px' } });
     roundsetSettingsDiv.appendChild(convertBloonsDiv);
@@ -2005,6 +2011,38 @@ function openRoundsetSettingsModal(type){
         applyRoundFilters(type);
     });
     allFortifiedDiv.appendChild(convertAllFortifiedInput);
+
+    let miscellaneousDiv = createEl('div', { classList: ['d-flex', 'ai-center', 'jc-center'], style: { gap: '8px' } });
+    roundsetSettingsDiv.appendChild(miscellaneousDiv);
+
+    let reverseModeInput = generateCheckbox("Reverse Mode", roundsetFilterSettings.roundsetReversed, (checked) => {
+        roundsetFilterSettings.roundsetReversed = checked;
+        rogueReverseDesc.style.display = selectedRoundset.startsWith("Rogue") && checked ? 'block' : 'none';
+    });
+    miscellaneousDiv.appendChild(reverseModeInput);
+
+    if (type === "quest") {
+        let showUnusedInput = generateCheckbox("Hide Unused", roundsetFilterSettings.roundsetHideUnused, (checked) => {
+            roundsetFilterSettings.roundsetHideUnused = checked;
+        });
+        miscellaneousDiv.appendChild(showUnusedInput);
+    } else if (type === 'boss') {
+        let showBossInput = generateCheckbox("Only Modified", roundsetFilterSettings.roundsetShowModified, (checked) => {
+            roundsetFilterSettings.roundsetShowModified = checked;
+        });
+        miscellaneousDiv.appendChild(showBossInput);
+    } else if (selectedRoundset === "DefaultRoundSet" || selectedRoundset.startsWith("Rogue")) {
+        let showHintsInput = generateCheckbox("Round Hints", roundsetFilterSettings.roundsetShowHints, (checked) => {
+            roundsetFilterSettings.roundsetShowHints = checked;
+        });
+        miscellaneousDiv.appendChild(showHintsInput);
+    } else {
+        miscellaneousDiv.style.gap = '32px';
+    }
+
+    roundsetSettingsDiv.appendChild(rogueReverseDesc);
+
+    
 
     let roundFilterDiv = createEl('div', { classList: ['d-flex', 'fd-column',], style: { gap: '16px', backgroundColor: "rgba(0,0,0,0.12)", borderRadius: "10px", margin: "8px", padding: "8px" } });
     container.appendChild(roundFilterDiv);
@@ -2278,7 +2316,8 @@ function isFiltersActive(){
         roundsetFilterSettings.roundsetReversed === true,
         roundsetFilterSettings.roundsetConvertAllCamo === true,
         roundsetFilterSettings.roundsetConvertAllRegrow === true,
-        roundsetFilterSettings.roundsetConvertAllFortified === true
+        roundsetFilterSettings.roundsetConvertAllFortified === true,
+        roundsetFilterSettings.roundsetCashMultiplier !== 100
     ];
 
     return conditions.some(Boolean);
