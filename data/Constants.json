@@ -4486,7 +4486,7 @@
             "icon": "CashDropUpgradeIcon"
         },
         "Supply Drop 5": {
-            "displayName": "Elite Supply Drop (v57+ only)",
+            "displayName": "Elite Supply Drop (# is v57+)",
             "description": "Supply drop gives much more cash.",
             "icon": "EliteSniperUpgradeIcon"
         },
@@ -6215,8 +6215,8 @@
             250,
             500,
             1100,
-            3000,
-            5225
+            2000,
+            4000
         ],
         "DailyScoreSlots": 4,
         "StageRewards": [
@@ -6300,7 +6300,8 @@
                 "DarkCastle",
                 "TrickyTracks",
                 "EnchantedGlade",
-                "MushroomGrotto"
+                "MushroomGrotto",
+                "ShipCapture"
             ],
             "BannedRelics": null,
             "BannedHeroes": [
@@ -6687,16 +6688,16 @@
             "InitialHealths": {
                 "Phayze": 300,
                 "Bloonarius": 400,
-                "Dreadbloon": 130,
-                "Blastapopoulos": 350,
+                "Dreadbloon": 140,
+                "Blastapopoulos": 325,
                 "Lych": 300,
                 "Diamondback": 500
             },
             "BossSpeeds": {
                 "Phayze": 1.15625,
-                "Bloonarius": 1.25,
+                "Bloonarius": 1.2,
                 "Dreadbloon": 1.25,
-                "Blastapopoulos": 1.25,
+                "Blastapopoulos": 1.2,
                 "Lych": 1.25,
                 "Diamondback": 1.25
             },
@@ -6718,12 +6719,12 @@
                 "Diamondback": 2500
             },
             "KillCash": {
-                "Phayze": 1000,
+                "Phayze": 1100,
                 "Bloonarius": 1000,
                 "Dreadbloon": 1000,
-                "Blastapopoulos": 1000,
-                "Lych": 1000,
-                "Diamondback": 1000
+                "Blastapopoulos": 1100,
+                "Lych": 1100,
+                "Diamondback": 1100
             },
             "MapKillCashMultiplier": {
                 "MapName": 1
@@ -6740,7 +6741,13 @@
             "MaxCashScaling": 100
         },
         "Overrides": {
-            "StageMap": null,
+            "StageMap": [
+                "CandyFalls",
+                "Haunted",
+                "TheCabin",
+                "OffTheCoast",
+                "LastResort"
+            ],
             "StageBoss": null,
             "StageBossHealth": null,
             "StageStartingCash": null,
